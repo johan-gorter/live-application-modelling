@@ -1,1 +1,7 @@
 glob:*/tmp
+syntax: glob
+.metadata
+*/bin
+lberunner/eclipse/classes
+lberunner/lib/lbe.jar
+lbe/build

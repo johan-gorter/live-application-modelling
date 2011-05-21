@@ -1,0 +1,38 @@
+#{extends 'main.html' /}
+#{set title:'Start flow' /}
+
+<h1>Start Flow</h1>
+
+<a href="/">Index</a>
+
+<p>Start Flow</p>
+<script type="text/javascript">
+
+var getFirstPageAction = #{jsAction @getFirstPage(':formattedSession') /};
+var waitForPageChangeAction = #{jsAction @waitForPageChange(':formattedSession', ':lastCaseVersion') /};
+
+var formattedSession = '${formattedSession}';
+var lastCaseVersion;
+
+$(document).ready(function() {
+	$.get(getFirstPageAction({formattedSession: formattedSession}), function(data) {
+		updatePage(data);
+		waitForPageChanges();
+	});
+})
+
+function waitForPageChanges() {
+	$.get(waitForPageChangeAction({formattedSession: formattedSession, lastCaseVersion: lastCaseVersion}), function(data) {
+		updatePage(data);
+		waitForPageChanges();
+	});
+}
+
+function updatePage(data) {
+	lastCaseVersion = data.caseVersion;
+	$('#result').html(data.structure.display);
+}
+
+</script>
+
+<div id="result">One moment...</div>
