@@ -4,39 +4,42 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import lbe.page.Page;
+import lbe.instance.Instance;
+import lbe.page.PageElement;
 import lbe.page.PageRenderer;
 import play.libs.F.Promise;
 
 public class Case {
 	
 	private static class Waiter {
-		Promise<Page> promise;
+		Promise<PageElement> promise;
 		Session session;
 
-		public Waiter(Promise<Page> promise, Session session) {
+		public Waiter(Promise<PageElement> promise, Session session) {
 			this.promise = promise;
 			this.session = session;
 		}
-		
-		
 	}
+
+	private final Instance caseInstance;
 	
+	public Case(Instance caseInstance, String id) {
+		this.caseInstance = caseInstance;
+		this.currentCaseData=new CaseData(caseInstance, 0);
+		this.id = id;
+	}
+
 	private String id;
-	private CaseData currentCaseData=new CaseData(0);
+	private CaseData currentCaseData;
 	private List<Waiter> waiters = new ArrayList<Waiter>();
 	
 	public String getId() {
 		return id;
 	}
 
-	public Case(String id) {
-		this.id = id;
-	}
-
 	public synchronized void change(Collection<Object> changes) {
 		//TODO make change
-		currentCaseData = new CaseData(currentCaseData.getVersion()+1);
+		currentCaseData = new CaseData(caseInstance, currentCaseData.getVersion()+1);
 		List<Waiter> promises = waiters;
 		waiters = new ArrayList<Waiter>();
 		for (Waiter waiter : promises) {
@@ -44,9 +47,9 @@ public class Case {
 		}
 	}
 
-	public synchronized Promise<Page> waitForChange(int lastCaseVersion, Session session) {
+	public synchronized Promise<PageElement> waitForChange(int lastCaseVersion, Session session) {
 		CaseManager.incrementChangeWaiters();
-		Promise<Page> promise = new Promise<Page>();
+		Promise<PageElement> promise = new Promise<PageElement>();
 		if (currentCaseData.getVersion()>lastCaseVersion) {
 			promise.invoke(render(session));
 			return promise;
@@ -60,7 +63,7 @@ public class Case {
 		CaseManager.decrementChangeWaiters();
 	}
 
-	public synchronized Page render(Session session) {
+	public synchronized PageElement render(Session session) {
 		return PageRenderer.renderPage(id, currentCaseData, session);
 	}
 }

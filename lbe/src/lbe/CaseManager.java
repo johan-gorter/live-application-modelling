@@ -5,7 +5,8 @@ import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-import lbe.page.Page;
+import lbe.instance.Instance;
+import lbe.page.PageElement;
 
 import org.apache.log4j.Logger;
 
@@ -43,7 +44,8 @@ public class CaseManager {
 					LOG.info("Model changes detected");
 				}
 				for (Case c: cases.values()) {
-					c.change(Collections.<Object>singleton("reloadModel"));
+					c.change(Collections.<Object>singleton("reloadModel1"));// Sends the page using the old model
+					c.change(Collections.<Object>singleton("reloadModel2"));// Makes the browser reload immediately and fetch the page using the new model
 				}
 			} else {
 				if (LOG.isDebugEnabled()) {
@@ -97,9 +99,9 @@ public class CaseManager {
 		}
 	}
 	
-	public static Case create() {
+	public static Case create(Instance caseInstance) {
 		long id = lastId.incrementAndGet();
-		Case c = new Case(""+id);
+		Case c = new Case(caseInstance, ""+id);
 		cases.put(c.getId(), c);
 		return c;
 	}
@@ -109,7 +111,7 @@ public class CaseManager {
 		c.change(changes);
 	}
 	
-	public static Promise<Page> waitForChange(Session session, int lastCaseVersion) {
+	public static Promise<PageElement> waitForChange(Session session, int lastCaseVersion) {
 		Case c = cases.get(session.getCaseId());
 		return c.waitForChange(lastCaseVersion, session);
 	}

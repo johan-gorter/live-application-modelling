@@ -2,7 +2,7 @@ package lbe.model;
 
 public abstract class InteractionModel {
 	
-	public abstract CaseModel getCaseModel();
+	public abstract EntityModel getCaseModel();
 	
 	public abstract FlowModel[] getExposedFlows();
 

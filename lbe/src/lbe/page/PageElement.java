@@ -10,4 +10,31 @@ public class PageElement {
 	public String display;
 	public Object value;
 	public PageElement[] content;
+	
+	public String datatype;
+	public Boolean required;
+	public Boolean multivalue;
+	public String question;
+	public String explain;
+	public Domain[] domain;
+	public Message[] messages;
+	
+	public static class Domain {
+		public Object value;
+		public String display;
+		public boolean valid;
+
+		public Domain(Object value, String display) {
+			this.value = value;
+			this.display = display;
+			this.valid = true;
+		}
+		
+		
+	}
+	
+	public static class Message {
+		public String type; // error/warning
+		public String display;
+	}
 }

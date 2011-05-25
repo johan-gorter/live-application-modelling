@@ -5,6 +5,10 @@ import java.util.List;
 
 import lbe.CaseData;
 import lbe.Session;
+import lbe.instance.AttributeValue;
+import lbe.instance.Instance;
+import lbe.model.AttributeModel;
+import lbe.model.RelationModel;
 
 //TODO: active instances
 public class RenderContext {
@@ -13,13 +17,13 @@ public class RenderContext {
 	private final Session session;
 	private final String caseId;
 	
-	private String idPrefix = null;
 	private List<Integer> lastIds = new ArrayList<Integer>(25);
 
 	public RenderContext(String caseId, CaseData caseData, Session session) {
 		this.caseId = caseId;
 		this.caseData = caseData;
 		this.session = session;
+		nextIdLevel();
 	}
 
 	public CaseData getCaseData() {
@@ -30,12 +34,6 @@ public class RenderContext {
 		return session;
 	}
 
-	public String initId(String pageName) {
-		idPrefix = pageName;
-		nextIdLevel();
-		return pageName;
-	}
-	
 	public void nextIdLevel() {
 		lastIds.add(-1);
 	}
@@ -48,9 +46,10 @@ public class RenderContext {
 		int lastIndex = lastIds.size()-1;
 		lastIds.set(lastIndex, lastIds.get(lastIndex)+1);
 		StringBuilder result = new StringBuilder(); //We can optimize performance by reusing the StringBuilder
-		result.append(idPrefix);
 		for (Integer id: lastIds) {
-			result.append("-");
+			if (result.length()>0) {
+				result.append("-");
+			}
 			result.append(id);
 		}
 		return result.toString();
@@ -59,5 +58,26 @@ public class RenderContext {
 	public String getCaseId() {
 		return caseId;
 	}
+
+	public String getLanguage() {
+		return "en-US";
+	}
+
+	public Instance pushRelation(RelationModel<Instance> relation) {
+		AttributeValue<Instance> value = caseData.getValue(relation);
+		Instance instance = value.get();
+		if (instance==null) {
+			throw new RuntimeException("Relation yielded unknown");
+		}
+		caseData.pushActiveInstance(instance);
+		return instance;
+	}
 	
+	public void popInstance(Instance instance) {
+		caseData.popActiveInstance(instance);
+	}
+
+	public <V extends Object> V getValue(AttributeModel<V> attribute) {
+		return caseData.getValue(attribute).get();
+	}
 }

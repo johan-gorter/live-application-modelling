@@ -5,16 +5,29 @@ import lbe.page.RenderContext;
 
 public abstract class PageModel extends FlowNodeModelBase {
 	
+	public class PageRootParamsElement {
+		
+	}
+	
+	public class PageRootElement extends PageElement {
+		public String caseId;
+		public int caseVersion;
+		public PageRootParamsElement params;
+		public String language;
+	}
+
 	public abstract PageElementModelBase[] getRootContainers();
 
 	public PageElement render(final RenderContext renderContext) {
-		PageElement[] contentElements = ContainerModel.renderChildren(renderContext, getRootContainers());
-		PageElement result = new PageElement() {
-			public String caseId = renderContext.getCaseId();
-			public int caseVersion = renderContext.getCaseData().getVersion();
-		};
+		PageRootElement result = new PageRootElement();
+		result.caseId = renderContext.getCaseId();
+		result.caseVersion = renderContext.getCaseData().getVersion();
+		result.language = renderContext.getLanguage();
+		result.params = new PageRootParamsElement();
 		result.elementType = "page";
-		result.id = renderContext.initId(getName());
+		result.id = getName();
+		result.name = getName();
+		PageElement[] contentElements = ContainerModel.renderChildren(renderContext, getRootContainers());
 		result.content = contentElements;
 		return result;
 	}

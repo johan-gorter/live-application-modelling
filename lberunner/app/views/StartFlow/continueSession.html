@@ -1,6 +1,42 @@
 #{extends 'main.html' /}
 #{set title:'Start flow' /}
 
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="@{'/public/yui-2.9.0/reset/reset-min.css'}" />
+<link rel="stylesheet" type="text/css" href="@{'/public/yui-2.9.0/container/assets/skins/sam/container.css'}" />	
+
+<link rel="stylesheet" media="screen" href="@{'/public/themes/default/css/styles.css'}">
+#{/set}
+
+#{set 'moreScripts'}
+
+<script type="text/javascript" src="@{'/public/yui-2.9.0/yahoo/yahoo.js'}"></script>
+<script type="text/javascript" src="@{'/public/yui-2.9.0/dom/dom.js'}"></script>
+<script type="text/javascript" src="@{'/public/yui-2.9.0/event/event.js'}"></script>
+<script type="text/javascript" src="@{'/public/yui-2.9.0/element/element.js'}"></script>
+<script type="text/javascript" src="@{'/public/yui-2.9.0/animation/animation.js'}"></script>
+<script type="text/javascript" src="@{'/public/yui-2.9.0/connection/connection.js'}"></script>
+<script type="text/javascript" src="@{'/public/yui-2.9.0/dragdrop/dragdrop.js'}"></script>
+<script type="text/javascript" src="@{'/public/yui-2.9.0/container/container.js'}"></script>
+<script type="text/javascript" src="@{'/public/yui-2.9.0/json/json.js'}"></script>
+<script type="text/javascript" src="@{'/public/yui-2.9.0/button/button.js'}"></script>
+<script type="text/javascript" src="@{'/public/yui-2.9.0/slider/slider.js'}"></script>
+
+
+<script src="@{'/public/json/core.js'}" type="text/javascript" charset="utf-8"></script>
+<script src="@{'/public/json/generic-controllers.js'}" type="text/javascript" charset="utf-8"></script>
+<script src="@{'/public/json/generic-inputs.js'}" type="text/javascript" charset="utf-8"></script>
+<script src="@{'/public/json/generic-factories.js'}" type="text/javascript" charset="utf-8"></script>
+
+<script src="@{'/public/json/debug/debug.js'}" type="text/javascript" charset="utf-8"></script>
+
+<script src="@{'/public/themes/default/default-controllers.js'}" type="text/javascript" charset="utf-8"></script>
+<script src="@{'/public/themes/default/default-inputs.js'}" type="text/javascript" charset="utf-8"></script>
+<script src="@{'/public/themes/default/default-factories.js'}" type="text/javascript" charset="utf-8"></script>
+
+<script src="@{'/public/lbe-json/lbe-engine.js'}" type="text/javascript" charset="utf-8"></script>
+#{/set}
+
 <h1>Start Flow</h1>
 
 <a href="/">Index</a>
@@ -13,8 +49,10 @@ var waitForPageChangeAction = #{jsAction @waitForPageChange(':formattedSession',
 
 var formattedSession = '${formattedSession}';
 var lastCaseVersion;
+var engine;
 
 $(document).ready(function() {
+	engine = new lbe.LbeEngine('AquimaMVC', defaultTheme.mvc.defaultThemeFactory, {});
 	$.get(getFirstPageAction({formattedSession: formattedSession}), function(data) {
 		updatePage(data);
 		waitForPageChanges();
@@ -30,9 +68,13 @@ function waitForPageChanges() {
 
 function updatePage(data) {
 	lastCaseVersion = data.caseVersion;
-	$('#result').html(data.structure.display);
+	engine.update(data);
 }
 
 </script>
 
-<div id="result">One moment...</div>
+<div class="yui-skin-sam">
+	<div id="AquimaMVC" class="AquimaMVC">
+		One moment...
+	</div>
+</div>

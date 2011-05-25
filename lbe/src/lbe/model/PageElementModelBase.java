@@ -11,6 +11,7 @@ public abstract class PageElementModelBase extends ModelBase {
 		PageElement result = new PageElement();
 		result.elementType = getElementType();
 		result.name = getName();
+		result.id = result.name+"@"+context.nextId();
 		return result;
 		
 	}
