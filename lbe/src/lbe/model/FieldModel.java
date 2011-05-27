@@ -1,5 +1,6 @@
 package lbe.model;
 
+import lbe.page.ChangeContext;
 import lbe.page.PageElement;
 import lbe.page.RenderContext;
 
@@ -29,6 +30,14 @@ public abstract class FieldModel extends PageElementModelBase {
 		result.multivalue = attribute.isMultivalue()?Boolean.TRUE:null;
 		result.domain = attribute.getDomain(context);
 		return result;
+	}
+	
+	@Override
+	public void changeValue(ChangeContext changeContext) {
+		String id = getName()+"@"+changeContext.nextId();
+		if (id.equals(changeContext.getPageElementId())) {
+			changeContext.setValue(getAttribute(), changeContext.getValue());
+		}
 	}
 
 	public abstract AttributeModel getAttribute();

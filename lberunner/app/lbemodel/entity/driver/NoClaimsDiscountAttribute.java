@@ -6,9 +6,10 @@ import lbe.model.AttributeModel;
 import lbe.model.EntityModel;
 import lbe.page.RenderContext;
 import lbemodel.entity.DriverEntity;
+import lbemodel.entity.DriverInstance;
 
 
-public class NoClaimsDiscountAttribute extends AttributeModel {
+public class NoClaimsDiscountAttribute extends AttributeModel<DriverInstance, Integer> {
 
 	public static NoClaimsDiscountAttribute INSTANCE = new NoClaimsDiscountAttribute();
 	
@@ -33,8 +34,8 @@ public class NoClaimsDiscountAttribute extends AttributeModel {
 	}
 
 	@Override
-	public AttributeValue get(Instance instance) {
-		// TODO Auto-generated method stub
-		return null;
+	public AttributeValue<DriverInstance, Integer> get(DriverInstance instance) {
+		return instance.noClaimsDiscount;
 	}
+
 }

@@ -6,8 +6,9 @@ import lbe.model.AttributeModel;
 import lbe.model.EntityModel;
 import lbe.page.RenderContext;
 import lbemodel.entity.DriverEntity;
+import lbemodel.entity.DriverInstance;
 
-public class ZipCodeAttribute extends AttributeModel{
+public class ZipCodeAttribute extends AttributeModel<DriverInstance, String> {
 
 	public static ZipCodeAttribute INSTANCE = new ZipCodeAttribute();
 	
@@ -32,8 +33,8 @@ public class ZipCodeAttribute extends AttributeModel{
 	}
 
 	@Override
-	public AttributeValue get(Instance instance) {
-		// TODO Auto-generated method stub
-		return null;
+	public AttributeValue<DriverInstance, String> get(DriverInstance instance) {
+		return instance.zipCode;
 	}
+
 }

@@ -1,5 +1,6 @@
 package lbe.model;
 
+import lbe.page.ChangeContext;
 import lbe.page.PageElement;
 import lbe.page.RenderContext;
 
@@ -30,6 +31,10 @@ public abstract class PageModel extends FlowNodeModelBase {
 		PageElement[] contentElements = ContainerModel.renderChildren(renderContext, getRootContainers());
 		result.content = contentElements;
 		return result;
+	}
+
+	public void changeValue(ChangeContext changeContext) {
+		ContainerModel.changeValue(changeContext, getRootContainers());
 	}
 
 }

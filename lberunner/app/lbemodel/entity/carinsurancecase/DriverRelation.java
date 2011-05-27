@@ -1,16 +1,15 @@
 package lbemodel.entity.carinsurancecase;
 
 import lbe.instance.AttributeValue;
-import lbe.instance.Instance;
 import lbe.model.EntityModel;
 import lbe.model.RelationModel;
-import lbe.page.RenderContext;
-import lbemodel.entity.CarinsuranceCaseInstance;
 import lbemodel.entity.CarinsuranceCaseEntity;
-import lbemodel.entity.DriverInstance;
+import lbemodel.entity.CarinsuranceCaseInstance;
 import lbemodel.entity.DriverEntity;
+import lbemodel.entity.DriverInstance;
+import lbemodel.entity.DriverEntity.CaseRelation;
 
-public final class DriverRelation extends RelationModel {
+public final class DriverRelation extends RelationModel<CarinsuranceCaseInstance, DriverInstance> {
 
 	public static final DriverRelation INSTANCE = new DriverRelation();
 	
@@ -37,24 +36,26 @@ public final class DriverRelation extends RelationModel {
 	}
 
 	@Override
-	public boolean isReverseMultivalue() {
-		return false;
-	}
-
-	@Override
 	public String getName() {
 		return "Driver";
 	}
 
 	@Override
-	public Instance createTo(Instance from) {
-		DriverInstance driver = new DriverInstance();
-		driver.getCarinsuranceCase().set((CarinsuranceCaseInstance) from);
+	public DriverInstance createTo(CarinsuranceCaseInstance from) {
+		DriverInstance driver = new DriverInstance(from.getCase());
+		driver.carinsuranceCase.set(from);
 		return driver;
 	}
 
 	@Override
-	public AttributeValue get(Instance instance) {
-		return ((CarinsuranceCaseInstance)instance).getDriver();
+	public RelationModel<DriverInstance, CarinsuranceCaseInstance> getReverseRelation() {
+		return CaseRelation.INSTANCE;
 	}
+
+	@Override
+	public AttributeValue<CarinsuranceCaseInstance, DriverInstance> get(
+			CarinsuranceCaseInstance instance) {
+		return instance.driver;
+	}
+
 }

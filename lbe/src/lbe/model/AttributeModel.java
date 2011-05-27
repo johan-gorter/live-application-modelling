@@ -6,7 +6,7 @@ import lbe.instance.Instance;
 import lbe.page.PageElement.Domain;
 import lbe.page.RenderContext;
 
-public abstract class AttributeModel<V extends Object> extends ModelBase {
+public abstract class AttributeModel<I extends Instance, Value extends Object> extends ModelBase {
 
 	public static final String DATATYPE_DATE = "date";
 	public static final String DATATYPE_INTEGER = "integer";
@@ -36,14 +36,18 @@ public abstract class AttributeModel<V extends Object> extends ModelBase {
 		return null;
 	}
 	
-	public Deduction<V> getDeduction() {
+	public Deduction<Value> getDeduction() {
 		return null;
 	}
 	
-	public V calculateValue(Instance instance) {
+	public Value calculateValue(I instance) {
+		Deduction<Value> deduction = getDeduction();
+		if (deduction!=null) {
+			return deduction.deduct(instance);
+		}
 		return null;
 	}
 	
-	public abstract AttributeValue<V> get(Instance instance);
+	public abstract AttributeValue<I, Value> get(I instance);
 
 }

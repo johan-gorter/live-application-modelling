@@ -1,5 +1,6 @@
 package lbe.model;
 
+import lbe.page.ChangeContext;
 import lbe.page.PageElement;
 import lbe.page.RenderContext;
 
@@ -14,6 +15,10 @@ public abstract class PageElementModelBase extends ModelBase {
 		result.id = result.name+"@"+context.nextId();
 		return result;
 		
+	}
+
+	public void changeValue(ChangeContext changeContext) {
+		changeContext.nextId();
 	}
 
 }

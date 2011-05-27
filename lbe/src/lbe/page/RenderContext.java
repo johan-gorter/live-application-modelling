@@ -63,8 +63,8 @@ public class RenderContext {
 		return "en-US";
 	}
 
-	public Instance pushRelation(RelationModel<Instance> relation) {
-		AttributeValue<Instance> value = caseData.getValue(relation);
+	public Instance pushRelation(RelationModel<Instance, Instance> relation) {
+		AttributeValue<Instance, Instance> value = caseData.getValue(relation);
 		Instance instance = value.get();
 		if (instance==null) {
 			throw new RuntimeException("Relation yielded unknown");
@@ -77,7 +77,7 @@ public class RenderContext {
 		caseData.popActiveInstance(instance);
 	}
 
-	public <V extends Object> V getValue(AttributeModel<V> attribute) {
+	public <I extends Instance, Value extends Object> Value getValue(AttributeModel<I, Value> attribute) {
 		return caseData.getValue(attribute).get();
 	}
 }

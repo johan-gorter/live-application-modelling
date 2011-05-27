@@ -1,5 +1,7 @@
 package lbe.flow;
 
+import java.util.Map;
+
 import lbe.Case;
 import lbe.Session;
 import lbe.model.FlowModel;
@@ -21,8 +23,12 @@ public final class Navigator {
 		}
 		throw new RuntimeException("Not yet implemented");
 	}
+
+	public static void changeValue(Case c, Session session, String pageElementId, Object value) {
+		c.changeValue(session, pageElementId, value);
+	}
 	
-	public static void continueFlow(Case c, Session session, FlowNodeModelBase node, String event) {
+	public static void handleEvent(Case c, Session session, FlowNodeModelBase node, String pageElementId) {
 		throw new RuntimeException("Not yet implemented");
 	}
 }

@@ -14,7 +14,7 @@ import lbemodel.entity.driver.DateOfBirthAttribute;
 import lbemodel.entity.driver.DisqualifiedAttribute;
 import lbemodel.entity.driver.MileageAttribute;
 import lbemodel.entity.driver.NoClaimsDiscountAttribute;
-import lbemodel.entity.driver.YearsDriverslicense;
+import lbemodel.entity.driver.YearsDriverslicenseAttribute;
 import lbemodel.entity.driver.YearsInsuredAttribute;
 import lbemodel.entity.driver.ZipCodeAttribute;
 
@@ -51,7 +51,7 @@ public class DriverContainer extends ContainerModel{
 
 			@Override
 			public AttributeModel getAttribute() {
-				return YearsDriverslicense.INSTANCE;
+				return YearsDriverslicenseAttribute.INSTANCE;
 			}
 
 			@Override
@@ -137,10 +137,9 @@ public class DriverContainer extends ContainerModel{
 	public PageElementModelBase[] getChildren() {
 		return CHILDREN;
 	}
-	
+
 	@Override
-	public RelationModel<Instance> getRelation() {
+	public RelationModel getRelation() {
 		return DriverRelation.INSTANCE;
 	}
-
 }

@@ -7,8 +7,9 @@ import lbe.model.EntityModel;
 import lbe.page.RenderContext;
 import lbe.page.PageElement.Domain;
 import lbemodel.entity.DriverEntity;
+import lbemodel.entity.DriverInstance;
 
-public class MileageAttribute extends AttributeModel{
+public class MileageAttribute extends AttributeModel<DriverInstance, String>{
 
 	public static final MileageAttribute INSTANCE = new MileageAttribute();
 
@@ -42,8 +43,7 @@ public class MileageAttribute extends AttributeModel{
 	}
 
 	@Override
-	public AttributeValue get(Instance instance) {
-		// TODO Auto-generated method stub
-		return null;
+	public AttributeValue<DriverInstance, String> get(DriverInstance instance) {
+		return instance.mileage;
 	}
 }

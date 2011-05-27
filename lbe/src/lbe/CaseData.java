@@ -43,10 +43,11 @@ public class CaseData {
 		}
 	}
 	
-	public <V extends Object> AttributeValue<V> getValue(AttributeModel<V> attribute) {
+	@SuppressWarnings("unchecked")
+	public <I extends Instance, Value extends Object> AttributeValue<I, Value> getValue(AttributeModel<I, Value> attribute) {
 		EntityModel entity = attribute.getEntity();
-		Instance instance = getActiveInstance(entity);
-		return attribute.get(instance);
+		I instance = (I) getActiveInstance(entity);
+		return (AttributeValue<I, Value>) attribute.get(instance);
 	}
 
 	private Instance getActiveInstance(EntityModel entity) {

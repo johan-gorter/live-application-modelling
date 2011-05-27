@@ -9,13 +9,13 @@ import lbemodel.entity.DriverEntity;
 import lbemodel.entity.DriverInstance;
 
 
-public class YearsInsuredAttribute extends AttributeModel<DriverInstance, Integer>{
+public class YearsDriverslicenseAttribute extends AttributeModel<DriverInstance, Integer>{
 
-	public static final YearsInsuredAttribute INSTANCE = new YearsInsuredAttribute();
+	public static final YearsDriverslicenseAttribute INSTANCE = new YearsDriverslicenseAttribute();
 
 	@Override
 	public String getName() {
-		return "YearsInsured";
+		return "YearsDriverslicense";
 	}
 
 	@Override
@@ -25,7 +25,12 @@ public class YearsInsuredAttribute extends AttributeModel<DriverInstance, Intege
 
 	@Override
 	public String getQuestion(RenderContext context) {
-		return "How many years have you been insured?";
+		return "How many years have you held your drivers licence?";
+	}
+	
+	@Override
+	public String getExplain(RenderContext context) {
+		return "Round the number of months down to entire years. e.g. if you own a drivers licence for 3 months round down to 0 years.";
 	}
 
 	@Override
@@ -35,7 +40,7 @@ public class YearsInsuredAttribute extends AttributeModel<DriverInstance, Intege
 
 	@Override
 	public AttributeValue<DriverInstance, Integer> get(DriverInstance instance) {
-		return instance.yearsInsured;
+		return instance.yearsDriverslicense;
 	}
 
 }

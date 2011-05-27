@@ -2,22 +2,22 @@ package lbe.instance;
 
 import lbe.model.AttributeModel;
 
-public class AttributeValue<V extends Object> {
+public class AttributeValue<I extends Instance, V extends Object> {
 	
-	private final AttributeModel<V> model;
-	private final Instance forInstance;
+	private final AttributeModel<I, V> model;
+	private final I forInstance;
 	
 	private V storedValue;
 	
 	private transient V calculatedValue;
 
 
-	public AttributeValue(Instance forInstance, AttributeModel<V> model) {
+	public AttributeValue(I forInstance, AttributeModel<I, V> model) {
 		this.forInstance = forInstance;
 		this.model = model;
 	}
 
-	public AttributeModel<V> getModel() {
+	public AttributeModel<I, V> getModel() {
 		return model;
 	}
 	
@@ -29,5 +29,9 @@ public class AttributeValue<V extends Object> {
 			calculatedValue = (V)model.calculateValue(forInstance);
 		}
 		return calculatedValue;
+	}
+
+	public void set(V value) {
+		storedValue = value;
 	}
 }

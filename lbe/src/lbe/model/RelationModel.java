@@ -3,7 +3,7 @@ package lbe.model;
 import lbe.instance.Instance;
 import lbe.page.RenderContext;
 
-public abstract class RelationModel<V extends Instance> extends AttributeModel<V> {
+public abstract class RelationModel<I extends Instance, To extends Instance> extends AttributeModel<I, To> {
 	
 	public abstract EntityModel getTo();
 	
@@ -11,9 +11,9 @@ public abstract class RelationModel<V extends Instance> extends AttributeModel<V
 	
 	public abstract boolean isMultivalue();
 	
-	public abstract boolean isReverseMultivalue();
-
-	public abstract Instance createTo(Instance from);
+	public abstract RelationModel<To, I> getReverseRelation();
+	
+	public abstract To createTo(I from);
 	
 	@Override
 	public String getDatatype() {

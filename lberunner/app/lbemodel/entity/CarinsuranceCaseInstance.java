@@ -7,14 +7,21 @@ import lbemodel.entity.carinsurancecase.DriverRelation;
 
 public class CarinsuranceCaseInstance extends Instance {
 
-	private SingleRelationValue<DriverInstance> driver = new SingleRelationValue<DriverInstance>(this, DriverRelation.INSTANCE, false);
+	public CarinsuranceCaseInstance() {
+		super(null);
+	}
+	
+	@Override
+	public Instance getCase() {
+		return this;
+	}
+
+	public final SingleRelationValue<CarinsuranceCaseInstance, DriverInstance> driver 
+		= new SingleRelationValue<CarinsuranceCaseInstance, DriverInstance>(this, DriverRelation.INSTANCE, false);
 
 	@Override
 	public EntityModel getModel() {
 		return CarinsuranceCaseEntity.INSTANCE;
 	}
 	
-	public SingleRelationValue<DriverInstance> getDriver() {
-		return driver;
-	}
 }

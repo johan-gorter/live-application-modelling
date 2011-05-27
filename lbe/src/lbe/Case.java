@@ -66,4 +66,9 @@ public class Case {
 	public synchronized PageElement render(Session session) {
 		return PageRenderer.renderPage(id, currentCaseData, session);
 	}
+
+	public synchronized void changeValue(Session session, String pageElementId, Object value) {
+		PageRenderer.changeValue(id, currentCaseData, session, pageElementId, value);
+		
+	}
 }

@@ -14,7 +14,7 @@ import lbemodel.entity.DriverInstance;
 import lbemodel.entity.DriverEntity;
 
 
-public class DateOfBirthAttribute extends AttributeModel<Date> {
+public class DateOfBirthAttribute extends AttributeModel<DriverInstance, Date> {
 
 	public static final DateOfBirthAttribute INSTANCE = new DateOfBirthAttribute();
 
@@ -44,7 +44,7 @@ public class DateOfBirthAttribute extends AttributeModel<Date> {
 	}
 
 	@Override
-	public AttributeValue<Date> get(Instance instance) {
-		return ((DriverInstance)instance).getDateOfBirth();
+	public AttributeValue<DriverInstance, Date> get(DriverInstance instance) {
+		return instance.dateOfBirth;
 	}
 }

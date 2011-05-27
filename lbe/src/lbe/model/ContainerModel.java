@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lbe.instance.Instance;
+import lbe.page.ChangeContext;
 import lbe.page.PageElement;
 import lbe.page.RenderContext;
 
@@ -24,7 +25,7 @@ public abstract class ContainerModel extends PageElementModelBase {
 
 	@Override
 	public PageElement render(RenderContext context) {
-		RelationModel<Instance> relation = this.getRelation();
+		RelationModel<Instance, Instance> relation = this.getRelation();
 		Instance pushed = null;
 		if (relation!=null) {
 			 pushed = context.pushRelation(relation);
@@ -34,12 +35,34 @@ public abstract class ContainerModel extends PageElementModelBase {
 		result.display = getDisplay(context);
 		result.name = getName();
 		context.nextIdLevel();
+		
 		result.content = renderChildren(context, getChildren());
+		
 		context.previousIdLevel();
 		if (relation!=null) {
 			context.popInstance(pushed);
 		}
 		return result;
+	}
+	
+	@Override
+	public void changeValue(ChangeContext context) {
+		super.changeValue(context);
+		RelationModel<Instance, Instance> relation = this.getRelation();
+		Instance pushed = null;
+		if (relation!=null) {
+			 pushed = context.pushRelation(relation);
+		}
+		context.nextIdLevel();
+		
+		for (PageElementModelBase child: getChildren()) {
+			child.changeValue(context);
+		}
+		
+		context.previousIdLevel();
+		if (relation!=null) {
+			context.popInstance(pushed);
+		}
 	}
 
 	public static PageElement[] renderChildren(RenderContext context, PageElementModelBase[] childModels) {
@@ -55,8 +78,16 @@ public abstract class ContainerModel extends PageElementModelBase {
 
 	public abstract PageElementModelBase[] getChildren();
 	
-	public RelationModel<Instance> getRelation() {
+	@SuppressWarnings("rawtypes")
+	public RelationModel getRelation() {
 		return null;
+	}
+
+	public static void changeValue(ChangeContext changeContext,
+			PageElementModelBase[] childModels) {
+		for (PageElementModelBase child: childModels) {
+			child.changeValue(changeContext);
+		}		
 	}
 
 }

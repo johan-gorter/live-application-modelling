@@ -6,8 +6,9 @@ import lbe.model.AttributeModel;
 import lbe.model.EntityModel;
 import lbe.page.RenderContext;
 import lbemodel.entity.DriverEntity;
+import lbemodel.entity.DriverInstance;
 
-public class DisqualifiedAttribute extends AttributeModel{
+public class DisqualifiedAttribute extends AttributeModel<DriverInstance, Boolean> {
 
 	public static final DisqualifiedAttribute INSTANCE = new DisqualifiedAttribute();
 
@@ -32,8 +33,7 @@ public class DisqualifiedAttribute extends AttributeModel{
 	}
 
 	@Override
-	public AttributeValue get(Instance instance) {
-		// TODO Auto-generated method stub
-		return null;
+	public AttributeValue<DriverInstance, Boolean> get(DriverInstance instance) {
+		return instance.disqualified;
 	}
 }

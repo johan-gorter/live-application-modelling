@@ -1,7 +1,7 @@
 package lbe.deduction.base;
 
 import lbe.deduction.Deduction;
-import lbe.deduction.DeductionContext;
+import lbe.instance.Instance;
 
 public class ConstantDeduction<V> extends Deduction<V> {
 
@@ -12,7 +12,7 @@ public class ConstantDeduction<V> extends Deduction<V> {
 	}
 
 	@Override
-	public V deduct(DeductionContext context) {
+	public V deduct(Instance fromInstance) {
 		return constant;
 	}
 

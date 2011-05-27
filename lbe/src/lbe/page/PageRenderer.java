@@ -12,4 +12,10 @@ public class PageRenderer {
 		PageElement element = session.getCurrentPage().render(renderContext);
 		return element;
 	}
+
+	public static void changeValue(String caseId, CaseData caseData, Session session, String pageElementId,
+			Object value) {
+		ChangeContext changeContext = new ChangeContext(caseId, caseData, session, pageElementId, value);
+		session.getCurrentPage().changeValue(changeContext);
+	}
 }
