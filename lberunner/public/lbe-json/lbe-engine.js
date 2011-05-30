@@ -15,6 +15,9 @@ var lbe = {};
     var LbeEngine = lbe.LbeEngine = function(div, rootFactory, config) {
     	LbeEngine.superclass.constructor.call(this, div, rootFactory, config);
     }
+
+    aquima.mvc.Settings.engine.aquimaUrl = 'StartFlow/submit';
+    aquima.mvc.Settings.engine.submitUnchangedValues = false;
     
     YAHOO.lang.extend(LbeEngine, aquima.Engine, {
     	
@@ -23,7 +26,10 @@ var lbe = {};
     	},
     	
     	update: function(pageData) {
-    		this.processNewPageData(pageData);
+    		LbeEngine.superclass.processNewPageData.call(this, pageData);
+    	},
+    	
+    	processNewPageData: function() {
     	}
     });
 

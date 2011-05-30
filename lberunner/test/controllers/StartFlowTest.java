@@ -10,7 +10,9 @@ import lbe.Case;
 import lbe.CaseManager;
 import lbe.Session;
 import lbe.flow.Navigator;
-import lbe.model.FlowModel;
+import lbe.model.Flow;
+import lbe.page.ChangeContext;
+import lbe.page.ChangeContext.FieldChange;
 import lbe.page.PageElement;
 import lbemodel.CarinsuranceInteractionModel;
 import lbemodel.entity.CarinsuranceCaseInstance;
@@ -21,18 +23,19 @@ public class StartFlowTest {
 
 	@Test
 	public void testGetFirstPage() {
-		FlowModel flowModel = CarinsuranceInteractionModel.INSTANCE.getExposedFlows()[0];
-		Case caseInstance = CaseManager.create(new CarinsuranceCaseInstance());
-		Session session = Navigator.startFlow(caseInstance, flowModel);
+		Flow flowModel = CarinsuranceInteractionModel.INSTANCE.getExposedFlows()[0];
+		Case c = CaseManager.create(new CarinsuranceCaseInstance());
+		Session session = Navigator.startFlow(c, flowModel);
 		
-		PageElement pageElement = caseInstance.render(session);
+		PageElement pageElement = c.render(session);
 	
 		PageElement dateOfBirth = getDateOfBirth(pageElement);
 		Assert.assertEquals(new GregorianCalendar(1980, 0, 1).getTime(), dateOfBirth.value);
 		
-		caseInstance.changeValue(session, dateOfBirth.id, new GregorianCalendar(1970, 0, 1).getTime());
+		FieldChange change = new ChangeContext.FieldChange(dateOfBirth.id, "1/1/1970");
+		c.submit(session, new FieldChange[]{change}, null);
 		
-		pageElement = caseInstance.render(session);
+		pageElement = c.render(session);
 		dateOfBirth = getDateOfBirth(pageElement);
 		Assert.assertEquals(new GregorianCalendar(1970, 0, 1).getTime(), dateOfBirth.value);
 	}

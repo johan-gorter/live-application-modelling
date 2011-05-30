@@ -6,7 +6,7 @@ public class FlowModelTest {
 
 	@Test
 	public void testGetPage() {
-		final PageModel pageModel = new PageModel() {
+		final Page pageModel = new Page() {
 			
 			@Override
 			public String getName() {
@@ -14,11 +14,11 @@ public class FlowModelTest {
 			}
 
 			@Override
-			public PageElementModelBase[] getRootContainers() {
-				return new PageElementModelBase[0];
+			public PageElementBase[] getRootContainers() {
+				return new PageElementBase[0];
 			}
 		};
-		FlowModel flowModel = new FlowModel() {
+		Flow flowModel = new Flow() {
 			
 			@Override
 			public String getName() {
@@ -26,18 +26,18 @@ public class FlowModelTest {
 			}
 			
 			@Override
-			public FlowModel[] getSubflows() {
-				return new FlowModel[]{};
+			public Flow[] getSubflows() {
+				return new Flow[]{};
 			}
 			
 			@Override
-			public FlowNodeModelBase getStart() {
+			public FlowNodeBase getStart() {
 				return null;
 			}
 			
 			@Override
-			public PageModel[] getPages() {
-				return new PageModel[]{pageModel};
+			public Page[] getPages() {
+				return new Page[]{pageModel};
 			}
 		};
 		

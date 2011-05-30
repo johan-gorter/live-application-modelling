@@ -1,5 +1,7 @@
 package lbe.page;
 
+import lbe.model.Text;
+
 import com.google.gson.annotations.SerializedName;
 
 public class PageElement {
@@ -18,19 +20,18 @@ public class PageElement {
 	public String explain;
 	public Domain[] domain;
 	public Message[] messages;
+	public boolean refresh;
 	
 	public static class Domain {
-		public Object value;
+		public String value;
 		public String display;
 		public boolean valid;
 
-		public Domain(Object value, String display) {
+		public Domain(String value, String display) {
 			this.value = value;
 			this.display = display;
 			this.valid = true;
 		}
-		
-		
 	}
 	
 	public static class Message {

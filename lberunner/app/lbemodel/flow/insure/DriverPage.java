@@ -1,16 +1,16 @@
 package lbemodel.flow.insure;
 
-import lbe.model.ContainerModel;
-import lbe.model.PageElementModelBase;
-import lbe.model.PageModel;
+import lbe.model.Container;
+import lbe.model.PageElementBase;
+import lbe.model.Page;
 import lbemodel.button.NextButton;
 import lbemodel.container.DriverContainer;
 
-public class DriverPage extends PageModel {
+public class DriverPage extends Page {
 
 	public static final DriverPage INSTANCE = new DriverPage();
 	
-	private static final PageElementModelBase[] ROOTS = new PageElementModelBase[]{
+	private static final PageElementBase[] ROOTS = new PageElementBase[]{
 		DriverContainer.INSTANCE,
 		NextButton.INSTANCE
 	}; 
@@ -21,7 +21,7 @@ public class DriverPage extends PageModel {
 	}
 	
 	@Override
-	public PageElementModelBase[] getRootContainers() {
+	public PageElementBase[] getRootContainers() {
 		return ROOTS;
 	}
 

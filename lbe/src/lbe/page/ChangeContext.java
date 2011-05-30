@@ -2,29 +2,47 @@ package lbe.page;
 
 import lbe.CaseData;
 import lbe.Session;
-import lbe.model.AttributeModel;
+import lbe.model.Attribute;
 
 public class ChangeContext extends RenderContext {
 
-	private String pageElementId;
-	private Object value;
+	public static class FieldChange {
+		private String pageElementId;
+		private Object value;
+		
+		public FieldChange(String pageElementId, Object value) {
+			this.pageElementId = pageElementId;
+			this.value = value;
+		}
 
-	public ChangeContext(String caseId, CaseData caseData, Session session, String pageElementId, Object value) {
+		public String getPageElementId() {
+			return pageElementId;
+		}
+		public Object getValue() {
+			return value;
+		}
+	}
+	
+	private String submit;
+	
+	private FieldChange[] fieldChanges; //TOOD: more efficiency by using a sorted array
+
+	public ChangeContext(String caseId, CaseData caseData, Session session, FieldChange[] fieldChanges, String submit) {
 		super(caseId, caseData, session);
-		this.pageElementId = pageElementId;
-		this.value = value;
+		this.fieldChanges = fieldChanges;
+		this.submit = submit;
 	}
 
-	public String getPageElementId() {
-		return pageElementId;
+	public void setValue(Attribute attribute, Object value) {
+		getCaseData().getValue(attribute).set(attribute.parse(value));
 	}
 
-	public Object getValue() {
-		return value;
+	public String getSubmit() {
+		return submit;
 	}
 
-	public void setValue(AttributeModel attribute, Object value) {
-		getCaseData().getValue(attribute).set(value);
+	public FieldChange[] getFieldChanges() {
+		return fieldChanges;
 	}
 	
 }

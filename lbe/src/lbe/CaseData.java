@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lbe.instance.AttributeValue;
+import lbe.instance.CaseInstance;
 import lbe.instance.Instance;
-import lbe.model.AttributeModel;
-import lbe.model.EntityModel;
+import lbe.model.Attribute;
+import lbe.model.Entity;
 
 /**
  * Contains all attributes that have a user-set value. Not thread-safe, synchronize on Case.
@@ -25,8 +26,8 @@ public class CaseData {
 		return version;
 	}
 
-	public Instance getCaseInstance() {
-		return activeInstances.get(0);
+	public CaseInstance getCaseInstance() {
+		return (CaseInstance)activeInstances.get(0);
 	}
 	
 	public void pushActiveInstance(Instance instance) {
@@ -44,13 +45,13 @@ public class CaseData {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <I extends Instance, Value extends Object> AttributeValue<I, Value> getValue(AttributeModel<I, Value> attribute) {
-		EntityModel entity = attribute.getEntity();
+	public <I extends Instance, Value extends Object> AttributeValue<I, Value> getValue(Attribute<I, Value> attribute) {
+		Entity entity = attribute.getEntity();
 		I instance = (I) getActiveInstance(entity);
 		return (AttributeValue<I, Value>) attribute.get(instance);
 	}
 
-	private Instance getActiveInstance(EntityModel entity) {
+	private Instance getActiveInstance(Entity entity) {
 		for (int i=activeInstances.size()-1;i>=0;i--) {
 			Instance instance = activeInstances.get(i);
 			if (instance.getModel()==entity) {

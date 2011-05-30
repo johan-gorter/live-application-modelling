@@ -1,7 +1,5 @@
 package lbe;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -44,8 +42,8 @@ public class CaseManager {
 					LOG.info("Model changes detected");
 				}
 				for (Case c: cases.values()) {
-					c.change(Collections.<Object>singleton("reloadModel1"));// Sends the page using the old model
-					c.change(Collections.<Object>singleton("reloadModel2"));// Makes the browser reload immediately and fetch the page using the new model
+					c.informWaiters();// Sends the page using the old model
+					c.informWaiters();// Makes the browser reload immediately and fetch the page using the new model
 				}
 			} else {
 				if (LOG.isDebugEnabled()) {
@@ -104,11 +102,6 @@ public class CaseManager {
 		Case c = new Case(caseInstance, ""+id);
 		cases.put(c.getId(), c);
 		return c;
-	}
-	
-	public static void changeCase(long caseId, Collection<Object> changes) {
-		Case c = cases.get(caseId);
-		c.change(changes);
 	}
 	
 	public static Promise<PageElement> waitForChange(Session session, int lastCaseVersion) {

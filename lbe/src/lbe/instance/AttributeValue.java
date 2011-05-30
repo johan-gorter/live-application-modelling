@@ -1,34 +1,20 @@
 package lbe.instance;
 
-import lbe.model.AttributeModel;
+import lbe.model.Attribute;
 
-public class AttributeValue<I extends Instance, V extends Object> {
-	
-	private final AttributeModel<I, V> model;
-	private final I forInstance;
+public class AttributeValue<I extends Instance, V extends Object> extends ReadonlyAttributeValue<I, V> {
 	
 	private V storedValue;
 	
-	private transient V calculatedValue;
-
-
-	public AttributeValue(I forInstance, AttributeModel<I, V> model) {
-		this.forInstance = forInstance;
-		this.model = model;
+	public AttributeValue(I forInstance, Attribute<I, V> model) {
+		super(forInstance, model);
 	}
 
-	public AttributeModel<I, V> getModel() {
-		return model;
-	}
-	
 	public V get() {
 		if (storedValue!=null) {
 			return storedValue;
 		}
-		if (calculatedValue==null) {
-			calculatedValue = (V)model.calculateValue(forInstance);
-		}
-		return calculatedValue;
+		return super.get();
 	}
 
 	public void set(V value) {

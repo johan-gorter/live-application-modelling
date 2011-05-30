@@ -13,9 +13,9 @@ public class PageRenderer {
 		return element;
 	}
 
-	public static void changeValue(String caseId, CaseData caseData, Session session, String pageElementId,
-			Object value) {
-		ChangeContext changeContext = new ChangeContext(caseId, caseData, session, pageElementId, value);
+	public static void submit(String caseId, CaseData caseData, Session session, ChangeContext.FieldChange[] fieldChanges,
+			String submit) {
+		ChangeContext changeContext = new ChangeContext(caseId, caseData, session, fieldChanges, submit);
 		session.getCurrentPage().changeValue(changeContext);
 	}
 }

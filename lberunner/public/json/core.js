@@ -980,6 +980,12 @@ this.questionTextNode =         document.createTextNode(text)
             if (YAHOO.lang.isArray(a) && YAHOO.lang.isArray(b)) {
                 return Util.arrayEquals(a, b);
             }
+            if (YAHOO.lang.isArray(a) && !YAHOO.lang.isArray(b)) {
+            	return a.length==0;
+            }
+            if (!YAHOO.lang.isArray(a) && YAHOO.lang.isArray(b)) {
+            	return b.length==0;
+            }
             return a == b;
         },
 
@@ -1228,7 +1234,7 @@ this.questionTextNode =         document.createTextNode(text)
 	                }
 	            }
             }
-            this.processPageData(newModel.page);
+            this.processNewPageData(newModel.page);
         }, 
         
         processNewPageData: function(page) {

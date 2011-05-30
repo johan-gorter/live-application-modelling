@@ -9,7 +9,6 @@
 #{/set}
 
 #{set 'moreScripts'}
-
 <script type="text/javascript" src="@{'/public/yui-2.9.0/yahoo/yahoo.js'}"></script>
 <script type="text/javascript" src="@{'/public/yui-2.9.0/dom/dom.js'}"></script>
 <script type="text/javascript" src="@{'/public/yui-2.9.0/event/event.js'}"></script>
@@ -28,13 +27,13 @@
 <script src="@{'/public/json/generic-inputs.js'}" type="text/javascript" charset="utf-8"></script>
 <script src="@{'/public/json/generic-factories.js'}" type="text/javascript" charset="utf-8"></script>
 
-<script src="@{'/public/json/debug/debug.js'}" type="text/javascript" charset="utf-8"></script>
-
 <script src="@{'/public/themes/default/default-controllers.js'}" type="text/javascript" charset="utf-8"></script>
 <script src="@{'/public/themes/default/default-inputs.js'}" type="text/javascript" charset="utf-8"></script>
 <script src="@{'/public/themes/default/default-factories.js'}" type="text/javascript" charset="utf-8"></script>
 
 <script src="@{'/public/lbe-json/lbe-engine.js'}" type="text/javascript" charset="utf-8"></script>
+
+<script src="@{'/public/json/debug/debug.js'}" type="text/javascript" charset="utf-8"></script>
 #{/set}
 
 <h1>Start Flow</h1>
@@ -51,8 +50,12 @@ var formattedSession = '${formattedSession}';
 var lastCaseVersion;
 var engine;
 
+var aquimaBaseUrl = aquima.mvc.Settings.engine.aquimaUrl;
+aquima.mvc.Settings.engine.aquimaUrl=aquimaBaseUrl+'?formattedSession='+formattedSession;
+
 $(document).ready(function() {
 	engine = new lbe.LbeEngine('AquimaMVC', defaultTheme.mvc.defaultThemeFactory, {});
+	engine.start();
 	$.get(getFirstPageAction({formattedSession: formattedSession}), function(data) {
 		updatePage(data);
 		waitForPageChanges();

@@ -1,17 +1,35 @@
 package lbemodel.entity;
 
-import lbe.model.AttributeModel;
-import lbe.model.EntityModel;
-import lbe.model.RelationModel;
-import lbemodel.entity.carinsurancecase.DriverRelation;
+import lbe.instance.AttributeValue;
+import lbe.instance.CaseInstance;
+import lbe.instance.Instance;
+import lbe.model.Attribute;
+import lbe.model.Entity;
+import lbe.model.Relation;
+import lbe.model.impl.SimpleRelation;
 
-public class CarinsuranceCaseEntity extends EntityModel {
+public class CarinsuranceCaseEntity extends Entity {
 
 	public static final CarinsuranceCaseEntity INSTANCE = new CarinsuranceCaseEntity();
 	
-	private static final AttributeModel[] ATTRIBUTES = new AttributeModel[]{};
-	private static final RelationModel[] RELATIONS = new RelationModel[]{DriverRelation.INSTANCE};
-	private static final RelationModel[] REVERSE_RELATIONS = new RelationModel[]{};
+	public static final Relation<CarinsuranceCaseInstance, DriverInstance> driver 
+		= new SimpleRelation<CarinsuranceCaseInstance, DriverInstance>("driver", INSTANCE, DriverEntity.INSTANCE, DriverInstance.class, DriverEntity.carinsuranceCase) {
+
+		@Override
+		public AttributeValue<CarinsuranceCaseInstance, DriverInstance> get(
+				CarinsuranceCaseInstance instance) {
+			return instance.driver;
+		}
+		
+		public boolean isOwner() {
+			return true;
+		};
+	};
+	
+	
+	private static final Attribute[] ATTRIBUTES = new Attribute[]{};
+	private static final Relation[] RELATIONS = new Relation[]{driver};
+	private static final Relation[] REVERSE_RELATIONS = new Relation[]{};
 
 	@Override
 	public String getName() {
@@ -19,18 +37,23 @@ public class CarinsuranceCaseEntity extends EntityModel {
 	}
 
 	@Override
-	public AttributeModel[] getAttributes() {
+	public Attribute[] getAttributes() {
 		return ATTRIBUTES;
 	}
 
 	@Override
-	public RelationModel[] getRelations() {
+	public Relation[] getRelations() {
 		return RELATIONS;
 	}
 
 	@Override
-	public RelationModel[] getReverseRelations() {
+	public Relation[] getReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+
+	@Override
+	public Instance createInstance(CaseInstance caseInstance) {
+		throw new RuntimeException("Only one case instance is allowed per case");
 	}
 	
 }

@@ -1,45 +1,36 @@
 package lbemodel.container;
 
-import lbe.instance.Instance;
-import lbe.model.AttributeModel;
-import lbe.model.ContainerModel;
-import lbe.model.FieldModel;
-import lbe.model.PageElementModelBase;
-import lbe.model.RelationModel;
+import lbe.model.Attribute;
+import lbe.model.Container;
+import lbe.model.Field;
+import lbe.model.PageElementBase;
+import lbe.model.Relation;
 import lbe.page.RenderContext;
+import lbemodel.entity.CarinsuranceCaseEntity;
 import lbemodel.entity.DriverEntity;
-import lbemodel.entity.carinsurancecase.DriverRelation;
-import lbemodel.entity.driver.CarUseAttribute;
-import lbemodel.entity.driver.DateOfBirthAttribute;
-import lbemodel.entity.driver.DisqualifiedAttribute;
-import lbemodel.entity.driver.MileageAttribute;
-import lbemodel.entity.driver.NoClaimsDiscountAttribute;
-import lbemodel.entity.driver.YearsDriverslicenseAttribute;
-import lbemodel.entity.driver.YearsInsuredAttribute;
-import lbemodel.entity.driver.ZipCodeAttribute;
 
-public class DriverContainer extends ContainerModel{
+public class DriverContainer extends Container{
 
 	public static DriverContainer INSTANCE = new DriverContainer();
 	
 	private DriverContainer() {}
 	
-	private static final PageElementModelBase[] CHILDREN = new PageElementModelBase[] {
+	private static final PageElementBase[] CHILDREN = new PageElementBase[] {
 
-		new FieldModel() {
+		new Field() {
 			@Override
-			public AttributeModel getAttribute() {
-				return DateOfBirthAttribute.INSTANCE;
+			public Attribute getAttribute() {
+				return DriverEntity.dateOfBirth;
 			}
 			@Override
 			public boolean isRequired() {
 				return true;
 			}
 		},
-		new FieldModel() {
+		new Field() {
 			@Override
-			public AttributeModel getAttribute() {
-				return YearsInsuredAttribute.INSTANCE;
+			public Attribute getAttribute() {
+				return DriverEntity.yearsInsured;
 			}
 
 			@Override
@@ -47,11 +38,11 @@ public class DriverContainer extends ContainerModel{
 				return true;
 			}
 		},
-		new FieldModel() {
+		new Field() {
 
 			@Override
-			public AttributeModel getAttribute() {
-				return YearsDriverslicenseAttribute.INSTANCE;
+			public Attribute getAttribute() {
+				return DriverEntity.yearsDriverslicense;
 			}
 
 			@Override
@@ -60,23 +51,11 @@ public class DriverContainer extends ContainerModel{
 			}
 			
 		},
-		new FieldModel() {
+		new Field() {
 
 			@Override
-			public AttributeModel getAttribute() {
-				return NoClaimsDiscountAttribute.INSTANCE;
-			}
-
-			@Override
-			public boolean isRequired() {
-				return true;
-			}
-		},
-		
-		new FieldModel() {
-			@Override
-			public AttributeModel getAttribute() {
-				return DisqualifiedAttribute.INSTANCE;
+			public Attribute getAttribute() {
+				return DriverEntity.noClaimsDiscount;
 			}
 
 			@Override
@@ -85,10 +64,10 @@ public class DriverContainer extends ContainerModel{
 			}
 		},
 		
-		new FieldModel() {
+		new Field() {
 			@Override
-			public AttributeModel getAttribute() {
-				return CarUseAttribute.INSTANCE;
+			public Attribute getAttribute() {
+				return DriverEntity.disqualified;
 			}
 
 			@Override
@@ -97,10 +76,10 @@ public class DriverContainer extends ContainerModel{
 			}
 		},
 		
-		new FieldModel() {
+		new Field() {
 			@Override
-			public AttributeModel getAttribute() {
-				return MileageAttribute.INSTANCE;
+			public Attribute getAttribute() {
+				return DriverEntity.carUse;
 			}
 
 			@Override
@@ -109,10 +88,22 @@ public class DriverContainer extends ContainerModel{
 			}
 		},
 		
-		new FieldModel() {
+		new Field() {
 			@Override
-			public AttributeModel getAttribute() {
-				return ZipCodeAttribute.INSTANCE;
+			public Attribute getAttribute() {
+				return DriverEntity.mileage;
+			}
+
+			@Override
+			public boolean isRequired() {
+				return true;
+			}
+		},
+		
+		new Field() {
+			@Override
+			public Attribute getAttribute() {
+				return DriverEntity.zipCode;
 			}
 
 			@Override
@@ -134,12 +125,12 @@ public class DriverContainer extends ContainerModel{
 	}
 	
 	@Override
-	public PageElementModelBase[] getChildren() {
+	public PageElementBase[] getChildren() {
 		return CHILDREN;
 	}
 
 	@Override
-	public RelationModel getRelation() {
-		return DriverRelation.INSTANCE;
+	public Relation getRelation() {
+		return CarinsuranceCaseEntity.driver;
 	}
 }

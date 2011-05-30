@@ -1,9 +1,9 @@
 package lbemodel.button;
 
-import lbe.model.ButtonModel;
+import lbe.model.Button;
 import lbe.page.RenderContext;
 
-public class NextButton extends ButtonModel{
+public class NextButton extends Button{
 
 	public static final NextButton INSTANCE = new NextButton();
 	

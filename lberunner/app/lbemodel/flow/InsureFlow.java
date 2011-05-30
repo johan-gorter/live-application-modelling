@@ -1,18 +1,18 @@
 package lbemodel.flow;
 
-import lbe.model.FlowModel;
-import lbe.model.FlowNodeModelBase;
-import lbe.model.PageModel;
+import lbe.model.Flow;
+import lbe.model.FlowNodeBase;
+import lbe.model.Page;
 import lbemodel.flow.insure.DriverPage;
 
-public class InsureFlow extends FlowModel {
+public class InsureFlow extends Flow {
 	
 	public static final InsureFlow INSTANCE = new InsureFlow();
-	private static final PageModel[] pages = new PageModel[]{DriverPage.INSTANCE};
-	private static final FlowModel[] subflows = new FlowModel[]{};
+	private static final Page[] pages = new Page[]{DriverPage.INSTANCE};
+	private static final Flow[] subflows = new Flow[]{};
 
 	@Override
-	public FlowNodeModelBase getStart() {
+	public FlowNodeBase getStart() {
 		return DriverPage.INSTANCE;
 	}
 
@@ -23,12 +23,12 @@ public class InsureFlow extends FlowModel {
 
 	
 	@Override
-	public PageModel[] getPages() {
+	public Page[] getPages() {
 		return pages;
 	}
 
 	@Override
-	public FlowModel[] getSubflows() {
+	public Flow[] getSubflows() {
 		return subflows;
 	}
 	

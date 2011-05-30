@@ -7,8 +7,8 @@ import lbe.CaseData;
 import lbe.Session;
 import lbe.instance.AttributeValue;
 import lbe.instance.Instance;
-import lbe.model.AttributeModel;
-import lbe.model.RelationModel;
+import lbe.model.Attribute;
+import lbe.model.Relation;
 
 //TODO: active instances
 public class RenderContext {
@@ -63,7 +63,7 @@ public class RenderContext {
 		return "en-US";
 	}
 
-	public Instance pushRelation(RelationModel<Instance, Instance> relation) {
+	public Instance pushRelation(Relation<Instance, Instance> relation) {
 		AttributeValue<Instance, Instance> value = caseData.getValue(relation);
 		Instance instance = value.get();
 		if (instance==null) {
@@ -77,7 +77,7 @@ public class RenderContext {
 		caseData.popActiveInstance(instance);
 	}
 
-	public <I extends Instance, Value extends Object> Value getValue(AttributeModel<I, Value> attribute) {
+	public <I extends Instance, Value extends Object> Value getValue(Attribute<I, Value> attribute) {
 		return caseData.getValue(attribute).get();
 	}
 }

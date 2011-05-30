@@ -1,22 +1,22 @@
 package lbe;
 
-import lbe.model.FlowModel;
-import lbe.model.InteractionModel;
-import lbe.model.PageModel;
+import lbe.model.Flow;
+import lbe.model.Interaction;
+import lbe.model.Page;
 
 public class Session {
 
 	private String caseId;
 	
-	private FlowModel startFlow;
+	private Flow startFlow;
 	
-	private PageModel currentPage;
+	private Page currentPage;
 
-	public static Session parse(String formattedSession, InteractionModel interactionModel) {
+	public static Session parse(String formattedSession, Interaction interactionModel) {
 		Session result = new Session();
 		String[] split = formattedSession.split("@");
 		if (split.length!=3) throw new RuntimeException("Invalid session string");
-		FlowModel startFlow = interactionModel.getExposedFlow(split[0]);
+		Flow startFlow = interactionModel.getExposedFlow(split[0]);
 		result.setStartFlow(startFlow);
 		result.setCurrentPage(startFlow.getPage(split[1]));
 		result.setCaseId(split[2]);
@@ -27,11 +27,11 @@ public class Session {
 		return startFlow.getName()+"@"+currentPage.getName()+"@"+caseId;//TODO: subflows
 	}
 	
-	public PageModel getCurrentPage() {
+	public Page getCurrentPage() {
 		return currentPage;
 	}
 
-	public void setCurrentPage(PageModel currentPage) {
+	public void setCurrentPage(Page currentPage) {
 		this.currentPage = currentPage;
 	}
 
@@ -43,11 +43,11 @@ public class Session {
 		this.caseId = caseId;
 	}
 	
-	public FlowModel getStartFlow() {
+	public Flow getStartFlow() {
 		return startFlow;
 	}
 
-	public void setStartFlow(FlowModel startFlow) {
+	public void setStartFlow(Flow startFlow) {
 		this.startFlow = startFlow;
 	}
 	

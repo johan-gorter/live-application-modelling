@@ -1,10 +1,18 @@
 package lbe;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
+import com.google.gson.GsonBuilder;
+
+import lbe.instance.CaseInstance;
 import lbe.instance.Instance;
+import lbe.page.ChangeContext;
 import lbe.page.PageElement;
 import lbe.page.PageRenderer;
 import play.libs.F.Promise;
@@ -37,16 +45,6 @@ public class Case {
 		return id;
 	}
 
-	public synchronized void change(Collection<Object> changes) {
-		//TODO make change
-		currentCaseData = new CaseData(caseInstance, currentCaseData.getVersion()+1);
-		List<Waiter> promises = waiters;
-		waiters = new ArrayList<Waiter>();
-		for (Waiter waiter : promises) {
-			waiter.promise.invoke(PageRenderer.renderPage(id, currentCaseData, waiter.session));
-		}
-	}
-
 	public synchronized Promise<PageElement> waitForChange(int lastCaseVersion, Session session) {
 		CaseManager.incrementChangeWaiters();
 		Promise<PageElement> promise = new Promise<PageElement>();
@@ -67,8 +65,28 @@ public class Case {
 		return PageRenderer.renderPage(id, currentCaseData, session);
 	}
 
-	public synchronized void changeValue(Session session, String pageElementId, Object value) {
-		PageRenderer.changeValue(id, currentCaseData, session, pageElementId, value);
-		
+	public synchronized void submit(Session session, ChangeContext.FieldChange[] fieldChanges, String submit) {
+		PageRenderer.submit(id, currentCaseData, session, fieldChanges, submit);
+		try {
+			persist();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		informWaiters();
+	}
+	
+	private void persist() throws IOException {
+//		File file = new File(id+".tmp");
+//		FileOutputStream stream = new FileOutputStream(file);
+//		file.renameTo(new File(id+".ser"));
+	}
+
+	public synchronized void informWaiters() {
+		currentCaseData = new CaseData(caseInstance, currentCaseData.getVersion()+1);
+		List<Waiter> promises = waiters;
+		waiters = new ArrayList<Waiter>();
+		for (Waiter waiter : promises) {
+			waiter.promise.invoke(PageRenderer.renderPage(id, currentCaseData, waiter.session));
+		}
 	}
 }
