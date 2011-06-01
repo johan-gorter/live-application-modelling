@@ -8,8 +8,6 @@ public class SingleRelationValue<I extends Instance, To extends Instance>
 	private final Relation<I, To> model;
 	private final I forInstance;
 
-	private To value;
-
 	public SingleRelationValue(I forInstance, Relation<I, To> model, boolean reverse) {
 		super(forInstance, model);
 		this.forInstance = forInstance;
@@ -17,16 +15,12 @@ public class SingleRelationValue<I extends Instance, To extends Instance>
 	}
 	
 	public To get() {
-		if (model.isOwner() && value == null) {
-			value = (To) model.createTo(forInstance);
+		if (model.isOwner() && !isStored()) {
+			set((To) model.createTo(forInstance));
 		}
-		return value;
+		return super.get();
 	}
 	
-	public void set(To value) {
-		this.value = value;
-	}
-
 	public Relation<I, To> getModel() {
 		return model;
 	}

@@ -20,4 +20,8 @@ public class AttributeValue<I extends Instance, V extends Object> extends Readon
 	public void set(V value) {
 		storedValue = value;
 	}
+
+	public boolean isStored() {
+		return storedValue!=null;
+	}
 }

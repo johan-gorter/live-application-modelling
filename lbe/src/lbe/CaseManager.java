@@ -3,7 +3,7 @@ package lbe;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-import lbe.instance.Instance;
+import lbe.instance.CaseInstance;
 import lbe.page.PageElement;
 
 import org.apache.log4j.Logger;
@@ -97,9 +97,10 @@ public class CaseManager {
 		}
 	}
 	
-	public static Case create(Instance caseInstance) {
-		long id = lastId.incrementAndGet();
-		Case c = new Case(caseInstance, ""+id);
+	public static Case create(CaseInstance caseInstance) {
+		String id = CasePersister.uniqueId();
+		Case c = new Case(caseInstance, id, CasePersister.INSTANCE);
+		CasePersister.INSTANCE.persist(id, caseInstance);
 		cases.put(c.getId(), c);
 		return c;
 	}
@@ -109,10 +110,15 @@ public class CaseManager {
 		return c.waitForChange(lastCaseVersion, session);
 	}
 
-	public static Case getCase(String caseId) {
+	public static <T extends CaseInstance> Case getCase(String caseId, Class<T> ofCaseInstanceType) {
 		Case result = cases.get(caseId);
 		if (result==null) {
-			throw new RuntimeException("Case not found, id: "+caseId);
+			T caseInstance = CasePersister.INSTANCE.load(caseId, ofCaseInstanceType);
+			if (caseInstance==null) {
+				throw new RuntimeException("Case not found, id: "+caseId);
+			}
+			result = new Case(caseInstance, caseId, CasePersister.INSTANCE);
+			cases.put(caseId, result);
 		}
 		return result;
 	}

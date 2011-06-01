@@ -5,9 +5,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import lbe.instance.CaseInstance;
@@ -30,11 +33,13 @@ public class Case {
 	}
 
 	private final Instance caseInstance;
+	private CasePersister persister;
 	
-	public Case(Instance caseInstance, String id) {
+	public Case(Instance caseInstance, String id, CasePersister persister) {
 		this.caseInstance = caseInstance;
 		this.currentCaseData=new CaseData(caseInstance, 0);
 		this.id = id;
+		this.persister = persister;
 	}
 
 	private String id;
@@ -67,20 +72,10 @@ public class Case {
 
 	public synchronized void submit(Session session, ChangeContext.FieldChange[] fieldChanges, String submit) {
 		PageRenderer.submit(id, currentCaseData, session, fieldChanges, submit);
-		try {
-			persist();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		CasePersister.INSTANCE.persist(id, currentCaseData.getCaseInstance());
 		informWaiters();
 	}
 	
-	private void persist() throws IOException {
-//		File file = new File(id+".tmp");
-//		FileOutputStream stream = new FileOutputStream(file);
-//		file.renameTo(new File(id+".ser"));
-	}
-
 	public synchronized void informWaiters() {
 		currentCaseData = new CaseData(caseInstance, currentCaseData.getVersion()+1);
 		List<Waiter> promises = waiters;

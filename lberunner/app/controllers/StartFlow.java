@@ -32,6 +32,7 @@ public class StartFlow extends Controller {
 	private static final Logger LOG = Logger.getLogger(StartFlow.class);
 
 	private static final Interaction application = CarinsuranceInteractionModel.INSTANCE;
+	private static final Class<CarinsuranceCaseInstance> caseInstanceClass = CarinsuranceCaseInstance.class; 
 
 	private static JsonSerializer<Date> dateSerializer = new JsonSerializer<Date>() {
 
@@ -54,7 +55,7 @@ public class StartFlow extends Controller {
 		if (caseId == null) {
 			c = CaseManager.create(new CarinsuranceCaseInstance());
 		} else {
-			c = CaseManager.getCase(caseId);
+			c = CaseManager.getCase(caseId, caseInstanceClass);
 		}
 		Flow startFlow;
 		if (startFlowName == null) {
@@ -78,7 +79,7 @@ public class StartFlow extends Controller {
 		CaseManager.fireChangesIfModelChanged();
 
 		Session lbesession = Session.parse(formattedSession, application);
-		Case c = CaseManager.getCase(lbesession.getCaseId());
+		Case c = CaseManager.getCase(lbesession.getCaseId(), caseInstanceClass);
 		renderJSON(c.render(lbesession), dateSerializer);
 	}
 
@@ -97,7 +98,7 @@ public class StartFlow extends Controller {
 						.get("id").getAsString(), value);
 			}
 			Session lbesession = Session.parse(formattedSession, application);
-			Case c = CaseManager.getCase(lbesession.getCaseId());
+			Case c = CaseManager.getCase(lbesession.getCaseId(), caseInstanceClass);
 			c.submit(lbesession, fieldChanges,
 					submit == null ? null : submit.getAsString());
 		}
@@ -127,7 +128,7 @@ public class StartFlow extends Controller {
 		CaseManager.fireChangesIfModelChanged();
 
 		Session lbesession = Session.parse(formattedSession, application);
-		Case c = CaseManager.getCase(lbesession.getCaseId());
+		Case c = CaseManager.getCase(lbesession.getCaseId(), caseInstanceClass);
 		PageElement page = await(c.waitForChange(lastCaseVersion, lbesession));
 		renderJSON(page, dateSerializer);
 	}
