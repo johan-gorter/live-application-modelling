@@ -3,19 +3,19 @@ package lbemodel.entity;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import lbe.deduction.Deduction;
-import lbe.deduction.base.ConstantDeduction;
-import lbe.instance.AttributeValue;
 import lbe.instance.CaseInstance;
 import lbe.instance.Instance;
+import lbe.instance.value.impl.AttributeValueImpl;
 import lbe.model.Attribute;
 import lbe.model.DomainEntry;
 import lbe.model.Entity;
 import lbe.model.Relation;
-import lbe.model.Text;
-import lbe.model.impl.ConstantText;
+import lbe.model.deduction.ConstantDeduction;
+import lbe.model.deduction.Deduction;
 import lbe.model.impl.SimpleAttribute;
 import lbe.model.impl.SimpleRelation;
+import lbe.model.pageelement.Text;
+import lbe.model.pageelement.impl.ConstantText;
 
 
 public class DriverEntity extends Entity {
@@ -25,7 +25,7 @@ public class DriverEntity extends Entity {
 	public static final Attribute<DriverInstance, Date> dateOfBirth = new SimpleAttribute<DriverInstance, Date>("dateOfBirth", INSTANCE, Date.class) {
 		
 		@Override
-		public AttributeValue<DriverInstance, Date> get(DriverInstance instance) {
+		public AttributeValueImpl<DriverInstance, Date> get(DriverInstance instance) {
 			return instance.dateOfBirth;
 		}
 		
@@ -46,7 +46,7 @@ public class DriverEntity extends Entity {
 	public static final Attribute<DriverInstance, Integer> yearsInsured = new SimpleAttribute<DriverInstance, Integer>("yearsInsured", INSTANCE, Integer.class) {
 
 		@Override
-		public AttributeValue<DriverInstance, Integer> get(
+		public AttributeValueImpl<DriverInstance, Integer> get(
 				DriverInstance instance) {
 			return instance.yearsInsured;
 		}
@@ -61,7 +61,7 @@ public class DriverEntity extends Entity {
 	public static final Attribute<DriverInstance, Integer> yearsDriverslicense = new SimpleAttribute<DriverInstance, Integer>("yearsDriverslicense", INSTANCE, Integer.class) {
 
 		@Override
-		public AttributeValue<DriverInstance, Integer> get(
+		public AttributeValueImpl<DriverInstance, Integer> get(
 				DriverInstance instance) {
 			return instance.yearsDriverslicense;
 		}
@@ -82,7 +82,7 @@ public class DriverEntity extends Entity {
 	public static final Attribute<DriverInstance, Integer> noClaimsDiscount = new SimpleAttribute<DriverInstance, Integer>("noClaimsDiscount", INSTANCE, Integer.class) {
 
 		@Override
-		public AttributeValue<DriverInstance, Integer> get(
+		public AttributeValueImpl<DriverInstance, Integer> get(
 				DriverInstance instance) {
 			return instance.noClaimsDiscount;
 		}
@@ -97,7 +97,7 @@ public class DriverEntity extends Entity {
 	public static final Attribute<DriverInstance, Boolean> disqualified = new SimpleAttribute<DriverInstance, Boolean>("disqualified", INSTANCE, Boolean.class) {
 
 		@Override
-		public AttributeValue<DriverInstance, Boolean> get(
+		public AttributeValueImpl<DriverInstance, Boolean> get(
 				DriverInstance instance) {
 			return instance.disqualified;
 		}
@@ -113,7 +113,7 @@ public class DriverEntity extends Entity {
 	public static final Attribute<DriverInstance, String> carUse = new SimpleAttribute<DriverInstance, String>("carUse", INSTANCE, String.class) {
 
 		@Override
-		public AttributeValue<DriverInstance, String> get(
+		public AttributeValueImpl<DriverInstance, String> get(
 				DriverInstance instance) {
 			return instance.carUse;
 		};
@@ -136,7 +136,7 @@ public class DriverEntity extends Entity {
 	public static final Attribute<DriverInstance, String> mileage = new SimpleAttribute<DriverInstance, String>("mileage", INSTANCE, String.class) {
 
 		@Override
-		public AttributeValue<DriverInstance, String> get(
+		public AttributeValueImpl<DriverInstance, String> get(
 				DriverInstance instance) {
 			return instance.mileage;
 		}
@@ -162,7 +162,7 @@ public class DriverEntity extends Entity {
 		= new SimpleAttribute<DriverInstance, String>("zipCode", INSTANCE, String.class) {
 
 		@Override
-		public AttributeValue<DriverInstance, String> get(
+		public AttributeValueImpl<DriverInstance, String> get(
 				DriverInstance instance) {
 			return instance.zipCode;
 		}
@@ -179,7 +179,7 @@ public class DriverEntity extends Entity {
 				CarinsuranceCaseInstance.class, CarinsuranceCaseEntity.driver) {
 
 			@Override
-			public AttributeValue<DriverInstance, CarinsuranceCaseInstance> get(
+			public AttributeValueImpl<DriverInstance, CarinsuranceCaseInstance> get(
 					DriverInstance instance) {
 				return instance.carinsuranceCase;
 			}

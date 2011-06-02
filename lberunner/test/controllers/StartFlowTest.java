@@ -6,14 +6,14 @@ import java.util.GregorianCalendar;
 
 import junit.framework.Assert;
 
-import lbe.Case;
-import lbe.CaseManager;
-import lbe.Session;
-import lbe.flow.Navigator;
-import lbe.model.Flow;
-import lbe.page.ChangeContext;
-import lbe.page.ChangeContext.FieldChange;
-import lbe.page.PageElement;
+import lbe.engine.Case;
+import lbe.engine.CaseManager;
+import lbe.engine.ChangeContext;
+import lbe.engine.Navigator;
+import lbe.engine.PageElement;
+import lbe.engine.Session;
+import lbe.engine.ChangeContext.FieldChange;
+import lbe.model.flow.Flow;
 import lbemodel.CarinsuranceInteractionModel;
 import lbemodel.entity.CarinsuranceCaseInstance;
 

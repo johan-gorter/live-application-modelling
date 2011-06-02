@@ -1,8 +1,8 @@
 package lbemodel;
 
 import lbe.model.Entity;
-import lbe.model.Flow;
-import lbe.model.Interaction;
+import lbe.model.flow.Flow;
+import lbe.model.flow.Interaction;
 import lbemodel.entity.CarinsuranceCaseEntity;
 import lbemodel.flow.InsureFlow;
 

@@ -5,14 +5,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import lbe.Case;
-import lbe.CaseManager;
-import lbe.Session;
-import lbe.flow.Navigator;
-import lbe.model.Flow;
-import lbe.model.Interaction;
-import lbe.page.ChangeContext;
-import lbe.page.PageElement;
+import lbe.engine.Case;
+import lbe.engine.CaseManager;
+import lbe.engine.ChangeContext;
+import lbe.engine.Navigator;
+import lbe.engine.PageElement;
+import lbe.engine.Session;
+import lbe.model.flow.Flow;
+import lbe.model.flow.Interaction;
 import lbemodel.CarinsuranceInteractionModel;
 import lbemodel.entity.CarinsuranceCaseInstance;
 

@@ -1,8 +1,8 @@
 package lbemodel.flow;
 
-import lbe.model.Flow;
-import lbe.model.FlowNodeBase;
-import lbe.model.Page;
+import lbe.model.flow.Flow;
+import lbe.model.flow.FlowNodeBase;
+import lbe.model.flow.Page;
 import lbemodel.flow.insure.DriverPage;
 
 public class InsureFlow extends Flow {

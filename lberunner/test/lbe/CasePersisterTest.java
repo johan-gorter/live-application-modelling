@@ -6,6 +6,7 @@ import java.util.Date;
 
 import org.junit.Test;
 
+import lbe.engine.CasePersister;
 import lbemodel.entity.CarinsuranceCaseInstance;
 
 public class CasePersisterTest {

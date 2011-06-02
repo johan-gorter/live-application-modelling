@@ -1,8 +1,8 @@
 package lbemodel.flow.insure;
 
-import lbe.model.Container;
-import lbe.model.PageElementBase;
-import lbe.model.Page;
+import lbe.model.flow.Page;
+import lbe.model.pageelement.Container;
+import lbe.model.pageelement.PageElementBase;
 import lbemodel.button.NextButton;
 import lbemodel.container.DriverContainer;
 
