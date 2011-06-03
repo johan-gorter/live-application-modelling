@@ -1,13 +1,13 @@
-package lbemodel.container;
+package app.carinsurance.container;
 
+import app.carinsurance.entity.CarinsuranceCaseEntity;
+import app.carinsurance.entity.DriverEntity;
 import lbe.engine.RenderContext;
 import lbe.model.Attribute;
 import lbe.model.Relation;
 import lbe.model.pageelement.Container;
 import lbe.model.pageelement.Field;
 import lbe.model.pageelement.PageElementBase;
-import lbemodel.entity.CarinsuranceCaseEntity;
-import lbemodel.entity.DriverEntity;
 
 public class DriverContainer extends Container{
 

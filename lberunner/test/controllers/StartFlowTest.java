@@ -14,16 +14,17 @@ import lbe.engine.PageElement;
 import lbe.engine.Session;
 import lbe.engine.ChangeContext.FieldChange;
 import lbe.model.flow.Flow;
-import lbemodel.CarinsuranceInteractionModel;
-import lbemodel.entity.CarinsuranceCaseInstance;
 
 import org.junit.Test;
+
+import app.carinsurance.CarinsuranceApplication;
+import app.carinsurance.entity.CarinsuranceCaseInstance;
 
 public class StartFlowTest {
 
 	@Test
 	public void testGetFirstPage() {
-		Flow flowModel = CarinsuranceInteractionModel.INSTANCE.getExposedFlows()[0];
+		Flow flowModel = CarinsuranceApplication.INSTANCE.getExposedFlows()[0];
 		Case c = CaseManager.create(new CarinsuranceCaseInstance());
 		Session session = Navigator.startFlow(c, flowModel);
 		

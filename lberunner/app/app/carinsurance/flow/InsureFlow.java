@@ -1,9 +1,9 @@
-package lbemodel.flow;
+package app.carinsurance.flow;
 
+import app.carinsurance.flow.insure.DriverPage;
 import lbe.model.flow.Flow;
 import lbe.model.flow.FlowNodeBase;
 import lbe.model.flow.Page;
-import lbemodel.flow.insure.DriverPage;
 
 public class InsureFlow extends Flow {
 	

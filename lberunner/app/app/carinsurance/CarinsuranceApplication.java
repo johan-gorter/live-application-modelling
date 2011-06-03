@@ -1,14 +1,14 @@
-package lbemodel;
+package app.carinsurance;
 
+import app.carinsurance.entity.CarinsuranceCaseEntity;
+import app.carinsurance.flow.InsureFlow;
+import lbe.model.Application;
 import lbe.model.Entity;
 import lbe.model.flow.Flow;
-import lbe.model.flow.Interaction;
-import lbemodel.entity.CarinsuranceCaseEntity;
-import lbemodel.flow.InsureFlow;
 
-public class CarinsuranceInteractionModel extends Interaction {
+public class CarinsuranceApplication extends Application {
 
-	public static final CarinsuranceInteractionModel INSTANCE = new CarinsuranceInteractionModel();
+	public static final CarinsuranceApplication INSTANCE = new CarinsuranceApplication();
 	
 	@Override
 	public Entity getCaseModel() {

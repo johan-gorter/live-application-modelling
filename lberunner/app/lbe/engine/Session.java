@@ -1,7 +1,7 @@
 package lbe.engine;
 
+import lbe.model.Application;
 import lbe.model.flow.Flow;
-import lbe.model.flow.Interaction;
 import lbe.model.flow.Page;
 
 public class Session {
@@ -12,7 +12,7 @@ public class Session {
 	
 	private Page currentPage;
 
-	public static Session parse(String formattedSession, Interaction interactionModel) {
+	public static Session parse(String formattedSession, Application interactionModel) {
 		Session result = new Session();
 		String[] split = formattedSession.split("@");
 		if (split.length!=3) throw new RuntimeException("Invalid session string");

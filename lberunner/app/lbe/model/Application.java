@@ -1,9 +1,9 @@
-package lbe.model.flow;
+package lbe.model;
 
-import lbe.model.Entity;
+import lbe.model.flow.Flow;
 
 
-public abstract class Interaction {
+public abstract class Application {
 	
 	public abstract Entity getCaseModel();
 	

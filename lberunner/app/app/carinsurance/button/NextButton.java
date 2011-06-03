@@ -1,4 +1,4 @@
-package lbemodel.button;
+package app.carinsurance.button;
 
 import lbe.engine.RenderContext;
 import lbe.model.pageelement.Button;

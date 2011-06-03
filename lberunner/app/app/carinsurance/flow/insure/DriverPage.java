@@ -1,10 +1,10 @@
-package lbemodel.flow.insure;
+package app.carinsurance.flow.insure;
 
+import app.carinsurance.button.NextButton;
+import app.carinsurance.container.DriverContainer;
 import lbe.model.flow.Page;
 import lbe.model.pageelement.Container;
 import lbe.model.pageelement.PageElementBase;
-import lbemodel.button.NextButton;
-import lbemodel.container.DriverContainer;
 
 public class DriverPage extends Page {
 

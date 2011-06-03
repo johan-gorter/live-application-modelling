@@ -11,14 +11,15 @@ import lbe.engine.ChangeContext;
 import lbe.engine.Navigator;
 import lbe.engine.PageElement;
 import lbe.engine.Session;
+import lbe.model.Application;
 import lbe.model.flow.Flow;
-import lbe.model.flow.Interaction;
-import lbemodel.CarinsuranceInteractionModel;
-import lbemodel.entity.CarinsuranceCaseInstance;
 
 import org.apache.log4j.Logger;
 
 import play.mvc.Controller;
+
+import app.carinsurance.CarinsuranceApplication;
+import app.carinsurance.entity.CarinsuranceCaseInstance;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -31,7 +32,7 @@ public class StartFlow extends Controller {
 
 	private static final Logger LOG = Logger.getLogger(StartFlow.class);
 
-	private static final Interaction application = CarinsuranceInteractionModel.INSTANCE;
+	private static final Application application = CarinsuranceApplication.INSTANCE;
 	private static final Class<CarinsuranceCaseInstance> caseInstanceClass = CarinsuranceCaseInstance.class; 
 
 	private static JsonSerializer<Date> dateSerializer = new JsonSerializer<Date>() {

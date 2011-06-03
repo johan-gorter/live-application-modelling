@@ -1,4 +1,4 @@
-package lbemodel.entity;
+package app.carinsurance.entity;
 
 import lbe.instance.CaseInstance;
 import lbe.instance.Instance;
