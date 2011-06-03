@@ -5,14 +5,14 @@ import lbe.model.Attribute;
 import lbe.model.Entity;
 import lbe.model.pageelement.Text;
 
-public abstract class SimpleAttribute<I extends Instance, Value extends Object> extends Attribute<I, Value> {
+public abstract class SimpleAttribute<I extends Instance, Value extends Object, Item extends Object> extends Attribute<I, Value, Item> {
 
 	private final String name;
 	private final Entity entity;
-	private final Class<Value> valueClass;
+	private final Class<Item> valueClass;
 	private Text question = null;
 	
-	public SimpleAttribute(String name, Entity entity, Class<Value> valueClass) {
+	public SimpleAttribute(String name, Entity entity, Class<Item> valueClass) {
 		this.name = name;
 		this.entity = entity;
 		this.valueClass = valueClass;
@@ -24,7 +24,7 @@ public abstract class SimpleAttribute<I extends Instance, Value extends Object> 
 	}
 
 	@Override
-	public Class<Value> getDatatype() {
+	public Class<Item> getDatatype() {
 		return valueClass;
 	}
 

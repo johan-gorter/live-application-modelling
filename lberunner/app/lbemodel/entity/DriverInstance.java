@@ -4,7 +4,11 @@ import java.util.Date;
 
 import lbe.instance.CaseInstance;
 import lbe.instance.Instance;
+import lbe.instance.value.AttributeValue;
+import lbe.instance.value.AttributeValues;
+import lbe.instance.value.RelationValue;
 import lbe.instance.value.impl.AttributeValueImpl;
+import lbe.instance.value.impl.AttributeValuesImpl;
 import lbe.instance.value.impl.RelationValueImpl;
 import lbe.model.Entity;
 
@@ -19,31 +23,31 @@ public class DriverInstance extends Instance {
 		return DriverEntity.INSTANCE;
 	}
 
-	public final RelationValueImpl<DriverInstance, CarinsuranceCaseInstance> carinsuranceCase 
+	public final RelationValue<DriverInstance, CarinsuranceCaseInstance> carinsuranceCase 
 		= new RelationValueImpl<DriverInstance, CarinsuranceCaseInstance>(this, DriverEntity.carinsuranceCase, true);
 	
-	public final AttributeValueImpl<DriverInstance, Date> dateOfBirth 
+	public final AttributeValue<DriverInstance, Date> dateOfBirth 
 		= new AttributeValueImpl<DriverInstance, Date>(this, DriverEntity.dateOfBirth);
 
-	public final AttributeValueImpl<DriverInstance, String> carUse 
-		= new AttributeValueImpl<DriverInstance, String>(this, DriverEntity.carUse);
+	public final AttributeValues<DriverInstance, String> carUse 
+		= new AttributeValuesImpl<DriverInstance, String>(this, DriverEntity.carUse);
 
-	public final AttributeValueImpl<DriverInstance, Boolean> disqualified 
+	public final AttributeValue<DriverInstance, Boolean> disqualified 
 		= new AttributeValueImpl<DriverInstance, Boolean>(this, DriverEntity.disqualified);
 
-	public final AttributeValueImpl<DriverInstance, String> zipCode 
+	public final AttributeValue<DriverInstance, String> zipCode 
 		= new AttributeValueImpl<DriverInstance, String>(this, DriverEntity.zipCode);
 
-	public final AttributeValueImpl<DriverInstance, Integer> yearsDriverslicense
+	public final AttributeValue<DriverInstance, Integer> yearsDriverslicense
 		= new AttributeValueImpl<DriverInstance, Integer>(this, DriverEntity.yearsDriverslicense);
 
-	public final AttributeValueImpl<DriverInstance, Integer> yearsInsured  
+	public final AttributeValue<DriverInstance, Integer> yearsInsured  
 		= new AttributeValueImpl<DriverInstance, Integer>(this, DriverEntity.yearsInsured);
 
-	public final AttributeValueImpl<DriverInstance, String> mileage
+	public final AttributeValue<DriverInstance, String> mileage
 		= new AttributeValueImpl<DriverInstance, String>(this, DriverEntity.mileage);
 
-	public final AttributeValueImpl<DriverInstance, Integer> noClaimsDiscount
+	public final AttributeValue<DriverInstance, Integer> noClaimsDiscount
 		= new AttributeValueImpl<DriverInstance, Integer>(this, DriverEntity.noClaimsDiscount);
 
 }

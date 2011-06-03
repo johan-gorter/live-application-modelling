@@ -1,20 +1,22 @@
 package lbe.model.impl;
 
 import lbe.instance.Instance;
+import lbe.instance.value.RelationValue;
+import lbe.instance.value.RelationValues;
 import lbe.model.Entity;
 import lbe.model.Relation;
 
-public abstract class SimpleRelation<I extends Instance, To extends Instance> extends Relation<I, To> {
+public abstract class SimpleRelation<I extends Instance, Value extends Object, To extends Instance> extends Relation<I, Value, To> {
 
 	private final String name;
 	private final Entity entity;
 	private final Entity to;
 	private final Class<To> valueClass;
-	private final Relation<To, I> reverseRelation;
+	private final Relation<To, ? extends Object,I> reverseRelation;
 	
 	
 	public SimpleRelation(String name, Entity entity, Entity to,
-			Class<To> valueClass, Relation<To, I> reverseRelation) {
+			Class<To> valueClass, Relation<To, ? extends Object,I> reverseRelation) {
 		this.name = name;
 		this.entity = entity;
 		this.to = to;
@@ -42,7 +44,7 @@ public abstract class SimpleRelation<I extends Instance, To extends Instance> ex
 	}
 
 	@Override
-	public Relation<To, I> getReverseRelation() {
+	public Relation<To, ? extends Object,I> getReverseRelation() {
 		return reverseRelation;
 	}
 
@@ -55,7 +57,19 @@ public abstract class SimpleRelation<I extends Instance, To extends Instance> ex
 	@SuppressWarnings("unchecked")
 	public To createTo(I from) {
 		To result = (To)getTo().createInstance(from.getCase());
-		getReverseRelation().get(result).set(from);
+		Relation<To, ? extends Object, I> reverseRelation = getReverseRelation();
+		if (!reverseRelation.isReadOnly()) {
+			if (reverseRelation.isMultivalue()) {
+				((RelationValues)reverseRelation.get(result)).add(from);
+			} else {
+				((RelationValue)reverseRelation.get(result)).set(from);
+			}
+		}
 		return result;
 	};
+	
+	@Override
+	public Class<To> getDatatype() {
+		return valueClass;
+	}
 }

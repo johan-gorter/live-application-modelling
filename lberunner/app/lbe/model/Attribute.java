@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import lbe.instance.Instance;
+import lbe.instance.value.ReadOnlyAttributeValue;
 import lbe.instance.value.impl.AttributeValueImpl;
 import lbe.model.deduction.Deduction;
 import lbe.model.pageelement.Text;
@@ -22,7 +23,7 @@ public abstract class Attribute<I extends Instance, Value extends Object, Item e
 
 	public abstract Entity getEntity();
 	
-	public abstract Class<Value> getDatatype();
+	public abstract Class<Item> getDatatype();
 
 	public abstract Text getQuestion();
 
@@ -60,7 +61,7 @@ public abstract class Attribute<I extends Instance, Value extends Object, Item e
 		return get((I)forInstance).get();
 	}
 	
-	public abstract AttributeValueImpl<I, Value> get(I instance);
+	public abstract ReadOnlyAttributeValue<I, Value> get(I instance);
 
 	private static final DateFormat DATE_INTERNATIONAL = new SimpleDateFormat("dd/MM/yyyy");
 	

@@ -5,6 +5,8 @@ import java.util.List;
 
 import lbe.instance.CaseInstance;
 import lbe.instance.Instance;
+import lbe.instance.value.AttributeValue;
+import lbe.instance.value.ReadOnlyAttributeValue;
 import lbe.instance.value.impl.AttributeValueImpl;
 import lbe.model.Attribute;
 import lbe.model.Entity;
@@ -45,10 +47,10 @@ public class CaseData {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <I extends Instance, Value extends Object> AttributeValueImpl<I, Value> getValue(Attribute<I, Value> attribute) {
+	public <I extends Instance, Value extends Object> ReadOnlyAttributeValue<I, Value> getValue(Attribute<I, Value, ? extends Object> attribute) {
 		Entity entity = attribute.getEntity();
 		I instance = (I) getActiveInstance(entity);
-		return (AttributeValueImpl<I, Value>) attribute.get(instance);
+		return attribute.get(instance);
 	}
 
 	private Instance getActiveInstance(Entity entity) {

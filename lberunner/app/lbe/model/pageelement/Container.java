@@ -26,7 +26,7 @@ public abstract class Container extends PageElementBase {
 
 	@Override
 	public PageElement render(RenderContext context) {
-		Relation<Instance, Instance> relation = this.getRelation();
+		Relation<Instance, Instance, Instance> relation = this.getRelation();
 		Instance pushed = null;
 		if (relation!=null) {
 			 pushed = context.pushRelation(relation);
@@ -49,7 +49,8 @@ public abstract class Container extends PageElementBase {
 	@Override
 	public void changeValue(ChangeContext context) {
 		super.changeValue(context);
-		Relation<Instance, Instance> relation = this.getRelation();
+		//TODO: remove code duplication
+		Relation<Instance, Instance, Instance> relation = this.getRelation();
 		Instance pushed = null;
 		if (relation!=null) {
 			 pushed = context.pushRelation(relation);

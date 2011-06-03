@@ -2,9 +2,11 @@ package lbemodel.entity;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import lbe.instance.CaseInstance;
 import lbe.instance.Instance;
+import lbe.instance.value.AttributeValue;
 import lbe.instance.value.impl.AttributeValueImpl;
 import lbe.model.Attribute;
 import lbe.model.DomainEntry;
@@ -22,10 +24,11 @@ public class DriverEntity extends Entity {
 
 	public static final DriverEntity INSTANCE = new DriverEntity();
 	
-	public static final Attribute<DriverInstance, Date> dateOfBirth = new SimpleAttribute<DriverInstance, Date>("dateOfBirth", INSTANCE, Date.class) {
+	public static final Attribute<DriverInstance, Date, Date> dateOfBirth 
+		= new SimpleAttribute<DriverInstance, Date, Date>("dateOfBirth", INSTANCE, Date.class) {
 		
 		@Override
-		public AttributeValueImpl<DriverInstance, Date> get(DriverInstance instance) {
+		public AttributeValue<DriverInstance, Date> get(DriverInstance instance) {
 			return instance.dateOfBirth;
 		}
 		
@@ -43,10 +46,11 @@ public class DriverEntity extends Entity {
 		
 	};
 	
-	public static final Attribute<DriverInstance, Integer> yearsInsured = new SimpleAttribute<DriverInstance, Integer>("yearsInsured", INSTANCE, Integer.class) {
+	public static final Attribute<DriverInstance, Integer, Integer> yearsInsured 
+		= new SimpleAttribute<DriverInstance, Integer, Integer>("yearsInsured", INSTANCE, Integer.class) {
 
 		@Override
-		public AttributeValueImpl<DriverInstance, Integer> get(
+		public AttributeValue<DriverInstance, Integer> get(
 				DriverInstance instance) {
 			return instance.yearsInsured;
 		}
@@ -58,10 +62,11 @@ public class DriverEntity extends Entity {
 		};
 	};
 	
-	public static final Attribute<DriverInstance, Integer> yearsDriverslicense = new SimpleAttribute<DriverInstance, Integer>("yearsDriverslicense", INSTANCE, Integer.class) {
+	public static final Attribute<DriverInstance, Integer, Integer> yearsDriverslicense 
+		= new SimpleAttribute<DriverInstance, Integer, Integer>("yearsDriverslicense", INSTANCE, Integer.class) {
 
 		@Override
-		public AttributeValueImpl<DriverInstance, Integer> get(
+		public AttributeValue<DriverInstance, Integer> get(
 				DriverInstance instance) {
 			return instance.yearsDriverslicense;
 		}
@@ -79,10 +84,11 @@ public class DriverEntity extends Entity {
 		};
 	};
 	
-	public static final Attribute<DriverInstance, Integer> noClaimsDiscount = new SimpleAttribute<DriverInstance, Integer>("noClaimsDiscount", INSTANCE, Integer.class) {
+	public static final Attribute<DriverInstance, Integer, Integer> noClaimsDiscount 
+		= new SimpleAttribute<DriverInstance, Integer, Integer>("noClaimsDiscount", INSTANCE, Integer.class) {
 
 		@Override
-		public AttributeValueImpl<DriverInstance, Integer> get(
+		public AttributeValue<DriverInstance, Integer> get(
 				DriverInstance instance) {
 			return instance.noClaimsDiscount;
 		}
@@ -94,10 +100,11 @@ public class DriverEntity extends Entity {
 		};
 	};
 
-	public static final Attribute<DriverInstance, Boolean> disqualified = new SimpleAttribute<DriverInstance, Boolean>("disqualified", INSTANCE, Boolean.class) {
+	public static final Attribute<DriverInstance, Boolean, Boolean> disqualified 
+		= new SimpleAttribute<DriverInstance, Boolean, Boolean>("disqualified", INSTANCE, Boolean.class) {
 
 		@Override
-		public AttributeValueImpl<DriverInstance, Boolean> get(
+		public AttributeValue<DriverInstance, Boolean> get(
 				DriverInstance instance) {
 			return instance.disqualified;
 		}
@@ -110,10 +117,11 @@ public class DriverEntity extends Entity {
 		
 	};
 	
-	public static final Attribute<DriverInstance, String> carUse = new SimpleAttribute<DriverInstance, String>("carUse", INSTANCE, String.class) {
+	public static final Attribute<DriverInstance, List<String>, String> carUse 
+		= new SimpleAttribute<DriverInstance, List<String>, String>("carUse", INSTANCE, String.class) {
 
 		@Override
-		public AttributeValueImpl<DriverInstance, String> get(
+		public AttributeValue<DriverInstance, List<String>> get(
 				DriverInstance instance) {
 			return instance.carUse;
 		};
@@ -133,10 +141,11 @@ public class DriverEntity extends Entity {
 
 	};
 	
-	public static final Attribute<DriverInstance, String> mileage = new SimpleAttribute<DriverInstance, String>("mileage", INSTANCE, String.class) {
+	public static final Attribute<DriverInstance, String, String> mileage 
+		= new SimpleAttribute<DriverInstance, String, String>("mileage", INSTANCE, String.class) {
 
 		@Override
-		public AttributeValueImpl<DriverInstance, String> get(
+		public AttributeValue<DriverInstance, String> get(
 				DriverInstance instance) {
 			return instance.mileage;
 		}
@@ -158,11 +167,11 @@ public class DriverEntity extends Entity {
 
 	};
 	
-	public static final Attribute<DriverInstance, String> zipCode 
-		= new SimpleAttribute<DriverInstance, String>("zipCode", INSTANCE, String.class) {
+	public static final Attribute<DriverInstance, String, String> zipCode 
+		= new SimpleAttribute<DriverInstance, String, String>("zipCode", INSTANCE, String.class) {
 
 		@Override
-		public AttributeValueImpl<DriverInstance, String> get(
+		public AttributeValue<DriverInstance, String> get(
 				DriverInstance instance) {
 			return instance.zipCode;
 		}
@@ -174,12 +183,13 @@ public class DriverEntity extends Entity {
 		};
 	};
 	
-	public static final Relation<DriverInstance, CarinsuranceCaseInstance> carinsuranceCase 
-		= new SimpleRelation<DriverInstance, CarinsuranceCaseInstance>("carinsuranceCase", INSTANCE, CarinsuranceCaseEntity.INSTANCE, 
+	public static final Relation<DriverInstance, CarinsuranceCaseInstance, CarinsuranceCaseInstance> carinsuranceCase 
+		= new SimpleRelation<DriverInstance, CarinsuranceCaseInstance, CarinsuranceCaseInstance>("carinsuranceCase", INSTANCE, 
+				CarinsuranceCaseEntity.INSTANCE, 
 				CarinsuranceCaseInstance.class, CarinsuranceCaseEntity.driver) {
 
 			@Override
-			public AttributeValueImpl<DriverInstance, CarinsuranceCaseInstance> get(
+			public AttributeValue<DriverInstance, CarinsuranceCaseInstance> get(
 					DriverInstance instance) {
 				return instance.carinsuranceCase;
 			}

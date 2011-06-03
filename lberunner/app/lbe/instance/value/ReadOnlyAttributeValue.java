@@ -3,10 +3,10 @@ package lbe.instance.value;
 import lbe.instance.Instance;
 import lbe.model.Attribute;
 
-public interface ReadOnlyAttributeValue<I extends Instance, V extends Object> {
+public interface ReadOnlyAttributeValue<I extends Instance, Value extends Object> {
 
-	Attribute<I, V> getModel();
+	Attribute<I, Value, ? extends Object> getModel();
 	
-	V get();
-
+	Value get();
+	
 }

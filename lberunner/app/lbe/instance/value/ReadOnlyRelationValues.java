@@ -10,7 +10,4 @@ import lbe.model.Relation;
 public interface ReadOnlyRelationValues<I extends Instance, To extends Instance> 
 	extends ReadOnlyAttributeValues<I, To>,  ReadOnlyRelationValue<I, List<To>>{
 	
-	@Override
-	public Attribute<I, List<To>> getModel();
-
 }

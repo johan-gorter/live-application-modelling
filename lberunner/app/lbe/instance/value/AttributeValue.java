@@ -6,4 +6,6 @@ public interface AttributeValue<I extends Instance, V extends Object> extends Re
 	
 	public void set(V value);
 	
+	boolean isStored();
+	
 }

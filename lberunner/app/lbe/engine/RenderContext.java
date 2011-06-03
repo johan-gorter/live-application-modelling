@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lbe.instance.Instance;
+import lbe.instance.value.ReadOnlyRelationValue;
+import lbe.instance.value.RelationValue;
 import lbe.instance.value.impl.AttributeValueImpl;
 import lbe.model.Attribute;
 import lbe.model.Relation;
@@ -61,8 +63,8 @@ public class RenderContext {
 		return "en-US";
 	}
 
-	public Instance pushRelation(Relation<Instance, Instance> relation) {
-		AttributeValueImpl<Instance, Instance> value = caseData.getValue(relation);
+	public Instance pushRelation(Relation<Instance, ? extends Instance, ? extends Instance> relation) {
+		ReadOnlyRelationValue<Instance, ? extends Instance> value = (ReadOnlyRelationValue<Instance, ? extends Instance>) caseData.getValue(relation);
 		Instance instance = value.get();
 		if (instance==null) {
 			throw new RuntimeException("Relation yielded unknown");
@@ -75,7 +77,7 @@ public class RenderContext {
 		caseData.popActiveInstance(instance);
 	}
 
-	public <I extends Instance, Value extends Object> Value getValue(Attribute<I, Value> attribute) {
+	public <I extends Instance, Value extends Object> Value getValue(Attribute<I, Value, ? extends Object> attribute) {
 		return caseData.getValue(attribute).get();
 	}
 }

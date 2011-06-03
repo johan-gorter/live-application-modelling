@@ -8,6 +8,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import lbe.instance.Instance;
+import lbe.instance.value.AttributeValue;
+import lbe.instance.value.ReadOnlyAttributeValue;
+import lbe.instance.value.RelationValue;
+import lbe.instance.value.RelationValues;
 import lbe.instance.value.impl.AttributeValueImpl;
 import lbe.instance.value.impl.RelationValueImpl;
 import lbe.model.Attribute;
@@ -35,7 +39,7 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 		result.add("instanceId", new JsonPrimitive(src.getInstanceId()));
 		for (Attribute attribute : entity.getAttributes()) {
 			if (!attribute.isReadOnly()) {
-				AttributeValueImpl attributeValue = attribute.get(src);
+				AttributeValue attributeValue = (AttributeValue) attribute.get(src);
 				if (attributeValue.isStored()) {
 					Object value = attributeValue.get();
 					if (value instanceof Date) {
@@ -52,15 +56,20 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 		}
 		for (Relation relation : entity.getRelations()) {
 			if (!relation.isReadOnly()) {
-				AttributeValueImpl attributeValue = relation.get(src);
+				AttributeValue attributeValue = (AttributeValue) relation.get(src);
 				if (attributeValue.isStored()) {
-					RelationValueImpl target = (RelationValueImpl)attributeValue;
-					Instance targetInstance = target.get();
-					if (relation.isOwner()) {
-						JsonElement childElement = context.serialize(targetInstance);
-						result.add(relation.getName(), childElement);
+					if (relation.isMultivalue()) {
+						RelationValues target = (RelationValues)attributeValue;
+						throw new RuntimeException("TODO");
 					} else {
-						result.add(relation.getName(), new JsonPrimitive(targetInstance.getInstanceId()));
+						RelationValue target = (RelationValue)attributeValue;
+						Instance targetInstance = (Instance) target.get();
+						if (relation.isOwner()) {
+							JsonElement childElement = context.serialize(targetInstance);
+							result.add(relation.getName(), childElement);
+						} else {
+							result.add(relation.getName(), new JsonPrimitive(targetInstance.getInstanceId()));
+						}
 					}
 				}
 			}
@@ -96,7 +105,7 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 			if (!attribute.isReadOnly()) {
 				if (data.has(attribute.getName())) {
 					JsonElement value = data.get(attribute.getName());
-					AttributeValueImpl attributeValue = attribute.get(result);
+					AttributeValue attributeValue = (AttributeValue) attribute.get(result);
 					if (attribute.getDatatype()==Date.class) {
 						try {
 							attributeValue.set(UNIVERSAL_DATE.parse(value.getAsString()));
@@ -118,9 +127,13 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 				if (data.has(relation.getName())) {
 					JsonElement value = data.get(relation.getName());
 					if (relation.isOwner()) {
-						RelationValueImpl attributeValue = (RelationValueImpl)relation.get(result);
-						Instance target = attributeValue.get();
-						deserializeFirstPass(data.get(relation.getName()).getAsJsonObject(), target, instances);
+						if (relation.isMultivalue()) {
+							throw new RuntimeException("TODO");
+						} else {
+							RelationValue attributeValue = (RelationValue)relation.get(result);
+							Instance target = (Instance) attributeValue.get();
+							deserializeFirstPass(data.get(relation.getName()).getAsJsonObject(), target, instances);
+						}
 					}
 				}
 			}

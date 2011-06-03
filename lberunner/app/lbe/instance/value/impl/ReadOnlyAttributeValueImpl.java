@@ -6,17 +6,17 @@ import lbe.model.Attribute;
 
 public class ReadOnlyAttributeValueImpl<I extends Instance, V extends Object> implements ReadOnlyAttributeValue<I, V> {
 
-	protected final Attribute<I, V> model;
+	protected final Attribute<I, V, ? extends Object> model;
 	protected final I forInstance;
 	
 	private transient V calculatedValue;
 
-	public ReadOnlyAttributeValueImpl(I forInstance, Attribute<I, V> model) {
+	public ReadOnlyAttributeValueImpl(I forInstance, Attribute<I, V, ? extends Object> model) {
 		this.forInstance = forInstance;
 		this.model = model;
 	}
 
-	public Attribute<I, V> getModel() {
+	public Attribute<I, V, ? extends Object> getModel() {
 		return model;
 	}
 	
@@ -26,5 +26,5 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, V extends Object> im
 		}
 		return calculatedValue;
 	}
-
+	
 }

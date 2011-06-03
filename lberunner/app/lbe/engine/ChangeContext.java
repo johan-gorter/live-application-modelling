@@ -1,5 +1,6 @@
 package lbe.engine;
 
+import lbe.instance.value.AttributeValue;
 import lbe.model.Attribute;
 
 public class ChangeContext extends RenderContext {
@@ -32,7 +33,7 @@ public class ChangeContext extends RenderContext {
 	}
 
 	public void setValue(Attribute attribute, Object value) {
-		getCaseData().getValue(attribute).set(attribute.parse(value));
+		((AttributeValue)getCaseData().getValue(attribute)).set(attribute.parse(value));
 	}
 
 	public String getSubmit() {
