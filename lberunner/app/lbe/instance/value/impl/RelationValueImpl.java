@@ -4,15 +4,14 @@ import lbe.instance.Instance;
 import lbe.instance.value.RelationValue;
 import lbe.model.Relation;
 
-// To: Instance or List<Instance>
-public class RelationValueImpl<I extends Instance, To extends Object> 
+public class RelationValueImpl<I extends Instance, To extends Instance> 
 	extends AttributeValueImpl<I, To> 
 	implements RelationValue<I, To>{
 
-	private final Relation<I, To, ? extends Instance> model;
+	private final Relation<I, To, To> model;
 	private final I forInstance;
 
-	public RelationValueImpl(I forInstance, Relation<I, To, ? extends Instance> model, boolean reverse) {
+	public RelationValueImpl(I forInstance, Relation<I, To, To> model) {
 		super(forInstance, model);
 		this.forInstance = forInstance;
 		this.model = model;
@@ -26,7 +25,7 @@ public class RelationValueImpl<I extends Instance, To extends Object>
 		return super.get();
 	}
 	
-	public Relation<I, To, ? extends Instance> getModel() {
+	public Relation<I, To, To> getModel() {
 		return model;
 	}
 }

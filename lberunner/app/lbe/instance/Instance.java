@@ -3,29 +3,12 @@ package lbe.instance;
 import lbe.instance.CaseInstance;
 import lbe.model.Entity;
 
-public abstract class Instance {
+public interface Instance {
 	
-	private final CaseInstance caseInstance;
+	CaseInstance getCase();
 	
-	private final long id;
+	long getInstanceId();
 	
-	public Instance(CaseInstance caseInstance) {
-		this.caseInstance = caseInstance;
-		if (caseInstance!=null) {
-			this.id = caseInstance.nextId();
-		} else {
-			this.id = 0; // This means we are the caseInstance
-		}
-	}
+	Entity getModel();
 	
-	public CaseInstance getCase() {
-		return caseInstance;
-	}
-	
-	public abstract Entity getModel();
-
-	public long getInstanceId() {
-		return id;
-	}
-
 }

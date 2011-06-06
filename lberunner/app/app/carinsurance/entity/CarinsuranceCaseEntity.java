@@ -57,5 +57,11 @@ public class CarinsuranceCaseEntity extends Entity {
 	public Instance createInstance(CaseInstance caseInstance) {
 		throw new RuntimeException("Only one case instance is allowed per case");
 	}
+
+	@Override
+	public Entity extendsEntity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

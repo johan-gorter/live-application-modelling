@@ -42,6 +42,11 @@ public abstract class SimpleRelation<I extends Instance, Value extends Object, T
 	public boolean isMultivalue() {
 		return false;
 	}
+	
+	@Override
+	public boolean isReverse() {
+		return false;
+	}
 
 	@Override
 	public Relation<To, ? extends Object,I> getReverseRelation() {

@@ -4,6 +4,7 @@ import java.util.Date;
 
 import lbe.instance.CaseInstance;
 import lbe.instance.Instance;
+import lbe.instance.impl.SimpleInstance;
 import lbe.instance.value.AttributeValue;
 import lbe.instance.value.AttributeValues;
 import lbe.instance.value.RelationValue;
@@ -11,20 +12,16 @@ import lbe.instance.value.impl.AttributeValueImpl;
 import lbe.instance.value.impl.AttributeValuesImpl;
 import lbe.instance.value.impl.RelationValueImpl;
 import lbe.model.Entity;
+import lbe.model.Relation;
 
-public class DriverInstance extends Instance {
+public class DriverInstance extends SimpleInstance {
 
 	public DriverInstance(CaseInstance caseInstance) {
-		super(caseInstance);
-	}
-
-	@Override
-	public Entity getModel() {
-		return DriverEntity.INSTANCE;
+		super(caseInstance, DriverEntity.INSTANCE);
 	}
 
 	public final RelationValue<DriverInstance, CarinsuranceCaseInstance> carinsuranceCase 
-		= new RelationValueImpl<DriverInstance, CarinsuranceCaseInstance>(this, DriverEntity.carinsuranceCase, true);
+		= createRelationValue(DriverEntity.carinsuranceCase);
 	
 	public final AttributeValue<DriverInstance, Date> dateOfBirth 
 		= new AttributeValueImpl<DriverInstance, Date>(this, DriverEntity.dateOfBirth);

@@ -2,20 +2,8 @@ package lbe.instance;
 
 
 
-public abstract class CaseInstance extends Instance {
+public interface CaseInstance extends Instance {
 
-	private long lastId;
+	long nextId();
 	
-	public CaseInstance() {
-		super(null);
-	}
-	
-	@Override
-	public CaseInstance getCase() {
-		return this;
-	}
-	
-	public long nextId() {
-		return ++lastId;
-	}
 }

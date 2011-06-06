@@ -43,5 +43,9 @@ public abstract class SimpleEntity extends Entity {
 	public String getName() {
 		return name;
 	}
-
+	
+	@Override
+	public Entity extendsEntity() {
+		return null;
+	}
 }

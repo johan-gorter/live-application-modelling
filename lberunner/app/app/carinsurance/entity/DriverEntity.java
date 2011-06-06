@@ -7,7 +7,6 @@ import java.util.List;
 import lbe.instance.CaseInstance;
 import lbe.instance.Instance;
 import lbe.instance.value.AttributeValue;
-import lbe.instance.value.impl.AttributeValueImpl;
 import lbe.model.Attribute;
 import lbe.model.DomainEntry;
 import lbe.model.Entity;
@@ -239,5 +238,11 @@ public class DriverEntity extends Entity {
 	@Override
 	public Instance createInstance(CaseInstance caseInstance) {
 		return new DriverInstance(caseInstance);
+	}
+
+	@Override
+	public Entity extendsEntity() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

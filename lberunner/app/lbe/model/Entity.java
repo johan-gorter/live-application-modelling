@@ -5,6 +5,8 @@ import lbe.instance.Instance;
 
 public abstract class Entity extends Model {
 
+	public abstract Entity extendsEntity();
+	
 	public abstract Attribute<? extends Instance, ? extends Object, ? extends Object>[] getAttributes();
 	
 	public abstract Relation<? extends Instance, ? extends Object, ? extends Instance>[] getRelations();

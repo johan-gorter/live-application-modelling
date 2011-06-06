@@ -11,6 +11,8 @@ public abstract class Relation<I extends Instance, Value extends Object, To exte
 	
 	public abstract boolean isMultivalue();
 	
+	public abstract boolean isReverse();
+	
 	public abstract Relation<To, ? extends Object, I> getReverseRelation();
 	
 	public abstract To createTo(I from);

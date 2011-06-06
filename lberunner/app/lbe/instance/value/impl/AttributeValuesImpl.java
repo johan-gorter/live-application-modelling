@@ -18,5 +18,5 @@ public class AttributeValuesImpl<I extends Instance, Item extends Object>
 	public void add(Item item) {
 		this.get().add(item);
 	}
-
+	
 }

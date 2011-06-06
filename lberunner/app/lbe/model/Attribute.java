@@ -3,6 +3,7 @@ package lbe.model;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import lbe.instance.Instance;
@@ -51,6 +52,9 @@ public abstract class Attribute<I extends Instance, Value extends Object, Item e
 		Deduction<Value> deduction = getDeduction();
 		if (deduction!=null) {
 			return deduction.deduct(instance);
+		} else if (isMultivalue()) {
+			// A pragmatic approach: multivalue attributes are never unknown
+			return (Value) new ArrayList();
 		}
 		return null;
 	}
