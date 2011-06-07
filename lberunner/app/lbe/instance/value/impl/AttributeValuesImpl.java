@@ -1,5 +1,6 @@
 package lbe.instance.value.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lbe.instance.Instance;
@@ -16,6 +17,9 @@ public class AttributeValuesImpl<I extends Instance, Item extends Object>
 
 	@Override
 	public void add(Item item) {
+		if (!isStored()) {
+			set(new ArrayList<Item>());
+		}
 		this.get().add(item);
 	}
 	

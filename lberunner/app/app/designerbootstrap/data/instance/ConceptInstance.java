@@ -1,15 +1,12 @@
 package app.designerbootstrap.data.instance;
 
-import app.carinsurance.entity.DriverEntity;
-import app.carinsurance.entity.DriverInstance;
-import app.designerbootstrap.data.entity.ConceptEntity;
 import lbe.instance.CaseInstance;
-import lbe.instance.Instance;
 import lbe.instance.impl.SimpleInstance;
 import lbe.instance.value.AttributeValue;
-import lbe.instance.value.impl.AttributeValueImpl;
-import lbe.model.Attribute;
+import lbe.instance.value.RelationValue;
+import lbe.instance.value.RelationValues;
 import lbe.model.Entity;
+import app.designerbootstrap.data.entity.ConceptEntity;
 
 public class ConceptInstance extends SimpleInstance {
 
@@ -20,6 +17,12 @@ public class ConceptInstance extends SimpleInstance {
 	protected ConceptInstance(CaseInstance caseInstance, Entity model) {
 		super(caseInstance, model);
 	}
+	
+	public final RelationValue<ConceptInstance, ConceptInstance> extendsFrom
+		= createRelationValue(ConceptEntity.extendsFrom);
+
+	public final RelationValues<ConceptInstance, ConceptInstance> extensions
+		= createRelationValues(ConceptEntity.extensions);
 
 	public final AttributeValue<ConceptInstance, String> name 
 		= createAttributeValue(ConceptEntity.name);

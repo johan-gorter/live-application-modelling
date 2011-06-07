@@ -37,7 +37,7 @@ public class ApplicationEntity extends SimpleEntity {
 		};
 	};
 
-	public static Relation<ApplicationInstance, EntityInstance, EntityInstance> caseEntity
+	public static final Relation<ApplicationInstance, EntityInstance, EntityInstance> caseEntity
 		= new SimpleRelation<ApplicationInstance, EntityInstance, EntityInstance>("caseEntity", INSTANCE, 
 				EntityEntity.INSTANCE, EntityInstance.class, EntityEntity.caseEntityInApplication) {
 	
@@ -51,12 +51,16 @@ public class ApplicationEntity extends SimpleEntity {
 	
 	
 	
-	private static final Attribute[] ATTRIBUTES = new Attribute[]{};
-	private static final Relation[] RELATIONS = new Relation[]{};
+	private static final Attribute[] ATTRIBUTES = new Attribute[]{
+	};
+	private static final Relation[] RELATIONS = new Relation[]{
+		entities,
+		caseEntity
+	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{};
 	
 	public ApplicationEntity() {
-		super("Application", ATTRIBUTES, RELATIONS, REVERSE_RELATIONS);
+		super("Application");
 	}
 
 	@Override
@@ -65,8 +69,18 @@ public class ApplicationEntity extends SimpleEntity {
 	}
 	
 	@Override
-	public Entity extendsEntity() {
-		return ConceptEntity.INSTANCE;
+	public Attribute<? extends Instance, ? extends Object, ? extends Object>[] getLocalAttributes() {
+		return ATTRIBUTES;
+	}
+
+	@Override
+	public Relation<? extends Instance, ? extends Object, ? extends Instance>[] getLocalRelations() {
+		return RELATIONS;
+	}
+
+	@Override
+	public Relation<? extends Instance, ? extends Object, ? extends Instance>[] getLocalReverseRelations() {
+		return REVERSE_RELATIONS;
 	}
 
 }

@@ -1,5 +1,6 @@
 package lbe.designerbootstrap;
 
+import lbe.engine.CasePersister;
 import lbe.engine.codegenerator.CodeGenerator;
 import app.designerbootstrap.data.instance.ApplicationInstance;
 import app.designerbootstrap.data.instance.AttributeInstance;
@@ -22,60 +23,47 @@ public class Bootstrapper {
 
 		EntityInstance entity = new EntityInstance(applicationInstance);
 		entity.name.set("Entity");
-
-		EntityInstance relation = new EntityInstance(applicationInstance);
-		relation.name.set("Relation");
+		entity.extendsFrom.set(concept);
 
 		EntityInstance attribute = new EntityInstance(applicationInstance);
 		attribute.name.set("Attribute");
+		attribute.extendsFrom.set(concept);
 		
+		EntityInstance relation = new EntityInstance(applicationInstance);
+		relation.name.set("Relation");
+		relation.extendsFrom.set(attribute);
+
 		// Relations
 		RelationInstance entities = new RelationInstance(applicationInstance);
+		application.relations.add(entities);
 		entities.name.set("entities");
-		entities.from.set(application);
 		entities.to.set(entity);
 		entities.multivalue.set(true);
 		entities.owner.set(true);
 
 		RelationInstance caseEntity = new RelationInstance(applicationInstance);
+		application.relations.add(caseEntity);
 		caseEntity.name.set("caseEntity");
-		caseEntity.from.set(application);
 		caseEntity.to.set(entity);
 
 		RelationInstance entityExtends = new RelationInstance(applicationInstance);
+		entity.relations.add(entityExtends);
 		entityExtends.name.set("entityExtends");
-		entityExtends.from.set(entity);
 		entityExtends.to.set(entity);
 		
 		RelationInstance entityAttributes = new RelationInstance(applicationInstance);
+		entity.relations.add(entityAttributes);
 		entityAttributes.name.set("entityAttributes");
-		entityAttributes.from.set(entity);
 		entityAttributes.to.set(attribute);
 		entityAttributes.multivalue.set(true);
 		entityAttributes.owner.set(true);
 
 		RelationInstance entityRelations = new RelationInstance(applicationInstance);
+		entity.relations.add(entityRelations);
 		entityRelations.name.set("entityAttributes");
-		entityRelations.from.set(entity);
 		entityRelations.to.set(relation);
 		entityRelations.multivalue.set(true);
 		entityRelations.owner.set(true);
-		
-		// Extends relations
-		RelationInstance entityExtendsFrom = new RelationInstance(applicationInstance);
-		entityExtendsFrom.name.set("entityExtendsFrom");
-		entityExtendsFrom.from.set(entity);
-		entityExtendsFrom.to.set(concept);
-
-		RelationInstance attributeExtendsFrom = new RelationInstance(applicationInstance);
-		attributeExtendsFrom.name.set("attributeExtendsFrom");
-		attributeExtendsFrom.from.set(attribute);
-		attributeExtendsFrom.to.set(concept);
-		
-		RelationInstance relationExtendsFrom = new RelationInstance(applicationInstance);
-		relationExtendsFrom.name.set("relationExtendsFrom");
-		relationExtendsFrom.from.set(relation);
-		relationExtendsFrom.to.set(attribute);
 		
 		// Finish up
 		applicationInstance.caseEntity.set(application);
@@ -84,6 +72,8 @@ public class Bootstrapper {
 		applicationInstance.entities.add(entity);
 		applicationInstance.entities.add(attribute);
 		applicationInstance.entities.add(relation);
+		
+		System.out.println(CasePersister.gson.toJson(applicationInstance));
 		
 		CodeGenerator.generateEntity(concept);
 		

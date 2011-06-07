@@ -19,6 +19,9 @@ public class EntityInstance extends ConceptInstance {
 	public final RelationValues<EntityInstance, AttributeInstance> attributes
 		= createRelationValues(EntityEntity.attributes);
 	
+	public final RelationValues<EntityInstance, RelationInstance> relations
+		= createRelationValues(EntityEntity.relations);
+
 	public final RelationValue<EntityInstance, ApplicationInstance> application
 		= createRelationValue(EntityEntity.application);
 

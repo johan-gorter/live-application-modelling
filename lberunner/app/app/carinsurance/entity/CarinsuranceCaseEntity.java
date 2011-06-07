@@ -39,17 +39,17 @@ public class CarinsuranceCaseEntity extends Entity {
 	}
 
 	@Override
-	public Attribute[] getAttributes() {
+	public Attribute[] getLocalAttributes() {
 		return ATTRIBUTES;
 	}
 
 	@Override
-	public Relation[] getRelations() {
+	public Relation[] getLocalRelations() {
 		return RELATIONS;
 	}
 
 	@Override
-	public Relation[] getReverseRelations() {
+	public Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
 	}
 

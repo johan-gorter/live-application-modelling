@@ -23,7 +23,7 @@ public class CasePersister {
 	private CasePersister() {
 	}
 
-	private static final Gson gson = new GsonBuilder()
+	public static final Gson gson = new GsonBuilder()
 			.setDateFormat("yyyy-MM-dd")
 			.setPrettyPrinting()
 			.registerTypeHierarchyAdapter(Instance.class,

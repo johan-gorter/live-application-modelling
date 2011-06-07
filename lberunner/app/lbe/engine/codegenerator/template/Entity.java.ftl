@@ -1,27 +1,20 @@
-package app.designerbootstrap.data.entity;
+package app.${appname}.data.entity;
 
 import java.util.List;
 
-import app.carinsurance.entity.DriverInstance;
-import app.designerbootstrap.data.instance.ConceptInstance;
-import lbe.instance.CaseInstance;
-import lbe.instance.Instance;
-import lbe.instance.value.AttributeValue;
-import lbe.instance.value.ReadOnlyAttributeValue;
-import lbe.instance.value.RelationValue;
-import lbe.instance.value.RelationValues;
-import lbe.model.Attribute;
-import lbe.model.Relation;
-import lbe.model.impl.SimpleAttribute;
-import lbe.model.impl.SimpleEntity;
-import lbe.model.impl.SimpleRelation;
-import lbe.model.pageelement.Text;
-import lbe.model.pageelement.impl.ConstantText;
+import app.${appname}.data.instance.*;
+import lbe.instance.*;
+import lbe.instance.value.*;
+import lbe.model.*;
+import lbe.model.impl.*;
+import lbe.model.pageelement.*;
+import lbe.model.pageelement.impl.*;
 
-public class ConceptEntity extends SimpleEntity {
+public class ${name}Entity extends SimpleEntity {
 
-	public static final ConceptEntity INSTANCE = new ConceptEntity();
+	public static final ${name}Entity INSTANCE = new ${name}Entity();
 	
+	//TODO from here
 	
 	public static final Attribute<ConceptInstance, String, String> name 
 		= new SimpleAttribute<ConceptInstance, String, String>("name", INSTANCE, String.class) {

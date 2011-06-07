@@ -14,6 +14,7 @@ import lbe.model.impl.SimpleRelation;
 import app.designerbootstrap.data.instance.ApplicationInstance;
 import app.designerbootstrap.data.instance.AttributeInstance;
 import app.designerbootstrap.data.instance.EntityInstance;
+import app.designerbootstrap.data.instance.RelationInstance;
 
 public class EntityEntity extends SimpleEntity {
 
@@ -34,6 +35,26 @@ public class EntityEntity extends SimpleEntity {
 		}
 
 		public boolean isOwner() {
+			return true;
+		};
+	};
+	
+	public static final Relation<EntityInstance, List<RelationInstance>, RelationInstance> relations = 
+		new SimpleRelation<EntityInstance, List<RelationInstance>, RelationInstance>(
+			"relations", INSTANCE, RelationEntity.INSTANCE,
+			RelationInstance.class, null) {
+
+		@Override
+		public RelationValues<EntityInstance, RelationInstance> get(
+				EntityInstance instance) {
+			return instance.relations;
+		}
+
+		public boolean isOwner() {
+			return true;
+		};
+		
+		public boolean isMultivalue() {
 			return true;
 		};
 	};
@@ -76,12 +97,17 @@ public class EntityEntity extends SimpleEntity {
 
 	
 	private static final Attribute[] ATTRIBUTES = new Attribute[] {};
-	private static final Relation[] RELATIONS = new Relation[] {};
-	private static final Relation[] REVERSE_RELATIONS = new Relation[] {};
-
+	private static final Relation[] RELATIONS = new Relation[] {
+		attributes,
+		relations
+	};
+	private static final Relation[] REVERSE_RELATIONS = new Relation[] {
+		application,
+		caseEntityInApplication
+	};
 
 	private EntityEntity() {
-		super("Entity", ATTRIBUTES, RELATIONS, REVERSE_RELATIONS);
+		super("Entity");
 	}
 
 	@Override
@@ -94,4 +120,18 @@ public class EntityEntity extends SimpleEntity {
 		return ConceptEntity.INSTANCE;
 	}
 
+	@Override
+	public Attribute<? extends Instance, ? extends Object, ? extends Object>[] getLocalAttributes() {
+		return ATTRIBUTES;
+	}
+
+	@Override
+	public Relation<? extends Instance, ? extends Object, ? extends Instance>[] getLocalRelations() {
+		return RELATIONS;
+	}
+
+	@Override
+	public Relation<? extends Instance, ? extends Object, ? extends Instance>[] getLocalReverseRelations() {
+		return REVERSE_RELATIONS;
+	}
 }

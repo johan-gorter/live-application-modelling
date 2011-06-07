@@ -23,16 +23,6 @@ public class RelationEntity extends SimpleEntity {
 	public static final RelationEntity INSTANCE = new RelationEntity();
 
 	// Attributes
-	public static Attribute<RelationInstance, Boolean, Boolean> multivalue =
-		new SimpleAttribute<RelationInstance, Boolean, Boolean>("multivalue", INSTANCE, Boolean.class) {
-
-		@Override
-		public AttributeValue<RelationInstance, Boolean> get(
-				RelationInstance instance) {
-			return instance.multivalue;
-		}
-	};
-	
 	public static Attribute<RelationInstance, Boolean, Boolean> owner =
 		new SimpleAttribute<RelationInstance, Boolean, Boolean>("owner", INSTANCE, Boolean.class) {
 
@@ -45,18 +35,6 @@ public class RelationEntity extends SimpleEntity {
 		
 
 	// Relations
-	public static final Relation<RelationInstance, EntityInstance, EntityInstance> from = 
-		new SimpleRelation<RelationInstance, EntityInstance, EntityInstance>(
-			"from", INSTANCE, EntityEntity.INSTANCE,
-			EntityInstance.class, null) {
-
-		@Override
-		public RelationValue<RelationInstance, EntityInstance> get(
-				RelationInstance instance) {
-			return instance.from;
-		}
-	};
-	
 	public static final Relation<RelationInstance, EntityInstance, EntityInstance> to = 
 		new SimpleRelation<RelationInstance, EntityInstance, EntityInstance>(
 			"to", INSTANCE, EntityEntity.INSTANCE,
@@ -72,13 +50,12 @@ public class RelationEntity extends SimpleEntity {
 	
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{};
 	private static final Relation[] RELATIONS = new Relation[]{
-		from,
 		to
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{};
 
 	private RelationEntity() {
-		super("Attribute", ATTRIBUTES, RELATIONS, REVERSE_RELATIONS);
+		super("Relation");
 	}
 	
 	@Override
@@ -88,6 +65,21 @@ public class RelationEntity extends SimpleEntity {
 
 	@Override
 	public Entity extendsEntity() {
-		return ConceptEntity.INSTANCE;
+		return AttributeEntity.INSTANCE;
+	}
+
+	@Override
+	public Attribute<? extends Instance, ? extends Object, ? extends Object>[] getLocalAttributes() {
+		return ATTRIBUTES;
+	}
+
+	@Override
+	public Relation<? extends Instance, ? extends Object, ? extends Instance>[] getLocalRelations() {
+		return RELATIONS;
+	}
+
+	@Override
+	public Relation<? extends Instance, ? extends Object, ? extends Instance>[] getLocalReverseRelations() {
+		return REVERSE_RELATIONS;
 	}
 }

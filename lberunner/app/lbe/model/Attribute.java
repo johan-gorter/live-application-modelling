@@ -52,9 +52,6 @@ public abstract class Attribute<I extends Instance, Value extends Object, Item e
 		Deduction<Value> deduction = getDeduction();
 		if (deduction!=null) {
 			return deduction.deduct(instance);
-		} else if (isMultivalue()) {
-			// A pragmatic approach: multivalue attributes are never unknown
-			return (Value) new ArrayList();
 		}
 		return null;
 	}

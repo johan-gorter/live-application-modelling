@@ -8,16 +8,10 @@ import lbe.instance.value.AttributeValue;
 import lbe.instance.value.RelationValue;
 import lbe.model.Entity;
 
-public class RelationInstance extends ConceptInstance {
-
-	public final RelationValue<RelationInstance, EntityInstance> from
-		= createRelationValue(RelationEntity.from);
+public class RelationInstance extends AttributeInstance {
 
 	public final RelationValue<RelationInstance, EntityInstance> to
 		= createRelationValue(RelationEntity.to);
-
-	public final AttributeValue<RelationInstance, Boolean> multivalue
-		= createAttributeValue(RelationEntity.multivalue);
 
 	public final AttributeValue<RelationInstance, Boolean> owner
 		= createAttributeValue(RelationEntity.owner);
