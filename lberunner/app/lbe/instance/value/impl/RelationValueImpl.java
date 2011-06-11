@@ -25,6 +25,16 @@ public class RelationValueImpl<I extends Instance, To extends Instance>
 		return super.get();
 	}
 	
+	@Override
+	public void set(To value) {
+		super.set(value);
+		if (getModel().getReverseRelation().isMultivalue()) {
+			((ReverseRelationValuesImpl)model.getReverseRelation().get(value)).addReverse(forInstance);
+		} else {
+			((ReverseRelationValueImpl)model.getReverseRelation().get(value)).setReverse(forInstance);
+		}
+	};
+	
 	public Relation<I, To, To> getModel() {
 		return model;
 	}

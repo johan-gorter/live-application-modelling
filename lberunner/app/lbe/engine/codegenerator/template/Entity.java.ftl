@@ -14,57 +14,102 @@ public class ${name}Entity extends SimpleEntity {
 
 	public static final ${name}Entity INSTANCE = new ${name}Entity();
 	
-	//TODO from here
+	// Attributes
+	<#list attributes as attribute>
 	
-	public static final Attribute<ConceptInstance, String, String> name 
-		= new SimpleAttribute<ConceptInstance, String, String>("name", INSTANCE, String.class) {
-	
-		@Override
-		public AttributeValue<ConceptInstance, String> get(
-				ConceptInstance instance) {
-			return instance.name;
-		}
-	};
-	
-	public static final Relation<ConceptInstance, ConceptInstance, ConceptInstance> extendsFrom
-		= new SimpleRelation<ConceptInstance, ConceptInstance, ConceptInstance>("extendsFrom", INSTANCE, ConceptEntity.INSTANCE, ConceptInstance.class, ConceptEntity.extensions) {
+	public static final Attribute<${name}Instance, String, String> ${attribute.name} 
+		= new SimpleAttribute<${name}Instance, String, String>(
+			"${attribute.name}", INSTANCE, ${attribute.className}.class
+		) {
 	
 			@Override
-			public RelationValue<ConceptInstance, ConceptInstance> get(
-					ConceptInstance instance) {
-				return instance.extendsFrom;
+			public AttributeValue<${name}Instance, String> get(${name}Instance instance) {
+				return instance.${attribute.name};
 			}
-		
-		};
-
-	public static final Relation<ConceptInstance, List<ConceptInstance>, ConceptInstance> extensions
-		= new SimpleRelation<ConceptInstance, List<ConceptInstance>, ConceptInstance>("extensions", INSTANCE, ConceptEntity.INSTANCE, ConceptInstance.class, ConceptEntity.extendsFrom) {
+			<#if attribute.multivalue>
 	
-			@Override
-			public RelationValues<ConceptInstance, ConceptInstance> get(
-					ConceptInstance instance) {
-				return instance.extensions;
-			}
-			
 			public boolean isMultivalue() {
 				return true;
-			};
+			}
+			</#if>
+		};
+	</#list>
+	
+	// Relations
+	<#list relations as relation>
+	
+	public static final Relation<${name}Instance, ${relation.to}, ${relation.item}Instance> extendsFrom
+		= new SimpleRelation<${name}Instance, ${relation.to}, ${relation.item}Instance>(
+			"${relation.name}", INSTANCE, ${name}Entity.INSTANCE, ${relation.item}Instance.class, ${relation.item}Entity.${relation.reverseName}
+		) {
+	
+			@Override
+			public RelationValue<#if relation.multivalue>s</#if><${name}Instance, ${relation.item}Instance> get(
+					${name}Instance instance) {
+				return instance.${relation.name};
+			}
+			<#if relation.owner>
+	
+			public boolean isOwner() {
+				return true;
+			}
+			</#if>
+			<#if relation.multivalue>
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+			</#if>
+			
+			//TODO: readonly
 		
 		};
+	</#list>
+	
+	// Reverse relations
+	<#list reverseRelations as relation>
+	
+	public static final Relation<${name}Instance, ${relation.to}, ${relation.item}Instance> extendsFrom
+		= new SimpleRelation<${name}Instance, ${relation.to}, ${relation.item}Instance>(
+			"${relation.name}", INSTANCE, ${name}Entity.INSTANCE, ${relation.item}Instance.class, ${relation.item}Entity.${relation.reverseName}
+		) {
+	
+			@Override
+			public RelationValue<#if relation.multivalue>s</#if><${name}Instance, ${relation.item}Instance> get(
+					${name}Instance instance) {
+				return instance.${relation.name};
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+			<#if relation.multivalue>
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+			</#if>
+		};
+	</#list>
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
-		name
+		<#list attributes as attribute>
+		${attribute.name},
+		</#list>
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
-		extendsFrom
+		<#list relations as relation>
+		${relation.name},
+		</#list>
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
-		extensions
+		<#list reverseRelations as relation>
+		${relation.name},
+		</#list>
 	};
 
-
-	private ConceptEntity() {
-		super("Concept");
+	private ${name}Entity() {
+		super("${name}");
 	}
 	
 	@Override
@@ -85,5 +130,4 @@ public class ${name}Entity extends SimpleEntity {
 	public Relation<? extends Instance, ? extends Object, ? extends Instance>[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
 	}
-
 }

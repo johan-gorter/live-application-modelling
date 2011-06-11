@@ -1,0 +1,5 @@
+- Code generatie afmaken, code kan zichzelf genereren
+- Bootstrapper uitbreiden met basis voor flow, pagina, container, field
+- Designer flow maken die container content kan editen
+- CarinsuranceBootstrapper maken
+- Demo voorbereiden

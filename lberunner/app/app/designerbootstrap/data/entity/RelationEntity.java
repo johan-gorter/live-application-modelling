@@ -9,6 +9,7 @@ import lbe.instance.CaseInstance;
 import lbe.instance.Instance;
 import lbe.instance.value.AttributeValue;
 import lbe.instance.value.ReadOnlyAttributeValue;
+import lbe.instance.value.ReadOnlyRelationValue;
 import lbe.instance.value.RelationValue;
 import lbe.instance.value.RelationValues;
 import lbe.model.Attribute;
@@ -33,12 +34,32 @@ public class RelationEntity extends SimpleEntity {
 		}
 	};
 		
+	public static Attribute<RelationInstance, Boolean, Boolean> reverseMultivalue =
+		new SimpleAttribute<RelationInstance, Boolean, Boolean>("reverseMultivalue", INSTANCE, Boolean.class) {
+
+		@Override
+		public AttributeValue<RelationInstance, Boolean> get(
+				RelationInstance instance) {
+			return instance.reverseMultivalue;
+		}
+	};
+		
+	public static Attribute<RelationInstance, String, String> reverseName =
+		new SimpleAttribute<RelationInstance, String, String>("reverseName", INSTANCE, String.class) {
+
+		@Override
+		public AttributeValue<RelationInstance, String> get(
+				RelationInstance instance) {
+			return instance.reverseName;
+		}
+	};
+		
 
 	// Relations
 	public static final Relation<RelationInstance, EntityInstance, EntityInstance> to = 
 		new SimpleRelation<RelationInstance, EntityInstance, EntityInstance>(
 			"to", INSTANCE, EntityEntity.INSTANCE,
-			EntityInstance.class, null) {
+			EntityInstance.class, EntityEntity.reverseRelations) {
 
 		@Override
 		public RelationValue<RelationInstance, EntityInstance> get(
@@ -47,12 +68,30 @@ public class RelationEntity extends SimpleEntity {
 		}
 	};
 	
+	// Reverse relations
+	public static final Relation<RelationInstance, EntityInstance, EntityInstance> entity = 
+		new SimpleRelation<RelationInstance, EntityInstance, EntityInstance>(
+			"entity", INSTANCE, EntityEntity.INSTANCE,
+			EntityInstance.class, EntityEntity.relations) {
+
+		@Override
+		public ReadOnlyRelationValue<RelationInstance, EntityInstance> get(
+				RelationInstance instance) {
+			return instance.entity;
+		}
+		
+		public boolean isReverse() {
+			return true;
+		};
+	};
+	
 	
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{};
 	private static final Relation[] RELATIONS = new Relation[]{
 		to
 	};
-	private static final Relation[] REVERSE_RELATIONS = new Relation[]{};
+	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
+	};
 
 	private RelationEntity() {
 		super("Relation");

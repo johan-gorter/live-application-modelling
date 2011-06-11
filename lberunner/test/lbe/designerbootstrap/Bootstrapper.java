@@ -34,9 +34,18 @@ public class Bootstrapper {
 		relation.extendsFrom.set(attribute);
 
 		// Relations
+		RelationInstance extendsFrom = new RelationInstance(applicationInstance);
+		entity.relations.add(extendsFrom);
+		extendsFrom.to.set(entity);
+		extendsFrom.name.set("extendsFrom");
+		extendsFrom.reverseName.set("extensions");
+		extendsFrom.reverseMultivalue.set(true);
+		
 		RelationInstance entities = new RelationInstance(applicationInstance);
 		application.relations.add(entities);
 		entities.name.set("entities");
+		entities.reverseName.set("application");
+		entities.reverseMultivalue.set(false);
 		entities.to.set(entity);
 		entities.multivalue.set(true);
 		entities.owner.set(true);
@@ -44,26 +53,32 @@ public class Bootstrapper {
 		RelationInstance caseEntity = new RelationInstance(applicationInstance);
 		application.relations.add(caseEntity);
 		caseEntity.name.set("caseEntity");
+		caseEntity.reverseName.set("caseEntityInApplication");
 		caseEntity.to.set(entity);
 
-		RelationInstance entityExtends = new RelationInstance(applicationInstance);
-		entity.relations.add(entityExtends);
-		entityExtends.name.set("entityExtends");
-		entityExtends.to.set(entity);
-		
 		RelationInstance entityAttributes = new RelationInstance(applicationInstance);
 		entity.relations.add(entityAttributes);
-		entityAttributes.name.set("entityAttributes");
+		entityAttributes.name.set("attributes");
+		entityAttributes.reverseName.set("entity");
+		entityAttributes.reverseMultivalue.set(false);
 		entityAttributes.to.set(attribute);
 		entityAttributes.multivalue.set(true);
 		entityAttributes.owner.set(true);
 
 		RelationInstance entityRelations = new RelationInstance(applicationInstance);
 		entity.relations.add(entityRelations);
-		entityRelations.name.set("entityAttributes");
+		entityRelations.name.set("relations");
+		entityRelations.reverseName.set("entity");
+		entityRelations.reverseMultivalue.set(false);
 		entityRelations.to.set(relation);
 		entityRelations.multivalue.set(true);
 		entityRelations.owner.set(true);
+
+		// Attributes
+		AttributeInstance conceptName = new AttributeInstance(applicationInstance);
+		conceptName.name.set("name");
+		conceptName.className.set("java.lang.String");
+		concept.attributes.add(conceptName);
 		
 		// Finish up
 		applicationInstance.caseEntity.set(application);
@@ -73,9 +88,9 @@ public class Bootstrapper {
 		applicationInstance.entities.add(attribute);
 		applicationInstance.entities.add(relation);
 		
-		System.out.println(CasePersister.gson.toJson(applicationInstance));
+//		System.out.println(CasePersister.gson.toJson(applicationInstance));
 		
-		CodeGenerator.generateEntity(concept);
+		CodeGenerator.generateEntity(concept, "designer");
 		
 	}
 }

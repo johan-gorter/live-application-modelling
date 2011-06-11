@@ -5,7 +5,8 @@ import lbe.model.Attribute;
 import lbe.model.Relation;
 
 // Value: List<Instance> or Instance
-public interface ReadOnlyRelationValue<I extends Instance, Value extends Object> extends ReadOnlyAttributeValue<I, Value> {
+public interface ReadOnlyRelationValue<I extends Instance, Value extends Object> 
+	extends ReadOnlyAttributeValue<I, Value> {
 
 	Relation<I, Value, ? extends Object> getModel();
 	

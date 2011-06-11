@@ -33,40 +33,12 @@ public class ConceptEntity extends SimpleEntity {
 		}
 	};
 	
-	public static final Relation<ConceptInstance, ConceptInstance, ConceptInstance> extendsFrom
-		= new SimpleRelation<ConceptInstance, ConceptInstance, ConceptInstance>("extendsFrom", INSTANCE, ConceptEntity.INSTANCE, ConceptInstance.class, ConceptEntity.extensions) {
-	
-			@Override
-			public RelationValue<ConceptInstance, ConceptInstance> get(
-					ConceptInstance instance) {
-				return instance.extendsFrom;
-			}
-		
-		};
-
-	public static final Relation<ConceptInstance, List<ConceptInstance>, ConceptInstance> extensions
-		= new SimpleRelation<ConceptInstance, List<ConceptInstance>, ConceptInstance>("extensions", INSTANCE, ConceptEntity.INSTANCE, ConceptInstance.class, ConceptEntity.extendsFrom) {
-	
-			@Override
-			public RelationValues<ConceptInstance, ConceptInstance> get(
-					ConceptInstance instance) {
-				return instance.extensions;
-			}
-			
-			public boolean isMultivalue() {
-				return true;
-			};
-		
-		};
-
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 		name
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
-		extendsFrom
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
-		extensions
 	};
 
 

@@ -17,10 +17,16 @@ public class AttributeValuesImpl<I extends Instance, Item extends Object>
 
 	@Override
 	public void add(Item item) {
-		if (!isStored()) {
+		this.get().add(item);
+	}
+	
+	@Override
+	public List<Item> get() {
+		// Pragmatic approach: Multivalue attributes are never unknown, unless a deduction is given.
+		if (!isStored() && getModel().getDeduction()==null) {
 			set(new ArrayList<Item>());
 		}
-		this.get().add(item);
+		return super.get();
 	}
 	
 }

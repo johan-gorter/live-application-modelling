@@ -12,7 +12,7 @@ public abstract class SimpleRelation<I extends Instance, Value extends Object, T
 	private final Entity entity;
 	private final Entity to;
 	private final Class<To> valueClass;
-	private final Relation<To, ? extends Object,I> reverseRelation;
+	private Relation<To, ? extends Object,I> reverseRelation;
 	
 	
 	public SimpleRelation(String name, Entity entity, Entity to,
@@ -22,6 +22,9 @@ public abstract class SimpleRelation<I extends Instance, Value extends Object, T
 		this.to = to;
 		this.valueClass = valueClass;
 		this.reverseRelation = reverseRelation;
+		if (reverseRelation!=null) {
+			reverseRelation.setReverseRelation(this);
+		}
 	}
 	
 	public String getName() {
@@ -46,6 +49,12 @@ public abstract class SimpleRelation<I extends Instance, Value extends Object, T
 	@Override
 	public boolean isReverse() {
 		return false;
+	}
+	
+	/* Needed for bootstrapping */
+	@Override
+	public void setReverseRelation(Relation<To, ? extends Object, I> reverse) {
+		this.reverseRelation = reverse;
 	}
 
 	@Override

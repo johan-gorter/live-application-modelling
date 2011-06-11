@@ -13,6 +13,8 @@ public abstract class Relation<I extends Instance, Value extends Object, To exte
 	
 	public abstract boolean isReverse();
 	
+	public abstract void setReverseRelation(Relation<To, ? extends Object, I> reverse);
+	
 	public abstract Relation<To, ? extends Object, I> getReverseRelation();
 	
 	public abstract To createTo(I from);
@@ -21,5 +23,5 @@ public abstract class Relation<I extends Instance, Value extends Object, To exte
 	public Text getQuestion() {
 		return null;
 	}
-
+	
 }

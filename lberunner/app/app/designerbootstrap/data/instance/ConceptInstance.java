@@ -18,12 +18,6 @@ public class ConceptInstance extends SimpleInstance {
 		super(caseInstance, model);
 	}
 	
-	public final RelationValue<ConceptInstance, ConceptInstance> extendsFrom
-		= createRelationValue(ConceptEntity.extendsFrom);
-
-	public final RelationValues<ConceptInstance, ConceptInstance> extensions
-		= createRelationValues(ConceptEntity.extensions);
-
 	public final AttributeValue<ConceptInstance, String> name 
 		= createAttributeValue(ConceptEntity.name);
 
