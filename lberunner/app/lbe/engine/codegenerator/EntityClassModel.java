@@ -9,6 +9,7 @@ public class EntityClassModel {
 		public String name;
 		public String className;
 		public boolean multivalue;
+		public boolean readonly;
 		
 		public String getName() {
 			return name;
@@ -18,6 +19,9 @@ public class EntityClassModel {
 		}
 		public boolean isMultivalue() {
 			return multivalue;
+		}
+		public boolean isReadonly() {
+			return readonly;
 		}
 	}
 	
@@ -44,8 +48,10 @@ public class EntityClassModel {
 		}
 	}
 	
+	public boolean caseEntity;
 	public String appname;
 	public String name;
+	public String extendsFrom;
 	public final List<Attribute> attributes = new ArrayList<Attribute>();
 	public final List<Relation> relations = new ArrayList<Relation>();
 	public final List<Relation> reverseRelations = new ArrayList<Relation>();
@@ -64,5 +70,11 @@ public class EntityClassModel {
 	}
 	public List<Relation> getReverseRelations() {
 		return reverseRelations;
+	}
+	public boolean isCaseEntity() {
+		return caseEntity;
+	}
+	public String getExtendsFrom() {
+		return extendsFrom;
 	}	
 }

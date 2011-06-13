@@ -1,24 +1,35 @@
 package app.designerbootstrap.data.instance;
 
-import lbe.instance.CaseInstance;
-import lbe.instance.impl.SimpleInstance;
-import lbe.instance.value.AttributeValue;
-import lbe.instance.value.RelationValue;
-import lbe.instance.value.RelationValues;
-import lbe.model.Entity;
-import app.designerbootstrap.data.entity.ConceptEntity;
+import java.util.List;
 
-public class ConceptInstance extends SimpleInstance {
+import app.designerbootstrap.data.entity.*;
+import lbe.instance.*;
+import lbe.instance.impl.*;
+import lbe.instance.value.*;
+import lbe.model.*;
+import lbe.model.impl.*;
+import lbe.model.pageelement.*;
+import lbe.model.pageelement.impl.*;
+
+public class ConceptInstance 
+	extends SimpleInstance 
+	implements Instance {
 
 	public ConceptInstance(CaseInstance caseInstance) {
-		this(caseInstance, ConceptEntity.INSTANCE);
+		super(caseInstance, ConceptEntity.INSTANCE);
 	}
 	
 	protected ConceptInstance(CaseInstance caseInstance, Entity model) {
 		super(caseInstance, model);
 	}
+
+	// Attributes
 	
-	public final AttributeValue<ConceptInstance, String> name 
+	public final AttributeValue<ConceptInstance, java.lang.String> name
 		= createAttributeValue(ConceptEntity.name);
+	
+	// Relations
+
+	// Reverse relations
 
 }

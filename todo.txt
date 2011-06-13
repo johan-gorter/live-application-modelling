@@ -1,5 +1,8 @@
-- Code generatie afmaken, code kan zichzelf genereren
+V Code generatie afmaken, code kan zichzelf genereren
+- Alle code in 1 keer genereren
+- AttributeBase maken zodat questiontext e.d. relation niet vervuilen
 - Bootstrapper uitbreiden met basis voor flow, pagina, container, field
 - Designer flow maken die container content kan editen
 - CarinsuranceBootstrapper maken
+- Visueel laten zien wie in welke case zitten
 - Demo voorbereiden

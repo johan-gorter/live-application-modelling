@@ -1,17 +1,19 @@
 package app.designerbootstrap.data.instance;
 
-import app.designerbootstrap.data.entity.AttributeEntity;
-import app.designerbootstrap.data.entity.ConceptEntity;
-import app.designerbootstrap.data.entity.RelationEntity;
-import lbe.instance.CaseInstance;
-import lbe.instance.Instance;
-import lbe.instance.impl.SimpleInstance;
-import lbe.instance.value.AttributeValue;
-import lbe.instance.value.ReadOnlyRelationValue;
-import lbe.instance.value.RelationValue;
-import lbe.model.Entity;
+import java.util.List;
 
-public class AttributeInstance extends ConceptInstance {
+import app.designerbootstrap.data.entity.*;
+import lbe.instance.*;
+import lbe.instance.impl.*;
+import lbe.instance.value.*;
+import lbe.model.*;
+import lbe.model.impl.*;
+import lbe.model.pageelement.*;
+import lbe.model.pageelement.impl.*;
+
+public class AttributeInstance 
+	extends ConceptInstance 
+	implements Instance {
 
 	public AttributeInstance(CaseInstance caseInstance) {
 		super(caseInstance, AttributeEntity.INSTANCE);
@@ -21,13 +23,22 @@ public class AttributeInstance extends ConceptInstance {
 		super(caseInstance, model);
 	}
 
-	public final ReadOnlyRelationValue<AttributeInstance, EntityInstance> entity
-		= createReverseRelationValue(AttributeEntity.entity);
+	// Attributes
 	
-	public final AttributeValue<AttributeInstance, String> className 
-		= createAttributeValue(AttributeEntity.className);
-
-	public final AttributeValue<AttributeInstance, Boolean> multivalue
+	public final AttributeValue<AttributeInstance, java.lang.Boolean> readonly
+		= createAttributeValue(AttributeEntity.readonly);
+	
+	public final AttributeValue<AttributeInstance, java.lang.Boolean> multivalue
 		= createAttributeValue(AttributeEntity.multivalue);
 	
+	public final AttributeValue<AttributeInstance, java.lang.String> className
+		= createAttributeValue(AttributeEntity.className);
+	
+	// Relations
+
+	// Reverse relations
+	
+	public final ReadOnlyRelationValue<AttributeInstance, EntityInstance> entity
+		= createReverseRelationValue(AttributeEntity.entity);
+
 }

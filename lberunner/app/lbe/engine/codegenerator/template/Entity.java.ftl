@@ -17,13 +17,13 @@ public class ${name}Entity extends SimpleEntity {
 	// Attributes
 	<#list attributes as attribute>
 	
-	public static final Attribute<${name}Instance, String, String> ${attribute.name} 
-		= new SimpleAttribute<${name}Instance, String, String>(
+	public static final Attribute<${name}Instance, ${attribute.className}, ${attribute.className}> ${attribute.name} 
+		= new SimpleAttribute<${name}Instance, ${attribute.className}, ${attribute.className}>(
 			"${attribute.name}", INSTANCE, ${attribute.className}.class
 		) {
 	
 			@Override
-			public AttributeValue<${name}Instance, String> get(${name}Instance instance) {
+			public ReadOnlyAttributeValue<${name}Instance, ${attribute.className}> get(${name}Instance instance) {
 				return instance.${attribute.name};
 			}
 			<#if attribute.multivalue>
@@ -38,13 +38,13 @@ public class ${name}Entity extends SimpleEntity {
 	// Relations
 	<#list relations as relation>
 	
-	public static final Relation<${name}Instance, ${relation.to}, ${relation.item}Instance> extendsFrom
+	public static final Relation<${name}Instance, ${relation.to}, ${relation.item}Instance> ${relation.name}
 		= new SimpleRelation<${name}Instance, ${relation.to}, ${relation.item}Instance>(
 			"${relation.name}", INSTANCE, ${name}Entity.INSTANCE, ${relation.item}Instance.class, ${relation.item}Entity.${relation.reverseName}
 		) {
 	
 			@Override
-			public RelationValue<#if relation.multivalue>s</#if><${name}Instance, ${relation.item}Instance> get(
+			public ReadOnlyRelationValue<#if relation.multivalue>s</#if><${name}Instance, ${relation.item}Instance> get(
 					${name}Instance instance) {
 				return instance.${relation.name};
 			}
@@ -60,22 +60,25 @@ public class ${name}Entity extends SimpleEntity {
 				return true;
 			}
 			</#if>
-			
-			//TODO: readonly
-		
+			<#if relation.readonly>
+	
+			public boolean isReadonly() {
+				return true;
+			}
+			</#if>
 		};
 	</#list>
 	
 	// Reverse relations
 	<#list reverseRelations as relation>
 	
-	public static final Relation<${name}Instance, ${relation.to}, ${relation.item}Instance> extendsFrom
+	public static final Relation<${name}Instance, ${relation.to}, ${relation.item}Instance> ${relation.name}
 		= new SimpleRelation<${name}Instance, ${relation.to}, ${relation.item}Instance>(
 			"${relation.name}", INSTANCE, ${name}Entity.INSTANCE, ${relation.item}Instance.class, ${relation.item}Entity.${relation.reverseName}
 		) {
 	
 			@Override
-			public RelationValue<#if relation.multivalue>s</#if><${name}Instance, ${relation.item}Instance> get(
+			public ReadOnlyRelationValue<#if relation.multivalue>s</#if><${name}Instance, ${relation.item}Instance> get(
 					${name}Instance instance) {
 				return instance.${relation.name};
 			}
@@ -114,8 +117,16 @@ public class ${name}Entity extends SimpleEntity {
 	
 	@Override
 	public Instance createInstance(CaseInstance caseInstance) {
-		return new ConceptInstance(caseInstance);
+		return new ${name}Instance(<#if !caseEntity>caseInstance</#if>);
 	}
+	<#if extendsFrom??>
+	
+	@Override
+	public Entity extendsEntity() {
+		return ${extendsFrom}Entity.INSTANCE;
+	}
+	</#if>
+	
 	@Override
 	public Attribute<? extends Instance, ? extends Object, ? extends Object>[] getLocalAttributes() {
 		return ATTRIBUTES;

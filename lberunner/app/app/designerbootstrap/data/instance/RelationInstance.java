@@ -1,35 +1,47 @@
 package app.designerbootstrap.data.instance;
 
-import app.designerbootstrap.data.entity.AttributeEntity;
-import app.designerbootstrap.data.entity.RelationEntity;
-import lbe.instance.CaseInstance;
-import lbe.instance.Instance;
-import lbe.instance.impl.SimpleInstance;
-import lbe.instance.value.AttributeValue;
-import lbe.instance.value.ReadOnlyRelationValue;
-import lbe.instance.value.RelationValue;
-import lbe.model.Entity;
+import java.util.List;
 
-public class RelationInstance extends AttributeInstance {
+import app.designerbootstrap.data.entity.*;
+import lbe.instance.*;
+import lbe.instance.impl.*;
+import lbe.instance.value.*;
+import lbe.model.*;
+import lbe.model.impl.*;
+import lbe.model.pageelement.*;
+import lbe.model.pageelement.impl.*;
 
-	public final ReadOnlyRelationValue<RelationInstance, EntityInstance> entity
-		= createReverseRelationValue(RelationEntity.entity);
-	
-	public final RelationValue<RelationInstance, EntityInstance> to
-		= createRelationValue(RelationEntity.to);
-
-	public final AttributeValue<RelationInstance, Boolean> owner
-		= createAttributeValue(RelationEntity.owner);
-
-	public final AttributeValue<RelationInstance, String> reverseName
-		= createAttributeValue(RelationEntity.reverseName);
-
-	public final AttributeValue<RelationInstance, Boolean> reverseMultivalue
-		= createAttributeValue(RelationEntity.reverseMultivalue);
-
+public class RelationInstance 
+	extends AttributeInstance 
+	implements Instance {
 
 	public RelationInstance(CaseInstance caseInstance) {
 		super(caseInstance, RelationEntity.INSTANCE);
 	}
+	
+	protected RelationInstance(CaseInstance caseInstance, Entity model) {
+		super(caseInstance, model);
+	}
+
+	// Attributes
+	
+	public final AttributeValue<RelationInstance, java.lang.Boolean> owner
+		= createAttributeValue(RelationEntity.owner);
+	
+	public final AttributeValue<RelationInstance, java.lang.Boolean> reverseMultivalue
+		= createAttributeValue(RelationEntity.reverseMultivalue);
+	
+	public final AttributeValue<RelationInstance, java.lang.String> reverseName
+		= createAttributeValue(RelationEntity.reverseName);
+	
+	// Relations
+	
+	public final RelationValue<RelationInstance, EntityInstance> to
+		= createRelationValue(RelationEntity.to);
+
+	// Reverse relations
+	
+	public final ReadOnlyRelationValue<RelationInstance, EntityInstance> entity
+		= createReverseRelationValue(RelationEntity.entity);
 
 }

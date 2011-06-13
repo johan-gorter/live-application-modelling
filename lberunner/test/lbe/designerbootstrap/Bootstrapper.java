@@ -74,11 +74,48 @@ public class Bootstrapper {
 		entityRelations.multivalue.set(true);
 		entityRelations.owner.set(true);
 
+		RelationInstance relationTo = new RelationInstance(applicationInstance);
+		relation.relations.add(relationTo);
+		relationTo.name.set("to");
+		relationTo.reverseName.set("reverseRelations");
+		relationTo.reverseMultivalue.set(true);
+		relationTo.to.set(entity);
+		
 		// Attributes
 		AttributeInstance conceptName = new AttributeInstance(applicationInstance);
 		conceptName.name.set("name");
 		conceptName.className.set("java.lang.String");
 		concept.attributes.add(conceptName);
+		
+		AttributeInstance attributeReadonly = new AttributeInstance(applicationInstance);
+		attributeReadonly.name.set("readonly");
+		attributeReadonly.className.set("java.lang.Boolean");
+		attribute.attributes.add(attributeReadonly);
+
+		AttributeInstance attributeMultivalue = new AttributeInstance(applicationInstance);
+		attributeMultivalue.name.set("multivalue");
+		attributeMultivalue.className.set("java.lang.Boolean");
+		attribute.attributes.add(attributeMultivalue);
+		
+		AttributeInstance attributeClassName = new AttributeInstance(applicationInstance);
+		attributeClassName.name.set("className");
+		attributeClassName.className.set("java.lang.String");
+		attribute.attributes.add(attributeClassName);
+		
+		AttributeInstance relationOwner = new AttributeInstance(applicationInstance);
+		relationOwner.name.set("owner");
+		relationOwner.className.set("java.lang.Boolean");
+		relation.attributes.add(relationOwner);
+		
+		AttributeInstance relationReverseMultivalue = new AttributeInstance(applicationInstance);
+		relationReverseMultivalue.name.set("reverseMultivalue");
+		relationReverseMultivalue.className.set("java.lang.Boolean");
+		relation.attributes.add(relationReverseMultivalue);
+		
+		AttributeInstance relationReverseName = new AttributeInstance(applicationInstance);
+		relationReverseName.name.set("reverseName");
+		relationReverseName.className.set("java.lang.String");
+		relation.attributes.add(relationReverseName);
 		
 		// Finish up
 		applicationInstance.caseEntity.set(application);
@@ -90,7 +127,7 @@ public class Bootstrapper {
 		
 //		System.out.println(CasePersister.gson.toJson(applicationInstance));
 		
-		CodeGenerator.generateEntity(concept, "designer");
+		CodeGenerator.generateEntity(relation, "designerbootstrap");
 		
 	}
 }

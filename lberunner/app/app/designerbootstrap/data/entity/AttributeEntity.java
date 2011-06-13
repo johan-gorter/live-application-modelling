@@ -1,21 +1,14 @@
 package app.designerbootstrap.data.entity;
 
-import app.designerbootstrap.data.instance.AttributeInstance;
-import app.designerbootstrap.data.instance.ConceptInstance;
-import app.designerbootstrap.data.instance.EntityInstance;
-import app.designerbootstrap.data.instance.RelationInstance;
-import lbe.instance.CaseInstance;
-import lbe.instance.Instance;
-import lbe.instance.value.AttributeValue;
-import lbe.instance.value.ReadOnlyAttributeValue;
-import lbe.instance.value.ReadOnlyRelationValue;
-import lbe.instance.value.RelationValue;
-import lbe.model.Attribute;
-import lbe.model.Entity;
-import lbe.model.Relation;
-import lbe.model.impl.SimpleAttribute;
-import lbe.model.impl.SimpleEntity;
-import lbe.model.impl.SimpleRelation;
+import java.util.List;
+
+import app.designerbootstrap.data.instance.*;
+import lbe.instance.*;
+import lbe.instance.value.*;
+import lbe.model.*;
+import lbe.model.impl.*;
+import lbe.model.pageelement.*;
+import lbe.model.pageelement.impl.*;
 
 public class AttributeEntity extends SimpleEntity {
 
@@ -23,51 +16,70 @@ public class AttributeEntity extends SimpleEntity {
 	
 	// Attributes
 	
-	public static final Attribute<AttributeInstance, String, String> className 
-		= new SimpleAttribute<AttributeInstance, String, String>("className", INSTANCE, String.class) {
+	public static final Attribute<AttributeInstance, java.lang.Boolean, java.lang.Boolean> readonly 
+		= new SimpleAttribute<AttributeInstance, java.lang.Boolean, java.lang.Boolean>(
+			"readonly", INSTANCE, java.lang.Boolean.class
+		) {
 	
-		@Override
-		public AttributeValue<AttributeInstance, String> get(
-				AttributeInstance instance) {
-			return instance.className;
-		}
-	};
-
-	public static Attribute<AttributeInstance, Boolean, Boolean> multivalue =
-		new SimpleAttribute<AttributeInstance, Boolean, Boolean>("multivalue", INSTANCE, Boolean.class) {
-
-		@Override
-		public AttributeValue<AttributeInstance, Boolean> get(
-				AttributeInstance instance) {
-			return instance.multivalue;
-		}
-	};
+			@Override
+			public ReadOnlyAttributeValue<AttributeInstance, java.lang.Boolean> get(AttributeInstance instance) {
+				return instance.readonly;
+			}
+		};
+	
+	public static final Attribute<AttributeInstance, java.lang.Boolean, java.lang.Boolean> multivalue 
+		= new SimpleAttribute<AttributeInstance, java.lang.Boolean, java.lang.Boolean>(
+			"multivalue", INSTANCE, java.lang.Boolean.class
+		) {
+	
+			@Override
+			public ReadOnlyAttributeValue<AttributeInstance, java.lang.Boolean> get(AttributeInstance instance) {
+				return instance.multivalue;
+			}
+		};
+	
+	public static final Attribute<AttributeInstance, java.lang.String, java.lang.String> className 
+		= new SimpleAttribute<AttributeInstance, java.lang.String, java.lang.String>(
+			"className", INSTANCE, java.lang.String.class
+		) {
+	
+			@Override
+			public ReadOnlyAttributeValue<AttributeInstance, java.lang.String> get(AttributeInstance instance) {
+				return instance.className;
+			}
+		};
+	
+	// Relations
 	
 	// Reverse relations
 	
-	public static final Relation<AttributeInstance, EntityInstance, EntityInstance> entity = 
-		new SimpleRelation<AttributeInstance, EntityInstance, EntityInstance>(
-			"entity", INSTANCE, EntityEntity.INSTANCE,
-			EntityInstance.class, EntityEntity.attributes) {
-
-		@Override
-		public ReadOnlyRelationValue<AttributeInstance, EntityInstance> get(
-				AttributeInstance instance) {
-			return instance.entity;
-		}
-		
-		public boolean isReverse() {
-			return true;
+	public static final Relation<AttributeInstance, EntityInstance, EntityInstance> entity
+		= new SimpleRelation<AttributeInstance, EntityInstance, EntityInstance>(
+			"entity", INSTANCE, AttributeEntity.INSTANCE, EntityInstance.class, EntityEntity.attributes
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<AttributeInstance, EntityInstance> get(
+					AttributeInstance instance) {
+				return instance.entity;
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
 		};
-	};
-	
+
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
+		readonly,
+		multivalue,
 		className,
-		multivalue
 	};
-	private static final Relation[] RELATIONS = new Relation[]{};
-	private static final Relation[] REVERSE_RELATIONS = new Relation[]{};
-	
+	private static final Relation[] RELATIONS = new Relation[]{
+	};
+	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
+		entity,
+	};
+
 	private AttributeEntity() {
 		super("Attribute");
 	}
@@ -76,7 +88,7 @@ public class AttributeEntity extends SimpleEntity {
 	public Instance createInstance(CaseInstance caseInstance) {
 		return new AttributeInstance(caseInstance);
 	}
-
+	
 	@Override
 	public Entity extendsEntity() {
 		return ConceptEntity.INSTANCE;
@@ -96,5 +108,4 @@ public class AttributeEntity extends SimpleEntity {
 	public Relation<? extends Instance, ? extends Object, ? extends Instance>[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
 	}
-	
 }
