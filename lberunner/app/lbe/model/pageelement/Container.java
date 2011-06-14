@@ -16,7 +16,7 @@ public abstract class Container extends PageElementBase {
 		return null;
 	}
 	
-	public String getDisplay(RenderContext context) {
+	public Text getDisplay() {
 		return null;
 	}
 	
@@ -33,7 +33,10 @@ public abstract class Container extends PageElementBase {
 		}
 		
 		PageElement result = super.render(context);
-		result.display = getDisplay(context);
+		Text display = getDisplay();
+		if (display!=null) {
+			result.display = display.render(context);
+		}
 		result.name = getName();
 		context.nextIdLevel();
 		

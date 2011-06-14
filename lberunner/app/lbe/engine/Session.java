@@ -18,7 +18,7 @@ public class Session {
 		if (split.length!=3) throw new RuntimeException("Invalid session string");
 		Flow startFlow = interactionModel.getExposedFlow(split[0]);
 		result.setStartFlow(startFlow);
-		result.setCurrentPage(startFlow.getPage(split[1]));
+		result.setCurrentPage(startFlow.getPage(split[1].split("\\."),0));
 		result.setCaseId(split[2]);
 		return result;
 	}

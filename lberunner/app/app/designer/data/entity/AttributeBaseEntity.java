@@ -10,64 +10,59 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class AttributeEntity extends SimpleEntity {
+public class AttributeBaseEntity extends SimpleEntity {
 
-	public static final AttributeEntity INSTANCE = new AttributeEntity();
+	public static final AttributeBaseEntity INSTANCE = new AttributeBaseEntity();
 	
 	// Attributes
 	
-	public static final Attribute<AttributeInstance, java.lang.String, java.lang.String> className 
-		= new SimpleAttribute<AttributeInstance, java.lang.String, java.lang.String>(
-			"className", INSTANCE, java.lang.String.class
+	public static final Attribute<AttributeBaseInstance, java.lang.Boolean, java.lang.Boolean> readonly 
+		= new SimpleAttribute<AttributeBaseInstance, java.lang.Boolean, java.lang.Boolean>(
+			"readonly", INSTANCE, java.lang.Boolean.class
 		) {
 	
 			@Override
-			public ReadOnlyAttributeValue<AttributeInstance, java.lang.String> get(AttributeInstance instance) {
-				return instance.className;
+			public ReadOnlyAttributeValue<AttributeBaseInstance, java.lang.Boolean> get(AttributeBaseInstance instance) {
+				return instance.readonly;
+			}
+		};
+	
+	public static final Attribute<AttributeBaseInstance, java.lang.Boolean, java.lang.Boolean> multivalue 
+		= new SimpleAttribute<AttributeBaseInstance, java.lang.Boolean, java.lang.Boolean>(
+			"multivalue", INSTANCE, java.lang.Boolean.class
+		) {
+	
+			@Override
+			public ReadOnlyAttributeValue<AttributeBaseInstance, java.lang.Boolean> get(AttributeBaseInstance instance) {
+				return instance.multivalue;
 			}
 		};
 	
 	// Relations
 	
 	// Reverse relations
-	
-	public static final Relation<AttributeInstance, EntityInstance, EntityInstance> entity
-		= new SimpleRelation<AttributeInstance, EntityInstance, EntityInstance>(
-			"entity", INSTANCE, AttributeEntity.INSTANCE, EntityInstance.class, EntityEntity.attributes
-		) {
-	
-			@Override
-			public ReadOnlyRelationValue<AttributeInstance, EntityInstance> get(
-					AttributeInstance instance) {
-				return instance.entity;
-			}
-	
-			public boolean isReverse() {
-				return true;
-			}
-		};
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
-		className,
+		readonly,
+		multivalue,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
-		entity,
 	};
 
-	private AttributeEntity() {
-		super("Attribute");
+	private AttributeBaseEntity() {
+		super("AttributeBase");
 	}
 	
 	@Override
 	public Instance createInstance(CaseInstance caseInstance) {
-		return new AttributeInstance(caseInstance);
+		return new AttributeBaseInstance(caseInstance);
 	}
 	
 	@Override
 	public Entity extendsEntity() {
-		return AttributeBaseEntity.INSTANCE;
+		return ConceptEntity.INSTANCE;
 	}
 	
 	@Override

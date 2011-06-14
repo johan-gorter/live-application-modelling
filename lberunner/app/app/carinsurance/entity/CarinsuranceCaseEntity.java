@@ -2,6 +2,7 @@ package app.carinsurance.entity;
 
 import lbe.instance.CaseInstance;
 import lbe.instance.Instance;
+import lbe.instance.value.AttributeValue;
 import lbe.instance.value.RelationValue;
 import lbe.instance.value.impl.AttributeValueImpl;
 import lbe.model.Attribute;
@@ -18,7 +19,7 @@ public class CarinsuranceCaseEntity extends Entity {
 				DriverEntity.INSTANCE, DriverInstance.class, DriverEntity.carinsuranceCase) {
 
 		@Override
-		public AttributeValueImpl<CarinsuranceCaseInstance, DriverInstance> get(
+		public AttributeValue<CarinsuranceCaseInstance, DriverInstance> get(
 				CarinsuranceCaseInstance instance) {
 			return instance.driver;
 		}

@@ -104,7 +104,7 @@ public class RelationEntity extends SimpleEntity {
 	
 	@Override
 	public Entity extendsEntity() {
-		return AttributeEntity.INSTANCE;
+		return AttributeBaseEntity.INSTANCE;
 	}
 	
 	@Override

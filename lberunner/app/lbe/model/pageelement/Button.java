@@ -13,10 +13,13 @@ public abstract class Button extends PageElementBase {
 	@Override
 	public PageElement render(RenderContext context) {
 		PageElement result = super.render(context);
-		result.display = getDisplay(context);
+		Text caption = getCaption();
+		if (caption!=null) {
+			result.display = caption.render(context);
+		}
 		return result;
 	}
 
-	public abstract String getDisplay(RenderContext context);
+	public abstract Text getCaption();
 	
 }

@@ -7,6 +7,7 @@ import lbe.instance.Instance;
 import lbe.instance.impl.SimpleInstance;
 import lbe.instance.value.AttributeValue;
 import lbe.instance.value.AttributeValues;
+import lbe.instance.value.ReadOnlyRelationValue;
 import lbe.instance.value.RelationValue;
 import lbe.instance.value.impl.AttributeValueImpl;
 import lbe.instance.value.impl.AttributeValuesImpl;
@@ -20,8 +21,8 @@ public class DriverInstance extends SimpleInstance {
 		super(caseInstance, DriverEntity.INSTANCE);
 	}
 
-	public final RelationValue<DriverInstance, CarinsuranceCaseInstance> carinsuranceCase 
-		= createRelationValue(DriverEntity.carinsuranceCase);
+	public final ReadOnlyRelationValue<DriverInstance, CarinsuranceCaseInstance> carinsuranceCase 
+		= createReverseRelationValue(DriverEntity.carinsuranceCase);
 	
 	public final AttributeValue<DriverInstance, Date> dateOfBirth 
 		= new AttributeValueImpl<DriverInstance, Date>(this, DriverEntity.dateOfBirth);

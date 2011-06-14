@@ -8,21 +8,11 @@ import lbe.model.pageelement.PageElementBase;
 
 public abstract class Page extends FlowNodeBase {
 	
-	public class PageRootParamsElement {
-		public String integerformat = "#0";
-		public String numberformat = "#0.000";
-		public String currencyformat = "#0.00";
-		public String percentageformat = "#0.0";
-	}
-	
-	public class PageRootElement extends PageElement {
-		public String caseId;
-		public int caseVersion;
-		public PageRootParamsElement params;
-		public String language;
-	}
-
 	public abstract PageElementBase[] getRootContainers();
+
+	public void changeValue(ChangeContext changeContext) {
+		Container.changeValue(changeContext, getRootContainers());
+	}
 
 	public PageElement render(final RenderContext renderContext) {
 		PageRootElement result = new PageRootElement();
@@ -38,8 +28,18 @@ public abstract class Page extends FlowNodeBase {
 		return result;
 	}
 
-	public void changeValue(ChangeContext changeContext) {
-		Container.changeValue(changeContext, getRootContainers());
+	public class PageRootParamsElement {
+		public String integerformat = "#0";
+		public String numberformat = "#0.000";
+		public String currencyformat = "#0.00";
+		public String percentageformat = "#0.0";
+	}
+	
+	public class PageRootElement extends PageElement {
+		public String caseId;
+		public int caseVersion;
+		public PageRootParamsElement params;
+		public String language;
 	}
 
 }

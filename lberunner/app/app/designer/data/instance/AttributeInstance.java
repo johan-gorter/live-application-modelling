@@ -12,7 +12,7 @@ import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
 public class AttributeInstance 
-	extends ConceptInstance 
+	extends AttributeBaseInstance 
 	implements Instance {
 
 	public AttributeInstance(CaseInstance caseInstance) {
@@ -24,12 +24,6 @@ public class AttributeInstance
 	}
 
 	// Attributes
-	
-	public final AttributeValue<AttributeInstance, java.lang.Boolean> readonly
-		= createAttributeValue(AttributeEntity.readonly);
-	
-	public final AttributeValue<AttributeInstance, java.lang.Boolean> multivalue
-		= createAttributeValue(AttributeEntity.multivalue);
 	
 	public final AttributeValue<AttributeInstance, java.lang.String> className
 		= createAttributeValue(AttributeEntity.className);

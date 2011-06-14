@@ -7,6 +7,7 @@ import java.util.List;
 import lbe.instance.CaseInstance;
 import lbe.instance.Instance;
 import lbe.instance.value.AttributeValue;
+import lbe.instance.value.ReadOnlyRelationValue;
 import lbe.model.Attribute;
 import lbe.model.DomainEntry;
 import lbe.model.Entity;
@@ -188,7 +189,7 @@ public class DriverEntity extends Entity {
 				CarinsuranceCaseInstance.class, CarinsuranceCaseEntity.driver) {
 
 			@Override
-			public AttributeValue<DriverInstance, CarinsuranceCaseInstance> get(
+			public ReadOnlyRelationValue<DriverInstance, CarinsuranceCaseInstance> get(
 					DriverInstance instance) {
 				return instance.carinsuranceCase;
 			}

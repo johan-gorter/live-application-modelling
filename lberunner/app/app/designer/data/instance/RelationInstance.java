@@ -12,7 +12,7 @@ import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
 public class RelationInstance 
-	extends AttributeInstance 
+	extends AttributeBaseInstance 
 	implements Instance {
 
 	public RelationInstance(CaseInstance caseInstance) {

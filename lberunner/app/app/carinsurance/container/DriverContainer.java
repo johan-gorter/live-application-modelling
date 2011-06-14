@@ -8,11 +8,15 @@ import lbe.model.Relation;
 import lbe.model.pageelement.Container;
 import lbe.model.pageelement.Field;
 import lbe.model.pageelement.PageElementBase;
+import lbe.model.pageelement.Text;
+import lbe.model.pageelement.impl.ConstantText;
 
 public class DriverContainer extends Container{
 
 	public static DriverContainer INSTANCE = new DriverContainer();
 	
+	private static final Text DISPLAY = new ConstantText("Driver details");
+
 	private DriverContainer() {}
 	
 	private static final PageElementBase[] CHILDREN = new PageElementBase[] {
@@ -120,8 +124,8 @@ public class DriverContainer extends Container{
 	}
 	
 	@Override
-	public String getDisplay(RenderContext context) {
-		return "Driver details";
+	public Text getDisplay() {
+		return DISPLAY;
 	}
 	
 	@Override
