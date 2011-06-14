@@ -1,8 +1,8 @@
-package app.designerbootstrap.data.entity;
+package app.designer.data.entity;
 
 import java.util.List;
 
-import app.designerbootstrap.data.instance.*;
+import app.designer.data.instance.*;
 import lbe.instance.*;
 import lbe.instance.value.*;
 import lbe.model.*;
@@ -16,13 +16,13 @@ public class ConceptEntity extends SimpleEntity {
 	
 	// Attributes
 	
-	public static final Attribute<ConceptInstance, String, String> name 
-		= new SimpleAttribute<ConceptInstance, String, String>(
+	public static final Attribute<ConceptInstance, java.lang.String, java.lang.String> name 
+		= new SimpleAttribute<ConceptInstance, java.lang.String, java.lang.String>(
 			"name", INSTANCE, java.lang.String.class
 		) {
 	
 			@Override
-			public AttributeValue<ConceptInstance, String> get(ConceptInstance instance) {
+			public ReadOnlyAttributeValue<ConceptInstance, java.lang.String> get(ConceptInstance instance) {
 				return instance.name;
 			}
 		};
@@ -47,6 +47,7 @@ public class ConceptEntity extends SimpleEntity {
 	public Instance createInstance(CaseInstance caseInstance) {
 		return new ConceptInstance(caseInstance);
 	}
+	
 	@Override
 	public Attribute<? extends Instance, ? extends Object, ? extends Object>[] getLocalAttributes() {
 		return ATTRIBUTES;

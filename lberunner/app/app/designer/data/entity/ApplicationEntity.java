@@ -1,8 +1,8 @@
-package app.designerbootstrap.data.entity;
+package app.designer.data.entity;
 
 import java.util.List;
 
-import app.designerbootstrap.data.instance.*;
+import app.designer.data.instance.*;
 import lbe.instance.*;
 import lbe.instance.value.*;
 import lbe.model.*;
@@ -16,6 +16,17 @@ public class ApplicationEntity extends SimpleEntity {
 	
 	// Attributes
 	
+	public static final Attribute<ApplicationInstance, java.lang.String, java.lang.String> name 
+		= new SimpleAttribute<ApplicationInstance, java.lang.String, java.lang.String>(
+			"name", INSTANCE, java.lang.String.class
+		) {
+	
+			@Override
+			public ReadOnlyAttributeValue<ApplicationInstance, java.lang.String> get(ApplicationInstance instance) {
+				return instance.name;
+			}
+		};
+	
 	// Relations
 	
 	public static final Relation<ApplicationInstance, List<EntityInstance>, EntityInstance> entities
@@ -24,7 +35,7 @@ public class ApplicationEntity extends SimpleEntity {
 		) {
 	
 			@Override
-			public RelationValues<ApplicationInstance, EntityInstance> get(
+			public ReadOnlyRelationValues<ApplicationInstance, EntityInstance> get(
 					ApplicationInstance instance) {
 				return instance.entities;
 			}
@@ -36,9 +47,6 @@ public class ApplicationEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
-			
-			//TODO: readonly
-		
 		};
 	
 	public static final Relation<ApplicationInstance, EntityInstance, EntityInstance> caseEntity
@@ -47,18 +55,16 @@ public class ApplicationEntity extends SimpleEntity {
 		) {
 	
 			@Override
-			public RelationValue<ApplicationInstance, EntityInstance> get(
+			public ReadOnlyRelationValue<ApplicationInstance, EntityInstance> get(
 					ApplicationInstance instance) {
 				return instance.caseEntity;
 			}
-			
-			//TODO: readonly
-		
 		};
 	
 	// Reverse relations
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
+		name,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
 		entities,
@@ -75,6 +81,7 @@ public class ApplicationEntity extends SimpleEntity {
 	public Instance createInstance(CaseInstance caseInstance) {
 		return new ApplicationInstance();
 	}
+	
 	@Override
 	public Attribute<? extends Instance, ? extends Object, ? extends Object>[] getLocalAttributes() {
 		return ATTRIBUTES;

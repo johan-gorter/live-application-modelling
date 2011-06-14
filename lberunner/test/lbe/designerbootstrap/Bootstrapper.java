@@ -2,10 +2,10 @@ package lbe.designerbootstrap;
 
 import lbe.engine.CasePersister;
 import lbe.engine.codegenerator.CodeGenerator;
-import app.designerbootstrap.data.instance.ApplicationInstance;
-import app.designerbootstrap.data.instance.AttributeInstance;
-import app.designerbootstrap.data.instance.EntityInstance;
-import app.designerbootstrap.data.instance.RelationInstance;
+import app.designer.data.instance.ApplicationInstance;
+import app.designer.data.instance.AttributeInstance;
+import app.designer.data.instance.EntityInstance;
+import app.designer.data.instance.RelationInstance;
 
 public class Bootstrapper {
 	
@@ -13,6 +13,7 @@ public class Bootstrapper {
 
 		// Case
 		ApplicationInstance applicationInstance = new ApplicationInstance();
+		applicationInstance.name.set("Designer");
 		
 		// Entities
 		EntityInstance application = new EntityInstance(applicationInstance);
@@ -25,13 +26,17 @@ public class Bootstrapper {
 		entity.name.set("Entity");
 		entity.extendsFrom.set(concept);
 
+		EntityInstance attributeBase = new EntityInstance(applicationInstance);
+		attributeBase.name.set("AttributeBase");
+		attributeBase.extendsFrom.set(concept);
+
 		EntityInstance attribute = new EntityInstance(applicationInstance);
 		attribute.name.set("Attribute");
-		attribute.extendsFrom.set(concept);
+		attribute.extendsFrom.set(attributeBase);
 		
 		EntityInstance relation = new EntityInstance(applicationInstance);
 		relation.name.set("Relation");
-		relation.extendsFrom.set(attribute);
+		relation.extendsFrom.set(attributeBase);
 
 		// Relations
 		RelationInstance extendsFrom = new RelationInstance(applicationInstance);
@@ -82,20 +87,25 @@ public class Bootstrapper {
 		relationTo.to.set(entity);
 		
 		// Attributes
+		AttributeInstance applicationName = new AttributeInstance(applicationInstance);
+		applicationName.name.set("name");
+		applicationName.className.set("java.lang.String");
+		application.attributes.add(applicationName);
+
 		AttributeInstance conceptName = new AttributeInstance(applicationInstance);
 		conceptName.name.set("name");
 		conceptName.className.set("java.lang.String");
 		concept.attributes.add(conceptName);
 		
-		AttributeInstance attributeReadonly = new AttributeInstance(applicationInstance);
-		attributeReadonly.name.set("readonly");
-		attributeReadonly.className.set("java.lang.Boolean");
-		attribute.attributes.add(attributeReadonly);
+		AttributeInstance attributeBaseReadonly = new AttributeInstance(applicationInstance);
+		attributeBaseReadonly.name.set("readonly");
+		attributeBaseReadonly.className.set("java.lang.Boolean");
+		attributeBase.attributes.add(attributeBaseReadonly);
 
-		AttributeInstance attributeMultivalue = new AttributeInstance(applicationInstance);
-		attributeMultivalue.name.set("multivalue");
-		attributeMultivalue.className.set("java.lang.Boolean");
-		attribute.attributes.add(attributeMultivalue);
+		AttributeInstance attributeBaseMultivalue = new AttributeInstance(applicationInstance);
+		attributeBaseMultivalue.name.set("multivalue");
+		attributeBaseMultivalue.className.set("java.lang.Boolean");
+		attributeBase.attributes.add(attributeBaseMultivalue);
 		
 		AttributeInstance attributeClassName = new AttributeInstance(applicationInstance);
 		attributeClassName.name.set("className");
@@ -122,12 +132,12 @@ public class Bootstrapper {
 		applicationInstance.entities.add(application);
 		applicationInstance.entities.add(concept);
 		applicationInstance.entities.add(entity);
+		applicationInstance.entities.add(attributeBase);
 		applicationInstance.entities.add(attribute);
 		applicationInstance.entities.add(relation);
 		
 //		System.out.println(CasePersister.gson.toJson(applicationInstance));
 		
-		CodeGenerator.generateEntity(relation, "designerbootstrap");
-		
+		CodeGenerator.generateApplication(applicationInstance);
 	}
 }

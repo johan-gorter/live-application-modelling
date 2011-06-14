@@ -1,8 +1,8 @@
-package app.designerbootstrap.data.entity;
+package app.designer.data.entity;
 
 import java.util.List;
 
-import app.designerbootstrap.data.instance.*;
+import app.designer.data.instance.*;
 import lbe.instance.*;
 import lbe.instance.value.*;
 import lbe.model.*;

@@ -1,8 +1,8 @@
-package app.designerbootstrap.data.instance;
+package app.designer.data.instance;
 
 import java.util.List;
 
-import app.designerbootstrap.data.entity.*;
+import app.designer.data.entity.*;
 import lbe.instance.*;
 import lbe.instance.impl.*;
 import lbe.instance.value.*;
@@ -20,6 +20,9 @@ public class ApplicationInstance
 	}
 
 	// Attributes
+	
+	public final AttributeValue<ApplicationInstance, java.lang.String> name
+		= createAttributeValue(ApplicationEntity.name);
 	
 	// Relations
 	
