@@ -18,11 +18,13 @@ public class RelationValueImpl<I extends Instance, To extends Instance>
 	}
 	
 	public To get() {
-		if (model.isOwner() && !isStored() && !model.isMultivalue()) {
-			// 1 on 1 relation, is now lazily created
-			set((To) model.createTo(forInstance));
+		To result = super.get();
+		if (result == null && model.isOwner() && !model.isMultivalue()) {
+			// 1 on 1 aggregation, is now lazily created
+			result = (To) model.createTo(forInstance);
+			set(result);
 		}
-		return super.get();
+		return result;
 	}
 	
 	@Override

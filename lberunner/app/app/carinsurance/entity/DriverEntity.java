@@ -193,6 +193,10 @@ public class DriverEntity extends Entity {
 					DriverInstance instance) {
 				return instance.carinsuranceCase;
 			}
+			
+			public boolean isReverse() {
+				return true;
+			};
 		
 	};
 	

@@ -3,6 +3,8 @@ package lbe.model.impl;
 import lbe.instance.Instance;
 import lbe.instance.value.RelationValue;
 import lbe.instance.value.RelationValues;
+import lbe.instance.value.impl.ReverseRelationValueImpl;
+import lbe.instance.value.impl.ReverseRelationValuesImpl;
 import lbe.model.Entity;
 import lbe.model.Relation;
 
@@ -72,13 +74,6 @@ public abstract class SimpleRelation<I extends Instance, Value extends Object, T
 	public To createTo(I from) {
 		To result = (To)getTo().createInstance(from.getCase());
 		Relation<To, ? extends Object, I> reverseRelation = getReverseRelation();
-		if (!reverseRelation.isReadOnly()) {
-			if (reverseRelation.isMultivalue()) {
-				((RelationValues)reverseRelation.get(result)).add(from);
-			} else {
-				((RelationValue)reverseRelation.get(result)).set(from);
-			}
-		}
 		return result;
 	};
 	
