@@ -72,26 +72,6 @@ public class EntityEntity extends SimpleEntity {
 	
 	// Reverse relations
 	
-	public static final Relation<EntityInstance, List<EntityInstance>, EntityInstance> extensions
-		= new SimpleRelation<EntityInstance, List<EntityInstance>, EntityInstance>(
-			"extensions", INSTANCE, EntityEntity.INSTANCE, EntityInstance.class, EntityEntity.extendsFrom
-		) {
-	
-			@Override
-			public ReadOnlyRelationValues<EntityInstance, EntityInstance> get(
-					EntityInstance instance) {
-				return instance.extensions;
-			}
-	
-			public boolean isReverse() {
-				return true;
-			}
-	
-			public boolean isMultivalue() {
-				return true;
-			}
-		};
-	
 	public static final Relation<EntityInstance, ApplicationInstance, ApplicationInstance> application
 		= new SimpleRelation<EntityInstance, ApplicationInstance, ApplicationInstance>(
 			"application", INSTANCE, EntityEntity.INSTANCE, ApplicationInstance.class, ApplicationEntity.entities
@@ -124,6 +104,26 @@ public class EntityEntity extends SimpleEntity {
 			}
 		};
 	
+	public static final Relation<EntityInstance, List<EntityInstance>, EntityInstance> extensions
+		= new SimpleRelation<EntityInstance, List<EntityInstance>, EntityInstance>(
+			"extensions", INSTANCE, EntityEntity.INSTANCE, EntityInstance.class, EntityEntity.extendsFrom
+		) {
+	
+			@Override
+			public ReadOnlyRelationValues<EntityInstance, EntityInstance> get(
+					EntityInstance instance) {
+				return instance.extensions;
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
+	
 	public static final Relation<EntityInstance, List<RelationInstance>, RelationInstance> reverseRelations
 		= new SimpleRelation<EntityInstance, List<RelationInstance>, RelationInstance>(
 			"reverseRelations", INSTANCE, EntityEntity.INSTANCE, RelationInstance.class, RelationEntity.to
@@ -152,9 +152,9 @@ public class EntityEntity extends SimpleEntity {
 		relations,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
-		extensions,
 		application,
 		caseEntityInApplication,
+		extensions,
 		reverseRelations,
 	};
 

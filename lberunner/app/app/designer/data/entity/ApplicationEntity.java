@@ -61,6 +61,42 @@ public class ApplicationEntity extends SimpleEntity {
 			}
 		};
 	
+	public static final Relation<ApplicationInstance, List<FlowInstance>, FlowInstance> flows
+		= new SimpleRelation<ApplicationInstance, List<FlowInstance>, FlowInstance>(
+			"flows", INSTANCE, ApplicationEntity.INSTANCE, FlowInstance.class, FlowEntity.application
+		) {
+	
+			@Override
+			public ReadOnlyRelationValues<ApplicationInstance, FlowInstance> get(
+					ApplicationInstance instance) {
+				return instance.flows;
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
+	
+	public static final Relation<ApplicationInstance, List<FlowInstance>, FlowInstance> exposedFlows
+		= new SimpleRelation<ApplicationInstance, List<FlowInstance>, FlowInstance>(
+			"exposedFlows", INSTANCE, ApplicationEntity.INSTANCE, FlowInstance.class, FlowEntity.exposedFlowInApplication
+		) {
+	
+			@Override
+			public ReadOnlyRelationValues<ApplicationInstance, FlowInstance> get(
+					ApplicationInstance instance) {
+				return instance.exposedFlows;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
+	
 	// Reverse relations
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
@@ -69,6 +105,8 @@ public class ApplicationEntity extends SimpleEntity {
 	private static final Relation[] RELATIONS = new Relation[]{
 		entities,
 		caseEntity,
+		flows,
+		exposedFlows,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};

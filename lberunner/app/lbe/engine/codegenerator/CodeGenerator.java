@@ -12,6 +12,7 @@ import play.Play;
 
 import lbe.engine.codegenerator.EntityClassModel.Attribute;
 import lbe.engine.codegenerator.EntityClassModel.Relation;
+import lbe.engine.codegenerator.FlowClassModel.FlowNode;
 import lbe.instance.CaseInstance;
 
 import freemarker.template.Configuration;
@@ -21,6 +22,8 @@ import app.designer.data.entity.EntityEntity;
 import app.designer.data.instance.ApplicationInstance;
 import app.designer.data.instance.AttributeInstance;
 import app.designer.data.instance.EntityInstance;
+import app.designer.data.instance.FlowInstance;
+import app.designer.data.instance.FlowNodeBaseInstance;
 import app.designer.data.instance.RelationInstance;
 
 public class CodeGenerator {
@@ -29,6 +32,7 @@ public class CodeGenerator {
 	private static Template entityTemplate;
 	private static Template instanceTemplate;
 	private static Template applicationTemplate;
+	private static Template flowTemplate;
 	private static File applicationsRoot = new File(Play.applicationPath, "app/app");
 	
 	static {
@@ -39,6 +43,7 @@ public class CodeGenerator {
 			entityTemplate = freemarkerConfig.getTemplate("Entity.java.ftl");
 			instanceTemplate = freemarkerConfig.getTemplate("Instance.java.ftl");
 			applicationTemplate = freemarkerConfig.getTemplate("Application.java.ftl");
+			flowTemplate = freemarkerConfig.getTemplate("Flow.java.ftl");
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -74,28 +79,59 @@ public class CodeGenerator {
 			}
 		}
 	}
-
-	public static void generateApplication(ApplicationInstance application, String appname, File applicationRoot) {
-		Writer applicationWriter = null;
-		try {
-			File entityFile = new File(applicationRoot, application.name.get()+"Application.java");
-			entityFile.getParentFile().mkdirs();
-			applicationWriter = new OutputStreamWriter(new FileOutputStream(entityFile), "UTF-8");
 	
-			ApplicationClassModel applicationClassModel = createApplicationClassModel(application, appname);
-			applicationTemplate.process(applicationClassModel, applicationWriter);
+	private static void generateFile(Template template, Object rootMap, String subDirectory, 
+			String name, String postfix, String appname, File root) {
+		Writer writer = null;
+		try {
+			if (subDirectory!=null) {
+				root = new File(root, subDirectory);
+				root.mkdirs();
+			}
+			File output = new File(root, name+postfix+".java");
+			writer = new OutputStreamWriter(new FileOutputStream(output), "UTF-8");
+			template.process(rootMap, writer);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		} finally {
-			try {
-				if (applicationWriter!=null) {
-					applicationWriter.close();
+			if (writer!=null) {
+				try {
+					writer.close();
+				} catch (IOException e) {
 				}
-			} catch (IOException e) {
 			}
 		}
 	}
+
+	public static void generateApplication(ApplicationInstance application, String appname, File applicationRoot) {
+		ApplicationClassModel applicationClassModel = createApplicationClassModel(application, appname);
+		generateFile(applicationTemplate, applicationClassModel, null, application.name.get(), "Application", appname, applicationRoot);
+	}
+
+	private static void generateFlow(FlowInstance flow, String appname, File applicationRoot) {
+		FlowClassModel flowClassModel = createFlowClassModel(flow, appname);
+		generateFile(flowTemplate, flowClassModel, "flow", flow.name.get(), "Flow", appname, applicationRoot);
+	}
 	
+	private static FlowClassModel createFlowClassModel(FlowInstance flow, String appname) {
+		FlowClassModel result = new FlowClassModel();
+		result.appname = appname;
+		result.name = flow.name.get();
+		for (FlowNodeBaseInstance source: flow.sources.get()) {
+			result.sources.add(source.name.get());
+		}
+		for (FlowNodeBaseInstance sink: flow.sources.get()) {
+			result.sinks.add(sink.name.get());
+		}
+		for (FlowNodeBaseInstance nodeInstance: flow.nodes.get()) {
+			FlowNode node = new FlowNode();
+			node.name = nodeInstance.name.get();
+			node.type = nodeInstance.getModel().getName();
+			result.nodes.add(node);
+		}
+		return result;
+	}
+
 	private static EntityClassModel createEntityClassModel(EntityInstance entity, String appname) {
 		EntityClassModel result = new EntityClassModel();
 		result.appname=appname;
@@ -151,7 +187,11 @@ public class CodeGenerator {
 		for (EntityInstance entity: applicationInstance.entities.get()) {
 			generateEntity(entity, appname, applicationRoot);
 		}
+		for (FlowInstance flow: applicationInstance.flows.get()) {
+			generateFlow(flow, appname, applicationRoot);
+		}
 		
 		new File(applicationRoot, "flow").mkdirs();
 	}
+
 }

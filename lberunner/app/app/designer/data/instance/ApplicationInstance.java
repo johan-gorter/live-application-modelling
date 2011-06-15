@@ -31,6 +31,12 @@ public class ApplicationInstance
 	
 	public final RelationValue<ApplicationInstance, EntityInstance> caseEntity
 		= createRelationValue(ApplicationEntity.caseEntity);
+	
+	public final RelationValues<ApplicationInstance, FlowInstance> flows
+		= createRelationValues(ApplicationEntity.flows);
+	
+	public final RelationValues<ApplicationInstance, FlowInstance> exposedFlows
+		= createRelationValues(ApplicationEntity.exposedFlows);
 
 	// Reverse relations
 

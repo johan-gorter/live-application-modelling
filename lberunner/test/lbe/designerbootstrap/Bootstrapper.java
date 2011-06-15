@@ -48,54 +48,34 @@ public class Bootstrapper {
 		createAttribute(relation, "reverseMultivalue", Boolean.class);
 		createAttribute(relation, "reverseName", String.class);
 		
-		// Flow
+		// Flow nodes & Flow
+		EntityInstance flowEdge = createEntity("FlowEdge", null);
+		EntityInstance flowNodeBase = createEntity("FlowNodeBase", concept);
+		EntityInstance flowSource = createEntity("FlowSource", flowNodeBase);
+		EntityInstance flowSink = createEntity("FlowSink", flowNodeBase);
+		EntityInstance page = createEntity("Page", flowNodeBase);
+		EntityInstance subFlow = createEntity("SubFlow", flowNodeBase);
 		EntityInstance flow = createEntity("Flow", concept);
 		
 		// Relations
 		
-		// Entity.extendsFrom
-		RelationInstance extendsFrom = new RelationInstance(applicationInstance);
-		entity.relations.add(extendsFrom);
-		extendsFrom.to.set(entity);
-		extendsFrom.name.set("extendsFrom");
-		extendsFrom.reverseName.set("extensions");
-		extendsFrom.reverseMultivalue.set(true);
-		
-		// Application.entities
 		createRelation("entities", application, RelationType.OneToManyAggregation, entity, "application");
-		// Application.caseEntity
-		RelationInstance caseEntity = new RelationInstance(applicationInstance);
-		application.relations.add(caseEntity);
-		caseEntity.name.set("caseEntity");
-		caseEntity.reverseName.set("caseEntityInApplication");
-		caseEntity.to.set(entity);
+		createRelation("caseEntity", application, RelationType.OneToOne, entity, "caseEntityInApplication");
+		createRelation("flows", application, RelationType.OneToManyAggregation, flow, "application");
+		createRelation("exposedFlows", application, RelationType.OneToMany, flow, "exposedFlowInApplication");
 
-		// Entity.attributes
+		createRelation("extendsFrom", entity, RelationType.ManyToOne, entity, "extensions");
 		createRelation("attributes", entity, RelationType.OneToManyAggregation, attribute, "entity");
-		RelationInstance entityAttributes = new RelationInstance(applicationInstance);
-		entity.relations.add(entityAttributes);
-		entityAttributes.name.set("attributes");
-		entityAttributes.reverseName.set("entity");
-		entityAttributes.reverseMultivalue.set(false);
-		entityAttributes.to.set(attribute);
-		entityAttributes.multivalue.set(true);
-		entityAttributes.owner.set(true);
-		// Entity.relations
-		RelationInstance entityRelations = new RelationInstance(applicationInstance);
-		entity.relations.add(entityRelations);
-		entityRelations.name.set("relations");
-		entityRelations.reverseName.set("entity");
-		entityRelations.reverseMultivalue.set(false);
-		entityRelations.to.set(relation);
-		entityRelations.multivalue.set(true);
-		entityRelations.owner.set(true);
-		// Relation.to
-		RelationInstance relationTo = new RelationInstance(applicationInstance);
-		relation.relations.add(relationTo);
-		relationTo.name.set("to");
-		relationTo.reverseName.set("reverseRelations");
-		relationTo.reverseMultivalue.set(true);
-		relationTo.to.set(entity);
+		createRelation("relations", entity, RelationType.OneToManyAggregation, relation, "entity");
+
+		createRelation("to", relation, RelationType.ManyToOne, entity, "reverseRelations");
+
+		createRelation("sources", flow, RelationType.OneToManyAggregation, flowSource, "flow");
+		createRelation("sinks", flow, RelationType.OneToManyAggregation, flowSink, "flow");
+		createRelation("nodes", flow, RelationType.OneToManyAggregation, flowNodeBase, "flow");
+		createRelation("edges", flow, RelationType.OneToManyAggregation, flowEdge, "flow");
+		createRelation("from", flowEdge, RelationType.ManyToOne, flowNodeBase, "outgoingEdges");
+		createRelation("to", flowEdge, RelationType.ManyToOne, flowNodeBase, "incomingEdges");
 		
 		// Finish up
 

@@ -7,6 +7,17 @@ public class FlowEdge {
 	private FlowNodeBase to;
 	private String entryName;
 	
+	
+	public FlowEdge() {
+	}
+
+	public FlowEdge(FlowNodeBase from, String exitName, FlowNodeBase to,
+			String entryName) {
+		this.from = from;
+		this.exitName = exitName;
+		this.to = to;
+		this.entryName = entryName;
+	}
 	public FlowNodeBase getFrom() {
 		return from;
 	}

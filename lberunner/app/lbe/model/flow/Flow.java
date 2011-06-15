@@ -5,13 +5,9 @@ import lbe.model.Model;
 
 public abstract class Flow extends Model {
 	
-	/**
-	 * Source as in a graph with source and sinks.
-	 * 
-	 * @return
-	 */
-	public abstract FlowNodeBase getStart();
 	public abstract FlowNodeBase[] getNodes();
+	public abstract FlowSource[] getSources();
+	public abstract FlowSink[] getSinks();
 	public abstract FlowEdge[] getEdges();
 
 	/**
@@ -28,5 +24,13 @@ public abstract class Flow extends Model {
 			}
 		}
 		throw new RuntimeException("Page/Subflow not found: "+path[pathIndex]);
+	}
+	public FlowEdge getEdge(FlowSource from) {
+		for (FlowEdge edge: getEdges()) {
+			if (edge.getFrom()==from) {
+				return edge;
+			}
+		}
+		return null;
 	}
 }

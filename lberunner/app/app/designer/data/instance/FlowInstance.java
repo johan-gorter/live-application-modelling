@@ -26,7 +26,25 @@ public class FlowInstance
 	// Attributes
 	
 	// Relations
+	
+	public final RelationValues<FlowInstance, FlowSourceInstance> sources
+		= createRelationValues(FlowEntity.sources);
+	
+	public final RelationValues<FlowInstance, FlowSinkInstance> sinks
+		= createRelationValues(FlowEntity.sinks);
+	
+	public final RelationValues<FlowInstance, FlowNodeBaseInstance> nodes
+		= createRelationValues(FlowEntity.nodes);
+	
+	public final RelationValues<FlowInstance, FlowEdgeInstance> edges
+		= createRelationValues(FlowEntity.edges);
 
 	// Reverse relations
+	
+	public final ReadOnlyRelationValue<FlowInstance, ApplicationInstance> application
+		= createReverseRelationValue(FlowEntity.application);
+	
+	public final ReadOnlyRelationValue<FlowInstance, ApplicationInstance> exposedFlowInApplication
+		= createReverseRelationValue(FlowEntity.exposedFlowInApplication);
 
 }

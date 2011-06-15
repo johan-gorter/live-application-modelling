@@ -38,14 +38,14 @@ public class EntityInstance
 
 	// Reverse relations
 	
-	public final ReadOnlyRelationValues<EntityInstance, EntityInstance> extensions
-		= createReverseRelationValues(EntityEntity.extensions);
-	
 	public final ReadOnlyRelationValue<EntityInstance, ApplicationInstance> application
 		= createReverseRelationValue(EntityEntity.application);
 	
 	public final ReadOnlyRelationValue<EntityInstance, ApplicationInstance> caseEntityInApplication
 		= createReverseRelationValue(EntityEntity.caseEntityInApplication);
+	
+	public final ReadOnlyRelationValues<EntityInstance, EntityInstance> extensions
+		= createReverseRelationValues(EntityEntity.extensions);
 	
 	public final ReadOnlyRelationValues<EntityInstance, RelationInstance> reverseRelations
 		= createReverseRelationValues(EntityEntity.reverseRelations);
