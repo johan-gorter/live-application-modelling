@@ -8,37 +8,52 @@ import app.designer.data.instance.EntityInstance;
 import app.designer.data.instance.RelationInstance;
 
 public class Bootstrapper {
+
+	public enum RelationType {OneToOne, OneToOneAggregation, OneToMany, OneToManyAggregation, ManyToOne, ManyToMany}
+	
+	private static ApplicationInstance applicationInstance;
 	
 	public static void main(String[] args) {
 
 		// Case
-		ApplicationInstance applicationInstance = new ApplicationInstance();
+		applicationInstance = new ApplicationInstance();
 		applicationInstance.name.set("Designer");
 		
 		// Entities
-		EntityInstance application = new EntityInstance(applicationInstance);
-		application.name.set("Application");
-
-		EntityInstance concept = new EntityInstance(applicationInstance);
-		concept.name.set("Concept");
-
-		EntityInstance entity = new EntityInstance(applicationInstance);
-		entity.name.set("Entity");
-		entity.extendsFrom.set(concept);
-
-		EntityInstance attributeBase = new EntityInstance(applicationInstance);
-		attributeBase.name.set("AttributeBase");
-		attributeBase.extendsFrom.set(concept);
-
-		EntityInstance attribute = new EntityInstance(applicationInstance);
-		attribute.name.set("Attribute");
-		attribute.extendsFrom.set(attributeBase);
 		
-		EntityInstance relation = new EntityInstance(applicationInstance);
-		relation.name.set("Relation");
-		relation.extendsFrom.set(attributeBase);
+		// Application
+		EntityInstance application = createEntity("Application", null);
+		createAttribute(application, "name", String.class);
+		applicationInstance.caseEntity.set(application);
+		
+		// Concept
+		EntityInstance concept = createEntity("Concept", null);
+		createAttribute(concept, "name", String.class);
+		
+		// Entity
+		EntityInstance entity = createEntity("Entity", concept);
 
+		// AttributeBase
+		EntityInstance attributeBase = createEntity("AttributeBase", concept);
+		createAttribute(attributeBase, "readonly", Boolean.class);
+		createAttribute(attributeBase, "multivalue", Boolean.class);
+		
+		// Attribute
+		EntityInstance attribute = createEntity("Attribute", attributeBase);
+		createAttribute(attribute, "className", String.class);
+		
+		// Relation
+		EntityInstance relation = createEntity("Relation", attributeBase);
+		createAttribute(relation, "owner", Boolean.class);
+		createAttribute(relation, "reverseMultivalue", Boolean.class);
+		createAttribute(relation, "reverseName", String.class);
+		
+		// Flow
+		EntityInstance flow = createEntity("Flow", concept);
+		
 		// Relations
+		
+		// Entity.extendsFrom
 		RelationInstance extendsFrom = new RelationInstance(applicationInstance);
 		entity.relations.add(extendsFrom);
 		extendsFrom.to.set(entity);
@@ -46,21 +61,17 @@ public class Bootstrapper {
 		extendsFrom.reverseName.set("extensions");
 		extendsFrom.reverseMultivalue.set(true);
 		
-		RelationInstance entities = new RelationInstance(applicationInstance);
-		application.relations.add(entities);
-		entities.name.set("entities");
-		entities.reverseName.set("application");
-		entities.reverseMultivalue.set(false);
-		entities.to.set(entity);
-		entities.multivalue.set(true);
-		entities.owner.set(true);
-
+		// Application.entities
+		createRelation("entities", application, RelationType.OneToManyAggregation, entity, "application");
+		// Application.caseEntity
 		RelationInstance caseEntity = new RelationInstance(applicationInstance);
 		application.relations.add(caseEntity);
 		caseEntity.name.set("caseEntity");
 		caseEntity.reverseName.set("caseEntityInApplication");
 		caseEntity.to.set(entity);
 
+		// Entity.attributes
+		createRelation("attributes", entity, RelationType.OneToManyAggregation, attribute, "entity");
 		RelationInstance entityAttributes = new RelationInstance(applicationInstance);
 		entity.relations.add(entityAttributes);
 		entityAttributes.name.set("attributes");
@@ -69,7 +80,7 @@ public class Bootstrapper {
 		entityAttributes.to.set(attribute);
 		entityAttributes.multivalue.set(true);
 		entityAttributes.owner.set(true);
-
+		// Entity.relations
 		RelationInstance entityRelations = new RelationInstance(applicationInstance);
 		entity.relations.add(entityRelations);
 		entityRelations.name.set("relations");
@@ -78,7 +89,7 @@ public class Bootstrapper {
 		entityRelations.to.set(relation);
 		entityRelations.multivalue.set(true);
 		entityRelations.owner.set(true);
-
+		// Relation.to
 		RelationInstance relationTo = new RelationInstance(applicationInstance);
 		relation.relations.add(relationTo);
 		relationTo.name.set("to");
@@ -86,58 +97,36 @@ public class Bootstrapper {
 		relationTo.reverseMultivalue.set(true);
 		relationTo.to.set(entity);
 		
-		// Attributes
-		AttributeInstance applicationName = new AttributeInstance(applicationInstance);
-		applicationName.name.set("name");
-		applicationName.className.set("java.lang.String");
-		application.attributes.add(applicationName);
-
-		AttributeInstance conceptName = new AttributeInstance(applicationInstance);
-		conceptName.name.set("name");
-		conceptName.className.set("java.lang.String");
-		concept.attributes.add(conceptName);
-		
-		AttributeInstance attributeBaseReadonly = new AttributeInstance(applicationInstance);
-		attributeBaseReadonly.name.set("readonly");
-		attributeBaseReadonly.className.set("java.lang.Boolean");
-		attributeBase.attributes.add(attributeBaseReadonly);
-
-		AttributeInstance attributeBaseMultivalue = new AttributeInstance(applicationInstance);
-		attributeBaseMultivalue.name.set("multivalue");
-		attributeBaseMultivalue.className.set("java.lang.Boolean");
-		attributeBase.attributes.add(attributeBaseMultivalue);
-		
-		AttributeInstance attributeClassName = new AttributeInstance(applicationInstance);
-		attributeClassName.name.set("className");
-		attributeClassName.className.set("java.lang.String");
-		attribute.attributes.add(attributeClassName);
-		
-		AttributeInstance relationOwner = new AttributeInstance(applicationInstance);
-		relationOwner.name.set("owner");
-		relationOwner.className.set("java.lang.Boolean");
-		relation.attributes.add(relationOwner);
-		
-		AttributeInstance relationReverseMultivalue = new AttributeInstance(applicationInstance);
-		relationReverseMultivalue.name.set("reverseMultivalue");
-		relationReverseMultivalue.className.set("java.lang.Boolean");
-		relation.attributes.add(relationReverseMultivalue);
-		
-		AttributeInstance relationReverseName = new AttributeInstance(applicationInstance);
-		relationReverseName.name.set("reverseName");
-		relationReverseName.className.set("java.lang.String");
-		relation.attributes.add(relationReverseName);
-		
 		// Finish up
-		applicationInstance.caseEntity.set(application);
-		applicationInstance.entities.add(application);
-		applicationInstance.entities.add(concept);
-		applicationInstance.entities.add(entity);
-		applicationInstance.entities.add(attributeBase);
-		applicationInstance.entities.add(attribute);
-		applicationInstance.entities.add(relation);
-		
+
 //		System.out.println(CasePersister.gson.toJson(applicationInstance));
 		
 		CodeGenerator.generateApplication(applicationInstance);
+	}
+
+	private static EntityInstance createEntity(String name, EntityInstance extendsFrom) {
+		EntityInstance result = new EntityInstance(applicationInstance);
+		result.name.set(name);
+		result.extendsFrom.set(extendsFrom);
+		applicationInstance.entities.add(result);
+		return result;
+	}
+
+	private static void createAttribute(EntityInstance entity, String name, Class<?> className) {
+		AttributeInstance attribute = new AttributeInstance(applicationInstance);
+		attribute.name.set(name);
+		attribute.className.set(className.getName());
+		entity.attributes.add(attribute);
+	}
+
+	private static void createRelation(String name, EntityInstance from, RelationType relationType, EntityInstance to, String reverseName) {
+		RelationInstance relation = new RelationInstance(applicationInstance);
+		from.relations.add(relation);
+		relation.to.set(to);
+		relation.name.set(name);
+		relation.reverseName.set(reverseName);
+		relation.owner.set(relationType==RelationType.OneToManyAggregation || relationType==RelationType.OneToOneAggregation);
+		relation.multivalue.set(relationType==RelationType.OneToMany || relationType==RelationType.OneToManyAggregation || relationType==RelationType.ManyToMany);
+		relation.reverseMultivalue.set(relationType==RelationType.ManyToMany || relationType==RelationType.ManyToOne);
 	}
 }

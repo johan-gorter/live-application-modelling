@@ -29,4 +29,10 @@ public class AttributeValuesImpl<I extends Instance, Item extends Object>
 		return super.get();
 	}
 	
+	@Override
+	public void set(List<Item> value) {
+		// TODO Auto-generated method stub
+		super.set(value);
+	}
+	
 }

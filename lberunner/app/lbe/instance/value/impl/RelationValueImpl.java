@@ -29,11 +29,18 @@ public class RelationValueImpl<I extends Instance, To extends Instance>
 	
 	@Override
 	public void set(To value) {
+		To previous = super.get();
+		if (previous == value) return;
 		super.set(value);
-		if (getModel().getReverseRelation().isMultivalue()) {
-			((ReverseRelationValuesImpl)model.getReverseRelation().get(value)).addReverse(forInstance);
-		} else {
-			((ReverseRelationValueImpl)model.getReverseRelation().get(value)).setReverse(forInstance);
+		if (previous!=null) {
+			throw new RuntimeException("Not yet implemented");
+		}
+		if (value!=null) {
+			if (getModel().getReverseRelation().isMultivalue()) {
+				((ReverseRelationValuesImpl)model.getReverseRelation().get(value)).addReverse(forInstance);
+			} else {
+				((ReverseRelationValueImpl)model.getReverseRelation().get(value)).setReverse(forInstance);
+			}
 		}
 	};
 	
