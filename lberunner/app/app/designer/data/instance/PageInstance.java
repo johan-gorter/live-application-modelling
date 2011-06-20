@@ -26,6 +26,9 @@ public class PageInstance
 	// Attributes
 	
 	// Relations
+	
+	public final RelationValues<PageInstance, PageElementBaseInstance> rootElements
+		= createRelationValues(PageEntity.rootElements);
 
 	// Reverse relations
 

@@ -19,6 +19,9 @@ public class ${name}Application extends Application {
 	}
 	
 	private static final Flow[] exposedFlows = new Flow[] {
+	<#list exposedFlows as exposedFlow>
+		${exposedFlow}Flow.INSTANCE,
+	</#list>
 	};
 
 	@Override

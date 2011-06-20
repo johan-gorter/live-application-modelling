@@ -19,7 +19,7 @@ public class RelationValueImpl<I extends Instance, To extends Instance>
 	
 	public To get() {
 		To result = super.get();
-		if (result == null && model.isOwner() && !model.isMultivalue()) {
+		if (result == null && model.isAutoCreate()) {
 			// 1 on 1 aggregation, is now lazily created
 			result = (To) model.createTo(forInstance);
 			set(result);

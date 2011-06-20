@@ -31,7 +31,7 @@ public class ApplicationEntity extends SimpleEntity {
 	
 	public static final Relation<ApplicationInstance, List<EntityInstance>, EntityInstance> entities
 		= new SimpleRelation<ApplicationInstance, List<EntityInstance>, EntityInstance>(
-			"entities", INSTANCE, ApplicationEntity.INSTANCE, EntityInstance.class, EntityEntity.application
+			"entities", INSTANCE, EntityEntity.INSTANCE, EntityInstance.class, EntityEntity.application
 		) {
 	
 			@Override
@@ -51,7 +51,7 @@ public class ApplicationEntity extends SimpleEntity {
 	
 	public static final Relation<ApplicationInstance, EntityInstance, EntityInstance> caseEntity
 		= new SimpleRelation<ApplicationInstance, EntityInstance, EntityInstance>(
-			"caseEntity", INSTANCE, ApplicationEntity.INSTANCE, EntityInstance.class, EntityEntity.caseEntityInApplication
+			"caseEntity", INSTANCE, EntityEntity.INSTANCE, EntityInstance.class, EntityEntity.caseEntityInApplication
 		) {
 	
 			@Override
@@ -63,7 +63,7 @@ public class ApplicationEntity extends SimpleEntity {
 	
 	public static final Relation<ApplicationInstance, List<FlowInstance>, FlowInstance> flows
 		= new SimpleRelation<ApplicationInstance, List<FlowInstance>, FlowInstance>(
-			"flows", INSTANCE, ApplicationEntity.INSTANCE, FlowInstance.class, FlowEntity.application
+			"flows", INSTANCE, FlowEntity.INSTANCE, FlowInstance.class, FlowEntity.application
 		) {
 	
 			@Override
@@ -81,9 +81,49 @@ public class ApplicationEntity extends SimpleEntity {
 			}
 		};
 	
+	public static final Relation<ApplicationInstance, List<ContainerInstance>, ContainerInstance> containers
+		= new SimpleRelation<ApplicationInstance, List<ContainerInstance>, ContainerInstance>(
+			"containers", INSTANCE, ContainerEntity.INSTANCE, ContainerInstance.class, ContainerEntity.application
+		) {
+	
+			@Override
+			public ReadOnlyRelationValues<ApplicationInstance, ContainerInstance> get(
+					ApplicationInstance instance) {
+				return instance.containers;
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
+	
+	public static final Relation<ApplicationInstance, List<ButtonInstance>, ButtonInstance> buttons
+		= new SimpleRelation<ApplicationInstance, List<ButtonInstance>, ButtonInstance>(
+			"buttons", INSTANCE, ButtonEntity.INSTANCE, ButtonInstance.class, ButtonEntity.application
+		) {
+	
+			@Override
+			public ReadOnlyRelationValues<ApplicationInstance, ButtonInstance> get(
+					ApplicationInstance instance) {
+				return instance.buttons;
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
+	
 	public static final Relation<ApplicationInstance, List<FlowInstance>, FlowInstance> exposedFlows
 		= new SimpleRelation<ApplicationInstance, List<FlowInstance>, FlowInstance>(
-			"exposedFlows", INSTANCE, ApplicationEntity.INSTANCE, FlowInstance.class, FlowEntity.exposedFlowInApplication
+			"exposedFlows", INSTANCE, FlowEntity.INSTANCE, FlowInstance.class, FlowEntity.exposedFlowInApplication
 		) {
 	
 			@Override
@@ -106,6 +146,8 @@ public class ApplicationEntity extends SimpleEntity {
 		entities,
 		caseEntity,
 		flows,
+		containers,
+		buttons,
 		exposedFlows,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{

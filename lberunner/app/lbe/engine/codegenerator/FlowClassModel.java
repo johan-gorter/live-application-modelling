@@ -8,11 +8,25 @@ public class FlowClassModel {
 	public static class FlowNode {
 		public String name;
 		public String type;
+		
+		public String getName() {
+			return name;
+		}
+		public String getType() {
+			return type;
+		}
 	}
 
 	public static class FlowEdge {
 		public String from;
 		public String to;
+		
+		public String getFrom() {
+			return from;
+		}
+		public String getTo() {
+			return to;
+		}
 	}
 	
 	public String appname;

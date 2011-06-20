@@ -25,8 +25,8 @@ public class AttributeBaseInstance
 
 	// Attributes
 	
-	public final AttributeValue<AttributeBaseInstance, java.lang.Boolean> readonly
-		= createAttributeValue(AttributeBaseEntity.readonly);
+	public final AttributeValue<AttributeBaseInstance, java.lang.Boolean> readOnly
+		= createAttributeValue(AttributeBaseEntity.readOnly);
 	
 	public final AttributeValue<AttributeBaseInstance, java.lang.Boolean> multivalue
 		= createAttributeValue(AttributeBaseEntity.multivalue);

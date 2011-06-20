@@ -32,7 +32,7 @@ public class EntityEntity extends SimpleEntity {
 	
 	public static final Relation<EntityInstance, List<AttributeInstance>, AttributeInstance> attributes
 		= new SimpleRelation<EntityInstance, List<AttributeInstance>, AttributeInstance>(
-			"attributes", INSTANCE, EntityEntity.INSTANCE, AttributeInstance.class, AttributeEntity.entity
+			"attributes", INSTANCE, AttributeEntity.INSTANCE, AttributeInstance.class, AttributeEntity.entity
 		) {
 	
 			@Override
@@ -52,7 +52,7 @@ public class EntityEntity extends SimpleEntity {
 	
 	public static final Relation<EntityInstance, List<RelationInstance>, RelationInstance> relations
 		= new SimpleRelation<EntityInstance, List<RelationInstance>, RelationInstance>(
-			"relations", INSTANCE, EntityEntity.INSTANCE, RelationInstance.class, RelationEntity.entity
+			"relations", INSTANCE, RelationEntity.INSTANCE, RelationInstance.class, RelationEntity.entity
 		) {
 	
 			@Override

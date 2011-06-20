@@ -6,3 +6,4 @@ lberunner/eclipse/classes
 lberunner/lib/lbe.jar
 lbe/build
 sessions/*
+*.log

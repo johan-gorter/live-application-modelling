@@ -4,6 +4,7 @@ import app.${appname}.data.entity.*;
 import app.${appname}.flow.*;
 import app.${appname}.flow.${name?lower_case}.*;
 import lbe.model.flow.*;
+import lbe.model.flow.impl.*;
 
 public class ${name}Flow extends Flow {
 

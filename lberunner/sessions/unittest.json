@@ -1,8 +1,11 @@
 {
   "instanceId": 0,
+  "entityName": "CarinsuranceCase",
+  "version": 101,
   "driver": {
     "instanceId": 1,
-    "dateOfBirth": "2011-06-01",
+    "entityName": "Driver",
+    "dateOfBirth": "2011-06-19",
     "yearsDriverslicense": 100
   }
 }

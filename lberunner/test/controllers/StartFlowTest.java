@@ -1,30 +1,28 @@
 package controllers;
 
-import static org.junit.Assert.*;
-
 import java.util.GregorianCalendar;
 
 import junit.framework.Assert;
-
 import lbe.engine.Case;
 import lbe.engine.CaseManager;
 import lbe.engine.ChangeContext;
+import lbe.engine.ChangeContext.FieldChange;
 import lbe.engine.Navigator;
 import lbe.engine.PageElement;
 import lbe.engine.Session;
-import lbe.engine.ChangeContext.FieldChange;
 import lbe.model.flow.Flow;
 
 import org.junit.Test;
 
 import app.carinsurance.CarinsuranceApplication;
-import app.carinsurance.entity.CarinsuranceCaseInstance;
+import app.carinsurancetest.CarInsuranceTestApplication;
+import app.carinsurancetest.data.instance.CarinsuranceCaseInstance;
 
 public class StartFlowTest {
 
 	@Test
 	public void testGetFirstPage() {
-		Flow flowModel = CarinsuranceApplication.INSTANCE.getExposedFlows()[0];
+		Flow flowModel = CarInsuranceTestApplication.INSTANCE.getExposedFlows()[0];
 		Case c = CaseManager.create(new CarinsuranceCaseInstance());
 		Session session = Navigator.startFlow(c, flowModel);
 		

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import lbe.instance.CaseInstance;
 import lbe.instance.Instance;
 import lbe.instance.value.AttributeValue;
 import lbe.instance.value.AttributeValues;
@@ -35,12 +36,14 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 	public static final SimpleDateFormat UNIVERSAL_DATE = new SimpleDateFormat("yyyy-MM-dd");
 
 	@Override
-	public JsonElement serialize(Instance src, Type typeOfSrc,
-			JsonSerializationContext context) {
+	public JsonElement serialize(Instance src, Type typeOfSrc, JsonSerializationContext context) {
 		Entity entity = src.getModel();
 		JsonObject result = new JsonObject();
 		result.add("instanceId", new JsonPrimitive(src.getInstanceId()));
 		result.add("entityName", new JsonPrimitive(entity.getName()));
+		if (src instanceof CaseInstance) {
+			result.add("version", new JsonPrimitive(((CaseInstance)src).getVersion()));
+		}
 		for (Attribute attribute : entity.getAttributes()) {
 			if (!attribute.isReadOnly()) {
 				AttributeValue attributeValue = (AttributeValue) attribute.get(src);
@@ -107,13 +110,14 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 	@Override
 	public Instance deserialize(JsonElement json, Type typeOfT,
 			JsonDeserializationContext context) throws JsonParseException {
-		Instance result;
+		CaseInstance result;
 		try {
-			result = (Instance) ((Class)typeOfT).newInstance();
+			result = (CaseInstance) ((Class)typeOfT).newInstance();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 		JsonObject data = json.getAsJsonObject();
+		result.setVersion(data.get("version").getAsInt());
 		// Old id -> Instance
 		Map<Long, Instance> instances = new HashMap<Long, Instance>();
 		

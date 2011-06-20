@@ -21,7 +21,7 @@ public class DriverPage extends Page {
 	}
 	
 	@Override
-	public PageElementBase[] getRootContainers() {
+	public PageElementBase[] getRootElements() {
 		return ROOTS;
 	}
 

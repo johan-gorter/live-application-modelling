@@ -17,9 +17,8 @@ import lbe.model.flow.Flow;
 import org.apache.log4j.Logger;
 
 import play.mvc.Controller;
-
-import app.carinsurance.CarinsuranceApplication;
-import app.carinsurance.entity.CarinsuranceCaseInstance;
+import app.carinsurancetest.CarInsuranceTestApplication;
+import app.carinsurancetest.data.instance.CarinsuranceCaseInstance;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -32,7 +31,7 @@ public class StartFlow extends Controller {
 
 	private static final Logger LOG = Logger.getLogger(StartFlow.class);
 
-	private static final Application application = CarinsuranceApplication.INSTANCE;
+	private static final Application application = CarInsuranceTestApplication.INSTANCE;
 	private static final Class<CarinsuranceCaseInstance> caseInstanceClass = CarinsuranceCaseInstance.class; 
 
 	private static JsonSerializer<Date> dateSerializer = new JsonSerializer<Date>() {
@@ -84,19 +83,20 @@ public class StartFlow extends Controller {
 		renderJSON(c.render(lbesession), dateSerializer);
 	}
 
-	public static void submit(String formattedSession, JsonObject event) {
+	public static void submit(String formattedSession, JsonObject event, JsonObject keepAlive) {
+		if (keepAlive!=null) {
+			renderJSON("{}");
+		}
 		JsonArray valuesArray = event.getAsJsonArray("values");
 		JsonElement submit = event.get("submit");
 		JsonElement refresh = event.get("refresh");
 
 		if (submit != null || refresh != null) {
-			ChangeContext.FieldChange[] fieldChanges = new ChangeContext.FieldChange[valuesArray
-					.size()];
+			ChangeContext.FieldChange[] fieldChanges = new ChangeContext.FieldChange[valuesArray.size()];
 			for (int i = 0; i < fieldChanges.length; i++) {
 				JsonObject change = valuesArray.get(i).getAsJsonObject();
 				Object value = toValue(change.get("value"));
-				fieldChanges[i] = new ChangeContext.FieldChange(change
-						.get("id").getAsString(), value);
+				fieldChanges[i] = new ChangeContext.FieldChange(change.get("id").getAsString(), value);
 			}
 			Session lbesession = Session.parse(formattedSession, application);
 			Case c = CaseManager.getCase(lbesession.getCaseId(), caseInstanceClass);
@@ -120,11 +120,9 @@ public class StartFlow extends Controller {
 				.isNumber() ? jsonValue.getAsNumber() : jsonValue.getAsString();
 	}
 
-	public static void waitForPageChange(String formattedSession,
-			int lastCaseVersion) {
+	public static void waitForPageChange(String formattedSession, int lastCaseVersion) {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("waitForPageChange(" + formattedSession + ", "
-					+ lastCaseVersion + ")");
+			LOG.debug("waitForPageChange(" + formattedSession + ", " + lastCaseVersion + ")");
 		}
 		CaseManager.fireChangesIfModelChanged();
 

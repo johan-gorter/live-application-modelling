@@ -35,6 +35,12 @@ public class ApplicationInstance
 	public final RelationValues<ApplicationInstance, FlowInstance> flows
 		= createRelationValues(ApplicationEntity.flows);
 	
+	public final RelationValues<ApplicationInstance, ContainerInstance> containers
+		= createRelationValues(ApplicationEntity.containers);
+	
+	public final RelationValues<ApplicationInstance, ButtonInstance> buttons
+		= createRelationValues(ApplicationEntity.buttons);
+	
 	public final RelationValues<ApplicationInstance, FlowInstance> exposedFlows
 		= createRelationValues(ApplicationEntity.exposedFlows);
 

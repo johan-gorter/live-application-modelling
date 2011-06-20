@@ -29,6 +29,58 @@ public class AttributeEntity extends SimpleEntity {
 	
 	// Relations
 	
+	public static final Relation<AttributeInstance, TextInstance, TextInstance> question
+		= new SimpleRelation<AttributeInstance, TextInstance, TextInstance>(
+			"question", INSTANCE, TextEntity.INSTANCE, TextInstance.class, TextEntity.questionOnAttribute
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<AttributeInstance, TextInstance> get(
+					AttributeInstance instance) {
+				return instance.question;
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+		};
+	
+	public static final Relation<AttributeInstance, TextInstance, TextInstance> explanation
+		= new SimpleRelation<AttributeInstance, TextInstance, TextInstance>(
+			"explanation", INSTANCE, TextEntity.INSTANCE, TextInstance.class, TextEntity.explanationOnAttribute
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<AttributeInstance, TextInstance> get(
+					AttributeInstance instance) {
+				return instance.explanation;
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+		};
+	
+	public static final Relation<AttributeInstance, List<DomainEntryInstance>, DomainEntryInstance> domain
+		= new SimpleRelation<AttributeInstance, List<DomainEntryInstance>, DomainEntryInstance>(
+			"domain", INSTANCE, DomainEntryEntity.INSTANCE, DomainEntryInstance.class, DomainEntryEntity.attribute
+		) {
+	
+			@Override
+			public ReadOnlyRelationValues<AttributeInstance, DomainEntryInstance> get(
+					AttributeInstance instance) {
+				return instance.domain;
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
+	
 	// Reverse relations
 	
 	public static final Relation<AttributeInstance, EntityInstance, EntityInstance> entity
@@ -46,14 +98,38 @@ public class AttributeEntity extends SimpleEntity {
 				return true;
 			}
 		};
+	
+	public static final Relation<AttributeInstance, List<FieldInstance>, FieldInstance> fields
+		= new SimpleRelation<AttributeInstance, List<FieldInstance>, FieldInstance>(
+			"fields", INSTANCE, AttributeEntity.INSTANCE, FieldInstance.class, FieldEntity.attribute
+		) {
+	
+			@Override
+			public ReadOnlyRelationValues<AttributeInstance, FieldInstance> get(
+					AttributeInstance instance) {
+				return instance.fields;
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 		className,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
+		question,
+		explanation,
+		domain,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 		entity,
+		fields,
 	};
 
 	private AttributeEntity() {

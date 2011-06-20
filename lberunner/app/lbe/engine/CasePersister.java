@@ -19,7 +19,7 @@ import com.google.gson.GsonBuilder;
 public class CasePersister {
 
 	public static final CasePersister INSTANCE = new CasePersister();
-
+	
 	private CasePersister() {
 	}
 
@@ -34,8 +34,9 @@ public class CasePersister {
 		sessionsDir.mkdirs();
 	}
 
-	public void persist(String id, CaseInstance caseInstance) {
+	public void persist(String id, CaseInstance caseInstance, int version) {
 		try {
+			caseInstance.setVersion(version);
 			File file = new File(sessionsDir, id + ".tmp");
 			FileOutputStream stream = new FileOutputStream(file);
 			OutputStreamWriter writer = new OutputStreamWriter(stream, "UTF-8");

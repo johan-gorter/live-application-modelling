@@ -7,7 +7,9 @@ public abstract class Relation<I extends Instance, Value extends Object, To exte
 	
 	public abstract Entity getTo();
 	
-	public abstract boolean isOwner();
+	public abstract boolean isOwner(); // Delete cascades
+
+	public abstract boolean isAutoCreate(); // Create cascades also (only valid if isOwner and !isMultivalue)
 	
 	public abstract boolean isMultivalue();
 	

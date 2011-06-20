@@ -16,14 +16,14 @@ public class AttributeBaseEntity extends SimpleEntity {
 	
 	// Attributes
 	
-	public static final Attribute<AttributeBaseInstance, java.lang.Boolean, java.lang.Boolean> readonly 
+	public static final Attribute<AttributeBaseInstance, java.lang.Boolean, java.lang.Boolean> readOnly 
 		= new SimpleAttribute<AttributeBaseInstance, java.lang.Boolean, java.lang.Boolean>(
-			"readonly", INSTANCE, java.lang.Boolean.class
+			"readOnly", INSTANCE, java.lang.Boolean.class
 		) {
 	
 			@Override
 			public ReadOnlyAttributeValue<AttributeBaseInstance, java.lang.Boolean> get(AttributeBaseInstance instance) {
-				return instance.readonly;
+				return instance.readOnly;
 			}
 		};
 	
@@ -43,7 +43,7 @@ public class AttributeBaseEntity extends SimpleEntity {
 	// Reverse relations
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
-		readonly,
+		readOnly,
 		multivalue,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{

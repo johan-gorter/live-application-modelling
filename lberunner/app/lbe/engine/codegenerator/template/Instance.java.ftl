@@ -32,7 +32,7 @@ public class ${name}Instance
 	// Attributes
 	<#list attributes as attribute>
 	
-	public final <#if attribute.readonly>ReadOnly</#if>AttributeValue<#if attribute.multivalue>s</#if><${name}Instance, ${attribute.className}> ${attribute.name}
+	public final <#if attribute.readonly>ReadOnly</#if>AttributeValue<#if attribute.multivalue>s</#if><${name}Instance, ${attribute.itemClassName}> ${attribute.name}
 		= create<#if attribute.readonly>ReadOnly</#if>AttributeValue<#if attribute.multivalue>s</#if>(${name}Entity.${attribute.name});
 	</#list>
 	

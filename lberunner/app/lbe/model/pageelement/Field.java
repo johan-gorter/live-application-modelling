@@ -68,7 +68,7 @@ public abstract class Field extends PageElementBase {
 		if (Instance.class.isAssignableFrom(datatype)) {
 			return "entity";
 		}
-		return datatype.getName().toLowerCase();
+		return datatype.getSimpleName().toLowerCase();
 	}
 
 	@Override
@@ -84,6 +84,8 @@ public abstract class Field extends PageElementBase {
 	public abstract Attribute getAttribute();
 	
 	public abstract boolean isRequired();
+
+	public abstract boolean isReadOnly();
 	
 	private Text getExplain() {
 		return getAttribute().getExplain();

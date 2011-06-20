@@ -34,7 +34,12 @@ public class CaseManager {
 	
 	public static void fireChangesIfModelChanged() {
 		if (Play.mode==Mode.DEV) {
-			Play.detectChanges();
+			try {
+				Play.detectChanges();
+			} catch (Exception e) {
+				LOG.warn("Could not succesfully detect source changes", e);
+				return;
+			}
 			if (modelState != Play.classloader.currentState) {
 				modelState = Play.classloader.currentState;
 				if (LOG.isInfoEnabled()) {
@@ -99,7 +104,7 @@ public class CaseManager {
 	public static Case create(CaseInstance caseInstance) {
 		String id = CasePersister.uniqueId();
 		Case c = new Case(caseInstance, id, CasePersister.INSTANCE);
-		CasePersister.INSTANCE.persist(id, caseInstance);
+		CasePersister.INSTANCE.persist(id, caseInstance, 0);
 		cases.put(c.getId(), c);
 		return c;
 	}

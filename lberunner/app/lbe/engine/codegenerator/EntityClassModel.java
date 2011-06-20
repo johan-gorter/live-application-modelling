@@ -3,13 +3,32 @@ package lbe.engine.codegenerator;
 import java.util.ArrayList;
 import java.util.List;
 
+import lbe.engine.codegenerator.EntityClassModel.Attribute.DomainEntry;
+
 public class EntityClassModel {
 
 	public static class Attribute {
+
+		public static class DomainEntry {
+			public String name;
+			public String display;
+			
+			public String getName() {
+				return name;
+			}
+			public String getDisplay() {
+				return display;
+			}
+		}
+		
 		public String name;
 		public String className;
+		public String itemClassName;
+		public String question;
 		public boolean multivalue;
 		public boolean readonly;
+		public String explanation;
+		public List<DomainEntry> domain;
 		
 		public String getName() {
 			return name;
@@ -23,6 +42,15 @@ public class EntityClassModel {
 		public boolean isReadonly() {
 			return readonly;
 		}
+		public String getQuestion() {
+			return question;
+		}
+		public List<DomainEntry> getDomain() {
+			return domain;
+		}
+		public String getItemClassName() {
+			return itemClassName;
+		}
 	}
 	
 	public static class Relation extends Attribute {
@@ -30,6 +58,7 @@ public class EntityClassModel {
 		public String to;
 		public String item;
 		public String reverseName;
+		public boolean autoCreate;
 		
 		public boolean isOwner() {
 			return owner;
@@ -45,6 +74,10 @@ public class EntityClassModel {
 
 		public String getReverseName() {
 			return reverseName;
+		}
+
+		public boolean isAutoCreate() {
+			return autoCreate;
 		}
 	}
 	

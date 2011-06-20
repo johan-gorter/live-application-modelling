@@ -17,13 +17,13 @@ public class ${name}Entity extends SimpleEntity {
 	// Attributes
 	<#list attributes as attribute>
 	
-	public static final Attribute<${name}Instance, ${attribute.className}, ${attribute.className}> ${attribute.name} 
-		= new SimpleAttribute<${name}Instance, ${attribute.className}, ${attribute.className}>(
-			"${attribute.name}", INSTANCE, ${attribute.className}.class
+	public static final Attribute<${name}Instance, ${attribute.className}, ${attribute.itemClassName}> ${attribute.name} 
+		= new SimpleAttribute<${name}Instance, ${attribute.className}, ${attribute.itemClassName}>(
+			"${attribute.name}", INSTANCE, ${attribute.itemClassName}.class
 		) {
 	
 			@Override
-			public ReadOnlyAttributeValue<${name}Instance, ${attribute.className}> get(${name}Instance instance) {
+			public ReadOnlyAttributeValue<#if attribute.multivalue>s</#if><${name}Instance, ${attribute.itemClassName}> get(${name}Instance instance) {
 				return instance.${attribute.name};
 			}
 			<#if attribute.multivalue>
@@ -31,6 +31,26 @@ public class ${name}Entity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			</#if>
+			<#if attribute.question??>
+			
+			private final Text question = ${attribute.question};
+			@Override
+			public Text getQuestion() {
+				return question;
+			}
+			</#if>
+			<#if attribute.domain??>
+			
+			private final DomainEntry[] domain = new DomainEntry[] {
+				<#list attribute.domain as entry>
+				new DomainEntry("${entry.name}", ${entry.display}),
+				</#list>
+			};
+			@Override
+			public DomainEntry[] getDomain() {
+				return domain;
+			};
 			</#if>
 		};
 	</#list>
@@ -40,7 +60,7 @@ public class ${name}Entity extends SimpleEntity {
 	
 	public static final Relation<${name}Instance, ${relation.to}, ${relation.item}Instance> ${relation.name}
 		= new SimpleRelation<${name}Instance, ${relation.to}, ${relation.item}Instance>(
-			"${relation.name}", INSTANCE, ${name}Entity.INSTANCE, ${relation.item}Instance.class, ${relation.item}Entity.${relation.reverseName}
+			"${relation.name}", INSTANCE, ${relation.item}Entity.INSTANCE, ${relation.item}Instance.class, ${relation.item}Entity.${relation.reverseName}
 		) {
 	
 			@Override
@@ -51,6 +71,12 @@ public class ${name}Entity extends SimpleEntity {
 			<#if relation.owner>
 	
 			public boolean isOwner() {
+				return true;
+			}
+			</#if>
+			<#if relation.autoCreate>
+	
+			public boolean isAutoCreate() {
 				return true;
 			}
 			</#if>

@@ -42,6 +42,11 @@ public abstract class SimpleRelation<I extends Instance, Value extends Object, T
 	public boolean isOwner() {
 		return false;
 	}
+	
+	@Override
+	public boolean isAutoCreate() {
+		return false;
+	}
 
 	@Override
 	public boolean isMultivalue() {

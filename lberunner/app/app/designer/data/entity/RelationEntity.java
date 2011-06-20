@@ -27,6 +27,17 @@ public class RelationEntity extends SimpleEntity {
 			}
 		};
 	
+	public static final Attribute<RelationInstance, java.lang.Boolean, java.lang.Boolean> autoCreate 
+		= new SimpleAttribute<RelationInstance, java.lang.Boolean, java.lang.Boolean>(
+			"autoCreate", INSTANCE, java.lang.Boolean.class
+		) {
+	
+			@Override
+			public ReadOnlyAttributeValue<RelationInstance, java.lang.Boolean> get(RelationInstance instance) {
+				return instance.autoCreate;
+			}
+		};
+	
 	public static final Attribute<RelationInstance, java.lang.Boolean, java.lang.Boolean> reverseMultivalue 
 		= new SimpleAttribute<RelationInstance, java.lang.Boolean, java.lang.Boolean>(
 			"reverseMultivalue", INSTANCE, java.lang.Boolean.class
@@ -53,7 +64,7 @@ public class RelationEntity extends SimpleEntity {
 	
 	public static final Relation<RelationInstance, EntityInstance, EntityInstance> to
 		= new SimpleRelation<RelationInstance, EntityInstance, EntityInstance>(
-			"to", INSTANCE, RelationEntity.INSTANCE, EntityInstance.class, EntityEntity.reverseRelations
+			"to", INSTANCE, EntityEntity.INSTANCE, EntityInstance.class, EntityEntity.reverseRelations
 		) {
 	
 			@Override
@@ -80,9 +91,30 @@ public class RelationEntity extends SimpleEntity {
 				return true;
 			}
 		};
+	
+	public static final Relation<RelationInstance, List<ContainerInstance>, ContainerInstance> relationInContainers
+		= new SimpleRelation<RelationInstance, List<ContainerInstance>, ContainerInstance>(
+			"relationInContainers", INSTANCE, RelationEntity.INSTANCE, ContainerInstance.class, ContainerEntity.relation
+		) {
+	
+			@Override
+			public ReadOnlyRelationValues<RelationInstance, ContainerInstance> get(
+					RelationInstance instance) {
+				return instance.relationInContainers;
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 		owner,
+		autoCreate,
 		reverseMultivalue,
 		reverseName,
 	};
@@ -91,6 +123,7 @@ public class RelationEntity extends SimpleEntity {
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 		entity,
+		relationInContainers,
 	};
 
 	private RelationEntity() {

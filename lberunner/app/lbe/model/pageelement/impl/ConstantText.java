@@ -5,17 +5,20 @@ import lbe.model.pageelement.Text;
 
 public class ConstantText extends Text {
 
-	private final String defaultText;
+	private final String untranslated;
 	
-	// TODO translations
-
-	public ConstantText(String defaultText) {
-		this.defaultText = defaultText;
+	public ConstantText(String untranslated) {
+		this.untranslated = untranslated;
 	}
 	
 	@Override
 	public String render(RenderContext context) {
-		return defaultText;
+		return untranslated;
+	}
+	
+	public ConstantText addTranslation(String languageCode, String translated) {
+		// TODO translations
+		throw new UnsupportedOperationException();
 	}
 
 }

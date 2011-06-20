@@ -18,11 +18,28 @@ public class PageEntity extends SimpleEntity {
 	
 	// Relations
 	
+	public static final Relation<PageInstance, List<PageElementBaseInstance>, PageElementBaseInstance> rootElements
+		= new SimpleRelation<PageInstance, List<PageElementBaseInstance>, PageElementBaseInstance>(
+			"rootElements", INSTANCE, PageElementBaseEntity.INSTANCE, PageElementBaseInstance.class, PageElementBaseEntity.rootElementInPages
+		) {
+	
+			@Override
+			public ReadOnlyRelationValues<PageInstance, PageElementBaseInstance> get(
+					PageInstance instance) {
+				return instance.rootElements;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
+	
 	// Reverse relations
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
+		rootElements,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};

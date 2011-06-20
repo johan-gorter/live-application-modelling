@@ -8,6 +8,7 @@ public class ApplicationClassModel {
 	public String caseEntity;
 	public String name;
 	public String appname;
+	public final List<String> exposedFlows = new ArrayList<String>();
 	
 	public String getCaseEntity() {
 		return caseEntity;
@@ -17,5 +18,8 @@ public class ApplicationClassModel {
 	}
 	public String getAppname() {
 		return appname;
+	}
+	public List<String> getExposedFlows() {
+		return exposedFlows;
 	}
 }

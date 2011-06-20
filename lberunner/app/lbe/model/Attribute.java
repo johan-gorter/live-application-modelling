@@ -76,5 +76,4 @@ public abstract class Attribute<I extends Instance, Value extends Object, Item e
 		}
 		return value;
 	}
-
 }

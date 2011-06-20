@@ -28,6 +28,9 @@ public class RelationInstance
 	public final AttributeValue<RelationInstance, java.lang.Boolean> owner
 		= createAttributeValue(RelationEntity.owner);
 	
+	public final AttributeValue<RelationInstance, java.lang.Boolean> autoCreate
+		= createAttributeValue(RelationEntity.autoCreate);
+	
 	public final AttributeValue<RelationInstance, java.lang.Boolean> reverseMultivalue
 		= createAttributeValue(RelationEntity.reverseMultivalue);
 	
@@ -43,5 +46,8 @@ public class RelationInstance
 	
 	public final ReadOnlyRelationValue<RelationInstance, EntityInstance> entity
 		= createReverseRelationValue(RelationEntity.entity);
+	
+	public final ReadOnlyRelationValues<RelationInstance, ContainerInstance> relationInContainers
+		= createReverseRelationValues(RelationEntity.relationInContainers);
 
 }

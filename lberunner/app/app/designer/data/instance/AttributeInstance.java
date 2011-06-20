@@ -29,10 +29,22 @@ public class AttributeInstance
 		= createAttributeValue(AttributeEntity.className);
 	
 	// Relations
+	
+	public final RelationValue<AttributeInstance, TextInstance> question
+		= createRelationValue(AttributeEntity.question);
+	
+	public final RelationValue<AttributeInstance, TextInstance> explanation
+		= createRelationValue(AttributeEntity.explanation);
+	
+	public final RelationValues<AttributeInstance, DomainEntryInstance> domain
+		= createRelationValues(AttributeEntity.domain);
 
 	// Reverse relations
 	
 	public final ReadOnlyRelationValue<AttributeInstance, EntityInstance> entity
 		= createReverseRelationValue(AttributeEntity.entity);
+	
+	public final ReadOnlyRelationValues<AttributeInstance, FieldInstance> fields
+		= createReverseRelationValues(AttributeEntity.fields);
 
 }

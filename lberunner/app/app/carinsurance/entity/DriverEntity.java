@@ -130,6 +130,7 @@ public class DriverEntity extends Entity {
 				new DomainEntry("private",new ConstantText("Private")),
 				new DomainEntry("business",new ConstantText("Business"))
 		};
+		@Override
 		public DomainEntry[] getDomain() {
 			return domain;
 		};

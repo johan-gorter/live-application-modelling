@@ -20,7 +20,7 @@ public class FlowEntity extends SimpleEntity {
 	
 	public static final Relation<FlowInstance, List<FlowSourceInstance>, FlowSourceInstance> sources
 		= new SimpleRelation<FlowInstance, List<FlowSourceInstance>, FlowSourceInstance>(
-			"sources", INSTANCE, FlowEntity.INSTANCE, FlowSourceInstance.class, FlowSourceEntity.flow
+			"sources", INSTANCE, FlowSourceEntity.INSTANCE, FlowSourceInstance.class, FlowSourceEntity.flow
 		) {
 	
 			@Override
@@ -40,7 +40,7 @@ public class FlowEntity extends SimpleEntity {
 	
 	public static final Relation<FlowInstance, List<FlowSinkInstance>, FlowSinkInstance> sinks
 		= new SimpleRelation<FlowInstance, List<FlowSinkInstance>, FlowSinkInstance>(
-			"sinks", INSTANCE, FlowEntity.INSTANCE, FlowSinkInstance.class, FlowSinkEntity.flow
+			"sinks", INSTANCE, FlowSinkEntity.INSTANCE, FlowSinkInstance.class, FlowSinkEntity.flow
 		) {
 	
 			@Override
@@ -60,7 +60,7 @@ public class FlowEntity extends SimpleEntity {
 	
 	public static final Relation<FlowInstance, List<FlowNodeBaseInstance>, FlowNodeBaseInstance> nodes
 		= new SimpleRelation<FlowInstance, List<FlowNodeBaseInstance>, FlowNodeBaseInstance>(
-			"nodes", INSTANCE, FlowEntity.INSTANCE, FlowNodeBaseInstance.class, FlowNodeBaseEntity.flow
+			"nodes", INSTANCE, FlowNodeBaseEntity.INSTANCE, FlowNodeBaseInstance.class, FlowNodeBaseEntity.flow
 		) {
 	
 			@Override
@@ -80,7 +80,7 @@ public class FlowEntity extends SimpleEntity {
 	
 	public static final Relation<FlowInstance, List<FlowEdgeInstance>, FlowEdgeInstance> edges
 		= new SimpleRelation<FlowInstance, List<FlowEdgeInstance>, FlowEdgeInstance>(
-			"edges", INSTANCE, FlowEntity.INSTANCE, FlowEdgeInstance.class, FlowEdgeEntity.flow
+			"edges", INSTANCE, FlowEdgeEntity.INSTANCE, FlowEdgeInstance.class, FlowEdgeEntity.flow
 		) {
 	
 			@Override

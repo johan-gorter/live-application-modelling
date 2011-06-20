@@ -17,6 +17,7 @@ import lbe.model.Entity;
 public class CaseData {
 	private final int version;
 	
+	// TODO: move to session!
 	private List<Instance> activeInstances = new ArrayList<Instance>();
 
 	public CaseData(Instance caseInstance, int version) {

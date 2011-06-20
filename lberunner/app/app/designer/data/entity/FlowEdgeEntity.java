@@ -20,7 +20,7 @@ public class FlowEdgeEntity extends SimpleEntity {
 	
 	public static final Relation<FlowEdgeInstance, FlowNodeBaseInstance, FlowNodeBaseInstance> from
 		= new SimpleRelation<FlowEdgeInstance, FlowNodeBaseInstance, FlowNodeBaseInstance>(
-			"from", INSTANCE, FlowEdgeEntity.INSTANCE, FlowNodeBaseInstance.class, FlowNodeBaseEntity.outgoingEdges
+			"from", INSTANCE, FlowNodeBaseEntity.INSTANCE, FlowNodeBaseInstance.class, FlowNodeBaseEntity.outgoingEdges
 		) {
 	
 			@Override
@@ -32,7 +32,7 @@ public class FlowEdgeEntity extends SimpleEntity {
 	
 	public static final Relation<FlowEdgeInstance, FlowNodeBaseInstance, FlowNodeBaseInstance> to
 		= new SimpleRelation<FlowEdgeInstance, FlowNodeBaseInstance, FlowNodeBaseInstance>(
-			"to", INSTANCE, FlowEdgeEntity.INSTANCE, FlowNodeBaseInstance.class, FlowNodeBaseEntity.incomingEdges
+			"to", INSTANCE, FlowNodeBaseEntity.INSTANCE, FlowNodeBaseInstance.class, FlowNodeBaseEntity.incomingEdges
 		) {
 	
 			@Override

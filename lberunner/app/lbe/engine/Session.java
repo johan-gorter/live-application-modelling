@@ -50,5 +50,4 @@ public class Session {
 	public void setStartFlow(Flow startFlow) {
 		this.startFlow = startFlow;
 	}
-	
 }

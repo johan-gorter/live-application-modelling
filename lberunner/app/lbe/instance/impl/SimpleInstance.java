@@ -5,11 +5,13 @@ import java.util.List;
 import lbe.instance.CaseInstance;
 import lbe.instance.Instance;
 import lbe.instance.value.AttributeValue;
+import lbe.instance.value.AttributeValues;
 import lbe.instance.value.ReadOnlyRelationValue;
 import lbe.instance.value.ReadOnlyRelationValues;
 import lbe.instance.value.RelationValue;
 import lbe.instance.value.RelationValues;
 import lbe.instance.value.impl.AttributeValueImpl;
+import lbe.instance.value.impl.AttributeValuesImpl;
 import lbe.instance.value.impl.RelationValueImpl;
 import lbe.instance.value.impl.RelationValuesImpl;
 import lbe.instance.value.impl.ReverseRelationValueImpl;
@@ -51,6 +53,10 @@ public class SimpleInstance implements Instance {
 
 	protected<I extends Instance, Value extends Object> AttributeValue<I, Value> createAttributeValue(Attribute<I, Value, Value> attribute) {
 		return new AttributeValueImpl<I, Value>((I)this, attribute);
+	}
+	
+	protected<I extends Instance, Value extends Object> AttributeValues<I, Value> createAttributeValues(Attribute<I, List<Value>, Value> attribute) {
+		return new AttributeValuesImpl<I, Value>((I)this, attribute);
 	}
 	
 	protected<I extends Instance, To extends Instance> RelationValue<I, To> createRelationValue(Relation<I, To, To> relation) {
