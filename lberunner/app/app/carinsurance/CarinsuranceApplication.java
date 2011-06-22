@@ -1,6 +1,7 @@
 
 package app.carinsurance;
 
+import lbe.instance.CaseInstance;
 import lbe.model.Application;
 import lbe.model.Entity;
 import lbe.model.flow.Flow;
@@ -23,6 +24,18 @@ public class CarinsuranceApplication extends Application {
 	@Override
 	public Flow[] getExposedFlows() {
 		return exposedFlows;
+	}
+
+	@Override
+	public Class<? extends CaseInstance> getCaseInstanceClass() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

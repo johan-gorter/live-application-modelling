@@ -17,12 +17,11 @@ import lbe.model.Entity;
 public class CaseData {
 	private final int version;
 	
-	// TODO: move to session!
-	private List<Instance> activeInstances = new ArrayList<Instance>();
+	private CaseInstance caseInstance;
 
-	public CaseData(Instance caseInstance, int version) {
+	public CaseData(CaseInstance caseInstance, int version) {
 		this.version = version;
-		this.activeInstances.add(caseInstance);
+		this.caseInstance = caseInstance;
 	}
 
 	public int getVersion() {
@@ -30,38 +29,6 @@ public class CaseData {
 	}
 
 	public CaseInstance getCaseInstance() {
-		return (CaseInstance)activeInstances.get(0);
+		return caseInstance;
 	}
-	
-	public void pushActiveInstance(Instance instance) {
-		this.activeInstances.add(instance);
-	}
-	
-	public void popActiveInstance(Instance instance) {
-		if (this.activeInstances.size()<=1) {
-			throw new RuntimeException("Asymmetric push/pop");
-		}
-		Instance removed = this.activeInstances.remove(this.activeInstances.size()-1);
-		if (removed !=instance) {
-			throw new RuntimeException("Asymmetric push/pop");
-		}
-	}
-	
-	@SuppressWarnings("unchecked")
-	public <I extends Instance, Value extends Object> ReadOnlyAttributeValue<I, Value> getValue(Attribute<I, Value, ? extends Object> attribute) {
-		Entity entity = attribute.getEntity();
-		I instance = (I) getActiveInstance(entity);
-		return attribute.get(instance);
-	}
-
-	private Instance getActiveInstance(Entity entity) {
-		for (int i=activeInstances.size()-1;i>=0;i--) {
-			Instance instance = activeInstances.get(i);
-			if (instance.getModel()==entity) {
-				return instance;
-			}
-		}
-		throw new RuntimeException("No active instance of entity "+entity.getName());
-	}
-	
 }

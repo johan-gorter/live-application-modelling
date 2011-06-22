@@ -74,6 +74,16 @@ public class Bootstrapper {
 		noClaimsDiscount.question.set(createConstantText("Number of years 'no claims discount' entitlement?"));
 		RelationInstance driverRelation = createRelation("driver", carinsuranceCase, RelationType.OneToOneAggregation, driver, "carinsuranceCase");
 
+		// Temp data
+//		EntityInstance session = createEntity("session", null);
+//		createAttribute(session, "user", String.class);
+//		EntityInstance flowPathNode = createEntity("FlowPathNode", null);
+//		createAttribute(flowPathNode, "name", String.class);
+//		AttributeInstance activeInstances = createAttribute(flowPathNode, "activeInstances", Integer.class);
+//		activeInstances.multivalue.set(true);
+//		createRelation("flowPath", session, RelationType.OneToManyAggregation, flowPathNode, "session");
+//		createRelation("sessions", carinsuranceCase, RelationType.OneToManyAggregation, session, "activeInCase");
+		
 		// Containers
 		ContainerInstance driverContainer = new ContainerInstance(applicationInstance);
 		driverContainer.name.set("Driver");

@@ -1,20 +1,22 @@
 package lbe.engine;
 
 import lbe.engine.ChangeContext.FieldChange;
+import lbe.model.flow.Page;
 
 public class PageRenderer {
 	
+	//TODO: inline in Case
 	private PageRenderer(){}
 	
-	public static PageElement renderPage(String caseId, CaseData data, Session session) {
-		RenderContext renderContext = new RenderContext(caseId, data, session);
-		PageElement element = session.getCurrentPage().render(renderContext);
+	public static PageElement renderPage(FlowContext flowContext) {
+		RenderContext renderContext = new RenderContext(flowContext);
+		PageElement element = flowContext.getPage().render(renderContext);
 		return element;
 	}
 
-	public static void submit(String caseId, CaseData caseData, Session session, ChangeContext.FieldChange[] fieldChanges,
+	public static void submit(FlowContext flowContext, ChangeContext.FieldChange[] fieldChanges,
 			String submit) {
-		ChangeContext changeContext = new ChangeContext(caseId, caseData, session, fieldChanges, submit);
-		session.getCurrentPage().changeValue(changeContext);
+		ChangeContext changeContext = new ChangeContext(flowContext, fieldChanges, submit);
+		flowContext.getPage().changeValue(changeContext);
 	}
 }

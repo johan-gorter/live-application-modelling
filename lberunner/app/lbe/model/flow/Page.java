@@ -1,7 +1,12 @@
 package lbe.model.flow;
 
+import java.util.Iterator;
+
 import lbe.engine.ChangeContext;
+import lbe.engine.FlowContext;
+import lbe.engine.PageCoordinates.Coordinate;
 import lbe.engine.PageElement;
+import lbe.engine.PageRenderer;
 import lbe.engine.RenderContext;
 import lbe.model.pageelement.Container;
 import lbe.model.pageelement.PageElementBase;
@@ -21,7 +26,7 @@ public abstract class Page extends FlowNodeBase {
 		result.language = renderContext.getLanguage();
 		result.params = new PageRootParamsElement();
 		result.elementType = "page";
-		result.id = getName();
+		result.id = renderContext.getPageCoordinates().format();
 		result.name = getName();
 		PageElement[] contentElements = Container.renderChildren(renderContext, getRootElements());
 		result.content = contentElements;
@@ -41,5 +46,19 @@ public abstract class Page extends FlowNodeBase {
 		public PageRootParamsElement params;
 		public String language;
 	}
-
+	
+	@Override
+	public String flow(String entryName, FlowContext context) {
+		context.getPageCoordinates().addCoordinate(new Coordinate(getName(), null));
+		context.setPage(this);
+		return null;
+	}
+	
+	@Override
+	public void jumpTo(FlowContext flowContext, Iterator<Coordinate> coordinates) {
+		if (coordinates.hasNext()) {
+			throw new RuntimeException("Page does not have subnodes");
+		}
+		flowContext.setPage(this);
+	}
 }

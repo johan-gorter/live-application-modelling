@@ -31,7 +31,7 @@ public class SimpleInstance implements Instance {
 	public SimpleInstance(CaseInstance caseInstance, Entity model) {
 		this.caseInstance = caseInstance;
 		if (caseInstance!=null) {
-			this.id = caseInstance.nextId();
+			this.id = caseInstance.registerInstance(this);
 		} else {
 			this.id = 0; // This means we are the caseInstance
 		}

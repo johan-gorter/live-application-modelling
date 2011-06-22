@@ -46,7 +46,7 @@
 var getFirstPageAction = #{jsAction @getFirstPage(':formattedSession') /};
 var waitForPageChangeAction = #{jsAction @waitForPageChange(':formattedSession', ':lastCaseVersion') /};
 
-var formattedSession = '${formattedSession}';
+var pageCoordinates = null;
 var lastCaseVersion;
 var engine;
 

@@ -109,11 +109,6 @@ public class CaseManager {
 		return c;
 	}
 	
-	public static Promise<PageElement> waitForChange(Session session, int lastCaseVersion) {
-		Case c = cases.get(session.getCaseId());
-		return c.waitForChange(lastCaseVersion, session);
-	}
-
 	public static <T extends CaseInstance> Case getCase(String caseId, Class<T> ofCaseInstanceType) {
 		Case result = cases.get(caseId);
 		if (result==null) {

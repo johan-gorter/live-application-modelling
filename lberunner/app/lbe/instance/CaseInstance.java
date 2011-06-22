@@ -8,6 +8,7 @@ public interface CaseInstance extends Instance {
 	
 	void setVersion(int version);
 	
-	long nextId();
+	long registerInstance(Instance instance);
 	
+	Instance getInstanceById(long id);
 }

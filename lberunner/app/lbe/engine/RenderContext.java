@@ -4,34 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lbe.instance.Instance;
+import lbe.instance.value.ReadOnlyAttributeValue;
 import lbe.instance.value.ReadOnlyRelationValue;
 import lbe.instance.value.RelationValue;
 import lbe.instance.value.impl.AttributeValueImpl;
 import lbe.model.Attribute;
+import lbe.model.Entity;
 import lbe.model.Relation;
 
-//TODO: active instances
 public class RenderContext {
 
-	private final CaseData caseData;
-	private final Session session;
-	private final String caseId;
+	private final FlowContext flowContext;
 	
 	private List<Integer> lastIds = new ArrayList<Integer>(25);
+	private final List<Instance> activeInstances = new ArrayList<Instance>(10);
 
-	public RenderContext(String caseId, CaseData caseData, Session session) {
-		this.caseId = caseId;
-		this.caseData = caseData;
-		this.session = session;
+	public RenderContext(FlowContext flowContext) {
+		this.flowContext = flowContext;
 		nextIdLevel();
 	}
 
 	public CaseData getCaseData() {
-		return caseData;
-	}
-
-	public Session getSession() {
-		return session;
+		return flowContext.getCaseData();
 	}
 
 	public void nextIdLevel() {
@@ -56,7 +50,7 @@ public class RenderContext {
 	}
 
 	public String getCaseId() {
-		return caseId;
+		return flowContext.getCaseId();
 	}
 
 	public String getLanguage() {
@@ -64,20 +58,56 @@ public class RenderContext {
 	}
 
 	public Instance pushRelation(Relation<Instance, ? extends Instance, ? extends Instance> relation) {
-		ReadOnlyRelationValue<Instance, ? extends Instance> value = (ReadOnlyRelationValue<Instance, ? extends Instance>) caseData.getValue(relation);
+		ReadOnlyRelationValue<Instance, ? extends Instance> value = (ReadOnlyRelationValue<Instance, ? extends Instance>) getAttributeValue(relation);
 		Instance instance = value.get();
 		if (instance==null) {
 			throw new RuntimeException("Relation yielded unknown");
 		}
-		caseData.pushActiveInstance(instance);
+		pushActiveInstance(instance);
 		return instance;
 	}
 	
 	public void popInstance(Instance instance) {
-		caseData.popActiveInstance(instance);
+		popActiveInstance(instance);
 	}
 
 	public <I extends Instance, Value extends Object> Value getValue(Attribute<I, Value, ? extends Object> attribute) {
-		return caseData.getValue(attribute).get();
+		return getAttributeValue(attribute).get();
+	}
+	
+	public void pushActiveInstance(Instance instance) {
+		this.activeInstances.add(instance);
+	}
+	
+	public void popActiveInstance(Instance instance) {
+		if (this.activeInstances.size()<=0) {
+			throw new RuntimeException("Asymmetric push/pop");
+		}
+		Instance removed = this.activeInstances.remove(this.activeInstances.size()-1);
+		if (removed !=instance) {
+			throw new RuntimeException("Asymmetric push/pop");
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public <I extends Instance, Value extends Object> ReadOnlyAttributeValue<I, Value> getAttributeValue(Attribute<I, Value, ? extends Object> attribute) {
+		Entity entity = attribute.getEntity();
+		I instance = (I) getActiveInstance(entity);
+		return attribute.get(instance);
+	}
+
+	private Instance getActiveInstance(Entity entity) {
+		for (int i=activeInstances.size()-1;i>=0;i--) {
+			Instance instance = activeInstances.get(i);
+			if (instance.getModel()==entity) {
+				return instance;
+			}
+		}
+		return flowContext.getActiveInstance(entity);
+	}
+	
+
+	public PageCoordinates getPageCoordinates() {
+		return flowContext.getPageCoordinates();
 	}
 }
