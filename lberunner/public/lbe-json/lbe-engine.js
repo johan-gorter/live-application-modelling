@@ -30,6 +30,14 @@ var lbe = {};
     	},
     	
     	processNewPageData: function() {
+    	},
+    	
+    	post: function(data) {
+    		var pageCoordinates = this.rootController.model.id;
+    		var oldAquimaUrl = Settings.engine.aquimaUrl;
+    		Settings.engine.aquimaUrl = Settings.engine.aquimaUrl + '&pageCoordinates='+pageCoordinates;
+    		LbeEngine.superclass.post.call(this, data);
+    		Settings.engine.aquimaUrl= oldAquimaUrl;
     	}
     });
 

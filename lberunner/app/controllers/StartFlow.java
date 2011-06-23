@@ -41,8 +41,7 @@ public class StartFlow extends Controller {
 
 	private static JsonSerializer<Date> dateSerializer = new JsonSerializer<Date>() {
 
-		private final DateFormat DATE_INTERNATIONAL = new SimpleDateFormat(
-				"MM/dd/yyyy");
+		private final DateFormat DATE_INTERNATIONAL = new SimpleDateFormat("MM/dd/yyyy");
 
 		@Override
 		public JsonElement serialize(Date arg0, Type arg1,
@@ -81,7 +80,7 @@ public class StartFlow extends Controller {
 		throw new RuntimeException("Unknown application: "+application);
 	}
 
-	public static void getFirstPage(String application, String startFlowName, String caseId) {
+	public static void jumpToPage(String application, String startFlowName, String caseId, String pageCoordinates) {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("getFirstPage(" + application+ ", "  + caseId + ", " + startFlowName +  ")");
 		}
