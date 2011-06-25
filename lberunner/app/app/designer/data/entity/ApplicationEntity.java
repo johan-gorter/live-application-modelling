@@ -81,46 +81,6 @@ public class ApplicationEntity extends SimpleEntity {
 			}
 		};
 	
-	public static final Relation<ApplicationInstance, List<ContainerInstance>, ContainerInstance> containers
-		= new SimpleRelation<ApplicationInstance, List<ContainerInstance>, ContainerInstance>(
-			"containers", INSTANCE, ContainerEntity.INSTANCE, ContainerInstance.class, ContainerEntity.application
-		) {
-	
-			@Override
-			public ReadOnlyRelationValues<ApplicationInstance, ContainerInstance> get(
-					ApplicationInstance instance) {
-				return instance.containers;
-			}
-	
-			public boolean isOwner() {
-				return true;
-			}
-	
-			public boolean isMultivalue() {
-				return true;
-			}
-		};
-	
-	public static final Relation<ApplicationInstance, List<ButtonInstance>, ButtonInstance> buttons
-		= new SimpleRelation<ApplicationInstance, List<ButtonInstance>, ButtonInstance>(
-			"buttons", INSTANCE, ButtonEntity.INSTANCE, ButtonInstance.class, ButtonEntity.application
-		) {
-	
-			@Override
-			public ReadOnlyRelationValues<ApplicationInstance, ButtonInstance> get(
-					ApplicationInstance instance) {
-				return instance.buttons;
-			}
-	
-			public boolean isOwner() {
-				return true;
-			}
-	
-			public boolean isMultivalue() {
-				return true;
-			}
-		};
-	
 	public static final Relation<ApplicationInstance, List<FlowInstance>, FlowInstance> exposedFlows
 		= new SimpleRelation<ApplicationInstance, List<FlowInstance>, FlowInstance>(
 			"exposedFlows", INSTANCE, FlowEntity.INSTANCE, FlowInstance.class, FlowEntity.exposedFlowInApplication
@@ -137,6 +97,26 @@ public class ApplicationEntity extends SimpleEntity {
 			}
 		};
 	
+	public static final Relation<ApplicationInstance, PageToolboxInstance, PageToolboxInstance> pageToolbox
+		= new SimpleRelation<ApplicationInstance, PageToolboxInstance, PageToolboxInstance>(
+			"pageToolbox", INSTANCE, PageToolboxEntity.INSTANCE, PageToolboxInstance.class, PageToolboxEntity.application
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<ApplicationInstance, PageToolboxInstance> get(
+					ApplicationInstance instance) {
+				return instance.pageToolbox;
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isAutoCreate() {
+				return true;
+			}
+		};
+	
 	// Reverse relations
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
@@ -146,9 +126,8 @@ public class ApplicationEntity extends SimpleEntity {
 		entities,
 		caseEntity,
 		flows,
-		containers,
-		buttons,
 		exposedFlows,
+		pageToolbox,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};

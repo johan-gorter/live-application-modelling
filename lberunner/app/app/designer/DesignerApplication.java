@@ -1,7 +1,7 @@
 package app.designer;
 
 import app.designer.data.entity.*;
-import app.designer.data.instance.ApplicationInstance;
+import app.designer.data.instance.*;
 import app.designer.flow.*;
 import lbe.instance.CaseInstance;
 import lbe.model.Application;
@@ -27,7 +27,7 @@ public class DesignerApplication extends Application {
 	public Flow[] getExposedFlows() {
 		return exposedFlows;
 	}
-
+	
 	@Override
 	public Class<? extends CaseInstance> getCaseInstanceClass() {
 		return ApplicationInstance.class;
@@ -37,5 +37,4 @@ public class DesignerApplication extends Application {
 	public String getName() {
 		return "Designer";
 	}
-
 }

@@ -10,24 +10,20 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class ContainerItemEntity extends SimpleEntity {
+public class ButtonTriggerEntity extends SimpleEntity {
 
-	public static final ContainerItemEntity INSTANCE = new ContainerItemEntity();
+	public static final ButtonTriggerEntity INSTANCE = new ButtonTriggerEntity();
 	
 	// Attributes
 	
-	public static final Attribute<ContainerItemInstance, List<java.lang.String>, java.lang.String> presentationStyles 
-		= new SimpleAttribute<ContainerItemInstance, List<java.lang.String>, java.lang.String>(
-			"presentationStyles", INSTANCE, java.lang.String.class
+	public static final Attribute<ButtonTriggerInstance, java.lang.String, java.lang.String> trigger 
+		= new SimpleAttribute<ButtonTriggerInstance, java.lang.String, java.lang.String>(
+			"trigger", INSTANCE, java.lang.String.class
 		) {
 	
 			@Override
-			public ReadOnlyAttributeValues<ContainerItemInstance, java.lang.String> get(ContainerItemInstance instance) {
-				return instance.presentationStyles;
-			}
-	
-			public boolean isMultivalue() {
-				return true;
+			public ReadOnlyAttributeValue<ButtonTriggerInstance, java.lang.String> get(ButtonTriggerInstance instance) {
+				return instance.trigger;
 			}
 		};
 	
@@ -36,20 +32,20 @@ public class ContainerItemEntity extends SimpleEntity {
 	// Reverse relations
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
-		presentationStyles,
+		trigger,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};
 
-	private ContainerItemEntity() {
-		super("ContainerItem");
+	private ButtonTriggerEntity() {
+		super("ButtonTrigger");
 	}
 	
 	@Override
 	public Instance createInstance(CaseInstance caseInstance) {
-		return new ContainerItemInstance(caseInstance);
+		return new ButtonTriggerInstance(caseInstance);
 	}
 	
 	@Override

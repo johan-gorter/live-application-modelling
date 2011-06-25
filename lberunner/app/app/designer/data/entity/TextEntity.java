@@ -20,6 +20,22 @@ public class TextEntity extends SimpleEntity {
 	
 	// Reverse relations
 	
+	public static final Relation<TextInstance, PageToolboxInstance, PageToolboxInstance> pageToolbox
+		= new SimpleRelation<TextInstance, PageToolboxInstance, PageToolboxInstance>(
+			"pageToolbox", INSTANCE, TextEntity.INSTANCE, PageToolboxInstance.class, PageToolboxEntity.texts
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<TextInstance, PageToolboxInstance> get(
+					TextInstance instance) {
+				return instance.pageToolbox;
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+		};
+	
 	public static final Relation<TextInstance, AttributeInstance, AttributeInstance> questionOnAttribute
 		= new SimpleRelation<TextInstance, AttributeInstance, AttributeInstance>(
 			"questionOnAttribute", INSTANCE, TextEntity.INSTANCE, AttributeInstance.class, AttributeEntity.question
@@ -67,15 +83,50 @@ public class TextEntity extends SimpleEntity {
 				return true;
 			}
 		};
+	
+	public static final Relation<TextInstance, ContainerInstance, ContainerInstance> displayOnContainer
+		= new SimpleRelation<TextInstance, ContainerInstance, ContainerInstance>(
+			"displayOnContainer", INSTANCE, TextEntity.INSTANCE, ContainerInstance.class, ContainerEntity.display
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<TextInstance, ContainerInstance> get(
+					TextInstance instance) {
+				return instance.displayOnContainer;
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+		};
+	
+	public static final Relation<TextInstance, ButtonInstance, ButtonInstance> captionOnButton
+		= new SimpleRelation<TextInstance, ButtonInstance, ButtonInstance>(
+			"captionOnButton", INSTANCE, TextEntity.INSTANCE, ButtonInstance.class, ButtonEntity.caption
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<TextInstance, ButtonInstance> get(
+					TextInstance instance) {
+				return instance.captionOnButton;
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+		};
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
+		pageToolbox,
 		questionOnAttribute,
 		explanationOnAttribute,
 		displayOnDomainEntry,
+		displayOnContainer,
+		captionOnButton,
 	};
 
 	private TextEntity() {

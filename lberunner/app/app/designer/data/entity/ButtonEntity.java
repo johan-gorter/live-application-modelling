@@ -18,17 +18,37 @@ public class ButtonEntity extends SimpleEntity {
 	
 	// Relations
 	
-	// Reverse relations
-	
-	public static final Relation<ButtonInstance, ApplicationInstance, ApplicationInstance> application
-		= new SimpleRelation<ButtonInstance, ApplicationInstance, ApplicationInstance>(
-			"application", INSTANCE, ButtonEntity.INSTANCE, ApplicationInstance.class, ApplicationEntity.buttons
+	public static final Relation<ButtonInstance, TextInstance, TextInstance> caption
+		= new SimpleRelation<ButtonInstance, TextInstance, TextInstance>(
+			"caption", INSTANCE, TextEntity.INSTANCE, TextInstance.class, TextEntity.captionOnButton
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<ButtonInstance, ApplicationInstance> get(
+			public ReadOnlyRelationValue<ButtonInstance, TextInstance> get(
 					ButtonInstance instance) {
-				return instance.application;
+				return instance.caption;
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isAutoCreate() {
+				return true;
+			}
+		};
+	
+	// Reverse relations
+	
+	public static final Relation<ButtonInstance, PageToolboxInstance, PageToolboxInstance> pageToolbox
+		= new SimpleRelation<ButtonInstance, PageToolboxInstance, PageToolboxInstance>(
+			"pageToolbox", INSTANCE, ButtonEntity.INSTANCE, PageToolboxInstance.class, PageToolboxEntity.buttons
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<ButtonInstance, PageToolboxInstance> get(
+					ButtonInstance instance) {
+				return instance.pageToolbox;
 			}
 	
 			public boolean isReverse() {
@@ -39,9 +59,10 @@ public class ButtonEntity extends SimpleEntity {
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
+		caption,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
-		application,
+		pageToolbox,
 	};
 
 	private ButtonEntity() {
@@ -55,7 +76,7 @@ public class ButtonEntity extends SimpleEntity {
 	
 	@Override
 	public Entity extendsEntity() {
-		return PageElementBaseEntity.INSTANCE;
+		return ConceptEntity.INSTANCE;
 	}
 	
 	@Override

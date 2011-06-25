@@ -314,7 +314,7 @@ public class CodeGenerator {
 		for (EntityInstance entity: applicationInstance.entities.get()) {
 			generateEntity(entity, appname, applicationRoot);
 		}
-		for (ContainerInstance container: applicationInstance.containers.get()) {
+		for (ContainerInstance container: applicationInstance.pageToolbox.get().containers.get()) {
 			generateContainer(container, appname, applicationRoot);
 		}
 		for (FlowInstance flow: applicationInstance.flows.get()) {

@@ -32,10 +32,13 @@ public class ContainerInstance
 	
 	public final RelationValue<ContainerInstance, RelationInstance> relation
 		= createRelationValue(ContainerEntity.relation);
+	
+	public final RelationValue<ContainerInstance, TextInstance> display
+		= createRelationValue(ContainerEntity.display);
 
 	// Reverse relations
 	
-	public final ReadOnlyRelationValue<ContainerInstance, ApplicationInstance> application
-		= createReverseRelationValue(ContainerEntity.application);
+	public final ReadOnlyRelationValue<ContainerInstance, PageToolboxInstance> pageToolbox
+		= createReverseRelationValue(ContainerEntity.pageToolbox);
 
 }

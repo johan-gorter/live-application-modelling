@@ -1,7 +1,9 @@
 package app.${appname};
 
 import app.${appname}.data.entity.*;
+import app.${appname}.data.instance.*;
 import app.${appname}.flow.*;
+import lbe.instance.CaseInstance;
 import lbe.model.Application;
 import lbe.model.Entity;
 import lbe.model.flow.Flow;
@@ -31,7 +33,7 @@ public class ${name}Application extends Application {
 	
 	@Override
 	public Class<? extends CaseInstance> getCaseInstanceClass() {
-		return new ${caseEntity}Instance();
+		return ${caseEntity}Instance.class;
 	}
 
 	@Override

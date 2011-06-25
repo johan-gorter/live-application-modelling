@@ -29,6 +29,9 @@ public class TextInstance
 
 	// Reverse relations
 	
+	public final ReadOnlyRelationValue<TextInstance, PageToolboxInstance> pageToolbox
+		= createReverseRelationValue(TextEntity.pageToolbox);
+	
 	public final ReadOnlyRelationValue<TextInstance, AttributeInstance> questionOnAttribute
 		= createReverseRelationValue(TextEntity.questionOnAttribute);
 	
@@ -37,5 +40,11 @@ public class TextInstance
 	
 	public final ReadOnlyRelationValue<TextInstance, DomainEntryInstance> displayOnDomainEntry
 		= createReverseRelationValue(TextEntity.displayOnDomainEntry);
+	
+	public final ReadOnlyRelationValue<TextInstance, ContainerInstance> displayOnContainer
+		= createReverseRelationValue(TextEntity.displayOnContainer);
+	
+	public final ReadOnlyRelationValue<TextInstance, ButtonInstance> captionOnButton
+		= createReverseRelationValue(TextEntity.captionOnButton);
 
 }

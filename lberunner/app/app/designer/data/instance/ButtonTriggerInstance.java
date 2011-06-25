@@ -11,22 +11,22 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class ContainerItemInstance 
+public class ButtonTriggerInstance 
 	extends PageElementBaseInstance 
 	implements Instance {
 
-	public ContainerItemInstance(CaseInstance caseInstance) {
-		super(caseInstance, ContainerItemEntity.INSTANCE);
+	public ButtonTriggerInstance(CaseInstance caseInstance) {
+		super(caseInstance, ButtonTriggerEntity.INSTANCE);
 	}
 	
-	protected ContainerItemInstance(CaseInstance caseInstance, Entity model) {
+	protected ButtonTriggerInstance(CaseInstance caseInstance, Entity model) {
 		super(caseInstance, model);
 	}
 
 	// Attributes
 	
-	public final AttributeValues<ContainerItemInstance, java.lang.String> presentationStyles
-		= createAttributeValues(ContainerItemEntity.presentationStyles);
+	public final AttributeValue<ButtonTriggerInstance, java.lang.String> trigger
+		= createAttributeValue(ButtonTriggerEntity.trigger);
 	
 	// Relations
 

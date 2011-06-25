@@ -12,7 +12,7 @@ import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
 public class ButtonInstance 
-	extends PageElementBaseInstance 
+	extends ConceptInstance 
 	implements Instance {
 
 	public ButtonInstance(CaseInstance caseInstance) {
@@ -26,10 +26,13 @@ public class ButtonInstance
 	// Attributes
 	
 	// Relations
+	
+	public final RelationValue<ButtonInstance, TextInstance> caption
+		= createRelationValue(ButtonEntity.caption);
 
 	// Reverse relations
 	
-	public final ReadOnlyRelationValue<ButtonInstance, ApplicationInstance> application
-		= createReverseRelationValue(ButtonEntity.application);
+	public final ReadOnlyRelationValue<ButtonInstance, PageToolboxInstance> pageToolbox
+		= createReverseRelationValue(ButtonEntity.pageToolbox);
 
 }

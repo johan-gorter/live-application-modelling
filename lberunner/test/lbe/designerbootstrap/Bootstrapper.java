@@ -195,7 +195,8 @@ public class Bootstrapper {
 
 		// Page elements
 		createRelation("rootElements", page, RelationType.ManyToMany, pageElementBase, "rootElementInPages");
-		createRelation("elements", container, RelationType.ManyToMany, pageElementBase, "containmentIn");
+		createRelation("items", container, RelationType.OneToManyAggregation, containerItem, "container");
+		createRelation("element", containerItem, RelationType.OneToZeroOrOne, pageElementBase, "containerItem");//TODO: who owns fields, buttonTriggers, some texts?
 		createRelation("attribute", field, RelationType.ManyToZeroOrOne, attribute, "fields");
 		createRelation("relation", container, RelationType.ManyToZeroOrOne, relation, "relationInContainers");
 		createRelation("display", container, RelationType.OneToZeroOrOneAggregation, text, "displayOnContainer");
@@ -277,7 +278,7 @@ public class Bootstrapper {
 	private static ContainerInstance createContainer(String name) {
 		ContainerInstance Container = new ContainerInstance(applicationInstance);
 		Container.name.set(name);
-		applicationInstance.containers.add(Container);
+		applicationInstance.pageToolbox.get().containers.add(Container);
 		return Container;
 	}
 

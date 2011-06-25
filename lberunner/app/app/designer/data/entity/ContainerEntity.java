@@ -46,17 +46,33 @@ public class ContainerEntity extends SimpleEntity {
 			}
 		};
 	
-	// Reverse relations
-	
-	public static final Relation<ContainerInstance, ApplicationInstance, ApplicationInstance> application
-		= new SimpleRelation<ContainerInstance, ApplicationInstance, ApplicationInstance>(
-			"application", INSTANCE, ContainerEntity.INSTANCE, ApplicationInstance.class, ApplicationEntity.containers
+	public static final Relation<ContainerInstance, TextInstance, TextInstance> display
+		= new SimpleRelation<ContainerInstance, TextInstance, TextInstance>(
+			"display", INSTANCE, TextEntity.INSTANCE, TextInstance.class, TextEntity.displayOnContainer
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<ContainerInstance, ApplicationInstance> get(
+			public ReadOnlyRelationValue<ContainerInstance, TextInstance> get(
 					ContainerInstance instance) {
-				return instance.application;
+				return instance.display;
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+		};
+	
+	// Reverse relations
+	
+	public static final Relation<ContainerInstance, PageToolboxInstance, PageToolboxInstance> pageToolbox
+		= new SimpleRelation<ContainerInstance, PageToolboxInstance, PageToolboxInstance>(
+			"pageToolbox", INSTANCE, ContainerEntity.INSTANCE, PageToolboxInstance.class, PageToolboxEntity.containers
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<ContainerInstance, PageToolboxInstance> get(
+					ContainerInstance instance) {
+				return instance.pageToolbox;
 			}
 	
 			public boolean isReverse() {
@@ -69,9 +85,10 @@ public class ContainerEntity extends SimpleEntity {
 	private static final Relation[] RELATIONS = new Relation[]{
 		elements,
 		relation,
+		display,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
-		application,
+		pageToolbox,
 	};
 
 	private ContainerEntity() {
