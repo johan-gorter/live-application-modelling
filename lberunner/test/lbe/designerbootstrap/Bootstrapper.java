@@ -9,6 +9,7 @@ import lbe.model.DomainEntry;
 import lbe.model.pageelement.impl.ConstantText;
 import app.designer.data.instance.ApplicationInstance;
 import app.designer.data.instance.AttributeInstance;
+import app.designer.data.instance.ButtonInstance;
 import app.designer.data.instance.ConstantTextInstance;
 import app.designer.data.instance.ContainerInstance;
 import app.designer.data.instance.DomainEntryInstance;
@@ -16,6 +17,7 @@ import app.designer.data.instance.EntityInstance;
 import app.designer.data.instance.FieldInstance;
 import app.designer.data.instance.FlowEdgeInstance;
 import app.designer.data.instance.FlowInstance;
+import app.designer.data.instance.FlowNodeBaseInstance;
 import app.designer.data.instance.FlowSourceInstance;
 import app.designer.data.instance.PageInstance;
 import app.designer.data.instance.RelationInstance;
@@ -36,8 +38,8 @@ public class Bootstrapper {
 	private static ApplicationInstance applicationInstance;
 	
 	public static void main(String[] args) {
-		createCarinsurance();
-//		createDesigner();
+//		createCarinsurance();
+		createDesigner();
 	}
 
 	public static void createCarinsurance() {
@@ -74,19 +76,8 @@ public class Bootstrapper {
 		noClaimsDiscount.question.set(createConstantText("Number of years 'no claims discount' entitlement?"));
 		RelationInstance driverRelation = createRelation("driver", carinsuranceCase, RelationType.OneToOneAggregation, driver, "carinsuranceCase");
 
-		// Temp data
-//		EntityInstance session = createEntity("session", null);
-//		createAttribute(session, "user", String.class);
-//		EntityInstance flowPathNode = createEntity("FlowPathNode", null);
-//		createAttribute(flowPathNode, "name", String.class);
-//		AttributeInstance activeInstances = createAttribute(flowPathNode, "activeInstances", Integer.class);
-//		activeInstances.multivalue.set(true);
-//		createRelation("flowPath", session, RelationType.OneToManyAggregation, flowPathNode, "session");
-//		createRelation("sessions", carinsuranceCase, RelationType.OneToManyAggregation, session, "activeInCase");
-		
 		// Containers
-		ContainerInstance driverContainer = new ContainerInstance(applicationInstance);
-		driverContainer.name.set("Driver");
+		ContainerInstance driverContainer = createContainer("Driver");
 		driverContainer.relation.set(driverRelation);
 		createField(driverContainer, dateOfBirth, true);
 		createField(driverContainer, yearsInsured, true);
@@ -96,24 +87,13 @@ public class Bootstrapper {
 		createField(driverContainer, carUse, true);
 		createField(driverContainer, mileage, true);
 		createField(driverContainer, zipCode, true);
-		applicationInstance.containers.add(driverContainer);
-		
 		
 		// Flows
-		FlowInstance insureFlow = new FlowInstance(applicationInstance);
-		insureFlow.name.set("Insure");
-		FlowSourceInstance insureStartSource = new FlowSourceInstance(applicationInstance);
-		insureStartSource.name.set("start");
-		insureFlow.sources.add(insureStartSource);
-		PageInstance insureDriverPage = new PageInstance(applicationInstance);
-		insureDriverPage.name.set("Driver");
+		FlowInstance insureFlow = createFlow("Insure");
+		FlowSourceInstance insureStartSource = createStartSource(insureFlow, "start");
+		PageInstance insureDriverPage = createPage(insureFlow, "Driver");
 		insureDriverPage.rootElements.add(driverContainer);
-		insureFlow.nodes.add(insureDriverPage);
-		FlowEdgeInstance edge = new FlowEdgeInstance(applicationInstance);
-		edge.from.set(insureStartSource);
-		edge.to.set(insureDriverPage);
-		insureFlow.edges.add(edge);
-		applicationInstance.flows.add(insureFlow);
+		createEdge(insureFlow, insureStartSource, insureDriverPage);
 		applicationInstance.exposedFlows.add(insureFlow);
 		
 		// Finish up
@@ -121,15 +101,6 @@ public class Bootstrapper {
 		System.out.println(CasePersister.gson.toJson(applicationInstance));
 		
 		CodeGenerator.generateApplication(applicationInstance);
-	}
-
-	private static FieldInstance createField(ContainerInstance container, AttributeInstance attribute, boolean required) {
-		FieldInstance field = new FieldInstance(applicationInstance);
-		field.attribute.set(attribute);
-		field.required.set(true);
-		container.elements.add(field);
-		return field;
-		
 	}
 
 	public static void createDesigner() {
@@ -172,12 +143,18 @@ public class Bootstrapper {
 		createAttribute(relation, "reverseName", String.class);
 		
 		// Page elements & Page
+		EntityInstance pageToolbox = createEntity("PageToolbox", null);
 		EntityInstance pageElementBase = createEntity("PageElementBase", concept);
 		EntityInstance container = createEntity("Container", pageElementBase);
+		EntityInstance containerItem = createEntity("ContainerItem", pageElementBase);
+		AttributeInstance presentationStyles = createAttribute(containerItem, "presentationStyles", String.class);
+		presentationStyles.multivalue.set(true);
 		EntityInstance field = createEntity("Field", pageElementBase);
 		createAttribute(field, "required", Boolean.class);
 		createAttribute(field, "readOnly", Boolean.class);
-		EntityInstance button = createEntity("Button", pageElementBase);
+		EntityInstance button = createEntity("Button", concept);
+		EntityInstance buttonTrigger = createEntity("ButtonTrigger", pageElementBase);
+		createAttribute(buttonTrigger, "trigger", String.class);
 		
 		// Text
 		EntityInstance text = createEntity("Text", pageElementBase);
@@ -200,10 +177,11 @@ public class Bootstrapper {
 		createRelation("entities", application, RelationType.OneToManyAggregation, entity, "application");
 		createRelation("caseEntity", application, RelationType.OneToZeroOrOne, entity, "caseEntityInApplication");
 		createRelation("flows", application, RelationType.OneToManyAggregation, flow, "application");
-		createRelation("containers", application, RelationType.OneToManyAggregation, container, "application");
-		createRelation("buttons", application, RelationType.OneToManyAggregation, button, "application");
-		// TODO: add containers, buttons, etc to a page toolbox entity
 		createRelation("exposedFlows", application, RelationType.OneToMany, flow, "exposedFlowInApplication");
+		createRelation("pageToolbox", application, RelationType.OneToOneAggregation, pageToolbox, "application");
+		createRelation("buttons", pageToolbox, RelationType.OneToManyAggregation, button, "pageToolbox");
+		createRelation("containers", pageToolbox, RelationType.OneToManyAggregation, container, "pageToolbox");
+		createRelation("texts", pageToolbox, RelationType.OneToManyAggregation, text, "pageToolbox");
 
 		// Data
 		createRelation("extendsFrom", entity, RelationType.ManyToZeroOrOne, entity, "extensions");
@@ -221,6 +199,7 @@ public class Bootstrapper {
 		createRelation("attribute", field, RelationType.ManyToZeroOrOne, attribute, "fields");
 		createRelation("relation", container, RelationType.ManyToZeroOrOne, relation, "relationInContainers");
 		createRelation("display", container, RelationType.OneToZeroOrOneAggregation, text, "displayOnContainer");
+		createRelation("caption", button, RelationType.OneToOneAggregation, text, "captionOnButton");
 		
 		// Flow
 		createRelation("sources", flow, RelationType.OneToManyAggregation, flowSource, "flow");
@@ -229,6 +208,22 @@ public class Bootstrapper {
 		createRelation("edges", flow, RelationType.OneToManyAggregation, flowEdge, "flow");
 		createRelation("from", flowEdge, RelationType.ManyToZeroOrOne, flowNodeBase, "outgoingEdges");
 		createRelation("to", flowEdge, RelationType.ManyToZeroOrOne, flowNodeBase, "incomingEdges");
+		
+		// Containers
+		
+		ButtonInstance pageToolboxButton = new ButtonInstance(applicationInstance);
+		pageToolboxButton.name.set("pageToolbox");
+		
+		// Flows
+		
+		FlowInstance mainFlow = createFlow("Main");
+		FlowSourceInstance mainStart = createStartSource(mainFlow, "start");
+		PageInstance welcomePage = createPage(mainFlow, "Welcome");
+		PageInstance pageToolboxPage = createPage(mainFlow, "PageToolbox");
+		PageInstance containerPage = createPage(mainFlow, "Container");
+		createEdge(mainFlow, mainStart, welcomePage);
+		createEdge(mainFlow, welcomePage, pageToolboxPage);
+		createEdge(mainFlow, pageToolboxPage, containerPage);
 		
 		// Finish up
 
@@ -277,5 +272,48 @@ public class Bootstrapper {
 		ConstantTextInstance result = new ConstantTextInstance(applicationInstance);
 		result.untranslated.set(untranslated);
 		return result;
+	}
+
+	private static ContainerInstance createContainer(String name) {
+		ContainerInstance Container = new ContainerInstance(applicationInstance);
+		Container.name.set(name);
+		applicationInstance.containers.add(Container);
+		return Container;
+	}
+
+	private static FieldInstance createField(ContainerInstance container, AttributeInstance attribute, boolean required) {
+		FieldInstance field = new FieldInstance(applicationInstance);
+		field.attribute.set(attribute);
+		field.required.set(true);
+		container.elements.add(field);
+		return field;
+	}
+
+	private static FlowInstance createFlow(String name) {
+		FlowInstance flow = new FlowInstance(applicationInstance);
+		flow.name.set(name);
+		applicationInstance.flows.add(flow);
+		return flow;
+	}
+
+	private static void createEdge(FlowInstance flow, FlowNodeBaseInstance from, FlowNodeBaseInstance to) {
+		FlowEdgeInstance edge = new FlowEdgeInstance(applicationInstance);
+		edge.from.set(from);
+		edge.to.set(to);
+		flow.edges.add(edge);
+	}
+
+	private static PageInstance createPage(FlowInstance flow, String name) {
+		PageInstance page = new PageInstance(applicationInstance);
+		page.name.set(name);
+		flow.nodes.add(page);
+		return page;
+	}
+
+	private static FlowSourceInstance createStartSource(FlowInstance flow, String name) {
+		FlowSourceInstance insureStartSource = new FlowSourceInstance(applicationInstance);
+		insureStartSource.name.set(name);
+		flow.sources.add(insureStartSource);
+		return insureStartSource;
 	}
 }

@@ -28,5 +28,14 @@ public class ${name}Application extends Application {
 	public Flow[] getExposedFlows() {
 		return exposedFlows;
 	}
+	
+	@Override
+	public Class<? extends CaseInstance> getCaseInstanceClass() {
+		return new ${caseEntity}Instance();
+	}
 
+	@Override
+	public String getName() {
+		return "${name}";
+	}
 }

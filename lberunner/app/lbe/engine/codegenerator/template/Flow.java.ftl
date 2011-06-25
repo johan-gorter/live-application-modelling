@@ -41,7 +41,7 @@ public class ${name}Flow extends Flow {
 	
 	private static final FlowEdge[] EDGES = new FlowEdge[]{
 	<#list edges as edge>
-		new FlowEdge(${edge.from}, null, ${edge.to}, null)
+		new FlowEdge(${edge.from}, null, ${edge.to}, null),
 	</#list>
 	};
 	
