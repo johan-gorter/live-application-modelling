@@ -20,42 +20,18 @@ public class PageElementBaseEntity extends SimpleEntity {
 	
 	// Reverse relations
 	
-	public static final Relation<PageElementBaseInstance, List<PageInstance>, PageInstance> rootElementInPages
-		= new SimpleRelation<PageElementBaseInstance, List<PageInstance>, PageInstance>(
-			"rootElementInPages", INSTANCE, PageElementBaseEntity.INSTANCE, PageInstance.class, PageEntity.rootElements
+	public static final Relation<PageElementBaseInstance, ContainerItemInstance, ContainerItemInstance> containerItem
+		= new SimpleRelation<PageElementBaseInstance, ContainerItemInstance, ContainerItemInstance>(
+			"containerItem", INSTANCE, PageElementBaseEntity.INSTANCE, ContainerItemInstance.class, ContainerItemEntity.element
 		) {
 	
 			@Override
-			public ReadOnlyRelationValues<PageElementBaseInstance, PageInstance> get(
+			public ReadOnlyRelationValue<PageElementBaseInstance, ContainerItemInstance> get(
 					PageElementBaseInstance instance) {
-				return instance.rootElementInPages;
+				return instance.containerItem;
 			}
 	
 			public boolean isReverse() {
-				return true;
-			}
-	
-			public boolean isMultivalue() {
-				return true;
-			}
-		};
-	
-	public static final Relation<PageElementBaseInstance, List<ContainerInstance>, ContainerInstance> containmentIn
-		= new SimpleRelation<PageElementBaseInstance, List<ContainerInstance>, ContainerInstance>(
-			"containmentIn", INSTANCE, PageElementBaseEntity.INSTANCE, ContainerInstance.class, ContainerEntity.elements
-		) {
-	
-			@Override
-			public ReadOnlyRelationValues<PageElementBaseInstance, ContainerInstance> get(
-					PageElementBaseInstance instance) {
-				return instance.containmentIn;
-			}
-	
-			public boolean isReverse() {
-				return true;
-			}
-	
-			public boolean isMultivalue() {
 				return true;
 			}
 		};
@@ -65,8 +41,7 @@ public class PageElementBaseEntity extends SimpleEntity {
 	private static final Relation[] RELATIONS = new Relation[]{
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
-		rootElementInPages,
-		containmentIn,
+		containerItem,
 	};
 
 	private PageElementBaseEntity() {

@@ -18,15 +18,19 @@ public class ContainerEntity extends SimpleEntity {
 	
 	// Relations
 	
-	public static final Relation<ContainerInstance, List<PageElementBaseInstance>, PageElementBaseInstance> elements
-		= new SimpleRelation<ContainerInstance, List<PageElementBaseInstance>, PageElementBaseInstance>(
-			"elements", INSTANCE, PageElementBaseEntity.INSTANCE, PageElementBaseInstance.class, PageElementBaseEntity.containmentIn
+	public static final Relation<ContainerInstance, List<ContainerItemInstance>, ContainerItemInstance> items
+		= new SimpleRelation<ContainerInstance, List<ContainerItemInstance>, ContainerItemInstance>(
+			"items", INSTANCE, ContainerItemEntity.INSTANCE, ContainerItemInstance.class, ContainerItemEntity.container
 		) {
 	
 			@Override
-			public ReadOnlyRelationValues<ContainerInstance, PageElementBaseInstance> get(
+			public ReadOnlyRelationValues<ContainerInstance, ContainerItemInstance> get(
 					ContainerInstance instance) {
-				return instance.elements;
+				return instance.items;
+			}
+	
+			public boolean isOwner() {
+				return true;
 			}
 	
 			public boolean isMultivalue() {
@@ -79,16 +83,33 @@ public class ContainerEntity extends SimpleEntity {
 				return true;
 			}
 		};
+	
+	public static final Relation<ContainerInstance, PageInstance, PageInstance> rootContainerInPage
+		= new SimpleRelation<ContainerInstance, PageInstance, PageInstance>(
+			"rootContainerInPage", INSTANCE, ContainerEntity.INSTANCE, PageInstance.class, PageEntity.rootContainer
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<ContainerInstance, PageInstance> get(
+					ContainerInstance instance) {
+				return instance.rootContainerInPage;
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+		};
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
-		elements,
+		items,
 		relation,
 		display,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 		pageToolbox,
+		rootContainerInPage,
 	};
 
 	private ContainerEntity() {

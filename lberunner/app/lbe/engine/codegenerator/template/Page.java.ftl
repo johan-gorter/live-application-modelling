@@ -10,6 +10,8 @@ public class ${name}Page extends Page {
 
 	public static final ${name}Page INSTANCE = new ${name}Page();
 	
+	// TODO: create the rootContainer inline here
+	
 	private static final PageElementBase[] ROOT_ELEMENTS = new PageElementBase[]{
 	<#list rootElements as rootElement>
 		${rootElement.name}${rootElement.type}.INSTANCE,

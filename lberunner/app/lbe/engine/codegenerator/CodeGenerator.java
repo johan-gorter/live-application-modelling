@@ -29,6 +29,7 @@ import app.designer.data.instance.ApplicationInstance;
 import app.designer.data.instance.AttributeInstance;
 import app.designer.data.instance.ConstantTextInstance;
 import app.designer.data.instance.ContainerInstance;
+import app.designer.data.instance.ContainerItemInstance;
 import app.designer.data.instance.DomainEntryInstance;
 import app.designer.data.instance.EntityInstance;
 import app.designer.data.instance.FieldInstance;
@@ -149,8 +150,9 @@ public class CodeGenerator {
 		ContainerClassModel result = new ContainerClassModel();
 		result.appname = appname;
 		result.name = container.name.get();
-		for (PageElementBaseInstance elementInstance: container.elements.get()) {
+		for (ContainerItemInstance itemInstance: container.items.get()) {
 			ContainerClassModel.Element element = new ContainerClassModel.Element();
+			PageElementBaseInstance elementInstance = itemInstance.element.get();
 			element.type=elementInstance.getModel().getName();
 			if (elementInstance instanceof FieldInstance) {
 				FieldInstance field = (FieldInstance) elementInstance;
@@ -176,7 +178,8 @@ public class CodeGenerator {
 		result.appname = appname;
 		result.flowname = flowName;
 		result.name = page.name.get();
-		for (PageElementBaseInstance element : page.rootElements.get()) {
+		for (ContainerItemInstance item : page.rootContainer.get().items.get()) {
+			PageElementBaseInstance element = item.element.get();
 			PageElement pageElement = new PageElement();
 			pageElement.name = element.name.get();
 			pageElement.type = element.getModel().getName();

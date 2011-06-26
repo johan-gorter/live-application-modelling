@@ -33,14 +33,44 @@ public class ContainerItemEntity extends SimpleEntity {
 	
 	// Relations
 	
+	public static final Relation<ContainerItemInstance, PageElementBaseInstance, PageElementBaseInstance> element
+		= new SimpleRelation<ContainerItemInstance, PageElementBaseInstance, PageElementBaseInstance>(
+			"element", INSTANCE, PageElementBaseEntity.INSTANCE, PageElementBaseInstance.class, PageElementBaseEntity.containerItem
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<ContainerItemInstance, PageElementBaseInstance> get(
+					ContainerItemInstance instance) {
+				return instance.element;
+			}
+		};
+	
 	// Reverse relations
+	
+	public static final Relation<ContainerItemInstance, ContainerInstance, ContainerInstance> container
+		= new SimpleRelation<ContainerItemInstance, ContainerInstance, ContainerInstance>(
+			"container", INSTANCE, ContainerItemEntity.INSTANCE, ContainerInstance.class, ContainerEntity.items
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<ContainerItemInstance, ContainerInstance> get(
+					ContainerItemInstance instance) {
+				return instance.container;
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+		};
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 		presentationStyles,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
+		element,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
+		container,
 	};
 
 	private ContainerItemEntity() {
@@ -50,11 +80,6 @@ public class ContainerItemEntity extends SimpleEntity {
 	@Override
 	public Instance createInstance(CaseInstance caseInstance) {
 		return new ContainerItemInstance(caseInstance);
-	}
-	
-	@Override
-	public Entity extendsEntity() {
-		return PageElementBaseEntity.INSTANCE;
 	}
 	
 	@Override

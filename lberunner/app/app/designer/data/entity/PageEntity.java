@@ -18,18 +18,22 @@ public class PageEntity extends SimpleEntity {
 	
 	// Relations
 	
-	public static final Relation<PageInstance, List<PageElementBaseInstance>, PageElementBaseInstance> rootElements
-		= new SimpleRelation<PageInstance, List<PageElementBaseInstance>, PageElementBaseInstance>(
-			"rootElements", INSTANCE, PageElementBaseEntity.INSTANCE, PageElementBaseInstance.class, PageElementBaseEntity.rootElementInPages
+	public static final Relation<PageInstance, ContainerInstance, ContainerInstance> rootContainer
+		= new SimpleRelation<PageInstance, ContainerInstance, ContainerInstance>(
+			"rootContainer", INSTANCE, ContainerEntity.INSTANCE, ContainerInstance.class, ContainerEntity.rootContainerInPage
 		) {
 	
 			@Override
-			public ReadOnlyRelationValues<PageInstance, PageElementBaseInstance> get(
+			public ReadOnlyRelationValue<PageInstance, ContainerInstance> get(
 					PageInstance instance) {
-				return instance.rootElements;
+				return instance.rootContainer;
 			}
 	
-			public boolean isMultivalue() {
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isAutoCreate() {
 				return true;
 			}
 		};
@@ -39,7 +43,7 @@ public class PageEntity extends SimpleEntity {
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
-		rootElements,
+		rootContainer,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};

@@ -12,6 +12,7 @@ import app.designer.data.instance.AttributeInstance;
 import app.designer.data.instance.ButtonInstance;
 import app.designer.data.instance.ConstantTextInstance;
 import app.designer.data.instance.ContainerInstance;
+import app.designer.data.instance.ContainerItemInstance;
 import app.designer.data.instance.DomainEntryInstance;
 import app.designer.data.instance.EntityInstance;
 import app.designer.data.instance.FieldInstance;
@@ -19,6 +20,7 @@ import app.designer.data.instance.FlowEdgeInstance;
 import app.designer.data.instance.FlowInstance;
 import app.designer.data.instance.FlowNodeBaseInstance;
 import app.designer.data.instance.FlowSourceInstance;
+import app.designer.data.instance.PageElementBaseInstance;
 import app.designer.data.instance.PageInstance;
 import app.designer.data.instance.RelationInstance;
 import app.designer.data.instance.TextInstance;
@@ -92,7 +94,7 @@ public class Bootstrapper {
 		FlowInstance insureFlow = createFlow("Insure");
 		FlowSourceInstance insureStartSource = createStartSource(insureFlow, "start");
 		PageInstance insureDriverPage = createPage(insureFlow, "Driver");
-		insureDriverPage.rootElements.add(driverContainer);
+		insureDriverPage.rootContainer.set(driverContainer);
 		createEdge(insureFlow, insureStartSource, insureDriverPage);
 		applicationInstance.exposedFlows.add(insureFlow);
 		
@@ -143,22 +145,23 @@ public class Bootstrapper {
 		createAttribute(relation, "reverseName", String.class);
 		
 		// Page elements & Page
-		EntityInstance pageToolbox = createEntity("PageToolbox", null);
+		EntityInstance toolbox = createEntity("Toolbox", null);
 		EntityInstance pageElementBase = createEntity("PageElementBase", concept);
 		EntityInstance container = createEntity("Container", pageElementBase);
-		EntityInstance containerItem = createEntity("ContainerItem", pageElementBase);
-		AttributeInstance presentationStyles = createAttribute(containerItem, "presentationStyles", String.class);
-		presentationStyles.multivalue.set(true);
+		EntityInstance toolboxContainer = createEntity("ToolboxContainer", pageElementBase);
 		EntityInstance field = createEntity("Field", pageElementBase);
 		createAttribute(field, "required", Boolean.class);
 		createAttribute(field, "readOnly", Boolean.class);
-		EntityInstance button = createEntity("Button", concept);
-		EntityInstance buttonTrigger = createEntity("ButtonTrigger", pageElementBase);
-		createAttribute(buttonTrigger, "trigger", String.class);
+		EntityInstance button = createEntity("Button", pageElementBase);
+		createAttribute(button, "trigger", String.class);
+		EntityInstance containerItem = createEntity("ContainerItem", null);
+		AttributeInstance presentationStyles = createAttribute(containerItem, "presentationStyles", String.class);
+		presentationStyles.multivalue.set(true);
 		
 		// Text
 		EntityInstance text = createEntity("Text", pageElementBase);
 		EntityInstance constantText = createEntity("ConstantText", text);
+		EntityInstance toolboxText = createEntity("ToolboxText", text);
 		createAttribute(constantText, "untranslated", String.class);
 		// TODO: translations
 
@@ -178,10 +181,6 @@ public class Bootstrapper {
 		createRelation("caseEntity", application, RelationType.OneToZeroOrOne, entity, "caseEntityInApplication");
 		createRelation("flows", application, RelationType.OneToManyAggregation, flow, "application");
 		createRelation("exposedFlows", application, RelationType.OneToMany, flow, "exposedFlowInApplication");
-		createRelation("pageToolbox", application, RelationType.OneToOneAggregation, pageToolbox, "application");
-		createRelation("buttons", pageToolbox, RelationType.OneToManyAggregation, button, "pageToolbox");
-		createRelation("containers", pageToolbox, RelationType.OneToManyAggregation, container, "pageToolbox");
-		createRelation("texts", pageToolbox, RelationType.OneToManyAggregation, text, "pageToolbox");
 
 		// Data
 		createRelation("extendsFrom", entity, RelationType.ManyToZeroOrOne, entity, "extensions");
@@ -194,9 +193,12 @@ public class Bootstrapper {
 		createRelation("display", domainEntry, RelationType.OneToZeroOrOneAggregation, text, "displayOnDomainEntry");
 
 		// Page elements
-		createRelation("rootElements", page, RelationType.ManyToMany, pageElementBase, "rootElementInPages");
+		createRelation("pageToolbox", application, RelationType.OneToOneAggregation, toolbox, "application");
+		createRelation("containers", toolbox, RelationType.OneToManyAggregation, container, "toolbox");
+		createRelation("texts", toolbox, RelationType.OneToManyAggregation, text, "toolbox");
+		createRelation("rootContainer", page, RelationType.OneToOneAggregation, container, "rootContainerInPage");
 		createRelation("items", container, RelationType.OneToManyAggregation, containerItem, "container");
-		createRelation("element", containerItem, RelationType.OneToZeroOrOne, pageElementBase, "containerItem");//TODO: who owns fields, buttonTriggers, some texts?
+		createRelation("element", containerItem, RelationType.OneToZeroOrOneAggregation, pageElementBase, "containerItem");
 		createRelation("attribute", field, RelationType.ManyToZeroOrOne, attribute, "fields");
 		createRelation("relation", container, RelationType.ManyToZeroOrOne, relation, "relationInContainers");
 		createRelation("display", container, RelationType.OneToZeroOrOneAggregation, text, "displayOnContainer");
@@ -210,10 +212,7 @@ public class Bootstrapper {
 		createRelation("from", flowEdge, RelationType.ManyToZeroOrOne, flowNodeBase, "outgoingEdges");
 		createRelation("to", flowEdge, RelationType.ManyToZeroOrOne, flowNodeBase, "incomingEdges");
 		
-		// Containers
-		
-		ButtonInstance pageToolboxButton = new ButtonInstance(applicationInstance);
-		pageToolboxButton.name.set("pageToolbox");
+		// Toolbox
 		
 		// Flows
 		
@@ -226,11 +225,29 @@ public class Bootstrapper {
 		createEdge(mainFlow, welcomePage, pageToolboxPage);
 		createEdge(mainFlow, pageToolboxPage, containerPage);
 		
+		ConstantTextInstance welcomeText = createConstantText("Welcome to the designer");
+		createContainerItem(welcomePage.rootContainer.get(), welcomeText);
+		ButtonInstance pageToolboxButton = createButton("toolbox", createConstantText("Toolbox")); 
+//TODO:		createContainerItem(welcomePage.rootContainer.get(), pageToolboxButton);
+		
 		// Finish up
 
 //		System.out.println(CasePersister.gson.toJson(applicationInstance));
 		
 		CodeGenerator.generateApplication(applicationInstance);
+	}
+
+	private static ButtonInstance createButton(String trigger, TextInstance caption) {
+		ButtonInstance result = new ButtonInstance(applicationInstance);
+		// TODO: trigger result..set("toolbox");
+		result.caption.set(caption);
+		return result;
+	}
+
+	private static void createContainerItem(ContainerInstance containerInstance, PageElementBaseInstance element) {
+		ContainerItemInstance item = new ContainerItemInstance(applicationInstance);
+		item.element.set(element);
+		containerInstance.items.add(item);
 	}
 
 	private static EntityInstance createEntity(String name, EntityInstance extendsFrom) {
@@ -286,7 +303,9 @@ public class Bootstrapper {
 		FieldInstance field = new FieldInstance(applicationInstance);
 		field.attribute.set(attribute);
 		field.required.set(true);
-		container.elements.add(field);
+		ContainerItemInstance item = new ContainerItemInstance(applicationInstance);
+		container.items.add(item);
+		item.element.set(field);
 		return field;
 	}
 

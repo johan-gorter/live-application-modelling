@@ -27,8 +27,8 @@ public class ContainerInstance
 	
 	// Relations
 	
-	public final RelationValues<ContainerInstance, PageElementBaseInstance> elements
-		= createRelationValues(ContainerEntity.elements);
+	public final RelationValues<ContainerInstance, ContainerItemInstance> items
+		= createRelationValues(ContainerEntity.items);
 	
 	public final RelationValue<ContainerInstance, RelationInstance> relation
 		= createRelationValue(ContainerEntity.relation);
@@ -40,5 +40,8 @@ public class ContainerInstance
 	
 	public final ReadOnlyRelationValue<ContainerInstance, PageToolboxInstance> pageToolbox
 		= createReverseRelationValue(ContainerEntity.pageToolbox);
+	
+	public final ReadOnlyRelationValue<ContainerInstance, PageInstance> rootContainerInPage
+		= createReverseRelationValue(ContainerEntity.rootContainerInPage);
 
 }

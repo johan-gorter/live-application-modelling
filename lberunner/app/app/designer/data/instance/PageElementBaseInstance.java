@@ -29,10 +29,7 @@ public class PageElementBaseInstance
 
 	// Reverse relations
 	
-	public final ReadOnlyRelationValues<PageElementBaseInstance, PageInstance> rootElementInPages
-		= createReverseRelationValues(PageElementBaseEntity.rootElementInPages);
-	
-	public final ReadOnlyRelationValues<PageElementBaseInstance, ContainerInstance> containmentIn
-		= createReverseRelationValues(PageElementBaseEntity.containmentIn);
+	public final ReadOnlyRelationValue<PageElementBaseInstance, ContainerItemInstance> containerItem
+		= createReverseRelationValue(PageElementBaseEntity.containerItem);
 
 }

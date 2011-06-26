@@ -12,7 +12,7 @@ import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
 public class ContainerItemInstance 
-	extends PageElementBaseInstance 
+	extends SimpleInstance 
 	implements Instance {
 
 	public ContainerItemInstance(CaseInstance caseInstance) {
@@ -29,7 +29,13 @@ public class ContainerItemInstance
 		= createAttributeValues(ContainerItemEntity.presentationStyles);
 	
 	// Relations
+	
+	public final RelationValue<ContainerItemInstance, PageElementBaseInstance> element
+		= createRelationValue(ContainerItemEntity.element);
 
 	// Reverse relations
+	
+	public final ReadOnlyRelationValue<ContainerItemInstance, ContainerInstance> container
+		= createReverseRelationValue(ContainerItemEntity.container);
 
 }
