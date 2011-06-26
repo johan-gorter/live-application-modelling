@@ -28,7 +28,7 @@ public class InsureFlow extends Flow {
 	};
 	
 	private static final FlowEdge[] EDGES = new FlowEdge[]{
-		new FlowEdge(START, null, DriverPage.INSTANCE, null)
+		new FlowEdge(START, null, DriverPage.INSTANCE, null),
 	};
 	
 	@Override

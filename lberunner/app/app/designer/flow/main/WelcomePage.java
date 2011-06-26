@@ -10,7 +10,9 @@ public class WelcomePage extends Page {
 
 	public static final WelcomePage INSTANCE = new WelcomePage();
 	
-	private static final PageElementBase[] ROOT_ELEMENTS = new PageElementBase[]{
+	@Override
+	public Container getRootContainer() {
+		return WelcomeContainer.INSTANCE;
 	}; 
 	
 	@Override
@@ -18,8 +20,4 @@ public class WelcomePage extends Page {
 		return "Welcome";
 	}
 	
-	@Override
-	public PageElementBase[] getRootElements() {
-		return ROOT_ELEMENTS;
-	}
 }

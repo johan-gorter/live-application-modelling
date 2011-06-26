@@ -21,6 +21,7 @@ public class DesignerApplication extends Application {
 	}
 	
 	private static final Flow[] exposedFlows = new Flow[] {
+		MainFlow.INSTANCE,
 	};
 
 	@Override

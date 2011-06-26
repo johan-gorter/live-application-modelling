@@ -10,8 +10,9 @@ public class DriverPage extends Page {
 
 	public static final DriverPage INSTANCE = new DriverPage();
 	
-	private static final PageElementBase[] ROOT_ELEMENTS = new PageElementBase[]{
-		DriverContainer.INSTANCE,
+	@Override
+	public Container getRootContainer() {
+		return DriverContainer.INSTANCE;
 	}; 
 	
 	@Override
@@ -19,8 +20,4 @@ public class DriverPage extends Page {
 		return "Driver";
 	}
 	
-	@Override
-	public PageElementBase[] getRootElements() {
-		return ROOT_ELEMENTS;
-	}
 }

@@ -20,22 +20,6 @@ public class TextEntity extends SimpleEntity {
 	
 	// Reverse relations
 	
-	public static final Relation<TextInstance, PageToolboxInstance, PageToolboxInstance> pageToolbox
-		= new SimpleRelation<TextInstance, PageToolboxInstance, PageToolboxInstance>(
-			"pageToolbox", INSTANCE, TextEntity.INSTANCE, PageToolboxInstance.class, PageToolboxEntity.texts
-		) {
-	
-			@Override
-			public ReadOnlyRelationValue<TextInstance, PageToolboxInstance> get(
-					TextInstance instance) {
-				return instance.pageToolbox;
-			}
-	
-			public boolean isReverse() {
-				return true;
-			}
-		};
-	
 	public static final Relation<TextInstance, AttributeInstance, AttributeInstance> questionOnAttribute
 		= new SimpleRelation<TextInstance, AttributeInstance, AttributeInstance>(
 			"questionOnAttribute", INSTANCE, TextEntity.INSTANCE, AttributeInstance.class, AttributeEntity.question
@@ -84,6 +68,22 @@ public class TextEntity extends SimpleEntity {
 			}
 		};
 	
+	public static final Relation<TextInstance, ToolboxInstance, ToolboxInstance> toolbox
+		= new SimpleRelation<TextInstance, ToolboxInstance, ToolboxInstance>(
+			"toolbox", INSTANCE, TextEntity.INSTANCE, ToolboxInstance.class, ToolboxEntity.texts
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<TextInstance, ToolboxInstance> get(
+					TextInstance instance) {
+				return instance.toolbox;
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+		};
+	
 	public static final Relation<TextInstance, ContainerInstance, ContainerInstance> displayOnContainer
 		= new SimpleRelation<TextInstance, ContainerInstance, ContainerInstance>(
 			"displayOnContainer", INSTANCE, TextEntity.INSTANCE, ContainerInstance.class, ContainerEntity.display
@@ -121,10 +121,10 @@ public class TextEntity extends SimpleEntity {
 	private static final Relation[] RELATIONS = new Relation[]{
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
-		pageToolbox,
 		questionOnAttribute,
 		explanationOnAttribute,
 		displayOnDomainEntry,
+		toolbox,
 		displayOnContainer,
 		captionOnButton,
 	};

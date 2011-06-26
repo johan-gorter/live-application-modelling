@@ -15,7 +15,7 @@ public abstract class Button extends PageElementBase {
 		PageElement result = super.render(context);
 		Text caption = getCaption();
 		if (caption!=null) {
-			result.display = caption.render(context);
+			result.display = caption.renderText(context);
 		}
 		return result;
 	}

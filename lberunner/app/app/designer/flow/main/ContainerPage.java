@@ -10,7 +10,9 @@ public class ContainerPage extends Page {
 
 	public static final ContainerPage INSTANCE = new ContainerPage();
 	
-	private static final PageElementBase[] ROOT_ELEMENTS = new PageElementBase[]{
+	@Override
+	public Container getRootContainer() {
+		return ContainerContainer.INSTANCE;
 	}; 
 	
 	@Override
@@ -18,8 +20,4 @@ public class ContainerPage extends Page {
 		return "Container";
 	}
 	
-	@Override
-	public PageElementBase[] getRootElements() {
-		return ROOT_ELEMENTS;
-	}
 }

@@ -11,27 +11,21 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class ButtonInstance 
+public class ToolboxContainerInstance 
 	extends PageElementBaseInstance 
 	implements Instance {
 
-	public ButtonInstance(CaseInstance caseInstance) {
-		super(caseInstance, ButtonEntity.INSTANCE);
+	public ToolboxContainerInstance(CaseInstance caseInstance) {
+		super(caseInstance, ToolboxContainerEntity.INSTANCE);
 	}
 	
-	protected ButtonInstance(CaseInstance caseInstance, Entity model) {
+	protected ToolboxContainerInstance(CaseInstance caseInstance, Entity model) {
 		super(caseInstance, model);
 	}
 
 	// Attributes
 	
-	public final AttributeValue<ButtonInstance, java.lang.String> trigger
-		= createAttributeValue(ButtonEntity.trigger);
-	
 	// Relations
-	
-	public final RelationValue<ButtonInstance, TextInstance> caption
-		= createRelationValue(ButtonEntity.caption);
 
 	// Reverse relations
 

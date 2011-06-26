@@ -10,63 +10,30 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class ButtonEntity extends SimpleEntity {
+public class ToolboxContainerEntity extends SimpleEntity {
 
-	public static final ButtonEntity INSTANCE = new ButtonEntity();
+	public static final ToolboxContainerEntity INSTANCE = new ToolboxContainerEntity();
 	
 	// Attributes
 	
-	public static final Attribute<ButtonInstance, java.lang.String, java.lang.String> trigger 
-		= new SimpleAttribute<ButtonInstance, java.lang.String, java.lang.String>(
-			"trigger", INSTANCE, java.lang.String.class
-		) {
-	
-			@Override
-			public ReadOnlyAttributeValue<ButtonInstance, java.lang.String> get(ButtonInstance instance) {
-				return instance.trigger;
-			}
-		};
-	
 	// Relations
-	
-	public static final Relation<ButtonInstance, TextInstance, TextInstance> caption
-		= new SimpleRelation<ButtonInstance, TextInstance, TextInstance>(
-			"caption", INSTANCE, TextEntity.INSTANCE, TextInstance.class, TextEntity.captionOnButton
-		) {
-	
-			@Override
-			public ReadOnlyRelationValue<ButtonInstance, TextInstance> get(
-					ButtonInstance instance) {
-				return instance.caption;
-			}
-	
-			public boolean isOwner() {
-				return true;
-			}
-	
-			public boolean isAutoCreate() {
-				return true;
-			}
-		};
 	
 	// Reverse relations
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
-		trigger,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
-		caption,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};
 
-	private ButtonEntity() {
-		super("Button");
+	private ToolboxContainerEntity() {
+		super("ToolboxContainer");
 	}
 	
 	@Override
 	public Instance createInstance(CaseInstance caseInstance) {
-		return new ButtonInstance(caseInstance);
+		return new ToolboxContainerInstance(caseInstance);
 	}
 	
 	@Override

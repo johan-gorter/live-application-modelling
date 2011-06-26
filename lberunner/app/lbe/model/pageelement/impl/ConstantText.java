@@ -12,7 +12,7 @@ public class ConstantText extends Text {
 	}
 	
 	@Override
-	public String render(RenderContext context) {
+	public String renderText(RenderContext context) {
 		return untranslated;
 	}
 	

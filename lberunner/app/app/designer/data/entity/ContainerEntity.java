@@ -68,15 +68,15 @@ public class ContainerEntity extends SimpleEntity {
 	
 	// Reverse relations
 	
-	public static final Relation<ContainerInstance, PageToolboxInstance, PageToolboxInstance> pageToolbox
-		= new SimpleRelation<ContainerInstance, PageToolboxInstance, PageToolboxInstance>(
-			"pageToolbox", INSTANCE, ContainerEntity.INSTANCE, PageToolboxInstance.class, PageToolboxEntity.containers
+	public static final Relation<ContainerInstance, ToolboxInstance, ToolboxInstance> toolbox
+		= new SimpleRelation<ContainerInstance, ToolboxInstance, ToolboxInstance>(
+			"toolbox", INSTANCE, ContainerEntity.INSTANCE, ToolboxInstance.class, ToolboxEntity.containers
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<ContainerInstance, PageToolboxInstance> get(
+			public ReadOnlyRelationValue<ContainerInstance, ToolboxInstance> get(
 					ContainerInstance instance) {
-				return instance.pageToolbox;
+				return instance.toolbox;
 			}
 	
 			public boolean isReverse() {
@@ -108,7 +108,7 @@ public class ContainerEntity extends SimpleEntity {
 		display,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
-		pageToolbox,
+		toolbox,
 		rootContainerInPage,
 	};
 

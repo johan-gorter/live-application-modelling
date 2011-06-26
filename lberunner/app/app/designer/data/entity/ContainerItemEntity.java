@@ -43,6 +43,10 @@ public class ContainerItemEntity extends SimpleEntity {
 					ContainerItemInstance instance) {
 				return instance.element;
 			}
+	
+			public boolean isOwner() {
+				return true;
+			}
 		};
 	
 	// Reverse relations

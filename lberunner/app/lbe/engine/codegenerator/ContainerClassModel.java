@@ -12,6 +12,8 @@ public class ContainerClassModel {
 		public String attribute;
 		public boolean required;
 		public boolean readOnly;
+		public String untranslated;
+		public String caption;
 		
 		public String getType() {
 			return type;
@@ -31,6 +33,12 @@ public class ContainerClassModel {
 		public String getName() {
 			return name;
 		}
+		public String getUntranslated() {
+			return untranslated;
+		}
+		public String getCaption() {
+			return caption;
+		}
 	}
 
 	public String appname;
@@ -41,6 +49,7 @@ public class ContainerClassModel {
 	public String relationName;
 	
 	public final List<Element> children = new ArrayList<Element>();
+	public String subpackageName;
 
 	public String getAppname() {
 		return appname;
@@ -64,5 +73,9 @@ public class ContainerClassModel {
 
 	public String getRelationName() {
 		return relationName;
+	}
+
+	public String getSubpackageName() {
+		return subpackageName;
 	}
 }

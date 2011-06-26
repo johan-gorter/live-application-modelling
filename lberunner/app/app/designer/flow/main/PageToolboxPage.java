@@ -10,7 +10,9 @@ public class PageToolboxPage extends Page {
 
 	public static final PageToolboxPage INSTANCE = new PageToolboxPage();
 	
-	private static final PageElementBase[] ROOT_ELEMENTS = new PageElementBase[]{
+	@Override
+	public Container getRootContainer() {
+		return PageToolboxContainer.INSTANCE;
 	}; 
 	
 	@Override
@@ -18,8 +20,4 @@ public class PageToolboxPage extends Page {
 		return "PageToolbox";
 	}
 	
-	@Override
-	public PageElementBase[] getRootElements() {
-		return ROOT_ELEMENTS;
-	}
 }

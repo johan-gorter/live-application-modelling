@@ -27,6 +27,7 @@ import freemarker.template.Template;
 import app.designer.data.entity.EntityEntity;
 import app.designer.data.instance.ApplicationInstance;
 import app.designer.data.instance.AttributeInstance;
+import app.designer.data.instance.ButtonInstance;
 import app.designer.data.instance.ConstantTextInstance;
 import app.designer.data.instance.ContainerInstance;
 import app.designer.data.instance.ContainerItemInstance;
@@ -135,8 +136,14 @@ public class CodeGenerator {
 		String flowName = flow.name.get();
 		for (FlowNodeBaseInstance node: flow.nodes.get()) {
 			if (node instanceof PageInstance) {
-				PageClassModel pageClassModel = createPageClassModel((PageInstance)node, appname, flowName);
-				generateFile(pageTemplate, pageClassModel, "flow/"+flowName.toLowerCase(), node.name.get(), "Page", appname, applicationRoot);
+				PageInstance page = (PageInstance)node;
+				PageClassModel pageClassModel = createPageClassModel(page, appname, flowName);
+				generateFile(pageTemplate, pageClassModel, "flow/"+flowName.toLowerCase(), page.name.get(), "Page", appname, applicationRoot);
+				ContainerInstance rootContainer = page.rootContainer.get();
+				ContainerClassModel containerClassModel = createContainerClassModel(rootContainer, appname);
+				containerClassModel.subpackageName = "flow."+flowName.toLowerCase();
+				containerClassModel.name = page.name.get();
+				generateFile(containerTemplate, containerClassModel, "flow/"+flowName.toLowerCase(), page.name.get(), "Container", appname, applicationRoot);
 			}
 		}
 	}
@@ -160,6 +167,11 @@ public class CodeGenerator {
 				element.entity = field.attribute.get().entity.get().name.get();
 				element.attribute = field.attribute.get().name.get();
 				element.readOnly = (field.readOnly.get()==Boolean.TRUE);
+			} else if (elementInstance instanceof ConstantTextInstance) {
+				element.untranslated = ((ConstantTextInstance)elementInstance).untranslated.get();
+			} else if (elementInstance instanceof ButtonInstance) {
+				element.caption = generateText(((ButtonInstance)elementInstance).caption.get());
+				element.name = elementInstance.name.get();
 			} else {
 				element.name = elementInstance.name.get();
 			}

@@ -38,7 +38,7 @@ public class ApplicationInstance
 	public final RelationValues<ApplicationInstance, FlowInstance> exposedFlows
 		= createRelationValues(ApplicationEntity.exposedFlows);
 	
-	public final RelationValue<ApplicationInstance, PageToolboxInstance> pageToolbox
+	public final RelationValue<ApplicationInstance, ToolboxInstance> pageToolbox
 		= createRelationValue(ApplicationEntity.pageToolbox);
 
 	// Reverse relations

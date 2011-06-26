@@ -10,12 +10,9 @@ public class ${name}Page extends Page {
 
 	public static final ${name}Page INSTANCE = new ${name}Page();
 	
-	// TODO: create the rootContainer inline here
-	
-	private static final PageElementBase[] ROOT_ELEMENTS = new PageElementBase[]{
-	<#list rootElements as rootElement>
-		${rootElement.name}${rootElement.type}.INSTANCE,
-	</#list>
+	@Override
+	public Container getRootContainer() {
+		return ${name}Container.INSTANCE;
 	}; 
 	
 	@Override
@@ -23,8 +20,4 @@ public class ${name}Page extends Page {
 		return "${name}";
 	}
 	
-	@Override
-	public PageElementBase[] getRootElements() {
-		return ROOT_ELEMENTS;
-	}
 }

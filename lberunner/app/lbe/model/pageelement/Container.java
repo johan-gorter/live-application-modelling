@@ -35,7 +35,7 @@ public abstract class Container extends PageElementBase {
 		PageElement result = super.render(context);
 		Text display = getDisplay();
 		if (display!=null) {
-			result.display = display.render(context);
+			result.display = display.renderText(context);
 		}
 		result.name = getName();
 		context.nextIdLevel();

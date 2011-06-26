@@ -38,8 +38,8 @@ public class ContainerInstance
 
 	// Reverse relations
 	
-	public final ReadOnlyRelationValue<ContainerInstance, PageToolboxInstance> pageToolbox
-		= createReverseRelationValue(ContainerEntity.pageToolbox);
+	public final ReadOnlyRelationValue<ContainerInstance, ToolboxInstance> toolbox
+		= createReverseRelationValue(ContainerEntity.toolbox);
 	
 	public final ReadOnlyRelationValue<ContainerInstance, PageInstance> rootContainerInPage
 		= createReverseRelationValue(ContainerEntity.rootContainerInPage);

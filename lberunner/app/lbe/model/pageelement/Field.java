@@ -36,11 +36,11 @@ public abstract class Field extends PageElementBase {
 		result.refresh = true;
 		Text question = getQuestion();
 		if (question!=null) {
-			result.question = question.render(context);
+			result.question = question.renderText(context);
 		}
 		Text explain = getExplain();
 		if (explain!=null) {
-			result.explain = explain.render(context);
+			result.explain = explain.renderText(context);
 		}
 		result.multivalue = attribute.isMultivalue()?Boolean.TRUE:null;
 		DomainEntry[] domain = attribute.getDomain();
@@ -53,7 +53,7 @@ public abstract class Field extends PageElementBase {
 	private Domain[] convertDomain(DomainEntry[] domain, RenderContext context) {
 		Domain[] result = new Domain[domain.length];
 		for (int i=0;i<domain.length;i++) {
-			result[i]=new Domain(domain[i].getValue(), domain[i].getDisplay().render(context));
+			result[i]=new Domain(domain[i].getValue(), domain[i].getDisplay().renderText(context));
 		}
 		return result;
 	}

@@ -13,10 +13,10 @@ import lbe.model.pageelement.PageElementBase;
 
 public abstract class Page extends FlowNodeBase {
 	
-	public abstract PageElementBase[] getRootElements();
+	public abstract Container getRootContainer();
 
 	public void changeValue(ChangeContext changeContext) {
-		Container.changeValue(changeContext, getRootElements());
+		getRootContainer().changeValue(changeContext);
 	}
 
 	public PageElement render(final RenderContext renderContext) {
@@ -28,8 +28,8 @@ public abstract class Page extends FlowNodeBase {
 		result.elementType = "page";
 		result.id = renderContext.getPageCoordinates().format();
 		result.name = getName();
-		PageElement[] contentElements = Container.renderChildren(renderContext, getRootElements());
-		result.content = contentElements;
+		PageElement contentElements = getRootContainer().render(renderContext);
+		result.content = new PageElement[]{contentElements};
 		return result;
 	}
 

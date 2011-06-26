@@ -1,7 +1,7 @@
 package app.carinsurancetest;
 
 import app.carinsurancetest.data.entity.*;
-import app.carinsurancetest.data.instance.CarinsuranceCaseInstance;
+import app.carinsurancetest.data.instance.*;
 import app.carinsurancetest.flow.*;
 import lbe.instance.CaseInstance;
 import lbe.model.Application;
@@ -28,7 +28,7 @@ public class CarInsuranceTestApplication extends Application {
 	public Flow[] getExposedFlows() {
 		return exposedFlows;
 	}
-
+	
 	@Override
 	public Class<? extends CaseInstance> getCaseInstanceClass() {
 		return CarinsuranceCaseInstance.class;
@@ -38,5 +38,4 @@ public class CarInsuranceTestApplication extends Application {
 	public String getName() {
 		return "CarInsuranceTest";
 	}
-
 }

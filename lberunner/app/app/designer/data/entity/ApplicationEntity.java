@@ -97,13 +97,13 @@ public class ApplicationEntity extends SimpleEntity {
 			}
 		};
 	
-	public static final Relation<ApplicationInstance, PageToolboxInstance, PageToolboxInstance> pageToolbox
-		= new SimpleRelation<ApplicationInstance, PageToolboxInstance, PageToolboxInstance>(
-			"pageToolbox", INSTANCE, PageToolboxEntity.INSTANCE, PageToolboxInstance.class, PageToolboxEntity.application
+	public static final Relation<ApplicationInstance, ToolboxInstance, ToolboxInstance> pageToolbox
+		= new SimpleRelation<ApplicationInstance, ToolboxInstance, ToolboxInstance>(
+			"pageToolbox", INSTANCE, ToolboxEntity.INSTANCE, ToolboxInstance.class, ToolboxEntity.application
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<ApplicationInstance, PageToolboxInstance> get(
+			public ReadOnlyRelationValue<ApplicationInstance, ToolboxInstance> get(
 					ApplicationInstance instance) {
 				return instance.pageToolbox;
 			}

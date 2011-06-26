@@ -228,9 +228,11 @@ public class Bootstrapper {
 		ConstantTextInstance welcomeText = createConstantText("Welcome to the designer");
 		createContainerItem(welcomePage.rootContainer.get(), welcomeText);
 		ButtonInstance pageToolboxButton = createButton("toolbox", createConstantText("Toolbox")); 
-//TODO:		createContainerItem(welcomePage.rootContainer.get(), pageToolboxButton);
+		createContainerItem(welcomePage.rootContainer.get(), pageToolboxButton);
 		
 		// Finish up
+		
+		applicationInstance.exposedFlows.add(mainFlow);
 
 //		System.out.println(CasePersister.gson.toJson(applicationInstance));
 		
@@ -239,7 +241,8 @@ public class Bootstrapper {
 
 	private static ButtonInstance createButton(String trigger, TextInstance caption) {
 		ButtonInstance result = new ButtonInstance(applicationInstance);
-		// TODO: trigger result..set("toolbox");
+		result.trigger.set(trigger);
+		result.name.set(trigger);
 		result.caption.set(caption);
 		return result;
 	}
