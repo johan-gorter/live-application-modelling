@@ -14,6 +14,7 @@ public class PageRenderer {
 		return element;
 	}
 
+	// TODO: return value should indicate if there are no blocking error messages
 	public static void submit(FlowContext flowContext, ChangeContext.FieldChange[] fieldChanges,
 			String submit) {
 		ChangeContext changeContext = new ChangeContext(flowContext, fieldChanges, submit);

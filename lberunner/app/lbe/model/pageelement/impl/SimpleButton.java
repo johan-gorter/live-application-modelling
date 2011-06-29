@@ -8,10 +8,13 @@ import lbe.model.pageelement.Text;
 public class SimpleButton extends Button {
 
 	private final String name;
+	private final String trigger;
 	private final Text caption;
 
-	public SimpleButton(String name, Text caption) {
-		this.name = name;
+
+	public SimpleButton(String trigger, Text caption) {
+		this.name = trigger;
+		this.trigger = trigger;
 		this.caption = caption;
 	}
 
@@ -23,5 +26,10 @@ public class SimpleButton extends Button {
 	@Override
 	public Text getCaption() {
 		return caption;
+	}
+
+	@Override
+	public String getTrigger() {
+		return trigger;
 	}
 }

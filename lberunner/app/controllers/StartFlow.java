@@ -82,7 +82,7 @@ public class StartFlow extends Controller {
 
 	public static void jumpToPage(String application, String startFlowName, String caseId, String pageCoordinates) {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("getFirstPage(" + application+ ", "  + caseId + ", " + startFlowName +  ")");
+			LOG.debug("jumpToPage(" + application+ ", "  + caseId + ", " + startFlowName +  ")");
 		}
 		CaseManager.fireChangesIfModelChanged();
 

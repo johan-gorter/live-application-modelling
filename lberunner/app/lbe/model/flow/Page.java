@@ -47,11 +47,9 @@ public abstract class Page extends FlowNodeBase {
 		public String language;
 	}
 	
-	@Override
-	public String flow(String entryName, FlowContext context) {
+	public void enter(FlowContext context) {
 		context.getPageCoordinates().addCoordinate(new Coordinate(getName(), null));
 		context.setPage(this);
-		return null;
 	}
 	
 	@Override

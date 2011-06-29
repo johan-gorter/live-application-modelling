@@ -40,8 +40,8 @@ public class Bootstrapper {
 	private static ApplicationInstance applicationInstance;
 	
 	public static void main(String[] args) {
-//		createCarinsurance();
-		createDesigner();
+		createCarinsurance();
+//		createDesigner();
 	}
 
 	public static void createCarinsurance() {

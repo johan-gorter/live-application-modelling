@@ -22,4 +22,9 @@ public class NextButton extends Button{
 		return "Next";
 	}
 
+	@Override
+	public String getTrigger() {
+		return "next";
+	}
+
 }

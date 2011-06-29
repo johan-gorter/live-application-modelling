@@ -12,8 +12,4 @@ public abstract class FlowSink extends FlowNodeBase {
 		throw new UnsupportedOperationException();
 	}
 	
-	@Override
-	public String flow(String entryName, FlowContext context) {
-		throw new UnsupportedOperationException();
-	}
 }

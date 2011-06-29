@@ -71,7 +71,7 @@ public class Case {
 	}
 	
 	private PageElement render(Flow startFlow, PageCoordinates pageCoordinates) {
-		FlowContext context = new FlowContext(currentCaseData, id);
+		FlowContext context = new FlowContext(startFlow, currentCaseData, id);
 		context.setPageCoordinates(pageCoordinates);
 		startFlow.jumpTo(context);
 		return PageRenderer.renderPage(context);
@@ -87,10 +87,10 @@ public class Case {
 		if (sources.length!=1) {
 			throw new RuntimeException("Can only start a flow with exactly 1 source");
 		}
-		FlowContext context = new FlowContext(currentCaseData, id);
+		FlowContext context = new FlowContext(startFlow, currentCaseData, id);
 		context.setPageCoordinates(new PageCoordinates());
 		
-		String event = startFlow.flow(sources[0], context);
+		String event = startFlow.flow(sources[0], null, context);
 		
 		if (event!=null) {
 			throw new RuntimeException("Startflow exited");
@@ -102,12 +102,14 @@ public class Case {
 	}
 
 	public synchronized void submit(Flow startFlow, PageCoordinates pageCoordinates, ChangeContext.FieldChange[] fieldChanges, String submit) {
-		FlowContext flowContext = new FlowContext(currentCaseData, id);
+		FlowContext flowContext = new FlowContext(startFlow, currentCaseData, id);
 		flowContext.setPageCoordinates(pageCoordinates);
 		startFlow.jumpTo(flowContext);
 		Page page = flowContext.getPage();
 		PageRenderer.submit(flowContext, fieldChanges, submit);
-		//TODO: handle exit event
+		if (flowContext.getTrigger()!=null) {
+			flowContext.flow();
+		}
 		informWaiters();
 	}
 	

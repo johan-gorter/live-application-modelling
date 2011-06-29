@@ -24,7 +24,7 @@ public class ChangeContext extends RenderContext {
 	
 	private String submit;
 	
-	private FieldChange[] fieldChanges; //TOOD: more efficiency by using a sorted array
+	private FieldChange[] fieldChanges; //TODO: more efficiency by using a sorted array
 
 	public ChangeContext(FlowContext flowContext, FieldChange[] fieldChanges, String submit) {
 		super(flowContext);
@@ -43,5 +43,5 @@ public class ChangeContext extends RenderContext {
 	public FieldChange[] getFieldChanges() {
 		return fieldChanges;
 	}
-	
+
 }

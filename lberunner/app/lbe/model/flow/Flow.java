@@ -30,7 +30,8 @@ public abstract class Flow extends Model {
 		}
 		throw new RuntimeException("Page/Subflow not found: "+path[pathIndex]);
 	}
-	public FlowEdge getEdge(FlowSource from) {
+	
+	public FlowEdge getEdge(FlowNodeBase from) {
 		for (FlowEdge edge: getEdges()) {
 			if (edge.getFrom()==from) {
 				return edge;
@@ -39,14 +40,25 @@ public abstract class Flow extends Model {
 		return null;
 	}
 	
-	public String flow(FlowSource flowSource, FlowContext context) {
+	private String enter(String trigger, FlowContext context) {
+		throw new UnsupportedOperationException();
+	}
+
+	// Step to the next point in the flow. Updates context and results in the next trigger
+	// returns null if a page has been reached.
+	// TODO: use trigger
+	public String flow(FlowNodeBase flowSource, String trigger, FlowContext context) {
 		FlowEdge edge = getEdge(flowSource);
 		FlowNodeBase node = edge.getTo();
-		String event = node.flow(edge.getEntryName(), context);
-		if (event!=null) {
-			throw new RuntimeException("Not yet implemented");
-		} else {
+		if (node instanceof SubFlow) {
+			return ((SubFlow)node).getFlow().enter(trigger, context);
+		} else if (node instanceof Page) {
+			((Page)node).enter(context);
 			return null;
+		} else if (node instanceof FlowSink) {
+			return node.getName();
+		} else {
+			throw new RuntimeException("Edge did not reach something useful "+node);
 		}
 	}
 

@@ -137,18 +137,10 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 				if (data.has(attribute.getName())) {
 					JsonElement value = data.get(attribute.getName());
 					AttributeValue attributeValue = (AttributeValue) attribute.get(result);
-					if (attribute.getDatatype()==Date.class) {
-						try {
-							attributeValue.set(UNIVERSAL_DATE.parse(value.getAsString()));
-						} catch (ParseException e) {
-							throw new RuntimeException(e);
-						}
-					} else if (attribute.getDatatype()==Boolean.class) {
-						attributeValue.set(value.getAsBoolean());
-					} else if (Number.class.isAssignableFrom(attribute.getDatatype())) {
-						attributeValue.set(value.getAsNumber());
+					if (attribute.isMultivalue()) {
+						setMultivalueAttribute(attribute, (AttributeValues) attributeValue, value);
 					} else {
-						attributeValue.set(value.getAsString());
+						attributeValue.set(toPrimitive(attribute, value));
 					}
 				}
 			}
@@ -168,6 +160,29 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 					}
 				}
 			}
+		}
+	}
+
+	private void setMultivalueAttribute(Attribute attribute, AttributeValues attributeValue, JsonElement value) {
+		JsonArray values = (JsonArray)value;
+		for (JsonElement item: values) {
+			attributeValue.add(toPrimitive(attribute, item));
+		}
+	}
+
+	private Object toPrimitive(Attribute attribute, JsonElement value) {
+		if (attribute.getDatatype()==Date.class) {
+			try {
+				return UNIVERSAL_DATE.parse(value.getAsString());
+			} catch (ParseException e) {
+				throw new RuntimeException(e);
+			}
+		} else if (attribute.getDatatype()==Boolean.class) {
+			return value.getAsBoolean();
+		} else if (Number.class.isAssignableFrom(attribute.getDatatype())) {
+			return value.getAsNumber();
+		} else {
+			return value.getAsString();
 		}
 	}
 }

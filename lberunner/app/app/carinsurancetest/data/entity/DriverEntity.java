@@ -90,7 +90,7 @@ public class DriverEntity extends SimpleEntity {
 				return instance.zipCode;
 			}
 			
-			private final Text question = new ConstantText("ZIP code");
+			private final Text question = new ConstantText("Zip code");
 			@Override
 			public Text getQuestion() {
 				return question;

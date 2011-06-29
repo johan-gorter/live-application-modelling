@@ -110,4 +110,8 @@ public class RenderContext {
 	public PageCoordinates getPageCoordinates() {
 		return flowContext.getPageCoordinates();
 	}
+
+	public FlowContext getFlowContext() {
+		return flowContext;
+	}
 }
