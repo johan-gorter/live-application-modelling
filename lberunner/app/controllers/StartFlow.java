@@ -50,23 +50,17 @@ public class StartFlow extends Controller {
 		}
 	};
 
-	public static void index(String application, String startFlowName, String caseId) {
+	public static void index(String application, String caseId) {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("index(" + application+ ", "  + caseId + ", " + startFlowName + ")");
+			LOG.debug("index(" + application+ ", "  + caseId + ")");
 		}
 		CaseManager.fireChangesIfModelChanged();
 		Application app = getApplication(application);
 		if (caseId == null) {
 			Case c = CaseManager.create((CaseInstance) app.getCaseModel().createInstance(null));
-			redirect("StartFlow.index", application, startFlowName, c.getId());
+			redirect("StartFlow.index", application, c.getId());
 		}
 		Case c = CaseManager.getCase(caseId, app.getCaseInstanceClass());
-		Flow startFlow;
-		if (startFlowName == null) {
-			startFlow = app.getExposedFlows()[0];
-			redirect("StartFlow.index", application, startFlow.getName(), c.getId());
-		}
-		startFlow = app.getExposedFlow(startFlowName);
 		
 		render();
 	}
@@ -80,24 +74,24 @@ public class StartFlow extends Controller {
 		throw new RuntimeException("Unknown application: "+application);
 	}
 
-	public static void jumpToPage(String application, String startFlowName, String caseId, String pageCoordinates) {
+	public static void jumpToPage(String application, String caseId, String pageCoordinates) {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("jumpToPage(" + application+ ", "  + caseId + ", " + startFlowName +  ")");
+			LOG.debug("jumpToPage(" + application+ ", "  + caseId +  ")");
 		}
 		CaseManager.fireChangesIfModelChanged();
 
 		Application app = getApplication(application);
 		Case c = CaseManager.getCase(caseId, app.getCaseInstanceClass());
-		Flow startFlow = app.getExposedFlow(startFlowName);
+		PageCoordinates coordinates = PageCoordinates.parse(pageCoordinates);
 
-		PageElement renderedPage = c.startFlow(startFlow);
+		PageElement renderedPage = c.jumpToPage(app, coordinates);
 		
 		renderJSON(renderedPage, dateSerializer);
 	}
 
-	public static void submit(String application, String startFlowName, String caseId, String pageCoordinates, JsonObject event, JsonObject keepAlive) {
+	public static void submit(String application, String caseId, String pageCoordinates, JsonObject event, JsonObject keepAlive) {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("submit(" + application+ ", "  + caseId + ", " + startFlowName +  ")");
+			LOG.debug("submit(" + application+ ", "  + caseId +  ")");
 		}
 		CaseManager.fireChangesIfModelChanged();
 
@@ -106,7 +100,6 @@ public class StartFlow extends Controller {
 		}
 		Application app = getApplication(application);
 		Case c = CaseManager.getCase(caseId, app.getCaseInstanceClass());
-		Flow startFlow = app.getExposedFlow(startFlowName);
 		
 		JsonArray valuesArray = event.getAsJsonArray("values");
 		JsonElement submit = event.get("submit");
@@ -119,7 +112,7 @@ public class StartFlow extends Controller {
 				Object value = toValue(change.get("value"));
 				fieldChanges[i] = new ChangeContext.FieldChange(change.get("id").getAsString(), value);
 			}
-			c.submit(startFlow, PageCoordinates.parse(pageCoordinates), fieldChanges,
+			c.submit(app, PageCoordinates.parse(pageCoordinates), fieldChanges,
 					submit == null ? null : submit.getAsString());
 		}
 		renderJSON("{}");
@@ -139,17 +132,16 @@ public class StartFlow extends Controller {
 				.isNumber() ? jsonValue.getAsNumber() : jsonValue.getAsString();
 	}
 
-	public static void waitForPageChange(String application, String startFlowName, String caseId, String pageCoordinates, int lastCaseVersion) {
+	public static void waitForPageChange(String application, String caseId, String pageCoordinates, int lastCaseVersion) {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug("waitForPageChange(" + application+ ", "  + caseId + ", " + startFlowName  + ", " + lastCaseVersion + ")");
+			LOG.debug("waitForPageChange(" + application+ ", "  + caseId + ", " + lastCaseVersion + ")");
 		}
 		CaseManager.fireChangesIfModelChanged();
 
 		Application app = getApplication(application);
 		Case c = CaseManager.getCase(caseId, app.getCaseInstanceClass());
-		Flow startFlow = app.getExposedFlow(startFlowName);
 		
-		PageElement page = await(c.waitForChange(lastCaseVersion, startFlow, PageCoordinates.parse(pageCoordinates)));
+		PageElement page = await(c.waitForChange(lastCaseVersion, app, PageCoordinates.parse(pageCoordinates)));
 		renderJSON(page, dateSerializer);
 	}
 }

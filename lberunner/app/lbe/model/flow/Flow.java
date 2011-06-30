@@ -48,6 +48,13 @@ public abstract class Flow extends Model {
 	// returns null if a page has been reached.
 	// TODO: use trigger
 	public String flow(FlowNodeBase flowSource, String trigger, FlowContext context) {
+		if (flowSource==null) {
+			FlowSource[] sources = getSources();
+			if (sources.length!=1) {
+				throw new RuntimeException("Can only start flows with 1 source, not "+getName());
+			}
+			flowSource = sources[0];
+		}
 		FlowEdge edge = getEdge(flowSource);
 		FlowNodeBase node = edge.getTo();
 		if (node instanceof SubFlow) {
@@ -63,26 +70,17 @@ public abstract class Flow extends Model {
 	}
 
 	// This should result in a page.
-	public void jumpTo(FlowContext flowContext) {
-		jumpTo(flowContext, flowContext.getPageCoordinates().getPath().iterator());
-		List<Coordinate> path = flowContext.getPageCoordinates().getPath();
-		if (path.size()==0) {
-			throw new RuntimeException("jumpTo did not reach a page");
+	public void jumpTo(FlowContext flowContext, Coordinate thisCoordinate, Iterator<Coordinate> coordinates) {
+		if (thisCoordinate.getActiveInstances()!=null) {
+			flowContext.pushActiveInstances(thisCoordinate.getActiveInstances());
 		}
-	}
-
-	// This should result in a page.
-	public void jumpTo(FlowContext flowContext, Iterator<Coordinate> coordinates) {
 		if (!coordinates.hasNext()) {
 			throw new RuntimeException("jumpTo did not reach a page");
 		}
 		Coordinate next = coordinates.next();
 		for (FlowNodeBase node : getNodes()) {
 			if (node.getName().equals(next.getNodeName())) {
-				if (next.getActiveInstances()!=null) {
-					flowContext.pushActiveInstances(next.getActiveInstances());
-				}
-				node.jumpTo(flowContext, coordinates);
+				node.jumpTo(flowContext, next, coordinates);
 			}
 		}
 	}

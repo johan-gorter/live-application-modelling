@@ -60,27 +60,26 @@
 var History = YAHOO.util.History;
 
 var application = History.getQueryStringParameter("application");
-var startFlowName = History.getQueryStringParameter("startFlowName");
 var caseId = History.getQueryStringParameter("caseId");
 
-var jumpToPageAction = #{jsAction @jumpToPage(':application', ':startFlowName', ':caseId', ':pageCoordinates') /};
-var waitForPageChangeAction = #{jsAction @waitForPageChange(':application', ':startFlowName', ':caseId', ':pageCoordinates', ':lastCaseVersion') /};
+var jumpToPageAction = #{jsAction @jumpToPage(':application', ':caseId', ':pageCoordinates') /};
+var waitForPageChangeAction = #{jsAction @waitForPageChange(':application', ':caseId', ':pageCoordinates', ':lastCaseVersion') /};
 
-var pageCoordinates = History.getBookmarkedState('page') || '';
+var pageCoordinates = History.getBookmarkedState('coordinates') || '';
 var lastCaseVersion;
 var engine;
 
 var aquimaBaseUrl = aquima.mvc.Settings.engine.aquimaUrl;
-aquima.mvc.Settings.engine.aquimaUrl=aquimaBaseUrl+'?application='+application+'&startFlowName='+startFlowName+'&caseId='+caseId;
+aquima.mvc.Settings.engine.aquimaUrl=aquimaBaseUrl+'?application='+application+'&caseId='+caseId;
 
 function jumpToPage() {
-	$.get(jumpToPageAction({application: application, startFlowName: startFlowName, caseId: caseId, pageCoordinates: pageCoordinates}), function(data) {
+	$.get(jumpToPageAction({application: application, caseId: caseId, pageCoordinates: pageCoordinates}), function(data) {
 		updatePage(data);
 		waitForPageChanges();
 	});
 }
 
-YAHOO.util.History.register("page", pageCoordinates, function (state) {
+YAHOO.util.History.register('coordinates', pageCoordinates, function (state) {
 	if (state && (pageCoordinates==state)) return;
 	pageCoordinates = state;
     jumpToPage(state);
@@ -102,7 +101,7 @@ $(document).ready(function() {
 })
 
 function waitForPageChanges() {
-	$.get(waitForPageChangeAction({application: application, startFlowName: startFlowName, caseId: caseId, pageCoordinates: pageCoordinates, lastCaseVersion: lastCaseVersion}), function(data) {
+	$.get(waitForPageChangeAction({application: application, caseId: caseId, pageCoordinates: pageCoordinates, lastCaseVersion: lastCaseVersion}), function(data) {
 		updatePage(data);
 		waitForPageChanges();
 	});
@@ -111,7 +110,7 @@ function waitForPageChanges() {
 function updatePage(data) {
 	document.title= data.name;
 	pageCoordinates = data.id;
-	History.navigate('page', pageCoordinates);
+	History.navigate('coordinates', pageCoordinates);
 
 	lastCaseVersion = data.caseVersion;
 	engine.update(data);

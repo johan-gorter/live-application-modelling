@@ -8,6 +8,6 @@ import lbe.model.Model;
 
 public abstract class FlowNodeBase extends Model {
 
-	public abstract void jumpTo(FlowContext flowContext, Iterator<Coordinate> coordinates);
+	public abstract void jumpTo(FlowContext flowContext, Coordinate thisCoordinate, Iterator<Coordinate> nextCoordinates);
 
 }

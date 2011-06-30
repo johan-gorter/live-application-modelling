@@ -53,8 +53,8 @@ public abstract class Page extends FlowNodeBase {
 	}
 	
 	@Override
-	public void jumpTo(FlowContext flowContext, Iterator<Coordinate> coordinates) {
-		if (coordinates.hasNext()) {
+	public void jumpTo(FlowContext flowContext, Coordinate thisCoordinate, Iterator<Coordinate> nextCoordinates) {
+		if (nextCoordinates.hasNext()) {
 			throw new RuntimeException("Page does not have subnodes");
 		}
 		flowContext.setPage(this);

@@ -47,12 +47,9 @@ public class FlowContext {
 	private PageCoordinates pageCoordinates;
 
 	
-	public FlowContext(Flow startFlow, CaseData caseData, String caseId) {
+	public FlowContext(CaseData caseData, String caseId) {
 		this.caseData = caseData;
 		this.caseId = caseId;
-		NodeStackNode nodeStackNode = new NodeStackNode(startFlow);
-		nodeStackNode.activeInstances.add(caseData.getCaseInstance());
-		stack.add(nodeStackNode);
 	}
 	
 	public void pushActiveInstance(Instance instance) {
@@ -66,7 +63,6 @@ public class FlowContext {
 	public void popActiveInstance(Instance instance) {
 		getStackTop().popActiveInstance(instance);
 	}
-	
 	
 	public Page getPage() {
 		return page;
@@ -105,6 +101,9 @@ public class FlowContext {
 	}
 
 	public Instance getActiveInstance(Entity entity) {
+		if (entity == caseData.getCaseInstance().getModel()) {
+			return caseData.getCaseInstance();
+		}
 		for (int i=stack.size()-1;i>=0;i--) {
 			Instance instance = stack.get(i).getActiveInstance(entity);
 			if (instance!=null) {

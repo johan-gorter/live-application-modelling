@@ -9,6 +9,7 @@ import controllers.StartFlow;
 
 import lbe.instance.CaseInstance;
 import lbe.instance.Instance;
+import lbe.model.Application;
 import lbe.model.flow.Flow;
 import lbe.model.flow.FlowSource;
 import lbe.model.flow.Page;
@@ -21,12 +22,12 @@ public class Case {
 
 	private static class Waiter {
 		Promise<PageElement> promise;
-		Flow startFlow;
+		Application application;
 		PageCoordinates pageCoordinates;
 
-		public Waiter(Promise<PageElement> promise, Flow startFlow, PageCoordinates pageCoordinates) {
+		public Waiter(Promise<PageElement> promise, Application application, PageCoordinates pageCoordinates) {
 			this.promise = promise;
-			this.startFlow = startFlow;
+			this.application = application;
 			this.pageCoordinates = pageCoordinates;
 		}
 	}
@@ -48,18 +49,18 @@ public class Case {
 		return id;
 	}
 
-	public synchronized Promise<PageElement> waitForChange(int lastCaseVersion, Flow startFlow, PageCoordinates pageCoordinates) {
+	public synchronized Promise<PageElement> waitForChange(int lastCaseVersion, Application application, PageCoordinates pageCoordinates) {
 		LOG.info("waitForChange, last known case version: "+lastCaseVersion+" case version "+currentCaseData.getVersion()
 					+" model version "+getModelVersion());
 		CaseManager.incrementChangeWaiters();
 		Promise<PageElement> promise = new Promise<PageElement>();
 		if (currentCaseData.getVersion()>lastCaseVersion) {
 			LOG.info("Sending page (not waiting for change)");
-			promise.invoke(render(startFlow, pageCoordinates));
+			promise.invoke(render(application, pageCoordinates));
 			return promise;
 		}
 		LOG.info("Waiting for change");
-		waiters.add(new Waiter(promise, startFlow, pageCoordinates));
+		waiters.add(new Waiter(promise, application, pageCoordinates));
 		return promise;
 	}
 
@@ -70,10 +71,10 @@ public class Case {
 		return 0;
 	}
 	
-	private PageElement render(Flow startFlow, PageCoordinates pageCoordinates) {
-		FlowContext context = new FlowContext(startFlow, currentCaseData, id);
+	private PageElement render(Application application, PageCoordinates pageCoordinates) {
+		FlowContext context = new FlowContext(currentCaseData, id);
 		context.setPageCoordinates(pageCoordinates);
-		startFlow.jumpTo(context);
+		application.jumpToPage(context);
 		return PageRenderer.renderPage(context);
 	}
 
@@ -82,29 +83,21 @@ public class Case {
 		CaseManager.decrementChangeWaiters();
 	}
 	
-	public synchronized PageElement startFlow(Flow startFlow) {
-		FlowSource[] sources = startFlow.getSources();
-		if (sources.length!=1) {
-			throw new RuntimeException("Can only start a flow with exactly 1 source");
-		}
-		FlowContext context = new FlowContext(startFlow, currentCaseData, id);
-		context.setPageCoordinates(new PageCoordinates());
+	public synchronized PageElement jumpToPage(Application application, PageCoordinates pageCoordinates) {
+		FlowContext flowContext = new FlowContext(currentCaseData, id);
+		flowContext.setPageCoordinates(pageCoordinates);
+		application.jumpToPage(flowContext);
 		
-		String event = startFlow.flow(sources[0], null, context);
-		
-		if (event!=null) {
-			throw new RuntimeException("Startflow exited");
-		}
-		if (!context.isReady()) {
+		if (!flowContext.isReady()) {
 			throw new RuntimeException("Flowing did not result in a page");
 		}
-		return PageRenderer.renderPage(context);
+		return PageRenderer.renderPage(flowContext);
 	}
 
-	public synchronized void submit(Flow startFlow, PageCoordinates pageCoordinates, ChangeContext.FieldChange[] fieldChanges, String submit) {
-		FlowContext flowContext = new FlowContext(startFlow, currentCaseData, id);
+	public synchronized void submit(Application application, PageCoordinates pageCoordinates, ChangeContext.FieldChange[] fieldChanges, String submit) {
+		FlowContext flowContext = new FlowContext(currentCaseData, id);
 		flowContext.setPageCoordinates(pageCoordinates);
-		startFlow.jumpTo(flowContext);
+		application.jumpToPage(flowContext);
 		Page page = flowContext.getPage();
 		PageRenderer.submit(flowContext, fieldChanges, submit);
 		if (flowContext.getTrigger()!=null) {
@@ -121,7 +114,7 @@ public class Case {
 		waiters = new ArrayList<Waiter>();
 		LOG.info("informing "+ promises.size() +"waiters");
 		for (Waiter waiter : promises) {
-			waiter.promise.invoke(render(waiter.startFlow, waiter.pageCoordinates));
+			waiter.promise.invoke(render(waiter.application, waiter.pageCoordinates));
 		}
 	}
 }
