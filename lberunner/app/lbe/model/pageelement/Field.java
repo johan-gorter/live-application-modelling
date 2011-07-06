@@ -72,13 +72,14 @@ public abstract class Field extends PageElementBase {
 	}
 
 	@Override
-	public void changeValue(ChangeContext changeContext) {
+	public String submit(ChangeContext changeContext) {
 		String id = getName()+"@"+changeContext.nextId();
 		
 		for (ChangeContext.FieldChange fieldChange: changeContext.getFieldChanges()) {
 			if (fieldChange.getPageElementId().equals(id))
 			changeContext.setValue(getAttribute(), fieldChange.getValue());
 		}
+		return null;
 	}
 
 	public abstract Attribute getAttribute();

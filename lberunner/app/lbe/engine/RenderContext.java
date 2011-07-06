@@ -6,8 +6,6 @@ import java.util.List;
 import lbe.instance.Instance;
 import lbe.instance.value.ReadOnlyAttributeValue;
 import lbe.instance.value.ReadOnlyRelationValue;
-import lbe.instance.value.RelationValue;
-import lbe.instance.value.impl.AttributeValueImpl;
 import lbe.model.Attribute;
 import lbe.model.Entity;
 import lbe.model.Relation;
@@ -18,8 +16,10 @@ public class RenderContext {
 	
 	private List<Integer> lastIds = new ArrayList<Integer>(25);
 	private final List<Instance> activeInstances = new ArrayList<Instance>(10);
+	private final String pageCoordinates;
 
-	public RenderContext(FlowContext flowContext) {
+	public RenderContext(FlowContext flowContext, String pageCoordinates) {
+		this.pageCoordinates = pageCoordinates;
 		this.flowContext = flowContext;
 		nextIdLevel();
 	}
@@ -107,8 +107,8 @@ public class RenderContext {
 	}
 	
 
-	public PageCoordinates getPageCoordinates() {
-		return flowContext.getPageCoordinates();
+	public String getPageCoordinates() {
+		return pageCoordinates;
 	}
 
 	public FlowContext getFlowContext() {

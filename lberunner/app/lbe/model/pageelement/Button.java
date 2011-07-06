@@ -26,12 +26,13 @@ public abstract class Button extends PageElementBase {
 	public abstract String getTrigger();
 
 	@Override
-	public void changeValue(ChangeContext changeContext) {
+	public String submit(ChangeContext changeContext) {
 		String id = getName()+"@"+changeContext.nextId();
 		
 		if (id.equals(changeContext.getSubmit())) {
-			changeContext.getFlowContext().setTrigger(getTrigger());
+			return getTrigger();
 		}
+		return null;
 	}
 	
 }

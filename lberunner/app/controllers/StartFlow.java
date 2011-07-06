@@ -29,6 +29,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+
+import controllers.Secure.Security;
 @With(Secure.class)
 public class StartFlow extends Controller {
 
@@ -61,7 +63,8 @@ public class StartFlow extends Controller {
 			redirect("StartFlow.index", application, c.getId());
 		}
 		Case c = CaseManager.getCase(caseId, app.getCaseInstanceClass());
-		
+		String sessionId = c.startSession(Security.connected(), null);
+		renderArgs.put("sessionId", sessionId);
 		render();
 	}
 
@@ -74,7 +77,7 @@ public class StartFlow extends Controller {
 		throw new RuntimeException("Unknown application: "+application);
 	}
 
-	public static void jumpToPage(String application, String caseId, String pageCoordinates) {
+	public static void jumpToPage(String application, String caseId, String pageCoordinates, String sessionId) {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("jumpToPage(" + application+ ", "  + caseId +  ")");
 		}
@@ -84,12 +87,12 @@ public class StartFlow extends Controller {
 		Case c = CaseManager.getCase(caseId, app.getCaseInstanceClass());
 		PageCoordinates coordinates = PageCoordinates.parse(pageCoordinates);
 
-		PageElement renderedPage = c.jumpToPage(app, coordinates);
+		PageElement renderedPage = c.renderOrStartFlow(app, coordinates, sessionId, Security.connected());
 		
 		renderJSON(renderedPage, dateSerializer);
 	}
 
-	public static void submit(String application, String caseId, String pageCoordinates, JsonObject event, JsonObject keepAlive) {
+	public static void submit(String application, String caseId, String pageCoordinates, String sessionId, JsonObject event, JsonObject keepAlive) {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("submit(" + application+ ", "  + caseId +  ")");
 		}
@@ -112,8 +115,8 @@ public class StartFlow extends Controller {
 				Object value = toValue(change.get("value"));
 				fieldChanges[i] = new ChangeContext.FieldChange(change.get("id").getAsString(), value);
 			}
-			c.submit(app, PageCoordinates.parse(pageCoordinates), fieldChanges,
-					submit == null ? null : submit.getAsString());
+			c.submit(app, PageCoordinates.parse(pageCoordinates),  sessionId, Security.connected(), 
+					fieldChanges, submit == null ? null : submit.getAsString());
 		}
 		renderJSON("{}");
 	}
@@ -132,7 +135,7 @@ public class StartFlow extends Controller {
 				.isNumber() ? jsonValue.getAsNumber() : jsonValue.getAsString();
 	}
 
-	public static void waitForPageChange(String application, String caseId, String pageCoordinates, int lastCaseVersion) {
+	public static void waitForPageChange(String application, String caseId, String pageCoordinates, String sessionId, int lastCaseVersion) {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("waitForPageChange(" + application+ ", "  + caseId + ", " + lastCaseVersion + ")");
 		}
@@ -141,7 +144,7 @@ public class StartFlow extends Controller {
 		Application app = getApplication(application);
 		Case c = CaseManager.getCase(caseId, app.getCaseInstanceClass());
 		
-		PageElement page = await(c.waitForChange(lastCaseVersion, app, PageCoordinates.parse(pageCoordinates)));
+		PageElement page = await(c.waitForChange(lastCaseVersion, app, PageCoordinates.parse(pageCoordinates), sessionId, Security.connected()));
 		renderJSON(page, dateSerializer);
 	}
 }

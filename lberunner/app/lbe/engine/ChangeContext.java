@@ -26,8 +26,8 @@ public class ChangeContext extends RenderContext {
 	
 	private FieldChange[] fieldChanges; //TODO: more efficiency by using a sorted array
 
-	public ChangeContext(FlowContext flowContext, FieldChange[] fieldChanges, String submit) {
-		super(flowContext);
+	public ChangeContext(FlowContext flowContext, String pageCoordinates, FieldChange[] fieldChanges, String submit) {
+		super(flowContext, pageCoordinates);
 		this.fieldChanges = fieldChanges;
 		this.submit = submit;
 	}

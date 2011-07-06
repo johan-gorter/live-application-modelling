@@ -1,22 +1,16 @@
 package lbe.model.flow;
 
-import java.util.Iterator;
-
 import lbe.engine.ChangeContext;
-import lbe.engine.FlowContext;
-import lbe.engine.PageCoordinates.Coordinate;
 import lbe.engine.PageElement;
-import lbe.engine.PageRenderer;
 import lbe.engine.RenderContext;
 import lbe.model.pageelement.Container;
-import lbe.model.pageelement.PageElementBase;
 
 public abstract class Page extends FlowNodeBase {
 	
 	public abstract Container getRootContainer();
 
-	public void changeValue(ChangeContext changeContext) {
-		getRootContainer().changeValue(changeContext);
+	public String submit(ChangeContext changeContext) {
+		return getRootContainer().submit(changeContext);
 	}
 
 	public PageElement render(final RenderContext renderContext) {
@@ -26,7 +20,7 @@ public abstract class Page extends FlowNodeBase {
 		result.language = renderContext.getLanguage();
 		result.params = new PageRootParamsElement();
 		result.elementType = "page";
-		result.id = renderContext.getPageCoordinates().format();
+		result.id = renderContext.getPageCoordinates();
 		result.name = getName();
 		PageElement contentElements = getRootContainer().render(renderContext);
 		result.content = new PageElement[]{contentElements};
@@ -45,18 +39,5 @@ public abstract class Page extends FlowNodeBase {
 		public int caseVersion;
 		public PageRootParamsElement params;
 		public String language;
-	}
-	
-	public void enter(FlowContext context) {
-		context.getPageCoordinates().addCoordinate(new Coordinate(getName(), null));
-		context.setPage(this);
-	}
-	
-	@Override
-	public void jumpTo(FlowContext flowContext, Coordinate thisCoordinate, Iterator<Coordinate> nextCoordinates) {
-		if (nextCoordinates.hasNext()) {
-			throw new RuntimeException("Page does not have subnodes");
-		}
-		flowContext.setPage(this);
 	}
 }

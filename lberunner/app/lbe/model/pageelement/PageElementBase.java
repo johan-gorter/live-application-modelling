@@ -18,8 +18,9 @@ public abstract class PageElementBase extends Model {
 		
 	}
 
-	public void changeValue(ChangeContext changeContext) {
+	public String submit(ChangeContext changeContext) {
 		changeContext.nextId();
+		return null;
 	}
 
 }

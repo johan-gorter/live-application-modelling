@@ -12,76 +12,17 @@ import lbe.model.flow.Page;
 
 public class FlowContext {
 
-	private static class NodeStackNode {
-		
-		public final Flow flow;
-		public final List<Instance> activeInstances = new ArrayList<Instance>(10);
-		
-		private NodeStackNode(Flow flow) {
-			this.flow = flow;
-		}
-		
-		public Instance getActiveInstance(Entity entity) {
-			for (Instance active: activeInstances) {
-				if (active.getModel()==entity) {
-					return active;
-				}
-			}
-			return null;
-		}
-
-		public void popActiveInstance(Instance instance) {
-			Instance removed = this.activeInstances.remove(this.activeInstances.size()-1);
-			if (removed !=instance) {
-				throw new RuntimeException("Asymmetric push/pop");
-			}
-		}
-	}
-	
 	private final CaseData caseData;
 	private final String caseId;
-	private final List<NodeStackNode> stack = new ArrayList<NodeStackNode>(10);
-	private String trigger;
+	private FlowStack flowStack;
 
-	private Page page;
-	private PageCoordinates pageCoordinates;
-
-	
 	public FlowContext(CaseData caseData, String caseId) {
 		this.caseData = caseData;
 		this.caseId = caseId;
 	}
 	
-	public void pushActiveInstance(Instance instance) {
-		getStackTop().activeInstances.add(instance);
-	}
-
-	private NodeStackNode getStackTop() {
-		return this.stack.get(stack.size()-1);
-	}
-	
-	public void popActiveInstance(Instance instance) {
-		getStackTop().popActiveInstance(instance);
-	}
-	
 	public Page getPage() {
-		return page;
-	}
-
-	public void setPage(Page page) {
-		this.page = page;
-	}
-
-	public PageCoordinates getPageCoordinates() {
-		return pageCoordinates;
-	}
-
-	public void setPageCoordinates(PageCoordinates pageCoordinates) {
-		this.pageCoordinates = pageCoordinates;
-	}
-	
-	public boolean isReady() {
-		return page!=null;
+		return (Page) flowStack.getCurrentNode();
 	}
 
 	public CaseData getCaseData() {
@@ -92,42 +33,33 @@ public class FlowContext {
 		return caseId;
 	}
 
-	public void pushActiveInstances(List<Long> activateInstances) {
-		CaseInstance caseInstance = caseData.getCaseInstance();
-		for (long id: activateInstances) {
-			pushActiveInstance(caseInstance.getInstanceById(id));
-		}
-		throw new UnsupportedOperationException();
-	}
-
 	public Instance getActiveInstance(Entity entity) {
 		if (entity == caseData.getCaseInstance().getModel()) {
 			return caseData.getCaseInstance();
 		}
-		for (int i=stack.size()-1;i>=0;i--) {
-			Instance instance = stack.get(i).getActiveInstance(entity);
-			if (instance!=null) {
-				return instance;
-			}
+		Instance result = flowStack.getActiveInstance(entity);
+		if (result!=null) {
+			return result;
 		}
 		throw new RuntimeException("No active instance of entity "+entity.getName());
 	}
 
-	public String getTrigger() {
-		return trigger;
+	public String step(String trigger) {
+		return flowStack.getFlow().step(flowStack.getCurrentNode(), trigger, this);
 	}
 
-	public void setTrigger(String trigger) {
-		this.trigger = trigger;
+	public FlowStack getFlowStack() {
+		return flowStack;
 	}
 
-	public void flow() {
-		Page currentPage = getPage();
-		setPage(null);
-		String currentTrigger = getTrigger();
-		setTrigger(null);
-		do {
-			currentTrigger = getStackTop().flow.flow(currentPage, currentTrigger, this);
-		} while (getPage()==null);
+	public void setFlowStack(FlowStack flowStack) {
+		this.flowStack = flowStack;
+	}
+
+	public void popFlowContext() {
+		flowStack = flowStack.getParent();
+		if (flowStack==null) {
+			throw new RuntimeException("End of startflow reached");
+		}
 	}
 }

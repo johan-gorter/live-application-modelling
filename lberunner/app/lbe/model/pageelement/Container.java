@@ -50,8 +50,9 @@ public abstract class Container extends PageElementBase {
 	}
 	
 	@Override
-	public void changeValue(ChangeContext context) {
-		super.changeValue(context);
+	public String submit(ChangeContext context) {
+		String result = null;
+		super.submit(context);
 		//TODO: remove code duplication
 		Relation<Instance, Instance, Instance> relation = this.getRelation();
 		Instance pushed = null;
@@ -61,13 +62,20 @@ public abstract class Container extends PageElementBase {
 		context.nextIdLevel();
 		
 		for (PageElementBase child: getChildren()) {
-			child.changeValue(context);
+			String childResult = child.submit(context);
+			if (childResult!=null) {
+				if (result!=null) {
+					throw new RuntimeException("More than one trigger?");
+				}
+				result = childResult;
+			}
 		}
 		
 		context.previousIdLevel();
 		if (relation!=null) {
 			context.popInstance(pushed);
 		}
+		return result;
 	}
 
 	public static PageElement[] renderChildren(RenderContext context, PageElementBase[] childModels) {
@@ -91,7 +99,7 @@ public abstract class Container extends PageElementBase {
 	public static void changeValue(ChangeContext changeContext,
 			PageElementBase[] childModels) {
 		for (PageElementBase child: childModels) {
-			child.changeValue(changeContext);
+			child.submit(changeContext);
 		}		
 	}
 

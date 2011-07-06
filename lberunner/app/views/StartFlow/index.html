@@ -61,19 +61,20 @@ var History = YAHOO.util.History;
 
 var application = History.getQueryStringParameter("application");
 var caseId = History.getQueryStringParameter("caseId");
+var sessionId = '${sessionId}';
 
-var jumpToPageAction = #{jsAction @jumpToPage(':application', ':caseId', ':pageCoordinates') /};
-var waitForPageChangeAction = #{jsAction @waitForPageChange(':application', ':caseId', ':pageCoordinates', ':lastCaseVersion') /};
+var jumpToPageAction = #{jsAction @jumpToPage(':application', ':caseId', ':pageCoordinates', ':sessionId') /};
+var waitForPageChangeAction = #{jsAction @waitForPageChange(':application', ':caseId', ':pageCoordinates', ':sessionId', ':lastCaseVersion') /};
 
 var pageCoordinates = History.getBookmarkedState('coordinates') || '';
 var lastCaseVersion;
 var engine;
 
 var aquimaBaseUrl = aquima.mvc.Settings.engine.aquimaUrl;
-aquima.mvc.Settings.engine.aquimaUrl=aquimaBaseUrl+'?application='+application+'&caseId='+caseId;
+aquima.mvc.Settings.engine.aquimaUrl=aquimaBaseUrl+'?application='+application+'&caseId='+caseId+'&sessionId='+sessionId;
 
 function jumpToPage() {
-	$.get(jumpToPageAction({application: application, caseId: caseId, pageCoordinates: pageCoordinates}), function(data) {
+	$.get(jumpToPageAction({application: application, caseId: caseId, pageCoordinates: pageCoordinates, sessionId: sessionId}), function(data) {
 		updatePage(data);
 		waitForPageChanges();
 	});
@@ -101,7 +102,7 @@ $(document).ready(function() {
 })
 
 function waitForPageChanges() {
-	$.get(waitForPageChangeAction({application: application, caseId: caseId, pageCoordinates: pageCoordinates, lastCaseVersion: lastCaseVersion}), function(data) {
+	$.get(waitForPageChangeAction({application: application, caseId: caseId, pageCoordinates: pageCoordinates, sessionId: sessionId, lastCaseVersion: lastCaseVersion}), function(data) {
 		updatePage(data);
 		waitForPageChanges();
 	});
