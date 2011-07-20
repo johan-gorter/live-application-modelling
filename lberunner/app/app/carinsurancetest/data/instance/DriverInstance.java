@@ -16,11 +16,11 @@ public class DriverInstance
 	implements Instance {
 
 	public DriverInstance(CaseInstance caseInstance) {
-		super(caseInstance, DriverEntity.INSTANCE);
+		super(caseInstance, DriverEntity.INSTANCE, 0);
 	}
 	
 	protected DriverInstance(CaseInstance caseInstance, Entity model) {
-		super(caseInstance, model);
+		super(caseInstance, model, 0);
 	}
 
 	// Attributes

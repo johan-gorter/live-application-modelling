@@ -88,6 +88,7 @@ public class EntityClassModel {
 	public final List<Attribute> attributes = new ArrayList<Attribute>();
 	public final List<Relation> relations = new ArrayList<Relation>();
 	public final List<Relation> reverseRelations = new ArrayList<Relation>();
+	public String applicationName;
 	
 	public String getAppname() {
 		return appname;

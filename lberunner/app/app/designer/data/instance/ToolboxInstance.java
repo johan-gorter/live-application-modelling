@@ -16,11 +16,11 @@ public class ToolboxInstance
 	implements Instance {
 
 	public ToolboxInstance(CaseInstance caseInstance) {
-		super(caseInstance, ToolboxEntity.INSTANCE);
+		super(caseInstance, ToolboxEntity.INSTANCE, 0);
 	}
 	
 	protected ToolboxInstance(CaseInstance caseInstance, Entity model) {
-		super(caseInstance, model);
+		super(caseInstance, model, 0);
 	}
 
 	// Attributes

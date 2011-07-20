@@ -64,5 +64,11 @@ public class CarinsuranceCaseEntity extends Entity {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

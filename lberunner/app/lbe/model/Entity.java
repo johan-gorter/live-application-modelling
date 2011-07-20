@@ -102,4 +102,6 @@ public abstract class Entity extends Model {
 
 	public abstract Instance createInstance(CaseInstance caseInstance);
 
+	public abstract Instance createInstance(CaseInstance caseInstance, long id);
+
 }

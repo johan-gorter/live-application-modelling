@@ -1,5 +1,6 @@
 package app.carinsurance.entity;
 
+import app.carinsurance.CarinsuranceApplication;
 import lbe.instance.CaseInstance;
 import lbe.instance.impl.SimpleCaseInstance;
 import lbe.instance.value.RelationValue;
@@ -9,7 +10,7 @@ import lbe.model.Entity;
 public class CarinsuranceCaseInstance extends SimpleCaseInstance {
 
 	public CarinsuranceCaseInstance() {
-		super(CarinsuranceCaseEntity.INSTANCE);
+		super(CarinsuranceCaseEntity.INSTANCE, CarinsuranceApplication.INSTANCE );
 	}
 
 	public final RelationValue<CarinsuranceCaseInstance, DriverInstance> driver 

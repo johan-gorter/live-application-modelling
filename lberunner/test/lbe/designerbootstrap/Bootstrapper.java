@@ -7,6 +7,7 @@ import lbe.engine.CasePersister;
 import lbe.engine.codegenerator.CodeGenerator;
 import lbe.model.DomainEntry;
 import lbe.model.pageelement.impl.ConstantText;
+import app.carinsurancetest.data.instance.CarinsuranceCaseInstance;
 import app.designer.data.instance.ApplicationInstance;
 import app.designer.data.instance.AttributeInstance;
 import app.designer.data.instance.ButtonInstance;
@@ -100,9 +101,13 @@ public class Bootstrapper {
 		
 		// Finish up
 
-		System.out.println(CasePersister.gson.toJson(applicationInstance));
 		
-		CodeGenerator.generateApplication(applicationInstance);
+		String json = CasePersister.gson.toJson(applicationInstance);
+		applicationInstance = CasePersister.gson.fromJson(json, ApplicationInstance.class);
+		json = CasePersister.gson.toJson(applicationInstance);
+		System.out.println(json);
+		
+//		CodeGenerator.generateApplication(applicationInstance);
 	}
 
 	public static void createDesigner() {

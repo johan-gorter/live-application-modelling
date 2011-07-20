@@ -1,6 +1,8 @@
 package lbe.model;
 
 import java.util.Iterator;
+import java.util.Map;
+import java.util.SortedMap;
 
 import lbe.engine.FlowContext;
 import lbe.engine.FlowStack;
@@ -18,6 +20,8 @@ public abstract class Application {
 	public abstract String getName();
 	
 	public abstract Entity getCaseModel();
+	
+	public abstract SortedMap<String, Entity> getEntities();
 	
 	public abstract Flow[] getExposedFlows();
 

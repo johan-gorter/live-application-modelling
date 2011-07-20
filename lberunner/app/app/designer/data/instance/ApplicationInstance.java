@@ -2,6 +2,7 @@ package app.designer.data.instance;
 
 import java.util.List;
 
+import app.designer.*;
 import app.designer.data.entity.*;
 import lbe.instance.*;
 import lbe.instance.impl.*;
@@ -16,7 +17,7 @@ public class ApplicationInstance
 	implements Instance {
 
 	public ApplicationInstance() {
-		super(ApplicationEntity.INSTANCE);
+		super(ApplicationEntity.INSTANCE, DesignerApplication.INSTANCE);
 	}
 
 	// Attributes

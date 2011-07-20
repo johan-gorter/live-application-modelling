@@ -108,8 +108,7 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 	}
 
 	@Override
-	public Instance deserialize(JsonElement json, Type typeOfT,
-			JsonDeserializationContext context) throws JsonParseException {
+	public Instance deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
 		CaseInstance result;
 		try {
 			result = (CaseInstance) ((Class)typeOfT).newInstance();
@@ -121,18 +120,55 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 		// Old id -> Instance
 		Map<Long, Instance> instances = new HashMap<Long, Instance>();
 		
-		deserializeFirstPass(data, result, instances);
-		
-		//TODO: second pass for non-owning relations
+		deserializeFirstPass(data, result, result, instances);
+		deserializeSecondPass(data, result, instances);
 		return result;
 	}
 
-	private void deserializeFirstPass(JsonObject data, Instance result,
-			Map<Long, Instance> instances) {
+	private void deserializeSecondPass(JsonObject data, Instance result, Map<Long, Instance> instances) {
+		Entity entity = result.getModel();
+		for (Relation relation : entity.getRelations()) {
+			if (!relation.isReadOnly()) {
+				if (data.has(relation.getName())) {
+					JsonElement value = data.get(relation.getName());
+					RelationValue relationValue = (RelationValue) relation.get(result);
+					if (!relation.isOwner()) {
+						// Set non-owning relations
+						if (relation.isMultivalue()) {
+							RelationValues values = (RelationValues) relationValue;
+							for (JsonElement item: ((JsonArray)value)) {
+								long itemId = item.getAsLong();
+								values.add(instances.get(itemId));
+							}
+						} else {
+							long itemId = value.getAsLong();
+							relationValue.set(instances.get(itemId));
+						}
+					} else {
+						// Recurse
+						if (relation.isMultivalue()) {
+							Iterable<Instance> targets = (Iterable<Instance>) relationValue.get();
+							JsonArray items = (JsonArray) value;
+							int index = 0;
+							for (Instance target: targets) {
+								JsonObject item = (JsonObject) items.get(index++);
+								deserializeSecondPass(item, target, instances);
+							}
+						} else {
+							Instance target = (Instance) relation.get(result).get();
+							deserializeSecondPass((JsonObject) value, target, instances);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private void deserializeFirstPass(JsonObject data, Instance result, CaseInstance caseInstance, Map<Long, Instance> instances) {
 		long id = data.get("instanceId").getAsNumber().longValue();
 		instances.put(id, result);
 		Entity entity = result.getModel();
-		for (Attribute attribute : entity.getLocalAttributes()) {
+		for (Attribute attribute : entity.getAttributes()) {
 			if (!attribute.isReadOnly()) {
 				if (data.has(attribute.getName())) {
 					JsonElement value = data.get(attribute.getName());
@@ -145,21 +181,34 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 				}
 			}
 		}
-		for (Relation relation : entity.getLocalRelations()) {
+		for (Relation relation : entity.getRelations()) {
 			if (!relation.isReadOnly()) {
 				if (data.has(relation.getName())) {
 					JsonElement value = data.get(relation.getName());
+					AttributeValue relationValue = (RelationValue) relation.get(result);
 					if (relation.isOwner()) {
 						if (relation.isMultivalue()) {
-							throw new RuntimeException("TODO");
+							setMultivalueRelation(relation, (RelationValues)relationValue, value, result, caseInstance, instances);
 						} else {
-							RelationValue attributeValue = (RelationValue)relation.get(result);
-							Instance target = (Instance) attributeValue.get();
-							deserializeFirstPass(data.get(relation.getName()).getAsJsonObject(), target, instances);
+							JsonObject valueObject = value.getAsJsonObject();
+							String entityName = valueObject.get("entityName").getAsString();
+							long instanceId = valueObject.get("instanceId").getAsLong();
+							Instance target = caseInstance.getApplication().getEntities().get(entityName).createInstance(caseInstance, instanceId);
+							deserializeFirstPass(valueObject, target, caseInstance, instances);
+							relationValue.set(target);
 						}
 					}
 				}
 			}
+		}
+	}
+
+	private void setMultivalueRelation(Relation relation, RelationValues relationValue, JsonElement value, Instance owner, CaseInstance caseInstance, Map<Long, Instance> instances) {
+		JsonArray values = (JsonArray)value;
+		for (JsonElement item: values) {
+			Instance target = relation.createTo(owner);
+			deserializeFirstPass(item.getAsJsonObject(), target, caseInstance, instances);
+			relationValue.add(target);
 		}
 	}
 

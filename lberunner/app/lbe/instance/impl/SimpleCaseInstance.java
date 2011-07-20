@@ -4,17 +4,20 @@ import java.util.WeakHashMap;
 
 import lbe.instance.CaseInstance;
 import lbe.instance.Instance;
+import lbe.model.Application;
 import lbe.model.Entity;
 
 public class SimpleCaseInstance extends SimpleInstance implements CaseInstance {
 
 	private long lastId;
 	private int version;
+	private final Application application;
 	
 	private WeakHashMap<Long, Instance> instances = new WeakHashMap<Long, Instance>();
 	
-	public SimpleCaseInstance(Entity entity) {
-		super(null, entity);
+	public SimpleCaseInstance(Entity entity, Application application) {
+		super(null, entity, 0);
+		this.application = application;
 	}
 	
 	@Override
@@ -31,15 +34,24 @@ public class SimpleCaseInstance extends SimpleInstance implements CaseInstance {
 	}
 
 	@Override
-	public long registerInstance(Instance instance) {
-		long id = ++lastId;
-		instances.put(id, instance);
+	public long registerInstance(Instance instance, long id) {
+		if (id==0) {
+			id = ++lastId;
+			instances.put(id, instance);
+		} else {
+			lastId = Math.max(lastId, id);
+		}
 		return id;
 	}
 
 	@Override
 	public Instance getInstanceById(long id) {
 		return instances.get(id);
+	}
+
+	@Override
+	public Application getApplication() {
+		return application;
 	}
 
 }

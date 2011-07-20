@@ -142,8 +142,8 @@ public class ${name}Entity extends SimpleEntity {
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
-		return new ${name}Instance(<#if !caseEntity>caseInstance</#if>);
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		return new ${name}Instance(<#if !caseEntity>caseInstance, id</#if>);
 	}
 	<#if extendsFrom??>
 	

@@ -16,11 +16,11 @@ public class ConceptInstance
 	implements Instance {
 
 	public ConceptInstance(CaseInstance caseInstance) {
-		super(caseInstance, ConceptEntity.INSTANCE);
+		super(caseInstance, ConceptEntity.INSTANCE, 0);
 	}
 	
 	protected ConceptInstance(CaseInstance caseInstance, Entity model) {
-		super(caseInstance, model);
+		super(caseInstance, model, 0);
 	}
 
 	// Attributes

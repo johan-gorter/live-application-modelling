@@ -16,11 +16,11 @@ public class ContainerItemInstance
 	implements Instance {
 
 	public ContainerItemInstance(CaseInstance caseInstance) {
-		super(caseInstance, ContainerItemEntity.INSTANCE);
+		super(caseInstance, ContainerItemEntity.INSTANCE, 0);
 	}
 	
 	protected ContainerItemInstance(CaseInstance caseInstance, Entity model) {
-		super(caseInstance, model);
+		super(caseInstance, model, 0);
 	}
 
 	// Attributes

@@ -31,6 +31,23 @@ public class ${name}Application extends Application {
 		return exposedFlows;
 	}
 	
+	private static final Entity[] entities = new Entity[] {
+	<#list entities as entity>
+		${entity}.INSTANCE,
+	</#list>
+	};
+	private static final SortedMap<String, Entity> entityMap = new TreeMap<String, Entity>();
+	static {
+		for (Entity entity:entities) {
+			entityMap.put(entity.getName(), entity);
+		}
+	}
+	@Override
+	public SortedMap<String, Entity> getEntities() {
+		return entityMap;
+	}
+	
+	
 	@Override
 	public Class<? extends CaseInstance> getCaseInstanceClass() {
 		return ${caseEntity}Instance.class;

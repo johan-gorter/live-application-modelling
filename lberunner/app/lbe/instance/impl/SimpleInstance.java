@@ -28,10 +28,10 @@ public class SimpleInstance implements Instance {
 	
 	private final Entity model;
 	
-	public SimpleInstance(CaseInstance caseInstance, Entity model) {
+	public SimpleInstance(CaseInstance caseInstance, Entity model, long id) {
 		this.caseInstance = caseInstance;
 		if (caseInstance!=null) {
-			this.id = caseInstance.registerInstance(this);
+			this.id = caseInstance.registerInstance(this, id);
 		} else {
 			this.id = 0; // This means we are the caseInstance
 		}

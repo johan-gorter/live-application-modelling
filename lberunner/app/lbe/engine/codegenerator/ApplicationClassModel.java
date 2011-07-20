@@ -9,6 +9,7 @@ public class ApplicationClassModel {
 	public String name;
 	public String appname;
 	public final List<String> exposedFlows = new ArrayList<String>();
+	public final List<String> entities = new ArrayList<String>();
 	
 	public String getCaseEntity() {
 		return caseEntity;

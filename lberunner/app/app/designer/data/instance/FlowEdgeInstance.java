@@ -16,11 +16,11 @@ public class FlowEdgeInstance
 	implements Instance {
 
 	public FlowEdgeInstance(CaseInstance caseInstance) {
-		super(caseInstance, FlowEdgeEntity.INSTANCE);
+		super(caseInstance, FlowEdgeEntity.INSTANCE, 0);
 	}
 	
 	protected FlowEdgeInstance(CaseInstance caseInstance, Entity model) {
-		super(caseInstance, model);
+		super(caseInstance, model, 0);
 	}
 
 	// Attributes

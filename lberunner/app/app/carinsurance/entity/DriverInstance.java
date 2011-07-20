@@ -18,7 +18,11 @@ import lbe.model.Relation;
 public class DriverInstance extends SimpleInstance {
 
 	public DriverInstance(CaseInstance caseInstance) {
-		super(caseInstance, DriverEntity.INSTANCE);
+		this(caseInstance, 0);
+	}
+	
+	public DriverInstance(CaseInstance caseInstance, long id) {
+		super(caseInstance, DriverEntity.INSTANCE, id);
 	}
 
 	public final ReadOnlyRelationValue<DriverInstance, CarinsuranceCaseInstance> carinsuranceCase 

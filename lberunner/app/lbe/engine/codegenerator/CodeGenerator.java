@@ -239,6 +239,7 @@ public class CodeGenerator {
 		result.appname=appname;
 		result.name=entity.name.get();
 		result.caseEntity = (entity.caseEntityInApplication.get()!=null);
+		result.applicationName = entity.application.get().name.get();
 		if (entity.extendsFrom.get()!=null) {
 			result.extendsFrom = entity.extendsFrom.get().name.get();
 		}
@@ -312,6 +313,9 @@ public class CodeGenerator {
 
 	private static ApplicationClassModel createApplicationClassModel(ApplicationInstance application, String appname) {
 		ApplicationClassModel result = new ApplicationClassModel();
+		for (EntityInstance entity: application.entities.get()) {
+			result.entities.add(entity.name.get());
+		}
 		result.appname = appname;
 		result.name = application.name.get();
 		result.caseEntity = application.caseEntity.get().name.get();

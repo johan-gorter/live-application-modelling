@@ -1,5 +1,7 @@
 package app.designer;
 
+import java.util.SortedMap;
+
 import app.designer.data.entity.*;
 import app.designer.data.instance.*;
 import app.designer.flow.*;
@@ -37,5 +39,11 @@ public class DesignerApplication extends Application {
 	@Override
 	public String getName() {
 		return "Designer";
+	}
+
+	@Override
+	public SortedMap<String, Entity> getEntities() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

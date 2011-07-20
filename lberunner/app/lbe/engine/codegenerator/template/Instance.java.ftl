@@ -2,6 +2,7 @@ package app.${appname}.data.instance;
 
 import java.util.List;
 
+import app.${appname}.*;
 import app.${appname}.data.entity.*;
 import lbe.instance.*;
 import lbe.instance.impl.*;
@@ -17,15 +18,19 @@ public class ${name}Instance
 
 	<#if caseEntity>
 	public ${name}Instance() {
-		super(${name}Entity.INSTANCE);
+		super(${name}Entity.INSTANCE, ${applicationName}Application.INSTANCE);
 	}
 	<#else>
 	public ${name}Instance(CaseInstance caseInstance) {
-		super(caseInstance, ${name}Entity.INSTANCE);
+		this(caseInstance, 0);
 	}
 	
-	protected ${name}Instance(CaseInstance caseInstance, Entity model) {
-		super(caseInstance, model);
+	public ${name}Instance(CaseInstance caseInstance, long id) {
+		super(caseInstance, ${name}Entity.INSTANCE, id);
+	}
+	
+	protected ${name}Instance(CaseInstance caseInstance, Entity model, long id) {
+		super(caseInstance, model, id);
 	}
 	</#if>
 

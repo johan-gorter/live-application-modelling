@@ -1,5 +1,7 @@
 package app.carinsurancetest;
 
+import java.util.SortedMap;
+
 import app.carinsurancetest.data.entity.*;
 import app.carinsurancetest.data.instance.*;
 import app.carinsurancetest.flow.*;
@@ -37,5 +39,11 @@ public class CarInsuranceTestApplication extends Application {
 	@Override
 	public String getName() {
 		return "CarInsuranceTest";
+	}
+
+	@Override
+	public SortedMap<String, Entity> getEntities() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
