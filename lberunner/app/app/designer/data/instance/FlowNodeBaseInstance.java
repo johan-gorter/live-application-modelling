@@ -2,6 +2,7 @@ package app.designer.data.instance;
 
 import java.util.List;
 
+import app.designer.*;
 import app.designer.data.entity.*;
 import lbe.instance.*;
 import lbe.instance.impl.*;
@@ -16,11 +17,15 @@ public class FlowNodeBaseInstance
 	implements Instance {
 
 	public FlowNodeBaseInstance(CaseInstance caseInstance) {
-		super(caseInstance, FlowNodeBaseEntity.INSTANCE);
+		this(caseInstance, 0);
 	}
 	
-	protected FlowNodeBaseInstance(CaseInstance caseInstance, Entity model) {
-		super(caseInstance, model);
+	public FlowNodeBaseInstance(CaseInstance caseInstance, long id) {
+		super(caseInstance, FlowNodeBaseEntity.INSTANCE, id);
+	}
+	
+	protected FlowNodeBaseInstance(CaseInstance caseInstance, Entity model, long id) {
+		super(caseInstance, model, id);
 	}
 
 	// Attributes

@@ -10,9 +10,10 @@ public class WelcomePage extends Page {
 
 	public static final WelcomePage INSTANCE = new WelcomePage();
 	
+	
 	@Override
-	public Container getRootContainer() {
-		return WelcomeContainer.INSTANCE;
+	public CompositePageFragment getRootContainer() {
+		return CONTENT;
 	}; 
 	
 	@Override

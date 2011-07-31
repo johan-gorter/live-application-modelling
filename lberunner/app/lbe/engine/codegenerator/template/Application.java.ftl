@@ -1,5 +1,7 @@
 package app.${appname};
 
+import java.util.*;
+
 import app.${appname}.data.entity.*;
 import app.${appname}.data.instance.*;
 import app.${appname}.flow.*;
@@ -33,7 +35,7 @@ public class ${name}Application extends Application {
 	
 	private static final Entity[] entities = new Entity[] {
 	<#list entities as entity>
-		${entity}.INSTANCE,
+		${entity}Entity.INSTANCE,
 	</#list>
 	};
 	private static final SortedMap<String, Entity> entityMap = new TreeMap<String, Entity>();

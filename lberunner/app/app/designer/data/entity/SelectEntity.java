@@ -10,52 +10,48 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class PageElementBaseEntity extends SimpleEntity {
+public class SelectEntity extends SimpleEntity {
 
-	public static final PageElementBaseEntity INSTANCE = new PageElementBaseEntity();
+	public static final SelectEntity INSTANCE = new SelectEntity();
 	
 	// Attributes
 	
 	// Relations
 	
-	// Reverse relations
-	
-	public static final Relation<PageElementBaseInstance, ContainerItemInstance, ContainerItemInstance> containerItem
-		= new SimpleRelation<PageElementBaseInstance, ContainerItemInstance, ContainerItemInstance>(
-			"containerItem", INSTANCE, PageElementBaseEntity.INSTANCE, ContainerItemInstance.class, ContainerItemEntity.element
+	public static final Relation<SelectInstance, RelationInstance, RelationInstance> relation
+		= new SimpleRelation<SelectInstance, RelationInstance, RelationInstance>(
+			"relation", INSTANCE, RelationEntity.INSTANCE, RelationInstance.class, RelationEntity.relationInselects
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<PageElementBaseInstance, ContainerItemInstance> get(
-					PageElementBaseInstance instance) {
-				return instance.containerItem;
-			}
-	
-			public boolean isReverse() {
-				return true;
+			public ReadOnlyRelationValue<SelectInstance, RelationInstance> get(
+					SelectInstance instance) {
+				return instance.relation;
 			}
 		};
+	
+	// Reverse relations
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
+		relation,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
-		containerItem,
 	};
 
-	private PageElementBaseEntity() {
-		super("PageElementBase");
+	private SelectEntity() {
+		super("Select");
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
-		return new PageElementBaseInstance(caseInstance);
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		return new SelectInstance(caseInstance, id);
 	}
 	
 	@Override
 	public Entity extendsEntity() {
-		return ConceptEntity.INSTANCE;
+		return CompositePageFragmentEntity.INSTANCE;
 	}
 	
 	@Override

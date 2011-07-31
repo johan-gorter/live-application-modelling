@@ -2,6 +2,7 @@ package app.designer.data.instance;
 
 import java.util.List;
 
+import app.designer.*;
 import app.designer.data.entity.*;
 import lbe.instance.*;
 import lbe.instance.impl.*;
@@ -16,11 +17,15 @@ public class ConstantTextInstance
 	implements Instance {
 
 	public ConstantTextInstance(CaseInstance caseInstance) {
-		super(caseInstance, ConstantTextEntity.INSTANCE);
+		this(caseInstance, 0);
 	}
 	
-	protected ConstantTextInstance(CaseInstance caseInstance, Entity model) {
-		super(caseInstance, model);
+	public ConstantTextInstance(CaseInstance caseInstance, long id) {
+		super(caseInstance, ConstantTextEntity.INSTANCE, id);
+	}
+	
+	protected ConstantTextInstance(CaseInstance caseInstance, Entity model, long id) {
+		super(caseInstance, model, id);
 	}
 
 	// Attributes

@@ -2,6 +2,7 @@ package app.carinsurancetest.data.instance;
 
 import java.util.List;
 
+import app.carinsurancetest.*;
 import app.carinsurancetest.data.entity.*;
 import lbe.instance.*;
 import lbe.instance.impl.*;
@@ -16,11 +17,15 @@ public class DriverInstance
 	implements Instance {
 
 	public DriverInstance(CaseInstance caseInstance) {
-		super(caseInstance, DriverEntity.INSTANCE, 0);
+		this(caseInstance, 0);
 	}
 	
-	protected DriverInstance(CaseInstance caseInstance, Entity model) {
-		super(caseInstance, model, 0);
+	public DriverInstance(CaseInstance caseInstance, long id) {
+		super(caseInstance, DriverEntity.INSTANCE, id);
+	}
+	
+	protected DriverInstance(CaseInstance caseInstance, Entity model, long id) {
+		super(caseInstance, model, id);
 	}
 
 	// Attributes

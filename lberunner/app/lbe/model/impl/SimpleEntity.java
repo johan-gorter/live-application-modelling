@@ -24,10 +24,8 @@ public abstract class SimpleEntity extends Entity {
 		return null;
 	}
 	
-	// TODO: reverse this!
-	public final Instance createInstance(CaseInstance caseInstance, long id) {
-		return createInstance(caseInstance);
+	public Instance createInstance(CaseInstance caseInstance) {
+		return createInstance(caseInstance, 0);
 	}
-	
 	
 }

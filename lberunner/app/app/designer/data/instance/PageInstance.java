@@ -2,6 +2,7 @@ package app.designer.data.instance;
 
 import java.util.List;
 
+import app.designer.*;
 import app.designer.data.entity.*;
 import lbe.instance.*;
 import lbe.instance.impl.*;
@@ -16,19 +17,23 @@ public class PageInstance
 	implements Instance {
 
 	public PageInstance(CaseInstance caseInstance) {
-		super(caseInstance, PageEntity.INSTANCE);
+		this(caseInstance, 0);
 	}
 	
-	protected PageInstance(CaseInstance caseInstance, Entity model) {
-		super(caseInstance, model);
+	public PageInstance(CaseInstance caseInstance, long id) {
+		super(caseInstance, PageEntity.INSTANCE, id);
+	}
+	
+	protected PageInstance(CaseInstance caseInstance, Entity model, long id) {
+		super(caseInstance, model, id);
 	}
 
 	// Attributes
 	
 	// Relations
 	
-	public final RelationValue<PageInstance, ContainerInstance> rootContainer
-		= createRelationValue(PageEntity.rootContainer);
+	public final RelationValue<PageInstance, CompositePageFragmentInstance> content
+		= createRelationValue(PageEntity.content);
 
 	// Reverse relations
 

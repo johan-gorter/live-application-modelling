@@ -2,6 +2,7 @@ package app.designer.data.instance;
 
 import java.util.List;
 
+import app.designer.*;
 import app.designer.data.entity.*;
 import lbe.instance.*;
 import lbe.instance.impl.*;
@@ -16,11 +17,15 @@ public class FlowSinkInstance
 	implements Instance {
 
 	public FlowSinkInstance(CaseInstance caseInstance) {
-		super(caseInstance, FlowSinkEntity.INSTANCE);
+		this(caseInstance, 0);
 	}
 	
-	protected FlowSinkInstance(CaseInstance caseInstance, Entity model) {
-		super(caseInstance, model);
+	public FlowSinkInstance(CaseInstance caseInstance, long id) {
+		super(caseInstance, FlowSinkEntity.INSTANCE, id);
+	}
+	
+	protected FlowSinkInstance(CaseInstance caseInstance, Entity model, long id) {
+		super(caseInstance, model, id);
 	}
 
 	// Attributes

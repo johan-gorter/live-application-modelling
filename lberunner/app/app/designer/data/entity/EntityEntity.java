@@ -163,8 +163,8 @@ public class EntityEntity extends SimpleEntity {
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
-		return new EntityInstance(caseInstance);
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		return new EntityInstance(caseInstance, id);
 	}
 	
 	@Override

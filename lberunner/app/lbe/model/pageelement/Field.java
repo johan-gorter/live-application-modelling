@@ -8,7 +8,7 @@ import lbe.instance.Instance;
 import lbe.model.Attribute;
 import lbe.model.DomainEntry;
 
-public abstract class Field extends PageElementBase {
+public abstract class Field extends PageFragment {
 	
 	public Field() {}
 	

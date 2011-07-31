@@ -2,6 +2,7 @@ package app.designer.data.instance;
 
 import java.util.List;
 
+import app.designer.*;
 import app.designer.data.entity.*;
 import lbe.instance.*;
 import lbe.instance.impl.*;
@@ -16,11 +17,15 @@ public class AttributeInstance
 	implements Instance {
 
 	public AttributeInstance(CaseInstance caseInstance) {
-		super(caseInstance, AttributeEntity.INSTANCE);
+		this(caseInstance, 0);
 	}
 	
-	protected AttributeInstance(CaseInstance caseInstance, Entity model) {
-		super(caseInstance, model);
+	public AttributeInstance(CaseInstance caseInstance, long id) {
+		super(caseInstance, AttributeEntity.INSTANCE, id);
+	}
+	
+	protected AttributeInstance(CaseInstance caseInstance, Entity model, long id) {
+		super(caseInstance, model, id);
 	}
 
 	// Attributes

@@ -10,47 +10,48 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class ButtonTriggerEntity extends SimpleEntity {
+public class SharedFragmentEntity extends SimpleEntity {
 
-	public static final ButtonTriggerEntity INSTANCE = new ButtonTriggerEntity();
+	public static final SharedFragmentEntity INSTANCE = new SharedFragmentEntity();
 	
 	// Attributes
 	
-	public static final Attribute<ButtonTriggerInstance, java.lang.String, java.lang.String> trigger 
-		= new SimpleAttribute<ButtonTriggerInstance, java.lang.String, java.lang.String>(
-			"trigger", INSTANCE, java.lang.String.class
+	// Relations
+	
+	public static final Relation<SharedFragmentInstance, PageFragmentHolderInstance, PageFragmentHolderInstance> holder
+		= new SimpleRelation<SharedFragmentInstance, PageFragmentHolderInstance, PageFragmentHolderInstance>(
+			"holder", INSTANCE, PageFragmentHolderEntity.INSTANCE, PageFragmentHolderInstance.class, PageFragmentHolderEntity.usages
 		) {
 	
 			@Override
-			public ReadOnlyAttributeValue<ButtonTriggerInstance, java.lang.String> get(ButtonTriggerInstance instance) {
-				return instance.trigger;
+			public ReadOnlyRelationValue<SharedFragmentInstance, PageFragmentHolderInstance> get(
+					SharedFragmentInstance instance) {
+				return instance.holder;
 			}
 		};
-	
-	// Relations
 	
 	// Reverse relations
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
-		trigger,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
+		holder,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};
 
-	private ButtonTriggerEntity() {
-		super("ButtonTrigger");
+	private SharedFragmentEntity() {
+		super("SharedFragment");
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
-		return new ButtonTriggerInstance(caseInstance);
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		return new SharedFragmentInstance(caseInstance, id);
 	}
 	
 	@Override
 	public Entity extendsEntity() {
-		return PageElementBaseEntity.INSTANCE;
+		return PageFragmentEntity.INSTANCE;
 	}
 	
 	@Override

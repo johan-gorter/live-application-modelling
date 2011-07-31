@@ -44,8 +44,8 @@ public class ConceptEntity extends SimpleEntity {
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
-		return new ConceptInstance(caseInstance);
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		return new ConceptInstance(caseInstance, id);
 	}
 	
 	@Override

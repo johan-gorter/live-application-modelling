@@ -65,13 +65,13 @@ public class ButtonEntity extends SimpleEntity {
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
-		return new ButtonInstance(caseInstance);
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		return new ButtonInstance(caseInstance, id);
 	}
 	
 	@Override
 	public Entity extendsEntity() {
-		return PageElementBaseEntity.INSTANCE;
+		return PageFragmentEntity.INSTANCE;
 	}
 	
 	@Override

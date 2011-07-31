@@ -110,5 +110,8 @@ public class EntityClassModel {
 	}
 	public String getExtendsFrom() {
 		return extendsFrom;
+	}
+	public String getApplicationName() {
+		return applicationName;
 	}	
 }

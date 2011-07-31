@@ -2,6 +2,7 @@ package app.designer.data.instance;
 
 import java.util.List;
 
+import app.designer.*;
 import app.designer.data.entity.*;
 import lbe.instance.*;
 import lbe.instance.impl.*;
@@ -16,11 +17,15 @@ public class DomainEntryInstance
 	implements Instance {
 
 	public DomainEntryInstance(CaseInstance caseInstance) {
-		super(caseInstance, DomainEntryEntity.INSTANCE);
+		this(caseInstance, 0);
 	}
 	
-	protected DomainEntryInstance(CaseInstance caseInstance, Entity model) {
-		super(caseInstance, model);
+	public DomainEntryInstance(CaseInstance caseInstance, long id) {
+		super(caseInstance, DomainEntryEntity.INSTANCE, id);
+	}
+	
+	protected DomainEntryInstance(CaseInstance caseInstance, Entity model, long id) {
+		super(caseInstance, model, id);
 	}
 
 	// Attributes

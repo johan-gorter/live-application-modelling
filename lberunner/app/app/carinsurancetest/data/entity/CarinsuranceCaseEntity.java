@@ -53,7 +53,7 @@ public class CarinsuranceCaseEntity extends SimpleEntity {
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
+	public Instance createInstance(CaseInstance caseInstance, long id) {
 		return new CarinsuranceCaseInstance();
 	}
 	

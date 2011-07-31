@@ -9,7 +9,7 @@ import lbe.engine.RenderContext;
 import lbe.instance.Instance;
 import lbe.model.Relation;
 
-public abstract class Container extends PageElementBase {
+public abstract class CompositePageFragment extends PageFragment {
 
 	@Override
 	public String getName() {
@@ -22,6 +22,12 @@ public abstract class Container extends PageElementBase {
 	
 	public String getElementType() {
 		return "container";
+	}
+
+	// TODO --> getSelect()
+	@SuppressWarnings("rawtypes")
+	public Relation getRelation() {
+		return null;
 	}
 
 	@Override
@@ -61,7 +67,7 @@ public abstract class Container extends PageElementBase {
 		}
 		context.nextIdLevel();
 		
-		for (PageElementBase child: getChildren()) {
+		for (PageFragment child: getChildren()) {
 			String childResult = child.submit(context);
 			if (childResult!=null) {
 				if (result!=null) {
@@ -78,9 +84,9 @@ public abstract class Container extends PageElementBase {
 		return result;
 	}
 
-	public static PageElement[] renderChildren(RenderContext context, PageElementBase[] childModels) {
+	public static PageElement[] renderChildren(RenderContext context, PageFragment[] childModels) {
 		List<PageElement> result = new ArrayList<PageElement>(childModels.length);
-		for (PageElementBase child: childModels) {
+		for (PageFragment child: childModels) {
 			PageElement element = child.render(context);
 			if (element!=null) {
 				result.add(element);
@@ -89,18 +95,12 @@ public abstract class Container extends PageElementBase {
 		return result.toArray(new PageElement[result.size()]);
 	}
 
-	public abstract PageElementBase[] getChildren();
+	public abstract PageFragment[] getChildren();
 	
-	@SuppressWarnings("rawtypes")
-	public Relation getRelation() {
-		return null;
-	}
-
 	public static void changeValue(ChangeContext changeContext,
-			PageElementBase[] childModels) {
-		for (PageElementBase child: childModels) {
+			PageFragment[] childModels) {
+		for (PageFragment child: childModels) {
 			child.submit(changeContext);
 		}		
 	}
-
 }

@@ -97,15 +97,15 @@ public class ApplicationEntity extends SimpleEntity {
 			}
 		};
 	
-	public static final Relation<ApplicationInstance, ToolboxInstance, ToolboxInstance> pageToolbox
-		= new SimpleRelation<ApplicationInstance, ToolboxInstance, ToolboxInstance>(
-			"pageToolbox", INSTANCE, ToolboxEntity.INSTANCE, ToolboxInstance.class, ToolboxEntity.application
+	public static final Relation<ApplicationInstance, SharedInstance, SharedInstance> shared
+		= new SimpleRelation<ApplicationInstance, SharedInstance, SharedInstance>(
+			"shared", INSTANCE, SharedEntity.INSTANCE, SharedInstance.class, SharedEntity.application
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<ApplicationInstance, ToolboxInstance> get(
+			public ReadOnlyRelationValue<ApplicationInstance, SharedInstance> get(
 					ApplicationInstance instance) {
-				return instance.pageToolbox;
+				return instance.shared;
 			}
 	
 			public boolean isOwner() {
@@ -127,7 +127,7 @@ public class ApplicationEntity extends SimpleEntity {
 		caseEntity,
 		flows,
 		exposedFlows,
-		pageToolbox,
+		shared,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};
@@ -137,7 +137,7 @@ public class ApplicationEntity extends SimpleEntity {
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
+	public Instance createInstance(CaseInstance caseInstance, long id) {
 		return new ApplicationInstance();
 	}
 	

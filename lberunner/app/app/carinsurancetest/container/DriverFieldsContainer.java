@@ -5,13 +5,13 @@ import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 import app.carinsurancetest.data.entity.*;
 
-public class DriverContainer extends Container {
+public class DriverFieldsContainer extends CompositePageFragment {
 
-	public static DriverContainer INSTANCE = new DriverContainer();
+	public static DriverFieldsContainer INSTANCE = new DriverFieldsContainer();
 	
-	private DriverContainer() {}
+	private DriverFieldsContainer() {}
 	
-	private static final PageElementBase[] CHILDREN = new PageElementBase[] {
+	private static final PageFragment[] CHILDREN = new PageFragment[] {
 		new SimpleField(DriverEntity.dateOfBirth).setRequired(),
 		new SimpleField(DriverEntity.yearsInsured).setRequired(),
 		new SimpleField(DriverEntity.yearsDriverslicense).setRequired(),
@@ -24,16 +24,11 @@ public class DriverContainer extends Container {
 
 	@Override
 	public String getName() {
-		return "Driver";
+		return "DriverFields";
 	}
 
 	@Override
-	public PageElementBase[] getChildren() {
+	public PageFragment[] getChildren() {
 		return CHILDREN;
-	}
-
-	@Override
-	public Relation getRelation() {
-		return CarinsuranceCaseEntity.driver;
 	}
 }

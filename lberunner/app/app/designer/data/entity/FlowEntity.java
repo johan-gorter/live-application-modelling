@@ -150,8 +150,8 @@ public class FlowEntity extends SimpleEntity {
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
-		return new FlowInstance(caseInstance);
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		return new FlowInstance(caseInstance, id);
 	}
 	
 	@Override

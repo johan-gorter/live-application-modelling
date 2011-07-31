@@ -66,8 +66,8 @@ public class DomainEntryEntity extends SimpleEntity {
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
-		return new DomainEntryInstance(caseInstance);
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		return new DomainEntryInstance(caseInstance, id);
 	}
 	
 	@Override

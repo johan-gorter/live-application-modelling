@@ -2,6 +2,7 @@ package app.designer.data.instance;
 
 import java.util.List;
 
+import app.designer.*;
 import app.designer.data.entity.*;
 import lbe.instance.*;
 import lbe.instance.impl.*;
@@ -12,15 +13,19 @@ import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
 public class FieldInstance 
-	extends PageElementBaseInstance 
+	extends PageFragmentInstance 
 	implements Instance {
 
 	public FieldInstance(CaseInstance caseInstance) {
-		super(caseInstance, FieldEntity.INSTANCE);
+		this(caseInstance, 0);
 	}
 	
-	protected FieldInstance(CaseInstance caseInstance, Entity model) {
-		super(caseInstance, model);
+	public FieldInstance(CaseInstance caseInstance, long id) {
+		super(caseInstance, FieldEntity.INSTANCE, id);
+	}
+	
+	protected FieldInstance(CaseInstance caseInstance, Entity model, long id) {
+		super(caseInstance, model, id);
 	}
 
 	// Attributes

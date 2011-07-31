@@ -1,6 +1,6 @@
 package app.designer;
 
-import java.util.SortedMap;
+import java.util.*;
 
 import app.designer.data.entity.*;
 import app.designer.data.instance.*;
@@ -31,6 +31,48 @@ public class DesignerApplication extends Application {
 		return exposedFlows;
 	}
 	
+	private static final Entity[] entities = new Entity[] {
+		ApplicationEntity.INSTANCE,
+		ConceptEntity.INSTANCE,
+		EntityEntity.INSTANCE,
+		AttributeBaseEntity.INSTANCE,
+		AttributeEntity.INSTANCE,
+		DomainEntryEntity.INSTANCE,
+		RelationEntity.INSTANCE,
+		SharedEntity.INSTANCE,
+		TextHolderEntity.INSTANCE,
+		PageFragmentHolderEntity.INSTANCE,
+		PageFragmentEntity.INSTANCE,
+		CompositePageFragmentEntity.INSTANCE,
+		SelectEntity.INSTANCE,
+		HeaderEntity.INSTANCE,
+		SharedFragmentEntity.INSTANCE,
+		FieldEntity.INSTANCE,
+		ButtonEntity.INSTANCE,
+		PageCompositionEntity.INSTANCE,
+		TextEntity.INSTANCE,
+		ConstantTextEntity.INSTANCE,
+		SharedTextEntity.INSTANCE,
+		FlowEdgeEntity.INSTANCE,
+		FlowNodeBaseEntity.INSTANCE,
+		FlowSourceEntity.INSTANCE,
+		FlowSinkEntity.INSTANCE,
+		PageEntity.INSTANCE,
+		SubFlowEntity.INSTANCE,
+		FlowEntity.INSTANCE,
+	};
+	private static final SortedMap<String, Entity> entityMap = new TreeMap<String, Entity>();
+	static {
+		for (Entity entity:entities) {
+			entityMap.put(entity.getName(), entity);
+		}
+	}
+	@Override
+	public SortedMap<String, Entity> getEntities() {
+		return entityMap;
+	}
+	
+	
 	@Override
 	public Class<? extends CaseInstance> getCaseInstanceClass() {
 		return ApplicationInstance.class;
@@ -39,11 +81,5 @@ public class DesignerApplication extends Application {
 	@Override
 	public String getName() {
 		return "Designer";
-	}
-
-	@Override
-	public SortedMap<String, Entity> getEntities() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

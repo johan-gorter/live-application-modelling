@@ -49,8 +49,8 @@ public class FlowSinkEntity extends SimpleEntity {
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
-		return new FlowSinkInstance(caseInstance);
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		return new FlowSinkInstance(caseInstance, id);
 	}
 	
 	@Override

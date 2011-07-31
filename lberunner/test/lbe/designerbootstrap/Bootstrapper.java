@@ -5,15 +5,11 @@ import java.util.Date;
 
 import lbe.engine.CasePersister;
 import lbe.engine.codegenerator.CodeGenerator;
-import lbe.model.DomainEntry;
-import lbe.model.pageelement.impl.ConstantText;
-import app.carinsurancetest.data.instance.CarinsuranceCaseInstance;
 import app.designer.data.instance.ApplicationInstance;
 import app.designer.data.instance.AttributeInstance;
 import app.designer.data.instance.ButtonInstance;
+import app.designer.data.instance.CompositePageFragmentInstance;
 import app.designer.data.instance.ConstantTextInstance;
-import app.designer.data.instance.ContainerInstance;
-import app.designer.data.instance.ContainerItemInstance;
 import app.designer.data.instance.DomainEntryInstance;
 import app.designer.data.instance.EntityInstance;
 import app.designer.data.instance.FieldInstance;
@@ -21,9 +17,12 @@ import app.designer.data.instance.FlowEdgeInstance;
 import app.designer.data.instance.FlowInstance;
 import app.designer.data.instance.FlowNodeBaseInstance;
 import app.designer.data.instance.FlowSourceInstance;
-import app.designer.data.instance.PageElementBaseInstance;
+import app.designer.data.instance.HeaderInstance;
+import app.designer.data.instance.PageCompositionInstance;
+import app.designer.data.instance.PageFragmentInstance;
 import app.designer.data.instance.PageInstance;
 import app.designer.data.instance.RelationInstance;
+import app.designer.data.instance.SelectInstance;
 import app.designer.data.instance.TextInstance;
 
 public class Bootstrapper {
@@ -41,8 +40,8 @@ public class Bootstrapper {
 	private static ApplicationInstance applicationInstance;
 	
 	public static void main(String[] args) {
-		createCarinsurance();
-//		createDesigner();
+//		createCarinsurance();
+		createDesigner();
 	}
 
 	public static void createCarinsurance() {
@@ -77,37 +76,46 @@ public class Bootstrapper {
 		mileage.domain.add(createDomainEntry("k1", "> 12.000 km"));	
 		AttributeInstance noClaimsDiscount = createAttribute(driver, "noClaimsDiscount", Integer.class);
 		noClaimsDiscount.question.set(createConstantText("Number of years 'no claims discount' entitlement?"));
-		RelationInstance driverRelation = createRelation("driver", carinsuranceCase, RelationType.OneToOneAggregation, driver, "carinsuranceCase");
+		RelationInstance driverRelation = createRelation(carinsuranceCase, "driver", RelationType.OneToOneAggregation, "carinsuranceCase", driver);
 
-		// Containers
-		ContainerInstance driverContainer = createContainer("Driver");
-		driverContainer.relation.set(driverRelation);
-		createField(driverContainer, dateOfBirth, true);
-		createField(driverContainer, yearsInsured, true);
-		createField(driverContainer, yearsDriverslicense, true);
-		createField(driverContainer, noClaimsDiscount, true);
-		createField(driverContainer, disqualified, true);
-		createField(driverContainer, carUse, true);
-		createField(driverContainer, mileage, true);
-		createField(driverContainer, zipCode, true);
+		// PageFragments
+		SelectInstance selectDriver = createSelect(driverRelation);
+		HeaderInstance driverHeader = createHeader(createConstantText("Driver"));
+		addContent(selectDriver, driverHeader);
+		CompositePageFragmentInstance driverFields = createCompositePageFragment();
+		addContent(driverHeader, driverFields);
+		createField(driverFields, dateOfBirth, true);
+		createField(driverFields, yearsInsured, true);
+		createField(driverFields, yearsDriverslicense, true);
+		createField(driverFields, noClaimsDiscount, true);
+		createField(driverFields, disqualified, true);
+		createField(driverFields, carUse, true);
+		createField(driverFields, mileage, true);
+		createField(driverFields, zipCode, true);
 		
 		// Flows
 		FlowInstance insureFlow = createFlow("Insure");
 		FlowSourceInstance insureStartSource = createStartSource(insureFlow, "start");
 		PageInstance insureDriverPage = createPage(insureFlow, "Driver");
-		insureDriverPage.rootContainer.set(driverContainer);
+		insureDriverPage.content.set(driverFields);
 		createEdge(insureFlow, insureStartSource, insureDriverPage);
 		applicationInstance.exposedFlows.add(insureFlow);
 		
 		// Finish up
-
 		
 		String json = CasePersister.gson.toJson(applicationInstance);
 		applicationInstance = CasePersister.gson.fromJson(json, ApplicationInstance.class);
 		json = CasePersister.gson.toJson(applicationInstance);
 		System.out.println(json);
 		
-//		CodeGenerator.generateApplication(applicationInstance);
+		CodeGenerator.generateApplication(applicationInstance);
+	}
+
+	private static PageCompositionInstance addContent(CompositePageFragmentInstance compositePageFragment, PageFragmentInstance item) {
+		PageCompositionInstance result = new PageCompositionInstance(applicationInstance);
+		result.pageFragment.set(item);
+		compositePageFragment.items.add(result);
+		return result;
 	}
 
 	public static void createDesigner() {
@@ -149,24 +157,30 @@ public class Bootstrapper {
 		createAttribute(relation, "reverseMultivalue", Boolean.class);
 		createAttribute(relation, "reverseName", String.class);
 		
+		// Shared
+		EntityInstance shared = createEntity("Shared", null);
+		EntityInstance textHolder = createEntity("TextHolder", concept);
+		EntityInstance pageFragmentHolder = createEntity("PageFragmentHolder", concept);
+		
 		// Page elements & Page
-		EntityInstance toolbox = createEntity("Toolbox", null);
-		EntityInstance pageElementBase = createEntity("PageElementBase", concept);
-		EntityInstance container = createEntity("Container", pageElementBase);
-		EntityInstance toolboxContainer = createEntity("ToolboxContainer", pageElementBase);
-		EntityInstance field = createEntity("Field", pageElementBase);
-		createAttribute(field, "required", Boolean.class);
+		EntityInstance pageFragment = createEntity("PageFragment", null);
+		EntityInstance compositePageFragment = createEntity("CompositePageFragment", pageFragment);
+		EntityInstance select = createEntity("Select", compositePageFragment);
+		EntityInstance header = createEntity("Header", compositePageFragment);
+		EntityInstance sharedPageFragment = createEntity("SharedFragment", pageFragment);
+		EntityInstance field = createEntity("Field", pageFragment);
+		createAttribute(field, "required", Boolean.class); // TODO: this validation goes to the domain
 		createAttribute(field, "readOnly", Boolean.class);
-		EntityInstance button = createEntity("Button", pageElementBase);
+		EntityInstance button = createEntity("Button", pageFragment);
 		createAttribute(button, "trigger", String.class);
-		EntityInstance containerItem = createEntity("ContainerItem", null);
-		AttributeInstance presentationStyles = createAttribute(containerItem, "presentationStyles", String.class);
+		EntityInstance pageComposition = createEntity("PageComposition", null);
+		AttributeInstance presentationStyles = createAttribute(pageComposition, "presentationStyles", String.class);
 		presentationStyles.multivalue.set(true);
 		
 		// Text
-		EntityInstance text = createEntity("Text", pageElementBase);
+		EntityInstance text = createEntity("Text", pageFragment);
 		EntityInstance constantText = createEntity("ConstantText", text);
-		EntityInstance toolboxText = createEntity("ToolboxText", text);
+		EntityInstance sharedText = createEntity("SharedText", text);
 		createAttribute(constantText, "untranslated", String.class);
 		// TODO: translations
 
@@ -182,40 +196,46 @@ public class Bootstrapper {
 		// Relations
 		
 		// Application
-		createRelation("entities", application, RelationType.OneToManyAggregation, entity, "application");
-		createRelation("caseEntity", application, RelationType.OneToZeroOrOne, entity, "caseEntityInApplication");
-		createRelation("flows", application, RelationType.OneToManyAggregation, flow, "application");
-		createRelation("exposedFlows", application, RelationType.OneToMany, flow, "exposedFlowInApplication");
+		createRelation(application, "entities", RelationType.OneToManyAggregation, "application", entity);
+		createRelation(application, "caseEntity", RelationType.OneToZeroOrOne, "caseEntityInApplication", entity);
+		createRelation(application, "flows", RelationType.OneToManyAggregation, "application", flow);
+		createRelation(application, "exposedFlows", RelationType.OneToMany, "exposedFlowInApplication", flow);
 
 		// Data
-		createRelation("extendsFrom", entity, RelationType.ManyToZeroOrOne, entity, "extensions");
-		createRelation("attributes", entity, RelationType.OneToManyAggregation, attribute, "entity");
-		createRelation("relations", entity, RelationType.OneToManyAggregation, relation, "entity");
-		createRelation("to", relation, RelationType.ManyToZeroOrOne, entity, "reverseRelations");
-		createRelation("question", attribute, RelationType.OneToZeroOrOneAggregation, text, "questionOnAttribute");
-		createRelation("explanation", attribute, RelationType.OneToZeroOrOneAggregation, text, "explanationOnAttribute");
-		createRelation("domain", attribute, RelationType.OneToManyAggregation, domainEntry, "attribute");
-		createRelation("display", domainEntry, RelationType.OneToZeroOrOneAggregation, text, "displayOnDomainEntry");
+		createRelation(entity, "extendsFrom", RelationType.ManyToZeroOrOne, "extensions", entity);
+		createRelation(entity, "attributes", RelationType.OneToManyAggregation, "entity", attribute);
+		createRelation(entity, "relations", RelationType.OneToManyAggregation, "entity", relation);
+		createRelation(relation, "to", RelationType.ManyToZeroOrOne, "reverseRelations", entity);
+		createRelation(attribute, "question", RelationType.OneToZeroOrOneAggregation, "questionOnAttribute", text);
+		createRelation(attribute, "explanation", RelationType.OneToZeroOrOneAggregation, "explanationOnAttribute", text);
+		createRelation(attribute, "domain", RelationType.OneToManyAggregation, "attribute", domainEntry);
+		createRelation(domainEntry, "display", RelationType.OneToZeroOrOneAggregation, "displayOnDomainEntry", text);
 
+		// Shared
+		createRelation(application, "shared", RelationType.OneToOneAggregation, "application", shared);
+		createRelation(shared, "pageFragments", RelationType.OneToManyAggregation, "shared", pageFragmentHolder);
+		createRelation(sharedPageFragment, "holder", RelationType.ManyToZeroOrOne, "usages", pageFragmentHolder);
+		createRelation(pageFragmentHolder, "pageFragment", RelationType.OneToOneAggregation, "holder", pageFragment);
+		createRelation(shared, "texts", RelationType.OneToManyAggregation, "shared", textHolder);
+		createRelation(sharedText, "holder", RelationType.ManyToZeroOrOne, "usages", textHolder);
+		createRelation(textHolder, "text", RelationType.OneToOneAggregation, "holder", text);
+		
 		// Page elements
-		createRelation("pageToolbox", application, RelationType.OneToOneAggregation, toolbox, "application");
-		createRelation("containers", toolbox, RelationType.OneToManyAggregation, container, "toolbox");
-		createRelation("texts", toolbox, RelationType.OneToManyAggregation, text, "toolbox");
-		createRelation("rootContainer", page, RelationType.OneToOneAggregation, container, "rootContainerInPage");
-		createRelation("items", container, RelationType.OneToManyAggregation, containerItem, "container");
-		createRelation("element", containerItem, RelationType.OneToZeroOrOneAggregation, pageElementBase, "containerItem");
-		createRelation("attribute", field, RelationType.ManyToZeroOrOne, attribute, "fields");
-		createRelation("relation", container, RelationType.ManyToZeroOrOne, relation, "relationInContainers");
-		createRelation("display", container, RelationType.OneToZeroOrOneAggregation, text, "displayOnContainer");
-		createRelation("caption", button, RelationType.OneToOneAggregation, text, "captionOnButton");
+		createRelation(page, "content", RelationType.OneToOneAggregation, "contentOfPage", compositePageFragment);
+		createRelation(compositePageFragment, "items", RelationType.OneToManyAggregation, "container", pageComposition);
+		createRelation(pageComposition, "pageFragment", RelationType.OneToZeroOrOneAggregation, "composedIn", pageFragment);
+		createRelation(field, "attribute", RelationType.ManyToZeroOrOne, "fields", attribute);
+		createRelation(select, "relation", RelationType.ManyToZeroOrOne, "relationInselects", relation);
+		createRelation(header, "text", RelationType.OneToOneAggregation, "textOnHeader", text);
+		createRelation(button, "caption", RelationType.OneToOneAggregation, "captionOnButton", text);
 		
 		// Flow
-		createRelation("sources", flow, RelationType.OneToManyAggregation, flowSource, "flow");
-		createRelation("sinks", flow, RelationType.OneToManyAggregation, flowSink, "flow");
-		createRelation("nodes", flow, RelationType.OneToManyAggregation, flowNodeBase, "flow");
-		createRelation("edges", flow, RelationType.OneToManyAggregation, flowEdge, "flow");
-		createRelation("from", flowEdge, RelationType.ManyToZeroOrOne, flowNodeBase, "outgoingEdges");
-		createRelation("to", flowEdge, RelationType.ManyToZeroOrOne, flowNodeBase, "incomingEdges");
+		createRelation(flow, "sources", RelationType.OneToManyAggregation, "flow", flowSource);
+		createRelation(flow, "sinks", RelationType.OneToManyAggregation, "flow", flowSink);
+		createRelation(flow, "nodes", RelationType.OneToManyAggregation, "flow", flowNodeBase);
+		createRelation(flow, "edges", RelationType.OneToManyAggregation, "flow", flowEdge);
+		createRelation(flowEdge, "from", RelationType.ManyToZeroOrOne, "outgoingEdges", flowNodeBase);
+		createRelation(flowEdge, "to", RelationType.ManyToZeroOrOne, "incomingEdges", flowNodeBase);
 		
 		// Toolbox
 		
@@ -224,16 +244,18 @@ public class Bootstrapper {
 		FlowInstance mainFlow = createFlow("Main");
 		FlowSourceInstance mainStart = createStartSource(mainFlow, "start");
 		PageInstance welcomePage = createPage(mainFlow, "Welcome");
-		PageInstance pageToolboxPage = createPage(mainFlow, "PageToolbox");
+		PageInstance sharedPage = createPage(mainFlow, "Shared");
 		PageInstance containerPage = createPage(mainFlow, "Container");
 		createEdge(mainFlow, mainStart, welcomePage);
-		createEdge(mainFlow, welcomePage, pageToolboxPage);
-		createEdge(mainFlow, pageToolboxPage, containerPage);
-		
+		createEdge(mainFlow, welcomePage, sharedPage);
+		createEdge(mainFlow, sharedPage, containerPage);
+
+		CompositePageFragmentInstance welcomePageContent = new CompositePageFragmentInstance(applicationInstance);
+		welcomePage.content.set(welcomePageContent);
 		ConstantTextInstance welcomeText = createConstantText("Welcome to the designer");
-		createContainerItem(welcomePage.rootContainer.get(), welcomeText);
-		ButtonInstance pageToolboxButton = createButton("toolbox", createConstantText("Toolbox")); 
-		createContainerItem(welcomePage.rootContainer.get(), pageToolboxButton);
+		createContainerItem(welcomePageContent, welcomeText);
+		ButtonInstance sharedButton = createButton("shared", createConstantText("Shared items")); 
+		createContainerItem(welcomePageContent, sharedButton);
 		
 		// Finish up
 		
@@ -247,14 +269,13 @@ public class Bootstrapper {
 	private static ButtonInstance createButton(String trigger, TextInstance caption) {
 		ButtonInstance result = new ButtonInstance(applicationInstance);
 		result.trigger.set(trigger);
-		result.name.set(trigger);
 		result.caption.set(caption);
 		return result;
 	}
 
-	private static void createContainerItem(ContainerInstance containerInstance, PageElementBaseInstance element) {
-		ContainerItemInstance item = new ContainerItemInstance(applicationInstance);
-		item.element.set(element);
+	private static void createContainerItem(CompositePageFragmentInstance containerInstance, PageFragmentInstance element) {
+		PageCompositionInstance item = new PageCompositionInstance(applicationInstance);
+		item.pageFragment.set(element);
 		containerInstance.items.add(item);
 	}
 
@@ -274,7 +295,7 @@ public class Bootstrapper {
 		return attribute;
 	}
 
-	private static RelationInstance createRelation(String name, EntityInstance from, RelationType relationType, EntityInstance to, String reverseName) {
+	private static RelationInstance createRelation(EntityInstance from, String name, RelationType relationType, String reverseName, EntityInstance to) {
 		RelationInstance relation = new RelationInstance(applicationInstance);
 		from.relations.add(relation);
 		relation.to.set(to);
@@ -300,20 +321,30 @@ public class Bootstrapper {
 		return result;
 	}
 
-	private static ContainerInstance createContainer(String name) {
-		ContainerInstance Container = new ContainerInstance(applicationInstance);
-		Container.name.set(name);
-		applicationInstance.pageToolbox.get().containers.add(Container);
-		return Container;
+	private static CompositePageFragmentInstance createCompositePageFragment() {
+		CompositePageFragmentInstance container = new CompositePageFragmentInstance(applicationInstance);
+		return container;
 	}
 
-	private static FieldInstance createField(ContainerInstance container, AttributeInstance attribute, boolean required) {
+	private static SelectInstance createSelect(RelationInstance relation) {
+		SelectInstance select = new SelectInstance(applicationInstance);
+		select.relation.set(relation);
+		return select;
+	}
+
+	private static HeaderInstance createHeader(TextInstance text) {
+		HeaderInstance header = new HeaderInstance(applicationInstance);
+		header.text.set(text);
+		return header;
+	}
+
+	private static FieldInstance createField(CompositePageFragmentInstance container, AttributeInstance attribute, boolean required) {
 		FieldInstance field = new FieldInstance(applicationInstance);
 		field.attribute.set(attribute);
 		field.required.set(true);
-		ContainerItemInstance item = new ContainerItemInstance(applicationInstance);
+		PageCompositionInstance item = new PageCompositionInstance(applicationInstance);
 		container.items.add(item);
-		item.element.set(field);
+		item.pageFragment.set(field);
 		return field;
 	}
 

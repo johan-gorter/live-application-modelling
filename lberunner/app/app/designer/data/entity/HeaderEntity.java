@@ -10,35 +10,56 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class ToolboxTextEntity extends SimpleEntity {
+public class HeaderEntity extends SimpleEntity {
 
-	public static final ToolboxTextEntity INSTANCE = new ToolboxTextEntity();
+	public static final HeaderEntity INSTANCE = new HeaderEntity();
 	
 	// Attributes
 	
 	// Relations
+	
+	public static final Relation<HeaderInstance, TextInstance, TextInstance> text
+		= new SimpleRelation<HeaderInstance, TextInstance, TextInstance>(
+			"text", INSTANCE, TextEntity.INSTANCE, TextInstance.class, TextEntity.textOnHeader
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<HeaderInstance, TextInstance> get(
+					HeaderInstance instance) {
+				return instance.text;
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isAutoCreate() {
+				return true;
+			}
+		};
 	
 	// Reverse relations
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
+		text,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};
 
-	private ToolboxTextEntity() {
-		super("ToolboxText");
+	private HeaderEntity() {
+		super("Header");
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
-		return new ToolboxTextInstance(caseInstance);
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		return new HeaderInstance(caseInstance, id);
 	}
 	
 	@Override
 	public Entity extendsEntity() {
-		return TextEntity.INSTANCE;
+		return CompositePageFragmentEntity.INSTANCE;
 	}
 	
 	@Override

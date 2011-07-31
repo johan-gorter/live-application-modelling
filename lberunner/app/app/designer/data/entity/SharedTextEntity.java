@@ -10,35 +10,48 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class ToolboxContainerEntity extends SimpleEntity {
+public class SharedTextEntity extends SimpleEntity {
 
-	public static final ToolboxContainerEntity INSTANCE = new ToolboxContainerEntity();
+	public static final SharedTextEntity INSTANCE = new SharedTextEntity();
 	
 	// Attributes
 	
 	// Relations
+	
+	public static final Relation<SharedTextInstance, TextHolderInstance, TextHolderInstance> holder
+		= new SimpleRelation<SharedTextInstance, TextHolderInstance, TextHolderInstance>(
+			"holder", INSTANCE, TextHolderEntity.INSTANCE, TextHolderInstance.class, TextHolderEntity.usages
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<SharedTextInstance, TextHolderInstance> get(
+					SharedTextInstance instance) {
+				return instance.holder;
+			}
+		};
 	
 	// Reverse relations
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
+		holder,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};
 
-	private ToolboxContainerEntity() {
-		super("ToolboxContainer");
+	private SharedTextEntity() {
+		super("SharedText");
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
-		return new ToolboxContainerInstance(caseInstance);
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		return new SharedTextInstance(caseInstance, id);
 	}
 	
 	@Override
 	public Entity extendsEntity() {
-		return PageElementBaseEntity.INSTANCE;
+		return TextEntity.INSTANCE;
 	}
 	
 	@Override

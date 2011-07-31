@@ -69,13 +69,13 @@ public class FieldEntity extends SimpleEntity {
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
-		return new FieldInstance(caseInstance);
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		return new FieldInstance(caseInstance, id);
 	}
 	
 	@Override
 	public Entity extendsEntity() {
-		return PageElementBaseEntity.INSTANCE;
+		return PageFragmentEntity.INSTANCE;
 	}
 	
 	@Override

@@ -91,8 +91,8 @@ public class FlowNodeBaseEntity extends SimpleEntity {
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
-		return new FlowNodeBaseInstance(caseInstance);
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		return new FlowNodeBaseInstance(caseInstance, id);
 	}
 	
 	@Override

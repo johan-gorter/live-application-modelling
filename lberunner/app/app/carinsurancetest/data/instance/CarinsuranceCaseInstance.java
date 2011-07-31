@@ -2,7 +2,7 @@ package app.carinsurancetest.data.instance;
 
 import java.util.List;
 
-import app.carinsurance.CarinsuranceApplication;
+import app.carinsurancetest.*;
 import app.carinsurancetest.data.entity.*;
 import lbe.instance.*;
 import lbe.instance.impl.*;
@@ -17,7 +17,7 @@ public class CarinsuranceCaseInstance
 	implements Instance {
 
 	public CarinsuranceCaseInstance() {
-		super(CarinsuranceCaseEntity.INSTANCE, CarinsuranceApplication.INSTANCE);
+		super(CarinsuranceCaseEntity.INSTANCE, CarInsuranceTestApplication.INSTANCE);
 	}
 
 	// Attributes

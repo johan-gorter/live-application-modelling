@@ -56,8 +56,8 @@ public class AttributeBaseEntity extends SimpleEntity {
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
-		return new AttributeBaseInstance(caseInstance);
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		return new AttributeBaseInstance(caseInstance, id);
 	}
 	
 	@Override

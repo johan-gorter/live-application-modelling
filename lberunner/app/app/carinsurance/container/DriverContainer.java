@@ -2,15 +2,15 @@ package app.carinsurance.container;
 
 import lbe.model.Attribute;
 import lbe.model.Relation;
-import lbe.model.pageelement.Container;
+import lbe.model.pageelement.CompositePageFragment;
 import lbe.model.pageelement.Field;
-import lbe.model.pageelement.PageElementBase;
+import lbe.model.pageelement.PageFragment;
 import lbe.model.pageelement.Text;
 import lbe.model.pageelement.impl.ConstantText;
 import app.carinsurancetest.data.entity.CarinsuranceCaseEntity;
 import app.carinsurancetest.data.entity.DriverEntity;
 
-public class DriverContainer extends Container{
+public class DriverContainer extends CompositePageFragment{
 
 	public static DriverContainer INSTANCE = new DriverContainer();
 	
@@ -18,7 +18,7 @@ public class DriverContainer extends Container{
 
 	private DriverContainer() {}
 	
-	private static final PageElementBase[] CHILDREN = new PageElementBase[] {
+	private static final PageFragment[] CHILDREN = new PageFragment[] {
 
 //		new Field() {
 //			@Override
@@ -128,7 +128,7 @@ public class DriverContainer extends Container{
 	}
 	
 	@Override
-	public PageElementBase[] getChildren() {
+	public PageFragment[] getChildren() {
 		return CHILDREN;
 	}
 

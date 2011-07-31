@@ -2,6 +2,7 @@ package app.designer.data.instance;
 
 import java.util.List;
 
+import app.designer.*;
 import app.designer.data.entity.*;
 import lbe.instance.*;
 import lbe.instance.impl.*;
@@ -16,11 +17,15 @@ public class EntityInstance
 	implements Instance {
 
 	public EntityInstance(CaseInstance caseInstance) {
-		super(caseInstance, EntityEntity.INSTANCE);
+		this(caseInstance, 0);
 	}
 	
-	protected EntityInstance(CaseInstance caseInstance, Entity model) {
-		super(caseInstance, model);
+	public EntityInstance(CaseInstance caseInstance, long id) {
+		super(caseInstance, EntityEntity.INSTANCE, id);
+	}
+	
+	protected EntityInstance(CaseInstance caseInstance, Entity model, long id) {
+		super(caseInstance, model, id);
 	}
 
 	// Attributes

@@ -216,8 +216,8 @@ public class DriverEntity extends SimpleEntity {
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
-		return new DriverInstance(caseInstance);
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		return new DriverInstance(caseInstance, id);
 	}
 	
 	@Override

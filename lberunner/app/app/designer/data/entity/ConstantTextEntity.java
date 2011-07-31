@@ -44,8 +44,8 @@ public class ConstantTextEntity extends SimpleEntity {
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
-		return new ConstantTextInstance(caseInstance);
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		return new ConstantTextInstance(caseInstance, id);
 	}
 	
 	@Override

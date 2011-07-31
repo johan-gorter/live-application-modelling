@@ -2,6 +2,7 @@ package app.designer.data.instance;
 
 import java.util.List;
 
+import app.designer.*;
 import app.designer.data.entity.*;
 import lbe.instance.*;
 import lbe.instance.impl.*;
@@ -16,11 +17,15 @@ public class RelationInstance
 	implements Instance {
 
 	public RelationInstance(CaseInstance caseInstance) {
-		super(caseInstance, RelationEntity.INSTANCE);
+		this(caseInstance, 0);
 	}
 	
-	protected RelationInstance(CaseInstance caseInstance, Entity model) {
-		super(caseInstance, model);
+	public RelationInstance(CaseInstance caseInstance, long id) {
+		super(caseInstance, RelationEntity.INSTANCE, id);
+	}
+	
+	protected RelationInstance(CaseInstance caseInstance, Entity model, long id) {
+		super(caseInstance, model, id);
 	}
 
 	// Attributes
@@ -47,7 +52,7 @@ public class RelationInstance
 	public final ReadOnlyRelationValue<RelationInstance, EntityInstance> entity
 		= createReverseRelationValue(RelationEntity.entity);
 	
-	public final ReadOnlyRelationValues<RelationInstance, ContainerInstance> relationInContainers
-		= createReverseRelationValues(RelationEntity.relationInContainers);
+	public final ReadOnlyRelationValues<RelationInstance, SelectInstance> relationInselects
+		= createReverseRelationValues(RelationEntity.relationInselects);
 
 }

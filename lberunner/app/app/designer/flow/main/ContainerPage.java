@@ -10,9 +10,10 @@ public class ContainerPage extends Page {
 
 	public static final ContainerPage INSTANCE = new ContainerPage();
 	
+	
 	@Override
-	public Container getRootContainer() {
-		return ContainerContainer.INSTANCE;
+	public CompositePageFragment getRootContainer() {
+		return CONTENT;
 	}; 
 	
 	@Override

@@ -2,6 +2,7 @@ package app.designer.data.instance;
 
 import java.util.List;
 
+import app.designer.*;
 import app.designer.data.entity.*;
 import lbe.instance.*;
 import lbe.instance.impl.*;
@@ -12,15 +13,19 @@ import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
 public class TextInstance 
-	extends PageElementBaseInstance 
+	extends PageFragmentInstance 
 	implements Instance {
 
 	public TextInstance(CaseInstance caseInstance) {
-		super(caseInstance, TextEntity.INSTANCE);
+		this(caseInstance, 0);
 	}
 	
-	protected TextInstance(CaseInstance caseInstance, Entity model) {
-		super(caseInstance, model);
+	public TextInstance(CaseInstance caseInstance, long id) {
+		super(caseInstance, TextEntity.INSTANCE, id);
+	}
+	
+	protected TextInstance(CaseInstance caseInstance, Entity model, long id) {
+		super(caseInstance, model, id);
 	}
 
 	// Attributes
@@ -38,11 +43,11 @@ public class TextInstance
 	public final ReadOnlyRelationValue<TextInstance, DomainEntryInstance> displayOnDomainEntry
 		= createReverseRelationValue(TextEntity.displayOnDomainEntry);
 	
-	public final ReadOnlyRelationValue<TextInstance, ToolboxInstance> toolbox
-		= createReverseRelationValue(TextEntity.toolbox);
+	public final ReadOnlyRelationValue<TextInstance, TextHolderInstance> holder
+		= createReverseRelationValue(TextEntity.holder);
 	
-	public final ReadOnlyRelationValue<TextInstance, ContainerInstance> displayOnContainer
-		= createReverseRelationValue(TextEntity.displayOnContainer);
+	public final ReadOnlyRelationValue<TextInstance, HeaderInstance> textOnHeader
+		= createReverseRelationValue(TextEntity.textOnHeader);
 	
 	public final ReadOnlyRelationValue<TextInstance, ButtonInstance> captionOnButton
 		= createReverseRelationValue(TextEntity.captionOnButton);

@@ -92,15 +92,15 @@ public class RelationEntity extends SimpleEntity {
 			}
 		};
 	
-	public static final Relation<RelationInstance, List<ContainerInstance>, ContainerInstance> relationInContainers
-		= new SimpleRelation<RelationInstance, List<ContainerInstance>, ContainerInstance>(
-			"relationInContainers", INSTANCE, RelationEntity.INSTANCE, ContainerInstance.class, ContainerEntity.relation
+	public static final Relation<RelationInstance, List<SelectInstance>, SelectInstance> relationInselects
+		= new SimpleRelation<RelationInstance, List<SelectInstance>, SelectInstance>(
+			"relationInselects", INSTANCE, RelationEntity.INSTANCE, SelectInstance.class, SelectEntity.relation
 		) {
 	
 			@Override
-			public ReadOnlyRelationValues<RelationInstance, ContainerInstance> get(
+			public ReadOnlyRelationValues<RelationInstance, SelectInstance> get(
 					RelationInstance instance) {
-				return instance.relationInContainers;
+				return instance.relationInselects;
 			}
 	
 			public boolean isReverse() {
@@ -123,7 +123,7 @@ public class RelationEntity extends SimpleEntity {
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 		entity,
-		relationInContainers,
+		relationInselects,
 	};
 
 	private RelationEntity() {
@@ -131,8 +131,8 @@ public class RelationEntity extends SimpleEntity {
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
-		return new RelationInstance(caseInstance);
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		return new RelationInstance(caseInstance, id);
 	}
 	
 	@Override

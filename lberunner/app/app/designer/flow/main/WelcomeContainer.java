@@ -5,15 +5,15 @@ import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 import app.designer.data.entity.*;
 
-public class WelcomeContainer extends Container {
+public class WelcomeContainer extends CompositePageFragment {
 
 	public static WelcomeContainer INSTANCE = new WelcomeContainer();
 	
 	private WelcomeContainer() {}
 	
-	private static final PageElementBase[] CHILDREN = new PageElementBase[] {
+	private static final PageFragment[] CHILDREN = new PageFragment[] {
 		new ConstantText("Welcome to the designer"),
-		new SimpleButton("toolbox", new ConstantText("Toolbox")),
+		new SimpleButton("shared", new ConstantText("Shared items")),
 	};
 
 	@Override
@@ -22,7 +22,7 @@ public class WelcomeContainer extends Container {
 	}
 
 	@Override
-	public PageElementBase[] getChildren() {
+	public PageFragment[] getChildren() {
 		return CHILDREN;
 	}
 }

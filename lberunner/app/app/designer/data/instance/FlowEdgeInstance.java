@@ -2,6 +2,7 @@ package app.designer.data.instance;
 
 import java.util.List;
 
+import app.designer.*;
 import app.designer.data.entity.*;
 import lbe.instance.*;
 import lbe.instance.impl.*;
@@ -16,11 +17,15 @@ public class FlowEdgeInstance
 	implements Instance {
 
 	public FlowEdgeInstance(CaseInstance caseInstance) {
-		super(caseInstance, FlowEdgeEntity.INSTANCE, 0);
+		this(caseInstance, 0);
 	}
 	
-	protected FlowEdgeInstance(CaseInstance caseInstance, Entity model) {
-		super(caseInstance, model, 0);
+	public FlowEdgeInstance(CaseInstance caseInstance, long id) {
+		super(caseInstance, FlowEdgeEntity.INSTANCE, id);
+	}
+	
+	protected FlowEdgeInstance(CaseInstance caseInstance, Entity model, long id) {
+		super(caseInstance, model, id);
 	}
 
 	// Attributes

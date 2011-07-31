@@ -68,15 +68,15 @@ public class TextEntity extends SimpleEntity {
 			}
 		};
 	
-	public static final Relation<TextInstance, ToolboxInstance, ToolboxInstance> toolbox
-		= new SimpleRelation<TextInstance, ToolboxInstance, ToolboxInstance>(
-			"toolbox", INSTANCE, TextEntity.INSTANCE, ToolboxInstance.class, ToolboxEntity.texts
+	public static final Relation<TextInstance, TextHolderInstance, TextHolderInstance> holder
+		= new SimpleRelation<TextInstance, TextHolderInstance, TextHolderInstance>(
+			"holder", INSTANCE, TextEntity.INSTANCE, TextHolderInstance.class, TextHolderEntity.text
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<TextInstance, ToolboxInstance> get(
+			public ReadOnlyRelationValue<TextInstance, TextHolderInstance> get(
 					TextInstance instance) {
-				return instance.toolbox;
+				return instance.holder;
 			}
 	
 			public boolean isReverse() {
@@ -84,15 +84,15 @@ public class TextEntity extends SimpleEntity {
 			}
 		};
 	
-	public static final Relation<TextInstance, ContainerInstance, ContainerInstance> displayOnContainer
-		= new SimpleRelation<TextInstance, ContainerInstance, ContainerInstance>(
-			"displayOnContainer", INSTANCE, TextEntity.INSTANCE, ContainerInstance.class, ContainerEntity.display
+	public static final Relation<TextInstance, HeaderInstance, HeaderInstance> textOnHeader
+		= new SimpleRelation<TextInstance, HeaderInstance, HeaderInstance>(
+			"textOnHeader", INSTANCE, TextEntity.INSTANCE, HeaderInstance.class, HeaderEntity.text
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<TextInstance, ContainerInstance> get(
+			public ReadOnlyRelationValue<TextInstance, HeaderInstance> get(
 					TextInstance instance) {
-				return instance.displayOnContainer;
+				return instance.textOnHeader;
 			}
 	
 			public boolean isReverse() {
@@ -124,8 +124,8 @@ public class TextEntity extends SimpleEntity {
 		questionOnAttribute,
 		explanationOnAttribute,
 		displayOnDomainEntry,
-		toolbox,
-		displayOnContainer,
+		holder,
+		textOnHeader,
 		captionOnButton,
 	};
 
@@ -134,13 +134,13 @@ public class TextEntity extends SimpleEntity {
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
-		return new TextInstance(caseInstance);
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		return new TextInstance(caseInstance, id);
 	}
 	
 	@Override
 	public Entity extendsEntity() {
-		return PageElementBaseEntity.INSTANCE;
+		return PageFragmentEntity.INSTANCE;
 	}
 	
 	@Override

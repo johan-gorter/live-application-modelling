@@ -49,8 +49,8 @@ public class FlowSourceEntity extends SimpleEntity {
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
-		return new FlowSourceInstance(caseInstance);
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		return new FlowSourceInstance(caseInstance, id);
 	}
 	
 	@Override

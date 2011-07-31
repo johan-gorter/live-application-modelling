@@ -23,4 +23,7 @@ public class ApplicationClassModel {
 	public List<String> getExposedFlows() {
 		return exposedFlows;
 	}
+	public List<String> getEntities() {
+		return entities;
+	}
 }

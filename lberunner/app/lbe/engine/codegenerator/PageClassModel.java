@@ -5,23 +5,11 @@ import java.util.List;
 
 public class PageClassModel {
 
-	public static class PageElement {
-		public String name;
-		public String type;
-		
-		public String getName() {
-			return name;
-		}
-		public String getType() {
-			return type;
-		}
-	}
-
 	public String appname;
 	public String flowname;
 	public String name;
 	
-	public final List<PageElement> rootElements = new ArrayList<PageElement>();
+	public final List<ContainerClassModel> containers = new ArrayList<ContainerClassModel>();
 
 	public String getAppname() {
 		return appname;
@@ -35,8 +23,8 @@ public class PageClassModel {
 		return name;
 	}
 
-	public List<PageElement> getRootElements() {
-		return rootElements;
+	public List<ContainerClassModel> getContainers() {
+		return containers;
 	}
 
 }

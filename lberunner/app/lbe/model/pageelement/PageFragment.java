@@ -5,7 +5,7 @@ import lbe.engine.PageElement;
 import lbe.engine.RenderContext;
 import lbe.model.Model;
 
-public abstract class PageElementBase extends Model {
+public abstract class PageFragment extends Model {
 
 	public abstract String getElementType();
 

@@ -4,7 +4,7 @@ import lbe.engine.PageElement;
 import lbe.engine.RenderContext;
 import lbe.model.Model;
 
-public abstract class Text extends PageElementBase {
+public abstract class Text extends PageFragment {
 
 	@Override
 	public String getName() {

@@ -32,8 +32,8 @@ public class SubFlowEntity extends SimpleEntity {
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
-		return new SubFlowInstance(caseInstance);
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		return new SubFlowInstance(caseInstance, id);
 	}
 	
 	@Override

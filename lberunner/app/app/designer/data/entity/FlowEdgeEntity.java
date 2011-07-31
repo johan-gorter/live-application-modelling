@@ -75,8 +75,8 @@ public class FlowEdgeEntity extends SimpleEntity {
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
-		return new FlowEdgeInstance(caseInstance);
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		return new FlowEdgeInstance(caseInstance, id);
 	}
 	
 	@Override

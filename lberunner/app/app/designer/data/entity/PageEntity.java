@@ -18,15 +18,15 @@ public class PageEntity extends SimpleEntity {
 	
 	// Relations
 	
-	public static final Relation<PageInstance, ContainerInstance, ContainerInstance> rootContainer
-		= new SimpleRelation<PageInstance, ContainerInstance, ContainerInstance>(
-			"rootContainer", INSTANCE, ContainerEntity.INSTANCE, ContainerInstance.class, ContainerEntity.rootContainerInPage
+	public static final Relation<PageInstance, CompositePageFragmentInstance, CompositePageFragmentInstance> content
+		= new SimpleRelation<PageInstance, CompositePageFragmentInstance, CompositePageFragmentInstance>(
+			"content", INSTANCE, CompositePageFragmentEntity.INSTANCE, CompositePageFragmentInstance.class, CompositePageFragmentEntity.contentOfPage
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<PageInstance, ContainerInstance> get(
+			public ReadOnlyRelationValue<PageInstance, CompositePageFragmentInstance> get(
 					PageInstance instance) {
-				return instance.rootContainer;
+				return instance.content;
 			}
 	
 			public boolean isOwner() {
@@ -43,7 +43,7 @@ public class PageEntity extends SimpleEntity {
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
-		rootContainer,
+		content,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};
@@ -53,8 +53,8 @@ public class PageEntity extends SimpleEntity {
 	}
 	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance) {
-		return new PageInstance(caseInstance);
+	public Instance createInstance(CaseInstance caseInstance, long id) {
+		return new PageInstance(caseInstance, id);
 	}
 	
 	@Override

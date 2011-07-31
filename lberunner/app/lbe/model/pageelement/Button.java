@@ -4,7 +4,7 @@ import lbe.engine.ChangeContext;
 import lbe.engine.PageElement;
 import lbe.engine.RenderContext;
 
-public abstract class Button extends PageElementBase {
+public abstract class Button extends PageFragment {
 
 	@Override
 	public String getElementType() {

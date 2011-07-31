@@ -5,14 +5,17 @@ import app.carinsurancetest.container.*;
 import app.carinsurancetest.button.*;
 import lbe.model.flow.*;
 import lbe.model.pageelement.*;
+import lbe.model.pageelement.impl.SimpleContainer;
 
 public class DriverPage extends Page {
 
 	public static final DriverPage INSTANCE = new DriverPage();
 	
+	private static final CompositePageFragment CONTENT = new SimpleContainer("x");
+	
 	@Override
-	public Container getRootContainer() {
-		return DriverContainer.INSTANCE;
+	public CompositePageFragment getRootContainer() {
+		return CONTENT;
 	}; 
 	
 	@Override

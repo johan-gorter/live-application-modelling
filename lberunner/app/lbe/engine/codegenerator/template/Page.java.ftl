@@ -10,9 +10,11 @@ public class ${name}Page extends Page {
 
 	public static final ${name}Page INSTANCE = new ${name}Page();
 	
+	<#include "Content.java.ftl"> 
+	
 	@Override
 	public Container getRootContainer() {
-		return ${name}Container.INSTANCE;
+		return CONTENT;
 	}; 
 	
 	@Override

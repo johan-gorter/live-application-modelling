@@ -11,7 +11,7 @@ public class PageToolboxPage extends Page {
 	public static final PageToolboxPage INSTANCE = new PageToolboxPage();
 	
 	@Override
-	public Container getRootContainer() {
+	public CompositePageFragment getRootContainer() {
 		return PageToolboxContainer.INSTANCE;
 	}; 
 	

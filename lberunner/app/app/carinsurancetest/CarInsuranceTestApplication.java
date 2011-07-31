@@ -1,6 +1,6 @@
 package app.carinsurancetest;
 
-import java.util.SortedMap;
+import java.util.*;
 
 import app.carinsurancetest.data.entity.*;
 import app.carinsurancetest.data.instance.*;
@@ -31,6 +31,22 @@ public class CarInsuranceTestApplication extends Application {
 		return exposedFlows;
 	}
 	
+	private static final Entity[] entities = new Entity[] {
+		CarinsuranceCaseEntity.INSTANCE,
+		DriverEntity.INSTANCE,
+	};
+	private static final SortedMap<String, Entity> entityMap = new TreeMap<String, Entity>();
+	static {
+		for (Entity entity:entities) {
+			entityMap.put(entity.getName(), entity);
+		}
+	}
+	@Override
+	public SortedMap<String, Entity> getEntities() {
+		return entityMap;
+	}
+	
+	
 	@Override
 	public Class<? extends CaseInstance> getCaseInstanceClass() {
 		return CarinsuranceCaseInstance.class;
@@ -39,11 +55,5 @@ public class CarInsuranceTestApplication extends Application {
 	@Override
 	public String getName() {
 		return "CarInsuranceTest";
-	}
-
-	@Override
-	public SortedMap<String, Entity> getEntities() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

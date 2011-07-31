@@ -5,13 +5,13 @@ import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 import app.designer.data.entity.*;
 
-public class PageToolboxContainer extends Container {
+public class PageToolboxContainer extends CompositePageFragment {
 
 	public static PageToolboxContainer INSTANCE = new PageToolboxContainer();
 	
 	private PageToolboxContainer() {}
 	
-	private static final PageElementBase[] CHILDREN = new PageElementBase[] {
+	private static final PageFragment[] CHILDREN = new PageFragment[] {
 	};
 
 	@Override
@@ -20,7 +20,7 @@ public class PageToolboxContainer extends Container {
 	}
 
 	@Override
-	public PageElementBase[] getChildren() {
+	public PageFragment[] getChildren() {
 		return CHILDREN;
 	}
 }

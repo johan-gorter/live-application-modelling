@@ -2,35 +2,23 @@ package lbe.engine.codegenerator;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.nio.charset.CharsetEncoder;
 import java.util.ArrayList;
 import java.util.List;
-
-import play.Play;
 
 import lbe.engine.codegenerator.EntityClassModel.Attribute;
 import lbe.engine.codegenerator.EntityClassModel.Attribute.DomainEntry;
 import lbe.engine.codegenerator.EntityClassModel.Relation;
 import lbe.engine.codegenerator.FlowClassModel.FlowEdge;
 import lbe.engine.codegenerator.FlowClassModel.FlowNode;
-import lbe.engine.codegenerator.PageClassModel.PageElement;
-import lbe.instance.CaseInstance;
-import lbe.model.pageelement.impl.ConstantText;
-
-import freemarker.template.Configuration;
-import freemarker.template.DefaultObjectWrapper;
-import freemarker.template.Template;
-import app.designer.data.entity.EntityEntity;
+import play.Play;
 import app.designer.data.instance.ApplicationInstance;
 import app.designer.data.instance.AttributeInstance;
 import app.designer.data.instance.ButtonInstance;
+import app.designer.data.instance.CompositePageFragmentInstance;
 import app.designer.data.instance.ConstantTextInstance;
-import app.designer.data.instance.ContainerInstance;
-import app.designer.data.instance.ContainerItemInstance;
 import app.designer.data.instance.DomainEntryInstance;
 import app.designer.data.instance.EntityInstance;
 import app.designer.data.instance.FieldInstance;
@@ -39,10 +27,14 @@ import app.designer.data.instance.FlowInstance;
 import app.designer.data.instance.FlowNodeBaseInstance;
 import app.designer.data.instance.FlowSinkInstance;
 import app.designer.data.instance.FlowSourceInstance;
-import app.designer.data.instance.PageElementBaseInstance;
+import app.designer.data.instance.PageFragmentHolderInstance;
+import app.designer.data.instance.PageFragmentInstance;
 import app.designer.data.instance.PageInstance;
 import app.designer.data.instance.RelationInstance;
 import app.designer.data.instance.TextInstance;
+import freemarker.template.Configuration;
+import freemarker.template.DefaultObjectWrapper;
+import freemarker.template.Template;
 
 public class CodeGenerator {
 
@@ -101,29 +93,6 @@ public class CodeGenerator {
 		}
 	}
 	
-	private static void generateFile(Template template, Object rootMap, String subDirectory, 
-			String name, String postfix, String appname, File root) {
-		Writer writer = null;
-		try {
-			if (subDirectory!=null) {
-				root = new File(root, subDirectory);
-				root.mkdirs();
-			}
-			File output = new File(root, name+postfix+".java");
-			writer = new OutputStreamWriter(new FileOutputStream(output), "UTF-8");
-			template.process(rootMap, writer);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		} finally {
-			if (writer!=null) {
-				try {
-					writer.close();
-				} catch (IOException e) {
-				}
-			}
-		}
-	}
-
 	public static void generateApplication(ApplicationInstance application, String appname, File applicationRoot) {
 		ApplicationClassModel applicationClassModel = createApplicationClassModel(application, appname);
 		applicationRoot.mkdirs();
@@ -139,48 +108,44 @@ public class CodeGenerator {
 				PageInstance page = (PageInstance)node;
 				PageClassModel pageClassModel = createPageClassModel(page, appname, flowName);
 				generateFile(pageTemplate, pageClassModel, "flow/"+flowName.toLowerCase(), page.name.get(), "Page", appname, applicationRoot);
-				ContainerInstance rootContainer = page.rootContainer.get();
-				ContainerClassModel containerClassModel = createContainerClassModel(rootContainer, appname);
-				containerClassModel.subpackageName = "flow."+flowName.toLowerCase();
-				containerClassModel.name = page.name.get();
-				generateFile(containerTemplate, containerClassModel, "flow/"+flowName.toLowerCase(), page.name.get(), "Container", appname, applicationRoot);
 			}
 		}
 	}
 	
-	private static void generateContainer(ContainerInstance container, String appname, File applicationRoot) {
+	//TODO: container -> holder
+	private static void generateContainer(PageFragmentHolderInstance container, String appname, File applicationRoot) {
 		ContainerClassModel containerClassModel = createContainerClassModel(container, appname);
 		generateFile(containerTemplate, containerClassModel, "container", container.name.get(), "Container", appname, applicationRoot);
 	}
 
-	private static ContainerClassModel createContainerClassModel(ContainerInstance container, String appname) {
+	private static ContainerClassModel createContainerClassModel(PageFragmentHolderInstance container, String appname) {
 		ContainerClassModel result = new ContainerClassModel();
 		result.appname = appname;
 		result.name = container.name.get();
-		for (ContainerItemInstance itemInstance: container.items.get()) {
-			ContainerClassModel.Element element = new ContainerClassModel.Element();
-			PageElementBaseInstance elementInstance = itemInstance.element.get();
-			element.type=elementInstance.getModel().getName();
-			if (elementInstance instanceof FieldInstance) {
-				FieldInstance field = (FieldInstance) elementInstance;
-				element.required = (field.required.get()== Boolean.TRUE);
-				element.entity = field.attribute.get().entity.get().name.get();
-				element.attribute = field.attribute.get().name.get();
-				element.readOnly = (field.readOnly.get()==Boolean.TRUE);
-			} else if (elementInstance instanceof ConstantTextInstance) {
-				element.untranslated = ((ConstantTextInstance)elementInstance).untranslated.get();
-			} else if (elementInstance instanceof ButtonInstance) {
-				element.caption = generateText(((ButtonInstance)elementInstance).caption.get());
-				element.name = elementInstance.name.get();
-			} else {
-				element.name = elementInstance.name.get();
-			}
-			result.children.add(element);
-		}
-		if (container.relation.get()!=null) {
-			result.relationEntity = container.relation.get().entity.get().name.get();
-			result.relationName = container.relation.get().name.get();
-		}
+//		for (ContainerItemInstance itemInstance: container.items.get()) {
+//			ContainerClassModel.Element element = new ContainerClassModel.Element();
+//			PageFragmentInstance elementInstance = itemInstance.element.get();
+//			element.type=elementInstance.getModel().getName();
+//			if (elementInstance instanceof FieldInstance) {
+//				FieldInstance field = (FieldInstance) elementInstance;
+//				element.required = (field.required.get()== Boolean.TRUE);
+//				element.entity = field.attribute.get().entity.get().name.get();
+//				element.attribute = field.attribute.get().name.get();
+//				element.readOnly = (field.readOnly.get()==Boolean.TRUE);
+//			} else if (elementInstance instanceof ConstantTextInstance) {
+//				element.untranslated = ((ConstantTextInstance)elementInstance).untranslated.get();
+//			} else if (elementInstance instanceof ButtonInstance) {
+//				element.caption = generateText(((ButtonInstance)elementInstance).caption.get());
+//				element.name = elementInstance.name.get();
+//			} else {
+//				element.name = elementInstance.name.get();
+//			}
+//			result.children.add(element);
+//		}
+//		if (container.relation.get()!=null) {
+//			result.relationEntity = container.relation.get().entity.get().name.get();
+//			result.relationName = container.relation.get().name.get();
+//		}
 		// TODO: display
 		return result;
 	}
@@ -190,14 +155,12 @@ public class CodeGenerator {
 		result.appname = appname;
 		result.flowname = flowName;
 		result.name = page.name.get();
-		for (ContainerItemInstance item : page.rootContainer.get().items.get()) {
-			PageElementBaseInstance element = item.element.get();
-			PageElement pageElement = new PageElement();
-			pageElement.name = element.name.get();
-			pageElement.type = element.getModel().getName();
-			result.rootElements.add(pageElement);
-		}
+//		createCompositionList(page.content.get(), result.containers);
 		return result;
+	}
+
+	private static void createCompositionList(CompositePageFragmentInstance fragment, List<ContainerClassModel> result) {
+//		createContainerClassModel(fragment);
 	}
 
 	private static FlowClassModel createFlowClassModel(FlowInstance flow, String appname) {
@@ -333,9 +296,10 @@ public class CodeGenerator {
 		for (EntityInstance entity: applicationInstance.entities.get()) {
 			generateEntity(entity, appname, applicationRoot);
 		}
-		for (ContainerInstance container: applicationInstance.pageToolbox.get().containers.get()) {
-			generateContainer(container, appname, applicationRoot);
+		for (PageFragmentHolderInstance pageFragment: applicationInstance.shared.get().pageFragments.get()) {
+//TODO:			generatePageFragment(pageFragment, appname, applicationRoot);
 		}
+		// TODO: textHolder
 		for (FlowInstance flow: applicationInstance.flows.get()) {
 			generateFlow(flow, appname, applicationRoot);
 		}
@@ -343,4 +307,26 @@ public class CodeGenerator {
 		new File(applicationRoot, "flow").mkdirs();
 	}
 
+	private static void generateFile(Template template, Object rootMap, String subDirectory, 
+			String name, String postfix, String appname, File root) {
+		Writer writer = null;
+		try {
+			if (subDirectory!=null) {
+				root = new File(root, subDirectory);
+				root.mkdirs();
+			}
+			File output = new File(root, name+postfix+".java");
+			writer = new OutputStreamWriter(new FileOutputStream(output), "UTF-8");
+			template.process(rootMap, writer);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (writer!=null) {
+				try {
+					writer.close();
+				} catch (IOException e) {
+				}
+			}
+		}
+	}
 }
