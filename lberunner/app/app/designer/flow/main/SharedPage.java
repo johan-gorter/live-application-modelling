@@ -10,6 +10,7 @@ public class SharedPage extends Page {
 
 	public static final SharedPage INSTANCE = new SharedPage();
 	
+	private static CompositePageFragment CONTENT = null; 
 	
 	@Override
 	public CompositePageFragment getRootContainer() {

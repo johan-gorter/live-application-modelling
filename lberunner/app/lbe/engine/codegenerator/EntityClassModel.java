@@ -11,12 +11,12 @@ public class EntityClassModel {
 
 		public static class DomainEntry {
 			public String name;
-			public String display;
+			public TextClassModel display;
 			
 			public String getName() {
 				return name;
 			}
-			public String getDisplay() {
+			public TextClassModel getDisplay() {
 				return display;
 			}
 		}
@@ -24,10 +24,10 @@ public class EntityClassModel {
 		public String name;
 		public String className;
 		public String itemClassName;
-		public String question;
+		public TextClassModel question;
 		public boolean multivalue;
 		public boolean readonly;
-		public String explanation;
+		public TextClassModel explanation;
 		public List<DomainEntry> domain;
 		
 		public String getName() {
@@ -42,14 +42,17 @@ public class EntityClassModel {
 		public boolean isReadonly() {
 			return readonly;
 		}
-		public String getQuestion() {
-			return question;
-		}
 		public List<DomainEntry> getDomain() {
 			return domain;
 		}
 		public String getItemClassName() {
 			return itemClassName;
+		}
+		public TextClassModel getQuestion() {
+			return question;
+		}
+		public TextClassModel getExplanation() {
+			return explanation;
 		}
 	}
 	

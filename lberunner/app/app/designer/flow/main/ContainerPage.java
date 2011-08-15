@@ -10,6 +10,7 @@ public class ContainerPage extends Page {
 
 	public static final ContainerPage INSTANCE = new ContainerPage();
 	
+	private static CompositePageFragment CONTENT = null; 
 	
 	@Override
 	public CompositePageFragment getRootContainer() {

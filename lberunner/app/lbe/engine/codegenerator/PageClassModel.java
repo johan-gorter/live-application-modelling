@@ -8,9 +8,8 @@ public class PageClassModel {
 	public String appname;
 	public String flowname;
 	public String name;
+	public ContentClassModel content;
 	
-	public final List<ContainerClassModel> containers = new ArrayList<ContainerClassModel>();
-
 	public String getAppname() {
 		return appname;
 	}
@@ -23,8 +22,7 @@ public class PageClassModel {
 		return name;
 	}
 
-	public List<ContainerClassModel> getContainers() {
-		return containers;
+	public ContentClassModel getContent() {
+		return content;
 	}
-
 }

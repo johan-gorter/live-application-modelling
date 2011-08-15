@@ -40,8 +40,8 @@ public class Bootstrapper {
 	private static ApplicationInstance applicationInstance;
 	
 	public static void main(String[] args) {
-//		createCarinsurance();
-		createDesigner();
+		createCarinsurance();
+//		createDesigner();
 	}
 
 	public static void createCarinsurance() {
@@ -97,7 +97,7 @@ public class Bootstrapper {
 		FlowInstance insureFlow = createFlow("Insure");
 		FlowSourceInstance insureStartSource = createStartSource(insureFlow, "start");
 		PageInstance insureDriverPage = createPage(insureFlow, "Driver");
-		insureDriverPage.content.set(driverFields);
+		insureDriverPage.content.set(selectDriver);
 		createEdge(insureFlow, insureStartSource, insureDriverPage);
 		applicationInstance.exposedFlows.add(insureFlow);
 		

@@ -27,10 +27,13 @@ import app.designer.data.instance.FlowInstance;
 import app.designer.data.instance.FlowNodeBaseInstance;
 import app.designer.data.instance.FlowSinkInstance;
 import app.designer.data.instance.FlowSourceInstance;
+import app.designer.data.instance.HeaderInstance;
+import app.designer.data.instance.PageCompositionInstance;
 import app.designer.data.instance.PageFragmentHolderInstance;
 import app.designer.data.instance.PageFragmentInstance;
 import app.designer.data.instance.PageInstance;
 import app.designer.data.instance.RelationInstance;
+import app.designer.data.instance.SelectInstance;
 import app.designer.data.instance.TextInstance;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
@@ -44,7 +47,6 @@ public class CodeGenerator {
 	private static Template applicationTemplate;
 	private static Template flowTemplate;
 	private static Template pageTemplate;
-	private static Template containerTemplate;
 	private static File applicationsRoot = new File(Play.applicationPath, "app/app");
 	
 	static {
@@ -57,7 +59,6 @@ public class CodeGenerator {
 			applicationTemplate = freemarkerConfig.getTemplate("Application.java.ftl");
 			flowTemplate = freemarkerConfig.getTemplate("Flow.java.ftl");
 			pageTemplate = freemarkerConfig.getTemplate("Page.java.ftl");
-			containerTemplate = freemarkerConfig.getTemplate("Container.java.ftl");
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -112,55 +113,42 @@ public class CodeGenerator {
 		}
 	}
 	
-	//TODO: container -> holder
-	private static void generateContainer(PageFragmentHolderInstance container, String appname, File applicationRoot) {
-		ContainerClassModel containerClassModel = createContainerClassModel(container, appname);
-		generateFile(containerTemplate, containerClassModel, "container", container.name.get(), "Container", appname, applicationRoot);
-	}
-
-	private static ContainerClassModel createContainerClassModel(PageFragmentHolderInstance container, String appname) {
-		ContainerClassModel result = new ContainerClassModel();
-		result.appname = appname;
-		result.name = container.name.get();
-//		for (ContainerItemInstance itemInstance: container.items.get()) {
-//			ContainerClassModel.Element element = new ContainerClassModel.Element();
-//			PageFragmentInstance elementInstance = itemInstance.element.get();
-//			element.type=elementInstance.getModel().getName();
-//			if (elementInstance instanceof FieldInstance) {
-//				FieldInstance field = (FieldInstance) elementInstance;
-//				element.required = (field.required.get()== Boolean.TRUE);
-//				element.entity = field.attribute.get().entity.get().name.get();
-//				element.attribute = field.attribute.get().name.get();
-//				element.readOnly = (field.readOnly.get()==Boolean.TRUE);
-//			} else if (elementInstance instanceof ConstantTextInstance) {
-//				element.untranslated = ((ConstantTextInstance)elementInstance).untranslated.get();
-//			} else if (elementInstance instanceof ButtonInstance) {
-//				element.caption = generateText(((ButtonInstance)elementInstance).caption.get());
-//				element.name = elementInstance.name.get();
-//			} else {
-//				element.name = elementInstance.name.get();
-//			}
-//			result.children.add(element);
-//		}
-//		if (container.relation.get()!=null) {
-//			result.relationEntity = container.relation.get().entity.get().name.get();
-//			result.relationName = container.relation.get().name.get();
-//		}
-		// TODO: display
-		return result;
-	}
-
 	private static PageClassModel createPageClassModel(PageInstance page, String appname, String flowName) {
 		PageClassModel result = new PageClassModel();
 		result.appname = appname;
 		result.flowname = flowName;
 		result.name = page.name.get();
-//		createCompositionList(page.content.get(), result.containers);
+		result.content = createContentClassModel(page.content.get());
 		return result;
 	}
 
-	private static void createCompositionList(CompositePageFragmentInstance fragment, List<ContainerClassModel> result) {
-//		createContainerClassModel(fragment);
+	private static ContentClassModel createContentClassModel(PageFragmentInstance fragment) {
+		ContentClassModel result = new ContentClassModel();
+		result.type=fragment.getModel().getName();
+		if (fragment instanceof FieldInstance) {
+			FieldInstance field = (FieldInstance) fragment;
+			result.required = (field.required.get()== Boolean.TRUE);
+			result.entity = field.attribute.get().entity.get().name.get();
+			result.attribute = field.attribute.get().name.get();
+			result.readOnly = (field.readOnly.get()==Boolean.TRUE);
+		} else if (fragment instanceof ConstantTextInstance) {
+			result.text = generateText((ConstantTextInstance)fragment);
+		} else if (fragment instanceof ButtonInstance) {
+			result.text = generateText(((ButtonInstance)fragment).caption.get());
+		} else if (fragment instanceof CompositePageFragmentInstance) {
+			for (PageCompositionInstance composition : ((CompositePageFragmentInstance)fragment).items.get()) {
+				result.children.add(createContentClassModel(composition.pageFragment.get()));
+			}
+			if (fragment instanceof HeaderInstance) {
+				result.text = generateText(((HeaderInstance)fragment).text.get());
+			}
+			if (fragment instanceof SelectInstance) {
+				SelectInstance selectFragment = (SelectInstance)fragment;
+				result.relationEntity = selectFragment.relation.get().entity.get().name.get();
+				result.relationName = selectFragment.relation.get().name.get();
+			}
+		}
+		return result;
 	}
 
 	private static FlowClassModel createFlowClassModel(FlowInstance flow, String appname) {
@@ -266,10 +254,10 @@ public class CodeGenerator {
 		return result;
 	}
 
-	private static String generateText(TextInstance text) {
+	private static TextClassModel generateText(TextInstance text) {
 		if (text instanceof ConstantTextInstance) {
 			ConstantTextInstance constantText = (ConstantTextInstance) text;
-			return String.format("new ConstantText(\"%s\")", constantText.untranslated.get());
+			return new TextClassModel(constantText.untranslated.get());
 		}
 		throw new RuntimeException("Unsupported subclass of TextInstance: "+text.getClass());
 	}

@@ -1,4 +1,5 @@
 package app.${appname}.data.entity;
+<#include "Text.java.ftl">
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class ${name}Entity extends SimpleEntity {
 			</#if>
 			<#if attribute.question??>
 			
-			private final Text question = ${attribute.question};
+			private final Text question = <@text_macro text=attribute.question />;
 			@Override
 			public Text getQuestion() {
 				return question;
@@ -44,7 +45,7 @@ public class ${name}Entity extends SimpleEntity {
 			
 			private final DomainEntry[] domain = new DomainEntry[] {
 				<#list attribute.domain as entry>
-				new DomainEntry("${entry.name}", ${entry.display}),
+				new DomainEntry("${entry.name}", <@text_macro text=entry.display />),
 				</#list>
 			};
 			@Override
