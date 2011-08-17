@@ -25,14 +25,12 @@ public class MainFlow extends Flow {
 	
 	private static final FlowNodeBase[] NODES = new FlowNodeBase[]{
 		WelcomePage.INSTANCE,
-		SharedPage.INSTANCE,
-		ContainerPage.INSTANCE,
+		FlowPage.INSTANCE,
 	};
 	
 	private static final FlowEdge[] EDGES = new FlowEdge[]{
 		new FlowEdge(START, null, WelcomePage.INSTANCE, null),
-		new FlowEdge(WelcomePage.INSTANCE, null, SharedPage.INSTANCE, null),
-		new FlowEdge(SharedPage.INSTANCE, null, ContainerPage.INSTANCE, null),
+		new FlowEdge(WelcomePage.INSTANCE, null, FlowPage.INSTANCE, null),
 	};
 	
 	@Override

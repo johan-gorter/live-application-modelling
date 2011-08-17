@@ -10,7 +10,7 @@ import lbe.model.flow.Flow;
 import lbe.model.flow.FlowNodeBase;
 import lbe.model.flow.Page;
 
-public class FlowContext {
+public class FlowContext extends DeductionContext {
 
 	private final CaseData caseData;
 	private final String caseId;
@@ -33,11 +33,12 @@ public class FlowContext {
 		return caseId;
 	}
 
-	public Instance getActiveInstance(Entity entity) {
+	@Override
+	public Instance getSelectedInstance(Entity entity) {
 		if (entity == caseData.getCaseInstance().getModel()) {
 			return caseData.getCaseInstance();
 		}
-		Instance result = flowStack.getActiveInstance(entity);
+		Instance result = flowStack.getSelectedInstance(entity);
 		if (result!=null) {
 			return result;
 		}

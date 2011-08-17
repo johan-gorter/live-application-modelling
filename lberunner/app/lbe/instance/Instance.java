@@ -9,6 +9,7 @@ public interface Instance {
 	
 	long getInstanceId();
 	
+	// TODO --> getEntity
 	Entity getModel();
 	
 }

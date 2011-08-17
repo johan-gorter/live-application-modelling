@@ -135,6 +135,7 @@ public class CodeGenerator {
 			result.text = generateText((ConstantTextInstance)fragment);
 		} else if (fragment instanceof ButtonInstance) {
 			result.text = generateText(((ButtonInstance)fragment).caption.get());
+			result.trigger = ((ButtonInstance)fragment).trigger.get();
 		} else if (fragment instanceof CompositePageFragmentInstance) {
 			for (PageCompositionInstance composition : ((CompositePageFragmentInstance)fragment).items.get()) {
 				result.children.add(createContentClassModel(composition.pageFragment.get()));

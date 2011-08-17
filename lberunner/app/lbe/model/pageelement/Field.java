@@ -7,6 +7,7 @@ import lbe.engine.RenderContext;
 import lbe.instance.Instance;
 import lbe.model.Attribute;
 import lbe.model.DomainEntry;
+import lbe.model.Entity;
 
 public abstract class Field extends PageFragment {
 	
@@ -26,7 +27,7 @@ public abstract class Field extends PageFragment {
 	public PageElement render(RenderContext context) {
 		PageElement result = super.render(context);
 		Attribute attribute = getAttribute();
-		Object value = context.getValue(attribute);
+		Object value = context.getValue(getEntity(), attribute);
 		if (attribute.isMultivalue() && value==null) {
 			value = new String[0];
 		}
@@ -77,11 +78,16 @@ public abstract class Field extends PageFragment {
 		
 		for (ChangeContext.FieldChange fieldChange: changeContext.getFieldChanges()) {
 			if (fieldChange.getPageElementId().equals(id))
-			changeContext.setValue(getAttribute(), fieldChange.getValue());
+			changeContext.setValue(getEntity(), getAttribute(), fieldChange.getValue());
 		}
 		return null;
 	}
 
+	/**
+	 * @return the entity that contains the attribute from getAttribute() or one of its subclasses.
+	 */
+	public abstract Entity getEntity();
+	
 	public abstract Attribute getAttribute();
 	
 	public abstract boolean isRequired();

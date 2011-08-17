@@ -5,14 +5,17 @@ import java.util.List;
 
 public class ContentClassModel {
 
-	public TextClassModel text;
 	public String type;
+
+	public TextClassModel text;
+
 	public String entity;
 	public String attribute;
 	public boolean required;
 	public boolean readOnly;
 	public String relationEntity;
 	public String relationName;
+	public String trigger;
 	public final List<ContentClassModel> children = new ArrayList<ContentClassModel>();
 	
 	public String getType() {
@@ -44,5 +47,8 @@ public class ContentClassModel {
 	}
 	public TextClassModel getText() {
 		return text;
+	}
+	public String getTrigger() {
+		return trigger;
 	}
 }

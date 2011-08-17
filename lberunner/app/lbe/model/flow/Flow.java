@@ -78,7 +78,7 @@ public abstract class Flow extends Model {
 		if (current.getActiveInstances()!=null) {
 			for (Long instanceId: current.getActiveInstances()) {
 				Instance instance = caseInstance.getInstanceById(instanceId);
-				stack.pushActiveInstance(instance);
+				stack.pushSelectedInstance(instance);
 			}
 		}
 		if (moreCoordinates.hasNext()) {

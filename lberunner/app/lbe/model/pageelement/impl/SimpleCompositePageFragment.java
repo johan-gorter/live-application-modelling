@@ -1,6 +1,7 @@
 package lbe.model.pageelement.impl;
 
 import lbe.model.Relation;
+import lbe.model.deduction.Deduction;
 import lbe.model.pageelement.CompositePageFragment;
 import lbe.model.pageelement.PageFragment;
 import lbe.model.pageelement.Text;
@@ -8,7 +9,7 @@ import lbe.model.pageelement.Text;
 public class SimpleCompositePageFragment extends CompositePageFragment {
 
 	private final PageFragment[] children;
-	private final Relation relation;
+	private final Deduction<Object> select;
 	private final Text display;
 
 	public SimpleCompositePageFragment(PageFragment[] children) {
@@ -23,8 +24,14 @@ public class SimpleCompositePageFragment extends CompositePageFragment {
 		this(null, display, children);
 	}
 	
-	public SimpleCompositePageFragment(Relation relation, Text display, PageFragment[] children) {
-		this.relation = relation;
+	/**
+	 * Creates a new SimpleCompositePageFragment
+	 * @param select The optional deduction which results in a single instance or multiple instances, often a relation.
+	 * @param display The optional header to display
+	 * @param children The children in the hierarchy.
+	 */
+	public SimpleCompositePageFragment(Deduction<Object> select, Text display, PageFragment[] children) {
+		this.select = select;
 		this.display = display;
 		this.children = children;
 		
@@ -36,8 +43,8 @@ public class SimpleCompositePageFragment extends CompositePageFragment {
 	}
 	
 	@Override
-	public Relation getRelation() {
-		return this.relation;
+	public Deduction<Object> getSelect() {
+		return this.select;
 	}
 	
 	@Override

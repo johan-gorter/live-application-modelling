@@ -1,13 +1,20 @@
 package lbe.model.pageelement.impl;
 
 import lbe.model.Attribute;
+import lbe.model.Entity;
 import lbe.model.pageelement.Field;
 
 public class SimpleField extends Field {
 
 	private final Attribute attribute;
+	private final Entity entity;
 	private boolean required;
 	private boolean readOnly;
+
+	public SimpleField(Entity entity, Attribute attribute) {
+		this.entity = entity;
+		this.attribute = attribute;
+	}
 
 	public SimpleField setRequired() {
 		this.required = true;
@@ -19,10 +26,6 @@ public class SimpleField extends Field {
 		return this;
 	}
 	
-	public SimpleField(Attribute attribute) {
-		this.attribute = attribute;
-	}
-
 	@Override
 	public Attribute getAttribute() {
 		return attribute;
@@ -36,5 +39,10 @@ public class SimpleField extends Field {
 	@Override
 	public boolean isReadOnly() {
 		return readOnly;
+	}
+
+	@Override
+	public Entity getEntity() {
+		return entity;
 	}
 }

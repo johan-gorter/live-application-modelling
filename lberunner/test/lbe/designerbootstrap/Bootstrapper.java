@@ -40,8 +40,8 @@ public class Bootstrapper {
 	private static ApplicationInstance applicationInstance;
 	
 	public static void main(String[] args) {
-		createCarinsurance();
-//		createDesigner();
+//		createCarinsurance();
+		createDesigner();
 	}
 
 	public static void createCarinsurance() {
@@ -133,7 +133,7 @@ public class Bootstrapper {
 		
 		// Concept
 		EntityInstance concept = createEntity("Concept", null);
-		createAttribute(concept, "name", String.class);
+		AttributeInstance name = createAttribute(concept, "name", String.class);
 		
 		// Entity
 		EntityInstance entity = createEntity("Entity", concept);
@@ -198,7 +198,7 @@ public class Bootstrapper {
 		// Application
 		createRelation(application, "entities", RelationType.OneToManyAggregation, "application", entity);
 		createRelation(application, "caseEntity", RelationType.OneToZeroOrOne, "caseEntityInApplication", entity);
-		createRelation(application, "flows", RelationType.OneToManyAggregation, "application", flow);
+		RelationInstance flows = createRelation(application, "flows", RelationType.OneToManyAggregation, "application", flow);
 		createRelation(application, "exposedFlows", RelationType.OneToMany, "exposedFlowInApplication", flow);
 
 		// Data
@@ -237,26 +237,24 @@ public class Bootstrapper {
 		createRelation(flowEdge, "from", RelationType.ManyToZeroOrOne, "outgoingEdges", flowNodeBase);
 		createRelation(flowEdge, "to", RelationType.ManyToZeroOrOne, "incomingEdges", flowNodeBase);
 		
-		// Toolbox
-		
 		// Flows
+		
+		// Main
 		
 		FlowInstance mainFlow = createFlow("Main");
 		FlowSourceInstance mainStart = createStartSource(mainFlow, "start");
 		PageInstance welcomePage = createPage(mainFlow, "Welcome");
-		PageInstance sharedPage = createPage(mainFlow, "Shared");
-		PageInstance containerPage = createPage(mainFlow, "Container");
+		PageInstance flowPage = createPage(mainFlow, "Flow");
 		createEdge(mainFlow, mainStart, welcomePage);
-		createEdge(mainFlow, welcomePage, sharedPage);
-		createEdge(mainFlow, sharedPage, containerPage);
+		createEdge(mainFlow, welcomePage, flowPage);
 
-		CompositePageFragmentInstance welcomePageContent = new CompositePageFragmentInstance(applicationInstance);
-		welcomePage.content.set(welcomePageContent);
-		ConstantTextInstance welcomeText = createConstantText("Welcome to the designer");
-		createContainerItem(welcomePageContent, welcomeText);
-		ButtonInstance sharedButton = createButton("shared", createConstantText("Shared items")); 
-		createContainerItem(welcomePageContent, sharedButton);
-		
+		addContent(welcomePage.content.get(), createConstantText("Welcome to the Designer"));
+		addContent(welcomePage.content.get(), createConstantText("Flows:"));
+		SelectInstance flowsSelect = createSelect(flows);
+		createField(flowsSelect, name, false);
+		addContent(welcomePage.content.get(), createButton("flowDetails", createConstantText("Details")));
+		addContent(welcomePage.content.get(), flowsSelect);
+
 		// Finish up
 		
 		applicationInstance.exposedFlows.add(mainFlow);
@@ -341,7 +339,7 @@ public class Bootstrapper {
 	private static FieldInstance createField(CompositePageFragmentInstance container, AttributeInstance attribute, boolean required) {
 		FieldInstance field = new FieldInstance(applicationInstance);
 		field.attribute.set(attribute);
-		field.required.set(true);
+		field.required.set(required);
 		PageCompositionInstance item = new PageCompositionInstance(applicationInstance);
 		container.items.add(item);
 		item.pageFragment.set(field);

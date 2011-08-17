@@ -8,7 +8,7 @@
 	<#elseif content.type=="ConstantText">
 	<@text_macro text=content.text /><#t>
 	<#elseif content.type=="Button">
-    new SimpleButton("${content.name}", ${content.caption})<#t>
+    new SimpleButton("${content.trigger}", <@text_macro text=content.text />)<#t>
 	<#elseif content.type=="CompositePageFragment" || content.type=="Select" || content.type=="Header">
     new SimpleCompositePageFragment(<#t>
     <#if content.type=="Select">${content.relationEntity}Entity.${content.relationName}, </#if><#t>

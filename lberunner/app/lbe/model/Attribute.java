@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import lbe.engine.DeductionContext;
+import lbe.engine.SingleInstanceDeductionContext;
 import lbe.instance.Instance;
 import lbe.instance.value.ReadOnlyAttributeValue;
 import lbe.instance.value.impl.AttributeValueImpl;
@@ -51,15 +53,15 @@ public abstract class Attribute<I extends Instance, Value extends Object, Item e
 	public Value calculateValue(I instance) {
 		Deduction<Value> deduction = getDeduction();
 		if (deduction!=null) {
-			return deduction.deduct(instance);
+			return deduction.deduct(new SingleInstanceDeductionContext(instance));
 		}
 		return null;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public Value deduct(Instance forInstance) {
-		return get((I)forInstance).get();
+	public Value deduct(DeductionContext context) {
+		return context.getAttributeValue(getEntity(), this).get();
 	}
 	
 	public abstract ReadOnlyAttributeValue<I, Value> get(I instance);

@@ -8,19 +8,13 @@ import lbe.model.flow.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class WelcomePage extends Page {
+public class FlowPage extends Page {
 
-	public static final WelcomePage INSTANCE = new WelcomePage();
+	public static final FlowPage INSTANCE = new FlowPage();
 	
 	
 	private static CompositePageFragment CONTENT = 
         new SimpleCompositePageFragment(new PageFragment[]{
-            new ConstantText("Welcome to the Designer"),
-            new ConstantText("Flows:"),
-            new SimpleButton("flowDetails", new ConstantText("Details")),
-            new SimpleCompositePageFragment(ApplicationEntity.flows, new PageFragment[]{
-                new SimpleField(ConceptEntity.name)
-            })
         }); 
 	
 	@Override
@@ -30,7 +24,7 @@ public class WelcomePage extends Page {
 	
 	@Override
 	public String getName() {
-		return "Welcome";
+		return "Flow";
 	}
 	
 }

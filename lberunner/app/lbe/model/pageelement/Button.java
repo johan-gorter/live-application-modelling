@@ -10,6 +10,11 @@ public abstract class Button extends PageFragment {
 	public String getElementType() {
 		return "button";
 	}
+	
+	@Override
+	public String getName() {
+		return null;
+	}
 
 	@Override
 	public PageElement render(RenderContext context) {
@@ -17,6 +22,7 @@ public abstract class Button extends PageFragment {
 		Text caption = getCaption();
 		if (caption!=null) {
 			result.display = caption.renderText(context);
+			result.name = getTrigger();
 		}
 		return result;
 	}

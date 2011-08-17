@@ -9,17 +9,16 @@ import lbe.model.Entity;
 import lbe.model.flow.Flow;
 import lbe.model.flow.FlowNodeBase;
 
-public class FlowStack {
+public class FlowStack extends AbstractDeductionContext {
 	
 	private final FlowStack parent;
 	
 	private final Flow flow;
 	
-	private final List<Instance> activeInstances = new ArrayList<Instance>();
-	
 	private FlowNodeBase currentNode;
 
 	public FlowStack(FlowStack parent, Flow flow) {
+		super(parent);
 		this.parent = parent;
 		this.flow = flow;
 	}
@@ -40,27 +39,6 @@ public class FlowStack {
 		return flow;
 	}
 
-	public List<Instance> getActiveInstances() {
-		return activeInstances;
-	}
-
-	public void pushActiveInstance(Instance instance) {
-		activeInstances.add(instance);
-	}
-	
-	public Instance getActiveInstance(Entity entity) {
-		for (int i=activeInstances.size()-1;i>=0;i--) {
-			Instance candidate = activeInstances.get(i);
-			if (candidate.getModel()==entity) {
-				return candidate;
-			}
-		}
-		if (parent!=null) {
-			return parent.getActiveInstance(entity);
-		}
-		return null;
-	}
-
 	public PageCoordinates toPageCoordinates() {
 		Coordinate lastCoordinate;
 		PageCoordinates result;
@@ -72,7 +50,7 @@ public class FlowStack {
 			result = parent.toPageCoordinates();
 			lastCoordinate = result.getPath().get(result.getPath().size()-1);
 		}
-		for (Instance instance: activeInstances) {
+		for (Instance instance: selectedInstances) {
 			lastCoordinate.getActiveInstances().add(instance.getInstanceId());
 		}
 		result.addCoordinate(new Coordinate(currentNode.getName(), new ArrayList<Long>()));
