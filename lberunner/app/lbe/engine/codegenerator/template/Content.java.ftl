@@ -2,7 +2,7 @@
 <#macro content_macro content depth>
     <#list 1..depth as i>    </#list><#t>
 	<#if content.type=="Field">
-    new SimpleField(${content.entity}Entity.${content.attribute})<#t>
+    new SimpleField(${content.entity}Entity.INSTANCE, ${content.entity}Entity.${content.attribute})<#t>
     <#if content.required>.setRequired()</#if><#t>
     <#if content.readOnly>.setReadOnly()</#if><#t>
 	<#elseif content.type=="ConstantText">

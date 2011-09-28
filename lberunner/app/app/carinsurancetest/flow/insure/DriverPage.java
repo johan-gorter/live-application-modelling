@@ -17,14 +17,14 @@ public class DriverPage extends Page {
         new SimpleCompositePageFragment(CarinsuranceCaseEntity.driver, new PageFragment[]{
             new SimpleCompositePageFragment(new ConstantText("Driver"), new PageFragment[]{
                 new SimpleCompositePageFragment(new PageFragment[]{
-                    new SimpleField(DriverEntity.dateOfBirth).setRequired(),
-                    new SimpleField(DriverEntity.yearsInsured).setRequired(),
-                    new SimpleField(DriverEntity.yearsDriverslicense).setRequired(),
-                    new SimpleField(DriverEntity.noClaimsDiscount).setRequired(),
-                    new SimpleField(DriverEntity.disqualified).setRequired(),
-                    new SimpleField(DriverEntity.carUse).setRequired(),
-                    new SimpleField(DriverEntity.mileage).setRequired(),
-                    new SimpleField(DriverEntity.zipCode).setRequired()
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.dateOfBirth).setRequired(),
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.yearsInsured).setRequired(),
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.yearsDriverslicense).setRequired(),
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.noClaimsDiscount).setRequired(),
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.disqualified).setRequired(),
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.carUse).setRequired(),
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.mileage).setRequired(),
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.zipCode).setRequired()
                 })
             })
         }); 

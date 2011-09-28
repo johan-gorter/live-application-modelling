@@ -22,7 +22,7 @@ public abstract class AbstractDeductionContext extends DeductionContext {
 	public Instance getSelectedInstance(Entity entity) {
 		for (int i=selectedInstances.size()-1;i>=0;i--) {
 			Instance candidate = selectedInstances.get(i);
-			if (candidate.getModel()==entity) {
+			if (extendsFrom(candidate.getModel(), entity)) {
 				return candidate;
 			}
 		}
@@ -31,7 +31,13 @@ public abstract class AbstractDeductionContext extends DeductionContext {
 		}
 		return null;
 	}
-	
+
+	private boolean extendsFrom(Entity entity, Entity from) {
+		if (entity==null) return false;
+		if (entity==from) return true;
+		return extendsFrom(entity.extendsEntity(), from);
+	}
+
 	public void pushSelectedInstance(Instance instance) {
 		selectedInstances.add(instance);
 	}

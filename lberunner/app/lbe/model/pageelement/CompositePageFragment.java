@@ -32,14 +32,14 @@ public abstract class CompositePageFragment extends PageFragment {
 	 * 
 	 * @return The objects that should be selected.
 	 */
-	public Deduction<Object> getSelect() {
+	public Deduction<? extends Object> getSelect() {
 		return null;
 	}
 
 	@Override
 	public PageElement render(RenderContext context) {
 		PageElement result;
-		Deduction<Object> select = this.getSelect();
+		Deduction<? extends Object> select = this.getSelect();
 		if (select!=null) {
 			Object value = select.deduct(context);
 			if (value==null) {
@@ -97,7 +97,7 @@ public abstract class CompositePageFragment extends PageFragment {
 		String result = null;
 		super.submit(context);
 		
-		Deduction<Object> select = this.getSelect();
+		Deduction<? extends Object> select = this.getSelect();
 		if (select!=null) {
 			Object value = select.deduct(context);
 			if (value==null) {

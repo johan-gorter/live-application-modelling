@@ -2,6 +2,7 @@ package app.carinsurance.container;
 
 import lbe.model.Attribute;
 import lbe.model.Relation;
+import lbe.model.deduction.Deduction;
 import lbe.model.pageelement.CompositePageFragment;
 import lbe.model.pageelement.Field;
 import lbe.model.pageelement.PageFragment;
@@ -131,9 +132,9 @@ public class DriverContainer extends CompositePageFragment{
 	public PageFragment[] getChildren() {
 		return CHILDREN;
 	}
-
+	
 	@Override
-	public Relation getRelation() {
+	public Deduction<? extends Object> getSelect() {
 		return CarinsuranceCaseEntity.driver;
 	}
 }

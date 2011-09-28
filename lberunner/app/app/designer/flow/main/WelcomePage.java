@@ -17,9 +17,9 @@ public class WelcomePage extends Page {
         new SimpleCompositePageFragment(new PageFragment[]{
             new ConstantText("Welcome to the Designer"),
             new ConstantText("Flows:"),
-            new SimpleButton("flowDetails", new ConstantText("Details")),
             new SimpleCompositePageFragment(ApplicationEntity.flows, new PageFragment[]{
-                new SimpleField(ConceptEntity.name)
+                new SimpleField(ConceptEntity.INSTANCE, ConceptEntity.name),
+                new SimpleButton("flowDetails", new ConstantText("Details")),
             })
         }); 
 	
