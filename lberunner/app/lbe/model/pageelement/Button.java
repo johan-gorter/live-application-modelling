@@ -36,6 +36,7 @@ public abstract class Button extends PageFragment {
 		String id = getName()+"@"+changeContext.nextId();
 		
 		if (id.equals(changeContext.getSubmit())) {
+			changeContext.storeSelectedInstancesDuringTrigger();
 			return getTrigger();
 		}
 		return null;

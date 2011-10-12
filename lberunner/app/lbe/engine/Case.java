@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import lbe.instance.CaseInstance;
+import lbe.instance.Instance;
 import lbe.model.Application;
 import lbe.model.flow.Flow;
 import lbe.model.flow.Page;
@@ -85,8 +86,8 @@ public class Case {
 		FlowContext context = new FlowContext(currentCaseData, id);
 		Flow startFlow = getStartFlow(application, pageCoordinates);
 		context.setFlowStack(new FlowStack(null, startFlow));
-		String firstTrigger = context.step(null);
-		flow(context, firstTrigger);
+		String firstTrigger = context.step(null, new Instance[0]);
+		flow(context, firstTrigger, new Instance[0]);
 		pageCoordinates = context.getFlowStack().toPageCoordinates();
 		Session session = getOrCreateSession(sessionId, userName);
 		session.setPageCoordinates(pageCoordinates);
@@ -136,14 +137,14 @@ public class Case {
 		Page page = flowContext.getPage();
 		ChangeContext changeContext = new ChangeContext(flowContext, pageCoordinates.format(), fieldChanges, submit);
 		String trigger = page.submit(changeContext);
-		flow(flowContext, trigger);
+		flow(flowContext, trigger, changeContext.getSelectedInstancesDuringTrigger());
 		getOrCreateSession(sessionId, userName).setPageCoordinates(flowContext.getFlowStack().toPageCoordinates());
 		informWaiters();
 	}
 	
-	private void flow(FlowContext flowContext, String trigger) {
+	private void flow(FlowContext flowContext, String trigger, Instance[] selectedInstances) {
 		while (trigger!=null) {
-			trigger = flowContext.step(trigger);
+			trigger = flowContext.step(trigger, selectedInstances);
 		}
 	}
 

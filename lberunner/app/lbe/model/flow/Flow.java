@@ -35,9 +35,9 @@ public abstract class Flow extends Model {
 		throw new RuntimeException("Page/Subflow not found: "+path[pathIndex]);
 	}
 	
-	public FlowEdge getEdge(FlowNodeBase from) {
+	public FlowEdge getEdge(FlowNodeBase from, String trigger) {
 		for (FlowEdge edge: getEdges()) {
-			if (edge.getFrom()==from) {
+			if (edge.getFrom()==from && edge.getEntryName().equals(trigger)) {
 				return edge;
 			}
 		}
@@ -51,7 +51,7 @@ public abstract class Flow extends Model {
 	// Step to the next point in the flow. Updates context and results in the next trigger
 	// returns null if a page has been reached.
 	// TODO: use trigger
-	public String step(FlowNodeBase flowSource, String trigger, FlowContext context) {
+	public String step(FlowNodeBase flowSource, String trigger, Instance[] selectedInstances, FlowContext context) {
 		if (flowSource==null && trigger == null) {
 			FlowSource[] sources = getSources();
 			if (sources.length!=1) {
@@ -59,7 +59,7 @@ public abstract class Flow extends Model {
 			}
 			flowSource = sources[0];
 		}
-		FlowEdge edge = getEdge(flowSource);
+		FlowEdge edge = getEdge(flowSource, trigger);
 		FlowNodeBase node = edge.getTo();
 		context.getFlowStack().setCurrentNode(node);
 		if (node instanceof SubFlow) {

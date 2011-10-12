@@ -15,6 +15,8 @@ public class FlowPage extends Page {
 	
 	private static CompositePageFragment CONTENT = 
         new SimpleCompositePageFragment(new PageFragment[]{
+            new ConstantText("Flow"),
+            new SimpleField(ConceptEntity.INSTANCE, ConceptEntity.name)
         }); 
 	
 	@Override

@@ -19,7 +19,7 @@ public class WelcomePage extends Page {
             new ConstantText("Flows:"),
             new SimpleCompositePageFragment(ApplicationEntity.flows, new PageFragment[]{
                 new SimpleField(ConceptEntity.INSTANCE, ConceptEntity.name),
-                new SimpleButton("flowDetails", new ConstantText("Details")),
+                new SimpleButton("flowDetails", new ConstantText("Details"))
             })
         }); 
 	

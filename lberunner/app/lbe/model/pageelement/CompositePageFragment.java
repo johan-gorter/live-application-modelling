@@ -95,7 +95,6 @@ public abstract class CompositePageFragment extends PageFragment {
 	@Override
 	public String submit(ChangeContext context) {
 		String result = null;
-		super.submit(context);
 		
 		Deduction<? extends Object> select = this.getSelect();
 		if (select!=null) {
@@ -116,7 +115,7 @@ public abstract class CompositePageFragment extends PageFragment {
 	}
 	
 	private String doLoopSubmit(ChangeContext context, Iterable<Instance> value) {
-		String result = null;
+		String result = super.submit(context);
 		context.nextIdLevel();
 		for (Object instance : (Iterable<Instance>)value) {
 			String childResult = doSubmitWithInstance((Instance)instance, context);
@@ -139,7 +138,7 @@ public abstract class CompositePageFragment extends PageFragment {
 	}
 
 	private String doSubmit(ChangeContext context) {
-		String result = null;
+		String result = super.submit(context);
 		context.nextIdLevel();
 		for (PageFragment child: getChildren()) {
 			String childResult = child.submit(context);

@@ -45,8 +45,8 @@ public class FlowContext extends DeductionContext {
 		throw new RuntimeException("No active instance of entity "+entity.getName());
 	}
 
-	public String step(String trigger) {
-		return flowStack.getFlow().step(flowStack.getCurrentNode(), trigger, this);
+	public String step(String trigger, Instance[] selectedInstances) {
+		return flowStack.getFlow().step(flowStack.getCurrentNode(), trigger, selectedInstances, this);
 	}
 
 	public FlowStack getFlowStack() {

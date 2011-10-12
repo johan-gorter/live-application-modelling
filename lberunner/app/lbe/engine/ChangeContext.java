@@ -1,5 +1,6 @@
 package lbe.engine;
 
+import lbe.instance.Instance;
 import lbe.instance.value.AttributeValue;
 import lbe.model.Attribute;
 import lbe.model.Entity;
@@ -27,6 +28,8 @@ public class ChangeContext extends RenderContext {
 	
 	private FieldChange[] fieldChanges; //TODO: more efficiency by using a sorted array
 
+	private Instance[] selectedInstancesDuringTrigger;
+
 	public ChangeContext(FlowContext flowContext, String pageCoordinates, FieldChange[] fieldChanges, String submit) {
 		super(flowContext, pageCoordinates);
 		this.fieldChanges = fieldChanges;
@@ -45,4 +48,11 @@ public class ChangeContext extends RenderContext {
 		return fieldChanges;
 	}
 
+	public void storeSelectedInstancesDuringTrigger() {
+		this.selectedInstancesDuringTrigger = selectedInstances.toArray(new Instance[selectedInstances.size()]);
+	}
+
+	public Instance[] getSelectedInstancesDuringTrigger() {
+		return selectedInstancesDuringTrigger;
+	}
 }
