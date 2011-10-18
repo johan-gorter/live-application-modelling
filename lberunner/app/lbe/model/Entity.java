@@ -8,6 +8,12 @@ import lbe.instance.Instance;
 
 public abstract class Entity extends Model {
 
+	public static boolean extendsFrom(Entity entity, Entity from) {
+		if (entity==null) return false;
+		if (entity==from) return true;
+		return extendsFrom(entity.extendsEntity(), from);
+	}
+	
 	private static class  BaseEntityFirstIterable<E> implements Iterable<E> {
 
 		private Iterable<E> baseEntityIterator;

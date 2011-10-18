@@ -34,7 +34,7 @@ public class FlowSinkInstance
 
 	// Reverse relations
 	
-	public final ReadOnlyRelationValue<FlowSinkInstance, FlowInstance> flow
-		= createReverseRelationValue(FlowSinkEntity.flow);
+	public final ReadOnlyRelationValue<FlowSinkInstance, FlowInstance> owner
+		= createReverseRelationValue(FlowSinkEntity.owner);
 
 }

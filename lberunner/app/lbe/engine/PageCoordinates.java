@@ -1,6 +1,7 @@
 package lbe.engine;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,11 +11,15 @@ public class PageCoordinates {
 	public static class Coordinate {
 		
 		private String nodeName;
-		private List<Long> activeInstances = new ArrayList<Long>();
+		private List<Long> activeInstances;
 
 		public Coordinate(String nodeName, List<Long> activeInstances) {
 			this.nodeName = nodeName;
-			this.activeInstances = activeInstances;
+			if (activeInstances!=null) {
+				this.activeInstances = activeInstances;
+			} else {
+				this.activeInstances = Collections.EMPTY_LIST;
+			}
 		}
 
 		public String getNodeName() {
@@ -27,7 +32,7 @@ public class PageCoordinates {
 		
 		@Override
 		public String toString() {
-			if (activeInstances==null || activeInstances.size()==0) {
+			if (activeInstances.size()==0) {
 				return nodeName;
 			}
 			StringBuilder sb = new StringBuilder(nodeName);

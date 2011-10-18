@@ -34,6 +34,7 @@ import app.designer.data.instance.PageFragmentInstance;
 import app.designer.data.instance.PageInstance;
 import app.designer.data.instance.RelationInstance;
 import app.designer.data.instance.SelectInstance;
+import app.designer.data.instance.SubFlowInstance;
 import app.designer.data.instance.TextInstance;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
@@ -47,6 +48,7 @@ public class CodeGenerator {
 	private static Template applicationTemplate;
 	private static Template flowTemplate;
 	private static Template pageTemplate;
+	private static Template subFlowTemplate;
 	private static File applicationsRoot = new File(Play.applicationPath, "app/app");
 	
 	static {
@@ -59,6 +61,7 @@ public class CodeGenerator {
 			applicationTemplate = freemarkerConfig.getTemplate("Application.java.ftl");
 			flowTemplate = freemarkerConfig.getTemplate("Flow.java.ftl");
 			pageTemplate = freemarkerConfig.getTemplate("Page.java.ftl");
+			subFlowTemplate = freemarkerConfig.getTemplate("SubFlow.java.ftl");
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -109,10 +112,24 @@ public class CodeGenerator {
 				PageInstance page = (PageInstance)node;
 				PageClassModel pageClassModel = createPageClassModel(page, appname, flowName);
 				generateFile(pageTemplate, pageClassModel, "flow/"+flowName.toLowerCase(), page.name.get(), "Page", appname, applicationRoot);
+			} else if (node instanceof SubFlowInstance) {
+				SubFlowInstance subFlow = (SubFlowInstance)node;
+				SubFlowClassModel subFlowClassModel = createSubFlowClassModel(subFlow, appname, flowName);
+				generateFile(subFlowTemplate, subFlowClassModel, "flow/"+flowName.toLowerCase(), subFlow.name.get(), "SubFlow", appname, applicationRoot);
 			}
 		}
 	}
 	
+	private static SubFlowClassModel createSubFlowClassModel(
+			SubFlowInstance subFlow, String appname, String flowName) {
+		SubFlowClassModel result = new SubFlowClassModel();
+		result.appname = appname;
+		result.name = subFlow.name.get();
+		result.flowname = flowName;
+		result.subFlowName = subFlow.flow.get().name.get();
+		return result;
+	}
+
 	private static PageClassModel createPageClassModel(PageInstance page, String appname, String flowName) {
 		PageClassModel result = new PageClassModel();
 		result.appname = appname;
@@ -171,8 +188,13 @@ public class CodeGenerator {
 		for (FlowEdgeInstance edgeInstance: flow.edges.get()) {
 			FlowEdge edge = new FlowEdge();
 			edge.from = edgePoint(edgeInstance.from.get());
+			edge.entryName = edgeInstance.entryName.get();
 			edge.to = edgePoint(edgeInstance.to.get());
+			edge.exitName = edgeInstance.exitName.get();
 			result.edges.add(edge);
+		}
+		for (EntityInstance selectInstance: flow.parameters.get()) {
+			result.parameters.add(selectInstance.name.get());
 		}
 		return result;
 	}

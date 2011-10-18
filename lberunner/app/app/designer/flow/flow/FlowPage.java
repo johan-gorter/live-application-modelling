@@ -1,4 +1,4 @@
-package app.designer.flow.main;
+package app.designer.flow.flow;
 
 import app.designer.flow.*;
 import app.designer.data.entity.*;

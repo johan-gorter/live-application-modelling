@@ -85,9 +85,10 @@ public class Case {
 	private PageElement startFlow(Application application, PageCoordinates pageCoordinates, String sessionId, String userName) {
 		FlowContext context = new FlowContext(currentCaseData, id);
 		Flow startFlow = getStartFlow(application, pageCoordinates);
-		context.setFlowStack(new FlowStack(null, startFlow));
-		String firstTrigger = context.step(null, new Instance[0]);
-		flow(context, firstTrigger, new Instance[0]);
+		startFlow.enter("start", context, new Instance[0]);
+//		context.setFlowStack(new FlowStack(null, startFlow));
+//		String firstTrigger = context.step("start", new Instance[0]);
+//		flow(context, firstTrigger, new Instance[0]);
 		pageCoordinates = context.getFlowStack().toPageCoordinates();
 		Session session = getOrCreateSession(sessionId, userName);
 		session.setPageCoordinates(pageCoordinates);

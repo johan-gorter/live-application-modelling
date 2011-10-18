@@ -19,6 +19,7 @@ import app.designer.data.instance.PageFragmentInstance;
 import app.designer.data.instance.PageInstance;
 import app.designer.data.instance.RelationInstance;
 import app.designer.data.instance.SelectInstance;
+import app.designer.data.instance.SubFlowInstance;
 import app.designer.data.instance.TextInstance;
 
 public abstract class BootstrapperUtil {
@@ -114,10 +115,12 @@ public abstract class BootstrapperUtil {
 		return flow;
 	}
 
-	protected static void createEdge(FlowInstance flow, FlowNodeBaseInstance from, FlowNodeBaseInstance to) {
+	protected static void createEdge(FlowInstance flow, FlowNodeBaseInstance from, String exitName, FlowNodeBaseInstance to, String entryName) {
 		FlowEdgeInstance edge = new FlowEdgeInstance(applicationInstance);
 		edge.from.set(from);
+		edge.exitName.set(exitName);
 		edge.to.set(to);
+		edge.entryName.set(entryName);
 		flow.edges.add(edge);
 	}
 
@@ -129,11 +132,20 @@ public abstract class BootstrapperUtil {
 	}
 
 	protected static FlowSourceInstance createStartSource(FlowInstance flow, String name) {
-		FlowSourceInstance insureStartSource = new FlowSourceInstance(applicationInstance);
-		insureStartSource.name.set(name);
-		flow.sources.add(insureStartSource);
-		return insureStartSource;
+		FlowSourceInstance startSource = new FlowSourceInstance(applicationInstance);
+		startSource.name.set(name);
+		flow.sources.add(startSource);
+		return startSource;
 	}
+	
+	protected static SubFlowInstance createSubFlow(FlowInstance parentFlow, FlowInstance flow) {
+		SubFlowInstance subFlow = new SubFlowInstance(applicationInstance);
+		subFlow.name.set(flow.name.get());
+		subFlow.flow.set(flow);
+		parentFlow.nodes.add(subFlow);
+		return subFlow;
+	}
+	
 	
 	protected static PageCompositionInstance addContent(CompositePageFragmentInstance compositePageFragment, PageFragmentInstance item) {
 		PageCompositionInstance result = new PageCompositionInstance(applicationInstance);

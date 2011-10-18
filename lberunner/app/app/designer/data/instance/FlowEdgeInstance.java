@@ -30,6 +30,12 @@ public class FlowEdgeInstance
 
 	// Attributes
 	
+	public final AttributeValue<FlowEdgeInstance, java.lang.String> entryName
+		= createAttributeValue(FlowEdgeEntity.entryName);
+	
+	public final AttributeValue<FlowEdgeInstance, java.lang.String> exitName
+		= createAttributeValue(FlowEdgeEntity.exitName);
+	
 	// Relations
 	
 	public final RelationValue<FlowEdgeInstance, FlowNodeBaseInstance> from
@@ -40,7 +46,7 @@ public class FlowEdgeInstance
 
 	// Reverse relations
 	
-	public final ReadOnlyRelationValue<FlowEdgeInstance, FlowInstance> flow
-		= createReverseRelationValue(FlowEdgeEntity.flow);
+	public final ReadOnlyRelationValue<FlowEdgeInstance, FlowInstance> owner
+		= createReverseRelationValue(FlowEdgeEntity.owner);
 
 }

@@ -71,7 +71,7 @@ public class CarinsuranceBootstrapper extends BootstrapperUtil {
 		FlowSourceInstance insureStartSource = createStartSource(insureFlow, "start");
 		PageInstance insureDriverPage = createPage(insureFlow, "Driver");
 		insureDriverPage.content.set(selectDriver);
-		createEdge(insureFlow, insureStartSource, insureDriverPage);
+		createEdge(insureFlow, insureStartSource, "start", insureDriverPage, null);
 		applicationInstance.exposedFlows.add(insureFlow);
 		
 		// Finish up

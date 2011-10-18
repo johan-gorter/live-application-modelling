@@ -20,15 +20,15 @@ public class FlowSourceEntity extends SimpleEntity {
 	
 	// Reverse relations
 	
-	public static final Relation<FlowSourceInstance, FlowInstance, FlowInstance> flow
+	public static final Relation<FlowSourceInstance, FlowInstance, FlowInstance> owner
 		= new SimpleRelation<FlowSourceInstance, FlowInstance, FlowInstance>(
-			"flow", INSTANCE, FlowSourceEntity.INSTANCE, FlowInstance.class, FlowEntity.sources
+			"owner", INSTANCE, FlowSourceEntity.INSTANCE, FlowInstance.class, FlowEntity.sources
 		) {
 	
 			@Override
 			public ReadOnlyRelationValue<FlowSourceInstance, FlowInstance> get(
 					FlowSourceInstance instance) {
-				return instance.flow;
+				return instance.owner;
 			}
 	
 			public boolean isReverse() {
@@ -41,7 +41,7 @@ public class FlowSourceEntity extends SimpleEntity {
 	private static final Relation[] RELATIONS = new Relation[]{
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
-		flow,
+		owner,
 	};
 
 	private FlowSourceEntity() {

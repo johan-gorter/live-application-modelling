@@ -9,6 +9,7 @@ import app.designer.data.instance.FlowSourceInstance;
 import app.designer.data.instance.PageInstance;
 import app.designer.data.instance.RelationInstance;
 import app.designer.data.instance.SelectInstance;
+import app.designer.data.instance.SubFlowInstance;
 
 public class DesignerBootstrapper extends BootstrapperUtil {
 
@@ -80,6 +81,8 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 
 		// Flow nodes & Flow
 		EntityInstance flowEdge = createEntity("FlowEdge", null);
+		createAttribute(flowEdge, "entryName", String.class);
+		createAttribute(flowEdge, "exitName", String.class);
 		EntityInstance flowNodeBase = createEntity("FlowNodeBase", concept);
 		EntityInstance flowSource = createEntity("FlowSource", flowNodeBase);
 		EntityInstance flowSink = createEntity("FlowSink", flowNodeBase);
@@ -124,22 +127,29 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createRelation(button, "caption", RelationType.OneToOneAggregation, "captionOnButton", text);
 		
 		// Flow
-		createRelation(flow, "sources", RelationType.OneToManyAggregation, "flow", flowSource);
-		createRelation(flow, "sinks", RelationType.OneToManyAggregation, "flow", flowSink);
-		createRelation(flow, "nodes", RelationType.OneToManyAggregation, "flow", flowNodeBase);
-		createRelation(flow, "edges", RelationType.OneToManyAggregation, "flow", flowEdge);
+		createRelation(flow, "sources", RelationType.OneToManyAggregation, "owner", flowSource);
+		createRelation(flow, "sinks", RelationType.OneToManyAggregation, "owner", flowSink);
+		createRelation(flow, "nodes", RelationType.OneToManyAggregation, "owner", flowNodeBase);
+		createRelation(flow, "edges", RelationType.OneToManyAggregation, "owner", flowEdge);
+		createRelation(flow, "parameters", RelationType.ManyToMany, "parameterInFlows", entity);
 		createRelation(flowEdge, "from", RelationType.ManyToZeroOrOne, "outgoingEdges", flowNodeBase);
 		createRelation(flowEdge, "to", RelationType.ManyToZeroOrOne, "incomingEdges", flowNodeBase);
+		createRelation(subFlow, "flow", RelationType.OneToZeroOrOne, "subFlowIn", flow);
 		
 		// Flows
-		
-		// Main
 		FlowInstance mainFlow = createFlow("Main");
+		FlowInstance flowFlow = createFlow("Flow");
+		flowFlow.parameters.add(flow);
+		// Main
 		FlowSourceInstance mainStart = createStartSource(mainFlow, "start");
 		PageInstance welcomePage = createPage(mainFlow, "Welcome");
-		PageInstance flowPage = createPage(mainFlow, "Flow");
-		createEdge(mainFlow, mainStart, welcomePage);
-		createEdge(mainFlow, welcomePage, flowPage);
+		SubFlowInstance flowSubFlow = createSubFlow(mainFlow, flowFlow);
+		createEdge(mainFlow, mainStart, "start", welcomePage, null);
+		createEdge(mainFlow, welcomePage, "flowDetails", flowSubFlow, "flowDetails");
+		// Flow
+		FlowSourceInstance flowStart = createStartSource(flowFlow, "flowDetails");
+		PageInstance flowPage = createPage(flowFlow, "Flow");
+		createEdge(flowFlow, flowStart, "start", flowPage, null);
 		// Welcome page
 		addContent(welcomePage.content.get(), createConstantText("Welcome to the Designer"));
 		addContent(welcomePage.content.get(), createConstantText("Flows:"));

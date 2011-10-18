@@ -31,6 +31,9 @@ public class SubFlowInstance
 	// Attributes
 	
 	// Relations
+	
+	public final RelationValue<SubFlowInstance, FlowInstance> flow
+		= createRelationValue(SubFlowEntity.flow);
 
 	// Reverse relations
 

@@ -3,6 +3,7 @@ package app.designer.flow;
 import app.designer.data.entity.*;
 import app.designer.flow.*;
 import app.designer.flow.main.*;
+import lbe.model.Entity;
 import lbe.model.flow.*;
 import lbe.model.flow.impl.*;
 
@@ -25,12 +26,15 @@ public class MainFlow extends Flow {
 	
 	private static final FlowNodeBase[] NODES = new FlowNodeBase[]{
 		WelcomePage.INSTANCE,
-		FlowPage.INSTANCE,
+		FlowSubFlow.INSTANCE,
 	};
 	
 	private static final FlowEdge[] EDGES = new FlowEdge[]{
-		new FlowEdge(START, null, WelcomePage.INSTANCE, null),
-		new FlowEdge(WelcomePage.INSTANCE, null, FlowPage.INSTANCE, null),
+		new FlowEdge(START, "start", WelcomePage.INSTANCE, null),
+		new FlowEdge(WelcomePage.INSTANCE, "flowDetails", FlowSubFlow.INSTANCE, "flowDetails"),
+	};
+	
+	private static final Entity[] PARAMETERS = new Entity[]{
 	};
 	
 	@Override
@@ -56,5 +60,10 @@ public class MainFlow extends Flow {
 	@Override
 	public FlowEdge[] getEdges() {
 		return EDGES;
+	}
+
+	@Override
+	public Entity[] getParameters() {
+		return PARAMETERS;
 	}
 }

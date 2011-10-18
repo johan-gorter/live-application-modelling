@@ -4,11 +4,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import freemarker.template.utility.StringUtil;
+
 import lbe.engine.FlowContext;
 import lbe.engine.FlowStack;
 import lbe.engine.PageCoordinates.Coordinate;
 import lbe.instance.CaseInstance;
 import lbe.instance.Instance;
+import lbe.model.Entity;
 import lbe.model.Model;
 
 
@@ -18,6 +21,7 @@ public abstract class Flow extends Model {
 	public abstract FlowSource[] getSources();
 	public abstract FlowSink[] getSinks();
 	public abstract FlowEdge[] getEdges();
+	public abstract Entity[] getParameters();
 
 	/**
 	 * Finds the page (pagePath is in the format subflowName.subflowName.pageName)
@@ -37,33 +41,40 @@ public abstract class Flow extends Model {
 	
 	public FlowEdge getEdge(FlowNodeBase from, String trigger) {
 		for (FlowEdge edge: getEdges()) {
-			if (edge.getFrom()==from && edge.getEntryName().equals(trigger)) {
+			if (edge.getFrom()==from && trigger.equals(edge.getExitName())) {
 				return edge;
 			}
 		}
-		return null;
+		throw new RuntimeException("Could not find edge with entryName "+trigger);
 	}
 	
-	private String enter(String trigger, FlowContext context) {
-		throw new UnsupportedOperationException();
+	public String enter(String trigger, FlowContext context, Instance[] selectedInstances) {
+		for (FlowSource source: getSources()) {
+			if (source.getName().equals(trigger)) {
+				context.pushFlowContext(this);
+				nextParameter: for (Entity entity : this.getParameters()) {
+					for (Instance instance: selectedInstances) {
+						if (Entity.extendsFrom(instance.getModel(), entity)) {
+							context.getFlowStack().pushSelectedInstance(instance);
+							continue nextParameter;
+						}
+					}
+					throw new RuntimeException("No instance selected which matches parameter "+entity.getName());
+				}
+				return step(source, "start", selectedInstances, context);
+			}
+		}
+		throw new RuntimeException("Could not find flow source with name: "+trigger);
 	}
 
 	// Step to the next point in the flow. Updates context and results in the next trigger
 	// returns null if a page has been reached.
-	// TODO: use trigger
 	public String step(FlowNodeBase flowSource, String trigger, Instance[] selectedInstances, FlowContext context) {
-		if (flowSource==null && trigger == null) {
-			FlowSource[] sources = getSources();
-			if (sources.length!=1) {
-				throw new RuntimeException("Can only start flows with 1 source, not "+getName());
-			}
-			flowSource = sources[0];
-		}
 		FlowEdge edge = getEdge(flowSource, trigger);
 		FlowNodeBase node = edge.getTo();
 		context.getFlowStack().setCurrentNode(node);
 		if (node instanceof SubFlow) {
-			return ((SubFlow)node).getFlow().enter(trigger, context);
+			return ((SubFlow)node).getFlow().enter(trigger, context, selectedInstances);
 		} else if (node instanceof Page) {
 			return null;
 		} else if (node instanceof FlowSink) {
@@ -75,11 +86,15 @@ public abstract class Flow extends Model {
 	}
 
 	public FlowStack createFlowStack(FlowStack stack, Coordinate current, Iterator<Coordinate> moreCoordinates, CaseInstance caseInstance) {
-		if (current.getActiveInstances()!=null) {
-			for (Long instanceId: current.getActiveInstances()) {
-				Instance instance = caseInstance.getInstanceById(instanceId);
-				stack.pushSelectedInstance(instance);
+		if (current.getActiveInstances().size()!=this.getParameters().length) {
+			throw new RuntimeException("Number of parameters does not match number of selected instances"); // TODO check if the right instances are selected
+		}
+		for (Long instanceId: current.getActiveInstances()) {
+			Instance instance = caseInstance.getInstanceById(instanceId);
+			if (instance==null) {
+				throw new RuntimeException("Instance "+instanceId+" invalid");
 			}
+			stack.pushSelectedInstance(instance);
 		}
 		if (moreCoordinates.hasNext()) {
 			Coordinate next = moreCoordinates.next();

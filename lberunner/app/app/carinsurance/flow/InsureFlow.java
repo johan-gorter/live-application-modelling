@@ -1,6 +1,7 @@
 package app.carinsurance.flow;
 
 import app.carinsurance.flow.insure.DriverPage;
+import lbe.model.Entity;
 import lbe.model.flow.Flow;
 import lbe.model.flow.FlowEdge;
 import lbe.model.flow.FlowNodeBase;
@@ -29,6 +30,8 @@ public class InsureFlow extends Flow {
 	private static final FlowEdge[] EDGES = new FlowEdge[]{
 		new FlowEdge(START, null, DriverPage.INSTANCE, null)
 	};
+
+	private static final Entity[] PARAMETERS = new Entity[0];
 	
 	private InsureFlow() {
 	}
@@ -56,5 +59,10 @@ public class InsureFlow extends Flow {
 	@Override
 	public FlowSink[] getSinks() {
 		return SINKS;
+	}
+
+	@Override
+	public Entity[] getParameters() {
+		return PARAMETERS;
 	}
 }

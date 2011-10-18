@@ -63,4 +63,8 @@ public class FlowContext extends DeductionContext {
 			throw new RuntimeException("End of startflow reached");
 		}
 	}
+	
+	public void pushFlowContext(Flow flow) {
+		flowStack = new FlowStack(flowStack, flow);
+	}
 }

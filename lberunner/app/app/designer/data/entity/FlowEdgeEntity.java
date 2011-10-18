@@ -16,6 +16,28 @@ public class FlowEdgeEntity extends SimpleEntity {
 	
 	// Attributes
 	
+	public static final Attribute<FlowEdgeInstance, java.lang.String, java.lang.String> entryName 
+		= new SimpleAttribute<FlowEdgeInstance, java.lang.String, java.lang.String>(
+			"entryName", INSTANCE, java.lang.String.class
+		) {
+	
+			@Override
+			public ReadOnlyAttributeValue<FlowEdgeInstance, java.lang.String> get(FlowEdgeInstance instance) {
+				return instance.entryName;
+			}
+		};
+	
+	public static final Attribute<FlowEdgeInstance, java.lang.String, java.lang.String> exitName 
+		= new SimpleAttribute<FlowEdgeInstance, java.lang.String, java.lang.String>(
+			"exitName", INSTANCE, java.lang.String.class
+		) {
+	
+			@Override
+			public ReadOnlyAttributeValue<FlowEdgeInstance, java.lang.String> get(FlowEdgeInstance instance) {
+				return instance.exitName;
+			}
+		};
+	
 	// Relations
 	
 	public static final Relation<FlowEdgeInstance, FlowNodeBaseInstance, FlowNodeBaseInstance> from
@@ -44,15 +66,15 @@ public class FlowEdgeEntity extends SimpleEntity {
 	
 	// Reverse relations
 	
-	public static final Relation<FlowEdgeInstance, FlowInstance, FlowInstance> flow
+	public static final Relation<FlowEdgeInstance, FlowInstance, FlowInstance> owner
 		= new SimpleRelation<FlowEdgeInstance, FlowInstance, FlowInstance>(
-			"flow", INSTANCE, FlowEdgeEntity.INSTANCE, FlowInstance.class, FlowEntity.edges
+			"owner", INSTANCE, FlowEdgeEntity.INSTANCE, FlowInstance.class, FlowEntity.edges
 		) {
 	
 			@Override
 			public ReadOnlyRelationValue<FlowEdgeInstance, FlowInstance> get(
 					FlowEdgeInstance instance) {
-				return instance.flow;
+				return instance.owner;
 			}
 	
 			public boolean isReverse() {
@@ -61,13 +83,15 @@ public class FlowEdgeEntity extends SimpleEntity {
 		};
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
+		entryName,
+		exitName,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
 		from,
 		to,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
-		flow,
+		owner,
 	};
 
 	private FlowEdgeEntity() {

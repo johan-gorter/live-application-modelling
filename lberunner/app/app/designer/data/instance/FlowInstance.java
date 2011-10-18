@@ -43,6 +43,9 @@ public class FlowInstance
 	
 	public final RelationValues<FlowInstance, FlowEdgeInstance> edges
 		= createRelationValues(FlowEntity.edges);
+	
+	public final RelationValues<FlowInstance, EntityInstance> parameters
+		= createRelationValues(FlowEntity.parameters);
 
 	// Reverse relations
 	
@@ -51,5 +54,8 @@ public class FlowInstance
 	
 	public final ReadOnlyRelationValue<FlowInstance, ApplicationInstance> exposedFlowInApplication
 		= createReverseRelationValue(FlowEntity.exposedFlowInApplication);
+	
+	public final ReadOnlyRelationValue<FlowInstance, SubFlowInstance> subFlowIn
+		= createReverseRelationValue(FlowEntity.subFlowIn);
 
 }

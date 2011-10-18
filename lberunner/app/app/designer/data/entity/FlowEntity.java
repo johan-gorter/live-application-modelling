@@ -20,7 +20,7 @@ public class FlowEntity extends SimpleEntity {
 	
 	public static final Relation<FlowInstance, List<FlowSourceInstance>, FlowSourceInstance> sources
 		= new SimpleRelation<FlowInstance, List<FlowSourceInstance>, FlowSourceInstance>(
-			"sources", INSTANCE, FlowSourceEntity.INSTANCE, FlowSourceInstance.class, FlowSourceEntity.flow
+			"sources", INSTANCE, FlowSourceEntity.INSTANCE, FlowSourceInstance.class, FlowSourceEntity.owner
 		) {
 	
 			@Override
@@ -40,7 +40,7 @@ public class FlowEntity extends SimpleEntity {
 	
 	public static final Relation<FlowInstance, List<FlowSinkInstance>, FlowSinkInstance> sinks
 		= new SimpleRelation<FlowInstance, List<FlowSinkInstance>, FlowSinkInstance>(
-			"sinks", INSTANCE, FlowSinkEntity.INSTANCE, FlowSinkInstance.class, FlowSinkEntity.flow
+			"sinks", INSTANCE, FlowSinkEntity.INSTANCE, FlowSinkInstance.class, FlowSinkEntity.owner
 		) {
 	
 			@Override
@@ -60,7 +60,7 @@ public class FlowEntity extends SimpleEntity {
 	
 	public static final Relation<FlowInstance, List<FlowNodeBaseInstance>, FlowNodeBaseInstance> nodes
 		= new SimpleRelation<FlowInstance, List<FlowNodeBaseInstance>, FlowNodeBaseInstance>(
-			"nodes", INSTANCE, FlowNodeBaseEntity.INSTANCE, FlowNodeBaseInstance.class, FlowNodeBaseEntity.flow
+			"nodes", INSTANCE, FlowNodeBaseEntity.INSTANCE, FlowNodeBaseInstance.class, FlowNodeBaseEntity.owner
 		) {
 	
 			@Override
@@ -80,7 +80,7 @@ public class FlowEntity extends SimpleEntity {
 	
 	public static final Relation<FlowInstance, List<FlowEdgeInstance>, FlowEdgeInstance> edges
 		= new SimpleRelation<FlowInstance, List<FlowEdgeInstance>, FlowEdgeInstance>(
-			"edges", INSTANCE, FlowEdgeEntity.INSTANCE, FlowEdgeInstance.class, FlowEdgeEntity.flow
+			"edges", INSTANCE, FlowEdgeEntity.INSTANCE, FlowEdgeInstance.class, FlowEdgeEntity.owner
 		) {
 	
 			@Override
@@ -91,6 +91,22 @@ public class FlowEntity extends SimpleEntity {
 	
 			public boolean isOwner() {
 				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
+	
+	public static final Relation<FlowInstance, List<EntityInstance>, EntityInstance> parameters
+		= new SimpleRelation<FlowInstance, List<EntityInstance>, EntityInstance>(
+			"parameters", INSTANCE, EntityEntity.INSTANCE, EntityInstance.class, EntityEntity.parameterInFlows
+		) {
+	
+			@Override
+			public ReadOnlyRelationValues<FlowInstance, EntityInstance> get(
+					FlowInstance instance) {
+				return instance.parameters;
 			}
 	
 			public boolean isMultivalue() {
@@ -131,6 +147,22 @@ public class FlowEntity extends SimpleEntity {
 				return true;
 			}
 		};
+	
+	public static final Relation<FlowInstance, SubFlowInstance, SubFlowInstance> subFlowIn
+		= new SimpleRelation<FlowInstance, SubFlowInstance, SubFlowInstance>(
+			"subFlowIn", INSTANCE, FlowEntity.INSTANCE, SubFlowInstance.class, SubFlowEntity.flow
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<FlowInstance, SubFlowInstance> get(
+					FlowInstance instance) {
+				return instance.subFlowIn;
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+		};
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 	};
@@ -139,10 +171,12 @@ public class FlowEntity extends SimpleEntity {
 		sinks,
 		nodes,
 		edges,
+		parameters,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 		application,
 		exposedFlowInApplication,
+		subFlowIn,
 	};
 
 	private FlowEntity() {

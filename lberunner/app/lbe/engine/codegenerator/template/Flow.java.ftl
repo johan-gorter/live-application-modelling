@@ -3,6 +3,7 @@ package app.${appname}.flow;
 import app.${appname}.data.entity.*;
 import app.${appname}.flow.*;
 import app.${appname}.flow.${name?lower_case}.*;
+import lbe.model.Entity;
 import lbe.model.flow.*;
 import lbe.model.flow.impl.*;
 
@@ -41,7 +42,13 @@ public class ${name}Flow extends Flow {
 	
 	private static final FlowEdge[] EDGES = new FlowEdge[]{
 	<#list edges as edge>
-		new FlowEdge(${edge.from}, null, ${edge.to}, null),
+		new FlowEdge(${edge.from}, "${edge.exitName}", ${edge.to}, <#if edge.entryName??>"${edge.entryName}"<#else>null</#if>),
+	</#list>
+	};
+	
+	private static final Entity[] PARAMETERS = new Entity[]{
+	<#list parameters as parameter>
+		${parameter}Entity.INSTANCE,
 	</#list>
 	};
 	
@@ -68,5 +75,10 @@ public class ${name}Flow extends Flow {
 	@Override
 	public FlowEdge[] getEdges() {
 		return EDGES;
+	}
+
+	@Override
+	public Entity[] getParameters() {
+		return PARAMETERS;
 	}
 }

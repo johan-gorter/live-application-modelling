@@ -18,11 +18,24 @@ public class SubFlowEntity extends SimpleEntity {
 	
 	// Relations
 	
+	public static final Relation<SubFlowInstance, FlowInstance, FlowInstance> flow
+		= new SimpleRelation<SubFlowInstance, FlowInstance, FlowInstance>(
+			"flow", INSTANCE, FlowEntity.INSTANCE, FlowInstance.class, FlowEntity.subFlowIn
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<SubFlowInstance, FlowInstance> get(
+					SubFlowInstance instance) {
+				return instance.flow;
+			}
+		};
+	
 	// Reverse relations
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
+		flow,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};

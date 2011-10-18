@@ -1,43 +1,44 @@
-package app.carinsurancetest.flow;
+package app.designer.flow;
 
-import app.carinsurancetest.data.entity.*;
-import app.carinsurancetest.flow.*;
-import app.carinsurancetest.flow.insure.*;
+import app.designer.data.entity.*;
+import app.designer.flow.*;
+import app.designer.flow.flow.*;
 import lbe.model.Entity;
 import lbe.model.flow.*;
 import lbe.model.flow.impl.*;
 
-public class InsureFlow extends Flow {
+public class FlowFlow extends Flow {
 
-	public static final InsureFlow INSTANCE = new InsureFlow();
+	public static final FlowFlow INSTANCE = new FlowFlow();
 	
-	private InsureFlow() {
+	private FlowFlow() {
 	}
 	
-	private static final FlowSource START = new SimpleFlowSource("start");
+	private static final FlowSource FLOWDETAILS = new SimpleFlowSource("flowDetails");
 
 
 	private static final FlowSource[] SOURCES = new FlowSource[]{
-		START,
+		FLOWDETAILS,
 	};
 
 	private static final FlowSink[] SINKS = new FlowSink[] {
 	};
 	
 	private static final FlowNodeBase[] NODES = new FlowNodeBase[]{
-		DriverPage.INSTANCE,
+		FlowPage.INSTANCE,
 	};
 	
 	private static final FlowEdge[] EDGES = new FlowEdge[]{
-		new FlowEdge(START, "start", DriverPage.INSTANCE, null),
+		new FlowEdge(FLOWDETAILS, "start", FlowPage.INSTANCE, null),
 	};
 	
 	private static final Entity[] PARAMETERS = new Entity[]{
+		FlowEntity.INSTANCE,
 	};
 	
 	@Override
 	public String getName() {
-		return "Insure";
+		return "Flow";
 	}
 
 	@Override

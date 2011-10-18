@@ -11,13 +11,13 @@ public class FlowEdge {
 	public FlowEdge() {
 	}
 
-	public FlowEdge(FlowNodeBase from, String exitName, FlowNodeBase to,
-			String entryName) {
+	public FlowEdge(FlowNodeBase from, String exitName, FlowNodeBase to, String entryName) {
 		this.from = from;
 		this.exitName = exitName;
 		this.to = to;
 		this.entryName = entryName;
 	}
+	
 	public FlowNodeBase getFrom() {
 		return from;
 	}

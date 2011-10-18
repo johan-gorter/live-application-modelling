@@ -37,10 +37,10 @@ public class SimpleCaseInstance extends SimpleInstance implements CaseInstance {
 	public long registerInstance(Instance instance, long id) {
 		if (id==0) {
 			id = ++lastId;
-			instances.put(id, instance);
 		} else {
 			lastId = Math.max(lastId, id);
 		}
+		instances.put(id, instance);
 		return id;
 	}
 

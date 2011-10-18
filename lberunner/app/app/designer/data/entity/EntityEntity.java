@@ -143,6 +143,26 @@ public class EntityEntity extends SimpleEntity {
 				return true;
 			}
 		};
+	
+	public static final Relation<EntityInstance, List<FlowInstance>, FlowInstance> parameterInFlows
+		= new SimpleRelation<EntityInstance, List<FlowInstance>, FlowInstance>(
+			"parameterInFlows", INSTANCE, EntityEntity.INSTANCE, FlowInstance.class, FlowEntity.parameters
+		) {
+	
+			@Override
+			public ReadOnlyRelationValues<EntityInstance, FlowInstance> get(
+					EntityInstance instance) {
+				return instance.parameterInFlows;
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 	};
@@ -156,6 +176,7 @@ public class EntityEntity extends SimpleEntity {
 		caseEntityInApplication,
 		extensions,
 		reverseRelations,
+		parameterInFlows,
 	};
 
 	private EntityEntity() {
