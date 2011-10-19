@@ -135,6 +135,7 @@ public class CodeGenerator {
 		result.appname = appname;
 		result.flowname = flowName;
 		result.name = page.name.get();
+		result.customization = page.customization.get();
 		result.content = createContentClassModel(page.content.get());
 		return result;
 	}

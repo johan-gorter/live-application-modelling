@@ -16,12 +16,14 @@ public class FlowFlow extends Flow {
 	
 	private static final FlowSource FLOWDETAILS = new SimpleFlowSource("flowDetails");
 
+	private static final FlowSink BACK = new SimpleFlowSink("back");
 
 	private static final FlowSource[] SOURCES = new FlowSource[]{
 		FLOWDETAILS,
 	};
 
 	private static final FlowSink[] SINKS = new FlowSink[] {
+		BACK,
 	};
 	
 	private static final FlowNodeBase[] NODES = new FlowNodeBase[]{
@@ -30,6 +32,7 @@ public class FlowFlow extends Flow {
 	
 	private static final FlowEdge[] EDGES = new FlowEdge[]{
 		new FlowEdge(FLOWDETAILS, "start", FlowPage.INSTANCE, null),
+		new FlowEdge(FlowPage.INSTANCE, "back", BACK, null),
 	};
 	
 	private static final Entity[] PARAMETERS = new Entity[]{

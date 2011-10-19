@@ -32,6 +32,7 @@ public class MainFlow extends Flow {
 	private static final FlowEdge[] EDGES = new FlowEdge[]{
 		new FlowEdge(START, "start", WelcomePage.INSTANCE, null),
 		new FlowEdge(WelcomePage.INSTANCE, "flowDetails", FlowSubFlow.INSTANCE, "flowDetails"),
+		new FlowEdge(FlowSubFlow.INSTANCE, "back", WelcomePage.INSTANCE, null),
 	};
 	
 	private static final Entity[] PARAMETERS = new Entity[]{

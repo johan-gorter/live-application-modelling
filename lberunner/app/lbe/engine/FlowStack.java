@@ -56,4 +56,9 @@ public class FlowStack extends AbstractDeductionContext {
 		result.addCoordinate(new Coordinate(currentNode.getName(), new ArrayList<Long>()));
 		return result;
 	}
+	
+	@Override
+	public String toString() {
+		return "("+currentNode+" in "+flow+")"+(parent==null?"":"-->"+parent);
+	}
 }

@@ -12,6 +12,7 @@ import app.designer.data.instance.FieldInstance;
 import app.designer.data.instance.FlowEdgeInstance;
 import app.designer.data.instance.FlowInstance;
 import app.designer.data.instance.FlowNodeBaseInstance;
+import app.designer.data.instance.FlowSinkInstance;
 import app.designer.data.instance.FlowSourceInstance;
 import app.designer.data.instance.HeaderInstance;
 import app.designer.data.instance.PageCompositionInstance;
@@ -131,11 +132,18 @@ public abstract class BootstrapperUtil {
 		return page;
 	}
 
-	protected static FlowSourceInstance createStartSource(FlowInstance flow, String name) {
-		FlowSourceInstance startSource = new FlowSourceInstance(applicationInstance);
-		startSource.name.set(name);
-		flow.sources.add(startSource);
-		return startSource;
+	protected static FlowSourceInstance createSource(FlowInstance flow, String name) {
+		FlowSourceInstance source = new FlowSourceInstance(applicationInstance);
+		source.name.set(name);
+		flow.sources.add(source);
+		return source;
+	}
+	
+	protected static FlowSinkInstance createSink(FlowInstance flow, String name) {
+		FlowSinkInstance sink = new FlowSinkInstance(applicationInstance);
+		sink.name.set(name);
+		flow.sinks.add(sink);
+		return sink;
 	}
 	
 	protected static SubFlowInstance createSubFlow(FlowInstance parentFlow, FlowInstance flow) {

@@ -16,6 +16,7 @@ public class ContentClassModel {
 	public String relationEntity;
 	public String relationName;
 	public String trigger;
+	public String customization;
 	public final List<ContentClassModel> children = new ArrayList<ContentClassModel>();
 	
 	public String getType() {
@@ -50,5 +51,8 @@ public class ContentClassModel {
 	}
 	public String getTrigger() {
 		return trigger;
+	}
+	public String getCustomization() {
+		return customization;
 	}
 }

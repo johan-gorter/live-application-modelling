@@ -19,7 +19,7 @@ public class ${name}Flow extends Flow {
 	</#list>
 
 	<#list sinks as sink>
-	private static final FlowSource ${sink?upper_case} = new SimpleFlowSource("${sink}");
+	private static final FlowSink ${sink?upper_case} = new SimpleFlowSink("${sink}");
 	</#list>
 
 	private static final FlowSource[] SOURCES = new FlowSource[]{

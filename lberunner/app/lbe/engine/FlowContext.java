@@ -67,4 +67,9 @@ public class FlowContext extends DeductionContext {
 	public void pushFlowContext(Flow flow) {
 		flowStack = new FlowStack(flowStack, flow);
 	}
+	
+	@Override
+	public String toString() {
+		return "Flowstack for case "+caseId+" "+flowStack;
+	}
 }

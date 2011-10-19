@@ -11,7 +11,7 @@ import lbe.model.pageelement.impl.*;
 
 public class ${name}Page extends Page {
 
-	public static final ${name}Page INSTANCE = new ${name}Page();
+	public static final ${name}Page INSTANCE = new <#if customization??>${customization}<#else>${name}Page</#if>();
 	
 	
 	private static CompositePageFragment CONTENT = 

@@ -38,8 +38,8 @@ public class Bootstrapper {
 	}
 	
 	public static void main(String[] args) {
-		createCarinsurance();
-//		createDesigner();
+//		createCarinsurance();
+		createDesigner();
 	}
 
 	private static void createCarinsurance() {
@@ -58,6 +58,8 @@ public class Bootstrapper {
 		ApplicationInstance applicationInstance = DesignerBootstrapper.createDesigner();
 
 //		System.out.println(CasePersister.gson.toJson(applicationInstance));
+		
+		CasePersister.INSTANCE.persist("designer", applicationInstance, (int)(System.currentTimeMillis()/1000));
 		
 		CodeGenerator.generateApplication(applicationInstance);
 	}

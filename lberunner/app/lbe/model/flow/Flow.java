@@ -45,7 +45,7 @@ public abstract class Flow extends Model {
 				return edge;
 			}
 		}
-		throw new RuntimeException("Could not find edge with entryName "+trigger);
+		throw new RuntimeException("Could not find edge with exitName "+trigger+" in flow "+this.getName()+" from node "+from.getName());
 	}
 	
 	public String enter(String trigger, FlowContext context, Instance[] selectedInstances) {
@@ -101,7 +101,9 @@ public abstract class Flow extends Model {
 			FlowNodeBase nextNode = getNode(next.getNodeName());
 			stack.setCurrentNode(nextNode);
 			if (nextNode instanceof SubFlow) {
-				return ((SubFlow)nextNode).getFlow().createFlowStack(stack, next, moreCoordinates, caseInstance);
+				Flow flow = ((SubFlow)nextNode).getFlow(); 
+				stack = new FlowStack(stack, flow);
+				return flow.createFlowStack(stack, next, moreCoordinates, caseInstance);
 			}
 		}
 		return stack;

@@ -27,12 +27,24 @@ public class ConceptEntity extends SimpleEntity {
 			}
 		};
 	
+	public static final Attribute<ConceptInstance, java.lang.String, java.lang.String> customization 
+		= new SimpleAttribute<ConceptInstance, java.lang.String, java.lang.String>(
+			"customization", INSTANCE, java.lang.String.class
+		) {
+	
+			@Override
+			public ReadOnlyAttributeValue<ConceptInstance, java.lang.String> get(ConceptInstance instance) {
+				return instance.customization;
+			}
+		};
+	
 	// Relations
 	
 	// Reverse relations
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 		name,
+		customization,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
 	};

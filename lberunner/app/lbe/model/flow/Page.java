@@ -23,6 +23,7 @@ public abstract class Page extends FlowNodeBase {
 		result.id = renderContext.getPageCoordinates();
 		result.name = getName();
 		PageElement contentElements = getRootContainer().render(renderContext);
+		contentElements.id = renderContext.getPageCoordinates()+"-root";
 		result.content = new PageElement[]{contentElements};
 		return result;
 	}

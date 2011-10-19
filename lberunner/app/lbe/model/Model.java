@@ -18,4 +18,9 @@ public abstract class Model implements Comparable<Model> {
 		}
 		return n1.compareTo(n2);
 	}
+	
+	@Override
+	public String toString() {
+		return getName()+":"+getClass().getName();
+	}
 }
