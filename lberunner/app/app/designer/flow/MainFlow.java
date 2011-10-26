@@ -27,12 +27,14 @@ public class MainFlow extends Flow {
 	private static final FlowNodeBase[] NODES = new FlowNodeBase[]{
 		WelcomePage.INSTANCE,
 		FlowSubFlow.INSTANCE,
+		CaseExplorerSubFlow.INSTANCE,
 	};
 	
 	private static final FlowEdge[] EDGES = new FlowEdge[]{
 		new FlowEdge(START, "start", WelcomePage.INSTANCE, null),
 		new FlowEdge(WelcomePage.INSTANCE, "flowDetails", FlowSubFlow.INSTANCE, "flowDetails"),
 		new FlowEdge(FlowSubFlow.INSTANCE, "back", WelcomePage.INSTANCE, null),
+		new FlowEdge(FlowSubFlow.INSTANCE, "exploreInstance", CaseExplorerSubFlow.INSTANCE, "exploreInstance"),
 	};
 	
 	private static final Entity[] PARAMETERS = new Entity[]{

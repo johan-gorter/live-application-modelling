@@ -1,5 +1,9 @@
 package lbe.engine;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
 import lbe.instance.Instance;
 import lbe.instance.value.AttributeValue;
 import lbe.model.Attribute;
@@ -49,7 +53,9 @@ public class ChangeContext extends RenderContext {
 	}
 
 	public void storeSelectedInstancesDuringTrigger() {
-		this.selectedInstancesDuringTrigger = selectedInstances.toArray(new Instance[selectedInstances.size()]);
+		List<Instance> result = new ArrayList<Instance>();
+		addSelectedInstances(result);
+		this.selectedInstancesDuringTrigger = result.toArray(new Instance[result.size()]);
 	}
 
 	public Instance[] getSelectedInstancesDuringTrigger() {

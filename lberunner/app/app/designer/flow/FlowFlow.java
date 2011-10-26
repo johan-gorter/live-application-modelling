@@ -17,6 +17,7 @@ public class FlowFlow extends Flow {
 	private static final FlowSource FLOWDETAILS = new SimpleFlowSource("flowDetails");
 
 	private static final FlowSink BACK = new SimpleFlowSink("back");
+	private static final FlowSink EXPLOREINSTANCE = new SimpleFlowSink("exploreInstance");
 
 	private static final FlowSource[] SOURCES = new FlowSource[]{
 		FLOWDETAILS,
@@ -24,6 +25,7 @@ public class FlowFlow extends Flow {
 
 	private static final FlowSink[] SINKS = new FlowSink[] {
 		BACK,
+		EXPLOREINSTANCE,
 	};
 	
 	private static final FlowNodeBase[] NODES = new FlowNodeBase[]{
@@ -33,6 +35,7 @@ public class FlowFlow extends Flow {
 	private static final FlowEdge[] EDGES = new FlowEdge[]{
 		new FlowEdge(FLOWDETAILS, "start", FlowPage.INSTANCE, null),
 		new FlowEdge(FlowPage.INSTANCE, "back", BACK, null),
+		new FlowEdge(FlowPage.INSTANCE, "exploreInstance", EXPLOREINSTANCE, null),
 	};
 	
 	private static final Entity[] PARAMETERS = new Entity[]{

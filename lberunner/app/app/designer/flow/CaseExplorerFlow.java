@@ -31,7 +31,7 @@ public class CaseExplorerFlow extends Flow {
 	};
 	
 	private static final FlowEdge[] EDGES = new FlowEdge[]{
-		new FlowEdge(EXPLOREINSTANCE, "exploreInstance", CaseExplorerInstanceSubFlow.INSTANCE, null),
+		new FlowEdge(EXPLOREINSTANCE, "start", CaseExplorerInstanceSubFlow.INSTANCE, "exploreInstance"),
 		new FlowEdge(CaseExplorerInstanceSubFlow.INSTANCE, "back", BACK, null),
 		new FlowEdge(CaseExplorerInstanceSubFlow.INSTANCE, "navigate", CaseExplorerInstanceSubFlow.INSTANCE, "exploreInstance"),
 	};

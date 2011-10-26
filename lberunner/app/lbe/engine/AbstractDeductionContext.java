@@ -2,6 +2,7 @@ package lbe.engine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 import lbe.instance.Instance;
 import lbe.model.Entity;
@@ -47,6 +48,16 @@ public abstract class AbstractDeductionContext extends DeductionContext {
 		Instance check = popSelectedInstance();
 		if (check!=instance) {
 			throw new RuntimeException("Asymmetric push/pop");
+		}
+	}
+	
+	protected void addSelectedInstances(List<Instance> result) {
+		ListIterator<Instance> iterator = selectedInstances.listIterator(selectedInstances.size());
+		while (iterator.hasPrevious()) {
+			result.add(iterator.previous());
+		}
+		if (parent!=null) {
+			parent.addSelectedInstances(result);
 		}
 	}
 	

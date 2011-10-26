@@ -1,5 +1,6 @@
 package app.carinsurancetest.container;
 
+import lbe.engine.RenderContext;
 import lbe.model.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
@@ -28,7 +29,7 @@ public class DriverFieldsContainer extends CompositePageFragment {
 	}
 
 	@Override
-	public PageFragment[] getChildren() {
+	public PageFragment[] getChildren(RenderContext context) {
 		return CHILDREN;
 	}
 }

@@ -27,6 +27,17 @@ public class ApplicationEntity extends SimpleEntity {
 			}
 		};
 	
+	public static final Attribute<ApplicationInstance, java.lang.String, java.lang.String> customization 
+		= new SimpleAttribute<ApplicationInstance, java.lang.String, java.lang.String>(
+			"customization", INSTANCE, java.lang.String.class
+		) {
+	
+			@Override
+			public ReadOnlyAttributeValue<ApplicationInstance, java.lang.String> get(ApplicationInstance instance) {
+				return instance.customization;
+			}
+		};
+	
 	// Relations
 	
 	public static final Relation<ApplicationInstance, List<EntityInstance>, EntityInstance> entities
@@ -121,6 +132,7 @@ public class ApplicationEntity extends SimpleEntity {
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 		name,
+		customization,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
 		entities,

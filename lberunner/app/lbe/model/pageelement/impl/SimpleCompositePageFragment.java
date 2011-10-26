@@ -1,5 +1,6 @@
 package lbe.model.pageelement.impl;
 
+import lbe.engine.RenderContext;
 import lbe.model.Relation;
 import lbe.model.deduction.Deduction;
 import lbe.model.pageelement.CompositePageFragment;
@@ -38,7 +39,7 @@ public class SimpleCompositePageFragment extends CompositePageFragment {
 	}
 	
 	@Override
-	public PageFragment[] getChildren() {
+	public PageFragment[] getChildren(RenderContext context) {
 		return children;
 	}
 	

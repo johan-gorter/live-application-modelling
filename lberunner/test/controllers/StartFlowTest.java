@@ -84,6 +84,9 @@ public class StartFlowTest {
 		String id = findButtonWithTrigger(page, "flowDetails").id;
 		submit(id);
 		Assert.assertEquals("Flow", page.name);
+		id = findButtonWithTrigger(page, "exploreInstance").id;
+		submit(id);
+		Assert.assertEquals("Instance", page.name);
 	}
 	
 	// Helper functions

@@ -86,7 +86,7 @@ public abstract class CompositePageFragment extends PageFragment {
 		result.name = getName();
 		context.nextIdLevel();
 		
-		result.content = renderChildren(context, getChildren());
+		result.content = renderChildren(context, getChildren(context));
 		
 		context.previousIdLevel();
 		return result;
@@ -140,7 +140,7 @@ public abstract class CompositePageFragment extends PageFragment {
 	private String doSubmit(ChangeContext context) {
 		String result = super.submit(context);
 		context.nextIdLevel();
-		for (PageFragment child: getChildren()) {
+		for (PageFragment child: getChildren(context)) {
 			String childResult = child.submit(context);
 			if (childResult!=null) {
 				if (result!=null) {
@@ -164,7 +164,7 @@ public abstract class CompositePageFragment extends PageFragment {
 		return result.toArray(new PageElement[result.size()]);
 	}
 
-	public abstract PageFragment[] getChildren();
+	public abstract PageFragment[] getChildren(RenderContext context);
 	
 	public static void changeValue(ChangeContext changeContext,
 			PageFragment[] childModels) {

@@ -172,6 +172,7 @@ public class CodeGenerator {
 
 	private static FlowClassModel createFlowClassModel(FlowInstance flow, String appname) {
 		FlowClassModel result = new FlowClassModel();
+		result.customization = flow.customization.get();
 		result.appname = appname;
 		result.name = flow.name.get();
 		for (FlowNodeBaseInstance source: flow.sources.get()) {

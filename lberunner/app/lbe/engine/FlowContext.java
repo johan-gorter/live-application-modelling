@@ -72,4 +72,9 @@ public class FlowContext extends DeductionContext {
 	public String toString() {
 		return "Flowstack for case "+caseId+" "+flowStack;
 	}
+
+	@Override
+	protected void addSelectedInstances(List<Instance> result) {
+		flowStack.addSelectedInstances(result);
+	}
 }

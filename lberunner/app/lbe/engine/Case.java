@@ -141,6 +141,7 @@ public class Case {
 		flow(flowContext, trigger, changeContext.getSelectedInstancesDuringTrigger());
 		getOrCreateSession(sessionId, userName).setPageCoordinates(flowContext.getFlowStack().toPageCoordinates());
 		informWaiters();
+		application.afterSubmit(this.caseInstance);
 	}
 	
 	private void flow(FlowContext flowContext, String trigger, Instance[] selectedInstances) {

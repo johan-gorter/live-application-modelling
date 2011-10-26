@@ -52,19 +52,23 @@ public abstract class Flow extends Model {
 		for (FlowSource source: getSources()) {
 			if (source.getName().equals(trigger)) {
 				context.pushFlowContext(this);
-				nextParameter: for (Entity entity : this.getParameters()) {
-					for (Instance instance: selectedInstances) {
-						if (Entity.extendsFrom(instance.getModel(), entity)) {
-							context.getFlowStack().pushSelectedInstance(instance);
-							continue nextParameter;
-						}
-					}
-					throw new RuntimeException("No instance selected which matches parameter "+entity.getName());
-				}
+				acceptParameters(context, selectedInstances);
 				return step(source, "start", selectedInstances, context);
 			}
 		}
 		throw new RuntimeException("Could not find flow source with name: "+trigger);
+	}
+	protected void acceptParameters(FlowContext context,
+			Instance[] selectedInstances) {
+		nextParameter: for (Entity entity : this.getParameters()) {
+			for (Instance instance: selectedInstances) {
+				if (Entity.extendsFrom(instance.getModel(), entity)) {
+					context.getFlowStack().pushSelectedInstance(instance);
+					continue nextParameter;
+				}
+			}
+			throw new RuntimeException("No instance selected which matches parameter "+entity.getName());
+		}
 	}
 
 	// Step to the next point in the flow. Updates context and results in the next trigger
@@ -74,7 +78,7 @@ public abstract class Flow extends Model {
 		FlowNodeBase node = edge.getTo();
 		context.getFlowStack().setCurrentNode(node);
 		if (node instanceof SubFlow) {
-			return ((SubFlow)node).getFlow().enter(trigger, context, selectedInstances);
+			return ((SubFlow)node).getFlow().enter(edge.getEntryName(), context, selectedInstances);
 		} else if (node instanceof Page) {
 			return null;
 		} else if (node instanceof FlowSink) {
@@ -86,16 +90,7 @@ public abstract class Flow extends Model {
 	}
 
 	public FlowStack createFlowStack(FlowStack stack, Coordinate current, Iterator<Coordinate> moreCoordinates, CaseInstance caseInstance) {
-		if (current.getActiveInstances().size()!=this.getParameters().length) {
-			throw new RuntimeException("Number of parameters does not match number of selected instances"); // TODO check if the right instances are selected
-		}
-		for (Long instanceId: current.getActiveInstances()) {
-			Instance instance = caseInstance.getInstanceById(instanceId);
-			if (instance==null) {
-				throw new RuntimeException("Instance "+instanceId+" invalid");
-			}
-			stack.pushSelectedInstance(instance);
-		}
+		stackSelectedInstances(stack, current, caseInstance);
 		if (moreCoordinates.hasNext()) {
 			Coordinate next = moreCoordinates.next();
 			FlowNodeBase nextNode = getNode(next.getNodeName());
@@ -107,6 +102,19 @@ public abstract class Flow extends Model {
 			}
 		}
 		return stack;
+	}
+	
+	protected void stackSelectedInstances(FlowStack stack, Coordinate current, CaseInstance caseInstance) {
+		if (current.getActiveInstances().size()!=this.getParameters().length) {
+			throw new RuntimeException("Number of parameters does not match number of selected instances"); // TODO check if the right instances are selected
+		}
+		for (Long instanceId: current.getActiveInstances()) {
+			Instance instance = caseInstance.getInstanceById(instanceId);
+			if (instance==null) {
+				throw new RuntimeException("Instance "+instanceId+" invalid");
+			}
+			stack.pushSelectedInstance(instance);
+		}
 	}
 	
 	private FlowNodeBase getNode(String nodeName) {

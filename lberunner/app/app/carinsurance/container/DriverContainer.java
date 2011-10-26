@@ -1,5 +1,6 @@
 package app.carinsurance.container;
 
+import lbe.engine.RenderContext;
 import lbe.model.Attribute;
 import lbe.model.Relation;
 import lbe.model.deduction.Deduction;
@@ -129,7 +130,7 @@ public class DriverContainer extends CompositePageFragment{
 	}
 	
 	@Override
-	public PageFragment[] getChildren() {
+	public PageFragment[] getChildren(RenderContext context) {
 		return CHILDREN;
 	}
 	

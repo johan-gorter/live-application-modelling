@@ -1,5 +1,7 @@
 package lbe.engine;
 
+import java.util.List;
+
 import lbe.instance.Instance;
 import lbe.model.Entity;
 
@@ -17,6 +19,11 @@ public class SingleInstanceDeductionContext extends DeductionContext {
 			return instance;
 		}
 		return null;
+	}
+
+	@Override
+	protected void addSelectedInstances(List<Instance> result) {
+		result.add(instance);
 	}
 
 }

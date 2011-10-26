@@ -19,6 +19,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		// Case
 		applicationInstance = new ApplicationInstance();
 		applicationInstance.name.set("Designer");
+		applicationInstance.customization.set("custom.designer.DesignerApplicationCustomization");
 		
 		// Entities
 		
@@ -26,11 +27,12 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		EntityInstance application = createEntity("Application", null);
 		createAttribute(application, "name", String.class);
 		applicationInstance.caseEntity.set(application);
+		createAttribute(application, "customization", String.class);
 		
 		// Concept
 		EntityInstance concept = createEntity("Concept", null);
 		AttributeInstance name = createAttribute(concept, "name", String.class);
-		AttributeInstance customization = createAttribute(concept, "customization", String.class);
+		createAttribute(concept, "customization", String.class);
 		
 		// Entity
 		EntityInstance entity = createEntity("Entity", concept);
@@ -141,35 +143,40 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		// Flows
 		FlowInstance mainFlow = createFlow("Main");
 		FlowInstance flowFlow = createFlow("Flow");
+		flowFlow.parameters.add(flow);
 		FlowInstance caseExplorerFlow = createFlow("CaseExplorer");
 		FlowInstance caseExplorerInstanceFlow = createFlow("CaseExplorerInstance");
-		flowFlow.parameters.add(flow);
+		caseExplorerInstanceFlow.customization.set("custom.designer.caseexplorer.CaseExplorerInstanceFlowCustomization");
 		// Main
 		FlowSourceInstance mainStart = createSource(mainFlow, "start");
 		PageInstance welcomePage = createPage(mainFlow, "Welcome");
 		SubFlowInstance flowSubFlow = createSubFlow(mainFlow, flowFlow);
+		SubFlowInstance caseExplorerSubFlow = createSubFlow(mainFlow, caseExplorerFlow);
 		createEdge(mainFlow, mainStart, "start", welcomePage, null);
 		createEdge(mainFlow, welcomePage, "flowDetails", flowSubFlow, "flowDetails");
 		createEdge(mainFlow, flowSubFlow, "back", welcomePage, null);
+		createEdge(mainFlow, flowSubFlow, "exploreInstance", caseExplorerSubFlow, "exploreInstance");
 		// Flow
 		FlowSourceInstance flowDetailsSource = createSource(flowFlow, "flowDetails");
 		FlowSinkInstance flowBackSink = createSink(flowFlow, "back");
+		FlowSinkInstance flowExploreSink = createSink(flowFlow, "exploreInstance");
 		PageInstance flowPage = createPage(flowFlow, "Flow");
 		createEdge(flowFlow, flowDetailsSource, "start", flowPage, null);
 		createEdge(flowFlow, flowPage, "back", flowBackSink, null);
+		createEdge(flowFlow, flowPage, "exploreInstance", flowExploreSink, null);
 		// CaseExplorer
 		FlowSourceInstance exploreInstanceSource = createSource(caseExplorerFlow, "exploreInstance");
 		FlowSinkInstance caseExplorerBackSink = createSink(caseExplorerFlow, "back");
-		SubFlowInstance caseExplorerSubFlow = createSubFlow(caseExplorerFlow, caseExplorerInstanceFlow);
-		createEdge(caseExplorerFlow, exploreInstanceSource, "exploreInstance", caseExplorerSubFlow, null);
-		createEdge(caseExplorerFlow, caseExplorerSubFlow, "back", caseExplorerBackSink , null);
-		createEdge(caseExplorerFlow, caseExplorerSubFlow, "navigate", caseExplorerSubFlow , "exploreInstance"); // This edge is the reason for this wrapping flow
+		SubFlowInstance caseExplorerInstanceSubFlow = createSubFlow(caseExplorerFlow, caseExplorerInstanceFlow);
+		createEdge(caseExplorerFlow, exploreInstanceSource, "start", caseExplorerInstanceSubFlow, "exploreInstance");
+		createEdge(caseExplorerFlow, caseExplorerInstanceSubFlow, "back", caseExplorerBackSink , null);
+		createEdge(caseExplorerFlow, caseExplorerInstanceSubFlow, "navigate", caseExplorerInstanceSubFlow , "exploreInstance"); // This edge is the reason for this wrapping flow
 		// CaseExplorerInstance
 		FlowSourceInstance instanceExploreInstanceSource = createSource(caseExplorerInstanceFlow, "exploreInstance");
 		FlowSinkInstance caseExplorerInstanceBackSink = createSink(caseExplorerInstanceFlow, "back");
 		PageInstance instancePage = createPage(caseExplorerInstanceFlow, "Instance");
 		instancePage.customization.set("custom.designer.caseexplorer.InstancePageCustomization");
-		createEdge(caseExplorerInstanceFlow, instanceExploreInstanceSource, "exploreInstance", instancePage, null);
+		createEdge(caseExplorerInstanceFlow, instanceExploreInstanceSource, "start", instancePage, null);
 		createEdge(caseExplorerInstanceFlow, instancePage, "back", caseExplorerInstanceBackSink , null);
 		// Welcome page
 		addContent(welcomePage.content.get(), createConstantText("Welcome to the Designer"));
@@ -181,6 +188,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		// Flow page
 		addContent(flowPage.content.get(), createConstantText("Flow"));
 		createField(flowPage.content.get(), name, false);
+		addContent(flowPage.content.get(), createButton("exploreInstance", createConstantText("Open in case explorer")));
 		addContent(flowPage.content.get(), createButton("back", createConstantText("Back")));
 		
 		// Finish up

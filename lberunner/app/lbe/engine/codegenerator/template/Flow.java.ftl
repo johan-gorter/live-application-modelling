@@ -9,9 +9,9 @@ import lbe.model.flow.impl.*;
 
 public class ${name}Flow extends Flow {
 
-	public static final ${name}Flow INSTANCE = new ${name}Flow();
+	public static final ${name}Flow INSTANCE = new <#if customization??>${customization}<#else>${name}Flow</#if>();
 	
-	private ${name}Flow() {
+	protected ${name}Flow() {
 	}
 	
 	<#list sources as source>

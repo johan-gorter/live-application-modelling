@@ -1,5 +1,7 @@
 package lbe.engine;
 
+import java.util.List;
+
 import lbe.instance.Instance;
 import lbe.instance.value.ReadOnlyAttributeValue;
 import lbe.model.Attribute;
@@ -23,5 +25,11 @@ public abstract class DeductionContext {
 		}
 		return attribute.get(instance);
 	}
+
+	/**
+	 * Add the selected instances in reverse order to result.
+	 * @param result the list to append to
+	 */
+	protected abstract void addSelectedInstances(List<Instance> result);
 
 }

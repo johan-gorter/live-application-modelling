@@ -14,7 +14,7 @@ public class DesignerApplication extends Application {
 
 	public static final DesignerApplication INSTANCE = new DesignerApplication();
 	
-	private DesignerApplication() {
+	protected DesignerApplication() {
 	}
 	
 	@Override

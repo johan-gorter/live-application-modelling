@@ -9,9 +9,9 @@ import lbe.model.flow.impl.*;
 
 public class CaseExplorerInstanceFlow extends Flow {
 
-	public static final CaseExplorerInstanceFlow INSTANCE = new CaseExplorerInstanceFlow();
+	public static final CaseExplorerInstanceFlow INSTANCE = new custom.designer.caseexplorer.CaseExplorerInstanceFlowCustomization();
 	
-	private CaseExplorerInstanceFlow() {
+	protected CaseExplorerInstanceFlow() {
 	}
 	
 	private static final FlowSource EXPLOREINSTANCE = new SimpleFlowSource("exploreInstance");
@@ -31,7 +31,7 @@ public class CaseExplorerInstanceFlow extends Flow {
 	};
 	
 	private static final FlowEdge[] EDGES = new FlowEdge[]{
-		new FlowEdge(EXPLOREINSTANCE, "exploreInstance", InstancePage.INSTANCE, null),
+		new FlowEdge(EXPLOREINSTANCE, "start", InstancePage.INSTANCE, null),
 		new FlowEdge(InstancePage.INSTANCE, "back", BACK, null),
 	};
 	

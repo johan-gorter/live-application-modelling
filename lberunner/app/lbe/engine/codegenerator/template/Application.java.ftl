@@ -12,9 +12,9 @@ import lbe.model.flow.Flow;
 
 public class ${name}Application extends Application {
 
-	public static final ${name}Application INSTANCE = new ${name}Application();
+	public static final ${name}Application INSTANCE = new <#if customization??>${customization}<#else>${name}Application</#if>();
 	
-	private ${name}Application() {
+	protected ${name}Application() {
 	}
 	
 	@Override

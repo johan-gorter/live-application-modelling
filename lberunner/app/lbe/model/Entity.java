@@ -9,8 +9,8 @@ import lbe.instance.Instance;
 public abstract class Entity extends Model {
 
 	public static boolean extendsFrom(Entity entity, Entity from) {
-		if (entity==null) return false;
 		if (entity==from) return true;
+		if (entity==null) return false;
 		return extendsFrom(entity.extendsEntity(), from);
 	}
 	

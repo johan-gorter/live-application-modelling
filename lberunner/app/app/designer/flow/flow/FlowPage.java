@@ -17,6 +17,7 @@ public class FlowPage extends Page {
         new SimpleCompositePageFragment(new PageFragment[]{
             new ConstantText("Flow"),
             new SimpleField(ConceptEntity.INSTANCE, ConceptEntity.name),
+            new SimpleButton("exploreInstance", new ConstantText("Open in case explorer")),
             new SimpleButton("back", new ConstantText("Back"))
         }); 
 	
