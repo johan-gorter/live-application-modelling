@@ -46,6 +46,7 @@ public class SimpleCaseInstance extends SimpleInstance implements CaseInstance {
 
 	@Override
 	public Instance getInstanceById(long id) {
+		if (id==0l) return this;
 		return instances.get(id);
 	}
 

@@ -174,10 +174,12 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		// CaseExplorerInstance
 		FlowSourceInstance instanceExploreInstanceSource = createSource(caseExplorerInstanceFlow, "exploreInstance");
 		FlowSinkInstance caseExplorerInstanceBackSink = createSink(caseExplorerInstanceFlow, "back");
+		FlowSinkInstance caseExplorerInstanceNavigateSink = createSink(caseExplorerInstanceFlow, "navigate");
 		PageInstance instancePage = createPage(caseExplorerInstanceFlow, "Instance");
 		instancePage.customization.set("custom.designer.caseexplorer.InstancePageCustomization");
 		createEdge(caseExplorerInstanceFlow, instanceExploreInstanceSource, "start", instancePage, null);
 		createEdge(caseExplorerInstanceFlow, instancePage, "back", caseExplorerInstanceBackSink , null);
+		createEdge(caseExplorerInstanceFlow, instancePage, "navigate", caseExplorerInstanceNavigateSink , null);
 		// Welcome page
 		addContent(welcomePage.content.get(), createConstantText("Welcome to the Designer"));
 		addContent(welcomePage.content.get(), createConstantText("Flows:"));

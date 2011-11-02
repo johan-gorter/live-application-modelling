@@ -11,7 +11,7 @@ public class MainFlow extends Flow {
 
 	public static final MainFlow INSTANCE = new MainFlow();
 	
-	private MainFlow() {
+	protected MainFlow() {
 	}
 	
 	private static final FlowSource START = new SimpleFlowSource("start");

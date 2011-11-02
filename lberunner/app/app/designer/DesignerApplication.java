@@ -12,7 +12,7 @@ import lbe.model.flow.Flow;
 
 public class DesignerApplication extends Application {
 
-	public static final DesignerApplication INSTANCE = new DesignerApplication();
+	public static final custom.designer.DesignerApplicationCustomization INSTANCE = new custom.designer.DesignerApplicationCustomization();
 	
 	protected DesignerApplication() {
 	}

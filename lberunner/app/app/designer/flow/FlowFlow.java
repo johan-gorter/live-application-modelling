@@ -11,7 +11,7 @@ public class FlowFlow extends Flow {
 
 	public static final FlowFlow INSTANCE = new FlowFlow();
 	
-	private FlowFlow() {
+	protected FlowFlow() {
 	}
 	
 	private static final FlowSource FLOWDETAILS = new SimpleFlowSource("flowDetails");

@@ -91,11 +91,11 @@ public abstract class Entity extends Model {
 		return new BaseEntityFirstIterable<Relation<? extends Instance,? extends Object,? extends Instance>>(baseEntityIterator, getLocalRelations());
 	}
 	
-	public final Iterable<Relation<? extends Instance, ? extends Object, ? extends Instance>> getRevereseRelations() {
+	public final Iterable<Relation<? extends Instance, ? extends Object, ? extends Instance>> getReverseRelations() {
 		Entity extendsEntity = extendsEntity();
 		Iterable<Relation<? extends Instance, ? extends Object, ? extends Instance>> baseEntityIterator=null;
 		if (extendsEntity!=null) {
-			baseEntityIterator = extendsEntity.getRevereseRelations();
+			baseEntityIterator = extendsEntity.getReverseRelations();
 		}
 		return new BaseEntityFirstIterable<Relation<? extends Instance,? extends Object,? extends Instance>>(baseEntityIterator, getLocalReverseRelations());
 	}

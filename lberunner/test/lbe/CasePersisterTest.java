@@ -8,7 +8,7 @@ import lbe.engine.CasePersister;
 
 import org.junit.Test;
 
-import app.carinsurancetest.data.instance.CarinsuranceCaseInstance;
+import app.carinsurance.data.instance.CarinsuranceCaseInstance;
 
 public class CasePersisterTest {
 

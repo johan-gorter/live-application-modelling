@@ -17,6 +17,7 @@ public class CaseExplorerInstanceFlow extends Flow {
 	private static final FlowSource EXPLOREINSTANCE = new SimpleFlowSource("exploreInstance");
 
 	private static final FlowSink BACK = new SimpleFlowSink("back");
+	private static final FlowSink NAVIGATE = new SimpleFlowSink("navigate");
 
 	private static final FlowSource[] SOURCES = new FlowSource[]{
 		EXPLOREINSTANCE,
@@ -24,6 +25,7 @@ public class CaseExplorerInstanceFlow extends Flow {
 
 	private static final FlowSink[] SINKS = new FlowSink[] {
 		BACK,
+		NAVIGATE,
 	};
 	
 	private static final FlowNodeBase[] NODES = new FlowNodeBase[]{
@@ -33,6 +35,7 @@ public class CaseExplorerInstanceFlow extends Flow {
 	private static final FlowEdge[] EDGES = new FlowEdge[]{
 		new FlowEdge(EXPLOREINSTANCE, "start", InstancePage.INSTANCE, null),
 		new FlowEdge(InstancePage.INSTANCE, "back", BACK, null),
+		new FlowEdge(InstancePage.INSTANCE, "navigate", NAVIGATE, null),
 	};
 	
 	private static final Entity[] PARAMETERS = new Entity[]{

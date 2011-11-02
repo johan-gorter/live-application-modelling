@@ -14,14 +14,12 @@ import lbe.engine.PageCoordinates;
 import lbe.engine.PageElement;
 import lbe.instance.CaseInstance;
 import lbe.model.Application;
-import lbe.model.flow.Flow;
 
 import org.apache.log4j.Logger;
 
 import play.mvc.Controller;
 import play.mvc.With;
-import app.carinsurancetest.CarInsuranceTestApplication;
-import app.designer.DesignerApplication;
+import app.carinsurance.CarInsuranceApplication;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -31,14 +29,15 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 import controllers.Secure.Security;
+import custom.designer.DesignerApplicationCustomization;
 @With(Secure.class)
 public class StartFlow extends Controller {
 
 	private static final Logger LOG = Logger.getLogger(StartFlow.class);
 
 	private static final List<Application> applications = Arrays.asList(new Application[]{
-			CarInsuranceTestApplication.INSTANCE,
-			DesignerApplication.INSTANCE
+			CarInsuranceApplication.INSTANCE,
+			DesignerApplicationCustomization.INSTANCE
 	});
 
 	private static JsonSerializer<Date> dateSerializer = new JsonSerializer<Date>() {
@@ -129,6 +128,9 @@ public class StartFlow extends Controller {
 				result[i] = toValue(array.get(i));
 			}
 			return result;
+		}
+		if (jsonElement.isJsonNull()) {
+			return null;
 		}
 		JsonPrimitive jsonValue = jsonElement.getAsJsonPrimitive();
 		return jsonValue.isBoolean() ? jsonValue.getAsBoolean() : jsonValue

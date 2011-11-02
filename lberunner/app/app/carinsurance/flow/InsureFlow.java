@@ -1,54 +1,43 @@
 package app.carinsurance.flow;
 
-import app.carinsurance.flow.insure.DriverPage;
+import app.carinsurance.data.entity.*;
+import app.carinsurance.flow.*;
+import app.carinsurance.flow.insure.*;
 import lbe.model.Entity;
-import lbe.model.flow.Flow;
-import lbe.model.flow.FlowEdge;
-import lbe.model.flow.FlowNodeBase;
-import lbe.model.flow.FlowSink;
-import lbe.model.flow.FlowSource;
-import lbe.model.flow.Page;
-import lbe.model.flow.impl.SimpleFlowSource;
+import lbe.model.flow.*;
+import lbe.model.flow.impl.*;
 
 public class InsureFlow extends Flow {
-	
+
 	public static final InsureFlow INSTANCE = new InsureFlow();
+	
+	protected InsureFlow() {
+	}
 	
 	private static final FlowSource START = new SimpleFlowSource("start");
 
-	private static final FlowNodeBase[] NODES = new FlowNodeBase[]{
-		DriverPage.INSTANCE
-	};
 
 	private static final FlowSource[] SOURCES = new FlowSource[]{
-		START
+		START,
 	};
 
 	private static final FlowSink[] SINKS = new FlowSink[] {
 	};
-
-	private static final FlowEdge[] EDGES = new FlowEdge[]{
-		new FlowEdge(START, null, DriverPage.INSTANCE, null)
-	};
-
-	private static final Entity[] PARAMETERS = new Entity[0];
 	
-	private InsureFlow() {
-	}
+	private static final FlowNodeBase[] NODES = new FlowNodeBase[]{
+		DriverPage.INSTANCE,
+	};
+	
+	private static final FlowEdge[] EDGES = new FlowEdge[]{
+		new FlowEdge(START, "start", DriverPage.INSTANCE, null),
+	};
+	
+	private static final Entity[] PARAMETERS = new Entity[]{
+	};
 	
 	@Override
 	public String getName() {
 		return "Insure";
-	}
-	
-	@Override
-	public FlowNodeBase[] getNodes() {
-		return NODES;
-	}
-
-	@Override
-	public FlowEdge[] getEdges() {
-		return EDGES;
 	}
 
 	@Override
@@ -59,6 +48,16 @@ public class InsureFlow extends Flow {
 	@Override
 	public FlowSink[] getSinks() {
 		return SINKS;
+	}
+	
+	@Override
+	public FlowNodeBase[] getNodes() {
+		return NODES;
+	}
+
+	@Override
+	public FlowEdge[] getEdges() {
+		return EDGES;
 	}
 
 	@Override

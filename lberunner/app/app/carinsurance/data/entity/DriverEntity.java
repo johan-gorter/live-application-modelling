@@ -1,8 +1,8 @@
-package app.carinsurancetest.data.entity;
+package app.carinsurance.data.entity;
 
 import java.util.List;
 
-import app.carinsurancetest.data.instance.*;
+import app.carinsurance.data.instance.*;
 import lbe.instance.*;
 import lbe.instance.value.*;
 import lbe.model.*;

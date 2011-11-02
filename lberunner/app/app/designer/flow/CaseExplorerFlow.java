@@ -11,7 +11,7 @@ public class CaseExplorerFlow extends Flow {
 
 	public static final CaseExplorerFlow INSTANCE = new CaseExplorerFlow();
 	
-	private CaseExplorerFlow() {
+	protected CaseExplorerFlow() {
 	}
 	
 	private static final FlowSource EXPLOREINSTANCE = new SimpleFlowSource("exploreInstance");

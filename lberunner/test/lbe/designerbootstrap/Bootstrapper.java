@@ -38,8 +38,8 @@ public class Bootstrapper {
 	}
 	
 	public static void main(String[] args) {
-//		createCarinsurance();
-		createDesigner();
+		createCarinsurance();
+//		createDesigner();
 	}
 
 	private static void createCarinsurance() {

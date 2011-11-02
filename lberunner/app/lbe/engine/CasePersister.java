@@ -29,8 +29,13 @@ public class CasePersister {
 			.registerTypeHierarchyAdapter(Instance.class,
 					new GsonInstanceAdapter()).create();
 
-	private static final File sessionsDir = new File("sessions");
+	private static final File sessionsDir;
 	static {
+		if (new File("lberunner").isDirectory()) {
+			sessionsDir = new File("lberunner/sessions");
+		} else {
+			sessionsDir = new File("sessions");
+		}
 		sessionsDir.mkdirs();
 	}
 

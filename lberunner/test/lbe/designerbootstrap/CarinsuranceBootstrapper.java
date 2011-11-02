@@ -21,7 +21,7 @@ public class CarinsuranceBootstrapper extends BootstrapperUtil {
 
 		// Case
 		applicationInstance = new ApplicationInstance();
-		applicationInstance.name.set("CarInsuranceTest");
+		applicationInstance.name.set("CarInsurance");
 		
 		// Data
 		EntityInstance carinsuranceCase = createEntity("CarinsuranceCase", null);

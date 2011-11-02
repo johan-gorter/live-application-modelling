@@ -1,7 +1,6 @@
 package controllers;
 
 import java.util.GregorianCalendar;
-import java.util.concurrent.ExecutionException;
 
 import junit.framework.Assert;
 import lbe.engine.Case;
@@ -11,15 +10,13 @@ import lbe.engine.ChangeContext.FieldChange;
 import lbe.engine.PageCoordinates;
 import lbe.engine.PageElement;
 import lbe.model.Application;
-import lbe.model.flow.Flow;
 import lbe.model.flow.Page.PageRootElement;
 
 import org.junit.Test;
 
 import play.libs.F.Promise;
-import app.carinsurancetest.CarInsuranceTestApplication;
-import app.carinsurancetest.data.instance.CarinsuranceCaseInstance;
-import app.carinsurancetest.flow.InsureFlow;
+import app.carinsurance.CarInsuranceApplication;
+import app.carinsurance.data.instance.CarinsuranceCaseInstance;
 import app.designer.DesignerApplication;
 import app.designer.data.instance.ApplicationInstance;
 
@@ -32,7 +29,7 @@ public class StartFlowTest {
 	
 	@Test
 	public void testCarInsurance() throws Exception {
-		application = CarInsuranceTestApplication.INSTANCE;
+		application = CarInsuranceApplication.INSTANCE;
 		c = CaseManager.create(new CarinsuranceCaseInstance());
 
 		startFlow();

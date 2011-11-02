@@ -294,6 +294,7 @@ public class CodeGenerator {
 		}
 		result.appname = appname;
 		result.name = application.name.get();
+		result.customization = application.customization.get();
 		result.caseEntity = application.caseEntity.get().name.get();
 		for (FlowInstance exposed: application.exposedFlows.get()) {
 			result.exposedFlows.add(exposed.name.get());

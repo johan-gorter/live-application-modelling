@@ -1,18 +1,35 @@
 package app.carinsurance.flow.insure;
 
-import app.carinsurance.button.NextButton;
-import app.carinsurance.container.DriverContainer;
-import lbe.model.flow.Page;
-import lbe.model.pageelement.CompositePageFragment;
-import lbe.model.pageelement.PageFragment;
+import app.carinsurance.flow.*;
+import app.carinsurance.data.entity.*;
+import lbe.model.flow.*;
+import lbe.model.pageelement.*;
+import lbe.model.pageelement.impl.*;
 
 public class DriverPage extends Page {
 
 	public static final DriverPage INSTANCE = new DriverPage();
 	
-	private static final PageFragment[] ROOTS = new PageFragment[]{
-		DriverContainer.INSTANCE,
-		NextButton.INSTANCE
+	
+	private static CompositePageFragment CONTENT = 
+        new SimpleCompositePageFragment(CarinsuranceCaseEntity.driver, new PageFragment[]{
+            new SimpleCompositePageFragment(new ConstantText("Driver"), new PageFragment[]{
+                new SimpleCompositePageFragment(new PageFragment[]{
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.dateOfBirth).setRequired(),
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.yearsInsured).setRequired(),
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.yearsDriverslicense).setRequired(),
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.noClaimsDiscount).setRequired(),
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.disqualified).setRequired(),
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.carUse).setRequired(),
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.mileage).setRequired(),
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.zipCode).setRequired()
+                })
+            })
+        }); 
+	
+	@Override
+	public CompositePageFragment getRootContainer() {
+		return CONTENT;
 	}; 
 	
 	@Override
@@ -20,9 +37,4 @@ public class DriverPage extends Page {
 		return "Driver";
 	}
 	
-	@Override
-	public CompositePageFragment getRootContainer() {
-		return DriverContainer.INSTANCE;
-	}
-
 }

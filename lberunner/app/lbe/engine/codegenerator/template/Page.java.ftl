@@ -3,8 +3,6 @@ package app.${appname}.flow.${flowname?lower_case};
 
 import app.${appname}.flow.*;
 import app.${appname}.data.entity.*;
-import app.${appname}.container.*;
-import app.${appname}.button.*;
 import lbe.model.flow.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
