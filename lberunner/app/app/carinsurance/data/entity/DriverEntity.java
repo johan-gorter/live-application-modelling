@@ -107,7 +107,7 @@ public class DriverEntity extends SimpleEntity {
 				return instance.yearsDriverslicense;
 			}
 			
-			private final Text question = new ConstantText("How many years have you held your drivers licence?");
+			private final Text question = new ConstantText("How many years your drivers licence?");
 			@Override
 			public Text getQuestion() {
 				return question;

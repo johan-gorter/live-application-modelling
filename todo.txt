@@ -1,11 +1,7 @@
-V Code generatie afmaken, code kan zichzelf genereren
-V Alle code in 1 keer genereren
-V AttributeBase maken zodat questiontext e.d. relation niet vervuilen
-- Bootstrapper uitbreiden met basis voor flow, pagina, container, field
-- Designer flow maken die container content kan editen
-- CarinsuranceBootstrapper maken
-- Visueel laten zien wie in welke case zitten
-- Demo voorbereiden
+Naam: Instant prototyping designer
 
-- List => Iterable
-- Naam
+Truth maintenance
+Trigger -> Event
+Page designer flow
+CaseExplorer dynamisch
+Play -> ASM
