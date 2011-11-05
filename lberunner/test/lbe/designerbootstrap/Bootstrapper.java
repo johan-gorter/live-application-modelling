@@ -4,6 +4,7 @@ package lbe.designerbootstrap;
 import java.util.Date;
 
 import lbe.engine.CasePersister;
+import lbe.engine.codegenerator.ApplicationGenerator;
 import lbe.engine.codegenerator.CodeGenerator;
 import app.designer.data.instance.ApplicationInstance;
 import app.designer.data.instance.AttributeInstance;
@@ -51,7 +52,7 @@ public class Bootstrapper {
 		
 		CasePersister.INSTANCE.persist("carinsurance", applicationInstance, (int)(System.currentTimeMillis()/1000));
 		
-		CodeGenerator.generateApplication(applicationInstance);
+		new ApplicationGenerator(applicationInstance).generate();
 	}
 
 	public static void createDesigner() {
@@ -61,7 +62,7 @@ public class Bootstrapper {
 		
 		CasePersister.INSTANCE.persist("designer", applicationInstance, (int)(System.currentTimeMillis()/1000));
 		
-		CodeGenerator.generateApplication(applicationInstance);
+		new ApplicationGenerator(applicationInstance).generate();
 	}
 
 }

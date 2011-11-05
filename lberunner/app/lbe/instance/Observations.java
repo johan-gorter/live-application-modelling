@@ -15,7 +15,7 @@ public class Observations implements ValueChangeListener {
 	private ValueChangeListener outdatedListener;
 	
 	public void add(ReadOnlyAttributeValue<? extends Instance, ? extends Object> attributeValueObserved) {
-		attributeValueObserved.addOneTimeValueChangeListener(this);
+		valuesObserved.add(attributeValueObserved);
 	}
 
 	public int size() {

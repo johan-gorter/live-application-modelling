@@ -43,13 +43,13 @@ import freemarker.template.Template;
 public class CodeGenerator {
 
 	private static Configuration freemarkerConfig;
-	private static Template entityTemplate;
-	private static Template instanceTemplate;
-	private static Template applicationTemplate;
-	private static Template flowTemplate;
-	private static Template pageTemplate;
-	private static Template subFlowTemplate;
-	private static File applicationsRoot = new File(Play.applicationPath, "app/app");
+	public static Template entityTemplate;
+	public static Template instanceTemplate;
+	public static Template applicationTemplate;
+	public static Template flowTemplate;
+	public static Template pageTemplate;
+	public static Template subFlowTemplate;
+	public static File applicationsRoot = new File(Play.applicationPath, "app/app");
 	
 	static {
 		freemarkerConfig = new Configuration();
@@ -97,13 +97,7 @@ public class CodeGenerator {
 		}
 	}
 	
-	public static void generateApplication(ApplicationInstance application, String appname, File applicationRoot) {
-		ApplicationClassModel applicationClassModel = createApplicationClassModel(application, appname);
-		applicationRoot.mkdirs();
-		generateFile(applicationTemplate, applicationClassModel, null, application.name.get(), "Application", appname, applicationRoot);
-	}
-
-	private static void generateFlow(FlowInstance flow, String appname, File applicationRoot) {
+	static void generateFlow(FlowInstance flow, String appname, File applicationRoot) {
 		FlowClassModel flowClassModel = createFlowClassModel(flow, appname);
 		generateFile(flowTemplate, flowClassModel, "flow", flow.name.get(), "Flow", appname, applicationRoot);
 		String flowName = flow.name.get();
@@ -287,53 +281,7 @@ public class CodeGenerator {
 		throw new RuntimeException("Unsupported subclass of TextInstance: "+text.getClass());
 	}
 
-	private static ApplicationClassModel createApplicationClassModel(ApplicationInstance application, String appname) {
-		ApplicationClassModel result = new ApplicationClassModel();
-		for (EntityInstance entity: application.entities.get()) {
-			result.entities.add(entity.name.get());
-		}
-		result.appname = appname;
-		result.name = application.name.get();
-		result.customization = application.customization.get();
-		result.caseEntity = application.caseEntity.get().name.get();
-		for (FlowInstance exposed: application.exposedFlows.get()) {
-			result.exposedFlows.add(exposed.name.get());
-		}
-		return result;
-	}
-	
-	public static void generateApplication(ApplicationInstance applicationInstance) {
-		String appname = applicationInstance.name.get().toLowerCase();
-		File applicationRoot = new File(applicationsRoot, appname);
-		purge(applicationRoot);
-		
-		generateApplication(applicationInstance, appname, applicationRoot);
-		new File(applicationRoot, "data/entity").mkdirs();
-		new File(applicationRoot, "data/instance").mkdirs();
-		for (EntityInstance entity: applicationInstance.entities.get()) {
-			generateEntity(entity, appname, applicationRoot);
-		}
-		for (PageFragmentHolderInstance pageFragment: applicationInstance.shared.get().pageFragments.get()) {
-//TODO:			generatePageFragment(pageFragment, appname, applicationRoot);
-		}
-		// TODO: textHolder
-		new File(applicationRoot, "flow").mkdirs();
-		for (FlowInstance flow: applicationInstance.flows.get()) {
-			generateFlow(flow, appname, applicationRoot);
-		}
-		
-	}
-
-	private static void purge(File dir) {
-		for( File file : dir.listFiles()) {
-			if (file.isDirectory()) {
-				purge(file);
-			}
-			if (!file.delete()) throw new RuntimeException("Could not delete "+file.getAbsolutePath());
-		}
-	}
-
-	private static void generateFile(Template template, Object rootMap, String subDirectory, 
+	static void generateFile(Template template, Object rootMap, String subDirectory, 
 			String name, String postfix, String appname, File root) {
 		Writer writer = null;
 		try {
