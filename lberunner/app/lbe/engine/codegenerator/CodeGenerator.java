@@ -305,8 +305,11 @@ public class CodeGenerator {
 	public static void generateApplication(ApplicationInstance applicationInstance) {
 		String appname = applicationInstance.name.get().toLowerCase();
 		File applicationRoot = new File(applicationsRoot, appname);
+		purge(applicationRoot);
 		
 		generateApplication(applicationInstance, appname, applicationRoot);
+		new File(applicationRoot, "data/entity").mkdirs();
+		new File(applicationRoot, "data/instance").mkdirs();
 		for (EntityInstance entity: applicationInstance.entities.get()) {
 			generateEntity(entity, appname, applicationRoot);
 		}
@@ -314,11 +317,20 @@ public class CodeGenerator {
 //TODO:			generatePageFragment(pageFragment, appname, applicationRoot);
 		}
 		// TODO: textHolder
+		new File(applicationRoot, "flow").mkdirs();
 		for (FlowInstance flow: applicationInstance.flows.get()) {
 			generateFlow(flow, appname, applicationRoot);
 		}
 		
-		new File(applicationRoot, "flow").mkdirs();
+	}
+
+	private static void purge(File dir) {
+		for( File file : dir.listFiles()) {
+			if (file.isDirectory()) {
+				purge(file);
+			}
+			if (!file.delete()) throw new RuntimeException("Could not delete "+file.getAbsolutePath());
+		}
 	}
 
 	private static void generateFile(Template template, Object rootMap, String subDirectory, 

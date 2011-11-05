@@ -1,6 +1,7 @@
 package lbe.instance.value.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import lbe.instance.Instance;
@@ -17,7 +18,9 @@ public class AttributeValuesImpl<I extends Instance, Item extends Object>
 
 	@Override
 	public void add(Item item) {
-		this.get().add(item);
+		get();
+		super.get().add(item);
+		fireValueChanged();
 	}
 	
 	@Override
@@ -26,7 +29,7 @@ public class AttributeValuesImpl<I extends Instance, Item extends Object>
 		if (!isStored() && getModel().getDeduction()==null) {
 			set(new ArrayList<Item>());
 		}
-		return super.get();
+		return Collections.unmodifiableList(super.get());
 	}
 	
 	@Override

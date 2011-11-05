@@ -23,6 +23,11 @@ public class AttributeValueImpl<I extends Instance, Value extends Object>
 
 	public void set(Value value) {
 		storedValue = value;
+		if (basedOn!=null && value != null) {
+			basedOn.removeOneTimeOutdatedListener();
+			basedOn = null;
+		}
+		fireValueChanged();
 	}
 
 	public boolean isStored() {

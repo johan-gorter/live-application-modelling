@@ -1,5 +1,6 @@
 package lbe.instance;
 
+import lbe.instance.value.ReadOnlyAttributeValue;
 import lbe.model.Application;
 
 
@@ -21,5 +22,11 @@ public interface CaseInstance extends Instance {
 	long registerInstance(Instance instance, long id);
 	
 	Instance getInstanceById(long id);
+	
+	void registerObservation(ReadOnlyAttributeValue<? extends Instance, ? extends Object> a);
+	
+	public void startRecordingObservations();
+
+	public Observations stopRecordingObservations();
 	
 }

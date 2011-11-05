@@ -9,4 +9,7 @@ public interface ReadOnlyAttributeValue<I extends Instance, Value extends Object
 	
 	Value get();
 	
+	public void addOneTimeValueChangeListener(ValueChangeListener listener);
+
+	public void removeOneTimeValueChangeListener(ValueChangeListener listener);
 }
