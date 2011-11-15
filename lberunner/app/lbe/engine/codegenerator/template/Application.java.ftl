@@ -56,7 +56,11 @@ public class ${name}Application extends Application {
 	
 	@Override
 	public Class<? extends CaseInstance> getCaseInstanceClass() {
+		<#if caseInstanceCustomization??>
+		return ${caseInstanceCustomization}.class;
+		<#else>
 		return ${caseEntity}Instance.class;
+		</#if>
 	}
 
 	@Override

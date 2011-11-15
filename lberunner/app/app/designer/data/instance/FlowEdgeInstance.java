@@ -33,8 +33,18 @@ public class FlowEdgeInstance
 	public final AttributeValue<FlowEdgeInstance, java.lang.String> entryName
 		= createAttributeValue(FlowEdgeEntity.entryName);
 	
+	public java.lang.String getEntryName() {
+		return entryName.get();
+	}
+
+	
 	public final AttributeValue<FlowEdgeInstance, java.lang.String> exitName
 		= createAttributeValue(FlowEdgeEntity.exitName);
+	
+	public java.lang.String getExitName() {
+		return exitName.get();
+	}
+
 	
 	// Relations
 	

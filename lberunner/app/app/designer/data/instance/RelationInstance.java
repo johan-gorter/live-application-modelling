@@ -33,14 +33,34 @@ public class RelationInstance
 	public final AttributeValue<RelationInstance, java.lang.Boolean> owner
 		= createAttributeValue(RelationEntity.owner);
 	
+	public java.lang.Boolean getOwner() {
+		return owner.get();
+	}
+
+	
 	public final AttributeValue<RelationInstance, java.lang.Boolean> autoCreate
 		= createAttributeValue(RelationEntity.autoCreate);
+	
+	public java.lang.Boolean getAutoCreate() {
+		return autoCreate.get();
+	}
+
 	
 	public final AttributeValue<RelationInstance, java.lang.Boolean> reverseMultivalue
 		= createAttributeValue(RelationEntity.reverseMultivalue);
 	
+	public java.lang.Boolean getReverseMultivalue() {
+		return reverseMultivalue.get();
+	}
+
+	
 	public final AttributeValue<RelationInstance, java.lang.String> reverseName
 		= createAttributeValue(RelationEntity.reverseName);
+	
+	public java.lang.String getReverseName() {
+		return reverseName.get();
+	}
+
 	
 	// Relations
 	

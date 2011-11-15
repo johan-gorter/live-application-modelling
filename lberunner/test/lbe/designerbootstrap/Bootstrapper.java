@@ -1,30 +1,9 @@
 package lbe.designerbootstrap;
 
 
-import java.util.Date;
-
 import lbe.engine.CasePersister;
-import lbe.engine.codegenerator.ApplicationGenerator;
-import lbe.engine.codegenerator.CodeGenerator;
 import app.designer.data.instance.ApplicationInstance;
-import app.designer.data.instance.AttributeInstance;
-import app.designer.data.instance.ButtonInstance;
-import app.designer.data.instance.CompositePageFragmentInstance;
-import app.designer.data.instance.ConstantTextInstance;
-import app.designer.data.instance.DomainEntryInstance;
-import app.designer.data.instance.EntityInstance;
-import app.designer.data.instance.FieldInstance;
-import app.designer.data.instance.FlowEdgeInstance;
-import app.designer.data.instance.FlowInstance;
-import app.designer.data.instance.FlowNodeBaseInstance;
-import app.designer.data.instance.FlowSourceInstance;
-import app.designer.data.instance.HeaderInstance;
-import app.designer.data.instance.PageCompositionInstance;
-import app.designer.data.instance.PageFragmentInstance;
-import app.designer.data.instance.PageInstance;
-import app.designer.data.instance.RelationInstance;
-import app.designer.data.instance.SelectInstance;
-import app.designer.data.instance.TextInstance;
+import custom.designer.ApplicationInstanceCustomization;
 
 public class Bootstrapper {
 
@@ -40,19 +19,25 @@ public class Bootstrapper {
 	
 	public static void main(String[] args) {
 		createCarinsurance();
-//		createDesigner();
+		//createDesigner();
 	}
 
 	private static void createCarinsurance() {
-		ApplicationInstance applicationInstance = CarinsuranceBootstrapper.createCarinsurance();
+		ApplicationInstanceCustomization applicationInstance = CarinsuranceBootstrapper.createCarinsurance();
 		
 		String json = CasePersister.gson.toJson(applicationInstance);
 		//		System.out.println(json);
-		applicationInstance = CasePersister.gson.fromJson(json, ApplicationInstance.class);
+		applicationInstance = CasePersister.gson.fromJson(json, ApplicationInstanceCustomization.class);
 		
 		CasePersister.INSTANCE.persist("carinsurance", applicationInstance, (int)(System.currentTimeMillis()/1000));
 		
-		new ApplicationGenerator(applicationInstance).generate();
+		applicationInstance.afterLoading();
+		
+		applicationInstance.getApplicationGenerator().setMustRegenerate();
+		
+		applicationInstance.afterSubmit();
+		
+		//new ApplicationGenerator(applicationInstance).update(false);
 	}
 
 	public static void createDesigner() {
@@ -62,7 +47,7 @@ public class Bootstrapper {
 		
 		CasePersister.INSTANCE.persist("designer", applicationInstance, (int)(System.currentTimeMillis()/1000));
 		
-		new ApplicationGenerator(applicationInstance).generate();
+		//new ApplicationGenerator(applicationInstance).update(false);
 	}
 
 }

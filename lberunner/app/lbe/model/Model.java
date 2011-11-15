@@ -21,6 +21,6 @@ public abstract class Model implements Comparable<Model> {
 	
 	@Override
 	public String toString() {
-		return getName()+":"+getClass().getName();
+		return getName();
 	}
 }

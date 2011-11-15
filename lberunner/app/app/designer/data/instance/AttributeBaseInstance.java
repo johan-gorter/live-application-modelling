@@ -33,8 +33,18 @@ public class AttributeBaseInstance
 	public final AttributeValue<AttributeBaseInstance, java.lang.Boolean> readOnly
 		= createAttributeValue(AttributeBaseEntity.readOnly);
 	
+	public java.lang.Boolean getReadOnly() {
+		return readOnly.get();
+	}
+
+	
 	public final AttributeValue<AttributeBaseInstance, java.lang.Boolean> multivalue
 		= createAttributeValue(AttributeBaseEntity.multivalue);
+	
+	public java.lang.Boolean getMultivalue() {
+		return multivalue.get();
+	}
+
 	
 	// Relations
 

@@ -1,16 +1,12 @@
 package app.oldcarinsurance.container;
 
 import lbe.engine.RenderContext;
-import lbe.model.Attribute;
-import lbe.model.Relation;
 import lbe.model.deduction.Deduction;
 import lbe.model.pageelement.CompositePageFragment;
-import lbe.model.pageelement.Field;
 import lbe.model.pageelement.PageFragment;
 import lbe.model.pageelement.Text;
 import lbe.model.pageelement.impl.ConstantText;
-import app.carinsurance.data.entity.CarinsuranceCaseEntity;
-import app.carinsurance.data.entity.DriverEntity;
+import app.oldcarinsurance.entity.CarinsuranceCaseEntity;
 
 public class DriverContainer extends CompositePageFragment{
 

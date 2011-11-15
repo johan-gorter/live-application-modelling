@@ -33,6 +33,11 @@ public class PageCompositionInstance
 	public final AttributeValues<PageCompositionInstance, java.lang.String> presentationStyles
 		= createAttributeValues(PageCompositionEntity.presentationStyles);
 	
+	public List<java.lang.String> getPresentationStyles() {
+		return presentationStyles.get();
+	}
+
+	
 	// Relations
 	
 	public final RelationValue<PageCompositionInstance, PageFragmentInstance> pageFragment

@@ -74,4 +74,19 @@ public class SimpleInstance implements Instance {
 	protected<I extends Instance, To extends Instance> ReadOnlyRelationValues<I, To> createReverseRelationValues(Relation<I, List<To>, To> relation) {
 		return new ReverseRelationValuesImpl<I, To>((I)this, relation);
 	}
+	
+	public String getName() {
+		return null;
+	}
+	
+	@Override
+	public String toString() {
+		String name = getName();
+		if (name==null) {
+			name="";
+		} else {
+			name="("+name+")";
+		}
+		return getModel().toString()+"#"+getInstanceId()+name;
+	}
 }

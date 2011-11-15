@@ -26,7 +26,7 @@ public class DriverEntity extends SimpleEntity {
 				return instance.dateOfBirth;
 			}
 			
-			private final Text question = new ConstantText("Date of birth");
+			private final Text question = new ConstantText("Date of birth is");
 			@Override
 			public Text getQuestion() {
 				return question;
@@ -73,7 +73,7 @@ public class DriverEntity extends SimpleEntity {
 				return instance.disqualified;
 			}
 			
-			private final Text question = new ConstantText("Have you been disqualified in the last 5 years?");
+			private final Text question = new ConstantText("been disqualified 1");
 			@Override
 			public Text getQuestion() {
 				return question;
@@ -150,7 +150,7 @@ public class DriverEntity extends SimpleEntity {
 			private final DomainEntry[] domain = new DomainEntry[] {
 				new DomainEntry("k1", new ConstantText("< 7.500 km")),
 				new DomainEntry("k2", new ConstantText("7.500 km - 12.000 km")),
-				new DomainEntry("k1", new ConstantText("> 12.000 km")),
+				new DomainEntry("k1", new ConstantText("adf")),
 			};
 			@Override
 			public DomainEntry[] getDomain() {

@@ -33,6 +33,11 @@ public class AttributeInstance
 	public final AttributeValue<AttributeInstance, java.lang.String> className
 		= createAttributeValue(AttributeEntity.className);
 	
+	public java.lang.String getClassName() {
+		return className.get();
+	}
+
+	
 	// Relations
 	
 	public final RelationValue<AttributeInstance, TextInstance> question

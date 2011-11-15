@@ -33,8 +33,18 @@ public class FieldInstance
 	public final AttributeValue<FieldInstance, java.lang.Boolean> required
 		= createAttributeValue(FieldEntity.required);
 	
+	public java.lang.Boolean getRequired() {
+		return required.get();
+	}
+
+	
 	public final AttributeValue<FieldInstance, java.lang.Boolean> readOnly
 		= createAttributeValue(FieldEntity.readOnly);
+	
+	public java.lang.Boolean getReadOnly() {
+		return readOnly.get();
+	}
+
 	
 	// Relations
 	

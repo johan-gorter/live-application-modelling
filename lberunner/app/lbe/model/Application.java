@@ -41,9 +41,4 @@ public abstract class Application {
 		FlowStack flowStack = new FlowStack(null, startFlow);
 		return startFlow.createFlowStack(flowStack, next, coordinates, caseInstance);
 	}
-
-	public void afterSubmit(CaseInstance caseInstance) {
-		// Can be overridden by subclasses
-	}
-	
 }

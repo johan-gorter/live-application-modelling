@@ -25,8 +25,12 @@ public interface CaseInstance extends Instance {
 	
 	void registerObservation(ReadOnlyAttributeValue<? extends Instance, ? extends Object> a);
 	
-	public void startRecordingObservations();
+	void startRecordingObservations();
 
-	public Observations stopRecordingObservations();
+	Observations stopRecordingObservations();
+	
+	void afterLoading();
+
+	void afterSubmit();
 	
 }

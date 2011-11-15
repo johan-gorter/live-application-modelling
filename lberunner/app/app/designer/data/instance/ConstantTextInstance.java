@@ -33,6 +33,11 @@ public class ConstantTextInstance
 	public final AttributeValue<ConstantTextInstance, java.lang.String> untranslated
 		= createAttributeValue(ConstantTextEntity.untranslated);
 	
+	public java.lang.String getUntranslated() {
+		return untranslated.get();
+	}
+
+	
 	// Relations
 
 	// Reverse relations

@@ -1,5 +1,6 @@
 package lbe.designerbootstrap;
 
+import custom.designer.ApplicationInstanceCustomization;
 import lbe.designerbootstrap.Bootstrapper.RelationType;
 import app.designer.data.instance.ApplicationInstance;
 import app.designer.data.instance.AttributeInstance;
@@ -17,14 +18,14 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 	public static ApplicationInstance createDesigner() {
 
 		// Case
-		applicationInstance = new ApplicationInstance();
+		applicationInstance = new ApplicationInstanceCustomization();
 		applicationInstance.name.set("Designer");
-		applicationInstance.customization.set("custom.designer.DesignerApplicationCustomization");
 		
 		// Entities
 		
 		// Application
 		EntityInstance application = createEntity("Application", null);
+		application.customization.set("custom.designer.ApplicationInstanceCustomization");
 		createAttribute(application, "name", String.class);
 		applicationInstance.caseEntity.set(application);
 		createAttribute(application, "customization", String.class);

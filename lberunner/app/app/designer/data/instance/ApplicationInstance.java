@@ -25,8 +25,18 @@ public class ApplicationInstance
 	public final AttributeValue<ApplicationInstance, java.lang.String> name
 		= createAttributeValue(ApplicationEntity.name);
 	
+	public java.lang.String getName() {
+		return name.get();
+	}
+
+	
 	public final AttributeValue<ApplicationInstance, java.lang.String> customization
 		= createAttributeValue(ApplicationEntity.customization);
+	
+	public java.lang.String getCustomization() {
+		return customization.get();
+	}
+
 	
 	// Relations
 	

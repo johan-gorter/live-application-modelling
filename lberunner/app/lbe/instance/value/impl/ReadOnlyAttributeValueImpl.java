@@ -66,4 +66,22 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, V extends Object> im
 	public void removeOneTimeValueChangeListener(ValueChangeListener listener) {
 		oneTimeListeners.add(listener);
 	}
+	
+	@Override
+	public String toString() {
+		return this.forInstance.toString()+"."+this.model.toString();
+	}
+	
+	@Override
+	public int hashCode() {
+		return new Long(forInstance.getInstanceId()).hashCode()+model.getName().hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if (other==null || other.getClass()!=getClass()) return false;
+		ReadOnlyAttributeValueImpl<? extends Instance, ? extends Object> o = 
+			(ReadOnlyAttributeValueImpl<? extends Instance, ? extends Object>) other;
+		return (o.forInstance==forInstance && o.model==model);
+	}
 }

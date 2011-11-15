@@ -33,6 +33,11 @@ public class ButtonInstance
 	public final AttributeValue<ButtonInstance, java.lang.String> trigger
 		= createAttributeValue(ButtonEntity.trigger);
 	
+	public java.lang.String getTrigger() {
+		return trigger.get();
+	}
+
+	
 	// Relations
 	
 	public final RelationValue<ButtonInstance, TextInstance> caption

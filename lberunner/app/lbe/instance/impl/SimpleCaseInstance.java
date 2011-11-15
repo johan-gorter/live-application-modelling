@@ -86,4 +86,10 @@ public class SimpleCaseInstance extends SimpleInstance implements CaseInstance {
 		}
 		return result;
 	}
+	
+	public void afterLoading() {
+	}
+	
+	public void afterSubmit() {
+	}
 }

@@ -10,6 +10,7 @@ public class RelationValueImpl<I extends Instance, To extends Instance>
 
 	private final Relation<I, To, To> model;
 	private final I forInstance;
+	private boolean suppressValueChanged;
 
 	public RelationValueImpl(I forInstance, Relation<I, To, To> model) {
 		super(forInstance, model);
@@ -22,9 +23,18 @@ public class RelationValueImpl<I extends Instance, To extends Instance>
 		if (result == null && model.isAutoCreate()) {
 			// 1 on 1 aggregation, is now lazily created
 			result = (To) model.createTo(forInstance);
+			this.suppressValueChanged = true;
 			set(result);
+			this.suppressValueChanged = false;
 		}
 		return result;
+	}
+	
+	@Override
+	protected void fireValueChanged() {
+		if (!suppressValueChanged) {
+			super.fireValueChanged();
+		}
 	}
 	
 	@Override

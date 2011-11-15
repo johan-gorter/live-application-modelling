@@ -2,6 +2,8 @@ package lbe.designerbootstrap;
 
 import java.util.Date;
 
+import custom.designer.ApplicationInstanceCustomization;
+
 import lbe.designerbootstrap.Bootstrapper.RelationType;
 import lbe.engine.CasePersister;
 import app.designer.data.instance.ApplicationInstance;
@@ -17,10 +19,10 @@ import app.designer.data.instance.SelectInstance;
 
 public class CarinsuranceBootstrapper extends BootstrapperUtil {
 
-	public static ApplicationInstance createCarinsurance() {
+	public static ApplicationInstanceCustomization createCarinsurance() {
 
 		// Case
-		applicationInstance = new ApplicationInstance();
+		applicationInstance = new ApplicationInstanceCustomization();
 		applicationInstance.name.set("CarInsurance");
 		
 		// Data

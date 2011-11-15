@@ -16,6 +16,7 @@ public class AttributeValueImpl<I extends Instance, Value extends Object>
 
 	public Value get() {
 		if (storedValue!=null) {
+			forInstance.getCase().registerObservation(this);
 			return storedValue;
 		}
 		return super.get();

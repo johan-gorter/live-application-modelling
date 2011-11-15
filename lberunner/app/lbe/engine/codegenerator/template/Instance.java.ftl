@@ -39,6 +39,11 @@ public class ${name}Instance
 	
 	public final <#if attribute.readonly>ReadOnly</#if>AttributeValue<#if attribute.multivalue>s</#if><${name}Instance, ${attribute.itemClassName}> ${attribute.name}
 		= create<#if attribute.readonly>ReadOnly</#if>AttributeValue<#if attribute.multivalue>s</#if>(${name}Entity.${attribute.name});
+	
+	public ${attribute.className} get${attribute.name?cap_first}() {
+		return ${attribute.name}.get();
+	}
+
 	</#list>
 	
 	// Relations

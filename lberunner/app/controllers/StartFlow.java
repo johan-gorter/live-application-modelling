@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 import play.mvc.Controller;
 import play.mvc.With;
 import app.carinsurance.CarInsuranceApplication;
+import app.designer.DesignerApplication;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -29,7 +30,6 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 import controllers.Secure.Security;
-import custom.designer.DesignerApplicationCustomization;
 @With(Secure.class)
 public class StartFlow extends Controller {
 
@@ -37,7 +37,7 @@ public class StartFlow extends Controller {
 
 	private static final List<Application> applications = Arrays.asList(new Application[]{
 			CarInsuranceApplication.INSTANCE,
-			DesignerApplicationCustomization.INSTANCE
+			DesignerApplication.INSTANCE
 	});
 
 	private static JsonSerializer<Date> dateSerializer = new JsonSerializer<Date>() {

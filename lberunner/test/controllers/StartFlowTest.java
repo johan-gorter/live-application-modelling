@@ -14,6 +14,8 @@ import lbe.model.flow.Page.PageRootElement;
 
 import org.junit.Test;
 
+import custom.designer.ApplicationInstanceCustomization;
+
 import play.libs.F.Promise;
 import app.carinsurance.CarInsuranceApplication;
 import app.carinsurance.data.instance.CarinsuranceCaseInstance;
@@ -56,7 +58,7 @@ public class StartFlowTest {
 	@Test
 	public void testDesigner() throws Exception {
 		application = DesignerApplication.INSTANCE;
-		c = CaseManager.create(new ApplicationInstance());
+		c = CaseManager.create(new ApplicationInstanceCustomization());
 		
 		username = "bob";
 		startFlow();
@@ -74,7 +76,7 @@ public class StartFlowTest {
 	@Test
 	public void testDesignCarinsurance() throws Exception {
 		application = DesignerApplication.INSTANCE;
-		c = CaseManager.getCase("carinsurance", ApplicationInstance.class);
+		c = CaseManager.getCase("carinsurance", ApplicationInstanceCustomization.class);
 		
 		startFlow();
 		

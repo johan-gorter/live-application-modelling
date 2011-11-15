@@ -1,5 +1,6 @@
 package lbe.designerbootstrap;
 
+import custom.designer.ApplicationInstanceCustomization;
 import lbe.designerbootstrap.Bootstrapper.RelationType;
 import app.designer.data.instance.ApplicationInstance;
 import app.designer.data.instance.AttributeInstance;
@@ -25,7 +26,7 @@ import app.designer.data.instance.TextInstance;
 
 public abstract class BootstrapperUtil {
 
-	protected static ApplicationInstance applicationInstance;
+	protected static ApplicationInstanceCustomization applicationInstance;
 	
 	protected static ButtonInstance createButton(String trigger, TextInstance caption) {
 		ButtonInstance result = new ButtonInstance(applicationInstance);

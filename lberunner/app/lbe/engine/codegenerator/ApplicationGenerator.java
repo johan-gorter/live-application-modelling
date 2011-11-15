@@ -2,30 +2,69 @@ package lbe.engine.codegenerator;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import lbe.instance.Observations;
 import lbe.instance.value.ReadOnlyAttributeValue;
 import lbe.instance.value.ValueChangeListener;
 
 import app.designer.data.instance.ApplicationInstance;
+import app.designer.data.instance.ConceptInstance;
 import app.designer.data.instance.EntityInstance;
 import app.designer.data.instance.FlowInstance;
 import app.designer.data.instance.PageFragmentHolderInstance;
 
-public class ApplicationGenerator extends AbstractClassModel implements ValueChangeListener {
+public class ApplicationGenerator extends AbstractGenerator {
 
 	private ApplicationInstance applicationInstance;
+	
+	private Map<String, FlowGenerator> flowGenerators = new HashMap<String, FlowGenerator>(); 
+	
+	private boolean mustRegenerate = false;
+
+	private Map<String, EntityGenerator> entityGenerators=new HashMap<String, EntityGenerator>();
 
 	public ApplicationGenerator(ApplicationInstance applicationInstance) {
 		this.applicationInstance = applicationInstance;
 	}
+
+	public void dryRun() {
+		update(null);
+	}
+
+	public void afterSubmit() {
+		//TODO: if appname changed...
+		File applicationRoot = new File(AbstractGenerator.applicationsRoot, appname);
+		applicationRoot.mkdirs();
+		update(applicationRoot);
+	}
 	
-	public void generate() {
+	public void delete(File applicationRoot) {
+		purge(applicationRoot);
+	}
+	
+	public void update(File applicationRoot) {
+		if (observations!=null && !observations.isOutdated() && !mustRegenerate) {
+			updateAll(entityGenerators.values(), applicationRoot);
+			updateAll(flowGenerators.values(), applicationRoot);
+			return;
+		}
+		if (mustRegenerate) {
+			purge(applicationRoot);
+			entityGenerators.clear();
+			flowGenerators.clear();
+		}
+		mustRegenerate = false;
+		
 		applicationInstance.startRecordingObservations();
 		appname = applicationInstance.name.get().toLowerCase();
 		name = applicationInstance.name.get();
 		customization = applicationInstance.customization.get();
+		caseInstanceCustomization = applicationInstance.caseEntity.get().customization.get();
 		entities = new ArrayList<String>();
 		for (EntityInstance entity: applicationInstance.entities.get()) {
 			entities.add(entity.name.get());
@@ -36,32 +75,40 @@ public class ApplicationGenerator extends AbstractClassModel implements ValueCha
 			exposedFlows.add(exposed.name.get());
 		}
 		
-		File applicationRoot = new File(CodeGenerator.applicationsRoot, appname);
-		applicationRoot.mkdirs();
-		purge(applicationRoot);
-		
-		CodeGenerator.generateFile(CodeGenerator.applicationTemplate, this, null, name, "Application", appname, applicationRoot);
-		
-		new File(applicationRoot, "data/entity").mkdirs();
-		new File(applicationRoot, "data/instance").mkdirs();
-		for (EntityInstance entity: applicationInstance.entities.get()) {
-			CodeGenerator.generateEntity(entity, appname, applicationRoot);
+		if (applicationRoot!=null) {
+			new File(applicationRoot, "data/entity").mkdirs();
+			new File(applicationRoot, "data/instance").mkdirs();
+			new File(applicationRoot, "flow").mkdirs();
 		}
+
+		AbstractGenerator.generateFile(AbstractGenerator.applicationTemplate, this, null, name, "Application", appname, applicationRoot);
+		
+		List<ConceptInstance> newEntities = updateGenerators(entityGenerators, applicationInstance.entities.get(), applicationRoot);
+		for(ConceptInstance newEntity : newEntities) {
+			EntityGenerator entityGenerator = new EntityGenerator((EntityInstance)newEntity, appname);
+			entityGenerator.update(applicationRoot);
+			entityGenerators.put(newEntity.getName(), entityGenerator);
+		}
+
 		for (PageFragmentHolderInstance pageFragment: applicationInstance.shared.get().pageFragments.get()) {
 //TODO:			generatePageFragment(pageFragment, appname, applicationRoot);
 		}
 		// TODO: textHolder
-		new File(applicationRoot, "flow").mkdirs();
-		for (FlowInstance flow: applicationInstance.flows.get()) {
-			CodeGenerator.generateFlow(flow, appname, applicationRoot);
+		
+		List<ConceptInstance> newFlows = updateGenerators(flowGenerators, applicationInstance.flows.get(), applicationRoot);
+		for(ConceptInstance newFlow : newFlows) {
+			FlowGenerator flowGenerator = new FlowGenerator((FlowInstance)newFlow, appname);
+			flowGenerator.update(applicationRoot);
+			flowGenerators.put(newFlow.getName(), flowGenerator);
 		}
-		Observations observations = applicationInstance.stopRecordingObservations();
-		observations.setOneTimeOutdatedListener(this);
+		
+		this.observations = applicationInstance.stopRecordingObservations();
 	}
 	
 	public String caseEntity;
 	public List<String> exposedFlows;
 	public List<String> entities;
+	public String caseInstanceCustomization;
 	
 	public String getCaseEntity() {
 		return caseEntity;
@@ -73,18 +120,11 @@ public class ApplicationGenerator extends AbstractClassModel implements ValueCha
 		return entities;
 	}
 
-	@Override
-	public void valueChanged(ReadOnlyAttributeValue value) {
-		// NO: register an aftersubmit listener that regenerates.
-		// generate();
+	public String getCaseInstanceCustomization() {
+		return caseInstanceCustomization;
 	}
-
-	private static void purge(File dir) {
-		for( File file : dir.listFiles()) {
-			if (file.isDirectory()) {
-				purge(file);
-			}
-			if (!file.delete()) throw new RuntimeException("Could not delete "+file.getAbsolutePath());
-		}
+	
+	public void setMustRegenerate() {
+		mustRegenerate = true;
 	}
 }

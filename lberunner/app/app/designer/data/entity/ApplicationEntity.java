@@ -150,7 +150,7 @@ public class ApplicationEntity extends SimpleEntity {
 	
 	@Override
 	public Instance createInstance(CaseInstance caseInstance, long id) {
-		return new ApplicationInstance();
+		return new custom.designer.ApplicationInstanceCustomization();
 	}
 	
 	@Override

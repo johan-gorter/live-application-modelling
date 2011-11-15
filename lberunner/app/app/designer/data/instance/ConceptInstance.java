@@ -33,8 +33,18 @@ public class ConceptInstance
 	public final AttributeValue<ConceptInstance, java.lang.String> name
 		= createAttributeValue(ConceptEntity.name);
 	
+	public java.lang.String getName() {
+		return name.get();
+	}
+
+	
 	public final AttributeValue<ConceptInstance, java.lang.String> customization
 		= createAttributeValue(ConceptEntity.customization);
+	
+	public java.lang.String getCustomization() {
+		return customization.get();
+	}
+
 	
 	// Relations
 

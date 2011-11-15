@@ -12,7 +12,7 @@ import lbe.model.flow.Flow;
 
 public class DesignerApplication extends Application {
 
-	public static final custom.designer.DesignerApplicationCustomization INSTANCE = new custom.designer.DesignerApplicationCustomization();
+	public static final DesignerApplication INSTANCE = new DesignerApplication();
 	
 	protected DesignerApplication() {
 	}
@@ -75,7 +75,7 @@ public class DesignerApplication extends Application {
 	
 	@Override
 	public Class<? extends CaseInstance> getCaseInstanceClass() {
-		return ApplicationInstance.class;
+		return custom.designer.ApplicationInstanceCustomization.class;
 	}
 
 	@Override

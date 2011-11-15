@@ -1,7 +1,7 @@
 Naam: Instant prototyping designer
 
-Truth maintenance
 Trigger -> Event
 Page designer flow
 CaseExplorer dynamisch
+gebruikers elkaar laten zien
 Play -> ASM
