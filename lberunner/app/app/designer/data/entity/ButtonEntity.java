@@ -16,17 +16,6 @@ public class ButtonEntity extends SimpleEntity {
 	
 	// Attributes
 	
-	public static final Attribute<ButtonInstance, java.lang.String, java.lang.String> trigger 
-		= new SimpleAttribute<ButtonInstance, java.lang.String, java.lang.String>(
-			"trigger", INSTANCE, java.lang.String.class
-		) {
-	
-			@Override
-			public ReadOnlyAttributeValue<ButtonInstance, java.lang.String> get(ButtonInstance instance) {
-				return instance.trigger;
-			}
-		};
-	
 	// Relations
 	
 	public static final Relation<ButtonInstance, TextInstance, TextInstance> caption
@@ -49,13 +38,25 @@ public class ButtonEntity extends SimpleEntity {
 			}
 		};
 	
+	public static final Relation<ButtonInstance, EventInstance, EventInstance> event
+		= new SimpleRelation<ButtonInstance, EventInstance, EventInstance>(
+			"event", INSTANCE, EventEntity.INSTANCE, EventInstance.class, EventEntity.firesFromButtons
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<ButtonInstance, EventInstance> get(
+					ButtonInstance instance) {
+				return instance.event;
+			}
+		};
+	
 	// Reverse relations
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
-		trigger,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
 		caption,
+		event,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};

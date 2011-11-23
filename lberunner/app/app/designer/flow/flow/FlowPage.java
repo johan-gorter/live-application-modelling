@@ -1,5 +1,6 @@
 package app.designer.flow.flow;
 
+import app.designer.event.*;
 import app.designer.flow.*;
 import app.designer.data.entity.*;
 import lbe.model.flow.*;
@@ -15,8 +16,8 @@ public class FlowPage extends Page {
         new SimpleCompositePageFragment(new PageFragment[]{
             new ConstantText("Flow"),
             new SimpleField(ConceptEntity.INSTANCE, ConceptEntity.name),
-            new SimpleButton("exploreInstance", new ConstantText("Open in case explorer")),
-            new SimpleButton("back", new ConstantText("Back"))
+            new SimpleButton(ExploreInstanceEvent.INSTANCE, new ConstantText("Open in case explorer")),
+            new SimpleButton(HomeEvent.INSTANCE, new ConstantText("Home"))
         }); 
 	
 	@Override

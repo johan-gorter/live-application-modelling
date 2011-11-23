@@ -1,45 +1,43 @@
 package lbe.model.flow;
 
+import lbe.model.FlowEvent;
+
 public class FlowEdge {
-	private FlowNodeBase from;
-	private String exitName;
 	
-	private FlowNodeBase to;
-	private String entryName;
+	private FlowNodeBase startNode;
+	private FlowEvent startEvent;
+	
+	private FlowNodeBase endNode;
+	private FlowEvent endEvent;
 	
 	
-	public FlowEdge() {
+	/**
+	 * Creates a new FlowEdge
+	 * @param startNode required: node the edge starts from
+	 * @param startEvent required: event the edge triggers on
+	 * @param endNode required: node the edge ends in
+	 * @param endEvent optional: event that is used to select the source to use in the target node
+	 */
+	public FlowEdge(FlowNodeBase startNode, FlowEvent startEvent, FlowNodeBase endNode, FlowEvent endEvent) {
+		this.startNode = startNode;
+		this.startEvent = startEvent;
+		this.endNode = endNode;
+		this.endEvent = endEvent;
+	}
+	
+	public FlowNodeBase getStartNode() {
+		return startNode;
 	}
 
-	public FlowEdge(FlowNodeBase from, String exitName, FlowNodeBase to, String entryName) {
-		this.from = from;
-		this.exitName = exitName;
-		this.to = to;
-		this.entryName = entryName;
+	public FlowEvent getStartEvent() {
+		return startEvent;
 	}
-	
-	public FlowNodeBase getFrom() {
-		return from;
+
+	public FlowNodeBase getEndNode() {
+		return endNode;
 	}
-	public void setFrom(FlowNodeBase from) {
-		this.from = from;
-	}
-	public String getExitName() {
-		return exitName;
-	}
-	public void setExitName(String exitName) {
-		this.exitName = exitName;
-	}
-	public FlowNodeBase getTo() {
-		return to;
-	}
-	public void setTo(FlowNodeBase to) {
-		this.to = to;
-	}
-	public String getEntryName() {
-		return entryName;
-	}
-	public void setEntryName(String entryName) {
-		this.entryName = entryName;
+
+	public FlowEvent getEndEvent() {
+		return endEvent;
 	}
 }

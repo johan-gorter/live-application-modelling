@@ -1,25 +1,25 @@
 package lbe.designerbootstrap;
 
-import custom.designer.ApplicationInstanceCustomization;
 import lbe.designerbootstrap.Bootstrapper.RelationType;
-import app.designer.data.instance.ApplicationInstance;
 import app.designer.data.instance.AttributeInstance;
 import app.designer.data.instance.EntityInstance;
+import app.designer.data.instance.EventInstance;
 import app.designer.data.instance.FlowInstance;
-import app.designer.data.instance.FlowSinkInstance;
 import app.designer.data.instance.FlowSourceInstance;
 import app.designer.data.instance.PageInstance;
 import app.designer.data.instance.RelationInstance;
 import app.designer.data.instance.SelectInstance;
 import app.designer.data.instance.SubFlowInstance;
+import custom.designer.ApplicationInstanceCustomization;
 
 public class DesignerBootstrapper extends BootstrapperUtil {
 
-	public static ApplicationInstance createDesigner() {
+	public static ApplicationInstanceCustomization createDesigner() {
 
 		// Case
 		applicationInstance = new ApplicationInstanceCustomization();
 		applicationInstance.name.set("Designer");
+//		applicationInstance.name.set("NextDesigner");
 		
 		// Entities
 		
@@ -72,7 +72,6 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createAttribute(field, "required", Boolean.class); // TODO: this validation goes to the domain
 		createAttribute(field, "readOnly", Boolean.class);
 		EntityInstance button = createEntity("Button", pageFragment);
-		createAttribute(button, "trigger", String.class);
 		EntityInstance pageComposition = createEntity("PageComposition", null);
 		AttributeInstance presentationStyles = createAttribute(pageComposition, "presentationStyles", String.class);
 		presentationStyles.multivalue.set(true);
@@ -85,12 +84,10 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		// TODO: translations
 
 		// Flow nodes & Flow
+		EntityInstance event = createEntity("Event", concept);
 		EntityInstance flowEdge = createEntity("FlowEdge", null);
-		createAttribute(flowEdge, "entryName", String.class);
-		createAttribute(flowEdge, "exitName", String.class);
 		EntityInstance flowNodeBase = createEntity("FlowNodeBase", concept);
-		EntityInstance flowSource = createEntity("FlowSource", flowNodeBase);
-		EntityInstance flowSink = createEntity("FlowSink", flowNodeBase);
+		EntityInstance flowSource = createEntity("FlowSource", null);
 		EntityInstance page = createEntity("Page", flowNodeBase);
 		EntityInstance subFlow = createEntity("SubFlow", flowNodeBase);
 		EntityInstance flow = createEntity("Flow", concept);
@@ -101,6 +98,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createRelation(application, "entities", RelationType.OneToManyAggregation, "application", entity);
 		createRelation(application, "caseEntity", RelationType.OneToZeroOrOne, "caseEntityInApplication", entity);
 		RelationInstance flows = createRelation(application, "flows", RelationType.OneToManyAggregation, "application", flow);
+		createRelation(application, "events", RelationType.OneToManyAggregation, "application", event);
 		createRelation(application, "exposedFlows", RelationType.OneToMany, "exposedFlowInApplication", flow);
 
 		// Data
@@ -124,22 +122,40 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		
 		// Page elements
 		createRelation(page, "content", RelationType.OneToOneAggregation, "contentOfPage", compositePageFragment);
-		createRelation(compositePageFragment, "items", RelationType.OneToManyAggregation, "container", pageComposition);
+		createRelation(compositePageFragment, "items", RelationType.OneToManyAggregation, "itemIn", pageComposition);
 		createRelation(pageComposition, "pageFragment", RelationType.OneToZeroOrOneAggregation, "composedIn", pageFragment);
 		createRelation(field, "attribute", RelationType.ManyToZeroOrOne, "fields", attribute);
 		createRelation(select, "relation", RelationType.ManyToZeroOrOne, "relationInselects", relation);
 		createRelation(header, "text", RelationType.OneToOneAggregation, "textOnHeader", text);
 		createRelation(button, "caption", RelationType.OneToOneAggregation, "captionOnButton", text);
+		createRelation(button, "event", RelationType.ManyToZeroOrOne, "firesFromButtons", event);
 		
 		// Flow
+		createRelation(event, "parameters", RelationType.ManyToMany, "parameterInEvent", entity);
+		
 		createRelation(flow, "sources", RelationType.OneToManyAggregation, "owner", flowSource);
-		createRelation(flow, "sinks", RelationType.OneToManyAggregation, "owner", flowSink);
 		createRelation(flow, "nodes", RelationType.OneToManyAggregation, "owner", flowNodeBase);
 		createRelation(flow, "edges", RelationType.OneToManyAggregation, "owner", flowEdge);
 		createRelation(flow, "parameters", RelationType.ManyToMany, "parameterInFlows", entity);
-		createRelation(flowEdge, "from", RelationType.ManyToZeroOrOne, "outgoingEdges", flowNodeBase);
-		createRelation(flowEdge, "to", RelationType.ManyToZeroOrOne, "incomingEdges", flowNodeBase);
+
+		createRelation(flowSource, "startEvent", RelationType.ManyToZeroOrOne, "startEventInSources", event);
+		createRelation(flowSource, "endNode", RelationType.ManyToZeroOrOne, "incomingSources", flowNodeBase);
+		createRelation(flowSource, "endEvent", RelationType.ManyToZeroOrOne, "endEventInSources", event);
+		
+		createRelation(flowEdge, "startNode", RelationType.ManyToZeroOrOne, "outgoingEdges", flowNodeBase);
+		createRelation(flowEdge, "startEvent", RelationType.ManyToZeroOrOne, "startEventInEdges", event);
+		createRelation(flowEdge, "endNode", RelationType.ManyToZeroOrOne, "incomingEdges", flowNodeBase);
+		createRelation(flowEdge, "endEvent", RelationType.ManyToZeroOrOne, "endEventInEdges", event);
+		
 		createRelation(subFlow, "flow", RelationType.OneToZeroOrOne, "subFlowIn", flow);
+		
+		// Interaction
+		
+		EventInstance home = createEvent("Home");
+		EventInstance flowDetails = createEvent("FlowDetails", flow);
+		EventInstance pageDetails = createEvent("PageDetails", page);
+		EventInstance exploreInstance = createEvent("ExploreInstance");
+		exploreInstance.customization.set("custom.designer.caseexplorer.ExploreInstanceEventCustomization");
 		
 		// Flows
 		FlowInstance mainFlow = createFlow("Main");
@@ -149,50 +165,36 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		FlowInstance caseExplorerInstanceFlow = createFlow("CaseExplorerInstance");
 		caseExplorerInstanceFlow.customization.set("custom.designer.caseexplorer.CaseExplorerInstanceFlowCustomization");
 		// Main
-		FlowSourceInstance mainStart = createSource(mainFlow, "start");
 		PageInstance welcomePage = createPage(mainFlow, "Welcome");
+		FlowSourceInstance mainStart = createSource(mainFlow, null, welcomePage, null);
 		SubFlowInstance flowSubFlow = createSubFlow(mainFlow, flowFlow);
 		SubFlowInstance caseExplorerSubFlow = createSubFlow(mainFlow, caseExplorerFlow);
-		createEdge(mainFlow, mainStart, "start", welcomePage, null);
-		createEdge(mainFlow, welcomePage, "flowDetails", flowSubFlow, "flowDetails");
-		createEdge(mainFlow, flowSubFlow, "back", welcomePage, null);
-		createEdge(mainFlow, flowSubFlow, "exploreInstance", caseExplorerSubFlow, "exploreInstance");
+		createEdge(mainFlow, welcomePage, flowDetails, flowSubFlow, flowDetails);
+		createEdge(mainFlow, flowSubFlow, home, welcomePage, null);
+		createEdge(mainFlow, flowSubFlow, exploreInstance, caseExplorerSubFlow, exploreInstance);
 		// Flow
-		FlowSourceInstance flowDetailsSource = createSource(flowFlow, "flowDetails");
-		FlowSinkInstance flowBackSink = createSink(flowFlow, "back");
-		FlowSinkInstance flowExploreSink = createSink(flowFlow, "exploreInstance");
 		PageInstance flowPage = createPage(flowFlow, "Flow");
-		createEdge(flowFlow, flowDetailsSource, "start", flowPage, null);
-		createEdge(flowFlow, flowPage, "back", flowBackSink, null);
-		createEdge(flowFlow, flowPage, "exploreInstance", flowExploreSink, null);
+		FlowSourceInstance flowDetailsSource = createSource(flowFlow, flowDetails, flowPage, null);
 		// CaseExplorer
-		FlowSourceInstance exploreInstanceSource = createSource(caseExplorerFlow, "exploreInstance");
-		FlowSinkInstance caseExplorerBackSink = createSink(caseExplorerFlow, "back");
 		SubFlowInstance caseExplorerInstanceSubFlow = createSubFlow(caseExplorerFlow, caseExplorerInstanceFlow);
-		createEdge(caseExplorerFlow, exploreInstanceSource, "start", caseExplorerInstanceSubFlow, "exploreInstance");
-		createEdge(caseExplorerFlow, caseExplorerInstanceSubFlow, "back", caseExplorerBackSink , null);
-		createEdge(caseExplorerFlow, caseExplorerInstanceSubFlow, "navigate", caseExplorerInstanceSubFlow , "exploreInstance"); // This edge is the reason for this wrapping flow
+		FlowSourceInstance exploreInstanceSource = createSource(caseExplorerFlow, exploreInstance, caseExplorerInstanceSubFlow, exploreInstance);
+		createEdge(caseExplorerFlow, caseExplorerInstanceSubFlow, exploreInstance, caseExplorerInstanceSubFlow, exploreInstance); // This edge is the reason for this wrapping flow
 		// CaseExplorerInstance
-		FlowSourceInstance instanceExploreInstanceSource = createSource(caseExplorerInstanceFlow, "exploreInstance");
-		FlowSinkInstance caseExplorerInstanceBackSink = createSink(caseExplorerInstanceFlow, "back");
-		FlowSinkInstance caseExplorerInstanceNavigateSink = createSink(caseExplorerInstanceFlow, "navigate");
 		PageInstance instancePage = createPage(caseExplorerInstanceFlow, "Instance");
 		instancePage.customization.set("custom.designer.caseexplorer.InstancePageCustomization");
-		createEdge(caseExplorerInstanceFlow, instanceExploreInstanceSource, "start", instancePage, null);
-		createEdge(caseExplorerInstanceFlow, instancePage, "back", caseExplorerInstanceBackSink , null);
-		createEdge(caseExplorerInstanceFlow, instancePage, "navigate", caseExplorerInstanceNavigateSink , null);
+		FlowSourceInstance instanceExploreInstanceSource = createSource(caseExplorerInstanceFlow, exploreInstance, instancePage, null);
 		// Welcome page
 		addContent(welcomePage.content.get(), createConstantText("Welcome to the Designer"));
 		addContent(welcomePage.content.get(), createConstantText("Flows:"));
 		SelectInstance flowsSelect = createSelect(flows);
 		createField(flowsSelect, name, false);
-		addContent(flowsSelect, createButton("flowDetails", createConstantText("Details")));
+		addContent(flowsSelect, createButton(flowDetails, createConstantText("Details")));
 		addContent(welcomePage.content.get(), flowsSelect);
 		// Flow page
 		addContent(flowPage.content.get(), createConstantText("Flow"));
 		createField(flowPage.content.get(), name, false);
-		addContent(flowPage.content.get(), createButton("exploreInstance", createConstantText("Open in case explorer")));
-		addContent(flowPage.content.get(), createButton("back", createConstantText("Back")));
+		addContent(flowPage.content.get(), createButton(exploreInstance, createConstantText("Open in case explorer")));
+		addContent(flowPage.content.get(), createButton(home, createConstantText("Home")));
 		
 		// Finish up
 		

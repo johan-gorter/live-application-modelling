@@ -55,6 +55,9 @@ public class EntityInstance
 	public final ReadOnlyRelationValues<EntityInstance, RelationInstance> reverseRelations
 		= createReverseRelationValues(EntityEntity.reverseRelations);
 	
+	public final ReadOnlyRelationValues<EntityInstance, EventInstance> parameterInEvent
+		= createReverseRelationValues(EntityEntity.parameterInEvent);
+	
 	public final ReadOnlyRelationValues<EntityInstance, FlowInstance> parameterInFlows
 		= createReverseRelationValues(EntityEntity.parameterInFlows);
 

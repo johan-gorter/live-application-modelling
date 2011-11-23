@@ -1,6 +1,7 @@
 package lbe.model.flow;
 
 import lbe.engine.ChangeContext;
+import lbe.engine.FlowEventOccurrence;
 import lbe.engine.PageElement;
 import lbe.engine.RenderContext;
 import lbe.model.pageelement.CompositePageFragment;
@@ -9,7 +10,7 @@ public abstract class Page extends FlowNodeBase {
 	
 	public abstract CompositePageFragment getRootContainer();
 
-	public String submit(ChangeContext changeContext) {
+	public FlowEventOccurrence submit(ChangeContext changeContext) {
 		return getRootContainer().submit(changeContext);
 	}
 

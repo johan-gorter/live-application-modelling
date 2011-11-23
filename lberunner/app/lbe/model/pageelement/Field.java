@@ -1,6 +1,7 @@
 package lbe.model.pageelement;
 
 import lbe.engine.ChangeContext;
+import lbe.engine.FlowEventOccurrence;
 import lbe.engine.PageElement;
 import lbe.engine.PageElement.Domain;
 import lbe.engine.RenderContext;
@@ -73,7 +74,7 @@ public abstract class Field extends PageFragment {
 	}
 
 	@Override
-	public String submit(ChangeContext changeContext) {
+	public FlowEventOccurrence submit(ChangeContext changeContext) {
 		String id = getName()+"@"+changeContext.nextId();
 		
 		for (ChangeContext.FieldChange fieldChange: changeContext.getFieldChanges()) {

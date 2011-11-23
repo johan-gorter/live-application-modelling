@@ -1,5 +1,6 @@
 package app.designer.flow.main;
 
+import app.designer.event.*;
 import app.designer.flow.*;
 import app.designer.data.entity.*;
 import lbe.model.flow.*;
@@ -17,7 +18,7 @@ public class WelcomePage extends Page {
             new ConstantText("Flows:"),
             new SimpleCompositePageFragment(ApplicationEntity.flows, new PageFragment[]{
                 new SimpleField(ConceptEntity.INSTANCE, ConceptEntity.name),
-                new SimpleButton("flowDetails", new ConstantText("Details"))
+                new SimpleButton(FlowDetailsEvent.INSTANCE, new ConstantText("Details"))
             })
         }); 
 	

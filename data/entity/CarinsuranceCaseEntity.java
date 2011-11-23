@@ -1,8 +1,8 @@
-package app.designer.data.entity;
+package app.carinsurance.data.entity;
 
 import java.util.List;
 
-import app.designer.data.instance.*;
+import app.carinsurance.data.instance.*;
 import lbe.instance.*;
 import lbe.instance.value.*;
 import lbe.model.*;
@@ -10,52 +10,51 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class FlowSinkEntity extends SimpleEntity {
+public class CarinsuranceCaseEntity extends SimpleEntity {
 
-	public static final FlowSinkEntity INSTANCE = new FlowSinkEntity();
+	public static final CarinsuranceCaseEntity INSTANCE = new CarinsuranceCaseEntity();
 	
 	// Attributes
 	
 	// Relations
 	
-	// Reverse relations
-	
-	public static final Relation<FlowSinkInstance, FlowInstance, FlowInstance> owner
-		= new SimpleRelation<FlowSinkInstance, FlowInstance, FlowInstance>(
-			"owner", INSTANCE, FlowSinkEntity.INSTANCE, FlowInstance.class, FlowEntity.sinks
+	public static final Relation<CarinsuranceCaseInstance, DriverInstance, DriverInstance> driver
+		= new SimpleRelation<CarinsuranceCaseInstance, DriverInstance, DriverInstance>(
+			"driver", INSTANCE, DriverEntity.INSTANCE, DriverInstance.class, DriverEntity.carinsuranceCase
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<FlowSinkInstance, FlowInstance> get(
-					FlowSinkInstance instance) {
-				return instance.owner;
+			public ReadOnlyRelationValue<CarinsuranceCaseInstance, DriverInstance> get(
+					CarinsuranceCaseInstance instance) {
+				return instance.driver;
 			}
 	
-			public boolean isReverse() {
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isAutoCreate() {
 				return true;
 			}
 		};
+	
+	// Reverse relations
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
+		driver,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
-		owner,
 	};
 
-	private FlowSinkEntity() {
-		super("FlowSink");
+	private CarinsuranceCaseEntity() {
+		super("CarinsuranceCase");
 	}
 	
 	@Override
 	public Instance createInstance(CaseInstance caseInstance, long id) {
-		return new FlowSinkInstance(caseInstance, id);
-	}
-	
-	@Override
-	public Entity extendsEntity() {
-		return FlowNodeBaseEntity.INSTANCE;
+		return new CarinsuranceCaseInstance();
 	}
 	
 	@Override

@@ -35,9 +35,6 @@ public class FlowInstance
 	public final RelationValues<FlowInstance, FlowSourceInstance> sources
 		= createRelationValues(FlowEntity.sources);
 	
-	public final RelationValues<FlowInstance, FlowSinkInstance> sinks
-		= createRelationValues(FlowEntity.sinks);
-	
 	public final RelationValues<FlowInstance, FlowNodeBaseInstance> nodes
 		= createRelationValues(FlowEntity.nodes);
 	

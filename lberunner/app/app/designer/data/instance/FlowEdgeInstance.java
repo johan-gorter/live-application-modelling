@@ -30,29 +30,19 @@ public class FlowEdgeInstance
 
 	// Attributes
 	
-	public final AttributeValue<FlowEdgeInstance, java.lang.String> entryName
-		= createAttributeValue(FlowEdgeEntity.entryName);
-	
-	public java.lang.String getEntryName() {
-		return entryName.get();
-	}
-
-	
-	public final AttributeValue<FlowEdgeInstance, java.lang.String> exitName
-		= createAttributeValue(FlowEdgeEntity.exitName);
-	
-	public java.lang.String getExitName() {
-		return exitName.get();
-	}
-
-	
 	// Relations
 	
-	public final RelationValue<FlowEdgeInstance, FlowNodeBaseInstance> from
-		= createRelationValue(FlowEdgeEntity.from);
+	public final RelationValue<FlowEdgeInstance, FlowNodeBaseInstance> startNode
+		= createRelationValue(FlowEdgeEntity.startNode);
 	
-	public final RelationValue<FlowEdgeInstance, FlowNodeBaseInstance> to
-		= createRelationValue(FlowEdgeEntity.to);
+	public final RelationValue<FlowEdgeInstance, EventInstance> startEvent
+		= createRelationValue(FlowEdgeEntity.startEvent);
+	
+	public final RelationValue<FlowEdgeInstance, FlowNodeBaseInstance> endNode
+		= createRelationValue(FlowEdgeEntity.endNode);
+	
+	public final RelationValue<FlowEdgeInstance, EventInstance> endEvent
+		= createRelationValue(FlowEdgeEntity.endEvent);
 
 	// Reverse relations
 	

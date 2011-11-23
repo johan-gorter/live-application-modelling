@@ -144,6 +144,26 @@ public class EntityEntity extends SimpleEntity {
 			}
 		};
 	
+	public static final Relation<EntityInstance, List<EventInstance>, EventInstance> parameterInEvent
+		= new SimpleRelation<EntityInstance, List<EventInstance>, EventInstance>(
+			"parameterInEvent", INSTANCE, EntityEntity.INSTANCE, EventInstance.class, EventEntity.parameters
+		) {
+	
+			@Override
+			public ReadOnlyRelationValues<EntityInstance, EventInstance> get(
+					EntityInstance instance) {
+				return instance.parameterInEvent;
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
+	
 	public static final Relation<EntityInstance, List<FlowInstance>, FlowInstance> parameterInFlows
 		= new SimpleRelation<EntityInstance, List<FlowInstance>, FlowInstance>(
 			"parameterInFlows", INSTANCE, EntityEntity.INSTANCE, FlowInstance.class, FlowEntity.parameters
@@ -176,6 +196,7 @@ public class EntityEntity extends SimpleEntity {
 		caseEntityInApplication,
 		extensions,
 		reverseRelations,
+		parameterInEvent,
 		parameterInFlows,
 	};
 

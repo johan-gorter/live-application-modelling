@@ -1,18 +1,19 @@
 package lbe.model.pageelement.impl;
 
 import lbe.model.Attribute;
+import lbe.model.FlowEvent;
 import lbe.model.pageelement.Button;
 import lbe.model.pageelement.Field;
 import lbe.model.pageelement.Text;
 
 public class SimpleButton extends Button {
 
-	private final String trigger;
+	private final FlowEvent flowEvent;
 	private final Text caption;
 
 
-	public SimpleButton(String trigger, Text caption) {
-		this.trigger = trigger;
+	public SimpleButton(FlowEvent flowEvent, Text caption) {
+		this.flowEvent = flowEvent;
 		this.caption = caption;
 	}
 
@@ -22,7 +23,8 @@ public class SimpleButton extends Button {
 	}
 
 	@Override
-	public String getTrigger() {
-		return trigger;
+	public FlowEvent getEvent() {
+		return flowEvent;
 	}
+
 }

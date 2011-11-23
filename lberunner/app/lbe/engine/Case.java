@@ -85,7 +85,7 @@ public class Case {
 	private PageElement startFlow(Application application, PageCoordinates pageCoordinates, String sessionId, String userName) {
 		FlowContext context = new FlowContext(currentCaseData, id);
 		Flow startFlow = getStartFlow(application, pageCoordinates);
-		startFlow.enter("start", context, new Instance[0]);
+		startFlow.enter(new FlowEventOccurrence(null, new Instance[0]), context);
 //		context.setFlowStack(new FlowStack(null, startFlow));
 //		String firstTrigger = context.step("start", new Instance[0]);
 //		flow(context, firstTrigger, new Instance[0]);
@@ -137,16 +137,16 @@ public class Case {
 		flowContext.setFlowStack(application.createFlowStack(pageCoordinates, caseInstance));
 		Page page = flowContext.getPage();
 		ChangeContext changeContext = new ChangeContext(flowContext, pageCoordinates.format(), fieldChanges, submit);
-		String trigger = page.submit(changeContext);
-		flow(flowContext, trigger, changeContext.getSelectedInstancesDuringTrigger());
+		FlowEventOccurrence occurrence = page.submit(changeContext);
+		flow(flowContext, occurrence);
 		getOrCreateSession(sessionId, userName).setPageCoordinates(flowContext.getFlowStack().toPageCoordinates());
 		informWaiters();
 		this.caseInstance.afterSubmit();
 	}
 	
-	private void flow(FlowContext flowContext, String trigger, Instance[] selectedInstances) {
-		while (trigger!=null) {
-			trigger = flowContext.step(trigger, selectedInstances);
+	private void flow(FlowContext flowContext, FlowEventOccurrence occurrence) {
+		while (occurrence!=null) {
+			occurrence = flowContext.step(occurrence);
 		}
 	}
 

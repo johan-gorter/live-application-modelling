@@ -20,7 +20,7 @@ public class CompositePageFragmentEntity extends SimpleEntity {
 	
 	public static final Relation<CompositePageFragmentInstance, List<PageCompositionInstance>, PageCompositionInstance> items
 		= new SimpleRelation<CompositePageFragmentInstance, List<PageCompositionInstance>, PageCompositionInstance>(
-			"items", INSTANCE, PageCompositionEntity.INSTANCE, PageCompositionInstance.class, PageCompositionEntity.container
+			"items", INSTANCE, PageCompositionEntity.INSTANCE, PageCompositionInstance.class, PageCompositionEntity.itemIn
 		) {
 	
 			@Override

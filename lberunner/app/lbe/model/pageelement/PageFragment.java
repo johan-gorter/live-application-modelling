@@ -1,6 +1,7 @@
 package lbe.model.pageelement;
 
 import lbe.engine.ChangeContext;
+import lbe.engine.FlowEventOccurrence;
 import lbe.engine.PageElement;
 import lbe.engine.RenderContext;
 import lbe.model.Model;
@@ -18,7 +19,7 @@ public abstract class PageFragment extends Model {
 		
 	}
 
-	public String submit(ChangeContext changeContext) {
+	public FlowEventOccurrence submit(ChangeContext changeContext) {
 		changeContext.nextId();
 		return null;
 	}

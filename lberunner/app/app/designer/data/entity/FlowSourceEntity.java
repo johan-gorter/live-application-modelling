@@ -18,6 +18,42 @@ public class FlowSourceEntity extends SimpleEntity {
 	
 	// Relations
 	
+	public static final Relation<FlowSourceInstance, EventInstance, EventInstance> startEvent
+		= new SimpleRelation<FlowSourceInstance, EventInstance, EventInstance>(
+			"startEvent", INSTANCE, EventEntity.INSTANCE, EventInstance.class, EventEntity.startEventInSources
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<FlowSourceInstance, EventInstance> get(
+					FlowSourceInstance instance) {
+				return instance.startEvent;
+			}
+		};
+	
+	public static final Relation<FlowSourceInstance, FlowNodeBaseInstance, FlowNodeBaseInstance> endNode
+		= new SimpleRelation<FlowSourceInstance, FlowNodeBaseInstance, FlowNodeBaseInstance>(
+			"endNode", INSTANCE, FlowNodeBaseEntity.INSTANCE, FlowNodeBaseInstance.class, FlowNodeBaseEntity.incomingSources
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<FlowSourceInstance, FlowNodeBaseInstance> get(
+					FlowSourceInstance instance) {
+				return instance.endNode;
+			}
+		};
+	
+	public static final Relation<FlowSourceInstance, EventInstance, EventInstance> endEvent
+		= new SimpleRelation<FlowSourceInstance, EventInstance, EventInstance>(
+			"endEvent", INSTANCE, EventEntity.INSTANCE, EventInstance.class, EventEntity.endEventInSources
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<FlowSourceInstance, EventInstance> get(
+					FlowSourceInstance instance) {
+				return instance.endEvent;
+			}
+		};
+	
 	// Reverse relations
 	
 	public static final Relation<FlowSourceInstance, FlowInstance, FlowInstance> owner
@@ -39,6 +75,9 @@ public class FlowSourceEntity extends SimpleEntity {
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
+		startEvent,
+		endNode,
+		endEvent,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 		owner,
@@ -51,11 +90,6 @@ public class FlowSourceEntity extends SimpleEntity {
 	@Override
 	public Instance createInstance(CaseInstance caseInstance, long id) {
 		return new FlowSourceInstance(caseInstance, id);
-	}
-	
-	@Override
-	public Entity extendsEntity() {
-		return FlowNodeBaseEntity.INSTANCE;
 	}
 	
 	@Override

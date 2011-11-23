@@ -38,26 +38,6 @@ public class FlowEntity extends SimpleEntity {
 			}
 		};
 	
-	public static final Relation<FlowInstance, List<FlowSinkInstance>, FlowSinkInstance> sinks
-		= new SimpleRelation<FlowInstance, List<FlowSinkInstance>, FlowSinkInstance>(
-			"sinks", INSTANCE, FlowSinkEntity.INSTANCE, FlowSinkInstance.class, FlowSinkEntity.owner
-		) {
-	
-			@Override
-			public ReadOnlyRelationValues<FlowInstance, FlowSinkInstance> get(
-					FlowInstance instance) {
-				return instance.sinks;
-			}
-	
-			public boolean isOwner() {
-				return true;
-			}
-	
-			public boolean isMultivalue() {
-				return true;
-			}
-		};
-	
 	public static final Relation<FlowInstance, List<FlowNodeBaseInstance>, FlowNodeBaseInstance> nodes
 		= new SimpleRelation<FlowInstance, List<FlowNodeBaseInstance>, FlowNodeBaseInstance>(
 			"nodes", INSTANCE, FlowNodeBaseEntity.INSTANCE, FlowNodeBaseInstance.class, FlowNodeBaseEntity.owner
@@ -168,7 +148,6 @@ public class FlowEntity extends SimpleEntity {
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
 		sources,
-		sinks,
 		nodes,
 		edges,
 		parameters,

@@ -49,6 +49,9 @@ public class ApplicationInstance
 	public final RelationValues<ApplicationInstance, FlowInstance> flows
 		= createRelationValues(ApplicationEntity.flows);
 	
+	public final RelationValues<ApplicationInstance, EventInstance> events
+		= createRelationValues(ApplicationEntity.events);
+	
 	public final RelationValues<ApplicationInstance, FlowInstance> exposedFlows
 		= createRelationValues(ApplicationEntity.exposedFlows);
 	

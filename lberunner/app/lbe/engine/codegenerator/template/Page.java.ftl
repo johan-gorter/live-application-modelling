@@ -1,6 +1,7 @@
 package app.${appname}.flow.${flowname?lower_case};
 <#include "Content.java.ftl">
 
+import app.${appname}.event.*;
 import app.${appname}.flow.*;
 import app.${appname}.data.entity.*;
 import lbe.model.flow.*;

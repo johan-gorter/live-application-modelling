@@ -2,10 +2,10 @@ package app.${appname}.flow;
 
 import app.${appname}.data.entity.*;
 import app.${appname}.flow.*;
+import app.${appname}.event.*;
 import app.${appname}.flow.${name?lower_case}.*;
 import lbe.model.Entity;
 import lbe.model.flow.*;
-import lbe.model.flow.impl.*;
 
 public class ${name}Flow extends Flow {
 
@@ -14,26 +14,16 @@ public class ${name}Flow extends Flow {
 	protected ${name}Flow() {
 	}
 	
-	<#list sources as source>
-	private static final FlowSource ${source?upper_case} = new SimpleFlowSource("${source}");
-	</#list>
-
-	<#list sinks as sink>
-	private static final FlowSink ${sink?upper_case} = new SimpleFlowSink("${sink}");
-	</#list>
-
 	private static final FlowSource[] SOURCES = new FlowSource[]{
 	<#list sources as source>
-		${source?upper_case},
+		new FlowSource(
+			<#if source.startEvent??>${source.startEvent}Event.INSTANCE<#else>null</#if>,
+			<#if source.endNode??>${source.endNode}<#else>null</#if>,
+			<#if source.endEvent??>${source.endEvent}Event.INSTANCE<#else>null</#if>
+		),
 	</#list>
 	};
 
-	private static final FlowSink[] SINKS = new FlowSink[] {
-	<#list sinks as sink>
-		${sink?upper_case},
-	</#list>
-	};
-	
 	private static final FlowNodeBase[] NODES = new FlowNodeBase[]{
 	<#list nodes as node>
 		${node.name}${node.type}.INSTANCE,
@@ -42,7 +32,12 @@ public class ${name}Flow extends Flow {
 	
 	private static final FlowEdge[] EDGES = new FlowEdge[]{
 	<#list edges as edge>
-		new FlowEdge(${edge.from}, "${edge.exitName}", ${edge.to}, <#if edge.entryName??>"${edge.entryName}"<#else>null</#if>),
+		new FlowEdge(
+			${edge.startNode}, 
+			<#if edge.startEvent??>${edge.startEvent}Event.INSTANCE<#else>null</#if>,
+			${edge.endNode},
+			<#if edge.endEvent??>${edge.endEvent}Event.INSTANCE<#else>null</#if>
+		),
 	</#list>
 	};
 	
@@ -62,11 +57,6 @@ public class ${name}Flow extends Flow {
 		return SOURCES;
 	}
 
-	@Override
-	public FlowSink[] getSinks() {
-		return SINKS;
-	}
-	
 	@Override
 	public FlowNodeBase[] getNodes() {
 		return NODES;

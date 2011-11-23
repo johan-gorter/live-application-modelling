@@ -18,8 +18,8 @@ public class Bootstrapper {
 	}
 	
 	public static void main(String[] args) {
-		createCarinsurance();
-		//createDesigner();
+		//createCarinsurance();
+		createDesigner();
 	}
 
 	private static void createCarinsurance() {
@@ -41,13 +41,19 @@ public class Bootstrapper {
 	}
 
 	public static void createDesigner() {
-		ApplicationInstance applicationInstance = DesignerBootstrapper.createDesigner();
+		ApplicationInstanceCustomization applicationInstance = DesignerBootstrapper.createDesigner();
 
 //		System.out.println(CasePersister.gson.toJson(applicationInstance));
 		
 		CasePersister.INSTANCE.persist("designer", applicationInstance, (int)(System.currentTimeMillis()/1000));
 		
 		//new ApplicationGenerator(applicationInstance).update(false);
+
+		applicationInstance.afterLoading();
+		
+		applicationInstance.getApplicationGenerator().setMustRegenerate();
+		
+		applicationInstance.afterSubmit();
 	}
 
 }

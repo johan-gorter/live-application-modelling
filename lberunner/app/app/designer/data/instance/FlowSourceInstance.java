@@ -13,7 +13,7 @@ import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
 public class FlowSourceInstance 
-	extends FlowNodeBaseInstance 
+	extends SimpleInstance 
 	implements Instance {
 
 	public FlowSourceInstance(CaseInstance caseInstance) {
@@ -31,6 +31,15 @@ public class FlowSourceInstance
 	// Attributes
 	
 	// Relations
+	
+	public final RelationValue<FlowSourceInstance, EventInstance> startEvent
+		= createRelationValue(FlowSourceEntity.startEvent);
+	
+	public final RelationValue<FlowSourceInstance, FlowNodeBaseInstance> endNode
+		= createRelationValue(FlowSourceEntity.endNode);
+	
+	public final RelationValue<FlowSourceInstance, EventInstance> endEvent
+		= createRelationValue(FlowSourceEntity.endEvent);
 
 	// Reverse relations
 	

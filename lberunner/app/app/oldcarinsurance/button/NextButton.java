@@ -1,6 +1,8 @@
 package app.oldcarinsurance.button;
 
+import app.oldcarinsurance.event.NextEvent;
 import lbe.engine.RenderContext;
+import lbe.model.FlowEvent;
 import lbe.model.pageelement.Button;
 import lbe.model.pageelement.Text;
 import lbe.model.pageelement.impl.ConstantText;
@@ -23,8 +25,7 @@ public class NextButton extends Button{
 	}
 
 	@Override
-	public String getTrigger() {
-		return "next";
+	public FlowEvent getEvent() {
+		return NextEvent.INSTANCE;
 	}
-
 }

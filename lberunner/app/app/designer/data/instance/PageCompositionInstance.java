@@ -45,7 +45,7 @@ public class PageCompositionInstance
 
 	// Reverse relations
 	
-	public final ReadOnlyRelationValue<PageCompositionInstance, CompositePageFragmentInstance> container
-		= createReverseRelationValue(PageCompositionEntity.container);
+	public final ReadOnlyRelationValue<PageCompositionInstance, CompositePageFragmentInstance> itemIn
+		= createReverseRelationValue(PageCompositionEntity.itemIn);
 
 }

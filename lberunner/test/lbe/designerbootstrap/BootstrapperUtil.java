@@ -1,19 +1,17 @@
 package lbe.designerbootstrap;
 
-import custom.designer.ApplicationInstanceCustomization;
 import lbe.designerbootstrap.Bootstrapper.RelationType;
-import app.designer.data.instance.ApplicationInstance;
 import app.designer.data.instance.AttributeInstance;
 import app.designer.data.instance.ButtonInstance;
 import app.designer.data.instance.CompositePageFragmentInstance;
 import app.designer.data.instance.ConstantTextInstance;
 import app.designer.data.instance.DomainEntryInstance;
 import app.designer.data.instance.EntityInstance;
+import app.designer.data.instance.EventInstance;
 import app.designer.data.instance.FieldInstance;
 import app.designer.data.instance.FlowEdgeInstance;
 import app.designer.data.instance.FlowInstance;
 import app.designer.data.instance.FlowNodeBaseInstance;
-import app.designer.data.instance.FlowSinkInstance;
 import app.designer.data.instance.FlowSourceInstance;
 import app.designer.data.instance.HeaderInstance;
 import app.designer.data.instance.PageCompositionInstance;
@@ -23,14 +21,15 @@ import app.designer.data.instance.RelationInstance;
 import app.designer.data.instance.SelectInstance;
 import app.designer.data.instance.SubFlowInstance;
 import app.designer.data.instance.TextInstance;
+import custom.designer.ApplicationInstanceCustomization;
 
 public abstract class BootstrapperUtil {
 
 	protected static ApplicationInstanceCustomization applicationInstance;
 	
-	protected static ButtonInstance createButton(String trigger, TextInstance caption) {
+	protected static ButtonInstance createButton(EventInstance event, TextInstance caption) {
 		ButtonInstance result = new ButtonInstance(applicationInstance);
-		result.trigger.set(trigger);
+		result.event.set(event);
 		result.caption.set(caption);
 		return result;
 	}
@@ -117,12 +116,12 @@ public abstract class BootstrapperUtil {
 		return flow;
 	}
 
-	protected static void createEdge(FlowInstance flow, FlowNodeBaseInstance from, String exitName, FlowNodeBaseInstance to, String entryName) {
+	protected static void createEdge(FlowInstance flow, FlowNodeBaseInstance startNode, EventInstance startEvent, FlowNodeBaseInstance endNode, EventInstance endEvent) {
 		FlowEdgeInstance edge = new FlowEdgeInstance(applicationInstance);
-		edge.from.set(from);
-		edge.exitName.set(exitName);
-		edge.to.set(to);
-		edge.entryName.set(entryName);
+		edge.startNode.set(startNode);
+		edge.startEvent.set(startEvent);
+		edge.endNode.set(endNode);
+		edge.endEvent.set(endEvent);
 		flow.edges.add(edge);
 	}
 
@@ -133,18 +132,13 @@ public abstract class BootstrapperUtil {
 		return page;
 	}
 
-	protected static FlowSourceInstance createSource(FlowInstance flow, String name) {
+	protected static FlowSourceInstance createSource(FlowInstance flow, EventInstance startEvent, FlowNodeBaseInstance endNode, EventInstance endEvent) {
 		FlowSourceInstance source = new FlowSourceInstance(applicationInstance);
-		source.name.set(name);
+		source.startEvent.set(startEvent);
+		source.endNode.set(endNode);
+		source.endEvent.set(endEvent);
 		flow.sources.add(source);
 		return source;
-	}
-	
-	protected static FlowSinkInstance createSink(FlowInstance flow, String name) {
-		FlowSinkInstance sink = new FlowSinkInstance(applicationInstance);
-		sink.name.set(name);
-		flow.sinks.add(sink);
-		return sink;
 	}
 	
 	protected static SubFlowInstance createSubFlow(FlowInstance parentFlow, FlowInstance flow) {
@@ -160,6 +154,16 @@ public abstract class BootstrapperUtil {
 		PageCompositionInstance result = new PageCompositionInstance(applicationInstance);
 		result.pageFragment.set(item);
 		compositePageFragment.items.add(result);
+		return result;
+	}
+
+	protected static EventInstance createEvent(String name, EntityInstance... parameters) {
+		EventInstance result = new EventInstance(applicationInstance);
+		result.name.set(name);
+		for(EntityInstance parameter: parameters) {
+			result.parameters.add(parameter);			
+		}
+		applicationInstance.events.add(result);
 		return result;
 	}
 

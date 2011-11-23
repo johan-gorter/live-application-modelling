@@ -1,20 +1,17 @@
 package app.oldcarinsurance.flow;
 
-import app.oldcarinsurance.flow.insure.DriverPage;
 import lbe.model.Entity;
 import lbe.model.flow.Flow;
 import lbe.model.flow.FlowEdge;
 import lbe.model.flow.FlowNodeBase;
-import lbe.model.flow.FlowSink;
 import lbe.model.flow.FlowSource;
-import lbe.model.flow.Page;
-import lbe.model.flow.impl.SimpleFlowSource;
+import app.oldcarinsurance.flow.insure.DriverPage;
 
 public class InsureFlow extends Flow {
 	
 	public static final InsureFlow INSTANCE = new InsureFlow();
 	
-	private static final FlowSource START = new SimpleFlowSource("start");
+	private static final FlowSource START = new FlowSource(null, DriverPage.INSTANCE, null);
 
 	private static final FlowNodeBase[] NODES = new FlowNodeBase[]{
 		DriverPage.INSTANCE
@@ -24,11 +21,8 @@ public class InsureFlow extends Flow {
 		START
 	};
 
-	private static final FlowSink[] SINKS = new FlowSink[] {
-	};
-
 	private static final FlowEdge[] EDGES = new FlowEdge[]{
-		new FlowEdge(START, null, DriverPage.INSTANCE, null)
+//		new FlowEdge(START, null, DriverPage.INSTANCE, null)
 	};
 
 	private static final Entity[] PARAMETERS = new Entity[0];
@@ -54,11 +48,6 @@ public class InsureFlow extends Flow {
 	@Override
 	public FlowSource[] getSources() {
 		return SOURCES;
-	}
-
-	@Override
-	public FlowSink[] getSinks() {
-		return SINKS;
 	}
 
 	@Override

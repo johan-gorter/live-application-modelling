@@ -51,15 +51,15 @@ public class PageCompositionEntity extends SimpleEntity {
 	
 	// Reverse relations
 	
-	public static final Relation<PageCompositionInstance, CompositePageFragmentInstance, CompositePageFragmentInstance> container
+	public static final Relation<PageCompositionInstance, CompositePageFragmentInstance, CompositePageFragmentInstance> itemIn
 		= new SimpleRelation<PageCompositionInstance, CompositePageFragmentInstance, CompositePageFragmentInstance>(
-			"container", INSTANCE, PageCompositionEntity.INSTANCE, CompositePageFragmentInstance.class, CompositePageFragmentEntity.items
+			"itemIn", INSTANCE, PageCompositionEntity.INSTANCE, CompositePageFragmentInstance.class, CompositePageFragmentEntity.items
 		) {
 	
 			@Override
 			public ReadOnlyRelationValue<PageCompositionInstance, CompositePageFragmentInstance> get(
 					PageCompositionInstance instance) {
-				return instance.container;
+				return instance.itemIn;
 			}
 	
 			public boolean isReverse() {
@@ -74,7 +74,7 @@ public class PageCompositionEntity extends SimpleEntity {
 		pageFragment,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
-		container,
+		itemIn,
 	};
 
 	private PageCompositionEntity() {

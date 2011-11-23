@@ -36,9 +36,29 @@ public class FlowNodeBaseEntity extends SimpleEntity {
 			}
 		};
 	
+	public static final Relation<FlowNodeBaseInstance, List<FlowSourceInstance>, FlowSourceInstance> incomingSources
+		= new SimpleRelation<FlowNodeBaseInstance, List<FlowSourceInstance>, FlowSourceInstance>(
+			"incomingSources", INSTANCE, FlowNodeBaseEntity.INSTANCE, FlowSourceInstance.class, FlowSourceEntity.endNode
+		) {
+	
+			@Override
+			public ReadOnlyRelationValues<FlowNodeBaseInstance, FlowSourceInstance> get(
+					FlowNodeBaseInstance instance) {
+				return instance.incomingSources;
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
+	
 	public static final Relation<FlowNodeBaseInstance, List<FlowEdgeInstance>, FlowEdgeInstance> outgoingEdges
 		= new SimpleRelation<FlowNodeBaseInstance, List<FlowEdgeInstance>, FlowEdgeInstance>(
-			"outgoingEdges", INSTANCE, FlowNodeBaseEntity.INSTANCE, FlowEdgeInstance.class, FlowEdgeEntity.from
+			"outgoingEdges", INSTANCE, FlowNodeBaseEntity.INSTANCE, FlowEdgeInstance.class, FlowEdgeEntity.startNode
 		) {
 	
 			@Override
@@ -58,7 +78,7 @@ public class FlowNodeBaseEntity extends SimpleEntity {
 	
 	public static final Relation<FlowNodeBaseInstance, List<FlowEdgeInstance>, FlowEdgeInstance> incomingEdges
 		= new SimpleRelation<FlowNodeBaseInstance, List<FlowEdgeInstance>, FlowEdgeInstance>(
-			"incomingEdges", INSTANCE, FlowNodeBaseEntity.INSTANCE, FlowEdgeInstance.class, FlowEdgeEntity.to
+			"incomingEdges", INSTANCE, FlowNodeBaseEntity.INSTANCE, FlowEdgeInstance.class, FlowEdgeEntity.endNode
 		) {
 	
 			@Override
@@ -82,6 +102,7 @@ public class FlowNodeBaseEntity extends SimpleEntity {
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 		owner,
+		incomingSources,
 		outgoingEdges,
 		incomingEdges,
 	};

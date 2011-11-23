@@ -15,6 +15,7 @@ import lbe.instance.value.ValueChangeListener;
 import app.designer.data.instance.ApplicationInstance;
 import app.designer.data.instance.ConceptInstance;
 import app.designer.data.instance.EntityInstance;
+import app.designer.data.instance.EventInstance;
 import app.designer.data.instance.FlowInstance;
 import app.designer.data.instance.PageFragmentHolderInstance;
 
@@ -22,11 +23,12 @@ public class ApplicationGenerator extends AbstractGenerator {
 
 	private ApplicationInstance applicationInstance;
 	
+	private Map<String, EntityGenerator> entityGenerators=new HashMap<String, EntityGenerator>();
+	private Map<String, EventGenerator> eventGenerators = new HashMap<String, EventGenerator>(); 
 	private Map<String, FlowGenerator> flowGenerators = new HashMap<String, FlowGenerator>(); 
 	
 	private boolean mustRegenerate = false;
 
-	private Map<String, EntityGenerator> entityGenerators=new HashMap<String, EntityGenerator>();
 
 	public ApplicationGenerator(ApplicationInstance applicationInstance) {
 		this.applicationInstance = applicationInstance;
@@ -55,6 +57,7 @@ public class ApplicationGenerator extends AbstractGenerator {
 		}
 		if (mustRegenerate) {
 			purge(applicationRoot);
+			eventGenerators.clear();
 			entityGenerators.clear();
 			flowGenerators.clear();
 		}
@@ -78,6 +81,7 @@ public class ApplicationGenerator extends AbstractGenerator {
 		if (applicationRoot!=null) {
 			new File(applicationRoot, "data/entity").mkdirs();
 			new File(applicationRoot, "data/instance").mkdirs();
+			new File(applicationRoot, "event").mkdirs();
 			new File(applicationRoot, "flow").mkdirs();
 		}
 
@@ -94,6 +98,14 @@ public class ApplicationGenerator extends AbstractGenerator {
 //TODO:			generatePageFragment(pageFragment, appname, applicationRoot);
 		}
 		// TODO: textHolder
+
+		List<ConceptInstance> newEvents = updateGenerators(eventGenerators, applicationInstance.events.get(), applicationRoot);
+		for(ConceptInstance newEvent : newEvents) {
+			EventGenerator eventGenerator = new EventGenerator((EventInstance)newEvent, appname);
+			eventGenerator.update(applicationRoot);
+			eventGenerators.put(newEvent.getName(), eventGenerator);
+		}
+		
 		
 		List<ConceptInstance> newFlows = updateGenerators(flowGenerators, applicationInstance.flows.get(), applicationRoot);
 		for(ConceptInstance newFlow : newFlows) {

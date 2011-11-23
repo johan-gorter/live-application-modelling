@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import lbe.engine.ChangeContext;
+import lbe.engine.FlowEventOccurrence;
 import lbe.engine.PageElement;
 import lbe.engine.RenderContext;
 import lbe.instance.Instance;
@@ -93,8 +94,8 @@ public abstract class CompositePageFragment extends PageFragment {
 	}
 
 	@Override
-	public String submit(ChangeContext context) {
-		String result = null;
+	public FlowEventOccurrence submit(ChangeContext context) {
+		FlowEventOccurrence result = null;
 		
 		Deduction<? extends Object> select = this.getSelect();
 		if (select!=null) {
@@ -114,11 +115,11 @@ public abstract class CompositePageFragment extends PageFragment {
 		return result;
 	}
 	
-	private String doLoopSubmit(ChangeContext context, Iterable<Instance> value) {
-		String result = super.submit(context);
+	private FlowEventOccurrence doLoopSubmit(ChangeContext context, Iterable<Instance> value) {
+		FlowEventOccurrence result = super.submit(context);
 		context.nextIdLevel();
 		for (Object instance : (Iterable<Instance>)value) {
-			String childResult = doSubmitWithInstance((Instance)instance, context);
+			FlowEventOccurrence childResult = doSubmitWithInstance((Instance)instance, context);
 			if (childResult!=null) {
 				if (result!=null) {
 					throw new RuntimeException("More than one trigger?");
@@ -130,18 +131,18 @@ public abstract class CompositePageFragment extends PageFragment {
 		return result;
 	}
 
-	private String doSubmitWithInstance(Instance instance, ChangeContext context) {
+	private FlowEventOccurrence doSubmitWithInstance(Instance instance, ChangeContext context) {
 		context.pushSelectedInstance(instance);
-		String result = doSubmit(context);
+		FlowEventOccurrence result = doSubmit(context);
 		context.popSelectedInstance(instance);
 		return result;
 	}
 
-	private String doSubmit(ChangeContext context) {
-		String result = super.submit(context);
+	private FlowEventOccurrence doSubmit(ChangeContext context) {
+		FlowEventOccurrence result = super.submit(context);
 		context.nextIdLevel();
 		for (PageFragment child: getChildren(context)) {
-			String childResult = child.submit(context);
+			FlowEventOccurrence childResult = child.submit(context);
 			if (childResult!=null) {
 				if (result!=null) {
 					throw new RuntimeException("More than one trigger?");

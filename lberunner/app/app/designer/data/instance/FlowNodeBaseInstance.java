@@ -37,6 +37,9 @@ public class FlowNodeBaseInstance
 	public final ReadOnlyRelationValue<FlowNodeBaseInstance, FlowInstance> owner
 		= createReverseRelationValue(FlowNodeBaseEntity.owner);
 	
+	public final ReadOnlyRelationValues<FlowNodeBaseInstance, FlowSourceInstance> incomingSources
+		= createReverseRelationValues(FlowNodeBaseEntity.incomingSources);
+	
 	public final ReadOnlyRelationValues<FlowNodeBaseInstance, FlowEdgeInstance> outgoingEdges
 		= createReverseRelationValues(FlowNodeBaseEntity.outgoingEdges);
 	

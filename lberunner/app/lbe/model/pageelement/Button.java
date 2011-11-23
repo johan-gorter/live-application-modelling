@@ -1,8 +1,10 @@
 package lbe.model.pageelement;
 
 import lbe.engine.ChangeContext;
+import lbe.engine.FlowEventOccurrence;
 import lbe.engine.PageElement;
 import lbe.engine.RenderContext;
+import lbe.model.FlowEvent;
 
 public abstract class Button extends PageFragment {
 
@@ -22,24 +24,22 @@ public abstract class Button extends PageFragment {
 		Text caption = getCaption();
 		if (caption!=null) {
 			result.display = caption.renderText(context);
-			result.name = getTrigger();
+			result.name = getEvent().getName();
 		}
 		return result;
 	}
 
 	public abstract Text getCaption();
 
-	public abstract String getTrigger();
+	public abstract FlowEvent getEvent();
 
 	@Override
-	public String submit(ChangeContext changeContext) {
+	public FlowEventOccurrence submit(ChangeContext changeContext) {
 		String id = getName()+"@"+changeContext.nextId();
 		
 		if (id.equals(changeContext.getSubmit())) {
-			changeContext.storeSelectedInstancesDuringTrigger();
-			return getTrigger();
+			return getEvent().createOccurrence(changeContext);
 		}
 		return null;
 	}
-	
 }

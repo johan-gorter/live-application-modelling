@@ -15,7 +15,7 @@ public class ContentClassModel {
 	public boolean readOnly;
 	public String relationEntity;
 	public String relationName;
-	public String trigger;
+	public String event;
 	public String customization;
 	public final List<ContentClassModel> children = new ArrayList<ContentClassModel>();
 	
@@ -49,8 +49,8 @@ public class ContentClassModel {
 	public TextClassModel getText() {
 		return text;
 	}
-	public String getTrigger() {
-		return trigger;
+	public String getEvent() {
+		return event;
 	}
 	public String getCustomization() {
 		return customization;

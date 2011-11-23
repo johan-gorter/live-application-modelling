@@ -16,51 +16,53 @@ public class FlowEdgeEntity extends SimpleEntity {
 	
 	// Attributes
 	
-	public static final Attribute<FlowEdgeInstance, java.lang.String, java.lang.String> entryName 
-		= new SimpleAttribute<FlowEdgeInstance, java.lang.String, java.lang.String>(
-			"entryName", INSTANCE, java.lang.String.class
-		) {
-	
-			@Override
-			public ReadOnlyAttributeValue<FlowEdgeInstance, java.lang.String> get(FlowEdgeInstance instance) {
-				return instance.entryName;
-			}
-		};
-	
-	public static final Attribute<FlowEdgeInstance, java.lang.String, java.lang.String> exitName 
-		= new SimpleAttribute<FlowEdgeInstance, java.lang.String, java.lang.String>(
-			"exitName", INSTANCE, java.lang.String.class
-		) {
-	
-			@Override
-			public ReadOnlyAttributeValue<FlowEdgeInstance, java.lang.String> get(FlowEdgeInstance instance) {
-				return instance.exitName;
-			}
-		};
-	
 	// Relations
 	
-	public static final Relation<FlowEdgeInstance, FlowNodeBaseInstance, FlowNodeBaseInstance> from
+	public static final Relation<FlowEdgeInstance, FlowNodeBaseInstance, FlowNodeBaseInstance> startNode
 		= new SimpleRelation<FlowEdgeInstance, FlowNodeBaseInstance, FlowNodeBaseInstance>(
-			"from", INSTANCE, FlowNodeBaseEntity.INSTANCE, FlowNodeBaseInstance.class, FlowNodeBaseEntity.outgoingEdges
+			"startNode", INSTANCE, FlowNodeBaseEntity.INSTANCE, FlowNodeBaseInstance.class, FlowNodeBaseEntity.outgoingEdges
 		) {
 	
 			@Override
 			public ReadOnlyRelationValue<FlowEdgeInstance, FlowNodeBaseInstance> get(
 					FlowEdgeInstance instance) {
-				return instance.from;
+				return instance.startNode;
 			}
 		};
 	
-	public static final Relation<FlowEdgeInstance, FlowNodeBaseInstance, FlowNodeBaseInstance> to
+	public static final Relation<FlowEdgeInstance, EventInstance, EventInstance> startEvent
+		= new SimpleRelation<FlowEdgeInstance, EventInstance, EventInstance>(
+			"startEvent", INSTANCE, EventEntity.INSTANCE, EventInstance.class, EventEntity.startEventInEdges
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<FlowEdgeInstance, EventInstance> get(
+					FlowEdgeInstance instance) {
+				return instance.startEvent;
+			}
+		};
+	
+	public static final Relation<FlowEdgeInstance, FlowNodeBaseInstance, FlowNodeBaseInstance> endNode
 		= new SimpleRelation<FlowEdgeInstance, FlowNodeBaseInstance, FlowNodeBaseInstance>(
-			"to", INSTANCE, FlowNodeBaseEntity.INSTANCE, FlowNodeBaseInstance.class, FlowNodeBaseEntity.incomingEdges
+			"endNode", INSTANCE, FlowNodeBaseEntity.INSTANCE, FlowNodeBaseInstance.class, FlowNodeBaseEntity.incomingEdges
 		) {
 	
 			@Override
 			public ReadOnlyRelationValue<FlowEdgeInstance, FlowNodeBaseInstance> get(
 					FlowEdgeInstance instance) {
-				return instance.to;
+				return instance.endNode;
+			}
+		};
+	
+	public static final Relation<FlowEdgeInstance, EventInstance, EventInstance> endEvent
+		= new SimpleRelation<FlowEdgeInstance, EventInstance, EventInstance>(
+			"endEvent", INSTANCE, EventEntity.INSTANCE, EventInstance.class, EventEntity.endEventInEdges
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<FlowEdgeInstance, EventInstance> get(
+					FlowEdgeInstance instance) {
+				return instance.endEvent;
 			}
 		};
 	
@@ -83,12 +85,12 @@ public class FlowEdgeEntity extends SimpleEntity {
 		};
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
-		entryName,
-		exitName,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
-		from,
-		to,
+		startNode,
+		startEvent,
+		endNode,
+		endEvent,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 		owner,

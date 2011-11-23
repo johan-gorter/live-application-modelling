@@ -92,6 +92,26 @@ public class ApplicationEntity extends SimpleEntity {
 			}
 		};
 	
+	public static final Relation<ApplicationInstance, List<EventInstance>, EventInstance> events
+		= new SimpleRelation<ApplicationInstance, List<EventInstance>, EventInstance>(
+			"events", INSTANCE, EventEntity.INSTANCE, EventInstance.class, EventEntity.application
+		) {
+	
+			@Override
+			public ReadOnlyRelationValues<ApplicationInstance, EventInstance> get(
+					ApplicationInstance instance) {
+				return instance.events;
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
+	
 	public static final Relation<ApplicationInstance, List<FlowInstance>, FlowInstance> exposedFlows
 		= new SimpleRelation<ApplicationInstance, List<FlowInstance>, FlowInstance>(
 			"exposedFlows", INSTANCE, FlowEntity.INSTANCE, FlowInstance.class, FlowEntity.exposedFlowInApplication
@@ -138,6 +158,7 @@ public class ApplicationEntity extends SimpleEntity {
 		entities,
 		caseEntity,
 		flows,
+		events,
 		exposedFlows,
 		shared,
 	};

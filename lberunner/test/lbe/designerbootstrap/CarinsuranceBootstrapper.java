@@ -2,20 +2,18 @@ package lbe.designerbootstrap;
 
 import java.util.Date;
 
-import custom.designer.ApplicationInstanceCustomization;
-
 import lbe.designerbootstrap.Bootstrapper.RelationType;
-import lbe.engine.CasePersister;
-import app.designer.data.instance.ApplicationInstance;
 import app.designer.data.instance.AttributeInstance;
 import app.designer.data.instance.CompositePageFragmentInstance;
 import app.designer.data.instance.EntityInstance;
+import app.designer.data.instance.EventInstance;
 import app.designer.data.instance.FlowInstance;
 import app.designer.data.instance.FlowSourceInstance;
 import app.designer.data.instance.HeaderInstance;
 import app.designer.data.instance.PageInstance;
 import app.designer.data.instance.RelationInstance;
 import app.designer.data.instance.SelectInstance;
+import custom.designer.ApplicationInstanceCustomization;
 
 public class CarinsuranceBootstrapper extends BootstrapperUtil {
 
@@ -69,11 +67,11 @@ public class CarinsuranceBootstrapper extends BootstrapperUtil {
 		createField(driverFields, zipCode, true);
 		
 		// Flows
+		EventInstance next = createEvent("Next");
 		FlowInstance insureFlow = createFlow("Insure");
-		FlowSourceInstance insureStartSource = createSource(insureFlow, "start");
 		PageInstance insureDriverPage = createPage(insureFlow, "Driver");
+		FlowSourceInstance insureStartSource = createSource(insureFlow, null, insureDriverPage, null);
 		insureDriverPage.content.set(selectDriver);
-		createEdge(insureFlow, insureStartSource, "start", insureDriverPage, null);
 		applicationInstance.exposedFlows.add(insureFlow);
 		
 		// Finish up

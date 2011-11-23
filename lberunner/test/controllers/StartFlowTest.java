@@ -80,10 +80,10 @@ public class StartFlowTest {
 		
 		startFlow();
 		
-		String id = findButtonWithTrigger(page, "flowDetails").id;
+		String id = findButtonWithEvent(page, "FlowDetails").id;
 		submit(id);
 		Assert.assertEquals("Flow", page.name);
-		id = findButtonWithTrigger(page, "exploreInstance").id;
+		id = findButtonWithEvent(page, "ExploreInstance").id;
 		submit(id);
 		Assert.assertEquals("Instance", page.name);
 	}
@@ -103,14 +103,14 @@ public class StartFlowTest {
 		page = (PageRootElement)promise.get();
 	}
 
-	private PageElement findButtonWithTrigger(PageElement pageElement, String trigger) {
+	private PageElement findButtonWithEvent(PageElement pageElement, String trigger) {
 		if ("button".equals(pageElement.elementType)) {
 			if (trigger.equals(pageElement.name)) {
 				return pageElement;
 			}
 		} else if (pageElement.content!=null){
 			for (PageElement child: pageElement.content) {
-				PageElement result = findButtonWithTrigger(child, trigger);
+				PageElement result = findButtonWithEvent(child, trigger);
 				if (result!=null) return result;
 			}
 		}
