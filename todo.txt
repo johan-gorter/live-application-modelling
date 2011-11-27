@@ -1,7 +1,10 @@
 Naam: Instant prototyping designer
 
-Trigger -> Event
+New design met tabellen
 Page designer flow
+DEMO Onne
 CaseExplorer dynamisch
-gebruikers elkaar laten zien
+Builder vanuit applicatie laten designen
+Demo diversen
 Play -> ASM
+gebruikers elkaar laten zien
