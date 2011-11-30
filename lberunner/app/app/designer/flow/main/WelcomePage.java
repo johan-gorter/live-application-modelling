@@ -15,11 +15,20 @@ public class WelcomePage extends Page {
 	private static CompositePageFragment CONTENT = 
         new SimpleCompositePageFragment(new PageFragment[]{
             new ConstantText("Welcome to the Designer"),
-            new ConstantText("Flows:"),
-            new SimpleCompositePageFragment(ApplicationEntity.flows, new PageFragment[]{
-                new SimpleField(ConceptEntity.INSTANCE, ConceptEntity.name),
-                new SimpleButton(FlowDetailsEvent.INSTANCE, new ConstantText("Details"))
-            })
+            new SimpleCompositePageFragment(new PageFragment[]{
+                new SimpleCompositePageFragment(new PageFragment[]{
+                    new ConstantText("Entities"),
+                    new SimpleCompositePageFragment(ApplicationEntity.entities, new PageFragment[]{
+                        new SimpleLink(EntityDetailsEvent.INSTANCE, new TemplatedText().add(ConceptEntity.name))
+                    })
+                }).withPresentation("column"),
+                new SimpleCompositePageFragment(new PageFragment[]{
+                    new ConstantText("Flows"),
+                    new SimpleCompositePageFragment(ApplicationEntity.flows, new PageFragment[]{
+                        new SimpleLink(FlowDetailsEvent.INSTANCE, new TemplatedText().add(ConceptEntity.name))
+                    })
+                }).withPresentation("column")
+            }).withPresentation("four-columns")
         }); 
 	
 	@Override

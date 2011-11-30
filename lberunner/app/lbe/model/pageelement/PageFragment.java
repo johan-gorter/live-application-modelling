@@ -8,6 +8,9 @@ import lbe.model.Model;
 
 public abstract class PageFragment extends Model {
 
+	// TODO: String -> List of tags
+	private String presentation;
+	
 	public abstract String getElementType();
 
 	public PageElement render(RenderContext context) {
@@ -15,6 +18,9 @@ public abstract class PageFragment extends Model {
 		result.elementType = getElementType();
 		result.name = getName();
 		result.id = result.name+"@"+context.nextId();
+		if (presentation!=null) {
+			result.presentationStyles=presentation.split(" ");
+		}
 		return result;
 		
 	}
@@ -22,6 +28,19 @@ public abstract class PageFragment extends Model {
 	public FlowEventOccurrence submit(ChangeContext changeContext) {
 		changeContext.nextId();
 		return null;
+	}
+
+	public String getPresentation() {
+		return presentation;
+	}
+
+	public void setPresentation(String presentation) {
+		this.presentation = presentation;
+	}
+
+	public PageFragment withPresentation(String presentation) {
+		this.presentation = presentation;
+		return this;
 	}
 
 }

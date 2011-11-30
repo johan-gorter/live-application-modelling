@@ -92,8 +92,8 @@ public abstract class Flow extends Model {
 
 	// Step to the next point in the flow. Updates context and results in the next trigger
 	// returns null if a page has been reached.
-	public FlowEventOccurrence step(FlowNodeBase flowSource, FlowEventOccurrence occurrence, FlowContext context) {
-		FlowEdge edge = findEdge(flowSource, occurrence);
+	public FlowEventOccurrence step(FlowNodeBase flowNode, FlowEventOccurrence occurrence, FlowContext context) {
+		FlowEdge edge = findEdge(flowNode, occurrence);
 		if (edge==null) { // No edge at this level, pop to the flow above and check again
 			context.popFlowContext();
 			return occurrence;

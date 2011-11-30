@@ -18,12 +18,12 @@ public class EntityGenerator extends AbstractGenerator{
 
 		public static class DomainEntry {
 			public String name;
-			public TextClassModel display;
+			public TextGenerator display;
 			
 			public String getName() {
 				return name;
 			}
-			public TextClassModel getDisplay() {
+			public TextGenerator getDisplay() {
 				return display;
 			}
 		}
@@ -31,10 +31,10 @@ public class EntityGenerator extends AbstractGenerator{
 		public String name;
 		public String className;
 		public String itemClassName;
-		public TextClassModel question;
+		public TextGenerator question;
 		public boolean multivalue;
 		public boolean readonly;
-		public TextClassModel explanation;
+		public TextGenerator explanation;
 		public List<DomainEntry> domain;
 		
 		public String getName() {
@@ -55,10 +55,10 @@ public class EntityGenerator extends AbstractGenerator{
 		public String getItemClassName() {
 			return itemClassName;
 		}
-		public TextClassModel getQuestion() {
+		public TextGenerator getQuestion() {
 			return question;
 		}
-		public TextClassModel getExplanation() {
+		public TextGenerator getExplanation() {
 			return explanation;
 		}
 	}

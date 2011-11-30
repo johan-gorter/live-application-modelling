@@ -128,7 +128,7 @@ public class FlowGenerator extends AbstractGenerator {
 		for (FlowEdgeInstance edgeInstance: flowInstance.edges.get()) {
 			FlowEdge edge = new FlowEdge();
 			edge.startNode = edgePoint(edgeInstance.startNode.get());
-			if (edgeInstance.endEvent.get()!=null) {
+			if (edgeInstance.startEvent.get()!=null) {
 				edge.startEvent = edgeInstance.startEvent.get().name.get();
 			}
 			edge.endNode = edgePoint(edgeInstance.endNode.get());

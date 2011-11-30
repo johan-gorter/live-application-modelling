@@ -10,35 +10,47 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class ButtonEntity extends SimpleEntity {
+public class ConstantStringEntity extends SimpleEntity {
 
-	public static final ButtonEntity INSTANCE = new ButtonEntity();
+	public static final ConstantStringEntity INSTANCE = new ConstantStringEntity();
 	
 	// Attributes
+	
+	public static final Attribute<ConstantStringInstance, java.lang.String, java.lang.String> constant 
+		= new SimpleAttribute<ConstantStringInstance, java.lang.String, java.lang.String>(
+			"constant", INSTANCE, java.lang.String.class
+		) {
+	
+			@Override
+			public ReadOnlyAttributeValue<ConstantStringInstance, java.lang.String> get(ConstantStringInstance instance) {
+				return instance.constant;
+			}
+		};
 	
 	// Relations
 	
 	// Reverse relations
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
+		constant,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};
 
-	private ButtonEntity() {
-		super("Button");
+	private ConstantStringEntity() {
+		super("ConstantString");
 	}
 	
 	@Override
 	public Instance createInstance(CaseInstance caseInstance, long id) {
-		return new ButtonInstance(caseInstance, id);
+		return new ConstantStringInstance(caseInstance, id);
 	}
 	
 	@Override
 	public Entity extendsEntity() {
-		return LinkEntity.INSTANCE;
+		return StringProducerEntity.INSTANCE;
 	}
 	
 	@Override

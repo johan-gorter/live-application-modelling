@@ -11,6 +11,7 @@ import app.designer.data.instance.CompositePageFragmentInstance;
 import app.designer.data.instance.ConstantTextInstance;
 import app.designer.data.instance.FieldInstance;
 import app.designer.data.instance.HeaderInstance;
+import app.designer.data.instance.LinkInstance;
 import app.designer.data.instance.PageCompositionInstance;
 import app.designer.data.instance.PageFragmentInstance;
 import app.designer.data.instance.PageInstance;
@@ -61,6 +62,7 @@ public class PageGenerator extends AbstractGenerator {
 	private ContentClassModel createContentClassModel(PageFragmentInstance fragment) {
 		ContentClassModel result = new ContentClassModel();
 		result.type=fragment.getModel().getName();
+		result.presentation = fragment.getPresentation();
 		if (fragment instanceof FieldInstance) {
 			FieldInstance field = (FieldInstance) fragment;
 			result.required = (field.required.get()== Boolean.TRUE);
@@ -73,6 +75,10 @@ public class PageGenerator extends AbstractGenerator {
 			ButtonInstance button = (ButtonInstance)fragment;
 			result.text = generateText(button.caption.get());
 			result.event = button.event.get()==null?null:button.event.get().name.get();
+		} else if (fragment instanceof LinkInstance) {
+			LinkInstance link = (LinkInstance)fragment;
+			result.text = generateText(link.caption.get());
+			result.event = link.event.get()==null?null:link.event.get().name.get();
 		} else if (fragment instanceof CompositePageFragmentInstance) {
 			for (PageCompositionInstance composition : ((CompositePageFragmentInstance)fragment).items.get()) {
 				result.children.add(createContentClassModel(composition.pageFragment.get()));

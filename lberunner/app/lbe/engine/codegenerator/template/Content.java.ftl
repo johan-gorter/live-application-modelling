@@ -9,6 +9,8 @@
 	<@text_macro text=content.text /><#t>
 	<#elseif content.type=="Button">
     new SimpleButton(<#if content.event??>${content.event}Event.INSTANCE<#else>null</#if>, <@text_macro text=content.text />)<#t>
+	<#elseif content.type=="Link">
+    new SimpleLink(<#if content.event??>${content.event}Event.INSTANCE<#else>null</#if>, <@text_macro text=content.text />)<#t>
 	<#elseif content.type=="CompositePageFragment" || content.type=="Select" || content.type=="Header">
     new SimpleCompositePageFragment(<#t>
     <#if content.type=="Select">${content.relationEntity}Entity.${content.relationName}, </#if><#t>
@@ -21,6 +23,7 @@
 	<#list 1..depth as i>    </#list><#t>
 	})<#t>
 	</#if>
+	<#if content.presentation??>.withPresentation("${content.presentation}")</#if><#t>
 </#macro>
 <#--
 

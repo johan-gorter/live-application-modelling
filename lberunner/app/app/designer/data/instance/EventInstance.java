@@ -40,7 +40,7 @@ public class EventInstance
 	public final ReadOnlyRelationValue<EventInstance, ApplicationInstance> application
 		= createReverseRelationValue(EventEntity.application);
 	
-	public final ReadOnlyRelationValues<EventInstance, ButtonInstance> firesFromButtons
+	public final ReadOnlyRelationValues<EventInstance, LinkInstance> firesFromButtons
 		= createReverseRelationValues(EventEntity.firesFromButtons);
 	
 	public final ReadOnlyRelationValues<EventInstance, FlowSourceInstance> startEventInSources

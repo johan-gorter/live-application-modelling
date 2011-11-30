@@ -16,6 +16,17 @@ public class PageFragmentEntity extends SimpleEntity {
 	
 	// Attributes
 	
+	public static final Attribute<PageFragmentInstance, java.lang.String, java.lang.String> presentation 
+		= new SimpleAttribute<PageFragmentInstance, java.lang.String, java.lang.String>(
+			"presentation", INSTANCE, java.lang.String.class
+		) {
+	
+			@Override
+			public ReadOnlyAttributeValue<PageFragmentInstance, java.lang.String> get(PageFragmentInstance instance) {
+				return instance.presentation;
+			}
+		};
+	
 	// Relations
 	
 	// Reverse relations
@@ -53,6 +64,7 @@ public class PageFragmentEntity extends SimpleEntity {
 		};
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
+		presentation,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
 	};

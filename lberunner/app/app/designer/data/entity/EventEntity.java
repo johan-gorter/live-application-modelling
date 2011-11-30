@@ -52,13 +52,13 @@ public class EventEntity extends SimpleEntity {
 			}
 		};
 	
-	public static final Relation<EventInstance, List<ButtonInstance>, ButtonInstance> firesFromButtons
-		= new SimpleRelation<EventInstance, List<ButtonInstance>, ButtonInstance>(
-			"firesFromButtons", INSTANCE, EventEntity.INSTANCE, ButtonInstance.class, ButtonEntity.event
+	public static final Relation<EventInstance, List<LinkInstance>, LinkInstance> firesFromButtons
+		= new SimpleRelation<EventInstance, List<LinkInstance>, LinkInstance>(
+			"firesFromButtons", INSTANCE, EventEntity.INSTANCE, LinkInstance.class, LinkEntity.event
 		) {
 	
 			@Override
-			public ReadOnlyRelationValues<EventInstance, ButtonInstance> get(
+			public ReadOnlyRelationValues<EventInstance, LinkInstance> get(
 					EventInstance instance) {
 				return instance.firesFromButtons;
 			}

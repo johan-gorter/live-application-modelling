@@ -1,6 +1,7 @@
 package lbe.designerbootstrap;
 
 import lbe.designerbootstrap.Bootstrapper.RelationType;
+import app.designer.data.instance.AttributeBaseInstance;
 import app.designer.data.instance.AttributeInstance;
 import app.designer.data.instance.ButtonInstance;
 import app.designer.data.instance.CompositePageFragmentInstance;
@@ -13,13 +14,16 @@ import app.designer.data.instance.FlowEdgeInstance;
 import app.designer.data.instance.FlowInstance;
 import app.designer.data.instance.FlowNodeBaseInstance;
 import app.designer.data.instance.FlowSourceInstance;
+import app.designer.data.instance.FormattedValueInstance;
 import app.designer.data.instance.HeaderInstance;
+import app.designer.data.instance.LinkInstance;
 import app.designer.data.instance.PageCompositionInstance;
 import app.designer.data.instance.PageFragmentInstance;
 import app.designer.data.instance.PageInstance;
 import app.designer.data.instance.RelationInstance;
 import app.designer.data.instance.SelectInstance;
 import app.designer.data.instance.SubFlowInstance;
+import app.designer.data.instance.TemplatedTextInstance;
 import app.designer.data.instance.TextInstance;
 import custom.designer.ApplicationInstanceCustomization;
 
@@ -29,6 +33,13 @@ public abstract class BootstrapperUtil {
 	
 	protected static ButtonInstance createButton(EventInstance event, TextInstance caption) {
 		ButtonInstance result = new ButtonInstance(applicationInstance);
+		result.event.set(event);
+		result.caption.set(caption);
+		return result;
+	}
+
+	protected static LinkInstance createLink(EventInstance event, TextInstance caption) {
+		LinkInstance result = new LinkInstance(applicationInstance);
 		result.event.set(event);
 		result.caption.set(caption);
 		return result;
@@ -81,6 +92,19 @@ public abstract class BootstrapperUtil {
 		result.untranslated.set(untranslated);
 		return result;
 	}
+	
+	protected static TemplatedTextInstance createTemplatedText() {
+		TemplatedTextInstance result = new TemplatedTextInstance(applicationInstance);
+		return result;
+	}
+	
+	protected static TemplatedTextInstance add(TemplatedTextInstance text, AttributeBaseInstance value) {
+		FormattedValueInstance formattedValue = new FormattedValueInstance(applicationInstance);
+		formattedValue.value.set(value);
+		text.untranslated.add(formattedValue);
+		return text;
+	}
+	
 
 	protected static CompositePageFragmentInstance createCompositePageFragment() {
 		CompositePageFragmentInstance container = new CompositePageFragmentInstance(applicationInstance);

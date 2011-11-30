@@ -173,4 +173,9 @@ public abstract class CompositePageFragment extends PageFragment {
 			child.submit(changeContext);
 		}		
 	}
+	
+	@Override
+	public CompositePageFragment withPresentation(String presentation) {
+		return (CompositePageFragment)super.withPresentation(presentation);
+	}
 }

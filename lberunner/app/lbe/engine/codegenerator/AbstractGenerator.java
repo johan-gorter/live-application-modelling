@@ -19,9 +19,11 @@ import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
 
 import lbe.instance.Observations;
+import lbe.model.pageelement.impl.TemplatedText;
 
 import app.designer.data.instance.ConceptInstance;
 import app.designer.data.instance.ConstantTextInstance;
+import app.designer.data.instance.TemplatedTextInstance;
 import app.designer.data.instance.TextInstance;
 
 public abstract class AbstractGenerator {
@@ -98,12 +100,8 @@ public abstract class AbstractGenerator {
 		return newConcepts;
 	}
 	
-	protected TextClassModel generateText(TextInstance text) {
-		if (text instanceof ConstantTextInstance) {
-			ConstantTextInstance constantText = (ConstantTextInstance) text;
-			return new TextClassModel(constantText.untranslated.get());
-		}
-		throw new RuntimeException("Unsupported subclass of TextInstance: "+text.getClass());
+	protected TextGenerator generateText(TextInstance text) {
+		return new TextGenerator(text);
 	}
 
 	static void generateFile(Template template, Object rootMap, String subDirectory, String name, String postfix, String appname, File root) {

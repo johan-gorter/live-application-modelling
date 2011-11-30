@@ -10,35 +10,56 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class ButtonEntity extends SimpleEntity {
+public class TemplatedTextEntity extends SimpleEntity {
 
-	public static final ButtonEntity INSTANCE = new ButtonEntity();
+	public static final TemplatedTextEntity INSTANCE = new TemplatedTextEntity();
 	
 	// Attributes
 	
 	// Relations
+	
+	public static final Relation<TemplatedTextInstance, List<StringProducerInstance>, StringProducerInstance> untranslated
+		= new SimpleRelation<TemplatedTextInstance, List<StringProducerInstance>, StringProducerInstance>(
+			"untranslated", INSTANCE, StringProducerEntity.INSTANCE, StringProducerInstance.class, StringProducerEntity.untranslatedInTemplate
+		) {
+	
+			@Override
+			public ReadOnlyRelationValues<TemplatedTextInstance, StringProducerInstance> get(
+					TemplatedTextInstance instance) {
+				return instance.untranslated;
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
 	
 	// Reverse relations
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
+		untranslated,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};
 
-	private ButtonEntity() {
-		super("Button");
+	private TemplatedTextEntity() {
+		super("TemplatedText");
 	}
 	
 	@Override
 	public Instance createInstance(CaseInstance caseInstance, long id) {
-		return new ButtonInstance(caseInstance, id);
+		return new TemplatedTextInstance(caseInstance, id);
 	}
 	
 	@Override
 	public Entity extendsEntity() {
-		return LinkEntity.INSTANCE;
+		return TextEntity.INSTANCE;
 	}
 	
 	@Override

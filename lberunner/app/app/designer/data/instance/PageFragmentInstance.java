@@ -30,6 +30,14 @@ public class PageFragmentInstance
 
 	// Attributes
 	
+	public final AttributeValue<PageFragmentInstance, java.lang.String> presentation
+		= createAttributeValue(PageFragmentEntity.presentation);
+	
+	public java.lang.String getPresentation() {
+		return presentation.get();
+	}
+
+	
 	// Relations
 
 	// Reverse relations

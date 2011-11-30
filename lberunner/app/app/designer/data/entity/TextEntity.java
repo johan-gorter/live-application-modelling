@@ -100,13 +100,13 @@ public class TextEntity extends SimpleEntity {
 			}
 		};
 	
-	public static final Relation<TextInstance, ButtonInstance, ButtonInstance> captionOnButton
-		= new SimpleRelation<TextInstance, ButtonInstance, ButtonInstance>(
-			"captionOnButton", INSTANCE, TextEntity.INSTANCE, ButtonInstance.class, ButtonEntity.caption
+	public static final Relation<TextInstance, LinkInstance, LinkInstance> captionOnButton
+		= new SimpleRelation<TextInstance, LinkInstance, LinkInstance>(
+			"captionOnButton", INSTANCE, TextEntity.INSTANCE, LinkInstance.class, LinkEntity.caption
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<TextInstance, ButtonInstance> get(
+			public ReadOnlyRelationValue<TextInstance, LinkInstance> get(
 					TextInstance instance) {
 				return instance.captionOnButton;
 			}

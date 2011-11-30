@@ -41,6 +41,22 @@ public class AttributeBaseEntity extends SimpleEntity {
 	// Relations
 	
 	// Reverse relations
+	
+	public static final Relation<AttributeBaseInstance, FormattedValueInstance, FormattedValueInstance> valueInTemplatedText
+		= new SimpleRelation<AttributeBaseInstance, FormattedValueInstance, FormattedValueInstance>(
+			"valueInTemplatedText", INSTANCE, AttributeBaseEntity.INSTANCE, FormattedValueInstance.class, FormattedValueEntity.value
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<AttributeBaseInstance, FormattedValueInstance> get(
+					AttributeBaseInstance instance) {
+				return instance.valueInTemplatedText;
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+		};
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 		readOnly,
@@ -49,6 +65,7 @@ public class AttributeBaseEntity extends SimpleEntity {
 	private static final Relation[] RELATIONS = new Relation[]{
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
+		valueInTemplatedText,
 	};
 
 	private AttributeBaseEntity() {

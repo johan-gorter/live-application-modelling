@@ -12,25 +12,28 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class ButtonInstance 
-	extends LinkInstance 
+public class TemplatedTextInstance 
+	extends TextInstance 
 	implements Instance {
 
-	public ButtonInstance(CaseInstance caseInstance) {
+	public TemplatedTextInstance(CaseInstance caseInstance) {
 		this(caseInstance, 0);
 	}
 	
-	public ButtonInstance(CaseInstance caseInstance, long id) {
-		super(caseInstance, ButtonEntity.INSTANCE, id);
+	public TemplatedTextInstance(CaseInstance caseInstance, long id) {
+		super(caseInstance, TemplatedTextEntity.INSTANCE, id);
 	}
 	
-	protected ButtonInstance(CaseInstance caseInstance, Entity model, long id) {
+	protected TemplatedTextInstance(CaseInstance caseInstance, Entity model, long id) {
 		super(caseInstance, model, id);
 	}
 
 	// Attributes
 	
 	// Relations
+	
+	public final RelationValues<TemplatedTextInstance, StringProducerInstance> untranslated
+		= createRelationValues(TemplatedTextEntity.untranslated);
 
 	// Reverse relations
 

@@ -25,9 +25,9 @@
 <script src="json/generic-inputs.js" type="text/javascript" charset="utf-8"></script>
 <script src="json/generic-factories.js" type="text/javascript" charset="utf-8"></script>
 
-<script src="themes/default/default-controllers.js" type="text/javascript" charset="utf-8"></script>
-<script src="themes/default/default-inputs.js" type="text/javascript" charset="utf-8"></script>
-<script src="themes/default/default-factories.js" type="text/javascript" charset="utf-8"></script>
+<script src="themes/prototype/prototype-controllers.js" type="text/javascript" charset="utf-8"></script>
+<script src="themes/prototype/prototype-inputs.js" type="text/javascript" charset="utf-8"></script>
+<script src="themes/prototype/prototype-factories.js" type="text/javascript" charset="utf-8"></script>
 
 <script src="lbe-json/lbe-engine.js" type="text/javascript" charset="utf-8"></script>
 
@@ -66,7 +66,7 @@ var History = YAHOO.util.History;
 
 var application = History.getQueryStringParameter("application");
 var caseId = History.getQueryStringParameter("caseId");
-var sessionId = 'e8ce332b-c17d-4245-be69-642bc8fcc208';
+var sessionId = Math.floor(Math.random()*1000000000);
 
 var jumpToPageAction = function(options) {var pattern = '/startflow/jumptopage?pageCoordinates=:pageCoordinates&application=:application&sessionId=:sessionId&caseId=:caseId'; for(key in options) { pattern = pattern.replace(':'+key, options[key]); } return pattern };
 var waitForPageChangeAction = function(options) {var pattern = '/startflow/waitforpagechange?pageCoordinates=:pageCoordinates&application=:application&sessionId=:sessionId&caseId=:caseId&lastCaseVersion=:lastCaseVersion'; for(key in options) { pattern = pattern.replace(':'+key, options[key]); } return pattern };
@@ -97,7 +97,7 @@ YAHOO.util.History.onReady(function () {
 
 
 $(document).ready(function() {
-	engine = new lbe.LbeEngine('AquimaMVC', defaultTheme.mvc.defaultThemeFactory, {});
+	engine = new lbe.LbeEngine('AquimaMVC', prototype.mvc.PrototypeFactory, {});
 	engine.start();
 	try {
         YAHOO.util.History.initialize('yui-history-field', 'yui-history-iframe');

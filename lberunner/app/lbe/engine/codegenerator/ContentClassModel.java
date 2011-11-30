@@ -7,7 +7,7 @@ public class ContentClassModel {
 
 	public String type;
 
-	public TextClassModel text;
+	public TextGenerator text;
 
 	public String entity;
 	public String attribute;
@@ -17,6 +17,7 @@ public class ContentClassModel {
 	public String relationName;
 	public String event;
 	public String customization;
+	public String presentation;
 	public final List<ContentClassModel> children = new ArrayList<ContentClassModel>();
 	
 	public String getType() {
@@ -46,7 +47,7 @@ public class ContentClassModel {
 	public List<ContentClassModel> getChildren() {
 		return children;
 	}
-	public TextClassModel getText() {
+	public TextGenerator getText() {
 		return text;
 	}
 	public String getEvent() {
@@ -54,5 +55,8 @@ public class ContentClassModel {
 	}
 	public String getCustomization() {
 		return customization;
+	}
+	public String getPresentation() {
+		return presentation;
 	}
 }

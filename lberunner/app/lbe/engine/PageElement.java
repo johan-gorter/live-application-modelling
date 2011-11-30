@@ -12,6 +12,7 @@ public class PageElement {
 	public String display;
 	public Object value;
 	public PageElement[] content;
+	public String[] presentationStyles;
 	
 	public String datatype;
 	public Boolean required;

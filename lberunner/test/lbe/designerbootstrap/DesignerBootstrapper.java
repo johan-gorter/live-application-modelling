@@ -2,6 +2,7 @@ package lbe.designerbootstrap;
 
 import lbe.designerbootstrap.Bootstrapper.RelationType;
 import app.designer.data.instance.AttributeInstance;
+import app.designer.data.instance.CompositePageFragmentInstance;
 import app.designer.data.instance.EntityInstance;
 import app.designer.data.instance.EventInstance;
 import app.designer.data.instance.FlowInstance;
@@ -10,6 +11,7 @@ import app.designer.data.instance.PageInstance;
 import app.designer.data.instance.RelationInstance;
 import app.designer.data.instance.SelectInstance;
 import app.designer.data.instance.SubFlowInstance;
+import app.designer.data.instance.TextInstance;
 import custom.designer.ApplicationInstanceCustomization;
 
 public class DesignerBootstrapper extends BootstrapperUtil {
@@ -64,6 +66,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		
 		// Page elements & Page
 		EntityInstance pageFragment = createEntity("PageFragment", null);
+		createAttribute(pageFragment, "presentation", String.class);
 		EntityInstance compositePageFragment = createEntity("CompositePageFragment", pageFragment);
 		EntityInstance select = createEntity("Select", compositePageFragment);
 		EntityInstance header = createEntity("Header", compositePageFragment);
@@ -71,7 +74,8 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		EntityInstance field = createEntity("Field", pageFragment);
 		createAttribute(field, "required", Boolean.class); // TODO: this validation goes to the domain
 		createAttribute(field, "readOnly", Boolean.class);
-		EntityInstance button = createEntity("Button", pageFragment);
+		EntityInstance link = createEntity("Link", pageFragment);
+		EntityInstance button = createEntity("Button", link);
 		EntityInstance pageComposition = createEntity("PageComposition", null);
 		AttributeInstance presentationStyles = createAttribute(pageComposition, "presentationStyles", String.class);
 		presentationStyles.multivalue.set(true);
@@ -79,8 +83,13 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		// Text
 		EntityInstance text = createEntity("Text", pageFragment);
 		EntityInstance constantText = createEntity("ConstantText", text);
-		EntityInstance sharedText = createEntity("SharedText", text);
 		createAttribute(constantText, "untranslated", String.class);
+		EntityInstance templatedText = createEntity("TemplatedText", text);
+		EntityInstance stringProducer = createEntity("StringProducer", null);
+		EntityInstance constantString = createEntity("ConstantString", stringProducer);
+		createAttribute(constantString, "constant", String.class);
+		EntityInstance formattedValue = createEntity("FormattedValue", stringProducer);
+		EntityInstance sharedText = createEntity("SharedText", text);
 		// TODO: translations
 
 		// Flow nodes & Flow
@@ -95,7 +104,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		// Relations
 		
 		// Application
-		createRelation(application, "entities", RelationType.OneToManyAggregation, "application", entity);
+		RelationInstance entities = createRelation(application, "entities", RelationType.OneToManyAggregation, "application", entity);
 		createRelation(application, "caseEntity", RelationType.OneToZeroOrOne, "caseEntityInApplication", entity);
 		RelationInstance flows = createRelation(application, "flows", RelationType.OneToManyAggregation, "application", flow);
 		createRelation(application, "events", RelationType.OneToManyAggregation, "application", event);
@@ -110,6 +119,10 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createRelation(attribute, "explanation", RelationType.OneToZeroOrOneAggregation, "explanationOnAttribute", text);
 		createRelation(attribute, "domain", RelationType.OneToManyAggregation, "attribute", domainEntry);
 		createRelation(domainEntry, "display", RelationType.OneToZeroOrOneAggregation, "displayOnDomainEntry", text);
+		
+		// Text
+		createRelation(templatedText, "untranslated", RelationType.OneToManyAggregation, "untranslatedInTemplate", stringProducer);
+		createRelation(formattedValue, "value", RelationType.OneToOneAggregation, "valueInTemplatedText", attributeBase);
 
 		// Shared
 		createRelation(application, "shared", RelationType.OneToOneAggregation, "application", shared);
@@ -127,8 +140,8 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createRelation(field, "attribute", RelationType.ManyToZeroOrOne, "fields", attribute);
 		createRelation(select, "relation", RelationType.ManyToZeroOrOne, "relationInselects", relation);
 		createRelation(header, "text", RelationType.OneToOneAggregation, "textOnHeader", text);
-		createRelation(button, "caption", RelationType.OneToOneAggregation, "captionOnButton", text);
-		createRelation(button, "event", RelationType.ManyToZeroOrOne, "firesFromButtons", event);
+		createRelation(link, "caption", RelationType.OneToOneAggregation, "captionOnButton", text);
+		createRelation(link, "event", RelationType.ManyToZeroOrOne, "firesFromButtons", event);
 		
 		// Flow
 		createRelation(event, "parameters", RelationType.ManyToMany, "parameterInEvent", entity);
@@ -153,6 +166,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		
 		EventInstance home = createEvent("Home");
 		EventInstance flowDetails = createEvent("FlowDetails", flow);
+		EventInstance entityDetails = createEvent("EntityDetails", flow);
 		EventInstance pageDetails = createEvent("PageDetails", page);
 		EventInstance exploreInstance = createEvent("ExploreInstance");
 		exploreInstance.customization.set("custom.designer.caseexplorer.ExploreInstanceEventCustomization");
@@ -185,11 +199,24 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		FlowSourceInstance instanceExploreInstanceSource = createSource(caseExplorerInstanceFlow, exploreInstance, instancePage, null);
 		// Welcome page
 		addContent(welcomePage.content.get(), createConstantText("Welcome to the Designer"));
-		addContent(welcomePage.content.get(), createConstantText("Flows:"));
+		CompositePageFragmentInstance columns = createCompositePageFragment();
+		columns.presentation.set("four-columns");
+		addContent(welcomePage.content.get(), columns);
+		CompositePageFragmentInstance column1 = createCompositePageFragment();
+		column1.presentation.set("column");
+		addContent(columns, column1);
+		addContent(column1, createConstantText("Entities"));
+		SelectInstance entitiesSelect = createSelect(entities);
+		addContent(entitiesSelect, createLink(entityDetails, add(createTemplatedText(), name)));
+		addContent(column1, entitiesSelect);
+
+		CompositePageFragmentInstance column2 = createCompositePageFragment();
+		column2.presentation.set("column");
+		addContent(columns, column2);
+		addContent(column2, createConstantText("Flows"));
 		SelectInstance flowsSelect = createSelect(flows);
-		createField(flowsSelect, name, false);
-		addContent(flowsSelect, createButton(flowDetails, createConstantText("Details")));
-		addContent(welcomePage.content.get(), flowsSelect);
+		addContent(flowsSelect, createLink(flowDetails, add(createTemplatedText(), name)));
+		addContent(column2, flowsSelect);
 		// Flow page
 		addContent(flowPage.content.get(), createConstantText("Flow"));
 		createField(flowPage.content.get(), name, false);

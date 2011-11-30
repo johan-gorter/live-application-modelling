@@ -10,35 +10,56 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class ButtonEntity extends SimpleEntity {
+public class FormattedValueEntity extends SimpleEntity {
 
-	public static final ButtonEntity INSTANCE = new ButtonEntity();
+	public static final FormattedValueEntity INSTANCE = new FormattedValueEntity();
 	
 	// Attributes
 	
 	// Relations
+	
+	public static final Relation<FormattedValueInstance, AttributeBaseInstance, AttributeBaseInstance> value
+		= new SimpleRelation<FormattedValueInstance, AttributeBaseInstance, AttributeBaseInstance>(
+			"value", INSTANCE, AttributeBaseEntity.INSTANCE, AttributeBaseInstance.class, AttributeBaseEntity.valueInTemplatedText
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<FormattedValueInstance, AttributeBaseInstance> get(
+					FormattedValueInstance instance) {
+				return instance.value;
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isAutoCreate() {
+				return true;
+			}
+		};
 	
 	// Reverse relations
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
+		value,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};
 
-	private ButtonEntity() {
-		super("Button");
+	private FormattedValueEntity() {
+		super("FormattedValue");
 	}
 	
 	@Override
 	public Instance createInstance(CaseInstance caseInstance, long id) {
-		return new ButtonInstance(caseInstance, id);
+		return new FormattedValueInstance(caseInstance, id);
 	}
 	
 	@Override
 	public Entity extendsEntity() {
-		return LinkEntity.INSTANCE;
+		return StringProducerEntity.INSTANCE;
 	}
 	
 	@Override

@@ -49,7 +49,7 @@ public class TextInstance
 	public final ReadOnlyRelationValue<TextInstance, HeaderInstance> textOnHeader
 		= createReverseRelationValue(TextEntity.textOnHeader);
 	
-	public final ReadOnlyRelationValue<TextInstance, ButtonInstance> captionOnButton
+	public final ReadOnlyRelationValue<TextInstance, LinkInstance> captionOnButton
 		= createReverseRelationValue(TextEntity.captionOnButton);
 
 }

@@ -49,5 +49,8 @@ public class AttributeBaseInstance
 	// Relations
 
 	// Reverse relations
+	
+	public final ReadOnlyRelationValue<AttributeBaseInstance, FormattedValueInstance> valueInTemplatedText
+		= createReverseRelationValue(AttributeBaseEntity.valueInTemplatedText);
 
 }
