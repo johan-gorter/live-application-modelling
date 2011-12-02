@@ -38,6 +38,14 @@ public class ConceptInstance
 	}
 
 	
+	public final ReadOnlyAttributeValue<ConceptInstance, java.lang.Boolean> valid
+		= createReadOnlyAttributeValue(ConceptEntity.valid);
+	
+	public java.lang.Boolean getValid() {
+		return valid.get();
+	}
+
+	
 	public final AttributeValue<ConceptInstance, java.lang.String> customization
 		= createAttributeValue(ConceptEntity.customization);
 	

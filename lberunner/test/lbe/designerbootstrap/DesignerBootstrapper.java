@@ -53,7 +53,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		
 		// Attribute
 		EntityInstance attribute = createEntity("Attribute", attributeBase);
-		createAttribute(attribute, "className", String.class);
+		AttributeInstance className = createAttribute(attribute, "className", String.class);
 		
 		// Domain
 		EntityInstance domainEntry = createEntity("DomainEntry", concept);
@@ -78,8 +78,8 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		EntityInstance header = createEntity("Header", compositePageFragment);
 		EntityInstance sharedPageFragment = createEntity("SharedFragment", pageFragment);
 		EntityInstance field = createEntity("Field", pageFragment);
-		createAttribute(field, "required", Boolean.class); // TODO: this validation goes to the domain
-		createAttribute(field, "readOnly", Boolean.class);
+		AttributeInstance required = createAttribute(field, "required", Boolean.class); // TODO: this validation goes to the domain
+		AttributeInstance readOnly = createAttribute(field, "readOnly", Boolean.class);
 		EntityInstance link = createEntity("Link", pageFragment);
 		EntityInstance button = createEntity("Button", link);
 		EntityInstance pageComposition = createEntity("PageComposition", null);
@@ -141,7 +141,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		RelationInstance content = createRelation(page, "content", RelationType.OneToOneAggregation, "contentOfPage", compositePageFragment);
 		createRelation(compositePageFragment, "items", RelationType.OneToManyAggregation, "itemIn", pageComposition);
 		createRelation(pageComposition, "pageFragment", RelationType.OneToZeroOrOneAggregation, "composedIn", pageFragment);
-		createRelation(field, "attribute", RelationType.ManyToZeroOrOne, "fields", attribute);
+		RelationInstance fieldAttribute = createRelation(field, "attribute", RelationType.ManyToZeroOrOne, "fields", attribute);
 		createRelation(select, "relation", RelationType.ManyToZeroOrOne, "relationInselects", relation);
 		createRelation(header, "text", RelationType.OneToOneAggregation, "textOnHeader", text);
 		createRelation(link, "caption", RelationType.OneToOneAggregation, "captionOnButton", text);
@@ -277,6 +277,15 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		addContent(pagePage.content.get(), createButton(addField, createConstantText("Add field")));
 		addContent(pagePage.content.get(), createButton(exploreInstance, createConstantText("Open in case explorer")));
 		addContent(pagePage.content.get(), createButton(home, createConstantText("Home")));
+		// Field page
+		createField(fieldPage.content.get(), required, false);
+		createField(fieldPage.content.get(), readOnly, false);
+		SelectInstance attributeSelect = createSelect(fieldAttribute);
+		createField(attributeSelect, name, true);
+		createField(attributeSelect, className, true);
+		addContent(fieldPage.content.get(), attributeSelect);
+		
+		
 		// Finish up
 		
 		applicationInstance.exposedFlows.add(mainFlow);

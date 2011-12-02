@@ -175,6 +175,50 @@ public class DriverEntity extends SimpleEntity {
 			}
 		};
 	
+	public static final Attribute<DriverInstance, java.lang.String, java.lang.String> NewAttribute1322863589 
+		= new SimpleAttribute<DriverInstance, java.lang.String, java.lang.String>(
+			"NewAttribute1322863589", INSTANCE, java.lang.String.class
+		) {
+	
+			@Override
+			public ReadOnlyAttributeValue<DriverInstance, java.lang.String> get(DriverInstance instance) {
+				return instance.NewAttribute1322863589;
+			}
+		};
+	
+	public static final Attribute<DriverInstance, java.lang.String, java.lang.String> NewAttribute1322863592 
+		= new SimpleAttribute<DriverInstance, java.lang.String, java.lang.String>(
+			"NewAttribute1322863592", INSTANCE, java.lang.String.class
+		) {
+	
+			@Override
+			public ReadOnlyAttributeValue<DriverInstance, java.lang.String> get(DriverInstance instance) {
+				return instance.NewAttribute1322863592;
+			}
+		};
+	
+	public static final Attribute<DriverInstance, java.lang.String, java.lang.String> Test 
+		= new SimpleAttribute<DriverInstance, java.lang.String, java.lang.String>(
+			"Test", INSTANCE, java.lang.String.class
+		) {
+	
+			@Override
+			public ReadOnlyAttributeValue<DriverInstance, java.lang.String> get(DriverInstance instance) {
+				return instance.Test;
+			}
+		};
+	
+	public static final Attribute<DriverInstance, java.lang.String, java.lang.String> NewAttribute1322863623 
+		= new SimpleAttribute<DriverInstance, java.lang.String, java.lang.String>(
+			"NewAttribute1322863623", INSTANCE, java.lang.String.class
+		) {
+	
+			@Override
+			public ReadOnlyAttributeValue<DriverInstance, java.lang.String> get(DriverInstance instance) {
+				return instance.NewAttribute1322863623;
+			}
+		};
+	
 	// Relations
 	
 	// Reverse relations
@@ -204,6 +248,10 @@ public class DriverEntity extends SimpleEntity {
 		yearsInsured,
 		mileage,
 		noClaimsDiscount,
+		NewAttribute1322863589,
+		NewAttribute1322863592,
+		Test,
+		NewAttribute1322863623,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
 	};

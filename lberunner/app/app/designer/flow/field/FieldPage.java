@@ -14,6 +14,12 @@ public class FieldPage extends Page {
 	
 	private static CompositePageFragment CONTENT = 
         new SimpleCompositePageFragment(new PageFragment[]{
+            new SimpleField(FieldEntity.INSTANCE, FieldEntity.required),
+            new SimpleField(FieldEntity.INSTANCE, FieldEntity.readOnly),
+            new SimpleCompositePageFragment(FieldEntity.attribute, new PageFragment[]{
+                new SimpleField(ConceptEntity.INSTANCE, ConceptEntity.name).setRequired(),
+                new SimpleField(AttributeEntity.INSTANCE, AttributeEntity.className).setRequired()
+            })
         }); 
 	
 	@Override

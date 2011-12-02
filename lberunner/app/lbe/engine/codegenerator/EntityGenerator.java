@@ -28,6 +28,7 @@ public class EntityGenerator extends AbstractGenerator{
 			}
 		}
 		
+		public String customization;
 		public String name;
 		public String className;
 		public String itemClassName;
@@ -60,6 +61,9 @@ public class EntityGenerator extends AbstractGenerator{
 		}
 		public TextGenerator getExplanation() {
 			return explanation;
+		}
+		public String getCustomization() {
+			return customization;
 		}
 	}
 	
@@ -140,6 +144,7 @@ public class EntityGenerator extends AbstractGenerator{
 		for (AttributeInstance attributeInstance: entityInstance.attributes.get()) {
 			Attribute attribute = new Attribute();
 			attribute.name = attributeInstance.name.get();
+			attribute.customization = attributeInstance.customization.get();
 			attribute.itemClassName = attributeInstance.className.get();
 			attribute.multivalue = (attributeInstance.multivalue.get()==Boolean.TRUE);
 			if (attribute.multivalue) {

@@ -94,6 +94,38 @@ public class DriverInstance
 	}
 
 	
+	public final AttributeValue<DriverInstance, java.lang.String> NewAttribute1322863589
+		= createAttributeValue(DriverEntity.NewAttribute1322863589);
+	
+	public java.lang.String getNewAttribute1322863589() {
+		return NewAttribute1322863589.get();
+	}
+
+	
+	public final AttributeValue<DriverInstance, java.lang.String> NewAttribute1322863592
+		= createAttributeValue(DriverEntity.NewAttribute1322863592);
+	
+	public java.lang.String getNewAttribute1322863592() {
+		return NewAttribute1322863592.get();
+	}
+
+	
+	public final AttributeValue<DriverInstance, java.lang.String> Test
+		= createAttributeValue(DriverEntity.Test);
+	
+	public java.lang.String getTest() {
+		return Test.get();
+	}
+
+	
+	public final AttributeValue<DriverInstance, java.lang.String> NewAttribute1322863623
+		= createAttributeValue(DriverEntity.NewAttribute1322863623);
+	
+	public java.lang.String getNewAttribute1322863623() {
+		return NewAttribute1322863623.get();
+	}
+
+	
 	// Relations
 
 	// Reverse relations

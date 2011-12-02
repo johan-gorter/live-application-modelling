@@ -27,6 +27,21 @@ public class ConceptEntity extends SimpleEntity {
 			}
 		};
 	
+	public static final Attribute<ConceptInstance, java.lang.Boolean, java.lang.Boolean> valid 
+		= new custom.designer.ValidAttributeCustomization(
+			"valid", INSTANCE, java.lang.Boolean.class
+		) {
+	
+			@Override
+			public ReadOnlyAttributeValue<ConceptInstance, java.lang.Boolean> get(ConceptInstance instance) {
+				return instance.valid;
+			}
+			
+			public boolean isReadOnly() {
+				return true;
+			};
+		};
+	
 	public static final Attribute<ConceptInstance, java.lang.String, java.lang.String> customization 
 		= new SimpleAttribute<ConceptInstance, java.lang.String, java.lang.String>(
 			"customization", INSTANCE, java.lang.String.class
@@ -44,6 +59,7 @@ public class ConceptEntity extends SimpleEntity {
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 		name,
+		valid,
 		customization,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{

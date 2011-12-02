@@ -19,7 +19,7 @@ public class ${name}Entity extends SimpleEntity {
 	<#list attributes as attribute>
 	
 	public static final Attribute<${name}Instance, ${attribute.className}, ${attribute.itemClassName}> ${attribute.name} 
-		= new <#if customization??>${customization}<#else>SimpleAttribute<${name}Instance, ${attribute.className}, ${attribute.itemClassName}></#if>(
+		= new <#if attribute.customization??>${attribute.customization}<#else>SimpleAttribute<${name}Instance, ${attribute.className}, ${attribute.itemClassName}></#if>(
 			"${attribute.name}", INSTANCE, ${attribute.itemClassName}.class
 		) {
 	
@@ -40,6 +40,12 @@ public class ${name}Entity extends SimpleEntity {
 			public Text getQuestion() {
 				return question;
 			}
+			</#if>
+			<#if attribute.readonly>
+			
+			public boolean isReadOnly() {
+				return true;
+			};
 			</#if>
 			<#if attribute.domain??>
 			

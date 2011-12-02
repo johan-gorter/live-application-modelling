@@ -12,6 +12,7 @@ import lbe.instance.value.RelationValue;
 import lbe.instance.value.RelationValues;
 import lbe.instance.value.impl.AttributeValueImpl;
 import lbe.instance.value.impl.AttributeValuesImpl;
+import lbe.instance.value.impl.ReadOnlyAttributeValueImpl;
 import lbe.instance.value.impl.RelationValueImpl;
 import lbe.instance.value.impl.RelationValuesImpl;
 import lbe.instance.value.impl.ReverseRelationValueImpl;
@@ -51,6 +52,10 @@ public class SimpleInstance implements Instance {
 		return model;
 	}
 
+	protected<I extends Instance, Value extends Object> ReadOnlyAttributeValueImpl<I, Value> createReadOnlyAttributeValue(Attribute<I, Value, Value> attribute) {
+		return new ReadOnlyAttributeValueImpl<I, Value>((I)this, attribute);
+	}
+	
 	protected<I extends Instance, Value extends Object> AttributeValue<I, Value> createAttributeValue(Attribute<I, Value, Value> attribute) {
 		return new AttributeValueImpl<I, Value>((I)this, attribute);
 	}
