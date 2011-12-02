@@ -9,7 +9,7 @@ public class FlowEventOccurrence {
 	
 	private Instance[] parameters;
 	
-	public FlowEventOccurrence(FlowEvent event, Instance[] parameters) {
+	public FlowEventOccurrence(FlowEvent event, Instance... parameters) {
 		this.event = event;
 		this.parameters = parameters;
 	}

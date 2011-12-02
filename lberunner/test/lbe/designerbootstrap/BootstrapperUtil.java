@@ -5,6 +5,7 @@ import app.designer.data.instance.AttributeBaseInstance;
 import app.designer.data.instance.AttributeInstance;
 import app.designer.data.instance.ButtonInstance;
 import app.designer.data.instance.CompositePageFragmentInstance;
+import app.designer.data.instance.ConstantStringInstance;
 import app.designer.data.instance.ConstantTextInstance;
 import app.designer.data.instance.DomainEntryInstance;
 import app.designer.data.instance.EntityInstance;
@@ -105,6 +106,12 @@ public abstract class BootstrapperUtil {
 		return text;
 	}
 	
+	protected static TemplatedTextInstance add(TemplatedTextInstance text, String constant) {
+		ConstantStringInstance constantInstance = new ConstantStringInstance(applicationInstance);
+		constantInstance.constant.set(constant);
+		text.untranslated.add(constantInstance);
+		return text;
+	}
 
 	protected static CompositePageFragmentInstance createCompositePageFragment() {
 		CompositePageFragmentInstance container = new CompositePageFragmentInstance(applicationInstance);

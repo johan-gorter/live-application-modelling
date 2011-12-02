@@ -7,9 +7,11 @@ import app.designer.data.instance.EntityInstance;
 import app.designer.data.instance.EventInstance;
 import app.designer.data.instance.FlowInstance;
 import app.designer.data.instance.FlowSourceInstance;
+import app.designer.data.instance.PageFragmentHolderInstance;
 import app.designer.data.instance.PageInstance;
 import app.designer.data.instance.RelationInstance;
 import app.designer.data.instance.SelectInstance;
+import app.designer.data.instance.SharedFragmentInstance;
 import app.designer.data.instance.SubFlowInstance;
 import app.designer.data.instance.TextInstance;
 import custom.designer.ApplicationInstanceCustomization;
@@ -35,6 +37,10 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		// Concept
 		EntityInstance concept = createEntity("Concept", null);
 		AttributeInstance name = createAttribute(concept, "name", String.class);
+		AttributeInstance valid = createAttribute(concept, "valid", Boolean.class);
+		valid.readOnly.set(true);
+		valid.customization.set("custom.designer.ValidAttributeCustomization");
+		
 		createAttribute(concept, "customization", String.class);
 		
 		// Entity
@@ -66,7 +72,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		
 		// Page elements & Page
 		EntityInstance pageFragment = createEntity("PageFragment", null);
-		createAttribute(pageFragment, "presentation", String.class);
+		AttributeInstance presentation = createAttribute(pageFragment, "presentation", String.class);
 		EntityInstance compositePageFragment = createEntity("CompositePageFragment", pageFragment);
 		EntityInstance select = createEntity("Select", compositePageFragment);
 		EntityInstance header = createEntity("Header", compositePageFragment);
@@ -77,8 +83,6 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		EntityInstance link = createEntity("Link", pageFragment);
 		EntityInstance button = createEntity("Button", link);
 		EntityInstance pageComposition = createEntity("PageComposition", null);
-		AttributeInstance presentationStyles = createAttribute(pageComposition, "presentationStyles", String.class);
-		presentationStyles.multivalue.set(true);
 		
 		// Text
 		EntityInstance text = createEntity("Text", pageFragment);
@@ -122,7 +126,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		
 		// Text
 		createRelation(templatedText, "untranslated", RelationType.OneToManyAggregation, "untranslatedInTemplate", stringProducer);
-		createRelation(formattedValue, "value", RelationType.OneToOneAggregation, "valueInTemplatedText", attributeBase);
+		createRelation(formattedValue, "value", RelationType.OneToZeroOrOne, "valueInTemplatedText", attributeBase); //TODO: deduction
 
 		// Shared
 		createRelation(application, "shared", RelationType.OneToOneAggregation, "application", shared);
@@ -134,7 +138,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createRelation(textHolder, "text", RelationType.OneToOneAggregation, "holder", text);
 		
 		// Page elements
-		createRelation(page, "content", RelationType.OneToOneAggregation, "contentOfPage", compositePageFragment);
+		RelationInstance content = createRelation(page, "content", RelationType.OneToOneAggregation, "contentOfPage", compositePageFragment);
 		createRelation(compositePageFragment, "items", RelationType.OneToManyAggregation, "itemIn", pageComposition);
 		createRelation(pageComposition, "pageFragment", RelationType.OneToZeroOrOneAggregation, "composedIn", pageFragment);
 		createRelation(field, "attribute", RelationType.ManyToZeroOrOne, "fields", attribute);
@@ -147,7 +151,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createRelation(event, "parameters", RelationType.ManyToMany, "parameterInEvent", entity);
 		
 		createRelation(flow, "sources", RelationType.OneToManyAggregation, "owner", flowSource);
-		createRelation(flow, "nodes", RelationType.OneToManyAggregation, "owner", flowNodeBase);
+		RelationInstance nodes = createRelation(flow, "nodes", RelationType.OneToManyAggregation, "owner", flowNodeBase);
 		createRelation(flow, "edges", RelationType.OneToManyAggregation, "owner", flowEdge);
 		createRelation(flow, "parameters", RelationType.ManyToMany, "parameterInFlows", entity);
 
@@ -164,10 +168,14 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		
 		// Interaction
 		
+		// Events
 		EventInstance home = createEvent("Home");
 		EventInstance flowDetails = createEvent("FlowDetails", flow);
-		EventInstance entityDetails = createEvent("EntityDetails", flow);
+		EventInstance flowNodeDetails = createEvent("FlowNodeDetails", flowNodeBase);
 		EventInstance pageDetails = createEvent("PageDetails", page);
+		EventInstance fieldDetails = createEvent("FieldDetails", field);
+		EventInstance addField = createEvent("AddField");
+		EventInstance entityDetails = createEvent("EntityDetails", flow);
 		EventInstance exploreInstance = createEvent("ExploreInstance");
 		exploreInstance.customization.set("custom.designer.caseexplorer.ExploreInstanceEventCustomization");
 		
@@ -175,6 +183,15 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		FlowInstance mainFlow = createFlow("Main");
 		FlowInstance flowFlow = createFlow("Flow");
 		flowFlow.parameters.add(flow);
+		FlowInstance pageFlow = createFlow("Page");
+		pageFlow.parameters.add(page);
+		FlowInstance addFieldFlow = createFlow("AddField");
+		addFieldFlow.customization.set("custom.designer.AddFieldFlowCustomization");
+		FlowInstance fieldFlow = createFlow("Field");
+		fieldFlow.parameters.add(field);
+		FlowInstance flowNodeFlow = createFlow("FlowNode");
+		flowNodeFlow.parameters.add(flowNodeBase);
+		flowNodeFlow.customization.set("custom.designer.FlowNodeFlowCustomization");
 		FlowInstance caseExplorerFlow = createFlow("CaseExplorer");
 		FlowInstance caseExplorerInstanceFlow = createFlow("CaseExplorerInstance");
 		caseExplorerInstanceFlow.customization.set("custom.designer.caseexplorer.CaseExplorerInstanceFlowCustomization");
@@ -184,11 +201,26 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		SubFlowInstance flowSubFlow = createSubFlow(mainFlow, flowFlow);
 		SubFlowInstance caseExplorerSubFlow = createSubFlow(mainFlow, caseExplorerFlow);
 		createEdge(mainFlow, welcomePage, flowDetails, flowSubFlow, flowDetails);
+		createEdge(mainFlow, flowSubFlow, flowDetails, flowSubFlow, flowDetails);//recursive
 		createEdge(mainFlow, flowSubFlow, home, welcomePage, null);
 		createEdge(mainFlow, flowSubFlow, exploreInstance, caseExplorerSubFlow, exploreInstance);
 		// Flow
 		PageInstance flowPage = createPage(flowFlow, "Flow");
 		FlowSourceInstance flowDetailsSource = createSource(flowFlow, flowDetails, flowPage, null);
+		SubFlowInstance flowNodeSubFlow = createSubFlow(flowFlow, flowNodeFlow);
+		SubFlowInstance pageSubFlow = createSubFlow(flowFlow, pageFlow);
+		createEdge(flowFlow, flowPage, flowNodeDetails, flowNodeSubFlow, null);
+		createEdge(flowFlow, flowNodeSubFlow, pageDetails, pageSubFlow, null);
+		// Page
+		PageInstance pagePage = createPage(pageFlow, "Page");
+		SubFlowInstance fieldSubFlow = createSubFlow(pageFlow, fieldFlow);
+		SubFlowInstance addFieldSubFlow = createSubFlow(pageFlow, addFieldFlow);
+		createSource(pageFlow, pageDetails, pagePage, null);
+		createEdge(pageFlow, pagePage, addField, addFieldSubFlow, addField);
+		createEdge(pageFlow, addFieldSubFlow, fieldDetails, fieldSubFlow, fieldDetails);
+		// Field
+		PageInstance fieldPage = createPage(fieldFlow, "Field");
+		createSource(fieldFlow, fieldDetails, fieldPage, null);
 		// CaseExplorer
 		SubFlowInstance caseExplorerInstanceSubFlow = createSubFlow(caseExplorerFlow, caseExplorerInstanceFlow);
 		FlowSourceInstance exploreInstanceSource = createSource(caseExplorerFlow, exploreInstance, caseExplorerInstanceSubFlow, exploreInstance);
@@ -197,6 +229,16 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		PageInstance instancePage = createPage(caseExplorerInstanceFlow, "Instance");
 		instancePage.customization.set("custom.designer.caseexplorer.InstancePageCustomization");
 		FlowSourceInstance instanceExploreInstanceSource = createSource(caseExplorerInstanceFlow, exploreInstance, instancePage, null);
+		
+		// Shared
+		CompositePageFragmentInstance pageFragmentEditor = createCompositePageFragment();
+		addContent(pageFragmentEditor, add(createTemplatedText(), "PageFragment"));
+		createField(pageFragmentEditor, presentation, false);
+		PageFragmentHolderInstance pageFragmentEditorHolder = new PageFragmentHolderInstance(applicationInstance);
+		pageFragmentEditorHolder.pageFragment.set(pageFragmentEditor);
+		applicationInstance.shared.get().pageFragments.add(pageFragmentEditorHolder);
+		
+		// Pages
 		// Welcome page
 		addContent(welcomePage.content.get(), createConstantText("Welcome to the Designer"));
 		CompositePageFragmentInstance columns = createCompositePageFragment();
@@ -218,11 +260,23 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		addContent(flowsSelect, createLink(flowDetails, add(createTemplatedText(), name)));
 		addContent(column2, flowsSelect);
 		// Flow page
-		addContent(flowPage.content.get(), createConstantText("Flow"));
 		createField(flowPage.content.get(), name, false);
+		addContent(flowPage.content.get(), createConstantText("Nodes"));
+		SelectInstance nodesSelect = createSelect(nodes);
+		addContent(nodesSelect, createLink(flowNodeDetails, add(createTemplatedText(), name)));
+		addContent(flowPage.content.get(), nodesSelect);
 		addContent(flowPage.content.get(), createButton(exploreInstance, createConstantText("Open in case explorer")));
 		addContent(flowPage.content.get(), createButton(home, createConstantText("Home")));
-		
+		// Page page
+		createField(pagePage.content.get(), name, false);
+		SelectInstance selectContent = createSelect(content);
+		SharedFragmentInstance editorReference = new SharedFragmentInstance(applicationInstance);
+		editorReference.holder.set(pageFragmentEditorHolder);
+		addContent(selectContent, editorReference);
+		addContent(pagePage.content.get(), selectContent);
+		addContent(pagePage.content.get(), createButton(addField, createConstantText("Add field")));
+		addContent(pagePage.content.get(), createButton(exploreInstance, createConstantText("Open in case explorer")));
+		addContent(pagePage.content.get(), createButton(home, createConstantText("Home")));
 		// Finish up
 		
 		applicationInstance.exposedFlows.add(mainFlow);

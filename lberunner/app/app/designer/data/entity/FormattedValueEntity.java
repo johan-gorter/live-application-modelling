@@ -28,14 +28,6 @@ public class FormattedValueEntity extends SimpleEntity {
 					FormattedValueInstance instance) {
 				return instance.value;
 			}
-	
-			public boolean isOwner() {
-				return true;
-			}
-	
-			public boolean isAutoCreate() {
-				return true;
-			}
 		};
 	
 	// Reverse relations

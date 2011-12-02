@@ -3,53 +3,53 @@ package app.designer.flow;
 import app.designer.data.entity.*;
 import app.designer.flow.*;
 import app.designer.event.*;
-import app.designer.flow.flow.*;
+import app.designer.flow.page.*;
 import lbe.model.Entity;
 import lbe.model.flow.*;
 
-public class FlowFlow extends Flow {
+public class PageFlow extends Flow {
 
-	public static final FlowFlow INSTANCE = new FlowFlow();
+	public static final PageFlow INSTANCE = new PageFlow();
 	
-	protected FlowFlow() {
+	protected PageFlow() {
 	}
 	
 	private static final FlowSource[] SOURCES = new FlowSource[]{
 		new FlowSource(
-			FlowDetailsEvent.INSTANCE,
-			FlowPage.INSTANCE,
+			PageDetailsEvent.INSTANCE,
+			PagePage.INSTANCE,
 			null
 		),
 	};
 
 	private static final FlowNodeBase[] NODES = new FlowNodeBase[]{
-		FlowPage.INSTANCE,
-		FlowNodeSubFlow.INSTANCE,
-		PageSubFlow.INSTANCE,
+		PagePage.INSTANCE,
+		FieldSubFlow.INSTANCE,
+		AddFieldSubFlow.INSTANCE,
 	};
 	
 	private static final FlowEdge[] EDGES = new FlowEdge[]{
 		new FlowEdge(
-			FlowPage.INSTANCE, 
-			FlowNodeDetailsEvent.INSTANCE,
-			FlowNodeSubFlow.INSTANCE,
-			null
+			PagePage.INSTANCE, 
+			AddFieldEvent.INSTANCE,
+			AddFieldSubFlow.INSTANCE,
+			AddFieldEvent.INSTANCE
 		),
 		new FlowEdge(
-			FlowNodeSubFlow.INSTANCE, 
-			PageDetailsEvent.INSTANCE,
-			PageSubFlow.INSTANCE,
-			null
+			AddFieldSubFlow.INSTANCE, 
+			FieldDetailsEvent.INSTANCE,
+			FieldSubFlow.INSTANCE,
+			FieldDetailsEvent.INSTANCE
 		),
 	};
 	
 	private static final Entity[] PARAMETERS = new Entity[]{
-		FlowEntity.INSTANCE,
+		PageEntity.INSTANCE,
 	};
 	
 	@Override
 	public String getName() {
-		return "Flow";
+		return "Page";
 	}
 
 	@Override

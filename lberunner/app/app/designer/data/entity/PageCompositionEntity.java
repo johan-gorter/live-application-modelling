@@ -16,21 +16,6 @@ public class PageCompositionEntity extends SimpleEntity {
 	
 	// Attributes
 	
-	public static final Attribute<PageCompositionInstance, List<java.lang.String>, java.lang.String> presentationStyles 
-		= new SimpleAttribute<PageCompositionInstance, List<java.lang.String>, java.lang.String>(
-			"presentationStyles", INSTANCE, java.lang.String.class
-		) {
-	
-			@Override
-			public ReadOnlyAttributeValues<PageCompositionInstance, java.lang.String> get(PageCompositionInstance instance) {
-				return instance.presentationStyles;
-			}
-	
-			public boolean isMultivalue() {
-				return true;
-			}
-		};
-	
 	// Relations
 	
 	public static final Relation<PageCompositionInstance, PageFragmentInstance, PageFragmentInstance> pageFragment
@@ -68,7 +53,6 @@ public class PageCompositionEntity extends SimpleEntity {
 		};
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
-		presentationStyles,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
 		pageFragment,

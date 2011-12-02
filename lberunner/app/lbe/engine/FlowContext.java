@@ -15,6 +15,10 @@ public class FlowContext extends DeductionContext {
 	private final CaseData caseData;
 	private final String caseId;
 	private FlowStack flowStack;
+	
+	// For debugging purposes
+	private FlowNodeBase lastNode;
+	private FlowEventOccurrence lastOccurrence;
 
 	public FlowContext(CaseData caseData, String caseId) {
 		this.caseData = caseData;
@@ -23,6 +27,10 @@ public class FlowContext extends DeductionContext {
 	
 	public Page getPage() {
 		return (Page) flowStack.getCurrentNode();
+	}
+	
+	public CaseInstance getCaseInstance() {
+		return caseData.getCaseInstance();
 	}
 
 	public CaseData getCaseData() {
@@ -60,7 +68,7 @@ public class FlowContext extends DeductionContext {
 	public void popFlowContext() {
 		flowStack = flowStack.getParent();
 		if (flowStack==null) {
-			throw new RuntimeException("End of startflow reached");
+			throw new UnhandledOccurrenceException(lastNode, lastOccurrence);
 		}
 	}
 	
@@ -76,5 +84,10 @@ public class FlowContext extends DeductionContext {
 	@Override
 	protected void addSelectedInstances(List<Instance> result) {
 		flowStack.addSelectedInstances(result);
+	}
+
+	public void logOccurrence(FlowEventOccurrence occurrence) {
+		this.lastNode = flowStack.getCurrentNode();
+		this.lastOccurrence = occurrence;
 	}
 }

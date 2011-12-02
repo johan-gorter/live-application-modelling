@@ -143,6 +143,9 @@ public class FlowGenerator extends AbstractGenerator {
 		}
 
 		AbstractGenerator.generateFile(AbstractGenerator.flowTemplate, this, "flow", name, "Flow", appname, applicationRoot);
+		if (applicationRoot!=null) {
+			new File(new File(applicationRoot,"flow"), name.toLowerCase()).mkdirs();
+		}
 		
 		List<ConceptInstance> newPages = updateGenerators(pageGenerators, getPages(flowInstance.nodes.get()), applicationRoot);
 		for(ConceptInstance newPage : newPages) {

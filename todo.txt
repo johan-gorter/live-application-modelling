@@ -3,6 +3,8 @@ Naam: Instant prototyping designer
 New design met tabellen
 Page designer flow
 DEMO Onne
+.get(), .set() verwijderen, inheritance van attributen mogelijk maken
+Deductions
 CaseExplorer dynamisch
 Builder vanuit applicatie laten designen
 Demo diversen

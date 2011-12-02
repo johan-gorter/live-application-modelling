@@ -145,6 +145,7 @@ public class Case {
 	}
 	
 	private void flow(FlowContext flowContext, FlowEventOccurrence occurrence) {
+		flowContext.logOccurrence(occurrence);
 		while (occurrence!=null) {
 			occurrence = flowContext.step(occurrence);
 		}

@@ -75,7 +75,7 @@ public abstract class Flow extends Model {
 			if (source.getStartEvent()==event) return source;
 		}
 		if (defaultSource!=null) return defaultSource;
-		throw new RuntimeException("Could not find flow source for event: "+event.getName());
+		throw new RuntimeException("Flow "+getName()+" does not have a source for event: "+event.getName());
 	}
 	
 	protected void acceptParameters(FlowContext context, Instance[] selectedInstances) {
@@ -107,6 +107,7 @@ public abstract class Flow extends Model {
 			occurrence = nextOccurrence(occurrence, endEvent);
 		}
 		context.getFlowStack().setCurrentNode(node);
+		context.logOccurrence(occurrence);
 		if (node instanceof SubFlow) {
 			return ((SubFlow)node).getFlow().enter(occurrence, context);
 		} else if (node instanceof Page) {

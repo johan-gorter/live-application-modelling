@@ -19,7 +19,7 @@ public class ${name}Entity extends SimpleEntity {
 	<#list attributes as attribute>
 	
 	public static final Attribute<${name}Instance, ${attribute.className}, ${attribute.itemClassName}> ${attribute.name} 
-		= new SimpleAttribute<${name}Instance, ${attribute.className}, ${attribute.itemClassName}>(
+		= new <#if customization??>${customization}<#else>SimpleAttribute<${name}Instance, ${attribute.className}, ${attribute.itemClassName}></#if>(
 			"${attribute.name}", INSTANCE, ${attribute.itemClassName}.class
 		) {
 	

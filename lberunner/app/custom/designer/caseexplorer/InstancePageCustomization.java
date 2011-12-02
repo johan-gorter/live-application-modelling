@@ -19,11 +19,10 @@ import lbe.model.pageelement.impl.SimpleButton;
 import lbe.model.pageelement.impl.SimpleCompositePageFragment;
 import lbe.model.pageelement.impl.SimpleField;
 import app.designer.data.entity.ConceptEntity;
+import app.designer.event.ExploreInstanceEvent;
 import app.designer.flow.caseexplorerinstance.InstancePage;
 
 public class InstancePageCustomization extends InstancePage {
-	
-	public static final SimpleFlowEvent NAVIGATE_EVENT = new SimpleFlowEvent("navigate", new Entity[]{});
 	
 	public static class InstanceButtonText extends Text {
 
@@ -67,7 +66,7 @@ public class InstancePageCustomization extends InstancePage {
 				children.add(
 					new SimpleCompositePageFragment(relation, 
 						new PageFragment[]{
-							new SimpleButton(NAVIGATE_EVENT, new InstanceButtonText())
+							new SimpleButton(ExploreInstanceEvent.INSTANCE, new InstanceButtonText())
 						}
 					)
 				);

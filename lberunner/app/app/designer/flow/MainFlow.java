@@ -37,6 +37,12 @@ public class MainFlow extends Flow {
 		),
 		new FlowEdge(
 			FlowSubFlow.INSTANCE, 
+			FlowDetailsEvent.INSTANCE,
+			FlowSubFlow.INSTANCE,
+			FlowDetailsEvent.INSTANCE
+		),
+		new FlowEdge(
+			FlowSubFlow.INSTANCE, 
 			HomeEvent.INSTANCE,
 			WelcomePage.INSTANCE,
 			null
