@@ -14,6 +14,10 @@ public class FieldPage extends Page {
 	
 	private static CompositePageFragment CONTENT = 
         new SimpleCompositePageFragment(new PageFragment[]{
+            new SimpleLink(HomeEvent.INSTANCE, new ConstantText("Home")),
+            new SimpleLink(FlowDetailsEvent.INSTANCE, new ConstantText("Flow")),
+            new SimpleLink(PageDetailsEvent.INSTANCE, new ConstantText("Page")),
+            new SimpleLink(ExploreInstanceEvent.INSTANCE, new ConstantText("Open in case explorer")),
             new SimpleField(FieldEntity.INSTANCE, FieldEntity.required),
             new SimpleField(FieldEntity.INSTANCE, FieldEntity.readOnly),
             new SimpleCompositePageFragment(FieldEntity.attribute, new PageFragment[]{

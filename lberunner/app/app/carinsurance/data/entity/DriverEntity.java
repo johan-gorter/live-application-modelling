@@ -175,36 +175,25 @@ public class DriverEntity extends SimpleEntity {
 			}
 		};
 	
-	public static final Attribute<DriverInstance, java.lang.String, java.lang.String> NewAttribute1322915123 
+	public static final Attribute<DriverInstance, java.lang.String, java.lang.String> test1 
 		= new SimpleAttribute<DriverInstance, java.lang.String, java.lang.String>(
-			"NewAttribute1322915123", INSTANCE, java.lang.String.class
+			"test1", INSTANCE, java.lang.String.class
 		) {
 	
 			@Override
 			public ReadOnlyAttributeValue<DriverInstance, java.lang.String> get(DriverInstance instance) {
-				return instance.NewAttribute1322915123;
+				return instance.test1;
 			}
 		};
 	
-	public static final Attribute<DriverInstance, java.lang.String, java.lang.String> XXxxxy 
+	public static final Attribute<DriverInstance, java.lang.String, java.lang.String> whatever 
 		= new SimpleAttribute<DriverInstance, java.lang.String, java.lang.String>(
-			"XXxxxy", INSTANCE, java.lang.String.class
+			"whatever", INSTANCE, java.lang.String.class
 		) {
 	
 			@Override
 			public ReadOnlyAttributeValue<DriverInstance, java.lang.String> get(DriverInstance instance) {
-				return instance.XXxxxy;
-			}
-		};
-	
-	public static final Attribute<DriverInstance, java.lang.String, java.lang.String> Bla 
-		= new SimpleAttribute<DriverInstance, java.lang.String, java.lang.String>(
-			"Bla", INSTANCE, java.lang.String.class
-		) {
-	
-			@Override
-			public ReadOnlyAttributeValue<DriverInstance, java.lang.String> get(DriverInstance instance) {
-				return instance.Bla;
+				return instance.whatever;
 			}
 		};
 	
@@ -237,9 +226,8 @@ public class DriverEntity extends SimpleEntity {
 		yearsInsured,
 		mileage,
 		noClaimsDiscount,
-		NewAttribute1322915123,
-		XXxxxy,
-		Bla,
+		test1,
+		whatever,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
 	};

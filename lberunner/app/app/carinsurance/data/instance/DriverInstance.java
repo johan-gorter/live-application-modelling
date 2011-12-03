@@ -94,27 +94,19 @@ public class DriverInstance
 	}
 
 	
-	public final AttributeValue<DriverInstance, java.lang.String> NewAttribute1322915123
-		= createAttributeValue(DriverEntity.NewAttribute1322915123);
+	public final AttributeValue<DriverInstance, java.lang.String> test1
+		= createAttributeValue(DriverEntity.test1);
 	
-	public java.lang.String getNewAttribute1322915123() {
-		return NewAttribute1322915123.get();
+	public java.lang.String getTest1() {
+		return test1.get();
 	}
 
 	
-	public final AttributeValue<DriverInstance, java.lang.String> XXxxxy
-		= createAttributeValue(DriverEntity.XXxxxy);
+	public final AttributeValue<DriverInstance, java.lang.String> whatever
+		= createAttributeValue(DriverEntity.whatever);
 	
-	public java.lang.String getXXxxxy() {
-		return XXxxxy.get();
-	}
-
-	
-	public final AttributeValue<DriverInstance, java.lang.String> Bla
-		= createAttributeValue(DriverEntity.Bla);
-	
-	public java.lang.String getBla() {
-		return Bla.get();
+	public java.lang.String getWhatever() {
+		return whatever.get();
 	}
 
 	

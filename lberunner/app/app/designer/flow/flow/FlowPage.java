@@ -14,13 +14,13 @@ public class FlowPage extends Page {
 	
 	private static CompositePageFragment CONTENT = 
         new SimpleCompositePageFragment(new PageFragment[]{
+            new SimpleLink(HomeEvent.INSTANCE, new ConstantText("Home")),
+            new SimpleLink(ExploreInstanceEvent.INSTANCE, new ConstantText("Open in case explorer")),
             new SimpleField(ConceptEntity.INSTANCE, ConceptEntity.name),
             new ConstantText("Nodes"),
             new SimpleCompositePageFragment(FlowEntity.nodes, new PageFragment[]{
                 new SimpleLink(FlowNodeDetailsEvent.INSTANCE, new TemplatedText().add(ConceptEntity.name))
-            }),
-            new SimpleButton(ExploreInstanceEvent.INSTANCE, new ConstantText("Open in case explorer")),
-            new SimpleButton(HomeEvent.INSTANCE, new ConstantText("Home"))
+            })
         }); 
 	
 	@Override

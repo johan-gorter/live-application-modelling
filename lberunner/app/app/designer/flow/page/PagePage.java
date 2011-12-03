@@ -14,13 +14,14 @@ public class PagePage extends Page {
 	
 	private static CompositePageFragment CONTENT = 
         new SimpleCompositePageFragment(new PageFragment[]{
+            new SimpleLink(HomeEvent.INSTANCE, new ConstantText("Home")),
+            new SimpleLink(FlowDetailsEvent.INSTANCE, new ConstantText("Flow")),
+            new SimpleLink(ExploreInstanceEvent.INSTANCE, new ConstantText("Open in case explorer")),
             new SimpleField(ConceptEntity.INSTANCE, ConceptEntity.name),
             new SimpleCompositePageFragment(PageEntity.content, new PageFragment[]{
                 
             }),
-            new SimpleButton(AddFieldEvent.INSTANCE, new ConstantText("Add field")),
-            new SimpleButton(ExploreInstanceEvent.INSTANCE, new ConstantText("Open in case explorer")),
-            new SimpleButton(HomeEvent.INSTANCE, new ConstantText("Home"))
+            new SimpleButton(AddFieldEvent.INSTANCE, new ConstantText("Add field"))
         }); 
 	
 	@Override

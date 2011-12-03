@@ -211,6 +211,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		SubFlowInstance pageSubFlow = createSubFlow(flowFlow, pageFlow);
 		createEdge(flowFlow, flowPage, flowNodeDetails, flowNodeSubFlow, null);
 		createEdge(flowFlow, flowNodeSubFlow, pageDetails, pageSubFlow, null);
+		createEdge(flowFlow, pageSubFlow, flowDetails, flowPage, null);
 		// Page
 		PageInstance pagePage = createPage(pageFlow, "Page");
 		SubFlowInstance fieldSubFlow = createSubFlow(pageFlow, fieldFlow);
@@ -218,6 +219,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createSource(pageFlow, pageDetails, pagePage, null);
 		createEdge(pageFlow, pagePage, addField, addFieldSubFlow, addField);
 		createEdge(pageFlow, addFieldSubFlow, fieldDetails, fieldSubFlow, fieldDetails);
+		createEdge(pageFlow, fieldSubFlow, pageDetails, pagePage, null);
 		// Field
 		PageInstance fieldPage = createPage(fieldFlow, "Field");
 		createSource(fieldFlow, fieldDetails, fieldPage, null);
@@ -260,14 +262,17 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		addContent(flowsSelect, createLink(flowDetails, add(createTemplatedText(), name)));
 		addContent(column2, flowsSelect);
 		// Flow page
+		addContent(flowPage.content.get(), createLink(home, createConstantText("Home")));
+		addContent(flowPage.content.get(), createLink(exploreInstance, createConstantText("Open in case explorer")));
 		createField(flowPage.content.get(), name, false);
 		addContent(flowPage.content.get(), createConstantText("Nodes"));
 		SelectInstance nodesSelect = createSelect(nodes);
 		addContent(nodesSelect, createLink(flowNodeDetails, add(createTemplatedText(), name)));
 		addContent(flowPage.content.get(), nodesSelect);
-		addContent(flowPage.content.get(), createButton(exploreInstance, createConstantText("Open in case explorer")));
-		addContent(flowPage.content.get(), createButton(home, createConstantText("Home")));
 		// Page page
+		addContent(pagePage.content.get(), createLink(home, createConstantText("Home")));
+		addContent(pagePage.content.get(), createLink(flowDetails, createConstantText("Flow")));
+		addContent(pagePage.content.get(), createLink(exploreInstance, createConstantText("Open in case explorer")));
 		createField(pagePage.content.get(), name, false);
 		SelectInstance selectContent = createSelect(content);
 		SharedFragmentInstance editorReference = new SharedFragmentInstance(applicationInstance);
@@ -275,16 +280,17 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		addContent(selectContent, editorReference);
 		addContent(pagePage.content.get(), selectContent);
 		addContent(pagePage.content.get(), createButton(addField, createConstantText("Add field")));
-		addContent(pagePage.content.get(), createButton(exploreInstance, createConstantText("Open in case explorer")));
-		addContent(pagePage.content.get(), createButton(home, createConstantText("Home")));
 		// Field page
+		addContent(fieldPage.content.get(), createLink(home, createConstantText("Home")));
+		addContent(fieldPage.content.get(), createLink(flowDetails, createConstantText("Flow")));
+		addContent(fieldPage.content.get(), createLink(pageDetails, createConstantText("Page")));
+		addContent(fieldPage.content.get(), createLink(exploreInstance, createConstantText("Open in case explorer")));
 		createField(fieldPage.content.get(), required, false);
 		createField(fieldPage.content.get(), readOnly, false);
 		SelectInstance attributeSelect = createSelect(fieldAttribute);
 		createField(attributeSelect, name, true);
 		createField(attributeSelect, className, true);
 		addContent(fieldPage.content.get(), attributeSelect);
-		
 		
 		// Finish up
 		

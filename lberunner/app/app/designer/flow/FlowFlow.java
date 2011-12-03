@@ -41,6 +41,12 @@ public class FlowFlow extends Flow {
 			PageSubFlow.INSTANCE,
 			null
 		),
+		new FlowEdge(
+			PageSubFlow.INSTANCE, 
+			FlowDetailsEvent.INSTANCE,
+			FlowPage.INSTANCE,
+			null
+		),
 	};
 	
 	private static final Entity[] PARAMETERS = new Entity[]{
