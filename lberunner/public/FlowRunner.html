@@ -40,7 +40,7 @@
 <input id="yui-history-field" type="hidden">
 
 <div class="doc">
-  <div class="header"><h1>{Header}</h1></div>
+  <div class="header"><h1><span id="header">{Header}</span></h1></div>
   <div class="main">
     <div class="content-wrap">
       <div class="content" id="AquimaMVC">
@@ -115,6 +115,11 @@ function waitForPageChanges() {
 
 function updatePage(data) {
 	document.title= data.name;
+    var header = YAHOO.util.Dom.get("header");
+    if (header) {
+    	header.innerHTML = data.name;
+    }
+
 	pageCoordinates = data.id;
 	History.navigate('coordinates', pageCoordinates);
 

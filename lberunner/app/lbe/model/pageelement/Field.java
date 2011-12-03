@@ -16,7 +16,7 @@ public abstract class Field extends PageFragment {
 	
 	@Override
 	public String getName() {
-		return getAttribute().getName();
+		return getAttribute().getName()+":"+this.datatypeToString(getAttribute().getDatatype());
 	}
 	
 	@Override
@@ -33,6 +33,7 @@ public abstract class Field extends PageFragment {
 			value = new String[0];
 		}
 		result.datatype = datatypeToString(attribute.getDatatype());
+		result.id = result.id;
 		result.value = value;
 		result.required = isRequired();
 		result.refresh = true;

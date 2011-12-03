@@ -21,6 +21,7 @@ public class CaseManager {
 	private static AtomicLong lastId = new AtomicLong(0);
 
 	private static ApplicationClassloaderState modelState;
+	private static boolean disabled = false;
 
 	private static Thread modelChangePollThread;
 	
@@ -33,25 +34,31 @@ public class CaseManager {
 	}
 	
 	public static void fireChangesIfModelChanged() {
-		if (Play.mode==Mode.DEV) {
-			try {
-				Play.detectChanges();
-			} catch (Exception e) {
-				LOG.warn("Could not succesfully detect source changes", e);
-				return;
-			}
-			if (modelState != Play.classloader.currentState) {
-				modelState = Play.classloader.currentState;
-				if (LOG.isInfoEnabled()) {
-					LOG.info("Model changes detected");
+		if (Play.mode==Mode.DEV && !disabled) {
+			synchronized(Play.class)
+			{
+				try {
+					Play.detectChanges();
+				} catch (Exception e) {
+					LOG.warn("Could not succesfully detect source changes", e);
+					return;
 				}
-				for (Case c: cases.values()) {
-					c.informWaiters();// Sends the page using the old model
-					c.informWaiters();// Makes the browser reload immediately and fetch the page using the new model
-				}
-			} else {
-				if (LOG.isDebugEnabled()) {
-					LOG.debug("No model changes detected");
+				if (modelState != Play.classloader.currentState) {
+					modelState = Play.classloader.currentState;
+					if (LOG.isInfoEnabled()) {
+						LOG.info("Model changes detected, state "+modelState);
+					}
+					disabled =true;
+					for (Case c: cases.values()) {
+						c.newCaseDataVersion();
+						c.informWaiters();// Sends the page using the old model
+						c.newCaseDataVersion();// Makes the browser reload immediately and fetch the page using the new model
+						c.informWaiters();// Sends the page using the new model
+					}
+				} else {
+					if (LOG.isDebugEnabled()) {
+						LOG.debug("No model changes detected");
+					}
 				}
 			}
 		}

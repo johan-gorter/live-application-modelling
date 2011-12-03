@@ -24,10 +24,9 @@ public class DriverPage extends Page {
                     new SimpleField(DriverEntity.INSTANCE, DriverEntity.carUse).setRequired(),
                     new SimpleField(DriverEntity.INSTANCE, DriverEntity.mileage).setRequired(),
                     new SimpleField(DriverEntity.INSTANCE, DriverEntity.zipCode).setRequired(),
-                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.NewAttribute1322863589),
-                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.NewAttribute1322863592),
-                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.Test),
-                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.NewAttribute1322863623)
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.NewAttribute1322915123),
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.XXxxxy),
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.Bla)
                 })
             })
         }); 

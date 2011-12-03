@@ -12,12 +12,15 @@ import lbe.instance.CaseInstance;
 import lbe.instance.Instance;
 
 import org.apache.commons.codec.binary.Hex;
+import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class CasePersister {
 
+	private static final Logger LOG = Logger.getLogger(CasePersister.class);
+	
 	public static final CasePersister INSTANCE = new CasePersister();
 	
 	private CasePersister() {
@@ -52,6 +55,7 @@ public class CasePersister {
 				targetFile.delete();
 			}
 			file.renameTo(targetFile);
+			LOG.info("Persisted "+id+" version "+version);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

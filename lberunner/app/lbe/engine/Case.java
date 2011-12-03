@@ -53,7 +53,7 @@ public class Case {
 	}
 
 	public synchronized Promise<PageElement> waitForChange(int lastCaseVersion, Application application, PageCoordinates pageCoordinates, String sessionId, String userName) {
-		LOG.info("waitForChange, last known case version: "+lastCaseVersion+" case version "+currentCaseData.getVersion()
+		LOG.info("waitForChange "+application.getName()+", last known case version: "+lastCaseVersion+" case version "+currentCaseData.getVersion()
 					+" model version "+getModelVersion());
 		CaseManager.incrementChangeWaiters();
 		Promise<PageElement> promise = new Promise<PageElement>();
@@ -140,8 +140,14 @@ public class Case {
 		FlowEventOccurrence occurrence = page.submit(changeContext);
 		flow(flowContext, occurrence);
 		getOrCreateSession(sessionId, userName).setPageCoordinates(flowContext.getFlowStack().toPageCoordinates());
+		newCaseDataVersion();
 		informWaiters();
 		this.caseInstance.afterSubmit();
+	}
+
+	public void newCaseDataVersion() {
+		currentCaseData = new CaseData(caseInstance, currentCaseData.getVersion()+1);
+		CasePersister.INSTANCE.persist(id, currentCaseData.getCaseInstance(), currentCaseData.getVersion());
 	}
 	
 	private void flow(FlowContext flowContext, FlowEventOccurrence occurrence) {
@@ -152,9 +158,6 @@ public class Case {
 	}
 
 	public synchronized void informWaiters() {
-		currentCaseData = new CaseData(caseInstance, currentCaseData.getVersion()+1);
-		CasePersister.INSTANCE.persist(id, currentCaseData.getCaseInstance(), currentCaseData.getVersion());
-		LOG.info("New case version: "+currentCaseData.getVersion());
 		List<Waiter> promises = waiters;
 		waiters = new ArrayList<Waiter>();
 		LOG.info("informing "+ promises.size() +"waiters");
