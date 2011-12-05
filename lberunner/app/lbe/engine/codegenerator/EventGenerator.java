@@ -4,19 +4,19 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.designer.data.instance.EntityInstance;
-import app.designer.data.instance.EventInstance;
+import app.designer.EntityDesign;
+import app.designer.EventDesign;
 
 public class EventGenerator extends AbstractGenerator {
 
-	private EventInstance eventInstance;
+	private EventDesign eventDesign;
 
 	public final List<String> parameters = new ArrayList<String>();
 
-	public EventGenerator(EventInstance eventInstance, String appname) {
-		this.eventInstance = eventInstance;
+	public EventGenerator(EventDesign eventDesign, String appname) {
+		this.eventDesign = eventDesign;
 		this.appname = appname;
-		this.name = eventInstance.getName();
+		this.name = eventDesign.getName();
 	}
 	
 	public List<String> getParameters() {
@@ -28,17 +28,17 @@ public class EventGenerator extends AbstractGenerator {
 		if (observations!=null && !observations.isOutdated()) {
 			return;
 		}
-		eventInstance.getCase().startRecordingObservations();
+		eventDesign.getCase().startRecordingObservations();
 		
-		this.customization = eventInstance.customization.get();
+		this.customization = eventDesign.customization.get();
 		
 		parameters.clear();
-		for (EntityInstance parameter: eventInstance.parameters.get()) {
+		for (EntityDesign parameter: eventDesign.parameters.get()) {
 			parameters.add(parameter.name.get());
 		}
 		AbstractGenerator.generateFile(AbstractGenerator.eventTemplate, this, "event", name, "Event", appname, applicationRoot);
 		
-		this.observations = eventInstance.getCase().stopRecordingObservations();
+		this.observations = eventDesign.getCase().stopRecordingObservations();
 	}
 
 	@Override

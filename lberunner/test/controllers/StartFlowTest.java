@@ -14,13 +14,11 @@ import lbe.model.flow.Page.PageRootElement;
 
 import org.junit.Test;
 
-import custom.designer.ApplicationInstanceCustomization;
-
 import play.libs.F.Promise;
 import app.carinsurance.CarInsuranceApplication;
-import app.carinsurance.data.instance.CarinsuranceCaseInstance;
+import app.carinsurance.CarinsuranceCase;
 import app.designer.DesignerApplication;
-import app.designer.data.instance.ApplicationInstance;
+import custom.designer.ApplicationDesignCustomization;
 
 public class StartFlowTest {
 
@@ -32,7 +30,7 @@ public class StartFlowTest {
 	@Test
 	public void testCarInsurance() throws Exception {
 		application = CarInsuranceApplication.INSTANCE;
-		c = CaseManager.create(new CarinsuranceCaseInstance());
+		c = CaseManager.create(new CarinsuranceCase());
 
 		startFlow();
 		PageCoordinates pageCoordinates = getPageCoordinates();
@@ -58,7 +56,7 @@ public class StartFlowTest {
 	@Test
 	public void testDesigner() throws Exception {
 		application = DesignerApplication.INSTANCE;
-		c = CaseManager.create(new ApplicationInstanceCustomization());
+		c = CaseManager.create(new ApplicationDesignCustomization());
 		
 		username = "bob";
 		startFlow();
@@ -76,7 +74,7 @@ public class StartFlowTest {
 	@Test
 	public void testDesignCarinsurance() throws Exception {
 		application = DesignerApplication.INSTANCE;
-		c = CaseManager.getCase("carinsurance", ApplicationInstanceCustomization.class);
+		c = CaseManager.getCase("carinsurance", ApplicationDesignCustomization.class);
 		
 		startFlow();
 		

@@ -2,8 +2,7 @@ package lbe.designerbootstrap;
 
 
 import lbe.engine.CasePersister;
-import app.designer.data.instance.ApplicationInstance;
-import custom.designer.ApplicationInstanceCustomization;
+import custom.designer.ApplicationDesignCustomization;
 
 public class Bootstrapper {
 
@@ -18,16 +17,16 @@ public class Bootstrapper {
 	}
 	
 	public static void main(String[] args) {
-		//createCarinsurance();
-		createDesigner();
+		createCarinsurance();
+		//createDesigner();
 	}
 
 	private static void createCarinsurance() {
-		ApplicationInstanceCustomization applicationInstance = CarinsuranceBootstrapper.createCarinsurance();
+		ApplicationDesignCustomization applicationInstance = CarinsuranceBootstrapper.createCarinsurance();
 		
 		String json = CasePersister.gson.toJson(applicationInstance);
 		//		System.out.println(json);
-		applicationInstance = CasePersister.gson.fromJson(json, ApplicationInstanceCustomization.class);
+		applicationInstance = CasePersister.gson.fromJson(json, ApplicationDesignCustomization.class);
 		
 		CasePersister.INSTANCE.persist("carinsurance", applicationInstance, (int)(System.currentTimeMillis()/1000));
 		
@@ -41,7 +40,7 @@ public class Bootstrapper {
 	}
 
 	public static void createDesigner() {
-		ApplicationInstanceCustomization applicationInstance = DesignerBootstrapper.createDesigner();
+		ApplicationDesignCustomization applicationInstance = DesignerBootstrapper.createDesigner();
 
 //		System.out.println(CasePersister.gson.toJson(applicationInstance));
 		

@@ -1,9 +1,9 @@
-package app.${appname}.data.entity;
+package app.${appname}.entity;
 <#include "Text.java.ftl">
 
 import java.util.List;
 
-import app.${appname}.data.instance.*;
+import app.${appname}.*;
 import lbe.instance.*;
 import lbe.instance.value.*;
 import lbe.model.*;
@@ -18,13 +18,13 @@ public class ${name}Entity extends SimpleEntity {
 	// Attributes
 	<#list attributes as attribute>
 	
-	public static final Attribute<${name}Instance, ${attribute.className}, ${attribute.itemClassName}> ${attribute.name} 
-		= new <#if attribute.customization??>${attribute.customization}<#else>SimpleAttribute<${name}Instance, ${attribute.className}, ${attribute.itemClassName}></#if>(
+	public static final Attribute<${name}, ${attribute.className}, ${attribute.itemClassName}> ${attribute.name} 
+		= new <#if attribute.customization??>${attribute.customization}<#else>SimpleAttribute<${name}, ${attribute.className}, ${attribute.itemClassName}></#if>(
 			"${attribute.name}", INSTANCE, ${attribute.itemClassName}.class
 		) {
 	
 			@Override
-			public ReadOnlyAttributeValue<#if attribute.multivalue>s</#if><${name}Instance, ${attribute.itemClassName}> get(${name}Instance instance) {
+			public ReadOnlyAttributeValue<#if attribute.multivalue>s</#if><${name}, ${attribute.itemClassName}> get(${name} instance) {
 				return instance.${attribute.name};
 			}
 			<#if attribute.multivalue>
@@ -65,14 +65,14 @@ public class ${name}Entity extends SimpleEntity {
 	// Relations
 	<#list relations as relation>
 	
-	public static final Relation<${name}Instance, ${relation.to}, ${relation.item}Instance> ${relation.name}
-		= new SimpleRelation<${name}Instance, ${relation.to}, ${relation.item}Instance>(
-			"${relation.name}", INSTANCE, ${relation.item}Entity.INSTANCE, ${relation.item}Instance.class, ${relation.item}Entity.${relation.reverseName}
+	public static final Relation<${name}, ${relation.to}, ${relation.item}> ${relation.name}
+		= new SimpleRelation<${name}, ${relation.to}, ${relation.item}>(
+			"${relation.name}", INSTANCE, ${relation.item}Entity.INSTANCE, ${relation.item}.class, ${relation.item}Entity.${relation.reverseName}
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<#if relation.multivalue>s</#if><${name}Instance, ${relation.item}Instance> get(
-					${name}Instance instance) {
+			public ReadOnlyRelationValue<#if relation.multivalue>s</#if><${name}, ${relation.item}> get(
+					${name} instance) {
 				return instance.${relation.name};
 			}
 			<#if relation.owner>
@@ -105,14 +105,14 @@ public class ${name}Entity extends SimpleEntity {
 	// Reverse relations
 	<#list reverseRelations as relation>
 	
-	public static final Relation<${name}Instance, ${relation.to}, ${relation.item}Instance> ${relation.name}
-		= new SimpleRelation<${name}Instance, ${relation.to}, ${relation.item}Instance>(
-			"${relation.name}", INSTANCE, ${name}Entity.INSTANCE, ${relation.item}Instance.class, ${relation.item}Entity.${relation.reverseName}
+	public static final Relation<${name}, ${relation.to}, ${relation.item}> ${relation.name}
+		= new SimpleRelation<${name}, ${relation.to}, ${relation.item}>(
+			"${relation.name}", INSTANCE, ${name}Entity.INSTANCE, ${relation.item}.class, ${relation.item}Entity.${relation.reverseName}
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<#if relation.multivalue>s</#if><${name}Instance, ${relation.item}Instance> get(
-					${name}Instance instance) {
+			public ReadOnlyRelationValue<#if relation.multivalue>s</#if><${name}, ${relation.item}> get(
+					${name} instance) {
 				return instance.${relation.name};
 			}
 	
@@ -153,7 +153,7 @@ public class ${name}Entity extends SimpleEntity {
 		<#if customization??>
 		return new ${customization}(<#if !caseEntity>caseInstance, id</#if>);
 		<#else>
-		return new ${name}Instance(<#if !caseEntity>caseInstance, id</#if>);
+		return new ${name}(<#if !caseEntity>caseInstance, id</#if>);
 		</#if>
 	}
 	<#if extendsFrom??>

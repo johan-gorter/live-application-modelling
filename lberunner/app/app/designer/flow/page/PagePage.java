@@ -2,7 +2,7 @@ package app.designer.flow.page;
 
 import app.designer.event.*;
 import app.designer.flow.*;
-import app.designer.data.entity.*;
+import app.designer.entity.*;
 import lbe.model.flow.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
@@ -18,7 +18,7 @@ public class PagePage extends Page {
             new SimpleLink(FlowDetailsEvent.INSTANCE, new ConstantText("Flow")),
             new SimpleLink(ExploreInstanceEvent.INSTANCE, new ConstantText("Open in case explorer")),
             new SimpleField(ConceptEntity.INSTANCE, ConceptEntity.name),
-            new SimpleCompositePageFragment(PageEntity.content, new PageFragment[]{
+            new SimpleCompositePageFragment(PageDesignEntity.content, new PageFragment[]{
                 
             }),
             new SimpleButton(AddFieldEvent.INSTANCE, new ConstantText("Add field"))

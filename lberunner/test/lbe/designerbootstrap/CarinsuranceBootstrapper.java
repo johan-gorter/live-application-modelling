@@ -3,59 +3,59 @@ package lbe.designerbootstrap;
 import java.util.Date;
 
 import lbe.designerbootstrap.Bootstrapper.RelationType;
-import app.designer.data.instance.AttributeInstance;
-import app.designer.data.instance.CompositePageFragmentInstance;
-import app.designer.data.instance.EntityInstance;
-import app.designer.data.instance.EventInstance;
-import app.designer.data.instance.FlowInstance;
-import app.designer.data.instance.FlowSourceInstance;
-import app.designer.data.instance.HeaderInstance;
-import app.designer.data.instance.PageInstance;
-import app.designer.data.instance.RelationInstance;
-import app.designer.data.instance.SelectInstance;
-import custom.designer.ApplicationInstanceCustomization;
+import app.designer.AttributeDesign;
+import app.designer.CompositePageFragmentDesign;
+import app.designer.EntityDesign;
+import app.designer.EventDesign;
+import app.designer.FlowDesign;
+import app.designer.FlowSourceDesign;
+import app.designer.Header;
+import app.designer.PageDesign;
+import app.designer.RelationDesign;
+import app.designer.Select;
+import custom.designer.ApplicationDesignCustomization;
 
 public class CarinsuranceBootstrapper extends BootstrapperUtil {
 
-	public static ApplicationInstanceCustomization createCarinsurance() {
+	public static ApplicationDesignCustomization createCarinsurance() {
 
 		// Case
-		applicationInstance = new ApplicationInstanceCustomization();
-		applicationInstance.name.set("CarInsurance");
+		applicationDesign = new ApplicationDesignCustomization();
+		applicationDesign.name.set("CarInsurance");
 		
 		// Data
-		EntityInstance carinsuranceCase = createEntity("CarinsuranceCase", null);
-		applicationInstance.caseEntity.set(carinsuranceCase);
-		EntityInstance driver = createEntity("Driver", null);
-		AttributeInstance dateOfBirth = createAttribute(driver, "dateOfBirth", Date.class);
+		EntityDesign carinsuranceCase = createEntity("CarinsuranceCase", null);
+		applicationDesign.caseEntity.set(carinsuranceCase);
+		EntityDesign driver = createEntity("Driver", null);
+		AttributeDesign dateOfBirth = createAttribute(driver, "dateOfBirth", Date.class);
 		dateOfBirth.question.set(createConstantText("Date of birth"));
-		AttributeInstance carUse = createAttribute(driver, "carUse", String.class);
+		AttributeDesign carUse = createAttribute(driver, "carUse", String.class);
 		carUse.multivalue.set(true);
 		carUse.domain.add(createDomainEntry("private", "Private"));
 		carUse.domain.add(createDomainEntry("business", "Business"));
 		carUse.question.set(createConstantText("How will the car be used?"));
-		AttributeInstance disqualified = createAttribute(driver, "disqualified", Boolean.class);
+		AttributeDesign disqualified = createAttribute(driver, "disqualified", Boolean.class);
 		disqualified.question.set(createConstantText("Have you been disqualified in the last 5 years?"));
-		AttributeInstance zipCode = createAttribute(driver, "zipCode", String.class);
+		AttributeDesign zipCode = createAttribute(driver, "zipCode", String.class);
 		zipCode.question.set(createConstantText("ZIP code"));
-		AttributeInstance yearsDriverslicense = createAttribute(driver, "yearsDriverslicense", Integer.class);
+		AttributeDesign yearsDriverslicense = createAttribute(driver, "yearsDriverslicense", Integer.class);
 		yearsDriverslicense.question.set(createConstantText("How many years have you held your drivers licence?"));
-		AttributeInstance yearsInsured = createAttribute(driver, "yearsInsured", Integer.class);
+		AttributeDesign yearsInsured = createAttribute(driver, "yearsInsured", Integer.class);
 		yearsInsured.question.set(createConstantText("How many years have you been insured?"));
-		AttributeInstance mileage = createAttribute(driver, "mileage", String.class);
+		AttributeDesign mileage = createAttribute(driver, "mileage", String.class);
 		mileage.question.set(createConstantText("Annual mileage"));
 		mileage.domain.add(createDomainEntry("k1", "< 7.500 km"));	
 		mileage.domain.add(createDomainEntry("k2", "7.500 km - 12.000 km"));	
 		mileage.domain.add(createDomainEntry("k1", "> 12.000 km"));	
-		AttributeInstance noClaimsDiscount = createAttribute(driver, "noClaimsDiscount", Integer.class);
+		AttributeDesign noClaimsDiscount = createAttribute(driver, "noClaimsDiscount", Integer.class);
 		noClaimsDiscount.question.set(createConstantText("Number of years 'no claims discount' entitlement?"));
-		RelationInstance driverRelation = createRelation(carinsuranceCase, "driver", RelationType.OneToOneAggregation, "carinsuranceCase", driver);
+		RelationDesign driverRelation = createRelation(carinsuranceCase, "driver", RelationType.OneToOneAggregation, "carinsuranceCase", driver);
 
 		// PageFragments
-		SelectInstance selectDriver = createSelect(driverRelation);
-		HeaderInstance driverHeader = createHeader(createConstantText("Driver"));
+		Select selectDriver = createSelect(driverRelation);
+		Header driverHeader = createHeader(createConstantText("Driver"));
 		addContent(selectDriver, driverHeader);
-		CompositePageFragmentInstance driverFields = createCompositePageFragment();
+		CompositePageFragmentDesign driverFields = createCompositePageFragment();
 		addContent(driverHeader, driverFields);
 		createField(driverFields, dateOfBirth, true);
 		createField(driverFields, yearsInsured, true);
@@ -67,15 +67,15 @@ public class CarinsuranceBootstrapper extends BootstrapperUtil {
 		createField(driverFields, zipCode, true);
 		
 		// Flows
-		EventInstance next = createEvent("Next");
-		FlowInstance insureFlow = createFlow("Insure");
-		PageInstance insureDriverPage = createPage(insureFlow, "Driver");
-		FlowSourceInstance insureStartSource = createSource(insureFlow, null, insureDriverPage, null);
+		EventDesign next = createEvent("Next");
+		FlowDesign insureFlow = createFlow("Insure");
+		PageDesign insureDriverPage = createPage(insureFlow, "Driver");
+		FlowSourceDesign insureStartSource = createSource(insureFlow, null, insureDriverPage, null);
 		insureDriverPage.content.set(selectDriver);
-		applicationInstance.exposedFlows.add(insureFlow);
+		applicationDesign.exposedFlows.add(insureFlow);
 		
 		// Finish up
 		
-		return applicationInstance;
+		return applicationDesign;
 	}
 }

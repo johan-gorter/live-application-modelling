@@ -2,8 +2,8 @@ package app.${appname};
 
 import java.util.*;
 
-import app.${appname}.data.entity.*;
-import app.${appname}.data.instance.*;
+import app.${appname}.entity.*;
+import app.${appname}.*;
 import app.${appname}.flow.*;
 import lbe.instance.CaseInstance;
 import lbe.model.Application;
@@ -59,7 +59,7 @@ public class ${name}Application extends Application {
 		<#if caseInstanceCustomization??>
 		return ${caseInstanceCustomization}.class;
 		<#else>
-		return ${caseEntity}Instance.class;
+		return ${caseEntity}.class;
 		</#if>
 	}
 

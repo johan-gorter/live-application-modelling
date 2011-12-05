@@ -6,14 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import app.designer.data.instance.ConceptInstance;
-import app.designer.data.instance.EntityInstance;
-import app.designer.data.instance.FlowEdgeInstance;
-import app.designer.data.instance.FlowInstance;
-import app.designer.data.instance.FlowNodeBaseInstance;
-import app.designer.data.instance.FlowSourceInstance;
-import app.designer.data.instance.PageInstance;
-import app.designer.data.instance.SubFlowInstance;
+import app.designer.Concept;
+import app.designer.EntityDesign;
+import app.designer.FlowDesign;
+import app.designer.FlowEdgeDesign;
+import app.designer.FlowNodeBaseDesign;
+import app.designer.FlowSourceDesign;
+import app.designer.PageDesign;
+import app.designer.SubFlowDesign;
 
 public class FlowGenerator extends AbstractGenerator {
 
@@ -65,10 +65,10 @@ public class FlowGenerator extends AbstractGenerator {
 		}
 	}
 
-	private FlowInstance flowInstance;
+	private FlowDesign flowDesign;
 	
-	public FlowGenerator(FlowInstance flowInstance, String appName) {
-		this.flowInstance = flowInstance;
+	public FlowGenerator(FlowDesign flowDesign, String appName) {
+		this.flowDesign = flowDesign;
 		this.appname = appName;
 	}
 	
@@ -103,14 +103,14 @@ public class FlowGenerator extends AbstractGenerator {
 			updateAll(subFlowGenerators.values(), applicationRoot);
 			return;
 		}
-		flowInstance.getCase().startRecordingObservations();
+		flowDesign.getCase().startRecordingObservations();
 
-		String flowName = flowInstance.name.get();
+		String flowName = flowDesign.name.get();
 		
-		customization = flowInstance.customization.get();
-		name = flowInstance.name.get();
+		customization = flowDesign.customization.get();
+		name = flowDesign.name.get();
 		sources.clear();
-		for (FlowSourceInstance source: flowInstance.sources.get()) {
+		for (FlowSourceDesign source: flowDesign.sources.get()) {
 			FlowSource flowSource = new FlowSource();
 			flowSource.startEvent = source.startEvent.get()==null?null:source.startEvent.get().name.get();
 			flowSource.endNode = source.endNode.get()==null?null:edgePoint(source.endNode.get());
@@ -118,28 +118,29 @@ public class FlowGenerator extends AbstractGenerator {
 			sources.add(flowSource);
 		}
 		nodes.clear();
-		for (FlowNodeBaseInstance nodeInstance: flowInstance.nodes.get()) {
+		for (FlowNodeBaseDesign nodeDesign: flowDesign.nodes.get()) {
 			FlowNode node = new FlowNode();
-			node.name = nodeInstance.name.get();
-			node.type = nodeInstance.getModel().getName();
+			node.name = nodeDesign.name.get();
+			node.type = nodeDesign.getModel().getName();
+			node.type = node.type.substring(0, node.type.length()-6); // remove Design
 			nodes.add(node);
 		}
 		edges.clear();
-		for (FlowEdgeInstance edgeInstance: flowInstance.edges.get()) {
+		for (FlowEdgeDesign edgeDesign: flowDesign.edges.get()) {
 			FlowEdge edge = new FlowEdge();
-			edge.startNode = edgePoint(edgeInstance.startNode.get());
-			if (edgeInstance.startEvent.get()!=null) {
-				edge.startEvent = edgeInstance.startEvent.get().name.get();
+			edge.startNode = edgePoint(edgeDesign.startNode.get());
+			if (edgeDesign.startEvent.get()!=null) {
+				edge.startEvent = edgeDesign.startEvent.get().name.get();
 			}
-			edge.endNode = edgePoint(edgeInstance.endNode.get());
-			if (edgeInstance.endEvent.get()!=null) {
-				edge.endEvent = edgeInstance.endEvent.get().name.get();
+			edge.endNode = edgePoint(edgeDesign.endNode.get());
+			if (edgeDesign.endEvent.get()!=null) {
+				edge.endEvent = edgeDesign.endEvent.get().name.get();
 			}
 			edges.add(edge);
 		}
 		parameters.clear();
-		for (EntityInstance selectInstance: flowInstance.parameters.get()) {
-			parameters.add(selectInstance.name.get());
+		for (EntityDesign selectDesign: flowDesign.parameters.get()) {
+			parameters.add(selectDesign.name.get());
 		}
 
 		AbstractGenerator.generateFile(AbstractGenerator.flowTemplate, this, "flow", name, "Flow", appname, applicationRoot);
@@ -147,36 +148,36 @@ public class FlowGenerator extends AbstractGenerator {
 			new File(new File(applicationRoot,"flow"), name.toLowerCase()).mkdirs();
 		}
 		
-		List<ConceptInstance> newPages = updateGenerators(pageGenerators, getPages(flowInstance.nodes.get()), applicationRoot);
-		for(ConceptInstance newPage : newPages) {
-			PageGenerator pageGenerator = new PageGenerator((PageInstance)newPage, appname, flowName);
+		List<Concept> newPages = updateGenerators(pageGenerators, getPages(flowDesign.nodes.get()), applicationRoot);
+		for(Concept newPage : newPages) {
+			PageGenerator pageGenerator = new PageGenerator((PageDesign)newPage, appname, flowName);
 			pageGenerator.update(applicationRoot);
 			pageGenerators.put(newPage.getName(), pageGenerator);
 		}
-		List<ConceptInstance> newSubFlows = updateGenerators(subFlowGenerators, getSubFlows(flowInstance.nodes.get()), applicationRoot);
-		for(ConceptInstance newSubFlow : newSubFlows) {
-			SubFlowGenerator subFlowGenerator = new SubFlowGenerator((SubFlowInstance)newSubFlow, appname, flowName);
+		List<Concept> newSubFlows = updateGenerators(subFlowGenerators, getSubFlows(flowDesign.nodes.get()), applicationRoot);
+		for(Concept newSubFlow : newSubFlows) {
+			SubFlowGenerator subFlowGenerator = new SubFlowGenerator((SubFlowDesign)newSubFlow, appname, flowName);
 			subFlowGenerator.update(applicationRoot);
 			subFlowGenerators.put(newSubFlow.getName(), subFlowGenerator);
 		}
-		this.observations = flowInstance.getCase().stopRecordingObservations();
+		this.observations = flowDesign.getCase().stopRecordingObservations();
 	}
 
-	private List<SubFlowInstance> getSubFlows(List<FlowNodeBaseInstance> list) {
-		ArrayList<SubFlowInstance> result = new ArrayList<SubFlowInstance>();
-		for (FlowNodeBaseInstance node:list) {
-			if (node instanceof SubFlowInstance) {
-				result.add((SubFlowInstance) node);
+	private List<SubFlowDesign> getSubFlows(List<FlowNodeBaseDesign> list) {
+		ArrayList<SubFlowDesign> result = new ArrayList<SubFlowDesign>();
+		for (FlowNodeBaseDesign node:list) {
+			if (node instanceof SubFlowDesign) {
+				result.add((SubFlowDesign) node);
 			}
 		}
 		return result;
 	}
 
-	private List<PageInstance> getPages(List<FlowNodeBaseInstance> list) {
-		ArrayList<PageInstance> result = new ArrayList<PageInstance>();
-		for (FlowNodeBaseInstance node:list) {
-			if (node instanceof PageInstance) {
-				result.add((PageInstance) node);
+	private List<PageDesign> getPages(List<FlowNodeBaseDesign> list) {
+		ArrayList<PageDesign> result = new ArrayList<PageDesign>();
+		for (FlowNodeBaseDesign node:list) {
+			if (node instanceof PageDesign) {
+				result.add((PageDesign) node);
 			}
 		}
 		return result;
@@ -190,9 +191,10 @@ public class FlowGenerator extends AbstractGenerator {
 		dir.delete();
 	}
 
-	private static String edgePoint(FlowNodeBaseInstance flowNodeBaseInstance) {
-		String name = flowNodeBaseInstance.name.get();
-		String typeName = flowNodeBaseInstance.getModel().getName();
+	private static String edgePoint(FlowNodeBaseDesign flowNodeBaseDesign) {
+		String name = flowNodeBaseDesign.name.get();
+		String typeName = flowNodeBaseDesign.getModel().getName();
+		typeName = typeName.substring(0, typeName.length()-6);// Remove Design
 		return name+typeName+".INSTANCE";
 	}
 }

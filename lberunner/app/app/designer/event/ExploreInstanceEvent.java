@@ -1,6 +1,6 @@
 package app.designer.event;
 
-import app.designer.data.entity.*;
+import app.designer.entity.*;
 import lbe.model.flow.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;

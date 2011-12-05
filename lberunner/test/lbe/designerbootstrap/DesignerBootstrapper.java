@@ -1,264 +1,263 @@
 package lbe.designerbootstrap;
 
 import lbe.designerbootstrap.Bootstrapper.RelationType;
-import app.designer.data.instance.AttributeInstance;
-import app.designer.data.instance.CompositePageFragmentInstance;
-import app.designer.data.instance.EntityInstance;
-import app.designer.data.instance.EventInstance;
-import app.designer.data.instance.FlowInstance;
-import app.designer.data.instance.FlowSourceInstance;
-import app.designer.data.instance.PageFragmentHolderInstance;
-import app.designer.data.instance.PageInstance;
-import app.designer.data.instance.RelationInstance;
-import app.designer.data.instance.SelectInstance;
-import app.designer.data.instance.SharedFragmentInstance;
-import app.designer.data.instance.SubFlowInstance;
-import app.designer.data.instance.TextInstance;
-import custom.designer.ApplicationInstanceCustomization;
+import app.designer.AttributeDesign;
+import app.designer.CompositePageFragmentDesign;
+import app.designer.EntityDesign;
+import app.designer.EventDesign;
+import app.designer.FlowDesign;
+import app.designer.FlowSourceDesign;
+import app.designer.PageDesign;
+import app.designer.PageFragmentHolder;
+import app.designer.RelationDesign;
+import app.designer.Select;
+import app.designer.SharedFragment;
+import app.designer.SubFlowDesign;
+import custom.designer.ApplicationDesignCustomization;
 
 public class DesignerBootstrapper extends BootstrapperUtil {
 
-	public static ApplicationInstanceCustomization createDesigner() {
+	public static ApplicationDesignCustomization createDesigner() {
 
 		// Case
-		applicationInstance = new ApplicationInstanceCustomization();
-		applicationInstance.name.set("Designer");
-//		applicationInstance.name.set("NextDesigner");
+		applicationDesign = new ApplicationDesignCustomization();
+		applicationDesign.name.set("Designer");
+		//applicationDesign.name.set("NextDesigner");
 		
 		// Entities
 		
 		// Application
-		EntityInstance application = createEntity("Application", null);
-		application.customization.set("custom.designer.ApplicationInstanceCustomization");
+		EntityDesign application = createEntity("ApplicationDesign", null);
+		application.customization.set("custom.designer.ApplicationDesignCustomization");
 		createAttribute(application, "name", String.class);
-		applicationInstance.caseEntity.set(application);
+		applicationDesign.caseEntity.set(application);
 		createAttribute(application, "customization", String.class);
 		
 		// Concept
-		EntityInstance concept = createEntity("Concept", null);
-		AttributeInstance name = createAttribute(concept, "name", String.class);
-		AttributeInstance valid = createAttribute(concept, "valid", Boolean.class);
+		EntityDesign concept = createEntity("Concept", null);
+		AttributeDesign name = createAttribute(concept, "name", String.class);
+		AttributeDesign valid = createAttribute(concept, "valid", Boolean.class);
 		valid.readOnly.set(true);
 		valid.customization.set("custom.designer.ValidAttributeCustomization");
 		
 		createAttribute(concept, "customization", String.class);
 		
 		// Entity
-		EntityInstance entity = createEntity("Entity", concept);
+		EntityDesign entityDesign = createEntity("EntityDesign", concept);
 
 		// AttributeBase
-		EntityInstance attributeBase = createEntity("AttributeBase", concept);
+		EntityDesign attributeBase = createEntity("AttributeBase", concept);
 		createAttribute(attributeBase, "readOnly", Boolean.class);
 		createAttribute(attributeBase, "multivalue", Boolean.class);
 		
 		// Attribute
-		EntityInstance attribute = createEntity("Attribute", attributeBase);
-		AttributeInstance className = createAttribute(attribute, "className", String.class);
+		EntityDesign attributeDesign = createEntity("AttributeDesign", attributeBase);
+		AttributeDesign className = createAttribute(attributeDesign, "className", String.class);
 		
 		// Domain
-		EntityInstance domainEntry = createEntity("DomainEntry", concept);
+		EntityDesign domainEntryDesign = createEntity("DomainEntryDesign", concept);
 		
 		// Relation
-		EntityInstance relation = createEntity("Relation", attributeBase);
-		createAttribute(relation, "owner", Boolean.class);
-		createAttribute(relation, "autoCreate", Boolean.class);
-		createAttribute(relation, "reverseMultivalue", Boolean.class);
-		createAttribute(relation, "reverseName", String.class);
+		EntityDesign relationDesign = createEntity("RelationDesign", attributeBase);
+		createAttribute(relationDesign, "owner", Boolean.class);
+		createAttribute(relationDesign, "autoCreate", Boolean.class);
+		createAttribute(relationDesign, "reverseMultivalue", Boolean.class);
+		createAttribute(relationDesign, "reverseName", String.class);
 		
 		// Shared
-		EntityInstance shared = createEntity("Shared", null);
-		EntityInstance textHolder = createEntity("TextHolder", concept);
-		EntityInstance pageFragmentHolder = createEntity("PageFragmentHolder", concept);
+		EntityDesign shared = createEntity("Shared", null);
+		EntityDesign textHolder = createEntity("TextHolder", concept);
+		EntityDesign pageFragmentHolder = createEntity("PageFragmentHolder", concept);
 		
 		// Page elements & Page
-		EntityInstance pageFragment = createEntity("PageFragment", null);
-		AttributeInstance presentation = createAttribute(pageFragment, "presentation", String.class);
-		EntityInstance compositePageFragment = createEntity("CompositePageFragment", pageFragment);
-		EntityInstance select = createEntity("Select", compositePageFragment);
-		EntityInstance header = createEntity("Header", compositePageFragment);
-		EntityInstance sharedPageFragment = createEntity("SharedFragment", pageFragment);
-		EntityInstance field = createEntity("Field", pageFragment);
-		AttributeInstance required = createAttribute(field, "required", Boolean.class); // TODO: this validation goes to the domain
-		AttributeInstance readOnly = createAttribute(field, "readOnly", Boolean.class);
-		EntityInstance link = createEntity("Link", pageFragment);
-		EntityInstance button = createEntity("Button", link);
-		EntityInstance pageComposition = createEntity("PageComposition", null);
+		EntityDesign pageFragmentDesign = createEntity("PageFragmentDesign", null);
+		AttributeDesign presentation = createAttribute(pageFragmentDesign, "presentation", String.class);
+		EntityDesign compositePageFragmentDesign = createEntity("CompositePageFragmentDesign", pageFragmentDesign);
+		EntityDesign select = createEntity("Select", compositePageFragmentDesign);
+		EntityDesign header = createEntity("Header", compositePageFragmentDesign);
+		EntityDesign sharedFragment = createEntity("SharedFragment", pageFragmentDesign);
+		EntityDesign fieldDesign = createEntity("FieldDesign", pageFragmentDesign);
+		AttributeDesign required = createAttribute(fieldDesign, "required", Boolean.class); // TODO: this validation goes to the domain
+		AttributeDesign readOnly = createAttribute(fieldDesign, "readOnly", Boolean.class);
+		EntityDesign linkDesign = createEntity("LinkDesign", pageFragmentDesign);
+		EntityDesign buttonDesign = createEntity("ButtonDesign", linkDesign);
+		EntityDesign pageComposition = createEntity("PageComposition", null);
 		
 		// Text
-		EntityInstance text = createEntity("Text", pageFragment);
-		EntityInstance constantText = createEntity("ConstantText", text);
-		createAttribute(constantText, "untranslated", String.class);
-		EntityInstance templatedText = createEntity("TemplatedText", text);
-		EntityInstance stringProducer = createEntity("StringProducer", null);
-		EntityInstance constantString = createEntity("ConstantString", stringProducer);
-		createAttribute(constantString, "constant", String.class);
-		EntityInstance formattedValue = createEntity("FormattedValue", stringProducer);
-		EntityInstance sharedText = createEntity("SharedText", text);
+		EntityDesign textDesign = createEntity("TextDesign", pageFragmentDesign);
+		EntityDesign constantTextDesign = createEntity("ConstantTextDesign", textDesign);
+		createAttribute(constantTextDesign, "untranslated", String.class);
+		EntityDesign templatedTextDesign = createEntity("TemplatedTextDesign", textDesign);
+		EntityDesign stringProducerDesign = createEntity("StringProducerDesign", null);
+		EntityDesign constantStringDesign = createEntity("ConstantStringDesign", stringProducerDesign);
+		createAttribute(constantStringDesign, "constant", String.class);
+		EntityDesign formattedValueDesign = createEntity("FormattedValueDesign", stringProducerDesign);
+		EntityDesign sharedTextDesign = createEntity("SharedTextDesign", textDesign);
 		// TODO: translations
 
 		// Flow nodes & Flow
-		EntityInstance event = createEntity("Event", concept);
-		EntityInstance flowEdge = createEntity("FlowEdge", null);
-		EntityInstance flowNodeBase = createEntity("FlowNodeBase", concept);
-		EntityInstance flowSource = createEntity("FlowSource", null);
-		EntityInstance page = createEntity("Page", flowNodeBase);
-		EntityInstance subFlow = createEntity("SubFlow", flowNodeBase);
-		EntityInstance flow = createEntity("Flow", concept);
+		EntityDesign eventDesign = createEntity("EventDesign", concept);
+		EntityDesign flowEdgeDesign = createEntity("FlowEdgeDesign", null);
+		EntityDesign flowNodeBaseDesign = createEntity("FlowNodeBaseDesign", concept);
+		EntityDesign flowSourceDesign = createEntity("FlowSourceDesign", null);
+		EntityDesign pageDesign = createEntity("PageDesign", flowNodeBaseDesign);
+		EntityDesign subFlowDesign = createEntity("SubFlowDesign", flowNodeBaseDesign);
+		EntityDesign flowDesign = createEntity("FlowDesign", concept);
 		
 		// Relations
 		
 		// Application
-		RelationInstance entities = createRelation(application, "entities", RelationType.OneToManyAggregation, "application", entity);
-		createRelation(application, "caseEntity", RelationType.OneToZeroOrOne, "caseEntityInApplication", entity);
-		RelationInstance flows = createRelation(application, "flows", RelationType.OneToManyAggregation, "application", flow);
-		createRelation(application, "events", RelationType.OneToManyAggregation, "application", event);
-		createRelation(application, "exposedFlows", RelationType.OneToMany, "exposedFlowInApplication", flow);
+		RelationDesign entities = createRelation(application, "entities", RelationType.OneToManyAggregation, "application", entityDesign);
+		createRelation(application, "caseEntity", RelationType.OneToZeroOrOne, "caseEntityInApplication", entityDesign);
+		RelationDesign flows = createRelation(application, "flows", RelationType.OneToManyAggregation, "application", flowDesign);
+		createRelation(application, "events", RelationType.OneToManyAggregation, "application", eventDesign);
+		createRelation(application, "exposedFlows", RelationType.OneToMany, "exposedFlowInApplication", flowDesign);
 
 		// Data
-		createRelation(entity, "extendsFrom", RelationType.ManyToZeroOrOne, "extensions", entity);
-		createRelation(entity, "attributes", RelationType.OneToManyAggregation, "entity", attribute);
-		createRelation(entity, "relations", RelationType.OneToManyAggregation, "entity", relation);
-		createRelation(relation, "to", RelationType.ManyToZeroOrOne, "reverseRelations", entity);
-		createRelation(attribute, "question", RelationType.OneToZeroOrOneAggregation, "questionOnAttribute", text);
-		createRelation(attribute, "explanation", RelationType.OneToZeroOrOneAggregation, "explanationOnAttribute", text);
-		createRelation(attribute, "domain", RelationType.OneToManyAggregation, "attribute", domainEntry);
-		createRelation(domainEntry, "display", RelationType.OneToZeroOrOneAggregation, "displayOnDomainEntry", text);
+		createRelation(entityDesign, "extendsFrom", RelationType.ManyToZeroOrOne, "extensions", entityDesign);
+		createRelation(entityDesign, "attributes", RelationType.OneToManyAggregation, "entity", attributeDesign);
+		createRelation(entityDesign, "relations", RelationType.OneToManyAggregation, "entity", relationDesign);
+		createRelation(relationDesign, "to", RelationType.ManyToZeroOrOne, "reverseRelations", entityDesign);
+		createRelation(attributeDesign, "question", RelationType.OneToZeroOrOneAggregation, "questionOnAttribute", textDesign);
+		createRelation(attributeDesign, "explanation", RelationType.OneToZeroOrOneAggregation, "explanationOnAttribute", textDesign);
+		createRelation(attributeDesign, "domain", RelationType.OneToManyAggregation, "attribute", domainEntryDesign);
+		createRelation(domainEntryDesign, "display", RelationType.OneToZeroOrOneAggregation, "displayOnDomainEntry", textDesign);
 		
 		// Text
-		createRelation(templatedText, "untranslated", RelationType.OneToManyAggregation, "untranslatedInTemplate", stringProducer);
-		createRelation(formattedValue, "value", RelationType.OneToZeroOrOne, "valueInTemplatedText", attributeBase); //TODO: deduction
+		createRelation(templatedTextDesign, "untranslated", RelationType.OneToManyAggregation, "untranslatedInTemplate", stringProducerDesign);
+		createRelation(formattedValueDesign, "value", RelationType.OneToZeroOrOne, "valueInTemplatedText", attributeBase); //TODO: deduction
 
 		// Shared
 		createRelation(application, "shared", RelationType.OneToOneAggregation, "application", shared);
 		createRelation(shared, "pageFragments", RelationType.OneToManyAggregation, "shared", pageFragmentHolder);
-		createRelation(sharedPageFragment, "holder", RelationType.ManyToZeroOrOne, "usages", pageFragmentHolder);
-		createRelation(pageFragmentHolder, "pageFragment", RelationType.OneToOneAggregation, "holder", pageFragment);
+		createRelation(sharedFragment, "holder", RelationType.ManyToZeroOrOne, "usages", pageFragmentHolder);
+		createRelation(pageFragmentHolder, "pageFragment", RelationType.OneToOneAggregation, "holder", pageFragmentDesign);
 		createRelation(shared, "texts", RelationType.OneToManyAggregation, "shared", textHolder);
-		createRelation(sharedText, "holder", RelationType.ManyToZeroOrOne, "usages", textHolder);
-		createRelation(textHolder, "text", RelationType.OneToOneAggregation, "holder", text);
+		createRelation(sharedTextDesign, "holder", RelationType.ManyToZeroOrOne, "usages", textHolder);
+		createRelation(textHolder, "text", RelationType.OneToOneAggregation, "holder", textDesign);
 		
 		// Page elements
-		RelationInstance content = createRelation(page, "content", RelationType.OneToOneAggregation, "contentOfPage", compositePageFragment);
-		createRelation(compositePageFragment, "items", RelationType.OneToManyAggregation, "itemIn", pageComposition);
-		createRelation(pageComposition, "pageFragment", RelationType.OneToZeroOrOneAggregation, "composedIn", pageFragment);
-		RelationInstance fieldAttribute = createRelation(field, "attribute", RelationType.ManyToZeroOrOne, "fields", attribute);
-		createRelation(select, "relation", RelationType.ManyToZeroOrOne, "relationInselects", relation);
-		createRelation(header, "text", RelationType.OneToOneAggregation, "textOnHeader", text);
-		createRelation(link, "caption", RelationType.OneToOneAggregation, "captionOnButton", text);
-		createRelation(link, "event", RelationType.ManyToZeroOrOne, "firesFromButtons", event);
+		RelationDesign content = createRelation(pageDesign, "content", RelationType.OneToOneAggregation, "contentOfPage", compositePageFragmentDesign);
+		createRelation(compositePageFragmentDesign, "items", RelationType.OneToManyAggregation, "itemIn", pageComposition);
+		createRelation(pageComposition, "pageFragment", RelationType.OneToZeroOrOneAggregation, "composedIn", pageFragmentDesign);
+		RelationDesign fieldAttribute = createRelation(fieldDesign, "attribute", RelationType.ManyToZeroOrOne, "fields", attributeDesign);
+		createRelation(select, "relation", RelationType.ManyToZeroOrOne, "relationInselects", relationDesign);
+		createRelation(header, "text", RelationType.OneToOneAggregation, "textOnHeader", textDesign);
+		createRelation(linkDesign, "caption", RelationType.OneToOneAggregation, "captionOnButton", textDesign);
+		createRelation(linkDesign, "event", RelationType.ManyToZeroOrOne, "firesFromButtons", eventDesign);
 		
 		// Flow
-		createRelation(event, "parameters", RelationType.ManyToMany, "parameterInEvent", entity);
+		createRelation(eventDesign, "parameters", RelationType.ManyToMany, "parameterInEvent", entityDesign);
 		
-		createRelation(flow, "sources", RelationType.OneToManyAggregation, "owner", flowSource);
-		RelationInstance nodes = createRelation(flow, "nodes", RelationType.OneToManyAggregation, "owner", flowNodeBase);
-		createRelation(flow, "edges", RelationType.OneToManyAggregation, "owner", flowEdge);
-		createRelation(flow, "parameters", RelationType.ManyToMany, "parameterInFlows", entity);
+		createRelation(flowDesign, "sources", RelationType.OneToManyAggregation, "owner", flowSourceDesign);
+		RelationDesign nodes = createRelation(flowDesign, "nodes", RelationType.OneToManyAggregation, "owner", flowNodeBaseDesign);
+		createRelation(flowDesign, "edges", RelationType.OneToManyAggregation, "owner", flowEdgeDesign);
+		createRelation(flowDesign, "parameters", RelationType.ManyToMany, "parameterInFlows", entityDesign);
 
-		createRelation(flowSource, "startEvent", RelationType.ManyToZeroOrOne, "startEventInSources", event);
-		createRelation(flowSource, "endNode", RelationType.ManyToZeroOrOne, "incomingSources", flowNodeBase);
-		createRelation(flowSource, "endEvent", RelationType.ManyToZeroOrOne, "endEventInSources", event);
+		createRelation(flowSourceDesign, "startEvent", RelationType.ManyToZeroOrOne, "startEventInSources", eventDesign);
+		createRelation(flowSourceDesign, "endNode", RelationType.ManyToZeroOrOne, "incomingSources", flowNodeBaseDesign);
+		createRelation(flowSourceDesign, "endEvent", RelationType.ManyToZeroOrOne, "endEventInSources", eventDesign);
 		
-		createRelation(flowEdge, "startNode", RelationType.ManyToZeroOrOne, "outgoingEdges", flowNodeBase);
-		createRelation(flowEdge, "startEvent", RelationType.ManyToZeroOrOne, "startEventInEdges", event);
-		createRelation(flowEdge, "endNode", RelationType.ManyToZeroOrOne, "incomingEdges", flowNodeBase);
-		createRelation(flowEdge, "endEvent", RelationType.ManyToZeroOrOne, "endEventInEdges", event);
+		createRelation(flowEdgeDesign, "startNode", RelationType.ManyToZeroOrOne, "outgoingEdges", flowNodeBaseDesign);
+		createRelation(flowEdgeDesign, "startEvent", RelationType.ManyToZeroOrOne, "startEventInEdges", eventDesign);
+		createRelation(flowEdgeDesign, "endNode", RelationType.ManyToZeroOrOne, "incomingEdges", flowNodeBaseDesign);
+		createRelation(flowEdgeDesign, "endEvent", RelationType.ManyToZeroOrOne, "endEventInEdges", eventDesign);
 		
-		createRelation(subFlow, "flow", RelationType.OneToZeroOrOne, "subFlowIn", flow);
+		createRelation(subFlowDesign, "flow", RelationType.OneToZeroOrOne, "subFlowIn", flowDesign);
 		
 		// Interaction
 		
 		// Events
-		EventInstance home = createEvent("Home");
-		EventInstance flowDetails = createEvent("FlowDetails", flow);
-		EventInstance flowNodeDetails = createEvent("FlowNodeDetails", flowNodeBase);
-		EventInstance pageDetails = createEvent("PageDetails", page);
-		EventInstance fieldDetails = createEvent("FieldDetails", field);
-		EventInstance addField = createEvent("AddField");
-		EventInstance entityDetails = createEvent("EntityDetails", flow);
-		EventInstance exploreInstance = createEvent("ExploreInstance");
+		EventDesign home = createEvent("Home");
+		EventDesign flowDetails = createEvent("FlowDetails", flowDesign);
+		EventDesign flowNodeDetails = createEvent("FlowNodeDetails", flowNodeBaseDesign);
+		EventDesign pageDetails = createEvent("PageDetails", pageDesign);
+		EventDesign fieldDetails = createEvent("FieldDetails", fieldDesign);
+		EventDesign addField = createEvent("AddField");
+		EventDesign entityDetails = createEvent("EntityDetails", flowDesign);
+		EventDesign exploreInstance = createEvent("ExploreInstance");
 		exploreInstance.customization.set("custom.designer.caseexplorer.ExploreInstanceEventCustomization");
 		
 		// Flows
-		FlowInstance mainFlow = createFlow("Main");
-		FlowInstance flowFlow = createFlow("Flow");
-		flowFlow.parameters.add(flow);
-		FlowInstance pageFlow = createFlow("Page");
-		pageFlow.parameters.add(page);
-		FlowInstance addFieldFlow = createFlow("AddField");
+		FlowDesign mainFlow = createFlow("Main");
+		FlowDesign flowFlow = createFlow("Flow");
+		flowFlow.parameters.add(flowDesign);
+		FlowDesign pageFlow = createFlow("Page");
+		pageFlow.parameters.add(pageDesign);
+		FlowDesign addFieldFlow = createFlow("AddField");
 		addFieldFlow.customization.set("custom.designer.AddFieldFlowCustomization");
-		FlowInstance fieldFlow = createFlow("Field");
-		fieldFlow.parameters.add(field);
-		FlowInstance flowNodeFlow = createFlow("FlowNode");
-		flowNodeFlow.parameters.add(flowNodeBase);
+		FlowDesign fieldFlow = createFlow("Field");
+		fieldFlow.parameters.add(fieldDesign);
+		FlowDesign flowNodeFlow = createFlow("FlowNode");
+		flowNodeFlow.parameters.add(flowNodeBaseDesign);
 		flowNodeFlow.customization.set("custom.designer.FlowNodeFlowCustomization");
-		FlowInstance caseExplorerFlow = createFlow("CaseExplorer");
-		FlowInstance caseExplorerInstanceFlow = createFlow("CaseExplorerInstance");
+		FlowDesign caseExplorerFlow = createFlow("CaseExplorer");
+		FlowDesign caseExplorerInstanceFlow = createFlow("CaseExplorerInstance");
 		caseExplorerInstanceFlow.customization.set("custom.designer.caseexplorer.CaseExplorerInstanceFlowCustomization");
 		// Main
-		PageInstance welcomePage = createPage(mainFlow, "Welcome");
-		FlowSourceInstance mainStart = createSource(mainFlow, null, welcomePage, null);
-		SubFlowInstance flowSubFlow = createSubFlow(mainFlow, flowFlow);
-		SubFlowInstance caseExplorerSubFlow = createSubFlow(mainFlow, caseExplorerFlow);
+		PageDesign welcomePage = createPage(mainFlow, "Welcome");
+		FlowSourceDesign mainStart = createSource(mainFlow, null, welcomePage, null);
+		SubFlowDesign flowSubFlow = createSubFlow(mainFlow, flowFlow);
+		SubFlowDesign caseExplorerSubFlow = createSubFlow(mainFlow, caseExplorerFlow);
 		createEdge(mainFlow, welcomePage, flowDetails, flowSubFlow, flowDetails);
 		createEdge(mainFlow, flowSubFlow, flowDetails, flowSubFlow, flowDetails);//recursive
 		createEdge(mainFlow, flowSubFlow, home, welcomePage, null);
 		createEdge(mainFlow, flowSubFlow, exploreInstance, caseExplorerSubFlow, exploreInstance);
 		// Flow
-		PageInstance flowPage = createPage(flowFlow, "Flow");
-		FlowSourceInstance flowDetailsSource = createSource(flowFlow, flowDetails, flowPage, null);
-		SubFlowInstance flowNodeSubFlow = createSubFlow(flowFlow, flowNodeFlow);
-		SubFlowInstance pageSubFlow = createSubFlow(flowFlow, pageFlow);
+		PageDesign flowPage = createPage(flowFlow, "Flow");
+		FlowSourceDesign flowDetailsSource = createSource(flowFlow, flowDetails, flowPage, null);
+		SubFlowDesign flowNodeSubFlow = createSubFlow(flowFlow, flowNodeFlow);
+		SubFlowDesign pageSubFlow = createSubFlow(flowFlow, pageFlow);
 		createEdge(flowFlow, flowPage, flowNodeDetails, flowNodeSubFlow, null);
 		createEdge(flowFlow, flowNodeSubFlow, pageDetails, pageSubFlow, null);
 		createEdge(flowFlow, pageSubFlow, flowDetails, flowPage, null);
 		// Page
-		PageInstance pagePage = createPage(pageFlow, "Page");
-		SubFlowInstance fieldSubFlow = createSubFlow(pageFlow, fieldFlow);
-		SubFlowInstance addFieldSubFlow = createSubFlow(pageFlow, addFieldFlow);
+		PageDesign pagePage = createPage(pageFlow, "Page");
+		SubFlowDesign fieldSubFlow = createSubFlow(pageFlow, fieldFlow);
+		SubFlowDesign addFieldSubFlow = createSubFlow(pageFlow, addFieldFlow);
 		createSource(pageFlow, pageDetails, pagePage, null);
 		createEdge(pageFlow, pagePage, addField, addFieldSubFlow, addField);
 		createEdge(pageFlow, addFieldSubFlow, fieldDetails, fieldSubFlow, fieldDetails);
 		createEdge(pageFlow, fieldSubFlow, pageDetails, pagePage, null);
 		// Field
-		PageInstance fieldPage = createPage(fieldFlow, "Field");
+		PageDesign fieldPage = createPage(fieldFlow, "Field");
 		createSource(fieldFlow, fieldDetails, fieldPage, null);
 		// CaseExplorer
-		SubFlowInstance caseExplorerInstanceSubFlow = createSubFlow(caseExplorerFlow, caseExplorerInstanceFlow);
-		FlowSourceInstance exploreInstanceSource = createSource(caseExplorerFlow, exploreInstance, caseExplorerInstanceSubFlow, exploreInstance);
+		SubFlowDesign caseExplorerInstanceSubFlow = createSubFlow(caseExplorerFlow, caseExplorerInstanceFlow);
+		FlowSourceDesign exploreInstanceSource = createSource(caseExplorerFlow, exploreInstance, caseExplorerInstanceSubFlow, exploreInstance);
 		createEdge(caseExplorerFlow, caseExplorerInstanceSubFlow, exploreInstance, caseExplorerInstanceSubFlow, exploreInstance); // This edge is the reason for this wrapping flow
-		// CaseExplorerInstance
-		PageInstance instancePage = createPage(caseExplorerInstanceFlow, "Instance");
+		// CaseExplorerDesign
+		PageDesign instancePage = createPage(caseExplorerInstanceFlow, "Instance");
 		instancePage.customization.set("custom.designer.caseexplorer.InstancePageCustomization");
-		FlowSourceInstance instanceExploreInstanceSource = createSource(caseExplorerInstanceFlow, exploreInstance, instancePage, null);
+		FlowSourceDesign instanceExploreInstanceSource = createSource(caseExplorerInstanceFlow, exploreInstance, instancePage, null);
 		
 		// Shared
-		CompositePageFragmentInstance pageFragmentEditor = createCompositePageFragment();
+		CompositePageFragmentDesign pageFragmentEditor = createCompositePageFragment();
 		addContent(pageFragmentEditor, add(createTemplatedText(), "PageFragment"));
 		createField(pageFragmentEditor, presentation, false);
-		PageFragmentHolderInstance pageFragmentEditorHolder = new PageFragmentHolderInstance(applicationInstance);
+		PageFragmentHolder pageFragmentEditorHolder = new PageFragmentHolder(applicationDesign);
 		pageFragmentEditorHolder.pageFragment.set(pageFragmentEditor);
-		applicationInstance.shared.get().pageFragments.add(pageFragmentEditorHolder);
+		applicationDesign.shared.get().pageFragments.add(pageFragmentEditorHolder);
 		
 		// Pages
 		// Welcome page
 		addContent(welcomePage.content.get(), createConstantText("Welcome to the Designer"));
-		CompositePageFragmentInstance columns = createCompositePageFragment();
+		CompositePageFragmentDesign columns = createCompositePageFragment();
 		columns.presentation.set("four-columns");
 		addContent(welcomePage.content.get(), columns);
-		CompositePageFragmentInstance column1 = createCompositePageFragment();
+		CompositePageFragmentDesign column1 = createCompositePageFragment();
 		column1.presentation.set("column");
 		addContent(columns, column1);
 		addContent(column1, createConstantText("Entities"));
-		SelectInstance entitiesSelect = createSelect(entities);
+		Select entitiesSelect = createSelect(entities);
 		addContent(entitiesSelect, createLink(entityDetails, add(createTemplatedText(), name)));
 		addContent(column1, entitiesSelect);
 
-		CompositePageFragmentInstance column2 = createCompositePageFragment();
+		CompositePageFragmentDesign column2 = createCompositePageFragment();
 		column2.presentation.set("column");
 		addContent(columns, column2);
 		addContent(column2, createConstantText("Flows"));
-		SelectInstance flowsSelect = createSelect(flows);
+		Select flowsSelect = createSelect(flows);
 		addContent(flowsSelect, createLink(flowDetails, add(createTemplatedText(), name)));
 		addContent(column2, flowsSelect);
 		// Flow page
@@ -266,7 +265,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		addContent(flowPage.content.get(), createLink(exploreInstance, createConstantText("Open in case explorer")));
 		createField(flowPage.content.get(), name, false);
 		addContent(flowPage.content.get(), createConstantText("Nodes"));
-		SelectInstance nodesSelect = createSelect(nodes);
+		Select nodesSelect = createSelect(nodes);
 		addContent(nodesSelect, createLink(flowNodeDetails, add(createTemplatedText(), name)));
 		addContent(flowPage.content.get(), nodesSelect);
 		// Page page
@@ -274,8 +273,8 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		addContent(pagePage.content.get(), createLink(flowDetails, createConstantText("Flow")));
 		addContent(pagePage.content.get(), createLink(exploreInstance, createConstantText("Open in case explorer")));
 		createField(pagePage.content.get(), name, false);
-		SelectInstance selectContent = createSelect(content);
-		SharedFragmentInstance editorReference = new SharedFragmentInstance(applicationInstance);
+		Select selectContent = createSelect(content);
+		SharedFragment editorReference = new SharedFragment(applicationDesign);
 		editorReference.holder.set(pageFragmentEditorHolder);
 		addContent(selectContent, editorReference);
 		addContent(pagePage.content.get(), selectContent);
@@ -287,15 +286,15 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		addContent(fieldPage.content.get(), createLink(exploreInstance, createConstantText("Open in case explorer")));
 		createField(fieldPage.content.get(), required, false);
 		createField(fieldPage.content.get(), readOnly, false);
-		SelectInstance attributeSelect = createSelect(fieldAttribute);
+		Select attributeSelect = createSelect(fieldAttribute);
 		createField(attributeSelect, name, true);
 		createField(attributeSelect, className, true);
 		addContent(fieldPage.content.get(), attributeSelect);
 		
 		// Finish up
 		
-		applicationInstance.exposedFlows.add(mainFlow);
+		applicationDesign.exposedFlows.add(mainFlow);
 		
-		return applicationInstance;
+		return applicationDesign;
 	}
 }

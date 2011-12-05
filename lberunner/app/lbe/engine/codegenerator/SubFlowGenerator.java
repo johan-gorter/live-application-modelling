@@ -3,19 +3,18 @@ package lbe.engine.codegenerator;
 import java.io.File;
 
 import lbe.instance.Observations;
-
-import app.designer.data.instance.SubFlowInstance;
+import app.designer.SubFlowDesign;
 
 public class SubFlowGenerator extends AbstractGenerator {
 
 	public String flowname;
 	public String subFlowName;
 	
-	public SubFlowInstance subFlowInstance;
+	public SubFlowDesign subFlowDesign;
 	private Observations observations;
 	
-	public SubFlowGenerator(SubFlowInstance subFlowInstance, String appname, String flowName) {
-		this.subFlowInstance = subFlowInstance;
+	public SubFlowGenerator(SubFlowDesign subFlowDesign, String appname, String flowName) {
+		this.subFlowDesign = subFlowDesign;
 		this.appname = appname;
 		this.flowname = flowName;
 	}
@@ -31,13 +30,13 @@ public class SubFlowGenerator extends AbstractGenerator {
 	@Override
 	public void update(File applicationRoot) {
 		if (observations!=null && !observations.isOutdated()) return;
-		subFlowInstance.getCase().startRecordingObservations();
+		subFlowDesign.getCase().startRecordingObservations();
 		
-		name = subFlowInstance.name.get();
-		subFlowName = subFlowInstance.flow.get().name.get();
+		name = subFlowDesign.name.get();
+		subFlowName = subFlowDesign.flow.get().name.get();
 		AbstractGenerator.generateFile(AbstractGenerator.subFlowTemplate, this, "flow/"+flowname.toLowerCase(), name, "SubFlow", appname, applicationRoot);
 		
-		this.observations = subFlowInstance.getCase().stopRecordingObservations();
+		this.observations = subFlowDesign.getCase().stopRecordingObservations();
 	}
 	
 	@Override

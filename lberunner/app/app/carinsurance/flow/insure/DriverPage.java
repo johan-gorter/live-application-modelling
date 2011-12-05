@@ -2,7 +2,7 @@ package app.carinsurance.flow.insure;
 
 import app.carinsurance.event.*;
 import app.carinsurance.flow.*;
-import app.carinsurance.data.entity.*;
+import app.carinsurance.entity.*;
 import lbe.model.flow.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
@@ -24,8 +24,8 @@ public class DriverPage extends Page {
                     new SimpleField(DriverEntity.INSTANCE, DriverEntity.carUse).setRequired(),
                     new SimpleField(DriverEntity.INSTANCE, DriverEntity.mileage).setRequired(),
                     new SimpleField(DriverEntity.INSTANCE, DriverEntity.zipCode).setRequired(),
-                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.test1),
-                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.whatever)
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.Test),
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.NewAttribute1323119309)
                 })
             })
         }); 

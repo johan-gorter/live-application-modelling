@@ -2,8 +2,8 @@ package app.designer;
 
 import java.util.*;
 
-import app.designer.data.entity.*;
-import app.designer.data.instance.*;
+import app.designer.entity.*;
+import app.designer.*;
 import app.designer.flow.*;
 import lbe.instance.CaseInstance;
 import lbe.model.Application;
@@ -19,7 +19,7 @@ public class DesignerApplication extends Application {
 	
 	@Override
 	public Entity getCaseModel() {
-		return ApplicationEntity.INSTANCE;
+		return ApplicationDesignEntity.INSTANCE;
 	}
 	
 	private static final Flow[] exposedFlows = new Flow[] {
@@ -32,39 +32,39 @@ public class DesignerApplication extends Application {
 	}
 	
 	private static final Entity[] entities = new Entity[] {
-		ApplicationEntity.INSTANCE,
+		ApplicationDesignEntity.INSTANCE,
 		ConceptEntity.INSTANCE,
-		EntityEntity.INSTANCE,
+		EntityDesignEntity.INSTANCE,
 		AttributeBaseEntity.INSTANCE,
-		AttributeEntity.INSTANCE,
-		DomainEntryEntity.INSTANCE,
-		RelationEntity.INSTANCE,
+		AttributeDesignEntity.INSTANCE,
+		DomainEntryDesignEntity.INSTANCE,
+		RelationDesignEntity.INSTANCE,
 		SharedEntity.INSTANCE,
 		TextHolderEntity.INSTANCE,
 		PageFragmentHolderEntity.INSTANCE,
-		PageFragmentEntity.INSTANCE,
-		CompositePageFragmentEntity.INSTANCE,
+		PageFragmentDesignEntity.INSTANCE,
+		CompositePageFragmentDesignEntity.INSTANCE,
 		SelectEntity.INSTANCE,
 		HeaderEntity.INSTANCE,
 		SharedFragmentEntity.INSTANCE,
-		FieldEntity.INSTANCE,
-		LinkEntity.INSTANCE,
-		ButtonEntity.INSTANCE,
+		FieldDesignEntity.INSTANCE,
+		LinkDesignEntity.INSTANCE,
+		ButtonDesignEntity.INSTANCE,
 		PageCompositionEntity.INSTANCE,
-		TextEntity.INSTANCE,
-		ConstantTextEntity.INSTANCE,
-		TemplatedTextEntity.INSTANCE,
-		StringProducerEntity.INSTANCE,
-		ConstantStringEntity.INSTANCE,
-		FormattedValueEntity.INSTANCE,
-		SharedTextEntity.INSTANCE,
-		EventEntity.INSTANCE,
-		FlowEdgeEntity.INSTANCE,
-		FlowNodeBaseEntity.INSTANCE,
-		FlowSourceEntity.INSTANCE,
-		PageEntity.INSTANCE,
-		SubFlowEntity.INSTANCE,
-		FlowEntity.INSTANCE,
+		TextDesignEntity.INSTANCE,
+		ConstantTextDesignEntity.INSTANCE,
+		TemplatedTextDesignEntity.INSTANCE,
+		StringProducerDesignEntity.INSTANCE,
+		ConstantStringDesignEntity.INSTANCE,
+		FormattedValueDesignEntity.INSTANCE,
+		SharedTextDesignEntity.INSTANCE,
+		EventDesignEntity.INSTANCE,
+		FlowEdgeDesignEntity.INSTANCE,
+		FlowNodeBaseDesignEntity.INSTANCE,
+		FlowSourceDesignEntity.INSTANCE,
+		PageDesignEntity.INSTANCE,
+		SubFlowDesignEntity.INSTANCE,
+		FlowDesignEntity.INSTANCE,
 	};
 	private static final SortedMap<String, Entity> entityMap = new TreeMap<String, Entity>();
 	static {
@@ -80,7 +80,7 @@ public class DesignerApplication extends Application {
 	
 	@Override
 	public Class<? extends CaseInstance> getCaseInstanceClass() {
-		return custom.designer.ApplicationInstanceCustomization.class;
+		return custom.designer.ApplicationDesignCustomization.class;
 	}
 
 	@Override

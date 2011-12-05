@@ -2,8 +2,8 @@ package app.carinsurance;
 
 import java.util.*;
 
-import app.carinsurance.data.entity.*;
-import app.carinsurance.data.instance.*;
+import app.carinsurance.entity.*;
+import app.carinsurance.*;
 import app.carinsurance.flow.*;
 import lbe.instance.CaseInstance;
 import lbe.model.Application;
@@ -49,7 +49,7 @@ public class CarInsuranceApplication extends Application {
 	
 	@Override
 	public Class<? extends CaseInstance> getCaseInstanceClass() {
-		return CarinsuranceCaseInstance.class;
+		return CarinsuranceCase.class;
 	}
 
 	@Override

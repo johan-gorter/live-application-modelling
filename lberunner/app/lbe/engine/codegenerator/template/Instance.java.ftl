@@ -1,9 +1,9 @@
-package app.${appname}.data.instance;
+package app.${appname};
 
 import java.util.List;
 
 import app.${appname}.*;
-import app.${appname}.data.entity.*;
+import app.${appname}.entity.*;
 import lbe.instance.*;
 import lbe.instance.impl.*;
 import lbe.instance.value.*;
@@ -12,24 +12,24 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class ${name}Instance 
-	extends <#if caseEntity>SimpleCaseInstance<#else><#if extendsFrom??>${extendsFrom}Instance<#else>SimpleInstance</#if></#if> 
+public class ${name} 
+	extends <#if caseEntity>SimpleCaseInstance<#else><#if extendsFrom??>${extendsFrom}<#else>SimpleInstance</#if></#if> 
 	implements Instance {
 
 	<#if caseEntity>
-	public ${name}Instance() {
+	public ${name}() {
 		super(${name}Entity.INSTANCE, ${applicationName}Application.INSTANCE);
 	}
 	<#else>
-	public ${name}Instance(CaseInstance caseInstance) {
+	public ${name}(CaseInstance caseInstance) {
 		this(caseInstance, 0);
 	}
 	
-	public ${name}Instance(CaseInstance caseInstance, long id) {
+	public ${name}(CaseInstance caseInstance, long id) {
 		super(caseInstance, ${name}Entity.INSTANCE, id);
 	}
 	
-	protected ${name}Instance(CaseInstance caseInstance, Entity model, long id) {
+	protected ${name}(CaseInstance caseInstance, Entity model, long id) {
 		super(caseInstance, model, id);
 	}
 	</#if>
@@ -37,7 +37,7 @@ public class ${name}Instance
 	// Attributes
 	<#list attributes as attribute>
 	
-	public final <#if attribute.readonly>ReadOnly</#if>AttributeValue<#if attribute.multivalue>s</#if><${name}Instance, ${attribute.itemClassName}> ${attribute.name}
+	public final <#if attribute.readonly>ReadOnly</#if>AttributeValue<#if attribute.multivalue>s</#if><${name}, ${attribute.itemClassName}> ${attribute.name}
 		= create<#if attribute.readonly>ReadOnly</#if>AttributeValue<#if attribute.multivalue>s</#if>(${name}Entity.${attribute.name});
 	
 	public ${attribute.className} get${attribute.name?cap_first}() {
@@ -49,14 +49,14 @@ public class ${name}Instance
 	// Relations
 	<#list relations as relation>
 	
-	public final <#if relation.readonly>ReadOnly</#if>RelationValue<#if relation.multivalue>s</#if><${name}Instance, ${relation.item}Instance> ${relation.name}
+	public final <#if relation.readonly>ReadOnly</#if>RelationValue<#if relation.multivalue>s</#if><${name}, ${relation.item}> ${relation.name}
 		= create<#if relation.readonly>ReadOnly</#if>RelationValue<#if relation.multivalue>s</#if>(${name}Entity.${relation.name});
 	</#list>
 
 	// Reverse relations
 	<#list reverseRelations as relation>
 	
-	public final ReadOnlyRelationValue<#if relation.multivalue>s</#if><${name}Instance, ${relation.item}Instance> ${relation.name}
+	public final ReadOnlyRelationValue<#if relation.multivalue>s</#if><${name}, ${relation.item}> ${relation.name}
 		= createReverseRelationValue<#if relation.multivalue>s</#if>(${name}Entity.${relation.name});
 	</#list>
 

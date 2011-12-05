@@ -1,75 +1,75 @@
 package lbe.designerbootstrap;
 
 import lbe.designerbootstrap.Bootstrapper.RelationType;
-import app.designer.data.instance.AttributeBaseInstance;
-import app.designer.data.instance.AttributeInstance;
-import app.designer.data.instance.ButtonInstance;
-import app.designer.data.instance.CompositePageFragmentInstance;
-import app.designer.data.instance.ConstantStringInstance;
-import app.designer.data.instance.ConstantTextInstance;
-import app.designer.data.instance.DomainEntryInstance;
-import app.designer.data.instance.EntityInstance;
-import app.designer.data.instance.EventInstance;
-import app.designer.data.instance.FieldInstance;
-import app.designer.data.instance.FlowEdgeInstance;
-import app.designer.data.instance.FlowInstance;
-import app.designer.data.instance.FlowNodeBaseInstance;
-import app.designer.data.instance.FlowSourceInstance;
-import app.designer.data.instance.FormattedValueInstance;
-import app.designer.data.instance.HeaderInstance;
-import app.designer.data.instance.LinkInstance;
-import app.designer.data.instance.PageCompositionInstance;
-import app.designer.data.instance.PageFragmentInstance;
-import app.designer.data.instance.PageInstance;
-import app.designer.data.instance.RelationInstance;
-import app.designer.data.instance.SelectInstance;
-import app.designer.data.instance.SubFlowInstance;
-import app.designer.data.instance.TemplatedTextInstance;
-import app.designer.data.instance.TextInstance;
-import custom.designer.ApplicationInstanceCustomization;
+import app.designer.AttributeBase;
+import app.designer.AttributeDesign;
+import app.designer.ButtonDesign;
+import app.designer.CompositePageFragmentDesign;
+import app.designer.ConstantStringDesign;
+import app.designer.ConstantTextDesign;
+import app.designer.DomainEntryDesign;
+import app.designer.EntityDesign;
+import app.designer.EventDesign;
+import app.designer.FieldDesign;
+import app.designer.FlowDesign;
+import app.designer.FlowEdgeDesign;
+import app.designer.FlowNodeBaseDesign;
+import app.designer.FlowSourceDesign;
+import app.designer.FormattedValueDesign;
+import app.designer.Header;
+import app.designer.LinkDesign;
+import app.designer.PageComposition;
+import app.designer.PageDesign;
+import app.designer.PageFragmentDesign;
+import app.designer.RelationDesign;
+import app.designer.Select;
+import app.designer.SubFlowDesign;
+import app.designer.TemplatedTextDesign;
+import app.designer.TextDesign;
+import custom.designer.ApplicationDesignCustomization;
 
 public abstract class BootstrapperUtil {
 
-	protected static ApplicationInstanceCustomization applicationInstance;
+	protected static ApplicationDesignCustomization applicationDesign;
 	
-	protected static ButtonInstance createButton(EventInstance event, TextInstance caption) {
-		ButtonInstance result = new ButtonInstance(applicationInstance);
+	protected static ButtonDesign createButton(EventDesign event, TextDesign caption) {
+		ButtonDesign result = new ButtonDesign(applicationDesign);
 		result.event.set(event);
 		result.caption.set(caption);
 		return result;
 	}
 
-	protected static LinkInstance createLink(EventInstance event, TextInstance caption) {
-		LinkInstance result = new LinkInstance(applicationInstance);
+	protected static LinkDesign createLink(EventDesign event, TextDesign caption) {
+		LinkDesign result = new LinkDesign(applicationDesign);
 		result.event.set(event);
 		result.caption.set(caption);
 		return result;
 	}
 
-	protected static void createContainerItem(CompositePageFragmentInstance containerInstance, PageFragmentInstance element) {
-		PageCompositionInstance item = new PageCompositionInstance(applicationInstance);
+	protected static void createContainerItem(CompositePageFragmentDesign containerDesign, PageFragmentDesign element) {
+		PageComposition item = new PageComposition(applicationDesign);
 		item.pageFragment.set(element);
-		containerInstance.items.add(item);
+		containerDesign.items.add(item);
 	}
 
-	protected static EntityInstance createEntity(String name, EntityInstance extendsFrom) {
-		EntityInstance result = new EntityInstance(applicationInstance);
+	protected static EntityDesign createEntity(String name, EntityDesign extendsFrom) {
+		EntityDesign result = new EntityDesign(applicationDesign);
 		result.name.set(name);
 		result.extendsFrom.set(extendsFrom);
-		applicationInstance.entities.add(result);
+		applicationDesign.entities.add(result);
 		return result;
 	}
 
-	protected static AttributeInstance createAttribute(EntityInstance entity, String name, Class<?> className) {
-		AttributeInstance attribute = new AttributeInstance(applicationInstance);
+	protected static AttributeDesign createAttribute(EntityDesign entity, String name, Class<?> className) {
+		AttributeDesign attribute = new AttributeDesign(applicationDesign);
 		attribute.name.set(name);
 		attribute.className.set(className.getName());
 		entity.attributes.add(attribute);
 		return attribute;
 	}
 
-	protected static RelationInstance createRelation(EntityInstance from, String name, RelationType relationType, String reverseName, EntityInstance to) {
-		RelationInstance relation = new RelationInstance(applicationInstance);
+	protected static RelationDesign createRelation(EntityDesign from, String name, RelationType relationType, String reverseName, EntityDesign to) {
+		RelationDesign relation = new RelationDesign(applicationDesign);
 		from.relations.add(relation);
 		relation.to.set(to);
 		relation.name.set(name);
@@ -81,74 +81,74 @@ public abstract class BootstrapperUtil {
 		return relation;
 	}
 
-	protected static DomainEntryInstance createDomainEntry(String name, String untranslatedConstantText) {
-		DomainEntryInstance entry = new DomainEntryInstance(applicationInstance);
+	protected static DomainEntryDesign createDomainEntry(String name, String untranslatedConstantText) {
+		DomainEntryDesign entry = new DomainEntryDesign(applicationDesign);
 		entry.name.set(name);
 		entry.display.set(createConstantText(untranslatedConstantText));
 		return entry;
 	}
 	
-	protected static ConstantTextInstance createConstantText(String untranslated) {
-		ConstantTextInstance result = new ConstantTextInstance(applicationInstance);
+	protected static ConstantTextDesign createConstantText(String untranslated) {
+		ConstantTextDesign result = new ConstantTextDesign(applicationDesign);
 		result.untranslated.set(untranslated);
 		return result;
 	}
 	
-	protected static TemplatedTextInstance createTemplatedText() {
-		TemplatedTextInstance result = new TemplatedTextInstance(applicationInstance);
+	protected static TemplatedTextDesign createTemplatedText() {
+		TemplatedTextDesign result = new TemplatedTextDesign(applicationDesign);
 		return result;
 	}
 	
-	protected static TemplatedTextInstance add(TemplatedTextInstance text, AttributeBaseInstance value) {
-		FormattedValueInstance formattedValue = new FormattedValueInstance(applicationInstance);
+	protected static TemplatedTextDesign add(TemplatedTextDesign text, AttributeBase value) {
+		FormattedValueDesign formattedValue = new FormattedValueDesign(applicationDesign);
 		formattedValue.value.set(value);
 		text.untranslated.add(formattedValue);
 		return text;
 	}
 	
-	protected static TemplatedTextInstance add(TemplatedTextInstance text, String constant) {
-		ConstantStringInstance constantInstance = new ConstantStringInstance(applicationInstance);
-		constantInstance.constant.set(constant);
-		text.untranslated.add(constantInstance);
+	protected static TemplatedTextDesign add(TemplatedTextDesign text, String constant) {
+		ConstantStringDesign constantDesign = new ConstantStringDesign(applicationDesign);
+		constantDesign.constant.set(constant);
+		text.untranslated.add(constantDesign);
 		return text;
 	}
 
-	protected static CompositePageFragmentInstance createCompositePageFragment() {
-		CompositePageFragmentInstance container = new CompositePageFragmentInstance(applicationInstance);
+	protected static CompositePageFragmentDesign createCompositePageFragment() {
+		CompositePageFragmentDesign container = new CompositePageFragmentDesign(applicationDesign);
 		return container;
 	}
 
-	protected static SelectInstance createSelect(RelationInstance relation) {
-		SelectInstance select = new SelectInstance(applicationInstance);
+	protected static Select createSelect(RelationDesign relation) {
+		Select select = new Select(applicationDesign);
 		select.relation.set(relation);
 		return select;
 	}
 
-	protected static HeaderInstance createHeader(TextInstance text) {
-		HeaderInstance header = new HeaderInstance(applicationInstance);
+	protected static Header createHeader(TextDesign text) {
+		Header header = new Header(applicationDesign);
 		header.text.set(text);
 		return header;
 	}
 
-	protected static FieldInstance createField(CompositePageFragmentInstance container, AttributeInstance attribute, boolean required) {
-		FieldInstance field = new FieldInstance(applicationInstance);
+	protected static FieldDesign createField(CompositePageFragmentDesign container, AttributeDesign attribute, boolean required) {
+		FieldDesign field = new FieldDesign(applicationDesign);
 		field.attribute.set(attribute);
 		field.required.set(required);
-		PageCompositionInstance item = new PageCompositionInstance(applicationInstance);
+		PageComposition item = new PageComposition(applicationDesign);
 		container.items.add(item);
 		item.pageFragment.set(field);
 		return field;
 	}
 
-	protected static FlowInstance createFlow(String name) {
-		FlowInstance flow = new FlowInstance(applicationInstance);
+	protected static FlowDesign createFlow(String name) {
+		FlowDesign flow = new FlowDesign(applicationDesign);
 		flow.name.set(name);
-		applicationInstance.flows.add(flow);
+		applicationDesign.flows.add(flow);
 		return flow;
 	}
 
-	protected static void createEdge(FlowInstance flow, FlowNodeBaseInstance startNode, EventInstance startEvent, FlowNodeBaseInstance endNode, EventInstance endEvent) {
-		FlowEdgeInstance edge = new FlowEdgeInstance(applicationInstance);
+	protected static void createEdge(FlowDesign flow, FlowNodeBaseDesign startNode, EventDesign startEvent, FlowNodeBaseDesign endNode, EventDesign endEvent) {
+		FlowEdgeDesign edge = new FlowEdgeDesign(applicationDesign);
 		edge.startNode.set(startNode);
 		edge.startEvent.set(startEvent);
 		edge.endNode.set(endNode);
@@ -156,15 +156,15 @@ public abstract class BootstrapperUtil {
 		flow.edges.add(edge);
 	}
 
-	protected static PageInstance createPage(FlowInstance flow, String name) {
-		PageInstance page = new PageInstance(applicationInstance);
+	protected static PageDesign createPage(FlowDesign flow, String name) {
+		PageDesign page = new PageDesign(applicationDesign);
 		page.name.set(name);
 		flow.nodes.add(page);
 		return page;
 	}
 
-	protected static FlowSourceInstance createSource(FlowInstance flow, EventInstance startEvent, FlowNodeBaseInstance endNode, EventInstance endEvent) {
-		FlowSourceInstance source = new FlowSourceInstance(applicationInstance);
+	protected static FlowSourceDesign createSource(FlowDesign flow, EventDesign startEvent, FlowNodeBaseDesign endNode, EventDesign endEvent) {
+		FlowSourceDesign source = new FlowSourceDesign(applicationDesign);
 		source.startEvent.set(startEvent);
 		source.endNode.set(endNode);
 		source.endEvent.set(endEvent);
@@ -172,8 +172,8 @@ public abstract class BootstrapperUtil {
 		return source;
 	}
 	
-	protected static SubFlowInstance createSubFlow(FlowInstance parentFlow, FlowInstance flow) {
-		SubFlowInstance subFlow = new SubFlowInstance(applicationInstance);
+	protected static SubFlowDesign createSubFlow(FlowDesign parentFlow, FlowDesign flow) {
+		SubFlowDesign subFlow = new SubFlowDesign(applicationDesign);
 		subFlow.name.set(flow.name.get());
 		subFlow.flow.set(flow);
 		parentFlow.nodes.add(subFlow);
@@ -181,20 +181,20 @@ public abstract class BootstrapperUtil {
 	}
 	
 	
-	protected static PageCompositionInstance addContent(CompositePageFragmentInstance compositePageFragment, PageFragmentInstance item) {
-		PageCompositionInstance result = new PageCompositionInstance(applicationInstance);
+	protected static PageComposition addContent(CompositePageFragmentDesign compositePageFragment, PageFragmentDesign item) {
+		PageComposition result = new PageComposition(applicationDesign);
 		result.pageFragment.set(item);
 		compositePageFragment.items.add(result);
 		return result;
 	}
 
-	protected static EventInstance createEvent(String name, EntityInstance... parameters) {
-		EventInstance result = new EventInstance(applicationInstance);
+	protected static EventDesign createEvent(String name, EntityDesign... parameters) {
+		EventDesign result = new EventDesign(applicationDesign);
 		result.name.set(name);
-		for(EntityInstance parameter: parameters) {
+		for(EntityDesign parameter: parameters) {
 			result.parameters.add(parameter);			
 		}
-		applicationInstance.events.add(result);
+		applicationDesign.events.add(result);
 		return result;
 	}
 

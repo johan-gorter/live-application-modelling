@@ -1,6 +1,6 @@
 package app.${appname}.flow;
 
-import app.${appname}.data.entity.*;
+import app.${appname}.entity.*;
 import app.${appname}.flow.*;
 import app.${appname}.event.*;
 import app.${appname}.flow.${name?lower_case}.*;

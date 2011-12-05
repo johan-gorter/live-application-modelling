@@ -1,33 +1,30 @@
 package lbe.engine.codegenerator;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import lbe.instance.Observations;
-
-import app.designer.data.instance.ButtonInstance;
-import app.designer.data.instance.CompositePageFragmentInstance;
-import app.designer.data.instance.ConstantTextInstance;
-import app.designer.data.instance.FieldInstance;
-import app.designer.data.instance.HeaderInstance;
-import app.designer.data.instance.LinkInstance;
-import app.designer.data.instance.PageCompositionInstance;
-import app.designer.data.instance.PageFragmentInstance;
-import app.designer.data.instance.PageInstance;
-import app.designer.data.instance.SelectInstance;
+import app.designer.ButtonDesign;
+import app.designer.CompositePageFragmentDesign;
+import app.designer.ConstantTextDesign;
+import app.designer.FieldDesign;
+import app.designer.Header;
+import app.designer.LinkDesign;
+import app.designer.PageComposition;
+import app.designer.PageDesign;
+import app.designer.PageFragmentDesign;
+import app.designer.Select;
 
 public class PageGenerator extends AbstractGenerator {
 
 	public String flowname;
 	public ContentClassModel content;
 	
-	private PageInstance pageInstance;
+	private PageDesign pageDesign;
 	
 	private Observations observations;
 	
-	public PageGenerator(PageInstance pageInstance, String appname, String flowname) {
-		this.pageInstance = pageInstance;
+	public PageGenerator(PageDesign pageDesign, String appname, String flowname) {
+		this.pageDesign = pageDesign;
 		this.appname = appname;
 		this.flowname = flowname;
 	}
@@ -43,51 +40,54 @@ public class PageGenerator extends AbstractGenerator {
 	@Override
 	public void update(File applicationRoot) {
 		if (observations!=null && !observations.isOutdated()) return;
-		pageInstance.getCase().startRecordingObservations();
+		pageDesign.getCase().startRecordingObservations();
 		
-		name = pageInstance.name.get();
-		customization = pageInstance.customization.get();
-		content = createContentClassModel(pageInstance.content.get());
+		name = pageDesign.name.get();
+		customization = pageDesign.customization.get();
+		content = createContentClassModel(pageDesign.content.get());
 		
-		AbstractGenerator.generateFile(AbstractGenerator.pageTemplate, this, "flow/"+flowname.toLowerCase(), pageInstance.name.get(), "Page", appname, applicationRoot);
+		AbstractGenerator.generateFile(AbstractGenerator.pageTemplate, this, "flow/"+flowname.toLowerCase(), pageDesign.name.get(), "Page", appname, applicationRoot);
 		
-		this.observations = pageInstance.getCase().stopRecordingObservations();
+		this.observations = pageDesign.getCase().stopRecordingObservations();
 	}
 
 	@Override
 	public void delete(File applicationRoot) {
-		AbstractGenerator.deleteFile("flow/"+flowname.toLowerCase(), pageInstance.name.get(), "Page", appname, applicationRoot);
+		AbstractGenerator.deleteFile("flow/"+flowname.toLowerCase(), pageDesign.name.get(), "Page", appname, applicationRoot);
 	}
 	
-	private ContentClassModel createContentClassModel(PageFragmentInstance fragment) {
+	private ContentClassModel createContentClassModel(PageFragmentDesign fragment) {
 		ContentClassModel result = new ContentClassModel();
 		result.type=fragment.getModel().getName();
+		if (result.type.endsWith("Design")) {
+			result.type = result.type.substring(0, result.type.length()-6);
+		}
 		result.presentation = fragment.getPresentation();
-		if (fragment instanceof FieldInstance) {
-			FieldInstance field = (FieldInstance) fragment;
+		if (fragment instanceof FieldDesign) {
+			FieldDesign field = (FieldDesign) fragment;
 			result.required = (field.required.get()== Boolean.TRUE);
 			result.entity = field.attribute.get().entity.get().name.get();
 			result.attribute = field.attribute.get().name.get();
 			result.readOnly = (field.readOnly.get()==Boolean.TRUE);
-		} else if (fragment instanceof ConstantTextInstance) {
-			result.text = generateText((ConstantTextInstance)fragment);
-		} else if (fragment instanceof ButtonInstance) {
-			ButtonInstance button = (ButtonInstance)fragment;
+		} else if (fragment instanceof ConstantTextDesign) {
+			result.text = generateText((ConstantTextDesign)fragment);
+		} else if (fragment instanceof ButtonDesign) {
+			ButtonDesign button = (ButtonDesign)fragment;
 			result.text = generateText(button.caption.get());
 			result.event = button.event.get()==null?null:button.event.get().name.get();
-		} else if (fragment instanceof LinkInstance) {
-			LinkInstance link = (LinkInstance)fragment;
+		} else if (fragment instanceof LinkDesign) {
+			LinkDesign link = (LinkDesign)fragment;
 			result.text = generateText(link.caption.get());
 			result.event = link.event.get()==null?null:link.event.get().name.get();
-		} else if (fragment instanceof CompositePageFragmentInstance) {
-			for (PageCompositionInstance composition : ((CompositePageFragmentInstance)fragment).items.get()) {
+		} else if (fragment instanceof CompositePageFragmentDesign) {
+			for (PageComposition composition : ((CompositePageFragmentDesign)fragment).items.get()) {
 				result.children.add(createContentClassModel(composition.pageFragment.get()));
 			}
-			if (fragment instanceof HeaderInstance) {
-				result.text = generateText(((HeaderInstance)fragment).text.get());
+			if (fragment instanceof Header) {
+				result.text = generateText(((Header)fragment).text.get());
 			}
-			if (fragment instanceof SelectInstance) {
-				SelectInstance selectFragment = (SelectInstance)fragment;
+			if (fragment instanceof Select) {
+				Select selectFragment = (Select)fragment;
 				result.relationEntity = selectFragment.relation.get().entity.get().name.get();
 				result.relationName = selectFragment.relation.get().name.get();
 			}

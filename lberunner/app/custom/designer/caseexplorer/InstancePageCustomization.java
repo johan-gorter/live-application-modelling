@@ -3,22 +3,17 @@ package custom.designer.caseexplorer;
 import java.util.ArrayList;
 import java.util.List;
 
-import lbe.engine.PageElement;
 import lbe.engine.RenderContext;
 import lbe.instance.Instance;
 import lbe.model.Attribute;
-import lbe.model.Entity;
 import lbe.model.Relation;
-import lbe.model.impl.SimpleFlowEvent;
 import lbe.model.pageelement.CompositePageFragment;
-import lbe.model.pageelement.Field;
 import lbe.model.pageelement.PageFragment;
 import lbe.model.pageelement.Text;
 import lbe.model.pageelement.impl.ConstantText;
 import lbe.model.pageelement.impl.SimpleButton;
 import lbe.model.pageelement.impl.SimpleCompositePageFragment;
 import lbe.model.pageelement.impl.SimpleField;
-import app.designer.data.entity.ConceptEntity;
 import app.designer.event.ExploreInstanceEvent;
 import app.designer.flow.caseexplorerinstance.InstancePage;
 

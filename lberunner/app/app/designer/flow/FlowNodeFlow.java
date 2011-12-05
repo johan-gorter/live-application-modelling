@@ -1,6 +1,6 @@
 package app.designer.flow;
 
-import app.designer.data.entity.*;
+import app.designer.entity.*;
 import app.designer.flow.*;
 import app.designer.event.*;
 import app.designer.flow.flownode.*;
@@ -24,7 +24,7 @@ public class FlowNodeFlow extends Flow {
 	};
 	
 	private static final Entity[] PARAMETERS = new Entity[]{
-		FlowNodeBaseEntity.INSTANCE,
+		FlowNodeBaseDesignEntity.INSTANCE,
 	};
 	
 	@Override

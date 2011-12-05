@@ -1,6 +1,6 @@
 package app.carinsurance.flow;
 
-import app.carinsurance.data.entity.*;
+import app.carinsurance.entity.*;
 import app.carinsurance.flow.*;
 import app.carinsurance.event.*;
 import app.carinsurance.flow.insure.*;

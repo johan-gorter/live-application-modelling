@@ -21,10 +21,10 @@ import freemarker.template.Template;
 import lbe.instance.Observations;
 import lbe.model.pageelement.impl.TemplatedText;
 
-import app.designer.data.instance.ConceptInstance;
-import app.designer.data.instance.ConstantTextInstance;
-import app.designer.data.instance.TemplatedTextInstance;
-import app.designer.data.instance.TextInstance;
+import app.designer.Concept;
+import app.designer.ConstantTextDesign;
+import app.designer.TemplatedTextDesign;
+import app.designer.TextDesign;;
 
 public abstract class AbstractGenerator {
 
@@ -76,9 +76,9 @@ public abstract class AbstractGenerator {
 	
 	public abstract void delete(File applicationRoot);
 	
-	protected <G extends AbstractGenerator> List<ConceptInstance> updateGenerators(Map<String, G> generators, List<? extends ConceptInstance> from, File applicationRoot) {
-		List<ConceptInstance> newConcepts = new ArrayList<ConceptInstance>();
-		for(ConceptInstance instance: from) {
+	protected <G extends AbstractGenerator> List<Concept> updateGenerators(Map<String, G> generators, List<? extends Concept> from, File applicationRoot) {
+		List<Concept> newConcepts = new ArrayList<Concept>();
+		for(Concept instance: from) {
 			AbstractGenerator generator = generators.get(instance.getName());
 			if (generator!=null) {
 				generator.update(applicationRoot);
@@ -89,7 +89,7 @@ public abstract class AbstractGenerator {
 		Iterator<Map.Entry<String, G>> i = generators.entrySet().iterator();
 		nextEntry: while (i.hasNext()) {
 			Entry<String, G> entry = i.next();
-			for (ConceptInstance instance : from) {
+			for (Concept instance : from) {
 				if (entry.getKey().equals(instance.getName())) {
 					break nextEntry;
 				}
@@ -100,7 +100,7 @@ public abstract class AbstractGenerator {
 		return newConcepts;
 	}
 	
-	protected TextGenerator generateText(TextInstance text) {
+	protected TextGenerator generateText(TextDesign text) {
 		return new TextGenerator(text);
 	}
 

@@ -1,6 +1,6 @@
 package app.carinsurance.event;
 
-import app.carinsurance.data.entity.*;
+import app.carinsurance.entity.*;
 import lbe.model.flow.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;

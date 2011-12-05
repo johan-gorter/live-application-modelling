@@ -2,7 +2,7 @@ package app.designer.flow.field;
 
 import app.designer.event.*;
 import app.designer.flow.*;
-import app.designer.data.entity.*;
+import app.designer.entity.*;
 import lbe.model.flow.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
@@ -18,11 +18,11 @@ public class FieldPage extends Page {
             new SimpleLink(FlowDetailsEvent.INSTANCE, new ConstantText("Flow")),
             new SimpleLink(PageDetailsEvent.INSTANCE, new ConstantText("Page")),
             new SimpleLink(ExploreInstanceEvent.INSTANCE, new ConstantText("Open in case explorer")),
-            new SimpleField(FieldEntity.INSTANCE, FieldEntity.required),
-            new SimpleField(FieldEntity.INSTANCE, FieldEntity.readOnly),
-            new SimpleCompositePageFragment(FieldEntity.attribute, new PageFragment[]{
+            new SimpleField(FieldDesignEntity.INSTANCE, FieldDesignEntity.required),
+            new SimpleField(FieldDesignEntity.INSTANCE, FieldDesignEntity.readOnly),
+            new SimpleCompositePageFragment(FieldDesignEntity.attribute, new PageFragment[]{
                 new SimpleField(ConceptEntity.INSTANCE, ConceptEntity.name).setRequired(),
-                new SimpleField(AttributeEntity.INSTANCE, AttributeEntity.className).setRequired()
+                new SimpleField(AttributeDesignEntity.INSTANCE, AttributeDesignEntity.className).setRequired()
             })
         }); 
 	

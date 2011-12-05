@@ -1,6 +1,6 @@
 package app.designer.flow;
 
-import app.designer.data.entity.*;
+import app.designer.entity.*;
 import app.designer.flow.*;
 import app.designer.event.*;
 import app.designer.flow.page.*;
@@ -50,7 +50,7 @@ public class PageFlow extends Flow {
 	};
 	
 	private static final Entity[] PARAMETERS = new Entity[]{
-		PageEntity.INSTANCE,
+		PageDesignEntity.INSTANCE,
 	};
 	
 	@Override

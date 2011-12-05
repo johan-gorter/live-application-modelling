@@ -1,14 +1,11 @@
 package custom.designer;
 
-import lbe.instance.value.ReadOnlyAttributeValue;
-import lbe.model.Attribute;
 import lbe.model.Entity;
 import lbe.model.deduction.Deduction;
 import lbe.model.impl.SimpleAttribute;
-import lbe.model.pageelement.Text;
-import app.designer.data.instance.ConceptInstance;
+import app.designer.Concept;
 
-public abstract class ValidAttributeCustomization extends SimpleAttribute<ConceptInstance, Boolean, Boolean> {
+public abstract class ValidAttributeCustomization extends SimpleAttribute<Concept, Boolean, Boolean> {
 
 	public ValidAttributeCustomization(String name, Entity entity,
 			Class<Boolean> valueClass) {

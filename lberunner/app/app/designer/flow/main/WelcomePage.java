@@ -2,7 +2,7 @@ package app.designer.flow.main;
 
 import app.designer.event.*;
 import app.designer.flow.*;
-import app.designer.data.entity.*;
+import app.designer.entity.*;
 import lbe.model.flow.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
@@ -18,13 +18,13 @@ public class WelcomePage extends Page {
             new SimpleCompositePageFragment(new PageFragment[]{
                 new SimpleCompositePageFragment(new PageFragment[]{
                     new ConstantText("Entities"),
-                    new SimpleCompositePageFragment(ApplicationEntity.entities, new PageFragment[]{
+                    new SimpleCompositePageFragment(ApplicationDesignEntity.entities, new PageFragment[]{
                         new SimpleLink(EntityDetailsEvent.INSTANCE, new TemplatedText().add(ConceptEntity.name))
                     })
                 }).withPresentation("column"),
                 new SimpleCompositePageFragment(new PageFragment[]{
                     new ConstantText("Flows"),
-                    new SimpleCompositePageFragment(ApplicationEntity.flows, new PageFragment[]{
+                    new SimpleCompositePageFragment(ApplicationDesignEntity.flows, new PageFragment[]{
                         new SimpleLink(FlowDetailsEvent.INSTANCE, new TemplatedText().add(ConceptEntity.name))
                     })
                 }).withPresentation("column")

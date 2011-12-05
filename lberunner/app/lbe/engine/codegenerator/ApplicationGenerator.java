@@ -3,25 +3,19 @@ package lbe.engine.codegenerator;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
-import lbe.instance.Observations;
-import lbe.instance.value.ReadOnlyAttributeValue;
-import lbe.instance.value.ValueChangeListener;
-
-import app.designer.data.instance.ApplicationInstance;
-import app.designer.data.instance.ConceptInstance;
-import app.designer.data.instance.EntityInstance;
-import app.designer.data.instance.EventInstance;
-import app.designer.data.instance.FlowInstance;
-import app.designer.data.instance.PageFragmentHolderInstance;
+import app.designer.ApplicationDesign;
+import app.designer.Concept;
+import app.designer.EntityDesign;
+import app.designer.EventDesign;
+import app.designer.FlowDesign;
+import app.designer.PageFragmentHolder;
 
 public class ApplicationGenerator extends AbstractGenerator {
 
-	private ApplicationInstance applicationInstance;
+	private ApplicationDesign applicationInstance;
 	
 	private Map<String, EntityGenerator> entityGenerators=new HashMap<String, EntityGenerator>();
 	private Map<String, EventGenerator> eventGenerators = new HashMap<String, EventGenerator>(); 
@@ -30,7 +24,7 @@ public class ApplicationGenerator extends AbstractGenerator {
 	private boolean mustRegenerate = false;
 
 
-	public ApplicationGenerator(ApplicationInstance applicationInstance) {
+	public ApplicationGenerator(ApplicationDesign applicationInstance) {
 		this.applicationInstance = applicationInstance;
 	}
 
@@ -69,47 +63,46 @@ public class ApplicationGenerator extends AbstractGenerator {
 		customization = applicationInstance.customization.get();
 		caseInstanceCustomization = applicationInstance.caseEntity.get().customization.get();
 		entities = new ArrayList<String>();
-		for (EntityInstance entity: applicationInstance.entities.get()) {
+		for (EntityDesign entity: applicationInstance.entities.get()) {
 			entities.add(entity.name.get());
 		}
 		caseEntity = applicationInstance.caseEntity.get().name.get();
 		exposedFlows = new ArrayList<String>();
-		for (FlowInstance exposed: applicationInstance.exposedFlows.get()) {
+		for (FlowDesign exposed: applicationInstance.exposedFlows.get()) {
 			exposedFlows.add(exposed.name.get());
 		}
 		
 		if (applicationRoot!=null) {
-			new File(applicationRoot, "data/entity").mkdirs();
-			new File(applicationRoot, "data/instance").mkdirs();
+			new File(applicationRoot, "entity").mkdirs();
 			new File(applicationRoot, "event").mkdirs();
 			new File(applicationRoot, "flow").mkdirs();
 		}
 
 		AbstractGenerator.generateFile(AbstractGenerator.applicationTemplate, this, null, name, "Application", appname, applicationRoot);
 		
-		List<ConceptInstance> newEntities = updateGenerators(entityGenerators, applicationInstance.entities.get(), applicationRoot);
-		for(ConceptInstance newEntity : newEntities) {
-			EntityGenerator entityGenerator = new EntityGenerator((EntityInstance)newEntity, appname);
+		List<Concept> newEntities = updateGenerators(entityGenerators, applicationInstance.entities.get(), applicationRoot);
+		for(Concept newEntity : newEntities) {
+			EntityGenerator entityGenerator = new EntityGenerator((EntityDesign)newEntity, appname);
 			entityGenerator.update(applicationRoot);
 			entityGenerators.put(newEntity.getName(), entityGenerator);
 		}
 
-		for (PageFragmentHolderInstance pageFragment: applicationInstance.shared.get().pageFragments.get()) {
+		for (PageFragmentHolder pageFragment: applicationInstance.shared.get().pageFragments.get()) {
 //TODO:			generatePageFragment(pageFragment, appname, applicationRoot);
 		}
 		// TODO: textHolder
 
-		List<ConceptInstance> newEvents = updateGenerators(eventGenerators, applicationInstance.events.get(), applicationRoot);
-		for(ConceptInstance newEvent : newEvents) {
-			EventGenerator eventGenerator = new EventGenerator((EventInstance)newEvent, appname);
+		List<Concept> newEvents = updateGenerators(eventGenerators, applicationInstance.events.get(), applicationRoot);
+		for(Concept newEvent : newEvents) {
+			EventGenerator eventGenerator = new EventGenerator((EventDesign)newEvent, appname);
 			eventGenerator.update(applicationRoot);
 			eventGenerators.put(newEvent.getName(), eventGenerator);
 		}
 		
 		
-		List<ConceptInstance> newFlows = updateGenerators(flowGenerators, applicationInstance.flows.get(), applicationRoot);
-		for(ConceptInstance newFlow : newFlows) {
-			FlowGenerator flowGenerator = new FlowGenerator((FlowInstance)newFlow, appname);
+		List<Concept> newFlows = updateGenerators(flowGenerators, applicationInstance.flows.get(), applicationRoot);
+		for(Concept newFlow : newFlows) {
+			FlowGenerator flowGenerator = new FlowGenerator((FlowDesign)newFlow, appname);
 			flowGenerator.update(applicationRoot);
 			flowGenerators.put(newFlow.getName(), flowGenerator);
 		}

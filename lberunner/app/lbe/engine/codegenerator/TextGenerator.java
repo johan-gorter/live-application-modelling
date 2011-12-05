@@ -3,14 +3,13 @@ package lbe.engine.codegenerator;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.designer.data.instance.AttributeBaseInstance;
-import app.designer.data.instance.AttributeInstance;
-import app.designer.data.instance.ConstantStringInstance;
-import app.designer.data.instance.ConstantTextInstance;
-import app.designer.data.instance.FormattedValueInstance;
-import app.designer.data.instance.StringProducerInstance;
-import app.designer.data.instance.TemplatedTextInstance;
-import app.designer.data.instance.TextInstance;
+import app.designer.AttributeDesign;
+import app.designer.ConstantStringDesign;
+import app.designer.ConstantTextDesign;
+import app.designer.FormattedValueDesign;
+import app.designer.StringProducerDesign;
+import app.designer.TemplatedTextDesign;
+import app.designer.TextDesign;
 
 public class TextGenerator {
 
@@ -41,32 +40,32 @@ public class TextGenerator {
 	
 	public List<StringProducer> stringProducers = new ArrayList<StringProducer>();
 
-	public TextGenerator(TextInstance text)
+	public TextGenerator(TextDesign text)
 	{
-		if (text instanceof ConstantTextInstance) {
+		if (text instanceof ConstantTextDesign) {
 			type="constant";
-			ConstantTextInstance constantText = (ConstantTextInstance) text;
+			ConstantTextDesign constantText = (ConstantTextDesign) text;
 			this.untranslatedConstant = constantText.untranslated.get();
-		} else if (text instanceof TemplatedTextInstance) {
+		} else if (text instanceof TemplatedTextDesign) {
 			type="templated";
-			TemplatedTextInstance templatedText = (TemplatedTextInstance) text;
-			List<StringProducerInstance> list = templatedText.untranslated.get();
-			for (StringProducerInstance spInstance : list) {
+			TemplatedTextDesign templatedText = (TemplatedTextDesign) text;
+			List<StringProducerDesign> list = templatedText.untranslated.get();
+			for (StringProducerDesign spInstance : list) {
 				StringProducer result = new StringProducer();
-				if (spInstance instanceof ConstantStringInstance) {
+				if (spInstance instanceof ConstantStringDesign) {
 					result.type = "constant";
-					result.constant = ((ConstantStringInstance)spInstance).getConstant();
-				} else if (spInstance instanceof FormattedValueInstance) {
+					result.constant = ((ConstantStringDesign)spInstance).getConstant();
+				} else if (spInstance instanceof FormattedValueDesign) {
 					result.type = "formattedValue";
-					FormattedValueInstance fvInstance = (FormattedValueInstance)spInstance;
+					FormattedValueDesign fvInstance = (FormattedValueDesign)spInstance;
 					// Other types of deduction are not yet supported
-					AttributeInstance attributeInstance = (AttributeInstance)fvInstance.value.get();
+					AttributeDesign attributeInstance = (AttributeDesign)fvInstance.value.get();
 					result.entity = attributeInstance.entity.get().name.get();
 					result.attribute = attributeInstance.name.get();
 				}
 				stringProducers.add(result);
 			}
-		} else throw new RuntimeException("Unsupported subclass of TextInstance: "+text.getClass());
+		} else throw new RuntimeException("Unsupported subclass of TextDesign: "+text.getClass());
 	}
 
 	public String getUntranslatedConstant() {
