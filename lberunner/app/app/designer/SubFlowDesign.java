@@ -34,6 +34,14 @@ public class SubFlowDesign
 	
 	public final RelationValue<SubFlowDesign, FlowDesign> flow
 		= createRelationValue(SubFlowDesignEntity.flow);
+		
+	public FlowDesign getFlow() {
+		return flow.get();
+	}
+	
+	public void setFlow(FlowDesign newValue) {
+		flow.set(newValue);
+	}
 
 	// Reverse relations
 

@@ -31,9 +31,6 @@ public class SharedTextDesign
 	// Attributes
 	
 	// Relations
-	
-	public final RelationValue<SharedTextDesign, TextHolder> holder
-		= createRelationValue(SharedTextDesignEntity.holder);
 
 	// Reverse relations
 

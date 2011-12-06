@@ -36,20 +36,42 @@ public class TextDesign
 	
 	public final ReadOnlyRelationValue<TextDesign, AttributeDesign> questionOnAttribute
 		= createReverseRelationValue(TextDesignEntity.questionOnAttribute);
+
+	public AttributeDesign getQuestionOnAttribute() {
+		return questionOnAttribute.get();
+	}
+
 	
 	public final ReadOnlyRelationValue<TextDesign, AttributeDesign> explanationOnAttribute
 		= createReverseRelationValue(TextDesignEntity.explanationOnAttribute);
+
+	public AttributeDesign getExplanationOnAttribute() {
+		return explanationOnAttribute.get();
+	}
+
 	
 	public final ReadOnlyRelationValue<TextDesign, DomainEntryDesign> displayOnDomainEntry
 		= createReverseRelationValue(TextDesignEntity.displayOnDomainEntry);
-	
-	public final ReadOnlyRelationValue<TextDesign, TextHolder> holder
-		= createReverseRelationValue(TextDesignEntity.holder);
+
+	public DomainEntryDesign getDisplayOnDomainEntry() {
+		return displayOnDomainEntry.get();
+	}
+
 	
 	public final ReadOnlyRelationValue<TextDesign, Header> textOnHeader
 		= createReverseRelationValue(TextDesignEntity.textOnHeader);
+
+	public Header getTextOnHeader() {
+		return textOnHeader.get();
+	}
+
 	
 	public final ReadOnlyRelationValue<TextDesign, LinkDesign> captionOnButton
 		= createReverseRelationValue(TextDesignEntity.captionOnButton);
+
+	public LinkDesign getCaptionOnButton() {
+		return captionOnButton.get();
+	}
+
 
 }

@@ -37,6 +37,9 @@ public class ConstantStringDesign
 		return constant.get();
 	}
 
+	public void setConstant(java.lang.String newValue) {
+		constant.set(newValue);
+	}
 	
 	// Relations
 

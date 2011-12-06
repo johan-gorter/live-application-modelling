@@ -34,7 +34,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createAttribute(application, "customization", String.class);
 		
 		// Concept
-		EntityDesign concept = createEntity("Concept", null);
+		EntityDesign concept = createEntity("Design", null);
 		AttributeDesign name = createAttribute(concept, "name", String.class);
 		AttributeDesign valid = createAttribute(concept, "valid", Boolean.class);
 		valid.readOnly.set(true);
@@ -46,7 +46,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		EntityDesign entityDesign = createEntity("EntityDesign", concept);
 
 		// AttributeBase
-		EntityDesign attributeBase = createEntity("AttributeBase", concept);
+		EntityDesign attributeBase = createEntity("AttributeBaseDesign", concept);
 		createAttribute(attributeBase, "readOnly", Boolean.class);
 		createAttribute(attributeBase, "multivalue", Boolean.class);
 		
@@ -65,23 +65,21 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createAttribute(relationDesign, "reverseName", String.class);
 		
 		// Shared
-		EntityDesign shared = createEntity("Shared", null);
-		EntityDesign textHolder = createEntity("TextHolder", concept);
-		EntityDesign pageFragmentHolder = createEntity("PageFragmentHolder", concept);
+		EntityDesign pageFragmentHolder = createEntity("PageFragmentHolderDesign", concept);
 		
 		// Page elements & Page
 		EntityDesign pageFragmentDesign = createEntity("PageFragmentDesign", null);
 		AttributeDesign presentation = createAttribute(pageFragmentDesign, "presentation", String.class);
 		EntityDesign compositePageFragmentDesign = createEntity("CompositePageFragmentDesign", pageFragmentDesign);
-		EntityDesign select = createEntity("Select", compositePageFragmentDesign);
-		EntityDesign header = createEntity("Header", compositePageFragmentDesign);
-		EntityDesign sharedFragment = createEntity("SharedFragment", pageFragmentDesign);
+		EntityDesign select = createEntity("SelectDesign", compositePageFragmentDesign);
+		EntityDesign header = createEntity("HeaderDesign", compositePageFragmentDesign);
+		EntityDesign sharedFragment = createEntity("SharedFragmentDesign", pageFragmentDesign);
 		EntityDesign fieldDesign = createEntity("FieldDesign", pageFragmentDesign);
 		AttributeDesign required = createAttribute(fieldDesign, "required", Boolean.class); // TODO: this validation goes to the domain
 		AttributeDesign readOnly = createAttribute(fieldDesign, "readOnly", Boolean.class);
 		EntityDesign linkDesign = createEntity("LinkDesign", pageFragmentDesign);
 		EntityDesign buttonDesign = createEntity("ButtonDesign", linkDesign);
-		EntityDesign pageComposition = createEntity("PageComposition", null);
+		EntityDesign pageComposition = createEntity("PageCompositionDesign", null);
 		
 		// Text
 		EntityDesign textDesign = createEntity("TextDesign", pageFragmentDesign);
@@ -128,13 +126,9 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createRelation(formattedValueDesign, "value", RelationType.OneToZeroOrOne, "valueInTemplatedText", attributeBase); //TODO: deduction
 
 		// Shared
-		createRelation(application, "shared", RelationType.OneToOneAggregation, "application", shared);
-		createRelation(shared, "pageFragments", RelationType.OneToManyAggregation, "shared", pageFragmentHolder);
+		createRelation(application, "sharedPageFragments", RelationType.OneToManyAggregation, "shared", pageFragmentHolder);
 		createRelation(sharedFragment, "holder", RelationType.ManyToZeroOrOne, "usages", pageFragmentHolder);
 		createRelation(pageFragmentHolder, "pageFragment", RelationType.OneToOneAggregation, "holder", pageFragmentDesign);
-		createRelation(shared, "texts", RelationType.OneToManyAggregation, "shared", textHolder);
-		createRelation(sharedTextDesign, "holder", RelationType.ManyToZeroOrOne, "usages", textHolder);
-		createRelation(textHolder, "text", RelationType.OneToOneAggregation, "holder", textDesign);
 		
 		// Page elements
 		RelationDesign content = createRelation(pageDesign, "content", RelationType.OneToOneAggregation, "contentOfPage", compositePageFragmentDesign);

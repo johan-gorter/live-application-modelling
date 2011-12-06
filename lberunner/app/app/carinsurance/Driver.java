@@ -37,6 +37,9 @@ public class Driver
 		return dateOfBirth.get();
 	}
 
+	public void setDateOfBirth(java.util.Date value) {
+		dateOfBirth.set(value);
+	}
 	
 	public final AttributeValues<Driver, java.lang.String> carUse
 		= createAttributeValues(DriverEntity.carUse);
@@ -45,6 +48,9 @@ public class Driver
 		return carUse.get();
 	}
 
+	public void setCarUse(List<java.lang.String> value) {
+		carUse.set(value);
+	}
 	
 	public final AttributeValue<Driver, java.lang.Boolean> disqualified
 		= createAttributeValue(DriverEntity.disqualified);
@@ -53,6 +59,9 @@ public class Driver
 		return disqualified.get();
 	}
 
+	public void setDisqualified(java.lang.Boolean value) {
+		disqualified.set(value);
+	}
 	
 	public final AttributeValue<Driver, java.lang.String> zipCode
 		= createAttributeValue(DriverEntity.zipCode);
@@ -61,6 +70,9 @@ public class Driver
 		return zipCode.get();
 	}
 
+	public void setZipCode(java.lang.String value) {
+		zipCode.set(value);
+	}
 	
 	public final AttributeValue<Driver, java.lang.Integer> yearsDriverslicense
 		= createAttributeValue(DriverEntity.yearsDriverslicense);
@@ -69,6 +81,9 @@ public class Driver
 		return yearsDriverslicense.get();
 	}
 
+	public void setYearsDriverslicense(java.lang.Integer value) {
+		yearsDriverslicense.set(value);
+	}
 	
 	public final AttributeValue<Driver, java.lang.Integer> yearsInsured
 		= createAttributeValue(DriverEntity.yearsInsured);
@@ -77,6 +92,9 @@ public class Driver
 		return yearsInsured.get();
 	}
 
+	public void setYearsInsured(java.lang.Integer value) {
+		yearsInsured.set(value);
+	}
 	
 	public final AttributeValue<Driver, java.lang.String> mileage
 		= createAttributeValue(DriverEntity.mileage);
@@ -85,6 +103,9 @@ public class Driver
 		return mileage.get();
 	}
 
+	public void setMileage(java.lang.String value) {
+		mileage.set(value);
+	}
 	
 	public final AttributeValue<Driver, java.lang.Integer> noClaimsDiscount
 		= createAttributeValue(DriverEntity.noClaimsDiscount);
@@ -93,22 +114,9 @@ public class Driver
 		return noClaimsDiscount.get();
 	}
 
-	
-	public final AttributeValue<Driver, java.lang.String> Test
-		= createAttributeValue(DriverEntity.Test);
-	
-	public java.lang.String getTest() {
-		return Test.get();
+	public void setNoClaimsDiscount(java.lang.Integer value) {
+		noClaimsDiscount.set(value);
 	}
-
-	
-	public final AttributeValue<Driver, java.lang.String> NewAttribute1323119309
-		= createAttributeValue(DriverEntity.NewAttribute1323119309);
-	
-	public java.lang.String getNewAttribute1323119309() {
-		return NewAttribute1323119309.get();
-	}
-
 	
 	// Relations
 
@@ -116,5 +124,10 @@ public class Driver
 	
 	public final ReadOnlyRelationValue<Driver, CarinsuranceCase> carinsuranceCase
 		= createReverseRelationValue(DriverEntity.carinsuranceCase);
+
+	public CarinsuranceCase getCarinsuranceCase() {
+		return carinsuranceCase.get();
+	}
+
 
 }

@@ -37,6 +37,9 @@ public class Concept
 		return name.get();
 	}
 
+	public void setName(java.lang.String newValue) {
+		name.set(newValue);
+	}
 	
 	public final ReadOnlyAttributeValue<Concept, java.lang.Boolean> valid
 		= createReadOnlyAttributeValue(ConceptEntity.valid);
@@ -53,6 +56,9 @@ public class Concept
 		return customization.get();
 	}
 
+	public void setCustomization(java.lang.String newValue) {
+		customization.set(newValue);
+	}
 	
 	// Relations
 

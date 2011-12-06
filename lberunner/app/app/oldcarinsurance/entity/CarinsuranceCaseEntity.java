@@ -1,5 +1,7 @@
 package app.oldcarinsurance.entity;
 
+import app.oldcarinsurance.CarinsuranceCase;
+import app.oldcarinsurance.Driver;
 import lbe.instance.CaseInstance;
 import lbe.instance.Instance;
 import lbe.instance.value.AttributeValue;
@@ -14,13 +16,13 @@ public class CarinsuranceCaseEntity extends Entity {
 
 	public static final CarinsuranceCaseEntity INSTANCE = new CarinsuranceCaseEntity();
 	
-	public static final Relation<CarinsuranceCaseInstance, DriverInstance, DriverInstance> driver 
-		= new SimpleRelation<CarinsuranceCaseInstance, DriverInstance, DriverInstance>("driver", INSTANCE, 
-				DriverEntity.INSTANCE, DriverInstance.class, DriverEntity.carinsuranceCase) {
+	public static final Relation<CarinsuranceCase, Driver, Driver> driver 
+		= new SimpleRelation<CarinsuranceCase, Driver, Driver>("driver", INSTANCE, 
+				DriverEntity.INSTANCE, Driver.class, DriverEntity.carinsuranceCase) {
 
 		@Override
-		public AttributeValue<CarinsuranceCaseInstance, DriverInstance> get(
-				CarinsuranceCaseInstance instance) {
+		public AttributeValue<CarinsuranceCase, Driver> get(
+				CarinsuranceCase instance) {
 			return instance.driver;
 		}
 		

@@ -37,6 +37,9 @@ public class AttributeBase
 		return readOnly.get();
 	}
 
+	public void setReadOnly(java.lang.Boolean newValue) {
+		readOnly.set(newValue);
+	}
 	
 	public final AttributeValue<AttributeBase, java.lang.Boolean> multivalue
 		= createAttributeValue(AttributeBaseEntity.multivalue);
@@ -45,6 +48,9 @@ public class AttributeBase
 		return multivalue.get();
 	}
 
+	public void setMultivalue(java.lang.Boolean newValue) {
+		multivalue.set(newValue);
+	}
 	
 	// Relations
 
@@ -52,5 +58,10 @@ public class AttributeBase
 	
 	public final ReadOnlyRelationValue<AttributeBase, FormattedValueDesign> valueInTemplatedText
 		= createReverseRelationValue(AttributeBaseEntity.valueInTemplatedText);
+
+	public FormattedValueDesign getValueInTemplatedText() {
+		return valueInTemplatedText.get();
+	}
+
 
 }

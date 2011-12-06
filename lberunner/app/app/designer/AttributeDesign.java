@@ -37,24 +37,61 @@ public class AttributeDesign
 		return className.get();
 	}
 
+	public void setClassName(java.lang.String newValue) {
+		className.set(newValue);
+	}
 	
 	// Relations
 	
 	public final RelationValue<AttributeDesign, TextDesign> question
 		= createRelationValue(AttributeDesignEntity.question);
+		
+	public TextDesign getQuestion() {
+		return question.get();
+	}
+	
+	public void setQuestion(TextDesign newValue) {
+		question.set(newValue);
+	}
 	
 	public final RelationValue<AttributeDesign, TextDesign> explanation
 		= createRelationValue(AttributeDesignEntity.explanation);
+		
+	public TextDesign getExplanation() {
+		return explanation.get();
+	}
+	
+	public void setExplanation(TextDesign newValue) {
+		explanation.set(newValue);
+	}
 	
 	public final RelationValues<AttributeDesign, DomainEntryDesign> domain
 		= createRelationValues(AttributeDesignEntity.domain);
+		
+	public List<DomainEntryDesign> getDomain() {
+		return domain.get();
+	}
+	
+	public void setDomain(List<DomainEntryDesign> newValue) {
+		domain.set(newValue);
+	}
 
 	// Reverse relations
 	
 	public final ReadOnlyRelationValue<AttributeDesign, EntityDesign> entity
 		= createReverseRelationValue(AttributeDesignEntity.entity);
+
+	public EntityDesign getEntity() {
+		return entity.get();
+	}
+
 	
 	public final ReadOnlyRelationValues<AttributeDesign, FieldDesign> fields
 		= createReverseRelationValues(AttributeDesignEntity.fields);
+
+	public List<FieldDesign> getFields() {
+		return fields.get();
+	}
+
 
 }

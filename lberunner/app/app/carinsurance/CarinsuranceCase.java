@@ -26,6 +26,14 @@ public class CarinsuranceCase
 	
 	public final RelationValue<CarinsuranceCase, Driver> driver
 		= createRelationValue(CarinsuranceCaseEntity.driver);
+		
+	public Driver getDriver() {
+		return driver.get();
+	}
+	
+	public void setDriver(Driver value) {
+		driver.set(value);
+	}
 
 	// Reverse relations
 

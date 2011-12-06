@@ -44,6 +44,11 @@ public class ${name}
 		return ${attribute.name}.get();
 	}
 
+	<#if !attribute.readonly>	
+	public void set${attribute.name?cap_first}(${attribute.className} newValue) {
+		${attribute.name}.set(newValue);
+	}
+	</#if>
 	</#list>
 	
 	// Relations
@@ -51,6 +56,16 @@ public class ${name}
 	
 	public final <#if relation.readonly>ReadOnly</#if>RelationValue<#if relation.multivalue>s</#if><${name}, ${relation.item}> ${relation.name}
 		= create<#if relation.readonly>ReadOnly</#if>RelationValue<#if relation.multivalue>s</#if>(${name}Entity.${relation.name});
+		
+	public ${relation.to} get${relation.name?cap_first}() {
+		return ${relation.name}.get();
+	}
+	
+	<#if !relation.readonly>	
+	public void set${relation.name?cap_first}(${relation.to} newValue) {
+		${relation.name}.set(newValue);
+	}
+	</#if>
 	</#list>
 
 	// Reverse relations
@@ -58,6 +73,11 @@ public class ${name}
 	
 	public final ReadOnlyRelationValue<#if relation.multivalue>s</#if><${name}, ${relation.item}> ${relation.name}
 		= createReverseRelationValue<#if relation.multivalue>s</#if>(${name}Entity.${relation.name});
+
+	public ${relation.to} get${relation.name?cap_first}() {
+		return ${relation.name}.get();
+	}
+
 	</#list>
 
 }

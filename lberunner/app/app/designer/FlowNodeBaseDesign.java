@@ -36,14 +36,34 @@ public class FlowNodeBaseDesign
 	
 	public final ReadOnlyRelationValue<FlowNodeBaseDesign, FlowDesign> owner
 		= createReverseRelationValue(FlowNodeBaseDesignEntity.owner);
+
+	public FlowDesign getOwner() {
+		return owner.get();
+	}
+
 	
 	public final ReadOnlyRelationValues<FlowNodeBaseDesign, FlowSourceDesign> incomingSources
 		= createReverseRelationValues(FlowNodeBaseDesignEntity.incomingSources);
+
+	public List<FlowSourceDesign> getIncomingSources() {
+		return incomingSources.get();
+	}
+
 	
 	public final ReadOnlyRelationValues<FlowNodeBaseDesign, FlowEdgeDesign> outgoingEdges
 		= createReverseRelationValues(FlowNodeBaseDesignEntity.outgoingEdges);
+
+	public List<FlowEdgeDesign> getOutgoingEdges() {
+		return outgoingEdges.get();
+	}
+
 	
 	public final ReadOnlyRelationValues<FlowNodeBaseDesign, FlowEdgeDesign> incomingEdges
 		= createReverseRelationValues(FlowNodeBaseDesignEntity.incomingEdges);
+
+	public List<FlowEdgeDesign> getIncomingEdges() {
+		return incomingEdges.get();
+	}
+
 
 }

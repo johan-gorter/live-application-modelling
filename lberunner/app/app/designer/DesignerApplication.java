@@ -40,7 +40,6 @@ public class DesignerApplication extends Application {
 		DomainEntryDesignEntity.INSTANCE,
 		RelationDesignEntity.INSTANCE,
 		SharedEntity.INSTANCE,
-		TextHolderEntity.INSTANCE,
 		PageFragmentHolderEntity.INSTANCE,
 		PageFragmentDesignEntity.INSTANCE,
 		CompositePageFragmentDesignEntity.INSTANCE,

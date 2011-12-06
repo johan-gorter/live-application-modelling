@@ -37,6 +37,9 @@ public class FieldDesign
 		return required.get();
 	}
 
+	public void setRequired(java.lang.Boolean newValue) {
+		required.set(newValue);
+	}
 	
 	public final AttributeValue<FieldDesign, java.lang.Boolean> readOnly
 		= createAttributeValue(FieldDesignEntity.readOnly);
@@ -45,11 +48,22 @@ public class FieldDesign
 		return readOnly.get();
 	}
 
+	public void setReadOnly(java.lang.Boolean newValue) {
+		readOnly.set(newValue);
+	}
 	
 	// Relations
 	
 	public final RelationValue<FieldDesign, AttributeDesign> attribute
 		= createRelationValue(FieldDesignEntity.attribute);
+		
+	public AttributeDesign getAttribute() {
+		return attribute.get();
+	}
+	
+	public void setAttribute(AttributeDesign newValue) {
+		attribute.set(newValue);
+	}
 
 	// Reverse relations
 

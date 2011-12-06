@@ -37,4 +37,9 @@ public class StringProducerDesign
 	public final ReadOnlyRelationValue<StringProducerDesign, TemplatedTextDesign> untranslatedInTemplate
 		= createReverseRelationValue(StringProducerDesignEntity.untranslatedInTemplate);
 
+	public TemplatedTextDesign getUntranslatedInTemplate() {
+		return untranslatedInTemplate.get();
+	}
+
+
 }

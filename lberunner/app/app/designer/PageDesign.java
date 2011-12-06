@@ -34,6 +34,14 @@ public class PageDesign
 	
 	public final RelationValue<PageDesign, CompositePageFragmentDesign> content
 		= createRelationValue(PageDesignEntity.content);
+		
+	public CompositePageFragmentDesign getContent() {
+		return content.get();
+	}
+	
+	public void setContent(CompositePageFragmentDesign newValue) {
+		content.set(newValue);
+	}
 
 	// Reverse relations
 

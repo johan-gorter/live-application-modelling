@@ -18,7 +18,7 @@ public class SingleInstanceDeductionContext extends DeductionContext {
 		if (instance.getModel()==entity) {
 			return instance;
 		}
-		return null;
+		throw new RuntimeException("No active instance of entity "+entity.getName());
 	}
 
 	@Override

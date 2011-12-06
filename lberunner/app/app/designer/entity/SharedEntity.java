@@ -38,26 +38,6 @@ public class SharedEntity extends SimpleEntity {
 			}
 		};
 	
-	public static final Relation<Shared, List<TextHolder>, TextHolder> texts
-		= new SimpleRelation<Shared, List<TextHolder>, TextHolder>(
-			"texts", INSTANCE, TextHolderEntity.INSTANCE, TextHolder.class, TextHolderEntity.shared
-		) {
-	
-			@Override
-			public ReadOnlyRelationValues<Shared, TextHolder> get(
-					Shared instance) {
-				return instance.texts;
-			}
-	
-			public boolean isOwner() {
-				return true;
-			}
-	
-			public boolean isMultivalue() {
-				return true;
-			}
-		};
-	
 	// Reverse relations
 	
 	public static final Relation<Shared, ApplicationDesign, ApplicationDesign> application
@@ -80,7 +60,6 @@ public class SharedEntity extends SimpleEntity {
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
 		pageFragments,
-		texts,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 		application,

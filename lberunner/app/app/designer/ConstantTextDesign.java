@@ -37,6 +37,9 @@ public class ConstantTextDesign
 		return untranslated.get();
 	}
 
+	public void setUntranslated(java.lang.String newValue) {
+		untranslated.set(newValue);
+	}
 	
 	// Relations
 

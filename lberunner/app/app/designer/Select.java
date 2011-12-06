@@ -34,6 +34,14 @@ public class Select
 	
 	public final RelationValue<Select, RelationDesign> relation
 		= createRelationValue(SelectEntity.relation);
+		
+	public RelationDesign getRelation() {
+		return relation.get();
+	}
+	
+	public void setRelation(RelationDesign newValue) {
+		relation.set(newValue);
+	}
 
 	// Reverse relations
 

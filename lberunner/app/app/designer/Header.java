@@ -34,6 +34,14 @@ public class Header
 	
 	public final RelationValue<Header, TextDesign> text
 		= createRelationValue(HeaderEntity.text);
+		
+	public TextDesign getText() {
+		return text.get();
+	}
+	
+	public void setText(TextDesign newValue) {
+		text.set(newValue);
+	}
 
 	// Reverse relations
 

@@ -34,19 +34,56 @@ public class FlowEdgeDesign
 	
 	public final RelationValue<FlowEdgeDesign, FlowNodeBaseDesign> startNode
 		= createRelationValue(FlowEdgeDesignEntity.startNode);
+		
+	public FlowNodeBaseDesign getStartNode() {
+		return startNode.get();
+	}
+	
+	public void setStartNode(FlowNodeBaseDesign newValue) {
+		startNode.set(newValue);
+	}
 	
 	public final RelationValue<FlowEdgeDesign, EventDesign> startEvent
 		= createRelationValue(FlowEdgeDesignEntity.startEvent);
+		
+	public EventDesign getStartEvent() {
+		return startEvent.get();
+	}
+	
+	public void setStartEvent(EventDesign newValue) {
+		startEvent.set(newValue);
+	}
 	
 	public final RelationValue<FlowEdgeDesign, FlowNodeBaseDesign> endNode
 		= createRelationValue(FlowEdgeDesignEntity.endNode);
+		
+	public FlowNodeBaseDesign getEndNode() {
+		return endNode.get();
+	}
+	
+	public void setEndNode(FlowNodeBaseDesign newValue) {
+		endNode.set(newValue);
+	}
 	
 	public final RelationValue<FlowEdgeDesign, EventDesign> endEvent
 		= createRelationValue(FlowEdgeDesignEntity.endEvent);
+		
+	public EventDesign getEndEvent() {
+		return endEvent.get();
+	}
+	
+	public void setEndEvent(EventDesign newValue) {
+		endEvent.set(newValue);
+	}
 
 	// Reverse relations
 	
 	public final ReadOnlyRelationValue<FlowEdgeDesign, FlowDesign> owner
 		= createReverseRelationValue(FlowEdgeDesignEntity.owner);
+
+	public FlowDesign getOwner() {
+		return owner.get();
+	}
+
 
 }

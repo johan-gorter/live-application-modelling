@@ -34,10 +34,23 @@ public class DomainEntryDesign
 	
 	public final RelationValue<DomainEntryDesign, TextDesign> display
 		= createRelationValue(DomainEntryDesignEntity.display);
+		
+	public TextDesign getDisplay() {
+		return display.get();
+	}
+	
+	public void setDisplay(TextDesign newValue) {
+		display.set(newValue);
+	}
 
 	// Reverse relations
 	
 	public final ReadOnlyRelationValue<DomainEntryDesign, AttributeDesign> attribute
 		= createReverseRelationValue(DomainEntryDesignEntity.attribute);
+
+	public AttributeDesign getAttribute() {
+		return attribute.get();
+	}
+
 
 }

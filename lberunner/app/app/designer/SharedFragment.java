@@ -34,6 +34,14 @@ public class SharedFragment
 	
 	public final RelationValue<SharedFragment, PageFragmentHolder> holder
 		= createRelationValue(SharedFragmentEntity.holder);
+		
+	public PageFragmentHolder getHolder() {
+		return holder.get();
+	}
+	
+	public void setHolder(PageFragmentHolder newValue) {
+		holder.set(newValue);
+	}
 
 	// Reverse relations
 

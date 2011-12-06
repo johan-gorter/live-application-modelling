@@ -1,19 +1,19 @@
-package app.oldcarinsurance.entity;
+package app.oldcarinsurance;
 
-import app.oldcarinsurance.CarinsuranceApplication;
+import app.oldcarinsurance.entity.CarinsuranceCaseEntity;
 import lbe.instance.CaseInstance;
 import lbe.instance.impl.SimpleCaseInstance;
 import lbe.instance.value.RelationValue;
 import lbe.instance.value.impl.RelationValueImpl;
 import lbe.model.Entity;
 
-public class CarinsuranceCaseInstance extends SimpleCaseInstance {
+public class CarinsuranceCase extends SimpleCaseInstance {
 
-	public CarinsuranceCaseInstance() {
+	public CarinsuranceCase() {
 		super(CarinsuranceCaseEntity.INSTANCE, CarinsuranceApplication.INSTANCE );
 	}
 
-	public final RelationValue<CarinsuranceCaseInstance, DriverInstance> driver 
+	public final RelationValue<CarinsuranceCase, Driver> driver 
 		= createRelationValue(CarinsuranceCaseEntity.driver);
 
 }

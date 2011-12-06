@@ -18,24 +18,11 @@ public class SharedTextDesignEntity extends SimpleEntity {
 	
 	// Relations
 	
-	public static final Relation<SharedTextDesign, TextHolder, TextHolder> holder
-		= new SimpleRelation<SharedTextDesign, TextHolder, TextHolder>(
-			"holder", INSTANCE, TextHolderEntity.INSTANCE, TextHolder.class, TextHolderEntity.usages
-		) {
-	
-			@Override
-			public ReadOnlyRelationValue<SharedTextDesign, TextHolder> get(
-					SharedTextDesign instance) {
-				return instance.holder;
-			}
-		};
-	
 	// Reverse relations
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
-		holder,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};

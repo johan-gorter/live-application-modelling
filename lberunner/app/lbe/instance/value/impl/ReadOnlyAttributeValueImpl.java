@@ -15,7 +15,7 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, V extends Object> im
 	
 	private transient ArrayList<ValueChangeListener> oneTimeListeners = new ArrayList<ValueChangeListener>(); 
 	
-	private transient V calculatedValue;
+	private transient V cachedValue;
 	
 	protected transient Observations basedOn;
 
@@ -30,21 +30,21 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, V extends Object> im
 	
 	public V get() {
 		forInstance.getCase().registerObservation(this);
-		if (calculatedValue==null) {
+		if (cachedValue==null) {
 			forInstance.getCase().startRecordingObservations();
-			calculatedValue = (V)model.calculateValue(forInstance);
+			cachedValue = (V)model.calculateValue(forInstance);
 			Observations observations = forInstance.getCase().stopRecordingObservations();
 			if (observations.size()>0) {
 				basedOn = observations;
 				observations.setOneTimeOutdatedListener(this);
 			}
 		}
-		return calculatedValue;
+		return cachedValue;
 	}
 
 	@Override
 	public void valueChanged(ReadOnlyAttributeValue value) {
-		calculatedValue = null;
+		cachedValue = null;
 		basedOn = null;
 		fireValueChanged();
 	}

@@ -68,22 +68,6 @@ public class TextDesignEntity extends SimpleEntity {
 			}
 		};
 	
-	public static final Relation<TextDesign, TextHolder, TextHolder> holder
-		= new SimpleRelation<TextDesign, TextHolder, TextHolder>(
-			"holder", INSTANCE, TextDesignEntity.INSTANCE, TextHolder.class, TextHolderEntity.text
-		) {
-	
-			@Override
-			public ReadOnlyRelationValue<TextDesign, TextHolder> get(
-					TextDesign instance) {
-				return instance.holder;
-			}
-	
-			public boolean isReverse() {
-				return true;
-			}
-		};
-	
 	public static final Relation<TextDesign, Header, Header> textOnHeader
 		= new SimpleRelation<TextDesign, Header, Header>(
 			"textOnHeader", INSTANCE, TextDesignEntity.INSTANCE, Header.class, HeaderEntity.text
@@ -124,7 +108,6 @@ public class TextDesignEntity extends SimpleEntity {
 		questionOnAttribute,
 		explanationOnAttribute,
 		displayOnDomainEntry,
-		holder,
 		textOnHeader,
 		captionOnButton,
 	};

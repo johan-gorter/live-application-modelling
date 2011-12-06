@@ -34,13 +34,31 @@ public class PageFragmentHolder
 	
 	public final RelationValue<PageFragmentHolder, PageFragmentDesign> pageFragment
 		= createRelationValue(PageFragmentHolderEntity.pageFragment);
+		
+	public PageFragmentDesign getPageFragment() {
+		return pageFragment.get();
+	}
+	
+	public void setPageFragment(PageFragmentDesign newValue) {
+		pageFragment.set(newValue);
+	}
 
 	// Reverse relations
 	
 	public final ReadOnlyRelationValue<PageFragmentHolder, Shared> shared
 		= createReverseRelationValue(PageFragmentHolderEntity.shared);
+
+	public Shared getShared() {
+		return shared.get();
+	}
+
 	
 	public final ReadOnlyRelationValues<PageFragmentHolder, SharedFragment> usages
 		= createReverseRelationValues(PageFragmentHolderEntity.usages);
+
+	public List<SharedFragment> getUsages() {
+		return usages.get();
+	}
+
 
 }

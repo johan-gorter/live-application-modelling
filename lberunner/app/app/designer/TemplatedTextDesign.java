@@ -34,6 +34,14 @@ public class TemplatedTextDesign
 	
 	public final RelationValues<TemplatedTextDesign, StringProducerDesign> untranslated
 		= createRelationValues(TemplatedTextDesignEntity.untranslated);
+		
+	public List<StringProducerDesign> getUntranslated() {
+		return untranslated.get();
+	}
+	
+	public void setUntranslated(List<StringProducerDesign> newValue) {
+		untranslated.set(newValue);
+	}
 
 	// Reverse relations
 

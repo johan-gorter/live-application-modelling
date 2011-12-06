@@ -34,13 +34,23 @@ public class Shared
 	
 	public final RelationValues<Shared, PageFragmentHolder> pageFragments
 		= createRelationValues(SharedEntity.pageFragments);
+		
+	public List<PageFragmentHolder> getPageFragments() {
+		return pageFragments.get();
+	}
 	
-	public final RelationValues<Shared, TextHolder> texts
-		= createRelationValues(SharedEntity.texts);
+	public void setPageFragments(List<PageFragmentHolder> newValue) {
+		pageFragments.set(newValue);
+	}
 
 	// Reverse relations
 	
 	public final ReadOnlyRelationValue<Shared, ApplicationDesign> application
 		= createReverseRelationValue(SharedEntity.application);
+
+	public ApplicationDesign getApplication() {
+		return application.get();
+	}
+
 
 }

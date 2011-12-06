@@ -175,28 +175,6 @@ public class DriverEntity extends SimpleEntity {
 			}
 		};
 	
-	public static final Attribute<Driver, java.lang.String, java.lang.String> Test 
-		= new SimpleAttribute<Driver, java.lang.String, java.lang.String>(
-			"Test", INSTANCE, java.lang.String.class
-		) {
-	
-			@Override
-			public ReadOnlyAttributeValue<Driver, java.lang.String> get(Driver instance) {
-				return instance.Test;
-			}
-		};
-	
-	public static final Attribute<Driver, java.lang.String, java.lang.String> NewAttribute1323119309 
-		= new SimpleAttribute<Driver, java.lang.String, java.lang.String>(
-			"NewAttribute1323119309", INSTANCE, java.lang.String.class
-		) {
-	
-			@Override
-			public ReadOnlyAttributeValue<Driver, java.lang.String> get(Driver instance) {
-				return instance.NewAttribute1323119309;
-			}
-		};
-	
 	// Relations
 	
 	// Reverse relations
@@ -226,8 +204,6 @@ public class DriverEntity extends SimpleEntity {
 		yearsInsured,
 		mileage,
 		noClaimsDiscount,
-		Test,
-		NewAttribute1323119309,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
 	};

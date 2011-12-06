@@ -34,6 +34,14 @@ public class FormattedValueDesign
 	
 	public final RelationValue<FormattedValueDesign, AttributeBase> value
 		= createRelationValue(FormattedValueDesignEntity.value);
+		
+	public AttributeBase getValue() {
+		return value.get();
+	}
+	
+	public void setValue(AttributeBase newValue) {
+		value.set(newValue);
+	}
 
 	// Reverse relations
 

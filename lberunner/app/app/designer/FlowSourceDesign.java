@@ -34,16 +34,45 @@ public class FlowSourceDesign
 	
 	public final RelationValue<FlowSourceDesign, EventDesign> startEvent
 		= createRelationValue(FlowSourceDesignEntity.startEvent);
+		
+	public EventDesign getStartEvent() {
+		return startEvent.get();
+	}
+	
+	public void setStartEvent(EventDesign newValue) {
+		startEvent.set(newValue);
+	}
 	
 	public final RelationValue<FlowSourceDesign, FlowNodeBaseDesign> endNode
 		= createRelationValue(FlowSourceDesignEntity.endNode);
+		
+	public FlowNodeBaseDesign getEndNode() {
+		return endNode.get();
+	}
+	
+	public void setEndNode(FlowNodeBaseDesign newValue) {
+		endNode.set(newValue);
+	}
 	
 	public final RelationValue<FlowSourceDesign, EventDesign> endEvent
 		= createRelationValue(FlowSourceDesignEntity.endEvent);
+		
+	public EventDesign getEndEvent() {
+		return endEvent.get();
+	}
+	
+	public void setEndEvent(EventDesign newValue) {
+		endEvent.set(newValue);
+	}
 
 	// Reverse relations
 	
 	public final ReadOnlyRelationValue<FlowSourceDesign, FlowDesign> owner
 		= createReverseRelationValue(FlowSourceDesignEntity.owner);
+
+	public FlowDesign getOwner() {
+		return owner.get();
+	}
+
 
 }

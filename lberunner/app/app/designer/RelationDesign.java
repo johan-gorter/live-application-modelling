@@ -37,6 +37,9 @@ public class RelationDesign
 		return owner.get();
 	}
 
+	public void setOwner(java.lang.Boolean newValue) {
+		owner.set(newValue);
+	}
 	
 	public final AttributeValue<RelationDesign, java.lang.Boolean> autoCreate
 		= createAttributeValue(RelationDesignEntity.autoCreate);
@@ -45,6 +48,9 @@ public class RelationDesign
 		return autoCreate.get();
 	}
 
+	public void setAutoCreate(java.lang.Boolean newValue) {
+		autoCreate.set(newValue);
+	}
 	
 	public final AttributeValue<RelationDesign, java.lang.Boolean> reverseMultivalue
 		= createAttributeValue(RelationDesignEntity.reverseMultivalue);
@@ -53,6 +59,9 @@ public class RelationDesign
 		return reverseMultivalue.get();
 	}
 
+	public void setReverseMultivalue(java.lang.Boolean newValue) {
+		reverseMultivalue.set(newValue);
+	}
 	
 	public final AttributeValue<RelationDesign, java.lang.String> reverseName
 		= createAttributeValue(RelationDesignEntity.reverseName);
@@ -61,18 +70,39 @@ public class RelationDesign
 		return reverseName.get();
 	}
 
+	public void setReverseName(java.lang.String newValue) {
+		reverseName.set(newValue);
+	}
 	
 	// Relations
 	
 	public final RelationValue<RelationDesign, EntityDesign> to
 		= createRelationValue(RelationDesignEntity.to);
+		
+	public EntityDesign getTo() {
+		return to.get();
+	}
+	
+	public void setTo(EntityDesign newValue) {
+		to.set(newValue);
+	}
 
 	// Reverse relations
 	
 	public final ReadOnlyRelationValue<RelationDesign, EntityDesign> entity
 		= createReverseRelationValue(RelationDesignEntity.entity);
+
+	public EntityDesign getEntity() {
+		return entity.get();
+	}
+
 	
 	public final ReadOnlyRelationValues<RelationDesign, Select> relationInselects
 		= createReverseRelationValues(RelationDesignEntity.relationInselects);
+
+	public List<Select> getRelationInselects() {
+		return relationInselects.get();
+	}
+
 
 }

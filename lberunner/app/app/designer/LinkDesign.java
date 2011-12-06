@@ -34,9 +34,25 @@ public class LinkDesign
 	
 	public final RelationValue<LinkDesign, TextDesign> caption
 		= createRelationValue(LinkDesignEntity.caption);
+		
+	public TextDesign getCaption() {
+		return caption.get();
+	}
+	
+	public void setCaption(TextDesign newValue) {
+		caption.set(newValue);
+	}
 	
 	public final RelationValue<LinkDesign, EventDesign> event
 		= createRelationValue(LinkDesignEntity.event);
+		
+	public EventDesign getEvent() {
+		return event.get();
+	}
+	
+	public void setEvent(EventDesign newValue) {
+		event.set(newValue);
+	}
 
 	// Reverse relations
 

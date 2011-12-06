@@ -34,10 +34,23 @@ public class CompositePageFragmentDesign
 	
 	public final RelationValues<CompositePageFragmentDesign, PageComposition> items
 		= createRelationValues(CompositePageFragmentDesignEntity.items);
+		
+	public List<PageComposition> getItems() {
+		return items.get();
+	}
+	
+	public void setItems(List<PageComposition> newValue) {
+		items.set(newValue);
+	}
 
 	// Reverse relations
 	
 	public final ReadOnlyRelationValue<CompositePageFragmentDesign, PageDesign> contentOfPage
 		= createReverseRelationValue(CompositePageFragmentDesignEntity.contentOfPage);
+
+	public PageDesign getContentOfPage() {
+		return contentOfPage.get();
+	}
+
 
 }

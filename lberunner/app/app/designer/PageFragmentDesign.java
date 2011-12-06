@@ -37,6 +37,9 @@ public class PageFragmentDesign
 		return presentation.get();
 	}
 
+	public void setPresentation(java.lang.String newValue) {
+		presentation.set(newValue);
+	}
 	
 	// Relations
 
@@ -44,8 +47,18 @@ public class PageFragmentDesign
 	
 	public final ReadOnlyRelationValue<PageFragmentDesign, PageFragmentHolder> holder
 		= createReverseRelationValue(PageFragmentDesignEntity.holder);
+
+	public PageFragmentHolder getHolder() {
+		return holder.get();
+	}
+
 	
 	public final ReadOnlyRelationValue<PageFragmentDesign, PageComposition> composedIn
 		= createReverseRelationValue(PageFragmentDesignEntity.composedIn);
+
+	public PageComposition getComposedIn() {
+		return composedIn.get();
+	}
+
 
 }

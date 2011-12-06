@@ -50,6 +50,7 @@ public abstract class Attribute<I extends Instance, Value extends Object, Item e
 		return null;
 	}
 	
+	// TODO: not public
 	public Value calculateValue(I instance) {
 		Deduction<Value> deduction = getDeduction();
 		if (deduction!=null) {
