@@ -10,23 +10,23 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class SelectEntity extends SimpleEntity {
+public class SharedFragmentDesignEntity extends SimpleEntity {
 
-	public static final SelectEntity INSTANCE = new SelectEntity();
+	public static final SharedFragmentDesignEntity INSTANCE = new SharedFragmentDesignEntity();
 	
 	// Attributes
 	
 	// Relations
 	
-	public static final Relation<Select, RelationDesign, RelationDesign> relation
-		= new SimpleRelation<Select, RelationDesign, RelationDesign>(
-			"relation", INSTANCE, RelationDesignEntity.INSTANCE, RelationDesign.class, RelationDesignEntity.relationInselects
+	public static final Relation<SharedFragmentDesign, PageFragmentHolderDesign, PageFragmentHolderDesign> holder
+		= new SimpleRelation<SharedFragmentDesign, PageFragmentHolderDesign, PageFragmentHolderDesign>(
+			"holder", INSTANCE, PageFragmentHolderDesignEntity.INSTANCE, PageFragmentHolderDesign.class, PageFragmentHolderDesignEntity.usages
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<Select, RelationDesign> get(
-					Select instance) {
-				return instance.relation;
+			public ReadOnlyRelationValue<SharedFragmentDesign, PageFragmentHolderDesign> get(
+					SharedFragmentDesign instance) {
+				return instance.holder;
 			}
 		};
 	
@@ -35,23 +35,23 @@ public class SelectEntity extends SimpleEntity {
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
-		relation,
+		holder,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};
 
-	private SelectEntity() {
-		super("Select");
+	private SharedFragmentDesignEntity() {
+		super("SharedFragmentDesign");
 	}
 	
 	@Override
 	public Instance createInstance(CaseInstance caseInstance, long id) {
-		return new Select(caseInstance, id);
+		return new SharedFragmentDesign(caseInstance, id);
 	}
 	
 	@Override
 	public Entity extendsEntity() {
-		return CompositePageFragmentDesignEntity.INSTANCE;
+		return PageFragmentDesignEntity.INSTANCE;
 	}
 	
 	@Override

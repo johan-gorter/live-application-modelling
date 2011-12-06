@@ -12,19 +12,19 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class Select 
+public class SelectDesign 
 	extends CompositePageFragmentDesign 
 	implements Instance {
 
-	public Select(CaseInstance caseInstance) {
+	public SelectDesign(CaseInstance caseInstance) {
 		this(caseInstance, 0);
 	}
 	
-	public Select(CaseInstance caseInstance, long id) {
-		super(caseInstance, SelectEntity.INSTANCE, id);
+	public SelectDesign(CaseInstance caseInstance, long id) {
+		super(caseInstance, SelectDesignEntity.INSTANCE, id);
 	}
 	
-	protected Select(CaseInstance caseInstance, Entity model, long id) {
+	protected SelectDesign(CaseInstance caseInstance, Entity model, long id) {
 		super(caseInstance, model, id);
 	}
 
@@ -32,8 +32,8 @@ public class Select
 	
 	// Relations
 	
-	public final RelationValue<Select, RelationDesign> relation
-		= createRelationValue(SelectEntity.relation);
+	public final RelationValue<SelectDesign, RelationDesign> relation
+		= createRelationValue(SelectDesignEntity.relation);
 		
 	public RelationDesign getRelation() {
 		return relation.get();

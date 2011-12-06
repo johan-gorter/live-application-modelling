@@ -12,19 +12,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import lbe.instance.Observations;
 import play.Play;
-
+import app.designer.Design;
+import app.designer.TextDesign;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
-
-import lbe.instance.Observations;
-import lbe.model.pageelement.impl.TemplatedText;
-
-import app.designer.Concept;
-import app.designer.ConstantTextDesign;
-import app.designer.TemplatedTextDesign;
-import app.designer.TextDesign;;
 
 public abstract class AbstractGenerator {
 
@@ -76,9 +70,9 @@ public abstract class AbstractGenerator {
 	
 	public abstract void delete(File applicationRoot);
 	
-	protected <G extends AbstractGenerator> List<Concept> updateGenerators(Map<String, G> generators, List<? extends Concept> from, File applicationRoot) {
-		List<Concept> newConcepts = new ArrayList<Concept>();
-		for(Concept instance: from) {
+	protected <G extends AbstractGenerator> List<Design> updateGenerators(Map<String, G> generators, List<? extends Design> from, File applicationRoot) {
+		List<Design> newConcepts = new ArrayList<Design>();
+		for(Design instance: from) {
 			AbstractGenerator generator = generators.get(instance.getName());
 			if (generator!=null) {
 				generator.update(applicationRoot);
@@ -89,7 +83,7 @@ public abstract class AbstractGenerator {
 		Iterator<Map.Entry<String, G>> i = generators.entrySet().iterator();
 		nextEntry: while (i.hasNext()) {
 			Entry<String, G> entry = i.next();
-			for (Concept instance : from) {
+			for (Design instance : from) {
 				if (entry.getKey().equals(instance.getName())) {
 					break nextEntry;
 				}

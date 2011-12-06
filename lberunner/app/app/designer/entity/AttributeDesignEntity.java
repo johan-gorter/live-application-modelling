@@ -143,7 +143,7 @@ public class AttributeDesignEntity extends SimpleEntity {
 	
 	@Override
 	public Entity extendsEntity() {
-		return AttributeBaseEntity.INSTANCE;
+		return AttributeBaseDesignEntity.INSTANCE;
 	}
 	
 	@Override

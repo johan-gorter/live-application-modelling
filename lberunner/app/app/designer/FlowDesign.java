@@ -13,7 +13,7 @@ import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
 public class FlowDesign 
-	extends Concept 
+	extends Design 
 	implements Instance {
 
 	public FlowDesign(CaseInstance caseInstance) {

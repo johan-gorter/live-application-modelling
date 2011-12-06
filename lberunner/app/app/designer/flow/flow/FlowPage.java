@@ -16,10 +16,10 @@ public class FlowPage extends Page {
         new SimpleCompositePageFragment(new PageFragment[]{
             new SimpleLink(HomeEvent.INSTANCE, new ConstantText("Home")),
             new SimpleLink(ExploreInstanceEvent.INSTANCE, new ConstantText("Open in case explorer")),
-            new SimpleField(ConceptEntity.INSTANCE, ConceptEntity.name),
+            new SimpleField(DesignEntity.INSTANCE, DesignEntity.name),
             new ConstantText("Nodes"),
             new SimpleCompositePageFragment(FlowDesignEntity.nodes, new PageFragment[]{
-                new SimpleLink(FlowNodeDetailsEvent.INSTANCE, new TemplatedText().add(ConceptEntity.name))
+                new SimpleLink(FlowNodeDetailsEvent.INSTANCE, new TemplatedText().add(DesignEntity.name))
             })
         }); 
 	

@@ -12,19 +12,19 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class SharedFragment 
+public class SharedFragmentDesign 
 	extends PageFragmentDesign 
 	implements Instance {
 
-	public SharedFragment(CaseInstance caseInstance) {
+	public SharedFragmentDesign(CaseInstance caseInstance) {
 		this(caseInstance, 0);
 	}
 	
-	public SharedFragment(CaseInstance caseInstance, long id) {
-		super(caseInstance, SharedFragmentEntity.INSTANCE, id);
+	public SharedFragmentDesign(CaseInstance caseInstance, long id) {
+		super(caseInstance, SharedFragmentDesignEntity.INSTANCE, id);
 	}
 	
-	protected SharedFragment(CaseInstance caseInstance, Entity model, long id) {
+	protected SharedFragmentDesign(CaseInstance caseInstance, Entity model, long id) {
 		super(caseInstance, model, id);
 	}
 
@@ -32,14 +32,14 @@ public class SharedFragment
 	
 	// Relations
 	
-	public final RelationValue<SharedFragment, PageFragmentHolder> holder
-		= createRelationValue(SharedFragmentEntity.holder);
+	public final RelationValue<SharedFragmentDesign, PageFragmentHolderDesign> holder
+		= createRelationValue(SharedFragmentDesignEntity.holder);
 		
-	public PageFragmentHolder getHolder() {
+	public PageFragmentHolderDesign getHolder() {
 		return holder.get();
 	}
 	
-	public void setHolder(PageFragmentHolder newValue) {
+	public void setHolder(PageFragmentHolderDesign newValue) {
 		holder.set(newValue);
 	}
 

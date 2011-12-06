@@ -101,15 +101,15 @@ public class ApplicationDesign
 		exposedFlows.set(newValue);
 	}
 	
-	public final RelationValue<ApplicationDesign, Shared> shared
-		= createRelationValue(ApplicationDesignEntity.shared);
+	public final RelationValues<ApplicationDesign, PageFragmentHolderDesign> sharedPageFragments
+		= createRelationValues(ApplicationDesignEntity.sharedPageFragments);
 		
-	public Shared getShared() {
-		return shared.get();
+	public List<PageFragmentHolderDesign> getSharedPageFragments() {
+		return sharedPageFragments.get();
 	}
 	
-	public void setShared(Shared newValue) {
-		shared.set(newValue);
+	public void setSharedPageFragments(List<PageFragmentHolderDesign> newValue) {
+		sharedPageFragments.set(newValue);
 	}
 
 	// Reverse relations

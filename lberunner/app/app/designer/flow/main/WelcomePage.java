@@ -19,13 +19,13 @@ public class WelcomePage extends Page {
                 new SimpleCompositePageFragment(new PageFragment[]{
                     new ConstantText("Entities"),
                     new SimpleCompositePageFragment(ApplicationDesignEntity.entities, new PageFragment[]{
-                        new SimpleLink(EntityDetailsEvent.INSTANCE, new TemplatedText().add(ConceptEntity.name))
+                        new SimpleLink(EntityDetailsEvent.INSTANCE, new TemplatedText().add(DesignEntity.name))
                     })
                 }).withPresentation("column"),
                 new SimpleCompositePageFragment(new PageFragment[]{
                     new ConstantText("Flows"),
                     new SimpleCompositePageFragment(ApplicationDesignEntity.flows, new PageFragment[]{
-                        new SimpleLink(FlowDetailsEvent.INSTANCE, new TemplatedText().add(ConceptEntity.name))
+                        new SimpleLink(FlowDetailsEvent.INSTANCE, new TemplatedText().add(DesignEntity.name))
                     })
                 }).withPresentation("column")
             }).withPresentation("four-columns")

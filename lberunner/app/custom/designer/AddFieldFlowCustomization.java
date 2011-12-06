@@ -7,9 +7,9 @@ import app.designer.AttributeDesign;
 import app.designer.CompositePageFragmentDesign;
 import app.designer.EntityDesign;
 import app.designer.FieldDesign;
-import app.designer.PageComposition;
+import app.designer.PageCompositionDesign;
 import app.designer.PageDesign;
-import app.designer.Select;
+import app.designer.SelectDesign;
 import app.designer.entity.PageDesignEntity;
 import app.designer.event.FieldDetailsEvent;
 import app.designer.flow.AddFieldFlow;
@@ -24,8 +24,8 @@ public class AddFieldFlowCustomization extends AddFieldFlow {
 		EntityDesign entity = null;
 		// Find a suitable spot... Fine for now
 		while (targetFragment.items.get().size()==1 && targetFragment.items.get().get(0).pageFragment.get() instanceof CompositePageFragmentDesign) {
-			if (targetFragment instanceof Select) {
-				entity = ((Select)targetFragment).relation.get().to.get();
+			if (targetFragment instanceof SelectDesign) {
+				entity = ((SelectDesign)targetFragment).relation.get().to.get();
 			}
 			targetFragment = (CompositePageFragmentDesign) targetFragment.items.get().get(0).pageFragment.get();
 		}
@@ -38,7 +38,7 @@ public class AddFieldFlowCustomization extends AddFieldFlow {
 		
 		FieldDesign field = new FieldDesign(application);
 		field.attribute.set(attribute);
-		PageComposition composition = new PageComposition(application);
+		PageCompositionDesign composition = new PageCompositionDesign(application);
 		composition.pageFragment.set(field);
 		targetFragment.items.add(composition);
 		

@@ -31,13 +31,13 @@ public class PageFragmentDesignEntity extends SimpleEntity {
 	
 	// Reverse relations
 	
-	public static final Relation<PageFragmentDesign, PageFragmentHolder, PageFragmentHolder> holder
-		= new SimpleRelation<PageFragmentDesign, PageFragmentHolder, PageFragmentHolder>(
-			"holder", INSTANCE, PageFragmentDesignEntity.INSTANCE, PageFragmentHolder.class, PageFragmentHolderEntity.pageFragment
+	public static final Relation<PageFragmentDesign, PageFragmentHolderDesign, PageFragmentHolderDesign> holder
+		= new SimpleRelation<PageFragmentDesign, PageFragmentHolderDesign, PageFragmentHolderDesign>(
+			"holder", INSTANCE, PageFragmentDesignEntity.INSTANCE, PageFragmentHolderDesign.class, PageFragmentHolderDesignEntity.pageFragment
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<PageFragmentDesign, PageFragmentHolder> get(
+			public ReadOnlyRelationValue<PageFragmentDesign, PageFragmentHolderDesign> get(
 					PageFragmentDesign instance) {
 				return instance.holder;
 			}
@@ -47,13 +47,13 @@ public class PageFragmentDesignEntity extends SimpleEntity {
 			}
 		};
 	
-	public static final Relation<PageFragmentDesign, PageComposition, PageComposition> composedIn
-		= new SimpleRelation<PageFragmentDesign, PageComposition, PageComposition>(
-			"composedIn", INSTANCE, PageFragmentDesignEntity.INSTANCE, PageComposition.class, PageCompositionEntity.pageFragment
+	public static final Relation<PageFragmentDesign, PageCompositionDesign, PageCompositionDesign> composedIn
+		= new SimpleRelation<PageFragmentDesign, PageCompositionDesign, PageCompositionDesign>(
+			"composedIn", INSTANCE, PageFragmentDesignEntity.INSTANCE, PageCompositionDesign.class, PageCompositionDesignEntity.pageFragment
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<PageFragmentDesign, PageComposition> get(
+			public ReadOnlyRelationValue<PageFragmentDesign, PageCompositionDesign> get(
 					PageFragmentDesign instance) {
 				return instance.composedIn;
 			}

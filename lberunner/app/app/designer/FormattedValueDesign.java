@@ -32,14 +32,14 @@ public class FormattedValueDesign
 	
 	// Relations
 	
-	public final RelationValue<FormattedValueDesign, AttributeBase> value
+	public final RelationValue<FormattedValueDesign, AttributeBaseDesign> value
 		= createRelationValue(FormattedValueDesignEntity.value);
 		
-	public AttributeBase getValue() {
+	public AttributeBaseDesign getValue() {
 		return value.get();
 	}
 	
-	public void setValue(AttributeBase newValue) {
+	public void setValue(AttributeBaseDesign newValue) {
 		value.set(newValue);
 	}
 

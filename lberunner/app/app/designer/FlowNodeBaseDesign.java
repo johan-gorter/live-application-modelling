@@ -13,7 +13,7 @@ import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
 public class FlowNodeBaseDesign 
-	extends Concept 
+	extends Design 
 	implements Instance {
 
 	public FlowNodeBaseDesign(CaseInstance caseInstance) {

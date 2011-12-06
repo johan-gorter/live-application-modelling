@@ -8,10 +8,10 @@ import app.designer.EventDesign;
 import app.designer.FlowDesign;
 import app.designer.FlowSourceDesign;
 import app.designer.PageDesign;
-import app.designer.PageFragmentHolder;
+import app.designer.PageFragmentHolderDesign;
 import app.designer.RelationDesign;
-import app.designer.Select;
-import app.designer.SharedFragment;
+import app.designer.SelectDesign;
+import app.designer.SharedFragmentDesign;
 import app.designer.SubFlowDesign;
 import custom.designer.ApplicationDesignCustomization;
 
@@ -229,9 +229,9 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		CompositePageFragmentDesign pageFragmentEditor = createCompositePageFragment();
 		addContent(pageFragmentEditor, add(createTemplatedText(), "PageFragment"));
 		createField(pageFragmentEditor, presentation, false);
-		PageFragmentHolder pageFragmentEditorHolder = new PageFragmentHolder(applicationDesign);
+		PageFragmentHolderDesign pageFragmentEditorHolder = new PageFragmentHolderDesign(applicationDesign);
 		pageFragmentEditorHolder.pageFragment.set(pageFragmentEditor);
-		applicationDesign.shared.get().pageFragments.add(pageFragmentEditorHolder);
+		applicationDesign.sharedPageFragments.add(pageFragmentEditorHolder);
 		
 		// Pages
 		// Welcome page
@@ -243,7 +243,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		column1.presentation.set("column");
 		addContent(columns, column1);
 		addContent(column1, createConstantText("Entities"));
-		Select entitiesSelect = createSelect(entities);
+		SelectDesign entitiesSelect = createSelect(entities);
 		addContent(entitiesSelect, createLink(entityDetails, add(createTemplatedText(), name)));
 		addContent(column1, entitiesSelect);
 
@@ -251,7 +251,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		column2.presentation.set("column");
 		addContent(columns, column2);
 		addContent(column2, createConstantText("Flows"));
-		Select flowsSelect = createSelect(flows);
+		SelectDesign flowsSelect = createSelect(flows);
 		addContent(flowsSelect, createLink(flowDetails, add(createTemplatedText(), name)));
 		addContent(column2, flowsSelect);
 		// Flow page
@@ -259,7 +259,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		addContent(flowPage.content.get(), createLink(exploreInstance, createConstantText("Open in case explorer")));
 		createField(flowPage.content.get(), name, false);
 		addContent(flowPage.content.get(), createConstantText("Nodes"));
-		Select nodesSelect = createSelect(nodes);
+		SelectDesign nodesSelect = createSelect(nodes);
 		addContent(nodesSelect, createLink(flowNodeDetails, add(createTemplatedText(), name)));
 		addContent(flowPage.content.get(), nodesSelect);
 		// Page page
@@ -267,8 +267,8 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		addContent(pagePage.content.get(), createLink(flowDetails, createConstantText("Flow")));
 		addContent(pagePage.content.get(), createLink(exploreInstance, createConstantText("Open in case explorer")));
 		createField(pagePage.content.get(), name, false);
-		Select selectContent = createSelect(content);
-		SharedFragment editorReference = new SharedFragment(applicationDesign);
+		SelectDesign selectContent = createSelect(content);
+		SharedFragmentDesign editorReference = new SharedFragmentDesign(applicationDesign);
 		editorReference.holder.set(pageFragmentEditorHolder);
 		addContent(selectContent, editorReference);
 		addContent(pagePage.content.get(), selectContent);
@@ -280,7 +280,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		addContent(fieldPage.content.get(), createLink(exploreInstance, createConstantText("Open in case explorer")));
 		createField(fieldPage.content.get(), required, false);
 		createField(fieldPage.content.get(), readOnly, false);
-		Select attributeSelect = createSelect(fieldAttribute);
+		SelectDesign attributeSelect = createSelect(fieldAttribute);
 		createField(attributeSelect, name, true);
 		createField(attributeSelect, className, true);
 		addContent(fieldPage.content.get(), attributeSelect);

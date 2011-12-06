@@ -10,22 +10,22 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class PageFragmentHolderEntity extends SimpleEntity {
+public class PageFragmentHolderDesignEntity extends SimpleEntity {
 
-	public static final PageFragmentHolderEntity INSTANCE = new PageFragmentHolderEntity();
+	public static final PageFragmentHolderDesignEntity INSTANCE = new PageFragmentHolderDesignEntity();
 	
 	// Attributes
 	
 	// Relations
 	
-	public static final Relation<PageFragmentHolder, PageFragmentDesign, PageFragmentDesign> pageFragment
-		= new SimpleRelation<PageFragmentHolder, PageFragmentDesign, PageFragmentDesign>(
+	public static final Relation<PageFragmentHolderDesign, PageFragmentDesign, PageFragmentDesign> pageFragment
+		= new SimpleRelation<PageFragmentHolderDesign, PageFragmentDesign, PageFragmentDesign>(
 			"pageFragment", INSTANCE, PageFragmentDesignEntity.INSTANCE, PageFragmentDesign.class, PageFragmentDesignEntity.holder
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<PageFragmentHolder, PageFragmentDesign> get(
-					PageFragmentHolder instance) {
+			public ReadOnlyRelationValue<PageFragmentHolderDesign, PageFragmentDesign> get(
+					PageFragmentHolderDesign instance) {
 				return instance.pageFragment;
 			}
 	
@@ -40,14 +40,14 @@ public class PageFragmentHolderEntity extends SimpleEntity {
 	
 	// Reverse relations
 	
-	public static final Relation<PageFragmentHolder, Shared, Shared> shared
-		= new SimpleRelation<PageFragmentHolder, Shared, Shared>(
-			"shared", INSTANCE, PageFragmentHolderEntity.INSTANCE, Shared.class, SharedEntity.pageFragments
+	public static final Relation<PageFragmentHolderDesign, ApplicationDesign, ApplicationDesign> shared
+		= new SimpleRelation<PageFragmentHolderDesign, ApplicationDesign, ApplicationDesign>(
+			"shared", INSTANCE, PageFragmentHolderDesignEntity.INSTANCE, ApplicationDesign.class, ApplicationDesignEntity.sharedPageFragments
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<PageFragmentHolder, Shared> get(
-					PageFragmentHolder instance) {
+			public ReadOnlyRelationValue<PageFragmentHolderDesign, ApplicationDesign> get(
+					PageFragmentHolderDesign instance) {
 				return instance.shared;
 			}
 	
@@ -56,14 +56,14 @@ public class PageFragmentHolderEntity extends SimpleEntity {
 			}
 		};
 	
-	public static final Relation<PageFragmentHolder, List<SharedFragment>, SharedFragment> usages
-		= new SimpleRelation<PageFragmentHolder, List<SharedFragment>, SharedFragment>(
-			"usages", INSTANCE, PageFragmentHolderEntity.INSTANCE, SharedFragment.class, SharedFragmentEntity.holder
+	public static final Relation<PageFragmentHolderDesign, List<SharedFragmentDesign>, SharedFragmentDesign> usages
+		= new SimpleRelation<PageFragmentHolderDesign, List<SharedFragmentDesign>, SharedFragmentDesign>(
+			"usages", INSTANCE, PageFragmentHolderDesignEntity.INSTANCE, SharedFragmentDesign.class, SharedFragmentDesignEntity.holder
 		) {
 	
 			@Override
-			public ReadOnlyRelationValues<PageFragmentHolder, SharedFragment> get(
-					PageFragmentHolder instance) {
+			public ReadOnlyRelationValues<PageFragmentHolderDesign, SharedFragmentDesign> get(
+					PageFragmentHolderDesign instance) {
 				return instance.usages;
 			}
 	
@@ -86,18 +86,18 @@ public class PageFragmentHolderEntity extends SimpleEntity {
 		usages,
 	};
 
-	private PageFragmentHolderEntity() {
-		super("PageFragmentHolder");
+	private PageFragmentHolderDesignEntity() {
+		super("PageFragmentHolderDesign");
 	}
 	
 	@Override
 	public Instance createInstance(CaseInstance caseInstance, long id) {
-		return new PageFragmentHolder(caseInstance, id);
+		return new PageFragmentHolderDesign(caseInstance, id);
 	}
 	
 	@Override
 	public Entity extendsEntity() {
-		return ConceptEntity.INSTANCE;
+		return DesignEntity.INSTANCE;
 	}
 	
 	@Override

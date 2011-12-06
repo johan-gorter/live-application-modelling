@@ -10,30 +10,30 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class AttributeBaseEntity extends SimpleEntity {
+public class AttributeBaseDesignEntity extends SimpleEntity {
 
-	public static final AttributeBaseEntity INSTANCE = new AttributeBaseEntity();
+	public static final AttributeBaseDesignEntity INSTANCE = new AttributeBaseDesignEntity();
 	
 	// Attributes
 	
-	public static final Attribute<AttributeBase, java.lang.Boolean, java.lang.Boolean> readOnly 
-		= new SimpleAttribute<AttributeBase, java.lang.Boolean, java.lang.Boolean>(
+	public static final Attribute<AttributeBaseDesign, java.lang.Boolean, java.lang.Boolean> readOnly 
+		= new SimpleAttribute<AttributeBaseDesign, java.lang.Boolean, java.lang.Boolean>(
 			"readOnly", INSTANCE, java.lang.Boolean.class
 		) {
 	
 			@Override
-			public ReadOnlyAttributeValue<AttributeBase, java.lang.Boolean> get(AttributeBase instance) {
+			public ReadOnlyAttributeValue<AttributeBaseDesign, java.lang.Boolean> get(AttributeBaseDesign instance) {
 				return instance.readOnly;
 			}
 		};
 	
-	public static final Attribute<AttributeBase, java.lang.Boolean, java.lang.Boolean> multivalue 
-		= new SimpleAttribute<AttributeBase, java.lang.Boolean, java.lang.Boolean>(
+	public static final Attribute<AttributeBaseDesign, java.lang.Boolean, java.lang.Boolean> multivalue 
+		= new SimpleAttribute<AttributeBaseDesign, java.lang.Boolean, java.lang.Boolean>(
 			"multivalue", INSTANCE, java.lang.Boolean.class
 		) {
 	
 			@Override
-			public ReadOnlyAttributeValue<AttributeBase, java.lang.Boolean> get(AttributeBase instance) {
+			public ReadOnlyAttributeValue<AttributeBaseDesign, java.lang.Boolean> get(AttributeBaseDesign instance) {
 				return instance.multivalue;
 			}
 		};
@@ -42,14 +42,14 @@ public class AttributeBaseEntity extends SimpleEntity {
 	
 	// Reverse relations
 	
-	public static final Relation<AttributeBase, FormattedValueDesign, FormattedValueDesign> valueInTemplatedText
-		= new SimpleRelation<AttributeBase, FormattedValueDesign, FormattedValueDesign>(
-			"valueInTemplatedText", INSTANCE, AttributeBaseEntity.INSTANCE, FormattedValueDesign.class, FormattedValueDesignEntity.value
+	public static final Relation<AttributeBaseDesign, FormattedValueDesign, FormattedValueDesign> valueInTemplatedText
+		= new SimpleRelation<AttributeBaseDesign, FormattedValueDesign, FormattedValueDesign>(
+			"valueInTemplatedText", INSTANCE, AttributeBaseDesignEntity.INSTANCE, FormattedValueDesign.class, FormattedValueDesignEntity.value
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<AttributeBase, FormattedValueDesign> get(
-					AttributeBase instance) {
+			public ReadOnlyRelationValue<AttributeBaseDesign, FormattedValueDesign> get(
+					AttributeBaseDesign instance) {
 				return instance.valueInTemplatedText;
 			}
 	
@@ -68,18 +68,18 @@ public class AttributeBaseEntity extends SimpleEntity {
 		valueInTemplatedText,
 	};
 
-	private AttributeBaseEntity() {
-		super("AttributeBase");
+	private AttributeBaseDesignEntity() {
+		super("AttributeBaseDesign");
 	}
 	
 	@Override
 	public Instance createInstance(CaseInstance caseInstance, long id) {
-		return new AttributeBase(caseInstance, id);
+		return new AttributeBaseDesign(caseInstance, id);
 	}
 	
 	@Override
 	public Entity extendsEntity() {
-		return ConceptEntity.INSTANCE;
+		return DesignEntity.INSTANCE;
 	}
 	
 	@Override

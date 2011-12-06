@@ -72,7 +72,7 @@ public class DomainEntryDesignEntity extends SimpleEntity {
 	
 	@Override
 	public Entity extendsEntity() {
-		return ConceptEntity.INSTANCE;
+		return DesignEntity.INSTANCE;
 	}
 	
 	@Override

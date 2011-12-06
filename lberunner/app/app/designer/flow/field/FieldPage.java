@@ -21,7 +21,7 @@ public class FieldPage extends Page {
             new SimpleField(FieldDesignEntity.INSTANCE, FieldDesignEntity.required),
             new SimpleField(FieldDesignEntity.INSTANCE, FieldDesignEntity.readOnly),
             new SimpleCompositePageFragment(FieldDesignEntity.attribute, new PageFragment[]{
-                new SimpleField(ConceptEntity.INSTANCE, ConceptEntity.name).setRequired(),
+                new SimpleField(DesignEntity.INSTANCE, DesignEntity.name).setRequired(),
                 new SimpleField(AttributeDesignEntity.INSTANCE, AttributeDesignEntity.className).setRequired()
             })
         }); 

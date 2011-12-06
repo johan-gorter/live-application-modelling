@@ -32,14 +32,14 @@ public class CompositePageFragmentDesign
 	
 	// Relations
 	
-	public final RelationValues<CompositePageFragmentDesign, PageComposition> items
+	public final RelationValues<CompositePageFragmentDesign, PageCompositionDesign> items
 		= createRelationValues(CompositePageFragmentDesignEntity.items);
 		
-	public List<PageComposition> getItems() {
+	public List<PageCompositionDesign> getItems() {
 		return items.get();
 	}
 	
-	public void setItems(List<PageComposition> newValue) {
+	public void setItems(List<PageCompositionDesign> newValue) {
 		items.set(newValue);
 	}
 

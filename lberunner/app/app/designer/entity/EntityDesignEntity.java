@@ -211,7 +211,7 @@ public class EntityDesignEntity extends SimpleEntity {
 	
 	@Override
 	public Entity extendsEntity() {
-		return ConceptEntity.INSTANCE;
+		return DesignEntity.INSTANCE;
 	}
 	
 	@Override

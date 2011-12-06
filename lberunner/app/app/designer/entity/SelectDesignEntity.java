@@ -10,31 +10,23 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class HeaderEntity extends SimpleEntity {
+public class SelectDesignEntity extends SimpleEntity {
 
-	public static final HeaderEntity INSTANCE = new HeaderEntity();
+	public static final SelectDesignEntity INSTANCE = new SelectDesignEntity();
 	
 	// Attributes
 	
 	// Relations
 	
-	public static final Relation<Header, TextDesign, TextDesign> text
-		= new SimpleRelation<Header, TextDesign, TextDesign>(
-			"text", INSTANCE, TextDesignEntity.INSTANCE, TextDesign.class, TextDesignEntity.textOnHeader
+	public static final Relation<SelectDesign, RelationDesign, RelationDesign> relation
+		= new SimpleRelation<SelectDesign, RelationDesign, RelationDesign>(
+			"relation", INSTANCE, RelationDesignEntity.INSTANCE, RelationDesign.class, RelationDesignEntity.relationInselects
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<Header, TextDesign> get(
-					Header instance) {
-				return instance.text;
-			}
-	
-			public boolean isOwner() {
-				return true;
-			}
-	
-			public boolean isAutoCreate() {
-				return true;
+			public ReadOnlyRelationValue<SelectDesign, RelationDesign> get(
+					SelectDesign instance) {
+				return instance.relation;
 			}
 		};
 	
@@ -43,18 +35,18 @@ public class HeaderEntity extends SimpleEntity {
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
-		text,
+		relation,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};
 
-	private HeaderEntity() {
-		super("Header");
+	private SelectDesignEntity() {
+		super("SelectDesign");
 	}
 	
 	@Override
 	public Instance createInstance(CaseInstance caseInstance, long id) {
-		return new Header(caseInstance, id);
+		return new SelectDesign(caseInstance, id);
 	}
 	
 	@Override

@@ -58,10 +58,10 @@ public class TextDesign
 	}
 
 	
-	public final ReadOnlyRelationValue<TextDesign, Header> textOnHeader
+	public final ReadOnlyRelationValue<TextDesign, HeaderDesign> textOnHeader
 		= createReverseRelationValue(TextDesignEntity.textOnHeader);
 
-	public Header getTextOnHeader() {
+	public HeaderDesign getTextOnHeader() {
 		return textOnHeader.get();
 	}
 

@@ -45,18 +45,18 @@ public class PageFragmentDesign
 
 	// Reverse relations
 	
-	public final ReadOnlyRelationValue<PageFragmentDesign, PageFragmentHolder> holder
+	public final ReadOnlyRelationValue<PageFragmentDesign, PageFragmentHolderDesign> holder
 		= createReverseRelationValue(PageFragmentDesignEntity.holder);
 
-	public PageFragmentHolder getHolder() {
+	public PageFragmentHolderDesign getHolder() {
 		return holder.get();
 	}
 
 	
-	public final ReadOnlyRelationValue<PageFragmentDesign, PageComposition> composedIn
+	public final ReadOnlyRelationValue<PageFragmentDesign, PageCompositionDesign> composedIn
 		= createReverseRelationValue(PageFragmentDesignEntity.composedIn);
 
-	public PageComposition getComposedIn() {
+	public PageCompositionDesign getComposedIn() {
 		return composedIn.get();
 	}
 

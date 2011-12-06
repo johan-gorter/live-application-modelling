@@ -68,13 +68,13 @@ public class TextDesignEntity extends SimpleEntity {
 			}
 		};
 	
-	public static final Relation<TextDesign, Header, Header> textOnHeader
-		= new SimpleRelation<TextDesign, Header, Header>(
-			"textOnHeader", INSTANCE, TextDesignEntity.INSTANCE, Header.class, HeaderEntity.text
+	public static final Relation<TextDesign, HeaderDesign, HeaderDesign> textOnHeader
+		= new SimpleRelation<TextDesign, HeaderDesign, HeaderDesign>(
+			"textOnHeader", INSTANCE, TextDesignEntity.INSTANCE, HeaderDesign.class, HeaderDesignEntity.text
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<TextDesign, Header> get(
+			public ReadOnlyRelationValue<TextDesign, HeaderDesign> get(
 					TextDesign instance) {
 				return instance.textOnHeader;
 			}

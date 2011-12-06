@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 import app.designer.ApplicationDesign;
-import app.designer.Concept;
+import app.designer.Design;
 import app.designer.EntityDesign;
 import app.designer.EventDesign;
 import app.designer.FlowDesign;
-import app.designer.PageFragmentHolder;
+import app.designer.PageFragmentHolderDesign;
 
 public class ApplicationGenerator extends AbstractGenerator {
 
@@ -80,28 +80,28 @@ public class ApplicationGenerator extends AbstractGenerator {
 
 		AbstractGenerator.generateFile(AbstractGenerator.applicationTemplate, this, null, name, "Application", appname, applicationRoot);
 		
-		List<Concept> newEntities = updateGenerators(entityGenerators, applicationInstance.entities.get(), applicationRoot);
-		for(Concept newEntity : newEntities) {
+		List<Design> newEntities = updateGenerators(entityGenerators, applicationInstance.entities.get(), applicationRoot);
+		for(Design newEntity : newEntities) {
 			EntityGenerator entityGenerator = new EntityGenerator((EntityDesign)newEntity, appname);
 			entityGenerator.update(applicationRoot);
 			entityGenerators.put(newEntity.getName(), entityGenerator);
 		}
 
-		for (PageFragmentHolder pageFragment: applicationInstance.shared.get().pageFragments.get()) {
+		for (PageFragmentHolderDesign pageFragment: applicationInstance.sharedPageFragments.get()) {
 //TODO:			generatePageFragment(pageFragment, appname, applicationRoot);
 		}
 		// TODO: textHolder
 
-		List<Concept> newEvents = updateGenerators(eventGenerators, applicationInstance.events.get(), applicationRoot);
-		for(Concept newEvent : newEvents) {
+		List<Design> newEvents = updateGenerators(eventGenerators, applicationInstance.events.get(), applicationRoot);
+		for(Design newEvent : newEvents) {
 			EventGenerator eventGenerator = new EventGenerator((EventDesign)newEvent, appname);
 			eventGenerator.update(applicationRoot);
 			eventGenerators.put(newEvent.getName(), eventGenerator);
 		}
 		
 		
-		List<Concept> newFlows = updateGenerators(flowGenerators, applicationInstance.flows.get(), applicationRoot);
-		for(Concept newFlow : newFlows) {
+		List<Design> newFlows = updateGenerators(flowGenerators, applicationInstance.flows.get(), applicationRoot);
+		for(Design newFlow : newFlows) {
 			FlowGenerator flowGenerator = new FlowGenerator((FlowDesign)newFlow, appname);
 			flowGenerator.update(applicationRoot);
 			flowGenerators.put(newFlow.getName(), flowGenerator);

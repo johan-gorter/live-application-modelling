@@ -1,7 +1,7 @@
 package lbe.designerbootstrap;
 
 import lbe.designerbootstrap.Bootstrapper.RelationType;
-import app.designer.AttributeBase;
+import app.designer.AttributeBaseDesign;
 import app.designer.AttributeDesign;
 import app.designer.ButtonDesign;
 import app.designer.CompositePageFragmentDesign;
@@ -16,13 +16,13 @@ import app.designer.FlowEdgeDesign;
 import app.designer.FlowNodeBaseDesign;
 import app.designer.FlowSourceDesign;
 import app.designer.FormattedValueDesign;
-import app.designer.Header;
+import app.designer.HeaderDesign;
 import app.designer.LinkDesign;
-import app.designer.PageComposition;
+import app.designer.PageCompositionDesign;
 import app.designer.PageDesign;
 import app.designer.PageFragmentDesign;
 import app.designer.RelationDesign;
-import app.designer.Select;
+import app.designer.SelectDesign;
 import app.designer.SubFlowDesign;
 import app.designer.TemplatedTextDesign;
 import app.designer.TextDesign;
@@ -47,7 +47,7 @@ public abstract class BootstrapperUtil {
 	}
 
 	protected static void createContainerItem(CompositePageFragmentDesign containerDesign, PageFragmentDesign element) {
-		PageComposition item = new PageComposition(applicationDesign);
+		PageCompositionDesign item = new PageCompositionDesign(applicationDesign);
 		item.pageFragment.set(element);
 		containerDesign.items.add(item);
 	}
@@ -99,7 +99,7 @@ public abstract class BootstrapperUtil {
 		return result;
 	}
 	
-	protected static TemplatedTextDesign add(TemplatedTextDesign text, AttributeBase value) {
+	protected static TemplatedTextDesign add(TemplatedTextDesign text, AttributeBaseDesign value) {
 		FormattedValueDesign formattedValue = new FormattedValueDesign(applicationDesign);
 		formattedValue.value.set(value);
 		text.untranslated.add(formattedValue);
@@ -118,14 +118,14 @@ public abstract class BootstrapperUtil {
 		return container;
 	}
 
-	protected static Select createSelect(RelationDesign relation) {
-		Select select = new Select(applicationDesign);
+	protected static SelectDesign createSelect(RelationDesign relation) {
+		SelectDesign select = new SelectDesign(applicationDesign);
 		select.relation.set(relation);
 		return select;
 	}
 
-	protected static Header createHeader(TextDesign text) {
-		Header header = new Header(applicationDesign);
+	protected static HeaderDesign createHeader(TextDesign text) {
+		HeaderDesign header = new HeaderDesign(applicationDesign);
 		header.text.set(text);
 		return header;
 	}
@@ -134,7 +134,7 @@ public abstract class BootstrapperUtil {
 		FieldDesign field = new FieldDesign(applicationDesign);
 		field.attribute.set(attribute);
 		field.required.set(required);
-		PageComposition item = new PageComposition(applicationDesign);
+		PageCompositionDesign item = new PageCompositionDesign(applicationDesign);
 		container.items.add(item);
 		item.pageFragment.set(field);
 		return field;
@@ -181,8 +181,8 @@ public abstract class BootstrapperUtil {
 	}
 	
 	
-	protected static PageComposition addContent(CompositePageFragmentDesign compositePageFragment, PageFragmentDesign item) {
-		PageComposition result = new PageComposition(applicationDesign);
+	protected static PageCompositionDesign addContent(CompositePageFragmentDesign compositePageFragment, PageFragmentDesign item) {
+		PageCompositionDesign result = new PageCompositionDesign(applicationDesign);
 		result.pageFragment.set(item);
 		compositePageFragment.items.add(result);
 		return result;

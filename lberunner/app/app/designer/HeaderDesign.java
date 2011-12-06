@@ -12,19 +12,19 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class Header 
+public class HeaderDesign 
 	extends CompositePageFragmentDesign 
 	implements Instance {
 
-	public Header(CaseInstance caseInstance) {
+	public HeaderDesign(CaseInstance caseInstance) {
 		this(caseInstance, 0);
 	}
 	
-	public Header(CaseInstance caseInstance, long id) {
-		super(caseInstance, HeaderEntity.INSTANCE, id);
+	public HeaderDesign(CaseInstance caseInstance, long id) {
+		super(caseInstance, HeaderDesignEntity.INSTANCE, id);
 	}
 	
-	protected Header(CaseInstance caseInstance, Entity model, long id) {
+	protected HeaderDesign(CaseInstance caseInstance, Entity model, long id) {
 		super(caseInstance, model, id);
 	}
 
@@ -32,8 +32,8 @@ public class Header
 	
 	// Relations
 	
-	public final RelationValue<Header, TextDesign> text
-		= createRelationValue(HeaderEntity.text);
+	public final RelationValue<HeaderDesign, TextDesign> text
+		= createRelationValue(HeaderDesignEntity.text);
 		
 	public TextDesign getText() {
 		return text.get();

@@ -12,19 +12,19 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class PageComposition 
+public class PageCompositionDesign 
 	extends SimpleInstance 
 	implements Instance {
 
-	public PageComposition(CaseInstance caseInstance) {
+	public PageCompositionDesign(CaseInstance caseInstance) {
 		this(caseInstance, 0);
 	}
 	
-	public PageComposition(CaseInstance caseInstance, long id) {
-		super(caseInstance, PageCompositionEntity.INSTANCE, id);
+	public PageCompositionDesign(CaseInstance caseInstance, long id) {
+		super(caseInstance, PageCompositionDesignEntity.INSTANCE, id);
 	}
 	
-	protected PageComposition(CaseInstance caseInstance, Entity model, long id) {
+	protected PageCompositionDesign(CaseInstance caseInstance, Entity model, long id) {
 		super(caseInstance, model, id);
 	}
 
@@ -32,8 +32,8 @@ public class PageComposition
 	
 	// Relations
 	
-	public final RelationValue<PageComposition, PageFragmentDesign> pageFragment
-		= createRelationValue(PageCompositionEntity.pageFragment);
+	public final RelationValue<PageCompositionDesign, PageFragmentDesign> pageFragment
+		= createRelationValue(PageCompositionDesignEntity.pageFragment);
 		
 	public PageFragmentDesign getPageFragment() {
 		return pageFragment.get();
@@ -45,8 +45,8 @@ public class PageComposition
 
 	// Reverse relations
 	
-	public final ReadOnlyRelationValue<PageComposition, CompositePageFragmentDesign> itemIn
-		= createReverseRelationValue(PageCompositionEntity.itemIn);
+	public final ReadOnlyRelationValue<PageCompositionDesign, CompositePageFragmentDesign> itemIn
+		= createReverseRelationValue(PageCompositionDesignEntity.itemIn);
 
 	public CompositePageFragmentDesign getItemIn() {
 		return itemIn.get();

@@ -18,13 +18,13 @@ public class CompositePageFragmentDesignEntity extends SimpleEntity {
 	
 	// Relations
 	
-	public static final Relation<CompositePageFragmentDesign, List<PageComposition>, PageComposition> items
-		= new SimpleRelation<CompositePageFragmentDesign, List<PageComposition>, PageComposition>(
-			"items", INSTANCE, PageCompositionEntity.INSTANCE, PageComposition.class, PageCompositionEntity.itemIn
+	public static final Relation<CompositePageFragmentDesign, List<PageCompositionDesign>, PageCompositionDesign> items
+		= new SimpleRelation<CompositePageFragmentDesign, List<PageCompositionDesign>, PageCompositionDesign>(
+			"items", INSTANCE, PageCompositionDesignEntity.INSTANCE, PageCompositionDesign.class, PageCompositionDesignEntity.itemIn
 		) {
 	
 			@Override
-			public ReadOnlyRelationValues<CompositePageFragmentDesign, PageComposition> get(
+			public ReadOnlyRelationValues<CompositePageFragmentDesign, PageCompositionDesign> get(
 					CompositePageFragmentDesign instance) {
 				return instance.items;
 			}

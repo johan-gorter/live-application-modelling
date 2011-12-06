@@ -7,12 +7,12 @@ import app.designer.ButtonDesign;
 import app.designer.CompositePageFragmentDesign;
 import app.designer.ConstantTextDesign;
 import app.designer.FieldDesign;
-import app.designer.Header;
+import app.designer.HeaderDesign;
 import app.designer.LinkDesign;
-import app.designer.PageComposition;
+import app.designer.PageCompositionDesign;
 import app.designer.PageDesign;
 import app.designer.PageFragmentDesign;
-import app.designer.Select;
+import app.designer.SelectDesign;
 
 public class PageGenerator extends AbstractGenerator {
 
@@ -80,14 +80,14 @@ public class PageGenerator extends AbstractGenerator {
 			result.text = generateText(link.caption.get());
 			result.event = link.event.get()==null?null:link.event.get().name.get();
 		} else if (fragment instanceof CompositePageFragmentDesign) {
-			for (PageComposition composition : ((CompositePageFragmentDesign)fragment).items.get()) {
+			for (PageCompositionDesign composition : ((CompositePageFragmentDesign)fragment).items.get()) {
 				result.children.add(createContentClassModel(composition.pageFragment.get()));
 			}
-			if (fragment instanceof Header) {
-				result.text = generateText(((Header)fragment).text.get());
+			if (fragment instanceof HeaderDesign) {
+				result.text = generateText(((HeaderDesign)fragment).text.get());
 			}
-			if (fragment instanceof Select) {
-				Select selectFragment = (Select)fragment;
+			if (fragment instanceof SelectDesign) {
+				SelectDesign selectFragment = (SelectDesign)fragment;
 				result.relationEntity = selectFragment.relation.get().entity.get().name.get();
 				result.relationName = selectFragment.relation.get().name.get();
 			}

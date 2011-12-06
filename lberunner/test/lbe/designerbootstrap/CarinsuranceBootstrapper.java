@@ -9,10 +9,10 @@ import app.designer.EntityDesign;
 import app.designer.EventDesign;
 import app.designer.FlowDesign;
 import app.designer.FlowSourceDesign;
-import app.designer.Header;
+import app.designer.HeaderDesign;
 import app.designer.PageDesign;
 import app.designer.RelationDesign;
-import app.designer.Select;
+import app.designer.SelectDesign;
 import custom.designer.ApplicationDesignCustomization;
 
 public class CarinsuranceBootstrapper extends BootstrapperUtil {
@@ -52,8 +52,8 @@ public class CarinsuranceBootstrapper extends BootstrapperUtil {
 		RelationDesign driverRelation = createRelation(carinsuranceCase, "driver", RelationType.OneToOneAggregation, "carinsuranceCase", driver);
 
 		// PageFragments
-		Select selectDriver = createSelect(driverRelation);
-		Header driverHeader = createHeader(createConstantText("Driver"));
+		SelectDesign selectDriver = createSelect(driverRelation);
+		HeaderDesign driverHeader = createHeader(createConstantText("Driver"));
 		addContent(selectDriver, driverHeader);
 		CompositePageFragmentDesign driverFields = createCompositePageFragment();
 		addContent(driverHeader, driverFields);

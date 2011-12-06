@@ -18,13 +18,13 @@ public class FormattedValueDesignEntity extends SimpleEntity {
 	
 	// Relations
 	
-	public static final Relation<FormattedValueDesign, AttributeBase, AttributeBase> value
-		= new SimpleRelation<FormattedValueDesign, AttributeBase, AttributeBase>(
-			"value", INSTANCE, AttributeBaseEntity.INSTANCE, AttributeBase.class, AttributeBaseEntity.valueInTemplatedText
+	public static final Relation<FormattedValueDesign, AttributeBaseDesign, AttributeBaseDesign> value
+		= new SimpleRelation<FormattedValueDesign, AttributeBaseDesign, AttributeBaseDesign>(
+			"value", INSTANCE, AttributeBaseDesignEntity.INSTANCE, AttributeBaseDesign.class, AttributeBaseDesignEntity.valueInTemplatedText
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<FormattedValueDesign, AttributeBase> get(
+			public ReadOnlyRelationValue<FormattedValueDesign, AttributeBaseDesign> get(
 					FormattedValueDesign instance) {
 				return instance.value;
 			}

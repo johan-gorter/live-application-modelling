@@ -13,7 +13,7 @@ import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
 public class DomainEntryDesign 
-	extends Concept 
+	extends Design 
 	implements Instance {
 
 	public DomainEntryDesign(CaseInstance caseInstance) {

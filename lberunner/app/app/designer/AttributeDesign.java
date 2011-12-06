@@ -13,7 +13,7 @@ import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
 public class AttributeDesign 
-	extends AttributeBase 
+	extends AttributeBaseDesign 
 	implements Instance {
 
 	public AttributeDesign(CaseInstance caseInstance) {

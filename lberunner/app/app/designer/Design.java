@@ -12,26 +12,26 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class Concept 
+public class Design 
 	extends SimpleInstance 
 	implements Instance {
 
-	public Concept(CaseInstance caseInstance) {
+	public Design(CaseInstance caseInstance) {
 		this(caseInstance, 0);
 	}
 	
-	public Concept(CaseInstance caseInstance, long id) {
-		super(caseInstance, ConceptEntity.INSTANCE, id);
+	public Design(CaseInstance caseInstance, long id) {
+		super(caseInstance, DesignEntity.INSTANCE, id);
 	}
 	
-	protected Concept(CaseInstance caseInstance, Entity model, long id) {
+	protected Design(CaseInstance caseInstance, Entity model, long id) {
 		super(caseInstance, model, id);
 	}
 
 	// Attributes
 	
-	public final AttributeValue<Concept, java.lang.String> name
-		= createAttributeValue(ConceptEntity.name);
+	public final AttributeValue<Design, java.lang.String> name
+		= createAttributeValue(DesignEntity.name);
 	
 	public java.lang.String getName() {
 		return name.get();
@@ -41,16 +41,16 @@ public class Concept
 		name.set(newValue);
 	}
 	
-	public final ReadOnlyAttributeValue<Concept, java.lang.Boolean> valid
-		= createReadOnlyAttributeValue(ConceptEntity.valid);
+	public final ReadOnlyAttributeValue<Design, java.lang.Boolean> valid
+		= createReadOnlyAttributeValue(DesignEntity.valid);
 	
 	public java.lang.Boolean getValid() {
 		return valid.get();
 	}
 
 	
-	public final AttributeValue<Concept, java.lang.String> customization
-		= createAttributeValue(ConceptEntity.customization);
+	public final AttributeValue<Design, java.lang.String> customization
+		= createAttributeValue(DesignEntity.customization);
 	
 	public java.lang.String getCustomization() {
 		return customization.get();

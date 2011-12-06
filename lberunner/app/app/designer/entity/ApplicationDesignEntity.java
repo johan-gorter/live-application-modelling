@@ -128,22 +128,22 @@ public class ApplicationDesignEntity extends SimpleEntity {
 			}
 		};
 	
-	public static final Relation<ApplicationDesign, Shared, Shared> shared
-		= new SimpleRelation<ApplicationDesign, Shared, Shared>(
-			"shared", INSTANCE, SharedEntity.INSTANCE, Shared.class, SharedEntity.application
+	public static final Relation<ApplicationDesign, List<PageFragmentHolderDesign>, PageFragmentHolderDesign> sharedPageFragments
+		= new SimpleRelation<ApplicationDesign, List<PageFragmentHolderDesign>, PageFragmentHolderDesign>(
+			"sharedPageFragments", INSTANCE, PageFragmentHolderDesignEntity.INSTANCE, PageFragmentHolderDesign.class, PageFragmentHolderDesignEntity.shared
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<ApplicationDesign, Shared> get(
+			public ReadOnlyRelationValues<ApplicationDesign, PageFragmentHolderDesign> get(
 					ApplicationDesign instance) {
-				return instance.shared;
+				return instance.sharedPageFragments;
 			}
 	
 			public boolean isOwner() {
 				return true;
 			}
 	
-			public boolean isAutoCreate() {
+			public boolean isMultivalue() {
 				return true;
 			}
 		};
@@ -160,7 +160,7 @@ public class ApplicationDesignEntity extends SimpleEntity {
 		flows,
 		events,
 		exposedFlows,
-		shared,
+		sharedPageFragments,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};

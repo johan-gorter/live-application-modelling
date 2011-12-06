@@ -3,7 +3,6 @@ package lbe.model.deduction;
 import lbe.engine.DeductionContext;
 import lbe.instance.Instance;
 import lbe.model.Attribute;
-import app.designer.AttributeBase;
 
 public class AttributeDeduction<V, I extends Instance> extends Deduction<V> {
 

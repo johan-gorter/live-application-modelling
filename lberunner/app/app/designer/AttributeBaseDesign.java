@@ -12,26 +12,26 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class AttributeBase 
-	extends Concept 
+public class AttributeBaseDesign 
+	extends Design 
 	implements Instance {
 
-	public AttributeBase(CaseInstance caseInstance) {
+	public AttributeBaseDesign(CaseInstance caseInstance) {
 		this(caseInstance, 0);
 	}
 	
-	public AttributeBase(CaseInstance caseInstance, long id) {
-		super(caseInstance, AttributeBaseEntity.INSTANCE, id);
+	public AttributeBaseDesign(CaseInstance caseInstance, long id) {
+		super(caseInstance, AttributeBaseDesignEntity.INSTANCE, id);
 	}
 	
-	protected AttributeBase(CaseInstance caseInstance, Entity model, long id) {
+	protected AttributeBaseDesign(CaseInstance caseInstance, Entity model, long id) {
 		super(caseInstance, model, id);
 	}
 
 	// Attributes
 	
-	public final AttributeValue<AttributeBase, java.lang.Boolean> readOnly
-		= createAttributeValue(AttributeBaseEntity.readOnly);
+	public final AttributeValue<AttributeBaseDesign, java.lang.Boolean> readOnly
+		= createAttributeValue(AttributeBaseDesignEntity.readOnly);
 	
 	public java.lang.Boolean getReadOnly() {
 		return readOnly.get();
@@ -41,8 +41,8 @@ public class AttributeBase
 		readOnly.set(newValue);
 	}
 	
-	public final AttributeValue<AttributeBase, java.lang.Boolean> multivalue
-		= createAttributeValue(AttributeBaseEntity.multivalue);
+	public final AttributeValue<AttributeBaseDesign, java.lang.Boolean> multivalue
+		= createAttributeValue(AttributeBaseDesignEntity.multivalue);
 	
 	public java.lang.Boolean getMultivalue() {
 		return multivalue.get();
@@ -56,8 +56,8 @@ public class AttributeBase
 
 	// Reverse relations
 	
-	public final ReadOnlyRelationValue<AttributeBase, FormattedValueDesign> valueInTemplatedText
-		= createReverseRelationValue(AttributeBaseEntity.valueInTemplatedText);
+	public final ReadOnlyRelationValue<AttributeBaseDesign, FormattedValueDesign> valueInTemplatedText
+		= createReverseRelationValue(AttributeBaseDesignEntity.valueInTemplatedText);
 
 	public FormattedValueDesign getValueInTemplatedText() {
 		return valueInTemplatedText.get();

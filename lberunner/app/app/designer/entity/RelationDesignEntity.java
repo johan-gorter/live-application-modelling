@@ -92,13 +92,13 @@ public class RelationDesignEntity extends SimpleEntity {
 			}
 		};
 	
-	public static final Relation<RelationDesign, List<Select>, Select> relationInselects
-		= new SimpleRelation<RelationDesign, List<Select>, Select>(
-			"relationInselects", INSTANCE, RelationDesignEntity.INSTANCE, Select.class, SelectEntity.relation
+	public static final Relation<RelationDesign, List<SelectDesign>, SelectDesign> relationInselects
+		= new SimpleRelation<RelationDesign, List<SelectDesign>, SelectDesign>(
+			"relationInselects", INSTANCE, RelationDesignEntity.INSTANCE, SelectDesign.class, SelectDesignEntity.relation
 		) {
 	
 			@Override
-			public ReadOnlyRelationValues<RelationDesign, Select> get(
+			public ReadOnlyRelationValues<RelationDesign, SelectDesign> get(
 					RelationDesign instance) {
 				return instance.relationInselects;
 			}
@@ -137,7 +137,7 @@ public class RelationDesignEntity extends SimpleEntity {
 	
 	@Override
 	public Entity extendsEntity() {
-		return AttributeBaseEntity.INSTANCE;
+		return AttributeBaseDesignEntity.INSTANCE;
 	}
 	
 	@Override

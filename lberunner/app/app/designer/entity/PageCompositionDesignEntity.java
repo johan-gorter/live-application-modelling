@@ -10,22 +10,22 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class PageCompositionEntity extends SimpleEntity {
+public class PageCompositionDesignEntity extends SimpleEntity {
 
-	public static final PageCompositionEntity INSTANCE = new PageCompositionEntity();
+	public static final PageCompositionDesignEntity INSTANCE = new PageCompositionDesignEntity();
 	
 	// Attributes
 	
 	// Relations
 	
-	public static final Relation<PageComposition, PageFragmentDesign, PageFragmentDesign> pageFragment
-		= new SimpleRelation<PageComposition, PageFragmentDesign, PageFragmentDesign>(
+	public static final Relation<PageCompositionDesign, PageFragmentDesign, PageFragmentDesign> pageFragment
+		= new SimpleRelation<PageCompositionDesign, PageFragmentDesign, PageFragmentDesign>(
 			"pageFragment", INSTANCE, PageFragmentDesignEntity.INSTANCE, PageFragmentDesign.class, PageFragmentDesignEntity.composedIn
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<PageComposition, PageFragmentDesign> get(
-					PageComposition instance) {
+			public ReadOnlyRelationValue<PageCompositionDesign, PageFragmentDesign> get(
+					PageCompositionDesign instance) {
 				return instance.pageFragment;
 			}
 	
@@ -36,14 +36,14 @@ public class PageCompositionEntity extends SimpleEntity {
 	
 	// Reverse relations
 	
-	public static final Relation<PageComposition, CompositePageFragmentDesign, CompositePageFragmentDesign> itemIn
-		= new SimpleRelation<PageComposition, CompositePageFragmentDesign, CompositePageFragmentDesign>(
-			"itemIn", INSTANCE, PageCompositionEntity.INSTANCE, CompositePageFragmentDesign.class, CompositePageFragmentDesignEntity.items
+	public static final Relation<PageCompositionDesign, CompositePageFragmentDesign, CompositePageFragmentDesign> itemIn
+		= new SimpleRelation<PageCompositionDesign, CompositePageFragmentDesign, CompositePageFragmentDesign>(
+			"itemIn", INSTANCE, PageCompositionDesignEntity.INSTANCE, CompositePageFragmentDesign.class, CompositePageFragmentDesignEntity.items
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<PageComposition, CompositePageFragmentDesign> get(
-					PageComposition instance) {
+			public ReadOnlyRelationValue<PageCompositionDesign, CompositePageFragmentDesign> get(
+					PageCompositionDesign instance) {
 				return instance.itemIn;
 			}
 	
@@ -61,13 +61,13 @@ public class PageCompositionEntity extends SimpleEntity {
 		itemIn,
 	};
 
-	private PageCompositionEntity() {
-		super("PageComposition");
+	private PageCompositionDesignEntity() {
+		super("PageCompositionDesign");
 	}
 	
 	@Override
 	public Instance createInstance(CaseInstance caseInstance, long id) {
-		return new PageComposition(caseInstance, id);
+		return new PageCompositionDesign(caseInstance, id);
 	}
 	
 	@Override

@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import app.designer.Concept;
+import app.designer.Design;
 import app.designer.EntityDesign;
 import app.designer.FlowDesign;
 import app.designer.FlowEdgeDesign;
@@ -148,14 +148,14 @@ public class FlowGenerator extends AbstractGenerator {
 			new File(new File(applicationRoot,"flow"), name.toLowerCase()).mkdirs();
 		}
 		
-		List<Concept> newPages = updateGenerators(pageGenerators, getPages(flowDesign.nodes.get()), applicationRoot);
-		for(Concept newPage : newPages) {
+		List<Design> newPages = updateGenerators(pageGenerators, getPages(flowDesign.nodes.get()), applicationRoot);
+		for(Design newPage : newPages) {
 			PageGenerator pageGenerator = new PageGenerator((PageDesign)newPage, appname, flowName);
 			pageGenerator.update(applicationRoot);
 			pageGenerators.put(newPage.getName(), pageGenerator);
 		}
-		List<Concept> newSubFlows = updateGenerators(subFlowGenerators, getSubFlows(flowDesign.nodes.get()), applicationRoot);
-		for(Concept newSubFlow : newSubFlows) {
+		List<Design> newSubFlows = updateGenerators(subFlowGenerators, getSubFlows(flowDesign.nodes.get()), applicationRoot);
+		for(Design newSubFlow : newSubFlows) {
 			SubFlowGenerator subFlowGenerator = new SubFlowGenerator((SubFlowDesign)newSubFlow, appname, flowName);
 			subFlowGenerator.update(applicationRoot);
 			subFlowGenerators.put(newSubFlow.getName(), subFlowGenerator);

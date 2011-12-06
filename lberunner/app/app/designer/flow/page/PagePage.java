@@ -17,7 +17,7 @@ public class PagePage extends Page {
             new SimpleLink(HomeEvent.INSTANCE, new ConstantText("Home")),
             new SimpleLink(FlowDetailsEvent.INSTANCE, new ConstantText("Flow")),
             new SimpleLink(ExploreInstanceEvent.INSTANCE, new ConstantText("Open in case explorer")),
-            new SimpleField(ConceptEntity.INSTANCE, ConceptEntity.name),
+            new SimpleField(DesignEntity.INSTANCE, DesignEntity.name),
             new SimpleCompositePageFragment(PageDesignEntity.content, new PageFragment[]{
                 
             }),
