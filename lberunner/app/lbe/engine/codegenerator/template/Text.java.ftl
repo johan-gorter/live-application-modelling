@@ -9,7 +9,7 @@
     			.add("${sp.constant}")<#t>
     		</#if>
     		<#if sp.type=="formattedValue">
-    			.add(${sp.entity}Entity.${sp.attribute})<#t>
+    			.add(createDeduction${sp.deductionIndex}())<#t>
     		</#if>
     	</#list>
     </#if>

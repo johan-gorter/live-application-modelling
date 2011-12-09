@@ -48,7 +48,7 @@ public class DriverEntity extends Entity {
 		
 		private final Deduction<Date> deduction = new ConstantDeduction<Date>(new GregorianCalendar(1980,0,1).getTime());
 		@Override
-		public Deduction<Date> getDeduction() {
+		public Deduction<Date> getDefault() {
 			return deduction;
 		};
 		
@@ -197,8 +197,8 @@ public class DriverEntity extends Entity {
 
 		protected final Deduction<Integer> DEDUCTION = createDeduction();
 		private Deduction<Integer> createDeduction() {
-			SelectedInstanceDeduction<Driver> d9 = new SelectedInstanceDeduction<Driver>(DriverEntity.INSTANCE);
-			AttributeDeduction<Integer, Driver> d8 = new AttributeDeduction<Integer, Driver>(d9, DriverEntity.yearsInsured);
+			Deduction<Driver> d9 = new SelectedInstanceDeduction<Driver>(DriverEntity.INSTANCE);
+			Deduction<Integer> d8 = new AttributeDeduction<Integer, Driver>(DriverEntity.yearsInsured, d9);
 			ConstantDeduction<Integer> d7 = new ConstantDeduction<Integer>(100);
 			FirstDeduction<Integer> d0 = new FirstDeduction<Integer>(d8, d7);
 			return d0;
@@ -215,7 +215,7 @@ public class DriverEntity extends Entity {
 			return true;
 		};
 		
-		public Deduction<Integer> getDeduction() {
+		public Deduction<Integer> getDefault() {
 			return DEDUCTION;
 		};
 		

@@ -59,7 +59,7 @@ public class InstancePageCustomization extends InstancePage {
 			Object value = relation.get(instance).get();
 			if (value!=null) {
 				children.add(
-					new SimpleCompositePageFragment(relation, 
+					new SimpleCompositePageFragment(relation.toDeduction(), 
 						new PageFragment[]{
 							new SimpleButton(ExploreInstanceEvent.INSTANCE, new InstanceButtonText())
 						}

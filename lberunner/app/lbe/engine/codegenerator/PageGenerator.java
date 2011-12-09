@@ -1,11 +1,14 @@
 package lbe.engine.codegenerator;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import lbe.instance.Observations;
 import app.designer.ButtonDesign;
 import app.designer.CompositePageFragmentDesign;
 import app.designer.ConstantTextDesign;
+import app.designer.DeductionSchemeDesign;
 import app.designer.FieldDesign;
 import app.designer.HeaderDesign;
 import app.designer.LinkDesign;
@@ -13,13 +16,15 @@ import app.designer.PageCompositionDesign;
 import app.designer.PageDesign;
 import app.designer.PageFragmentDesign;
 import app.designer.SelectDesign;
+import app.designer.TextDesign;
 
-public class PageGenerator extends AbstractGenerator {
+public class PageGenerator extends AbstractGenerator implements DeductionSchemeHolder {
 
 	public String flowname;
 	public ContentClassModel content;
 	
 	private PageDesign pageDesign;
+	private List<DeductionSchemeGenerator> deductionSchemes = new ArrayList<DeductionSchemeGenerator>();
 	
 	private Observations observations;
 	
@@ -40,6 +45,7 @@ public class PageGenerator extends AbstractGenerator {
 	@Override
 	public void update(File applicationRoot) {
 		if (observations!=null && !observations.isOutdated()) return;
+		deductionSchemes.clear();
 		pageDesign.getCase().startRecordingObservations();
 		
 		name = pageDesign.name.get();
@@ -69,31 +75,38 @@ public class PageGenerator extends AbstractGenerator {
 			result.entity = field.attribute.get().entity.get().name.get();
 			result.attribute = field.attribute.get().name.get();
 			result.readOnly = (field.readOnly.get()==Boolean.TRUE);
-		} else if (fragment instanceof ConstantTextDesign) {
-			result.text = generateText((ConstantTextDesign)fragment);
+		} else if (fragment instanceof TextDesign) {
+			result.text = new TextGenerator((TextDesign)fragment, this);
 		} else if (fragment instanceof ButtonDesign) {
 			ButtonDesign button = (ButtonDesign)fragment;
-			result.text = generateText(button.caption.get());
+			result.text = new TextGenerator(button.caption.get(), this);
 			result.event = button.event.get()==null?null:button.event.get().name.get();
 		} else if (fragment instanceof LinkDesign) {
 			LinkDesign link = (LinkDesign)fragment;
-			result.text = generateText(link.caption.get());
+			result.text = new TextGenerator(link.caption.get(), this);
 			result.event = link.event.get()==null?null:link.event.get().name.get();
 		} else if (fragment instanceof CompositePageFragmentDesign) {
 			for (PageCompositionDesign composition : ((CompositePageFragmentDesign)fragment).items.get()) {
 				result.children.add(createContentClassModel(composition.pageFragment.get()));
 			}
 			if (fragment instanceof HeaderDesign) {
-				result.text = generateText(((HeaderDesign)fragment).text.get());
+				result.text = new TextGenerator(((HeaderDesign)fragment).text.get(), this);
 			}
 			if (fragment instanceof SelectDesign) {
 				SelectDesign selectFragment = (SelectDesign)fragment;
-				result.relationEntity = selectFragment.relation.get().entity.get().name.get();
-				result.relationName = selectFragment.relation.get().name.get();
+				result.deductionIndex = addDeductionScheme(selectFragment.getDeduction());
 			}
 		}
 		return result;
 	}
 
+	public List<DeductionSchemeGenerator> getDeductionSchemes() {
+		return deductionSchemes;
+	}
 	
+	public int addDeductionScheme(DeductionSchemeDesign scheme) {
+		int deductionIndex = deductionSchemes.size();
+		deductionSchemes.add(new DeductionSchemeGenerator(scheme, deductionIndex));
+		return deductionIndex;
+	}
 }

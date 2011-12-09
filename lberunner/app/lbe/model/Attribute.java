@@ -11,7 +11,9 @@ import lbe.engine.SingleInstanceDeductionContext;
 import lbe.instance.Instance;
 import lbe.instance.value.ReadOnlyAttributeValue;
 import lbe.instance.value.impl.AttributeValueImpl;
+import lbe.model.deduction.AttributeDeduction;
 import lbe.model.deduction.Deduction;
+import lbe.model.deduction.SelectedInstanceDeduction;
 import lbe.model.pageelement.Text;
 
 /**
@@ -22,7 +24,7 @@ import lbe.model.pageelement.Text;
  * @param <Value> Either the same as <Item> or List<Item>
  * @param <Item>
  */
-public abstract class Attribute<I extends Instance, Value extends Object, Item extends Object> extends Deduction<Value> {
+public abstract class Attribute<I extends Instance, Value extends Object, Item extends Object> extends Model {
 
 	public abstract Entity getEntity();
 	
@@ -46,23 +48,17 @@ public abstract class Attribute<I extends Instance, Value extends Object, Item e
 		return null;
 	}
 	
-	public Deduction<Value> getDeduction() {
+	public Deduction<Value> getDefault() {
 		return null;
 	}
 	
 	// TODO: not public
 	public Value calculateValue(I instance) {
-		Deduction<Value> deduction = getDeduction();
+		Deduction<Value> deduction = getDefault();
 		if (deduction!=null) {
 			return deduction.deduct(new SingleInstanceDeductionContext(instance));
 		}
 		return null;
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public Value deduct(DeductionContext context) {
-		return context.getAttributeValue(getEntity(), this).get();
 	}
 	
 	public abstract ReadOnlyAttributeValue<I, Value> get(I instance);
@@ -78,5 +74,10 @@ public abstract class Attribute<I extends Instance, Value extends Object, Item e
 			}
 		}
 		return value;
+	}
+	
+	public AttributeDeduction<Value, Instance> toDeduction() {
+		SelectedInstanceDeduction<Instance> selectedInstanceDeduction = new SelectedInstanceDeduction<Instance>(this.getEntity());
+		return new AttributeDeduction<Value, Instance>((Attribute<Instance, Value, ? extends Object>) this, selectedInstanceDeduction);
 	}
 }

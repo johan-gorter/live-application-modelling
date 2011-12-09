@@ -5,6 +5,7 @@ import java.util.Date;
 import lbe.designerbootstrap.Bootstrapper.RelationType;
 import app.designer.AttributeDesign;
 import app.designer.CompositePageFragmentDesign;
+import app.designer.DeductionDesign;
 import app.designer.EntityDesign;
 import app.designer.EventDesign;
 import app.designer.FlowDesign;
@@ -52,7 +53,7 @@ public class CarinsuranceBootstrapper extends BootstrapperUtil {
 		RelationDesign driverRelation = createRelation(carinsuranceCase, "driver", RelationType.OneToOneAggregation, "carinsuranceCase", driver);
 
 		// PageFragments
-		SelectDesign selectDriver = createSelect(driverRelation);
+		SelectDesign selectDriver = createSelect(createDeduction(driverRelation));
 		HeaderDesign driverHeader = createHeader(createConstantText("Driver"));
 		addContent(selectDriver, driverHeader);
 		CompositePageFragmentDesign driverFields = createCompositePageFragment();

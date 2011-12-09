@@ -32,15 +32,15 @@ public class FormattedValueDesign
 	
 	// Relations
 	
-	public final RelationValue<FormattedValueDesign, AttributeBaseDesign> value
-		= createRelationValue(FormattedValueDesignEntity.value);
+	public final RelationValue<FormattedValueDesign, DeductionSchemeDesign> deduction
+		= createRelationValue(FormattedValueDesignEntity.deduction);
 		
-	public AttributeBaseDesign getValue() {
-		return value.get();
+	public DeductionSchemeDesign getDeduction() {
+		return deduction.get();
 	}
 	
-	public void setValue(AttributeBaseDesign newValue) {
-		value.set(newValue);
+	public void setDeduction(DeductionSchemeDesign newValue) {
+		deduction.set(newValue);
 	}
 
 	// Reverse relations

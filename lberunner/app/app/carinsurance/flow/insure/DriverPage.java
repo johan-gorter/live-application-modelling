@@ -1,19 +1,29 @@
 package app.carinsurance.flow.insure;
 
+import app.carinsurance.*;
 import app.carinsurance.event.*;
 import app.carinsurance.flow.*;
 import app.carinsurance.entity.*;
+import lbe.instance.*;
 import lbe.model.flow.*;
+import lbe.model.deduction.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
 public class DriverPage extends Page {
 
 	public static final DriverPage INSTANCE = new DriverPage();
-	
+
+
+	private static Deduction<?> createDeduction0() {
+		Deduction<CarinsuranceCase> d0 = SelectedInstanceDeduction.create(CarinsuranceCaseEntity.INSTANCE);
+		Deduction<Driver> d1 = AttributeDeduction.create(CarinsuranceCaseEntity.driver, d0);
+		return d1;
+	}
+
 	
 	private static CompositePageFragment CONTENT = 
-        new SimpleCompositePageFragment(CarinsuranceCaseEntity.driver, new PageFragment[]{
+        new SimpleCompositePageFragment(createDeduction0(), new PageFragment[]{
             new SimpleCompositePageFragment(new ConstantText("Driver"), new PageFragment[]{
                 new SimpleCompositePageFragment(new PageFragment[]{
                     new SimpleField(DriverEntity.INSTANCE, DriverEntity.dateOfBirth).setRequired(),
@@ -23,7 +33,8 @@ public class DriverPage extends Page {
                     new SimpleField(DriverEntity.INSTANCE, DriverEntity.disqualified).setRequired(),
                     new SimpleField(DriverEntity.INSTANCE, DriverEntity.carUse).setRequired(),
                     new SimpleField(DriverEntity.INSTANCE, DriverEntity.mileage).setRequired(),
-                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.zipCode).setRequired()
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.zipCode).setRequired(),
+                    new SimpleField(DriverEntity.INSTANCE, DriverEntity.What)
                 })
             })
         }); 

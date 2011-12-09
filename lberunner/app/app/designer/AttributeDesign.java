@@ -13,7 +13,7 @@ import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
 public class AttributeDesign 
-	extends AttributeBaseDesign 
+	extends Design 
 	implements Instance {
 
 	public AttributeDesign(CaseInstance caseInstance) {
@@ -29,6 +29,28 @@ public class AttributeDesign
 	}
 
 	// Attributes
+	
+	public final AttributeValue<AttributeDesign, java.lang.Boolean> readOnly
+		= createAttributeValue(AttributeDesignEntity.readOnly);
+	
+	public java.lang.Boolean getReadOnly() {
+		return readOnly.get();
+	}
+
+	public void setReadOnly(java.lang.Boolean newValue) {
+		readOnly.set(newValue);
+	}
+	
+	public final AttributeValue<AttributeDesign, java.lang.Boolean> multivalue
+		= createAttributeValue(AttributeDesignEntity.multivalue);
+	
+	public java.lang.Boolean getMultivalue() {
+		return multivalue.get();
+	}
+
+	public void setMultivalue(java.lang.Boolean newValue) {
+		multivalue.set(newValue);
+	}
 	
 	public final AttributeValue<AttributeDesign, java.lang.String> className
 		= createAttributeValue(AttributeDesignEntity.className);
@@ -83,6 +105,14 @@ public class AttributeDesign
 
 	public EntityDesign getEntity() {
 		return entity.get();
+	}
+
+	
+	public final ReadOnlyRelationValues<AttributeDesign, AttributeDeductionDesign> attributeInDeductions
+		= createReverseRelationValues(AttributeDesignEntity.attributeInDeductions);
+
+	public List<AttributeDeductionDesign> getAttributeInDeductions() {
+		return attributeInDeductions.get();
 	}
 
 	

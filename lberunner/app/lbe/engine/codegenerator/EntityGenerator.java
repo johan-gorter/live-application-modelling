@@ -6,12 +6,13 @@ import java.util.List;
 
 import lbe.engine.codegenerator.EntityGenerator.Attribute.DomainEntry;
 import app.designer.AttributeDesign;
+import app.designer.DeductionSchemeDesign;
 import app.designer.DomainEntryDesign;
 import app.designer.EntityDesign;
 import app.designer.RelationDesign;
 import app.designer.TextDesign;
 
-public class EntityGenerator extends AbstractGenerator{
+public class EntityGenerator extends AbstractGenerator implements DeductionSchemeHolder {
 
 	public static class Attribute {
 
@@ -154,11 +155,11 @@ public class EntityGenerator extends AbstractGenerator{
 			attribute.readonly = (attributeDesign.readOnly.get()==Boolean.TRUE);
 			TextDesign question = attributeDesign.question.get();
 			if (question!=null) {
-				attribute.question = generateText(question);
+				attribute.question = new TextGenerator(question, this);
 			}
 			TextDesign explanation = attributeDesign.explanation.get();
 			if (explanation!=null) {
-				attribute.explanation = generateText(explanation);
+				attribute.explanation = new TextGenerator(explanation, this);
 			}
 			List<DomainEntryDesign> domain = attributeDesign.domain.get();
 			if (domain.size()>0) {
@@ -185,7 +186,7 @@ public class EntityGenerator extends AbstractGenerator{
 			relation.name = relationDesign.reverseName.get();
 			relation.multivalue = (relationDesign.reverseMultivalue.get()==Boolean.TRUE);
 			relation.reverseName = relationDesign.name.get();
-			relation.item = relationDesign.entity.get().name.get();
+			relation.item = relationDesign.from.get().name.get();
 			relation.to = relation.multivalue?"List<"+relation.item+">":relation.item;
 			reverseRelations.add(relation);
 		}
@@ -206,10 +207,14 @@ public class EntityGenerator extends AbstractGenerator{
 		for (DomainEntryDesign entry: domain) {
 			DomainEntry resultEntry = new DomainEntry();
 			resultEntry.name = entry.name.get();
-			resultEntry.display = generateText(entry.display.get());
+			resultEntry.display = new TextGenerator(entry.display.get(), this);
 			result.add(resultEntry);
 		}
 		return result;
+	}
+	@Override
+	public int addDeductionScheme(DeductionSchemeDesign scheme) {
+		throw new RuntimeException("TODO");
 	}
 
 }

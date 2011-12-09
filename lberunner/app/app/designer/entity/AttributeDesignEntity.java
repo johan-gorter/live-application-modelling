@@ -16,6 +16,28 @@ public class AttributeDesignEntity extends SimpleEntity {
 	
 	// Attributes
 	
+	public static final Attribute<AttributeDesign, java.lang.Boolean, java.lang.Boolean> readOnly 
+		= new SimpleAttribute<AttributeDesign, java.lang.Boolean, java.lang.Boolean>(
+			"readOnly", INSTANCE, java.lang.Boolean.class
+		) {
+	
+			@Override
+			public ReadOnlyAttributeValue<AttributeDesign, java.lang.Boolean> get(AttributeDesign instance) {
+				return instance.readOnly;
+			}
+		};
+	
+	public static final Attribute<AttributeDesign, java.lang.Boolean, java.lang.Boolean> multivalue 
+		= new SimpleAttribute<AttributeDesign, java.lang.Boolean, java.lang.Boolean>(
+			"multivalue", INSTANCE, java.lang.Boolean.class
+		) {
+	
+			@Override
+			public ReadOnlyAttributeValue<AttributeDesign, java.lang.Boolean> get(AttributeDesign instance) {
+				return instance.multivalue;
+			}
+		};
+	
 	public static final Attribute<AttributeDesign, java.lang.String, java.lang.String> className 
 		= new SimpleAttribute<AttributeDesign, java.lang.String, java.lang.String>(
 			"className", INSTANCE, java.lang.String.class
@@ -99,6 +121,26 @@ public class AttributeDesignEntity extends SimpleEntity {
 			}
 		};
 	
+	public static final Relation<AttributeDesign, List<AttributeDeductionDesign>, AttributeDeductionDesign> attributeInDeductions
+		= new SimpleRelation<AttributeDesign, List<AttributeDeductionDesign>, AttributeDeductionDesign>(
+			"attributeInDeductions", INSTANCE, AttributeDesignEntity.INSTANCE, AttributeDeductionDesign.class, AttributeDeductionDesignEntity.attribute
+		) {
+	
+			@Override
+			public ReadOnlyRelationValues<AttributeDesign, AttributeDeductionDesign> get(
+					AttributeDesign instance) {
+				return instance.attributeInDeductions;
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
+	
 	public static final Relation<AttributeDesign, List<FieldDesign>, FieldDesign> fields
 		= new SimpleRelation<AttributeDesign, List<FieldDesign>, FieldDesign>(
 			"fields", INSTANCE, AttributeDesignEntity.INSTANCE, FieldDesign.class, FieldDesignEntity.attribute
@@ -120,6 +162,8 @@ public class AttributeDesignEntity extends SimpleEntity {
 		};
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
+		readOnly,
+		multivalue,
 		className,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
@@ -129,6 +173,7 @@ public class AttributeDesignEntity extends SimpleEntity {
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 		entity,
+		attributeInDeductions,
 		fields,
 	};
 
@@ -143,7 +188,7 @@ public class AttributeDesignEntity extends SimpleEntity {
 	
 	@Override
 	public Entity extendsEntity() {
-		return AttributeBaseDesignEntity.INSTANCE;
+		return DesignEntity.INSTANCE;
 	}
 	
 	@Override

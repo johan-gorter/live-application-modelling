@@ -76,38 +76,18 @@ public class RelationDesignEntity extends SimpleEntity {
 	
 	// Reverse relations
 	
-	public static final Relation<RelationDesign, EntityDesign, EntityDesign> entity
+	public static final Relation<RelationDesign, EntityDesign, EntityDesign> from
 		= new SimpleRelation<RelationDesign, EntityDesign, EntityDesign>(
-			"entity", INSTANCE, RelationDesignEntity.INSTANCE, EntityDesign.class, EntityDesignEntity.relations
+			"from", INSTANCE, RelationDesignEntity.INSTANCE, EntityDesign.class, EntityDesignEntity.relations
 		) {
 	
 			@Override
 			public ReadOnlyRelationValue<RelationDesign, EntityDesign> get(
 					RelationDesign instance) {
-				return instance.entity;
+				return instance.from;
 			}
 	
 			public boolean isReverse() {
-				return true;
-			}
-		};
-	
-	public static final Relation<RelationDesign, List<SelectDesign>, SelectDesign> relationInselects
-		= new SimpleRelation<RelationDesign, List<SelectDesign>, SelectDesign>(
-			"relationInselects", INSTANCE, RelationDesignEntity.INSTANCE, SelectDesign.class, SelectDesignEntity.relation
-		) {
-	
-			@Override
-			public ReadOnlyRelationValues<RelationDesign, SelectDesign> get(
-					RelationDesign instance) {
-				return instance.relationInselects;
-			}
-	
-			public boolean isReverse() {
-				return true;
-			}
-	
-			public boolean isMultivalue() {
 				return true;
 			}
 		};
@@ -122,8 +102,7 @@ public class RelationDesignEntity extends SimpleEntity {
 		to,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
-		entity,
-		relationInselects,
+		from,
 	};
 
 	private RelationDesignEntity() {
@@ -137,7 +116,7 @@ public class RelationDesignEntity extends SimpleEntity {
 	
 	@Override
 	public Entity extendsEntity() {
-		return AttributeBaseDesignEntity.INSTANCE;
+		return AttributeDesignEntity.INSTANCE;
 	}
 	
 	@Override

@@ -31,8 +31,8 @@ public class CarinsuranceCase
 		return driver.get();
 	}
 	
-	public void setDriver(Driver value) {
-		driver.set(value);
+	public void setDriver(Driver newValue) {
+		driver.set(newValue);
 	}
 
 	// Reverse relations

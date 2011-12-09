@@ -1,11 +1,15 @@
-package app.oldcarinsurance.container;
+ package app.oldcarinsurance.container;
 
 import lbe.engine.RenderContext;
+import lbe.model.deduction.AttributeDeduction;
 import lbe.model.deduction.Deduction;
+import lbe.model.deduction.SelectedInstanceDeduction;
 import lbe.model.pageelement.CompositePageFragment;
 import lbe.model.pageelement.PageFragment;
 import lbe.model.pageelement.Text;
 import lbe.model.pageelement.impl.ConstantText;
+import app.oldcarinsurance.CarinsuranceCase;
+import app.oldcarinsurance.Driver;
 import app.oldcarinsurance.entity.CarinsuranceCaseEntity;
 
 public class DriverContainer extends CompositePageFragment{
@@ -130,8 +134,11 @@ public class DriverContainer extends CompositePageFragment{
 		return CHILDREN;
 	}
 	
+	private Deduction<Driver> select = 
+		new AttributeDeduction<Driver, CarinsuranceCase>(CarinsuranceCaseEntity.driver, new SelectedInstanceDeduction<CarinsuranceCase>(CarinsuranceCaseEntity.INSTANCE));
+	
 	@Override
 	public Deduction<? extends Object> getSelect() {
-		return CarinsuranceCaseEntity.driver;
+		return select;
 	}
 }

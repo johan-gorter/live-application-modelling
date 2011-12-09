@@ -9,6 +9,7 @@ public class ContentClassModel {
 
 	public TextGenerator text;
 
+	public int deductionIndex;
 	public String entity;
 	public String attribute;
 	public boolean required;
@@ -22,12 +23,6 @@ public class ContentClassModel {
 	
 	public String getType() {
 		return type;
-	}
-	public String getEntity() {
-		return entity;
-	}
-	public String getAttribute() {
-		return attribute;
 	}
 	public boolean isRequired() {
 		return required;
@@ -58,5 +53,14 @@ public class ContentClassModel {
 	}
 	public String getPresentation() {
 		return presentation;
+	}
+	public int getDeductionIndex() {
+		return deductionIndex;
+	}
+	public String getEntity() {
+		return entity;
+	}
+	public String getAttribute() {
+		return attribute;
 	}
 }

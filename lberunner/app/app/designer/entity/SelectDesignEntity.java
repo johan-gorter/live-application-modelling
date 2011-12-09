@@ -18,15 +18,19 @@ public class SelectDesignEntity extends SimpleEntity {
 	
 	// Relations
 	
-	public static final Relation<SelectDesign, RelationDesign, RelationDesign> relation
-		= new SimpleRelation<SelectDesign, RelationDesign, RelationDesign>(
-			"relation", INSTANCE, RelationDesignEntity.INSTANCE, RelationDesign.class, RelationDesignEntity.relationInselects
+	public static final Relation<SelectDesign, DeductionSchemeDesign, DeductionSchemeDesign> deduction
+		= new SimpleRelation<SelectDesign, DeductionSchemeDesign, DeductionSchemeDesign>(
+			"deduction", INSTANCE, DeductionSchemeDesignEntity.INSTANCE, DeductionSchemeDesign.class, DeductionSchemeDesignEntity.select
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<SelectDesign, RelationDesign> get(
+			public ReadOnlyRelationValue<SelectDesign, DeductionSchemeDesign> get(
 					SelectDesign instance) {
-				return instance.relation;
+				return instance.deduction;
+			}
+	
+			public boolean isOwner() {
+				return true;
 			}
 		};
 	
@@ -35,7 +39,7 @@ public class SelectDesignEntity extends SimpleEntity {
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
-		relation,
+		deduction,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};

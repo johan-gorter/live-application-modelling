@@ -32,15 +32,15 @@ public class SelectDesign
 	
 	// Relations
 	
-	public final RelationValue<SelectDesign, RelationDesign> relation
-		= createRelationValue(SelectDesignEntity.relation);
+	public final RelationValue<SelectDesign, DeductionSchemeDesign> deduction
+		= createRelationValue(SelectDesignEntity.deduction);
 		
-	public RelationDesign getRelation() {
-		return relation.get();
+	public DeductionSchemeDesign getDeduction() {
+		return deduction.get();
 	}
 	
-	public void setRelation(RelationDesign newValue) {
-		relation.set(newValue);
+	public void setDeduction(DeductionSchemeDesign newValue) {
+		deduction.set(newValue);
 	}
 
 	// Reverse relations

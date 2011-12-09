@@ -26,7 +26,7 @@ public class AttributeValuesImpl<I extends Instance, Item extends Object>
 	@Override
 	public List<Item> get() {
 		// Pragmatic approach: Multivalue attributes are never unknown, unless a deduction is given.
-		if (!isStored() && getModel().getDeduction()==null) {
+		if (!isStored() && getModel().getDefault()==null) {
 			set(new ArrayList<Item>());
 		}
 		return Collections.unmodifiableList(super.get());

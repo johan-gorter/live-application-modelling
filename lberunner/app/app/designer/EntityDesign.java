@@ -99,6 +99,14 @@ public class EntityDesign
 	}
 
 	
+	public final ReadOnlyRelationValues<EntityDesign, SelectedInstanceDeductionDesign> entityInDeductions
+		= createReverseRelationValues(EntityDesignEntity.entityInDeductions);
+
+	public List<SelectedInstanceDeductionDesign> getEntityInDeductions() {
+		return entityInDeductions.get();
+	}
+
+	
 	public final ReadOnlyRelationValues<EntityDesign, EventDesign> parameterInEvent
 		= createReverseRelationValues(EntityDesignEntity.parameterInEvent);
 

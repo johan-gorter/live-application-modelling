@@ -13,9 +13,9 @@ public abstract class ValidAttributeCustomization extends SimpleAttribute<Design
 	}
 	
 	@Override
-	public Deduction<Boolean> getDeduction() {
+	public Deduction<Boolean> getDefault() {
 		// TODO Auto-generated method stub
-		return super.getDeduction();
+		return super.getDefault();
 	}
 
 }

@@ -45,24 +45,27 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		// Entity
 		EntityDesign entityDesign = createEntity("EntityDesign", concept);
 
-		// AttributeBase
-		EntityDesign attributeBase = createEntity("AttributeBaseDesign", concept);
-		createAttribute(attributeBase, "readOnly", Boolean.class);
-		createAttribute(attributeBase, "multivalue", Boolean.class);
-		
 		// Attribute
-		EntityDesign attributeDesign = createEntity("AttributeDesign", attributeBase);
+		EntityDesign attributeDesign = createEntity("AttributeDesign", concept);
+		createAttribute(attributeDesign, "readOnly", Boolean.class);
+		createAttribute(attributeDesign, "multivalue", Boolean.class);
 		AttributeDesign className = createAttribute(attributeDesign, "className", String.class);
-		
-		// Domain
 		EntityDesign domainEntryDesign = createEntity("DomainEntryDesign", concept);
 		
 		// Relation
-		EntityDesign relationDesign = createEntity("RelationDesign", attributeBase);
+		EntityDesign relationDesign = createEntity("RelationDesign", attributeDesign);
 		createAttribute(relationDesign, "owner", Boolean.class);
 		createAttribute(relationDesign, "autoCreate", Boolean.class);
 		createAttribute(relationDesign, "reverseMultivalue", Boolean.class);
 		createAttribute(relationDesign, "reverseName", String.class);
+		
+		// Deduction
+		EntityDesign deductionSchemeDesign = createEntity("DeductionSchemeDesign", null);
+		EntityDesign deductionDesign = createEntity("DeductionDesign", null);
+		createAttribute(deductionDesign, "multivalue", Boolean.class);
+		createAttribute(deductionDesign, "className", String.class); // in case of an entity, see relation entity
+		EntityDesign selectedInstanceDeductionDesign = createEntity("SelectedInstanceDeductionDesign" , deductionDesign);
+		EntityDesign attributeDeductionDesign = createEntity("AttributeDeductionDesign" , deductionDesign);
 		
 		// Shared
 		EntityDesign pageFragmentHolder = createEntity("PageFragmentHolderDesign", concept);
@@ -114,16 +117,23 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		// Data
 		createRelation(entityDesign, "extendsFrom", RelationType.ManyToZeroOrOne, "extensions", entityDesign);
 		createRelation(entityDesign, "attributes", RelationType.OneToManyAggregation, "entity", attributeDesign);
-		createRelation(entityDesign, "relations", RelationType.OneToManyAggregation, "entity", relationDesign);
+		createRelation(entityDesign, "relations", RelationType.OneToManyAggregation, "from", relationDesign);
 		createRelation(relationDesign, "to", RelationType.ManyToZeroOrOne, "reverseRelations", entityDesign);
 		createRelation(attributeDesign, "question", RelationType.OneToZeroOrOneAggregation, "questionOnAttribute", textDesign);
 		createRelation(attributeDesign, "explanation", RelationType.OneToZeroOrOneAggregation, "explanationOnAttribute", textDesign);
 		createRelation(attributeDesign, "domain", RelationType.OneToManyAggregation, "attribute", domainEntryDesign);
 		createRelation(domainEntryDesign, "display", RelationType.OneToZeroOrOneAggregation, "displayOnDomainEntry", textDesign);
 		
+		// Deduction
+		createRelation(deductionSchemeDesign, "deductions", RelationType.OneToManyAggregation, "scheme", deductionDesign);
+		createRelation(deductionSchemeDesign, "output", RelationType.OneToZeroOrOne, "schemeOutput", deductionDesign);
+		createRelation(deductionDesign, "inputs", RelationType.ManyToMany, "outputs", deductionDesign);
+		createRelation(attributeDeductionDesign, "attribute", RelationType.ManyToZeroOrOne, "attributeInDeductions", attributeDesign);
+		createRelation(selectedInstanceDeductionDesign, "entity", RelationType.ManyToZeroOrOne, "entityInDeductions", entityDesign);
+		
 		// Text
 		createRelation(templatedTextDesign, "untranslated", RelationType.OneToManyAggregation, "untranslatedInTemplate", stringProducerDesign);
-		createRelation(formattedValueDesign, "value", RelationType.OneToZeroOrOne, "valueInTemplatedText", attributeBase); //TODO: deduction
+		createRelation(formattedValueDesign, "deduction", RelationType.OneToZeroOrOne, "templatedText", deductionSchemeDesign);
 
 		// Shared
 		createRelation(application, "sharedPageFragments", RelationType.OneToManyAggregation, "shared", pageFragmentHolder);
@@ -135,7 +145,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createRelation(compositePageFragmentDesign, "items", RelationType.OneToManyAggregation, "itemIn", pageComposition);
 		createRelation(pageComposition, "pageFragment", RelationType.OneToZeroOrOneAggregation, "composedIn", pageFragmentDesign);
 		RelationDesign fieldAttribute = createRelation(fieldDesign, "attribute", RelationType.ManyToZeroOrOne, "fields", attributeDesign);
-		createRelation(select, "relation", RelationType.ManyToZeroOrOne, "relationInselects", relationDesign);
+		createRelation(select, "deduction", RelationType.OneToZeroOrOneAggregation, "select", deductionSchemeDesign);
 		createRelation(header, "text", RelationType.OneToOneAggregation, "textOnHeader", textDesign);
 		createRelation(linkDesign, "caption", RelationType.OneToOneAggregation, "captionOnButton", textDesign);
 		createRelation(linkDesign, "event", RelationType.ManyToZeroOrOne, "firesFromButtons", eventDesign);
@@ -158,6 +168,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createRelation(flowEdgeDesign, "endEvent", RelationType.ManyToZeroOrOne, "endEventInEdges", eventDesign);
 		
 		createRelation(subFlowDesign, "flow", RelationType.OneToZeroOrOne, "subFlowIn", flowDesign);
+		
 		
 		// Interaction
 		
@@ -243,7 +254,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		column1.presentation.set("column");
 		addContent(columns, column1);
 		addContent(column1, createConstantText("Entities"));
-		SelectDesign entitiesSelect = createSelect(entities);
+		SelectDesign entitiesSelect = createSelect(createDeduction(entities));
 		addContent(entitiesSelect, createLink(entityDetails, add(createTemplatedText(), name)));
 		addContent(column1, entitiesSelect);
 
@@ -251,7 +262,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		column2.presentation.set("column");
 		addContent(columns, column2);
 		addContent(column2, createConstantText("Flows"));
-		SelectDesign flowsSelect = createSelect(flows);
+		SelectDesign flowsSelect = createSelect(createDeduction(flows));
 		addContent(flowsSelect, createLink(flowDetails, add(createTemplatedText(), name)));
 		addContent(column2, flowsSelect);
 		// Flow page
@@ -259,7 +270,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		addContent(flowPage.content.get(), createLink(exploreInstance, createConstantText("Open in case explorer")));
 		createField(flowPage.content.get(), name, false);
 		addContent(flowPage.content.get(), createConstantText("Nodes"));
-		SelectDesign nodesSelect = createSelect(nodes);
+		SelectDesign nodesSelect = createSelect(createDeduction(nodes));
 		addContent(nodesSelect, createLink(flowNodeDetails, add(createTemplatedText(), name)));
 		addContent(flowPage.content.get(), nodesSelect);
 		// Page page
@@ -267,7 +278,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		addContent(pagePage.content.get(), createLink(flowDetails, createConstantText("Flow")));
 		addContent(pagePage.content.get(), createLink(exploreInstance, createConstantText("Open in case explorer")));
 		createField(pagePage.content.get(), name, false);
-		SelectDesign selectContent = createSelect(content);
+		SelectDesign selectContent = createSelect(createDeduction(content));
 		SharedFragmentDesign editorReference = new SharedFragmentDesign(applicationDesign);
 		editorReference.holder.set(pageFragmentEditorHolder);
 		addContent(selectContent, editorReference);
@@ -280,7 +291,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		addContent(fieldPage.content.get(), createLink(exploreInstance, createConstantText("Open in case explorer")));
 		createField(fieldPage.content.get(), required, false);
 		createField(fieldPage.content.get(), readOnly, false);
-		SelectDesign attributeSelect = createSelect(fieldAttribute);
+		SelectDesign attributeSelect = createSelect(createDeduction(fieldAttribute));
 		createField(attributeSelect, name, true);
 		createField(attributeSelect, className, true);
 		addContent(fieldPage.content.get(), attributeSelect);

@@ -5,6 +5,10 @@ import lbe.instance.Instance;
 
 public class ConstantDeduction<V> extends Deduction<V> {
 
+	public static <V> ConstantDeduction<V> create(V constant) {
+		return new ConstantDeduction<V>(constant);
+	}
+	
 	private final V constant;
 	
 	public ConstantDeduction(V constant) {

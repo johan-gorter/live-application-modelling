@@ -52,7 +52,7 @@ public class EntityDesignEntity extends SimpleEntity {
 	
 	public static final Relation<EntityDesign, List<RelationDesign>, RelationDesign> relations
 		= new SimpleRelation<EntityDesign, List<RelationDesign>, RelationDesign>(
-			"relations", INSTANCE, RelationDesignEntity.INSTANCE, RelationDesign.class, RelationDesignEntity.entity
+			"relations", INSTANCE, RelationDesignEntity.INSTANCE, RelationDesign.class, RelationDesignEntity.from
 		) {
 	
 			@Override
@@ -144,6 +144,26 @@ public class EntityDesignEntity extends SimpleEntity {
 			}
 		};
 	
+	public static final Relation<EntityDesign, List<SelectedInstanceDeductionDesign>, SelectedInstanceDeductionDesign> entityInDeductions
+		= new SimpleRelation<EntityDesign, List<SelectedInstanceDeductionDesign>, SelectedInstanceDeductionDesign>(
+			"entityInDeductions", INSTANCE, EntityDesignEntity.INSTANCE, SelectedInstanceDeductionDesign.class, SelectedInstanceDeductionDesignEntity.entity
+		) {
+	
+			@Override
+			public ReadOnlyRelationValues<EntityDesign, SelectedInstanceDeductionDesign> get(
+					EntityDesign instance) {
+				return instance.entityInDeductions;
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
+	
 	public static final Relation<EntityDesign, List<EventDesign>, EventDesign> parameterInEvent
 		= new SimpleRelation<EntityDesign, List<EventDesign>, EventDesign>(
 			"parameterInEvent", INSTANCE, EntityDesignEntity.INSTANCE, EventDesign.class, EventDesignEntity.parameters
@@ -196,6 +216,7 @@ public class EntityDesignEntity extends SimpleEntity {
 		caseEntityInApplication,
 		extensions,
 		reverseRelations,
+		entityInDeductions,
 		parameterInEvent,
 		parameterInFlows,
 	};

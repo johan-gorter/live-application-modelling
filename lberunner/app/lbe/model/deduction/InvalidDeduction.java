@@ -9,6 +9,10 @@ import lbe.engine.DeductionContext;
  */
 public class InvalidDeduction<V> extends Deduction<V> {
 
+	public static <V> InvalidDeduction<V> create() {
+		return new InvalidDeduction<V>();
+	}
+	
 	@Override
 	public V deduct(DeductionContext context) {
 		return null;

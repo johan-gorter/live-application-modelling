@@ -6,6 +6,8 @@ import java.util.List;
 import app.designer.AttributeDesign;
 import app.designer.ConstantStringDesign;
 import app.designer.ConstantTextDesign;
+import app.designer.DeductionDesign;
+import app.designer.DeductionSchemeDesign;
 import app.designer.FormattedValueDesign;
 import app.designer.StringProducerDesign;
 import app.designer.TemplatedTextDesign;
@@ -17,8 +19,7 @@ public class TextGenerator {
 	{
 		public String type;
 		public String constant;
-		public String entity;
-		public String attribute;
+		public int deductionIndex;
 		
 		public String getType() {
 			return type;
@@ -26,13 +27,12 @@ public class TextGenerator {
 		public String getConstant() {
 			return constant;
 		}
-		public String getEntity() {
-			return entity;
-		}
-		public String getAttribute() {
-			return attribute;
+		public int getDeductionIndex() {
+			return deductionIndex;
 		}
 	}
+	
+	private DeductionSchemeHolder deductionSchemeHolder;
 	
 	public String type;
 	
@@ -40,8 +40,9 @@ public class TextGenerator {
 	
 	public List<StringProducer> stringProducers = new ArrayList<StringProducer>();
 
-	public TextGenerator(TextDesign text)
+	public TextGenerator(TextDesign text, DeductionSchemeHolder deductionSchemeHolder)
 	{
+		this.deductionSchemeHolder = deductionSchemeHolder;
 		if (text instanceof ConstantTextDesign) {
 			type="constant";
 			ConstantTextDesign constantText = (ConstantTextDesign) text;
@@ -58,10 +59,8 @@ public class TextGenerator {
 				} else if (spInstance instanceof FormattedValueDesign) {
 					result.type = "formattedValue";
 					FormattedValueDesign fvInstance = (FormattedValueDesign)spInstance;
-					// Other types of deduction are not yet supported
-					AttributeDesign attributeInstance = (AttributeDesign)fvInstance.value.get();
-					result.entity = attributeInstance.entity.get().name.get();
-					result.attribute = attributeInstance.name.get();
+					DeductionSchemeDesign scheme = fvInstance.getDeduction();
+					result.deductionIndex = deductionSchemeHolder.addDeductionScheme(scheme);
 				}
 				stringProducers.add(result);
 			}

@@ -1,12 +1,13 @@
 package lbe.designerbootstrap;
 
 import lbe.designerbootstrap.Bootstrapper.RelationType;
-import app.designer.AttributeBaseDesign;
+import app.designer.AttributeDeductionDesign;
 import app.designer.AttributeDesign;
 import app.designer.ButtonDesign;
 import app.designer.CompositePageFragmentDesign;
 import app.designer.ConstantStringDesign;
 import app.designer.ConstantTextDesign;
+import app.designer.DeductionSchemeDesign;
 import app.designer.DomainEntryDesign;
 import app.designer.EntityDesign;
 import app.designer.EventDesign;
@@ -23,6 +24,7 @@ import app.designer.PageDesign;
 import app.designer.PageFragmentDesign;
 import app.designer.RelationDesign;
 import app.designer.SelectDesign;
+import app.designer.SelectedInstanceDeductionDesign;
 import app.designer.SubFlowDesign;
 import app.designer.TemplatedTextDesign;
 import app.designer.TextDesign;
@@ -99,9 +101,13 @@ public abstract class BootstrapperUtil {
 		return result;
 	}
 	
-	protected static TemplatedTextDesign add(TemplatedTextDesign text, AttributeBaseDesign value) {
+	protected static TemplatedTextDesign add(TemplatedTextDesign text, AttributeDesign attribute) {
+		return add(text, createDeduction(attribute));
+	}
+	
+	protected static TemplatedTextDesign add(TemplatedTextDesign text, DeductionSchemeDesign deduction) {
 		FormattedValueDesign formattedValue = new FormattedValueDesign(applicationDesign);
-		formattedValue.value.set(value);
+		formattedValue.setDeduction(deduction);
 		text.untranslated.add(formattedValue);
 		return text;
 	}
@@ -118,11 +124,39 @@ public abstract class BootstrapperUtil {
 		return container;
 	}
 
-	protected static SelectDesign createSelect(RelationDesign relation) {
+	protected static SelectDesign createSelect(DeductionSchemeDesign deduction) {
 		SelectDesign select = new SelectDesign(applicationDesign);
-		select.relation.set(relation);
+		select.deduction.set(deduction);
 		return select;
 	}
+	
+	protected static DeductionSchemeDesign createDeduction(AttributeDesign attribute) {
+		String className = attribute.getClassName();
+		EntityDesign source = attribute.getEntity();
+		if (attribute instanceof RelationDesign) {
+			// We should come up with a solution that makes this unnecessary
+			RelationDesign relation = (RelationDesign)attribute;
+			className = relation.getTo().getName();
+			source = relation.getFrom();
+		}
+		DeductionSchemeDesign scheme = new DeductionSchemeDesign(applicationDesign);
+		SelectedInstanceDeductionDesign selectedInstanceDeductionDesign = new SelectedInstanceDeductionDesign(applicationDesign);
+		selectedInstanceDeductionDesign.entity.set(source);
+		selectedInstanceDeductionDesign.className.set(source.getName());
+		AttributeDeductionDesign attributeDeductionDesign = new AttributeDeductionDesign(applicationDesign);
+		attributeDeductionDesign.attribute.set(attribute);
+		attributeDeductionDesign.inputs.add(selectedInstanceDeductionDesign);
+		if (attribute.getMultivalue()==Boolean.TRUE) {
+			attributeDeductionDesign.className.set("java.util.List<"+className+">");
+		} else {
+			attributeDeductionDesign.className.set(className);	
+		}
+		scheme.deductions.add(selectedInstanceDeductionDesign);
+		scheme.deductions.add(attributeDeductionDesign);
+		scheme.output.set(attributeDeductionDesign);
+		return scheme;
+	}
+	
 
 	protected static HeaderDesign createHeader(TextDesign text) {
 		HeaderDesign header = new HeaderDesign(applicationDesign);

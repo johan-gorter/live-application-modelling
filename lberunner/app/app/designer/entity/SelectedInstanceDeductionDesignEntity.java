@@ -10,23 +10,23 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class FormattedValueDesignEntity extends SimpleEntity {
+public class SelectedInstanceDeductionDesignEntity extends SimpleEntity {
 
-	public static final FormattedValueDesignEntity INSTANCE = new FormattedValueDesignEntity();
+	public static final SelectedInstanceDeductionDesignEntity INSTANCE = new SelectedInstanceDeductionDesignEntity();
 	
 	// Attributes
 	
 	// Relations
 	
-	public static final Relation<FormattedValueDesign, DeductionSchemeDesign, DeductionSchemeDesign> deduction
-		= new SimpleRelation<FormattedValueDesign, DeductionSchemeDesign, DeductionSchemeDesign>(
-			"deduction", INSTANCE, DeductionSchemeDesignEntity.INSTANCE, DeductionSchemeDesign.class, DeductionSchemeDesignEntity.templatedText
+	public static final Relation<SelectedInstanceDeductionDesign, EntityDesign, EntityDesign> entity
+		= new SimpleRelation<SelectedInstanceDeductionDesign, EntityDesign, EntityDesign>(
+			"entity", INSTANCE, EntityDesignEntity.INSTANCE, EntityDesign.class, EntityDesignEntity.entityInDeductions
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<FormattedValueDesign, DeductionSchemeDesign> get(
-					FormattedValueDesign instance) {
-				return instance.deduction;
+			public ReadOnlyRelationValue<SelectedInstanceDeductionDesign, EntityDesign> get(
+					SelectedInstanceDeductionDesign instance) {
+				return instance.entity;
 			}
 		};
 	
@@ -35,23 +35,23 @@ public class FormattedValueDesignEntity extends SimpleEntity {
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
-		deduction,
+		entity,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};
 
-	private FormattedValueDesignEntity() {
-		super("FormattedValueDesign");
+	private SelectedInstanceDeductionDesignEntity() {
+		super("SelectedInstanceDeductionDesign");
 	}
 	
 	@Override
 	public Instance createInstance(CaseInstance caseInstance, long id) {
-		return new FormattedValueDesign(caseInstance, id);
+		return new SelectedInstanceDeductionDesign(caseInstance, id);
 	}
 	
 	@Override
 	public Entity extendsEntity() {
-		return StringProducerDesignEntity.INSTANCE;
+		return DeductionDesignEntity.INSTANCE;
 	}
 	
 	@Override

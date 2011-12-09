@@ -13,7 +13,7 @@ public class DriverPage extends Page {
 	
 	
 	private static CompositePageFragment CONTENT = 
-        new SimpleCompositePageFragment(CarinsuranceCaseEntity.driver, new PageFragment[]{
+        new SimpleCompositePageFragment(CarinsuranceCaseEntity.driver.toDeduction(), new PageFragment[]{
             new SimpleCompositePageFragment(new ConstantText("Driver"), new PageFragment[]{
                 new SimpleCompositePageFragment(new PageFragment[]{
                     new SimpleField(DriverEntity.INSTANCE, DriverEntity.dateOfBirth).setRequired(),

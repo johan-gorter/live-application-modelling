@@ -13,7 +13,7 @@
     new SimpleLink(<#if content.event??>${content.event}Event.INSTANCE<#else>null</#if>, <@text_macro text=content.text />)<#t>
 	<#elseif content.type=="CompositePageFragment" || content.type=="Select" || content.type=="Header">
     new SimpleCompositePageFragment(<#t>
-    <#if content.type=="Select">${content.relationEntity}Entity.${content.relationName}, </#if><#t>
+    <#if content.type=="Select">createDeduction${content.deductionIndex}(), </#if><#t>
     <#if content.type=="Header"><@text_macro text=content.text />, </#if><#t>
     new PageFragment[]{<#lt>
 	<#list content.children as childContent>

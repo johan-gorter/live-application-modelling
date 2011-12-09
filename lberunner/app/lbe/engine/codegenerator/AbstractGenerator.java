@@ -94,10 +94,6 @@ public abstract class AbstractGenerator {
 		return newConcepts;
 	}
 	
-	protected TextGenerator generateText(TextDesign text) {
-		return new TextGenerator(text);
-	}
-
 	static void generateFile(Template template, Object rootMap, String subDirectory, String name, String postfix, String appname, File root) {
 		if (root==null) return;//Dry run
 		Writer writer = null;

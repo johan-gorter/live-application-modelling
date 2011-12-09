@@ -13,7 +13,7 @@ import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
 public class RelationDesign 
-	extends AttributeBaseDesign 
+	extends AttributeDesign 
 	implements Instance {
 
 	public RelationDesign(CaseInstance caseInstance) {
@@ -89,19 +89,11 @@ public class RelationDesign
 
 	// Reverse relations
 	
-	public final ReadOnlyRelationValue<RelationDesign, EntityDesign> entity
-		= createReverseRelationValue(RelationDesignEntity.entity);
+	public final ReadOnlyRelationValue<RelationDesign, EntityDesign> from
+		= createReverseRelationValue(RelationDesignEntity.from);
 
-	public EntityDesign getEntity() {
-		return entity.get();
-	}
-
-	
-	public final ReadOnlyRelationValues<RelationDesign, SelectDesign> relationInselects
-		= createReverseRelationValues(RelationDesignEntity.relationInselects);
-
-	public List<SelectDesign> getRelationInselects() {
-		return relationInselects.get();
+	public EntityDesign getFrom() {
+		return from.get();
 	}
 
 

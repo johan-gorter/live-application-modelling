@@ -6,6 +6,10 @@ import lbe.model.Entity;
 
 public class SelectedInstanceDeduction<V extends Instance> extends Deduction<V> {
 
+	public static <V extends Instance> SelectedInstanceDeduction<V> create(Entity entity) {
+		return new SelectedInstanceDeduction<V>(entity);
+	}
+	
 	private Entity entity;
 
 	public SelectedInstanceDeduction(Entity entity) {
