@@ -44,7 +44,7 @@ public abstract class CompositePageFragment extends PageFragment {
 		if (select!=null) {
 			Object value = select.deduct(context);
 			if (value==null) {
-				throw new RuntimeException("Deduction did not yield a value for select "+this);
+				return null;
 			} else if (value instanceof Instance) {
 				result = doRenderWithInstance((Instance)value, context);
 			} else if (value instanceof Iterable) {
@@ -64,7 +64,10 @@ public abstract class CompositePageFragment extends PageFragment {
 		result.name = getName()+"-Parent";
 		List<PageElement> children = new ArrayList<PageElement>();
 		for (Object instance : (Iterable<Instance>)value) {
-			children.add(doRenderWithInstance((Instance)instance, context));
+			PageElement element = doRenderWithInstance((Instance)instance, context);
+			if (element!=null) {
+				children.add(element);
+			}
 		}
 		result.content = children.toArray(new PageElement[children.size()]);
 		context.previousIdLevel();
@@ -101,7 +104,7 @@ public abstract class CompositePageFragment extends PageFragment {
 		if (select!=null) {
 			Object value = select.deduct(context);
 			if (value==null) {
-				throw new RuntimeException("Deduction did not yield a value for select "+this);
+				return null;
 			} else if (value instanceof Instance) {
 				result = doSubmitWithInstance((Instance)value, context);
 			} else if (value instanceof Iterable) {

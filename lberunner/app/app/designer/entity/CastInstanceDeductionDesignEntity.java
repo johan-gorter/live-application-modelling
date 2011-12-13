@@ -10,22 +10,22 @@ import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class SelectedInstanceDeductionDesignEntity extends SimpleEntity {
+public class CastInstanceDeductionDesignEntity extends SimpleEntity {
 
-	public static final SelectedInstanceDeductionDesignEntity INSTANCE = new SelectedInstanceDeductionDesignEntity();
+	public static final CastInstanceDeductionDesignEntity INSTANCE = new CastInstanceDeductionDesignEntity();
 	
 	// Attributes
 	
 	// Relations
 	
-	public static final Relation<SelectedInstanceDeductionDesign, EntityDesign, EntityDesign> entity
-		= new SimpleRelation<SelectedInstanceDeductionDesign, EntityDesign, EntityDesign>(
-			"entity", INSTANCE, EntityDesignEntity.INSTANCE, EntityDesign.class, EntityDesignEntity.entityInSelectedInstanceDeductions
+	public static final Relation<CastInstanceDeductionDesign, EntityDesign, EntityDesign> entity
+		= new SimpleRelation<CastInstanceDeductionDesign, EntityDesign, EntityDesign>(
+			"entity", INSTANCE, EntityDesignEntity.INSTANCE, EntityDesign.class, EntityDesignEntity.entityInCastDeductions
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<SelectedInstanceDeductionDesign, EntityDesign> get(
-					SelectedInstanceDeductionDesign instance) {
+			public ReadOnlyRelationValue<CastInstanceDeductionDesign, EntityDesign> get(
+					CastInstanceDeductionDesign instance) {
 				return instance.entity;
 			}
 		};
@@ -40,13 +40,13 @@ public class SelectedInstanceDeductionDesignEntity extends SimpleEntity {
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};
 
-	private SelectedInstanceDeductionDesignEntity() {
-		super("SelectedInstanceDeductionDesign");
+	private CastInstanceDeductionDesignEntity() {
+		super("CastInstanceDeductionDesign");
 	}
 	
 	@Override
 	public Instance createInstance(CaseInstance caseInstance, long id) {
-		return new SelectedInstanceDeductionDesign(caseInstance, id);
+		return new CastInstanceDeductionDesign(caseInstance, id);
 	}
 	
 	@Override

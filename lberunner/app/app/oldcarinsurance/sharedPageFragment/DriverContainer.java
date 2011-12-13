@@ -1,4 +1,4 @@
- package app.oldcarinsurance.container;
+ package app.oldcarinsurance.sharedPageFragment;
 
 import lbe.engine.RenderContext;
 import lbe.model.deduction.AttributeDeduction;
@@ -12,7 +12,7 @@ import app.oldcarinsurance.CarinsuranceCase;
 import app.oldcarinsurance.Driver;
 import app.oldcarinsurance.entity.CarinsuranceCaseEntity;
 
-public class DriverContainer extends CompositePageFragment{
+public class DriverContainer extends CompositePageFragment {
 
 	public static DriverContainer INSTANCE = new DriverContainer();
 	

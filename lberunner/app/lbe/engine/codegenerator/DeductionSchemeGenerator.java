@@ -7,6 +7,7 @@ import lbe.instance.value.RelationValue;
 
 import app.designer.AttributeDeductionDesign;
 import app.designer.AttributeDesign;
+import app.designer.CastInstanceDeductionDesign;
 import app.designer.DeductionDesign;
 import app.designer.DeductionSchemeDesign;
 import app.designer.Design;
@@ -41,7 +42,7 @@ public class DeductionSchemeGenerator {
 	private List<DeductionClassModel> deductions = new ArrayList<DeductionClassModel>();
 	
 	public DeductionSchemeGenerator(DeductionSchemeDesign deductionSchemeDesign, int index) {
-		fillDeductions(deductionSchemeDesign.output.get());
+		fillDeductions(deductionSchemeDesign.getOutput());
 		int deductionIndex = 0;
 		for (DeductionDesign design : deductionDesigns) {
 			DeductionClassModel classModel = new DeductionClassModel();
@@ -57,6 +58,9 @@ public class DeductionSchemeGenerator {
 				String name = attribute.getName();
 				String entityName = (attribute instanceof RelationDesign)?((RelationDesign)attribute).getFrom().getName():attribute.getEntity().getName();
 				classModel.parameters.add(entityName+"Entity."+name);
+			} else if (design instanceof CastInstanceDeductionDesign) {
+				String name = ((CastInstanceDeductionDesign)design).getEntity().getName();
+				classModel.parameters.add(name+"Entity.INSTANCE");
 			}
 			for (DeductionDesign input : design.getInputs()) {
 				classModel.parameters.add("d"+deductionDesigns.indexOf(input));

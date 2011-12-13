@@ -9,6 +9,7 @@ public class PageElement {
 	public String elementType;
 	public String name;
 	public String id;
+	public boolean readonly;
 	public String display;
 	public Object value;
 	public PageElement[] content;

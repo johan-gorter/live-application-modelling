@@ -32,7 +32,7 @@ public class TextGenerator {
 		}
 	}
 	
-	private DeductionSchemeHolder deductionSchemeHolder;
+	private AbstractGenerator deductionSchemeHolder;
 	
 	public String type;
 	
@@ -40,7 +40,7 @@ public class TextGenerator {
 	
 	public List<StringProducer> stringProducers = new ArrayList<StringProducer>();
 
-	public TextGenerator(TextDesign text, DeductionSchemeHolder deductionSchemeHolder)
+	public TextGenerator(TextDesign text, AbstractGenerator deductionSchemeHolder)
 	{
 		this.deductionSchemeHolder = deductionSchemeHolder;
 		if (text instanceof ConstantTextDesign) {

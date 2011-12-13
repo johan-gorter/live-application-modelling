@@ -39,7 +39,7 @@ public abstract class PageFragment extends Model {
 	}
 
 	public PageFragment withPresentation(String presentation) {
-		this.presentation = presentation;
+		setPresentation(presentation);
 		return this;
 	}
 

@@ -99,11 +99,19 @@ public class EntityDesign
 	}
 
 	
-	public final ReadOnlyRelationValues<EntityDesign, SelectedInstanceDeductionDesign> entityInDeductions
-		= createReverseRelationValues(EntityDesignEntity.entityInDeductions);
+	public final ReadOnlyRelationValues<EntityDesign, SelectedInstanceDeductionDesign> entityInSelectedInstanceDeductions
+		= createReverseRelationValues(EntityDesignEntity.entityInSelectedInstanceDeductions);
 
-	public List<SelectedInstanceDeductionDesign> getEntityInDeductions() {
-		return entityInDeductions.get();
+	public List<SelectedInstanceDeductionDesign> getEntityInSelectedInstanceDeductions() {
+		return entityInSelectedInstanceDeductions.get();
+	}
+
+	
+	public final ReadOnlyRelationValues<EntityDesign, CastInstanceDeductionDesign> entityInCastDeductions
+		= createReverseRelationValues(EntityDesignEntity.entityInCastDeductions);
+
+	public List<CastInstanceDeductionDesign> getEntityInCastDeductions() {
+		return entityInCastDeductions.get();
 	}
 
 	

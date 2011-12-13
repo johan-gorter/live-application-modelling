@@ -28,6 +28,14 @@ public class FormattedValueDesignEntity extends SimpleEntity {
 					FormattedValueDesign instance) {
 				return instance.deduction;
 			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isAutoCreate() {
+				return true;
+			}
 		};
 	
 	// Reverse relations

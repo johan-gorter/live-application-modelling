@@ -4,6 +4,7 @@ import lbe.designerbootstrap.Bootstrapper.RelationType;
 import app.designer.AttributeDeductionDesign;
 import app.designer.AttributeDesign;
 import app.designer.ButtonDesign;
+import app.designer.CastInstanceDeductionDesign;
 import app.designer.CompositePageFragmentDesign;
 import app.designer.ConstantStringDesign;
 import app.designer.ConstantTextDesign;
@@ -130,6 +131,33 @@ public abstract class BootstrapperUtil {
 		return select;
 	}
 	
+	protected static DeductionSchemeDesign createCastDeduction(EntityDesign entity, EntityDesign toEntity) {
+		DeductionSchemeDesign scheme = new DeductionSchemeDesign(applicationDesign);
+		SelectedInstanceDeductionDesign selectedInstanceDeductionDesign = new SelectedInstanceDeductionDesign(applicationDesign);
+		selectedInstanceDeductionDesign.entity.set(entity);
+		selectedInstanceDeductionDesign.className.set(entity.getName());
+		CastInstanceDeductionDesign castInstanceDeductionDesign = new CastInstanceDeductionDesign(applicationDesign);
+		castInstanceDeductionDesign.entity.set(toEntity);
+		castInstanceDeductionDesign.className.set(toEntity.getName());
+		castInstanceDeductionDesign.inputs.add(selectedInstanceDeductionDesign);
+		scheme.deductions.add(selectedInstanceDeductionDesign);
+		scheme.deductions.add(castInstanceDeductionDesign);
+		scheme.setOutput(castInstanceDeductionDesign);
+		return scheme;
+	}
+
+	// Deduction for an active instance
+	protected static DeductionSchemeDesign createDeduction(EntityDesign entity) {
+		DeductionSchemeDesign scheme = new DeductionSchemeDesign(applicationDesign);
+		SelectedInstanceDeductionDesign selectedInstanceDeductionDesign = new SelectedInstanceDeductionDesign(applicationDesign);
+		selectedInstanceDeductionDesign.entity.set(entity);
+		selectedInstanceDeductionDesign.className.set(entity.getName());
+		scheme.deductions.add(selectedInstanceDeductionDesign);
+		scheme.setOutput(selectedInstanceDeductionDesign);
+		return scheme;
+	}
+	
+	// Deduction for an attribute/relation
 	protected static DeductionSchemeDesign createDeduction(AttributeDesign attribute) {
 		String className = attribute.getClassName();
 		EntityDesign source = attribute.getEntity();

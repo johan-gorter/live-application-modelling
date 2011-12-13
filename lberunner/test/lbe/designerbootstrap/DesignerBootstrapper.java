@@ -7,7 +7,10 @@ import app.designer.EntityDesign;
 import app.designer.EventDesign;
 import app.designer.FlowDesign;
 import app.designer.FlowSourceDesign;
+import app.designer.HeaderDesign;
+import app.designer.LinkDesign;
 import app.designer.PageDesign;
+import app.designer.PageFragmentDesign;
 import app.designer.PageFragmentHolderDesign;
 import app.designer.RelationDesign;
 import app.designer.SelectDesign;
@@ -34,23 +37,23 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createAttribute(application, "customization", String.class);
 		
 		// Concept
-		EntityDesign concept = createEntity("Design", null);
-		AttributeDesign name = createAttribute(concept, "name", String.class);
-		AttributeDesign valid = createAttribute(concept, "valid", Boolean.class);
+		EntityDesign design = createEntity("Design", null);
+		AttributeDesign name = createAttribute(design, "name", String.class);
+		AttributeDesign valid = createAttribute(design, "valid", Boolean.class);
 		valid.readOnly.set(true);
 		valid.customization.set("custom.designer.ValidAttributeCustomization");
 		
-		createAttribute(concept, "customization", String.class);
+		createAttribute(design, "customization", String.class);
 		
 		// Entity
-		EntityDesign entityDesign = createEntity("EntityDesign", concept);
+		EntityDesign entityDesign = createEntity("EntityDesign", design);
 
 		// Attribute
-		EntityDesign attributeDesign = createEntity("AttributeDesign", concept);
+		EntityDesign attributeDesign = createEntity("AttributeDesign", design);
 		createAttribute(attributeDesign, "readOnly", Boolean.class);
 		createAttribute(attributeDesign, "multivalue", Boolean.class);
 		AttributeDesign className = createAttribute(attributeDesign, "className", String.class);
-		EntityDesign domainEntryDesign = createEntity("DomainEntryDesign", concept);
+		EntityDesign domainEntryDesign = createEntity("DomainEntryDesign", design);
 		
 		// Relation
 		EntityDesign relationDesign = createEntity("RelationDesign", attributeDesign);
@@ -65,13 +68,14 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createAttribute(deductionDesign, "multivalue", Boolean.class);
 		createAttribute(deductionDesign, "className", String.class); // in case of an entity, see relation entity
 		EntityDesign selectedInstanceDeductionDesign = createEntity("SelectedInstanceDeductionDesign" , deductionDesign);
+		EntityDesign castInstanceDeductionDesign = createEntity("CastInstanceDeductionDesign" , deductionDesign);
 		EntityDesign attributeDeductionDesign = createEntity("AttributeDeductionDesign" , deductionDesign);
 		
 		// Shared
-		EntityDesign pageFragmentHolder = createEntity("PageFragmentHolderDesign", concept);
+		EntityDesign pageFragmentHolder = createEntity("PageFragmentHolderDesign", design);
 		
 		// Page elements & Page
-		EntityDesign pageFragmentDesign = createEntity("PageFragmentDesign", null);
+		EntityDesign pageFragmentDesign = createEntity("PageFragmentDesign", design);
 		AttributeDesign presentation = createAttribute(pageFragmentDesign, "presentation", String.class);
 		EntityDesign compositePageFragmentDesign = createEntity("CompositePageFragmentDesign", pageFragmentDesign);
 		EntityDesign select = createEntity("SelectDesign", compositePageFragmentDesign);
@@ -97,13 +101,13 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		// TODO: translations
 
 		// Flow nodes & Flow
-		EntityDesign eventDesign = createEntity("EventDesign", concept);
+		EntityDesign eventDesign = createEntity("EventDesign", design);
 		EntityDesign flowEdgeDesign = createEntity("FlowEdgeDesign", null);
-		EntityDesign flowNodeBaseDesign = createEntity("FlowNodeBaseDesign", concept);
+		EntityDesign flowNodeBaseDesign = createEntity("FlowNodeBaseDesign", design);
 		EntityDesign flowSourceDesign = createEntity("FlowSourceDesign", null);
 		EntityDesign pageDesign = createEntity("PageDesign", flowNodeBaseDesign);
 		EntityDesign subFlowDesign = createEntity("SubFlowDesign", flowNodeBaseDesign);
-		EntityDesign flowDesign = createEntity("FlowDesign", concept);
+		EntityDesign flowDesign = createEntity("FlowDesign", design);
 		
 		// Relations
 		
@@ -129,11 +133,12 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createRelation(deductionSchemeDesign, "output", RelationType.OneToZeroOrOne, "schemeOutput", deductionDesign);
 		createRelation(deductionDesign, "inputs", RelationType.ManyToMany, "outputs", deductionDesign);
 		createRelation(attributeDeductionDesign, "attribute", RelationType.ManyToZeroOrOne, "attributeInDeductions", attributeDesign);
-		createRelation(selectedInstanceDeductionDesign, "entity", RelationType.ManyToZeroOrOne, "entityInDeductions", entityDesign);
+		createRelation(selectedInstanceDeductionDesign, "entity", RelationType.ManyToZeroOrOne, "entityInSelectedInstanceDeductions", entityDesign);
+		createRelation(castInstanceDeductionDesign, "entity", RelationType.ManyToZeroOrOne, "entityInCastDeductions", entityDesign);
 		
 		// Text
 		createRelation(templatedTextDesign, "untranslated", RelationType.OneToManyAggregation, "untranslatedInTemplate", stringProducerDesign);
-		createRelation(formattedValueDesign, "deduction", RelationType.OneToZeroOrOne, "templatedText", deductionSchemeDesign);
+		createRelation(formattedValueDesign, "deduction", RelationType.OneToOneAggregation, "templatedText", deductionSchemeDesign);
 
 		// Shared
 		createRelation(application, "sharedPageFragments", RelationType.OneToManyAggregation, "shared", pageFragmentHolder);
@@ -142,8 +147,8 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		
 		// Page elements
 		RelationDesign content = createRelation(pageDesign, "content", RelationType.OneToOneAggregation, "contentOfPage", compositePageFragmentDesign);
-		createRelation(compositePageFragmentDesign, "items", RelationType.OneToManyAggregation, "itemIn", pageComposition);
-		createRelation(pageComposition, "pageFragment", RelationType.OneToZeroOrOneAggregation, "composedIn", pageFragmentDesign);
+		RelationDesign items = createRelation(compositePageFragmentDesign, "items", RelationType.OneToManyAggregation, "itemIn", pageComposition);
+		RelationDesign pageFragment = createRelation(pageComposition, "pageFragment", RelationType.OneToZeroOrOneAggregation, "composedIn", pageFragmentDesign);
 		RelationDesign fieldAttribute = createRelation(fieldDesign, "attribute", RelationType.ManyToZeroOrOne, "fields", attributeDesign);
 		createRelation(select, "deduction", RelationType.OneToZeroOrOneAggregation, "select", deductionSchemeDesign);
 		createRelation(header, "text", RelationType.OneToOneAggregation, "textOnHeader", textDesign);
@@ -221,6 +226,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		SubFlowDesign fieldSubFlow = createSubFlow(pageFlow, fieldFlow);
 		SubFlowDesign addFieldSubFlow = createSubFlow(pageFlow, addFieldFlow);
 		createSource(pageFlow, pageDetails, pagePage, null);
+		createEdge(pageFlow, pagePage, fieldDetails, fieldSubFlow, fieldDetails);
 		createEdge(pageFlow, pagePage, addField, addFieldSubFlow, addField);
 		createEdge(pageFlow, addFieldSubFlow, fieldDetails, fieldSubFlow, fieldDetails);
 		createEdge(pageFlow, fieldSubFlow, pageDetails, pagePage, null);
@@ -238,12 +244,32 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		
 		// Shared
 		CompositePageFragmentDesign pageFragmentEditor = createCompositePageFragment();
-		addContent(pageFragmentEditor, add(createTemplatedText(), "PageFragment"));
-		createField(pageFragmentEditor, presentation, false);
+		addContent(pageFragmentEditor, add(createTemplatedText(), createDeduction(pageFragmentDesign)));
+		SelectDesign fieldSelect = createSelect(createCastDeduction(pageFragmentDesign, fieldDesign));
+		addContent(fieldSelect, createLink(fieldDetails, add(createTemplatedText(), createDeduction(pageFragmentDesign))));
+		PageFragmentDesign previewDesign = new PageFragmentDesign(applicationDesign);
+		previewDesign.setCustomization("custom.designer.PreviewPageFragmentCustomization");
+		addContent(fieldSelect, previewDesign);
+		SelectDesign compositeSelect = createSelect(createCastDeduction(pageFragmentDesign, compositePageFragmentDesign));
+		addContent(pageFragmentEditor, fieldSelect);
+		addContent(pageFragmentEditor, compositeSelect);
+		CompositePageFragmentDesign indentedContent = createCompositePageFragment();
+		indentedContent.setPresentation("indented");
+		addContent(compositeSelect, indentedContent);
+		SelectDesign itemsSelect = createSelect(createDeduction(items));
+		addContent(indentedContent, itemsSelect);
+		SelectDesign pageFragmentSelect = createSelect(createDeduction(pageFragment));
+		addContent(itemsSelect, pageFragmentSelect);
+		SharedFragmentDesign recursivePageFragmentEditor = new SharedFragmentDesign(applicationDesign);
+		addContent(pageFragmentSelect, recursivePageFragmentEditor); // Careful: recursion
+		
 		PageFragmentHolderDesign pageFragmentEditorHolder = new PageFragmentHolderDesign(applicationDesign);
 		pageFragmentEditorHolder.pageFragment.set(pageFragmentEditor);
+		pageFragmentEditorHolder.setName("PageFragmentEditor");
 		applicationDesign.sharedPageFragments.add(pageFragmentEditorHolder);
-		
+
+		recursivePageFragmentEditor.setHolder(pageFragmentEditorHolder);
+
 		// Pages
 		// Welcome page
 		addContent(welcomePage.content.get(), createConstantText("Welcome to the Designer"));

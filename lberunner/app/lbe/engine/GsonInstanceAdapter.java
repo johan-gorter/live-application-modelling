@@ -52,7 +52,7 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 						AttributeValues attributeValues = (AttributeValues) attributeValue;
 						JsonArray values = new JsonArray();
 						for (Object value : (List)attributeValues.get()) {
-							JsonPrimitive valueItem = toJsonPrimitive(attributeValue.get());
+							JsonPrimitive valueItem = toJsonPrimitive(value);
 							values.add(valueItem);
 						}
 						result.add(attribute.getName(), values);

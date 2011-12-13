@@ -12,7 +12,7 @@ import app.designer.EntityDesign;
 import app.designer.RelationDesign;
 import app.designer.TextDesign;
 
-public class EntityGenerator extends AbstractGenerator implements DeductionSchemeHolder {
+public class EntityGenerator extends AbstractGenerator {
 
 	public static class Attribute {
 
@@ -131,6 +131,7 @@ public class EntityGenerator extends AbstractGenerator implements DeductionSchem
 	@Override
 	public void update(File applicationRoot) {
 		if (observations!=null && !observations.isOutdated()) return;
+		clearDeductionSchemes();
 		entityDesign.getCase().startRecordingObservations();
 		
 		name=entityDesign.name.get();
@@ -211,10 +212,6 @@ public class EntityGenerator extends AbstractGenerator implements DeductionSchem
 			result.add(resultEntry);
 		}
 		return result;
-	}
-	@Override
-	public int addDeductionScheme(DeductionSchemeDesign scheme) {
-		throw new RuntimeException("TODO");
 	}
 
 }

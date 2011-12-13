@@ -43,6 +43,6 @@ public class EventGenerator extends AbstractGenerator {
 
 	@Override
 	public void delete(File applicationRoot) {
-		AbstractGenerator.deleteFile("event", name.toLowerCase(), "Event", appname, applicationRoot);
+		AbstractGenerator.deleteFile("event", name, "Event", appname, applicationRoot);
 	}
 }

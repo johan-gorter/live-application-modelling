@@ -144,15 +144,35 @@ public class EntityDesignEntity extends SimpleEntity {
 			}
 		};
 	
-	public static final Relation<EntityDesign, List<SelectedInstanceDeductionDesign>, SelectedInstanceDeductionDesign> entityInDeductions
+	public static final Relation<EntityDesign, List<SelectedInstanceDeductionDesign>, SelectedInstanceDeductionDesign> entityInSelectedInstanceDeductions
 		= new SimpleRelation<EntityDesign, List<SelectedInstanceDeductionDesign>, SelectedInstanceDeductionDesign>(
-			"entityInDeductions", INSTANCE, EntityDesignEntity.INSTANCE, SelectedInstanceDeductionDesign.class, SelectedInstanceDeductionDesignEntity.entity
+			"entityInSelectedInstanceDeductions", INSTANCE, EntityDesignEntity.INSTANCE, SelectedInstanceDeductionDesign.class, SelectedInstanceDeductionDesignEntity.entity
 		) {
 	
 			@Override
 			public ReadOnlyRelationValues<EntityDesign, SelectedInstanceDeductionDesign> get(
 					EntityDesign instance) {
-				return instance.entityInDeductions;
+				return instance.entityInSelectedInstanceDeductions;
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
+	
+	public static final Relation<EntityDesign, List<CastInstanceDeductionDesign>, CastInstanceDeductionDesign> entityInCastDeductions
+		= new SimpleRelation<EntityDesign, List<CastInstanceDeductionDesign>, CastInstanceDeductionDesign>(
+			"entityInCastDeductions", INSTANCE, EntityDesignEntity.INSTANCE, CastInstanceDeductionDesign.class, CastInstanceDeductionDesignEntity.entity
+		) {
+	
+			@Override
+			public ReadOnlyRelationValues<EntityDesign, CastInstanceDeductionDesign> get(
+					EntityDesign instance) {
+				return instance.entityInCastDeductions;
 			}
 	
 			public boolean isReverse() {
@@ -216,7 +236,8 @@ public class EntityDesignEntity extends SimpleEntity {
 		caseEntityInApplication,
 		extensions,
 		reverseRelations,
-		entityInDeductions,
+		entityInSelectedInstanceDeductions,
+		entityInCastDeductions,
 		parameterInEvent,
 		parameterInFlows,
 	};

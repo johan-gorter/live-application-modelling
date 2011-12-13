@@ -20,9 +20,9 @@ public class ApplicationGenerator extends AbstractGenerator {
 	private Map<String, EntityGenerator> entityGenerators=new HashMap<String, EntityGenerator>();
 	private Map<String, EventGenerator> eventGenerators = new HashMap<String, EventGenerator>(); 
 	private Map<String, FlowGenerator> flowGenerators = new HashMap<String, FlowGenerator>(); 
+	private Map<String, SharedPageFragmentGenerator> sharedPageFragmentGenerators = new HashMap<String, SharedPageFragmentGenerator>();
 	
 	private boolean mustRegenerate = false;
-
 
 	public ApplicationGenerator(ApplicationDesign applicationInstance) {
 		this.applicationInstance = applicationInstance;
@@ -54,6 +54,7 @@ public class ApplicationGenerator extends AbstractGenerator {
 			eventGenerators.clear();
 			entityGenerators.clear();
 			flowGenerators.clear();
+			sharedPageFragmentGenerators.clear();
 		}
 		mustRegenerate = false;
 		
@@ -76,6 +77,7 @@ public class ApplicationGenerator extends AbstractGenerator {
 			new File(applicationRoot, "entity").mkdirs();
 			new File(applicationRoot, "event").mkdirs();
 			new File(applicationRoot, "flow").mkdirs();
+			new File(applicationRoot, "sharedpagefragment").mkdirs();
 		}
 
 		AbstractGenerator.generateFile(AbstractGenerator.applicationTemplate, this, null, name, "Application", appname, applicationRoot);
@@ -87,10 +89,12 @@ public class ApplicationGenerator extends AbstractGenerator {
 			entityGenerators.put(newEntity.getName(), entityGenerator);
 		}
 
-		for (PageFragmentHolderDesign pageFragment: applicationInstance.sharedPageFragments.get()) {
-//TODO:			generatePageFragment(pageFragment, appname, applicationRoot);
+		List<Design> newSharedPageFragments = updateGenerators(sharedPageFragmentGenerators, applicationInstance.sharedPageFragments.get(), applicationRoot);
+		for(Design newSharedPageFragment : newSharedPageFragments) {
+			SharedPageFragmentGenerator sharedPageFragmentGenerator = new SharedPageFragmentGenerator((PageFragmentHolderDesign)newSharedPageFragment, appname);
+			sharedPageFragmentGenerator.update(applicationRoot);
+			sharedPageFragmentGenerators.put(newSharedPageFragment.getName(), sharedPageFragmentGenerator);
 		}
-		// TODO: textHolder
 
 		List<Design> newEvents = updateGenerators(eventGenerators, applicationInstance.events.get(), applicationRoot);
 		for(Design newEvent : newEvents) {

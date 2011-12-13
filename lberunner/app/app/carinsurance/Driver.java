@@ -118,17 +118,6 @@ public class Driver
 		noClaimsDiscount.set(newValue);
 	}
 	
-	public final AttributeValue<Driver, java.lang.String> What
-		= createAttributeValue(DriverEntity.What);
-	
-	public java.lang.String getWhat() {
-		return What.get();
-	}
-
-	public void setWhat(java.lang.String newValue) {
-		What.set(newValue);
-	}
-	
 	// Relations
 
 	// Reverse relations

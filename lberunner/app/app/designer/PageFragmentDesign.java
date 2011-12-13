@@ -13,7 +13,7 @@ import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
 public class PageFragmentDesign 
-	extends SimpleInstance 
+	extends Design 
 	implements Instance {
 
 	public PageFragmentDesign(CaseInstance caseInstance) {

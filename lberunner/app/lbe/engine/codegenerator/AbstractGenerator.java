@@ -14,6 +14,7 @@ import java.util.Map.Entry;
 
 import lbe.instance.Observations;
 import play.Play;
+import app.designer.DeductionSchemeDesign;
 import app.designer.Design;
 import app.designer.TextDesign;
 import freemarker.template.Configuration;
@@ -26,12 +27,15 @@ public abstract class AbstractGenerator {
 	public String name;
 	public String customization;
 	
+	private List<DeductionSchemeGenerator> deductionSchemes = new ArrayList<DeductionSchemeGenerator>();
+	
 	protected Observations observations;
 	static Configuration freemarkerConfig;
 	public static File applicationsRoot = new File(Play.applicationPath, "app/app");
 	public static Template subFlowTemplate;
 	public static Template pageTemplate;
 	public static Template eventTemplate;
+	public static Template pageFragmentTemplate;
 	public static Template flowTemplate;
 	public static Template applicationTemplate;
 	public static Template instanceTemplate;
@@ -46,6 +50,7 @@ public abstract class AbstractGenerator {
 			instanceTemplate = freemarkerConfig.getTemplate("Instance.java.ftl");
 			applicationTemplate = freemarkerConfig.getTemplate("Application.java.ftl");
 			eventTemplate = freemarkerConfig.getTemplate("Event.java.ftl");
+			pageFragmentTemplate = freemarkerConfig.getTemplate("PageFragment.java.ftl");
 			flowTemplate = freemarkerConfig.getTemplate("Flow.java.ftl");
 			pageTemplate = freemarkerConfig.getTemplate("Page.java.ftl");
 			subFlowTemplate = freemarkerConfig.getTemplate("SubFlow.java.ftl");
@@ -64,6 +69,10 @@ public abstract class AbstractGenerator {
 	
 	public String getCustomization() {
 		return customization;
+	}
+	
+	protected void clearDeductionSchemes() {
+		deductionSchemes.clear();
 	}
 	
 	public abstract void update(File applicationRoot);
@@ -135,5 +144,15 @@ public abstract class AbstractGenerator {
 		for (AbstractGenerator generator: generators) {
 			generator.update(applicationRoot);
 		}
+	}
+	
+	public List<DeductionSchemeGenerator> getDeductionSchemes() {
+		return deductionSchemes;
+	}
+	
+	public int addDeductionScheme(DeductionSchemeDesign scheme) {
+		int deductionIndex = deductionSchemes.size();
+		deductionSchemes.add(new DeductionSchemeGenerator(scheme, deductionIndex));
+		return deductionIndex;
 	}
 }

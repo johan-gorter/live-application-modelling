@@ -41,6 +41,7 @@ public class DesignerApplication extends Application {
 		DeductionSchemeDesignEntity.INSTANCE,
 		DeductionDesignEntity.INSTANCE,
 		SelectedInstanceDeductionDesignEntity.INSTANCE,
+		CastInstanceDeductionDesignEntity.INSTANCE,
 		AttributeDeductionDesignEntity.INSTANCE,
 		PageFragmentHolderDesignEntity.INSTANCE,
 		PageFragmentDesignEntity.INSTANCE,

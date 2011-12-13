@@ -1,4 +1,4 @@
-package app.${appname}.flow.${flowname?lower_case};
+package app.${appname}.sharedpagefragment;
 <#include "Content.java.ftl">
 <#include "DeductionScheme.java.ftl">
 
@@ -13,25 +13,23 @@ import lbe.model.deduction.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
 
-public class ${name}Page extends Page {
-
-	public static final ${name}Page INSTANCE = new <#if customization??>${customization}<#else>${name}Page</#if>();
+public class ${name}PageFragment extends SimpleSharedPageFragment {
+	
+	public static ${name}PageFragment INSTANCE = new <#if customization??>${customization}<#else>${name}PageFragment</#if>();
+	
+	protected ${name}PageFragment() {
+	}
 
 <#list deductionSchemes as scheme>
 	<@deductionscheme_macro scheme=scheme />
 </#list>
 	
-	private static CompositePageFragment CONTENT = 
+	public static final PageFragment SHARED_INSTANCE = 
 <@content_macro content=content depth=2 />; 
 	
+
 	@Override
-	public CompositePageFragment getRootContainer() {
-		return CONTENT;
-	}; 
-	
-	@Override
-	public String getName() {
-		return "${name}";
+	protected PageFragment getDelegate() {
+		return SHARED_INSTANCE;
 	}
-	
 }

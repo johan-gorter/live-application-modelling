@@ -4,6 +4,7 @@ import app.designer.*;
 import app.designer.event.*;
 import app.designer.flow.*;
 import app.designer.entity.*;
+import app.designer.sharedpagefragment.*;
 import lbe.instance.*;
 import lbe.model.flow.*;
 import lbe.model.deduction.*;

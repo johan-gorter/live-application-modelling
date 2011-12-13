@@ -1,7 +1,7 @@
 package app.oldcarinsurance.flow.insure;
 
 import app.oldcarinsurance.button.NextButton;
-import app.oldcarinsurance.container.DriverContainer;
+import app.oldcarinsurance.sharedPageFragment.DriverContainer;
 import lbe.model.flow.Page;
 import lbe.model.pageelement.CompositePageFragment;
 import lbe.model.pageelement.PageFragment;

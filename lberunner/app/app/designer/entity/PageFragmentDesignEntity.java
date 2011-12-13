@@ -83,6 +83,11 @@ public class PageFragmentDesignEntity extends SimpleEntity {
 	}
 	
 	@Override
+	public Entity extendsEntity() {
+		return DesignEntity.INSTANCE;
+	}
+	
+	@Override
 	public Attribute<? extends Instance, ? extends Object, ? extends Object>[] getLocalAttributes() {
 		return ATTRIBUTES;
 	}

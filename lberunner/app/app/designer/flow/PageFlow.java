@@ -31,6 +31,12 @@ public class PageFlow extends Flow {
 	private static final FlowEdge[] EDGES = new FlowEdge[]{
 		new FlowEdge(
 			PagePage.INSTANCE, 
+			FieldDetailsEvent.INSTANCE,
+			FieldSubFlow.INSTANCE,
+			FieldDetailsEvent.INSTANCE
+		),
+		new FlowEdge(
+			PagePage.INSTANCE, 
 			AddFieldEvent.INSTANCE,
 			AddFieldSubFlow.INSTANCE,
 			AddFieldEvent.INSTANCE
