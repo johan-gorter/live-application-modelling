@@ -17,7 +17,6 @@ import app.designer.TextDesign;
 public class ContentClassModel {
 
 	public String type;
-
 	public String name;
 	public TextGenerator text;
 
@@ -39,6 +38,7 @@ public class ContentClassModel {
 			type = type.substring(0, type.length()-6);
 		}
 		presentation = fragment.getPresentation();
+		customization = fragment.getCustomization();
 		if (fragment instanceof SharedFragmentDesign) {
 			name = fragment.getHolder().getName();
 		} else if (fragment instanceof FieldDesign) {

@@ -52,6 +52,9 @@ public class CarinsuranceBootstrapper extends BootstrapperUtil {
 		noClaimsDiscount.question.set(createConstantText("Number of years 'no claims discount' entitlement?"));
 		RelationDesign driverRelation = createRelation(carinsuranceCase, "driver", RelationType.OneToOneAggregation, "carinsuranceCase", driver);
 
+		// Events
+		EventDesign next = createEvent("Next");
+		
 		// PageFragments
 		SelectDesign selectDriver = createSelect(createDeduction(driverRelation));
 		HeaderDesign driverHeader = createHeader(createConstantText("Driver"));
@@ -66,9 +69,9 @@ public class CarinsuranceBootstrapper extends BootstrapperUtil {
 		createField(driverFields, carUse, true);
 		createField(driverFields, mileage, true);
 		createField(driverFields, zipCode, true);
+		addContent(selectDriver, createButton(next, createConstantText("Next")));
 		
 		// Flows
-		EventDesign next = createEvent("Next");
 		FlowDesign insureFlow = createFlow("Insure");
 		PageDesign insureDriverPage = createPage(insureFlow, "Driver");
 		FlowSourceDesign insureStartSource = createSource(insureFlow, null, insureDriverPage, null);

@@ -17,8 +17,9 @@ public class Bootstrapper {
 	}
 	
 	public static void main(String[] args) {
-		//createCarinsurance();
-		createDesigner();
+//		createCarinsurance();
+//		createDesigner();
+		createRitadministratie();
 	}
 
 	private static void createCarinsurance() {
@@ -55,4 +56,20 @@ public class Bootstrapper {
 		applicationInstance.afterSubmit();
 	}
 
+	private static void createRitadministratie() {
+		ApplicationDesignCustomization applicationInstance = RitAdministratieBootstrapper.createRitAdministratie();
+		
+		String json = CasePersister.gson.toJson(applicationInstance);
+		//		System.out.println(json);
+		applicationInstance = CasePersister.gson.fromJson(json, ApplicationDesignCustomization.class);
+		
+		CasePersister.INSTANCE.persist("ritAdministratie", applicationInstance, (int)(System.currentTimeMillis()/1000));
+		
+		applicationInstance.afterLoading();
+		
+		applicationInstance.getApplicationGenerator().setMustRegenerate();
+		
+		applicationInstance.afterSubmit();
+	}
+	
 }

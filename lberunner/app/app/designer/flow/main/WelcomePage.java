@@ -51,13 +51,17 @@ public class WelcomePage extends Page {
                 new SimpleCompositePageFragment(new PageFragment[]{
                     new ConstantText("Entities"),
                     new SimpleCompositePageFragment(createDeduction1(), new PageFragment[]{
-                        new SimpleLink(EntityDetailsEvent.INSTANCE, new TemplatedText().add(createDeduction0()))
+                        new SimpleCompositePageFragment(new PageFragment[]{
+                            new SimpleLink(EntityDetailsEvent.INSTANCE, new TemplatedText().add(createDeduction0()))
+                        }).withPresentation("row")
                     })
                 }).withPresentation("column"),
                 new SimpleCompositePageFragment(new PageFragment[]{
                     new ConstantText("Flows"),
                     new SimpleCompositePageFragment(createDeduction3(), new PageFragment[]{
-                        new SimpleLink(FlowDetailsEvent.INSTANCE, new TemplatedText().add(createDeduction2()))
+                        new SimpleCompositePageFragment(new PageFragment[]{
+                            new SimpleLink(FlowDetailsEvent.INSTANCE, new TemplatedText().add(createDeduction2()))
+                        }).withPresentation("row")
                     })
                 }).withPresentation("column")
             }).withPresentation("four-columns")

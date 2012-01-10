@@ -36,7 +36,8 @@ public class DriverPage extends Page {
                     new SimpleField(DriverEntity.INSTANCE, DriverEntity.mileage).setRequired(),
                     new SimpleField(DriverEntity.INSTANCE, DriverEntity.zipCode).setRequired()
                 })
-            })
+            }),
+            new SimpleButton(NextEvent.INSTANCE, new ConstantText("Next"))
         }); 
 	
 	@Override

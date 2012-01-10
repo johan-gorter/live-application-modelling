@@ -1,7 +1,9 @@
 package custom.designer;
 
+import app.designer.ButtonDesign;
 import app.designer.ConstantTextDesign;
 import app.designer.FieldDesign;
+import app.designer.HeaderDesign;
 import app.designer.PageFragmentDesign;
 import app.designer.TextDesign;
 import app.designer.entity.PageFragmentDesignEntity;
@@ -26,10 +28,25 @@ public class PreviewPageFragmentCustomization extends PageFragment {
 		result.readonly = true;
 		if (design instanceof FieldDesign) {
 			transformToField(result, (FieldDesign)design);
+		} else if (design instanceof HeaderDesign) {
+			transformToHeader(result, (HeaderDesign)design);
+		} else if (design instanceof ButtonDesign) {
+			transformToButton(result, (ButtonDesign)design);
 		}
 		return result;
 	}
 	
+	private void transformToButton(PageElement result, ButtonDesign design) {
+		result.id="button-"+result.id;
+		result.elementType="button";
+		result.display = previewText(design.getCaption());
+	}
+
+	private void transformToHeader(PageElement result, HeaderDesign design) {
+		result.id = "header-"+result.id;
+		result.display = previewText(design.getText());
+	}
+
 	private void transformToField(PageElement result, FieldDesign design) {
 		result.id = "field-"+result.id;
 		result.elementType = "field";

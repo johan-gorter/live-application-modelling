@@ -13,7 +13,7 @@ public class EntityDetailsEvent extends SimpleFlowEvent {
 
 	public EntityDetailsEvent() {
 		super("EntityDetails", new Entity[]{
-			FlowDesignEntity.INSTANCE,
+			EntityDesignEntity.INSTANCE,
 		});
 	}
 }

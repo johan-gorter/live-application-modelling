@@ -24,6 +24,7 @@ public class MainFlow extends Flow {
 
 	private static final FlowNodeBase[] NODES = new FlowNodeBase[]{
 		WelcomePage.INSTANCE,
+		EntitySubFlow.INSTANCE,
 		FlowSubFlow.INSTANCE,
 		CaseExplorerSubFlow.INSTANCE,
 	};
@@ -34,6 +35,18 @@ public class MainFlow extends Flow {
 			FlowDetailsEvent.INSTANCE,
 			FlowSubFlow.INSTANCE,
 			FlowDetailsEvent.INSTANCE
+		),
+		new FlowEdge(
+			WelcomePage.INSTANCE, 
+			EntityDetailsEvent.INSTANCE,
+			EntitySubFlow.INSTANCE,
+			EntityDetailsEvent.INSTANCE
+		),
+		new FlowEdge(
+			WelcomePage.INSTANCE, 
+			AttributeDetailsInEntityEvent.INSTANCE,
+			EntitySubFlow.INSTANCE,
+			AttributeDetailsInEntityEvent.INSTANCE
 		),
 		new FlowEdge(
 			FlowSubFlow.INSTANCE, 
@@ -49,6 +62,18 @@ public class MainFlow extends Flow {
 		),
 		new FlowEdge(
 			FlowSubFlow.INSTANCE, 
+			ExploreInstanceEvent.INSTANCE,
+			CaseExplorerSubFlow.INSTANCE,
+			ExploreInstanceEvent.INSTANCE
+		),
+		new FlowEdge(
+			EntitySubFlow.INSTANCE, 
+			HomeEvent.INSTANCE,
+			WelcomePage.INSTANCE,
+			null
+		),
+		new FlowEdge(
+			EntitySubFlow.INSTANCE, 
 			ExploreInstanceEvent.INSTANCE,
 			CaseExplorerSubFlow.INSTANCE,
 			ExploreInstanceEvent.INSTANCE

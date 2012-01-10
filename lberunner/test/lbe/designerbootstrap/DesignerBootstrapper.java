@@ -120,7 +120,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 
 		// Data
 		createRelation(entityDesign, "extendsFrom", RelationType.ManyToZeroOrOne, "extensions", entityDesign);
-		createRelation(entityDesign, "attributes", RelationType.OneToManyAggregation, "entity", attributeDesign);
+		RelationDesign attributes = createRelation(entityDesign, "attributes", RelationType.OneToManyAggregation, "entity", attributeDesign);
 		createRelation(entityDesign, "relations", RelationType.OneToManyAggregation, "from", relationDesign);
 		createRelation(relationDesign, "to", RelationType.ManyToZeroOrOne, "reverseRelations", entityDesign);
 		createRelation(attributeDesign, "question", RelationType.OneToZeroOrOneAggregation, "questionOnAttribute", textDesign);
@@ -182,14 +182,21 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		EventDesign flowDetails = createEvent("FlowDetails", flowDesign);
 		EventDesign flowNodeDetails = createEvent("FlowNodeDetails", flowNodeBaseDesign);
 		EventDesign pageDetails = createEvent("PageDetails", pageDesign);
+		EventDesign pageFragmentDetails = createEvent("PageFragmentDetails", fieldDesign);
 		EventDesign fieldDetails = createEvent("FieldDetails", fieldDesign);
 		EventDesign addField = createEvent("AddField");
-		EventDesign entityDetails = createEvent("EntityDetails", flowDesign);
+		EventDesign entityDetails = createEvent("EntityDetails", entityDesign);
+		EventDesign attributeDetails = createEvent("AttributeDetails", attributeDesign);
+		EventDesign attributeDetailsInEntity = createEvent("AttributeDetailsInEntity", entityDesign, attributeDesign);
 		EventDesign exploreInstance = createEvent("ExploreInstance");
 		exploreInstance.customization.set("custom.designer.caseexplorer.ExploreInstanceEventCustomization");
 		
 		// Flows
 		FlowDesign mainFlow = createFlow("Main");
+		FlowDesign entityFlow = createFlow("Entity");
+		entityFlow.parameters.add(entityDesign);
+		FlowDesign attributeFlow = createFlow("Attribute");
+		attributeFlow.parameters.add(attributeDesign);
 		FlowDesign flowFlow = createFlow("Flow");
 		flowFlow.parameters.add(flowDesign);
 		FlowDesign pageFlow = createFlow("Page");
@@ -207,12 +214,27 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		// Main
 		PageDesign welcomePage = createPage(mainFlow, "Welcome");
 		FlowSourceDesign mainStart = createSource(mainFlow, null, welcomePage, null);
+		SubFlowDesign entitySubFlow = createSubFlow(mainFlow, entityFlow);
 		SubFlowDesign flowSubFlow = createSubFlow(mainFlow, flowFlow);
 		SubFlowDesign caseExplorerSubFlow = createSubFlow(mainFlow, caseExplorerFlow);
 		createEdge(mainFlow, welcomePage, flowDetails, flowSubFlow, flowDetails);
+		createEdge(mainFlow, welcomePage, entityDetails, entitySubFlow, entityDetails);
+		createEdge(mainFlow, welcomePage, attributeDetailsInEntity, entitySubFlow, attributeDetailsInEntity);
 		createEdge(mainFlow, flowSubFlow, flowDetails, flowSubFlow, flowDetails);//recursive
 		createEdge(mainFlow, flowSubFlow, home, welcomePage, null);
 		createEdge(mainFlow, flowSubFlow, exploreInstance, caseExplorerSubFlow, exploreInstance);
+		createEdge(mainFlow, entitySubFlow, home, welcomePage, null);
+		createEdge(mainFlow, entitySubFlow, exploreInstance, caseExplorerSubFlow, exploreInstance);
+		// Entity
+		PageDesign entityPage = createPage(entityFlow, "Entity");
+		FlowSourceDesign entityDetailsSource = createSource(entityFlow, entityDetails, entityPage, null);
+		SubFlowDesign attributeSubFlow = createSubFlow(entityFlow, attributeFlow);
+		FlowSourceDesign attributeDetailsInEntitySource = createSource(entityFlow, attributeDetailsInEntity, attributeSubFlow, attributeDetails);
+		createEdge(entityFlow, entityPage, attributeDetails, attributeSubFlow, attributeDetails);
+		createEdge(entityFlow, attributeSubFlow, entityDetails, entityPage, null);
+		// Attribute
+		PageDesign attributePage = createPage(attributeFlow, "Attribute");
+		FlowSourceDesign attributeDetailsSource = createSource(attributeFlow, attributeDetails, attributePage, null);
 		// Flow
 		PageDesign flowPage = createPage(flowFlow, "Flow");
 		FlowSourceDesign flowDetailsSource = createSource(flowFlow, flowDetails, flowPage, null);
@@ -244,24 +266,34 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		
 		// Shared
 		CompositePageFragmentDesign pageFragmentEditor = createCompositePageFragment();
-		addContent(pageFragmentEditor, add(createTemplatedText(), createDeduction(pageFragmentDesign)));
+		pageFragmentEditor.setPresentation("pageFragmentEditor");
+		CompositePageFragmentDesign pageFragmentEditorHeader = createCompositePageFragment();
+		pageFragmentEditorHeader.setPresentation("pageFragmentEditorHeader NoAnimation");
 		SelectDesign fieldSelect = createSelect(createCastDeduction(pageFragmentDesign, fieldDesign));
-		addContent(fieldSelect, createLink(fieldDetails, add(createTemplatedText(), createDeduction(pageFragmentDesign))));
+		SelectDesign fieldAttributeSelect = createSelect(createDeduction(fieldAttribute));
+		addContent(fieldAttributeSelect, createLink(attributeDetails, add(createTemplatedText(), name)));
+		addContent(fieldSelect, fieldAttributeSelect);
+		addContent(pageFragmentEditorHeader, createLink(pageFragmentDetails, add(createTemplatedText(), createDeduction(pageFragmentDesign))));
+		addContent(pageFragmentEditorHeader, fieldSelect);
+		CompositePageFragmentDesign previewHolderDesign = new CompositePageFragmentDesign(applicationDesign);
+		previewHolderDesign.setPresentation("pageFragmentEditorPreview");
 		PageFragmentDesign previewDesign = new PageFragmentDesign(applicationDesign);
 		previewDesign.setCustomization("custom.designer.PreviewPageFragmentCustomization");
-		addContent(fieldSelect, previewDesign);
+		addContent(previewHolderDesign, previewDesign);
 		SelectDesign compositeSelect = createSelect(createCastDeduction(pageFragmentDesign, compositePageFragmentDesign));
-		addContent(pageFragmentEditor, fieldSelect);
-		addContent(pageFragmentEditor, compositeSelect);
 		CompositePageFragmentDesign indentedContent = createCompositePageFragment();
-		indentedContent.setPresentation("indented");
-		addContent(compositeSelect, indentedContent);
+		indentedContent.setPresentation("pageFragmentEditorContent");
 		SelectDesign itemsSelect = createSelect(createDeduction(items));
-		addContent(indentedContent, itemsSelect);
 		SelectDesign pageFragmentSelect = createSelect(createDeduction(pageFragment));
 		addContent(itemsSelect, pageFragmentSelect);
 		SharedFragmentDesign recursivePageFragmentEditor = new SharedFragmentDesign(applicationDesign);
 		addContent(pageFragmentSelect, recursivePageFragmentEditor); // Careful: recursion
+		addContent(indentedContent, itemsSelect);
+		addContent(compositeSelect, indentedContent);
+
+		addContent(pageFragmentEditor, pageFragmentEditorHeader);
+		addContent(pageFragmentEditor, previewHolderDesign);
+		addContent(pageFragmentEditor, compositeSelect);
 		
 		PageFragmentHolderDesign pageFragmentEditorHolder = new PageFragmentHolderDesign(applicationDesign);
 		pageFragmentEditorHolder.pageFragment.set(pageFragmentEditor);
@@ -281,7 +313,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		addContent(columns, column1);
 		addContent(column1, createConstantText("Entities"));
 		SelectDesign entitiesSelect = createSelect(createDeduction(entities));
-		addContent(entitiesSelect, createLink(entityDetails, add(createTemplatedText(), name)));
+		addContent(entitiesSelect, putInRow(createLink(entityDetails, add(createTemplatedText(), name))));
 		addContent(column1, entitiesSelect);
 
 		CompositePageFragmentDesign column2 = createCompositePageFragment();
@@ -289,8 +321,16 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		addContent(columns, column2);
 		addContent(column2, createConstantText("Flows"));
 		SelectDesign flowsSelect = createSelect(createDeduction(flows));
-		addContent(flowsSelect, createLink(flowDetails, add(createTemplatedText(), name)));
+		addContent(flowsSelect, putInRow(createLink(flowDetails, add(createTemplatedText(), name))));
 		addContent(column2, flowsSelect);
+		// Entity page
+		addContent(entityPage.content.get(), createLink(home, createConstantText("Home")));
+		addContent(entityPage.content.get(), createLink(exploreInstance, createConstantText("Open in case explorer")));
+		createField(entityPage.content.get(), name, false);
+		addContent(entityPage.content.get(), createConstantText("Attributes"));
+		SelectDesign attributesSelect = createSelect(createDeduction(attributes));
+		addContent(attributesSelect, putInRow(createLink(attributeDetails, add(createTemplatedText(), name))));
+		addContent(entityPage.content.get(), attributesSelect);
 		// Flow page
 		addContent(flowPage.content.get(), createLink(home, createConstantText("Home")));
 		addContent(flowPage.content.get(), createLink(exploreInstance, createConstantText("Open in case explorer")));
@@ -327,5 +367,12 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		applicationDesign.exposedFlows.add(mainFlow);
 		
 		return applicationDesign;
+	}
+
+	private static PageFragmentDesign putInRow(PageFragmentDesign content) {
+		CompositePageFragmentDesign result = new CompositePageFragmentDesign(applicationDesign);
+		addContent(result, content);
+		result.setPresentation("row");
+		return result;
 	}
 }

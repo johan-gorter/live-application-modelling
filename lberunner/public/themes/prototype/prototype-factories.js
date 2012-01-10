@@ -15,7 +15,7 @@
 	            case 'link': 
                     return new prototype.mvc.controller.LinkController({
             			className:Util.concatCssClasses('link', model.presentationStyles),
-            			createOuterAnimDiv: true // Links are placed vertically for now
+            			createOuterAnimDiv: false // Links are placed horizontally
             		});
 	        }
 	    	return aquima.mvc.generic.genericFactory.createController(model, childIndexPath); 
