@@ -76,16 +76,13 @@ public class Rit
 		eindstand.set(newValue);
 	}
 	
-	public final RelationValue<Rit, Stand> beginstand
-		= createRelationValue(RitEntity.beginstand);
+	public final ReadOnlyRelationValue<Rit, Stand> beginstand
+		= createReadOnlyRelationValue(RitEntity.beginstand);
 		
 	public Stand getBeginstand() {
 		return beginstand.get();
 	}
 	
-	public void setBeginstand(Stand newValue) {
-		beginstand.set(newValue);
-	}
 
 	// Reverse relations
 	

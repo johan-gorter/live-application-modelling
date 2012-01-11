@@ -9,10 +9,13 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class JaarEntity extends SimpleEntity {
 
 	public static final JaarEntity INSTANCE = new JaarEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -47,6 +50,28 @@ public class JaarEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			
+		};
+	
+	public static final Relation<Jaar, List<Ijking>, Ijking> ijkingen
+		= new SimpleRelation<Jaar, List<Ijking>, Ijking>(
+			"ijkingen", INSTANCE, IjkingEntity.INSTANCE, Ijking.class, IjkingEntity.jaar
+		) {
+	
+			@Override
+			public ReadOnlyRelationValues<Jaar, Ijking> get(
+					Jaar instance) {
+				return instance.ijkingen;
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+			
 		};
 	
 	// Reverse relations
@@ -56,6 +81,7 @@ public class JaarEntity extends SimpleEntity {
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
 		autos,
+		ijkingen,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};

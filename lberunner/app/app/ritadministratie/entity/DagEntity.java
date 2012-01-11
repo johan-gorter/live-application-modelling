@@ -9,10 +9,13 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class DagEntity extends SimpleEntity {
 
 	public static final DagEntity INSTANCE = new DagEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -47,6 +50,7 @@ public class DagEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			
 		};
 	
 	// Reverse relations

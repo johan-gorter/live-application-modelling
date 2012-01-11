@@ -9,10 +9,13 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class AutoEntity extends SimpleEntity {
 
 	public static final AutoEntity INSTANCE = new AutoEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -47,6 +50,7 @@ public class AutoEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			
 		};
 	
 	public static final Relation<Auto, Stand, Stand> beginstand
@@ -67,6 +71,7 @@ public class AutoEntity extends SimpleEntity {
 			public boolean isAutoCreate() {
 				return true;
 			}
+			
 		};
 	
 	// Reverse relations

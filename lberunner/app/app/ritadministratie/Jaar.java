@@ -45,6 +45,17 @@ public class Jaar
 	public void setAutos(List<Auto> newValue) {
 		autos.set(newValue);
 	}
+	
+	public final RelationValues<Jaar, Ijking> ijkingen
+		= createRelationValues(JaarEntity.ijkingen);
+		
+	public List<Ijking> getIjkingen() {
+		return ijkingen.get();
+	}
+	
+	public void setIjkingen(List<Ijking> newValue) {
+		ijkingen.set(newValue);
+	}
 
 	// Reverse relations
 

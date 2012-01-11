@@ -20,6 +20,7 @@ public class DeductionSchemeGenerator {
 		public int index;
 		public String type;
 		public String resultType;
+		public String customization;
 		public List<String> parameters = new ArrayList<String>();
 		
 		public int getIndex() {
@@ -33,6 +34,9 @@ public class DeductionSchemeGenerator {
 		}
 		public List<String> getParameters() {
 			return parameters;
+		}
+		public String getCustomization() {
+			return customization;
 		}
 	}
 	
@@ -49,6 +53,7 @@ public class DeductionSchemeGenerator {
 			classModel.index = deductionIndex++;
 			classModel.type = design.getModel().getName();
 			classModel.type = classModel.type.substring(0, classModel.type.length()-6);
+			classModel.customization = design.getCustomization();
 			classModel.resultType = design.getClassName();
 			if (design instanceof SelectedInstanceDeductionDesign) {
 				String name = ((SelectedInstanceDeductionDesign)design).getEntity().getName();
@@ -89,6 +94,10 @@ public class DeductionSchemeGenerator {
 	
 	public int getLastDeductionIndex() {
 		return deductions.size()-1;
+	}
+
+	public String getLastResultType() {
+		return deductions.get(deductions.size()-1).resultType;
 	}
 
 }

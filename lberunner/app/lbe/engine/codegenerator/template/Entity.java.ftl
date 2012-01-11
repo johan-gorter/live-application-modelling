@@ -1,5 +1,6 @@
 package app.${appname}.entity;
 <#include "Text.java.ftl">
+<#include "DeductionScheme.java.ftl">
 
 import java.util.List;
 
@@ -10,10 +11,16 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class ${name}Entity extends SimpleEntity {
 
 	public static final ${name}Entity INSTANCE = new ${name}Entity();
+
+	// Deductions
+	<#list deductionSchemes as scheme>
+		<@deductionscheme_macro scheme=scheme />
+	</#list>
 	
 	// Attributes
 	<#list attributes as attribute>
@@ -99,6 +106,15 @@ public class ${name}Entity extends SimpleEntity {
 				return true;
 			}
 			</#if>
+			<#if relation.ruleDeductionIndex??>
+
+			private Deduction<Stand> RULE = createDeduction${relation.ruleDeductionIndex}();
+			@Override
+			public Deduction<Stand> getRule() {
+				return RULE;
+			}
+			</#if>
+			
 		};
 	</#list>
 	

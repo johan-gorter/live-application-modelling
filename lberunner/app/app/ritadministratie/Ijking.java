@@ -33,5 +33,13 @@ public class Ijking
 	// Relations
 
 	// Reverse relations
+	
+	public final ReadOnlyRelationValue<Ijking, Jaar> jaar
+		= createReverseRelationValue(IjkingEntity.jaar);
+
+	public Jaar getJaar() {
+		return jaar.get();
+	}
+
 
 }

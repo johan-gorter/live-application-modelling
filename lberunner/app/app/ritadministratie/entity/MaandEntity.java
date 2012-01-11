@@ -9,10 +9,13 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class MaandEntity extends SimpleEntity {
 
 	public static final MaandEntity INSTANCE = new MaandEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -47,6 +50,7 @@ public class MaandEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			
 		};
 	
 	// Reverse relations

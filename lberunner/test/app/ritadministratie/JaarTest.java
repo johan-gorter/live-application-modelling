@@ -27,6 +27,8 @@ public class JaarTest {
 		Rit rit = new Rit(jaar);
 		rit.getEindstand().setAdres(adres);
 		rit.getEindstand().setKmStand(kmStand);
+		
+		rit.getBeginstand();
 		dag.ritten.add(rit);
 	}
 
@@ -36,6 +38,8 @@ public class JaarTest {
 		auto.getBeginstand().setAdres("a");
 		
 		addStand(1, 2, "b", 10100);
+		
+		
 	}
 
 }

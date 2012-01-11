@@ -37,6 +37,9 @@ public class EntityGenerator extends AbstractGenerator {
 		public boolean readonly;
 		public TextGenerator explanation;
 		public List<DomainEntry> domain;
+		public Integer relevanceDeductionIndex;
+		public Integer ruleDeductionIndex;
+		public Integer defaultDeductionIndex;
 		
 		public String getName() {
 			return name;
@@ -64,6 +67,15 @@ public class EntityGenerator extends AbstractGenerator {
 		}
 		public String getCustomization() {
 			return customization;
+		}
+		public Integer getRuleDeductionIndex() {
+			return ruleDeductionIndex;
+		}
+		public Integer getDefaultDeductionIndex() {
+			return defaultDeductionIndex;
+		}
+		public Integer getRelevanceDeductionIndex() {
+			return relevanceDeductionIndex;
 		}
 	}
 	
@@ -166,6 +178,9 @@ public class EntityGenerator extends AbstractGenerator {
 			if (domain.size()>0) {
 				attribute.domain = generateDomain(domain);
 			}
+			if (attributeDesign.getRule()!=null) {
+				attribute.ruleDeductionIndex = addDeductionScheme(attributeDesign.getRule());
+			}
 			attributes.add(attribute);
 		}
 		relations.clear();
@@ -179,6 +194,10 @@ public class EntityGenerator extends AbstractGenerator {
 			relation.item = relationDesign.to.get().name.get();
 			relation.to = relation.multivalue?"List<"+relation.item+">":relation.item;
 			relation.reverseName=relationDesign.reverseName.get();
+			if (relationDesign.getRule()!=null) {
+				relation.ruleDeductionIndex = addDeductionScheme(relationDesign.getRule());
+			}
+			
 			relations.add(relation);
 		}
 		reverseRelations.clear();

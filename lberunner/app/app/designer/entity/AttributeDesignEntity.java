@@ -118,9 +118,6 @@ public class AttributeDesignEntity extends SimpleEntity {
 				return true;
 			}
 	
-			public boolean isAutoCreate() {
-				return true;
-			}
 		};
 	
 	public static final Relation<AttributeDesign, DeductionSchemeDesign, DeductionSchemeDesign> rule
@@ -138,9 +135,6 @@ public class AttributeDesignEntity extends SimpleEntity {
 				return true;
 			}
 	
-			public boolean isAutoCreate() {
-				return true;
-			}
 		};
 	
 	public static final Relation<AttributeDesign, DeductionSchemeDesign, DeductionSchemeDesign> _default
@@ -155,10 +149,6 @@ public class AttributeDesignEntity extends SimpleEntity {
 			}
 	
 			public boolean isOwner() {
-				return true;
-			}
-	
-			public boolean isAutoCreate() {
 				return true;
 			}
 		};

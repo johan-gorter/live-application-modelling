@@ -1,19 +1,10 @@
 package lbe.designerbootstrap;
 
-import java.util.Date;
-
 import lbe.designerbootstrap.Bootstrapper.RelationType;
 import app.designer.AttributeDesign;
-import app.designer.CompositePageFragmentDesign;
-import app.designer.DeductionDesign;
 import app.designer.EntityDesign;
-import app.designer.EventDesign;
-import app.designer.FlowDesign;
-import app.designer.FlowSourceDesign;
-import app.designer.HeaderDesign;
-import app.designer.PageDesign;
 import app.designer.RelationDesign;
-import app.designer.SelectDesign;
+import app.ritadministratie.Stand;
 import custom.designer.ApplicationDesignCustomization;
 
 public class RitAdministratieBootstrapper extends BootstrapperUtil {
@@ -60,6 +51,9 @@ public class RitAdministratieBootstrapper extends BootstrapperUtil {
 		RelationDesign beginstandRelation = createRelation(rit, "beginstand", RelationType.OneToZeroOrOne, "beginstandVanRit", stand);
 		RelationDesign autoBeginstandRelation = createRelation(auto, "beginstand", RelationType.OneToOneAggregation, "beginstandVanAuto", stand);
 		RelationDesign ijkingenRelation = createRelation(jaar, "ijkingen", RelationType.OneToManyAggregation, "jaar", ijking);
+		
+		beginstandRelation.setReadOnly(true);
+		beginstandRelation.setRule(createCustomDeduction("custom.ritadministratie.BeginstandDeductionCustomization", Stand.class));
 		
 		return applicationDesign;
 	}

@@ -9,10 +9,19 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class RitEntity extends SimpleEntity {
 
 	public static final RitEntity INSTANCE = new RitEntity();
+
+	// Deductions
+
+	private static Deduction<app.ritadministratie.Stand> createDeduction0() {
+		    Deduction<app.ritadministratie.Stand> d0 = new custom.ritadministratie.BeginstandDeductionCustomization();
+		return d0;
+	}
+
 	
 	// Attributes
 	
@@ -69,6 +78,7 @@ public class RitEntity extends SimpleEntity {
 			public boolean isAutoCreate() {
 				return true;
 			}
+			
 		};
 	
 	public static final Relation<Rit, Stand, Stand> beginstand
@@ -81,6 +91,17 @@ public class RitEntity extends SimpleEntity {
 					Rit instance) {
 				return instance.beginstand;
 			}
+	
+			public boolean isReadonly() {
+				return true;
+			}
+
+			private Deduction<Stand> RULE = createDeduction0();
+			@Override
+			public Deduction<Stand> getRule() {
+				return RULE;
+			}
+			
 		};
 	
 	// Reverse relations

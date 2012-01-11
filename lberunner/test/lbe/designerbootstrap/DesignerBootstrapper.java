@@ -129,9 +129,9 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createRelation(attributeDesign, "question", RelationType.OneToZeroOrOneAggregation, "questionOnAttribute", textDesign);
 		createRelation(attributeDesign, "explanation", RelationType.OneToZeroOrOneAggregation, "explanationOnAttribute", textDesign);
 		createRelation(attributeDesign, "domain", RelationType.OneToManyAggregation, "attribute", domainEntryDesign);
-		createRelation(attributeDesign, "relevance", RelationType.OneToOneAggregation, "relevanceOfAttribute", deductionSchemeDesign);
-		createRelation(attributeDesign, "rule", RelationType.OneToOneAggregation, "ruleOfAttribute", deductionSchemeDesign);
-		createRelation(attributeDesign, "default", RelationType.OneToOneAggregation, "defaultOfAttribute", deductionSchemeDesign);
+		createRelation(attributeDesign, "relevance", RelationType.OneToZeroOrOneAggregation, "relevanceOfAttribute", deductionSchemeDesign);
+		createRelation(attributeDesign, "rule", RelationType.OneToZeroOrOneAggregation, "ruleOfAttribute", deductionSchemeDesign);
+		createRelation(attributeDesign, "default", RelationType.OneToZeroOrOneAggregation, "defaultOfAttribute", deductionSchemeDesign);
 		createRelation(domainEntryDesign, "display", RelationType.OneToZeroOrOneAggregation, "displayOnDomainEntry", textDesign);
 		
 		// Deduction
