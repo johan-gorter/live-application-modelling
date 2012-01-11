@@ -52,6 +52,17 @@ public class DeductionDesign
 		className.set(newValue);
 	}
 	
+	public final AttributeValue<DeductionDesign, java.lang.String> customization
+		= createAttributeValue(DeductionDesignEntity.customization);
+	
+	public java.lang.String getCustomization() {
+		return customization.get();
+	}
+
+	public void setCustomization(java.lang.String newValue) {
+		customization.set(newValue);
+	}
+	
 	// Relations
 	
 	public final RelationValues<DeductionDesign, DeductionDesign> inputs

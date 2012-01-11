@@ -52,6 +52,54 @@ public class DeductionSchemeDesignEntity extends SimpleEntity {
 	
 	// Reverse relations
 	
+	public static final Relation<DeductionSchemeDesign, AttributeDesign, AttributeDesign> relevanceOfAttribute
+		= new SimpleRelation<DeductionSchemeDesign, AttributeDesign, AttributeDesign>(
+			"relevanceOfAttribute", INSTANCE, DeductionSchemeDesignEntity.INSTANCE, AttributeDesign.class, AttributeDesignEntity.relevance
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<DeductionSchemeDesign, AttributeDesign> get(
+					DeductionSchemeDesign instance) {
+				return instance.relevanceOfAttribute;
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+		};
+	
+	public static final Relation<DeductionSchemeDesign, AttributeDesign, AttributeDesign> ruleOfAttribute
+		= new SimpleRelation<DeductionSchemeDesign, AttributeDesign, AttributeDesign>(
+			"ruleOfAttribute", INSTANCE, DeductionSchemeDesignEntity.INSTANCE, AttributeDesign.class, AttributeDesignEntity.rule
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<DeductionSchemeDesign, AttributeDesign> get(
+					DeductionSchemeDesign instance) {
+				return instance.ruleOfAttribute;
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+		};
+	
+	public static final Relation<DeductionSchemeDesign, AttributeDesign, AttributeDesign> defaultOfAttribute
+		= new SimpleRelation<DeductionSchemeDesign, AttributeDesign, AttributeDesign>(
+			"defaultOfAttribute", INSTANCE, DeductionSchemeDesignEntity.INSTANCE, AttributeDesign.class, AttributeDesignEntity._default
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<DeductionSchemeDesign, AttributeDesign> get(
+					DeductionSchemeDesign instance) {
+				return instance.defaultOfAttribute;
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+		};
+	
 	public static final Relation<DeductionSchemeDesign, FormattedValueDesign, FormattedValueDesign> templatedText
 		= new SimpleRelation<DeductionSchemeDesign, FormattedValueDesign, FormattedValueDesign>(
 			"templatedText", INSTANCE, DeductionSchemeDesignEntity.INSTANCE, FormattedValueDesign.class, FormattedValueDesignEntity.deduction
@@ -91,6 +139,9 @@ public class DeductionSchemeDesignEntity extends SimpleEntity {
 		output,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
+		relevanceOfAttribute,
+		ruleOfAttribute,
+		defaultOfAttribute,
 		templatedText,
 		select,
 	};

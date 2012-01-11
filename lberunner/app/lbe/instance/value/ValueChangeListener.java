@@ -2,6 +2,6 @@ package lbe.instance.value;
 
 public interface ValueChangeListener {
 	
-	public void valueChanged(ReadOnlyAttributeValue value);
+	public void valueChanged(ReadOnlyAttributeValue valueHolder);
 	
 }

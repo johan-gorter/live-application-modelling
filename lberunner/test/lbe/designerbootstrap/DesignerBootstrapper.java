@@ -42,7 +42,9 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		AttributeDesign valid = createAttribute(design, "valid", Boolean.class);
 		valid.readOnly.set(true);
 		valid.customization.set("custom.designer.ValidAttributeCustomization");
-		
+		AttributeDesign javaName = createAttribute(design, "javaName", String.class);
+		javaName.setReadOnly(true);
+		javaName.setRule(createCustomDeduction("custom.designer.JavaNameCustomization", String.class));
 		createAttribute(design, "customization", String.class);
 		
 		// Entity
@@ -67,6 +69,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		EntityDesign deductionDesign = createEntity("DeductionDesign", null);
 		createAttribute(deductionDesign, "multivalue", Boolean.class);
 		createAttribute(deductionDesign, "className", String.class); // in case of an entity, see relation entity
+		createAttribute(deductionDesign, "customization", String.class);
 		EntityDesign selectedInstanceDeductionDesign = createEntity("SelectedInstanceDeductionDesign" , deductionDesign);
 		EntityDesign castInstanceDeductionDesign = createEntity("CastInstanceDeductionDesign" , deductionDesign);
 		EntityDesign attributeDeductionDesign = createEntity("AttributeDeductionDesign" , deductionDesign);
@@ -126,6 +129,9 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createRelation(attributeDesign, "question", RelationType.OneToZeroOrOneAggregation, "questionOnAttribute", textDesign);
 		createRelation(attributeDesign, "explanation", RelationType.OneToZeroOrOneAggregation, "explanationOnAttribute", textDesign);
 		createRelation(attributeDesign, "domain", RelationType.OneToManyAggregation, "attribute", domainEntryDesign);
+		createRelation(attributeDesign, "relevance", RelationType.OneToOneAggregation, "relevanceOfAttribute", deductionSchemeDesign);
+		createRelation(attributeDesign, "rule", RelationType.OneToOneAggregation, "ruleOfAttribute", deductionSchemeDesign);
+		createRelation(attributeDesign, "default", RelationType.OneToOneAggregation, "defaultOfAttribute", deductionSchemeDesign);
 		createRelation(domainEntryDesign, "display", RelationType.OneToZeroOrOneAggregation, "displayOnDomainEntry", textDesign);
 		
 		// Deduction

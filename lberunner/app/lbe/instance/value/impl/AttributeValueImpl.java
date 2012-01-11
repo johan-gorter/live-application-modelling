@@ -31,6 +31,12 @@ public class AttributeValueImpl<I extends Instance, Value extends Object>
 		fireValueChanged();
 	}
 
+	@Override
+	protected Value getStoredValue() {
+		return storedValue;
+	}
+	
+
 	public boolean isStored() {
 		return storedValue!=null;
 	}

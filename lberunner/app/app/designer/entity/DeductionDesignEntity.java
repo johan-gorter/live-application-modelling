@@ -38,6 +38,17 @@ public class DeductionDesignEntity extends SimpleEntity {
 			}
 		};
 	
+	public static final Attribute<DeductionDesign, java.lang.String, java.lang.String> customization 
+		= new SimpleAttribute<DeductionDesign, java.lang.String, java.lang.String>(
+			"customization", INSTANCE, java.lang.String.class
+		) {
+	
+			@Override
+			public ReadOnlyAttributeValue<DeductionDesign, java.lang.String> get(DeductionDesign instance) {
+				return instance.customization;
+			}
+		};
+	
 	// Relations
 	
 	public static final Relation<DeductionDesign, List<DeductionDesign>, DeductionDesign> inputs
@@ -113,6 +124,7 @@ public class DeductionDesignEntity extends SimpleEntity {
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 		multivalue,
 		className,
+		customization,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
 		inputs,

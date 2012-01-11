@@ -48,16 +48,15 @@ public abstract class Attribute<I extends Instance, Value extends Object, Item e
 		return null;
 	}
 	
-	public Deduction<Value> getDefault() {
+	public Deduction<Boolean> getRelevance() {
 		return null;
 	}
 	
-	// TODO: not public
-	public Value calculateValue(I instance) {
-		Deduction<Value> deduction = getDefault();
-		if (deduction!=null) {
-			return deduction.deduct(new SingleInstanceDeductionContext(instance));
-		}
+	public Deduction<Value> getRule() {
+		return null;
+	}
+	
+	public Deduction<Value> getDefault() {
 		return null;
 	}
 	

@@ -42,6 +42,21 @@ public class DesignEntity extends SimpleEntity {
 			};
 		};
 	
+	public static final Attribute<Design, java.lang.String, java.lang.String> javaName 
+		= new SimpleAttribute<Design, java.lang.String, java.lang.String>(
+			"javaName", INSTANCE, java.lang.String.class
+		) {
+	
+			@Override
+			public ReadOnlyAttributeValue<Design, java.lang.String> get(Design instance) {
+				return instance.javaName;
+			}
+			
+			public boolean isReadOnly() {
+				return true;
+			};
+		};
+	
 	public static final Attribute<Design, java.lang.String, java.lang.String> customization 
 		= new SimpleAttribute<Design, java.lang.String, java.lang.String>(
 			"customization", INSTANCE, java.lang.String.class
@@ -60,6 +75,7 @@ public class DesignEntity extends SimpleEntity {
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 		name,
 		valid,
+		javaName,
 		customization,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{

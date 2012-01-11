@@ -103,6 +103,66 @@ public class AttributeDesignEntity extends SimpleEntity {
 			}
 		};
 	
+	public static final Relation<AttributeDesign, DeductionSchemeDesign, DeductionSchemeDesign> relevance
+		= new SimpleRelation<AttributeDesign, DeductionSchemeDesign, DeductionSchemeDesign>(
+			"relevance", INSTANCE, DeductionSchemeDesignEntity.INSTANCE, DeductionSchemeDesign.class, DeductionSchemeDesignEntity.relevanceOfAttribute
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<AttributeDesign, DeductionSchemeDesign> get(
+					AttributeDesign instance) {
+				return instance.relevance;
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isAutoCreate() {
+				return true;
+			}
+		};
+	
+	public static final Relation<AttributeDesign, DeductionSchemeDesign, DeductionSchemeDesign> rule
+		= new SimpleRelation<AttributeDesign, DeductionSchemeDesign, DeductionSchemeDesign>(
+			"rule", INSTANCE, DeductionSchemeDesignEntity.INSTANCE, DeductionSchemeDesign.class, DeductionSchemeDesignEntity.ruleOfAttribute
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<AttributeDesign, DeductionSchemeDesign> get(
+					AttributeDesign instance) {
+				return instance.rule;
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isAutoCreate() {
+				return true;
+			}
+		};
+	
+	public static final Relation<AttributeDesign, DeductionSchemeDesign, DeductionSchemeDesign> _default
+		= new SimpleRelation<AttributeDesign, DeductionSchemeDesign, DeductionSchemeDesign>(
+			"default", INSTANCE, DeductionSchemeDesignEntity.INSTANCE, DeductionSchemeDesign.class, DeductionSchemeDesignEntity.defaultOfAttribute
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<AttributeDesign, DeductionSchemeDesign> get(
+					AttributeDesign instance) {
+				return instance._default;
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isAutoCreate() {
+				return true;
+			}
+		};
+	
 	// Reverse relations
 	
 	public static final Relation<AttributeDesign, EntityDesign, EntityDesign> entity
@@ -170,6 +230,9 @@ public class AttributeDesignEntity extends SimpleEntity {
 		question,
 		explanation,
 		domain,
+		relevance,
+		rule,
+		_default,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 		entity,

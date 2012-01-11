@@ -97,6 +97,39 @@ public class AttributeDesign
 	public void setDomain(List<DomainEntryDesign> newValue) {
 		domain.set(newValue);
 	}
+	
+	public final RelationValue<AttributeDesign, DeductionSchemeDesign> relevance
+		= createRelationValue(AttributeDesignEntity.relevance);
+		
+	public DeductionSchemeDesign getRelevance() {
+		return relevance.get();
+	}
+	
+	public void setRelevance(DeductionSchemeDesign newValue) {
+		relevance.set(newValue);
+	}
+	
+	public final RelationValue<AttributeDesign, DeductionSchemeDesign> rule
+		= createRelationValue(AttributeDesignEntity.rule);
+		
+	public DeductionSchemeDesign getRule() {
+		return rule.get();
+	}
+	
+	public void setRule(DeductionSchemeDesign newValue) {
+		rule.set(newValue);
+	}
+	
+	public final RelationValue<AttributeDesign, DeductionSchemeDesign> _default
+		= createRelationValue(AttributeDesignEntity._default);
+		
+	public DeductionSchemeDesign getDefault() {
+		return _default.get();
+	}
+	
+	public void setDefault(DeductionSchemeDesign newValue) {
+		_default.set(newValue);
+	}
 
 	// Reverse relations
 	

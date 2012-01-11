@@ -56,6 +56,30 @@ public class DeductionSchemeDesign
 
 	// Reverse relations
 	
+	public final ReadOnlyRelationValue<DeductionSchemeDesign, AttributeDesign> relevanceOfAttribute
+		= createReverseRelationValue(DeductionSchemeDesignEntity.relevanceOfAttribute);
+
+	public AttributeDesign getRelevanceOfAttribute() {
+		return relevanceOfAttribute.get();
+	}
+
+	
+	public final ReadOnlyRelationValue<DeductionSchemeDesign, AttributeDesign> ruleOfAttribute
+		= createReverseRelationValue(DeductionSchemeDesignEntity.ruleOfAttribute);
+
+	public AttributeDesign getRuleOfAttribute() {
+		return ruleOfAttribute.get();
+	}
+
+	
+	public final ReadOnlyRelationValue<DeductionSchemeDesign, AttributeDesign> defaultOfAttribute
+		= createReverseRelationValue(DeductionSchemeDesignEntity.defaultOfAttribute);
+
+	public AttributeDesign getDefaultOfAttribute() {
+		return defaultOfAttribute.get();
+	}
+
+	
 	public final ReadOnlyRelationValue<DeductionSchemeDesign, FormattedValueDesign> templatedText
 		= createReverseRelationValue(DeductionSchemeDesignEntity.templatedText);
 

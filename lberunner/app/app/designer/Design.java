@@ -49,6 +49,14 @@ public class Design
 	}
 
 	
+	public final ReadOnlyAttributeValue<Design, java.lang.String> javaName
+		= createReadOnlyAttributeValue(DesignEntity.javaName);
+	
+	public java.lang.String getJavaName() {
+		return javaName.get();
+	}
+
+	
 	public final AttributeValue<Design, java.lang.String> customization
 		= createAttributeValue(DesignEntity.customization);
 	

@@ -8,6 +8,7 @@ import app.designer.CastInstanceDeductionDesign;
 import app.designer.CompositePageFragmentDesign;
 import app.designer.ConstantStringDesign;
 import app.designer.ConstantTextDesign;
+import app.designer.DeductionDesign;
 import app.designer.DeductionSchemeDesign;
 import app.designer.DomainEntryDesign;
 import app.designer.EntityDesign;
@@ -154,6 +155,16 @@ public abstract class BootstrapperUtil {
 		selectedInstanceDeductionDesign.className.set(entity.getName());
 		scheme.deductions.add(selectedInstanceDeductionDesign);
 		scheme.setOutput(selectedInstanceDeductionDesign);
+		return scheme;
+	}
+	
+	protected static DeductionSchemeDesign createCustomDeduction(String customization, Class c) {
+		DeductionSchemeDesign scheme = new DeductionSchemeDesign(applicationDesign);
+		DeductionDesign customDeductionDesign = new DeductionDesign(applicationDesign);
+		customDeductionDesign.setCustomization(customization);
+		customDeductionDesign.className.set(c.getName());
+		scheme.deductions.add(customDeductionDesign);
+		scheme.setOutput(customDeductionDesign);
 		return scheme;
 	}
 	
