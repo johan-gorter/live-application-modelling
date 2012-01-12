@@ -64,6 +64,14 @@ public class Stand
 	}
 
 	
+	public final ReadOnlyRelationValue<Stand, Maand> beginstandVanMaand
+		= createReverseRelationValue(StandEntity.beginstandVanMaand);
+
+	public Maand getBeginstandVanMaand() {
+		return beginstandVanMaand.get();
+	}
+
+	
 	public final ReadOnlyRelationValue<Stand, Rit> eindstandVanRit
 		= createReverseRelationValue(StandEntity.eindstandVanRit);
 

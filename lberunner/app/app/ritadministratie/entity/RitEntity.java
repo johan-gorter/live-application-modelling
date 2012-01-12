@@ -18,7 +18,7 @@ public class RitEntity extends SimpleEntity {
 	// Deductions
 
 	private static Deduction<app.ritadministratie.Stand> createDeduction0() {
-		    Deduction<app.ritadministratie.Stand> d0 = new custom.ritadministratie.BeginstandDeductionCustomization();
+		    Deduction<app.ritadministratie.Stand> d0 = new custom.ritadministratie.RitBeginstandDeductionCustomization();
 		return d0;
 	}
 

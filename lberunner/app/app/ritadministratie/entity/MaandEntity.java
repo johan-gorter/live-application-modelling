@@ -16,6 +16,12 @@ public class MaandEntity extends SimpleEntity {
 	public static final MaandEntity INSTANCE = new MaandEntity();
 
 	// Deductions
+
+	private static Deduction<app.ritadministratie.Stand> createDeduction0() {
+		    Deduction<app.ritadministratie.Stand> d0 = new custom.ritadministratie.MaandBeginstandDeductionCustomization();
+		return d0;
+	}
+
 	
 	// Attributes
 	
@@ -53,6 +59,25 @@ public class MaandEntity extends SimpleEntity {
 			
 		};
 	
+	public static final Relation<Maand, Stand, Stand> beginstand
+		= new SimpleRelation<Maand, Stand, Stand>(
+			"beginstand", INSTANCE, StandEntity.INSTANCE, Stand.class, StandEntity.beginstandVanMaand
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<Maand, Stand> get(
+					Maand instance) {
+				return instance.beginstand;
+			}
+
+			private Deduction<Stand> RULE = createDeduction0();
+			@Override
+			public Deduction<Stand> getRule() {
+				return RULE;
+			}
+			
+		};
+	
 	// Reverse relations
 	
 	public static final Relation<Maand, Auto, Auto> auto
@@ -76,6 +101,7 @@ public class MaandEntity extends SimpleEntity {
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
 		dagen,
+		beginstand,
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 		auto,

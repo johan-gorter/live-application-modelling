@@ -53,6 +53,17 @@ public class Maand
 	public void setDagen(List<Dag> newValue) {
 		dagen.set(newValue);
 	}
+	
+	public final RelationValue<Maand, Stand> beginstand
+		= createRelationValue(MaandEntity.beginstand);
+		
+	public Stand getBeginstand() {
+		return beginstand.get();
+	}
+	
+	public void setBeginstand(Stand newValue) {
+		beginstand.set(newValue);
+	}
 
 	// Reverse relations
 	

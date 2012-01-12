@@ -48,12 +48,14 @@ public class RitAdministratieBootstrapper extends BootstrapperUtil {
 		RelationDesign dagRelation = createRelation(maand, "dagen", RelationType.OneToManyAggregation, "maand", dag);
 		RelationDesign opnameRelation = createRelation(dag, "ritten", RelationType.OneToManyAggregation, "dag", rit);
 		RelationDesign eindstandRelation = createRelation(rit, "eindstand", RelationType.OneToOneAggregation, "eindstandVanRit", stand);
-		RelationDesign beginstandRelation = createRelation(rit, "beginstand", RelationType.OneToZeroOrOne, "beginstandVanRit", stand);
+		RelationDesign ritBeginstandRelation = createRelation(rit, "beginstand", RelationType.OneToZeroOrOne, "beginstandVanRit", stand);
+		RelationDesign maandBeginstandRelation = createRelation(maand, "beginstand", RelationType.OneToZeroOrOne, "beginstandVanMaand", stand);
 		RelationDesign autoBeginstandRelation = createRelation(auto, "beginstand", RelationType.OneToOneAggregation, "beginstandVanAuto", stand);
 		RelationDesign ijkingenRelation = createRelation(jaar, "ijkingen", RelationType.OneToManyAggregation, "jaar", ijking);
 		
-		beginstandRelation.setReadOnly(true);
-		beginstandRelation.setRule(createCustomDeduction("custom.ritadministratie.BeginstandDeductionCustomization", Stand.class));
+		ritBeginstandRelation.setReadOnly(true);
+		ritBeginstandRelation.setRule(createCustomDeduction("custom.ritadministratie.RitBeginstandDeductionCustomization", Stand.class));
+		maandBeginstandRelation.setRule(createCustomDeduction("custom.ritadministratie.MaandBeginstandDeductionCustomization", Stand.class));
 		
 		return applicationDesign;
 	}

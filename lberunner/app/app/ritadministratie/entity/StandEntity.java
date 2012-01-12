@@ -61,6 +61,22 @@ public class StandEntity extends SimpleEntity {
 			}
 		};
 	
+	public static final Relation<Stand, Maand, Maand> beginstandVanMaand
+		= new SimpleRelation<Stand, Maand, Maand>(
+			"beginstandVanMaand", INSTANCE, StandEntity.INSTANCE, Maand.class, MaandEntity.beginstand
+		) {
+	
+			@Override
+			public ReadOnlyRelationValue<Stand, Maand> get(
+					Stand instance) {
+				return instance.beginstandVanMaand;
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+		};
+	
 	public static final Relation<Stand, Rit, Rit> eindstandVanRit
 		= new SimpleRelation<Stand, Rit, Rit>(
 			"eindstandVanRit", INSTANCE, StandEntity.INSTANCE, Rit.class, RitEntity.eindstand
@@ -101,6 +117,7 @@ public class StandEntity extends SimpleEntity {
 	};
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 		beginstandVanAuto,
+		beginstandVanMaand,
 		eindstandVanRit,
 		beginstandVanRit,
 	};

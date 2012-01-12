@@ -30,7 +30,7 @@ public class AutoCustomization extends Auto {
 			Date date = new Date(getJaar().getJaartal()-1900, maand.getMaandNr()-1, i+1);
 			if (date.getMonth()!=maand.getMaandNr()-1) break;
 			Dag dag = new Dag(getCase());
-			dag.setDagNr(i);
+			dag.setDagNr(i+1);
 			maand.dagen.add(dag);
 		}
 	}

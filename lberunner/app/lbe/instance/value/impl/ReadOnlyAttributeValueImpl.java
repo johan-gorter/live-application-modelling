@@ -29,6 +29,7 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, V extends Object> im
 		@Override
 		public void valueChanged(ReadOnlyAttributeValue valueHolder) {
 			basedOn = null;
+			cachedValue = null;
 			fireValueChanged();
 		}
 	};
