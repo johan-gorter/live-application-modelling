@@ -1,16 +1,11 @@
 package app.designer;
 
-import java.util.List;
+import org.instantlogic.core.CaseInstance;
+import org.instantlogic.core.Instance;
+import org.instantlogic.core.model.Entity;
+import org.instantlogic.core.value.RelationValue;
 
-import app.designer.*;
-import app.designer.entity.*;
-import lbe.instance.*;
-import lbe.instance.impl.*;
-import lbe.instance.value.*;
-import lbe.model.*;
-import lbe.model.impl.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
+import app.designer.entity.SharedFragmentDesignEntity;
 
 public class SharedFragmentDesign 
 	extends PageFragmentDesign 

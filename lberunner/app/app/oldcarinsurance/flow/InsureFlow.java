@@ -1,10 +1,11 @@
 package app.oldcarinsurance.flow;
 
-import lbe.model.Entity;
-import lbe.model.flow.Flow;
-import lbe.model.flow.FlowEdge;
-import lbe.model.flow.FlowNodeBase;
-import lbe.model.flow.FlowSource;
+import org.instantlogic.core.model.Entity;
+import org.instantlogic.interaction.flow.Flow;
+import org.instantlogic.interaction.flow.FlowEdge;
+import org.instantlogic.interaction.flow.FlowNodeBase;
+import org.instantlogic.interaction.flow.FlowSource;
+
 import app.oldcarinsurance.flow.insure.DriverPage;
 
 public class InsureFlow extends Flow {

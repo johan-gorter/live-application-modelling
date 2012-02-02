@@ -12,10 +12,10 @@ import lbe.engine.CaseManager;
 import lbe.engine.ChangeContext;
 import lbe.engine.PageCoordinates;
 import lbe.engine.PageElement;
-import lbe.instance.CaseInstance;
-import lbe.model.Application;
 
 import org.apache.log4j.Logger;
+import org.instantlogic.core.CaseInstance;
+import org.instantlogic.interaction.Application;
 
 import play.mvc.Controller;
 import play.mvc.With;

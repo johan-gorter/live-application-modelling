@@ -1,11 +1,11 @@
 package app.oldcarinsurance.button;
 
+import org.instantlogic.core.text.ConstantText;
+import org.instantlogic.core.text.Text;
+import org.instantlogic.interaction.flow.FlowEvent;
+import org.instantlogic.interaction.page.Button;
+
 import app.oldcarinsurance.event.NextEvent;
-import lbe.engine.RenderContext;
-import lbe.model.FlowEvent;
-import lbe.model.pageelement.Button;
-import lbe.model.pageelement.Text;
-import lbe.model.pageelement.impl.ConstantText;
 
 public class NextButton extends Button{
 

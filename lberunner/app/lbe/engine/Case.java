@@ -6,13 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import lbe.instance.CaseInstance;
-import lbe.instance.Instance;
-import lbe.model.Application;
-import lbe.model.flow.Flow;
-import lbe.model.flow.Page;
-
 import org.apache.log4j.Logger;
+import org.instantlogic.core.CaseInstance;
+import org.instantlogic.core.Instance;
+import org.instantlogic.interaction.Application;
+import org.instantlogic.interaction.flow.Flow;
+import org.instantlogic.interaction.flow.Page;
 
 import play.Play;
 import play.libs.F.Promise;

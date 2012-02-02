@@ -1,20 +1,16 @@
 package app.designer;
 
-import java.util.List;
+import org.instantlogic.core.CaseInstance;
+import org.instantlogic.core.Instance;
+import org.instantlogic.core.model.Entity;
+import org.instantlogic.core.value.AttributeValue;
+import org.instantlogic.core.value.ReadOnlyRelationValue;
 
-import app.designer.*;
-import app.designer.entity.*;
-import lbe.instance.*;
-import lbe.instance.impl.*;
-import lbe.instance.value.*;
-import lbe.model.*;
-import lbe.model.impl.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
+import app.designer.entity.PageFragmentDesignEntity;
 
 public class PageFragmentDesign 
 	extends Design 
-	implements Instance {
+	implements Instance<PageFragmentDesign> {
 
 	public PageFragmentDesign(CaseInstance caseInstance) {
 		this(caseInstance, 0);

@@ -9,9 +9,9 @@ import lbe.engine.ChangeContext;
 import lbe.engine.ChangeContext.FieldChange;
 import lbe.engine.PageCoordinates;
 import lbe.engine.PageElement;
-import lbe.model.Application;
-import lbe.model.flow.Page.PageRootElement;
 
+import org.instantlogic.interaction.Application;
+import org.instantlogic.interaction.flow.Page.PageRootElement;
 import org.junit.Test;
 
 import play.libs.F.Promise;

@@ -2,15 +2,16 @@ package app.ritadministratie;
 
 import java.util.List;
 
-import app.ritadministratie.*;
-import app.ritadministratie.entity.*;
-import lbe.instance.*;
-import lbe.instance.impl.*;
-import lbe.instance.value.*;
-import lbe.model.*;
-import lbe.model.impl.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
+import org.instantlogic.core.CaseInstance;
+import org.instantlogic.core.Instance;
+import org.instantlogic.core.impl.SimpleInstance;
+import org.instantlogic.core.model.Entity;
+import org.instantlogic.core.value.AttributeValue;
+import org.instantlogic.core.value.ReadOnlyRelationValue;
+import org.instantlogic.core.value.RelationValue;
+import org.instantlogic.core.value.RelationValues;
+
+import app.ritadministratie.entity.MaandEntity;
 
 public class Maand 
 	extends SimpleInstance 

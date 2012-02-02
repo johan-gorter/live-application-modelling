@@ -1,10 +1,11 @@
 package app.oldcarinsurance.flow.insure;
 
+import org.instantlogic.interaction.flow.Page;
+import org.instantlogic.interaction.page.CompositePageFragment;
+import org.instantlogic.interaction.page.PageFragment;
+
 import app.oldcarinsurance.button.NextButton;
 import app.oldcarinsurance.sharedPageFragment.DriverContainer;
-import lbe.model.flow.Page;
-import lbe.model.pageelement.CompositePageFragment;
-import lbe.model.pageelement.PageFragment;
 
 public class DriverPage extends Page {
 

@@ -1,14 +1,17 @@
 package app.generatortest;
 
-import java.util.*;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
-import app.generatortest.data.entity.*;
-import app.generatortest.data.instance.*;
-import app.generatortest.flow.*;
-import lbe.instance.CaseInstance;
-import lbe.model.Application;
-import lbe.model.Entity;
-import lbe.model.flow.Flow;
+import org.instantlogic.core.CaseInstance;
+import org.instantlogic.core.model.Entity;
+import org.instantlogic.interaction.Application;
+import org.instantlogic.interaction.flow.Flow;
+
+import app.generatortest.data.entity.CarinsuranceCaseEntity;
+import app.generatortest.data.entity.DriverEntity;
+import app.generatortest.data.instance.CarinsuranceCaseInstance;
+import app.generatortest.flow.InsureXFlow;
 
 public class GeneratorTestApplication extends Application {
 

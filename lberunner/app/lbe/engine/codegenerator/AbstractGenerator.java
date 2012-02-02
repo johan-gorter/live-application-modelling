@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import lbe.instance.Observations;
+import org.instantlogic.core.util.Observations;
+
 import play.Play;
 import app.designer.DeductionSchemeDesign;
 import app.designer.Design;
-import app.designer.TextDesign;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;

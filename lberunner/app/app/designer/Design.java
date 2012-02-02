@@ -1,31 +1,28 @@
 package app.designer;
 
-import java.util.List;
+import org.instantlogic.core.CaseInstance;
+import org.instantlogic.core.Instance;
+import org.instantlogic.core.impl.SimpleInstance;
+import org.instantlogic.core.model.Entity;
+import org.instantlogic.core.value.AttributeValue;
+import org.instantlogic.core.value.ReadOnlyAttributeValue;
 
-import app.designer.*;
-import app.designer.entity.*;
-import lbe.instance.*;
-import lbe.instance.impl.*;
-import lbe.instance.value.*;
-import lbe.model.*;
-import lbe.model.impl.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
+import app.designer.entity.DesignEntity;
 
 public class Design 
-	extends SimpleInstance 
-	implements Instance {
+	extends SimpleInstance<Design> 
+	implements Instance<Design> {
 
 	public Design(CaseInstance caseInstance) {
 		this(caseInstance, 0);
 	}
 	
 	public Design(CaseInstance caseInstance, long id) {
-		super(caseInstance, DesignEntity.INSTANCE, id);
+		super(caseInstance, id);
 	}
 	
 	protected Design(CaseInstance caseInstance, Entity model, long id) {
-		super(caseInstance, model, id);
+		super(caseInstance, id);
 	}
 
 	// Attributes
@@ -66,6 +63,11 @@ public class Design
 
 	public void setCustomization(java.lang.String newValue) {
 		customization.set(newValue);
+	}
+
+	@Override
+	public Entity<Design> getModel() {
+		return DesignEntity.INSTANCE;
 	}
 	
 	// Relations

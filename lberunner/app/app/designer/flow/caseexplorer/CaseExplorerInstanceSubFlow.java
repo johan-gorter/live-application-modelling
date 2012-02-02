@@ -1,7 +1,9 @@
 package app.designer.flow.caseexplorer;
 
-import app.designer.flow.*;
-import lbe.model.flow.*;
+import org.instantlogic.interaction.flow.Flow;
+import org.instantlogic.interaction.flow.SubFlow;
+
+import app.designer.flow.CaseExplorerInstanceFlow;
 
 public class CaseExplorerInstanceSubFlow extends SubFlow {
 

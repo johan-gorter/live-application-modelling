@@ -1,18 +1,28 @@
 package app.designer.entity;
 
-import java.util.List;
+import org.instantlogic.core.CaseInstance;
+import org.instantlogic.core.Instance;
+import org.instantlogic.core.model.Attribute;
+import org.instantlogic.core.model.Entity;
+import org.instantlogic.core.model.Relation;
+import org.instantlogic.core.model.impl.SimpleAttribute;
+import org.instantlogic.core.value.ReadOnlyAttributeValue;
 
-import app.designer.*;
-import lbe.instance.*;
-import lbe.instance.value.*;
-import lbe.model.*;
-import lbe.model.impl.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
+import app.designer.Design;
 
-public class DesignEntity extends SimpleEntity {
+public class DesignEntity extends Entity<Design> {
 
 	public static final DesignEntity INSTANCE = new DesignEntity();
+	
+	@Override
+	public String getName() {
+		return "Design";
+	}
+	
+	@Override
+	public Entity<?> extendsEntity() {
+		return null;
+	}
 	
 	// Attributes
 	
@@ -83,27 +93,23 @@ public class DesignEntity extends SimpleEntity {
 	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
 	};
 
-	private DesignEntity() {
-		super("Design");
-	}
-	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance, long id) {
+	public Design createInstance(CaseInstance caseInstance, long id) {
 		return new Design(caseInstance, id);
 	}
 	
 	@Override
-	public Attribute<? extends Instance, ? extends Object, ? extends Object>[] getLocalAttributes() {
+	public Attribute<Design, ? extends Object, ? extends Object>[] getLocalAttributes() {
 		return ATTRIBUTES;
 	}
 
 	@Override
-	public Relation<? extends Instance, ? extends Object, ? extends Instance>[] getLocalRelations() {
+	public Relation<Design, ? extends Object, ? extends Instance<?>>[] getLocalRelations() {
 		return RELATIONS;
 	}
 
 	@Override
-	public Relation<? extends Instance, ? extends Object, ? extends Instance>[] getLocalReverseRelations() {
+	public Relation<? extends Instance<?>, ? extends Object, Design>[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
 	}
 }

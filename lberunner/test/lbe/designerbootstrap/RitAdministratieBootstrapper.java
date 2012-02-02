@@ -38,6 +38,7 @@ public class RitAdministratieBootstrapper extends BootstrapperUtil {
 		AttributeDesign priveRit = createAttribute(rit, "priveRit", Boolean.class);
 		
 		AttributeDesign dagNr = createAttribute(dag, "dagNr", Integer.class);
+		AttributeDesign dagInWeekNr = createAttribute(dag, "dagInWeekNr", Integer.class);
 		AttributeDesign maandNr = createAttribute(maand, "maandNr", Integer.class);
 		AttributeDesign jaartal = createAttribute(jaar, "jaartal", Integer.class);
 		
@@ -55,6 +56,7 @@ public class RitAdministratieBootstrapper extends BootstrapperUtil {
 		
 		ritBeginstandRelation.setReadOnly(true);
 		ritBeginstandRelation.setRule(createCustomDeduction("custom.ritadministratie.RitBeginstandDeductionCustomization", Stand.class));
+		maandBeginstandRelation.setReadOnly(true);
 		maandBeginstandRelation.setRule(createCustomDeduction("custom.ritadministratie.MaandBeginstandDeductionCustomization", Stand.class));
 		
 		return applicationDesign;

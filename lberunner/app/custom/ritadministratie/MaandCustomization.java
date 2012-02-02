@@ -1,9 +1,8 @@
 package custom.ritadministratie;
 
+import org.instantlogic.core.CaseInstance;
+
 import app.ritadministratie.Maand;
-import lbe.instance.CaseInstance;
-import lbe.instance.Instance;
-import lbe.model.Entity;
 
 public class MaandCustomization extends Maand {
 

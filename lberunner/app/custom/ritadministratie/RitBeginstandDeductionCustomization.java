@@ -1,10 +1,11 @@
 package custom.ritadministratie;
 
 import java.util.List;
-import java.util.ListIterator;
 
-import lbe.engine.DeductionContext;
-import lbe.model.deduction.Deduction;
+
+import org.instantlogic.core.deduction.Deduction;
+import org.instantlogic.core.util.DeductionContext;
+
 import app.ritadministratie.Dag;
 import app.ritadministratie.Maand;
 import app.ritadministratie.Rit;

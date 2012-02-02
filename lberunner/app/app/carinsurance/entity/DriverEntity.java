@@ -2,13 +2,22 @@ package app.carinsurance.entity;
 
 import java.util.List;
 
-import app.carinsurance.*;
-import lbe.instance.*;
-import lbe.instance.value.*;
-import lbe.model.*;
-import lbe.model.impl.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
+import org.instantlogic.core.CaseInstance;
+import org.instantlogic.core.Instance;
+import org.instantlogic.core.model.Attribute;
+import org.instantlogic.core.model.DomainEntry;
+import org.instantlogic.core.model.Relation;
+import org.instantlogic.core.model.impl.SimpleAttribute;
+import org.instantlogic.core.model.impl.SimpleEntity;
+import org.instantlogic.core.model.impl.SimpleRelation;
+import org.instantlogic.core.text.ConstantText;
+import org.instantlogic.core.text.Text;
+import org.instantlogic.core.value.ReadOnlyAttributeValue;
+import org.instantlogic.core.value.ReadOnlyAttributeValues;
+import org.instantlogic.core.value.ReadOnlyRelationValue;
+
+import app.carinsurance.CarinsuranceCase;
+import app.carinsurance.Driver;
 
 public class DriverEntity extends SimpleEntity {
 

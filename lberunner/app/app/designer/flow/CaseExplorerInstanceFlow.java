@@ -1,11 +1,13 @@
 package app.designer.flow;
 
-import app.designer.entity.*;
-import app.designer.flow.*;
-import app.designer.event.*;
-import app.designer.flow.caseexplorerinstance.*;
-import lbe.model.Entity;
-import lbe.model.flow.*;
+import org.instantlogic.core.model.Entity;
+import org.instantlogic.interaction.flow.Flow;
+import org.instantlogic.interaction.flow.FlowEdge;
+import org.instantlogic.interaction.flow.FlowNodeBase;
+import org.instantlogic.interaction.flow.FlowSource;
+
+import app.designer.event.ExploreInstanceEvent;
+import app.designer.flow.caseexplorerinstance.InstancePage;
 
 public class CaseExplorerInstanceFlow extends Flow {
 

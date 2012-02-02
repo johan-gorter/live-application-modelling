@@ -2,7 +2,6 @@ package lbe.engine.codegenerator;
 
 import java.io.File;
 
-import app.designer.EntityDesign;
 import app.designer.PageFragmentHolderDesign;
 
 public class SharedPageFragmentGenerator extends AbstractGenerator {

@@ -2,13 +2,20 @@ package app.designer.entity;
 
 import java.util.List;
 
-import app.designer.*;
-import lbe.instance.*;
-import lbe.instance.value.*;
-import lbe.model.*;
-import lbe.model.impl.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
+import org.instantlogic.core.CaseInstance;
+import org.instantlogic.core.Instance;
+import org.instantlogic.core.model.Attribute;
+import org.instantlogic.core.model.Relation;
+import org.instantlogic.core.model.impl.SimpleEntity;
+import org.instantlogic.core.model.impl.SimpleRelation;
+import org.instantlogic.core.value.ReadOnlyRelationValue;
+import org.instantlogic.core.value.ReadOnlyRelationValues;
+
+import app.designer.AttributeDesign;
+import app.designer.DeductionDesign;
+import app.designer.DeductionSchemeDesign;
+import app.designer.FormattedValueDesign;
+import app.designer.SelectDesign;
 
 public class DeductionSchemeDesignEntity extends SimpleEntity {
 

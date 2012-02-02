@@ -3,14 +3,12 @@ package lbe.engine;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-import lbe.instance.CaseInstance;
-
 import org.apache.log4j.Logger;
+import org.instantlogic.core.CaseInstance;
 
 import play.Play;
 import play.Play.Mode;
 import play.classloading.ApplicationClassloaderState;
-import play.libs.F.Promise;
 
 public class CaseManager {
 

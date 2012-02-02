@@ -1,18 +1,21 @@
 package app.oldcarinsurance.entity;
 
+import java.util.SortedMap;
+import java.util.TreeMap;
+
+import org.instantlogic.core.CaseInstance;
+import org.instantlogic.core.Instance;
+import org.instantlogic.core.model.Attribute;
+import org.instantlogic.core.model.CaseEntity;
+import org.instantlogic.core.model.Entity;
+import org.instantlogic.core.model.Relation;
+import org.instantlogic.core.model.impl.SimpleRelation;
+import org.instantlogic.core.value.AttributeValue;
+
 import app.oldcarinsurance.CarinsuranceCase;
 import app.oldcarinsurance.Driver;
-import lbe.instance.CaseInstance;
-import lbe.instance.Instance;
-import lbe.instance.value.AttributeValue;
-import lbe.instance.value.RelationValue;
-import lbe.instance.value.impl.AttributeValueImpl;
-import lbe.model.Attribute;
-import lbe.model.Entity;
-import lbe.model.Relation;
-import lbe.model.impl.SimpleRelation;
 
-public class CarinsuranceCaseEntity extends Entity {
+public class CarinsuranceCaseEntity extends CaseEntity {
 
 	public static final CarinsuranceCaseEntity INSTANCE = new CarinsuranceCaseEntity();
 	
@@ -72,5 +75,22 @@ public class CarinsuranceCaseEntity extends Entity {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	private static final Entity[] entities = new Entity[] {
+		app.oldcarinsurance.entity.CarinsuranceCaseEntity.INSTANCE,
+		DriverEntity.INSTANCE
+	};
+
+	private static final SortedMap<String, Entity> entityMap = new TreeMap<String, Entity>();
+	static {
+		for (Entity entity:entities) {
+			entityMap.put(entity.getName(), entity);
+		}
+	}
+	@Override
+	public SortedMap<String, Entity> getEntities() {
+		return entityMap;
+	}
+	
 	
 }

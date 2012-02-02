@@ -1,14 +1,14 @@
 package lbe.engine;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-import lbe.instance.Instance;
-import lbe.instance.value.AttributeValue;
-import lbe.model.Attribute;
-import lbe.model.Entity;
-import lbe.model.FlowEvent;
+import org.instantlogic.core.model.Attribute;
+import org.instantlogic.core.model.Entity;
+import org.instantlogic.core.value.AttributeValue;
+
 
 public class ChangeContext extends RenderContext {
 
@@ -40,7 +40,20 @@ public class ChangeContext extends RenderContext {
 	}
 
 	public void setValue(Entity entity, Attribute attribute, Object value) {
-		((AttributeValue)getAttributeValue(entity, attribute)).set(attribute.parse(value));
+		((AttributeValue)getAttributeValue(entity, attribute)).set(parse(value, attribute));
+	}
+	
+	private static final DateFormat DATE_INTERNATIONAL = new SimpleDateFormat("dd/MM/yyyy");
+	
+	public Object parse(Object value, Attribute attribute) {
+		if (attribute.getDatatype()==Date.class && value instanceof String) {
+			try {
+				return DATE_INTERNATIONAL.parseObject((String)value);
+			} catch (ParseException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		return value;
 	}
 
 	public String getSubmit() {

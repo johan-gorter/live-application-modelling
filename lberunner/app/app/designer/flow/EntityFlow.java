@@ -1,11 +1,17 @@
 package app.designer.flow;
 
-import app.designer.entity.*;
-import app.designer.flow.*;
-import app.designer.event.*;
-import app.designer.flow.entity.*;
-import lbe.model.Entity;
-import lbe.model.flow.*;
+import org.instantlogic.core.model.Entity;
+import org.instantlogic.interaction.flow.Flow;
+import org.instantlogic.interaction.flow.FlowEdge;
+import org.instantlogic.interaction.flow.FlowNodeBase;
+import org.instantlogic.interaction.flow.FlowSource;
+
+import app.designer.entity.EntityDesignEntity;
+import app.designer.event.AttributeDetailsEvent;
+import app.designer.event.AttributeDetailsInEntityEvent;
+import app.designer.event.EntityDetailsEvent;
+import app.designer.flow.entity.AttributeSubFlow;
+import app.designer.flow.entity.EntityPage;
 
 public class EntityFlow extends Flow {
 

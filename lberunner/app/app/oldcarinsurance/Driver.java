@@ -2,22 +2,18 @@ package app.oldcarinsurance;
 
 import java.util.Date;
 
+import org.instantlogic.core.CaseInstance;
+import org.instantlogic.core.impl.SimpleInstance;
+import org.instantlogic.core.value.AttributeValue;
+import org.instantlogic.core.value.AttributeValues;
+import org.instantlogic.core.value.ReadOnlyAttributeValue;
+import org.instantlogic.core.value.ReadOnlyRelationValue;
+import org.instantlogic.core.value.impl.AttributeValueImpl;
+import org.instantlogic.core.value.impl.AttributeValuesImpl;
+import org.instantlogic.core.value.impl.ReadOnlyAttributeValueImpl;
+
 import app.oldcarinsurance.entity.DriverEntity;
 
-import lbe.instance.CaseInstance;
-import lbe.instance.Instance;
-import lbe.instance.impl.SimpleInstance;
-import lbe.instance.value.AttributeValue;
-import lbe.instance.value.AttributeValues;
-import lbe.instance.value.ReadOnlyAttributeValue;
-import lbe.instance.value.ReadOnlyRelationValue;
-import lbe.instance.value.RelationValue;
-import lbe.instance.value.impl.AttributeValueImpl;
-import lbe.instance.value.impl.AttributeValuesImpl;
-import lbe.instance.value.impl.ReadOnlyAttributeValueImpl;
-import lbe.instance.value.impl.RelationValueImpl;
-import lbe.model.Entity;
-import lbe.model.Relation;
 
 public class Driver extends SimpleInstance {
 

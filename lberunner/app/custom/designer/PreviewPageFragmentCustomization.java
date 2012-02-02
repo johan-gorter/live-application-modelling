@@ -1,5 +1,10 @@
 package custom.designer;
 
+import lbe.engine.PageElement;
+import lbe.engine.RenderContext;
+
+import org.instantlogic.interaction.page.PageFragment;
+
 import app.designer.ButtonDesign;
 import app.designer.ConstantTextDesign;
 import app.designer.FieldDesign;
@@ -7,11 +12,6 @@ import app.designer.HeaderDesign;
 import app.designer.PageFragmentDesign;
 import app.designer.TextDesign;
 import app.designer.entity.PageFragmentDesignEntity;
-import lbe.engine.PageElement;
-import lbe.engine.RenderContext;
-import lbe.instance.Instance;
-import lbe.model.pageelement.PageFragment;
-import lbe.model.pageelement.impl.ConstantText;
 
 public class PreviewPageFragmentCustomization extends PageFragment {
 

@@ -1,7 +1,8 @@
 package app.oldcarinsurance.event;
 
-import lbe.model.Entity;
-import lbe.model.impl.SimpleFlowEvent;
+import org.instantlogic.core.model.Entity;
+import org.instantlogic.interaction.flow.impl.SimpleFlowEvent;
+
 
 public class NextEvent extends SimpleFlowEvent {
 

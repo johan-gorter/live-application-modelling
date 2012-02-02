@@ -2,15 +2,15 @@ package app.carinsurance;
 
 import java.util.List;
 
-import app.carinsurance.*;
-import app.carinsurance.entity.*;
-import lbe.instance.*;
-import lbe.instance.impl.*;
-import lbe.instance.value.*;
-import lbe.model.*;
-import lbe.model.impl.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
+import org.instantlogic.core.CaseInstance;
+import org.instantlogic.core.Instance;
+import org.instantlogic.core.impl.SimpleInstance;
+import org.instantlogic.core.model.Entity;
+import org.instantlogic.core.value.AttributeValue;
+import org.instantlogic.core.value.AttributeValues;
+import org.instantlogic.core.value.ReadOnlyRelationValue;
+
+import app.carinsurance.entity.DriverEntity;
 
 public class Driver 
 	extends SimpleInstance 

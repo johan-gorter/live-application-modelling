@@ -1,13 +1,13 @@
 package lbe.engine;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import lbe.engine.PageCoordinates.Coordinate;
-import lbe.instance.Instance;
-import lbe.model.Entity;
-import lbe.model.flow.Flow;
-import lbe.model.flow.FlowNodeBase;
+
+import org.instantlogic.core.Instance;
+import org.instantlogic.core.util.AbstractDeductionContext;
+import org.instantlogic.interaction.flow.Flow;
+import org.instantlogic.interaction.flow.FlowNodeBase;
 
 public class FlowStack extends AbstractDeductionContext {
 	

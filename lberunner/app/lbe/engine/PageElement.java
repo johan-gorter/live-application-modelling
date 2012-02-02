@@ -1,7 +1,5 @@
 package lbe.engine;
 
-import lbe.model.pageelement.Text;
-
 import com.google.gson.annotations.SerializedName;
 
 public class PageElement {

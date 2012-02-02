@@ -1,15 +1,21 @@
 package app.carinsurance.flow.insure;
 
-import app.carinsurance.*;
-import app.carinsurance.event.*;
-import app.carinsurance.flow.*;
-import app.carinsurance.entity.*;
-import app.carinsurance.sharedpagefragment.*;
-import lbe.instance.*;
-import lbe.model.flow.*;
-import lbe.model.deduction.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
+import org.instantlogic.core.deduction.AttributeDeduction;
+import org.instantlogic.core.deduction.Deduction;
+import org.instantlogic.core.deduction.SelectedInstanceDeduction;
+import org.instantlogic.core.text.ConstantText;
+import org.instantlogic.interaction.flow.Page;
+import org.instantlogic.interaction.page.CompositePageFragment;
+import org.instantlogic.interaction.page.PageFragment;
+import org.instantlogic.interaction.page.impl.SimpleButton;
+import org.instantlogic.interaction.page.impl.SimpleCompositePageFragment;
+import org.instantlogic.interaction.page.impl.SimpleField;
+
+import app.carinsurance.CarinsuranceCase;
+import app.carinsurance.Driver;
+import app.carinsurance.entity.CarinsuranceCaseEntity;
+import app.carinsurance.entity.DriverEntity;
+import app.carinsurance.event.NextEvent;
 
 public class DriverPage extends Page {
 

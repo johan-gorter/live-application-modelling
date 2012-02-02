@@ -1,22 +1,10 @@
 package lbe.engine.codegenerator;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
-import lbe.instance.Observations;
-import app.designer.ButtonDesign;
-import app.designer.CompositePageFragmentDesign;
-import app.designer.ConstantTextDesign;
-import app.designer.DeductionSchemeDesign;
-import app.designer.FieldDesign;
-import app.designer.HeaderDesign;
-import app.designer.LinkDesign;
-import app.designer.PageCompositionDesign;
+import org.instantlogic.core.util.Observations;
+
 import app.designer.PageDesign;
-import app.designer.PageFragmentDesign;
-import app.designer.SelectDesign;
-import app.designer.TextDesign;
 
 public class PageGenerator extends AbstractGenerator {
 

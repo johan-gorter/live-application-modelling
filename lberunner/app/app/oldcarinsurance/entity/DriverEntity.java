@@ -4,28 +4,28 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import org.instantlogic.core.CaseInstance;
+import org.instantlogic.core.Instance;
+import org.instantlogic.core.deduction.AttributeDeduction;
+import org.instantlogic.core.deduction.ConstantDeduction;
+import org.instantlogic.core.deduction.Deduction;
+import org.instantlogic.core.deduction.FirstDeduction;
+import org.instantlogic.core.deduction.SelectedInstanceDeduction;
+import org.instantlogic.core.model.Attribute;
+import org.instantlogic.core.model.DomainEntry;
+import org.instantlogic.core.model.Entity;
+import org.instantlogic.core.model.Relation;
+import org.instantlogic.core.model.impl.SimpleAttribute;
+import org.instantlogic.core.model.impl.SimpleRelation;
+import org.instantlogic.core.text.ConstantText;
+import org.instantlogic.core.text.Text;
+import org.instantlogic.core.value.AttributeValue;
+import org.instantlogic.core.value.ReadOnlyAttributeValue;
+import org.instantlogic.core.value.ReadOnlyRelationValue;
+
 import app.oldcarinsurance.CarinsuranceCase;
 import app.oldcarinsurance.Driver;
 
-import lbe.instance.CaseInstance;
-import lbe.instance.Instance;
-import lbe.instance.value.AttributeValue;
-import lbe.instance.value.ReadOnlyAttributeValue;
-import lbe.instance.value.ReadOnlyRelationValue;
-import lbe.instance.value.impl.AttributeValueImpl;
-import lbe.model.Attribute;
-import lbe.model.DomainEntry;
-import lbe.model.Entity;
-import lbe.model.Relation;
-import lbe.model.deduction.AttributeDeduction;
-import lbe.model.deduction.ConstantDeduction;
-import lbe.model.deduction.Deduction;
-import lbe.model.deduction.FirstDeduction;
-import lbe.model.deduction.SelectedInstanceDeduction;
-import lbe.model.impl.SimpleAttribute;
-import lbe.model.impl.SimpleRelation;
-import lbe.model.pageelement.Text;
-import lbe.model.pageelement.impl.ConstantText;
 
 
 public class DriverEntity extends Entity {

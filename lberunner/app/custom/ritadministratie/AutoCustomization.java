@@ -2,12 +2,11 @@ package custom.ritadministratie;
 
 import java.util.Date;
 
+import org.instantlogic.core.CaseInstance;
+
 import app.ritadministratie.Auto;
 import app.ritadministratie.Dag;
 import app.ritadministratie.Maand;
-import lbe.instance.CaseInstance;
-import lbe.instance.Instance;
-import lbe.model.Entity;
 
 public class AutoCustomization extends Auto {
 

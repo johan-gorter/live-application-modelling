@@ -1,15 +1,12 @@
 package app.ritadministratie.entity;
 
-import java.util.List;
+import org.instantlogic.core.CaseInstance;
+import org.instantlogic.core.Instance;
+import org.instantlogic.core.model.Attribute;
+import org.instantlogic.core.model.Relation;
+import org.instantlogic.core.model.impl.SimpleEntity;
 
-import app.ritadministratie.*;
-import lbe.instance.*;
-import lbe.instance.value.*;
-import lbe.model.*;
-import lbe.model.impl.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
-import lbe.model.deduction.*;
+import app.ritadministratie.Traject;
 
 public class TrajectEntity extends SimpleEntity {
 

@@ -3,8 +3,10 @@ package custom.designer.caseexplorer;
 import lbe.engine.FlowContext;
 import lbe.engine.FlowStack;
 import lbe.engine.PageCoordinates.Coordinate;
-import lbe.instance.CaseInstance;
-import lbe.instance.Instance;
+
+import org.instantlogic.core.CaseInstance;
+import org.instantlogic.core.Instance;
+
 import app.designer.flow.CaseExplorerInstanceFlow;
 
 /**
