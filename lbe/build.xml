@@ -1,0 +1,48 @@
+<project name="lbe" default="rebuild" basedir=".">
+    <description>
+        simple example build file
+    </description>
+  <!-- set global properties for this build -->
+
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="dist"  location="../lberunner/lib"/>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile" depends="init" description="compile the source " >
+    <javac srcdir="${src}" destdir="${build}" debug="true" debuglevel="lines,vars,source">
+		<classpath>
+			<fileset dir="d:\java\play-1.2.1\framework\">
+			        <include name="*.jar"/>
+			</fileset>		
+			<fileset dir="d:\java\play-1.2.1\framework\lib\">
+			        <include name="*.jar"/>
+			</fileset>		
+    	</classpath>    
+    </javac>
+  </target>
+
+  <target name="jar" depends="compile"
+        description="generate the distribution" >
+    <mkdir dir="${dist}"/>
+
+    <jar jarfile="${dist}/lbe.jar" basedir="${build}"/>
+  </target>
+
+  <target name="clean"
+        description="clean up" >
+    <delete dir="${build}"/>
+  </target>
+
+  <target name="rebuild" depends="clean,jar"
+        description="regenerate the distribution">
+  </target>
+	
+	
+</project>

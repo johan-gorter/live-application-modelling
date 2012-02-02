@@ -1,0 +1,20 @@
+RitAdministratie goed
+globale listeners
+
+code generatie zonder imports
+- 2 constructors (met en zonder DesirializedInstance)
+- extra generics (ook voor caseinstance)
+
+
+New design met tabellen
+Page designer flow
+.get(), .set() verwijderen, inheritance van attributen mogelijk maken
+CaseExplorer dynamisch
+Builder vanuit applicatie laten designen
+Demo diversen
+Play -> ASM
+gebruikers elkaar laten zien
+
+
+Nadenken:
+- Alle instances zijn caseinstances?

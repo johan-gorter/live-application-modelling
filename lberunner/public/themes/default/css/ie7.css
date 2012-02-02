@@ -1,0 +1,17 @@
+/* IE7 specific Css  */
+div.aq-page-content { width: 948px; }
+div.aq-container { width: 946px; }
+div.aq-container-caption { width: 945px!important; }
+div.aq-field { height: 100%; }
+div.aq-field div.aq-required { margin-left: -240px; position: static; margin-top: 7px; }
+div.aq-field div.aq-answer input.aq-checkbox { margin-top: 0px; }
+div.aq-field div.aq-answer div.aq-answer-holder ul { padding-top: 0px; }
+div.bd div.aq-explain-body { margin-left: 1px; }
+div.aq-breadcrumbcontainer ul li.aq-breadcrumb-disabled { width: 128px; margin-left: -26px; }
+div.aq-breadcrumbcontainer ul li.first { width: 141px; margin-left: -13px; }
+div.aq-breadcrumbcontainer ul li.aq-breadcrumb-caption { left: 106px; }
+div.aq-breadcrumbcontainer ul li.first-caption { left: 119px; }
+div.aq-alertcontainer { width: 320px; left: 0px; position: static; }
+/* xslt specific */
+div.aq-alertcontainer-xslt { position: static; z-index: 0; }
+div.aq-breadcrumbcontainer ul li.aq-breadcrumb-disabled-xslt { width: 141px; margin-left: -26px; }

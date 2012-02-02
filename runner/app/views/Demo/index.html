@@ -1,0 +1,22 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<h1>Hello world</h1>
+
+<p>Test</p>
+<script type="text/javascript">
+
+var initAction = #{jsAction @init() /}
+var updateAction = #{jsAction @update() /}
+
+function updateMe() {
+	$('#result').load(updateAction(), null, updateMe);
+}
+
+$(document).ready(function() {
+	$('#result').load(initAction(), null, updateMe);
+})
+
+</script>
+
+<div id="result">One moment...</div>

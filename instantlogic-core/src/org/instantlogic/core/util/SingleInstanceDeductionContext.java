@@ -1,0 +1,32 @@
+package org.instantlogic.core.util;
+
+import java.util.List;
+
+
+import org.instantlogic.core.Instance;
+import org.instantlogic.core.model.Entity;
+
+
+public class SingleInstanceDeductionContext extends DeductionContext {
+
+	private final Instance<?> instance;
+	
+	public SingleInstanceDeductionContext(Instance<?> instance) {
+		this.instance = instance;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <I extends Instance<I>> I getSelectedInstance(Entity<I> entity) {
+		if (instance.getModel()==entity) {
+			return (I)instance;
+		}
+		throw new RuntimeException("No active instance of entity "+entity.getName());
+	}
+
+	@Override
+	protected void addSelectedInstances(List<Instance<?>> result) {
+		result.add(instance);
+	}
+
+}
