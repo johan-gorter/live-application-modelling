@@ -1,6 +1,6 @@
 package app.generatortest.event;
 
-import org.instantlogic.core.model.Entity;
+import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.interaction.flow.impl.SimpleFlowEvent;
 
 public class NextEvent extends SimpleFlowEvent {

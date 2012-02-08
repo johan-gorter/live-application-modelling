@@ -2,7 +2,7 @@ package custom.ritadministratie;
 
 import java.util.Date;
 
-import org.instantlogic.core.CaseInstance;
+import org.instantlogic.fabric.CaseInstance;
 
 import app.ritadministratie.Auto;
 import app.ritadministratie.Dag;

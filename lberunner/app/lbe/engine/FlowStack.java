@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import lbe.engine.PageCoordinates.Coordinate;
 
-import org.instantlogic.core.Instance;
-import org.instantlogic.core.util.AbstractDeductionContext;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.util.AbstractDeductionContext;
 import org.instantlogic.interaction.flow.Flow;
 import org.instantlogic.interaction.flow.FlowNodeBase;
 

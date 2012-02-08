@@ -2,15 +2,15 @@ package app.oldcarinsurance;
 
 import java.util.Date;
 
-import org.instantlogic.core.CaseInstance;
-import org.instantlogic.core.impl.SimpleInstance;
-import org.instantlogic.core.value.AttributeValue;
-import org.instantlogic.core.value.AttributeValues;
-import org.instantlogic.core.value.ReadOnlyAttributeValue;
-import org.instantlogic.core.value.ReadOnlyRelationValue;
-import org.instantlogic.core.value.impl.AttributeValueImpl;
-import org.instantlogic.core.value.impl.AttributeValuesImpl;
-import org.instantlogic.core.value.impl.ReadOnlyAttributeValueImpl;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.impl.SimpleInstance;
+import org.instantlogic.fabric.value.AttributeValue;
+import org.instantlogic.fabric.value.AttributeValues;
+import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
+import org.instantlogic.fabric.value.ReadOnlyRelationValue;
+import org.instantlogic.fabric.value.impl.AttributeValueImpl;
+import org.instantlogic.fabric.value.impl.AttributeValuesImpl;
+import org.instantlogic.fabric.value.impl.ReadOnlyAttributeValueImpl;
 
 import app.oldcarinsurance.entity.DriverEntity;
 

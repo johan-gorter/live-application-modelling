@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
-import org.instantlogic.core.CaseInstance;
-import org.instantlogic.core.Instance;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.Instance;
 import org.instantlogic.interaction.Application;
 import org.instantlogic.interaction.flow.Flow;
 import org.instantlogic.interaction.flow.Page;

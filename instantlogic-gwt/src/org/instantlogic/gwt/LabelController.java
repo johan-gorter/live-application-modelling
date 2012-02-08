@@ -1,7 +1,7 @@
 package org.instantlogic.gwt;
 
-import org.instantlogic.core.util.ValueAndLevel;
-import org.instantlogic.core.value.ReadOnlyAttributeValue;
+import org.instantlogic.fabric.util.ValueAndLevel;
+import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
 
 import com.google.gwt.user.client.ui.Label;
 

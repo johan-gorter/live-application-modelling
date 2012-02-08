@@ -1,6 +1,6 @@
 package app.designer.event;
 
-import org.instantlogic.core.model.Entity;
+import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.interaction.flow.impl.SimpleFlowEvent;
 
 import app.designer.entity.FlowNodeBaseDesignEntity;

@@ -2,14 +2,14 @@ package app.designer.entity;
 
 import java.util.List;
 
-import org.instantlogic.core.CaseInstance;
-import org.instantlogic.core.Instance;
-import org.instantlogic.core.model.Attribute;
-import org.instantlogic.core.model.Entity;
-import org.instantlogic.core.model.Relation;
-import org.instantlogic.core.model.impl.SimpleEntity;
-import org.instantlogic.core.model.impl.SimpleRelation;
-import org.instantlogic.core.value.ReadOnlyRelationValues;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.model.Attribute;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.model.Relation;
+import org.instantlogic.fabric.model.impl.SimpleEntity;
+import org.instantlogic.fabric.model.impl.SimpleRelation;
+import org.instantlogic.fabric.value.ReadOnlyRelationValues;
 
 import app.designer.StringProducerDesign;
 import app.designer.TemplatedTextDesign;

@@ -2,10 +2,10 @@ package lbe.engine;
 
 import java.util.List;
 
-import org.instantlogic.core.CaseInstance;
-import org.instantlogic.core.Instance;
-import org.instantlogic.core.model.Entity;
-import org.instantlogic.core.util.DeductionContext;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.util.DeductionContext;
 import org.instantlogic.interaction.flow.Flow;
 import org.instantlogic.interaction.flow.FlowNodeBase;
 import org.instantlogic.interaction.flow.Page;

@@ -1,8 +1,8 @@
 package org.instantlogic.server;
 
 import org.instantlogic.client.GreetingService;
-import org.instantlogic.core.impl.SimpleCaseInstance;
-import org.instantlogic.core.model.CaseEntity;
+import org.instantlogic.fabric.impl.SimpleCaseInstance;
+import org.instantlogic.fabric.model.CaseEntity;
 import org.instantlogic.shared.FieldVerifier;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;

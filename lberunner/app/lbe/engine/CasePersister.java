@@ -10,8 +10,8 @@ import java.util.Random;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.log4j.Logger;
-import org.instantlogic.core.CaseInstance;
-import org.instantlogic.core.Instance;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.Instance;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

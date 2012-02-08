@@ -5,9 +5,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.instantlogic.core.model.Attribute;
-import org.instantlogic.core.model.Entity;
-import org.instantlogic.core.value.AttributeValue;
+import org.instantlogic.fabric.model.Attribute;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.value.AttributeValue;
 
 
 public class ChangeContext extends RenderContext {

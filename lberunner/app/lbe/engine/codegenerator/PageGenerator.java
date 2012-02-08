@@ -2,7 +2,7 @@ package lbe.engine.codegenerator;
 
 import java.io.File;
 
-import org.instantlogic.core.util.Observations;
+import org.instantlogic.fabric.util.Observations;
 
 import app.designer.PageDesign;
 

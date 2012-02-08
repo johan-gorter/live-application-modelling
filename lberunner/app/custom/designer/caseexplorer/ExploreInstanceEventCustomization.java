@@ -3,7 +3,7 @@ package custom.designer.caseexplorer;
 import lbe.engine.ChangeContext;
 import lbe.engine.FlowEventOccurrence;
 
-import org.instantlogic.core.Instance;
+import org.instantlogic.fabric.Instance;
 
 import app.designer.event.ExploreInstanceEvent;
 

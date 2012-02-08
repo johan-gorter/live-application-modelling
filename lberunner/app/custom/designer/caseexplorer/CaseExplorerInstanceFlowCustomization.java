@@ -4,8 +4,8 @@ import lbe.engine.FlowContext;
 import lbe.engine.FlowStack;
 import lbe.engine.PageCoordinates.Coordinate;
 
-import org.instantlogic.core.CaseInstance;
-import org.instantlogic.core.Instance;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.Instance;
 
 import app.designer.flow.CaseExplorerInstanceFlow;
 

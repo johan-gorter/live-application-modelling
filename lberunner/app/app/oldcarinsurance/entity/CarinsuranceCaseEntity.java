@@ -3,14 +3,14 @@ package app.oldcarinsurance.entity;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import org.instantlogic.core.CaseInstance;
-import org.instantlogic.core.Instance;
-import org.instantlogic.core.model.Attribute;
-import org.instantlogic.core.model.CaseEntity;
-import org.instantlogic.core.model.Entity;
-import org.instantlogic.core.model.Relation;
-import org.instantlogic.core.model.impl.SimpleRelation;
-import org.instantlogic.core.value.AttributeValue;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.model.Attribute;
+import org.instantlogic.fabric.model.CaseEntity;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.model.Relation;
+import org.instantlogic.fabric.model.impl.SimpleRelation;
+import org.instantlogic.fabric.value.AttributeValue;
 
 import app.oldcarinsurance.CarinsuranceCase;
 import app.oldcarinsurance.Driver;

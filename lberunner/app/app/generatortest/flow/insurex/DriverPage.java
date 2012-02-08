@@ -1,6 +1,6 @@
 package app.generatortest.flow.insurex;
 
-import org.instantlogic.core.text.ConstantText;
+import org.instantlogic.fabric.text.ConstantText;
 import org.instantlogic.interaction.flow.Page;
 import org.instantlogic.interaction.page.CompositePageFragment;
 import org.instantlogic.interaction.page.PageFragment;

@@ -3,8 +3,8 @@ package app.carinsurance;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import org.instantlogic.core.CaseInstance;
-import org.instantlogic.core.model.Entity;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.interaction.Application;
 import org.instantlogic.interaction.flow.Flow;
 

@@ -3,7 +3,7 @@ package custom.designer;
 import lbe.engine.FlowContext;
 import lbe.engine.FlowEventOccurrence;
 
-import org.instantlogic.core.CaseInstance;
+import org.instantlogic.fabric.CaseInstance;
 
 import app.designer.AttributeDeductionDesign;
 import app.designer.AttributeDesign;
