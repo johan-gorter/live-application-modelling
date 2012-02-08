@@ -1,8 +1,8 @@
 package org.instantlogic.gwt;
 
-import org.instantlogic.core.util.ValueChangeEvent;
-import org.instantlogic.core.util.ValueChangeListener;
-import org.instantlogic.core.value.ReadOnlyAttributeValue;
+import org.instantlogic.fabric.util.ValueChangeEvent;
+import org.instantlogic.fabric.util.ValueChangeListener;
+import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
 
 import com.google.gwt.user.client.ui.Widget;
 

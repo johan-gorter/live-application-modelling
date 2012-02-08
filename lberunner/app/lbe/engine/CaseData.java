@@ -1,6 +1,6 @@
 package lbe.engine;
 
-import org.instantlogic.core.CaseInstance;
+import org.instantlogic.fabric.CaseInstance;
 
 
 /**

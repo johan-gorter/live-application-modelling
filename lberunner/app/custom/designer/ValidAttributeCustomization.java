@@ -1,8 +1,8 @@
 package custom.designer;
 
-import org.instantlogic.core.deduction.Deduction;
-import org.instantlogic.core.model.Entity;
-import org.instantlogic.core.model.impl.SimpleAttribute;
+import org.instantlogic.fabric.deduction.Deduction;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.model.impl.SimpleAttribute;
 
 import app.designer.Design;
 

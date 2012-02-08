@@ -3,8 +3,8 @@ package custom.ritadministratie;
 import java.util.List;
 
 
-import org.instantlogic.core.deduction.Deduction;
-import org.instantlogic.core.util.DeductionContext;
+import org.instantlogic.fabric.deduction.Deduction;
+import org.instantlogic.fabric.util.DeductionContext;
 
 import app.ritadministratie.Dag;
 import app.ritadministratie.Maand;

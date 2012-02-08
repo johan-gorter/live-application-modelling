@@ -14,7 +14,7 @@ import lbe.engine.PageCoordinates;
 import lbe.engine.PageElement;
 
 import org.apache.log4j.Logger;
-import org.instantlogic.core.CaseInstance;
+import org.instantlogic.fabric.CaseInstance;
 import org.instantlogic.interaction.Application;
 
 import play.mvc.Controller;

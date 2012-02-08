@@ -3,7 +3,7 @@ package lbe.engine;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.instantlogic.core.util.AbstractDeductionContext;
+import org.instantlogic.fabric.util.AbstractDeductionContext;
 
 
 public class RenderContext extends AbstractDeductionContext{

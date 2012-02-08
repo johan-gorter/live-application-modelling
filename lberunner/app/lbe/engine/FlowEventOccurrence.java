@@ -1,6 +1,6 @@
 package lbe.engine;
 
-import org.instantlogic.core.Instance;
+import org.instantlogic.fabric.Instance;
 import org.instantlogic.interaction.flow.FlowEvent;
 
 

@@ -4,7 +4,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.log4j.Logger;
-import org.instantlogic.core.CaseInstance;
+import org.instantlogic.fabric.CaseInstance;
 
 import play.Play;
 import play.Play.Mode;

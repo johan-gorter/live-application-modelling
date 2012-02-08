@@ -2,12 +2,12 @@ package app.designer;
 
 import java.util.List;
 
-import org.instantlogic.core.CaseInstance;
-import org.instantlogic.core.Instance;
-import org.instantlogic.core.model.Entity;
-import org.instantlogic.core.value.ReadOnlyRelationValue;
-import org.instantlogic.core.value.ReadOnlyRelationValues;
-import org.instantlogic.core.value.RelationValue;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.value.ReadOnlyRelationValue;
+import org.instantlogic.fabric.value.ReadOnlyRelationValues;
+import org.instantlogic.fabric.value.RelationValue;
 
 import app.designer.entity.PageFragmentHolderDesignEntity;
 

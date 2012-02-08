@@ -1,9 +1,9 @@
 package app.designer;
 
-import org.instantlogic.core.CaseInstance;
-import org.instantlogic.core.Instance;
-import org.instantlogic.core.model.Entity;
-import org.instantlogic.core.value.AttributeValue;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.value.AttributeValue;
 
 import app.designer.entity.ConstantStringDesignEntity;
 

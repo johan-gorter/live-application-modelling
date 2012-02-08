@@ -8,15 +8,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.instantlogic.core.CaseInstance;
-import org.instantlogic.core.Instance;
-import org.instantlogic.core.model.Attribute;
-import org.instantlogic.core.model.Entity;
-import org.instantlogic.core.model.Relation;
-import org.instantlogic.core.value.AttributeValue;
-import org.instantlogic.core.value.AttributeValues;
-import org.instantlogic.core.value.RelationValue;
-import org.instantlogic.core.value.RelationValues;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.model.Attribute;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.model.Relation;
+import org.instantlogic.fabric.value.AttributeValue;
+import org.instantlogic.fabric.value.AttributeValues;
+import org.instantlogic.fabric.value.RelationValue;
+import org.instantlogic.fabric.value.RelationValues;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;

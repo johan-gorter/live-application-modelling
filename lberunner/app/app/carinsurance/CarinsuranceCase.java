@@ -1,8 +1,8 @@
 package app.carinsurance;
 
-import org.instantlogic.core.Instance;
-import org.instantlogic.core.impl.SimpleCaseInstance;
-import org.instantlogic.core.value.RelationValue;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.impl.SimpleCaseInstance;
+import org.instantlogic.fabric.value.RelationValue;
 
 import app.carinsurance.entity.CarinsuranceCaseEntity;
 

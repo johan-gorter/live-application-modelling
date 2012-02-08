@@ -1,6 +1,6 @@
 package app.generatortest.flow;
 
-import org.instantlogic.core.model.Entity;
+import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.interaction.flow.Flow;
 import org.instantlogic.interaction.flow.FlowEdge;
 import org.instantlogic.interaction.flow.FlowNodeBase;

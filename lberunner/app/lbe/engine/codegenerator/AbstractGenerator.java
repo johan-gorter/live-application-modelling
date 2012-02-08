@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.instantlogic.core.util.Observations;
+import org.instantlogic.fabric.util.Observations;
 
 import play.Play;
 import app.designer.DeductionSchemeDesign;

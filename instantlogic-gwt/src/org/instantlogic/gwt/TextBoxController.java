@@ -1,6 +1,6 @@
 package org.instantlogic.gwt;
 
-import org.instantlogic.core.value.AttributeValue;
+import org.instantlogic.fabric.value.AttributeValue;
 
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;

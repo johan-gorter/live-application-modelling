@@ -2,13 +2,13 @@ package app.ritadministratie;
 
 import java.util.List;
 
-import org.instantlogic.core.CaseInstance;
-import org.instantlogic.core.Instance;
-import org.instantlogic.core.impl.SimpleInstance;
-import org.instantlogic.core.model.Entity;
-import org.instantlogic.core.value.AttributeValue;
-import org.instantlogic.core.value.ReadOnlyRelationValue;
-import org.instantlogic.core.value.RelationValues;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.impl.SimpleInstance;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.value.AttributeValue;
+import org.instantlogic.fabric.value.ReadOnlyRelationValue;
+import org.instantlogic.fabric.value.RelationValues;
 
 import app.ritadministratie.entity.DagEntity;
 

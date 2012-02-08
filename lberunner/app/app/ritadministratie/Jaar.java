@@ -2,11 +2,11 @@ package app.ritadministratie;
 
 import java.util.List;
 
-import org.instantlogic.core.Instance;
-import org.instantlogic.core.impl.SimpleCaseInstance;
-import org.instantlogic.core.model.CaseEntity;
-import org.instantlogic.core.value.AttributeValue;
-import org.instantlogic.core.value.RelationValues;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.impl.SimpleCaseInstance;
+import org.instantlogic.fabric.model.CaseEntity;
+import org.instantlogic.fabric.value.AttributeValue;
+import org.instantlogic.fabric.value.RelationValues;
 
 import app.ritadministratie.entity.JaarEntity;
 

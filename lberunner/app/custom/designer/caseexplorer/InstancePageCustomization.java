@@ -5,12 +5,12 @@ import java.util.List;
 
 import lbe.engine.RenderContext;
 
-import org.instantlogic.core.Instance;
-import org.instantlogic.core.model.Attribute;
-import org.instantlogic.core.model.Relation;
-import org.instantlogic.core.text.ConstantText;
-import org.instantlogic.core.text.Text;
-import org.instantlogic.core.util.DeductionContext;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.model.Attribute;
+import org.instantlogic.fabric.model.Relation;
+import org.instantlogic.fabric.text.ConstantText;
+import org.instantlogic.fabric.text.Text;
+import org.instantlogic.fabric.util.DeductionContext;
 import org.instantlogic.interaction.page.CompositePageFragment;
 import org.instantlogic.interaction.page.PageFragment;
 import org.instantlogic.interaction.page.TextPageFragment;

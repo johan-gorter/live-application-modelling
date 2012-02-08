@@ -2,11 +2,11 @@
 
 import lbe.engine.RenderContext;
 
-import org.instantlogic.core.deduction.AttributeDeduction;
-import org.instantlogic.core.deduction.Deduction;
-import org.instantlogic.core.deduction.SelectedInstanceDeduction;
-import org.instantlogic.core.text.ConstantText;
-import org.instantlogic.core.text.Text;
+import org.instantlogic.fabric.deduction.AttributeDeduction;
+import org.instantlogic.fabric.deduction.Deduction;
+import org.instantlogic.fabric.deduction.SelectedInstanceDeduction;
+import org.instantlogic.fabric.text.ConstantText;
+import org.instantlogic.fabric.text.Text;
 import org.instantlogic.interaction.page.CompositePageFragment;
 import org.instantlogic.interaction.page.PageFragment;
 

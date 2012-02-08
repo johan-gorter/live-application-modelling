@@ -1,6 +1,6 @@
 package custom.ritadministratie;
 
-import org.instantlogic.core.CaseInstance;
+import org.instantlogic.fabric.CaseInstance;
 
 import app.ritadministratie.Maand;
 
