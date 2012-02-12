@@ -3,10 +3,13 @@ package org.instantlogic.fabric.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.instantlogic.fabric.model.Attribute;
+import org.instantlogic.fabric.value.AttributeValue;
+
 public class Operation {
 	
 	private final InstanceAdministration instanceAdministration;
-	private final List<ValueChangeEvent> undoEvents = new ArrayList<ValueChangeEvent>();
+	private final List<ValueChangeEvent> eventsToUndo = new ArrayList<ValueChangeEvent>();
 	private final Operation partOfOperation;
 	private boolean completed;
 
@@ -27,12 +30,16 @@ public class Operation {
 		return completed;
 	}
 	
-	public void clearUndoEvents() {
-		this.undoEvents.clear();
+	public void clearEventsToUndo() {
+		this.eventsToUndo.clear();
 	}
-	
-	public void addUndoEvent(ValueChangeEvent event) {
-		this.undoEvents.add(event);
+	/**
+	 * Adds an event that must be undone in case the operation does not complete.
+	 * 
+	 * @param event the event to undo
+	 */
+	public void addEventToUndo(ValueChangeEvent event) {
+		this.eventsToUndo.add(event);
 	}
 	
 	public void close() {
@@ -49,8 +56,8 @@ public class Operation {
 					this.instanceAdministration.fireTransactionCompleted(committed);
 				}
 			} else {
-				for (ValueChangeEvent event: this.undoEvents) {
-					partOfOperation.addUndoEvent(event);
+				for (ValueChangeEvent event: this.eventsToUndo) {
+					partOfOperation.addEventToUndo(event);
 				}
 			}
 		}
@@ -58,6 +65,10 @@ public class Operation {
 	}
 
 	protected void undo() {
-		throw new RuntimeException("Not yet implemented");
+		for (int i=eventsToUndo.size()-1;i>=0;i--) {
+			ValueChangeEvent event = eventsToUndo.get(i);
+			AttributeValue attributeValue = (AttributeValue)((Attribute)event.getAttribute()).get(event.getInstance());
+			attributeValue.set(event.getOldStoredValue());
+		}
 	}
 }

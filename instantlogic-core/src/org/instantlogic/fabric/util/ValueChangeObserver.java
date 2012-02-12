@@ -1,7 +1,7 @@
 package org.instantlogic.fabric.util;
 
 
-public interface ValueChangeListener {
+public interface ValueChangeObserver {
 	
 	/**
 	 * Listener interface for value changes
@@ -9,6 +9,6 @@ public interface ValueChangeListener {
 	 * @param The event.
 	 * @return if the listener must be maintained. (return true to keep listening, false removes the listener)
 	 */
-	public boolean valueChanged(ValueChangeEvent event);
+	public void valueChanged(ValueChangeEvent event);
 	
 }

@@ -11,7 +11,7 @@ import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.fabric.model.Relation;
 import org.instantlogic.fabric.util.InstanceAdministration;
 import org.instantlogic.fabric.util.ValueChangeEvent;
-import org.instantlogic.fabric.util.ValueChangeListener;
+import org.instantlogic.fabric.util.ValueChangeObserver;
 import org.instantlogic.fabric.value.AttributeValue;
 import org.instantlogic.fabric.value.AttributeValues;
 import org.instantlogic.fabric.value.ReadOnlyRelationValue;
@@ -35,8 +35,9 @@ import org.instantlogic.fabric.value.impl.ReverseRelationValuesImpl;
 public abstract class Instance<I extends Instance<I>> {
 	
 	private static class GlobalValueChangeListener {
-		ValueChangeListener listener;
+		ValueChangeObserver listener;
 		boolean alsoForOwnedInstances;
+		boolean permanent;
 	}
 	
 	private List<GlobalValueChangeListener> tempGlobalValueChangeListeners = new ArrayList<GlobalValueChangeListener>();
@@ -162,14 +163,15 @@ public abstract class Instance<I extends Instance<I>> {
 		return getEntity().toString()+"#"+instanceId+name;
 	}
 	
-	public void addGlobalValueChangeListener(ValueChangeListener listener, boolean alsoForOwnedInstances) {
+	public void addGlobalValueChangeListener(ValueChangeObserver listener, boolean alsoForOwnedInstances, boolean permanent) {
 		GlobalValueChangeListener gvcl = new GlobalValueChangeListener();
 		gvcl.listener = listener;
+		gvcl.permanent = permanent;
 		gvcl.alsoForOwnedInstances = alsoForOwnedInstances;
 		globalValueChangeListeners.add(gvcl);
 	}
 	
-	public void removeGlobalValueChangeListener(ValueChangeListener listener) {
+	public void removeGlobalValueChangeListener(ValueChangeObserver listener) {
 		Iterator<GlobalValueChangeListener> iterator = globalValueChangeListeners.iterator();
 		while (iterator.hasNext()) {
 			GlobalValueChangeListener next = iterator.next();
@@ -188,7 +190,8 @@ public abstract class Instance<I extends Instance<I>> {
 		for (GlobalValueChangeListener listener: tempGlobalValueChangeListeners) {
 			boolean reAdd = true;
 			if (listener.alsoForOwnedInstances || fromSelf) {
-				reAdd = listener.listener.valueChanged(event);
+				listener.listener.valueChanged(event);
+				reAdd = listener.permanent;
 			}
 			if (reAdd) {
 				globalValueChangeListeners.add(listener);

@@ -1,7 +1,7 @@
 package org.instantlogic.gwt;
 
 import org.instantlogic.fabric.util.ValueChangeEvent;
-import org.instantlogic.fabric.util.ValueChangeListener;
+import org.instantlogic.fabric.util.ValueChangeObserver;
 import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
 
 import com.google.gwt.user.client.ui.Widget;
@@ -12,7 +12,7 @@ public abstract class FieldController<V, W extends Widget> extends Controller {
 	
 	private W view;
 
-	private ValueChangeListener valueChangeListener = new ValueChangeListener() {
+	private ValueChangeObserver valueChangeListener = new ValueChangeObserver() {
 		
 		@Override
 		public boolean valueChanged(ValueChangeEvent event) {
