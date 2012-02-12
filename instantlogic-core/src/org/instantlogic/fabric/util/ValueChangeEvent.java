@@ -10,6 +10,7 @@ public class ValueChangeEvent {
 	public enum MultiValueUpdateType {INSERT, DELETE}
 	
 	private ValueChangeEvent eventToUndo;
+	private ValueChangeEvent undoEvent; // Created on demand
 	private final Operation operation;
 	private final ValueAndLevel<? extends Object> oldValue;
 	private final ReadOnlyAttributeValue<?,?> attributeValue;
@@ -43,7 +44,7 @@ public class ValueChangeEvent {
 	 * Creates an undo event based on a previous event
 	 * @param eventToUndo Event to undo
 	 */
-	public ValueChangeEvent(ValueChangeEvent eventToUndo, ValueAndLevel<? extends Object> failedNewValue) {
+	private ValueChangeEvent(ValueChangeEvent eventToUndo, ValueAndLevel<? extends Object> failedNewValue) {
 		this.eventToUndo = eventToUndo;
 		this.oldValue = failedNewValue;
 		this.operation = eventToUndo.operation;
@@ -120,5 +121,16 @@ public class ValueChangeEvent {
 
 	public Operation getOperation() {
 		return operation;
+	}
+
+	public ValueChangeEvent getUndoEvent() {
+		if (undoEvent==null) {
+			undoEvent = new ValueChangeEvent(this, this.getNewValue());
+		}
+		return undoEvent;
+	}
+
+	public boolean isFor(ReadOnlyAttributeValue<? extends Instance<?>, ? extends Object> valueObserved) {
+		return valueObserved == this.attributeValue;
 	}
 }

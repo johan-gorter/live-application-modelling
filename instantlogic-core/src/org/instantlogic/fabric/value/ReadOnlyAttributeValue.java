@@ -4,7 +4,7 @@ package org.instantlogic.fabric.value;
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Attribute;
 import org.instantlogic.fabric.util.ValueAndLevel;
-import org.instantlogic.fabric.util.ValueChangeListener;
+import org.instantlogic.fabric.util.ValueChangeObserver;
 
 
 public interface ReadOnlyAttributeValue<I extends Instance<I>, Value extends Object> {
@@ -22,7 +22,9 @@ public interface ReadOnlyAttributeValue<I extends Instance<I>, Value extends Obj
 	
 	boolean hasStoredValue();
 	
-	public void addValueChangeListener(ValueChangeListener listener);
+	public void addValueChangeListener(ValueChangeObserver listener);
 
-	public void removeValueChangeListener(ValueChangeListener listener);
+	public void addValueChangeListener(ValueChangeObserver listener, boolean permanent);
+
+	public void removeValueChangeListener(ValueChangeObserver listener);
 }

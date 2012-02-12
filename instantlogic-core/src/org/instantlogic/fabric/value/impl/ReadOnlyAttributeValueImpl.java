@@ -1,50 +1,71 @@
 package org.instantlogic.fabric.value.impl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.deduction.Deduction;
 import org.instantlogic.fabric.model.Attribute;
 import org.instantlogic.fabric.util.InstanceAdministration;
 import org.instantlogic.fabric.util.Observations;
+import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 import org.instantlogic.fabric.util.Operation;
 import org.instantlogic.fabric.util.SingleInstanceDeductionContext;
 import org.instantlogic.fabric.util.ValueAndLevel;
 import org.instantlogic.fabric.util.ValueChangeEvent;
-import org.instantlogic.fabric.util.ValueChangeListener;
+import org.instantlogic.fabric.util.ValueChangeObserver;
 import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
 
-public class ReadOnlyAttributeValueImpl<I extends Instance<I>, V extends Object> implements ReadOnlyAttributeValue<I, V> {
+public class ReadOnlyAttributeValueImpl<I extends Instance<I>, Value extends Object> implements ReadOnlyAttributeValue<I, Value> {
 
 	public enum ValueDetermination {RELEVANCE, RULE, STORED, DEFAULT, NONE}
+	private static class Observer {
+		ValueChangeObserver observer;
+		boolean permanent;
+	}
+
 	
-	protected final Attribute<I, V, ? extends Object> model;
+	protected final Attribute<I, Value, ? extends Object> model;
 	protected final I forInstance;
 	
-	transient ArrayList<ValueChangeListener> tempValueChangeListeners = new ArrayList<ValueChangeListener>(); 
-	transient ArrayList<ValueChangeListener> valueChangeListeners = new ArrayList<ValueChangeListener>(); 
+	transient ArrayList<Observer> tempValueChangeListeners = new ArrayList<Observer>(); 
+	transient ArrayList<Observer> valueChangeListeners = new ArrayList<Observer>(); 
 	
-	private transient ValueAndLevel<V> cached;
-	private transient Observations basedOn;
+	private transient ValueAndLevel<Value> cached;
+	private transient ObservationsOutdatedObserver basedOn;
 	
-	private ValueChangeListener valueChangeListener = new ValueChangeListener() {
+	private ValueChangeObserver valueChangeListener = new ValueChangeObserver() {
 
 		@Override
-		public boolean valueChanged(ValueChangeEvent event) {
-			ValueAndLevel<V> oldValue = cached;
-			basedOn = null;
+		public void valueChanged(ValueChangeEvent event) {
+			ValueAndLevel<Value> oldCached = cached;
+			ObservationsOutdatedObserver oldBasedOn = basedOn;
 			cached = null;
-			fireValueChanged(oldValue, getStoredValue(), getStoredValue(), event.getOperation());
-			return false;
+			basedOn = null;
+			boolean success = false;
+			try {
+				fireValueChanged(oldCached, getStoredValue(), getStoredValue(), event.getOperation());
+				success = true;
+			} finally {
+				if (!success) {
+					// Rollback everything
+					if (basedOn!=null) {
+						basedOn.remove();
+					}
+					basedOn = oldBasedOn;
+					cached = oldCached;
+				}
+			}
 		}
 	};
 	
-	public ReadOnlyAttributeValueImpl(I forInstance, Attribute<I, V, ? extends Object> model) {
+	public ReadOnlyAttributeValueImpl(I forInstance, Attribute<I, Value, ? extends Object> model) {
 		this.forInstance = forInstance;
 		this.model = model;
 	}
 	
-	public Attribute<I, V, ? extends Object> getModel() {
+	public Attribute<I, Value, ? extends Object> getModel() {
 		return model;
 	}
 	
@@ -52,10 +73,10 @@ public class ReadOnlyAttributeValueImpl<I extends Instance<I>, V extends Object>
 	 * For subclasses
 	 * @return The value previously cached
 	 */
-	protected ValueAndLevel<V> invalidateCachedValue() {
-		ValueAndLevel<V> result = cached;
+	protected ValueAndLevel<Value> invalidateCachedValue() {
+		ValueAndLevel<Value> result = cached;
 		if (basedOn!=null) {
-			basedOn.removeOneTimeOutdatedListener();
+			basedOn.remove();
 			basedOn = null;
 		}
 		cached = null;
@@ -68,14 +89,13 @@ public class ReadOnlyAttributeValueImpl<I extends Instance<I>, V extends Object>
 			calculateValue();
 			Observations observations = registry.stopRecordingObservations();
 			if (observations.size()>0) {
-				basedOn = observations;
-				observations.setOneTimeOutdatedListener(valueChangeListener);
+				basedOn = new ObservationsOutdatedObserver(observations, valueChangeListener);
 			}
 		}
 	}
 	
 	@Override
-	public ValueAndLevel<V> getValueAndLevel() {
+	public ValueAndLevel<Value> getValueAndLevel() {
 		InstanceAdministration registry = forInstance.getInstanceAdministration();
 		registry.registerObservation(this);
 		ensureCached(registry);
@@ -83,18 +103,18 @@ public class ReadOnlyAttributeValueImpl<I extends Instance<I>, V extends Object>
 	}
 	
 	@Deprecated
-	public V get() {
+	public Value get() {
 		return getValue();
 	}
 	
 	
-	public V getValue() {
+	public Value getValue() {
 		return getValueAndLevel().getValue();
 	}
 
 	// The logic for determining the value
 	private void calculateValue() {
-		Attribute<I, V, ? extends Object> attribute = getModel();
+		Attribute<I, Value, ? extends Object> attribute = getModel();
 		SingleInstanceDeductionContext context = new SingleInstanceDeductionContext(forInstance);
 		//Relevance
 		Deduction<Boolean> relevance = attribute.getRelevance();
@@ -106,9 +126,9 @@ public class ReadOnlyAttributeValueImpl<I extends Instance<I>, V extends Object>
 			}
 		}
 		//Rule
-		Deduction<V> ruleDeduction = attribute.getRule();
+		Deduction<Value> ruleDeduction = attribute.getRule();
 		if (ruleDeduction!=null) {
-			ValueAndLevel<V> result = ruleDeduction.deduct(context);
+			ValueAndLevel<Value> result = ruleDeduction.deduct(context);
 			if (result.isConclusive()) {
 				cached = result;
 				return;
@@ -120,22 +140,25 @@ public class ReadOnlyAttributeValueImpl<I extends Instance<I>, V extends Object>
 			return;
 		}
 		//Default
-		Deduction<V> defaultDeduction = attribute.getDefault();
+		Deduction<Value> defaultDeduction = attribute.getDefault();
 		if (defaultDeduction!=null) {
-			ValueAndLevel<V> defaultValue = defaultDeduction.deduct(context);
+			ValueAndLevel<Value> defaultValue = defaultDeduction.deduct(context);
 			cached = defaultValue;
 			return;
 		}
 		cached = ValueAndLevel.inconclusive();
 	}
 	
-	protected void fireValueChanged(ValueAndLevel<V> oldValue, V oldStoredValue, V newStoredValue, Operation operation) {
-		ValueChangeEvent event = new ValueChangeEvent(this, oldValue, oldStoredValue, getStoredValue(), operation);
+	protected void fireValueChanged(ValueAndLevel<Value> oldValue, Value oldStoredValue, Value newStoredValue, Operation operation) {
+		ValueChangeEvent event = new ValueChangeEvent(this, oldValue, oldStoredValue, newStoredValue, operation);
 		fireEvent(event);
 	}
 	
+	/**
+	 * Takes extra care to undo pending changes when exceptions occur
+	 */
 	protected void fireEvent(ValueChangeEvent event) {
-		ArrayList<ValueChangeListener> tempListenersBuffer = tempValueChangeListeners;
+		ArrayList<Observer> tempListenersBuffer = tempValueChangeListeners;
 		tempValueChangeListeners = valueChangeListeners;
 		valueChangeListeners = tempListenersBuffer;
 		valueChangeListeners.clear();
@@ -143,19 +166,33 @@ public class ReadOnlyAttributeValueImpl<I extends Instance<I>, V extends Object>
 		boolean success = false;
 		try {
 			for (;tempIndex<tempValueChangeListeners.size();tempIndex++) {
-				ValueChangeListener listener = tempValueChangeListeners.get(tempIndex);
-				boolean readd = listener.valueChanged(event);
-				if (readd) {
-					ensureCached(forInstance.getInstanceAdministration());
+				Observer listener = tempValueChangeListeners.get(tempIndex);
+				listener.observer.valueChanged(event);
+				if (listener.permanent) {
+					System.out.println("Re-adding listener "+listener);
 					valueChangeListeners.add(listener);
 				}
 			}
 			forInstance.fireValueChanged(event, true);
 			success = true;
 		} finally {
-			if (!success) {
+			if (success) {
+				event.getOperation().addEventToUndo(event);
+			} else {
+				// The rollback procedure
+				System.out.println("Rolling back "+this);
+				ValueChangeEvent undoEvent = event.getUndoEvent();
+				cached = (ValueAndLevel<Value>) event.getOldValue();
+				if (event.getOldStoredValue()!=null) {
+					setStoredValue((Value) event.getOldStoredValue());
+				}
+				for (int i=valueChangeListeners.size()-1;i>=0;i--) {
+					Observer listener = valueChangeListeners.get(i);
+					listener.observer.valueChanged(undoEvent);
+				}
 				for (int i=tempIndex;i<tempValueChangeListeners.size();i++) {
-					// Readd the listeners that weren't informed (including the one that threw an exception) 
+					// Readd the listeners that weren't informed (including the one that threw an exception)
+					System.out.println("Re-adding oblivious listener "+tempValueChangeListeners.get(i));
 					valueChangeListeners.add(tempValueChangeListeners.get(i));
 				}
 			}
@@ -168,20 +205,41 @@ public class ReadOnlyAttributeValueImpl<I extends Instance<I>, V extends Object>
 		return getStoredValue()!=null;
 	}
 	
-	protected V getStoredValue() {
+	protected Value getStoredValue() {
 		return null;
 	}
 
+	protected void setStoredValue(Value newStoredValue) {
+		throw new RuntimeException("Only implemented in subclass");
+	}
+	
 	@Override
-	public void addValueChangeListener(ValueChangeListener listener) {
-		// This statement usually does nothing. The value is normally already deduced. Listening to changes in an unknown value is rarely useful.
-		ensureCached(forInstance.getInstanceAdministration()); 
-		valueChangeListeners.add(listener);
+	public void addValueChangeListener(ValueChangeObserver listener) {
+		addValueChangeListener(listener, false);
 	}
 
 	@Override
-	public void removeValueChangeListener(ValueChangeListener listener) {
-		valueChangeListeners.remove(listener);
+	public void addValueChangeListener(ValueChangeObserver listener, boolean permanent) {
+		System.out.println("Adding listener "+listener);
+		// This statement usually does nothing. The value is normally already deduced. Listening to changes in an unknown value is rarely useful.
+		ensureCached(forInstance.getInstanceAdministration());
+		Observer entry = new Observer();
+		entry.observer = listener;
+		entry.permanent = permanent;
+		valueChangeListeners.add(entry);
+	}
+
+	@Override
+	public void removeValueChangeListener(ValueChangeObserver listener) {
+		Iterator<Observer> iterator = this.valueChangeListeners.iterator();
+		while (iterator.hasNext()) {
+			Observer entry = iterator.next();
+			if (entry.observer==listener) {
+				iterator.remove();
+				return;
+			}
+		}
+		throw new NoSuchElementException();
 	}
 	
 	@Override
