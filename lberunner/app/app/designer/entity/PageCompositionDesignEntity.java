@@ -9,10 +9,13 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class PageCompositionDesignEntity extends SimpleEntity {
 
 	public static final PageCompositionDesignEntity INSTANCE = new PageCompositionDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -32,6 +35,7 @@ public class PageCompositionDesignEntity extends SimpleEntity {
 			public boolean isOwner() {
 				return true;
 			}
+			
 		};
 	
 	// Reverse relations

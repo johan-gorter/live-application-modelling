@@ -9,10 +9,13 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class ButtonDesignEntity extends SimpleEntity {
 
 	public static final ButtonDesignEntity INSTANCE = new ButtonDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	

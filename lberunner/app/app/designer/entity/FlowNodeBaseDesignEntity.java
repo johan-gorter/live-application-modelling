@@ -9,10 +9,13 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class FlowNodeBaseDesignEntity extends SimpleEntity {
 
 	public static final FlowNodeBaseDesignEntity INSTANCE = new FlowNodeBaseDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	

@@ -9,10 +9,13 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class DeductionSchemeDesignEntity extends SimpleEntity {
 
 	public static final DeductionSchemeDesignEntity INSTANCE = new DeductionSchemeDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -36,6 +39,7 @@ public class DeductionSchemeDesignEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			
 		};
 	
 	public static final Relation<DeductionSchemeDesign, DeductionDesign, DeductionDesign> output
@@ -48,6 +52,7 @@ public class DeductionSchemeDesignEntity extends SimpleEntity {
 					DeductionSchemeDesign instance) {
 				return instance.output;
 			}
+			
 		};
 	
 	// Reverse relations

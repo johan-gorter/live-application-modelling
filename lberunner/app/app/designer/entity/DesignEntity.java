@@ -9,10 +9,19 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class DesignEntity extends SimpleEntity {
 
 	public static final DesignEntity INSTANCE = new DesignEntity();
+
+	// Deductions
+
+	private static Deduction<java.lang.String> createDeduction0() {
+		    Deduction<java.lang.String> d0 = new custom.designer.JavaNameCustomization();
+		return d0;
+	}
+
 	
 	// Attributes
 	

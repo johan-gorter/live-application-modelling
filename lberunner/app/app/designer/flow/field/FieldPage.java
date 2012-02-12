@@ -16,9 +16,9 @@ public class FieldPage extends Page {
 	public static final FieldPage INSTANCE = new FieldPage();
 
 
-	private static Deduction<?> createDeduction0() {
-		Deduction<FieldDesign> d0 = SelectedInstanceDeduction.create(FieldDesignEntity.INSTANCE);
-		Deduction<AttributeDesign> d1 = AttributeDeduction.create(FieldDesignEntity.attribute, d0);
+	private static Deduction<AttributeDesign> createDeduction0() {
+		  	Deduction<FieldDesign> d0 = SelectedInstanceDeduction.create(FieldDesignEntity.INSTANCE);
+		  	Deduction<AttributeDesign> d1 = AttributeDeduction.create(FieldDesignEntity.attribute, d0);
 		return d1;
 	}
 

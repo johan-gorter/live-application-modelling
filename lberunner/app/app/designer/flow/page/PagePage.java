@@ -16,9 +16,9 @@ public class PagePage extends Page {
 	public static final PagePage INSTANCE = new PagePage();
 
 
-	private static Deduction<?> createDeduction0() {
-		Deduction<PageDesign> d0 = SelectedInstanceDeduction.create(PageDesignEntity.INSTANCE);
-		Deduction<CompositePageFragmentDesign> d1 = AttributeDeduction.create(PageDesignEntity.content, d0);
+	private static Deduction<CompositePageFragmentDesign> createDeduction0() {
+		  	Deduction<PageDesign> d0 = SelectedInstanceDeduction.create(PageDesignEntity.INSTANCE);
+		  	Deduction<CompositePageFragmentDesign> d1 = AttributeDeduction.create(PageDesignEntity.content, d0);
 		return d1;
 	}
 

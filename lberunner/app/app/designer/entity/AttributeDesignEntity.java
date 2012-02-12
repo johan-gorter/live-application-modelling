@@ -9,10 +9,13 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class AttributeDesignEntity extends SimpleEntity {
 
 	public static final AttributeDesignEntity INSTANCE = new AttributeDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -65,6 +68,7 @@ public class AttributeDesignEntity extends SimpleEntity {
 			public boolean isOwner() {
 				return true;
 			}
+			
 		};
 	
 	public static final Relation<AttributeDesign, TextDesign, TextDesign> explanation
@@ -81,6 +85,7 @@ public class AttributeDesignEntity extends SimpleEntity {
 			public boolean isOwner() {
 				return true;
 			}
+			
 		};
 	
 	public static final Relation<AttributeDesign, List<DomainEntryDesign>, DomainEntryDesign> domain
@@ -101,6 +106,7 @@ public class AttributeDesignEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			
 		};
 	
 	public static final Relation<AttributeDesign, DeductionSchemeDesign, DeductionSchemeDesign> relevance
@@ -117,7 +123,7 @@ public class AttributeDesignEntity extends SimpleEntity {
 			public boolean isOwner() {
 				return true;
 			}
-	
+			
 		};
 	
 	public static final Relation<AttributeDesign, DeductionSchemeDesign, DeductionSchemeDesign> rule
@@ -134,7 +140,7 @@ public class AttributeDesignEntity extends SimpleEntity {
 			public boolean isOwner() {
 				return true;
 			}
-	
+			
 		};
 	
 	public static final Relation<AttributeDesign, DeductionSchemeDesign, DeductionSchemeDesign> _default
@@ -151,6 +157,7 @@ public class AttributeDesignEntity extends SimpleEntity {
 			public boolean isOwner() {
 				return true;
 			}
+			
 		};
 	
 	// Reverse relations

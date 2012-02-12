@@ -9,10 +9,13 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class StringProducerDesignEntity extends SimpleEntity {
 
 	public static final StringProducerDesignEntity INSTANCE = new StringProducerDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	

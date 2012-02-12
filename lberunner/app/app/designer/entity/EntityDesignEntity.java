@@ -9,10 +9,13 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class EntityDesignEntity extends SimpleEntity {
 
 	public static final EntityDesignEntity INSTANCE = new EntityDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -28,6 +31,7 @@ public class EntityDesignEntity extends SimpleEntity {
 					EntityDesign instance) {
 				return instance.extendsFrom;
 			}
+			
 		};
 	
 	public static final Relation<EntityDesign, List<AttributeDesign>, AttributeDesign> attributes
@@ -48,6 +52,7 @@ public class EntityDesignEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			
 		};
 	
 	public static final Relation<EntityDesign, List<RelationDesign>, RelationDesign> relations
@@ -68,6 +73,7 @@ public class EntityDesignEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			
 		};
 	
 	// Reverse relations

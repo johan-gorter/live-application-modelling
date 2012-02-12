@@ -16,30 +16,30 @@ public class WelcomePage extends Page {
 	public static final WelcomePage INSTANCE = new WelcomePage();
 
 
-	private static Deduction<?> createDeduction0() {
-		Deduction<Design> d0 = SelectedInstanceDeduction.create(DesignEntity.INSTANCE);
-		Deduction<java.lang.String> d1 = AttributeDeduction.create(DesignEntity.name, d0);
+	private static Deduction<java.lang.String> createDeduction0() {
+		  	Deduction<Design> d0 = SelectedInstanceDeduction.create(DesignEntity.INSTANCE);
+		  	Deduction<java.lang.String> d1 = AttributeDeduction.create(DesignEntity.name, d0);
 		return d1;
 	}
 
 
-	private static Deduction<?> createDeduction1() {
-		Deduction<ApplicationDesign> d0 = SelectedInstanceDeduction.create(ApplicationDesignEntity.INSTANCE);
-		Deduction<java.util.List<EntityDesign>> d1 = AttributeDeduction.create(ApplicationDesignEntity.entities, d0);
+	private static Deduction<java.util.List<EntityDesign>> createDeduction1() {
+		  	Deduction<ApplicationDesign> d0 = SelectedInstanceDeduction.create(ApplicationDesignEntity.INSTANCE);
+		  	Deduction<java.util.List<EntityDesign>> d1 = AttributeDeduction.create(ApplicationDesignEntity.entities, d0);
 		return d1;
 	}
 
 
-	private static Deduction<?> createDeduction2() {
-		Deduction<Design> d0 = SelectedInstanceDeduction.create(DesignEntity.INSTANCE);
-		Deduction<java.lang.String> d1 = AttributeDeduction.create(DesignEntity.name, d0);
+	private static Deduction<java.lang.String> createDeduction2() {
+		  	Deduction<Design> d0 = SelectedInstanceDeduction.create(DesignEntity.INSTANCE);
+		  	Deduction<java.lang.String> d1 = AttributeDeduction.create(DesignEntity.name, d0);
 		return d1;
 	}
 
 
-	private static Deduction<?> createDeduction3() {
-		Deduction<ApplicationDesign> d0 = SelectedInstanceDeduction.create(ApplicationDesignEntity.INSTANCE);
-		Deduction<java.util.List<FlowDesign>> d1 = AttributeDeduction.create(ApplicationDesignEntity.flows, d0);
+	private static Deduction<java.util.List<FlowDesign>> createDeduction3() {
+		  	Deduction<ApplicationDesign> d0 = SelectedInstanceDeduction.create(ApplicationDesignEntity.INSTANCE);
+		  	Deduction<java.util.List<FlowDesign>> d1 = AttributeDeduction.create(ApplicationDesignEntity.flows, d0);
 		return d1;
 	}
 

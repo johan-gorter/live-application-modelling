@@ -9,10 +9,13 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class LinkDesignEntity extends SimpleEntity {
 
 	public static final LinkDesignEntity INSTANCE = new LinkDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -36,6 +39,7 @@ public class LinkDesignEntity extends SimpleEntity {
 			public boolean isAutoCreate() {
 				return true;
 			}
+			
 		};
 	
 	public static final Relation<LinkDesign, EventDesign, EventDesign> event
@@ -48,6 +52,7 @@ public class LinkDesignEntity extends SimpleEntity {
 					LinkDesign instance) {
 				return instance.event;
 			}
+			
 		};
 	
 	// Reverse relations

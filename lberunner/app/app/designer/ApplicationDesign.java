@@ -33,6 +33,28 @@ public class ApplicationDesign
 		name.set(newValue);
 	}
 	
+	public final AttributeValue<ApplicationDesign, java.lang.String> packageName
+		= createAttributeValue(ApplicationDesignEntity.packageName);
+	
+	public java.lang.String getPackage() {
+		return packageName.get();
+	}
+
+	public void setPackage(java.lang.String newValue) {
+		packageName.set(newValue);
+	}
+	
+	public final AttributeValue<ApplicationDesign, java.lang.String> sourcePath
+		= createAttributeValue(ApplicationDesignEntity.sourcePath);
+	
+	public java.lang.String getSourcePath() {
+		return sourcePath.get();
+	}
+
+	public void setSourcePath(java.lang.String newValue) {
+		sourcePath.set(newValue);
+	}
+	
 	public final AttributeValue<ApplicationDesign, java.lang.String> customization
 		= createAttributeValue(ApplicationDesignEntity.customization);
 	

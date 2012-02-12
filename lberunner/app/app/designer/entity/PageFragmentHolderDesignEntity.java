@@ -9,10 +9,13 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class PageFragmentHolderDesignEntity extends SimpleEntity {
 
 	public static final PageFragmentHolderDesignEntity INSTANCE = new PageFragmentHolderDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -36,6 +39,7 @@ public class PageFragmentHolderDesignEntity extends SimpleEntity {
 			public boolean isAutoCreate() {
 				return true;
 			}
+			
 		};
 	
 	// Reverse relations

@@ -9,10 +9,13 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class FormattedValueDesignEntity extends SimpleEntity {
 
 	public static final FormattedValueDesignEntity INSTANCE = new FormattedValueDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -36,6 +39,7 @@ public class FormattedValueDesignEntity extends SimpleEntity {
 			public boolean isAutoCreate() {
 				return true;
 			}
+			
 		};
 	
 	// Reverse relations

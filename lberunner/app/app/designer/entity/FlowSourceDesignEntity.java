@@ -9,10 +9,13 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class FlowSourceDesignEntity extends SimpleEntity {
 
 	public static final FlowSourceDesignEntity INSTANCE = new FlowSourceDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -28,6 +31,7 @@ public class FlowSourceDesignEntity extends SimpleEntity {
 					FlowSourceDesign instance) {
 				return instance.startEvent;
 			}
+			
 		};
 	
 	public static final Relation<FlowSourceDesign, FlowNodeBaseDesign, FlowNodeBaseDesign> endNode
@@ -40,6 +44,7 @@ public class FlowSourceDesignEntity extends SimpleEntity {
 					FlowSourceDesign instance) {
 				return instance.endNode;
 			}
+			
 		};
 	
 	public static final Relation<FlowSourceDesign, EventDesign, EventDesign> endEvent
@@ -52,6 +57,7 @@ public class FlowSourceDesignEntity extends SimpleEntity {
 					FlowSourceDesign instance) {
 				return instance.endEvent;
 			}
+			
 		};
 	
 	// Reverse relations

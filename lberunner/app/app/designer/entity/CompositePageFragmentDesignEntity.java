@@ -9,10 +9,13 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class CompositePageFragmentDesignEntity extends SimpleEntity {
 
 	public static final CompositePageFragmentDesignEntity INSTANCE = new CompositePageFragmentDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -36,6 +39,7 @@ public class CompositePageFragmentDesignEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			
 		};
 	
 	// Reverse relations

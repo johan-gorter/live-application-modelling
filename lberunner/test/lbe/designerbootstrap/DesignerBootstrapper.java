@@ -33,6 +33,8 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		EntityDesign application = createEntity("ApplicationDesign", null);
 		application.customization.set("custom.designer.ApplicationDesignCustomization");
 		createAttribute(application, "name", String.class);
+		createAttribute(application, "package", String.class);
+		createAttribute(application, "sourcePath", String.class);
 		applicationDesign.caseEntity.set(application);
 		createAttribute(application, "customization", String.class);
 		

@@ -9,10 +9,13 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class AttributeDeductionDesignEntity extends SimpleEntity {
 
 	public static final AttributeDeductionDesignEntity INSTANCE = new AttributeDeductionDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -28,6 +31,7 @@ public class AttributeDeductionDesignEntity extends SimpleEntity {
 					AttributeDeductionDesign instance) {
 				return instance.attribute;
 			}
+			
 		};
 	
 	// Reverse relations

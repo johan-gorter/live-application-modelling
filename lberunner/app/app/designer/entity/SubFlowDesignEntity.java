@@ -9,10 +9,13 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class SubFlowDesignEntity extends SimpleEntity {
 
 	public static final SubFlowDesignEntity INSTANCE = new SubFlowDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -28,6 +31,7 @@ public class SubFlowDesignEntity extends SimpleEntity {
 					SubFlowDesign instance) {
 				return instance.flow;
 			}
+			
 		};
 	
 	// Reverse relations

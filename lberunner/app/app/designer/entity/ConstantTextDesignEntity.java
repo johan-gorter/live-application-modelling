@@ -9,10 +9,13 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class ConstantTextDesignEntity extends SimpleEntity {
 
 	public static final ConstantTextDesignEntity INSTANCE = new ConstantTextDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	

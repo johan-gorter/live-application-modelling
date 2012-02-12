@@ -9,10 +9,13 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class FieldDesignEntity extends SimpleEntity {
 
 	public static final FieldDesignEntity INSTANCE = new FieldDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -50,6 +53,7 @@ public class FieldDesignEntity extends SimpleEntity {
 					FieldDesign instance) {
 				return instance.attribute;
 			}
+			
 		};
 	
 	// Reverse relations

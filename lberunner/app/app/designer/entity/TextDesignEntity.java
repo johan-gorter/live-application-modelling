@@ -9,10 +9,13 @@ import lbe.model.*;
 import lbe.model.impl.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;
+import lbe.model.deduction.*;
 
 public class TextDesignEntity extends SimpleEntity {
 
 	public static final TextDesignEntity INSTANCE = new TextDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	

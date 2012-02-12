@@ -34,7 +34,7 @@ public class ApplicationGenerator extends AbstractGenerator {
 
 	public void afterSubmit() {
 		//TODO: if appname changed...
-		File applicationRoot = new File(AbstractGenerator.applicationsRoot, appname);
+		File applicationRoot = new File(AbstractGenerator.applicationsRoot, applicationInstance.getName());
 		applicationRoot.mkdirs();
 		update(applicationRoot);
 	}
