@@ -34,7 +34,16 @@ public class ApplicationGenerator extends AbstractGenerator {
 
 	public void afterSubmit() {
 		//TODO: if appname changed...
-		File applicationRoot = new File(AbstractGenerator.applicationsRoot, applicationInstance.getName());
+		File applicationRoot;
+		if (applicationInstance.getSourcePath()!=null) {
+			applicationRoot = new File(applicationInstance.getSourcePath());
+			String[] packageNames = applicationInstance.getRootPackageName().split("\\.");
+			for (String packageName : packageNames) {
+				applicationRoot = new File(applicationRoot, packageName);
+			}
+		} else {
+			applicationRoot = new File(AbstractGenerator.applicationsRoot, applicationInstance.getName());
+		}
 		applicationRoot.mkdirs();
 		update(applicationRoot);
 	}
@@ -59,7 +68,7 @@ public class ApplicationGenerator extends AbstractGenerator {
 		mustRegenerate = false;
 		
 		applicationInstance.startRecordingObservations();
-		appname = applicationInstance.name.get().toLowerCase();
+		rootPackageName = applicationInstance.getRootPackageName();
 		name = applicationInstance.name.get();
 		customization = applicationInstance.customization.get();
 		caseInstanceCustomization = applicationInstance.caseEntity.get().customization.get();
@@ -80,25 +89,25 @@ public class ApplicationGenerator extends AbstractGenerator {
 			new File(applicationRoot, "sharedpagefragment").mkdirs();
 		}
 
-		AbstractGenerator.generateFile(AbstractGenerator.applicationTemplate, this, null, name, "Application", appname, applicationRoot);
+		AbstractGenerator.generateFile(AbstractGenerator.applicationTemplate, this, null, name, "Application", rootPackageName, applicationRoot);
 		
 		List<Design> newEntities = updateGenerators(entityGenerators, applicationInstance.entities.get(), applicationRoot);
 		for(Design newEntity : newEntities) {
-			EntityGenerator entityGenerator = new EntityGenerator((EntityDesign)newEntity, appname);
+			EntityGenerator entityGenerator = new EntityGenerator((EntityDesign)newEntity, rootPackageName);
 			entityGenerator.update(applicationRoot);
 			entityGenerators.put(newEntity.getName(), entityGenerator);
 		}
 
 		List<Design> newSharedPageFragments = updateGenerators(sharedPageFragmentGenerators, applicationInstance.sharedPageFragments.get(), applicationRoot);
 		for(Design newSharedPageFragment : newSharedPageFragments) {
-			SharedPageFragmentGenerator sharedPageFragmentGenerator = new SharedPageFragmentGenerator((PageFragmentHolderDesign)newSharedPageFragment, appname);
+			SharedPageFragmentGenerator sharedPageFragmentGenerator = new SharedPageFragmentGenerator((PageFragmentHolderDesign)newSharedPageFragment, rootPackageName);
 			sharedPageFragmentGenerator.update(applicationRoot);
 			sharedPageFragmentGenerators.put(newSharedPageFragment.getName(), sharedPageFragmentGenerator);
 		}
 
 		List<Design> newEvents = updateGenerators(eventGenerators, applicationInstance.events.get(), applicationRoot);
 		for(Design newEvent : newEvents) {
-			EventGenerator eventGenerator = new EventGenerator((EventDesign)newEvent, appname);
+			EventGenerator eventGenerator = new EventGenerator((EventDesign)newEvent, rootPackageName);
 			eventGenerator.update(applicationRoot);
 			eventGenerators.put(newEvent.getName(), eventGenerator);
 		}
@@ -106,7 +115,7 @@ public class ApplicationGenerator extends AbstractGenerator {
 		
 		List<Design> newFlows = updateGenerators(flowGenerators, applicationInstance.flows.get(), applicationRoot);
 		for(Design newFlow : newFlows) {
-			FlowGenerator flowGenerator = new FlowGenerator((FlowDesign)newFlow, appname);
+			FlowGenerator flowGenerator = new FlowGenerator((FlowDesign)newFlow, rootPackageName);
 			flowGenerator.update(applicationRoot);
 			flowGenerators.put(newFlow.getName(), flowGenerator);
 		}

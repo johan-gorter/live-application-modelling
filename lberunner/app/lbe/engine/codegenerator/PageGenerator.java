@@ -29,7 +29,7 @@ public class PageGenerator extends AbstractGenerator {
 	
 	public PageGenerator(PageDesign pageDesign, String appname, String flowname) {
 		this.pageDesign = pageDesign;
-		this.appname = appname;
+		this.rootPackageName = appname;
 		this.flowname = flowname;
 	}
 
@@ -51,13 +51,13 @@ public class PageGenerator extends AbstractGenerator {
 		customization = pageDesign.customization.get();
 		content = new ContentClassModel(pageDesign.getContent(), this);
 		
-		AbstractGenerator.generateFile(AbstractGenerator.pageTemplate, this, "flow/"+flowname.toLowerCase(), pageDesign.name.get(), "Page", appname, applicationRoot);
+		AbstractGenerator.generateFile(AbstractGenerator.pageTemplate, this, "flow/"+flowname.toLowerCase(), pageDesign.name.get(), "Page", rootPackageName, applicationRoot);
 		
 		this.observations = pageDesign.getCase().stopRecordingObservations();
 	}
 
 	@Override
 	public void delete(File applicationRoot) {
-		AbstractGenerator.deleteFile("flow/"+flowname.toLowerCase(), pageDesign.name.get(), "Page", appname, applicationRoot);
+		AbstractGenerator.deleteFile("flow/"+flowname.toLowerCase(), pageDesign.name.get(), "Page", rootPackageName, applicationRoot);
 	}
 }

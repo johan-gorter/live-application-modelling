@@ -36,7 +36,7 @@ public class ApplicationDesign
 	public final AttributeValue<ApplicationDesign, java.lang.String> packageName
 		= createAttributeValue(ApplicationDesignEntity.packageName);
 	
-	public java.lang.String getPackage() {
+	public java.lang.String getRootPackageName() {
 		return packageName.get();
 	}
 

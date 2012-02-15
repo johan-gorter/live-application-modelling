@@ -15,7 +15,7 @@ public class SubFlowGenerator extends AbstractGenerator {
 	
 	public SubFlowGenerator(SubFlowDesign subFlowDesign, String appname, String flowName) {
 		this.subFlowDesign = subFlowDesign;
-		this.appname = appname;
+		this.rootPackageName = appname;
 		this.flowname = flowName;
 	}
 
@@ -34,13 +34,13 @@ public class SubFlowGenerator extends AbstractGenerator {
 		
 		name = subFlowDesign.name.get();
 		subFlowName = subFlowDesign.flow.get().name.get();
-		AbstractGenerator.generateFile(AbstractGenerator.subFlowTemplate, this, "flow/"+flowname.toLowerCase(), name, "SubFlow", appname, applicationRoot);
+		AbstractGenerator.generateFile(AbstractGenerator.subFlowTemplate, this, "flow/"+flowname.toLowerCase(), name, "SubFlow", rootPackageName, applicationRoot);
 		
 		this.observations = subFlowDesign.getCase().stopRecordingObservations();
 	}
 	
 	@Override
 	public void delete(File applicationRoot) {
-		AbstractGenerator.deleteFile("flow/"+flowname.toLowerCase(), name, "SubFlow", appname, applicationRoot);
+		AbstractGenerator.deleteFile("flow/"+flowname.toLowerCase(), name, "SubFlow", rootPackageName, applicationRoot);
 	}
 }

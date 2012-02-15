@@ -12,7 +12,7 @@ public class SharedPageFragmentGenerator extends AbstractGenerator {
 
 	public SharedPageFragmentGenerator(PageFragmentHolderDesign pageFragmentHolderDesign, String appname) {
 		this.pageFragmentHolderDesign = pageFragmentHolderDesign;
-		this.appname = appname;
+		this.rootPackageName = appname;
 		this.name = pageFragmentHolderDesign.getName();
 	}
 
@@ -26,14 +26,14 @@ public class SharedPageFragmentGenerator extends AbstractGenerator {
 		clearDeductionSchemes();
 		this.customization = pageFragmentHolderDesign.getCustomization();
 		this.content = new ContentClassModel(pageFragmentHolderDesign.getPageFragment(), this);
-		AbstractGenerator.generateFile(AbstractGenerator.pageFragmentTemplate, this, "sharedpagefragment", name, "PageFragment", appname, applicationRoot);
+		AbstractGenerator.generateFile(AbstractGenerator.pageFragmentTemplate, this, "sharedpagefragment", name, "PageFragment", rootPackageName, applicationRoot);
 		
 		this.observations = pageFragmentHolderDesign.getCase().stopRecordingObservations();
 	}
 
 	@Override
 	public void delete(File applicationRoot) {
-		AbstractGenerator.deleteFile("sharedpagefragment", name, "Event", appname, applicationRoot);
+		AbstractGenerator.deleteFile("sharedpagefragment", name, "Event", rootPackageName, applicationRoot);
 	}
 
 	public ContentClassModel getContent() {

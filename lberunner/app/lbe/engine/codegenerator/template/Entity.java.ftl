@@ -1,21 +1,30 @@
-package app.${appname}.entity;
+package ${rootPackageName}.entity;
 <#include "Text.java.ftl">
 <#include "DeductionScheme.java.ftl">
 
-import java.util.List;
-
-import app.${appname}.*;
-import lbe.instance.*;
-import lbe.instance.value.*;
-import lbe.model.*;
-import lbe.model.impl.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
-import lbe.model.deduction.*;
-
-public class ${name}Entity extends SimpleEntity {
+public class ${name}Entity extends org.instantlogic.fabric.model.Entity<${rootPackageName}.${name}> {
 
 	public static final ${name}Entity INSTANCE = new ${name}Entity();
+	
+	protected ${name}Entity() {
+	}
+
+	<#if extendsFrom??>
+	@Override
+	public Entity extendsEntity() {
+		return ${rootPackageName}.entity.${extendsFrom}Entity.INSTANCE;
+	}
+	</#if>
+
+	@Override
+	public ${rootPackageName}.${name} createInstance() {
+		return new ${rootPackageName}.${name}();
+	}
+	
+	@Override
+	public String getName() {
+		return "${name}";
+	}
 
 	// Deductions
 	<#list deductionSchemes as scheme>
@@ -25,13 +34,13 @@ public class ${name}Entity extends SimpleEntity {
 	// Attributes
 	<#list attributes as attribute>
 	
-	public static final Attribute<${name}, ${attribute.className}, ${attribute.itemClassName}> ${attribute.name} 
-		= new <#if attribute.customization??>${attribute.customization}<#else>SimpleAttribute<${name}, ${attribute.className}, ${attribute.itemClassName}></#if>(
+	public static final org.instantlogic.fabric.model.Attribute<${rootPackageName}.${name}, ${attribute.className}, ${attribute.itemClassName}> ${attribute.name} 
+		= new org.instantlogic.fabric.model.impl.<#if attribute.customization??>${attribute.customization}<#else>SimpleAttribute<${rootPackageName}.${name}, ${attribute.className}, ${attribute.itemClassName}></#if>(
 			"${attribute.name}", INSTANCE, ${attribute.itemClassName}.class
 		) {
 	
 			@Override
-			public ReadOnlyAttributeValue<#if attribute.multivalue>s</#if><${name}, ${attribute.itemClassName}> get(${name} instance) {
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<#if attribute.multivalue>s</#if><${rootPackageName}.${name}, ${attribute.itemClassName}> get(${rootPackageName}.${name} instance) {
 				return instance.${attribute.name};
 			}
 			<#if attribute.multivalue>
@@ -72,14 +81,14 @@ public class ${name}Entity extends SimpleEntity {
 	// Relations
 	<#list relations as relation>
 	
-	public static final Relation<${name}, ${relation.to}, ${relation.item}> ${relation.name}
-		= new SimpleRelation<${name}, ${relation.to}, ${relation.item}>(
-			"${relation.name}", INSTANCE, ${relation.item}Entity.INSTANCE, ${relation.item}.class, ${relation.item}Entity.${relation.reverseName}
+	public static final org.instantlogic.fabric.model.Relation<${rootPackageName}.${name}, ${relation.to}, ${rootPackageName}.${relation.item}> ${relation.name}
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<${rootPackageName}.${name}, ${relation.to}, ${rootPackageName}.${relation.item}>(
+			"${relation.name}", INSTANCE, ${rootPackageName}.entity.${relation.item}Entity.INSTANCE, ${rootPackageName}.${relation.item}.class, ${rootPackageName}.entity.${relation.item}Entity.${relation.reverseName}
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<#if relation.multivalue>s</#if><${name}, ${relation.item}> get(
-					${name} instance) {
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<#if relation.multivalue>s</#if><${rootPackageName}.${name}, ${rootPackageName}.${relation.item}> get(
+					${rootPackageName}.${name} instance) {
 				return instance.${relation.name};
 			}
 			<#if relation.owner>
@@ -108,9 +117,9 @@ public class ${name}Entity extends SimpleEntity {
 			</#if>
 			<#if relation.ruleDeductionIndex??>
 
-			private Deduction<Stand> RULE = createDeduction${relation.ruleDeductionIndex}();
+			private org.instantlogic.fabric.deduction.Deduction<${relation.to}> RULE = createDeduction${relation.ruleDeductionIndex}();
 			@Override
-			public Deduction<Stand> getRule() {
+			public org.instantlogic.fabric.deduction.Deduction<${relation.to}> getRule() {
 				return RULE;
 			}
 			</#if>
@@ -121,14 +130,14 @@ public class ${name}Entity extends SimpleEntity {
 	// Reverse relations
 	<#list reverseRelations as relation>
 	
-	public static final Relation<${name}, ${relation.to}, ${relation.item}> ${relation.name}
-		= new SimpleRelation<${name}, ${relation.to}, ${relation.item}>(
-			"${relation.name}", INSTANCE, ${name}Entity.INSTANCE, ${relation.item}.class, ${relation.item}Entity.${relation.reverseName}
+	public static final org.instantlogic.fabric.model.Relation<${rootPackageName}.${name}, ${relation.to}, ${rootPackageName}.${relation.item}> ${relation.name}
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<${rootPackageName}.${name}, ${relation.to}, ${rootPackageName}.${relation.item}>(
+			"${relation.name}", INSTANCE, ${rootPackageName}.entity.${relation.item}Entity.INSTANCE, ${rootPackageName}.${relation.item}.class, ${rootPackageName}.entity.${relation.item}Entity.${relation.reverseName}
 		) {
 	
 			@Override
-			public ReadOnlyRelationValue<#if relation.multivalue>s</#if><${name}, ${relation.item}> get(
-					${name} instance) {
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<#if relation.multivalue>s</#if><${rootPackageName}.${name}, ${rootPackageName}.${relation.item}> get(
+					${rootPackageName}.${name} instance) {
 				return instance.${relation.name};
 			}
 	
@@ -144,54 +153,34 @@ public class ${name}Entity extends SimpleEntity {
 		};
 	</#list>
 
-	private static final Attribute[] ATTRIBUTES = new Attribute[]{
+	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
 		<#list attributes as attribute>
 		${attribute.name},
 		</#list>
 	};
-	private static final Relation[] RELATIONS = new Relation[]{
+	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		<#list relations as relation>
 		${relation.name},
 		</#list>
 	};
-	private static final Relation[] REVERSE_RELATIONS = new Relation[]{
+	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		<#list reverseRelations as relation>
 		${relation.name},
 		</#list>
 	};
 
-	private ${name}Entity() {
-		super("${name}");
-	}
-	
 	@Override
-	public Instance createInstance(CaseInstance caseInstance, long id) {
-		<#if customization??>
-		return new ${customization}(<#if !caseEntity>caseInstance, id</#if>);
-		<#else>
-		return new ${name}(<#if !caseEntity>caseInstance, id</#if>);
-		</#if>
-	}
-	<#if extendsFrom??>
-	
-	@Override
-	public Entity extendsEntity() {
-		return ${extendsFrom}Entity.INSTANCE;
-	}
-	</#if>
-	
-	@Override
-	public Attribute<? extends Instance, ? extends Object, ? extends Object>[] getLocalAttributes() {
+	public org.instantlogic.fabric.model.Attribute[] getLocalAttributes() {
 		return ATTRIBUTES;
 	}
 
 	@Override
-	public Relation<? extends Instance, ? extends Object, ? extends Instance>[] getLocalRelations() {
+	public org.instantlogic.fabric.model.Relation[] getLocalRelations() {
 		return RELATIONS;
 	}
 
 	@Override
-	public Relation<? extends Instance, ? extends Object, ? extends Instance>[] getLocalReverseRelations() {
+	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
 	}
 }

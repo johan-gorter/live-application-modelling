@@ -109,9 +109,9 @@ public class EntityGenerator extends AbstractGenerator {
 	
 	public EntityDesign entityDesign;
 	
-	public EntityGenerator(EntityDesign entityDesign, String appname) {
+	public EntityGenerator(EntityDesign entityDesign, String rootPackageName) {
 		this.entityDesign = entityDesign;
-		this.appname = appname;
+		this.rootPackageName = rootPackageName;
 	}
 	
 	public boolean caseEntity;
@@ -161,7 +161,7 @@ public class EntityGenerator extends AbstractGenerator {
 			attribute.itemClassName = attributeDesign.className.get();
 			attribute.multivalue = (attributeDesign.multivalue.get()==Boolean.TRUE);
 			if (attribute.multivalue) {
-				attribute.className="List<"+attribute.itemClassName+">";
+				attribute.className="java.util.List<"+attribute.itemClassName+">";
 			} else {
 				attribute.className=attribute.itemClassName;
 			}
@@ -192,7 +192,10 @@ public class EntityGenerator extends AbstractGenerator {
 			relation.owner = (relationDesign.owner.get()==Boolean.TRUE);
 			relation.autoCreate = (relationDesign.autoCreate.get()==Boolean.TRUE);
 			relation.item = relationDesign.to.get().name.get();
-			relation.to = relation.multivalue?"List<"+relation.item+">":relation.item;
+			relation.to = rootPackageName+"."+relation.item;
+			if (relation.multivalue) {
+				relation.to = "java.util.List<"+relation.to+">";
+			}
 			relation.reverseName=relationDesign.reverseName.get();
 			if (relationDesign.getRule()!=null) {
 				relation.ruleDeductionIndex = addDeductionScheme(relationDesign.getRule());
@@ -207,19 +210,22 @@ public class EntityGenerator extends AbstractGenerator {
 			relation.multivalue = (relationDesign.reverseMultivalue.get()==Boolean.TRUE);
 			relation.reverseName = relationDesign.name.get();
 			relation.item = relationDesign.from.get().name.get();
-			relation.to = relation.multivalue?"List<"+relation.item+">":relation.item;
+			relation.to = rootPackageName+"."+relation.item;
+			if (relation.multivalue) {
+				relation.to = "java.util.List<"+relation.to+">";
+			}
 			reverseRelations.add(relation);
 		}
-		AbstractGenerator.generateFile(AbstractGenerator.entityTemplate, this, "entity", name, "Entity", appname, applicationRoot);
-		AbstractGenerator.generateFile(AbstractGenerator.instanceTemplate, this, null, name, "", appname, applicationRoot);
+		AbstractGenerator.generateFile(AbstractGenerator.entityTemplate, this, "entity", name, "Entity", rootPackageName, applicationRoot);
+		AbstractGenerator.generateFile(AbstractGenerator.instanceTemplate, this, null, name, "", rootPackageName, applicationRoot);
 		
 		this.observations = entityDesign.getCase().stopRecordingObservations();
 	}
 	
 	@Override
 	public void delete(File applicationRoot) {
-		AbstractGenerator.deleteFile("entity", name, "Entity", appname, applicationRoot);
-		AbstractGenerator.deleteFile(null, name, "Instance", appname, applicationRoot);
+		AbstractGenerator.deleteFile("entity", name, "Entity", rootPackageName, applicationRoot);
+		AbstractGenerator.deleteFile(null, name, "Instance", rootPackageName, applicationRoot);
 	}
 	
 	private List<DomainEntry> generateDomain(List<DomainEntryDesign> domain) {

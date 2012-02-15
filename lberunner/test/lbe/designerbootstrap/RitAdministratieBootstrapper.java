@@ -14,6 +14,8 @@ public class RitAdministratieBootstrapper extends BootstrapperUtil {
 		// Case
 		applicationDesign = new ApplicationDesignCustomization();
 		applicationDesign.name.set("RitAdministratie");
+		applicationDesign.packageName.set("com.jg.ritadministratie.instantlogic");
+		applicationDesign.sourcePath.set("/prive/live-business-engineering/lberunner/app");
 		
 		// Data
 		EntityDesign jaar = createEntity("Jaar", null);

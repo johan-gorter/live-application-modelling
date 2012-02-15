@@ -23,7 +23,7 @@ import freemarker.template.Template;
 
 public abstract class AbstractGenerator {
 
-	public String appname;
+	public String rootPackageName;
 	public String name;
 	public String customization;
 	
@@ -59,8 +59,8 @@ public abstract class AbstractGenerator {
 		}
 	}
 	
-	public String getAppname() {
-		return appname;
+	public String getRootPackageName() {
+		return rootPackageName;
 	}
 	
 	public String getName() {
