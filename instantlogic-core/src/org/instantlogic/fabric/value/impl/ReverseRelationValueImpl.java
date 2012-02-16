@@ -45,7 +45,7 @@ public class ReverseRelationValueImpl<I extends Instance<I>, From extends Instan
 			result = ((List)value).remove(forInstance);
 		} else {
 			result = value.getValue()==forInstance;
-			value.set(null);
+			value.setValue(null);
 		}
 		if (!result) throw new RuntimeException("Reverse value not in sync while clearing reverse relation");
 	}

@@ -68,7 +68,7 @@ public class Operation {
 		for (int i=eventsToUndo.size()-1;i>=0;i--) {
 			ValueChangeEvent event = eventsToUndo.get(i);
 			AttributeValue attributeValue = (AttributeValue)((Attribute)event.getAttribute()).get(event.getInstance());
-			attributeValue.set(event.getOldStoredValue());
+			attributeValue.setValue(event.getOldStoredValue());
 		}
 	}
 }

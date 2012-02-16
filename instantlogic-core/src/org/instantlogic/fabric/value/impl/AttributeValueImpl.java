@@ -29,7 +29,8 @@ public class AttributeValueImpl<I extends Instance<I>, Value extends Object>
 		return super.getValue();
 	}
 
-	public void set(Value value) {
+	@Override
+	public void setValue(Value value) {
 		Operation operation = forInstance.getInstanceAdministration().startOperation();
 		try {
 			Value oldStoredValue = storedValue;
