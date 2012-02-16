@@ -108,6 +108,11 @@ public class Period extends Instance<Period> {
 			return "Period";
 		}
 
+		@Override
+		public Class<Period> getInstanceClass() {
+			return Period.class;
+		}
+
 	}
 
 	@Override
@@ -126,7 +131,7 @@ public class Period extends Instance<Period> {
 	}
 	
 	public void setFrom(Date from) {
-		this.from.set(from);
+		this.from.setValue(from);
 	}
 
 	public Date getTo() {
@@ -134,7 +139,7 @@ public class Period extends Instance<Period> {
 	}
 
 	public void setTo(Date from) {
-		this.to.set(from);
+		this.to.setValue(from);
 	}
 
 	public Integer getDaysBetween() {

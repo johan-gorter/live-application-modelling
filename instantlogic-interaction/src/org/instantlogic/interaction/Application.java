@@ -1,25 +1,17 @@
 package org.instantlogic.interaction;
 
 import java.util.Iterator;
-import java.util.SortedMap;
 
-import lbe.engine.FlowStack;
-import lbe.engine.PageCoordinates;
-import lbe.engine.PageCoordinates.Coordinate;
-
-import org.instantlogic.core.CaseInstance;
-import org.instantlogic.core.model.CaseEntity;
-import org.instantlogic.core.model.Entity;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.interaction.flow.Flow;
 
 
 public abstract class Application {
 	
-	public abstract Class<? extends CaseInstance> getCaseInstanceClass();
+	public abstract Entity<? extends Instance<?>> getCaseEntity();
 	
 	public abstract String getName();
-	
-	public abstract CaseEntity getCaseModel();
 	
 	public abstract Flow[] getExposedFlows();
 

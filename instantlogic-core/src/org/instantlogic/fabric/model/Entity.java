@@ -18,7 +18,6 @@ public abstract class Entity<I extends Instance<I>> extends Concept {
 		throw new RuntimeException("TODO");
 	}
 	
-
 	public static boolean extendsFrom(Entity<?> entity, Entity<?> from) {
 		if (entity==from) return true;
 		if (entity==null) return false;
@@ -82,7 +81,9 @@ public abstract class Entity<I extends Instance<I>> extends Concept {
 		
 	}
 	
-	public abstract Entity<?> extendsEntity();
+	public Entity<?> extendsEntity() {
+		return null;
+	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public final Iterable<Attribute<I, ? extends Object, ? extends Object>> getAttributes() {
@@ -121,5 +122,7 @@ public abstract class Entity<I extends Instance<I>> extends Concept {
 	public abstract Relation<? extends Instance<?>, ? extends Object, I>[] getLocalReverseRelations();
 
 	public abstract I createInstance();
+	
+	public abstract Class<I> getInstanceClass();
 
 }

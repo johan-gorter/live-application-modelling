@@ -26,7 +26,7 @@ public class RelationValueImpl<I extends Instance<I>, To extends Instance<To>>
 			// 1 on 1 aggregation, is now lazily created
 			result = (To) model.createTo(forInstance);
 			this.suppressValueChanged = true;
-			set(result);
+			setValue(result);
 			this.suppressValueChanged = false;
 		}
 		return result;
@@ -41,10 +41,10 @@ public class RelationValueImpl<I extends Instance<I>, To extends Instance<To>>
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void set(To value) {
+	public void setValue(To value) {
 		To previous = super.getValue();
 		if (previous == value) return;
-		super.set(value);
+		super.setValue(value);
 		if (previous!=null) {
 			throw new RuntimeException("Not yet implemented");
 		}
