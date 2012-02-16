@@ -22,6 +22,11 @@ public class ${name}Entity extends org.instantlogic.fabric.model.Entity<${rootPa
 	}
 	
 	@Override
+	public Class<${rootPackageName}.${name}> getInstanceClass() {
+		return ${rootPackageName}.${name}.class;
+	}
+	
+	@Override
 	public String getName() {
 		return "${name}";
 	}
@@ -41,7 +46,7 @@ public class ${name}Entity extends org.instantlogic.fabric.model.Entity<${rootPa
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<#if attribute.multivalue>s</#if><${rootPackageName}.${name}, ${attribute.itemClassName}> get(${rootPackageName}.${name} instance) {
-				return instance.${attribute.name};
+				return instance.get${attribute.name?cap_first}Attribute();
 			}
 			<#if attribute.multivalue>
 	
@@ -89,7 +94,7 @@ public class ${name}Entity extends org.instantlogic.fabric.model.Entity<${rootPa
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<#if relation.multivalue>s</#if><${rootPackageName}.${name}, ${rootPackageName}.${relation.item}> get(
 					${rootPackageName}.${name} instance) {
-				return instance.${relation.name};
+				return instance.get${relation.name?cap_first}Relation();
 			}
 			<#if relation.owner>
 	
@@ -138,7 +143,7 @@ public class ${name}Entity extends org.instantlogic.fabric.model.Entity<${rootPa
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<#if relation.multivalue>s</#if><${rootPackageName}.${name}, ${rootPackageName}.${relation.item}> get(
 					${rootPackageName}.${name} instance) {
-				return instance.${relation.name};
+				return instance.get${relation.name?cap_first}Relation();
 			}
 	
 			public boolean isReverse() {

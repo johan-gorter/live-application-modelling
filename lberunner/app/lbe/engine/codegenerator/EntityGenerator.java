@@ -216,8 +216,8 @@ public class EntityGenerator extends AbstractGenerator {
 			}
 			reverseRelations.add(relation);
 		}
-		AbstractGenerator.generateFile(AbstractGenerator.entityTemplate, this, "entity", name, "Entity", rootPackageName, applicationRoot);
-		AbstractGenerator.generateFile(AbstractGenerator.instanceTemplate, this, null, name, "", rootPackageName, applicationRoot);
+		AbstractGenerator.generateFile(AbstractGenerator.entityTemplate, this, "entity", name, "Entity", rootPackageName, applicationRoot, false);
+		AbstractGenerator.generateFile(AbstractGenerator.instanceTemplate, this, null, name, "", rootPackageName, applicationRoot, this.customization!=null);
 		
 		this.observations = entityDesign.getCase().stopRecordingObservations();
 	}
@@ -226,6 +226,7 @@ public class EntityGenerator extends AbstractGenerator {
 	public void delete(File applicationRoot) {
 		AbstractGenerator.deleteFile("entity", name, "Entity", rootPackageName, applicationRoot);
 		AbstractGenerator.deleteFile(null, name, "Instance", rootPackageName, applicationRoot);
+		AbstractGenerator.deleteFile(null, name, "AbstractInstance", rootPackageName, applicationRoot);
 	}
 	
 	private List<DomainEntry> generateDomain(List<DomainEntryDesign> domain) {

@@ -34,7 +34,7 @@ public class SubFlowGenerator extends AbstractGenerator {
 		
 		name = subFlowDesign.name.get();
 		subFlowName = subFlowDesign.flow.get().name.get();
-		AbstractGenerator.generateFile(AbstractGenerator.subFlowTemplate, this, "flow/"+flowname.toLowerCase(), name, "SubFlow", rootPackageName, applicationRoot);
+		AbstractGenerator.generateFile(AbstractGenerator.subFlowTemplate, this, "flow/"+flowname.toLowerCase(), name, "SubFlow", rootPackageName, applicationRoot, this.customization!=null);
 		
 		this.observations = subFlowDesign.getCase().stopRecordingObservations();
 	}

@@ -59,7 +59,7 @@ public class ApplicationGenerator extends AbstractGenerator {
 			return;
 		}
 		if (mustRegenerate) {
-			purge(applicationRoot);
+//TODO: rethink what can be thrown away, for example only files containing the special word AllowGeneratorToOverwriteThisFile purge(applicationRoot);
 			eventGenerators.clear();
 			entityGenerators.clear();
 			flowGenerators.clear();
@@ -89,7 +89,8 @@ public class ApplicationGenerator extends AbstractGenerator {
 			new File(applicationRoot, "sharedpagefragment").mkdirs();
 		}
 
-		AbstractGenerator.generateFile(AbstractGenerator.applicationTemplate, this, null, name, "Application", rootPackageName, applicationRoot);
+		//TODO: if application.generateApplication...
+		//AbstractGenerator.generateFile(AbstractGenerator.applicationTemplate, this, null, name, "Application", rootPackageName, applicationRoot);
 		
 		List<Design> newEntities = updateGenerators(entityGenerators, applicationInstance.entities.get(), applicationRoot);
 		for(Design newEntity : newEntities) {

@@ -51,7 +51,7 @@ public class PageGenerator extends AbstractGenerator {
 		customization = pageDesign.customization.get();
 		content = new ContentClassModel(pageDesign.getContent(), this);
 		
-		AbstractGenerator.generateFile(AbstractGenerator.pageTemplate, this, "flow/"+flowname.toLowerCase(), pageDesign.name.get(), "Page", rootPackageName, applicationRoot);
+		AbstractGenerator.generateFile(AbstractGenerator.pageTemplate, this, "flow/"+flowname.toLowerCase(), pageDesign.name.get(), "Page", rootPackageName, applicationRoot, this.customization!=null);
 		
 		this.observations = pageDesign.getCase().stopRecordingObservations();
 	}

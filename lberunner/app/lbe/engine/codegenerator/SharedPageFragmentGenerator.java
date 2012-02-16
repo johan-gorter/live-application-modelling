@@ -26,7 +26,7 @@ public class SharedPageFragmentGenerator extends AbstractGenerator {
 		clearDeductionSchemes();
 		this.customization = pageFragmentHolderDesign.getCustomization();
 		this.content = new ContentClassModel(pageFragmentHolderDesign.getPageFragment(), this);
-		AbstractGenerator.generateFile(AbstractGenerator.pageFragmentTemplate, this, "sharedpagefragment", name, "PageFragment", rootPackageName, applicationRoot);
+		AbstractGenerator.generateFile(AbstractGenerator.pageFragmentTemplate, this, "sharedpagefragment", name, "PageFragment", rootPackageName, applicationRoot, this.customization!=null);
 		
 		this.observations = pageFragmentHolderDesign.getCase().stopRecordingObservations();
 	}

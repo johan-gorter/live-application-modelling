@@ -103,7 +103,7 @@ public abstract class AbstractGenerator {
 		return newConcepts;
 	}
 	
-	static void generateFile(Template template, Object rootMap, String subDirectory, String name, String postfix, String appname, File root) {
+	static void generateFile(Template template, Object rootMap, String subDirectory, String name, String postfix, String appname, File root, boolean isCustomized) {
 		if (root==null) return;//Dry run
 		Writer writer = null;
 		try {
@@ -111,7 +111,8 @@ public abstract class AbstractGenerator {
 				root = new File(root, subDirectory);
 				root.mkdirs();
 			}
-			File output = new File(root, name+postfix+".java");
+			String prefix = isCustomized?"Abstract":"";
+			File output = new File(root, prefix+name+postfix+".java");
 			writer = new OutputStreamWriter(new FileOutputStream(output), "UTF-8");
 			template.process(rootMap, writer);
 		} catch (Exception e) {

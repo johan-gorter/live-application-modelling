@@ -143,7 +143,7 @@ public class FlowGenerator extends AbstractGenerator {
 			parameters.add(selectDesign.name.get());
 		}
 
-		AbstractGenerator.generateFile(AbstractGenerator.flowTemplate, this, "flow", name, "Flow", rootPackageName, applicationRoot);
+		AbstractGenerator.generateFile(AbstractGenerator.flowTemplate, this, "flow", name, "Flow", rootPackageName, applicationRoot, this.customization!=null);
 		if (applicationRoot!=null) {
 			new File(new File(applicationRoot,"flow"), name.toLowerCase()).mkdirs();
 		}

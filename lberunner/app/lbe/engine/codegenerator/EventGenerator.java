@@ -36,7 +36,7 @@ public class EventGenerator extends AbstractGenerator {
 		for (EntityDesign parameter: eventDesign.parameters.get()) {
 			parameters.add(parameter.name.get());
 		}
-		AbstractGenerator.generateFile(AbstractGenerator.eventTemplate, this, "event", name, "Event", rootPackageName, applicationRoot);
+		AbstractGenerator.generateFile(AbstractGenerator.eventTemplate, this, "event", name, "Event", rootPackageName, applicationRoot, this.customization!=null);
 		
 		this.observations = eventDesign.getCase().stopRecordingObservations();
 	}
