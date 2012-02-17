@@ -13,10 +13,13 @@ import org.instantlogic.fabric.value.ReadOnlyRelationValue;
 
 import app.designer.AttributeDesign;
 import app.designer.FieldDesign;
+import lbe.model.deduction.*;
 
 public class FieldDesignEntity extends SimpleEntity {
 
 	public static final FieldDesignEntity INSTANCE = new FieldDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -54,6 +57,7 @@ public class FieldDesignEntity extends SimpleEntity {
 					FieldDesign instance) {
 				return instance.attribute;
 			}
+			
 		};
 	
 	// Reverse relations

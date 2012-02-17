@@ -1,12 +1,12 @@
-package app.${appname}.flow.${flowname?lower_case};
+package ${rootPackageName}.flow.${flowname?lower_case};
 <#include "Content.java.ftl">
 <#include "DeductionScheme.java.ftl">
 
-import app.${appname}.*;
-import app.${appname}.event.*;
-import app.${appname}.flow.*;
-import app.${appname}.entity.*;
-import app.${appname}.sharedpagefragment.*;
+import ${rootPackageName}.*;
+import ${rootPackageName}.event.*;
+import ${rootPackageName}.flow.*;
+import ${rootPackageName}.entity.*;
+import ${rootPackageName}.sharedpagefragment.*;
 import lbe.instance.*;
 import lbe.model.flow.*;
 import lbe.model.deduction.*;

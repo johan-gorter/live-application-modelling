@@ -10,10 +10,13 @@ import org.instantlogic.fabric.model.impl.SimpleEntity;
 import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
 
 import app.designer.ConstantStringDesign;
+import lbe.model.deduction.*;
 
 public class ConstantStringDesignEntity extends SimpleEntity {
 
 	public static final ConstantStringDesignEntity INSTANCE = new ConstantStringDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	

@@ -20,6 +20,8 @@ import app.designer.FlowSourceDesign;
 public class FlowNodeBaseDesignEntity extends SimpleEntity {
 
 	public static final FlowNodeBaseDesignEntity INSTANCE = new FlowNodeBaseDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	

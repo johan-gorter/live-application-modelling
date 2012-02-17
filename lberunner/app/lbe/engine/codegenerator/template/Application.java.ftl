@@ -1,10 +1,10 @@
-package app.${appname};
+package ${rootPackageName};
 
 import java.util.*;
 
-import app.${appname}.entity.*;
-import app.${appname}.*;
-import app.${appname}.flow.*;
+import ${rootPackageName}.entity.*;
+import ${rootPackageName}.*;
+import ${rootPackageName}.flow.*;
 import lbe.instance.CaseInstance;
 import lbe.model.Application;
 import lbe.model.Entity;

@@ -20,6 +20,8 @@ import app.designer.SharedFragmentDesign;
 public class PageFragmentHolderDesignEntity extends SimpleEntity {
 
 	public static final PageFragmentHolderDesignEntity INSTANCE = new PageFragmentHolderDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -43,6 +45,7 @@ public class PageFragmentHolderDesignEntity extends SimpleEntity {
 			public boolean isAutoCreate() {
 				return true;
 			}
+			
 		};
 	
 	// Reverse relations

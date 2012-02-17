@@ -1,9 +1,9 @@
-package app.${appname}.flow;
+package ${rootPackageName}.flow;
 
-import app.${appname}.entity.*;
-import app.${appname}.flow.*;
-import app.${appname}.event.*;
-import app.${appname}.flow.${name?lower_case}.*;
+import ${rootPackageName}.entity.*;
+import ${rootPackageName}.flow.*;
+import ${rootPackageName}.event.*;
+import ${rootPackageName}.flow.${name?lower_case}.*;
 import lbe.model.Entity;
 import lbe.model.flow.*;
 

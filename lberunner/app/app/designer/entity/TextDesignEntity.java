@@ -14,10 +14,13 @@ import app.designer.DomainEntryDesign;
 import app.designer.HeaderDesign;
 import app.designer.LinkDesign;
 import app.designer.TextDesign;
+import lbe.model.deduction.*;
 
 public class TextDesignEntity extends SimpleEntity {
 
 	public static final TextDesignEntity INSTANCE = new TextDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	

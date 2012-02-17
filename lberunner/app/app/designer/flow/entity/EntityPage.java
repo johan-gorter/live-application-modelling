@@ -26,16 +26,16 @@ public class EntityPage extends Page {
 	public static final EntityPage INSTANCE = new EntityPage();
 
 
-	private static Deduction<?> createDeduction0() {
-		Deduction<Design> d0 = SelectedInstanceDeduction.create(DesignEntity.INSTANCE);
-		Deduction<java.lang.String> d1 = AttributeDeduction.create(DesignEntity.name, d0);
+	private static Deduction<java.lang.String> createDeduction0() {
+		  	Deduction<Design> d0 = SelectedInstanceDeduction.create(DesignEntity.INSTANCE);
+		  	Deduction<java.lang.String> d1 = AttributeDeduction.create(DesignEntity.name, d0);
 		return d1;
 	}
 
 
-	private static Deduction<?> createDeduction1() {
-		Deduction<EntityDesign> d0 = SelectedInstanceDeduction.create(EntityDesignEntity.INSTANCE);
-		Deduction<java.util.List<AttributeDesign>> d1 = AttributeDeduction.create(EntityDesignEntity.attributes, d0);
+	private static Deduction<java.util.List<AttributeDesign>> createDeduction1() {
+		  	Deduction<EntityDesign> d0 = SelectedInstanceDeduction.create(EntityDesignEntity.INSTANCE);
+		  	Deduction<java.util.List<AttributeDesign>> d1 = AttributeDeduction.create(EntityDesignEntity.attributes, d0);
 		return d1;
 	}
 

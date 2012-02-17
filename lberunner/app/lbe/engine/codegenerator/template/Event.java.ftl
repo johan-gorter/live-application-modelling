@@ -1,6 +1,6 @@
-package app.${appname}.event;
+package ${rootPackageName}.event;
 
-import app.${appname}.entity.*;
+import ${rootPackageName}.entity.*;
 import lbe.model.flow.*;
 import lbe.model.pageelement.*;
 import lbe.model.pageelement.impl.*;

@@ -9,10 +9,19 @@ import org.instantlogic.fabric.model.impl.SimpleAttribute;
 import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
 
 import app.designer.Design;
+import lbe.model.deduction.*;
 
 public class DesignEntity extends Entity<Design> {
 
 	public static final DesignEntity INSTANCE = new DesignEntity();
+
+	// Deductions
+
+	private static Deduction<java.lang.String> createDeduction0() {
+		    Deduction<java.lang.String> d0 = new custom.designer.JavaNameCustomization();
+		return d0;
+	}
+
 	
 	@Override
 	public String getName() {

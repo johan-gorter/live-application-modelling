@@ -11,10 +11,13 @@ import org.instantlogic.fabric.value.ReadOnlyRelationValue;
 import app.designer.CompositePageFragmentDesign;
 import app.designer.PageCompositionDesign;
 import app.designer.PageFragmentDesign;
+import lbe.model.deduction.*;
 
 public class PageCompositionDesignEntity extends SimpleEntity {
 
 	public static final PageCompositionDesignEntity INSTANCE = new PageCompositionDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -34,6 +37,7 @@ public class PageCompositionDesignEntity extends SimpleEntity {
 			public boolean isOwner() {
 				return true;
 			}
+			
 		};
 	
 	// Reverse relations

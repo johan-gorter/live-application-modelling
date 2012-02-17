@@ -11,10 +11,13 @@ import org.instantlogic.fabric.value.ReadOnlyRelationValue;
 
 import app.designer.DeductionSchemeDesign;
 import app.designer.SelectDesign;
+import lbe.model.deduction.*;
 
 public class SelectDesignEntity extends SimpleEntity {
 
 	public static final SelectDesignEntity INSTANCE = new SelectDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -34,6 +37,7 @@ public class SelectDesignEntity extends SimpleEntity {
 			public boolean isOwner() {
 				return true;
 			}
+			
 		};
 	
 	// Reverse relations

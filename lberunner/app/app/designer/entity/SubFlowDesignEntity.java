@@ -11,10 +11,13 @@ import org.instantlogic.fabric.value.ReadOnlyRelationValue;
 
 import app.designer.FlowDesign;
 import app.designer.SubFlowDesign;
+import lbe.model.deduction.*;
 
 public class SubFlowDesignEntity extends SimpleEntity {
 
 	public static final SubFlowDesignEntity INSTANCE = new SubFlowDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -30,6 +33,7 @@ public class SubFlowDesignEntity extends SimpleEntity {
 					SubFlowDesign instance) {
 				return instance.flow;
 			}
+			
 		};
 	
 	// Reverse relations

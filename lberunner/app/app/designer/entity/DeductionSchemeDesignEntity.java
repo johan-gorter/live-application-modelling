@@ -20,6 +20,8 @@ import app.designer.SelectDesign;
 public class DeductionSchemeDesignEntity extends SimpleEntity {
 
 	public static final DeductionSchemeDesignEntity INSTANCE = new DeductionSchemeDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -43,6 +45,7 @@ public class DeductionSchemeDesignEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			
 		};
 	
 	public static final Relation<DeductionSchemeDesign, DeductionDesign, DeductionDesign> output
@@ -55,6 +58,7 @@ public class DeductionSchemeDesignEntity extends SimpleEntity {
 					DeductionSchemeDesign instance) {
 				return instance.output;
 			}
+			
 		};
 	
 	// Reverse relations

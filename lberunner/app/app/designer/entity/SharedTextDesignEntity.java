@@ -8,10 +8,13 @@ import org.instantlogic.fabric.model.Relation;
 import org.instantlogic.fabric.model.impl.SimpleEntity;
 
 import app.designer.SharedTextDesign;
+import lbe.model.deduction.*;
 
 public class SharedTextDesignEntity extends SimpleEntity {
 
 	public static final SharedTextDesignEntity INSTANCE = new SharedTextDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	

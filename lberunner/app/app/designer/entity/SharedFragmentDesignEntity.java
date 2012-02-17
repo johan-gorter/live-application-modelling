@@ -11,10 +11,13 @@ import org.instantlogic.fabric.value.ReadOnlyRelationValue;
 
 import app.designer.PageFragmentHolderDesign;
 import app.designer.SharedFragmentDesign;
+import lbe.model.deduction.*;
 
 public class SharedFragmentDesignEntity extends SimpleEntity {
 
 	public static final SharedFragmentDesignEntity INSTANCE = new SharedFragmentDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -30,6 +33,7 @@ public class SharedFragmentDesignEntity extends SimpleEntity {
 					SharedFragmentDesign instance) {
 				return instance.holder;
 			}
+			
 		};
 	
 	// Reverse relations

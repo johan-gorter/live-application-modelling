@@ -11,10 +11,13 @@ import org.instantlogic.fabric.value.ReadOnlyRelationValue;
 
 import app.designer.DeductionSchemeDesign;
 import app.designer.FormattedValueDesign;
+import lbe.model.deduction.*;
 
 public class FormattedValueDesignEntity extends SimpleEntity {
 
 	public static final FormattedValueDesignEntity INSTANCE = new FormattedValueDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -38,6 +41,7 @@ public class FormattedValueDesignEntity extends SimpleEntity {
 			public boolean isAutoCreate() {
 				return true;
 			}
+			
 		};
 	
 	// Reverse relations

@@ -158,11 +158,11 @@ public abstract class BootstrapperUtil {
 		return scheme;
 	}
 	
-	protected static DeductionSchemeDesign createCustomDeduction(String customization, Class c) {
+	protected static DeductionSchemeDesign createCustomDeduction(String customization, String resultClassName) {
 		DeductionSchemeDesign scheme = new DeductionSchemeDesign(applicationDesign);
 		DeductionDesign customDeductionDesign = new DeductionDesign(applicationDesign);
 		customDeductionDesign.setCustomization(customization);
-		customDeductionDesign.className.set(c.getName());
+		customDeductionDesign.className.set(resultClassName);
 		scheme.deductions.add(customDeductionDesign);
 		scheme.setOutput(customDeductionDesign);
 		return scheme;

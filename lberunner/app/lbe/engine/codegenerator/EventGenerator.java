@@ -15,7 +15,7 @@ public class EventGenerator extends AbstractGenerator {
 
 	public EventGenerator(EventDesign eventDesign, String appname) {
 		this.eventDesign = eventDesign;
-		this.appname = appname;
+		this.rootPackageName = appname;
 		this.name = eventDesign.getName();
 	}
 	
@@ -36,13 +36,13 @@ public class EventGenerator extends AbstractGenerator {
 		for (EntityDesign parameter: eventDesign.parameters.get()) {
 			parameters.add(parameter.name.get());
 		}
-		AbstractGenerator.generateFile(AbstractGenerator.eventTemplate, this, "event", name, "Event", appname, applicationRoot);
+		AbstractGenerator.generateFile(AbstractGenerator.eventTemplate, this, "event", name, "Event", rootPackageName, applicationRoot, this.customization!=null);
 		
 		this.observations = eventDesign.getCase().stopRecordingObservations();
 	}
 
 	@Override
 	public void delete(File applicationRoot) {
-		AbstractGenerator.deleteFile("event", name, "Event", appname, applicationRoot);
+		AbstractGenerator.deleteFile("event", name, "Event", rootPackageName, applicationRoot);
 	}
 }

@@ -69,7 +69,7 @@ public class FlowGenerator extends AbstractGenerator {
 	
 	public FlowGenerator(FlowDesign flowDesign, String appName) {
 		this.flowDesign = flowDesign;
-		this.appname = appName;
+		this.rootPackageName = appName;
 	}
 	
 	public final List<FlowSource> sources = new ArrayList<FlowSource>();
@@ -143,20 +143,20 @@ public class FlowGenerator extends AbstractGenerator {
 			parameters.add(selectDesign.name.get());
 		}
 
-		AbstractGenerator.generateFile(AbstractGenerator.flowTemplate, this, "flow", name, "Flow", appname, applicationRoot);
+		AbstractGenerator.generateFile(AbstractGenerator.flowTemplate, this, "flow", name, "Flow", rootPackageName, applicationRoot, this.customization!=null);
 		if (applicationRoot!=null) {
 			new File(new File(applicationRoot,"flow"), name.toLowerCase()).mkdirs();
 		}
 		
 		List<Design> newPages = updateGenerators(pageGenerators, getPages(flowDesign.nodes.get()), applicationRoot);
 		for(Design newPage : newPages) {
-			PageGenerator pageGenerator = new PageGenerator((PageDesign)newPage, appname, flowName);
+			PageGenerator pageGenerator = new PageGenerator((PageDesign)newPage, rootPackageName, flowName);
 			pageGenerator.update(applicationRoot);
 			pageGenerators.put(newPage.getName(), pageGenerator);
 		}
 		List<Design> newSubFlows = updateGenerators(subFlowGenerators, getSubFlows(flowDesign.nodes.get()), applicationRoot);
 		for(Design newSubFlow : newSubFlows) {
-			SubFlowGenerator subFlowGenerator = new SubFlowGenerator((SubFlowDesign)newSubFlow, appname, flowName);
+			SubFlowGenerator subFlowGenerator = new SubFlowGenerator((SubFlowDesign)newSubFlow, rootPackageName, flowName);
 			subFlowGenerator.update(applicationRoot);
 			subFlowGenerators.put(newSubFlow.getName(), subFlowGenerator);
 		}
@@ -185,7 +185,7 @@ public class FlowGenerator extends AbstractGenerator {
 
 	@Override
 	public void delete(File applicationRoot) {
-		AbstractGenerator.deleteFile("flow", name.toLowerCase(), "Flow", appname, applicationRoot);
+		AbstractGenerator.deleteFile("flow", name.toLowerCase(), "Flow", rootPackageName, applicationRoot);
 		File dir =new File(applicationRoot,"flow/"+name.toLowerCase()); 
 		purge(dir);
 		dir.delete();

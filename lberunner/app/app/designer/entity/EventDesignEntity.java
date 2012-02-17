@@ -22,6 +22,8 @@ import app.designer.LinkDesign;
 public class EventDesignEntity extends SimpleEntity {
 
 	public static final EventDesignEntity INSTANCE = new EventDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -41,6 +43,7 @@ public class EventDesignEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			
 		};
 	
 	// Reverse relations

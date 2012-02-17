@@ -17,6 +17,8 @@ import app.designer.TemplatedTextDesign;
 public class TemplatedTextDesignEntity extends SimpleEntity {
 
 	public static final TemplatedTextDesignEntity INSTANCE = new TemplatedTextDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -40,6 +42,7 @@ public class TemplatedTextDesignEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			
 		};
 	
 	// Reverse relations

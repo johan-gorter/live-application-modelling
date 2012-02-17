@@ -11,10 +11,13 @@ import org.instantlogic.fabric.value.ReadOnlyRelationValue;
 
 import app.designer.HeaderDesign;
 import app.designer.TextDesign;
+import lbe.model.deduction.*;
 
 public class HeaderDesignEntity extends SimpleEntity {
 
 	public static final HeaderDesignEntity INSTANCE = new HeaderDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -38,6 +41,7 @@ public class HeaderDesignEntity extends SimpleEntity {
 			public boolean isAutoCreate() {
 				return true;
 			}
+			
 		};
 	
 	// Reverse relations

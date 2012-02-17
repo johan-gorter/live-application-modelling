@@ -26,16 +26,16 @@ public class FlowPage extends Page {
 	public static final FlowPage INSTANCE = new FlowPage();
 
 
-	private static Deduction<?> createDeduction0() {
-		Deduction<Design> d0 = SelectedInstanceDeduction.create(DesignEntity.INSTANCE);
-		Deduction<java.lang.String> d1 = AttributeDeduction.create(DesignEntity.name, d0);
+	private static Deduction<java.lang.String> createDeduction0() {
+		  	Deduction<Design> d0 = SelectedInstanceDeduction.create(DesignEntity.INSTANCE);
+		  	Deduction<java.lang.String> d1 = AttributeDeduction.create(DesignEntity.name, d0);
 		return d1;
 	}
 
 
-	private static Deduction<?> createDeduction1() {
-		Deduction<FlowDesign> d0 = SelectedInstanceDeduction.create(FlowDesignEntity.INSTANCE);
-		Deduction<java.util.List<FlowNodeBaseDesign>> d1 = AttributeDeduction.create(FlowDesignEntity.nodes, d0);
+	private static Deduction<java.util.List<FlowNodeBaseDesign>> createDeduction1() {
+		  	Deduction<FlowDesign> d0 = SelectedInstanceDeduction.create(FlowDesignEntity.INSTANCE);
+		  	Deduction<java.util.List<FlowNodeBaseDesign>> d1 = AttributeDeduction.create(FlowDesignEntity.nodes, d0);
 		return d1;
 	}
 

@@ -1,4 +1,4 @@
-package app.${appname}.flow.${flowname?lower_case};
+package ${rootPackageName}.flow.${flowname?lower_case};
 
 import app.${appname}.flow.*;
 import lbe.model.flow.*;

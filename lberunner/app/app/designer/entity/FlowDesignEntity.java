@@ -23,6 +23,8 @@ import app.designer.SubFlowDesign;
 public class FlowDesignEntity extends SimpleEntity {
 
 	public static final FlowDesignEntity INSTANCE = new FlowDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -46,6 +48,7 @@ public class FlowDesignEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			
 		};
 	
 	public static final Relation<FlowDesign, List<FlowNodeBaseDesign>, FlowNodeBaseDesign> nodes
@@ -66,6 +69,7 @@ public class FlowDesignEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			
 		};
 	
 	public static final Relation<FlowDesign, List<FlowEdgeDesign>, FlowEdgeDesign> edges
@@ -86,6 +90,7 @@ public class FlowDesignEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			
 		};
 	
 	public static final Relation<FlowDesign, List<EntityDesign>, EntityDesign> parameters
@@ -102,6 +107,7 @@ public class FlowDesignEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			
 		};
 	
 	// Reverse relations

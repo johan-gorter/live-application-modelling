@@ -19,6 +19,8 @@ import app.designer.PageDesign;
 public class CompositePageFragmentDesignEntity extends SimpleEntity {
 
 	public static final CompositePageFragmentDesignEntity INSTANCE = new CompositePageFragmentDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -42,6 +44,7 @@ public class CompositePageFragmentDesignEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			
 		};
 	
 	// Reverse relations

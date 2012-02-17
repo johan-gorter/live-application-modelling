@@ -14,10 +14,13 @@ import org.instantlogic.fabric.value.ReadOnlyRelationValue;
 import app.designer.PageCompositionDesign;
 import app.designer.PageFragmentDesign;
 import app.designer.PageFragmentHolderDesign;
+import lbe.model.deduction.*;
 
 public class PageFragmentDesignEntity extends SimpleEntity {
 
 	public static final PageFragmentDesignEntity INSTANCE = new PageFragmentDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	

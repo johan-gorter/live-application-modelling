@@ -8,10 +8,13 @@ import org.instantlogic.fabric.model.Relation;
 import org.instantlogic.fabric.model.impl.SimpleEntity;
 
 import app.designer.ButtonDesign;
+import lbe.model.deduction.*;
 
 public class ButtonDesignEntity extends SimpleEntity {
 
 	public static final ButtonDesignEntity INSTANCE = new ButtonDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	

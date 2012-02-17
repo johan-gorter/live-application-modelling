@@ -10,10 +10,13 @@ import org.instantlogic.fabric.value.ReadOnlyRelationValue;
 
 import app.designer.StringProducerDesign;
 import app.designer.TemplatedTextDesign;
+import lbe.model.deduction.*;
 
 public class StringProducerDesignEntity extends SimpleEntity {
 
 	public static final StringProducerDesignEntity INSTANCE = new StringProducerDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	

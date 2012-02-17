@@ -22,6 +22,8 @@ import app.designer.PageFragmentHolderDesign;
 public class ApplicationDesignEntity extends SimpleEntity {
 
 	public static final ApplicationDesignEntity INSTANCE = new ApplicationDesignEntity();
+
+	// Deductions
 	
 	// Attributes
 	
@@ -33,6 +35,28 @@ public class ApplicationDesignEntity extends SimpleEntity {
 			@Override
 			public ReadOnlyAttributeValue<ApplicationDesign, java.lang.String> get(ApplicationDesign instance) {
 				return instance.name;
+			}
+		};
+	
+	public static final Attribute<ApplicationDesign, java.lang.String, java.lang.String> packageName 
+		= new SimpleAttribute<ApplicationDesign, java.lang.String, java.lang.String>(
+			"packageName", INSTANCE, java.lang.String.class
+		) {
+	
+			@Override
+			public ReadOnlyAttributeValue<ApplicationDesign, java.lang.String> get(ApplicationDesign instance) {
+				return instance.packageName;
+			}
+		};
+	
+	public static final Attribute<ApplicationDesign, java.lang.String, java.lang.String> sourcePath 
+		= new SimpleAttribute<ApplicationDesign, java.lang.String, java.lang.String>(
+			"sourcePath", INSTANCE, java.lang.String.class
+		) {
+	
+			@Override
+			public ReadOnlyAttributeValue<ApplicationDesign, java.lang.String> get(ApplicationDesign instance) {
+				return instance.sourcePath;
 			}
 		};
 	
@@ -67,6 +91,7 @@ public class ApplicationDesignEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			
 		};
 	
 	public static final Relation<ApplicationDesign, EntityDesign, EntityDesign> caseEntity
@@ -79,6 +104,7 @@ public class ApplicationDesignEntity extends SimpleEntity {
 					ApplicationDesign instance) {
 				return instance.caseEntity;
 			}
+			
 		};
 	
 	public static final Relation<ApplicationDesign, List<FlowDesign>, FlowDesign> flows
@@ -99,6 +125,7 @@ public class ApplicationDesignEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			
 		};
 	
 	public static final Relation<ApplicationDesign, List<EventDesign>, EventDesign> events
@@ -119,6 +146,7 @@ public class ApplicationDesignEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			
 		};
 	
 	public static final Relation<ApplicationDesign, List<FlowDesign>, FlowDesign> exposedFlows
@@ -135,6 +163,7 @@ public class ApplicationDesignEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			
 		};
 	
 	public static final Relation<ApplicationDesign, List<PageFragmentHolderDesign>, PageFragmentHolderDesign> sharedPageFragments
@@ -155,12 +184,15 @@ public class ApplicationDesignEntity extends SimpleEntity {
 			public boolean isMultivalue() {
 				return true;
 			}
+			
 		};
 	
 	// Reverse relations
 
 	private static final Attribute[] ATTRIBUTES = new Attribute[]{
 		name,
+		packageName,
+		sourcePath,
 		customization,
 	};
 	private static final Relation[] RELATIONS = new Relation[]{
