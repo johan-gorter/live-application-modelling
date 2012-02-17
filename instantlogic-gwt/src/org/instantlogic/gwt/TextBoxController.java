@@ -23,7 +23,7 @@ public class TextBoxController<V extends Object> extends FieldController<V, Text
 					value = (V)text;
 				}
 			}
-			((AttributeValue<?,V>)getModel()).set(value);
+			((AttributeValue<?,V>)getModel()).setValue(value);
 		}
 	};
 
