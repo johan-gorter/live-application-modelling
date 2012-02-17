@@ -1,15 +1,25 @@
 package app.designer.flow.entity;
 
-import app.designer.*;
-import app.designer.event.*;
-import app.designer.flow.*;
-import app.designer.entity.*;
-import app.designer.sharedpagefragment.*;
-import lbe.instance.*;
-import lbe.model.flow.*;
-import lbe.model.deduction.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
+import org.instantlogic.fabric.deduction.AttributeDeduction;
+import org.instantlogic.fabric.deduction.Deduction;
+import org.instantlogic.fabric.deduction.SelectedInstanceDeduction;
+import org.instantlogic.fabric.text.ConstantText;
+import org.instantlogic.fabric.text.TemplatedText;
+import org.instantlogic.interaction.flow.Page;
+import org.instantlogic.interaction.page.CompositePageFragment;
+import org.instantlogic.interaction.page.PageFragment;
+import org.instantlogic.interaction.page.impl.SimpleCompositePageFragment;
+import org.instantlogic.interaction.page.impl.SimpleField;
+import org.instantlogic.interaction.page.impl.SimpleLink;
+
+import app.designer.AttributeDesign;
+import app.designer.Design;
+import app.designer.EntityDesign;
+import app.designer.entity.DesignEntity;
+import app.designer.entity.EntityDesignEntity;
+import app.designer.event.AttributeDetailsEvent;
+import app.designer.event.ExploreInstanceEvent;
+import app.designer.event.HomeEvent;
 
 public class EntityPage extends Page {
 

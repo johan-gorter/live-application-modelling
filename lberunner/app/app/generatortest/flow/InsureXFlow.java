@@ -1,11 +1,12 @@
 package app.generatortest.flow;
 
-import app.generatortest.data.entity.*;
-import app.generatortest.flow.*;
-import app.generatortest.event.*;
-import app.generatortest.flow.insurex.*;
-import lbe.model.Entity;
-import lbe.model.flow.*;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.interaction.flow.Flow;
+import org.instantlogic.interaction.flow.FlowEdge;
+import org.instantlogic.interaction.flow.FlowNodeBase;
+import org.instantlogic.interaction.flow.FlowSource;
+
+import app.generatortest.flow.insurex.DriverPage;
 
 public class InsureXFlow extends Flow {
 

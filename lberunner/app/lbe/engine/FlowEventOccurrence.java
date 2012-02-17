@@ -1,7 +1,8 @@
 package lbe.engine;
 
-import lbe.instance.Instance;
-import lbe.model.FlowEvent;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.interaction.flow.FlowEvent;
+
 
 public class FlowEventOccurrence {
 

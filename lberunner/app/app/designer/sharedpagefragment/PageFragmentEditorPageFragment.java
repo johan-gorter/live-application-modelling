@@ -1,15 +1,28 @@
 package app.designer.sharedpagefragment;
 
-import app.designer.*;
-import app.designer.event.*;
-import app.designer.flow.*;
-import app.designer.entity.*;
-import app.designer.sharedpagefragment.*;
-import lbe.instance.*;
-import lbe.model.flow.*;
-import lbe.model.deduction.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
+import org.instantlogic.fabric.deduction.AttributeDeduction;
+import org.instantlogic.fabric.deduction.CastInstanceDeduction;
+import org.instantlogic.fabric.deduction.Deduction;
+import org.instantlogic.fabric.deduction.SelectedInstanceDeduction;
+import org.instantlogic.fabric.text.TemplatedText;
+import org.instantlogic.interaction.page.PageFragment;
+import org.instantlogic.interaction.page.impl.SimpleCompositePageFragment;
+import org.instantlogic.interaction.page.impl.SimpleLink;
+import org.instantlogic.interaction.page.impl.SimpleSharedPageFragment;
+
+import app.designer.AttributeDesign;
+import app.designer.CompositePageFragmentDesign;
+import app.designer.Design;
+import app.designer.FieldDesign;
+import app.designer.PageCompositionDesign;
+import app.designer.PageFragmentDesign;
+import app.designer.entity.CompositePageFragmentDesignEntity;
+import app.designer.entity.DesignEntity;
+import app.designer.entity.FieldDesignEntity;
+import app.designer.entity.PageCompositionDesignEntity;
+import app.designer.entity.PageFragmentDesignEntity;
+import app.designer.event.AttributeDetailsEvent;
+import app.designer.event.PageFragmentDetailsEvent;
 
 public class PageFragmentEditorPageFragment extends SimpleSharedPageFragment {
 	

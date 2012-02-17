@@ -1,11 +1,10 @@
 package app.designer.flow;
 
-import app.designer.entity.*;
-import app.designer.flow.*;
-import app.designer.event.*;
-import app.designer.flow.addfield.*;
-import lbe.model.Entity;
-import lbe.model.flow.*;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.interaction.flow.Flow;
+import org.instantlogic.interaction.flow.FlowEdge;
+import org.instantlogic.interaction.flow.FlowNodeBase;
+import org.instantlogic.interaction.flow.FlowSource;
 
 public class AddFieldFlow extends Flow {
 

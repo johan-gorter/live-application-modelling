@@ -59,7 +59,8 @@ public class RitAdministratieBootstrapper extends BootstrapperUtil {
 		
 		ritBeginstandRelation.setReadOnly(true);
 		ritBeginstandRelation.setRule(createCustomDeduction("com.jg.ritadministratie.instantlogic.deduction.RitBeginstandDeductionCustomization", "com.jg.ritadministratie.instantlogic.Stand"));
-		maandBeginstandRelation.setRule(createCustomDeduction("com.jg.ritadministratie.instantlogic.deduction.MaandBeginstandDeductionCustomization", "com.jg.ritadministratie.instantlogic.Stand"));
+		maandBeginstandRelation.setReadOnly(true);
+		maandBeginstandRelation.setRule(createCustomDeduction("custom.ritadministratie.MaandBeginstandDeductionCustomization", Stand.class));
 		
 		return applicationDesign;
 	}

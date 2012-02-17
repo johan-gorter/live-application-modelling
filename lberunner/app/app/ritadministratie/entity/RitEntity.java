@@ -1,15 +1,19 @@
 package app.ritadministratie.entity;
 
-import java.util.List;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.deduction.Deduction;
+import org.instantlogic.fabric.model.Attribute;
+import org.instantlogic.fabric.model.Relation;
+import org.instantlogic.fabric.model.impl.SimpleAttribute;
+import org.instantlogic.fabric.model.impl.SimpleEntity;
+import org.instantlogic.fabric.model.impl.SimpleRelation;
+import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
+import org.instantlogic.fabric.value.ReadOnlyRelationValue;
 
-import app.ritadministratie.*;
-import lbe.instance.*;
-import lbe.instance.value.*;
-import lbe.model.*;
-import lbe.model.impl.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
-import lbe.model.deduction.*;
+import app.ritadministratie.Dag;
+import app.ritadministratie.Rit;
+import app.ritadministratie.Stand;
 
 public class RitEntity extends SimpleEntity {
 

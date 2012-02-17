@@ -6,7 +6,6 @@ import java.util.List;
 
 import lbe.engine.codegenerator.EntityGenerator.Attribute.DomainEntry;
 import app.designer.AttributeDesign;
-import app.designer.DeductionSchemeDesign;
 import app.designer.DomainEntryDesign;
 import app.designer.EntityDesign;
 import app.designer.RelationDesign;

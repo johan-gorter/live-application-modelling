@@ -1,14 +1,49 @@
 package app.designer;
 
-import java.util.*;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
-import app.designer.entity.*;
-import app.designer.*;
-import app.designer.flow.*;
-import lbe.instance.CaseInstance;
-import lbe.model.Application;
-import lbe.model.Entity;
-import lbe.model.flow.Flow;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.interaction.Application;
+import org.instantlogic.interaction.flow.Flow;
+
+import app.designer.entity.ApplicationDesignEntity;
+import app.designer.entity.AttributeDeductionDesignEntity;
+import app.designer.entity.AttributeDesignEntity;
+import app.designer.entity.ButtonDesignEntity;
+import app.designer.entity.CastInstanceDeductionDesignEntity;
+import app.designer.entity.CompositePageFragmentDesignEntity;
+import app.designer.entity.ConstantStringDesignEntity;
+import app.designer.entity.ConstantTextDesignEntity;
+import app.designer.entity.DeductionDesignEntity;
+import app.designer.entity.DeductionSchemeDesignEntity;
+import app.designer.entity.DesignEntity;
+import app.designer.entity.DomainEntryDesignEntity;
+import app.designer.entity.EntityDesignEntity;
+import app.designer.entity.EventDesignEntity;
+import app.designer.entity.FieldDesignEntity;
+import app.designer.entity.FlowDesignEntity;
+import app.designer.entity.FlowEdgeDesignEntity;
+import app.designer.entity.FlowNodeBaseDesignEntity;
+import app.designer.entity.FlowSourceDesignEntity;
+import app.designer.entity.FormattedValueDesignEntity;
+import app.designer.entity.HeaderDesignEntity;
+import app.designer.entity.LinkDesignEntity;
+import app.designer.entity.PageCompositionDesignEntity;
+import app.designer.entity.PageDesignEntity;
+import app.designer.entity.PageFragmentDesignEntity;
+import app.designer.entity.PageFragmentHolderDesignEntity;
+import app.designer.entity.RelationDesignEntity;
+import app.designer.entity.SelectDesignEntity;
+import app.designer.entity.SelectedInstanceDeductionDesignEntity;
+import app.designer.entity.SharedFragmentDesignEntity;
+import app.designer.entity.SharedTextDesignEntity;
+import app.designer.entity.StringProducerDesignEntity;
+import app.designer.entity.SubFlowDesignEntity;
+import app.designer.entity.TemplatedTextDesignEntity;
+import app.designer.entity.TextDesignEntity;
+import app.designer.flow.MainFlow;
 
 public class DesignerApplication extends Application {
 

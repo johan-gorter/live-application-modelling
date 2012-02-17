@@ -1,15 +1,9 @@
 package app.designer.flow.caseexplorerinstance;
 
-import app.designer.*;
-import app.designer.event.*;
-import app.designer.flow.*;
-import app.designer.entity.*;
-import app.designer.sharedpagefragment.*;
-import lbe.instance.*;
-import lbe.model.flow.*;
-import lbe.model.deduction.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
+import org.instantlogic.interaction.flow.Page;
+import org.instantlogic.interaction.page.CompositePageFragment;
+import org.instantlogic.interaction.page.PageFragment;
+import org.instantlogic.interaction.page.impl.SimpleCompositePageFragment;
 
 public class InstancePage extends Page {
 

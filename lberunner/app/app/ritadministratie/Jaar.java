@@ -2,22 +2,20 @@ package app.ritadministratie;
 
 import java.util.List;
 
-import app.ritadministratie.*;
-import app.ritadministratie.entity.*;
-import lbe.instance.*;
-import lbe.instance.impl.*;
-import lbe.instance.value.*;
-import lbe.model.*;
-import lbe.model.impl.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.impl.SimpleCaseInstance;
+import org.instantlogic.fabric.model.CaseEntity;
+import org.instantlogic.fabric.value.AttributeValue;
+import org.instantlogic.fabric.value.RelationValues;
+
+import app.ritadministratie.entity.JaarEntity;
 
 public class Jaar 
 	extends SimpleCaseInstance 
 	implements Instance {
 
 	public Jaar() {
-		super(JaarEntity.INSTANCE, RitAdministratieApplication.INSTANCE);
+		super(JaarEntity.INSTANCE);
 	}
 
 	// Attributes
@@ -55,6 +53,11 @@ public class Jaar
 	
 	public void setIjkingen(List<Ijking> newValue) {
 		ijkingen.set(newValue);
+	}
+
+	@Override
+	public CaseEntity getModel() {
+		return JaarEntity.INSTANCE;
 	}
 
 	// Reverse relations

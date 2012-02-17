@@ -1,6 +1,6 @@
 package lbe.engine;
 
-import lbe.model.flow.FlowNodeBase;
+import org.instantlogic.interaction.flow.FlowNodeBase;
 
 public class UnhandledOccurrenceException extends RuntimeException {
 

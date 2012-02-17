@@ -125,7 +125,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 
 		// Data
 		createRelation(entityDesign, "extendsFrom", RelationType.ManyToZeroOrOne, "extensions", entityDesign);
-		RelationDesign attributes = createRelation(entityDesign, "attributes", RelationType.OneToManyAggregation, "entity", attributeDesign);
+		RelationDesign attributes = createRelation(entityDesign, "attributes", RelationType.OneToManyAggregation, "ofEntity", attributeDesign);
 		createRelation(entityDesign, "relations", RelationType.OneToManyAggregation, "from", relationDesign);
 		createRelation(relationDesign, "to", RelationType.ManyToZeroOrOne, "reverseRelations", entityDesign);
 		createRelation(attributeDesign, "question", RelationType.OneToZeroOrOneAggregation, "questionOnAttribute", textDesign);
@@ -141,8 +141,8 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createRelation(deductionSchemeDesign, "output", RelationType.OneToZeroOrOne, "schemeOutput", deductionDesign);
 		createRelation(deductionDesign, "inputs", RelationType.ManyToMany, "outputs", deductionDesign);
 		createRelation(attributeDeductionDesign, "attribute", RelationType.ManyToZeroOrOne, "attributeInDeductions", attributeDesign);
-		createRelation(selectedInstanceDeductionDesign, "entity", RelationType.ManyToZeroOrOne, "entityInSelectedInstanceDeductions", entityDesign);
-		createRelation(castInstanceDeductionDesign, "entity", RelationType.ManyToZeroOrOne, "entityInCastDeductions", entityDesign);
+		createRelation(selectedInstanceDeductionDesign, "ofEntity", RelationType.ManyToZeroOrOne, "entityInSelectedInstanceDeductions", entityDesign);
+		createRelation(castInstanceDeductionDesign, "toEntity", RelationType.ManyToZeroOrOne, "entityInCastDeductions", entityDesign);
 		
 		// Text
 		createRelation(templatedTextDesign, "untranslated", RelationType.OneToManyAggregation, "untranslatedInTemplate", stringProducerDesign);

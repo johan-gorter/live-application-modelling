@@ -1,14 +1,22 @@
 package app.ritadministratie;
 
-import java.util.*;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
-import app.ritadministratie.entity.*;
-import app.ritadministratie.*;
-import app.ritadministratie.flow.*;
-import lbe.instance.CaseInstance;
-import lbe.model.Application;
-import lbe.model.Entity;
-import lbe.model.flow.Flow;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.model.CaseEntity;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.interaction.Application;
+import org.instantlogic.interaction.flow.Flow;
+
+import app.ritadministratie.entity.AutoEntity;
+import app.ritadministratie.entity.DagEntity;
+import app.ritadministratie.entity.IjkingEntity;
+import app.ritadministratie.entity.JaarEntity;
+import app.ritadministratie.entity.MaandEntity;
+import app.ritadministratie.entity.RitEntity;
+import app.ritadministratie.entity.StandEntity;
+import app.ritadministratie.entity.TrajectEntity;
 
 public class RitAdministratieApplication extends Application {
 
@@ -18,7 +26,7 @@ public class RitAdministratieApplication extends Application {
 	}
 	
 	@Override
-	public Entity getCaseModel() {
+	public CaseEntity getCaseModel() {
 		return JaarEntity.INSTANCE;
 	}
 	
@@ -29,28 +37,6 @@ public class RitAdministratieApplication extends Application {
 	public Flow[] getExposedFlows() {
 		return exposedFlows;
 	}
-	
-	private static final Entity[] entities = new Entity[] {
-		JaarEntity.INSTANCE,
-		AutoEntity.INSTANCE,
-		MaandEntity.INSTANCE,
-		DagEntity.INSTANCE,
-		RitEntity.INSTANCE,
-		StandEntity.INSTANCE,
-		TrajectEntity.INSTANCE,
-		IjkingEntity.INSTANCE,
-	};
-	private static final SortedMap<String, Entity> entityMap = new TreeMap<String, Entity>();
-	static {
-		for (Entity entity:entities) {
-			entityMap.put(entity.getName(), entity);
-		}
-	}
-	@Override
-	public SortedMap<String, Entity> getEntities() {
-		return entityMap;
-	}
-	
 	
 	@Override
 	public Class<? extends CaseInstance> getCaseInstanceClass() {

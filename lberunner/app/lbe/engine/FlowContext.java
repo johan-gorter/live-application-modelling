@@ -1,14 +1,15 @@
 package lbe.engine;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import lbe.instance.CaseInstance;
-import lbe.instance.Instance;
-import lbe.model.Entity;
-import lbe.model.flow.Flow;
-import lbe.model.flow.FlowNodeBase;
-import lbe.model.flow.Page;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.util.DeductionContext;
+import org.instantlogic.interaction.flow.Flow;
+import org.instantlogic.interaction.flow.FlowNodeBase;
+import org.instantlogic.interaction.flow.Page;
+
 
 public class FlowContext extends DeductionContext {
 

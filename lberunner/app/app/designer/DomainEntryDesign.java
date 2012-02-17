@@ -1,16 +1,12 @@
 package app.designer;
 
-import java.util.List;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.value.ReadOnlyRelationValue;
+import org.instantlogic.fabric.value.RelationValue;
 
-import app.designer.*;
-import app.designer.entity.*;
-import lbe.instance.*;
-import lbe.instance.impl.*;
-import lbe.instance.value.*;
-import lbe.model.*;
-import lbe.model.impl.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
+import app.designer.entity.DomainEntryDesignEntity;
 
 public class DomainEntryDesign 
 	extends Design 

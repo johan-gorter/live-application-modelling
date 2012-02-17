@@ -1,7 +1,9 @@
 package app.designer.flow.entity;
 
-import app.designer.flow.*;
-import lbe.model.flow.*;
+import org.instantlogic.interaction.flow.Flow;
+import org.instantlogic.interaction.flow.SubFlow;
+
+import app.designer.flow.AttributeFlow;
 
 public class AttributeSubFlow extends SubFlow {
 

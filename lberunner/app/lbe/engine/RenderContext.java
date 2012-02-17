@@ -3,12 +3,8 @@ package lbe.engine;
 import java.util.ArrayList;
 import java.util.List;
 
-import lbe.instance.Instance;
-import lbe.instance.value.ReadOnlyAttributeValue;
-import lbe.instance.value.ReadOnlyRelationValue;
-import lbe.model.Attribute;
-import lbe.model.Entity;
-import lbe.model.Relation;
+import org.instantlogic.fabric.util.AbstractDeductionContext;
+
 
 public class RenderContext extends AbstractDeductionContext{
 

@@ -1,14 +1,16 @@
 package app.designer.entity;
 
-import java.util.List;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.model.Attribute;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.model.Relation;
+import org.instantlogic.fabric.model.impl.SimpleEntity;
+import org.instantlogic.fabric.model.impl.SimpleRelation;
+import org.instantlogic.fabric.value.ReadOnlyRelationValue;
 
-import app.designer.*;
-import lbe.instance.*;
-import lbe.instance.value.*;
-import lbe.model.*;
-import lbe.model.impl.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
+import app.designer.DeductionSchemeDesign;
+import app.designer.FormattedValueDesign;
 import lbe.model.deduction.*;
 
 public class FormattedValueDesignEntity extends SimpleEntity {

@@ -3,14 +3,11 @@ package lbe.engine.codegenerator;
 import java.util.ArrayList;
 import java.util.List;
 
-import lbe.instance.value.RelationValue;
-
 import app.designer.AttributeDeductionDesign;
 import app.designer.AttributeDesign;
 import app.designer.CastInstanceDeductionDesign;
 import app.designer.DeductionDesign;
 import app.designer.DeductionSchemeDesign;
-import app.designer.Design;
 import app.designer.RelationDesign;
 import app.designer.SelectedInstanceDeductionDesign;
 

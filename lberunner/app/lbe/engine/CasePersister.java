@@ -8,11 +8,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Random;
 
-import lbe.instance.CaseInstance;
-import lbe.instance.Instance;
-
 import org.apache.commons.codec.binary.Hex;
 import org.apache.log4j.Logger;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.Instance;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

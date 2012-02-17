@@ -3,10 +3,8 @@ package lbe.engine.codegenerator;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.designer.AttributeDesign;
 import app.designer.ConstantStringDesign;
 import app.designer.ConstantTextDesign;
-import app.designer.DeductionDesign;
 import app.designer.DeductionSchemeDesign;
 import app.designer.FormattedValueDesign;
 import app.designer.StringProducerDesign;

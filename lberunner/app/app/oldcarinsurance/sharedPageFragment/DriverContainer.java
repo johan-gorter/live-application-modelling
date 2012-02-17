@@ -1,13 +1,15 @@
  package app.oldcarinsurance.sharedPageFragment;
 
 import lbe.engine.RenderContext;
-import lbe.model.deduction.AttributeDeduction;
-import lbe.model.deduction.Deduction;
-import lbe.model.deduction.SelectedInstanceDeduction;
-import lbe.model.pageelement.CompositePageFragment;
-import lbe.model.pageelement.PageFragment;
-import lbe.model.pageelement.Text;
-import lbe.model.pageelement.impl.ConstantText;
+
+import org.instantlogic.fabric.deduction.AttributeDeduction;
+import org.instantlogic.fabric.deduction.Deduction;
+import org.instantlogic.fabric.deduction.SelectedInstanceDeduction;
+import org.instantlogic.fabric.text.ConstantText;
+import org.instantlogic.fabric.text.Text;
+import org.instantlogic.interaction.page.CompositePageFragment;
+import org.instantlogic.interaction.page.PageFragment;
+
 import app.oldcarinsurance.CarinsuranceCase;
 import app.oldcarinsurance.Driver;
 import app.oldcarinsurance.entity.CarinsuranceCaseEntity;

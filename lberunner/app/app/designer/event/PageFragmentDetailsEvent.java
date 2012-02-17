@@ -1,11 +1,9 @@
 package app.designer.event;
 
-import app.designer.entity.*;
-import lbe.model.flow.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
-import lbe.model.Entity;
-import lbe.model.impl.SimpleFlowEvent;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.interaction.flow.impl.SimpleFlowEvent;
+
+import app.designer.entity.FieldDesignEntity;
 
 public class PageFragmentDetailsEvent extends SimpleFlowEvent {
 

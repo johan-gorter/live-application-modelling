@@ -4,16 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lbe.engine.RenderContext;
-import lbe.instance.Instance;
-import lbe.model.Attribute;
-import lbe.model.Relation;
-import lbe.model.pageelement.CompositePageFragment;
-import lbe.model.pageelement.PageFragment;
-import lbe.model.pageelement.Text;
-import lbe.model.pageelement.impl.ConstantText;
-import lbe.model.pageelement.impl.SimpleButton;
-import lbe.model.pageelement.impl.SimpleCompositePageFragment;
-import lbe.model.pageelement.impl.SimpleField;
+
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.model.Attribute;
+import org.instantlogic.fabric.model.Relation;
+import org.instantlogic.fabric.text.ConstantText;
+import org.instantlogic.fabric.text.Text;
+import org.instantlogic.fabric.util.DeductionContext;
+import org.instantlogic.interaction.page.CompositePageFragment;
+import org.instantlogic.interaction.page.PageFragment;
+import org.instantlogic.interaction.page.TextPageFragment;
+import org.instantlogic.interaction.page.impl.SimpleButton;
+import org.instantlogic.interaction.page.impl.SimpleCompositePageFragment;
+import org.instantlogic.interaction.page.impl.SimpleField;
+
 import app.designer.event.ExploreInstanceEvent;
 import app.designer.flow.caseexplorerinstance.InstancePage;
 
@@ -22,7 +26,7 @@ public class InstancePageCustomization extends InstancePage {
 	public static class InstanceButtonText extends Text {
 
 		@Override
-		public String renderText(RenderContext context) {
+		public String renderText(DeductionContext context) {
 			Instance selected = context.getSelectedInstance(null);
 			return selected.getModel().getName() + selected.getInstanceId();
 		}
@@ -39,7 +43,7 @@ public class InstancePageCustomization extends InstancePage {
 		public PageFragment[] getChildren(RenderContext context) {
 			Instance instance = context.getSelectedInstance(null);
 			List<PageFragment> children = new ArrayList<PageFragment>();
-			children.add(new ConstantText("Instance "+instance.getInstanceId()+" of type "+instance.getModel().getName()));
+			children.add(new TextPageFragment(new ConstantText("Instance "+instance.getInstanceId()+" of type "+instance.getModel().getName())));
 			addFields(children, instance, context);
 			addButtons(children, instance, context);
 			return children.toArray(new PageFragment[children.size()]);
@@ -55,7 +59,7 @@ public class InstancePageCustomization extends InstancePage {
 		}
 
 		private void addRelation(List<PageFragment> children, Instance instance, Relation relation) {
-			children.add(new ConstantText(relation.getName()+": "));
+			children.add(new TextPageFragment(new ConstantText(relation.getName()+": ")));
 			Object value = relation.get(instance).get();
 			if (value!=null) {
 				children.add(
@@ -87,7 +91,7 @@ public class InstancePageCustomization extends InstancePage {
 	
 	private static CompositePageFragment CONTENT = 
         new SimpleCompositePageFragment(new PageFragment[]{
-            new ConstantText("Case Explorer"),
+            new TextPageFragment(new ConstantText("Case Explorer")),
             new InstanceExplorerFragment()
         }); 
 	

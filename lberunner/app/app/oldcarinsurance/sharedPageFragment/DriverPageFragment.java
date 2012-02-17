@@ -1,17 +1,18 @@
 package app.oldcarinsurance.sharedPageFragment;
 
+import org.instantlogic.fabric.deduction.AttributeDeduction;
+import org.instantlogic.fabric.deduction.Deduction;
+import org.instantlogic.fabric.deduction.SelectedInstanceDeduction;
+import org.instantlogic.fabric.text.ConstantText;
+import org.instantlogic.interaction.page.PageFragment;
+import org.instantlogic.interaction.page.impl.SimpleCompositePageFragment;
+import org.instantlogic.interaction.page.impl.SimpleField;
+import org.instantlogic.interaction.page.impl.SimpleSharedPageFragment;
+
 import app.carinsurance.CarinsuranceCase;
 import app.carinsurance.Driver;
 import app.carinsurance.entity.CarinsuranceCaseEntity;
 import app.carinsurance.entity.DriverEntity;
-import lbe.model.deduction.AttributeDeduction;
-import lbe.model.deduction.Deduction;
-import lbe.model.deduction.SelectedInstanceDeduction;
-import lbe.model.pageelement.PageFragment;
-import lbe.model.pageelement.impl.ConstantText;
-import lbe.model.pageelement.impl.SimpleCompositePageFragment;
-import lbe.model.pageelement.impl.SimpleField;
-import lbe.model.pageelement.impl.SimpleSharedPageFragment;
 
 public class DriverPageFragment extends SimpleSharedPageFragment {
 	

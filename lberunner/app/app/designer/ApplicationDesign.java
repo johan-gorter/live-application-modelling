@@ -2,15 +2,13 @@ package app.designer;
 
 import java.util.List;
 
-import app.designer.*;
-import app.designer.entity.*;
-import lbe.instance.*;
-import lbe.instance.impl.*;
-import lbe.instance.value.*;
-import lbe.model.*;
-import lbe.model.impl.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.impl.SimpleCaseInstance;
+import org.instantlogic.fabric.value.AttributeValue;
+import org.instantlogic.fabric.value.RelationValue;
+import org.instantlogic.fabric.value.RelationValues;
+
+import app.designer.entity.ApplicationDesignEntity;
 
 public class ApplicationDesign 
 	extends SimpleCaseInstance 

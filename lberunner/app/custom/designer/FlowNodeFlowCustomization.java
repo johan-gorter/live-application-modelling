@@ -2,7 +2,9 @@ package custom.designer;
 
 import lbe.engine.FlowContext;
 import lbe.engine.FlowEventOccurrence;
-import lbe.instance.Instance;
+
+import org.instantlogic.fabric.Instance;
+
 import app.designer.PageDesign;
 import app.designer.SubFlowDesign;
 import app.designer.event.FlowDetailsEvent;

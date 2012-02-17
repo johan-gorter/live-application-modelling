@@ -1,10 +1,9 @@
 package custom.designer;
 
-import app.designer.ApplicationDesign;
 import lbe.engine.codegenerator.ApplicationGenerator;
-import lbe.instance.impl.SimpleCaseInstance;
 import play.Play;
 import play.classloading.HotswapAgent;
+import app.designer.ApplicationDesign;
 
 public class ApplicationDesignCustomization extends ApplicationDesign {
 

@@ -2,14 +2,24 @@ package app.designer.entity;
 
 import java.util.List;
 
-import app.designer.*;
-import lbe.instance.*;
-import lbe.instance.value.*;
-import lbe.model.*;
-import lbe.model.impl.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
-import lbe.model.deduction.*;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.model.Attribute;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.model.Relation;
+import org.instantlogic.fabric.model.impl.SimpleEntity;
+import org.instantlogic.fabric.model.impl.SimpleRelation;
+import org.instantlogic.fabric.value.ReadOnlyRelationValue;
+import org.instantlogic.fabric.value.ReadOnlyRelationValues;
+
+import app.designer.ApplicationDesign;
+import app.designer.AttributeDesign;
+import app.designer.CastInstanceDeductionDesign;
+import app.designer.EntityDesign;
+import app.designer.EventDesign;
+import app.designer.FlowDesign;
+import app.designer.RelationDesign;
+import app.designer.SelectedInstanceDeductionDesign;
 
 public class EntityDesignEntity extends SimpleEntity {
 
