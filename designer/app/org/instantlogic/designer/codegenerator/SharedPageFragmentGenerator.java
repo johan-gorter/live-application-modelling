@@ -1,4 +1,4 @@
-package lbe.engine.codegenerator;
+package org.instantlogic.codegenerator;
 
 import java.io.File;
 

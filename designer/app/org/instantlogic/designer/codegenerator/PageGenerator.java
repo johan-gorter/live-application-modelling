@@ -1,10 +1,8 @@
-package lbe.engine.codegenerator;
+package org.instantlogic.codegenerator;
 
 import java.io.File;
 
 import org.instantlogic.fabric.util.Observations;
-
-import app.designer.PageDesign;
 
 public class PageGenerator extends AbstractGenerator {
 
@@ -41,7 +39,7 @@ public class PageGenerator extends AbstractGenerator {
 		
 		AbstractGenerator.generateFile(AbstractGenerator.pageTemplate, this, "flow/"+flowname.toLowerCase(), pageDesign.name.get(), "Page", rootPackageName, applicationRoot, this.customization!=null);
 		
-		this.observations = pageDesign.getCase().stopRecordingObservations();
+		this.observations = pageDesign.getInstanceAdministration().stopRecordingObservations();
 	}
 
 	@Override

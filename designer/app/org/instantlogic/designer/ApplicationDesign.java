@@ -1,5 +1,12 @@
 package org.instantlogic.designer;
 
-public class ApplicationDesign extends AbstractApplicationDesign {
+import lbe.engine.codegenerator.ApplicationGenerator;
 
+public class ApplicationDesign extends AbstractApplicationDesign {
+	
+	private ApplicationGenerator applicationGenerator = new ApplicationGenerator(this);
+	
+	public ApplicationDesign() {
+		
+	}
 }

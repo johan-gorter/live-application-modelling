@@ -1,4 +1,4 @@
-package lbe.engine.codegenerator;
+package org.instantlogic.codegenerator;
 
 import java.util.ArrayList;
 import java.util.List;
