@@ -25,6 +25,10 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		// Case
 		applicationDesign = new ApplicationDesignCustomization();
 		applicationDesign.name.set("Designer");
+		
+		applicationDesign.packageName.set("org.instantlogic.designer");
+		applicationDesign.sourcePath.set("/prive/live-business-engineering/designer-generated/app");
+		
 		//applicationDesign.name.set("NextDesigner");
 		
 		// Entities
@@ -41,12 +45,12 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		// Concept
 		EntityDesign design = createEntity("Design", null);
 		AttributeDesign name = createAttribute(design, "name", String.class);
-		AttributeDesign valid = createAttribute(design, "valid", Boolean.class);
-		valid.readOnly.set(true);
-		valid.customization.set("custom.designer.ValidAttributeCustomization");
+//		AttributeDesign valid = createAttribute(design, "valid", Boolean.class);
+//		valid.readOnly.set(true);
+//		valid.customization.set("custom.designer.ValidAttributeCustomization");
 		AttributeDesign javaName = createAttribute(design, "javaName", String.class);
 		javaName.setReadOnly(true);
-		javaName.setRule(createCustomDeduction("custom.designer.JavaNameCustomization", String.class));
+		javaName.setRule(createCustomDeduction("org.instantlogic.designer.deduction.JavaNameDeduction", "java.lang.String"));
 		createAttribute(design, "customization", String.class);
 		
 		// Entity
@@ -150,7 +154,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 
 		// Shared
 		createRelation(application, "sharedPageFragments", RelationType.OneToManyAggregation, "shared", pageFragmentHolder);
-		createRelation(sharedFragment, "holder", RelationType.ManyToZeroOrOne, "usages", pageFragmentHolder);
+		createRelation(sharedFragment, "pageFragmentHolder", RelationType.ManyToZeroOrOne, "usages", pageFragmentHolder);
 		createRelation(pageFragmentHolder, "pageFragment", RelationType.OneToOneAggregation, "holder", pageFragmentDesign);
 		
 		// Page elements

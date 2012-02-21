@@ -11,7 +11,7 @@ public class ${name}Entity extends org.instantlogic.fabric.model.Entity<${rootPa
 
 	<#if extendsFrom??>
 	@Override
-	public Entity extendsEntity() {
+	public org.instantlogic.fabric.model.Entity extendsEntity() {
 		return ${rootPackageName}.entity.${extendsFrom}Entity.INSTANCE;
 	}
 	</#if>

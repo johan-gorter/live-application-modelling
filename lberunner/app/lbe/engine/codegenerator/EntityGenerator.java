@@ -156,7 +156,7 @@ public class EntityGenerator extends AbstractGenerator {
 		attributes.clear();
 		for (AttributeDesign attributeDesign: entityDesign.attributes.get()) {
 			Attribute attribute = new Attribute();
-			attribute.name = attributeDesign.name.get();
+			attribute.name = javaSafeName(attributeDesign.name.get());
 			attribute.customization = attributeDesign.customization.get();
 			attribute.itemClassName = attributeDesign.className.get();
 			attribute.multivalue = (attributeDesign.multivalue.get()==Boolean.TRUE);
@@ -186,7 +186,7 @@ public class EntityGenerator extends AbstractGenerator {
 		relations.clear();
 		for (RelationDesign relationDesign: entityDesign.relations.get()) {
 			Relation relation = new Relation();
-			relation.name = relationDesign.name.get();
+			relation.name = javaSafeName(relationDesign.name.get());
 			relation.multivalue = (relationDesign.multivalue.get()==Boolean.TRUE);
 			relation.readonly = (relationDesign.readOnly.get()==Boolean.TRUE);
 			relation.owner = (relationDesign.owner.get()==Boolean.TRUE);
@@ -206,9 +206,9 @@ public class EntityGenerator extends AbstractGenerator {
 		reverseRelations.clear();
 		for (RelationDesign relationDesign: entityDesign.reverseRelations.get()) {
 			Relation relation = new Relation();
-			relation.name = relationDesign.reverseName.get();
+			relation.name = javaSafeName(relationDesign.reverseName.get());
 			relation.multivalue = (relationDesign.reverseMultivalue.get()==Boolean.TRUE);
-			relation.reverseName = relationDesign.name.get();
+			relation.reverseName = javaSafeName(relationDesign.name.get());
 			relation.item = relationDesign.from.get().name.get();
 			relation.to = rootPackageName+"."+relation.item;
 			if (relation.multivalue) {

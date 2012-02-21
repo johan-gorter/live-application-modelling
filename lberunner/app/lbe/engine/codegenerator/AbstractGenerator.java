@@ -156,4 +156,13 @@ public abstract class AbstractGenerator {
 		deductionSchemes.add(new DeductionSchemeGenerator(scheme, deductionIndex));
 		return deductionIndex;
 	}
+
+	protected String javaSafeName(String name) {
+		if ("package".equals(name) || "default".equals(name)) {
+			return "_"+name;
+		}
+		return name;
+	}
+	
+	
 }
