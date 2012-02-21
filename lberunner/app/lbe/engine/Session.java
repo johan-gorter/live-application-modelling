@@ -1,5 +1,7 @@
 package lbe.engine;
 
+import org.instantlogic.interaction.util.PageCoordinates;
+
 public class Session {
 
 	private String id;

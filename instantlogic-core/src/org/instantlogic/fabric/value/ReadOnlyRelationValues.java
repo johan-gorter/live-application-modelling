@@ -6,7 +6,7 @@ import org.instantlogic.fabric.Instance;
 
 
 // Value: List<Instance> or Instance
-public interface ReadOnlyRelationValues<I extends Instance<I>, To extends Instance<To>> 
+public interface ReadOnlyRelationValues<I extends Instance, To extends Instance> 
 	extends ReadOnlyAttributeValues<I, To>,  ReadOnlyRelationValue<I, List<To>>{
 	
 }

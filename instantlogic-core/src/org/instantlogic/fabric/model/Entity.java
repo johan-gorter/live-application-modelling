@@ -4,15 +4,16 @@ import java.util.Iterator;
 import java.util.SortedMap;
 
 import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.Instance;
 
 
 /**
  * Can be compared to a Class, only more powerful
  */
-public abstract class Entity<I extends Instance<I>> extends Concept {
+public abstract class Entity<I extends Instance> extends Concept {
 
 	public SortedMap<String, Entity<?>> getAllEntities() {
-		for (Relation<I, ? extends Object, ? extends Instance<?>> relation : getRelations()) {
+		for (Relation<I, ? extends Object, ? extends Instance> relation : getRelations()) {
 			relation.getTo();
 		}
 		throw new RuntimeException("TODO");
@@ -96,7 +97,7 @@ public abstract class Entity<I extends Instance<I>> extends Concept {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public final Iterable<Relation<I, ? extends Object, ? extends Instance<?>>> getRelations() {
+	public final Iterable<Relation<I, ? extends Object, ? extends Instance>> getRelations() {
 		Entity<?> extendsEntity = extendsEntity();
 		Iterable<?> baseEntityIterator=null;
 		if (extendsEntity!=null) {
@@ -106,7 +107,7 @@ public abstract class Entity<I extends Instance<I>> extends Concept {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public final Iterable<Relation<? extends Instance<?>, ? extends Object, I>> getReverseRelations() {
+	public final Iterable<Relation<? extends Instance, ? extends Object, I>> getReverseRelations() {
 		Entity<?> extendsEntity = extendsEntity();
 		Iterable<?> baseEntityIterator=null;
 		if (extendsEntity!=null) {
@@ -117,9 +118,9 @@ public abstract class Entity<I extends Instance<I>> extends Concept {
 	
 	public abstract Attribute<I, ? extends Object, ? extends Object>[] getLocalAttributes();
 	
-	public abstract Relation<I, ? extends Object, ? extends Instance<?>>[] getLocalRelations();
+	public abstract Relation<I, ? extends Object, ? extends Instance>[] getLocalRelations();
 
-	public abstract Relation<? extends Instance<?>, ? extends Object, I>[] getLocalReverseRelations();
+	public abstract Relation<? extends Instance, ? extends Object, I>[] getLocalReverseRelations();
 
 	public abstract I createInstance();
 	

@@ -1,4 +1,4 @@
-package lbe.engine;
+package org.instantlogic.interaction.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,15 +8,17 @@ import java.util.regex.Pattern;
 
 public class PageCoordinates {
 
+	private static final Pattern coordinate = Pattern.compile("\\.?(\\w+)(\\[([\\d,\\-]*)\\])?");
+	
 	public static class Coordinate {
 		
 		private String nodeName;
-		private List<Long> activeInstances;
+		private List<String> activeInstances;
 
-		public Coordinate(String nodeName, List<Long> activeInstances) {
+		public Coordinate(String nodeName, List<String> activeInstanceIds) {
 			this.nodeName = nodeName;
-			if (activeInstances!=null) {
-				this.activeInstances = activeInstances;
+			if (activeInstanceIds!=null) {
+				this.activeInstances = activeInstanceIds;
 			} else {
 				this.activeInstances = Collections.EMPTY_LIST;
 			}
@@ -26,7 +28,7 @@ public class PageCoordinates {
 			return nodeName;
 		}
 
-		public List<Long> getActiveInstances() {
+		public List<String> getActiveInstances() {
 			return activeInstances;
 		}
 		
@@ -38,7 +40,7 @@ public class PageCoordinates {
 			StringBuilder sb = new StringBuilder(nodeName);
 			sb.append('[');
 			boolean first = true;
-			for (Long activeInstance: activeInstances) {
+			for (String activeInstance: activeInstances) {
 				if (first) {
 					first = false;
 				} else {
@@ -51,20 +53,18 @@ public class PageCoordinates {
 		}
 	}
 	
-	private static final Pattern coordinate = Pattern.compile("\\.?(\\w+)(\\[([\\d,]*)\\])?");
-	
 	public static PageCoordinates parse(String in) {
 		PageCoordinates result = new PageCoordinates();
 		Matcher matcher = coordinate.matcher(in);
 		while (matcher.find()) {
 			String nodeName = matcher.group(1);
 			String indices = matcher.group(3);
-			List<Long> activeInstances=null;
+			List<String> activeInstances=null;
 			if (indices!=null) {
 				String[] split = indices.split(",");
-				activeInstances = new ArrayList<Long>(split.length);
+				activeInstances = new ArrayList<String>(split.length);
 				for (String item:split) {
-					activeInstances.add(Long.parseLong(item));
+					activeInstances.add(item);
 				}
 			}
 			result.addCoordinate(new Coordinate(nodeName, activeInstances));

@@ -6,9 +6,9 @@ import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.fabric.util.DeductionContext;
 import org.instantlogic.fabric.util.ValueAndLevel;
 
-public class SelectedInstanceDeduction<V extends Instance<V>> extends Deduction<V> {
+public class SelectedInstanceDeduction<V extends Instance> extends Deduction<V> {
 
-	public static <V extends Instance<V>> SelectedInstanceDeduction<V> create(Entity<V> entity) {
+	public static <V extends Instance> SelectedInstanceDeduction<V> create(Entity<V> entity) {
 		return new SelectedInstanceDeduction<V>(entity);
 	}
 	

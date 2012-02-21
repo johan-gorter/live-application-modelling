@@ -1,9 +1,7 @@
-package lbe.engine;
-
-import com.google.gson.annotations.SerializedName;
+package org.instantlogic.interaction.page;
 
 public class PageElement {
-	@SerializedName("type")
+//	@com.google.gson.annotations.SerializedName("type")
 	public String elementType;
 	public String name;
 	public String id;

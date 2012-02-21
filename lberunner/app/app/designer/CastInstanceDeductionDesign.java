@@ -30,7 +30,7 @@ public class CastInstanceDeductionDesign
 	public final RelationValue<CastInstanceDeductionDesign, EntityDesign> entity
 		= createRelationValue(CastInstanceDeductionDesignEntity.entity);
 		
-	public EntityDesign getEntity() {
+	public EntityDesign getInstanceEntity() {
 		return entity.get();
 	}
 	

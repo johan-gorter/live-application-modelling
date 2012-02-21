@@ -13,7 +13,7 @@ import org.instantlogic.fabric.util.ValueAndLevel;
 import org.instantlogic.fabric.value.AttributeValue;
 import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
 
-public class Period extends Instance<Period> {
+public class Period extends Instance {
 
 	public static class DaysBetweenRule extends Deduction<Integer> {
 
@@ -89,12 +89,12 @@ public class Period extends Instance<Period> {
 		}
 
 		@Override
-		public Relation<Period, ? extends Object, ? extends Instance<?>>[] getLocalRelations() {
+		public Relation<Period, ? extends Object, ? extends Instance>[] getLocalRelations() {
 			return RELATIONS;
 		}
 
 		@Override
-		public Relation<? extends Instance<?>, ? extends Object, Period>[] getLocalReverseRelations() {
+		public Relation<? extends Instance, ? extends Object, Period>[] getLocalReverseRelations() {
 			return REVERSE_RELATIONS;
 		}
 
@@ -116,7 +116,7 @@ public class Period extends Instance<Period> {
 	}
 
 	@Override
-	public Entity<Period> getEntity() {
+	public Entity<Period> getInstanceEntity() {
 		return PeriodEntity.INSTANCE;
 	}
 

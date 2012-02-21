@@ -1,9 +1,9 @@
 package custom.designer;
 
-import lbe.engine.PageElement;
-import lbe.engine.RenderContext;
 
+import org.instantlogic.interaction.page.PageElement;
 import org.instantlogic.interaction.page.PageFragment;
+import org.instantlogic.interaction.util.RenderContext;
 
 import app.designer.ButtonDesign;
 import app.designer.ConstantTextDesign;

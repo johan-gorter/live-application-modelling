@@ -1,9 +1,7 @@
 package org.instantlogic.interaction.page;
 
-import lbe.engine.PageElement;
-import lbe.engine.RenderContext;
-
-import org.instantlogic.core.text.Text;
+import org.instantlogic.fabric.text.Text;
+import org.instantlogic.interaction.util.RenderContext;
 
 public class TextPageFragment extends PageFragment {
 
@@ -28,9 +26,5 @@ public class TextPageFragment extends PageFragment {
 		PageElement result = super.render(context);
 		result.display = text.renderText(context);
 		return result;
-		
 	}
-	
-	
-	
 }

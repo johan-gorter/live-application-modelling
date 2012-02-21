@@ -6,7 +6,7 @@ import org.instantlogic.fabric.model.Relation;
 import org.instantlogic.fabric.value.ReadOnlyRelationValue;
 
 
-public class ReadOnlyRelationValueImpl<I extends Instance<I>, Value extends Object> 
+public class ReadOnlyRelationValueImpl<I extends Instance, Value extends Object> 
 	extends ReadOnlyAttributeValueImpl<I, Value>
 	implements ReadOnlyRelationValue<I, Value>{
 

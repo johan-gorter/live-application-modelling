@@ -14,7 +14,7 @@ import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
  * @param <Value> Either the same as <Item> or List<Item>
  * @param <Item>
  */
-public abstract class Attribute<I extends Instance<I>, Value extends Object, Item extends Object> extends Concept {
+public abstract class Attribute<I extends Instance, Value extends Object, Item extends Object> extends Concept {
 
 	public abstract Entity<I> getEntity();
 	

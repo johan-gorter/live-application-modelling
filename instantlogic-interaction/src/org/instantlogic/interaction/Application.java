@@ -5,11 +5,14 @@ import java.util.Iterator;
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.interaction.flow.Flow;
+import org.instantlogic.interaction.util.FlowStack;
+import org.instantlogic.interaction.util.PageCoordinates;
+import org.instantlogic.interaction.util.PageCoordinates.Coordinate;
 
 
 public abstract class Application {
 	
-	public abstract Entity<? extends Instance<?>> getCaseEntity();
+	public abstract Entity<? extends Instance> getCaseEntity();
 	
 	public abstract String getName();
 	
@@ -24,7 +27,7 @@ public abstract class Application {
 		throw new RuntimeException("Exposed flow not found. Name: "+startFlowName);
 	}
 
-	public FlowStack createFlowStack(PageCoordinates pageCoordinates, CaseInstance caseInstance) {
+	public FlowStack createFlowStack(PageCoordinates pageCoordinates, Instance caseInstance) {
 		Iterator<Coordinate> coordinates = pageCoordinates.getPath().iterator();
 		Coordinate next = coordinates.next();
 		Flow startFlow = getExposedFlow(next.getNodeName());

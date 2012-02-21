@@ -4,7 +4,7 @@ import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.text.Text;
 
 
-public abstract class Relation<I extends Instance<I>, Value extends Object, To extends Instance<To>> extends Attribute<I, Value, To> {
+public abstract class Relation<I extends Instance, Value extends Object, To extends Instance> extends Attribute<I, Value, To> {
 	
 	public abstract Entity<To> getTo();
 	

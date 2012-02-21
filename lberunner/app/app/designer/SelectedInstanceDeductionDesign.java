@@ -30,7 +30,7 @@ public class SelectedInstanceDeductionDesign
 	public final RelationValue<SelectedInstanceDeductionDesign, EntityDesign> entity
 		= createRelationValue(SelectedInstanceDeductionDesignEntity.entity);
 		
-	public EntityDesign getEntity() {
+	public EntityDesign getInstanceEntity() {
 		return entity.get();
 	}
 	

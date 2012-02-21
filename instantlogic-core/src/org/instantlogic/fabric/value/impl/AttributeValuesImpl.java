@@ -12,7 +12,7 @@ import org.instantlogic.fabric.util.ValueChangeEvent.MultiValueUpdateType;
 import org.instantlogic.fabric.value.AttributeValues;
 
 
-public class AttributeValuesImpl<I extends Instance<I>, Item extends Object> 
+public class AttributeValuesImpl<I extends Instance, Item extends Object> 
 	extends AttributeValueImpl<I, List<Item>>
 	implements AttributeValues<I, Item>{
 

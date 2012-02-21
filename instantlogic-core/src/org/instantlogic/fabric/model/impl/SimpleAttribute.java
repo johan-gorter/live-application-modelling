@@ -7,7 +7,7 @@ import org.instantlogic.fabric.text.ConstantText;
 import org.instantlogic.fabric.text.Text;
 
 
-public abstract class SimpleAttribute<I extends Instance<I>, Value extends Object, Item extends Object> extends Attribute<I, Value, Item> {
+public abstract class SimpleAttribute<I extends Instance, Value extends Object, Item extends Object> extends Attribute<I, Value, Item> {
 
 	private final String name;
 	private final Entity<I> entity;

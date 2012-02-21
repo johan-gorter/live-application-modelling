@@ -1,16 +1,14 @@
 package org.instantlogic.interaction.page;
 
-import lbe.engine.ChangeContext;
-import lbe.engine.FlowEventOccurrence;
-import lbe.engine.PageElement;
-import lbe.engine.PageElement.Domain;
-import lbe.engine.RenderContext;
-
-import org.instantlogic.core.Instance;
-import org.instantlogic.core.model.Attribute;
-import org.instantlogic.core.model.DomainEntry;
-import org.instantlogic.core.model.Entity;
-import org.instantlogic.core.text.Text;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.model.Attribute;
+import org.instantlogic.fabric.model.DomainEntry;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.text.Text;
+import org.instantlogic.interaction.page.PageElement.Domain;
+import org.instantlogic.interaction.util.ChangeContext;
+import org.instantlogic.interaction.util.FlowEventOccurrence;
+import org.instantlogic.interaction.util.RenderContext;
 
 public abstract class Field extends PageFragment {
 	

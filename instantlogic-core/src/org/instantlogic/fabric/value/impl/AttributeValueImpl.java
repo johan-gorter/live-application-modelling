@@ -11,7 +11,7 @@ import org.instantlogic.fabric.util.ValueChangeObserver;
 import org.instantlogic.fabric.value.AttributeValue;
 
 
-public class AttributeValueImpl<I extends Instance<I>, Value extends Object> 
+public class AttributeValueImpl<I extends Instance, Value extends Object> 
 	extends ReadOnlyAttributeValueImpl<I, Value> 
 	implements AttributeValue<I, Value>{
 	

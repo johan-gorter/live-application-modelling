@@ -5,7 +5,7 @@ import org.instantlogic.fabric.model.Relation;
 
 
 // Value: List<Instance> or Instance
-public interface ReadOnlyRelationValue<I extends Instance<I>, Value extends Object> 
+public interface ReadOnlyRelationValue<I extends Instance, Value extends Object> 
 	extends ReadOnlyAttributeValue<I, Value> {
 
 	Relation<I, Value, ? extends Object> getModel();

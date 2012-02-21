@@ -2,9 +2,11 @@
 <classpath>
 	<classpathentry excluding="views/**" kind="src" path="app"/>
 	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="src" path="designer-generated"/>
+	<classpathentry kind="src" path="designer"/>
 	<classpathentry kind="src" path="secure"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="D:/java/play-1.2.1/framework/play-1.2.1.jar" sourcepath="D:/java/play-1.2.1/framework/src"/>
+	<classpathentry kind="lib" path="D:/java/play-1.2.1/framework/play-1.2.1.jar"/>
 	<classpathentry kind="lib" path="D:/prive/live-business-engineering/lberunner/lib/freemarker.jar"/>
 	<classpathentry kind="lib" path="D:/java/play-1.2.1/framework/lib/activation-1.1.1.jar"/>
 	<classpathentry kind="lib" path="D:/java/play-1.2.1/framework/lib/antlr-2.7.6.jar"/>

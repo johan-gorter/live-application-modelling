@@ -6,7 +6,7 @@ import org.instantlogic.fabric.util.ValueChangeEvent;
 import org.instantlogic.fabric.value.RelationValue;
 
 
-public class RelationValueImpl<I extends Instance<I>, To extends Instance<To>> 
+public class RelationValueImpl<I extends Instance, To extends Instance> 
 	extends AttributeValueImpl<I, To> 
 	implements RelationValue<I, To>{
 

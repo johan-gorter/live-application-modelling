@@ -5,7 +5,7 @@ import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.fabric.model.Relation;
 
 
-public abstract class SimpleRelation<I extends Instance<I>, Value extends Object, To extends Instance<To>> extends Relation<I, Value, To> {
+public abstract class SimpleRelation<I extends Instance, Value extends Object, To extends Instance> extends Relation<I, Value, To> {
 
 	private final String name;
 	private final Entity<I> entity;

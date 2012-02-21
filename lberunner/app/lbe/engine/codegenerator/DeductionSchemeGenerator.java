@@ -53,15 +53,15 @@ public class DeductionSchemeGenerator {
 			classModel.customization = design.getCustomization();
 			classModel.resultType = design.getClassName();
 			if (design instanceof SelectedInstanceDeductionDesign) {
-				String name = ((SelectedInstanceDeductionDesign)design).getEntity().getName();
+				String name = ((SelectedInstanceDeductionDesign)design).getInstanceEntity().getName();
 				classModel.parameters.add(name+"Entity.INSTANCE");
 			} else if (design instanceof AttributeDeductionDesign) {
 				AttributeDesign attribute = ((AttributeDeductionDesign)design).getAttribute(); 
 				String name = attribute.getName();
-				String entityName = (attribute instanceof RelationDesign)?((RelationDesign)attribute).getFrom().getName():attribute.getEntity().getName();
+				String entityName = (attribute instanceof RelationDesign)?((RelationDesign)attribute).getFrom().getName():attribute.getInstanceEntity().getName();
 				classModel.parameters.add(entityName+"Entity."+name);
 			} else if (design instanceof CastInstanceDeductionDesign) {
-				String name = ((CastInstanceDeductionDesign)design).getEntity().getName();
+				String name = ((CastInstanceDeductionDesign)design).getInstanceEntity().getName();
 				classModel.parameters.add(name+"Entity.INSTANCE");
 			}
 			for (DeductionDesign input : design.getInputs()) {

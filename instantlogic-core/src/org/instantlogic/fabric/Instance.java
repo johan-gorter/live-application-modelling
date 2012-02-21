@@ -30,9 +30,9 @@ import org.instantlogic.fabric.value.impl.ReverseRelationValuesImpl;
 /**
  * Can be compared to a class, only more powerful.
  * 
- * Note that an instance should always have an owner. the root of this owner hierarchy extends CaseInstance.
+ * Note that an instance should always have an owner. the root of this owner hierarchy is called the case.
  */
-public abstract class Instance<I extends Instance<I>> {
+public abstract class Instance {
 	
 	private static class GlobalValueChangeListener {
 		ValueChangeObserver listener;
@@ -43,20 +43,20 @@ public abstract class Instance<I extends Instance<I>> {
 	private List<GlobalValueChangeListener> tempGlobalValueChangeListeners = new ArrayList<GlobalValueChangeListener>();
 	private List<GlobalValueChangeListener> globalValueChangeListeners = new ArrayList<GlobalValueChangeListener>();
 	
-	private Instance<?> owner = null;
+	private Instance owner = null;
+	
+	public abstract Entity<?> getInstanceEntity();
 	
 	// Only available on the top instance, instances with an owner get the registry from the top instance (TODO: cache and invalidate for performance)
 	private InstanceAdministration instanceRegistry; 
 	
 	private String localId="0";
 	private int lastChildId=0;
-	private HashMap<String, Instance<?>> children;
+	private HashMap<String, Instance> children;
 	
 	protected Instance() {
 	}
 	
-	public abstract Entity<I> getEntity();
-
 	public InstanceAdministration getInstanceAdministration() {
 		if (instanceRegistry==null) {
 			if (owner!=null) {
@@ -66,6 +66,12 @@ public abstract class Instance<I extends Instance<I>> {
 			}
 		}
 		return instanceRegistry;
+	}
+	
+	public String getInstanceId() {
+		StringBuilder builder = new StringBuilder();
+		getInstanceId(builder);
+		return builder.toString();
 	}
 	
 	public void getInstanceId(StringBuilder builder) {
@@ -88,16 +94,16 @@ public abstract class Instance<I extends Instance<I>> {
 	 * Registers this as the owner of instance.
 	 * @param instance the owned instance.
 	 */
-	public void adopt(Instance<?> instance) {
+	public void adopt(Instance instance) {
 		if (children==null) {
-			children = new HashMap<String, Instance<?>>();
+			children = new HashMap<String, Instance>();
 		}
 		String childLocalId = ""+(++lastChildId);
 		children.put(childLocalId, instance);
 		instance.registerOwner(this, childLocalId);
 	}
 	
-	protected void registerOwner(Instance<?> owner, String localId) {
+	protected void registerOwner(Instance owner, String localId) {
 		if (this.owner!=null && owner!=null) {
 			throw new RuntimeException("This instance is already owned by "+this.owner);
 		}
@@ -107,42 +113,42 @@ public abstract class Instance<I extends Instance<I>> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected<Value extends Object> ReadOnlyAttributeValueImpl<I, Value> createReadOnlyAttributeValue(Attribute<I, Value, Value> attribute) {
+	protected<Value extends Object, I extends Instance> ReadOnlyAttributeValueImpl<I, Value> createReadOnlyAttributeValue(Attribute<I, Value, Value> attribute) {
 		return new ReadOnlyAttributeValueImpl<I, Value>((I)this, attribute);
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected<Value extends Object> AttributeValue<I, Value> createAttributeValue(Attribute<I, Value, Value> attribute) {
+	protected<Value extends Object, I extends Instance> AttributeValue<I, Value> createAttributeValue(Attribute<I, Value, Value> attribute) {
 		return new AttributeValueImpl<I, Value>((I)this, attribute);
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected<Value extends Object> AttributeValues<I, Value> createAttributeValues(Attribute<I, List<Value>, Value> attribute) {
+	protected<Value extends Object, I extends Instance> AttributeValues<I, Value> createAttributeValues(Attribute<I, List<Value>, Value> attribute) {
 		return new AttributeValuesImpl<I, Value>((I)this, attribute);
 	}
 
 	@SuppressWarnings("unchecked")
-	protected<To extends Instance<To>> ReadOnlyRelationValue<I, To> createReadOnlyRelationValue(Relation<I, To, To> relation) {
+	protected<To extends Instance, I extends Instance> ReadOnlyRelationValue<I, To> createReadOnlyRelationValue(Relation<I, To, To> relation) {
 		return new ReadOnlyRelationValueImpl<I, To>((I)this, relation);
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected<To extends Instance<To>> RelationValue<I, To> createRelationValue(Relation<I, To, To> relation) {
+	protected<To extends Instance, I extends Instance> RelationValue<I, To> createRelationValue(Relation<I, To, To> relation) {
 		return new RelationValueImpl<I, To>((I)this, relation);
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected<To extends Instance<To>> RelationValues<I, To> createRelationValues(Relation<I, List<To>, To> relation) {
+	protected<To extends Instance, I extends Instance> RelationValues<I, To> createRelationValues(Relation<I, List<To>, To> relation) {
 		return new RelationValuesImpl<I, To>((I)this, relation);
 	}
 
 	@SuppressWarnings("unchecked")
-	protected<To extends Instance<To>> ReadOnlyRelationValue<I, To> createReverseRelationValue(Relation<I, To, To> relation) {
+	protected<To extends Instance, I extends Instance> ReadOnlyRelationValue<I, To> createReverseRelationValue(Relation<I, To, To> relation) {
 		return new ReverseRelationValueImpl<I, To>((I)this, relation);
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected<To extends Instance<To>> ReadOnlyRelationValues<I, To> createReverseRelationValues(Relation<I, List<To>, To> relation) {
+	protected<To extends Instance, I extends Instance> ReadOnlyRelationValues<I, To> createReverseRelationValues(Relation<I, List<To>, To> relation) {
 		return new ReverseRelationValuesImpl<I, To>((I)this, relation);
 	}
 	
@@ -160,7 +166,7 @@ public abstract class Instance<I extends Instance<I>> {
 		}
 		StringBuilder instanceId = new StringBuilder();
 		getInstanceId(instanceId);
-		return getEntity().toString()+"#"+instanceId+name;
+		return getInstanceEntity().toString()+"#"+instanceId+name;
 	}
 	
 	public void addGlobalValueChangeListener(ValueChangeObserver listener, boolean alsoForOwnedInstances, boolean permanent) {

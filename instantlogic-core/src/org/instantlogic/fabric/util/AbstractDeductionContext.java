@@ -13,7 +13,7 @@ import org.instantlogic.fabric.model.Entity;
  */
 public abstract class AbstractDeductionContext extends DeductionContext {
 
-	protected final List<Instance<?>> selectedInstances = new ArrayList<Instance<?>>();
+	protected final List<Instance> selectedInstances = new ArrayList<Instance>();
 	
 	private final DeductionContext parent;
 	
@@ -23,10 +23,10 @@ public abstract class AbstractDeductionContext extends DeductionContext {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <I extends Instance<I>> I getSelectedInstance(Entity<I> entity) {
+	public <I extends Instance> I getSelectedInstance(Entity<I> entity) {
 		for (int i=selectedInstances.size()-1;i>=0;i--) {
-			Instance<?> candidate = selectedInstances.get(i);
-			if (Entity.extendsFrom(candidate.getEntity(), entity)) {
+			Instance candidate = selectedInstances.get(i);
+			if (Entity.extendsFrom(candidate.getInstanceEntity(), entity)) {
 				return (I)candidate;
 			}
 		}
@@ -36,26 +36,26 @@ public abstract class AbstractDeductionContext extends DeductionContext {
 		return null;
 	}
 
-	public void pushSelectedInstance(Instance<?> instance) {
+	public void pushSelectedInstance(Instance instance) {
 		selectedInstances.add(instance);
 	}
 	
-	public Instance<?> popSelectedInstance() {
+	public Instance popSelectedInstance() {
 		if (this.selectedInstances.size()==0) {
 			throw new RuntimeException("Asymmetric push/pop");
 		}
 		return selectedInstances.remove(selectedInstances.size()-1);
 	}
 
-	public void popSelectedInstance(Instance<?> instance) {
-		Instance<?> check = popSelectedInstance();
+	public void popSelectedInstance(Instance instance) {
+		Instance check = popSelectedInstance();
 		if (check!=instance) {
 			throw new RuntimeException("Asymmetric push/pop");
 		}
 	}
 	
-	public void addSelectedInstances(List<Instance<?>> result) {
-		ListIterator<Instance<?>> iterator = selectedInstances.listIterator(selectedInstances.size());
+	public void addSelectedInstances(List<Instance> result) {
+		ListIterator<Instance> iterator = selectedInstances.listIterator(selectedInstances.size());
 		while (iterator.hasPrevious()) {
 			result.add(iterator.previous());
 		}

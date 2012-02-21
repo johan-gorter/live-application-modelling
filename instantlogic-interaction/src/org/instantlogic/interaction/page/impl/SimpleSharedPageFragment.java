@@ -1,11 +1,10 @@
 package org.instantlogic.interaction.page.impl;
 
-import lbe.engine.ChangeContext;
-import lbe.engine.FlowEventOccurrence;
-import lbe.engine.PageElement;
-import lbe.engine.RenderContext;
-
+import org.instantlogic.interaction.page.PageElement;
 import org.instantlogic.interaction.page.PageFragment;
+import org.instantlogic.interaction.util.ChangeContext;
+import org.instantlogic.interaction.util.FlowEventOccurrence;
+import org.instantlogic.interaction.util.RenderContext;
 
 public abstract class SimpleSharedPageFragment extends PageFragment {
 
