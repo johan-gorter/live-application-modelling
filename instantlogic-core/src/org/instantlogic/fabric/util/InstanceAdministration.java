@@ -10,7 +10,7 @@ import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
 
 public class InstanceAdministration {
 
-	private HashMap<String, Instance<?>> instances = new HashMap<String, Instance<?>>();
+	private HashMap<String, Instance> instances = new HashMap<String, Instance>();
 	
 	private long version;
 	private List<Observations> observationsStack = new ArrayList<Observations>();
@@ -20,15 +20,15 @@ public class InstanceAdministration {
 	
 	private Operation currentOperation;
 	
-	public InstanceAdministration(Instance<? extends Instance<?>> rootInstance) {
+	public InstanceAdministration(Instance rootInstance) {
 		instances.put("0", rootInstance);
 	}
 	
-	public Instance<?> getInstanceById(String id) {
+	public Instance getInstanceById(String id) {
 		return instances.get(id);
 	}
 
-	public void registerObservation(ReadOnlyAttributeValue<? extends Instance<?>, ? extends Object> attributeValueObserved) {
+	public void registerObservation(ReadOnlyAttributeValue<? extends Instance, ? extends Object> attributeValueObserved) {
 		if (currentObservations!=null) {
 			currentObservations.add(attributeValueObserved);
 		}

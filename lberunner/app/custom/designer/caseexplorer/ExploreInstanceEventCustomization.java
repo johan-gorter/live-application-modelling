@@ -1,9 +1,9 @@
 package custom.designer.caseexplorer;
 
-import lbe.engine.ChangeContext;
-import lbe.engine.FlowEventOccurrence;
 
 import org.instantlogic.fabric.Instance;
+import org.instantlogic.interaction.util.ChangeContext;
+import org.instantlogic.interaction.util.FlowEventOccurrence;
 
 import app.designer.event.ExploreInstanceEvent;
 

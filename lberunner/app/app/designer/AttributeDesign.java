@@ -137,7 +137,7 @@ public class AttributeDesign
 	public final ReadOnlyRelationValue<AttributeDesign, EntityDesign> entity
 		= createReverseRelationValue(AttributeDesignEntity.entity);
 
-	public EntityDesign getEntity() {
+	public EntityDesign getInstanceEntity() {
 		return entity.get();
 	}
 

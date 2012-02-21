@@ -17,7 +17,7 @@ import org.instantlogic.fabric.util.ValueChangeEvent;
 import org.instantlogic.fabric.util.ValueChangeObserver;
 import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
 
-public class ReadOnlyAttributeValueImpl<I extends Instance<I>, Value extends Object> implements ReadOnlyAttributeValue<I, Value> {
+public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object> implements ReadOnlyAttributeValue<I, Value> {
 
 	public enum ValueDetermination {RELEVANCE, RULE, STORED, DEFAULT, NONE}
 	private static class Observer {
@@ -263,8 +263,8 @@ public class ReadOnlyAttributeValueImpl<I extends Instance<I>, Value extends Obj
 	@Override
 	public boolean equals(Object other) {
 		if (other==null || other.getClass()!=getClass()) return false;
-		ReadOnlyAttributeValueImpl<? extends Instance<?>, ? extends Object> o = 
-			(ReadOnlyAttributeValueImpl<? extends Instance<?>, ? extends Object>) other;
+		ReadOnlyAttributeValueImpl<? extends Instance, ? extends Object> o = 
+			(ReadOnlyAttributeValueImpl<? extends Instance, ? extends Object>) other;
 		return (o.forInstance==forInstance && o.model==model);
 	}
 

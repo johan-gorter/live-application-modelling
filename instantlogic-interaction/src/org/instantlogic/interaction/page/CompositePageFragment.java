@@ -3,14 +3,12 @@ package org.instantlogic.interaction.page;
 import java.util.ArrayList;
 import java.util.List;
 
-import lbe.engine.ChangeContext;
-import lbe.engine.FlowEventOccurrence;
-import lbe.engine.PageElement;
-import lbe.engine.RenderContext;
-
-import org.instantlogic.core.Instance;
-import org.instantlogic.core.deduction.Deduction;
-import org.instantlogic.core.text.Text;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.deduction.Deduction;
+import org.instantlogic.fabric.text.Text;
+import org.instantlogic.interaction.util.ChangeContext;
+import org.instantlogic.interaction.util.FlowEventOccurrence;
+import org.instantlogic.interaction.util.RenderContext;
 
 public abstract class CompositePageFragment extends PageFragment {
 

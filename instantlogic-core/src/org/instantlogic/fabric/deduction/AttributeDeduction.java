@@ -6,9 +6,9 @@ import org.instantlogic.fabric.model.Attribute;
 import org.instantlogic.fabric.util.DeductionContext;
 import org.instantlogic.fabric.util.ValueAndLevel;
 
-public class AttributeDeduction<V, I extends Instance<I>> extends Deduction<V> {
+public class AttributeDeduction<V, I extends Instance> extends Deduction<V> {
 
-	public static <V, I extends Instance<I>> AttributeDeduction<V, I> create(Attribute<I, V, ? extends Object> attribute, Deduction<I> input) {
+	public static <V, I extends Instance> AttributeDeduction<V, I> create(Attribute<I, V, ? extends Object> attribute, Deduction<I> input) {
 		return new AttributeDeduction<V, I>(attribute, input);
 	}
 	

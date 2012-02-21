@@ -1,10 +1,9 @@
 package org.instantlogic.interaction.flow;
 
-import lbe.engine.ChangeContext;
-import lbe.engine.FlowEventOccurrence;
-
-import org.instantlogic.core.model.Concept;
-import org.instantlogic.core.model.Entity;
+import org.instantlogic.fabric.model.Concept;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.interaction.util.ChangeContext;
+import org.instantlogic.interaction.util.FlowEventOccurrence;
 
 public abstract class FlowEvent extends Concept {
 

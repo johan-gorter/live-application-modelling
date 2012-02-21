@@ -8,10 +8,10 @@ import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
 
 public class Observations {
 
-	private HashSet<ReadOnlyAttributeValue<? extends Instance<?>, ? extends Object>> valuesObserved 
-		= new HashSet<ReadOnlyAttributeValue<? extends Instance<?>,? extends Object>>();
+	private HashSet<ReadOnlyAttributeValue<? extends Instance, ? extends Object>> valuesObserved 
+		= new HashSet<ReadOnlyAttributeValue<? extends Instance,? extends Object>>();
 
-	public void add(ReadOnlyAttributeValue<? extends Instance<?>, ? extends Object> attributeValueObserved) {
+	public void add(ReadOnlyAttributeValue<? extends Instance, ? extends Object> attributeValueObserved) {
 		valuesObserved.add(attributeValueObserved);
 	}
 
@@ -19,7 +19,7 @@ public class Observations {
 		return valuesObserved.size();
 	}
 
-	public HashSet<ReadOnlyAttributeValue<? extends Instance<?>, ? extends Object>> getValuesObserved() {
+	public HashSet<ReadOnlyAttributeValue<? extends Instance, ? extends Object>> getValuesObserved() {
 		return valuesObserved;
 	}
 

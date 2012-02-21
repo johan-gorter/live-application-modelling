@@ -8,7 +8,7 @@ import org.instantlogic.fabric.value.AttributeValue;
 import org.instantlogic.fabric.value.ReadOnlyRelationValue;
 
 
-public class ReverseRelationValueImpl<I extends Instance<I>, From extends Instance<From>>
+public class ReverseRelationValueImpl<I extends Instance, From extends Instance>
 	extends ReadOnlyRelationValueImpl<I, From>
 	implements ReadOnlyRelationValue<I, From>{
 

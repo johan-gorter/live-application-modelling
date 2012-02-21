@@ -1,6 +1,6 @@
 package org.instantlogic.interaction.page.impl;
 
-import org.instantlogic.core.text.Text;
+import org.instantlogic.fabric.text.Text;
 import org.instantlogic.interaction.flow.FlowEvent;
 import org.instantlogic.interaction.page.Link;
 

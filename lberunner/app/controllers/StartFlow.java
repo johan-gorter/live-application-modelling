@@ -9,13 +9,13 @@ import java.util.List;
 
 import lbe.engine.Case;
 import lbe.engine.CaseManager;
-import lbe.engine.ChangeContext;
-import lbe.engine.PageCoordinates;
-import lbe.engine.PageElement;
 
 import org.apache.log4j.Logger;
 import org.instantlogic.fabric.CaseInstance;
 import org.instantlogic.interaction.Application;
+import org.instantlogic.interaction.page.PageElement;
+import org.instantlogic.interaction.util.ChangeContext;
+import org.instantlogic.interaction.util.PageCoordinates;
 
 import play.mvc.Controller;
 import play.mvc.With;

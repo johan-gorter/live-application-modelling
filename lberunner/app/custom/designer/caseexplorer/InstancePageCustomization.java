@@ -3,7 +3,6 @@ package custom.designer.caseexplorer;
 import java.util.ArrayList;
 import java.util.List;
 
-import lbe.engine.RenderContext;
 
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Attribute;
@@ -17,6 +16,7 @@ import org.instantlogic.interaction.page.TextPageFragment;
 import org.instantlogic.interaction.page.impl.SimpleButton;
 import org.instantlogic.interaction.page.impl.SimpleCompositePageFragment;
 import org.instantlogic.interaction.page.impl.SimpleField;
+import org.instantlogic.interaction.util.RenderContext;
 
 import app.designer.event.ExploreInstanceEvent;
 import app.designer.flow.caseexplorerinstance.InstancePage;

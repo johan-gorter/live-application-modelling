@@ -1,4 +1,4 @@
-package lbe.engine;
+package org.instantlogic.interaction.util;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -40,7 +40,7 @@ public class ChangeContext extends RenderContext {
 	}
 
 	public void setValue(Entity entity, Attribute attribute, Object value) {
-		((AttributeValue)getAttributeValue(entity, attribute)).set(parse(value, attribute));
+		((AttributeValue)getAttributeValue(entity, attribute)).setValue(parse(value, attribute));
 	}
 	
 	private static final DateFormat DATE_INTERNATIONAL = new SimpleDateFormat("dd/MM/yyyy");

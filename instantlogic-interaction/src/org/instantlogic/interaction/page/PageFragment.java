@@ -1,11 +1,9 @@
 package org.instantlogic.interaction.page;
 
-import lbe.engine.ChangeContext;
-import lbe.engine.FlowEventOccurrence;
-import lbe.engine.PageElement;
-import lbe.engine.RenderContext;
-
-import org.instantlogic.core.model.Concept;
+import org.instantlogic.fabric.model.Concept;
+import org.instantlogic.interaction.util.ChangeContext;
+import org.instantlogic.interaction.util.FlowEventOccurrence;
+import org.instantlogic.interaction.util.RenderContext;
 
 public abstract class PageFragment extends Concept {
 

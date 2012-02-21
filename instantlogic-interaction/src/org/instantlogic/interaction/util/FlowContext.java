@@ -1,8 +1,7 @@
-package lbe.engine;
+package org.instantlogic.interaction.util;
 
 import java.util.List;
 
-import org.instantlogic.fabric.CaseInstance;
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.fabric.util.DeductionContext;
@@ -13,7 +12,7 @@ import org.instantlogic.interaction.flow.Page;
 
 public class FlowContext extends DeductionContext {
 
-	private final CaseData caseData;
+	private final Instance caseInstance;
 	private final String caseId;
 	private FlowStack flowStack;
 	
@@ -21,8 +20,8 @@ public class FlowContext extends DeductionContext {
 	private FlowNodeBase lastNode;
 	private FlowEventOccurrence lastOccurrence;
 
-	public FlowContext(CaseData caseData, String caseId) {
-		this.caseData = caseData;
+	public FlowContext(Instance caseInstance, String caseId) {
+		this.caseInstance = caseInstance;
 		this.caseId = caseId;
 	}
 	
@@ -30,12 +29,8 @@ public class FlowContext extends DeductionContext {
 		return (Page) flowStack.getCurrentNode();
 	}
 	
-	public CaseInstance getCaseInstance() {
-		return caseData.getCaseInstance();
-	}
-
-	public CaseData getCaseData() {
-		return caseData;
+	public Instance getCaseInstance() {
+		return this.caseInstance;
 	}
 
 	public String getCaseId() {
@@ -44,8 +39,8 @@ public class FlowContext extends DeductionContext {
 
 	@Override
 	public Instance getSelectedInstance(Entity entity) {
-		if (entity == caseData.getCaseInstance().getModel()) {
-			return caseData.getCaseInstance();
+		if (entity == caseInstance.getInstanceEntity()) {
+			return caseInstance;
 		}
 		Instance result = flowStack.getSelectedInstance(entity);
 		if (result!=null) {

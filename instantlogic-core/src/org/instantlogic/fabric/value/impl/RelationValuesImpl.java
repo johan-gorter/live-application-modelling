@@ -7,7 +7,7 @@ import org.instantlogic.fabric.model.Relation;
 import org.instantlogic.fabric.value.RelationValues;
 
 
-public class RelationValuesImpl<I extends Instance<I>, To extends Instance<To>>
+public class RelationValuesImpl<I extends Instance, To extends Instance>
 	extends AttributeValuesImpl<I, To>
 	implements RelationValues<I, To> {
 

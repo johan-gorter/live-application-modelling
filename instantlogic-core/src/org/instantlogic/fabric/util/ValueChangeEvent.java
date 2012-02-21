@@ -73,7 +73,7 @@ public class ValueChangeEvent {
 		return attributeValue.getModel();
 	}
 	
-	public Instance<?> getInstance() {
+	public Instance getInstance() {
 		return attributeValue.getInstance();
 	}
 	
@@ -130,7 +130,7 @@ public class ValueChangeEvent {
 		return undoEvent;
 	}
 
-	public boolean isFor(ReadOnlyAttributeValue<? extends Instance<?>, ? extends Object> valueObserved) {
+	public boolean isFor(ReadOnlyAttributeValue<? extends Instance, ? extends Object> valueObserved) {
 		return valueObserved == this.attributeValue;
 	}
 }

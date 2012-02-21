@@ -17,9 +17,29 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>designer</name>
+			<type>2</type>
+			<location>D:/prive/live-business-engineering/designer/app</location>
+		</link>
+		<link>
+			<name>designer-generated</name>
+			<type>2</type>
+			<location>D:/prive/live-business-engineering/designer-generated/app</location>
+		</link>
+		<link>
 			<name>secure</name>
 			<type>2</type>
 			<location>D:/java/play-1.2.1/modules/secure/app</location>
+		</link>
+		<link>
+			<name>conf/designer</name>
+			<type>2</type>
+			<location>D:/prive/live-business-engineering/designer/conf</location>
+		</link>
+		<link>
+			<name>conf/designer-generated</name>
+			<type>2</type>
+			<location>D:/prive/live-business-engineering/designer-generated/conf</location>
 		</link>
 		<link>
 			<name>conf/secure</name>

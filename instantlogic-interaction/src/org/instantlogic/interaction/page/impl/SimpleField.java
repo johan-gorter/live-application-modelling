@@ -1,7 +1,7 @@
 package org.instantlogic.interaction.page.impl;
 
-import org.instantlogic.core.model.Attribute;
-import org.instantlogic.core.model.Entity;
+import org.instantlogic.fabric.model.Attribute;
+import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.interaction.page.Field;
 
 

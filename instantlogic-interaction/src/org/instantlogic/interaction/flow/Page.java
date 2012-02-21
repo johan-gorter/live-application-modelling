@@ -1,11 +1,10 @@
 package org.instantlogic.interaction.flow;
 
-import lbe.engine.ChangeContext;
-import lbe.engine.FlowEventOccurrence;
-import lbe.engine.PageElement;
-import lbe.engine.RenderContext;
-
 import org.instantlogic.interaction.page.CompositePageFragment;
+import org.instantlogic.interaction.page.PageElement;
+import org.instantlogic.interaction.util.ChangeContext;
+import org.instantlogic.interaction.util.FlowEventOccurrence;
+import org.instantlogic.interaction.util.RenderContext;
 
 public abstract class Page extends FlowNodeBase {
 	
@@ -18,7 +17,7 @@ public abstract class Page extends FlowNodeBase {
 	public PageElement render(final RenderContext renderContext) {
 		PageRootElement result = new PageRootElement();
 		result.caseId = renderContext.getCaseId();
-		result.caseVersion = renderContext.getCaseData().getVersion();
+		result.caseVersion = renderContext.getCaseInstance().getInstanceAdministration().getVersion();
 		result.language = renderContext.getLanguage();
 		result.params = new PageRootParamsElement();
 		result.elementType = "page";
@@ -39,7 +38,7 @@ public abstract class Page extends FlowNodeBase {
 	
 	public class PageRootElement extends PageElement {
 		public String caseId;
-		public int caseVersion;
+		public long caseVersion;
 		public PageRootParamsElement params;
 		public String language;
 	}

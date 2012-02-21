@@ -1,8 +1,9 @@
-package lbe.engine;
+package org.instantlogic.interaction.util;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.util.AbstractDeductionContext;
 
 
@@ -20,8 +21,8 @@ public class RenderContext extends AbstractDeductionContext{
 		nextIdLevel();
 	}
 
-	public CaseData getCaseData() {
-		return flowContext.getCaseData();
+	public Instance getCaseInstance() {
+		return flowContext.getCaseInstance();
 	}
 
 	public void nextIdLevel() {

@@ -3,15 +3,13 @@ package org.instantlogic.interaction.flow;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import lbe.engine.FlowContext;
-import lbe.engine.FlowEventOccurrence;
-import lbe.engine.FlowStack;
-import lbe.engine.PageCoordinates.Coordinate;
-
-import org.instantlogic.core.CaseInstance;
-import org.instantlogic.core.Instance;
-import org.instantlogic.core.model.Concept;
-import org.instantlogic.core.model.Entity;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.model.Concept;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.interaction.util.FlowContext;
+import org.instantlogic.interaction.util.FlowEventOccurrence;
+import org.instantlogic.interaction.util.FlowStack;
+import org.instantlogic.interaction.util.PageCoordinates.Coordinate;
 
 
 public abstract class Flow extends Concept {
@@ -78,7 +76,7 @@ public abstract class Flow extends Concept {
 	protected void acceptParameters(FlowContext context, Instance[] selectedInstances) {
 		nextParameter: for (Entity entity : this.getParameters()) {
 			for (Instance instance: selectedInstances) {
-				if (Entity.extendsFrom(instance.getModel(), entity)) {
+				if (Entity.extendsFrom(instance.getInstanceEntity(), entity)) {
 					context.getFlowStack().pushSelectedInstance(instance);
 					continue nextParameter;
 				}
@@ -114,7 +112,7 @@ public abstract class Flow extends Concept {
 		}
 	}
 	
-	public FlowStack createFlowStack(FlowStack stack, Coordinate current, Iterator<Coordinate> moreCoordinates, CaseInstance caseInstance) {
+	public FlowStack createFlowStack(FlowStack stack, Coordinate current, Iterator<Coordinate> moreCoordinates, Instance caseInstance) {
 		stackSelectedInstances(stack, current, caseInstance);
 		if (moreCoordinates.hasNext()) {
 			Coordinate next = moreCoordinates.next();
@@ -129,12 +127,12 @@ public abstract class Flow extends Concept {
 		return stack;
 	}
 	
-	protected void stackSelectedInstances(FlowStack stack, Coordinate current, CaseInstance caseInstance) {
+	protected void stackSelectedInstances(FlowStack stack, Coordinate current, Instance caseInstance) {
 		if (current.getActiveInstances().size()!=this.getParameters().length) {
 			throw new RuntimeException("Number of parameters does not match number of selected instances"); // TODO check if the right instances are selected
 		}
-		for (Long instanceId: current.getActiveInstances()) {
-			Instance instance = caseInstance.getInstanceById(instanceId);
+		for (String instanceId: current.getActiveInstances()) {
+			Instance instance = caseInstance.getInstanceAdministration().getInstanceById(instanceId);
 			if (instance==null) {
 				throw new RuntimeException("Instance "+instanceId+" invalid");
 			}

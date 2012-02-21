@@ -1,13 +1,12 @@
-package lbe.engine;
+package org.instantlogic.interaction.util;
 
 import java.util.ArrayList;
-
-import lbe.engine.PageCoordinates.Coordinate;
 
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.util.AbstractDeductionContext;
 import org.instantlogic.interaction.flow.Flow;
 import org.instantlogic.interaction.flow.FlowNodeBase;
+import org.instantlogic.interaction.util.PageCoordinates.Coordinate;
 
 public class FlowStack extends AbstractDeductionContext {
 	
@@ -44,7 +43,7 @@ public class FlowStack extends AbstractDeductionContext {
 		PageCoordinates result;
 		if (parent==null) {
 			result = new PageCoordinates();
-			lastCoordinate = new Coordinate(flow.getName(), new ArrayList<Long>());
+			lastCoordinate = new Coordinate(flow.getName(), new ArrayList<String>());
 			result.getPath().add(lastCoordinate);
 		} else {
 			result = parent.toPageCoordinates();
@@ -53,7 +52,7 @@ public class FlowStack extends AbstractDeductionContext {
 		for (Instance instance: selectedInstances) {
 			lastCoordinate.getActiveInstances().add(instance.getInstanceId());
 		}
-		result.addCoordinate(new Coordinate(currentNode.getName(), new ArrayList<Long>()));
+		result.addCoordinate(new Coordinate(currentNode.getName(), new ArrayList<String>()));
 		return result;
 	}
 	

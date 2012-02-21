@@ -171,7 +171,7 @@ public abstract class BootstrapperUtil {
 	// Deduction for an attribute/relation
 	protected static DeductionSchemeDesign createDeduction(AttributeDesign attribute) {
 		String className = attribute.getClassName();
-		EntityDesign source = attribute.getEntity();
+		EntityDesign source = attribute.getInstanceEntity();
 		if (attribute instanceof RelationDesign) {
 			// We should come up with a solution that makes this unnecessary
 			RelationDesign relation = (RelationDesign)attribute;

@@ -1,4 +1,4 @@
-package lbe.engine;
+package org.instantlogic.interaction.util;
 
 import org.instantlogic.interaction.flow.FlowNodeBase;
 

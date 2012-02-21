@@ -7,9 +7,9 @@ import org.instantlogic.fabric.util.DeductionContext;
 import org.instantlogic.fabric.util.ValueAndLevel;
 
 // If the input is the specified subclass, the input is returned, otherwise null is returned 
-public class CastInstanceDeduction<I extends Instance<I>, V extends Instance<V>> extends Deduction<V> { // V extends I
+public class CastInstanceDeduction<I extends Instance, V extends Instance> extends Deduction<V> { // V extends I
 
-	public static <I extends Instance<I>, V extends Instance<V>> CastInstanceDeduction<I, V> create(Entity<V> entity, Deduction<I> instanceDeduction) {
+	public static <I extends Instance, V extends Instance> CastInstanceDeduction<I, V> create(Entity<V> entity, Deduction<I> instanceDeduction) {
 		return new CastInstanceDeduction<I, V>(entity, instanceDeduction);
 	}
 	
@@ -25,7 +25,7 @@ public class CastInstanceDeduction<I extends Instance<I>, V extends Instance<V>>
 	@Override
 	public ValueAndLevel<V> deduct(DeductionContext context) {
 		ValueAndLevel<I> candidate = instanceDeduction.deduct(context);
-		if (Entity.extendsFrom(candidate.getValue().getEntity(), toEntity)) {
+		if (Entity.extendsFrom(candidate.getValue().getInstanceEntity(), toEntity)) {
 			return ValueAndLevel.deduced((V)candidate.getValue());
 		}
 		return null;
