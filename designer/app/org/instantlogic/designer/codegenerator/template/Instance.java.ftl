@@ -1,10 +1,10 @@
 package ${rootPackageName};
 
 
-public <#if customization??>abstract</#if> class <#if customization??>Abstract</#if>${name} extends <#if extendsFrom??>${extendsFrom}<#else>org.instantlogic.fabric.Instance<${name}></#if> { 
+public <#if customization??>abstract</#if> class <#if customization??>Abstract</#if>${name} extends <#if extendsFrom??>${extendsFrom}<#else>org.instantlogic.fabric.Instance</#if> { 
 
 	@Override
-	public org.instantlogic.fabric.model.Entity<${name}> getEntity() {
+	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return ${rootPackageName}.entity.${name}Entity.INSTANCE;
 	}
 

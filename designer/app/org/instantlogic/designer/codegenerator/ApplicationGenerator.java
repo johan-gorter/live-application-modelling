@@ -93,6 +93,8 @@ public class ApplicationGenerator extends AbstractGenerator {
 			entityGenerator.update(applicationRoot);
 			entityGenerators.put(newEntity.getName(), entityGenerator);
 		}
+		
+		if (applicationInstance.packageName.get()!=null) return; // TODO: re-enable
 
 		List<Design> newSharedPageFragments = updateGenerators(sharedPageFragmentGenerators, applicationInstance.sharedPageFragments.get(), applicationRoot);
 		for(Design newSharedPageFragment : newSharedPageFragments) {
