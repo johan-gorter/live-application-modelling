@@ -7,10 +7,6 @@ import app.designer.ApplicationDesign;
 
 public class ApplicationDesignCustomization extends ApplicationDesign {
 
-	static {
-		HotswapAgent.enabled = false;
-	}
-
 	private ApplicationGenerator applicationGenerator;
 	
 	@Override

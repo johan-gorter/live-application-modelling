@@ -1,4 +1,4 @@
-package lbe.engine.codegenerator;
+package org.instantlogic.codegenerator;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -6,12 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import app.designer.ApplicationDesign;
-import app.designer.Design;
-import app.designer.EntityDesign;
-import app.designer.EventDesign;
-import app.designer.FlowDesign;
-import app.designer.PageFragmentHolderDesign;
+import org.instantlogic.designer.ApplicationDesign;
 
 public class ApplicationGenerator extends AbstractGenerator {
 
@@ -67,7 +62,7 @@ public class ApplicationGenerator extends AbstractGenerator {
 		}
 		mustRegenerate = false;
 		
-		applicationInstance.startRecordingObservations();
+		applicationInstance.getInstanceAdministration().startRecordingObservations();
 		rootPackageName = applicationInstance.getRootPackageName();
 		name = applicationInstance.name.get();
 		customization = applicationInstance.customization.get();
