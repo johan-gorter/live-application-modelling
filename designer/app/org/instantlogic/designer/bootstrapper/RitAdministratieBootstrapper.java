@@ -1,22 +1,21 @@
 package org.instantlogic.designer.bootstrapper;
 
-import lbe.designerbootstrap.Bootstrapper.RelationType;
-import app.designer.AttributeDesign;
-import app.designer.EntityDesign;
-import app.designer.RelationDesign;
-import app.ritadministratie.Stand;
-import custom.designer.ApplicationDesignCustomization;
+import org.instantlogic.designer.ApplicationDesign;
+import org.instantlogic.designer.AttributeDesign;
+import org.instantlogic.designer.EntityDesign;
+import org.instantlogic.designer.RelationDesign;
+import org.instantlogic.designer.bootstrapper.Bootstrapper.RelationType;
 
 public class RitAdministratieBootstrapper extends BootstrapperUtil {
 
-	public static ApplicationDesignCustomization createRitAdministratie() {
+	public static ApplicationDesign createRitAdministratie() {
 
 		// Case
-		applicationDesign = new ApplicationDesignCustomization();
-		applicationDesign.name.set("RitAdministratie");
-		applicationDesign.packageName.set("com.jg.ritadministratie.instantlogic");
+		applicationDesign = new ApplicationDesign();
+		applicationDesign.setName("RitAdministratie");
+		applicationDesign.setRootPackageName("com.jg.ritadministratie.instantlogic");
 //		applicationDesign.sourcePath.set("/prive/live-business-engineering/lberunner/app");
-		applicationDesign.sourcePath.set("/prive/ritadministratie/src");
+		applicationDesign.setSourcePath("/prive/ritadministratie/src");
 		
 		// Data
 		EntityDesign jaar = createEntity("Jaar", null);
@@ -28,10 +27,10 @@ public class RitAdministratieBootstrapper extends BootstrapperUtil {
 		EntityDesign traject = createEntity("Traject", null);
 		EntityDesign ijking = createEntity("Ijking", null);
 		
-		applicationDesign.caseEntity.set(jaar);
+		applicationDesign.setCaseEntity(jaar);
 
-		auto.setCustomization("true");
-		maand.setCustomization("true");
+		auto.setIsCustomized(true);
+		maand.setIsCustomized(true);
 		
 		AttributeDesign kmStand = createAttribute(stand, "kmStand", Integer.class);
 		AttributeDesign adres = createAttribute(stand, "adres", String.class);
@@ -60,7 +59,7 @@ public class RitAdministratieBootstrapper extends BootstrapperUtil {
 		ritBeginstandRelation.setReadOnly(true);
 		ritBeginstandRelation.setRule(createCustomDeduction("com.jg.ritadministratie.instantlogic.deduction.RitBeginstandDeductionCustomization", "com.jg.ritadministratie.instantlogic.Stand"));
 		maandBeginstandRelation.setReadOnly(true);
-		maandBeginstandRelation.setRule(createCustomDeduction("custom.ritadministratie.MaandBeginstandDeductionCustomization", Stand.class));
+		maandBeginstandRelation.setRule(createCustomDeduction("custom.ritadministratie.MaandBeginstandDeductionCustomization", "com.jg.ritadministratie.instantlogic.Stand"));
 		
 		return applicationDesign;
 	}
