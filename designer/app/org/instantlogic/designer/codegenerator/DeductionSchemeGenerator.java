@@ -1,15 +1,16 @@
-package org.instantlogic.codegenerator;
+package org.instantlogic.designer.codegenerator;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-import app.designer.AttributeDeductionDesign;
-import app.designer.AttributeDesign;
-import app.designer.CastInstanceDeductionDesign;
-import app.designer.DeductionDesign;
-import app.designer.DeductionSchemeDesign;
-import app.designer.RelationDesign;
-import app.designer.SelectedInstanceDeductionDesign;
+import org.instantlogic.designer.AttributeDeductionDesign;
+import org.instantlogic.designer.AttributeDesign;
+import org.instantlogic.designer.CastInstanceDeductionDesign;
+import org.instantlogic.designer.DeductionDesign;
+import org.instantlogic.designer.DeductionSchemeDesign;
+import org.instantlogic.designer.RelationDesign;
+import org.instantlogic.designer.SelectedInstanceDeductionDesign;
 
 public class DeductionSchemeGenerator {
 	
@@ -48,7 +49,7 @@ public class DeductionSchemeGenerator {
 		for (DeductionDesign design : deductionDesigns) {
 			DeductionClassModel classModel = new DeductionClassModel();
 			classModel.index = deductionIndex++;
-			classModel.type = design.getModel().getName();
+			classModel.type = design.getInstanceEntity().getName();
 			classModel.type = classModel.type.substring(0, classModel.type.length()-6);
 			classModel.customization = design.getCustomization();
 			classModel.resultType = design.getClassName();
@@ -74,7 +75,7 @@ public class DeductionSchemeGenerator {
 
 	private void fillDeductions(DeductionDesign fromOutput) {
 		if (deductionDesigns.contains(fromOutput)) return;
-		for (DeductionDesign input: fromOutput.inputs.get()) {
+		for (DeductionDesign input: fromOutput.getInputs()) {
 			fillDeductions(input);
 		}
 		if (deductionDesigns.contains(fromOutput)) return;

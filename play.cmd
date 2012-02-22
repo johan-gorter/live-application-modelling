@@ -1,1 +1,1 @@
-call d:\java\play-1.2.1\play.bat %*
+call d:\java\play-1.2.4\play.bat %*

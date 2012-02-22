@@ -26,20 +26,20 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 		name.setValue(newValue);
 	}
 	
-	private final org.instantlogic.fabric.value.AttributeValue<ApplicationDesign, java.lang.String> _package
-		= createAttributeValue(org.instantlogic.designer.entity.ApplicationDesignEntity._package);
+	private final org.instantlogic.fabric.value.AttributeValue<ApplicationDesign, java.lang.String> rootPackageName
+		= createAttributeValue(org.instantlogic.designer.entity.ApplicationDesignEntity.rootPackageName);
 	
-	public java.lang.String get_package() {
-		return _package.getValue();
+	public java.lang.String getRootPackageName() {
+		return rootPackageName.getValue();
 	}
 
-	public org.instantlogic.fabric.value.AttributeValue<ApplicationDesign, java.lang.String> get_packageAttribute() {
-		return _package;
+	public org.instantlogic.fabric.value.AttributeValue<ApplicationDesign, java.lang.String> getRootPackageNameAttribute() {
+		return rootPackageName;
 	}
 
 
-	public void set_package(java.lang.String newValue) {
-		_package.setValue(newValue);
+	public void setRootPackageName(java.lang.String newValue) {
+		rootPackageName.setValue(newValue);
 	}
 	
 	private final org.instantlogic.fabric.value.AttributeValue<ApplicationDesign, java.lang.String> sourcePath
@@ -58,20 +58,20 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 		sourcePath.setValue(newValue);
 	}
 	
-	private final org.instantlogic.fabric.value.AttributeValue<ApplicationDesign, java.lang.String> customization
-		= createAttributeValue(org.instantlogic.designer.entity.ApplicationDesignEntity.customization);
+	private final org.instantlogic.fabric.value.AttributeValue<ApplicationDesign, java.lang.Boolean> isCustomized
+		= createAttributeValue(org.instantlogic.designer.entity.ApplicationDesignEntity.isCustomized);
 	
-	public java.lang.String getCustomization() {
-		return customization.getValue();
+	public java.lang.Boolean getIsCustomized() {
+		return isCustomized.getValue();
 	}
 
-	public org.instantlogic.fabric.value.AttributeValue<ApplicationDesign, java.lang.String> getCustomizationAttribute() {
-		return customization;
+	public org.instantlogic.fabric.value.AttributeValue<ApplicationDesign, java.lang.Boolean> getIsCustomizedAttribute() {
+		return isCustomized;
 	}
 
 
-	public void setCustomization(java.lang.String newValue) {
-		customization.setValue(newValue);
+	public void setIsCustomized(java.lang.Boolean newValue) {
+		isCustomized.setValue(newValue);
 	}
 	
 	// Relations

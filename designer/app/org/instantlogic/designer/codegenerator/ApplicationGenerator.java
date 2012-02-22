@@ -1,4 +1,5 @@
-package org.instantlogic.codegenerator;
+package org.instantlogic.designer.codegenerator;
+
 
 import java.io.File;
 import java.util.ArrayList;
@@ -7,6 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.instantlogic.designer.ApplicationDesign;
+import org.instantlogic.designer.Design;
+import org.instantlogic.designer.EntityDesign;
+import org.instantlogic.designer.EventDesign;
+import org.instantlogic.designer.FlowDesign;
+import org.instantlogic.designer.PageFragmentHolderDesign;
+import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 
 public class ApplicationGenerator extends AbstractGenerator {
 
@@ -37,7 +44,7 @@ public class ApplicationGenerator extends AbstractGenerator {
 				applicationRoot = new File(applicationRoot, packageName);
 			}
 		} else {
-			applicationRoot = new File(AbstractGenerator.applicationsRoot, applicationInstance.getName());
+			applicationRoot = new File(applicationInstance.getName());
 		}
 		applicationRoot.mkdirs();
 		update(applicationRoot);
@@ -64,17 +71,16 @@ public class ApplicationGenerator extends AbstractGenerator {
 		
 		applicationInstance.getInstanceAdministration().startRecordingObservations();
 		rootPackageName = applicationInstance.getRootPackageName();
-		name = applicationInstance.name.get();
-		customization = applicationInstance.customization.get();
-		caseInstanceCustomization = applicationInstance.caseEntity.get().customization.get();
+		name = applicationInstance.getName();
+		isCustomized = applicationInstance.getIsCustomized()==Boolean.TRUE;
 		entities = new ArrayList<String>();
-		for (EntityDesign entity: applicationInstance.entities.get()) {
-			entities.add(entity.name.get());
+		for (EntityDesign entity: applicationInstance.getEntities()) {
+			entities.add(entity.getName());
 		}
-		caseEntity = applicationInstance.caseEntity.get().name.get();
+		caseEntity = applicationInstance.getCaseEntity().getName();
 		exposedFlows = new ArrayList<String>();
-		for (FlowDesign exposed: applicationInstance.exposedFlows.get()) {
-			exposedFlows.add(exposed.name.get());
+		for (FlowDesign exposed: applicationInstance.getExposedFlows()) {
+			exposedFlows.add(exposed.getName());
 		}
 		
 		if (applicationRoot!=null) {
@@ -87,44 +93,42 @@ public class ApplicationGenerator extends AbstractGenerator {
 		//TODO: if application.generateApplication...
 		//AbstractGenerator.generateFile(AbstractGenerator.applicationTemplate, this, null, name, "Application", rootPackageName, applicationRoot);
 		
-		List<Design> newEntities = updateGenerators(entityGenerators, applicationInstance.entities.get(), applicationRoot);
+		List<Design> newEntities = updateGenerators(entityGenerators, applicationInstance.getEntities(), applicationRoot);
 		for(Design newEntity : newEntities) {
 			EntityGenerator entityGenerator = new EntityGenerator((EntityDesign)newEntity, rootPackageName);
 			entityGenerator.update(applicationRoot);
 			entityGenerators.put(newEntity.getName(), entityGenerator);
 		}
 		
-		if (applicationInstance.packageName.get()!=null) return; // TODO: re-enable
-
-		List<Design> newSharedPageFragments = updateGenerators(sharedPageFragmentGenerators, applicationInstance.sharedPageFragments.get(), applicationRoot);
-		for(Design newSharedPageFragment : newSharedPageFragments) {
-			SharedPageFragmentGenerator sharedPageFragmentGenerator = new SharedPageFragmentGenerator((PageFragmentHolderDesign)newSharedPageFragment, rootPackageName);
-			sharedPageFragmentGenerator.update(applicationRoot);
-			sharedPageFragmentGenerators.put(newSharedPageFragment.getName(), sharedPageFragmentGenerator);
-		}
-
-		List<Design> newEvents = updateGenerators(eventGenerators, applicationInstance.events.get(), applicationRoot);
-		for(Design newEvent : newEvents) {
-			EventGenerator eventGenerator = new EventGenerator((EventDesign)newEvent, rootPackageName);
-			eventGenerator.update(applicationRoot);
-			eventGenerators.put(newEvent.getName(), eventGenerator);
-		}
+		// TODO: re-enable
+//		List<Design> newSharedPageFragments = updateGenerators(sharedPageFragmentGenerators, applicationInstance.getSharedPageFragments(), applicationRoot);
+//		for(Design newSharedPageFragment : newSharedPageFragments) {
+//			SharedPageFragmentGenerator sharedPageFragmentGenerator = new SharedPageFragmentGenerator((PageFragmentHolderDesign)newSharedPageFragment, rootPackageName);
+//			sharedPageFragmentGenerator.update(applicationRoot);
+//			sharedPageFragmentGenerators.put(newSharedPageFragment.getName(), sharedPageFragmentGenerator);
+//		}
+//
+//		List<Design> newEvents = updateGenerators(eventGenerators, applicationInstance.events.get(), applicationRoot);
+//		for(Design newEvent : newEvents) {
+//			EventGenerator eventGenerator = new EventGenerator((EventDesign)newEvent, rootPackageName);
+//			eventGenerator.update(applicationRoot);
+//			eventGenerators.put(newEvent.getName(), eventGenerator);
+//		}
+//		
+//		
+//		List<Design> newFlows = updateGenerators(flowGenerators, applicationInstance.flows.get(), applicationRoot);
+//		for(Design newFlow : newFlows) {
+//			FlowGenerator flowGenerator = new FlowGenerator((FlowDesign)newFlow, rootPackageName);
+//			flowGenerator.update(applicationRoot);
+//			flowGenerators.put(newFlow.getName(), flowGenerator);
+//		}
 		
-		
-		List<Design> newFlows = updateGenerators(flowGenerators, applicationInstance.flows.get(), applicationRoot);
-		for(Design newFlow : newFlows) {
-			FlowGenerator flowGenerator = new FlowGenerator((FlowDesign)newFlow, rootPackageName);
-			flowGenerator.update(applicationRoot);
-			flowGenerators.put(newFlow.getName(), flowGenerator);
-		}
-		
-		this.observations = applicationInstance.stopRecordingObservations();
+		this.observations = new ObservationsOutdatedObserver(applicationInstance.getInstanceAdministration().stopRecordingObservations(), null);
 	}
 	
 	public String caseEntity;
 	public List<String> exposedFlows;
 	public List<String> entities;
-	public String caseInstanceCustomization;
 	
 	public String getCaseEntity() {
 		return caseEntity;
@@ -136,11 +140,12 @@ public class ApplicationGenerator extends AbstractGenerator {
 		return entities;
 	}
 
-	public String getCaseInstanceCustomization() {
-		return caseInstanceCustomization;
-	}
-	
 	public void setMustRegenerate() {
 		mustRegenerate = true;
+	}
+
+	public void generateJavaCode() {
+		mustRegenerate=true;
+		afterSubmit();
 	}
 }

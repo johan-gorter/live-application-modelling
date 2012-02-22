@@ -40,7 +40,7 @@ public class ${name}Entity extends org.instantlogic.fabric.model.Entity<${rootPa
 	<#list attributes as attribute>
 	
 	public static final org.instantlogic.fabric.model.Attribute<${rootPackageName}.${name}, ${attribute.className}, ${attribute.itemClassName}> ${attribute.name} 
-		= new org.instantlogic.fabric.model.impl.<#if attribute.customization??>${attribute.customization}<#else>SimpleAttribute<${rootPackageName}.${name}, ${attribute.className}, ${attribute.itemClassName}></#if>(
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<${rootPackageName}.${name}, ${attribute.className}, ${attribute.itemClassName}>(
 			"${attribute.name}", INSTANCE, ${attribute.itemClassName}.class
 		) {
 	

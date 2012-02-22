@@ -1,8 +1,6 @@
 package org.instantlogic.server;
 
 import org.instantlogic.client.GreetingService;
-import org.instantlogic.fabric.impl.SimpleCaseInstance;
-import org.instantlogic.fabric.model.CaseEntity;
 import org.instantlogic.shared.FieldVerifier;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -15,17 +13,6 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		GreetingService {
 
 	public String greetServer(String input) throws IllegalArgumentException {
-		
-		SimpleCaseInstance simpleCaseInstance = new SimpleCaseInstance() {
-			
-			@Override
-			public CaseEntity getModel() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-		};
-		
-		simpleCaseInstance.getInstanceId();
 		
 		// Verify that the input is valid. 
 		if (!FieldVerifier.isValidName(input)) {
