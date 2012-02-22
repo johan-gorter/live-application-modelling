@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="app"/>
+	<classpathentry including="**/*" kind="src" path="generated"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/instantlogic-fabric"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/instantlogic-interaction"/>
+	<classpathentry kind="lib" path="D:/java/freemarker-2.3.18/lib/freemarker.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -1,15 +1,17 @@
-package org.instantlogic.codegenerator;
+package org.instantlogic.designer.codegenerator;
+
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import lbe.engine.codegenerator.EntityGenerator.Attribute.DomainEntry;
-import app.designer.AttributeDesign;
-import app.designer.DomainEntryDesign;
-import app.designer.EntityDesign;
-import app.designer.RelationDesign;
-import app.designer.TextDesign;
+import org.instantlogic.designer.AttributeDesign;
+import org.instantlogic.designer.DomainEntryDesign;
+import org.instantlogic.designer.EntityDesign;
+import org.instantlogic.designer.RelationDesign;
+import org.instantlogic.designer.TextDesign;
+import org.instantlogic.fabric.model.DomainEntry;
+import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 
 public class EntityGenerator extends AbstractGenerator {
 
@@ -27,7 +29,6 @@ public class EntityGenerator extends AbstractGenerator {
 			}
 		}
 		
-		public String customization;
 		public String name;
 		public String className;
 		public String itemClassName;
@@ -63,9 +64,6 @@ public class EntityGenerator extends AbstractGenerator {
 		}
 		public TextGenerator getExplanation() {
 			return explanation;
-		}
-		public String getCustomization() {
-			return customization;
 		}
 		public Integer getRuleDeductionIndex() {
 			return ruleDeductionIndex;
@@ -113,12 +111,10 @@ public class EntityGenerator extends AbstractGenerator {
 		this.rootPackageName = rootPackageName;
 	}
 	
-	public boolean caseEntity;
 	public String extendsFrom;
 	public final List<Attribute> attributes = new ArrayList<Attribute>();
 	public final List<Relation> relations = new ArrayList<Relation>();
 	public final List<Relation> reverseRelations = new ArrayList<Relation>();
-	public String applicationName;
 	
 	public List<Attribute> getAttributes() {
 		return attributes;
@@ -129,51 +125,42 @@ public class EntityGenerator extends AbstractGenerator {
 	public List<Relation> getReverseRelations() {
 		return reverseRelations;
 	}
-	public boolean isCaseEntity() {
-		return caseEntity;
-	}
 	public String getExtendsFrom() {
 		return extendsFrom;
-	}
-	public String getApplicationName() {
-		return applicationName;
 	}
 
 	@Override
 	public void update(File applicationRoot) {
 		if (observations!=null && !observations.isOutdated()) return;
 		clearDeductionSchemes();
-		entityDesign.getCase().startRecordingObservations();
+		entityDesign.getInstanceAdministration().startRecordingObservations();
 		
-		name=entityDesign.name.get();
-		customization = entityDesign.customization.get();
-		caseEntity = (entityDesign.caseEntityInApplication.get()!=null);
-		applicationName = entityDesign.application.get().name.get();
-		if (entityDesign.extendsFrom.get()!=null) {
-			extendsFrom = entityDesign.extendsFrom.get().name.get();
+		name = entityDesign.getName();
+		isCustomized = entityDesign.getIsCustomized()==Boolean.TRUE;
+		if (entityDesign.getExtendsFrom()!=null) {
+			extendsFrom = entityDesign.getExtendsFrom().getName();
 		}
 		attributes.clear();
-		for (AttributeDesign attributeDesign: entityDesign.attributes.get()) {
+		for (AttributeDesign attributeDesign: entityDesign.getAttributes()) {
 			Attribute attribute = new Attribute();
-			attribute.name = javaSafeName(attributeDesign.name.get());
-			attribute.customization = attributeDesign.customization.get();
-			attribute.itemClassName = attributeDesign.className.get();
-			attribute.multivalue = (attributeDesign.multivalue.get()==Boolean.TRUE);
+			attribute.name = javaSafeName(attributeDesign.getName());
+			attribute.itemClassName = attributeDesign.getClassName();
+			attribute.multivalue = (attributeDesign.getMultivalue()==Boolean.TRUE);
 			if (attribute.multivalue) {
 				attribute.className="java.util.List<"+attribute.itemClassName+">";
 			} else {
 				attribute.className=attribute.itemClassName;
 			}
-			attribute.readonly = (attributeDesign.readOnly.get()==Boolean.TRUE);
-			TextDesign question = attributeDesign.question.get();
+			attribute.readonly = (attributeDesign.getReadOnly()==Boolean.TRUE);
+			TextDesign question = attributeDesign.getQuestion();
 			if (question!=null) {
 				attribute.question = new TextGenerator(question, this);
 			}
-			TextDesign explanation = attributeDesign.explanation.get();
+			TextDesign explanation = attributeDesign.getExplanation();
 			if (explanation!=null) {
 				attribute.explanation = new TextGenerator(explanation, this);
 			}
-			List<DomainEntryDesign> domain = attributeDesign.domain.get();
+			List<DomainEntryDesign> domain = attributeDesign.getDomain();
 			if (domain.size()>0) {
 				attribute.domain = generateDomain(domain);
 			}
@@ -183,19 +170,19 @@ public class EntityGenerator extends AbstractGenerator {
 			attributes.add(attribute);
 		}
 		relations.clear();
-		for (RelationDesign relationDesign: entityDesign.relations.get()) {
+		for (RelationDesign relationDesign: entityDesign.getRelations()) {
 			Relation relation = new Relation();
-			relation.name = javaSafeName(relationDesign.name.get());
-			relation.multivalue = (relationDesign.multivalue.get()==Boolean.TRUE);
-			relation.readonly = (relationDesign.readOnly.get()==Boolean.TRUE);
-			relation.owner = (relationDesign.owner.get()==Boolean.TRUE);
-			relation.autoCreate = (relationDesign.autoCreate.get()==Boolean.TRUE);
-			relation.item = relationDesign.to.get().name.get();
+			relation.name = javaSafeName(relationDesign.getName());
+			relation.multivalue = (relationDesign.getMultivalue()==Boolean.TRUE);
+			relation.readonly = (relationDesign.getReadOnly()==Boolean.TRUE);
+			relation.owner = (relationDesign.getOwner()==Boolean.TRUE);
+			relation.autoCreate = (relationDesign.getAutoCreate()==Boolean.TRUE);
+			relation.item = relationDesign.getTo().getName();
 			relation.to = rootPackageName+"."+relation.item;
 			if (relation.multivalue) {
 				relation.to = "java.util.List<"+relation.to+">";
 			}
-			relation.reverseName=relationDesign.reverseName.get();
+			relation.reverseName=relationDesign.getReverseName();
 			if (relationDesign.getRule()!=null) {
 				relation.ruleDeductionIndex = addDeductionScheme(relationDesign.getRule());
 			}
@@ -203,12 +190,12 @@ public class EntityGenerator extends AbstractGenerator {
 			relations.add(relation);
 		}
 		reverseRelations.clear();
-		for (RelationDesign relationDesign: entityDesign.reverseRelations.get()) {
+		for (RelationDesign relationDesign: entityDesign.getReverseRelations()) {
 			Relation relation = new Relation();
-			relation.name = javaSafeName(relationDesign.reverseName.get());
-			relation.multivalue = (relationDesign.reverseMultivalue.get()==Boolean.TRUE);
-			relation.reverseName = javaSafeName(relationDesign.name.get());
-			relation.item = relationDesign.from.get().name.get();
+			relation.name = javaSafeName(relationDesign.getReverseName());
+			relation.multivalue = (relationDesign.getReverseMultivalue()==Boolean.TRUE);
+			relation.reverseName = javaSafeName(relationDesign.getName());
+			relation.item = relationDesign.getFrom().getName();
 			relation.to = rootPackageName+"."+relation.item;
 			if (relation.multivalue) {
 				relation.to = "java.util.List<"+relation.to+">";
@@ -216,9 +203,9 @@ public class EntityGenerator extends AbstractGenerator {
 			reverseRelations.add(relation);
 		}
 		AbstractGenerator.generateFile(AbstractGenerator.entityTemplate, this, "entity", name, "Entity", rootPackageName, applicationRoot, false);
-		AbstractGenerator.generateFile(AbstractGenerator.instanceTemplate, this, null, name, "", rootPackageName, applicationRoot, this.customization!=null);
+		AbstractGenerator.generateFile(AbstractGenerator.instanceTemplate, this, null, name, "", rootPackageName, applicationRoot, this.isCustomized);
 		
-		this.observations = entityDesign.getCase().stopRecordingObservations();
+		this.observations = new ObservationsOutdatedObserver(entityDesign.getInstanceAdministration().stopRecordingObservations(), null);
 	}
 	
 	@Override
@@ -228,12 +215,12 @@ public class EntityGenerator extends AbstractGenerator {
 		AbstractGenerator.deleteFile(null, name, "AbstractInstance", rootPackageName, applicationRoot);
 	}
 	
-	private List<DomainEntry> generateDomain(List<DomainEntryDesign> domain) {
-		List<DomainEntry> result = new ArrayList<DomainEntry>();
+	private List<EntityGenerator.Attribute.DomainEntry> generateDomain(List<DomainEntryDesign> domain) {
+		List<EntityGenerator.Attribute.DomainEntry> result = new ArrayList<EntityGenerator.Attribute.DomainEntry>();
 		for (DomainEntryDesign entry: domain) {
-			DomainEntry resultEntry = new DomainEntry();
-			resultEntry.name = entry.name.get();
-			resultEntry.display = new TextGenerator(entry.display.get(), this);
+			EntityGenerator.Attribute.DomainEntry resultEntry = new EntityGenerator.Attribute.DomainEntry();
+			resultEntry.name = entry.getName();
+			resultEntry.display = new TextGenerator(entry.getDisplay(), this);
 			result.add(resultEntry);
 		}
 		return result;

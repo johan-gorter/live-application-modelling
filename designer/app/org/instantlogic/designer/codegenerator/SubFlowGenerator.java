@@ -1,4 +1,5 @@
-package org.instantlogic.codegenerator;
+package org.instantlogic.designer.codegenerator;
+
 
 import java.io.File;
 

@@ -1,15 +1,16 @@
-package org.instantlogic.codegenerator;
+package org.instantlogic.designer.codegenerator;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-import app.designer.ConstantStringDesign;
-import app.designer.ConstantTextDesign;
-import app.designer.DeductionSchemeDesign;
-import app.designer.FormattedValueDesign;
-import app.designer.StringProducerDesign;
-import app.designer.TemplatedTextDesign;
-import app.designer.TextDesign;
+import org.instantlogic.designer.ConstantStringDesign;
+import org.instantlogic.designer.ConstantTextDesign;
+import org.instantlogic.designer.DeductionSchemeDesign;
+import org.instantlogic.designer.FormattedValueDesign;
+import org.instantlogic.designer.StringProducerDesign;
+import org.instantlogic.designer.TemplatedTextDesign;
+import org.instantlogic.designer.TextDesign;
 
 public class TextGenerator {
 
@@ -44,11 +45,11 @@ public class TextGenerator {
 		if (text instanceof ConstantTextDesign) {
 			type="constant";
 			ConstantTextDesign constantText = (ConstantTextDesign) text;
-			this.untranslatedConstant = constantText.untranslated.get();
+			this.untranslatedConstant = constantText.getUntranslated();
 		} else if (text instanceof TemplatedTextDesign) {
 			type="templated";
 			TemplatedTextDesign templatedText = (TemplatedTextDesign) text;
-			List<StringProducerDesign> list = templatedText.untranslated.get();
+			List<StringProducerDesign> list = templatedText.getUntranslated();
 			for (StringProducerDesign spInstance : list) {
 				StringProducer result = new StringProducer();
 				if (spInstance instanceof ConstantStringDesign) {

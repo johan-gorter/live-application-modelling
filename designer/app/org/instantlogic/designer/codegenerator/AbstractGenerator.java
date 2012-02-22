@@ -1,4 +1,5 @@
-package org.instantlogic.codegenerator;
+package org.instantlogic.designer.codegenerator;
+
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -12,11 +13,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.instantlogic.fabric.util.Observations;
+import org.instantlogic.designer.DeductionSchemeDesign;
+import org.instantlogic.designer.Design;
+import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 
-import play.Play;
-import app.designer.DeductionSchemeDesign;
-import app.designer.Design;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
@@ -25,13 +25,12 @@ public abstract class AbstractGenerator {
 
 	public String rootPackageName;
 	public String name;
-	public String customization;
+	public boolean isCustomized;
 	
 	private List<DeductionSchemeGenerator> deductionSchemes = new ArrayList<DeductionSchemeGenerator>();
 	
-	protected Observations observations;
+	protected ObservationsOutdatedObserver observations;
 	static Configuration freemarkerConfig;
-	public static File applicationsRoot = new File(Play.applicationPath, "app/app");
 	public static Template subFlowTemplate;
 	public static Template pageTemplate;
 	public static Template eventTemplate;
@@ -67,8 +66,8 @@ public abstract class AbstractGenerator {
 		return name;
 	}
 	
-	public String getCustomization() {
-		return customization;
+	public boolean getIsCustomized() {
+		return isCustomized;
 	}
 	
 	protected void clearDeductionSchemes() {
