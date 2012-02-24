@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class CompositePageFragmentDesign extends PageFragmentDesign { 
+public class CompositePageFragmentDesign extends PageFragmentDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {

@@ -10,13 +10,9 @@ import lbe.model.Application;
 import lbe.model.Entity;
 import lbe.model.flow.Flow;
 
-public class ${name}Application extends Application {
+public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${name}Application extends Application {
 
-<#if customization??>
-	public static final ${customization} INSTANCE = new ${customization}();
-<#else>
 	public static final ${name}Application INSTANCE = new ${name}Application();
-</#if>
 	
 	protected ${name}Application() {
 	}

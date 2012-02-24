@@ -16,7 +16,7 @@ public class InstanceAdministration {
 	private List<Observations> observationsStack = new ArrayList<Observations>();
 	private Observations currentObservations = null;
 	
-	private List<TransactionListener> transactionListeners = new CopyOnWriteArrayList<TransactionListener>();
+	private List<TransactionListener> transactionListeners = new ArrayList<TransactionListener>();
 	
 	private Operation currentOperation;
 	
@@ -100,11 +100,15 @@ public class InstanceAdministration {
 	}
 	
 	public void addTransactionListener(TransactionListener listener) {
-		this.transactionListeners.add(listener);
+		ArrayList<TransactionListener> newListeners = new ArrayList<TransactionListener>(this.transactionListeners);
+		newListeners.add(listener);
+		this.transactionListeners = newListeners;
 	}
 
 	public void removeTransactionListener(TransactionListener listener) {
-		this.transactionListeners.remove(listener);
+		ArrayList<TransactionListener> newListeners = new ArrayList<TransactionListener>(this.transactionListeners);
+		newListeners.remove(listener);
+		this.transactionListeners = newListeners;
 	}
 
 	protected void popCurrentOperation(Operation operation) {

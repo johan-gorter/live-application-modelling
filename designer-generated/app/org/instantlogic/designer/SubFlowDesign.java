@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class SubFlowDesign extends FlowNodeBaseDesign { 
+public class SubFlowDesign extends FlowNodeBaseDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {

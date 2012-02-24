@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class PageFragmentHolderDesign extends Design { 
+public class PageFragmentHolderDesign extends Design { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {

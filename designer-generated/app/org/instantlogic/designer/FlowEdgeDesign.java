@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class FlowEdgeDesign extends org.instantlogic.fabric.Instance { 
+public class FlowEdgeDesign extends org.instantlogic.fabric.Instance { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {

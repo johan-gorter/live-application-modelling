@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class EventDesign extends Design { 
+public class EventDesign extends Design { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {

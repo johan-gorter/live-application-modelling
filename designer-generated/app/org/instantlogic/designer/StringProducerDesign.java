@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class StringProducerDesign extends org.instantlogic.fabric.Instance { 
+public class StringProducerDesign extends org.instantlogic.fabric.Instance { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {

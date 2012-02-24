@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class AttributeDeductionDesign extends DeductionDesign { 
+public class AttributeDeductionDesign extends DeductionDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
