@@ -12,19 +12,19 @@ public  class SelectedInstanceDeductionDesign extends DeductionDesign {
 	
 	// Relations
 	
-	private final org.instantlogic.fabric.value.RelationValue<SelectedInstanceDeductionDesign, EntityDesign> entity
-		= createRelationValue(org.instantlogic.designer.entity.SelectedInstanceDeductionDesignEntity.entity);
+	private final org.instantlogic.fabric.value.RelationValue<SelectedInstanceDeductionDesign, EntityDesign> ofEntity
+		= createRelationValue(org.instantlogic.designer.entity.SelectedInstanceDeductionDesignEntity.ofEntity);
 		
-	public org.instantlogic.fabric.value.RelationValue<SelectedInstanceDeductionDesign, EntityDesign> getEntityRelation() {
-		return entity;
+	public org.instantlogic.fabric.value.RelationValue<SelectedInstanceDeductionDesign, EntityDesign> getOfEntityRelation() {
+		return ofEntity;
 	}
 
-	public org.instantlogic.designer.EntityDesign getEntity() {
-		return entity.get();
+	public org.instantlogic.designer.EntityDesign getOfEntity() {
+		return ofEntity.get();
 	}
 	
-	public void setEntity(org.instantlogic.designer.EntityDesign newValue) {
-		entity.setValue(newValue);
+	public void setOfEntity(org.instantlogic.designer.EntityDesign newValue) {
+		ofEntity.setValue(newValue);
 	}
 
 	// Reverse relations

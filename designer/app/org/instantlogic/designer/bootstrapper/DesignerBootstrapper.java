@@ -25,8 +25,8 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		applicationDesign.setName("Designer");
 		
 		applicationDesign.setRootPackageName("org.instantlogic.designer");
-//		applicationDesign.setSourcePath("/prive/live-business-engineering/designer-generated/app");
-		applicationDesign.setSourcePath("/temp/designer-generated/app");
+		applicationDesign.setSourcePath("/prive/live-business-engineering/designer-generated/app");
+//		applicationDesign.setSourcePath("/temp/designer-generated/app");
 		
 		//applicationDesign.name.set("NextDesigner");
 		
@@ -36,10 +36,10 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		EntityDesign application = createEntity("ApplicationDesign", null);
 		application.setIsCustomized(true);
 		createAttribute(application, "name", String.class);
-		createAttribute(application, "package", String.class);
+		createAttribute(application, "rootPackageName", String.class);
 		createAttribute(application, "sourcePath", String.class);
 		applicationDesign.setCaseEntity(application);
-		createAttribute(application, "customization", String.class);
+		createAttribute(application, "isCustomized", Boolean.class);
 		
 		// Concept
 		EntityDesign design = createEntity("Design", null);
@@ -50,7 +50,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		AttributeDesign javaName = createAttribute(design, "javaName", String.class);
 		javaName.setReadOnly(true);
 		javaName.setRule(createCustomDeduction("org.instantlogic.designer.deduction.JavaNameDeduction", "java.lang.String"));
-		createAttribute(design, "customization", String.class);
+		createAttribute(design, "isCustomized", Boolean.class);
 		
 		// Entity
 		EntityDesign entityDesign = createEntity("EntityDesign", design);
@@ -128,7 +128,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 
 		// Data
 		createRelation(entityDesign, "extendsFrom", RelationType.ManyToZeroOrOne, "extensions", entityDesign);
-		RelationDesign attributes = createRelation(entityDesign, "attributes", RelationType.OneToManyAggregation, "ofEntity", attributeDesign);
+		RelationDesign attributes = createRelation(entityDesign, "attributes", RelationType.OneToManyAggregation, "belongsToEntity", attributeDesign);
 		createRelation(entityDesign, "relations", RelationType.OneToManyAggregation, "from", relationDesign);
 		createRelation(relationDesign, "to", RelationType.ManyToZeroOrOne, "reverseRelations", entityDesign);
 		createRelation(attributeDesign, "question", RelationType.OneToZeroOrOneAggregation, "questionOnAttribute", textDesign);

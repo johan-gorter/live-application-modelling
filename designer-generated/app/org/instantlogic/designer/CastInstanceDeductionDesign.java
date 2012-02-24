@@ -12,19 +12,19 @@ public  class CastInstanceDeductionDesign extends DeductionDesign {
 	
 	// Relations
 	
-	private final org.instantlogic.fabric.value.RelationValue<CastInstanceDeductionDesign, EntityDesign> entity
-		= createRelationValue(org.instantlogic.designer.entity.CastInstanceDeductionDesignEntity.entity);
+	private final org.instantlogic.fabric.value.RelationValue<CastInstanceDeductionDesign, EntityDesign> toEntity
+		= createRelationValue(org.instantlogic.designer.entity.CastInstanceDeductionDesignEntity.toEntity);
 		
-	public org.instantlogic.fabric.value.RelationValue<CastInstanceDeductionDesign, EntityDesign> getEntityRelation() {
-		return entity;
+	public org.instantlogic.fabric.value.RelationValue<CastInstanceDeductionDesign, EntityDesign> getToEntityRelation() {
+		return toEntity;
 	}
 
-	public org.instantlogic.designer.EntityDesign getEntity() {
-		return entity.get();
+	public org.instantlogic.designer.EntityDesign getToEntity() {
+		return toEntity.get();
 	}
 	
-	public void setEntity(org.instantlogic.designer.EntityDesign newValue) {
-		entity.setValue(newValue);
+	public void setToEntity(org.instantlogic.designer.EntityDesign newValue) {
+		toEntity.setValue(newValue);
 	}
 
 	// Reverse relations

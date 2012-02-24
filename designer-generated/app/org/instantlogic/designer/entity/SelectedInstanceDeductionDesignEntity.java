@@ -33,15 +33,15 @@ public class SelectedInstanceDeductionDesignEntity extends org.instantlogic.fabr
 	
 	// Relations
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.SelectedInstanceDeductionDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> entity
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.SelectedInstanceDeductionDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> ofEntity
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.SelectedInstanceDeductionDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign>(
-			"entity", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, org.instantlogic.designer.entity.EntityDesignEntity.entityInSelectedInstanceDeductions
+			"ofEntity", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, org.instantlogic.designer.entity.EntityDesignEntity.entityInSelectedInstanceDeductions
 		) {
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.SelectedInstanceDeductionDesign, org.instantlogic.designer.EntityDesign> get(
 					org.instantlogic.designer.SelectedInstanceDeductionDesign instance) {
-				return instance.getEntityRelation();
+				return instance.getOfEntityRelation();
 			}
 			
 		};
@@ -51,7 +51,7 @@ public class SelectedInstanceDeductionDesignEntity extends org.instantlogic.fabr
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
-		entity,
+		ofEntity,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 	};
