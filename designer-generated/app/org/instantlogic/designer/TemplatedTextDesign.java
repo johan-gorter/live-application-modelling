@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class TemplatedTextDesign extends TextDesign { 
+public class TemplatedTextDesign extends TextDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {

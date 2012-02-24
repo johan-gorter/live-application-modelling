@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class LinkDesign extends PageFragmentDesign { 
+public class LinkDesign extends PageFragmentDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {

@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class RelationDesign extends AttributeDesign { 
+public class RelationDesign extends AttributeDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {

@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class PageDesign extends FlowNodeBaseDesign { 
+public class PageDesign extends FlowNodeBaseDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {

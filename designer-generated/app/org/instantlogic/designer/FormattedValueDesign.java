@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class FormattedValueDesign extends StringProducerDesign { 
+public class FormattedValueDesign extends StringProducerDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
