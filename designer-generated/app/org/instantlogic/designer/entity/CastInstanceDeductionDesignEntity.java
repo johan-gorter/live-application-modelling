@@ -33,15 +33,15 @@ public class CastInstanceDeductionDesignEntity extends org.instantlogic.fabric.m
 	
 	// Relations
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.CastInstanceDeductionDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> entity
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.CastInstanceDeductionDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> toEntity
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.CastInstanceDeductionDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign>(
-			"entity", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, org.instantlogic.designer.entity.EntityDesignEntity.entityInCastDeductions
+			"toEntity", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, org.instantlogic.designer.entity.EntityDesignEntity.entityInCastDeductions
 		) {
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.CastInstanceDeductionDesign, org.instantlogic.designer.EntityDesign> get(
 					org.instantlogic.designer.CastInstanceDeductionDesign instance) {
-				return instance.getEntityRelation();
+				return instance.getToEntityRelation();
 			}
 			
 		};
@@ -51,7 +51,7 @@ public class CastInstanceDeductionDesignEntity extends org.instantlogic.fabric.m
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
-		entity,
+		toEntity,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 	};

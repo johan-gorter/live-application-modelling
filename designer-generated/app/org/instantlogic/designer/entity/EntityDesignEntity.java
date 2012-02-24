@@ -48,7 +48,7 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, java.util.List<org.instantlogic.designer.AttributeDesign>, org.instantlogic.designer.AttributeDesign> attributes
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, java.util.List<org.instantlogic.designer.AttributeDesign>, org.instantlogic.designer.AttributeDesign>(
-			"attributes", INSTANCE, org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE, org.instantlogic.designer.AttributeDesign.class, org.instantlogic.designer.entity.AttributeDesignEntity.entity
+			"attributes", INSTANCE, org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE, org.instantlogic.designer.AttributeDesign.class, org.instantlogic.designer.entity.AttributeDesignEntity.belongsToEntity
 		) {
 	
 			@Override
@@ -164,7 +164,7 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, java.util.List<org.instantlogic.designer.SelectedInstanceDeductionDesign>, org.instantlogic.designer.SelectedInstanceDeductionDesign> entityInSelectedInstanceDeductions
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, java.util.List<org.instantlogic.designer.SelectedInstanceDeductionDesign>, org.instantlogic.designer.SelectedInstanceDeductionDesign>(
-			"entityInSelectedInstanceDeductions", INSTANCE, org.instantlogic.designer.entity.SelectedInstanceDeductionDesignEntity.INSTANCE, org.instantlogic.designer.SelectedInstanceDeductionDesign.class, org.instantlogic.designer.entity.SelectedInstanceDeductionDesignEntity.entity
+			"entityInSelectedInstanceDeductions", INSTANCE, org.instantlogic.designer.entity.SelectedInstanceDeductionDesignEntity.INSTANCE, org.instantlogic.designer.SelectedInstanceDeductionDesign.class, org.instantlogic.designer.entity.SelectedInstanceDeductionDesignEntity.ofEntity
 		) {
 	
 			@Override
@@ -184,7 +184,7 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, java.util.List<org.instantlogic.designer.CastInstanceDeductionDesign>, org.instantlogic.designer.CastInstanceDeductionDesign> entityInCastDeductions
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, java.util.List<org.instantlogic.designer.CastInstanceDeductionDesign>, org.instantlogic.designer.CastInstanceDeductionDesign>(
-			"entityInCastDeductions", INSTANCE, org.instantlogic.designer.entity.CastInstanceDeductionDesignEntity.INSTANCE, org.instantlogic.designer.CastInstanceDeductionDesign.class, org.instantlogic.designer.entity.CastInstanceDeductionDesignEntity.entity
+			"entityInCastDeductions", INSTANCE, org.instantlogic.designer.entity.CastInstanceDeductionDesignEntity.INSTANCE, org.instantlogic.designer.CastInstanceDeductionDesign.class, org.instantlogic.designer.entity.CastInstanceDeductionDesignEntity.toEntity
 		) {
 	
 			@Override

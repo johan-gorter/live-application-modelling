@@ -135,10 +135,10 @@ public abstract class BootstrapperUtil {
 	protected static DeductionSchemeDesign createCastDeduction(EntityDesign entity, EntityDesign toEntity) {
 		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
 		SelectedInstanceDeductionDesign selectedInstanceDeductionDesign = new SelectedInstanceDeductionDesign();
-		selectedInstanceDeductionDesign.setEntity(entity);
+		selectedInstanceDeductionDesign.setOfEntity(entity);
 		selectedInstanceDeductionDesign.setClassName(entity.getName());
 		CastInstanceDeductionDesign castInstanceDeductionDesign = new CastInstanceDeductionDesign();
-		castInstanceDeductionDesign.setEntity(toEntity);
+		castInstanceDeductionDesign.setToEntity(toEntity);
 		castInstanceDeductionDesign.setClassName(toEntity.getName());
 		castInstanceDeductionDesign.getInputsRelation().add(selectedInstanceDeductionDesign);
 		scheme.getDeductionsRelation().add(selectedInstanceDeductionDesign);
@@ -151,7 +151,7 @@ public abstract class BootstrapperUtil {
 	protected static DeductionSchemeDesign createDeduction(EntityDesign entity) {
 		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
 		SelectedInstanceDeductionDesign selectedInstanceDeductionDesign = new SelectedInstanceDeductionDesign();
-		selectedInstanceDeductionDesign.setEntity(entity);
+		selectedInstanceDeductionDesign.setOfEntity(entity);
 		selectedInstanceDeductionDesign.setClassName(entity.getName());
 		scheme.getDeductionsRelation().add(selectedInstanceDeductionDesign);
 		scheme.setOutput(selectedInstanceDeductionDesign);
@@ -171,7 +171,7 @@ public abstract class BootstrapperUtil {
 	// Deduction for an attribute/relation
 	protected static DeductionSchemeDesign createDeduction(AttributeDesign attribute) {
 		String className = attribute.getClassName();
-		EntityDesign source = attribute.getEntity();
+		EntityDesign source = attribute.getBelongsToEntity();
 		if (attribute instanceof RelationDesign) {
 			// We should come up with a solution that makes this unnecessary
 			RelationDesign relation = (RelationDesign)attribute;
@@ -180,7 +180,7 @@ public abstract class BootstrapperUtil {
 		}
 		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
 		SelectedInstanceDeductionDesign selectedInstanceDeductionDesign = new SelectedInstanceDeductionDesign();
-		selectedInstanceDeductionDesign.setEntity(source);
+		selectedInstanceDeductionDesign.setOfEntity(source);
 		selectedInstanceDeductionDesign.setClassName(source.getName());
 		AttributeDeductionDesign attributeDeductionDesign = new AttributeDeductionDesign();
 		attributeDeductionDesign.setAttribute(attribute);

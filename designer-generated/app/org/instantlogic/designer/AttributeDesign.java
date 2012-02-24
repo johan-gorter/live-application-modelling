@@ -152,15 +152,15 @@ public  class AttributeDesign extends Design {
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<AttributeDesign, EntityDesign> entity
-		= createReverseRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity.entity);
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<AttributeDesign, EntityDesign> belongsToEntity
+		= createReverseRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity.belongsToEntity);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<AttributeDesign, EntityDesign> getEntityRelation() {
-		return entity;
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<AttributeDesign, EntityDesign> getBelongsToEntityRelation() {
+		return belongsToEntity;
 	}
 
-	public org.instantlogic.designer.EntityDesign getEntity() {
-		return entity.get();
+	public org.instantlogic.designer.EntityDesign getBelongsToEntity() {
+		return belongsToEntity.get();
 	}
 
 	
