@@ -14,6 +14,7 @@ import org.instantlogic.fabric.util.ValueChangeEvent;
 import org.instantlogic.fabric.util.ValueChangeObserver;
 import org.instantlogic.fabric.value.AttributeValue;
 import org.instantlogic.fabric.value.AttributeValues;
+import org.instantlogic.fabric.value.Multi;
 import org.instantlogic.fabric.value.ReadOnlyRelationValue;
 import org.instantlogic.fabric.value.ReadOnlyRelationValues;
 import org.instantlogic.fabric.value.RelationValue;
@@ -103,6 +104,16 @@ public abstract class Instance {
 		instance.registerOwner(this, childLocalId);
 	}
 	
+	/**
+	 * Opposite of adopt, clears the owner of instance
+	 * @param instance
+	 */
+	public void reject(Instance instance) {
+		Instance found = children.remove(instance.getInstanceLocalId());
+		if (found!=instance) throw new RuntimeException("This instance was not adopted: "+instance);
+		instance.registerOwner(null, null);
+	}
+	
 	protected void registerOwner(Instance owner, String localId) {
 		if (this.owner!=null && owner!=null) {
 			throw new RuntimeException("This instance is already owned by "+this.owner);
@@ -123,7 +134,7 @@ public abstract class Instance {
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected<Value extends Object, I extends Instance> AttributeValues<I, Value> createAttributeValues(Attribute<I, List<Value>, Value> attribute) {
+	protected<Value extends Object, I extends Instance> AttributeValues<I, Value> createAttributeValues(Attribute<I, Multi<Value>, Value> attribute) {
 		return new AttributeValuesImpl<I, Value>((I)this, attribute);
 	}
 
@@ -138,7 +149,7 @@ public abstract class Instance {
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected<To extends Instance, I extends Instance> RelationValues<I, To> createRelationValues(Relation<I, List<To>, To> relation) {
+	protected<To extends Instance, I extends Instance> RelationValues<I, To> createRelationValues(Relation<I, Multi<To>, To> relation) {
 		return new RelationValuesImpl<I, To>((I)this, relation);
 	}
 
@@ -148,7 +159,7 @@ public abstract class Instance {
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected<To extends Instance, I extends Instance> ReadOnlyRelationValues<I, To> createReverseRelationValues(Relation<I, List<To>, To> relation) {
+	protected<To extends Instance, I extends Instance> ReadOnlyRelationValues<I, To> createReverseRelationValues(Relation<I, Multi<To>, To> relation) {
 		return new ReverseRelationValuesImpl<I, To>((I)this, relation);
 	}
 	

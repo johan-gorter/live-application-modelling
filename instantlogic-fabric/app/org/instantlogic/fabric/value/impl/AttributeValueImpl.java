@@ -1,13 +1,9 @@
 package org.instantlogic.fabric.value.impl;
 
-import java.util.ArrayList;
-
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Attribute;
 import org.instantlogic.fabric.util.Operation;
 import org.instantlogic.fabric.util.ValueAndLevel;
-import org.instantlogic.fabric.util.ValueChangeEvent;
-import org.instantlogic.fabric.util.ValueChangeObserver;
 import org.instantlogic.fabric.value.AttributeValue;
 
 
@@ -19,14 +15,6 @@ public class AttributeValueImpl<I extends Instance, Value extends Object>
 	
 	public AttributeValueImpl(I forInstance, Attribute<I, Value, ? extends Object> model) {
 		super(forInstance, model);
-	}
-
-	public Value getValue() {
-		if (storedValue!=null) {
-			forInstance.getInstanceAdministration().registerObservation(this);
-			return storedValue;
-		}
-		return super.getValue();
 	}
 
 	@Override

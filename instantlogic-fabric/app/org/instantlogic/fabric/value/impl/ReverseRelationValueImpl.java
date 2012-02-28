@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Relation;
+import org.instantlogic.fabric.util.Operation;
+import org.instantlogic.fabric.util.ValueAndLevel;
 import org.instantlogic.fabric.value.AttributeValue;
 import org.instantlogic.fabric.value.ReadOnlyRelationValue;
 
@@ -29,11 +31,18 @@ public class ReverseRelationValueImpl<I extends Instance, From extends Instance>
 		return (Relation<I, From, From>) super.getModel();
 	}
 
-	public void setReverse(From reverseValue, boolean isOwner) {
+	public void setReverse(From reverseValue, boolean isOwner, Operation operation) {
+		From oldValue = this.reverseValue;
 		this.reverseValue = reverseValue;
 		if (isOwner) {
-			reverseValue.adopt(forInstance);
+			if (oldValue!=null) {
+				oldValue.reject(forInstance);
+			}
+			if (reverseValue!=null) {
+				reverseValue.adopt(forInstance);
+			}
 		}
+		fireValueChanged(ValueAndLevel.deduced(oldValue), null, null, operation);
 	}
 	
 	public void clear() {
