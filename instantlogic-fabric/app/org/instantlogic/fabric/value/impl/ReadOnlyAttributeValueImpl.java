@@ -83,6 +83,23 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 		return result;
 	}
 	
+	@Deprecated
+	public Value get() {
+		return getValue();
+	}
+	
+	public Value getValue() {
+		return getValueAndLevel().getValue();
+	}
+
+	@Override
+	public ValueAndLevel<Value> getValueAndLevel() {
+		InstanceAdministration registry = forInstance.getInstanceAdministration();
+		registry.registerObservation(this);
+		ensureCached(registry);
+		return cached;
+	}
+	
 	private void ensureCached(InstanceAdministration registry) {
 		if (cached==null) {
 			registry.startRecordingObservations();
@@ -94,24 +111,6 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 		}
 	}
 	
-	@Override
-	public ValueAndLevel<Value> getValueAndLevel() {
-		InstanceAdministration registry = forInstance.getInstanceAdministration();
-		registry.registerObservation(this);
-		ensureCached(registry);
-		return cached;
-	}
-	
-	@Deprecated
-	public Value get() {
-		return getValue();
-	}
-	
-	
-	public Value getValue() {
-		return getValueAndLevel().getValue();
-	}
-
 	// The logic for determining the value
 	private void calculateValue() {
 		Attribute<I, Value, ? extends Object> attribute = getModel();

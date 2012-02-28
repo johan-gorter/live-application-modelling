@@ -2,6 +2,8 @@ package org.instantlogic.fabric.value.impl;
 
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Relation;
+import org.instantlogic.fabric.util.Operation;
+import org.instantlogic.fabric.util.ValueAndLevel;
 import org.instantlogic.fabric.util.ValueChangeEvent;
 import org.instantlogic.fabric.value.RelationValue;
 
@@ -41,18 +43,20 @@ public class RelationValueImpl<I extends Instance, To extends Instance>
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public void setValue(To value) {
-		To previous = super.getValue();
-		if (previous == value) return;
-		super.setValue(value);
-		if (previous!=null) {
-			throw new RuntimeException("Not yet implemented");
-		}
-		if (value!=null) {
+	protected void fireValueChanged(ValueAndLevel<To> oldValue, To oldStoredValue, To newStoredValue, Operation operation) {
+		super.fireValueChanged(oldValue, oldStoredValue, newStoredValue, operation);
+		if (oldStoredValue!=null) {
 			if (getModel().getReverseRelation().isMultivalue()) {
-				((ReverseRelationValuesImpl)model.getReverseRelation().get(value)).addReverse(forInstance);
+				((ReverseRelationValuesImpl)model.getReverseRelation().get(oldStoredValue)).removeReverse(forInstance, operation);
 			} else {
-				((ReverseRelationValueImpl)model.getReverseRelation().get(value)).setReverse(forInstance, model.isOwner());
+				((ReverseRelationValueImpl)model.getReverseRelation().get(oldStoredValue)).setReverse(forInstance, model.isOwner(), operation);
+			}
+		}
+		if (newStoredValue!=null) {
+			if (getModel().getReverseRelation().isMultivalue()) {
+				((ReverseRelationValuesImpl)model.getReverseRelation().get(newStoredValue)).addReverse(forInstance, operation);
+			} else {
+				((ReverseRelationValueImpl)model.getReverseRelation().get(newStoredValue)).setReverse(forInstance, model.isOwner(), operation);
 			}
 		}
 	};
