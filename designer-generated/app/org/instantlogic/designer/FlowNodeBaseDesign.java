@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class FlowNodeBaseDesign extends Design { 
+public  class FlowNodeBaseDesign extends Design { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -33,7 +33,7 @@ public class FlowNodeBaseDesign extends Design {
 		return incomingSources;
 	}
 
-	public java.util.List<org.instantlogic.designer.FlowSourceDesign> getIncomingSources() {
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowSourceDesign> getIncomingSources() {
 		return incomingSources.get();
 	}
 
@@ -45,7 +45,7 @@ public class FlowNodeBaseDesign extends Design {
 		return outgoingEdges;
 	}
 
-	public java.util.List<org.instantlogic.designer.FlowEdgeDesign> getOutgoingEdges() {
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowEdgeDesign> getOutgoingEdges() {
 		return outgoingEdges.get();
 	}
 
@@ -57,7 +57,7 @@ public class FlowNodeBaseDesign extends Design {
 		return incomingEdges;
 	}
 
-	public java.util.List<org.instantlogic.designer.FlowEdgeDesign> getIncomingEdges() {
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowEdgeDesign> getIncomingEdges() {
 		return incomingEdges.get();
 	}
 

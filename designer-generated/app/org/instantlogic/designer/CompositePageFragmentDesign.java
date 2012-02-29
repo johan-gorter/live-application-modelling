@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class CompositePageFragmentDesign extends PageFragmentDesign { 
+public  class CompositePageFragmentDesign extends PageFragmentDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -19,13 +19,26 @@ public class CompositePageFragmentDesign extends PageFragmentDesign {
 		return items;
 	}
 
-	public java.util.List<org.instantlogic.designer.PageCompositionDesign> getItems() {
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.PageCompositionDesign> getItems() {
 		return items.get();
 	}
 	
-	public void setItems(java.util.List<org.instantlogic.designer.PageCompositionDesign> newValue) {
-		items.setValue(newValue);
+	public void addToItems(PageCompositionDesign item) {
+		items.addValue(item);
 	}
+	
+	public void addToItems(PageCompositionDesign item, int index) {
+		items.insertValue(item, index);
+	}
+	
+	public void removeFromItems(PageCompositionDesign item) {
+		items.removeValue(item);
+	}
+	
+	public void removeFromItems(int index) {
+		items.removeValue(index);
+	}
+	
 
 	// Reverse relations
 	

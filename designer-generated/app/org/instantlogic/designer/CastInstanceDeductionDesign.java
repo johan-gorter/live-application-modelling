@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class CastInstanceDeductionDesign extends DeductionDesign { 
+public  class CastInstanceDeductionDesign extends DeductionDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -26,6 +26,7 @@ public class CastInstanceDeductionDesign extends DeductionDesign {
 	public void setToEntity(org.instantlogic.designer.EntityDesign newValue) {
 		toEntity.setValue(newValue);
 	}
+
 
 	// Reverse relations
 

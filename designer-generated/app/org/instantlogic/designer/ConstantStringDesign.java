@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class ConstantStringDesign extends StringProducerDesign { 
+public  class ConstantStringDesign extends StringProducerDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -21,10 +21,10 @@ public class ConstantStringDesign extends StringProducerDesign {
 		return constant;
 	}
 
-
 	public void setConstant(java.lang.String newValue) {
 		constant.setValue(newValue);
 	}
+	
 	
 	// Relations
 

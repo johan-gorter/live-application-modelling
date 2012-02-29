@@ -12,6 +12,7 @@ public class Operation {
 	private final List<ValueChangeEvent> eventsToUndo = new ArrayList<ValueChangeEvent>();
 	private final Operation partOfOperation;
 	private boolean completed;
+	private int recordingUndoEventsPaused;
 
 	public Operation(InstanceAdministration instanceAdministration, Operation partOfOperation) {
 		this.instanceAdministration = instanceAdministration;
@@ -30,16 +31,15 @@ public class Operation {
 		return completed;
 	}
 	
-	public void clearEventsToUndo() {
-		this.eventsToUndo.clear();
-	}
 	/**
 	 * Adds an event that must be undone in case the operation does not complete.
 	 * 
 	 * @param event the event to undo
 	 */
 	public void addEventToUndo(ValueChangeEvent event) {
-		this.eventsToUndo.add(event);
+		if (recordingUndoEventsPaused==0) {
+			this.eventsToUndo.add(event);
+		}
 	}
 	
 	public void close() {
@@ -67,8 +67,21 @@ public class Operation {
 	protected void undo() {
 		for (int i=eventsToUndo.size()-1;i>=0;i--) {
 			ValueChangeEvent event = eventsToUndo.get(i);
-			AttributeValue attributeValue = (AttributeValue)((Attribute)event.getAttribute()).get(event.getInstance());
-			attributeValue.setValue(event.getOldStoredValue());
+			if (event.isMultivalueUpdate()) {
+				throw new RuntimeException("TODO");
+			} else {
+				AttributeValue attributeValue = (AttributeValue)((Attribute)event.getAttribute()).get(event.getInstance());
+				attributeValue.setValue(event.getOldStoredValue());
+			}
 		}
+	}
+
+	public void pauseRecordingUndoEvents() {
+		this.recordingUndoEventsPaused ++;
+	}
+
+	public void resumeRecordingUndoEvents() {
+		if (recordingUndoEventsPaused==0) throw new IllegalStateException();
+		this.recordingUndoEventsPaused --;
 	}
 }

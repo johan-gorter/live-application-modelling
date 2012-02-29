@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class FieldDesign extends PageFragmentDesign { 
+public  class FieldDesign extends PageFragmentDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -21,10 +21,10 @@ public class FieldDesign extends PageFragmentDesign {
 		return required;
 	}
 
-
 	public void setRequired(java.lang.Boolean newValue) {
 		required.setValue(newValue);
 	}
+	
 	
 	private final org.instantlogic.fabric.value.AttributeValue<FieldDesign, java.lang.Boolean> readOnly
 		= createAttributeValue(org.instantlogic.designer.entity.FieldDesignEntity.readOnly);
@@ -37,10 +37,10 @@ public class FieldDesign extends PageFragmentDesign {
 		return readOnly;
 	}
 
-
 	public void setReadOnly(java.lang.Boolean newValue) {
 		readOnly.setValue(newValue);
 	}
+	
 	
 	// Relations
 	
@@ -58,6 +58,7 @@ public class FieldDesign extends PageFragmentDesign {
 	public void setAttribute(org.instantlogic.designer.AttributeDesign newValue) {
 		attribute.setValue(newValue);
 	}
+
 
 	// Reverse relations
 

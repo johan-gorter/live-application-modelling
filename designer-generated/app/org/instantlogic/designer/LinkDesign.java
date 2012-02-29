@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class LinkDesign extends PageFragmentDesign { 
+public  class LinkDesign extends PageFragmentDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -26,6 +26,7 @@ public class LinkDesign extends PageFragmentDesign {
 	public void setCaption(org.instantlogic.designer.TextDesign newValue) {
 		caption.setValue(newValue);
 	}
+
 	
 	private final org.instantlogic.fabric.value.RelationValue<LinkDesign, EventDesign> event
 		= createRelationValue(org.instantlogic.designer.entity.LinkDesignEntity.event);
@@ -41,6 +42,7 @@ public class LinkDesign extends PageFragmentDesign {
 	public void setEvent(org.instantlogic.designer.EventDesign newValue) {
 		event.setValue(newValue);
 	}
+
 
 	// Reverse relations
 

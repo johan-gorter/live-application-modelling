@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class FlowDesign extends Design { 
+public  class FlowDesign extends Design { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -19,13 +19,26 @@ public class FlowDesign extends Design {
 		return sources;
 	}
 
-	public java.util.List<org.instantlogic.designer.FlowSourceDesign> getSources() {
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowSourceDesign> getSources() {
 		return sources.get();
 	}
 	
-	public void setSources(java.util.List<org.instantlogic.designer.FlowSourceDesign> newValue) {
-		sources.setValue(newValue);
+	public void addToSources(FlowSourceDesign item) {
+		sources.addValue(item);
 	}
+	
+	public void addToSources(FlowSourceDesign item, int index) {
+		sources.insertValue(item, index);
+	}
+	
+	public void removeFromSources(FlowSourceDesign item) {
+		sources.removeValue(item);
+	}
+	
+	public void removeFromSources(int index) {
+		sources.removeValue(index);
+	}
+	
 	
 	private final org.instantlogic.fabric.value.RelationValues<FlowDesign, FlowNodeBaseDesign> nodes
 		= createRelationValues(org.instantlogic.designer.entity.FlowDesignEntity.nodes);
@@ -34,13 +47,26 @@ public class FlowDesign extends Design {
 		return nodes;
 	}
 
-	public java.util.List<org.instantlogic.designer.FlowNodeBaseDesign> getNodes() {
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowNodeBaseDesign> getNodes() {
 		return nodes.get();
 	}
 	
-	public void setNodes(java.util.List<org.instantlogic.designer.FlowNodeBaseDesign> newValue) {
-		nodes.setValue(newValue);
+	public void addToNodes(FlowNodeBaseDesign item) {
+		nodes.addValue(item);
 	}
+	
+	public void addToNodes(FlowNodeBaseDesign item, int index) {
+		nodes.insertValue(item, index);
+	}
+	
+	public void removeFromNodes(FlowNodeBaseDesign item) {
+		nodes.removeValue(item);
+	}
+	
+	public void removeFromNodes(int index) {
+		nodes.removeValue(index);
+	}
+	
 	
 	private final org.instantlogic.fabric.value.RelationValues<FlowDesign, FlowEdgeDesign> edges
 		= createRelationValues(org.instantlogic.designer.entity.FlowDesignEntity.edges);
@@ -49,13 +75,26 @@ public class FlowDesign extends Design {
 		return edges;
 	}
 
-	public java.util.List<org.instantlogic.designer.FlowEdgeDesign> getEdges() {
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowEdgeDesign> getEdges() {
 		return edges.get();
 	}
 	
-	public void setEdges(java.util.List<org.instantlogic.designer.FlowEdgeDesign> newValue) {
-		edges.setValue(newValue);
+	public void addToEdges(FlowEdgeDesign item) {
+		edges.addValue(item);
 	}
+	
+	public void addToEdges(FlowEdgeDesign item, int index) {
+		edges.insertValue(item, index);
+	}
+	
+	public void removeFromEdges(FlowEdgeDesign item) {
+		edges.removeValue(item);
+	}
+	
+	public void removeFromEdges(int index) {
+		edges.removeValue(index);
+	}
+	
 	
 	private final org.instantlogic.fabric.value.RelationValues<FlowDesign, EntityDesign> parameters
 		= createRelationValues(org.instantlogic.designer.entity.FlowDesignEntity.parameters);
@@ -64,13 +103,26 @@ public class FlowDesign extends Design {
 		return parameters;
 	}
 
-	public java.util.List<org.instantlogic.designer.EntityDesign> getParameters() {
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EntityDesign> getParameters() {
 		return parameters.get();
 	}
 	
-	public void setParameters(java.util.List<org.instantlogic.designer.EntityDesign> newValue) {
-		parameters.setValue(newValue);
+	public void addToParameters(EntityDesign item) {
+		parameters.addValue(item);
 	}
+	
+	public void addToParameters(EntityDesign item, int index) {
+		parameters.insertValue(item, index);
+	}
+	
+	public void removeFromParameters(EntityDesign item) {
+		parameters.removeValue(item);
+	}
+	
+	public void removeFromParameters(int index) {
+		parameters.removeValue(index);
+	}
+	
 
 	// Reverse relations
 	

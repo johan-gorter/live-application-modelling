@@ -73,8 +73,8 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 	
 	// Relations
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ApplicationDesign, java.util.List<org.instantlogic.designer.EntityDesign>, org.instantlogic.designer.EntityDesign> entities
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.ApplicationDesign, java.util.List<org.instantlogic.designer.EntityDesign>, org.instantlogic.designer.EntityDesign>(
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EntityDesign>, org.instantlogic.designer.EntityDesign> entities
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EntityDesign>, org.instantlogic.designer.EntityDesign>(
 			"entities", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, org.instantlogic.designer.entity.EntityDesignEntity.application
 		) {
 	
@@ -107,8 +107,8 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ApplicationDesign, java.util.List<org.instantlogic.designer.FlowDesign>, org.instantlogic.designer.FlowDesign> flows
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.ApplicationDesign, java.util.List<org.instantlogic.designer.FlowDesign>, org.instantlogic.designer.FlowDesign>(
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowDesign>, org.instantlogic.designer.FlowDesign> flows
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowDesign>, org.instantlogic.designer.FlowDesign>(
 			"flows", INSTANCE, org.instantlogic.designer.entity.FlowDesignEntity.INSTANCE, org.instantlogic.designer.FlowDesign.class, org.instantlogic.designer.entity.FlowDesignEntity.application
 		) {
 	
@@ -128,8 +128,8 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ApplicationDesign, java.util.List<org.instantlogic.designer.EventDesign>, org.instantlogic.designer.EventDesign> events
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.ApplicationDesign, java.util.List<org.instantlogic.designer.EventDesign>, org.instantlogic.designer.EventDesign>(
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EventDesign>, org.instantlogic.designer.EventDesign> events
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EventDesign>, org.instantlogic.designer.EventDesign>(
 			"events", INSTANCE, org.instantlogic.designer.entity.EventDesignEntity.INSTANCE, org.instantlogic.designer.EventDesign.class, org.instantlogic.designer.entity.EventDesignEntity.application
 		) {
 	
@@ -149,8 +149,8 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ApplicationDesign, java.util.List<org.instantlogic.designer.FlowDesign>, org.instantlogic.designer.FlowDesign> exposedFlows
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.ApplicationDesign, java.util.List<org.instantlogic.designer.FlowDesign>, org.instantlogic.designer.FlowDesign>(
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowDesign>, org.instantlogic.designer.FlowDesign> exposedFlows
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowDesign>, org.instantlogic.designer.FlowDesign>(
 			"exposedFlows", INSTANCE, org.instantlogic.designer.entity.FlowDesignEntity.INSTANCE, org.instantlogic.designer.FlowDesign.class, org.instantlogic.designer.entity.FlowDesignEntity.exposedFlowInApplication
 		) {
 	
@@ -166,8 +166,8 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ApplicationDesign, java.util.List<org.instantlogic.designer.PageFragmentHolderDesign>, org.instantlogic.designer.PageFragmentHolderDesign> sharedPageFragments
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.ApplicationDesign, java.util.List<org.instantlogic.designer.PageFragmentHolderDesign>, org.instantlogic.designer.PageFragmentHolderDesign>(
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.PageFragmentHolderDesign>, org.instantlogic.designer.PageFragmentHolderDesign> sharedPageFragments
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.PageFragmentHolderDesign>, org.instantlogic.designer.PageFragmentHolderDesign>(
 			"sharedPageFragments", INSTANCE, org.instantlogic.designer.entity.PageFragmentHolderDesignEntity.INSTANCE, org.instantlogic.designer.PageFragmentHolderDesign.class, org.instantlogic.designer.entity.PageFragmentHolderDesignEntity.shared
 		) {
 	

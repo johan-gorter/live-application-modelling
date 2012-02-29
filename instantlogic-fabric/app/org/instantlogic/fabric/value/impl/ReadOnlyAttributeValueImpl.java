@@ -164,6 +164,7 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 		int tempIndex = 0;
 		boolean success = false;
 		try {
+			event.getOperation().pauseRecordingUndoEvents();
 			for (;tempIndex<tempValueChangeListeners.size();tempIndex++) {
 				Observer listener = tempValueChangeListeners.get(tempIndex);
 				listener.observer.valueChanged(event);
@@ -173,8 +174,10 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 				}
 			}
 			forInstance.fireValueChanged(event, true);
+			afterFiringChange(event);
 			success = true;
 		} finally {
+			event.getOperation().resumeRecordingUndoEvents();
 			if (success) {
 				event.getOperation().addEventToUndo(event);
 			} else {
@@ -198,7 +201,15 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 			tempValueChangeListeners.clear();
 		}
 	}
-	
+
+	/**
+	 * Can be overridden by subclasses to change reverse relation for example.
+	 * Will be called after all changes fire, but before the operation completes
+	 * @param event
+	 */
+	protected void afterFiringChange(ValueChangeEvent event) {
+	}
+
 	@Override
 	public boolean hasStoredValue() {
 		return getStoredValue()!=null;

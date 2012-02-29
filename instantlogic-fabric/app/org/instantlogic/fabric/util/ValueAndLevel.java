@@ -16,6 +16,16 @@ public class ValueAndLevel<V extends Object> {
 	public static <V> ValueAndLevel<V> irrelevant() {
 		return new ValueAndLevel<V>(null, ValueLevel.IRRELEVANT);
 	}
+
+	public static <V> ValueAndLevel<V> deducedOrInconclusive(V value) {
+		if (value==null) return inconclusive();
+		return new ValueAndLevel<V>(value, ValueLevel.DEDUCED);
+	}
+	
+	public static <V> ValueAndLevel<V> deducedOrMissing(V value) {
+		if (value==null) return missing();
+		return new ValueAndLevel<V>(value, ValueLevel.DEDUCED);
+	}
 	
 	public static <V> ValueAndLevel<V> deduced(V value) {
 		if (value==null) throw new IllegalArgumentException("value");

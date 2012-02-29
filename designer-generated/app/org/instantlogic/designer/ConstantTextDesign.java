@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class ConstantTextDesign extends TextDesign { 
+public  class ConstantTextDesign extends TextDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -21,10 +21,10 @@ public class ConstantTextDesign extends TextDesign {
 		return untranslated;
 	}
 
-
 	public void setUntranslated(java.lang.String newValue) {
 		untranslated.setValue(newValue);
 	}
+	
 	
 	// Relations
 

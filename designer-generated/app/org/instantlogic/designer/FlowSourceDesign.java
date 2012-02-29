@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class FlowSourceDesign extends org.instantlogic.fabric.Instance { 
+public  class FlowSourceDesign extends org.instantlogic.fabric.Instance { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -26,6 +26,7 @@ public class FlowSourceDesign extends org.instantlogic.fabric.Instance {
 	public void setStartEvent(org.instantlogic.designer.EventDesign newValue) {
 		startEvent.setValue(newValue);
 	}
+
 	
 	private final org.instantlogic.fabric.value.RelationValue<FlowSourceDesign, FlowNodeBaseDesign> endNode
 		= createRelationValue(org.instantlogic.designer.entity.FlowSourceDesignEntity.endNode);
@@ -41,6 +42,7 @@ public class FlowSourceDesign extends org.instantlogic.fabric.Instance {
 	public void setEndNode(org.instantlogic.designer.FlowNodeBaseDesign newValue) {
 		endNode.setValue(newValue);
 	}
+
 	
 	private final org.instantlogic.fabric.value.RelationValue<FlowSourceDesign, EventDesign> endEvent
 		= createRelationValue(org.instantlogic.designer.entity.FlowSourceDesignEntity.endEvent);
@@ -56,6 +58,7 @@ public class FlowSourceDesign extends org.instantlogic.fabric.Instance {
 	public void setEndEvent(org.instantlogic.designer.EventDesign newValue) {
 		endEvent.setValue(newValue);
 	}
+
 
 	// Reverse relations
 	

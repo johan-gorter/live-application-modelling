@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class SharedFragmentDesign extends PageFragmentDesign { 
+public  class SharedFragmentDesign extends PageFragmentDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -26,6 +26,7 @@ public class SharedFragmentDesign extends PageFragmentDesign {
 	public void setPageFragmentHolder(org.instantlogic.designer.PageFragmentHolderDesign newValue) {
 		pageFragmentHolder.setValue(newValue);
 	}
+
 
 	// Reverse relations
 

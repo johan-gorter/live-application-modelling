@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class SharedTextDesign extends TextDesign { 
+public  class SharedTextDesign extends TextDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {

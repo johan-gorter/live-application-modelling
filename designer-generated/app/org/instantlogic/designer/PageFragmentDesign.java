@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class PageFragmentDesign extends Design { 
+public  class PageFragmentDesign extends Design { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -21,10 +21,10 @@ public class PageFragmentDesign extends Design {
 		return presentation;
 	}
 
-
 	public void setPresentation(java.lang.String newValue) {
 		presentation.setValue(newValue);
 	}
+	
 	
 	// Relations
 

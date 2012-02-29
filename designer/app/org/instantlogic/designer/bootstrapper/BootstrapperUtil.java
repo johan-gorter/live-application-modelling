@@ -53,14 +53,14 @@ public abstract class BootstrapperUtil {
 	protected static void createContainerItem(CompositePageFragmentDesign containerDesign, PageFragmentDesign element) {
 		PageCompositionDesign item = new PageCompositionDesign();
 		item.setPageFragment(element);
-		containerDesign.getItemsRelation().add(item);
+		containerDesign.addToItems(item);
 	}
 
 	protected static EntityDesign createEntity(String name, EntityDesign extendsFrom) {
 		EntityDesign result = new EntityDesign();
 		result.setName(name);
 		result.setExtendsFrom(extendsFrom);
-		applicationDesign.getEntitiesRelation().add(result);
+		applicationDesign.addToEntities(result);
 		return result;
 	}
 
@@ -68,13 +68,13 @@ public abstract class BootstrapperUtil {
 		AttributeDesign attribute = new AttributeDesign();
 		attribute.setName(name);
 		attribute.setClassName(className.getName());
-		entity.getAttributesRelation().add(attribute);
+		entity.addToAttributes(attribute);
 		return attribute;
 	}
 
 	protected static RelationDesign createRelation(EntityDesign from, String name, RelationType relationType, String reverseName, EntityDesign to) {
 		RelationDesign relation = new RelationDesign();
-		from.getRelationsRelation().add(relation);
+		from.addToRelations(relation);
 		relation.setTo(to);
 		relation.setName(name);
 		relation.setReverseName(reverseName);
@@ -110,14 +110,14 @@ public abstract class BootstrapperUtil {
 	protected static TemplatedTextDesign add(TemplatedTextDesign text, DeductionSchemeDesign deduction) {
 		FormattedValueDesign formattedValue = new FormattedValueDesign();
 		formattedValue.setDeduction(deduction);
-		text.getUntranslatedRelation().add(formattedValue);
+		text.addToUntranslated(formattedValue);
 		return text;
 	}
 	
 	protected static TemplatedTextDesign add(TemplatedTextDesign text, String constant) {
 		ConstantStringDesign constantDesign = new ConstantStringDesign();
 		constantDesign.setConstant(constant);
-		text.getUntranslatedRelation().add(constantDesign);
+		text.addToUntranslated(constantDesign);
 		return text;
 	}
 
@@ -140,9 +140,9 @@ public abstract class BootstrapperUtil {
 		CastInstanceDeductionDesign castInstanceDeductionDesign = new CastInstanceDeductionDesign();
 		castInstanceDeductionDesign.setToEntity(toEntity);
 		castInstanceDeductionDesign.setClassName(toEntity.getName());
-		castInstanceDeductionDesign.getInputsRelation().add(selectedInstanceDeductionDesign);
-		scheme.getDeductionsRelation().add(selectedInstanceDeductionDesign);
-		scheme.getDeductionsRelation().add(castInstanceDeductionDesign);
+		castInstanceDeductionDesign.addToInputs(selectedInstanceDeductionDesign);
+		scheme.addToDeductions(selectedInstanceDeductionDesign);
+		scheme.addToDeductions(castInstanceDeductionDesign);
 		scheme.setOutput(castInstanceDeductionDesign);
 		return scheme;
 	}
@@ -153,7 +153,7 @@ public abstract class BootstrapperUtil {
 		SelectedInstanceDeductionDesign selectedInstanceDeductionDesign = new SelectedInstanceDeductionDesign();
 		selectedInstanceDeductionDesign.setOfEntity(entity);
 		selectedInstanceDeductionDesign.setClassName(entity.getName());
-		scheme.getDeductionsRelation().add(selectedInstanceDeductionDesign);
+		scheme.addToDeductions(selectedInstanceDeductionDesign);
 		scheme.setOutput(selectedInstanceDeductionDesign);
 		return scheme;
 	}
@@ -163,7 +163,7 @@ public abstract class BootstrapperUtil {
 		DeductionDesign customDeductionDesign = new DeductionDesign();
 		customDeductionDesign.setCustomization(customization);
 		customDeductionDesign.setClassName(resultClassName);
-		scheme.getDeductionsRelation().add(customDeductionDesign);
+		scheme.addToDeductions(customDeductionDesign);
 		scheme.setOutput(customDeductionDesign);
 		return scheme;
 	}
@@ -184,14 +184,14 @@ public abstract class BootstrapperUtil {
 		selectedInstanceDeductionDesign.setClassName(source.getName());
 		AttributeDeductionDesign attributeDeductionDesign = new AttributeDeductionDesign();
 		attributeDeductionDesign.setAttribute(attribute);
-		attributeDeductionDesign.getInputsRelation().add(selectedInstanceDeductionDesign);
+		attributeDeductionDesign.addToInputs(selectedInstanceDeductionDesign);
 		if (attribute.getMultivalue()==Boolean.TRUE) {
 			attributeDeductionDesign.setClassName("java.util.List<"+className+">");
 		} else {
 			attributeDeductionDesign.setClassName(className);	
 		}
-		scheme.getDeductionsRelation().add(selectedInstanceDeductionDesign);
-		scheme.getDeductionsRelation().add(attributeDeductionDesign);
+		scheme.addToDeductions(selectedInstanceDeductionDesign);
+		scheme.addToDeductions(attributeDeductionDesign);
 		scheme.setOutput(attributeDeductionDesign);
 		return scheme;
 	}
@@ -208,7 +208,7 @@ public abstract class BootstrapperUtil {
 		field.setAttribute(attribute);
 		field.setRequired(required);
 		PageCompositionDesign item = new PageCompositionDesign();
-		container.getItemsRelation().add(item);
+		container.addToItems(item);
 		item.setPageFragment(field);
 		return field;
 	}
@@ -216,7 +216,7 @@ public abstract class BootstrapperUtil {
 	protected static FlowDesign createFlow(String name) {
 		FlowDesign flow = new FlowDesign();
 		flow.setName(name);
-		applicationDesign.getFlowsRelation().add(flow);
+		applicationDesign.addToFlows(flow);
 		return flow;
 	}
 
@@ -226,13 +226,13 @@ public abstract class BootstrapperUtil {
 		edge.setStartEvent(startEvent);
 		edge.setEndNode(endNode);
 		edge.setEndEvent(endEvent);
-		flow.getEdgesRelation().add(edge);
+		flow.addToEdges(edge);
 	}
 
 	protected static PageDesign createPage(FlowDesign flow, String name) {
 		PageDesign page = new PageDesign();
 		page.setName(name);
-		flow.getNodesRelation().add(page);
+		flow.addToNodes(page);
 		return page;
 	}
 
@@ -241,7 +241,7 @@ public abstract class BootstrapperUtil {
 		source.setStartEvent(startEvent);
 		source.setEndNode(endNode);
 		source.setEndEvent(endEvent);
-		flow.getSourcesRelation().add(source);
+		flow.addToSources(source);
 		return source;
 	}
 	
@@ -249,7 +249,7 @@ public abstract class BootstrapperUtil {
 		SubFlowDesign subFlow = new SubFlowDesign();
 		subFlow.setName(flow.getName());
 		subFlow.setFlow(flow);
-		parentFlow.getNodesRelation().add(subFlow);
+		parentFlow.addToNodes(subFlow);
 		return subFlow;
 	}
 	
@@ -257,7 +257,7 @@ public abstract class BootstrapperUtil {
 	protected static PageCompositionDesign addContent(CompositePageFragmentDesign compositePageFragment, PageFragmentDesign item) {
 		PageCompositionDesign result = new PageCompositionDesign();
 		result.setPageFragment(item);
-		compositePageFragment.getItemsRelation().add(result);
+		compositePageFragment.addToItems(result);
 		return result;
 	}
 
@@ -265,9 +265,9 @@ public abstract class BootstrapperUtil {
 		EventDesign result = new EventDesign();
 		result.setName(name);
 		for(EntityDesign parameter: parameters) {
-			result.getParametersRelation().add(parameter);			
+			result.addToParameters(parameter);			
 		}
-		applicationDesign.getEventsRelation().add(result);
+		applicationDesign.addToEvents(result);
 		return result;
 	}
 

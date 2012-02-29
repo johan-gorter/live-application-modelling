@@ -46,8 +46,8 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, java.util.List<org.instantlogic.designer.AttributeDesign>, org.instantlogic.designer.AttributeDesign> attributes
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, java.util.List<org.instantlogic.designer.AttributeDesign>, org.instantlogic.designer.AttributeDesign>(
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.AttributeDesign>, org.instantlogic.designer.AttributeDesign> attributes
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.AttributeDesign>, org.instantlogic.designer.AttributeDesign>(
 			"attributes", INSTANCE, org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE, org.instantlogic.designer.AttributeDesign.class, org.instantlogic.designer.entity.AttributeDesignEntity.belongsToEntity
 		) {
 	
@@ -67,8 +67,8 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, java.util.List<org.instantlogic.designer.RelationDesign>, org.instantlogic.designer.RelationDesign> relations
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, java.util.List<org.instantlogic.designer.RelationDesign>, org.instantlogic.designer.RelationDesign>(
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.RelationDesign>, org.instantlogic.designer.RelationDesign> relations
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.RelationDesign>, org.instantlogic.designer.RelationDesign>(
 			"relations", INSTANCE, org.instantlogic.designer.entity.RelationDesignEntity.INSTANCE, org.instantlogic.designer.RelationDesign.class, org.instantlogic.designer.entity.RelationDesignEntity.from
 		) {
 	
@@ -122,8 +122,8 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, java.util.List<org.instantlogic.designer.EntityDesign>, org.instantlogic.designer.EntityDesign> extensions
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, java.util.List<org.instantlogic.designer.EntityDesign>, org.instantlogic.designer.EntityDesign>(
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EntityDesign>, org.instantlogic.designer.EntityDesign> extensions
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EntityDesign>, org.instantlogic.designer.EntityDesign>(
 			"extensions", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, org.instantlogic.designer.entity.EntityDesignEntity.extendsFrom
 		) {
 	
@@ -142,8 +142,8 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, java.util.List<org.instantlogic.designer.RelationDesign>, org.instantlogic.designer.RelationDesign> reverseRelations
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, java.util.List<org.instantlogic.designer.RelationDesign>, org.instantlogic.designer.RelationDesign>(
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.RelationDesign>, org.instantlogic.designer.RelationDesign> reverseRelations
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.RelationDesign>, org.instantlogic.designer.RelationDesign>(
 			"reverseRelations", INSTANCE, org.instantlogic.designer.entity.RelationDesignEntity.INSTANCE, org.instantlogic.designer.RelationDesign.class, org.instantlogic.designer.entity.RelationDesignEntity.to
 		) {
 	
@@ -162,8 +162,8 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, java.util.List<org.instantlogic.designer.SelectedInstanceDeductionDesign>, org.instantlogic.designer.SelectedInstanceDeductionDesign> entityInSelectedInstanceDeductions
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, java.util.List<org.instantlogic.designer.SelectedInstanceDeductionDesign>, org.instantlogic.designer.SelectedInstanceDeductionDesign>(
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.SelectedInstanceDeductionDesign>, org.instantlogic.designer.SelectedInstanceDeductionDesign> entityInSelectedInstanceDeductions
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.SelectedInstanceDeductionDesign>, org.instantlogic.designer.SelectedInstanceDeductionDesign>(
 			"entityInSelectedInstanceDeductions", INSTANCE, org.instantlogic.designer.entity.SelectedInstanceDeductionDesignEntity.INSTANCE, org.instantlogic.designer.SelectedInstanceDeductionDesign.class, org.instantlogic.designer.entity.SelectedInstanceDeductionDesignEntity.ofEntity
 		) {
 	
@@ -182,8 +182,8 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, java.util.List<org.instantlogic.designer.CastInstanceDeductionDesign>, org.instantlogic.designer.CastInstanceDeductionDesign> entityInCastDeductions
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, java.util.List<org.instantlogic.designer.CastInstanceDeductionDesign>, org.instantlogic.designer.CastInstanceDeductionDesign>(
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.CastInstanceDeductionDesign>, org.instantlogic.designer.CastInstanceDeductionDesign> entityInCastDeductions
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.CastInstanceDeductionDesign>, org.instantlogic.designer.CastInstanceDeductionDesign>(
 			"entityInCastDeductions", INSTANCE, org.instantlogic.designer.entity.CastInstanceDeductionDesignEntity.INSTANCE, org.instantlogic.designer.CastInstanceDeductionDesign.class, org.instantlogic.designer.entity.CastInstanceDeductionDesignEntity.toEntity
 		) {
 	
@@ -202,8 +202,8 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, java.util.List<org.instantlogic.designer.EventDesign>, org.instantlogic.designer.EventDesign> parameterInEvent
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, java.util.List<org.instantlogic.designer.EventDesign>, org.instantlogic.designer.EventDesign>(
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EventDesign>, org.instantlogic.designer.EventDesign> parameterInEvent
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EventDesign>, org.instantlogic.designer.EventDesign>(
 			"parameterInEvent", INSTANCE, org.instantlogic.designer.entity.EventDesignEntity.INSTANCE, org.instantlogic.designer.EventDesign.class, org.instantlogic.designer.entity.EventDesignEntity.parameters
 		) {
 	
@@ -222,8 +222,8 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, java.util.List<org.instantlogic.designer.FlowDesign>, org.instantlogic.designer.FlowDesign> parameterInFlows
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, java.util.List<org.instantlogic.designer.FlowDesign>, org.instantlogic.designer.FlowDesign>(
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowDesign>, org.instantlogic.designer.FlowDesign> parameterInFlows
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowDesign>, org.instantlogic.designer.FlowDesign>(
 			"parameterInFlows", INSTANCE, org.instantlogic.designer.entity.FlowDesignEntity.INSTANCE, org.instantlogic.designer.FlowDesign.class, org.instantlogic.designer.entity.FlowDesignEntity.parameters
 		) {
 	

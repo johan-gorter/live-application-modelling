@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class AttributeDesign extends Design { 
+public  class AttributeDesign extends Design { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -21,10 +21,10 @@ public class AttributeDesign extends Design {
 		return readOnly;
 	}
 
-
 	public void setReadOnly(java.lang.Boolean newValue) {
 		readOnly.setValue(newValue);
 	}
+	
 	
 	private final org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.Boolean> multivalue
 		= createAttributeValue(org.instantlogic.designer.entity.AttributeDesignEntity.multivalue);
@@ -37,10 +37,10 @@ public class AttributeDesign extends Design {
 		return multivalue;
 	}
 
-
 	public void setMultivalue(java.lang.Boolean newValue) {
 		multivalue.setValue(newValue);
 	}
+	
 	
 	private final org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.String> className
 		= createAttributeValue(org.instantlogic.designer.entity.AttributeDesignEntity.className);
@@ -53,10 +53,10 @@ public class AttributeDesign extends Design {
 		return className;
 	}
 
-
 	public void setClassName(java.lang.String newValue) {
 		className.setValue(newValue);
 	}
+	
 	
 	// Relations
 	
@@ -74,6 +74,7 @@ public class AttributeDesign extends Design {
 	public void setQuestion(org.instantlogic.designer.TextDesign newValue) {
 		question.setValue(newValue);
 	}
+
 	
 	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, TextDesign> explanation
 		= createRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity.explanation);
@@ -89,6 +90,7 @@ public class AttributeDesign extends Design {
 	public void setExplanation(org.instantlogic.designer.TextDesign newValue) {
 		explanation.setValue(newValue);
 	}
+
 	
 	private final org.instantlogic.fabric.value.RelationValues<AttributeDesign, DomainEntryDesign> domain
 		= createRelationValues(org.instantlogic.designer.entity.AttributeDesignEntity.domain);
@@ -97,13 +99,26 @@ public class AttributeDesign extends Design {
 		return domain;
 	}
 
-	public java.util.List<org.instantlogic.designer.DomainEntryDesign> getDomain() {
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DomainEntryDesign> getDomain() {
 		return domain.get();
 	}
 	
-	public void setDomain(java.util.List<org.instantlogic.designer.DomainEntryDesign> newValue) {
-		domain.setValue(newValue);
+	public void addToDomain(DomainEntryDesign item) {
+		domain.addValue(item);
 	}
+	
+	public void addToDomain(DomainEntryDesign item, int index) {
+		domain.insertValue(item, index);
+	}
+	
+	public void removeFromDomain(DomainEntryDesign item) {
+		domain.removeValue(item);
+	}
+	
+	public void removeFromDomain(int index) {
+		domain.removeValue(index);
+	}
+	
 	
 	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, DeductionSchemeDesign> relevance
 		= createRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity.relevance);
@@ -119,6 +134,7 @@ public class AttributeDesign extends Design {
 	public void setRelevance(org.instantlogic.designer.DeductionSchemeDesign newValue) {
 		relevance.setValue(newValue);
 	}
+
 	
 	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, DeductionSchemeDesign> rule
 		= createRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity.rule);
@@ -134,6 +150,7 @@ public class AttributeDesign extends Design {
 	public void setRule(org.instantlogic.designer.DeductionSchemeDesign newValue) {
 		rule.setValue(newValue);
 	}
+
 	
 	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, DeductionSchemeDesign> _default
 		= createRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity._default);
@@ -149,6 +166,7 @@ public class AttributeDesign extends Design {
 	public void set_default(org.instantlogic.designer.DeductionSchemeDesign newValue) {
 		_default.setValue(newValue);
 	}
+
 
 	// Reverse relations
 	
@@ -171,7 +189,7 @@ public class AttributeDesign extends Design {
 		return attributeInDeductions;
 	}
 
-	public java.util.List<org.instantlogic.designer.AttributeDeductionDesign> getAttributeInDeductions() {
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.AttributeDeductionDesign> getAttributeInDeductions() {
 		return attributeInDeductions.get();
 	}
 
@@ -183,7 +201,7 @@ public class AttributeDesign extends Design {
 		return fields;
 	}
 
-	public java.util.List<org.instantlogic.designer.FieldDesign> getFields() {
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FieldDesign> getFields() {
 		return fields.get();
 	}
 
