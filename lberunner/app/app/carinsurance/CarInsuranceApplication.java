@@ -1,14 +1,16 @@
 package app.carinsurance;
 
-import java.util.*;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
-import app.carinsurance.entity.*;
-import app.carinsurance.*;
-import app.carinsurance.flow.*;
-import lbe.instance.CaseInstance;
-import lbe.model.Application;
-import lbe.model.Entity;
-import lbe.model.flow.Flow;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.interaction.Application;
+import org.instantlogic.interaction.flow.Flow;
+
+import app.carinsurance.entity.CarinsuranceCaseEntity;
+import app.carinsurance.entity.DriverEntity;
+import app.carinsurance.flow.InsureFlow;
 
 public class CarInsuranceApplication extends Application {
 

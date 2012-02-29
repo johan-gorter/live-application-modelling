@@ -1,16 +1,11 @@
 package app.generatortest.data.instance;
 
-import java.util.List;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.impl.SimpleCaseInstance;
+import org.instantlogic.fabric.value.RelationValue;
 
-import app.generatortest.*;
-import app.generatortest.data.entity.*;
-import lbe.instance.*;
-import lbe.instance.impl.*;
-import lbe.instance.value.*;
-import lbe.model.*;
-import lbe.model.impl.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
+import app.generatortest.GeneratorTestApplication;
+import app.generatortest.data.entity.CarinsuranceCaseEntity;
 
 public class CarinsuranceCaseInstance 
 	extends SimpleCaseInstance 

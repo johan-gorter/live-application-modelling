@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- This is startpageTemplate.html, A template file used for starting any json flow -->
+<head>
+    <link rel="stylesheet" type="text/css" href="../../web-resources/${webResourcesCacheKey}/themes/aquima/css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../../web-resources/${webResourcesCacheKey}/themes/aquima/css/tables.css" />
+    <link rel="stylesheet" type="text/css" href="../../web-resources/${webResourcesCacheKey}/themes/jsonTools/css/jsonTools.css" />
+
+    <!--[if IE 7]>
+	<link rel="stylesheet" type="text/css" href="../../web-resources/${webResourcesCacheKey}/themes/aquima/css/ie7.css" />
+	<![endif]-->
+	
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/container/assets/skins/sam/container.css" />	
+  
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/yahoo/yahoo.js"></script>
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/dom/dom.js"></script>
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/event/event.js"></script>
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/element/element.js"></script>
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/animation/animation.js"></script>
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/connection/connection.js"></script>
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/dragdrop/dragdrop.js"></script>
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/container/container.js"></script>
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/json/json.js"></script>
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/button/button.js"></script>
+
+    <script type="text/javascript" src="../../web-resources/${webResourcesCacheKey}/json/core.js"></script>
+    <script type="text/javascript" src="../../web-resources/${webResourcesCacheKey}/json/generic-controllers.js"></script>
+    <script type="text/javascript" src="../../web-resources/${webResourcesCacheKey}/json/generic-inputs.js"></script>
+    <script type="text/javascript" src="../../web-resources/${webResourcesCacheKey}/json/generic-factories.js"></script>
+
+    <script type="text/javascript" src="../../web-resources/${webResourcesCacheKey}/themes/aquima/aquima-controllers.js"></script>
+    <script type="text/javascript" src="../../web-resources/${webResourcesCacheKey}/themes/aquima/aquima-inputs.js"></script>
+    <script type="text/javascript" src="../../web-resources/${webResourcesCacheKey}/themes/aquima/aquima-factories.js"></script>
+
+    <script type="text/javascript" src="../../web-resources/${webResourcesCacheKey}/themes/jsonTools/tools-controllers.js"></script>
+    <script type="text/javascript" src="../../web-resources/${webResourcesCacheKey}/themes/jsonTools/tools-factories.js"></script>
+
+    <script type="text/javascript" src="../../web-resources/${webResourcesCacheKey}/json/debug/debug.js"></script>
+
+    <title>Start page</title>
+    
+    <script type="text/javascript">
+        var Dom = YAHOO.util.Dom;
+        var Event = YAHOO.util.Event;
+        var JSON = YAHOO.lang.JSON;
+        var Util = aquima.mvc.Util;
+        
+        aquima.mvc.Settings.baseUrl='../../';
+        aquima.mvc.Settings.engine.aquimaUrl='${engineUrl}'
+		
+		function init() {
+            var aquimaEngine = new aquima.Engine('AquimaMVC', aquima.mvc.jsonTools.toolsFactory);
+            aquimaEngine.continueFlow('${aquimaSessionId}');
+		}
+		YAHOO.util.Event.onDOMReady(init);
+    </script>
+    
+</head>
+<body class="yui-skin-sam">
+    <div id="AquimaMVC" class="AquimaMVC">
+    	One moment please...
+    </div>
+	<div id="aq-footer">Copyright 2010 &#169; Everest bv. All rights reserved.</div>
+</body>
+</html>

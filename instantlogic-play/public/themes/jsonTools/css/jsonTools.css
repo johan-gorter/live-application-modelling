@@ -1,0 +1,56 @@
+div.aq-page.sessionTools {
+	width: auto;
+	border: 0px;
+	padding: 0 0 0 0;
+	margin: 0 0 0 0;
+}
+
+div.aq-page.sessionTools div.aq-page-header, div.aq-page.sessionTools div.aq-page-content {
+	width: auto;
+	border: 0px;
+	padding: 0 0 0 0;
+	margin: 0 0 0 0;
+}
+
+.aq-grid .aq-table-cell {
+	width: 310px;
+	border: solid 1px black;
+}
+
+.aq-grid div.aq-table-column-1colspan2 {
+	width: 620px;
+}
+.aq-grid div.aq-table-column-1colspan3 {
+	width: 930px;
+}
+
+.start-parameters {
+	clear:both;
+	height:285px;
+}
+
+.profile-explorer .leftColumn {
+	float: left;
+	clear: none;
+	width: 300px;	
+}
+
+.profile-explorer .rightColumn {
+	float: left;
+	clear: none;
+	width: 430px;	
+}
+
+.aq-node .children {
+	padding-left:15px;
+}
+
+.aq-node .aq-button.aq-disabled {
+	display:none;
+}
+
+.profile-explorer .rightColumn .aq-table-column-1 {	width: 140px; }
+.profile-explorer .rightColumn .aq-table-column-2 {	width: 200px; }
+.profile-explorer .rightColumn .aq-table-column-3 {	width: 70px; }
+
+.aq-popup .aqdev-closePopup {position:absolute;top:5px;right:5px}

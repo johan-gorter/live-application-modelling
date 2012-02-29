@@ -1,16 +1,13 @@
 package app.ritadministratie;
 
-import java.util.List;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.impl.SimpleInstance;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.value.AttributeValue;
+import org.instantlogic.fabric.value.ReadOnlyRelationValue;
 
-import app.ritadministratie.*;
-import app.ritadministratie.entity.*;
-import lbe.instance.*;
-import lbe.instance.impl.*;
-import lbe.instance.value.*;
-import lbe.model.*;
-import lbe.model.impl.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
+import app.ritadministratie.entity.StandEntity;
 
 public class Stand 
 	extends SimpleInstance 

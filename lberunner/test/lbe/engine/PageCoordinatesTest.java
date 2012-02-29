@@ -5,8 +5,9 @@ import static org.junit.Assert.assertEquals;
 import java.util.Arrays;
 
 import junit.framework.Assert;
-import lbe.engine.PageCoordinates.Coordinate;
 
+import org.instantlogic.interaction.util.PageCoordinates;
+import org.instantlogic.interaction.util.PageCoordinates.Coordinate;
 import org.junit.Test;
 
 public class PageCoordinatesTest extends Assert {
