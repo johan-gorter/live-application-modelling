@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class DomainEntryDesign extends Design { 
+public class DomainEntryDesign extends Design { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -20,7 +20,7 @@ public  class DomainEntryDesign extends Design {
 	}
 
 	public org.instantlogic.designer.TextDesign getDisplay() {
-		return display.get();
+		return display.getValue();
 	}
 	
 	public void setDisplay(org.instantlogic.designer.TextDesign newValue) {
@@ -38,7 +38,7 @@ public  class DomainEntryDesign extends Design {
 	}
 
 	public org.instantlogic.designer.AttributeDesign getAttribute() {
-		return attribute.get();
+		return attribute.getValue();
 	}
 
 

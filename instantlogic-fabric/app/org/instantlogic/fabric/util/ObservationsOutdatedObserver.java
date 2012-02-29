@@ -13,7 +13,7 @@ public class ObservationsOutdatedObserver {
 		@Override
 		public void valueChanged(ValueChangeEvent event) {
 			if (!outdated) {
-				System.out.println("Observations became outdated due to "+event);
+//				System.out.println("Observations became outdated due to "+event);
 				if (outdatedListener!=null) {
 					outdatedListener.valueChanged(event);
 				}

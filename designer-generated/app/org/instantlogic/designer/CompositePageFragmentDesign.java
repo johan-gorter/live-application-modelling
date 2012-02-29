@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class CompositePageFragmentDesign extends PageFragmentDesign { 
+public class CompositePageFragmentDesign extends PageFragmentDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -20,7 +20,7 @@ public  class CompositePageFragmentDesign extends PageFragmentDesign {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.PageCompositionDesign> getItems() {
-		return items.get();
+		return items.getValue();
 	}
 	
 	public void addToItems(PageCompositionDesign item) {
@@ -50,7 +50,7 @@ public  class CompositePageFragmentDesign extends PageFragmentDesign {
 	}
 
 	public org.instantlogic.designer.PageDesign getContentOfPage() {
-		return contentOfPage.get();
+		return contentOfPage.getValue();
 	}
 
 

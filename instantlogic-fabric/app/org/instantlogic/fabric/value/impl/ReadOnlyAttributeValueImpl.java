@@ -169,7 +169,7 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 				Observer listener = tempValueChangeListeners.get(tempIndex);
 				listener.observer.valueChanged(event);
 				if (listener.permanent) {
-					System.out.println("Re-adding listener "+listener);
+//					System.out.println("Re-adding listener "+listener);
 					valueChangeListeners.add(listener);
 				}
 			}
@@ -182,7 +182,7 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 				event.getOperation().addEventToUndo(event);
 			} else {
 				// The rollback procedure
-				System.out.println("Rolling back "+this);
+//				System.out.println("Rolling back "+this);
 				ValueChangeEvent undoEvent = event.getUndoEvent();
 				cached = (ValueAndLevel<Value>) event.getOldValue();
 				if (event.getOldStoredValue()!=null) {
@@ -194,7 +194,7 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 				}
 				for (int i=tempIndex;i<tempValueChangeListeners.size();i++) {
 					// Readd the listeners that weren't informed (including the one that threw an exception)
-					System.out.println("Re-adding oblivious listener "+tempValueChangeListeners.get(i));
+//					System.out.println("Re-adding oblivious listener "+tempValueChangeListeners.get(i));
 					valueChangeListeners.add(tempValueChangeListeners.get(i));
 				}
 			}
@@ -230,7 +230,7 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 
 	@Override
 	public void addValueChangeListener(ValueChangeObserver listener, boolean permanent) {
-		System.out.println("Adding listener "+listener);
+//		System.out.println("Adding listener "+listener);
 		// This statement usually does nothing. The value is normally already deduced. Listening to changes in an unknown value is rarely useful.
 		ensureCached(forInstance.getInstanceAdministration());
 		Observer entry = new Observer();

@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class EventDesign extends Design { 
+public class EventDesign extends Design { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -20,7 +20,7 @@ public  class EventDesign extends Design {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EntityDesign> getParameters() {
-		return parameters.get();
+		return parameters.getValue();
 	}
 	
 	public void addToParameters(EntityDesign item) {
@@ -50,7 +50,7 @@ public  class EventDesign extends Design {
 	}
 
 	public org.instantlogic.designer.ApplicationDesign getApplication() {
-		return application.get();
+		return application.getValue();
 	}
 
 	
@@ -62,7 +62,7 @@ public  class EventDesign extends Design {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.LinkDesign> getFiresFromButtons() {
-		return firesFromButtons.get();
+		return firesFromButtons.getValue();
 	}
 
 	
@@ -74,7 +74,7 @@ public  class EventDesign extends Design {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowSourceDesign> getStartEventInSources() {
-		return startEventInSources.get();
+		return startEventInSources.getValue();
 	}
 
 	
@@ -86,7 +86,7 @@ public  class EventDesign extends Design {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowSourceDesign> getEndEventInSources() {
-		return endEventInSources.get();
+		return endEventInSources.getValue();
 	}
 
 	
@@ -98,7 +98,7 @@ public  class EventDesign extends Design {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowEdgeDesign> getStartEventInEdges() {
-		return startEventInEdges.get();
+		return startEventInEdges.getValue();
 	}
 
 	
@@ -110,7 +110,7 @@ public  class EventDesign extends Design {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowEdgeDesign> getEndEventInEdges() {
-		return endEventInEdges.get();
+		return endEventInEdges.getValue();
 	}
 
 

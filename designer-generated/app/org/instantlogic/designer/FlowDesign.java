@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class FlowDesign extends Design { 
+public class FlowDesign extends Design { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -20,7 +20,7 @@ public  class FlowDesign extends Design {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowSourceDesign> getSources() {
-		return sources.get();
+		return sources.getValue();
 	}
 	
 	public void addToSources(FlowSourceDesign item) {
@@ -48,7 +48,7 @@ public  class FlowDesign extends Design {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowNodeBaseDesign> getNodes() {
-		return nodes.get();
+		return nodes.getValue();
 	}
 	
 	public void addToNodes(FlowNodeBaseDesign item) {
@@ -76,7 +76,7 @@ public  class FlowDesign extends Design {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowEdgeDesign> getEdges() {
-		return edges.get();
+		return edges.getValue();
 	}
 	
 	public void addToEdges(FlowEdgeDesign item) {
@@ -104,7 +104,7 @@ public  class FlowDesign extends Design {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EntityDesign> getParameters() {
-		return parameters.get();
+		return parameters.getValue();
 	}
 	
 	public void addToParameters(EntityDesign item) {
@@ -134,7 +134,7 @@ public  class FlowDesign extends Design {
 	}
 
 	public org.instantlogic.designer.ApplicationDesign getApplication() {
-		return application.get();
+		return application.getValue();
 	}
 
 	
@@ -146,7 +146,7 @@ public  class FlowDesign extends Design {
 	}
 
 	public org.instantlogic.designer.ApplicationDesign getExposedFlowInApplication() {
-		return exposedFlowInApplication.get();
+		return exposedFlowInApplication.getValue();
 	}
 
 	
@@ -158,7 +158,7 @@ public  class FlowDesign extends Design {
 	}
 
 	public org.instantlogic.designer.SubFlowDesign getSubFlowIn() {
-		return subFlowIn.get();
+		return subFlowIn.getValue();
 	}
 
 

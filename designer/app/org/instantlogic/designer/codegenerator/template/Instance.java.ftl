@@ -59,7 +59,7 @@ public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${
 	}
 
 	public ${relation.to} get${relation.name?cap_first}() {
-		return ${relation.name}.get();
+		return ${relation.name}.getValue();
 	}
 	
 	<#if !relation.readonly && !relation.multivalue>	
@@ -99,7 +99,7 @@ public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${
 	}
 
 	public ${relation.to} get${relation.name?cap_first}() {
-		return ${relation.name}.get();
+		return ${relation.name}.getValue();
 	}
 
 	</#list>

@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class StringProducerDesign extends org.instantlogic.fabric.Instance { 
+public class StringProducerDesign extends org.instantlogic.fabric.Instance { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -22,7 +22,7 @@ public  class StringProducerDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	public org.instantlogic.designer.TemplatedTextDesign getUntranslatedInTemplate() {
-		return untranslatedInTemplate.get();
+		return untranslatedInTemplate.getValue();
 	}
 
 

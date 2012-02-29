@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class HeaderDesign extends CompositePageFragmentDesign { 
+public class HeaderDesign extends CompositePageFragmentDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -20,7 +20,7 @@ public  class HeaderDesign extends CompositePageFragmentDesign {
 	}
 
 	public org.instantlogic.designer.TextDesign getText() {
-		return text.get();
+		return text.getValue();
 	}
 	
 	public void setText(org.instantlogic.designer.TextDesign newValue) {

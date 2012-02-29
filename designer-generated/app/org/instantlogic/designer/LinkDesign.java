@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class LinkDesign extends PageFragmentDesign { 
+public class LinkDesign extends PageFragmentDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -20,7 +20,7 @@ public  class LinkDesign extends PageFragmentDesign {
 	}
 
 	public org.instantlogic.designer.TextDesign getCaption() {
-		return caption.get();
+		return caption.getValue();
 	}
 	
 	public void setCaption(org.instantlogic.designer.TextDesign newValue) {
@@ -36,7 +36,7 @@ public  class LinkDesign extends PageFragmentDesign {
 	}
 
 	public org.instantlogic.designer.EventDesign getEvent() {
-		return event.get();
+		return event.getValue();
 	}
 	
 	public void setEvent(org.instantlogic.designer.EventDesign newValue) {

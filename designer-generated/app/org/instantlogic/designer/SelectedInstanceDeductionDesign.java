@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class SelectedInstanceDeductionDesign extends DeductionDesign { 
+public class SelectedInstanceDeductionDesign extends DeductionDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -20,7 +20,7 @@ public  class SelectedInstanceDeductionDesign extends DeductionDesign {
 	}
 
 	public org.instantlogic.designer.EntityDesign getOfEntity() {
-		return ofEntity.get();
+		return ofEntity.getValue();
 	}
 	
 	public void setOfEntity(org.instantlogic.designer.EntityDesign newValue) {

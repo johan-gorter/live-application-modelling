@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class TextDesign extends PageFragmentDesign { 
+public class TextDesign extends PageFragmentDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -22,7 +22,7 @@ public  class TextDesign extends PageFragmentDesign {
 	}
 
 	public org.instantlogic.designer.AttributeDesign getQuestionOnAttribute() {
-		return questionOnAttribute.get();
+		return questionOnAttribute.getValue();
 	}
 
 	
@@ -34,7 +34,7 @@ public  class TextDesign extends PageFragmentDesign {
 	}
 
 	public org.instantlogic.designer.AttributeDesign getExplanationOnAttribute() {
-		return explanationOnAttribute.get();
+		return explanationOnAttribute.getValue();
 	}
 
 	
@@ -46,7 +46,7 @@ public  class TextDesign extends PageFragmentDesign {
 	}
 
 	public org.instantlogic.designer.DomainEntryDesign getDisplayOnDomainEntry() {
-		return displayOnDomainEntry.get();
+		return displayOnDomainEntry.getValue();
 	}
 
 	
@@ -58,7 +58,7 @@ public  class TextDesign extends PageFragmentDesign {
 	}
 
 	public org.instantlogic.designer.HeaderDesign getTextOnHeader() {
-		return textOnHeader.get();
+		return textOnHeader.getValue();
 	}
 
 	
@@ -70,7 +70,7 @@ public  class TextDesign extends PageFragmentDesign {
 	}
 
 	public org.instantlogic.designer.LinkDesign getCaptionOnButton() {
-		return captionOnButton.get();
+		return captionOnButton.getValue();
 	}
 
 

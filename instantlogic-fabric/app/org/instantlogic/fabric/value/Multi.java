@@ -28,4 +28,9 @@ public class Multi<T> implements Iterable<T> {
 	public Iterator<T> iterator() {
 		return asList().iterator();
 	}
+
+
+	public T get(int i) {
+		return items.get(i);
+	}
 }

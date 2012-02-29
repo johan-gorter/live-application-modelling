@@ -68,6 +68,14 @@ public class ${name}Entity extends org.instantlogic.fabric.model.Entity<${rootPa
 				return true;
 			};
 			</#if>
+			<#if attribute.ruleDeductionIndex??>
+
+			private org.instantlogic.fabric.deduction.Deduction<${attribute.itemClassName}> RULE = createDeduction${attribute.ruleDeductionIndex}();
+			@Override
+			public org.instantlogic.fabric.deduction.Deduction<${attribute.itemClassName}> getRule() {
+				return RULE;
+			}
+			</#if>
 			<#if attribute.domain??>
 			
 			private final DomainEntry[] domain = new DomainEntry[] {
@@ -75,6 +83,7 @@ public class ${name}Entity extends org.instantlogic.fabric.model.Entity<${rootPa
 				new DomainEntry("${entry.name}", <@text_macro text=entry.display />),
 				</#list>
 			};
+
 			@Override
 			public DomainEntry[] getDomain() {
 				return domain;
