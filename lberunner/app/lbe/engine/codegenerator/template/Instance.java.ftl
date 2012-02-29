@@ -22,11 +22,29 @@ public <#if customization??>abstract</#if> class <#if customization??>Abstract</
 		return ${attribute.name};
 	}
 
-
-	<#if !attribute.readonly>	
+	<#if !attribute.readonly && !attribute.multivalue>	
 	public void set${attribute.name?cap_first}(${attribute.className} newValue) {
 		${attribute.name}.setValue(newValue);
 	}
+	
+	</#if>
+	<#if !attribute.readonly && attribute.multivalue>	
+	public void addTo${attribute.name?cap_first}(${attribute.className} item) {
+		${attribute.name}.addValue(item);
+	}
+	
+	public void addTo${attribute.name?cap_first}(${attribute.className} item, int index) {
+		${attribute.name}.insertValue(item, index);
+	}
+	
+	public void removeFrom${attribute.name?cap_first}(${attribute.className} item) {
+		${attribute.name}.removeValue(item);
+	}
+	
+	public void removeFrom${attribute.name?cap_first}(int index) {
+		${attribute.name}.removeValue(index);
+	}
+	
 	</#if>
 	</#list>
 	
@@ -44,10 +62,29 @@ public <#if customization??>abstract</#if> class <#if customization??>Abstract</
 		return ${relation.name}.get();
 	}
 	
-	<#if !relation.readonly>	
+	<#if !relation.readonly && !relation.multivalue>	
 	public void set${relation.name?cap_first}(${relation.to} newValue) {
 		${relation.name}.setValue(newValue);
 	}
+
+	</#if>
+	<#if !relation.readonly && relation.multivalue>	
+	public void addTo${relation.name?cap_first}(${relation.item} item) {
+		${relation.name}.addValue(item);
+	}
+	
+	public void addTo${relation.name?cap_first}(${relation.item} item, int index) {
+		${relation.name}.insertValue(item, index);
+	}
+	
+	public void removeFrom${relation.name?cap_first}(${relation.item} item) {
+		${relation.name}.removeValue(item);
+	}
+	
+	public void removeFrom${relation.name?cap_first}(int index) {
+		${relation.name}.removeValue(index);
+	}
+	
 	</#if>
 	</#list>
 

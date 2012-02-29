@@ -6,7 +6,6 @@ import java.util.List;
 
 import lbe.engine.codegenerator.EntityGenerator.Attribute.DomainEntry;
 import app.designer.AttributeDesign;
-import app.designer.DeductionSchemeDesign;
 import app.designer.DomainEntryDesign;
 import app.designer.EntityDesign;
 import app.designer.RelationDesign;
@@ -161,7 +160,7 @@ public class EntityGenerator extends AbstractGenerator {
 			attribute.itemClassName = attributeDesign.className.get();
 			attribute.multivalue = (attributeDesign.multivalue.get()==Boolean.TRUE);
 			if (attribute.multivalue) {
-				attribute.className="java.util.List<"+attribute.itemClassName+">";
+				attribute.className="org.instantlogic.fabric.value.Multi<"+attribute.itemClassName+">";
 			} else {
 				attribute.className=attribute.itemClassName;
 			}
@@ -194,7 +193,7 @@ public class EntityGenerator extends AbstractGenerator {
 			relation.item = relationDesign.to.get().name.get();
 			relation.to = rootPackageName+"."+relation.item;
 			if (relation.multivalue) {
-				relation.to = "java.util.List<"+relation.to+">";
+				relation.to = "org.instantlogic.fabric.value.Multi<"+relation.to+">";
 			}
 			relation.reverseName=relationDesign.reverseName.get();
 			if (relationDesign.getRule()!=null) {
@@ -212,7 +211,7 @@ public class EntityGenerator extends AbstractGenerator {
 			relation.item = relationDesign.from.get().name.get();
 			relation.to = rootPackageName+"."+relation.item;
 			if (relation.multivalue) {
-				relation.to = "java.util.List<"+relation.to+">";
+				relation.to = "org.instantlogic.fabric.value.Multi<"+relation.to+">";
 			}
 			reverseRelations.add(relation);
 		}

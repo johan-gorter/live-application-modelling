@@ -37,10 +37,10 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		EntityDesign application = createEntity("ApplicationDesign", null);
 		application.customization.set("custom.designer.ApplicationDesignCustomization");
 		createAttribute(application, "name", String.class);
-		createAttribute(application, "package", String.class);
+		createAttribute(application, "rootPackageName", String.class);
 		createAttribute(application, "sourcePath", String.class);
 		applicationDesign.caseEntity.set(application);
-		createAttribute(application, "customization", String.class);
+		createAttribute(application, "isCustomized", Boolean.class);
 		
 		// Concept
 		EntityDesign design = createEntity("Design", null);
@@ -51,7 +51,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		AttributeDesign javaName = createAttribute(design, "javaName", String.class);
 		javaName.setReadOnly(true);
 		javaName.setRule(createCustomDeduction("org.instantlogic.designer.deduction.JavaNameDeduction", "java.lang.String"));
-		createAttribute(design, "customization", String.class);
+		createAttribute(design, "isCustomized", Boolean.class);
 		
 		// Entity
 		EntityDesign entityDesign = createEntity("EntityDesign", design);
@@ -129,7 +129,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 
 		// Data
 		createRelation(entityDesign, "extendsFrom", RelationType.ManyToZeroOrOne, "extensions", entityDesign);
-		RelationDesign attributes = createRelation(entityDesign, "attributes", RelationType.OneToManyAggregation, "entity", attributeDesign);
+		RelationDesign attributes = createRelation(entityDesign, "attributes", RelationType.OneToManyAggregation, "belongsToEntity", attributeDesign);
 		createRelation(entityDesign, "relations", RelationType.OneToManyAggregation, "from", relationDesign);
 		createRelation(relationDesign, "to", RelationType.ManyToZeroOrOne, "reverseRelations", entityDesign);
 		createRelation(attributeDesign, "question", RelationType.OneToZeroOrOneAggregation, "questionOnAttribute", textDesign);
@@ -145,8 +145,8 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createRelation(deductionSchemeDesign, "output", RelationType.OneToZeroOrOne, "schemeOutput", deductionDesign);
 		createRelation(deductionDesign, "inputs", RelationType.ManyToMany, "outputs", deductionDesign);
 		createRelation(attributeDeductionDesign, "attribute", RelationType.ManyToZeroOrOne, "attributeInDeductions", attributeDesign);
-		createRelation(selectedInstanceDeductionDesign, "entity", RelationType.ManyToZeroOrOne, "entityInSelectedInstanceDeductions", entityDesign);
-		createRelation(castInstanceDeductionDesign, "entity", RelationType.ManyToZeroOrOne, "entityInCastDeductions", entityDesign);
+		createRelation(selectedInstanceDeductionDesign, "ofEntity", RelationType.ManyToZeroOrOne, "entityInSelectedInstanceDeductions", entityDesign);
+		createRelation(castInstanceDeductionDesign, "toEntity", RelationType.ManyToZeroOrOne, "entityInCastDeductions", entityDesign);
 		
 		// Text
 		createRelation(templatedTextDesign, "untranslated", RelationType.OneToManyAggregation, "untranslatedInTemplate", stringProducerDesign);
