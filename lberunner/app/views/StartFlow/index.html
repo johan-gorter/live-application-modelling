@@ -1,0 +1,125 @@
+#{extends 'main.html' /}
+#{set title:'Start flow' /}
+
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="@{'/public/yui-2.9.0/reset/reset-min.css'}" />
+<link rel="stylesheet" type="text/css" href="@{'/public/yui-2.9.0/container/assets/skins/sam/container.css'}" />	
+
+<link rel="stylesheet" media="screen" href="@{'/public/themes/default/css/styles.css'}">
+
+ <style type="text/css">
+     #yui-history-iframe {
+       position: absolute;
+       top: 0;
+       left: 0;
+       width: 1px;
+       height: 1px;
+       visibility: hidden;
+     }        
+ </style>
+#{/set}
+
+#{set 'moreScripts'}
+<script type="text/javascript" src="@{'/public/yui-2.9.0/yahoo/yahoo.js'}"></script>
+<script type="text/javascript" src="@{'/public/yui-2.9.0/dom/dom.js'}"></script>
+<script type="text/javascript" src="@{'/public/yui-2.9.0/event/event.js'}"></script>
+<script type="text/javascript" src="@{'/public/yui-2.9.0/element/element.js'}"></script>
+<script type="text/javascript" src="@{'/public/yui-2.9.0/animation/animation.js'}"></script>
+<script type="text/javascript" src="@{'/public/yui-2.9.0/connection/connection.js'}"></script>
+<script type="text/javascript" src="@{'/public/yui-2.9.0/dragdrop/dragdrop.js'}"></script>
+<script type="text/javascript" src="@{'/public/yui-2.9.0/container/container.js'}"></script>
+<script type="text/javascript" src="@{'/public/yui-2.9.0/json/json.js'}"></script>
+<script type="text/javascript" src="@{'/public/yui-2.9.0/button/button.js'}"></script>
+<script type="text/javascript" src="@{'/public/yui-2.9.0/slider/slider.js'}"></script>
+<script type="text/javascript" src="@{'/public/yui-2.9.0/history/history.js'}"></script> 
+
+<script src="@{'/public/json/core.js'}" type="text/javascript" charset="utf-8"></script>
+<script src="@{'/public/json/generic-controllers.js'}" type="text/javascript" charset="utf-8"></script>
+<script src="@{'/public/json/generic-inputs.js'}" type="text/javascript" charset="utf-8"></script>
+<script src="@{'/public/json/generic-factories.js'}" type="text/javascript" charset="utf-8"></script>
+
+<script src="@{'/public/themes/default/default-controllers.js'}" type="text/javascript" charset="utf-8"></script>
+<script src="@{'/public/themes/default/default-inputs.js'}" type="text/javascript" charset="utf-8"></script>
+<script src="@{'/public/themes/default/default-factories.js'}" type="text/javascript" charset="utf-8"></script>
+
+<script src="@{'/public/lbe-json/lbe-engine.js'}" type="text/javascript" charset="utf-8"></script>
+
+<script src="@{'/public/json/debug/debug.js'}" type="text/javascript" charset="utf-8"></script>
+#{/set}
+
+<iframe id="yui-history-iframe" src="../main.html"></iframe>
+<input id="yui-history-field" type="hidden">
+
+<h1>Start Flow</h1>
+
+<a href="/">Index</a>
+
+<p>Start Flow</p>
+<script type="text/javascript">
+
+var History = YAHOO.util.History;
+
+var application = History.getQueryStringParameter("application");
+var caseId = History.getQueryStringParameter("caseId");
+var sessionId = '${sessionId}';
+
+var jumpToPageAction = #{jsAction @jumpToPage(':application', ':caseId', ':pageCoordinates', ':sessionId') /};
+var waitForPageChangeAction = #{jsAction @waitForPageChange(':application', ':caseId', ':pageCoordinates', ':sessionId', ':lastCaseVersion') /};
+
+var pageCoordinates = History.getBookmarkedState('coordinates') || '';
+var lastCaseVersion;
+var engine;
+
+var aquimaBaseUrl = aquima.mvc.Settings.engine.aquimaUrl;
+aquima.mvc.Settings.engine.aquimaUrl=aquimaBaseUrl+'?application='+application+'&caseId='+caseId+'&sessionId='+sessionId;
+
+function jumpToPage() {
+	$.get(jumpToPageAction({application: application, caseId: caseId, pageCoordinates: pageCoordinates, sessionId: sessionId}), function(data) {
+		updatePage(data);
+		waitForPageChanges();
+	});
+}
+
+YAHOO.util.History.register('coordinates', pageCoordinates, function (state) {
+	if (state && (pageCoordinates==state)) return;
+	pageCoordinates = state;
+    jumpToPage(state);
+});
+
+YAHOO.util.History.onReady(function () {
+	jumpToPage();
+});
+
+
+$(document).ready(function() {
+	engine = new lbe.LbeEngine('AquimaMVC', defaultTheme.mvc.defaultThemeFactory, {});
+	engine.start();
+	try {
+        YAHOO.util.History.initialize('yui-history-field', 'yui-history-iframe');
+    } catch (e) {
+        jumpToPage();
+    }
+})
+
+function waitForPageChanges() {
+	$.get(waitForPageChangeAction({application: application, caseId: caseId, pageCoordinates: pageCoordinates, sessionId: sessionId, lastCaseVersion: lastCaseVersion}), function(data) {
+		updatePage(data);
+		waitForPageChanges();
+	});
+}
+
+function updatePage(data) {
+	document.title= data.name;
+	pageCoordinates = data.id;
+	History.navigate('coordinates', pageCoordinates);
+
+	lastCaseVersion = data.caseVersion;
+	engine.update(data);
+}
+</script>
+
+<div class="yui-skin-sam">
+	<div id="AquimaMVC" class="AquimaMVC">
+		One moment...
+	</div>
+</div>

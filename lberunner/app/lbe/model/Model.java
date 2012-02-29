@@ -1,0 +1,26 @@
+package lbe.model;
+
+import java.util.Comparator;
+
+import com.sun.org.apache.xml.internal.utils.StringComparable;
+
+public abstract class Model implements Comparable<Model> {
+	
+	public abstract String getName();
+
+	@Override
+	public int compareTo(Model o) {
+		String n1 = getName();
+		String n2 = o.getName();
+		if (n1==null || n2==null) {
+			if (n1==n2) return 0;
+			return n1==null?-1:1;
+		}
+		return n1.compareTo(n2);
+	}
+	
+	@Override
+	public String toString() {
+		return getName();
+	}
+}
