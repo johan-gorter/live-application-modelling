@@ -7,3 +7,13 @@ lberunner/lib/lbe.jar
 lbe/build
 sessions/*
 *.log
+instantlogic-gwt/war/WEB-INF/classes
+instantlogic-gwt/war/WEB-INF/deploy
+instantlogic-gwt/war/WEB-INF/lib
+instantlogic-gwt/war/instantlogic/
+instantlogic-gwt/lib
+gwt-unitCache-*
+instantlogic-core/dist
+instantlogic-gwt/dist
+*.orig
+instantlogic-play/eclipse/classes

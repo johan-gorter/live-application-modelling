@@ -1,16 +1,10 @@
 package app.carinsurance;
 
-import java.util.List;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.impl.SimpleCaseInstance;
+import org.instantlogic.fabric.value.RelationValue;
 
-import app.carinsurance.*;
-import app.carinsurance.entity.*;
-import lbe.instance.*;
-import lbe.instance.impl.*;
-import lbe.instance.value.*;
-import lbe.model.*;
-import lbe.model.impl.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
+import app.carinsurance.entity.CarinsuranceCaseEntity;
 
 public class CarinsuranceCase 
 	extends SimpleCaseInstance 

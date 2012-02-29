@@ -1,11 +1,14 @@
 package app.generatortest.flow.insurex;
 
-import app.generatortest.event.*;
-import app.generatortest.flow.*;
-import app.generatortest.data.entity.*;
-import lbe.model.flow.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
+import org.instantlogic.fabric.text.ConstantText;
+import org.instantlogic.interaction.flow.Page;
+import org.instantlogic.interaction.page.CompositePageFragment;
+import org.instantlogic.interaction.page.PageFragment;
+import org.instantlogic.interaction.page.impl.SimpleCompositePageFragment;
+import org.instantlogic.interaction.page.impl.SimpleField;
+
+import app.generatortest.data.entity.CarinsuranceCaseEntity;
+import app.generatortest.data.entity.DriverEntity;
 
 public class DriverPage extends Page {
 

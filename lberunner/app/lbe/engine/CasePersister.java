@@ -8,11 +8,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Random;
 
-import lbe.instance.CaseInstance;
-import lbe.instance.Instance;
-
 import org.apache.commons.codec.binary.Hex;
 import org.apache.log4j.Logger;
+import org.instantlogic.fabric.Instance;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -42,9 +40,9 @@ public class CasePersister {
 		sessionsDir.mkdirs();
 	}
 
-	public void persist(String id, CaseInstance caseInstance, int version) {
+	public void persist(String id, Instance<?> caseInstance, int version) {
 		try {
-			caseInstance.setVersion(version);
+			caseInstance.getInstanceAdministration().setVersion(version);
 			File file = new File(sessionsDir, id + ".tmp");
 			FileOutputStream stream = new FileOutputStream(file);
 			OutputStreamWriter writer = new OutputStreamWriter(stream, "UTF-8");
@@ -61,7 +59,7 @@ public class CasePersister {
 		}
 	}
 
-	public <T extends CaseInstance> T load(String id, Class<T> ofType) {
+	public <T extends Instance<T>> T load(String id, Class<T> ofType) {
 		T result = null;
 		try {
 			File file = new File(sessionsDir, id + ".json");

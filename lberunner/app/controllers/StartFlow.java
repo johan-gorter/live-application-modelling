@@ -9,14 +9,14 @@ import java.util.List;
 
 import lbe.engine.Case;
 import lbe.engine.CaseManager;
-import lbe.engine.ChangeContext;
-import lbe.engine.PageCoordinates;
-import lbe.engine.PageElement;
-import lbe.instance.CaseInstance;
-import lbe.model.Application;
 
 import org.apache.log4j.Logger;
+import org.instantlogic.interaction.Application;
+import org.instantlogic.interaction.page.PageElement;
+import org.instantlogic.interaction.util.ChangeContext;
+import org.instantlogic.interaction.util.PageCoordinates;
 
+import play.classloading.HotswapAgent;
 import play.mvc.Controller;
 import play.mvc.With;
 import app.carinsurance.CarInsuranceApplication;
@@ -33,6 +33,10 @@ import controllers.Secure.Security;
 @With(Secure.class)
 public class StartFlow extends Controller {
 
+	static {
+		HotswapAgent.enabled = false;
+	}
+	
 	private static final Logger LOG = Logger.getLogger(StartFlow.class);
 
 	private static final List<Application> applications = Arrays.asList(new Application[]{

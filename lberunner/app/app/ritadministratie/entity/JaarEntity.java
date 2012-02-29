@@ -1,20 +1,52 @@
 package app.ritadministratie.entity;
 
 import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
-import app.ritadministratie.*;
-import lbe.instance.*;
-import lbe.instance.value.*;
-import lbe.model.*;
-import lbe.model.impl.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
-import lbe.model.deduction.*;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.model.Attribute;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.model.Relation;
+import org.instantlogic.fabric.model.impl.SimpleAttribute;
+import org.instantlogic.fabric.model.impl.SimpleCaseEntity;
+import org.instantlogic.fabric.model.impl.SimpleEntity;
+import org.instantlogic.fabric.model.impl.SimpleRelation;
+import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
+import org.instantlogic.fabric.value.ReadOnlyRelationValues;
 
-public class JaarEntity extends SimpleEntity {
+import app.ritadministratie.Auto;
+import app.ritadministratie.Ijking;
+import app.ritadministratie.Jaar;
+
+public class JaarEntity extends SimpleCaseEntity {
 
 	public static final JaarEntity INSTANCE = new JaarEntity();
 
+	private static final Entity[] entities = new Entity[] {
+		JaarEntity.INSTANCE,
+		AutoEntity.INSTANCE,
+		MaandEntity.INSTANCE,
+		DagEntity.INSTANCE,
+		RitEntity.INSTANCE,
+		StandEntity.INSTANCE,
+		TrajectEntity.INSTANCE,
+		IjkingEntity.INSTANCE,
+	};
+	
+	private static final SortedMap<String, Entity> entityMap = new TreeMap<String, Entity>();
+	static {
+		for (Entity entity:entities) {
+			entityMap.put(entity.getName(), entity);
+		}
+	}
+	@Override
+	public SortedMap<String, Entity> getEntities() {
+		return entityMap;
+	}
+	
+	
 	// Deductions
 	
 	// Attributes

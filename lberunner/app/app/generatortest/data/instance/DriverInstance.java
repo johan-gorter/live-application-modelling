@@ -2,15 +2,15 @@ package app.generatortest.data.instance;
 
 import java.util.List;
 
-import app.generatortest.*;
-import app.generatortest.data.entity.*;
-import lbe.instance.*;
-import lbe.instance.impl.*;
-import lbe.instance.value.*;
-import lbe.model.*;
-import lbe.model.impl.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.impl.SimpleInstance;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.value.AttributeValue;
+import org.instantlogic.fabric.value.AttributeValues;
+import org.instantlogic.fabric.value.ReadOnlyRelationValue;
+
+import app.generatortest.data.entity.DriverEntity;
 
 public class DriverInstance 
 	extends SimpleInstance 

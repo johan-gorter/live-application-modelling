@@ -1,0 +1,32 @@
+/*
+ * This stylesheet is only used in Json/MVC
+ *
+ * Tables in JSON are made up out of div-elements. This is done in order 
+ * to make animation of rows added and deleted possible in all browsers.
+ *
+ * It is now necessary to specify the width of all columns explicitly, Because
+ * there is no auto resize.
+ *
+ * Each table that needs its own column widths should receive a unique presentationStyle.
+ * You can then set the widths of each column as follows:
+ * 
+ * .unique-presentationstyle .aq-table-column-1 {width: 200px}
+ */
+ 
+/* Default fallback in case no widths are explicitly specified */
+.aq-table-cell { padding: 0px; padding-top: 2px;  padding-right: 2px;  display: block; width: 70px; overflow: hidden; float: left; clear: none; font: 12px/17px Verdana,Arial; }
+.aq-table-header .aq-table-cell span { display:block; width: 100%; background: #009BBB; color: #FFF; font-weight: bold; padding: 5px; }
+.aq-table-row  .aq-table-cell span { display:block; width: 100%; color: #254E6E; padding: 4px 5px 5px 0px; }
+
+.aq-table-cell .aq-answer-holder { padding: 2px; }
+.aq-table-cell .aq-answer-holder input[type='text'] { padding: 2px; border: 1px solid #CCCCCC; }
+.aq-table-cell .aq-answer-holder textarea { padding: 2px; max-width: 220px; border: 1px solid #CCCCCC; }
+
+.aq-table-column-3 { width: 80px; }
+.aq-table-column-8 { width: 110px; }
+.aq-table-column-9 { width: 80px; }
+.aq-table-column-10 { width: 228px; padding-right: 0px; }
+
+.aq-worklist .aq-table-cell { width: 160px }
+.aq-worklist .aq-table-column-3colspan2 { width: 320px; }
+.aq-worklist .aq-table-row  .aq-table .aq-table-cell { width: 156px; }

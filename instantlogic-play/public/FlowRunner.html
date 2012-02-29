@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>Flow runner</title>
+
+	<link rel="stylesheet" type="text/css" href="themes/prototype/prototype.css" />	
+
+<script src="javascripts/jquery-1.5.2.min.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript" src="yui-2.9.0/yahoo/yahoo.js"></script>
+<script type="text/javascript" src="yui-2.9.0/dom/dom.js"></script>
+<script type="text/javascript" src="yui-2.9.0/event/event.js"></script>
+<script type="text/javascript" src="yui-2.9.0/element/element.js"></script>
+<script type="text/javascript" src="yui-2.9.0/animation/animation.js"></script>
+<script type="text/javascript" src="yui-2.9.0/connection/connection.js"></script>
+<script type="text/javascript" src="yui-2.9.0/dragdrop/dragdrop.js"></script>
+<script type="text/javascript" src="yui-2.9.0/container/container.js"></script>
+<script type="text/javascript" src="yui-2.9.0/json/json.js"></script>
+<script type="text/javascript" src="yui-2.9.0/button/button.js"></script>
+<script type="text/javascript" src="yui-2.9.0/slider/slider.js"></script>
+<script type="text/javascript" src="yui-2.9.0/history/history.js"></script> 
+
+<script src="json/core.js" type="text/javascript" charset="utf-8"></script>
+<script src="json/generic-controllers.js" type="text/javascript" charset="utf-8"></script>
+<script src="json/generic-inputs.js" type="text/javascript" charset="utf-8"></script>
+<script src="json/generic-factories.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="themes/prototype/prototype-controllers.js" type="text/javascript" charset="utf-8"></script>
+<script src="themes/prototype/prototype-inputs.js" type="text/javascript" charset="utf-8"></script>
+<script src="themes/prototype/prototype-factories.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="lbe-json/lbe-engine.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="json/debug/debug.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+<body>
+
+<iframe id="yui-history-iframe" src="empty.html"></iframe>
+<input id="yui-history-field" type="hidden">
+
+<div class="doc">
+  <div class="header"><h1><span id="header">{Header}</span></h1></div>
+  <div class="main">
+    <div class="content-wrap">
+      <div class="content" id="AquimaMVC">
+
+{content}
+
+
+      </div>
+	</div>
+	<div class="sidebar">
+
+{sidebar}	
+
+	</div>
+	
+  </div>
+  <div id="ft" class="footer">{footer}</div>
+</div>
+
+<script type="text/javascript">
+
+var History = YAHOO.util.History;
+
+var application = History.getQueryStringParameter("application");
+var caseId = History.getQueryStringParameter("caseId");
+var sessionId = Math.floor(Math.random()*1000000000);
+
+var jumpToPageAction = function(options) {var pattern = '/startflow/jumptopage?pageCoordinates=:pageCoordinates&application=:application&sessionId=:sessionId&caseId=:caseId'; for(key in options) { pattern = pattern.replace(':'+key, options[key]); } return pattern };
+var waitForPageChangeAction = function(options) {var pattern = '/startflow/waitforpagechange?pageCoordinates=:pageCoordinates&application=:application&sessionId=:sessionId&caseId=:caseId&lastCaseVersion=:lastCaseVersion'; for(key in options) { pattern = pattern.replace(':'+key, options[key]); } return pattern };
+
+var pageCoordinates = History.getBookmarkedState('coordinates') || '';
+var lastCaseVersion;
+var engine;
+
+var aquimaBaseUrl = aquima.mvc.Settings.engine.aquimaUrl;
+aquima.mvc.Settings.engine.aquimaUrl=aquimaBaseUrl+'?application='+application+'&caseId='+caseId+'&sessionId='+sessionId;
+
+function jumpToPage() {
+	$.get(jumpToPageAction({application: application, caseId: caseId, pageCoordinates: pageCoordinates, sessionId: sessionId}), function(data) {
+		updatePage(data);
+		waitForPageChanges();
+	});
+}
+
+YAHOO.util.History.register('coordinates', pageCoordinates, function (state) {
+	if (state && (pageCoordinates==state)) return;
+	pageCoordinates = state;
+    jumpToPage(state);
+});
+
+YAHOO.util.History.onReady(function () {
+	jumpToPage();
+});
+
+
+$(document).ready(function() {
+	engine = new lbe.LbeEngine('AquimaMVC', prototype.mvc.PrototypeFactory, {});
+	engine.start();
+	try {
+        YAHOO.util.History.initialize('yui-history-field', 'yui-history-iframe');
+    } catch (e) {
+        jumpToPage();
+    }
+})
+
+function waitForPageChanges() {
+	$.get(waitForPageChangeAction({application: application, caseId: caseId, pageCoordinates: pageCoordinates, sessionId: sessionId, lastCaseVersion: lastCaseVersion}), function(data) {
+		updatePage(data);
+		waitForPageChanges();
+	});
+}
+
+function updatePage(data) {
+	document.title= data.name;
+    var header = YAHOO.util.Dom.get("header");
+    if (header) {
+    	header.innerHTML = data.name;
+    }
+
+	pageCoordinates = data.id;
+	History.navigate('coordinates', pageCoordinates);
+
+	lastCaseVersion = data.caseVersion;
+	engine.update(data);
+}
+</script>
+
+</body>
+</html>

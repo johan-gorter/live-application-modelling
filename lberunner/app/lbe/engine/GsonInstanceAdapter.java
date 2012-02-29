@@ -8,18 +8,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import lbe.instance.CaseInstance;
-import lbe.instance.Instance;
-import lbe.instance.value.AttributeValue;
-import lbe.instance.value.AttributeValues;
-import lbe.instance.value.ReadOnlyAttributeValue;
-import lbe.instance.value.RelationValue;
-import lbe.instance.value.RelationValues;
-import lbe.instance.value.impl.AttributeValueImpl;
-import lbe.instance.value.impl.RelationValueImpl;
-import lbe.model.Attribute;
-import lbe.model.Entity;
-import lbe.model.Relation;
+import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.model.Attribute;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.model.Relation;
+import org.instantlogic.fabric.value.AttributeValue;
+import org.instantlogic.fabric.value.AttributeValues;
+import org.instantlogic.fabric.value.RelationValue;
+import org.instantlogic.fabric.value.RelationValues;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
@@ -165,7 +162,7 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 			JsonObject valueObject) {
 		String entityName = valueObject.get("entityName").getAsString();
 		long instanceId = valueObject.get("instanceId").getAsLong();
-		Instance target = caseInstance.getApplication().getEntities().get(entityName).createInstance(caseInstance, instanceId);
+		Instance target = caseInstance.getModel().getEntities().get(entityName).createInstance(caseInstance, instanceId);
 		return target;
 	}
 

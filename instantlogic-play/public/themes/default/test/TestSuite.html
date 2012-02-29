@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/reset/reset-min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/styles.css" />
+
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/logger/assets/logger.css" />
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/yuitest/assets/testlogger.css" />
+
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/yahoo/yahoo.js"></script>
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/dom/dom.js"></script>
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/event/event.js"></script>
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/element/element.js"></script>
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/animation/animation.js"></script>
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/connection/connection.js"></script>
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/dragdrop/dragdrop.js"></script>
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/container/container.js"></script>
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/json/json.js"></script>
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/button/button.js"></script>
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/slider/slider.js"></script>
+
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/logger/logger.js"></script>
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.8.1/build/yuitest/yuitest.js"></script>
+
+    <script type="text/javascript" src="../../../engine/resources/json/core.js"></script>
+    <script type="text/javascript" src="../../../engine/resources/json/generic-controllers.js"></script>
+    <script type="text/javascript" src="../../../engine/resources/json/generic-inputs.js"></script>
+    <script type="text/javascript" src="../../../engine/resources/json/generic-factories.js"></script>
+
+    <script type="text/javascript" src="../default-controllers.js"></script>
+    <script type="text/javascript" src="../default-inputs.js"></script>
+    <script type="text/javascript" src="../default-factories.js"></script>
+
+    <script type="text/javascript" src="../../../development/resources/json/test/testUtil.js"></script>
+
+    <!-- The tests -->
+    <script type="text/javascript" src="../../../development/resources/json/test/formattersTest.js"></script>
+    <script type="text/javascript" src="../../../development/resources/json/test/renderTest.js"></script>
+    <script type="text/javascript" src="../../../development/resources/json/test/utilTest.js"></script>
+
+    <script type="text/javascript" src="../../../development/resources/json/test/controllers/breadcrumbTest.js"></script>
+    <script type="text/javascript" src="../../../development/resources/json/test/controllers/containerTest.js"></script>
+    <script type="text/javascript" src="../../../development/resources/json/test/controllers/contentControllerTest.js"></script>
+    <script type="text/javascript" src="../../../development/resources/json/test/controllers/failedElementTest.js"></script>
+    <script type="text/javascript" src="../../../development/resources/json/test/controllers/fieldTest.js"></script>
+    <script type="text/javascript" src="../../../development/resources/json/test/controllers/instanceSelectorTest.js"></script>
+    <script type="text/javascript" src="../../../development/resources/json/test/controllers/linkTest.js"></script>
+    <script type="text/javascript" src="../../../development/resources/json/test/controllers/tableTest.js"></script>
+    <script type="text/javascript" src="../../../development/resources/json/test/controllers/worklistTest.js"></script>
+    <script type="text/javascript" src="../../../development/resources/json/test/controllers/textItemTest.js"></script>
+    
+    <script type="text/javascript" src="../../../development/resources/json/test/inputs/domainTest.js"></script>
+    <script type="text/javascript" src="../../../development/resources/json/test/inputs/multiValueDomainTest.js"></script>
+    <script type="text/javascript" src="../../../development/resources/json/test/inputs/radioTest.js"></script>
+    
+    <script type="text/javascript" src="../../../development/resources/json/debug/debug.js"></script>
+    
+    <title>Unit test</title>
+    
+    <script type="text/javascript">
+        var Dom = YAHOO.util.Dom;
+        var Event = YAHOO.util.Event;
+        var JSON = YAHOO.lang.JSON;
+        var Util = aquima.mvc.Util;
+        
+        var TestUtil = aquima.mvc.test.Util;
+
+        aquima.mvc.Settings.baseUrl='../../../';
+        aquima.mvc.Settings.test.factory = defaultTheme.mvc.defaultThemeFactory;
+		
+		function init() {
+			var oLogger = new YAHOO.tool.TestLogger();
+			if (document.location.search.indexOf('auto')>0) { // add ?auto to the url to enable this
+			    Dom.get('Tests').style.display='none';
+			    runTest(aquima.mvc.test.Tests.suite);
+			    //TODO: post results to the server?
+			} else {
+			    aquima.mvc.test.Tests.renderTree(Dom.get('Tree'), this.runTest);
+			}
+		}
+		
+		function runTest(testOrSuite) {
+		    YAHOO.tool.TestRunner.clear();
+			YAHOO.tool.TestRunner.add(testOrSuite);
+			YAHOO.tool.TestRunner.run();
+			if (testOrSuite instanceof YAHOO.tool.TestCase) {
+			    var buttons = Dom.get('ManualButtons');
+			    Util.removeAllChildren(buttons);
+			    for (var test in testOrSuite) {
+			        if (test.substr(0,4)=='test' && YAHOO.lang.isFunction(testOrSuite[test])) {
+			            var button = document.createElement('button');
+			            Util.setText(button, test);
+			            Event.on(button, 'click', function(ev,testName) {
+			                    testOrSuite[testName]();
+			                }, test);
+			            buttons.appendChild(button);
+			            buttons.appendChild(document.createElement('br'));
+			        }
+			    }
+			    Dom.get('ManualTests').style.display='block';
+			} else {
+			    Dom.get('ManualTests').style.display='none';
+			}
+		}
+
+    </script>
+    
+</head>
+<body onload="init()">
+    <div id="Tests" style="position:absolute;right:44em;width:20em;font-size:77%;z-index:9001;overflow:hidden">
+        <div id="Tree">
+            <p>Run testcase/testsuite:</p>
+        </div>
+        <div id="ManualTests" style="display:none;">
+            Rerun manually:
+            <div id="ManualButtons"></div>
+        </div>
+    </div>
+    
+   	<div id="aq-page">
+		<div id="paq-page-content">    
+    		<div id="AquimaMVC" class="AquimaMVC">
+    			<div id="Content">
+    				AquimaMVC area
+    			</div>
+    		</div>
+    	</div>
+    </div>
+</body>
+</html>

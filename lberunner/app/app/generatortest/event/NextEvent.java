@@ -1,11 +1,7 @@
 package app.generatortest.event;
 
-import app.generatortest.data.entity.*;
-import lbe.model.flow.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
-import lbe.model.Entity;
-import lbe.model.impl.SimpleFlowEvent;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.interaction.flow.impl.SimpleFlowEvent;
 
 public class NextEvent extends SimpleFlowEvent {
 

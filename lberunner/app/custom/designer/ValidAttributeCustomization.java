@@ -1,8 +1,9 @@
 package custom.designer;
 
-import lbe.model.Entity;
-import lbe.model.deduction.Deduction;
-import lbe.model.impl.SimpleAttribute;
+import org.instantlogic.fabric.deduction.Deduction;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.model.impl.SimpleAttribute;
+
 import app.designer.Design;
 
 public abstract class ValidAttributeCustomization extends SimpleAttribute<Design, Boolean, Boolean> {
