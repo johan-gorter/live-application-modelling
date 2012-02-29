@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class PageFragmentDesign extends Design { 
+public class PageFragmentDesign extends Design { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -38,7 +38,7 @@ public  class PageFragmentDesign extends Design {
 	}
 
 	public org.instantlogic.designer.PageFragmentHolderDesign getHolder() {
-		return holder.get();
+		return holder.getValue();
 	}
 
 	
@@ -50,7 +50,7 @@ public  class PageFragmentDesign extends Design {
 	}
 
 	public org.instantlogic.designer.PageCompositionDesign getComposedIn() {
-		return composedIn.get();
+		return composedIn.getValue();
 	}
 
 

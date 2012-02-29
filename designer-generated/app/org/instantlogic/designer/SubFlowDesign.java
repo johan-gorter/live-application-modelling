@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class SubFlowDesign extends FlowNodeBaseDesign { 
+public class SubFlowDesign extends FlowNodeBaseDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -20,7 +20,7 @@ public  class SubFlowDesign extends FlowNodeBaseDesign {
 	}
 
 	public org.instantlogic.designer.FlowDesign getFlow() {
-		return flow.get();
+		return flow.getValue();
 	}
 	
 	public void setFlow(org.instantlogic.designer.FlowDesign newValue) {

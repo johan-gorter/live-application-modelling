@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class DeductionDesign extends org.instantlogic.fabric.Instance { 
+public class DeductionDesign extends org.instantlogic.fabric.Instance { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -68,7 +68,7 @@ public  class DeductionDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DeductionDesign> getInputs() {
-		return inputs.get();
+		return inputs.getValue();
 	}
 	
 	public void addToInputs(DeductionDesign item) {
@@ -98,7 +98,7 @@ public  class DeductionDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	public org.instantlogic.designer.DeductionSchemeDesign getScheme() {
-		return scheme.get();
+		return scheme.getValue();
 	}
 
 	
@@ -110,7 +110,7 @@ public  class DeductionDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	public org.instantlogic.designer.DeductionSchemeDesign getSchemeOutput() {
-		return schemeOutput.get();
+		return schemeOutput.getValue();
 	}
 
 	
@@ -122,7 +122,7 @@ public  class DeductionDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DeductionDesign> getOutputs() {
-		return outputs.get();
+		return outputs.getValue();
 	}
 
 

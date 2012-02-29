@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class AttributeDesign extends Design { 
+public class AttributeDesign extends Design { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -68,7 +68,7 @@ public  class AttributeDesign extends Design {
 	}
 
 	public org.instantlogic.designer.TextDesign getQuestion() {
-		return question.get();
+		return question.getValue();
 	}
 	
 	public void setQuestion(org.instantlogic.designer.TextDesign newValue) {
@@ -84,7 +84,7 @@ public  class AttributeDesign extends Design {
 	}
 
 	public org.instantlogic.designer.TextDesign getExplanation() {
-		return explanation.get();
+		return explanation.getValue();
 	}
 	
 	public void setExplanation(org.instantlogic.designer.TextDesign newValue) {
@@ -100,7 +100,7 @@ public  class AttributeDesign extends Design {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DomainEntryDesign> getDomain() {
-		return domain.get();
+		return domain.getValue();
 	}
 	
 	public void addToDomain(DomainEntryDesign item) {
@@ -128,7 +128,7 @@ public  class AttributeDesign extends Design {
 	}
 
 	public org.instantlogic.designer.DeductionSchemeDesign getRelevance() {
-		return relevance.get();
+		return relevance.getValue();
 	}
 	
 	public void setRelevance(org.instantlogic.designer.DeductionSchemeDesign newValue) {
@@ -144,7 +144,7 @@ public  class AttributeDesign extends Design {
 	}
 
 	public org.instantlogic.designer.DeductionSchemeDesign getRule() {
-		return rule.get();
+		return rule.getValue();
 	}
 	
 	public void setRule(org.instantlogic.designer.DeductionSchemeDesign newValue) {
@@ -160,7 +160,7 @@ public  class AttributeDesign extends Design {
 	}
 
 	public org.instantlogic.designer.DeductionSchemeDesign get_default() {
-		return _default.get();
+		return _default.getValue();
 	}
 	
 	public void set_default(org.instantlogic.designer.DeductionSchemeDesign newValue) {
@@ -178,7 +178,7 @@ public  class AttributeDesign extends Design {
 	}
 
 	public org.instantlogic.designer.EntityDesign getBelongsToEntity() {
-		return belongsToEntity.get();
+		return belongsToEntity.getValue();
 	}
 
 	
@@ -190,7 +190,7 @@ public  class AttributeDesign extends Design {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.AttributeDeductionDesign> getAttributeInDeductions() {
-		return attributeInDeductions.get();
+		return attributeInDeductions.getValue();
 	}
 
 	
@@ -202,7 +202,7 @@ public  class AttributeDesign extends Design {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FieldDesign> getFields() {
-		return fields.get();
+		return fields.getValue();
 	}
 
 

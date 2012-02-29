@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class PageFragmentHolderDesign extends Design { 
+public class PageFragmentHolderDesign extends Design { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -20,7 +20,7 @@ public  class PageFragmentHolderDesign extends Design {
 	}
 
 	public org.instantlogic.designer.PageFragmentDesign getPageFragment() {
-		return pageFragment.get();
+		return pageFragment.getValue();
 	}
 	
 	public void setPageFragment(org.instantlogic.designer.PageFragmentDesign newValue) {
@@ -38,7 +38,7 @@ public  class PageFragmentHolderDesign extends Design {
 	}
 
 	public org.instantlogic.designer.ApplicationDesign getShared() {
-		return shared.get();
+		return shared.getValue();
 	}
 
 	
@@ -50,7 +50,7 @@ public  class PageFragmentHolderDesign extends Design {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.SharedFragmentDesign> getUsages() {
-		return usages.get();
+		return usages.getValue();
 	}
 
 

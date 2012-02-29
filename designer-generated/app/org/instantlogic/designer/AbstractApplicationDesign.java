@@ -84,7 +84,7 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EntityDesign> getEntities() {
-		return entities.get();
+		return entities.getValue();
 	}
 	
 	public void addToEntities(EntityDesign item) {
@@ -112,7 +112,7 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 	}
 
 	public org.instantlogic.designer.EntityDesign getCaseEntity() {
-		return caseEntity.get();
+		return caseEntity.getValue();
 	}
 	
 	public void setCaseEntity(org.instantlogic.designer.EntityDesign newValue) {
@@ -128,7 +128,7 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowDesign> getFlows() {
-		return flows.get();
+		return flows.getValue();
 	}
 	
 	public void addToFlows(FlowDesign item) {
@@ -156,7 +156,7 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EventDesign> getEvents() {
-		return events.get();
+		return events.getValue();
 	}
 	
 	public void addToEvents(EventDesign item) {
@@ -184,7 +184,7 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowDesign> getExposedFlows() {
-		return exposedFlows.get();
+		return exposedFlows.getValue();
 	}
 	
 	public void addToExposedFlows(FlowDesign item) {
@@ -212,7 +212,7 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.PageFragmentHolderDesign> getSharedPageFragments() {
-		return sharedPageFragments.get();
+		return sharedPageFragments.getValue();
 	}
 	
 	public void addToSharedPageFragments(PageFragmentHolderDesign item) {

@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class FlowEdgeDesign extends org.instantlogic.fabric.Instance { 
+public class FlowEdgeDesign extends org.instantlogic.fabric.Instance { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -20,7 +20,7 @@ public  class FlowEdgeDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	public org.instantlogic.designer.FlowNodeBaseDesign getStartNode() {
-		return startNode.get();
+		return startNode.getValue();
 	}
 	
 	public void setStartNode(org.instantlogic.designer.FlowNodeBaseDesign newValue) {
@@ -36,7 +36,7 @@ public  class FlowEdgeDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	public org.instantlogic.designer.EventDesign getStartEvent() {
-		return startEvent.get();
+		return startEvent.getValue();
 	}
 	
 	public void setStartEvent(org.instantlogic.designer.EventDesign newValue) {
@@ -52,7 +52,7 @@ public  class FlowEdgeDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	public org.instantlogic.designer.FlowNodeBaseDesign getEndNode() {
-		return endNode.get();
+		return endNode.getValue();
 	}
 	
 	public void setEndNode(org.instantlogic.designer.FlowNodeBaseDesign newValue) {
@@ -68,7 +68,7 @@ public  class FlowEdgeDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	public org.instantlogic.designer.EventDesign getEndEvent() {
-		return endEvent.get();
+		return endEvent.getValue();
 	}
 	
 	public void setEndEvent(org.instantlogic.designer.EventDesign newValue) {
@@ -86,7 +86,7 @@ public  class FlowEdgeDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	public org.instantlogic.designer.FlowDesign getOwner() {
-		return owner.get();
+		return owner.getValue();
 	}
 
 

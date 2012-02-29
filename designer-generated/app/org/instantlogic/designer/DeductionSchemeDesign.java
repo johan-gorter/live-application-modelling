@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class DeductionSchemeDesign extends org.instantlogic.fabric.Instance { 
+public class DeductionSchemeDesign extends org.instantlogic.fabric.Instance { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -20,7 +20,7 @@ public  class DeductionSchemeDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DeductionDesign> getDeductions() {
-		return deductions.get();
+		return deductions.getValue();
 	}
 	
 	public void addToDeductions(DeductionDesign item) {
@@ -48,7 +48,7 @@ public  class DeductionSchemeDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	public org.instantlogic.designer.DeductionDesign getOutput() {
-		return output.get();
+		return output.getValue();
 	}
 	
 	public void setOutput(org.instantlogic.designer.DeductionDesign newValue) {
@@ -66,7 +66,7 @@ public  class DeductionSchemeDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	public org.instantlogic.designer.AttributeDesign getRelevanceOfAttribute() {
-		return relevanceOfAttribute.get();
+		return relevanceOfAttribute.getValue();
 	}
 
 	
@@ -78,7 +78,7 @@ public  class DeductionSchemeDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	public org.instantlogic.designer.AttributeDesign getRuleOfAttribute() {
-		return ruleOfAttribute.get();
+		return ruleOfAttribute.getValue();
 	}
 
 	
@@ -90,7 +90,7 @@ public  class DeductionSchemeDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	public org.instantlogic.designer.AttributeDesign getDefaultOfAttribute() {
-		return defaultOfAttribute.get();
+		return defaultOfAttribute.getValue();
 	}
 
 	
@@ -102,7 +102,7 @@ public  class DeductionSchemeDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	public org.instantlogic.designer.FormattedValueDesign getTemplatedText() {
-		return templatedText.get();
+		return templatedText.getValue();
 	}
 
 	
@@ -114,7 +114,7 @@ public  class DeductionSchemeDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	public org.instantlogic.designer.SelectDesign getSelect() {
-		return select.get();
+		return select.getValue();
 	}
 
 

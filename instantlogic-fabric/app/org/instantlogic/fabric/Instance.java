@@ -219,4 +219,26 @@ public abstract class Instance {
 			owner.fireValueChanged(event, false);
 		}
 	}
+
+	public Instance getInstanceOwner() {
+		return owner;
+	}
+	
+	/**
+	 * Travels down the owners until an owner of the specified entity (or subclass) is found
+	 * @param ofEntity The desired entity
+	 * @return an instance of the desired entity or null
+	 */
+	@SuppressWarnings("unchecked")
+	public <T extends Instance> T getInstanceOwner(Entity<T> ofEntity) {
+		if (ofEntity==null) throw new IllegalArgumentException();
+		Class<T> instanceClass = ofEntity.getInstanceClass();
+		Instance candidate = owner;
+		while (candidate!=null) {
+			if (Entity.extendsFrom(candidate.getInstanceEntity(), ofEntity)) return (T)candidate;
+//			if (instanceClass.isAssignableFrom(candidate.getClass())) return (T)candidate;  // Causes problems with GWT
+			candidate = candidate.getInstanceOwner();
+		}
+		return null;
+	}
 }

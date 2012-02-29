@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class SelectDesign extends CompositePageFragmentDesign { 
+public class SelectDesign extends CompositePageFragmentDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -20,7 +20,7 @@ public  class SelectDesign extends CompositePageFragmentDesign {
 	}
 
 	public org.instantlogic.designer.DeductionSchemeDesign getDeduction() {
-		return deduction.get();
+		return deduction.getValue();
 	}
 	
 	public void setDeduction(org.instantlogic.designer.DeductionSchemeDesign newValue) {

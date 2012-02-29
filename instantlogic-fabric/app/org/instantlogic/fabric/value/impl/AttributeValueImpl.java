@@ -37,7 +37,7 @@ public class AttributeValueImpl<I extends Instance, Value extends Object>
 	}
 	
 	/**
-	 * For internal use only.
+	 * For internal use only. Does not invalidate the cached value.
 	 */
 	@Override
 	protected void setStoredValue(Value newStoredValue) {

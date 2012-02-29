@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class FieldDesign extends PageFragmentDesign { 
+public class FieldDesign extends PageFragmentDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -52,7 +52,7 @@ public  class FieldDesign extends PageFragmentDesign {
 	}
 
 	public org.instantlogic.designer.AttributeDesign getAttribute() {
-		return attribute.get();
+		return attribute.getValue();
 	}
 	
 	public void setAttribute(org.instantlogic.designer.AttributeDesign newValue) {

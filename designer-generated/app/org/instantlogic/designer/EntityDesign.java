@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class EntityDesign extends Design { 
+public class EntityDesign extends Design { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -20,7 +20,7 @@ public  class EntityDesign extends Design {
 	}
 
 	public org.instantlogic.designer.EntityDesign getExtendsFrom() {
-		return extendsFrom.get();
+		return extendsFrom.getValue();
 	}
 	
 	public void setExtendsFrom(org.instantlogic.designer.EntityDesign newValue) {
@@ -36,7 +36,7 @@ public  class EntityDesign extends Design {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.AttributeDesign> getAttributes() {
-		return attributes.get();
+		return attributes.getValue();
 	}
 	
 	public void addToAttributes(AttributeDesign item) {
@@ -64,7 +64,7 @@ public  class EntityDesign extends Design {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.RelationDesign> getRelations() {
-		return relations.get();
+		return relations.getValue();
 	}
 	
 	public void addToRelations(RelationDesign item) {
@@ -94,7 +94,7 @@ public  class EntityDesign extends Design {
 	}
 
 	public org.instantlogic.designer.ApplicationDesign getApplication() {
-		return application.get();
+		return application.getValue();
 	}
 
 	
@@ -106,7 +106,7 @@ public  class EntityDesign extends Design {
 	}
 
 	public org.instantlogic.designer.ApplicationDesign getCaseEntityInApplication() {
-		return caseEntityInApplication.get();
+		return caseEntityInApplication.getValue();
 	}
 
 	
@@ -118,7 +118,7 @@ public  class EntityDesign extends Design {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EntityDesign> getExtensions() {
-		return extensions.get();
+		return extensions.getValue();
 	}
 
 	
@@ -130,7 +130,7 @@ public  class EntityDesign extends Design {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.RelationDesign> getReverseRelations() {
-		return reverseRelations.get();
+		return reverseRelations.getValue();
 	}
 
 	
@@ -142,7 +142,7 @@ public  class EntityDesign extends Design {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.SelectedInstanceDeductionDesign> getEntityInSelectedInstanceDeductions() {
-		return entityInSelectedInstanceDeductions.get();
+		return entityInSelectedInstanceDeductions.getValue();
 	}
 
 	
@@ -154,7 +154,7 @@ public  class EntityDesign extends Design {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.CastInstanceDeductionDesign> getEntityInCastDeductions() {
-		return entityInCastDeductions.get();
+		return entityInCastDeductions.getValue();
 	}
 
 	
@@ -166,7 +166,7 @@ public  class EntityDesign extends Design {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EventDesign> getParameterInEvent() {
-		return parameterInEvent.get();
+		return parameterInEvent.getValue();
 	}
 
 	
@@ -178,7 +178,7 @@ public  class EntityDesign extends Design {
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowDesign> getParameterInFlows() {
-		return parameterInFlows.get();
+		return parameterInFlows.getValue();
 	}
 
 

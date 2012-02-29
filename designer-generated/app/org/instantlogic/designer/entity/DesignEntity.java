@@ -58,6 +58,12 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 			public boolean isReadOnly() {
 				return true;
 			};
+
+			private org.instantlogic.fabric.deduction.Deduction<java.lang.String> RULE = createDeduction0();
+			@Override
+			public org.instantlogic.fabric.deduction.Deduction<java.lang.String> getRule() {
+				return RULE;
+			}
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.Design, java.lang.Boolean, java.lang.Boolean> isCustomized 

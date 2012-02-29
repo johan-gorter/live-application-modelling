@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public  class RelationDesign extends AttributeDesign { 
+public class RelationDesign extends AttributeDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -84,7 +84,7 @@ public  class RelationDesign extends AttributeDesign {
 	}
 
 	public org.instantlogic.designer.EntityDesign getTo() {
-		return to.get();
+		return to.getValue();
 	}
 	
 	public void setTo(org.instantlogic.designer.EntityDesign newValue) {
@@ -102,7 +102,7 @@ public  class RelationDesign extends AttributeDesign {
 	}
 
 	public org.instantlogic.designer.EntityDesign getFrom() {
-		return from.get();
+		return from.getValue();
 	}
 
 
