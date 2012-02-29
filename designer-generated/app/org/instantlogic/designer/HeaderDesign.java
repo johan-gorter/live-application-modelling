@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class HeaderDesign extends CompositePageFragmentDesign { 
+public  class HeaderDesign extends CompositePageFragmentDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -26,6 +26,7 @@ public class HeaderDesign extends CompositePageFragmentDesign {
 	public void setText(org.instantlogic.designer.TextDesign newValue) {
 		text.setValue(newValue);
 	}
+
 
 	// Reverse relations
 

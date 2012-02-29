@@ -78,7 +78,7 @@ public abstract class AbstractGenerator {
 	
 	public abstract void delete(File applicationRoot);
 	
-	protected <G extends AbstractGenerator> List<Design> updateGenerators(Map<String, G> generators, List<? extends Design> from, File applicationRoot) {
+	protected <G extends AbstractGenerator> List<Design> updateGenerators(Map<String, G> generators, Iterable<? extends Design> from, File applicationRoot) {
 		List<Design> newConcepts = new ArrayList<Design>();
 		for(Design instance: from) {
 			AbstractGenerator generator = generators.get(instance.getName());

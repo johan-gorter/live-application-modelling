@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class ButtonDesign extends LinkDesign { 
+public  class ButtonDesign extends LinkDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {

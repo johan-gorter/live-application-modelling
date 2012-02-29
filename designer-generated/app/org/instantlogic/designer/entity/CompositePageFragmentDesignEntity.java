@@ -33,8 +33,8 @@ public class CompositePageFragmentDesignEntity extends org.instantlogic.fabric.m
 	
 	// Relations
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.CompositePageFragmentDesign, java.util.List<org.instantlogic.designer.PageCompositionDesign>, org.instantlogic.designer.PageCompositionDesign> items
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.CompositePageFragmentDesign, java.util.List<org.instantlogic.designer.PageCompositionDesign>, org.instantlogic.designer.PageCompositionDesign>(
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.CompositePageFragmentDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.PageCompositionDesign>, org.instantlogic.designer.PageCompositionDesign> items
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.CompositePageFragmentDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.PageCompositionDesign>, org.instantlogic.designer.PageCompositionDesign>(
 			"items", INSTANCE, org.instantlogic.designer.entity.PageCompositionDesignEntity.INSTANCE, org.instantlogic.designer.PageCompositionDesign.class, org.instantlogic.designer.entity.PageCompositionDesignEntity.itemIn
 		) {
 	

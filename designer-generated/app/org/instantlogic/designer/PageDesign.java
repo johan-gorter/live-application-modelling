@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class PageDesign extends FlowNodeBaseDesign { 
+public  class PageDesign extends FlowNodeBaseDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -26,6 +26,7 @@ public class PageDesign extends FlowNodeBaseDesign {
 	public void setContent(org.instantlogic.designer.CompositePageFragmentDesign newValue) {
 		content.setValue(newValue);
 	}
+
 
 	// Reverse relations
 

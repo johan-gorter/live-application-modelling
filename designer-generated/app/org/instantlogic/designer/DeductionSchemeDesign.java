@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class DeductionSchemeDesign extends org.instantlogic.fabric.Instance { 
+public  class DeductionSchemeDesign extends org.instantlogic.fabric.Instance { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -19,13 +19,26 @@ public class DeductionSchemeDesign extends org.instantlogic.fabric.Instance {
 		return deductions;
 	}
 
-	public java.util.List<org.instantlogic.designer.DeductionDesign> getDeductions() {
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DeductionDesign> getDeductions() {
 		return deductions.get();
 	}
 	
-	public void setDeductions(java.util.List<org.instantlogic.designer.DeductionDesign> newValue) {
-		deductions.setValue(newValue);
+	public void addToDeductions(DeductionDesign item) {
+		deductions.addValue(item);
 	}
+	
+	public void addToDeductions(DeductionDesign item, int index) {
+		deductions.insertValue(item, index);
+	}
+	
+	public void removeFromDeductions(DeductionDesign item) {
+		deductions.removeValue(item);
+	}
+	
+	public void removeFromDeductions(int index) {
+		deductions.removeValue(index);
+	}
+	
 	
 	private final org.instantlogic.fabric.value.RelationValue<DeductionSchemeDesign, DeductionDesign> output
 		= createRelationValue(org.instantlogic.designer.entity.DeductionSchemeDesignEntity.output);
@@ -41,6 +54,7 @@ public class DeductionSchemeDesign extends org.instantlogic.fabric.Instance {
 	public void setOutput(org.instantlogic.designer.DeductionDesign newValue) {
 		output.setValue(newValue);
 	}
+
 
 	// Reverse relations
 	

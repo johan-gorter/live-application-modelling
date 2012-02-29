@@ -10,8 +10,8 @@ import org.instantlogic.designer.DomainEntryDesign;
 import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.RelationDesign;
 import org.instantlogic.designer.TextDesign;
-import org.instantlogic.fabric.model.DomainEntry;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
+import org.instantlogic.fabric.value.Multi;
 
 public class EntityGenerator extends AbstractGenerator {
 
@@ -160,7 +160,7 @@ public class EntityGenerator extends AbstractGenerator {
 			if (explanation!=null) {
 				attribute.explanation = new TextGenerator(explanation, this);
 			}
-			List<DomainEntryDesign> domain = attributeDesign.getDomain();
+			Multi<DomainEntryDesign> domain = attributeDesign.getDomain();
 			if (domain.size()>0) {
 				attribute.domain = generateDomain(domain);
 			}
@@ -215,7 +215,7 @@ public class EntityGenerator extends AbstractGenerator {
 		AbstractGenerator.deleteFile(null, name, "AbstractInstance", rootPackageName, applicationRoot);
 	}
 	
-	private List<EntityGenerator.Attribute.DomainEntry> generateDomain(List<DomainEntryDesign> domain) {
+	private List<EntityGenerator.Attribute.DomainEntry> generateDomain(Multi<DomainEntryDesign> domain) {
 		List<EntityGenerator.Attribute.DomainEntry> result = new ArrayList<EntityGenerator.Attribute.DomainEntry>();
 		for (DomainEntryDesign entry: domain) {
 			EntityGenerator.Attribute.DomainEntry resultEntry = new EntityGenerator.Attribute.DomainEntry();

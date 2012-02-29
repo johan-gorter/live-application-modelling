@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class DeductionDesign extends org.instantlogic.fabric.Instance { 
+public  class DeductionDesign extends org.instantlogic.fabric.Instance { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -21,10 +21,10 @@ public class DeductionDesign extends org.instantlogic.fabric.Instance {
 		return multivalue;
 	}
 
-
 	public void setMultivalue(java.lang.Boolean newValue) {
 		multivalue.setValue(newValue);
 	}
+	
 	
 	private final org.instantlogic.fabric.value.AttributeValue<DeductionDesign, java.lang.String> className
 		= createAttributeValue(org.instantlogic.designer.entity.DeductionDesignEntity.className);
@@ -37,10 +37,10 @@ public class DeductionDesign extends org.instantlogic.fabric.Instance {
 		return className;
 	}
 
-
 	public void setClassName(java.lang.String newValue) {
 		className.setValue(newValue);
 	}
+	
 	
 	private final org.instantlogic.fabric.value.AttributeValue<DeductionDesign, java.lang.String> customization
 		= createAttributeValue(org.instantlogic.designer.entity.DeductionDesignEntity.customization);
@@ -53,10 +53,10 @@ public class DeductionDesign extends org.instantlogic.fabric.Instance {
 		return customization;
 	}
 
-
 	public void setCustomization(java.lang.String newValue) {
 		customization.setValue(newValue);
 	}
+	
 	
 	// Relations
 	
@@ -67,13 +67,26 @@ public class DeductionDesign extends org.instantlogic.fabric.Instance {
 		return inputs;
 	}
 
-	public java.util.List<org.instantlogic.designer.DeductionDesign> getInputs() {
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DeductionDesign> getInputs() {
 		return inputs.get();
 	}
 	
-	public void setInputs(java.util.List<org.instantlogic.designer.DeductionDesign> newValue) {
-		inputs.setValue(newValue);
+	public void addToInputs(DeductionDesign item) {
+		inputs.addValue(item);
 	}
+	
+	public void addToInputs(DeductionDesign item, int index) {
+		inputs.insertValue(item, index);
+	}
+	
+	public void removeFromInputs(DeductionDesign item) {
+		inputs.removeValue(item);
+	}
+	
+	public void removeFromInputs(int index) {
+		inputs.removeValue(index);
+	}
+	
 
 	// Reverse relations
 	
@@ -108,7 +121,7 @@ public class DeductionDesign extends org.instantlogic.fabric.Instance {
 		return outputs;
 	}
 
-	public java.util.List<org.instantlogic.designer.DeductionDesign> getOutputs() {
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DeductionDesign> getOutputs() {
 		return outputs.get();
 	}
 

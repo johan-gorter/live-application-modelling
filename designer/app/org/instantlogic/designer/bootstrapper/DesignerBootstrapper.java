@@ -205,19 +205,19 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		// Flows
 		FlowDesign mainFlow = createFlow("Main");
 		FlowDesign entityFlow = createFlow("Entity");
-		entityFlow.getParametersRelation().add(entityDesign);
+		entityFlow.addToParameters(entityDesign);
 		FlowDesign attributeFlow = createFlow("Attribute");
-		attributeFlow.getParametersRelation().add(attributeDesign);
+		attributeFlow.addToParameters(attributeDesign);
 		FlowDesign flowFlow = createFlow("Flow");
-		flowFlow.getParametersRelation().add(flowDesign);
+		flowFlow.addToParameters(flowDesign);
 		FlowDesign pageFlow = createFlow("Page");
-		pageFlow.getParametersRelation().add(pageDesign);
+		pageFlow.addToParameters(pageDesign);
 		FlowDesign addFieldFlow = createFlow("AddField");
 		addFieldFlow.setIsCustomized(true); //setCustomization("custom.designer.AddFieldFlowCustomization");
 		FlowDesign fieldFlow = createFlow("Field");
-		fieldFlow.getParametersRelation().add(fieldDesign);
+		fieldFlow.addToParameters(fieldDesign);
 		FlowDesign flowNodeFlow = createFlow("FlowNode");
-		flowNodeFlow.getParametersRelation().add(flowNodeBaseDesign);
+		flowNodeFlow.addToParameters(flowNodeBaseDesign);
 		flowNodeFlow.setIsCustomized(true); //customization.set("custom.designer.FlowNodeFlowCustomization");
 		FlowDesign caseExplorerFlow = createFlow("CaseExplorer");
 		FlowDesign caseExplorerInstanceFlow = createFlow("CaseExplorerInstance");
@@ -309,7 +309,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		PageFragmentHolderDesign pageFragmentEditorHolder = new PageFragmentHolderDesign();
 		pageFragmentEditorHolder.setPageFragment(pageFragmentEditor);
 		pageFragmentEditorHolder.setName("PageFragmentEditor");
-		applicationDesign.getSharedPageFragmentsRelation().add(pageFragmentEditorHolder);
+		applicationDesign.addToSharedPageFragments(pageFragmentEditorHolder);
 
 		recursivePageFragmentEditor.setPageFragmentHolder(pageFragmentEditorHolder);
 
@@ -375,7 +375,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		
 		// Finish up
 		
-		applicationDesign.getExposedFlowsRelation().add(mainFlow);
+		applicationDesign.addToExposedFlows(mainFlow);
 		
 		return applicationDesign;
 	}

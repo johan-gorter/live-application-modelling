@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class Design extends org.instantlogic.fabric.Instance { 
+public  class Design extends org.instantlogic.fabric.Instance { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -21,10 +21,10 @@ public class Design extends org.instantlogic.fabric.Instance {
 		return name;
 	}
 
-
 	public void setName(java.lang.String newValue) {
 		name.setValue(newValue);
 	}
+	
 	
 	private final org.instantlogic.fabric.value.ReadOnlyAttributeValue<Design, java.lang.String> javaName
 		= createReadOnlyAttributeValue(org.instantlogic.designer.entity.DesignEntity.javaName);
@@ -36,7 +36,6 @@ public class Design extends org.instantlogic.fabric.Instance {
 	public org.instantlogic.fabric.value.ReadOnlyAttributeValue<Design, java.lang.String> getJavaNameAttribute() {
 		return javaName;
 	}
-
 
 	
 	private final org.instantlogic.fabric.value.AttributeValue<Design, java.lang.Boolean> isCustomized
@@ -50,10 +49,10 @@ public class Design extends org.instantlogic.fabric.Instance {
 		return isCustomized;
 	}
 
-
 	public void setIsCustomized(java.lang.Boolean newValue) {
 		isCustomized.setValue(newValue);
 	}
+	
 	
 	// Relations
 

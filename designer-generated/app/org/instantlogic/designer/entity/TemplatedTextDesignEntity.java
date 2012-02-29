@@ -33,8 +33,8 @@ public class TemplatedTextDesignEntity extends org.instantlogic.fabric.model.Ent
 	
 	// Relations
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.TemplatedTextDesign, java.util.List<org.instantlogic.designer.StringProducerDesign>, org.instantlogic.designer.StringProducerDesign> untranslated
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.TemplatedTextDesign, java.util.List<org.instantlogic.designer.StringProducerDesign>, org.instantlogic.designer.StringProducerDesign>(
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.TemplatedTextDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.StringProducerDesign>, org.instantlogic.designer.StringProducerDesign> untranslated
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.TemplatedTextDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.StringProducerDesign>, org.instantlogic.designer.StringProducerDesign>(
 			"untranslated", INSTANCE, org.instantlogic.designer.entity.StringProducerDesignEntity.INSTANCE, org.instantlogic.designer.StringProducerDesign.class, org.instantlogic.designer.entity.StringProducerDesignEntity.untranslatedInTemplate
 		) {
 	

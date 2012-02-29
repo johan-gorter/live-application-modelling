@@ -46,12 +46,14 @@ public class ValueChangeEvent {
 	 */
 	private ValueChangeEvent(ValueChangeEvent eventToUndo, ValueAndLevel<? extends Object> failedNewValue) {
 		this.eventToUndo = eventToUndo;
-		this.oldValue = failedNewValue;
-		this.operation = eventToUndo.operation;
+		oldValue = failedNewValue;
+		operation = eventToUndo.operation;
+		attributeValue = eventToUndo.attributeValue;
 		if (eventToUndo.isMultivalueUpdate()) {
-			throw new RuntimeException("TODO");
+			multiValueUpdateType = eventToUndo.multiValueUpdateType==MultiValueUpdateType.INSERT?MultiValueUpdateType.DELETE:MultiValueUpdateType.INSERT;
+			index = eventToUndo.index;
+			itemValue = eventToUndo.itemValue;
 		} else {
-			attributeValue = eventToUndo.attributeValue;
 			oldStoredValue = eventToUndo.newStoredValue;
 			newStoredValue = eventToUndo.oldStoredValue;
 		}
@@ -132,5 +134,17 @@ public class ValueChangeEvent {
 
 	public boolean isFor(ReadOnlyAttributeValue<? extends Instance, ? extends Object> valueObserved) {
 		return valueObserved == this.attributeValue;
+	}
+
+	public MultiValueUpdateType getMultiValueUpdateType() {
+		return multiValueUpdateType;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public Object getItemValue() {
+		return itemValue;
 	}
 }

@@ -3,6 +3,7 @@ package org.instantlogic.fabric.value.impl;
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Relation;
 import org.instantlogic.fabric.util.Operation;
+import org.instantlogic.fabric.util.ValueChangeEvent;
 import org.instantlogic.fabric.util.ValueChangeEvent.MultiValueUpdateType;
 import org.instantlogic.fabric.value.Multi;
 import org.instantlogic.fabric.value.RelationValues;
@@ -26,8 +27,11 @@ public class RelationValuesImpl<I extends Instance, To extends Instance>
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	protected void fireChange(MultiValueUpdateType type, int index, To item, Operation operation) {
-		super.fireChange(type, index, item, operation);
+	protected void afterFiringChange(ValueChangeEvent event) {
+		MultiValueUpdateType type = event.getMultiValueUpdateType();
+		To item = (To) event.getItemValue();
+		Operation operation = event.getOperation();
+		super.afterFiringChange(event);
 		if (type == MultiValueUpdateType.INSERT) {
 			if (getModel().getReverseRelation().isMultivalue()) {
 				((ReverseRelationValuesImpl)model.getReverseRelation().get(item)).addReverse(forInstance, operation);
@@ -41,6 +45,5 @@ public class RelationValuesImpl<I extends Instance, To extends Instance>
 				((ReverseRelationValueImpl)model.getReverseRelation().get(item)).setReverse(null, model.isOwner(), operation);
 			}
 		}
-	}
-	
+	};
 }

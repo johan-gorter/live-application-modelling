@@ -42,7 +42,7 @@ public class ReverseRelationValueImpl<I extends Instance, From extends Instance>
 				reverseValue.adopt(forInstance);
 			}
 		}
-		fireValueChanged(ValueAndLevel.deduced(oldValue), null, null, operation);
+		fireValueChanged(ValueAndLevel.deducedOrMissing(oldValue), null, null, operation);
 	}
 	
 	public void clear() {

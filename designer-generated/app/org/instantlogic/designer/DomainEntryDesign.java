@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class DomainEntryDesign extends Design { 
+public  class DomainEntryDesign extends Design { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -26,6 +26,7 @@ public class DomainEntryDesign extends Design {
 	public void setDisplay(org.instantlogic.designer.TextDesign newValue) {
 		display.setValue(newValue);
 	}
+
 
 	// Reverse relations
 	

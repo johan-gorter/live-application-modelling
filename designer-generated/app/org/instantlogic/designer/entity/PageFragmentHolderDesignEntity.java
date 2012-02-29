@@ -72,8 +72,8 @@ public class PageFragmentHolderDesignEntity extends org.instantlogic.fabric.mode
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.PageFragmentHolderDesign, java.util.List<org.instantlogic.designer.SharedFragmentDesign>, org.instantlogic.designer.SharedFragmentDesign> usages
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.PageFragmentHolderDesign, java.util.List<org.instantlogic.designer.SharedFragmentDesign>, org.instantlogic.designer.SharedFragmentDesign>(
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.PageFragmentHolderDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.SharedFragmentDesign>, org.instantlogic.designer.SharedFragmentDesign> usages
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.PageFragmentHolderDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.SharedFragmentDesign>, org.instantlogic.designer.SharedFragmentDesign>(
 			"usages", INSTANCE, org.instantlogic.designer.entity.SharedFragmentDesignEntity.INSTANCE, org.instantlogic.designer.SharedFragmentDesign.class, org.instantlogic.designer.entity.SharedFragmentDesignEntity.pageFragmentHolder
 		) {
 	

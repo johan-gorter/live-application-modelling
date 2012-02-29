@@ -2,6 +2,7 @@ package org.instantlogic.fabric.value.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Attribute;
@@ -40,7 +41,7 @@ public class AttributeValuesImpl<I extends Instance, Item extends Object>
 		Operation operation = startOperation();
 		try {
 			storedValues.add(item);
-			int index = super.getValue().size()-1;
+			int index = storedValues.size()-1;
 			fireChange(ValueChangeEvent.MultiValueUpdateType.INSERT, index, item, operation);
 			operation.complete();
 		} finally {
@@ -70,6 +71,15 @@ public class AttributeValuesImpl<I extends Instance, Item extends Object>
 			operation.close();
 		}
 	}
+	
+	@Override
+	public void removeValue(Item item) {
+		if (storedValues==null) throw new NoSuchElementException("Item: "+item);
+		int index = storedValues.indexOf(item);
+		if (index<0) throw new NoSuchElementException("Item: "+item);
+		removeValue(index);
+	}
+
 	
 	protected void fireChange(MultiValueUpdateType type, int index, Item item, Operation operation) {
 		ValueChangeEvent event = new ValueChangeEvent(this, getValueAndLevel(), type, index, item, operation);

@@ -27,10 +27,6 @@ public class AttributeValueImpl<I extends Instance, Value extends Object>
 			fireValueChanged(oldValue, oldStoredValue, value, operation);
 			operation.complete();
 		} finally {
-			operation.clearEventsToUndo(); // Events triggered by valuechanges should undo their changes when receiving undo events.
-			if (!operation.completed()) {
-				
-			}
 			operation.close();
 		}
 	}

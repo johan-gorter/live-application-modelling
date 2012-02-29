@@ -11,4 +11,6 @@ public interface AttributeValues<I extends Instance, Item extends Object>
 	public void insertValue(Item item, int index);
 
 	public Item removeValue(int index);
+
+	public void removeValue(Item item);
 }

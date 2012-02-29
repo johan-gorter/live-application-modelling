@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class FormattedValueDesign extends StringProducerDesign { 
+public  class FormattedValueDesign extends StringProducerDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -26,6 +26,7 @@ public class FormattedValueDesign extends StringProducerDesign {
 	public void setDeduction(org.instantlogic.designer.DeductionSchemeDesign newValue) {
 		deduction.setValue(newValue);
 	}
+
 
 	// Reverse relations
 

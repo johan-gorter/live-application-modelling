@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class RelationDesign extends AttributeDesign { 
+public  class RelationDesign extends AttributeDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -21,10 +21,10 @@ public class RelationDesign extends AttributeDesign {
 		return owner;
 	}
 
-
 	public void setOwner(java.lang.Boolean newValue) {
 		owner.setValue(newValue);
 	}
+	
 	
 	private final org.instantlogic.fabric.value.AttributeValue<RelationDesign, java.lang.Boolean> autoCreate
 		= createAttributeValue(org.instantlogic.designer.entity.RelationDesignEntity.autoCreate);
@@ -37,10 +37,10 @@ public class RelationDesign extends AttributeDesign {
 		return autoCreate;
 	}
 
-
 	public void setAutoCreate(java.lang.Boolean newValue) {
 		autoCreate.setValue(newValue);
 	}
+	
 	
 	private final org.instantlogic.fabric.value.AttributeValue<RelationDesign, java.lang.Boolean> reverseMultivalue
 		= createAttributeValue(org.instantlogic.designer.entity.RelationDesignEntity.reverseMultivalue);
@@ -53,10 +53,10 @@ public class RelationDesign extends AttributeDesign {
 		return reverseMultivalue;
 	}
 
-
 	public void setReverseMultivalue(java.lang.Boolean newValue) {
 		reverseMultivalue.setValue(newValue);
 	}
+	
 	
 	private final org.instantlogic.fabric.value.AttributeValue<RelationDesign, java.lang.String> reverseName
 		= createAttributeValue(org.instantlogic.designer.entity.RelationDesignEntity.reverseName);
@@ -69,10 +69,10 @@ public class RelationDesign extends AttributeDesign {
 		return reverseName;
 	}
 
-
 	public void setReverseName(java.lang.String newValue) {
 		reverseName.setValue(newValue);
 	}
+	
 	
 	// Relations
 	
@@ -90,6 +90,7 @@ public class RelationDesign extends AttributeDesign {
 	public void setTo(org.instantlogic.designer.EntityDesign newValue) {
 		to.setValue(newValue);
 	}
+
 
 	// Reverse relations
 	
