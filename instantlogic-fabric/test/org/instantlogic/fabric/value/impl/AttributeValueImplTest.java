@@ -37,9 +37,9 @@ public class AttributeValueImplTest {
 		PrintListener listener1 = new PrintListener("Listener1", period.getDaysBetween());
 		PrintListener listener2 = new PrintListener("Listener2", period.getDaysBetween());
 		try {
-			period.getDaysBetweenAttribute().addValueChangeListener(listener1, true);
-			period.getDaysBetweenAttribute().addValueChangeListener(new ConstraintEnforcer(), true);
-			period.getDaysBetweenAttribute().addValueChangeListener(listener2, true);
+			period.getDaysBetweenAttribute().addValueChangeObserver(listener1);
+			period.getDaysBetweenAttribute().addValueChangeObserver(new ConstraintEnforcer());
+			period.getDaysBetweenAttribute().addValueChangeObserver(listener2);
 			period.setTo(date(2012,2,1));
 			assertEquals(1, listener1.getNrOfUpdates());
 			assertEquals(1, listener2.getNrOfUpdates());
@@ -49,13 +49,13 @@ public class AttributeValueImplTest {
 			fail();
 		} catch(InvalidPeriodException expected) {
 			System.out.println("Exception caught");
-			assertEquals(3, listener1.getNrOfUpdates());
-			assertEquals(1, listener2.getNrOfUpdates());
+			assertEquals(1, listener1.getNrOfUpdates());
+			assertEquals(3, listener2.getNrOfUpdates());
 			assertEquals(31, listener1.getLastValue());
 			assertEquals(31, listener2.getLastValue());
 			period.setTo(date(2012,3,1));
-			assertEquals(4, listener1.getNrOfUpdates());
-			assertEquals(2, listener2.getNrOfUpdates());
+			assertEquals(2, listener1.getNrOfUpdates());
+			assertEquals(4, listener2.getNrOfUpdates());
 			assertEquals(60, listener1.getLastValue());
 			assertEquals(60, listener2.getLastValue());
 		}
