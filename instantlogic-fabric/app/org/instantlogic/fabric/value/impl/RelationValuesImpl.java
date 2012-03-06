@@ -27,11 +27,11 @@ public class RelationValuesImpl<I extends Instance, To extends Instance>
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	protected void afterFiringChange(ValueChangeEvent event) {
+	protected void beforeFiringChange(ValueChangeEvent event) {
 		MultiValueUpdateType type = event.getMultiValueUpdateType();
 		To item = (To) event.getItemValue();
 		Operation operation = event.getOperation();
-		super.afterFiringChange(event);
+		super.beforeFiringChange(event);
 		if (type == MultiValueUpdateType.INSERT) {
 			if (getModel().getReverseRelation().isMultivalue()) {
 				((ReverseRelationValuesImpl)model.getReverseRelation().get(item)).addReverse(forInstance, operation);

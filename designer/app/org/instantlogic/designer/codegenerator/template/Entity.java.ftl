@@ -125,7 +125,7 @@ public class ${name}Entity extends org.instantlogic.fabric.model.Entity<${rootPa
 			</#if>
 			<#if relation.readonly>
 	
-			public boolean isReadonly() {
+			public boolean isReadOnly() {
 				return true;
 			}
 			</#if>
