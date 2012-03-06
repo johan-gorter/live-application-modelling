@@ -20,7 +20,7 @@ public class ObservationsOutdatedObserver {
 				outdated = true;
 				for (ReadOnlyAttributeValue<? extends Instance,? extends Object> valueObserved: observations.getValuesObserved()) {
 					if (!event.isFor(valueObserved)) {
-						valueObserved.removeValueChangeListener(observer);
+						valueObserved.removeNextValueChangeObserver(observer);
 					}
 				}
 			}
@@ -31,13 +31,13 @@ public class ObservationsOutdatedObserver {
 		this.observations = observations;
 		this.outdatedListener = outdatedListener;
 		for (ReadOnlyAttributeValue<? extends Instance, ? extends Object> value : observations.getValuesObserved()) {
-			value.addValueChangeListener(observer);
+			value.addNextValueChangeObserver(observer);
 		}
 	}
 	
 	public void remove() {
 		for (ReadOnlyAttributeValue<? extends Instance,? extends Object> valueObserved: this.observations.getValuesObserved()) {
-			valueObserved.removeValueChangeListener(observer);
+			valueObserved.removeNextValueChangeObserver(observer);
 		}
 	}
 

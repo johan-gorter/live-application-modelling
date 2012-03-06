@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 import org.instantlogic.fabric.model.Attribute;
@@ -195,6 +196,7 @@ public abstract class Instance {
 	}
 
 	public void removeGlobalValueChangeListener(ValueChangeObserver listener) {
+		copyGlobalValueChangeListenersIfNeeded();
 		Iterator<GlobalValueChangeListener> iterator = globalValueChangeListeners.iterator();
 		while (iterator.hasNext()) {
 			GlobalValueChangeListener next = iterator.next();
@@ -213,8 +215,10 @@ public abstract class Instance {
 			clearIteratingOnExit = true;
 		}
 		List<GlobalValueChangeListener> iterating = iteratingGlobalValueChangeListeners;
+		ListIterator<GlobalValueChangeListener> iterator = iterating.listIterator(iterating.size());
 		try {
-			for (GlobalValueChangeListener listener: iterating) {
+			while (iterator.hasPrevious()) {
+				GlobalValueChangeListener listener = iterator.previous();
 				if (listener.alsoForOwnedInstances || fromSelf) {
 					listener.listener.valueChanged(event);
 				}

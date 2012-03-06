@@ -2,6 +2,8 @@ package org.instantlogic.fabric.value.impl;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 import org.instantlogic.fabric.Instance;
@@ -20,17 +22,15 @@ import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
 public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object> implements ReadOnlyAttributeValue<I, Value> {
 
 	public enum ValueDetermination {RELEVANCE, RULE, STORED, DEFAULT, NONE}
-	private static class Observer {
-		ValueChangeObserver observer;
-		boolean permanent;
-	}
-
 	
 	protected final Attribute<I, Value, ? extends Object> model;
 	protected final I forInstance;
 	
-	transient ArrayList<Observer> tempValueChangeListeners = new ArrayList<Observer>(); 
-	transient ArrayList<Observer> valueChangeListeners = new ArrayList<Observer>(); 
+	transient ArrayList<ValueChangeObserver> valueChangeObservers = new ArrayList<ValueChangeObserver>(); 
+	// When this value is the same as globalValueChangeListeners, copy globalValueChangeListeners on write and clear this field.
+	transient ArrayList<ValueChangeObserver> iteratingValueChangeObservers = null; 
+	transient ArrayList<ValueChangeObserver> nextValueChangeObservers = new ArrayList<ValueChangeObserver>(); 
+	transient boolean iteratingNextValueChangeObservers = false;
 	
 	private transient ValueAndLevel<Value> cached;
 	private transient ObservationsOutdatedObserver basedOn;
@@ -156,51 +156,96 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 	/**
 	 * Takes extra care to undo pending changes when exceptions occur
 	 */
+	@SuppressWarnings("unchecked")
 	protected void fireEvent(ValueChangeEvent event) {
-		ArrayList<Observer> tempListenersBuffer = tempValueChangeListeners;
-		tempValueChangeListeners = valueChangeListeners;
-		valueChangeListeners = tempListenersBuffer;
-		valueChangeListeners.clear();
-		int tempIndex = 0;
+		boolean clearIteratingOnExit = false;
+		int lastInformedNextIndex = nextValueChangeObservers.size();
 		boolean success = false;
+		boolean instanceInformed = false;
+		List<ValueChangeObserver> iterating = null;
+		ListIterator<ValueChangeObserver> iterator = null;
 		try {
-			event.getOperation().pauseRecordingUndoEvents();
+			// Listeners must undo their actions when they receive the undo event
+			event.getOperation().pauseRecordingUndoEvents(); 
+			// Reverse relations and such
 			beforeFiringChange(event);
-			for (;tempIndex<tempValueChangeListeners.size();tempIndex++) {
-				Observer listener = tempValueChangeListeners.get(tempIndex);
-				listener.observer.valueChanged(event);
-				if (listener.permanent) {
-//					System.out.println("Re-adding listener "+listener);
-					valueChangeListeners.add(listener);
+			// NextValueChangeObservers
+			iteratingNextValueChangeObservers = true;
+			while (lastInformedNextIndex>0) {
+				ValueChangeObserver observer = nextValueChangeObservers.get(lastInformedNextIndex-1);
+				if (observer!=null) {
+					observer.valueChanged(event);
 				}
+				lastInformedNextIndex--;
+				nextValueChangeObservers.remove(lastInformedNextIndex);
 			}
+			// ValueChangeObservers
+			if (iteratingValueChangeObservers != valueChangeObservers) {
+				iteratingValueChangeObservers = valueChangeObservers;
+				clearIteratingOnExit = true;
+			}
+			iterating = iteratingValueChangeObservers;
+			iterator = iterating.listIterator(iterating.size());
+			while (iterator.hasPrevious()) {
+				ValueChangeObserver listener = iterator.previous();
+				listener.valueChanged(event);
+			}
+			// Observers on the Instance and Instances above
+			instanceInformed = true;
 			forInstance.fireValueChanged(event, true);
 			success = true;
 		} finally {
-			event.getOperation().resumeRecordingUndoEvents();
 			if (success) {
+				event.getOperation().resumeRecordingUndoEvents();
+				if (clearIteratingOnExit && iteratingValueChangeObservers == iterating) {
+					iteratingValueChangeObservers = null;
+				}
+				iteratingNextValueChangeObservers = false;
 				if (event.storedValueChanged()) {
 					event.getOperation().addEventToUndo(event);
 				}
 			} else {
 				// The rollback procedure
-//				System.out.println("Rolling back "+this);
-				ValueChangeEvent undoEvent = event.getUndoEvent();
-				cached = (ValueAndLevel<Value>) event.getOldValue();
-				if (event.getOldStoredValue()!=null) {
-					setStoredValue((Value) event.getOldStoredValue());
-				}
-				for (int i=valueChangeListeners.size()-1;i>=0;i--) {
-					Observer listener = valueChangeListeners.get(i);
-					listener.observer.valueChanged(undoEvent);
-				}
-				for (int i=tempIndex;i<tempValueChangeListeners.size();i++) {
-					// Readd the listeners that weren't informed (including the one that threw an exception)
-//					System.out.println("Re-adding oblivious listener "+tempValueChangeListeners.get(i));
-					valueChangeListeners.add(tempValueChangeListeners.get(i));
+				try {
+					ValueChangeEvent undoEvent = event.getUndoEvent();
+					cached = (ValueAndLevel<Value>) event.getOldValue();
+					if (event.getOldStoredValue()!=null) {
+						setStoredValue((Value) event.getOldStoredValue());
+					}
+					
+					// Observers on the Instance
+					if (instanceInformed) {
+						forInstance.fireValueChanged(undoEvent, true);
+					}
+					// ValueChangeObservers
+					if (iterator!=null) {
+						if (iterator.hasNext()) {
+							if (!instanceInformed) {
+								iterator.next(); // Do not reinform the observer that crashed
+							}
+							while (iterator.hasNext()) {
+								iterator.next().valueChanged(undoEvent);
+							}
+						}
+					}
+					// Newly added nextValueChangeObservers
+					int lastMisinfomedIndex = nextValueChangeObservers.size()-1;
+					while (lastInformedNextIndex <= lastMisinfomedIndex) {
+						ValueChangeObserver observer = nextValueChangeObservers.get(lastInformedNextIndex);
+						if (observer!=null) {
+							observer.valueChanged(undoEvent);
+						}
+						nextValueChangeObservers.remove(lastInformedNextIndex);
+						lastMisinfomedIndex--;
+					}
+				} finally {
+					event.getOperation().resumeRecordingUndoEvents();
+					if (clearIteratingOnExit && iteratingValueChangeObservers == iterating) {
+						iteratingValueChangeObservers = null;
+					}
+					iteratingNextValueChangeObservers = false;
 				}
 			}
-			tempValueChangeListeners.clear();
 		}
 	}
 
@@ -225,28 +270,28 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 		throw new RuntimeException("Only implemented in subclass");
 	}
 	
-	@Override
-	public void addValueChangeListener(ValueChangeObserver listener) {
-		addValueChangeListener(listener, false);
+	private void copyGlobalValueChangeListenersIfNeeded() {
+		if (iteratingValueChangeObservers==valueChangeObservers) {
+			valueChangeObservers = new ArrayList<ValueChangeObserver>(valueChangeObservers);
+		}
 	}
-
+	
+	
 	@Override
-	public void addValueChangeListener(ValueChangeObserver listener, boolean permanent) {
-//		System.out.println("Adding listener "+listener);
-		// This statement usually does nothing. The value is normally already deduced. Listening to changes in an unknown value is rarely useful.
+	public void addValueChangeObserver(ValueChangeObserver observer) {
+		// This statement usually does nothing. The value is normally already deduced. Listening to changes on an unknown value is rarely useful.
 		ensureCached(forInstance.getInstanceAdministration());
-		Observer entry = new Observer();
-		entry.observer = listener;
-		entry.permanent = permanent;
-		valueChangeListeners.add(entry);
+		copyGlobalValueChangeListenersIfNeeded();
+		valueChangeObservers.add(observer);
 	}
 
 	@Override
-	public void removeValueChangeListener(ValueChangeObserver listener) {
-		Iterator<Observer> iterator = this.valueChangeListeners.iterator();
+	public void removeValueChangeObserver(ValueChangeObserver observer) {
+		copyGlobalValueChangeListenersIfNeeded();
+		Iterator<ValueChangeObserver> iterator = this.valueChangeObservers.iterator();
 		while (iterator.hasNext()) {
-			Observer entry = iterator.next();
-			if (entry.observer==listener) {
+			ValueChangeObserver entry = iterator.next();
+			if (entry==observer) {
 				iterator.remove();
 				return;
 			}
@@ -255,11 +300,26 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 	}
 	
 	@Override
+	public void addNextValueChangeObserver(ValueChangeObserver observer) {
+		nextValueChangeObservers.add(observer);
+	}
+
+	@Override
+	public void removeNextValueChangeObserver(ValueChangeObserver observer) {
+		if (iteratingNextValueChangeObservers) {
+			// We need to be careful
+			int index = nextValueChangeObservers.indexOf(observer);
+			if (index<0) throw new NoSuchElementException();
+			nextValueChangeObservers.set(index, null);
+		} else {
+			if (!nextValueChangeObservers.remove(observer)) throw new NoSuchElementException();
+		}
+	}
+	
+	@Override
 	public I getInstance() {
 		return forInstance;
 	}
-	
-	
 	
 	@Override
 	public String toString() {

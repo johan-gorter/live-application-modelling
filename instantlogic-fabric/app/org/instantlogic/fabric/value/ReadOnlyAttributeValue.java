@@ -15,16 +15,20 @@ public interface ReadOnlyAttributeValue<I extends Instance, Value extends Object
 	
 	Value getValue();
 	
-	@Deprecated
-	Value get();
-	
 	ValueAndLevel<Value> getValueAndLevel();
 	
 	boolean hasStoredValue();
 	
-	public void addValueChangeListener(ValueChangeObserver listener);
+	public void addValueChangeObserver(ValueChangeObserver observer);
 
-	public void addValueChangeListener(ValueChangeObserver listener, boolean permanent);
+	public void removeValueChangeObserver(ValueChangeObserver observer);
 
-	public void removeValueChangeListener(ValueChangeObserver listener);
+	/**
+	 * The observer will only be called once, when the value changes again.
+	 * 
+	 * @param observer The observer which will receive the callback.
+	 */
+	public void addNextValueChangeObserver(ValueChangeObserver observer);
+
+	public void removeNextValueChangeObserver(ValueChangeObserver observer);
 }
