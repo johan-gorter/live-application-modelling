@@ -32,7 +32,9 @@ public class ReverseRelationValuesImpl<I extends Instance, From extends Instance
 
 	public void addReverse(From reverseValue, Operation operation) {
 		this.values.add(reverseValue);
-		fireEvent(new ValueChangeEvent(this, ValueAndLevel.deduced(this.reverseValue), MultiValueUpdateType.INSERT, this.values.size()-1, reverseValue, operation));
+		if (operation!=null) {
+			fireEvent(new ValueChangeEvent(this, ValueAndLevel.deduced(this.reverseValue), MultiValueUpdateType.INSERT, this.values.size()-1, reverseValue, operation));
+		}
 	}
 
 	public void removeReverse(From reverseValue, Operation operation) {

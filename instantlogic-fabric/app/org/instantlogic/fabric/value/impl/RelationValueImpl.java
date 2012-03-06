@@ -4,6 +4,9 @@ import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Relation;
 import org.instantlogic.fabric.util.Operation;
 import org.instantlogic.fabric.util.ValueAndLevel;
+import org.instantlogic.fabric.util.ValueChangeEvent;
+import org.instantlogic.fabric.util.ValueChangeEvent.MultiValueUpdateType;
+import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
 import org.instantlogic.fabric.value.RelationValue;
 
 
@@ -23,34 +26,44 @@ public class RelationValueImpl<I extends Instance, To extends Instance>
 	public To getValue() {
 		To result = super.getValue();
 		if (result == null && model.isAutoCreate()) {
-			// 1 on 1 aggregation, is now lazily created
+			// 1 on 1 aggregation, is now silently lazily created
 			result = (To) model.createTo(forInstance);
 			setStoredValue(result);
 			invalidateCachedValue();
+			ReadOnlyAttributeValue<To, ? extends Object> newReverseRelationValue = model.getReverseRelation().get(result);
+			if (getModel().getReverseRelation().isMultivalue()) {
+				((ReverseRelationValuesImpl)newReverseRelationValue).addReverse(forInstance, null);
+			} else {
+				((ReverseRelationValueImpl)newReverseRelationValue).setReverse(forInstance, model.isOwner(), null);
+			}
 			forInstance.adopt(result);
 		}
 		return result;
 	}
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	protected void fireValueChanged(ValueAndLevel<To> oldValue, To oldStoredValue, To newStoredValue, Operation operation) {
-		super.fireValueChanged(oldValue, oldStoredValue, newStoredValue, operation);
+	protected void beforeFiringChange(ValueChangeEvent event) {
+		To oldStoredValue = (To) event.getOldStoredValue();
+		To newStoredValue = (To) event.getNewStoredValue();
+		Operation operation = event.getOperation();
+		super.beforeFiringChange(event);
 		if (oldStoredValue!=null) {
+			ReadOnlyAttributeValue<To, ? extends Object> oldReverseRelationValue = model.getReverseRelation().get(oldStoredValue);
 			if (getModel().getReverseRelation().isMultivalue()) {
-				((ReverseRelationValuesImpl)model.getReverseRelation().get(oldStoredValue)).removeReverse(forInstance, operation);
+				((ReverseRelationValuesImpl)oldReverseRelationValue).removeReverse(forInstance, operation);
 			} else {
-				((ReverseRelationValueImpl)model.getReverseRelation().get(oldStoredValue)).setReverse(forInstance, model.isOwner(), operation);
+				((ReverseRelationValueImpl)oldReverseRelationValue).setReverse(forInstance, model.isOwner(), operation);
 			}
 		}
 		if (newStoredValue!=null) {
+			ReadOnlyAttributeValue<To, ? extends Object> newReverseRelationValue = model.getReverseRelation().get(newStoredValue);
 			if (getModel().getReverseRelation().isMultivalue()) {
-				((ReverseRelationValuesImpl)model.getReverseRelation().get(newStoredValue)).addReverse(forInstance, operation);
+				((ReverseRelationValuesImpl)newReverseRelationValue).addReverse(forInstance, operation);
 			} else {
-				((ReverseRelationValueImpl)model.getReverseRelation().get(newStoredValue)).setReverse(forInstance, model.isOwner(), operation);
+				((ReverseRelationValueImpl)newReverseRelationValue).setReverse(forInstance, model.isOwner(), operation);
 			}
 		}
-	};
+	}
 	
 	public Relation<I, To, To> getModel() {
 		return model;

@@ -51,6 +51,9 @@ public class RitAdministratieBootstrapper extends BootstrapperUtil {
 		AttributeDesign priveKm = createAttribute(rit, "priveKm", Integer.class);
 		AttributeDesign priveRit = createAttribute(rit, "priveRit", Boolean.class);
 		AttributeDesign index = createAttribute(rit, "index", Integer.class);
+		AttributeDesign ritKilometers = createAttribute(rit, "ritKilometers", Integer.class);
+		ritKilometers.setReadOnly(true);
+		ritKilometers.setRule(createCustomDeduction("com.jg.ritadministratie.instantlogic.deduction.RitKilometersDeduction", "java.lang.Integer"));
 		
 		AttributeDesign dagNr = createAttribute(dag, "dagNr", Integer.class);
 		AttributeDesign dagInWeekNr = createAttribute(dag, "dagInWeekNr", Integer.class);

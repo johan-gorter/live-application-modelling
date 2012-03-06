@@ -38,11 +38,11 @@ public abstract class Instance {
 	private static class GlobalValueChangeListener {
 		ValueChangeObserver listener;
 		boolean alsoForOwnedInstances;
-		boolean permanent;
 	}
 	
-	private List<GlobalValueChangeListener> tempGlobalValueChangeListeners = new ArrayList<GlobalValueChangeListener>();
 	private List<GlobalValueChangeListener> globalValueChangeListeners = new ArrayList<GlobalValueChangeListener>();
+	// When this value is the same as globalValueChangeListeners, copy globalValueChangeListeners on write and clear this field.
+	private List<GlobalValueChangeListener> iteratingGlobalValueChangeListeners = null; 
 	
 	private Instance owner = null;
 	
@@ -180,14 +180,20 @@ public abstract class Instance {
 		return getInstanceEntity().toString()+"#"+instanceId+name;
 	}
 	
-	public void addGlobalValueChangeListener(ValueChangeObserver listener, boolean alsoForOwnedInstances, boolean permanent) {
+	public void addGlobalValueChangeListener(ValueChangeObserver listener, boolean alsoForOwnedInstances) {
 		GlobalValueChangeListener gvcl = new GlobalValueChangeListener();
 		gvcl.listener = listener;
-		gvcl.permanent = permanent;
 		gvcl.alsoForOwnedInstances = alsoForOwnedInstances;
+		copyGlobalValueChangeListenersIfNeeded();
 		globalValueChangeListeners.add(gvcl);
 	}
 	
+	private void copyGlobalValueChangeListenersIfNeeded() {
+		if (iteratingGlobalValueChangeListeners==globalValueChangeListeners) {
+			globalValueChangeListeners = new ArrayList<Instance.GlobalValueChangeListener>(globalValueChangeListeners);
+		}
+	}
+
 	public void removeGlobalValueChangeListener(ValueChangeObserver listener) {
 		Iterator<GlobalValueChangeListener> iterator = globalValueChangeListeners.iterator();
 		while (iterator.hasNext()) {
@@ -201,22 +207,25 @@ public abstract class Instance {
 	}
 	
 	public void fireValueChanged(ValueChangeEvent event, boolean fromSelf) {
-		List<GlobalValueChangeListener> oldTemp = tempGlobalValueChangeListeners;
-		tempGlobalValueChangeListeners = globalValueChangeListeners;
-		globalValueChangeListeners = oldTemp;
-		for (GlobalValueChangeListener listener: tempGlobalValueChangeListeners) {
-			boolean reAdd = true;
-			if (listener.alsoForOwnedInstances || fromSelf) {
-				listener.listener.valueChanged(event);
-				reAdd = listener.permanent;
-			}
-			if (reAdd) {
-				globalValueChangeListeners.add(listener);
-			}
+		boolean clearIteratingOnExit = false;
+		if (iteratingGlobalValueChangeListeners != globalValueChangeListeners) {
+			iteratingGlobalValueChangeListeners = globalValueChangeListeners;
+			clearIteratingOnExit = true;
 		}
-		tempGlobalValueChangeListeners.clear();
-		if (owner!=null) {
-			owner.fireValueChanged(event, false);
+		List<GlobalValueChangeListener> iterating = iteratingGlobalValueChangeListeners;
+		try {
+			for (GlobalValueChangeListener listener: iterating) {
+				if (listener.alsoForOwnedInstances || fromSelf) {
+					listener.listener.valueChanged(event);
+				}
+			}
+			if (owner!=null) {
+				owner.fireValueChanged(event, false);
+			}
+		} finally {
+			if (clearIteratingOnExit && iteratingGlobalValueChangeListeners == iterating) {
+				iteratingGlobalValueChangeListeners = null;
+			}
 		}
 	}
 
