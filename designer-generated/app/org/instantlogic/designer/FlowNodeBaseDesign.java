@@ -17,7 +17,7 @@ public class FlowNodeBaseDesign extends Design {
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<FlowNodeBaseDesign, FlowDesign> owner
 		= createReverseRelationValue(org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.owner);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<FlowNodeBaseDesign, FlowDesign> getOwnerRelation() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<FlowNodeBaseDesign, FlowDesign> getOwnerRelationValue() {
 		return owner;
 	}
 
@@ -29,7 +29,7 @@ public class FlowNodeBaseDesign extends Design {
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<FlowNodeBaseDesign, FlowSourceDesign> incomingSources
 		= createReverseRelationValues(org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.incomingSources);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<FlowNodeBaseDesign, FlowSourceDesign> getIncomingSourcesRelation() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValues<FlowNodeBaseDesign, FlowSourceDesign> getIncomingSourcesRelationValue() {
 		return incomingSources;
 	}
 
@@ -41,7 +41,7 @@ public class FlowNodeBaseDesign extends Design {
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<FlowNodeBaseDesign, FlowEdgeDesign> outgoingEdges
 		= createReverseRelationValues(org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.outgoingEdges);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<FlowNodeBaseDesign, FlowEdgeDesign> getOutgoingEdgesRelation() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValues<FlowNodeBaseDesign, FlowEdgeDesign> getOutgoingEdgesRelationValue() {
 		return outgoingEdges;
 	}
 
@@ -53,7 +53,7 @@ public class FlowNodeBaseDesign extends Design {
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<FlowNodeBaseDesign, FlowEdgeDesign> incomingEdges
 		= createReverseRelationValues(org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.incomingEdges);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<FlowNodeBaseDesign, FlowEdgeDesign> getIncomingEdgesRelation() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValues<FlowNodeBaseDesign, FlowEdgeDesign> getIncomingEdgesRelationValue() {
 		return incomingEdges;
 	}
 

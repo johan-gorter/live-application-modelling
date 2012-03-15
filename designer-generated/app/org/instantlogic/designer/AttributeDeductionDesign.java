@@ -15,7 +15,7 @@ public class AttributeDeductionDesign extends DeductionDesign {
 	private final org.instantlogic.fabric.value.RelationValue<AttributeDeductionDesign, AttributeDesign> attribute
 		= createRelationValue(org.instantlogic.designer.entity.AttributeDeductionDesignEntity.attribute);
 		
-	public org.instantlogic.fabric.value.RelationValue<AttributeDeductionDesign, AttributeDesign> getAttributeRelation() {
+	public org.instantlogic.fabric.value.RelationValue<AttributeDeductionDesign, AttributeDesign> getAttributeRelationValue() {
 		return attribute;
 	}
 
@@ -23,8 +23,9 @@ public class AttributeDeductionDesign extends DeductionDesign {
 		return attribute.getValue();
 	}
 	
-	public void setAttribute(org.instantlogic.designer.AttributeDesign newValue) {
+	public AttributeDeductionDesign setAttribute(org.instantlogic.designer.AttributeDesign newValue) {
 		attribute.setValue(newValue);
+		return (AttributeDeductionDesign)this;
 	}
 
 

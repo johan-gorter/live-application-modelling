@@ -38,7 +38,7 @@ public class ConstantTextDesignEntity extends org.instantlogic.fabric.model.Enti
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.ConstantTextDesign, java.lang.String> get(org.instantlogic.designer.ConstantTextDesign instance) {
-				return instance.getUntranslatedAttribute();
+				return instance.getUntranslatedAttributeValue();
 			}
 		};
 	

@@ -38,7 +38,7 @@ public class FieldDesignEntity extends org.instantlogic.fabric.model.Entity<org.
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.FieldDesign, java.lang.Boolean> get(org.instantlogic.designer.FieldDesign instance) {
-				return instance.getRequiredAttribute();
+				return instance.getRequiredAttributeValue();
 			}
 		};
 	
@@ -49,7 +49,7 @@ public class FieldDesignEntity extends org.instantlogic.fabric.model.Entity<org.
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.FieldDesign, java.lang.Boolean> get(org.instantlogic.designer.FieldDesign instance) {
-				return instance.getReadOnlyAttribute();
+				return instance.getReadOnlyAttributeValue();
 			}
 		};
 	
@@ -63,7 +63,7 @@ public class FieldDesignEntity extends org.instantlogic.fabric.model.Entity<org.
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FieldDesign, org.instantlogic.designer.AttributeDesign> get(
 					org.instantlogic.designer.FieldDesign instance) {
-				return instance.getAttributeRelation();
+				return instance.getAttributeRelationValue();
 			}
 			
 		};

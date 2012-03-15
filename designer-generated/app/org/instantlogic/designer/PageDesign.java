@@ -15,7 +15,7 @@ public class PageDesign extends FlowNodeBaseDesign {
 	private final org.instantlogic.fabric.value.RelationValue<PageDesign, CompositePageFragmentDesign> content
 		= createRelationValue(org.instantlogic.designer.entity.PageDesignEntity.content);
 		
-	public org.instantlogic.fabric.value.RelationValue<PageDesign, CompositePageFragmentDesign> getContentRelation() {
+	public org.instantlogic.fabric.value.RelationValue<PageDesign, CompositePageFragmentDesign> getContentRelationValue() {
 		return content;
 	}
 
@@ -23,8 +23,9 @@ public class PageDesign extends FlowNodeBaseDesign {
 		return content.getValue();
 	}
 	
-	public void setContent(org.instantlogic.designer.CompositePageFragmentDesign newValue) {
+	public PageDesign setContent(org.instantlogic.designer.CompositePageFragmentDesign newValue) {
 		content.setValue(newValue);
+		return (PageDesign)this;
 	}
 
 

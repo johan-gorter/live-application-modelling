@@ -54,6 +54,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		
 		// Entity
 		EntityDesign entityDesign = createEntity("EntityDesign", design);
+		entityDesign.setIsCustomized(true);
 
 		// Attribute
 		EntityDesign attributeDesign = createEntity("AttributeDesign", design);
@@ -78,6 +79,9 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		EntityDesign selectedInstanceDeductionDesign = createEntity("SelectedInstanceDeductionDesign" , deductionDesign);
 		EntityDesign castInstanceDeductionDesign = createEntity("CastInstanceDeductionDesign" , deductionDesign);
 		EntityDesign attributeDeductionDesign = createEntity("AttributeDeductionDesign" , deductionDesign);
+		EntityDesign reverseRelationDeductionDesign = createEntity("ReverseRelationDeductionDesign", deductionDesign);
+		EntityDesign negationDeductionDesign = createEntity("NegationDeductionDesign", deductionDesign);
+		EntityDesign sumDeductionDesign = createEntity("SumDeductionDesign", deductionDesign);
 		
 		// Shared
 		EntityDesign pageFragmentHolder = createEntity("PageFragmentHolderDesign", design);
@@ -144,6 +148,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createRelation(deductionSchemeDesign, "output", RelationType.OneToZeroOrOne, "schemeOutput", deductionDesign);
 		createRelation(deductionDesign, "inputs", RelationType.ManyToMany, "outputs", deductionDesign);
 		createRelation(attributeDeductionDesign, "attribute", RelationType.ManyToZeroOrOne, "attributeInDeductions", attributeDesign);
+		createRelation(reverseRelationDeductionDesign, "relation", RelationType.ManyToZeroOrOne, "relationInDeductions", relationDesign);
 		createRelation(selectedInstanceDeductionDesign, "ofEntity", RelationType.ManyToZeroOrOne, "entityInSelectedInstanceDeductions", entityDesign);
 		createRelation(castInstanceDeductionDesign, "toEntity", RelationType.ManyToZeroOrOne, "entityInCastDeductions", entityDesign);
 		

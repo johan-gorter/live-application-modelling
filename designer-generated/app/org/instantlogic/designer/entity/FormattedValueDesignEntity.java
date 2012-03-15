@@ -41,7 +41,7 @@ public class FormattedValueDesignEntity extends org.instantlogic.fabric.model.En
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FormattedValueDesign, org.instantlogic.designer.DeductionSchemeDesign> get(
 					org.instantlogic.designer.FormattedValueDesign instance) {
-				return instance.getDeductionRelation();
+				return instance.getDeductionRelationValue();
 			}
 	
 			public boolean isOwner() {

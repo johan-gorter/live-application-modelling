@@ -20,6 +20,10 @@ public class Multi<T> implements Iterable<T> {
 		return readOnlyItems;
 	}
 	
+	public boolean contains(T item) {
+		return items.contains(item);
+	}
+	
 	public int size() {
 		return items.size();
 	}

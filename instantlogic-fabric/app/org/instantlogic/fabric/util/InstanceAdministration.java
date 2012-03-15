@@ -71,6 +71,7 @@ public class InstanceAdministration {
 
 	public Operation startOperation() {
 		Operation operation = new Operation(this, currentOperation);
+		currentOperation = operation;
 		operation.start();
 		return operation;
 	}

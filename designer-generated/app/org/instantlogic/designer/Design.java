@@ -17,12 +17,13 @@ public class Design extends org.instantlogic.fabric.Instance {
 		return name.getValue();
 	}
 
-	public org.instantlogic.fabric.value.AttributeValue<Design, java.lang.String> getNameAttribute() {
+	public org.instantlogic.fabric.value.AttributeValue<Design, java.lang.String> getNameAttributeValue() {
 		return name;
 	}
 
-	public void setName(java.lang.String newValue) {
+	public Design setName(java.lang.String newValue) {
 		name.setValue(newValue);
+		return (Design)this;
 	}
 	
 	
@@ -33,7 +34,7 @@ public class Design extends org.instantlogic.fabric.Instance {
 		return javaName.getValue();
 	}
 
-	public org.instantlogic.fabric.value.ReadOnlyAttributeValue<Design, java.lang.String> getJavaNameAttribute() {
+	public org.instantlogic.fabric.value.ReadOnlyAttributeValue<Design, java.lang.String> getJavaNameAttributeValue() {
 		return javaName;
 	}
 
@@ -45,12 +46,13 @@ public class Design extends org.instantlogic.fabric.Instance {
 		return isCustomized.getValue();
 	}
 
-	public org.instantlogic.fabric.value.AttributeValue<Design, java.lang.Boolean> getIsCustomizedAttribute() {
+	public org.instantlogic.fabric.value.AttributeValue<Design, java.lang.Boolean> getIsCustomizedAttributeValue() {
 		return isCustomized;
 	}
 
-	public void setIsCustomized(java.lang.Boolean newValue) {
+	public Design setIsCustomized(java.lang.Boolean newValue) {
 		isCustomized.setValue(newValue);
+		return (Design)this;
 	}
 	
 	

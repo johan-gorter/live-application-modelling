@@ -15,7 +15,7 @@ public class SubFlowDesign extends FlowNodeBaseDesign {
 	private final org.instantlogic.fabric.value.RelationValue<SubFlowDesign, FlowDesign> flow
 		= createRelationValue(org.instantlogic.designer.entity.SubFlowDesignEntity.flow);
 		
-	public org.instantlogic.fabric.value.RelationValue<SubFlowDesign, FlowDesign> getFlowRelation() {
+	public org.instantlogic.fabric.value.RelationValue<SubFlowDesign, FlowDesign> getFlowRelationValue() {
 		return flow;
 	}
 
@@ -23,8 +23,9 @@ public class SubFlowDesign extends FlowNodeBaseDesign {
 		return flow.getValue();
 	}
 	
-	public void setFlow(org.instantlogic.designer.FlowDesign newValue) {
+	public SubFlowDesign setFlow(org.instantlogic.designer.FlowDesign newValue) {
 		flow.setValue(newValue);
+		return (SubFlowDesign)this;
 	}
 
 

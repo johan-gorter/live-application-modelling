@@ -41,7 +41,7 @@ public class HeaderDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.HeaderDesign, org.instantlogic.designer.TextDesign> get(
 					org.instantlogic.designer.HeaderDesign instance) {
-				return instance.getTextRelation();
+				return instance.getTextRelationValue();
 			}
 	
 			public boolean isOwner() {

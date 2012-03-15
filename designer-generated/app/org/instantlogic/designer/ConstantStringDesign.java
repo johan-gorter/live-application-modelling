@@ -17,12 +17,13 @@ public class ConstantStringDesign extends StringProducerDesign {
 		return constant.getValue();
 	}
 
-	public org.instantlogic.fabric.value.AttributeValue<ConstantStringDesign, java.lang.String> getConstantAttribute() {
+	public org.instantlogic.fabric.value.AttributeValue<ConstantStringDesign, java.lang.String> getConstantAttributeValue() {
 		return constant;
 	}
 
-	public void setConstant(java.lang.String newValue) {
+	public ConstantStringDesign setConstant(java.lang.String newValue) {
 		constant.setValue(newValue);
+		return (ConstantStringDesign)this;
 	}
 	
 	

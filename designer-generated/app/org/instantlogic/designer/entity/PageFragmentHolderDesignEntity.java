@@ -41,7 +41,7 @@ public class PageFragmentHolderDesignEntity extends org.instantlogic.fabric.mode
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.PageFragmentHolderDesign, org.instantlogic.designer.PageFragmentDesign> get(
 					org.instantlogic.designer.PageFragmentHolderDesign instance) {
-				return instance.getPageFragmentRelation();
+				return instance.getPageFragmentRelationValue();
 			}
 	
 			public boolean isOwner() {
@@ -64,7 +64,7 @@ public class PageFragmentHolderDesignEntity extends org.instantlogic.fabric.mode
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.PageFragmentHolderDesign, org.instantlogic.designer.ApplicationDesign> get(
 					org.instantlogic.designer.PageFragmentHolderDesign instance) {
-				return instance.getSharedRelation();
+				return instance.getSharedRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -80,7 +80,7 @@ public class PageFragmentHolderDesignEntity extends org.instantlogic.fabric.mode
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.PageFragmentHolderDesign, org.instantlogic.designer.SharedFragmentDesign> get(
 					org.instantlogic.designer.PageFragmentHolderDesign instance) {
-				return instance.getUsagesRelation();
+				return instance.getUsagesRelationValue();
 			}
 	
 			public boolean isReverse() {

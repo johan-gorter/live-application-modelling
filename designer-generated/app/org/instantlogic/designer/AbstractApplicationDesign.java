@@ -17,12 +17,13 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 		return name.getValue();
 	}
 
-	public org.instantlogic.fabric.value.AttributeValue<ApplicationDesign, java.lang.String> getNameAttribute() {
+	public org.instantlogic.fabric.value.AttributeValue<ApplicationDesign, java.lang.String> getNameAttributeValue() {
 		return name;
 	}
 
-	public void setName(java.lang.String newValue) {
+	public ApplicationDesign setName(java.lang.String newValue) {
 		name.setValue(newValue);
+		return (ApplicationDesign)this;
 	}
 	
 	
@@ -33,12 +34,13 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 		return rootPackageName.getValue();
 	}
 
-	public org.instantlogic.fabric.value.AttributeValue<ApplicationDesign, java.lang.String> getRootPackageNameAttribute() {
+	public org.instantlogic.fabric.value.AttributeValue<ApplicationDesign, java.lang.String> getRootPackageNameAttributeValue() {
 		return rootPackageName;
 	}
 
-	public void setRootPackageName(java.lang.String newValue) {
+	public ApplicationDesign setRootPackageName(java.lang.String newValue) {
 		rootPackageName.setValue(newValue);
+		return (ApplicationDesign)this;
 	}
 	
 	
@@ -49,12 +51,13 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 		return sourcePath.getValue();
 	}
 
-	public org.instantlogic.fabric.value.AttributeValue<ApplicationDesign, java.lang.String> getSourcePathAttribute() {
+	public org.instantlogic.fabric.value.AttributeValue<ApplicationDesign, java.lang.String> getSourcePathAttributeValue() {
 		return sourcePath;
 	}
 
-	public void setSourcePath(java.lang.String newValue) {
+	public ApplicationDesign setSourcePath(java.lang.String newValue) {
 		sourcePath.setValue(newValue);
+		return (ApplicationDesign)this;
 	}
 	
 	
@@ -65,12 +68,13 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 		return isCustomized.getValue();
 	}
 
-	public org.instantlogic.fabric.value.AttributeValue<ApplicationDesign, java.lang.Boolean> getIsCustomizedAttribute() {
+	public org.instantlogic.fabric.value.AttributeValue<ApplicationDesign, java.lang.Boolean> getIsCustomizedAttributeValue() {
 		return isCustomized;
 	}
 
-	public void setIsCustomized(java.lang.Boolean newValue) {
+	public ApplicationDesign setIsCustomized(java.lang.Boolean newValue) {
 		isCustomized.setValue(newValue);
+		return (ApplicationDesign)this;
 	}
 	
 	
@@ -79,7 +83,7 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 	private final org.instantlogic.fabric.value.RelationValues<ApplicationDesign, EntityDesign> entities
 		= createRelationValues(org.instantlogic.designer.entity.ApplicationDesignEntity.entities);
 		
-	public org.instantlogic.fabric.value.RelationValues<ApplicationDesign, EntityDesign> getEntitiesRelation() {
+	public org.instantlogic.fabric.value.RelationValues<ApplicationDesign, EntityDesign> getEntitiesRelationValue() {
 		return entities;
 	}
 
@@ -87,27 +91,31 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 		return entities.getValue();
 	}
 	
-	public void addToEntities(EntityDesign item) {
+	public ApplicationDesign addToEntities(EntityDesign item) {
 		entities.addValue(item);
+		return (ApplicationDesign)this;
 	}
 	
-	public void addToEntities(EntityDesign item, int index) {
+	public ApplicationDesign addToEntities(EntityDesign item, int index) {
 		entities.insertValue(item, index);
+		return (ApplicationDesign)this;
 	}
 	
-	public void removeFromEntities(EntityDesign item) {
+	public ApplicationDesign removeFromEntities(EntityDesign item) {
 		entities.removeValue(item);
+		return (ApplicationDesign)this;
 	}
 	
-	public void removeFromEntities(int index) {
+	public ApplicationDesign removeFromEntities(int index) {
 		entities.removeValue(index);
+		return (ApplicationDesign)this;
 	}
 	
 	
 	private final org.instantlogic.fabric.value.RelationValue<ApplicationDesign, EntityDesign> caseEntity
 		= createRelationValue(org.instantlogic.designer.entity.ApplicationDesignEntity.caseEntity);
 		
-	public org.instantlogic.fabric.value.RelationValue<ApplicationDesign, EntityDesign> getCaseEntityRelation() {
+	public org.instantlogic.fabric.value.RelationValue<ApplicationDesign, EntityDesign> getCaseEntityRelationValue() {
 		return caseEntity;
 	}
 
@@ -115,15 +123,16 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 		return caseEntity.getValue();
 	}
 	
-	public void setCaseEntity(org.instantlogic.designer.EntityDesign newValue) {
+	public ApplicationDesign setCaseEntity(org.instantlogic.designer.EntityDesign newValue) {
 		caseEntity.setValue(newValue);
+		return (ApplicationDesign)this;
 	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValues<ApplicationDesign, FlowDesign> flows
 		= createRelationValues(org.instantlogic.designer.entity.ApplicationDesignEntity.flows);
 		
-	public org.instantlogic.fabric.value.RelationValues<ApplicationDesign, FlowDesign> getFlowsRelation() {
+	public org.instantlogic.fabric.value.RelationValues<ApplicationDesign, FlowDesign> getFlowsRelationValue() {
 		return flows;
 	}
 
@@ -131,27 +140,31 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 		return flows.getValue();
 	}
 	
-	public void addToFlows(FlowDesign item) {
+	public ApplicationDesign addToFlows(FlowDesign item) {
 		flows.addValue(item);
+		return (ApplicationDesign)this;
 	}
 	
-	public void addToFlows(FlowDesign item, int index) {
+	public ApplicationDesign addToFlows(FlowDesign item, int index) {
 		flows.insertValue(item, index);
+		return (ApplicationDesign)this;
 	}
 	
-	public void removeFromFlows(FlowDesign item) {
+	public ApplicationDesign removeFromFlows(FlowDesign item) {
 		flows.removeValue(item);
+		return (ApplicationDesign)this;
 	}
 	
-	public void removeFromFlows(int index) {
+	public ApplicationDesign removeFromFlows(int index) {
 		flows.removeValue(index);
+		return (ApplicationDesign)this;
 	}
 	
 	
 	private final org.instantlogic.fabric.value.RelationValues<ApplicationDesign, EventDesign> events
 		= createRelationValues(org.instantlogic.designer.entity.ApplicationDesignEntity.events);
 		
-	public org.instantlogic.fabric.value.RelationValues<ApplicationDesign, EventDesign> getEventsRelation() {
+	public org.instantlogic.fabric.value.RelationValues<ApplicationDesign, EventDesign> getEventsRelationValue() {
 		return events;
 	}
 
@@ -159,27 +172,31 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 		return events.getValue();
 	}
 	
-	public void addToEvents(EventDesign item) {
+	public ApplicationDesign addToEvents(EventDesign item) {
 		events.addValue(item);
+		return (ApplicationDesign)this;
 	}
 	
-	public void addToEvents(EventDesign item, int index) {
+	public ApplicationDesign addToEvents(EventDesign item, int index) {
 		events.insertValue(item, index);
+		return (ApplicationDesign)this;
 	}
 	
-	public void removeFromEvents(EventDesign item) {
+	public ApplicationDesign removeFromEvents(EventDesign item) {
 		events.removeValue(item);
+		return (ApplicationDesign)this;
 	}
 	
-	public void removeFromEvents(int index) {
+	public ApplicationDesign removeFromEvents(int index) {
 		events.removeValue(index);
+		return (ApplicationDesign)this;
 	}
 	
 	
 	private final org.instantlogic.fabric.value.RelationValues<ApplicationDesign, FlowDesign> exposedFlows
 		= createRelationValues(org.instantlogic.designer.entity.ApplicationDesignEntity.exposedFlows);
 		
-	public org.instantlogic.fabric.value.RelationValues<ApplicationDesign, FlowDesign> getExposedFlowsRelation() {
+	public org.instantlogic.fabric.value.RelationValues<ApplicationDesign, FlowDesign> getExposedFlowsRelationValue() {
 		return exposedFlows;
 	}
 
@@ -187,27 +204,31 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 		return exposedFlows.getValue();
 	}
 	
-	public void addToExposedFlows(FlowDesign item) {
+	public ApplicationDesign addToExposedFlows(FlowDesign item) {
 		exposedFlows.addValue(item);
+		return (ApplicationDesign)this;
 	}
 	
-	public void addToExposedFlows(FlowDesign item, int index) {
+	public ApplicationDesign addToExposedFlows(FlowDesign item, int index) {
 		exposedFlows.insertValue(item, index);
+		return (ApplicationDesign)this;
 	}
 	
-	public void removeFromExposedFlows(FlowDesign item) {
+	public ApplicationDesign removeFromExposedFlows(FlowDesign item) {
 		exposedFlows.removeValue(item);
+		return (ApplicationDesign)this;
 	}
 	
-	public void removeFromExposedFlows(int index) {
+	public ApplicationDesign removeFromExposedFlows(int index) {
 		exposedFlows.removeValue(index);
+		return (ApplicationDesign)this;
 	}
 	
 	
 	private final org.instantlogic.fabric.value.RelationValues<ApplicationDesign, PageFragmentHolderDesign> sharedPageFragments
 		= createRelationValues(org.instantlogic.designer.entity.ApplicationDesignEntity.sharedPageFragments);
 		
-	public org.instantlogic.fabric.value.RelationValues<ApplicationDesign, PageFragmentHolderDesign> getSharedPageFragmentsRelation() {
+	public org.instantlogic.fabric.value.RelationValues<ApplicationDesign, PageFragmentHolderDesign> getSharedPageFragmentsRelationValue() {
 		return sharedPageFragments;
 	}
 
@@ -215,20 +236,24 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 		return sharedPageFragments.getValue();
 	}
 	
-	public void addToSharedPageFragments(PageFragmentHolderDesign item) {
+	public ApplicationDesign addToSharedPageFragments(PageFragmentHolderDesign item) {
 		sharedPageFragments.addValue(item);
+		return (ApplicationDesign)this;
 	}
 	
-	public void addToSharedPageFragments(PageFragmentHolderDesign item, int index) {
+	public ApplicationDesign addToSharedPageFragments(PageFragmentHolderDesign item, int index) {
 		sharedPageFragments.insertValue(item, index);
+		return (ApplicationDesign)this;
 	}
 	
-	public void removeFromSharedPageFragments(PageFragmentHolderDesign item) {
+	public ApplicationDesign removeFromSharedPageFragments(PageFragmentHolderDesign item) {
 		sharedPageFragments.removeValue(item);
+		return (ApplicationDesign)this;
 	}
 	
-	public void removeFromSharedPageFragments(int index) {
+	public ApplicationDesign removeFromSharedPageFragments(int index) {
 		sharedPageFragments.removeValue(index);
+		return (ApplicationDesign)this;
 	}
 	
 

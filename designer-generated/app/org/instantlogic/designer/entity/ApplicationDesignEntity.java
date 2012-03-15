@@ -34,7 +34,7 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.ApplicationDesign, java.lang.String> get(org.instantlogic.designer.ApplicationDesign instance) {
-				return instance.getNameAttribute();
+				return instance.getNameAttributeValue();
 			}
 		};
 	
@@ -45,7 +45,7 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.ApplicationDesign, java.lang.String> get(org.instantlogic.designer.ApplicationDesign instance) {
-				return instance.getRootPackageNameAttribute();
+				return instance.getRootPackageNameAttributeValue();
 			}
 		};
 	
@@ -56,7 +56,7 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.ApplicationDesign, java.lang.String> get(org.instantlogic.designer.ApplicationDesign instance) {
-				return instance.getSourcePathAttribute();
+				return instance.getSourcePathAttributeValue();
 			}
 		};
 	
@@ -67,7 +67,7 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.ApplicationDesign, java.lang.Boolean> get(org.instantlogic.designer.ApplicationDesign instance) {
-				return instance.getIsCustomizedAttribute();
+				return instance.getIsCustomizedAttributeValue();
 			}
 		};
 	
@@ -81,7 +81,7 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.ApplicationDesign, org.instantlogic.designer.EntityDesign> get(
 					org.instantlogic.designer.ApplicationDesign instance) {
-				return instance.getEntitiesRelation();
+				return instance.getEntitiesRelationValue();
 			}
 	
 			public boolean isOwner() {
@@ -102,7 +102,7 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.ApplicationDesign, org.instantlogic.designer.EntityDesign> get(
 					org.instantlogic.designer.ApplicationDesign instance) {
-				return instance.getCaseEntityRelation();
+				return instance.getCaseEntityRelationValue();
 			}
 			
 		};
@@ -115,7 +115,7 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.ApplicationDesign, org.instantlogic.designer.FlowDesign> get(
 					org.instantlogic.designer.ApplicationDesign instance) {
-				return instance.getFlowsRelation();
+				return instance.getFlowsRelationValue();
 			}
 	
 			public boolean isOwner() {
@@ -136,7 +136,7 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.ApplicationDesign, org.instantlogic.designer.EventDesign> get(
 					org.instantlogic.designer.ApplicationDesign instance) {
-				return instance.getEventsRelation();
+				return instance.getEventsRelationValue();
 			}
 	
 			public boolean isOwner() {
@@ -157,7 +157,7 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.ApplicationDesign, org.instantlogic.designer.FlowDesign> get(
 					org.instantlogic.designer.ApplicationDesign instance) {
-				return instance.getExposedFlowsRelation();
+				return instance.getExposedFlowsRelationValue();
 			}
 	
 			public boolean isMultivalue() {
@@ -174,7 +174,7 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.ApplicationDesign, org.instantlogic.designer.PageFragmentHolderDesign> get(
 					org.instantlogic.designer.ApplicationDesign instance) {
-				return instance.getSharedPageFragmentsRelation();
+				return instance.getSharedPageFragmentsRelationValue();
 			}
 	
 			public boolean isOwner() {

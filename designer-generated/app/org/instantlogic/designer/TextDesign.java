@@ -17,7 +17,7 @@ public class TextDesign extends PageFragmentDesign {
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, AttributeDesign> questionOnAttribute
 		= createReverseRelationValue(org.instantlogic.designer.entity.TextDesignEntity.questionOnAttribute);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, AttributeDesign> getQuestionOnAttributeRelation() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, AttributeDesign> getQuestionOnAttributeRelationValue() {
 		return questionOnAttribute;
 	}
 
@@ -29,7 +29,7 @@ public class TextDesign extends PageFragmentDesign {
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, AttributeDesign> explanationOnAttribute
 		= createReverseRelationValue(org.instantlogic.designer.entity.TextDesignEntity.explanationOnAttribute);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, AttributeDesign> getExplanationOnAttributeRelation() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, AttributeDesign> getExplanationOnAttributeRelationValue() {
 		return explanationOnAttribute;
 	}
 
@@ -41,7 +41,7 @@ public class TextDesign extends PageFragmentDesign {
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, DomainEntryDesign> displayOnDomainEntry
 		= createReverseRelationValue(org.instantlogic.designer.entity.TextDesignEntity.displayOnDomainEntry);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, DomainEntryDesign> getDisplayOnDomainEntryRelation() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, DomainEntryDesign> getDisplayOnDomainEntryRelationValue() {
 		return displayOnDomainEntry;
 	}
 
@@ -53,7 +53,7 @@ public class TextDesign extends PageFragmentDesign {
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, HeaderDesign> textOnHeader
 		= createReverseRelationValue(org.instantlogic.designer.entity.TextDesignEntity.textOnHeader);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, HeaderDesign> getTextOnHeaderRelation() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, HeaderDesign> getTextOnHeaderRelationValue() {
 		return textOnHeader;
 	}
 
@@ -65,7 +65,7 @@ public class TextDesign extends PageFragmentDesign {
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, LinkDesign> captionOnButton
 		= createReverseRelationValue(org.instantlogic.designer.entity.TextDesignEntity.captionOnButton);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, LinkDesign> getCaptionOnButtonRelation() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, LinkDesign> getCaptionOnButtonRelationValue() {
 		return captionOnButton;
 	}
 

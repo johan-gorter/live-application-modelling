@@ -5,7 +5,6 @@ import org.instantlogic.fabric.model.Relation;
 import org.instantlogic.fabric.util.Operation;
 import org.instantlogic.fabric.util.ValueAndLevel;
 import org.instantlogic.fabric.util.ValueChangeEvent;
-import org.instantlogic.fabric.util.ValueChangeEvent.MultiValueUpdateType;
 import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
 import org.instantlogic.fabric.value.RelationValue;
 
@@ -23,20 +22,22 @@ public class RelationValueImpl<I extends Instance, To extends Instance>
 		this.model = model;
 	}
 	
-	public To getValue() {
-		To result = super.getValue();
-		if (result == null && model.isAutoCreate()) {
+	@Override
+	public ValueAndLevel<To> getValueAndLevel() {
+		ValueAndLevel<To> result = super.getValueAndLevel();
+		if (!result.isConclusive() && model.isAutoCreate()) {
 			// 1 on 1 aggregation, is now silently lazily created
-			result = (To) model.createTo(forInstance);
-			setStoredValue(result);
+			To resultValue = (To) model.createTo(forInstance);
+			setStoredValue(resultValue);
 			invalidateCachedValue();
-			ReadOnlyAttributeValue<To, ? extends Object> newReverseRelationValue = model.getReverseRelation().get(result);
+			ReadOnlyAttributeValue<To, ? extends Object> newReverseRelationValue = model.getReverseRelation().get(resultValue);
 			if (getModel().getReverseRelation().isMultivalue()) {
 				((ReverseRelationValuesImpl)newReverseRelationValue).addReverse(forInstance, null);
 			} else {
 				((ReverseRelationValueImpl)newReverseRelationValue).setReverse(forInstance, model.isOwner(), null);
 			}
-			forInstance.adopt(result);
+			forInstance.adopt(resultValue);
+			return ValueAndLevel.stored(resultValue);
 		}
 		return result;
 	}

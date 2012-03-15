@@ -15,7 +15,7 @@ public class LinkDesign extends PageFragmentDesign {
 	private final org.instantlogic.fabric.value.RelationValue<LinkDesign, TextDesign> caption
 		= createRelationValue(org.instantlogic.designer.entity.LinkDesignEntity.caption);
 		
-	public org.instantlogic.fabric.value.RelationValue<LinkDesign, TextDesign> getCaptionRelation() {
+	public org.instantlogic.fabric.value.RelationValue<LinkDesign, TextDesign> getCaptionRelationValue() {
 		return caption;
 	}
 
@@ -23,15 +23,16 @@ public class LinkDesign extends PageFragmentDesign {
 		return caption.getValue();
 	}
 	
-	public void setCaption(org.instantlogic.designer.TextDesign newValue) {
+	public LinkDesign setCaption(org.instantlogic.designer.TextDesign newValue) {
 		caption.setValue(newValue);
+		return (LinkDesign)this;
 	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValue<LinkDesign, EventDesign> event
 		= createRelationValue(org.instantlogic.designer.entity.LinkDesignEntity.event);
 		
-	public org.instantlogic.fabric.value.RelationValue<LinkDesign, EventDesign> getEventRelation() {
+	public org.instantlogic.fabric.value.RelationValue<LinkDesign, EventDesign> getEventRelationValue() {
 		return event;
 	}
 
@@ -39,8 +40,9 @@ public class LinkDesign extends PageFragmentDesign {
 		return event.getValue();
 	}
 	
-	public void setEvent(org.instantlogic.designer.EventDesign newValue) {
+	public LinkDesign setEvent(org.instantlogic.designer.EventDesign newValue) {
 		event.setValue(newValue);
+		return (LinkDesign)this;
 	}
 
 

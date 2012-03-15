@@ -13,6 +13,7 @@ public class ValueChangeEvent {
 	private ValueChangeEvent undoEvent; // Created on demand
 	private final Operation operation;
 	private final ValueAndLevel<? extends Object> oldValue;
+	private ValueAndLevel<? extends Object> cachedNewValue;
 	private final ReadOnlyAttributeValue<?,?> attributeValue;
 	private Object oldStoredValue;
 	private Object newStoredValue;
@@ -87,13 +88,16 @@ public class ValueChangeEvent {
 	}
 	
 	/**
-	 * Use with caution, calling getNewValue can cause loops and inefficiencies.
+	 * Use with caution, calling getNewValue can cause loops and inefficiencies. 
+	 * Be prepared to receive a temporary value that is not consistent. In this case more events will be fired.
 	 * 
-	 * @param deduceIfNecessary
-	 * @return
+	 * @return the new value
 	 */
 	public ValueAndLevel<? extends Object> getNewValue() {
-		return attributeValue.getValueAndLevel();
+		if (cachedNewValue == null) {
+			cachedNewValue = attributeValue.getValueAndLevel(); 
+		}
+		return cachedNewValue;
 	}
 
 	public Object getNewStoredValue() {
@@ -105,7 +109,7 @@ public class ValueChangeEvent {
 	}
 	
 	public boolean storedValueChanged() {
-		return newStoredValue!=oldStoredValue;
+		return newStoredValue!=oldStoredValue || (multiValueUpdateType!=null && oldValue.getValueLevel()==ValueLevel.STORED);
 	}
 
 	@Override
@@ -127,7 +131,7 @@ public class ValueChangeEvent {
 
 	public ValueChangeEvent getUndoEvent() {
 		if (undoEvent==null) {
-			undoEvent = new ValueChangeEvent(this, this.getNewValue());
+			undoEvent = new ValueChangeEvent(this, this.cachedNewValue);
 		}
 		return undoEvent;
 	}

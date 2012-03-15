@@ -39,7 +39,7 @@ public class StringProducerDesignEntity extends org.instantlogic.fabric.model.En
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.StringProducerDesign, org.instantlogic.designer.TemplatedTextDesign> get(
 					org.instantlogic.designer.StringProducerDesign instance) {
-				return instance.getUntranslatedInTemplateRelation();
+				return instance.getUntranslatedInTemplateRelationValue();
 			}
 	
 			public boolean isReverse() {

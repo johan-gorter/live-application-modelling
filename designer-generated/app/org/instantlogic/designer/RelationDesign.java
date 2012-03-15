@@ -17,12 +17,13 @@ public class RelationDesign extends AttributeDesign {
 		return owner.getValue();
 	}
 
-	public org.instantlogic.fabric.value.AttributeValue<RelationDesign, java.lang.Boolean> getOwnerAttribute() {
+	public org.instantlogic.fabric.value.AttributeValue<RelationDesign, java.lang.Boolean> getOwnerAttributeValue() {
 		return owner;
 	}
 
-	public void setOwner(java.lang.Boolean newValue) {
+	public RelationDesign setOwner(java.lang.Boolean newValue) {
 		owner.setValue(newValue);
+		return (RelationDesign)this;
 	}
 	
 	
@@ -33,12 +34,13 @@ public class RelationDesign extends AttributeDesign {
 		return autoCreate.getValue();
 	}
 
-	public org.instantlogic.fabric.value.AttributeValue<RelationDesign, java.lang.Boolean> getAutoCreateAttribute() {
+	public org.instantlogic.fabric.value.AttributeValue<RelationDesign, java.lang.Boolean> getAutoCreateAttributeValue() {
 		return autoCreate;
 	}
 
-	public void setAutoCreate(java.lang.Boolean newValue) {
+	public RelationDesign setAutoCreate(java.lang.Boolean newValue) {
 		autoCreate.setValue(newValue);
+		return (RelationDesign)this;
 	}
 	
 	
@@ -49,12 +51,13 @@ public class RelationDesign extends AttributeDesign {
 		return reverseMultivalue.getValue();
 	}
 
-	public org.instantlogic.fabric.value.AttributeValue<RelationDesign, java.lang.Boolean> getReverseMultivalueAttribute() {
+	public org.instantlogic.fabric.value.AttributeValue<RelationDesign, java.lang.Boolean> getReverseMultivalueAttributeValue() {
 		return reverseMultivalue;
 	}
 
-	public void setReverseMultivalue(java.lang.Boolean newValue) {
+	public RelationDesign setReverseMultivalue(java.lang.Boolean newValue) {
 		reverseMultivalue.setValue(newValue);
+		return (RelationDesign)this;
 	}
 	
 	
@@ -65,12 +68,13 @@ public class RelationDesign extends AttributeDesign {
 		return reverseName.getValue();
 	}
 
-	public org.instantlogic.fabric.value.AttributeValue<RelationDesign, java.lang.String> getReverseNameAttribute() {
+	public org.instantlogic.fabric.value.AttributeValue<RelationDesign, java.lang.String> getReverseNameAttributeValue() {
 		return reverseName;
 	}
 
-	public void setReverseName(java.lang.String newValue) {
+	public RelationDesign setReverseName(java.lang.String newValue) {
 		reverseName.setValue(newValue);
+		return (RelationDesign)this;
 	}
 	
 	
@@ -79,7 +83,7 @@ public class RelationDesign extends AttributeDesign {
 	private final org.instantlogic.fabric.value.RelationValue<RelationDesign, EntityDesign> to
 		= createRelationValue(org.instantlogic.designer.entity.RelationDesignEntity.to);
 		
-	public org.instantlogic.fabric.value.RelationValue<RelationDesign, EntityDesign> getToRelation() {
+	public org.instantlogic.fabric.value.RelationValue<RelationDesign, EntityDesign> getToRelationValue() {
 		return to;
 	}
 
@@ -87,8 +91,9 @@ public class RelationDesign extends AttributeDesign {
 		return to.getValue();
 	}
 	
-	public void setTo(org.instantlogic.designer.EntityDesign newValue) {
+	public RelationDesign setTo(org.instantlogic.designer.EntityDesign newValue) {
 		to.setValue(newValue);
+		return (RelationDesign)this;
 	}
 
 
@@ -97,12 +102,24 @@ public class RelationDesign extends AttributeDesign {
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<RelationDesign, EntityDesign> from
 		= createReverseRelationValue(org.instantlogic.designer.entity.RelationDesignEntity.from);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<RelationDesign, EntityDesign> getFromRelation() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<RelationDesign, EntityDesign> getFromRelationValue() {
 		return from;
 	}
 
 	public org.instantlogic.designer.EntityDesign getFrom() {
 		return from.getValue();
+	}
+
+	
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<RelationDesign, ReverseRelationDeductionDesign> relationInDeductions
+		= createReverseRelationValues(org.instantlogic.designer.entity.RelationDesignEntity.relationInDeductions);
+
+	public org.instantlogic.fabric.value.ReadOnlyRelationValues<RelationDesign, ReverseRelationDeductionDesign> getRelationInDeductionsRelationValue() {
+		return relationInDeductions;
+	}
+
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.ReverseRelationDeductionDesign> getRelationInDeductions() {
+		return relationInDeductions.getValue();
 	}
 
 

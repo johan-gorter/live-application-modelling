@@ -15,7 +15,7 @@ public class PageFragmentHolderDesign extends Design {
 	private final org.instantlogic.fabric.value.RelationValue<PageFragmentHolderDesign, PageFragmentDesign> pageFragment
 		= createRelationValue(org.instantlogic.designer.entity.PageFragmentHolderDesignEntity.pageFragment);
 		
-	public org.instantlogic.fabric.value.RelationValue<PageFragmentHolderDesign, PageFragmentDesign> getPageFragmentRelation() {
+	public org.instantlogic.fabric.value.RelationValue<PageFragmentHolderDesign, PageFragmentDesign> getPageFragmentRelationValue() {
 		return pageFragment;
 	}
 
@@ -23,8 +23,9 @@ public class PageFragmentHolderDesign extends Design {
 		return pageFragment.getValue();
 	}
 	
-	public void setPageFragment(org.instantlogic.designer.PageFragmentDesign newValue) {
+	public PageFragmentHolderDesign setPageFragment(org.instantlogic.designer.PageFragmentDesign newValue) {
 		pageFragment.setValue(newValue);
+		return (PageFragmentHolderDesign)this;
 	}
 
 
@@ -33,7 +34,7 @@ public class PageFragmentHolderDesign extends Design {
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<PageFragmentHolderDesign, ApplicationDesign> shared
 		= createReverseRelationValue(org.instantlogic.designer.entity.PageFragmentHolderDesignEntity.shared);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<PageFragmentHolderDesign, ApplicationDesign> getSharedRelation() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<PageFragmentHolderDesign, ApplicationDesign> getSharedRelationValue() {
 		return shared;
 	}
 
@@ -45,7 +46,7 @@ public class PageFragmentHolderDesign extends Design {
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<PageFragmentHolderDesign, SharedFragmentDesign> usages
 		= createReverseRelationValues(org.instantlogic.designer.entity.PageFragmentHolderDesignEntity.usages);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<PageFragmentHolderDesign, SharedFragmentDesign> getUsagesRelation() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValues<PageFragmentHolderDesign, SharedFragmentDesign> getUsagesRelationValue() {
 		return usages;
 	}
 

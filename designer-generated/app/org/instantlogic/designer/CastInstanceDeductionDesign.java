@@ -15,7 +15,7 @@ public class CastInstanceDeductionDesign extends DeductionDesign {
 	private final org.instantlogic.fabric.value.RelationValue<CastInstanceDeductionDesign, EntityDesign> toEntity
 		= createRelationValue(org.instantlogic.designer.entity.CastInstanceDeductionDesignEntity.toEntity);
 		
-	public org.instantlogic.fabric.value.RelationValue<CastInstanceDeductionDesign, EntityDesign> getToEntityRelation() {
+	public org.instantlogic.fabric.value.RelationValue<CastInstanceDeductionDesign, EntityDesign> getToEntityRelationValue() {
 		return toEntity;
 	}
 
@@ -23,8 +23,9 @@ public class CastInstanceDeductionDesign extends DeductionDesign {
 		return toEntity.getValue();
 	}
 	
-	public void setToEntity(org.instantlogic.designer.EntityDesign newValue) {
+	public CastInstanceDeductionDesign setToEntity(org.instantlogic.designer.EntityDesign newValue) {
 		toEntity.setValue(newValue);
+		return (CastInstanceDeductionDesign)this;
 	}
 
 

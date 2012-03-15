@@ -12,10 +12,6 @@ public abstract class CompositeController extends Controller {
 		subControllers.add(controller);
 	}
 	
-	public void removeSubControllers() {
-		subControllers.clear();
-	}
-	
 	@Override
 	public void close() {
 		for (Controller subController : subControllers) {

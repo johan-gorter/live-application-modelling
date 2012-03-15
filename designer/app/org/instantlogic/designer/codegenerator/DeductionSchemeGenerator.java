@@ -4,7 +4,9 @@ package org.instantlogic.designer.codegenerator;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.instantlogic.designer.ApplicationDesign;
 import org.instantlogic.designer.AttributeDeductionDesign;
+import org.instantlogic.designer.ReverseRelationDeductionDesign;
 import org.instantlogic.designer.AttributeDesign;
 import org.instantlogic.designer.CastInstanceDeductionDesign;
 import org.instantlogic.designer.DeductionDesign;
@@ -43,29 +45,37 @@ public class DeductionSchemeGenerator {
 	private List<DeductionDesign> deductionDesigns = new ArrayList<DeductionDesign>();
 	private List<DeductionClassModel> deductions = new ArrayList<DeductionClassModel>();
 	
-	public DeductionSchemeGenerator(DeductionSchemeDesign deductionSchemeDesign, int index) {
+	public DeductionSchemeGenerator(String rootPackageName, DeductionSchemeDesign deductionSchemeDesign, int index) {
 		fillDeductions(deductionSchemeDesign.getOutput());
 		int deductionIndex = 0;
-		for (DeductionDesign design : deductionDesigns) {
+		for (DeductionDesign deduction : deductionDesigns) {
 			DeductionClassModel classModel = new DeductionClassModel();
 			classModel.index = deductionIndex++;
-			classModel.type = design.getInstanceEntity().getName();
-			classModel.type = classModel.type.substring(0, classModel.type.length()-6);
-			classModel.customization = design.getCustomization();
-			classModel.resultType = design.getClassName();
-			if (design instanceof SelectedInstanceDeductionDesign) {
-				String name = ((SelectedInstanceDeductionDesign)design).getInstanceEntity().getName();
-				classModel.parameters.add(name+"Entity.INSTANCE");
-			} else if (design instanceof AttributeDeductionDesign) {
-				AttributeDesign attribute = ((AttributeDeductionDesign)design).getAttribute(); 
-				String name = attribute.getName();
-				String entityName = (attribute instanceof RelationDesign)?((RelationDesign)attribute).getFrom().getName():attribute.getInstanceEntity().getName();
-				classModel.parameters.add(entityName+"Entity."+name);
-			} else if (design instanceof CastInstanceDeductionDesign) {
-				String name = ((CastInstanceDeductionDesign)design).getInstanceEntity().getName();
-				classModel.parameters.add(name+"Entity.INSTANCE");
+			classModel.type = deduction.getInstanceEntity().getName();
+			classModel.type = "org.instantlogic.fabric.deduction."+classModel.type.substring(0, classModel.type.length()-6); // leave Design suffix off
+			classModel.customization = deduction.getCustomization();
+			if (deduction.getClassName()==null) {
+				throw new RuntimeException("Resulting classname was not specified for deduction "+deduction);
 			}
-			for (DeductionDesign input : design.getInputs()) {
+			classModel.resultType = deduction.getClassName();
+			if (deduction instanceof SelectedInstanceDeductionDesign) {
+				String name = ((SelectedInstanceDeductionDesign)deduction).getOfEntity().getName();
+				classModel.parameters.add(rootPackageName+".entity."+name+"Entity.INSTANCE");
+			} else if (deduction instanceof AttributeDeductionDesign) {
+				AttributeDesign attribute = ((AttributeDeductionDesign)deduction).getAttribute(); 
+				String name = attribute.getName();
+				String entityName = (attribute instanceof RelationDesign)?((RelationDesign)attribute).getFrom().getName():attribute.getBelongsToEntity().getName();
+				classModel.parameters.add(rootPackageName+".entity."+entityName+"Entity."+name);
+			} else if (deduction instanceof ReverseRelationDeductionDesign) {
+				RelationDesign relation = ((ReverseRelationDeductionDesign)deduction).getRelation(); 
+				String name = relation.getName();
+				String entityName = relation.getFrom().getName();
+				classModel.parameters.add(rootPackageName+".entity."+entityName+"Entity."+name);
+			} else if (deduction instanceof CastInstanceDeductionDesign) {
+				String name = ((CastInstanceDeductionDesign)deduction).getToEntity().getName();
+				classModel.parameters.add(rootPackageName+".entity."+name+"Entity.INSTANCE");
+			}
+			for (DeductionDesign input : deduction.getInputs()) {
 				classModel.parameters.add("d"+deductionDesigns.indexOf(input));
 			}
 			deductions.add(classModel);

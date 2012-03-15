@@ -37,7 +37,7 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionDesign> get(
 					org.instantlogic.designer.DeductionSchemeDesign instance) {
-				return instance.getDeductionsRelation();
+				return instance.getDeductionsRelationValue();
 			}
 	
 			public boolean isOwner() {
@@ -58,7 +58,7 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionDesign> get(
 					org.instantlogic.designer.DeductionSchemeDesign instance) {
-				return instance.getOutputRelation();
+				return instance.getOutputRelationValue();
 			}
 			
 		};
@@ -73,7 +73,7 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.AttributeDesign> get(
 					org.instantlogic.designer.DeductionSchemeDesign instance) {
-				return instance.getRelevanceOfAttributeRelation();
+				return instance.getRelevanceOfAttributeRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -89,7 +89,7 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.AttributeDesign> get(
 					org.instantlogic.designer.DeductionSchemeDesign instance) {
-				return instance.getRuleOfAttributeRelation();
+				return instance.getRuleOfAttributeRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -105,7 +105,7 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.AttributeDesign> get(
 					org.instantlogic.designer.DeductionSchemeDesign instance) {
-				return instance.getDefaultOfAttributeRelation();
+				return instance.getDefaultOfAttributeRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -121,7 +121,7 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.FormattedValueDesign> get(
 					org.instantlogic.designer.DeductionSchemeDesign instance) {
-				return instance.getTemplatedTextRelation();
+				return instance.getTemplatedTextRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -137,7 +137,7 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.SelectDesign> get(
 					org.instantlogic.designer.DeductionSchemeDesign instance) {
-				return instance.getSelectRelation();
+				return instance.getSelectRelationValue();
 			}
 	
 			public boolean isReverse() {

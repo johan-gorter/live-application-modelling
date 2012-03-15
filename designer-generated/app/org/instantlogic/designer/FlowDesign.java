@@ -15,7 +15,7 @@ public class FlowDesign extends Design {
 	private final org.instantlogic.fabric.value.RelationValues<FlowDesign, FlowSourceDesign> sources
 		= createRelationValues(org.instantlogic.designer.entity.FlowDesignEntity.sources);
 		
-	public org.instantlogic.fabric.value.RelationValues<FlowDesign, FlowSourceDesign> getSourcesRelation() {
+	public org.instantlogic.fabric.value.RelationValues<FlowDesign, FlowSourceDesign> getSourcesRelationValue() {
 		return sources;
 	}
 
@@ -23,27 +23,31 @@ public class FlowDesign extends Design {
 		return sources.getValue();
 	}
 	
-	public void addToSources(FlowSourceDesign item) {
+	public FlowDesign addToSources(FlowSourceDesign item) {
 		sources.addValue(item);
+		return (FlowDesign)this;
 	}
 	
-	public void addToSources(FlowSourceDesign item, int index) {
+	public FlowDesign addToSources(FlowSourceDesign item, int index) {
 		sources.insertValue(item, index);
+		return (FlowDesign)this;
 	}
 	
-	public void removeFromSources(FlowSourceDesign item) {
+	public FlowDesign removeFromSources(FlowSourceDesign item) {
 		sources.removeValue(item);
+		return (FlowDesign)this;
 	}
 	
-	public void removeFromSources(int index) {
+	public FlowDesign removeFromSources(int index) {
 		sources.removeValue(index);
+		return (FlowDesign)this;
 	}
 	
 	
 	private final org.instantlogic.fabric.value.RelationValues<FlowDesign, FlowNodeBaseDesign> nodes
 		= createRelationValues(org.instantlogic.designer.entity.FlowDesignEntity.nodes);
 		
-	public org.instantlogic.fabric.value.RelationValues<FlowDesign, FlowNodeBaseDesign> getNodesRelation() {
+	public org.instantlogic.fabric.value.RelationValues<FlowDesign, FlowNodeBaseDesign> getNodesRelationValue() {
 		return nodes;
 	}
 
@@ -51,27 +55,31 @@ public class FlowDesign extends Design {
 		return nodes.getValue();
 	}
 	
-	public void addToNodes(FlowNodeBaseDesign item) {
+	public FlowDesign addToNodes(FlowNodeBaseDesign item) {
 		nodes.addValue(item);
+		return (FlowDesign)this;
 	}
 	
-	public void addToNodes(FlowNodeBaseDesign item, int index) {
+	public FlowDesign addToNodes(FlowNodeBaseDesign item, int index) {
 		nodes.insertValue(item, index);
+		return (FlowDesign)this;
 	}
 	
-	public void removeFromNodes(FlowNodeBaseDesign item) {
+	public FlowDesign removeFromNodes(FlowNodeBaseDesign item) {
 		nodes.removeValue(item);
+		return (FlowDesign)this;
 	}
 	
-	public void removeFromNodes(int index) {
+	public FlowDesign removeFromNodes(int index) {
 		nodes.removeValue(index);
+		return (FlowDesign)this;
 	}
 	
 	
 	private final org.instantlogic.fabric.value.RelationValues<FlowDesign, FlowEdgeDesign> edges
 		= createRelationValues(org.instantlogic.designer.entity.FlowDesignEntity.edges);
 		
-	public org.instantlogic.fabric.value.RelationValues<FlowDesign, FlowEdgeDesign> getEdgesRelation() {
+	public org.instantlogic.fabric.value.RelationValues<FlowDesign, FlowEdgeDesign> getEdgesRelationValue() {
 		return edges;
 	}
 
@@ -79,27 +87,31 @@ public class FlowDesign extends Design {
 		return edges.getValue();
 	}
 	
-	public void addToEdges(FlowEdgeDesign item) {
+	public FlowDesign addToEdges(FlowEdgeDesign item) {
 		edges.addValue(item);
+		return (FlowDesign)this;
 	}
 	
-	public void addToEdges(FlowEdgeDesign item, int index) {
+	public FlowDesign addToEdges(FlowEdgeDesign item, int index) {
 		edges.insertValue(item, index);
+		return (FlowDesign)this;
 	}
 	
-	public void removeFromEdges(FlowEdgeDesign item) {
+	public FlowDesign removeFromEdges(FlowEdgeDesign item) {
 		edges.removeValue(item);
+		return (FlowDesign)this;
 	}
 	
-	public void removeFromEdges(int index) {
+	public FlowDesign removeFromEdges(int index) {
 		edges.removeValue(index);
+		return (FlowDesign)this;
 	}
 	
 	
 	private final org.instantlogic.fabric.value.RelationValues<FlowDesign, EntityDesign> parameters
 		= createRelationValues(org.instantlogic.designer.entity.FlowDesignEntity.parameters);
 		
-	public org.instantlogic.fabric.value.RelationValues<FlowDesign, EntityDesign> getParametersRelation() {
+	public org.instantlogic.fabric.value.RelationValues<FlowDesign, EntityDesign> getParametersRelationValue() {
 		return parameters;
 	}
 
@@ -107,20 +119,24 @@ public class FlowDesign extends Design {
 		return parameters.getValue();
 	}
 	
-	public void addToParameters(EntityDesign item) {
+	public FlowDesign addToParameters(EntityDesign item) {
 		parameters.addValue(item);
+		return (FlowDesign)this;
 	}
 	
-	public void addToParameters(EntityDesign item, int index) {
+	public FlowDesign addToParameters(EntityDesign item, int index) {
 		parameters.insertValue(item, index);
+		return (FlowDesign)this;
 	}
 	
-	public void removeFromParameters(EntityDesign item) {
+	public FlowDesign removeFromParameters(EntityDesign item) {
 		parameters.removeValue(item);
+		return (FlowDesign)this;
 	}
 	
-	public void removeFromParameters(int index) {
+	public FlowDesign removeFromParameters(int index) {
 		parameters.removeValue(index);
+		return (FlowDesign)this;
 	}
 	
 
@@ -129,7 +145,7 @@ public class FlowDesign extends Design {
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<FlowDesign, ApplicationDesign> application
 		= createReverseRelationValue(org.instantlogic.designer.entity.FlowDesignEntity.application);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<FlowDesign, ApplicationDesign> getApplicationRelation() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<FlowDesign, ApplicationDesign> getApplicationRelationValue() {
 		return application;
 	}
 
@@ -141,7 +157,7 @@ public class FlowDesign extends Design {
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<FlowDesign, ApplicationDesign> exposedFlowInApplication
 		= createReverseRelationValue(org.instantlogic.designer.entity.FlowDesignEntity.exposedFlowInApplication);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<FlowDesign, ApplicationDesign> getExposedFlowInApplicationRelation() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<FlowDesign, ApplicationDesign> getExposedFlowInApplicationRelationValue() {
 		return exposedFlowInApplication;
 	}
 
@@ -153,7 +169,7 @@ public class FlowDesign extends Design {
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<FlowDesign, SubFlowDesign> subFlowIn
 		= createReverseRelationValue(org.instantlogic.designer.entity.FlowDesignEntity.subFlowIn);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<FlowDesign, SubFlowDesign> getSubFlowInRelation() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<FlowDesign, SubFlowDesign> getSubFlowInRelationValue() {
 		return subFlowIn;
 	}
 

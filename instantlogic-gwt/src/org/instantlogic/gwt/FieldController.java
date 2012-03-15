@@ -26,7 +26,7 @@ public abstract class FieldController<V, W extends Widget> extends Controller {
 		this.view = view;
 		
 		update();
-		this.model.addValueChangeListener(valueChangeListener, true);
+		this.model.addValueChangeObserver(valueChangeListener);
 	}
 
 	protected abstract void update();
@@ -42,7 +42,7 @@ public abstract class FieldController<V, W extends Widget> extends Controller {
 
 	@Override
 	public void close() {
-		this.model.removeValueChangeListener(valueChangeListener);
+		this.model.removeValueChangeObserver(valueChangeListener);
 	}
 	
 }

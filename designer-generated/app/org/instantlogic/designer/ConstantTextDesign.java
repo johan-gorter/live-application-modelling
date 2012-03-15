@@ -17,12 +17,13 @@ public class ConstantTextDesign extends TextDesign {
 		return untranslated.getValue();
 	}
 
-	public org.instantlogic.fabric.value.AttributeValue<ConstantTextDesign, java.lang.String> getUntranslatedAttribute() {
+	public org.instantlogic.fabric.value.AttributeValue<ConstantTextDesign, java.lang.String> getUntranslatedAttributeValue() {
 		return untranslated;
 	}
 
-	public void setUntranslated(java.lang.String newValue) {
+	public ConstantTextDesign setUntranslated(java.lang.String newValue) {
 		untranslated.setValue(newValue);
+		return (ConstantTextDesign)this;
 	}
 	
 	

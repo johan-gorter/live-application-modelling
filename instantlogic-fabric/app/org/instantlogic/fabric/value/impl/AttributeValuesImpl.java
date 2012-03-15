@@ -55,6 +55,7 @@ public class AttributeValuesImpl<I extends Instance, Item extends Object>
 		try {
 			storedValues.add(index, item);
 			fireChange(ValueChangeEvent.MultiValueUpdateType.INSERT, index, item, operation);
+			operation.complete();
 		} finally {
 			operation.close();
 		}
@@ -65,7 +66,8 @@ public class AttributeValuesImpl<I extends Instance, Item extends Object>
 		Operation operation = startOperation();
 		try {
 			Item item = storedValues.remove(index);
-			fireChange(ValueChangeEvent.MultiValueUpdateType.INSERT, index, item, operation);
+			fireChange(ValueChangeEvent.MultiValueUpdateType.DELETE, index, item, operation);
+			operation.complete();
 			return item;
 		} finally {
 			operation.close();

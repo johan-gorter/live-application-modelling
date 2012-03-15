@@ -34,7 +34,7 @@ public class DeductionDesignEntity extends org.instantlogic.fabric.model.Entity<
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.DeductionDesign, java.lang.Boolean> get(org.instantlogic.designer.DeductionDesign instance) {
-				return instance.getMultivalueAttribute();
+				return instance.getMultivalueAttributeValue();
 			}
 		};
 	
@@ -45,7 +45,7 @@ public class DeductionDesignEntity extends org.instantlogic.fabric.model.Entity<
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.DeductionDesign, java.lang.String> get(org.instantlogic.designer.DeductionDesign instance) {
-				return instance.getClassNameAttribute();
+				return instance.getClassNameAttributeValue();
 			}
 		};
 	
@@ -56,7 +56,7 @@ public class DeductionDesignEntity extends org.instantlogic.fabric.model.Entity<
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.DeductionDesign, java.lang.String> get(org.instantlogic.designer.DeductionDesign instance) {
-				return instance.getCustomizationAttribute();
+				return instance.getCustomizationAttributeValue();
 			}
 		};
 	
@@ -70,7 +70,7 @@ public class DeductionDesignEntity extends org.instantlogic.fabric.model.Entity<
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.DeductionDesign, org.instantlogic.designer.DeductionDesign> get(
 					org.instantlogic.designer.DeductionDesign instance) {
-				return instance.getInputsRelation();
+				return instance.getInputsRelationValue();
 			}
 	
 			public boolean isMultivalue() {
@@ -89,7 +89,7 @@ public class DeductionDesignEntity extends org.instantlogic.fabric.model.Entity<
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionDesign, org.instantlogic.designer.DeductionSchemeDesign> get(
 					org.instantlogic.designer.DeductionDesign instance) {
-				return instance.getSchemeRelation();
+				return instance.getSchemeRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -105,7 +105,7 @@ public class DeductionDesignEntity extends org.instantlogic.fabric.model.Entity<
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionDesign, org.instantlogic.designer.DeductionSchemeDesign> get(
 					org.instantlogic.designer.DeductionDesign instance) {
-				return instance.getSchemeOutputRelation();
+				return instance.getSchemeOutputRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -121,7 +121,7 @@ public class DeductionDesignEntity extends org.instantlogic.fabric.model.Entity<
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.DeductionDesign, org.instantlogic.designer.DeductionDesign> get(
 					org.instantlogic.designer.DeductionDesign instance) {
-				return instance.getOutputsRelation();
+				return instance.getOutputsRelationValue();
 			}
 	
 			public boolean isReverse() {

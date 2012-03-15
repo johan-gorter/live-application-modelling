@@ -15,7 +15,7 @@ public class HeaderDesign extends CompositePageFragmentDesign {
 	private final org.instantlogic.fabric.value.RelationValue<HeaderDesign, TextDesign> text
 		= createRelationValue(org.instantlogic.designer.entity.HeaderDesignEntity.text);
 		
-	public org.instantlogic.fabric.value.RelationValue<HeaderDesign, TextDesign> getTextRelation() {
+	public org.instantlogic.fabric.value.RelationValue<HeaderDesign, TextDesign> getTextRelationValue() {
 		return text;
 	}
 
@@ -23,8 +23,9 @@ public class HeaderDesign extends CompositePageFragmentDesign {
 		return text.getValue();
 	}
 	
-	public void setText(org.instantlogic.designer.TextDesign newValue) {
+	public HeaderDesign setText(org.instantlogic.designer.TextDesign newValue) {
 		text.setValue(newValue);
+		return (HeaderDesign)this;
 	}
 
 

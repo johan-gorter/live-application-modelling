@@ -38,7 +38,7 @@ public class ConstantStringDesignEntity extends org.instantlogic.fabric.model.En
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.ConstantStringDesign, java.lang.String> get(org.instantlogic.designer.ConstantStringDesign instance) {
-				return instance.getConstantAttribute();
+				return instance.getConstantAttributeValue();
 			}
 		};
 	

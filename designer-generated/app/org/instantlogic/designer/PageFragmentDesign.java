@@ -17,12 +17,13 @@ public class PageFragmentDesign extends Design {
 		return presentation.getValue();
 	}
 
-	public org.instantlogic.fabric.value.AttributeValue<PageFragmentDesign, java.lang.String> getPresentationAttribute() {
+	public org.instantlogic.fabric.value.AttributeValue<PageFragmentDesign, java.lang.String> getPresentationAttributeValue() {
 		return presentation;
 	}
 
-	public void setPresentation(java.lang.String newValue) {
+	public PageFragmentDesign setPresentation(java.lang.String newValue) {
 		presentation.setValue(newValue);
+		return (PageFragmentDesign)this;
 	}
 	
 	
@@ -33,7 +34,7 @@ public class PageFragmentDesign extends Design {
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<PageFragmentDesign, PageFragmentHolderDesign> holder
 		= createReverseRelationValue(org.instantlogic.designer.entity.PageFragmentDesignEntity.holder);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<PageFragmentDesign, PageFragmentHolderDesign> getHolderRelation() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<PageFragmentDesign, PageFragmentHolderDesign> getHolderRelationValue() {
 		return holder;
 	}
 
@@ -45,7 +46,7 @@ public class PageFragmentDesign extends Design {
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<PageFragmentDesign, PageCompositionDesign> composedIn
 		= createReverseRelationValue(org.instantlogic.designer.entity.PageFragmentDesignEntity.composedIn);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<PageFragmentDesign, PageCompositionDesign> getComposedInRelation() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<PageFragmentDesign, PageCompositionDesign> getComposedInRelationValue() {
 		return composedIn;
 	}
 

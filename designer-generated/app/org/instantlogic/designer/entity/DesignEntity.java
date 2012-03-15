@@ -41,7 +41,7 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.Design, java.lang.String> get(org.instantlogic.designer.Design instance) {
-				return instance.getNameAttribute();
+				return instance.getNameAttributeValue();
 			}
 		};
 	
@@ -52,7 +52,7 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.Design, java.lang.String> get(org.instantlogic.designer.Design instance) {
-				return instance.getJavaNameAttribute();
+				return instance.getJavaNameAttributeValue();
 			}
 			
 			public boolean isReadOnly() {
@@ -73,7 +73,7 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.Design, java.lang.Boolean> get(org.instantlogic.designer.Design instance) {
-				return instance.getIsCustomizedAttribute();
+				return instance.getIsCustomizedAttributeValue();
 			}
 		};
 	

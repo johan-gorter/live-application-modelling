@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.instantlogic.fabric.model.Attribute;
+import org.instantlogic.fabric.util.ValueChangeEvent.MultiValueUpdateType;
 import org.instantlogic.fabric.value.AttributeValue;
+import org.instantlogic.fabric.value.AttributeValues;
 
 public class Operation {
 	
+	public enum OperationState {STARTED, UNDOING, COMPLETED, CLOSED}
 	private final InstanceAdministration instanceAdministration;
 	private final List<ValueChangeEvent> eventsToUndo = new ArrayList<ValueChangeEvent>();
 	private final Operation partOfOperation;
-	private boolean completed;
+	private OperationState state;
 	private int recordingUndoEventsPaused;
 
 	public Operation(InstanceAdministration instanceAdministration, Operation partOfOperation) {
@@ -20,15 +23,17 @@ public class Operation {
 	}
 	
 	public void start() {
+		state = OperationState.STARTED;
 		this.instanceAdministration.fireTransactionStarted();
 	}
 
 	public void complete() {
-		completed = true;
+		if (state!=OperationState.STARTED) throw new IllegalStateException();
+		state = OperationState.COMPLETED;
 	}
 	
 	public boolean completed() {
-		return completed;
+		return state == OperationState.COMPLETED;
 	}
 	
 	/**
@@ -43,9 +48,11 @@ public class Operation {
 	}
 	
 	public void close() {
-		if (!completed) {
+		if (state==OperationState.STARTED) { // We were not completed, we should undo (called from a finally block)
+			if (partOfOperation!=null && partOfOperation.state == OperationState.UNDOING) return; // The undo operation on our parent crashed here, we have done enough damage.
 			undo();
-		} else {
+			state=OperationState.CLOSED;
+		} else if (state==OperationState.COMPLETED) {
 			if (partOfOperation==null) {
 				boolean committed = false;
 				try {
@@ -60,19 +67,34 @@ public class Operation {
 					partOfOperation.addEventToUndo(event);
 				}
 			}
+		} else {
+			throw new IllegalStateException(""+state);
 		}
 		this.instanceAdministration.popCurrentOperation(partOfOperation);
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected void undo() {
-		for (int i=eventsToUndo.size()-1;i>=0;i--) {
-			ValueChangeEvent event = eventsToUndo.get(i);
-			if (event.isMultivalueUpdate()) {
-				throw new RuntimeException("TODO");
-			} else {
-				AttributeValue attributeValue = (AttributeValue)((Attribute)event.getAttribute()).get(event.getInstance());
-				attributeValue.setValue(event.getOldStoredValue());
+		state = OperationState.UNDOING;
+		pauseRecordingUndoEvents();
+		try {
+			for (int i=eventsToUndo.size()-1;i>=0;i--) {
+				ValueChangeEvent event = eventsToUndo.get(i);
+				if (event.isMultivalueUpdate()) {
+					AttributeValues attributeValues = (AttributeValues)((Attribute)event.getAttribute()).get(event.getInstance());
+					if (event.getMultiValueUpdateType()==MultiValueUpdateType.INSERT) {
+						attributeValues.removeValue(event.getIndex());
+					}
+					if (event.getMultiValueUpdateType()==MultiValueUpdateType.DELETE) {
+						attributeValues.insertValue(event.getItemValue(), event.getIndex());
+					}
+				} else {
+					AttributeValue attributeValue = (AttributeValue)((Attribute)event.getAttribute()).get(event.getInstance());
+					attributeValue.setValue(event.getOldStoredValue());
+				}
 			}
+		} finally {
+			resumeRecordingUndoEvents();
 		}
 	}
 

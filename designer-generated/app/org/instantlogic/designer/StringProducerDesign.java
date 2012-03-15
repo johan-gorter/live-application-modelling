@@ -17,7 +17,7 @@ public class StringProducerDesign extends org.instantlogic.fabric.Instance {
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<StringProducerDesign, TemplatedTextDesign> untranslatedInTemplate
 		= createReverseRelationValue(org.instantlogic.designer.entity.StringProducerDesignEntity.untranslatedInTemplate);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<StringProducerDesign, TemplatedTextDesign> getUntranslatedInTemplateRelation() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<StringProducerDesign, TemplatedTextDesign> getUntranslatedInTemplateRelationValue() {
 		return untranslatedInTemplate;
 	}
 

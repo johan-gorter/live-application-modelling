@@ -41,7 +41,7 @@ public class EventDesignEntity extends org.instantlogic.fabric.model.Entity<org.
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EventDesign, org.instantlogic.designer.EntityDesign> get(
 					org.instantlogic.designer.EventDesign instance) {
-				return instance.getParametersRelation();
+				return instance.getParametersRelationValue();
 			}
 	
 			public boolean isMultivalue() {
@@ -60,7 +60,7 @@ public class EventDesignEntity extends org.instantlogic.fabric.model.Entity<org.
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.EventDesign, org.instantlogic.designer.ApplicationDesign> get(
 					org.instantlogic.designer.EventDesign instance) {
-				return instance.getApplicationRelation();
+				return instance.getApplicationRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -76,7 +76,7 @@ public class EventDesignEntity extends org.instantlogic.fabric.model.Entity<org.
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EventDesign, org.instantlogic.designer.LinkDesign> get(
 					org.instantlogic.designer.EventDesign instance) {
-				return instance.getFiresFromButtonsRelation();
+				return instance.getFiresFromButtonsRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -96,7 +96,7 @@ public class EventDesignEntity extends org.instantlogic.fabric.model.Entity<org.
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EventDesign, org.instantlogic.designer.FlowSourceDesign> get(
 					org.instantlogic.designer.EventDesign instance) {
-				return instance.getStartEventInSourcesRelation();
+				return instance.getStartEventInSourcesRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -116,7 +116,7 @@ public class EventDesignEntity extends org.instantlogic.fabric.model.Entity<org.
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EventDesign, org.instantlogic.designer.FlowSourceDesign> get(
 					org.instantlogic.designer.EventDesign instance) {
-				return instance.getEndEventInSourcesRelation();
+				return instance.getEndEventInSourcesRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -136,7 +136,7 @@ public class EventDesignEntity extends org.instantlogic.fabric.model.Entity<org.
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EventDesign, org.instantlogic.designer.FlowEdgeDesign> get(
 					org.instantlogic.designer.EventDesign instance) {
-				return instance.getStartEventInEdgesRelation();
+				return instance.getStartEventInEdgesRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -156,7 +156,7 @@ public class EventDesignEntity extends org.instantlogic.fabric.model.Entity<org.
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EventDesign, org.instantlogic.designer.FlowEdgeDesign> get(
 					org.instantlogic.designer.EventDesign instance) {
-				return instance.getEndEventInEdgesRelation();
+				return instance.getEndEventInEdgesRelationValue();
 			}
 	
 			public boolean isReverse() {

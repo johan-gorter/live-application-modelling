@@ -41,7 +41,7 @@ public class LinkDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.LinkDesign, org.instantlogic.designer.TextDesign> get(
 					org.instantlogic.designer.LinkDesign instance) {
-				return instance.getCaptionRelation();
+				return instance.getCaptionRelationValue();
 			}
 	
 			public boolean isOwner() {
@@ -62,7 +62,7 @@ public class LinkDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.LinkDesign, org.instantlogic.designer.EventDesign> get(
 					org.instantlogic.designer.LinkDesign instance) {
-				return instance.getEventRelation();
+				return instance.getEventRelationValue();
 			}
 			
 		};

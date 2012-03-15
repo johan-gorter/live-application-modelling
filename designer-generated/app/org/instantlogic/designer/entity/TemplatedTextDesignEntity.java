@@ -41,7 +41,7 @@ public class TemplatedTextDesignEntity extends org.instantlogic.fabric.model.Ent
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.TemplatedTextDesign, org.instantlogic.designer.StringProducerDesign> get(
 					org.instantlogic.designer.TemplatedTextDesign instance) {
-				return instance.getUntranslatedRelation();
+				return instance.getUntranslatedRelationValue();
 			}
 	
 			public boolean isOwner() {
