@@ -26,8 +26,8 @@ public class ReverseRelationValuesImpl<I extends Instance, From extends Instance
 	}
 	
 	@Override
-	public Multi<From> getValue() {
-		return reverseValue;
+	public ValueAndLevel<Multi<From>> getValueAndLevel() {
+		return ValueAndLevel.deducedOrInconclusive(reverseValue);
 	}
 
 	public void addReverse(From reverseValue, Operation operation) {

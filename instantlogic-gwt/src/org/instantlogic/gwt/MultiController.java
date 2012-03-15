@@ -54,7 +54,7 @@ public class MultiController<T, C extends Controller> extends CompositeControlle
 		this.view = view;
 		this.factory = factory;
 		init();
-		model.addValueChangeListener(observer, true);
+		model.addValueChangeObserver(observer);
 	}
 	
 	private void init() {
@@ -71,7 +71,7 @@ public class MultiController<T, C extends Controller> extends CompositeControlle
 	
 	@Override
 	public void close() {
-		model.removeValueChangeListener(observer);
+		model.removeValueChangeObserver(observer);
 		super.close();
 	}
 

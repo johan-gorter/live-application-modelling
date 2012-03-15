@@ -41,7 +41,7 @@ public class CastInstanceDeductionDesignEntity extends org.instantlogic.fabric.m
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.CastInstanceDeductionDesign, org.instantlogic.designer.EntityDesign> get(
 					org.instantlogic.designer.CastInstanceDeductionDesign instance) {
-				return instance.getToEntityRelation();
+				return instance.getToEntityRelationValue();
 			}
 			
 		};

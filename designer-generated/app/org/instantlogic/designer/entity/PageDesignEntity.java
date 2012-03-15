@@ -41,7 +41,7 @@ public class PageDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.PageDesign, org.instantlogic.designer.CompositePageFragmentDesign> get(
 					org.instantlogic.designer.PageDesign instance) {
-				return instance.getContentRelation();
+				return instance.getContentRelationValue();
 			}
 	
 			public boolean isOwner() {

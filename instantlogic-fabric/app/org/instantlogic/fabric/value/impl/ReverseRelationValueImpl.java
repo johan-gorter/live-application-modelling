@@ -21,8 +21,8 @@ public class ReverseRelationValueImpl<I extends Instance, From extends Instance>
 	}
 	
 	@Override
-	public From getValue() {
-		return reverseValue;
+	public ValueAndLevel<From> getValueAndLevel() {
+		return ValueAndLevel.deducedOrInconclusive(reverseValue);
 	}
 
 	@SuppressWarnings("unchecked")

@@ -41,7 +41,7 @@ public class DomainEntryDesignEntity extends org.instantlogic.fabric.model.Entit
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DomainEntryDesign, org.instantlogic.designer.TextDesign> get(
 					org.instantlogic.designer.DomainEntryDesign instance) {
-				return instance.getDisplayRelation();
+				return instance.getDisplayRelationValue();
 			}
 	
 			public boolean isOwner() {
@@ -60,7 +60,7 @@ public class DomainEntryDesignEntity extends org.instantlogic.fabric.model.Entit
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DomainEntryDesign, org.instantlogic.designer.AttributeDesign> get(
 					org.instantlogic.designer.DomainEntryDesign instance) {
-				return instance.getAttributeRelation();
+				return instance.getAttributeRelationValue();
 			}
 	
 			public boolean isReverse() {

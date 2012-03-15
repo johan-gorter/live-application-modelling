@@ -15,7 +15,7 @@ public class TemplatedTextDesign extends TextDesign {
 	private final org.instantlogic.fabric.value.RelationValues<TemplatedTextDesign, StringProducerDesign> untranslated
 		= createRelationValues(org.instantlogic.designer.entity.TemplatedTextDesignEntity.untranslated);
 		
-	public org.instantlogic.fabric.value.RelationValues<TemplatedTextDesign, StringProducerDesign> getUntranslatedRelation() {
+	public org.instantlogic.fabric.value.RelationValues<TemplatedTextDesign, StringProducerDesign> getUntranslatedRelationValue() {
 		return untranslated;
 	}
 
@@ -23,20 +23,24 @@ public class TemplatedTextDesign extends TextDesign {
 		return untranslated.getValue();
 	}
 	
-	public void addToUntranslated(StringProducerDesign item) {
+	public TemplatedTextDesign addToUntranslated(StringProducerDesign item) {
 		untranslated.addValue(item);
+		return (TemplatedTextDesign)this;
 	}
 	
-	public void addToUntranslated(StringProducerDesign item, int index) {
+	public TemplatedTextDesign addToUntranslated(StringProducerDesign item, int index) {
 		untranslated.insertValue(item, index);
+		return (TemplatedTextDesign)this;
 	}
 	
-	public void removeFromUntranslated(StringProducerDesign item) {
+	public TemplatedTextDesign removeFromUntranslated(StringProducerDesign item) {
 		untranslated.removeValue(item);
+		return (TemplatedTextDesign)this;
 	}
 	
-	public void removeFromUntranslated(int index) {
+	public TemplatedTextDesign removeFromUntranslated(int index) {
 		untranslated.removeValue(index);
+		return (TemplatedTextDesign)this;
 	}
 	
 

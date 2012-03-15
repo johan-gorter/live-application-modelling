@@ -15,7 +15,7 @@ public class SelectDesign extends CompositePageFragmentDesign {
 	private final org.instantlogic.fabric.value.RelationValue<SelectDesign, DeductionSchemeDesign> deduction
 		= createRelationValue(org.instantlogic.designer.entity.SelectDesignEntity.deduction);
 		
-	public org.instantlogic.fabric.value.RelationValue<SelectDesign, DeductionSchemeDesign> getDeductionRelation() {
+	public org.instantlogic.fabric.value.RelationValue<SelectDesign, DeductionSchemeDesign> getDeductionRelationValue() {
 		return deduction;
 	}
 
@@ -23,8 +23,9 @@ public class SelectDesign extends CompositePageFragmentDesign {
 		return deduction.getValue();
 	}
 	
-	public void setDeduction(org.instantlogic.designer.DeductionSchemeDesign newValue) {
+	public SelectDesign setDeduction(org.instantlogic.designer.DeductionSchemeDesign newValue) {
 		deduction.setValue(newValue);
+		return (SelectDesign)this;
 	}
 
 

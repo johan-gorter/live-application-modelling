@@ -15,7 +15,7 @@ public class DomainEntryDesign extends Design {
 	private final org.instantlogic.fabric.value.RelationValue<DomainEntryDesign, TextDesign> display
 		= createRelationValue(org.instantlogic.designer.entity.DomainEntryDesignEntity.display);
 		
-	public org.instantlogic.fabric.value.RelationValue<DomainEntryDesign, TextDesign> getDisplayRelation() {
+	public org.instantlogic.fabric.value.RelationValue<DomainEntryDesign, TextDesign> getDisplayRelationValue() {
 		return display;
 	}
 
@@ -23,8 +23,9 @@ public class DomainEntryDesign extends Design {
 		return display.getValue();
 	}
 	
-	public void setDisplay(org.instantlogic.designer.TextDesign newValue) {
+	public DomainEntryDesign setDisplay(org.instantlogic.designer.TextDesign newValue) {
 		display.setValue(newValue);
+		return (DomainEntryDesign)this;
 	}
 
 
@@ -33,7 +34,7 @@ public class DomainEntryDesign extends Design {
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<DomainEntryDesign, AttributeDesign> attribute
 		= createReverseRelationValue(org.instantlogic.designer.entity.DomainEntryDesignEntity.attribute);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<DomainEntryDesign, AttributeDesign> getAttributeRelation() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<DomainEntryDesign, AttributeDesign> getAttributeRelationValue() {
 		return attribute;
 	}
 

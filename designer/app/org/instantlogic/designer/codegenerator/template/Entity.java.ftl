@@ -46,7 +46,7 @@ public class ${name}Entity extends org.instantlogic.fabric.model.Entity<${rootPa
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<#if attribute.multivalue>s</#if><${rootPackageName}.${name}, ${attribute.itemClassName}> get(${rootPackageName}.${name} instance) {
-				return instance.get${attribute.name?cap_first}Attribute();
+				return instance.get${attribute.name?cap_first}AttributeValue();
 			}
 			<#if attribute.multivalue>
 	
@@ -70,10 +70,13 @@ public class ${name}Entity extends org.instantlogic.fabric.model.Entity<${rootPa
 			</#if>
 			<#if attribute.ruleDeductionIndex??>
 
-			private org.instantlogic.fabric.deduction.Deduction<${attribute.itemClassName}> RULE = createDeduction${attribute.ruleDeductionIndex}();
+			private org.instantlogic.fabric.deduction.Deduction<${attribute.itemClassName}> rule;
 			@Override
 			public org.instantlogic.fabric.deduction.Deduction<${attribute.itemClassName}> getRule() {
-				return RULE;
+				if (rule==null) {
+					rule = createDeduction${attribute.ruleDeductionIndex}();
+				}
+				return rule;
 			}
 			</#if>
 			<#if attribute.domain??>
@@ -103,7 +106,7 @@ public class ${name}Entity extends org.instantlogic.fabric.model.Entity<${rootPa
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<#if relation.multivalue>s</#if><${rootPackageName}.${name}, ${rootPackageName}.${relation.item}> get(
 					${rootPackageName}.${name} instance) {
-				return instance.get${relation.name?cap_first}Relation();
+				return instance.get${relation.name?cap_first}RelationValue();
 			}
 			<#if relation.owner>
 	
@@ -131,10 +134,13 @@ public class ${name}Entity extends org.instantlogic.fabric.model.Entity<${rootPa
 			</#if>
 			<#if relation.ruleDeductionIndex??>
 
-			private org.instantlogic.fabric.deduction.Deduction<${relation.to}> RULE = createDeduction${relation.ruleDeductionIndex}();
+			private org.instantlogic.fabric.deduction.Deduction<${relation.to}> rule;
 			@Override
 			public org.instantlogic.fabric.deduction.Deduction<${relation.to}> getRule() {
-				return RULE;
+				if (rule==null) {
+					rule  = createDeduction${relation.ruleDeductionIndex}();
+				}
+				return rule;
 			}
 			</#if>
 			
@@ -152,7 +158,7 @@ public class ${name}Entity extends org.instantlogic.fabric.model.Entity<${rootPa
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<#if relation.multivalue>s</#if><${rootPackageName}.${name}, ${rootPackageName}.${relation.item}> get(
 					${rootPackageName}.${name} instance) {
-				return instance.get${relation.name?cap_first}Relation();
+				return instance.get${relation.name?cap_first}RelationValue();
 			}
 	
 			public boolean isReverse() {

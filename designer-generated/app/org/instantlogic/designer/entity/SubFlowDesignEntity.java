@@ -41,7 +41,7 @@ public class SubFlowDesignEntity extends org.instantlogic.fabric.model.Entity<or
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.SubFlowDesign, org.instantlogic.designer.FlowDesign> get(
 					org.instantlogic.designer.SubFlowDesign instance) {
-				return instance.getFlowRelation();
+				return instance.getFlowRelationValue();
 			}
 			
 		};

@@ -37,7 +37,7 @@ public class FlowSourceDesignEntity extends org.instantlogic.fabric.model.Entity
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FlowSourceDesign, org.instantlogic.designer.EventDesign> get(
 					org.instantlogic.designer.FlowSourceDesign instance) {
-				return instance.getStartEventRelation();
+				return instance.getStartEventRelationValue();
 			}
 			
 		};
@@ -50,7 +50,7 @@ public class FlowSourceDesignEntity extends org.instantlogic.fabric.model.Entity
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FlowSourceDesign, org.instantlogic.designer.FlowNodeBaseDesign> get(
 					org.instantlogic.designer.FlowSourceDesign instance) {
-				return instance.getEndNodeRelation();
+				return instance.getEndNodeRelationValue();
 			}
 			
 		};
@@ -63,7 +63,7 @@ public class FlowSourceDesignEntity extends org.instantlogic.fabric.model.Entity
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FlowSourceDesign, org.instantlogic.designer.EventDesign> get(
 					org.instantlogic.designer.FlowSourceDesign instance) {
-				return instance.getEndEventRelation();
+				return instance.getEndEventRelationValue();
 			}
 			
 		};
@@ -78,7 +78,7 @@ public class FlowSourceDesignEntity extends org.instantlogic.fabric.model.Entity
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FlowSourceDesign, org.instantlogic.designer.FlowDesign> get(
 					org.instantlogic.designer.FlowSourceDesign instance) {
-				return instance.getOwnerRelation();
+				return instance.getOwnerRelationValue();
 			}
 	
 			public boolean isReverse() {

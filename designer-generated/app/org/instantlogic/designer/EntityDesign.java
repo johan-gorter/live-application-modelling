@@ -1,185 +1,78 @@
 package org.instantlogic.designer;
 
+import org.instantlogic.designer.bootstrapper.Bootstrapper.RelationType;
 
-public class EntityDesign extends Design { 
 
-	@Override
-	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
-		return org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE;
-	}
+public class EntityDesign extends AbstractEntityDesign { 
 
-	// Attributes
-	
-	// Relations
-	
-	private final org.instantlogic.fabric.value.RelationValue<EntityDesign, EntityDesign> extendsFrom
-		= createRelationValue(org.instantlogic.designer.entity.EntityDesignEntity.extendsFrom);
-		
-	public org.instantlogic.fabric.value.RelationValue<EntityDesign, EntityDesign> getExtendsFromRelation() {
-		return extendsFrom;
-	}
-
-	public org.instantlogic.designer.EntityDesign getExtendsFrom() {
-		return extendsFrom.getValue();
+	public AttributeDesign addAttribute(String name, Class<?> type) {
+		return addAttribute(name, type.getName());
 	}
 	
-	public void setExtendsFrom(org.instantlogic.designer.EntityDesign newValue) {
-		extendsFrom.setValue(newValue);
-	}
-
-	
-	private final org.instantlogic.fabric.value.RelationValues<EntityDesign, AttributeDesign> attributes
-		= createRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.attributes);
-		
-	public org.instantlogic.fabric.value.RelationValues<EntityDesign, AttributeDesign> getAttributesRelation() {
-		return attributes;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.AttributeDesign> getAttributes() {
-		return attributes.getValue();
+	protected AttributeDesign addAttribute(String name, String className) {
+		AttributeDesign result = new AttributeDesign();
+		result.setName(name);
+		result.setClassName(className);
+		addToAttributes(result);
+		return result;
 	}
 	
-	public void addToAttributes(AttributeDesign item) {
-		attributes.addValue(item);
+	protected RelationDesign addRelation(String name, RelationType relationType, EntityDesign to) {
+		RelationDesign relation = new RelationDesign();
+		addToRelations(relation);
+		relation.setTo(to);
+		relation.setName(name);
+		relation.setOwner(relationType==RelationType.OneToManyAggregation || relationType==RelationType.OneToZeroOrOneAggregation || relationType==RelationType.OneToOneAggregation);
+		relation.setAutoCreate(relationType==RelationType.OneToOneAggregation);
+		relation.setMultivalue(relationType==RelationType.OneToMany || relationType==RelationType.OneToManyAggregation || relationType==RelationType.ManyToMany);
+		relation.setReverseMultivalue(relationType==RelationType.ManyToMany || relationType==RelationType.ManyToZeroOrOne);
+		return relation;
 	}
 	
-	public void addToAttributes(AttributeDesign item, int index) {
-		attributes.insertValue(item, index);
+	protected DeductionSchemeDesign createCustomDeduction(String customization, Class resultClass) {
+		return createCustomDeduction(customization, resultClass.getName());
 	}
 	
-	public void removeFromAttributes(AttributeDesign item) {
-		attributes.removeValue(item);
+	protected DeductionSchemeDesign createCustomDeduction(String customization, String resultClassName) {
+		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
+		DeductionDesign customDeductionDesign = new DeductionDesign();
+		customDeductionDesign.setCustomization(customization);
+		customDeductionDesign.setClassName(resultClassName);
+		scheme.addToDeductions(customDeductionDesign);
+		scheme.setOutput(customDeductionDesign);
+		return scheme;
 	}
 	
-	public void removeFromAttributes(int index) {
-		attributes.removeValue(index);
+	protected DeductionDesign selectedInstanceDeduction(EntityDesign entity) {
+		return new SelectedInstanceDeductionDesign()
+				.setOfEntity(entity)
+				.setClassName(entity.getApplication().getRootPackageName()+"."+entity.getName());
+	}
+	
+	protected static DeductionSchemeDesign createDeductionScheme(DeductionDesign output) {
+		DeductionSchemeDesign result = new DeductionSchemeDesign();
+		addDeductions(result, output);
+		result.setOutput(output);
+		return result;
 	}
 	
 	
-	private final org.instantlogic.fabric.value.RelationValues<EntityDesign, RelationDesign> relations
-		= createRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.relations);
-		
-	public org.instantlogic.fabric.value.RelationValues<EntityDesign, RelationDesign> getRelationsRelation() {
-		return relations;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.RelationDesign> getRelations() {
-		return relations.getValue();
+	private static void addDeductions(DeductionSchemeDesign result, DeductionDesign deduction) {
+		if (result.getDeductions().asList().contains(deduction)) return;
+		result.addToDeductions(deduction);
+		for(DeductionDesign input: deduction.getInputs()) {
+			addDeductions(result, input);
+		}
 	}
 	
-	public void addToRelations(RelationDesign item) {
-		relations.addValue(item);
+	public void registerApplication(ApplicationDesign application) {
+		if (application.getEntities().contains(this)) return;
+		application.addToEntities(this);
+		for (RelationDesign relation: getRelations()) {
+			relation.getTo().registerApplication(application);
+		}
 	}
 	
-	public void addToRelations(RelationDesign item, int index) {
-		relations.insertValue(item, index);
+	public void init() {
 	}
-	
-	public void removeFromRelations(RelationDesign item) {
-		relations.removeValue(item);
-	}
-	
-	public void removeFromRelations(int index) {
-		relations.removeValue(index);
-	}
-	
-
-	// Reverse relations
-	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<EntityDesign, ApplicationDesign> application
-		= createReverseRelationValue(org.instantlogic.designer.entity.EntityDesignEntity.application);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<EntityDesign, ApplicationDesign> getApplicationRelation() {
-		return application;
-	}
-
-	public org.instantlogic.designer.ApplicationDesign getApplication() {
-		return application.getValue();
-	}
-
-	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<EntityDesign, ApplicationDesign> caseEntityInApplication
-		= createReverseRelationValue(org.instantlogic.designer.entity.EntityDesignEntity.caseEntityInApplication);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<EntityDesign, ApplicationDesign> getCaseEntityInApplicationRelation() {
-		return caseEntityInApplication;
-	}
-
-	public org.instantlogic.designer.ApplicationDesign getCaseEntityInApplication() {
-		return caseEntityInApplication.getValue();
-	}
-
-	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, EntityDesign> extensions
-		= createReverseRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.extensions);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, EntityDesign> getExtensionsRelation() {
-		return extensions;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EntityDesign> getExtensions() {
-		return extensions.getValue();
-	}
-
-	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, RelationDesign> reverseRelations
-		= createReverseRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.reverseRelations);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, RelationDesign> getReverseRelationsRelation() {
-		return reverseRelations;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.RelationDesign> getReverseRelations() {
-		return reverseRelations.getValue();
-	}
-
-	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, SelectedInstanceDeductionDesign> entityInSelectedInstanceDeductions
-		= createReverseRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.entityInSelectedInstanceDeductions);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, SelectedInstanceDeductionDesign> getEntityInSelectedInstanceDeductionsRelation() {
-		return entityInSelectedInstanceDeductions;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.SelectedInstanceDeductionDesign> getEntityInSelectedInstanceDeductions() {
-		return entityInSelectedInstanceDeductions.getValue();
-	}
-
-	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, CastInstanceDeductionDesign> entityInCastDeductions
-		= createReverseRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.entityInCastDeductions);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, CastInstanceDeductionDesign> getEntityInCastDeductionsRelation() {
-		return entityInCastDeductions;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.CastInstanceDeductionDesign> getEntityInCastDeductions() {
-		return entityInCastDeductions.getValue();
-	}
-
-	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, EventDesign> parameterInEvent
-		= createReverseRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.parameterInEvent);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, EventDesign> getParameterInEventRelation() {
-		return parameterInEvent;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EventDesign> getParameterInEvent() {
-		return parameterInEvent.getValue();
-	}
-
-	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, FlowDesign> parameterInFlows
-		= createReverseRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.parameterInFlows);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, FlowDesign> getParameterInFlowsRelation() {
-		return parameterInFlows;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowDesign> getParameterInFlows() {
-		return parameterInFlows.getValue();
-	}
-
-
 }

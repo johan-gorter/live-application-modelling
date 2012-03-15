@@ -38,7 +38,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.AttributeDesign, java.lang.Boolean> get(org.instantlogic.designer.AttributeDesign instance) {
-				return instance.getReadOnlyAttribute();
+				return instance.getReadOnlyAttributeValue();
 			}
 		};
 	
@@ -49,7 +49,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.AttributeDesign, java.lang.Boolean> get(org.instantlogic.designer.AttributeDesign instance) {
-				return instance.getMultivalueAttribute();
+				return instance.getMultivalueAttributeValue();
 			}
 		};
 	
@@ -60,7 +60,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.AttributeDesign, java.lang.String> get(org.instantlogic.designer.AttributeDesign instance) {
-				return instance.getClassNameAttribute();
+				return instance.getClassNameAttributeValue();
 			}
 		};
 	
@@ -74,7 +74,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.TextDesign> get(
 					org.instantlogic.designer.AttributeDesign instance) {
-				return instance.getQuestionRelation();
+				return instance.getQuestionRelationValue();
 			}
 	
 			public boolean isOwner() {
@@ -91,7 +91,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.TextDesign> get(
 					org.instantlogic.designer.AttributeDesign instance) {
-				return instance.getExplanationRelation();
+				return instance.getExplanationRelationValue();
 			}
 	
 			public boolean isOwner() {
@@ -108,7 +108,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DomainEntryDesign> get(
 					org.instantlogic.designer.AttributeDesign instance) {
-				return instance.getDomainRelation();
+				return instance.getDomainRelationValue();
 			}
 	
 			public boolean isOwner() {
@@ -129,7 +129,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DeductionSchemeDesign> get(
 					org.instantlogic.designer.AttributeDesign instance) {
-				return instance.getRelevanceRelation();
+				return instance.getRelevanceRelationValue();
 			}
 	
 			public boolean isOwner() {
@@ -146,7 +146,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DeductionSchemeDesign> get(
 					org.instantlogic.designer.AttributeDesign instance) {
-				return instance.getRuleRelation();
+				return instance.getRuleRelationValue();
 			}
 	
 			public boolean isOwner() {
@@ -163,7 +163,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DeductionSchemeDesign> get(
 					org.instantlogic.designer.AttributeDesign instance) {
-				return instance.get_defaultRelation();
+				return instance.get_defaultRelationValue();
 			}
 	
 			public boolean isOwner() {
@@ -182,7 +182,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.EntityDesign> get(
 					org.instantlogic.designer.AttributeDesign instance) {
-				return instance.getBelongsToEntityRelation();
+				return instance.getBelongsToEntityRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -198,7 +198,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDeductionDesign> get(
 					org.instantlogic.designer.AttributeDesign instance) {
-				return instance.getAttributeInDeductionsRelation();
+				return instance.getAttributeInDeductionsRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -218,7 +218,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.FieldDesign> get(
 					org.instantlogic.designer.AttributeDesign instance) {
-				return instance.getFieldsRelation();
+				return instance.getFieldsRelationValue();
 			}
 	
 			public boolean isReverse() {

@@ -37,7 +37,7 @@ public class FlowEdgeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.FlowNodeBaseDesign> get(
 					org.instantlogic.designer.FlowEdgeDesign instance) {
-				return instance.getStartNodeRelation();
+				return instance.getStartNodeRelationValue();
 			}
 			
 		};
@@ -50,7 +50,7 @@ public class FlowEdgeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.EventDesign> get(
 					org.instantlogic.designer.FlowEdgeDesign instance) {
-				return instance.getStartEventRelation();
+				return instance.getStartEventRelationValue();
 			}
 			
 		};
@@ -63,7 +63,7 @@ public class FlowEdgeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.FlowNodeBaseDesign> get(
 					org.instantlogic.designer.FlowEdgeDesign instance) {
-				return instance.getEndNodeRelation();
+				return instance.getEndNodeRelationValue();
 			}
 			
 		};
@@ -76,7 +76,7 @@ public class FlowEdgeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.EventDesign> get(
 					org.instantlogic.designer.FlowEdgeDesign instance) {
-				return instance.getEndEventRelation();
+				return instance.getEndEventRelationValue();
 			}
 			
 		};
@@ -91,7 +91,7 @@ public class FlowEdgeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.FlowDesign> get(
 					org.instantlogic.designer.FlowEdgeDesign instance) {
-				return instance.getOwnerRelation();
+				return instance.getOwnerRelationValue();
 			}
 	
 			public boolean isReverse() {

@@ -88,7 +88,7 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 		return getValue();
 	}
 	
-	public Value getValue() {
+	public final Value getValue() {
 		return getValueAndLevel().getValue();
 	}
 

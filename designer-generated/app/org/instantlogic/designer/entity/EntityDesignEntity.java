@@ -41,7 +41,7 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> get(
 					org.instantlogic.designer.EntityDesign instance) {
-				return instance.getExtendsFromRelation();
+				return instance.getExtendsFromRelationValue();
 			}
 			
 		};
@@ -54,7 +54,7 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.AttributeDesign> get(
 					org.instantlogic.designer.EntityDesign instance) {
-				return instance.getAttributesRelation();
+				return instance.getAttributesRelationValue();
 			}
 	
 			public boolean isOwner() {
@@ -75,7 +75,7 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.RelationDesign> get(
 					org.instantlogic.designer.EntityDesign instance) {
-				return instance.getRelationsRelation();
+				return instance.getRelationsRelationValue();
 			}
 	
 			public boolean isOwner() {
@@ -98,7 +98,7 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.ApplicationDesign> get(
 					org.instantlogic.designer.EntityDesign instance) {
-				return instance.getApplicationRelation();
+				return instance.getApplicationRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -114,7 +114,7 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.ApplicationDesign> get(
 					org.instantlogic.designer.EntityDesign instance) {
-				return instance.getCaseEntityInApplicationRelation();
+				return instance.getCaseEntityInApplicationRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -130,7 +130,7 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> get(
 					org.instantlogic.designer.EntityDesign instance) {
-				return instance.getExtensionsRelation();
+				return instance.getExtensionsRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -150,7 +150,7 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.RelationDesign> get(
 					org.instantlogic.designer.EntityDesign instance) {
-				return instance.getReverseRelationsRelation();
+				return instance.getReverseRelationsRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -170,7 +170,7 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.SelectedInstanceDeductionDesign> get(
 					org.instantlogic.designer.EntityDesign instance) {
-				return instance.getEntityInSelectedInstanceDeductionsRelation();
+				return instance.getEntityInSelectedInstanceDeductionsRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -190,7 +190,7 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.CastInstanceDeductionDesign> get(
 					org.instantlogic.designer.EntityDesign instance) {
-				return instance.getEntityInCastDeductionsRelation();
+				return instance.getEntityInCastDeductionsRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -210,7 +210,7 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EventDesign> get(
 					org.instantlogic.designer.EntityDesign instance) {
-				return instance.getParameterInEventRelation();
+				return instance.getParameterInEventRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -230,7 +230,7 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.FlowDesign> get(
 					org.instantlogic.designer.EntityDesign instance) {
-				return instance.getParameterInFlowsRelation();
+				return instance.getParameterInFlowsRelationValue();
 			}
 	
 			public boolean isReverse() {

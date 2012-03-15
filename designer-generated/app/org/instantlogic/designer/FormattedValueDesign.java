@@ -15,7 +15,7 @@ public class FormattedValueDesign extends StringProducerDesign {
 	private final org.instantlogic.fabric.value.RelationValue<FormattedValueDesign, DeductionSchemeDesign> deduction
 		= createRelationValue(org.instantlogic.designer.entity.FormattedValueDesignEntity.deduction);
 		
-	public org.instantlogic.fabric.value.RelationValue<FormattedValueDesign, DeductionSchemeDesign> getDeductionRelation() {
+	public org.instantlogic.fabric.value.RelationValue<FormattedValueDesign, DeductionSchemeDesign> getDeductionRelationValue() {
 		return deduction;
 	}
 
@@ -23,8 +23,9 @@ public class FormattedValueDesign extends StringProducerDesign {
 		return deduction.getValue();
 	}
 	
-	public void setDeduction(org.instantlogic.designer.DeductionSchemeDesign newValue) {
+	public FormattedValueDesign setDeduction(org.instantlogic.designer.DeductionSchemeDesign newValue) {
 		deduction.setValue(newValue);
+		return (FormattedValueDesign)this;
 	}
 
 

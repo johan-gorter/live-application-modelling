@@ -17,12 +17,13 @@ public class FieldDesign extends PageFragmentDesign {
 		return required.getValue();
 	}
 
-	public org.instantlogic.fabric.value.AttributeValue<FieldDesign, java.lang.Boolean> getRequiredAttribute() {
+	public org.instantlogic.fabric.value.AttributeValue<FieldDesign, java.lang.Boolean> getRequiredAttributeValue() {
 		return required;
 	}
 
-	public void setRequired(java.lang.Boolean newValue) {
+	public FieldDesign setRequired(java.lang.Boolean newValue) {
 		required.setValue(newValue);
+		return (FieldDesign)this;
 	}
 	
 	
@@ -33,12 +34,13 @@ public class FieldDesign extends PageFragmentDesign {
 		return readOnly.getValue();
 	}
 
-	public org.instantlogic.fabric.value.AttributeValue<FieldDesign, java.lang.Boolean> getReadOnlyAttribute() {
+	public org.instantlogic.fabric.value.AttributeValue<FieldDesign, java.lang.Boolean> getReadOnlyAttributeValue() {
 		return readOnly;
 	}
 
-	public void setReadOnly(java.lang.Boolean newValue) {
+	public FieldDesign setReadOnly(java.lang.Boolean newValue) {
 		readOnly.setValue(newValue);
+		return (FieldDesign)this;
 	}
 	
 	
@@ -47,7 +49,7 @@ public class FieldDesign extends PageFragmentDesign {
 	private final org.instantlogic.fabric.value.RelationValue<FieldDesign, AttributeDesign> attribute
 		= createRelationValue(org.instantlogic.designer.entity.FieldDesignEntity.attribute);
 		
-	public org.instantlogic.fabric.value.RelationValue<FieldDesign, AttributeDesign> getAttributeRelation() {
+	public org.instantlogic.fabric.value.RelationValue<FieldDesign, AttributeDesign> getAttributeRelationValue() {
 		return attribute;
 	}
 
@@ -55,8 +57,9 @@ public class FieldDesign extends PageFragmentDesign {
 		return attribute.getValue();
 	}
 	
-	public void setAttribute(org.instantlogic.designer.AttributeDesign newValue) {
+	public FieldDesign setAttribute(org.instantlogic.designer.AttributeDesign newValue) {
 		attribute.setValue(newValue);
+		return (FieldDesign)this;
 	}
 
 

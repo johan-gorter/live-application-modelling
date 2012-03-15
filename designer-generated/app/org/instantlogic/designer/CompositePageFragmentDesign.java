@@ -15,7 +15,7 @@ public class CompositePageFragmentDesign extends PageFragmentDesign {
 	private final org.instantlogic.fabric.value.RelationValues<CompositePageFragmentDesign, PageCompositionDesign> items
 		= createRelationValues(org.instantlogic.designer.entity.CompositePageFragmentDesignEntity.items);
 		
-	public org.instantlogic.fabric.value.RelationValues<CompositePageFragmentDesign, PageCompositionDesign> getItemsRelation() {
+	public org.instantlogic.fabric.value.RelationValues<CompositePageFragmentDesign, PageCompositionDesign> getItemsRelationValue() {
 		return items;
 	}
 
@@ -23,20 +23,24 @@ public class CompositePageFragmentDesign extends PageFragmentDesign {
 		return items.getValue();
 	}
 	
-	public void addToItems(PageCompositionDesign item) {
+	public CompositePageFragmentDesign addToItems(PageCompositionDesign item) {
 		items.addValue(item);
+		return (CompositePageFragmentDesign)this;
 	}
 	
-	public void addToItems(PageCompositionDesign item, int index) {
+	public CompositePageFragmentDesign addToItems(PageCompositionDesign item, int index) {
 		items.insertValue(item, index);
+		return (CompositePageFragmentDesign)this;
 	}
 	
-	public void removeFromItems(PageCompositionDesign item) {
+	public CompositePageFragmentDesign removeFromItems(PageCompositionDesign item) {
 		items.removeValue(item);
+		return (CompositePageFragmentDesign)this;
 	}
 	
-	public void removeFromItems(int index) {
+	public CompositePageFragmentDesign removeFromItems(int index) {
 		items.removeValue(index);
+		return (CompositePageFragmentDesign)this;
 	}
 	
 
@@ -45,7 +49,7 @@ public class CompositePageFragmentDesign extends PageFragmentDesign {
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<CompositePageFragmentDesign, PageDesign> contentOfPage
 		= createReverseRelationValue(org.instantlogic.designer.entity.CompositePageFragmentDesignEntity.contentOfPage);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<CompositePageFragmentDesign, PageDesign> getContentOfPageRelation() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<CompositePageFragmentDesign, PageDesign> getContentOfPageRelationValue() {
 		return contentOfPage;
 	}
 

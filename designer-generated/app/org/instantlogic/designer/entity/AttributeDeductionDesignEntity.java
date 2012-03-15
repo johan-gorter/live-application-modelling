@@ -41,7 +41,7 @@ public class AttributeDeductionDesignEntity extends org.instantlogic.fabric.mode
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.AttributeDeductionDesign, org.instantlogic.designer.AttributeDesign> get(
 					org.instantlogic.designer.AttributeDeductionDesign instance) {
-				return instance.getAttributeRelation();
+				return instance.getAttributeRelationValue();
 			}
 			
 		};

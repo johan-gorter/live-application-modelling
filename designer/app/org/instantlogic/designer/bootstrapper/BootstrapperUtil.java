@@ -64,12 +64,16 @@ public abstract class BootstrapperUtil {
 		return result;
 	}
 
-	protected static AttributeDesign createAttribute(EntityDesign entity, String name, Class<?> className) {
+	protected static AttributeDesign createAttribute(EntityDesign entity, String name, String className) {
 		AttributeDesign attribute = new AttributeDesign();
 		attribute.setName(name);
-		attribute.setClassName(className.getName());
+		attribute.setClassName(className);
 		entity.addToAttributes(attribute);
 		return attribute;
+	}
+
+	protected static AttributeDesign createAttribute(EntityDesign entity, String name, Class<?> className) {
+		return createAttribute(entity, name, className.getName());
 	}
 
 	protected static RelationDesign createRelation(EntityDesign from, String name, RelationType relationType, String reverseName, EntityDesign to) {
@@ -132,6 +136,22 @@ public abstract class BootstrapperUtil {
 		return select;
 	}
 	
+	protected static DeductionSchemeDesign createDeductionScheme(DeductionDesign output) {
+		DeductionSchemeDesign result = new DeductionSchemeDesign();
+		addDeductions(result, output);
+		result.setOutput(output);
+		return result;
+	}
+	
+	
+	private static void addDeductions(DeductionSchemeDesign result, DeductionDesign deduction) {
+		if (result.getDeductions().asList().contains(deduction)) return;
+		result.addToDeductions(deduction);
+		for(DeductionDesign input: deduction.getInputs()) {
+			addDeductions(result, input);
+		}
+	}
+
 	protected static DeductionSchemeDesign createCastDeduction(EntityDesign entity, EntityDesign toEntity) {
 		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
 		SelectedInstanceDeductionDesign selectedInstanceDeductionDesign = new SelectedInstanceDeductionDesign();
@@ -156,6 +176,10 @@ public abstract class BootstrapperUtil {
 		scheme.addToDeductions(selectedInstanceDeductionDesign);
 		scheme.setOutput(selectedInstanceDeductionDesign);
 		return scheme;
+	}
+	
+	protected static DeductionSchemeDesign createCustomDeduction(String customization, Class resultClass) {
+		return createCustomDeduction(customization, resultClass.getName());
 	}
 	
 	protected static DeductionSchemeDesign createCustomDeduction(String customization, String resultClassName) {
@@ -186,7 +210,7 @@ public abstract class BootstrapperUtil {
 		attributeDeductionDesign.setAttribute(attribute);
 		attributeDeductionDesign.addToInputs(selectedInstanceDeductionDesign);
 		if (attribute.getMultivalue()==Boolean.TRUE) {
-			attributeDeductionDesign.setClassName("java.util.List<"+className+">");
+			attributeDeductionDesign.setClassName("org.instantlogic.fabric.value.Multi<"+className+">");
 		} else {
 			attributeDeductionDesign.setClassName(className);	
 		}

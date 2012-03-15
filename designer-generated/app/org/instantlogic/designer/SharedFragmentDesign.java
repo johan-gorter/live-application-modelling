@@ -15,7 +15,7 @@ public class SharedFragmentDesign extends PageFragmentDesign {
 	private final org.instantlogic.fabric.value.RelationValue<SharedFragmentDesign, PageFragmentHolderDesign> pageFragmentHolder
 		= createRelationValue(org.instantlogic.designer.entity.SharedFragmentDesignEntity.pageFragmentHolder);
 		
-	public org.instantlogic.fabric.value.RelationValue<SharedFragmentDesign, PageFragmentHolderDesign> getPageFragmentHolderRelation() {
+	public org.instantlogic.fabric.value.RelationValue<SharedFragmentDesign, PageFragmentHolderDesign> getPageFragmentHolderRelationValue() {
 		return pageFragmentHolder;
 	}
 
@@ -23,8 +23,9 @@ public class SharedFragmentDesign extends PageFragmentDesign {
 		return pageFragmentHolder.getValue();
 	}
 	
-	public void setPageFragmentHolder(org.instantlogic.designer.PageFragmentHolderDesign newValue) {
+	public SharedFragmentDesign setPageFragmentHolder(org.instantlogic.designer.PageFragmentHolderDesign newValue) {
 		pageFragmentHolder.setValue(newValue);
+		return (SharedFragmentDesign)this;
 	}
 
 

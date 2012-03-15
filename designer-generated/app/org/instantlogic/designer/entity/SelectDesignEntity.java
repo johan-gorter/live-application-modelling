@@ -41,7 +41,7 @@ public class SelectDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.SelectDesign, org.instantlogic.designer.DeductionSchemeDesign> get(
 					org.instantlogic.designer.SelectDesign instance) {
-				return instance.getDeductionRelation();
+				return instance.getDeductionRelationValue();
 			}
 	
 			public boolean isOwner() {

@@ -43,7 +43,7 @@ public class TextDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.TextDesign, org.instantlogic.designer.AttributeDesign> get(
 					org.instantlogic.designer.TextDesign instance) {
-				return instance.getQuestionOnAttributeRelation();
+				return instance.getQuestionOnAttributeRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -59,7 +59,7 @@ public class TextDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.TextDesign, org.instantlogic.designer.AttributeDesign> get(
 					org.instantlogic.designer.TextDesign instance) {
-				return instance.getExplanationOnAttributeRelation();
+				return instance.getExplanationOnAttributeRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -75,7 +75,7 @@ public class TextDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.TextDesign, org.instantlogic.designer.DomainEntryDesign> get(
 					org.instantlogic.designer.TextDesign instance) {
-				return instance.getDisplayOnDomainEntryRelation();
+				return instance.getDisplayOnDomainEntryRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -91,7 +91,7 @@ public class TextDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.TextDesign, org.instantlogic.designer.HeaderDesign> get(
 					org.instantlogic.designer.TextDesign instance) {
-				return instance.getTextOnHeaderRelation();
+				return instance.getTextOnHeaderRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -107,7 +107,7 @@ public class TextDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.TextDesign, org.instantlogic.designer.LinkDesign> get(
 					org.instantlogic.designer.TextDesign instance) {
-				return instance.getCaptionOnButtonRelation();
+				return instance.getCaptionOnButtonRelationValue();
 			}
 	
 			public boolean isReverse() {

@@ -15,7 +15,7 @@ public class SelectedInstanceDeductionDesign extends DeductionDesign {
 	private final org.instantlogic.fabric.value.RelationValue<SelectedInstanceDeductionDesign, EntityDesign> ofEntity
 		= createRelationValue(org.instantlogic.designer.entity.SelectedInstanceDeductionDesignEntity.ofEntity);
 		
-	public org.instantlogic.fabric.value.RelationValue<SelectedInstanceDeductionDesign, EntityDesign> getOfEntityRelation() {
+	public org.instantlogic.fabric.value.RelationValue<SelectedInstanceDeductionDesign, EntityDesign> getOfEntityRelationValue() {
 		return ofEntity;
 	}
 
@@ -23,8 +23,9 @@ public class SelectedInstanceDeductionDesign extends DeductionDesign {
 		return ofEntity.getValue();
 	}
 	
-	public void setOfEntity(org.instantlogic.designer.EntityDesign newValue) {
+	public SelectedInstanceDeductionDesign setOfEntity(org.instantlogic.designer.EntityDesign newValue) {
 		ofEntity.setValue(newValue);
+		return (SelectedInstanceDeductionDesign)this;
 	}
 
 

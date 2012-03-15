@@ -38,7 +38,7 @@ public class PageFragmentDesignEntity extends org.instantlogic.fabric.model.Enti
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.PageFragmentDesign, java.lang.String> get(org.instantlogic.designer.PageFragmentDesign instance) {
-				return instance.getPresentationAttribute();
+				return instance.getPresentationAttributeValue();
 			}
 		};
 	
@@ -54,7 +54,7 @@ public class PageFragmentDesignEntity extends org.instantlogic.fabric.model.Enti
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.PageFragmentDesign, org.instantlogic.designer.PageFragmentHolderDesign> get(
 					org.instantlogic.designer.PageFragmentDesign instance) {
-				return instance.getHolderRelation();
+				return instance.getHolderRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -70,7 +70,7 @@ public class PageFragmentDesignEntity extends org.instantlogic.fabric.model.Enti
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.PageFragmentDesign, org.instantlogic.designer.PageCompositionDesign> get(
 					org.instantlogic.designer.PageFragmentDesign instance) {
-				return instance.getComposedInRelation();
+				return instance.getComposedInRelationValue();
 			}
 	
 			public boolean isReverse() {

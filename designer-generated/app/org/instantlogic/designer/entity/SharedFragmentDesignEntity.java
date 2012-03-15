@@ -41,7 +41,7 @@ public class SharedFragmentDesignEntity extends org.instantlogic.fabric.model.En
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.SharedFragmentDesign, org.instantlogic.designer.PageFragmentHolderDesign> get(
 					org.instantlogic.designer.SharedFragmentDesign instance) {
-				return instance.getPageFragmentHolderRelation();
+				return instance.getPageFragmentHolderRelationValue();
 			}
 			
 		};

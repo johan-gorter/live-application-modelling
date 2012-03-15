@@ -152,7 +152,7 @@ public abstract class AbstractGenerator {
 	
 	public int addDeductionScheme(DeductionSchemeDesign scheme) {
 		int deductionIndex = deductionSchemes.size();
-		deductionSchemes.add(new DeductionSchemeGenerator(scheme, deductionIndex));
+		deductionSchemes.add(new DeductionSchemeGenerator(rootPackageName, scheme, deductionIndex));
 		return deductionIndex;
 	}
 

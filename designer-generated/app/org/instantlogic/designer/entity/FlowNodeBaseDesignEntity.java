@@ -43,7 +43,7 @@ public class FlowNodeBaseDesignEntity extends org.instantlogic.fabric.model.Enti
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.designer.FlowDesign> get(
 					org.instantlogic.designer.FlowNodeBaseDesign instance) {
-				return instance.getOwnerRelation();
+				return instance.getOwnerRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -59,7 +59,7 @@ public class FlowNodeBaseDesignEntity extends org.instantlogic.fabric.model.Enti
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.designer.FlowSourceDesign> get(
 					org.instantlogic.designer.FlowNodeBaseDesign instance) {
-				return instance.getIncomingSourcesRelation();
+				return instance.getIncomingSourcesRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -79,7 +79,7 @@ public class FlowNodeBaseDesignEntity extends org.instantlogic.fabric.model.Enti
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.designer.FlowEdgeDesign> get(
 					org.instantlogic.designer.FlowNodeBaseDesign instance) {
-				return instance.getOutgoingEdgesRelation();
+				return instance.getOutgoingEdgesRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -99,7 +99,7 @@ public class FlowNodeBaseDesignEntity extends org.instantlogic.fabric.model.Enti
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.designer.FlowEdgeDesign> get(
 					org.instantlogic.designer.FlowNodeBaseDesign instance) {
-				return instance.getIncomingEdgesRelation();
+				return instance.getIncomingEdgesRelationValue();
 			}
 	
 			public boolean isReverse() {

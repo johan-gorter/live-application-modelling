@@ -18,31 +18,36 @@ public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${
 		return ${attribute.name}.getValue();
 	}
 
-	public org.instantlogic.fabric.value.<#if attribute.readonly>ReadOnly</#if>AttributeValue<#if attribute.multivalue>s</#if><${name}, ${attribute.itemClassName}> get${attribute.name?cap_first}Attribute() {
+	public org.instantlogic.fabric.value.<#if attribute.readonly>ReadOnly</#if>AttributeValue<#if attribute.multivalue>s</#if><${name}, ${attribute.itemClassName}> get${attribute.name?cap_first}AttributeValue() {
 		return ${attribute.name};
 	}
 
 	<#if !attribute.readonly && !attribute.multivalue>	
-	public void set${attribute.name?cap_first}(${attribute.className} newValue) {
+	public ${name} set${attribute.name?cap_first}(${attribute.className} newValue) {
 		${attribute.name}.setValue(newValue);
+		return (${name})this;
 	}
 	
 	</#if>
 	<#if !attribute.readonly && attribute.multivalue>	
-	public void addTo${attribute.name?cap_first}(${attribute.className} item) {
+	public ${name} addTo${attribute.name?cap_first}(${attribute.className} item) {
 		${attribute.name}.addValue(item);
+		return (${name})this;
 	}
 	
-	public void addTo${attribute.name?cap_first}(${attribute.className} item, int index) {
+	public ${name} addTo${attribute.name?cap_first}(${attribute.className} item, int index) {
 		${attribute.name}.insertValue(item, index);
+		return (${name})this;
 	}
 	
-	public void removeFrom${attribute.name?cap_first}(${attribute.className} item) {
+	public ${name} removeFrom${attribute.name?cap_first}(${attribute.className} item) {
 		${attribute.name}.removeValue(item);
+		return (${name})this;
 	}
 	
-	public void removeFrom${attribute.name?cap_first}(int index) {
+	public ${name} removeFrom${attribute.name?cap_first}(int index) {
 		${attribute.name}.removeValue(index);
+		return (${name})this;
 	}
 	
 	</#if>
@@ -54,7 +59,7 @@ public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${
 	private final org.instantlogic.fabric.value.<#if relation.readonly>ReadOnly</#if>RelationValue<#if relation.multivalue>s</#if><${name}, ${relation.item}> ${relation.name}
 		= create<#if relation.readonly>ReadOnly</#if>RelationValue<#if relation.multivalue>s</#if>(${rootPackageName}.entity.${name}Entity.${relation.name});
 		
-	public org.instantlogic.fabric.value.<#if relation.readonly>ReadOnly</#if>RelationValue<#if relation.multivalue>s</#if><${name}, ${relation.item}> get${relation.name?cap_first}Relation() {
+	public org.instantlogic.fabric.value.<#if relation.readonly>ReadOnly</#if>RelationValue<#if relation.multivalue>s</#if><${name}, ${relation.item}> get${relation.name?cap_first}RelationValue() {
 		return ${relation.name};
 	}
 
@@ -63,26 +68,31 @@ public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${
 	}
 	
 	<#if !relation.readonly && !relation.multivalue>	
-	public void set${relation.name?cap_first}(${relation.to} newValue) {
+	public ${name} set${relation.name?cap_first}(${relation.to} newValue) {
 		${relation.name}.setValue(newValue);
+		return (${name})this;
 	}
 
 	</#if>
 	<#if !relation.readonly && relation.multivalue>	
-	public void addTo${relation.name?cap_first}(${relation.item} item) {
+	public ${name} addTo${relation.name?cap_first}(${relation.item} item) {
 		${relation.name}.addValue(item);
+		return (${name})this;
 	}
 	
-	public void addTo${relation.name?cap_first}(${relation.item} item, int index) {
+	public ${name} addTo${relation.name?cap_first}(${relation.item} item, int index) {
 		${relation.name}.insertValue(item, index);
+		return (${name})this;
 	}
 	
-	public void removeFrom${relation.name?cap_first}(${relation.item} item) {
+	public ${name} removeFrom${relation.name?cap_first}(${relation.item} item) {
 		${relation.name}.removeValue(item);
+		return (${name})this;
 	}
 	
-	public void removeFrom${relation.name?cap_first}(int index) {
+	public ${name} removeFrom${relation.name?cap_first}(int index) {
 		${relation.name}.removeValue(index);
+		return (${name})this;
 	}
 	
 	</#if>
@@ -94,7 +104,7 @@ public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<#if relation.multivalue>s</#if><${name}, ${relation.item}> ${relation.name}
 		= createReverseRelationValue<#if relation.multivalue>s</#if>(${rootPackageName}.entity.${name}Entity.${relation.name});
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<#if relation.multivalue>s</#if><${name}, ${relation.item}> get${relation.name?cap_first}Relation() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<#if relation.multivalue>s</#if><${name}, ${relation.item}> get${relation.name?cap_first}RelationValue() {
 		return ${relation.name};
 	}
 

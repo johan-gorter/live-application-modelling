@@ -41,7 +41,7 @@ public class SelectedInstanceDeductionDesignEntity extends org.instantlogic.fabr
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.SelectedInstanceDeductionDesign, org.instantlogic.designer.EntityDesign> get(
 					org.instantlogic.designer.SelectedInstanceDeductionDesign instance) {
-				return instance.getOfEntityRelation();
+				return instance.getOfEntityRelationValue();
 			}
 			
 		};
