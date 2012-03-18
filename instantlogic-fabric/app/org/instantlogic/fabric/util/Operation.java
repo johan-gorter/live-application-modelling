@@ -11,13 +11,13 @@ import org.instantlogic.fabric.value.AttributeValues;
 public class Operation {
 	
 	public enum OperationState {STARTED, UNDOING, COMPLETED, CLOSED}
-	private final InstanceAdministration instanceAdministration;
+	private final CaseAdministration instanceAdministration;
 	private final List<ValueChangeEvent> eventsToUndo = new ArrayList<ValueChangeEvent>();
 	private final Operation partOfOperation;
 	private OperationState state;
 	private int recordingUndoEventsPaused;
 
-	public Operation(InstanceAdministration instanceAdministration, Operation partOfOperation) {
+	public Operation(CaseAdministration instanceAdministration, Operation partOfOperation) {
 		this.instanceAdministration = instanceAdministration;
 		this.partOfOperation = partOfOperation;
 	}

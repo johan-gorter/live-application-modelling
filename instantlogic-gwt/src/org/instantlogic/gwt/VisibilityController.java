@@ -2,6 +2,7 @@ package org.instantlogic.gwt;
 
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.deduction.Deduction;
+import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.util.Observations;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 import org.instantlogic.fabric.util.SingleInstanceDeductionContext;
@@ -36,10 +37,11 @@ public class VisibilityController extends Controller {
 	
 	protected void update() {
 		SingleInstanceDeductionContext context = new SingleInstanceDeductionContext(instance);
-		instance.getInstanceAdministration().startRecordingObservations();
+		CaseAdministration caseAdministration = instance.getMetadata().getCaseAdministration();
+		caseAdministration.startRecordingObservations();
 		boolean visible = deduction.deduct(context).getValue()==Boolean.TRUE;
 		widget.setVisible(visible);
-		Observations observations = instance.getInstanceAdministration().stopRecordingObservations();
+		Observations observations = caseAdministration.stopRecordingObservations();
 		observationsOutdatedObserver = new ObservationsOutdatedObserver(observations, outdatedListener);
 	}
 

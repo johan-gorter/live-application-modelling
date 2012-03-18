@@ -19,7 +19,7 @@ public class AttributeValueImpl<I extends Instance, Value extends Object>
 
 	@Override
 	public void setValue(Value value) {
-		Operation operation = forInstance.getInstanceAdministration().startOperation();
+		Operation operation = forInstance.getMetadata().getCaseAdministration().startOperation();
 		try {
 			Value oldStoredValue = storedValue;
 			ValueAndLevel<Value> oldValue = invalidateCachedValue();

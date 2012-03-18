@@ -69,7 +69,7 @@ public class ApplicationGenerator extends AbstractGenerator {
 		}
 		mustRegenerate = false;
 		
-		applicationInstance.getInstanceAdministration().startRecordingObservations();
+		applicationInstance.getMetadata().getCaseAdministration().startRecordingObservations();
 		rootPackageName = applicationInstance.getRootPackageName();
 		name = applicationInstance.getName();
 		isCustomized = applicationInstance.getIsCustomized()==Boolean.TRUE;
@@ -123,7 +123,7 @@ public class ApplicationGenerator extends AbstractGenerator {
 //			flowGenerators.put(newFlow.getName(), flowGenerator);
 //		}
 		
-		this.observations = new ObservationsOutdatedObserver(applicationInstance.getInstanceAdministration().stopRecordingObservations(), null);
+		this.observations = new ObservationsOutdatedObserver(applicationInstance.getMetadata().getCaseAdministration().stopRecordingObservations(), null);
 	}
 	
 	public String caseEntity;

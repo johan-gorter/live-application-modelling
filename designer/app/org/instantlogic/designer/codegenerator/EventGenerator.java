@@ -5,8 +5,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.designer.EntityDesign;
-import app.designer.EventDesign;
+import org.instantlogic.designer.EntityDesign;
+import org.instantlogic.designer.EventDesign;
+import org.instantlogic.fabric.util.CaseAdministration;
+import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 
 public class EventGenerator extends AbstractGenerator {
 
@@ -29,17 +31,18 @@ public class EventGenerator extends AbstractGenerator {
 		if (observations!=null && !observations.isOutdated()) {
 			return;
 		}
-		eventDesign.getCase().startRecordingObservations();
+		CaseAdministration caseAdministration = eventDesign.getMetadata().getCaseAdministration();
+		caseAdministration.startRecordingObservations();
 		
-		this.customization = eventDesign.customization.get();
+		this.isCustomized = eventDesign.getIsCustomized();
 		
 		parameters.clear();
-		for (EntityDesign parameter: eventDesign.parameters.get()) {
-			parameters.add(parameter.name.get());
+		for (EntityDesign parameter: eventDesign.getParameters()) {
+			parameters.add(parameter.getName());
 		}
-		AbstractGenerator.generateFile(AbstractGenerator.eventTemplate, this, "event", name, "Event", rootPackageName, applicationRoot, this.customization!=null);
+		AbstractGenerator.generateFile(AbstractGenerator.eventTemplate, this, "event", name, "Event", rootPackageName, applicationRoot, this.isCustomized);
 		
-		this.observations = eventDesign.getCase().stopRecordingObservations();
+		this.observations = new ObservationsOutdatedObserver(caseAdministration.stopRecordingObservations(), null);
 	}
 
 	@Override

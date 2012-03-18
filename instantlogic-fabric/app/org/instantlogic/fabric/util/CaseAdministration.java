@@ -3,12 +3,11 @@ package org.instantlogic.fabric.util;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
 
-public class InstanceAdministration {
+public class CaseAdministration {
 
 	private HashMap<String, Instance> instances = new HashMap<String, Instance>();
 	
@@ -20,7 +19,7 @@ public class InstanceAdministration {
 	
 	private Operation currentOperation;
 	
-	public InstanceAdministration(Instance rootInstance) {
+	public CaseAdministration(Instance rootInstance) {
 		instances.put("0", rootInstance);
 	}
 	

@@ -26,7 +26,7 @@ public class AttributeValuesImpl<I extends Instance, Item extends Object>
 	
 	private Operation startOperation() {
 		ensureStored();
-		return forInstance.getInstanceAdministration().startOperation();
+		return forInstance.getMetadata().getCaseAdministration().startOperation();
 	}
 
 	private void ensureStored() {

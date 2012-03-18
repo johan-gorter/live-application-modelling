@@ -3,16 +3,17 @@ package org.instantlogic.designer.codegenerator;
 
 import java.io.File;
 
+import org.instantlogic.designer.PageDesign;
+import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.util.Observations;
+import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 
 public class PageGenerator extends AbstractGenerator {
 
 	private String flowname;
-	private ContentClassModel content;
+	private ContentGenerator content;
 	
 	private PageDesign pageDesign;
-	
-	private Observations observations;
 	
 	public PageGenerator(PageDesign pageDesign, String appname, String flowname) {
 		this.pageDesign = pageDesign;
@@ -24,7 +25,7 @@ public class PageGenerator extends AbstractGenerator {
 		return flowname;
 	}
 
-	public ContentClassModel getContent() {
+	public ContentGenerator getContent() {
 		return content;
 	}
 
@@ -32,19 +33,20 @@ public class PageGenerator extends AbstractGenerator {
 	public void update(File applicationRoot) {
 		if (observations!=null && !observations.isOutdated()) return;
 		clearDeductionSchemes();
-		pageDesign.getCase().startRecordingObservations();
+		CaseAdministration caseAdministration = pageDesign.getMetadata().getCaseAdministration();
+		caseAdministration.startRecordingObservations();
 		
-		name = pageDesign.name.get();
-		customization = pageDesign.customization.get();
-		content = new ContentClassModel(pageDesign.getContent(), this);
+		name = pageDesign.getName();
+		isCustomized = pageDesign.getIsCustomized();
+		content = new ContentGenerator(pageDesign.getContent(), this);
 		
-		AbstractGenerator.generateFile(AbstractGenerator.pageTemplate, this, "flow/"+flowname.toLowerCase(), pageDesign.name.get(), "Page", rootPackageName, applicationRoot, this.customization!=null);
+		AbstractGenerator.generateFile(AbstractGenerator.pageTemplate, this, "flow/"+flowname.toLowerCase(), pageDesign.getName(), "Page", rootPackageName, applicationRoot, this.isCustomized);
 		
-		this.observations = pageDesign.getInstanceAdministration().stopRecordingObservations();
+		this.observations = new ObservationsOutdatedObserver(caseAdministration.stopRecordingObservations(), null);
 	}
 
 	@Override
 	public void delete(File applicationRoot) {
-		AbstractGenerator.deleteFile("flow/"+flowname.toLowerCase(), pageDesign.name.get(), "Page", rootPackageName, applicationRoot);
+		AbstractGenerator.deleteFile("flow/"+flowname.toLowerCase(), pageDesign.getName(), "Page", rootPackageName, applicationRoot);
 	}
 }
