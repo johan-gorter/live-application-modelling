@@ -133,7 +133,7 @@ public class EntityGenerator extends AbstractGenerator {
 	public void update(File applicationRoot) {
 		if (observations!=null && !observations.isOutdated()) return;
 		clearDeductionSchemes();
-		entityDesign.getInstanceAdministration().startRecordingObservations();
+		entityDesign.getMetadata().getCaseAdministration().startRecordingObservations();
 		
 		name = entityDesign.getName();
 		isCustomized = entityDesign.getIsCustomized()==Boolean.TRUE;
@@ -205,7 +205,7 @@ public class EntityGenerator extends AbstractGenerator {
 		AbstractGenerator.generateFile(AbstractGenerator.entityTemplate, this, "entity", name, "Entity", rootPackageName, applicationRoot, false);
 		AbstractGenerator.generateFile(AbstractGenerator.instanceTemplate, this, null, name, "", rootPackageName, applicationRoot, this.isCustomized);
 		
-		this.observations = new ObservationsOutdatedObserver(entityDesign.getInstanceAdministration().stopRecordingObservations(), null);
+		this.observations = new ObservationsOutdatedObserver(entityDesign.getMetadata().getCaseAdministration().stopRecordingObservations(), null);
 	}
 	
 	@Override

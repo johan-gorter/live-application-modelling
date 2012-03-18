@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.deduction.Deduction;
 import org.instantlogic.fabric.model.Attribute;
-import org.instantlogic.fabric.util.InstanceAdministration;
+import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.util.Observations;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 import org.instantlogic.fabric.util.Operation;
@@ -94,13 +94,13 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 
 	@Override
 	public ValueAndLevel<Value> getValueAndLevel() {
-		InstanceAdministration registry = forInstance.getInstanceAdministration();
+		CaseAdministration registry = forInstance.getMetadata().getCaseAdministration();
 		registry.registerObservation(this);
 		ensureCached(registry);
 		return cached;
 	}
 	
-	private void ensureCached(InstanceAdministration registry) {
+	private void ensureCached(CaseAdministration registry) {
 		if (cached==null) {
 			registry.startRecordingObservations();
 			calculateValue();
@@ -192,7 +192,7 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 			}
 			// Observers on the Instance and Instances above
 			instanceInformed = true;
-			forInstance.fireValueChanged(event, true);
+			forInstance.getMetadata().fireValueChanged(event, true);
 			success = true;
 		} finally {
 			if (success) {
@@ -215,7 +215,7 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 					
 					// Observers on the Instance
 					if (instanceInformed) {
-						forInstance.fireValueChanged(undoEvent, true);
+						forInstance.getMetadata().fireValueChanged(undoEvent, true);
 					}
 					// ValueChangeObservers
 					if (iterator!=null) {
@@ -280,7 +280,7 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 	@Override
 	public void addValueChangeObserver(ValueChangeObserver observer) {
 		// This statement usually does nothing. The value is normally already deduced. Listening to changes on an unknown value is rarely useful.
-		ensureCached(forInstance.getInstanceAdministration());
+		ensureCached(forInstance.getMetadata().getCaseAdministration());
 		copyGlobalValueChangeListenersIfNeeded();
 		valueChangeObservers.add(observer);
 	}
@@ -328,7 +328,7 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 	
 	@Override
 	public int hashCode() {
-		return forInstance.getInstanceLocalId().hashCode()+model.getName().hashCode();
+		return forInstance.getMetadata().getInstanceLocalId().hashCode()+model.getName().hashCode();
 	}
 	
 	@SuppressWarnings("unchecked")

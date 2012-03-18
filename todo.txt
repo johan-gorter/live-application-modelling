@@ -1,20 +1,21 @@
-RitAdministratie goed
-globale listeners
+0.7:
+Ritadministratie
+- Afwijking zichtbaar
+- Demo pagina
+- Stresstest feature op demo pagina
+- Look and feel moderniseren
+- route inzichtelijker maken (laatste lokatie naar links)
 
-code generatie zonder imports
-- 2 constructors (met en zonder DesirializedInstance)
-- extra generics (ook voor caseinstance)
+Fabric
+- Tijdelijke listeners Operation + Transaction
+- inheritance van attributen mogelijk maken
 
+Interaction
+- Play -> ASM
+- gebruikers elkaar laten zien
+- Look and feel showcasebaar
 
-New design met tabellen
-Page designer flow
-.get(), .set() verwijderen, inheritance van attributen mogelijk maken
-CaseExplorer dynamisch
-Builder vanuit applicatie laten designen
-Demo diversen
-Play -> ASM
-gebruikers elkaar laten zien
-
-
-Nadenken:
-- Alle instances zijn caseinstances?
+0.8
+- Serialisatie
+- Android apps
+- CaseExplorer dynamisch

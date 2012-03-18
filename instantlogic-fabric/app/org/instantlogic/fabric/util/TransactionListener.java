@@ -2,12 +2,12 @@ package org.instantlogic.fabric.util;
 
 public interface TransactionListener {
 
-	void transactionStarted(InstanceAdministration instanceAdministration);
+	void transactionStarted(CaseAdministration instanceAdministration);
 
-	void transactionPreparing(InstanceAdministration instanceAdministration);
+	void transactionPreparing(CaseAdministration instanceAdministration);
 
-	void transactionCommitting(InstanceAdministration instanceAdministration);
+	void transactionCommitting(CaseAdministration instanceAdministration);
 
-	void transactionCompleted(InstanceAdministration instanceAdministration, boolean committed);
+	void transactionCompleted(CaseAdministration instanceAdministration, boolean committed);
 	
 }

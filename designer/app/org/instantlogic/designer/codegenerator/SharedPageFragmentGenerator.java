@@ -3,11 +3,13 @@ package org.instantlogic.designer.codegenerator;
 
 import java.io.File;
 
-import app.designer.PageFragmentHolderDesign;
+import org.instantlogic.designer.PageFragmentHolderDesign;
+import org.instantlogic.fabric.util.CaseAdministration;
+import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 
 public class SharedPageFragmentGenerator extends AbstractGenerator {
 
-	private ContentClassModel content;
+	private ContentGenerator content;
 	private PageFragmentHolderDesign pageFragmentHolderDesign;
 
 	public SharedPageFragmentGenerator(PageFragmentHolderDesign pageFragmentHolderDesign, String appname) {
@@ -21,14 +23,15 @@ public class SharedPageFragmentGenerator extends AbstractGenerator {
 		if (observations!=null && !observations.isOutdated()) {
 			return;
 		}
-		pageFragmentHolderDesign.getCase().startRecordingObservations();
+		CaseAdministration caseAdministration = pageFragmentHolderDesign.getMetadata().getCaseAdministration();
+		caseAdministration.startRecordingObservations();
 
 		clearDeductionSchemes();
-		this.customization = pageFragmentHolderDesign.getCustomization();
-		this.content = new ContentClassModel(pageFragmentHolderDesign.getPageFragment(), this);
-		AbstractGenerator.generateFile(AbstractGenerator.pageFragmentTemplate, this, "sharedpagefragment", name, "PageFragment", rootPackageName, applicationRoot, this.customization!=null);
+		this.isCustomized = pageFragmentHolderDesign.getIsCustomized();
+		this.content = new ContentGenerator(pageFragmentHolderDesign.getPageFragment(), this);
+		AbstractGenerator.generateFile(AbstractGenerator.pageFragmentTemplate, this, "sharedpagefragment", name, "PageFragment", rootPackageName, applicationRoot, this.isCustomized);
 		
-		this.observations = pageFragmentHolderDesign.getCase().stopRecordingObservations();
+		this.observations = new ObservationsOutdatedObserver(caseAdministration.stopRecordingObservations(), null);
 	}
 
 	@Override
@@ -36,7 +39,7 @@ public class SharedPageFragmentGenerator extends AbstractGenerator {
 		AbstractGenerator.deleteFile("sharedpagefragment", name, "Event", rootPackageName, applicationRoot);
 	}
 
-	public ContentClassModel getContent() {
+	public ContentGenerator getContent() {
 		return content;
 	}
 

@@ -3,9 +3,10 @@ package org.instantlogic.designer.codegenerator;
 
 import java.io.File;
 
+import org.instantlogic.designer.SubFlowDesign;
+import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.util.Observations;
-
-import app.designer.SubFlowDesign;
+import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 
 public class SubFlowGenerator extends AbstractGenerator {
 
@@ -13,7 +14,6 @@ public class SubFlowGenerator extends AbstractGenerator {
 	public String subFlowName;
 	
 	public SubFlowDesign subFlowDesign;
-	private Observations observations;
 	
 	public SubFlowGenerator(SubFlowDesign subFlowDesign, String appname, String flowName) {
 		this.subFlowDesign = subFlowDesign;
@@ -32,13 +32,14 @@ public class SubFlowGenerator extends AbstractGenerator {
 	@Override
 	public void update(File applicationRoot) {
 		if (observations!=null && !observations.isOutdated()) return;
-		subFlowDesign.getCase().startRecordingObservations();
+		CaseAdministration caseAdministration = subFlowDesign.getMetadata().getCaseAdministration();
+		caseAdministration.startRecordingObservations();
 		
-		name = subFlowDesign.name.get();
-		subFlowName = subFlowDesign.flow.get().name.get();
-		AbstractGenerator.generateFile(AbstractGenerator.subFlowTemplate, this, "flow/"+flowname.toLowerCase(), name, "SubFlow", rootPackageName, applicationRoot, this.customization!=null);
+		name = subFlowDesign.getName();
+		subFlowName = subFlowDesign.getFlow().getName();
+		AbstractGenerator.generateFile(AbstractGenerator.subFlowTemplate, this, "flow/"+flowname.toLowerCase(), name, "SubFlow", rootPackageName, applicationRoot, this.isCustomized);
 		
-		this.observations = subFlowDesign.getCase().stopRecordingObservations();
+		this.observations = new ObservationsOutdatedObserver(caseAdministration.stopRecordingObservations(), null);
 	}
 	
 	@Override

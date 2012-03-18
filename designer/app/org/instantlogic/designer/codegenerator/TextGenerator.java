@@ -11,6 +11,7 @@ import org.instantlogic.designer.FormattedValueDesign;
 import org.instantlogic.designer.StringProducerDesign;
 import org.instantlogic.designer.TemplatedTextDesign;
 import org.instantlogic.designer.TextDesign;
+import org.instantlogic.fabric.value.Multi;
 
 public class TextGenerator {
 
@@ -49,7 +50,7 @@ public class TextGenerator {
 		} else if (text instanceof TemplatedTextDesign) {
 			type="templated";
 			TemplatedTextDesign templatedText = (TemplatedTextDesign) text;
-			List<StringProducerDesign> list = templatedText.getUntranslated();
+			Multi<StringProducerDesign> list = templatedText.getUntranslated();
 			for (StringProducerDesign spInstance : list) {
 				StringProducer result = new StringProducer();
 				if (spInstance instanceof ConstantStringDesign) {

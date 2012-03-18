@@ -36,7 +36,7 @@ public class RelationValueImpl<I extends Instance, To extends Instance>
 			} else {
 				((ReverseRelationValueImpl)newReverseRelationValue).setReverse(forInstance, model.isOwner(), null);
 			}
-			forInstance.adopt(resultValue);
+			forInstance.getMetadata().adopt(resultValue);
 			return ValueAndLevel.stored(resultValue);
 		}
 		return result;

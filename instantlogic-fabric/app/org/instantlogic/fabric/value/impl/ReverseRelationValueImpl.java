@@ -37,10 +37,10 @@ public class ReverseRelationValueImpl<I extends Instance, From extends Instance>
 		if (operation==null) return;
 		if (isOwner) {
 			if (oldValue!=null) {
-				oldValue.reject(forInstance);
+				oldValue.getMetadata().reject(forInstance);
 			}
 			if (reverseValue!=null) {
-				reverseValue.adopt(forInstance);
+				reverseValue.getMetadata().adopt(forInstance);
 			}
 		}
 		fireValueChanged(ValueAndLevel.deducedOrMissing(oldValue), null, null, operation);
