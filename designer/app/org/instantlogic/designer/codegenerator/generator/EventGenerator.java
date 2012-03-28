@@ -31,6 +31,7 @@ public class EventGenerator extends AbstractGenerator {
 		caseAdministration.startRecordingObservations();
 		
 		EventClassModel model = initModel();
+		model.rootPackageName = context.rootPackageName;
 
 		for (EntityDesign parameter: eventDesign.getParameters()) {
 			model.parameters.add(parameter.getName());

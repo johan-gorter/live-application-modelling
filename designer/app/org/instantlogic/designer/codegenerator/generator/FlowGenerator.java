@@ -45,9 +45,8 @@ public class FlowGenerator extends AbstractGenerator {
 		caseAdministration.startRecordingObservations();
 		
 		FlowClassModel model = initModel();
+		model.rootPackageName = context.rootPackageName;
 		
-		model.isCustomized = flowDesign.getIsCustomized();
-		model.name = flowDesign.getName();
 		for (FlowSourceDesign source: flowDesign.getSources()) {
 			FlowClassModel.FlowSource flowSource = new FlowClassModel.FlowSource();
 			flowSource.startEvent = source.getStartEvent()==null?null:source.getStartEvent().getName();

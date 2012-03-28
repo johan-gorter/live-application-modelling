@@ -22,6 +22,8 @@ public class SubFlowGenerator extends AbstractGenerator {
 		caseAdministration.startRecordingObservations();
 		
 		SubFlowClassModel model = initModel();
+		model.rootPackageName = context.rootPackageName;
+		model.subFlowName = subFlowDesign.getFlow().getName();
 		
 		this.observations = new ObservationsOutdatedObserver(caseAdministration.stopRecordingObservations(), null);
 		context.updatedSubFlows.add(model);
@@ -36,7 +38,8 @@ public class SubFlowGenerator extends AbstractGenerator {
 	private SubFlowClassModel initModel() {
 		SubFlowClassModel model = new SubFlowClassModel();
 		model.name = subFlowDesign.getName();
-		model.isCustomized = subFlowDesign.getIsCustomized();
+		model.isCustomized = subFlowDesign.getIsCustomized()==Boolean.TRUE;
+		model.flowname = subFlowDesign.getOwner().getName();
 		return model;
 	}
 }

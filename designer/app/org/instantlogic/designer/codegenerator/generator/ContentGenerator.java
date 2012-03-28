@@ -22,9 +22,9 @@ public abstract class ContentGenerator extends AbstractGenerator {
 			model.type = model.type.substring(0, model.type.length()-6);
 		}
 		model.presentation = fragment.getPresentation();
-		model.isCustomized = fragment.getIsCustomized();
+		model.isCustomized = fragment.getIsCustomized() == Boolean.TRUE;
 		if (fragment instanceof SharedFragmentDesign) {
-			model.name = fragment.getHolder().getName();
+			model.name = ((SharedFragmentDesign) fragment).getPageFragmentHolder().getName();
 		} else if (fragment instanceof FieldDesign) {
 			FieldDesign field = (FieldDesign) fragment;
 			model.required = (field.getRequired()== Boolean.TRUE);
