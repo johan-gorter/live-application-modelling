@@ -17,7 +17,7 @@ public abstract class Page extends FlowNodeBase {
 	public PageElement render(final RenderContext renderContext) {
 		PageRootElement result = new PageRootElement();
 		result.caseId = renderContext.getCaseId();
-		result.caseVersion = renderContext.getCaseInstance().getInstanceAdministration().getVersion();
+		result.caseVersion = renderContext.getCaseInstance().getMetadata().getCaseAdministration().getVersion();
 		result.language = renderContext.getLanguage();
 		result.params = new PageRootParamsElement();
 		result.elementType = "page";

@@ -18,3 +18,4 @@ instantlogic-gwt/dist
 *.orig
 instantlogic-play/eclipse/classes
 Zandbak/
+generated-bin

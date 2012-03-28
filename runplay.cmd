@@ -1,1 +1,1 @@
-call d:\java\play-1.2.1\play.bat run lberunner
+call d:\java\play-1.2.1\play.bat run instantlogic-play

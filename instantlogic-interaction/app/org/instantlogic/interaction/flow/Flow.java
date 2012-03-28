@@ -132,7 +132,7 @@ public abstract class Flow extends Concept {
 			throw new RuntimeException("Number of parameters does not match number of selected instances"); // TODO check if the right instances are selected
 		}
 		for (String instanceId: current.getActiveInstances()) {
-			Instance instance = caseInstance.getInstanceAdministration().getInstanceById(instanceId);
+			Instance instance = caseInstance.getMetadata().getCaseAdministration().getInstanceById(instanceId);
 			if (instance==null) {
 				throw new RuntimeException("Instance "+instanceId+" invalid");
 			}

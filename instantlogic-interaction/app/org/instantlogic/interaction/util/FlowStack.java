@@ -50,7 +50,7 @@ public class FlowStack extends AbstractDeductionContext {
 			lastCoordinate = result.getPath().get(result.getPath().size()-1);
 		}
 		for (Instance instance: selectedInstances) {
-			lastCoordinate.getActiveInstances().add(instance.getInstanceId());
+			lastCoordinate.getActiveInstances().add(instance.getMetadata().getInstanceId());
 		}
 		result.addCoordinate(new Coordinate(currentNode.getName(), new ArrayList<String>()));
 		return result;

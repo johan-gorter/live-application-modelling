@@ -1,8 +1,5 @@
-package org.instantlogic.designer.codegenerator;
+package org.instantlogic.designer.codegenerator.generator;
 
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.instantlogic.designer.ConstantStringDesign;
 import org.instantlogic.designer.ConstantTextDesign;
@@ -11,48 +8,24 @@ import org.instantlogic.designer.FormattedValueDesign;
 import org.instantlogic.designer.StringProducerDesign;
 import org.instantlogic.designer.TemplatedTextDesign;
 import org.instantlogic.designer.TextDesign;
+import org.instantlogic.designer.codegenerator.classmodel.AbstractClassModel;
+import org.instantlogic.designer.codegenerator.classmodel.TextModel;
 import org.instantlogic.fabric.value.Multi;
 
-public class TextGenerator {
+public abstract class TextGenerator extends AbstractGenerator {
 
-	public class StringProducer
-	{
-		public String type;
-		public String constant;
-		public int deductionIndex;
-		
-		public String getType() {
-			return type;
-		}
-		public String getConstant() {
-			return constant;
-		}
-		public int getDeductionIndex() {
-			return deductionIndex;
-		}
-	}
-	
-	private AbstractGenerator deductionSchemeHolder;
-	
-	public String type;
-	
-	public String untranslatedConstant;
-	
-	public List<StringProducer> stringProducers = new ArrayList<StringProducer>();
-
-	public TextGenerator(TextDesign text, AbstractGenerator deductionSchemeHolder)
-	{
-		this.deductionSchemeHolder = deductionSchemeHolder;
+	public static TextModel generate(TextDesign text, AbstractClassModel deductionSchemeHolder) {
+		TextModel model = new TextModel();
 		if (text instanceof ConstantTextDesign) {
-			type="constant";
+			model.type="constant";
 			ConstantTextDesign constantText = (ConstantTextDesign) text;
-			this.untranslatedConstant = constantText.getUntranslated();
+			model.untranslatedConstant = constantText.getUntranslated();
 		} else if (text instanceof TemplatedTextDesign) {
-			type="templated";
+			model.type="templated";
 			TemplatedTextDesign templatedText = (TemplatedTextDesign) text;
 			Multi<StringProducerDesign> list = templatedText.getUntranslated();
 			for (StringProducerDesign spInstance : list) {
-				StringProducer result = new StringProducer();
+				TextModel.StringProducer result = new TextModel.StringProducer();
 				if (spInstance instanceof ConstantStringDesign) {
 					result.type = "constant";
 					result.constant = ((ConstantStringDesign)spInstance).getConstant();
@@ -60,22 +33,11 @@ public class TextGenerator {
 					result.type = "formattedValue";
 					FormattedValueDesign fvInstance = (FormattedValueDesign)spInstance;
 					DeductionSchemeDesign scheme = fvInstance.getDeduction();
-					result.deductionIndex = deductionSchemeHolder.addDeductionScheme(scheme);
+					result.deductionIndex = deductionSchemeHolder.addDeductionScheme(DeductionSchemeGenerator.generate(deductionSchemeHolder.rootPackageName, scheme));
 				}
-				stringProducers.add(result);
+				model.stringProducers.add(result);
 			}
 		} else throw new RuntimeException("Unsupported subclass of TextDesign: "+text.getClass());
-	}
-
-	public String getUntranslatedConstant() {
-		return untranslatedConstant;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public List<StringProducer> getStringProducers() {
-		return stringProducers;
+		return model;
 	}
 }

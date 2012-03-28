@@ -20,6 +20,7 @@ public class Bootstrapper {
 //		createCarinsurance();
 //		createDesigner();
 //		CycleBootstrapper.createCycle().getApplicationGenerator().generateJavaCode();
+//		PeriodBootstrapper.createPeriod().getApplicationGenerator().generateJavaCode();
 	}
 
 	public static void createDesigner() {

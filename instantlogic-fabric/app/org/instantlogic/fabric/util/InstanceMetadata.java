@@ -12,7 +12,7 @@ import org.instantlogic.fabric.model.Entity;
 
 public class InstanceMetadata {
 
-	private Instance instance;
+	private final Instance instance;
 	private Instance owner = null;
 	private List<GlobalValueChangeListener> globalValueChangeListeners = new ArrayList<GlobalValueChangeListener>();
 	// When this value is the same as globalValueChangeListeners, copy globalValueChangeListeners on write and clear this field.
@@ -153,7 +153,7 @@ public class InstanceMetadata {
 		}
 		String childLocalId = ""+(++lastChildId);
 		children.put(childLocalId, instance);
-		instance.getMetadata().registerOwner(instance, childLocalId);
+		instance.getMetadata().registerOwner(this.instance, childLocalId);
 	}
 	
 	/**
@@ -177,5 +177,10 @@ public class InstanceMetadata {
 	
 	public Entity<?> getEntity() {
 		return instance.getInstanceEntity();
+	}
+	
+	@Override
+	public String toString() {
+		return "InstanceMetadata("+instance.toString()+")";
 	}
 }
