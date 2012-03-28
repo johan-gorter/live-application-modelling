@@ -59,10 +59,13 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 				return true;
 			};
 
-			private org.instantlogic.fabric.deduction.Deduction<java.lang.String> RULE = createDeduction0();
+			private org.instantlogic.fabric.deduction.Deduction<java.lang.String> rule;
 			@Override
 			public org.instantlogic.fabric.deduction.Deduction<java.lang.String> getRule() {
-				return RULE;
+				if (rule==null) {
+					rule = createDeduction0();
+				}
+				return rule;
 			}
 		};
 	
