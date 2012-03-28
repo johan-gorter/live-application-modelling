@@ -1,6 +1,5 @@
 package ${rootPackageName}.flow.${flowname?lower_case};
 
-import app.${appname}.flow.*;
 import lbe.model.flow.*;
 
 public class ${name}SubFlow extends SubFlow {

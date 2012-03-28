@@ -28,6 +28,7 @@ public class SharedPageFragmentGenerator extends AbstractGenerator {
 		caseAdministration.startRecordingObservations();
 
 		SharedPageFragmentClassModel model = initModel(context);
+		model.rootPackageName = context.rootPackageName;
 		model.content = ContentGenerator.generate(pageFragmentHolderDesign.getPageFragment(), model);
 		
 		this.observations = new ObservationsOutdatedObserver(caseAdministration.stopRecordingObservations(), null);
@@ -44,7 +45,7 @@ public class SharedPageFragmentGenerator extends AbstractGenerator {
 		SharedPageFragmentClassModel model = new SharedPageFragmentClassModel();
 		model.rootPackageName = context.rootPackageName;
 		model.name = pageFragmentHolderDesign.getName();
-		model.isCustomized = pageFragmentHolderDesign.getIsCustomized();
+		model.isCustomized = pageFragmentHolderDesign.getIsCustomized()==Boolean.TRUE;
 		return model;
 	}
 }

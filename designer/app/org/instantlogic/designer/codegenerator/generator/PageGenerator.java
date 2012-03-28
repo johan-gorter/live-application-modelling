@@ -23,6 +23,7 @@ public class PageGenerator extends AbstractGenerator {
 		caseAdministration.startRecordingObservations();
 		
 		PageClassModel model = initModel();
+		model.rootPackageName = context.rootPackageName;
 		model.content = ContentGenerator.generate(pageDesign.getContent(), model);
 
 		this.observations = new ObservationsOutdatedObserver(caseAdministration.stopRecordingObservations(), null);
@@ -38,7 +39,7 @@ public class PageGenerator extends AbstractGenerator {
 	private PageClassModel initModel() {
 		PageClassModel model = new PageClassModel();
 		model.name = pageDesign.getName();
-		model.isCustomized = pageDesign.getIsCustomized();
+		model.isCustomized = pageDesign.getIsCustomized()==Boolean.TRUE;
 		model.flowname = pageDesign.getOwner().getName();
 		return model;
 	}
