@@ -73,6 +73,9 @@ public class EntityDesign extends AbstractEntityDesign {
 		}
 	}
 	
+	/**
+	 * Will be called once for every entity from ApplicationDesign.init
+	 */
 	public void init() {
 	}
 }

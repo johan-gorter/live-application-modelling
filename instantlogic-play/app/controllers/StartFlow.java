@@ -40,7 +40,7 @@ public class StartFlow extends Controller {
 	private static final Logger LOG = Logger.getLogger(StartFlow.class);
 
 	private static final List<Application> applications = Arrays.asList(new Application[]{
-			CarInsuranceApplication.INSTANCE,
+//			CarInsuranceApplication.INSTANCE,
 			DesignerApplication.INSTANCE
 	});
 

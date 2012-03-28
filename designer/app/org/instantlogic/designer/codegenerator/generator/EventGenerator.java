@@ -1,4 +1,4 @@
-package org.instantlogic.designer.codegenerator;
+package org.instantlogic.designer.codegenerator.generator;
 
 
 import java.io.File;
@@ -7,6 +7,9 @@ import java.util.List;
 
 import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.EventDesign;
+import org.instantlogic.designer.codegenerator.classmodel.AbstractClassModel;
+import org.instantlogic.designer.codegenerator.classmodel.EventClassModel;
+import org.instantlogic.designer.codegenerator.javacode.AbstractJavacodeGenerator;
 import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 
@@ -14,39 +17,39 @@ public class EventGenerator extends AbstractGenerator {
 
 	private EventDesign eventDesign;
 
-	public final List<String> parameters = new ArrayList<String>();
-
-	public EventGenerator(EventDesign eventDesign, String appname) {
+	public EventGenerator(EventDesign eventDesign) {
 		this.eventDesign = eventDesign;
-		this.rootPackageName = appname;
-		this.name = eventDesign.getName();
 	}
 	
-	public List<String> getParameters() {
-		return parameters;
-	}
-
 	@Override
-	public void update(File applicationRoot) {
+	public void update(GeneratedClassModels context) {
 		if (observations!=null && !observations.isOutdated()) {
 			return;
 		}
+
 		CaseAdministration caseAdministration = eventDesign.getMetadata().getCaseAdministration();
 		caseAdministration.startRecordingObservations();
 		
-		this.isCustomized = eventDesign.getIsCustomized();
-		
-		parameters.clear();
+		EventClassModel model = initModel();
+
 		for (EntityDesign parameter: eventDesign.getParameters()) {
-			parameters.add(parameter.getName());
+			model.parameters.add(parameter.getName());
 		}
-		AbstractGenerator.generateFile(AbstractGenerator.eventTemplate, this, "event", name, "Event", rootPackageName, applicationRoot, this.isCustomized);
 		
 		this.observations = new ObservationsOutdatedObserver(caseAdministration.stopRecordingObservations(), null);
+		context.updatedEvents.add(model);
 	}
 
 	@Override
-	public void delete(File applicationRoot) {
-		AbstractGenerator.deleteFile("event", name, "Event", rootPackageName, applicationRoot);
+	public void delete(GeneratedClassModels context) {
+		EventClassModel model = initModel();
+		context.deletedEvents.add(model);
+	}
+
+	private EventClassModel initModel() {
+		EventClassModel model = new EventClassModel();
+		model.name = eventDesign.getName();
+		model.isCustomized = eventDesign.getIsCustomized()==Boolean.TRUE;
+		return model;
 	}
 }

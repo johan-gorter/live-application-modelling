@@ -1,55 +1,29 @@
-package org.instantlogic.designer.codegenerator;
+package org.instantlogic.designer.codegenerator.generator;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.instantlogic.designer.ApplicationDesign;
 import org.instantlogic.designer.AttributeDeductionDesign;
-import org.instantlogic.designer.ReverseRelationDeductionDesign;
 import org.instantlogic.designer.AttributeDesign;
 import org.instantlogic.designer.CastInstanceDeductionDesign;
 import org.instantlogic.designer.DeductionDesign;
 import org.instantlogic.designer.DeductionSchemeDesign;
 import org.instantlogic.designer.RelationDesign;
+import org.instantlogic.designer.ReverseRelationDeductionDesign;
 import org.instantlogic.designer.SelectedInstanceDeductionDesign;
+import org.instantlogic.designer.codegenerator.classmodel.DeductionModel;
+import org.instantlogic.designer.codegenerator.classmodel.DeductionSchemeModel;
 
 public class DeductionSchemeGenerator {
 	
-	public static class DeductionClassModel {
-		public int index;
-		public String type;
-		public String resultType;
-		public String customization;
-		public List<String> parameters = new ArrayList<String>();
-		
-		public int getIndex() {
-			return index;
-		}
-		public String getType() {
-			return type;
-		}
-		public String getResultType() {
-			return resultType;
-		}
-		public List<String> getParameters() {
-			return parameters;
-		}
-		public String getCustomization() {
-			return customization;
-		}
-	}
-	
-	private int index;
-	
-	private List<DeductionDesign> deductionDesigns = new ArrayList<DeductionDesign>();
-	private List<DeductionClassModel> deductions = new ArrayList<DeductionClassModel>();
-	
-	public DeductionSchemeGenerator(String rootPackageName, DeductionSchemeDesign deductionSchemeDesign, int index) {
-		fillDeductions(deductionSchemeDesign.getOutput());
+	public static DeductionSchemeModel generate(String rootPackageName, DeductionSchemeDesign deductionSchemeDesign) {
+		List<DeductionDesign> deductionDesigns = new ArrayList<DeductionDesign>();
+		fillDeductions(deductionSchemeDesign.getOutput(), deductionDesigns);
 		int deductionIndex = 0;
+		DeductionSchemeModel model = new DeductionSchemeModel();
 		for (DeductionDesign deduction : deductionDesigns) {
-			DeductionClassModel classModel = new DeductionClassModel();
+			DeductionModel classModel = new DeductionModel();
 			classModel.index = deductionIndex++;
 			classModel.type = deduction.getInstanceEntity().getName();
 			classModel.type = "org.instantlogic.fabric.deduction."+classModel.type.substring(0, classModel.type.length()-6); // leave Design suffix off
@@ -78,34 +52,17 @@ public class DeductionSchemeGenerator {
 			for (DeductionDesign input : deduction.getInputs()) {
 				classModel.parameters.add("d"+deductionDesigns.indexOf(input));
 			}
-			deductions.add(classModel);
+			model.deductions.add(classModel);
 		}
-		this.index = index;
+		return model;
 	}
 
-	private void fillDeductions(DeductionDesign fromOutput) {
+	private static void fillDeductions(DeductionDesign fromOutput, List<DeductionDesign> deductionDesigns) {
 		if (deductionDesigns.contains(fromOutput)) return;
 		for (DeductionDesign input: fromOutput.getInputs()) {
-			fillDeductions(input);
+			fillDeductions(input, deductionDesigns);
 		}
 		if (deductionDesigns.contains(fromOutput)) return;
 		deductionDesigns.add(fromOutput);
 	}
-
-	public int getIndex() {
-		return index;
-	}
-
-	public List<DeductionClassModel> getDeductions() {
-		return deductions;
-	}
-	
-	public int getLastDeductionIndex() {
-		return deductions.size()-1;
-	}
-
-	public String getLastResultType() {
-		return deductions.get(deductions.size()-1).resultType;
-	}
-
 }
