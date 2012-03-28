@@ -18,7 +18,7 @@ public class Bootstrapper {
 	
 	public static void main(String[] args) {
 //		createCarinsurance();
-//		createDesigner();
+		createDesigner();
 //		CycleBootstrapper.createCycle().getApplicationGenerator().generateJavaCode();
 //		PeriodBootstrapper.createPeriod().getApplicationGenerator().generateJavaCode();
 	}
