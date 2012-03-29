@@ -1,17 +1,16 @@
-package custom.designer;
+package org.instantlogic.designer.pagefragment;
 
 
+import org.instantlogic.designer.ButtonDesign;
+import org.instantlogic.designer.ConstantTextDesign;
+import org.instantlogic.designer.FieldDesign;
+import org.instantlogic.designer.HeaderDesign;
+import org.instantlogic.designer.PageFragmentDesign;
+import org.instantlogic.designer.TextDesign;
+import org.instantlogic.designer.entity.PageFragmentDesignEntity;
 import org.instantlogic.interaction.page.PageElement;
 import org.instantlogic.interaction.page.PageFragment;
 import org.instantlogic.interaction.util.RenderContext;
-
-import app.designer.ButtonDesign;
-import app.designer.ConstantTextDesign;
-import app.designer.FieldDesign;
-import app.designer.HeaderDesign;
-import app.designer.PageFragmentDesign;
-import app.designer.TextDesign;
-import app.designer.entity.PageFragmentDesignEntity;
 
 public class PreviewPageFragmentCustomization extends PageFragment {
 

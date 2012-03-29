@@ -14,7 +14,7 @@ public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${
 	
 	private static final org.instantlogic.interaction.flow.Flow[] exposedFlows = new org.instantlogic.interaction.flow.Flow[] {
 	<#list exposedFlows as exposedFlow>
-		${exposedFlow}Flow.INSTANCE,
+		${rootPackageName}.flow.${exposedFlow}Flow.INSTANCE,
 	</#list>
 	};
 

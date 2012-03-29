@@ -3,6 +3,7 @@ package org.instantlogic.designer.bootstrapper;
 import org.instantlogic.designer.ApplicationDesign;
 import org.instantlogic.designer.AttributeDesign;
 import org.instantlogic.designer.CompositePageFragmentDesign;
+import org.instantlogic.designer.CustomPageFragmentDesign;
 import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.EventDesign;
 import org.instantlogic.designer.FlowDesign;
@@ -92,6 +93,8 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		EntityDesign compositePageFragmentDesign = createEntity("CompositePageFragmentDesign", pageFragmentDesign);
 		EntityDesign select = createEntity("SelectDesign", compositePageFragmentDesign);
 		EntityDesign header = createEntity("HeaderDesign", compositePageFragmentDesign);
+		EntityDesign customPageFragment = createEntity("CustomPageFragmentDesign", compositePageFragmentDesign);
+		createAttribute(customPageFragment, "implementationClassName", String.class);
 		EntityDesign sharedFragment = createEntity("SharedFragmentDesign", pageFragmentDesign);
 		EntityDesign fieldDesign = createEntity("FieldDesign", pageFragmentDesign);
 		AttributeDesign required = createAttribute(fieldDesign, "required", Boolean.class); // TODO: this validation goes to the domain
@@ -205,7 +208,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		EventDesign attributeDetails = createEvent("AttributeDetails", attributeDesign);
 		EventDesign attributeDetailsInEntity = createEvent("AttributeDetailsInEntity", entityDesign, attributeDesign);
 		EventDesign exploreInstance = createEvent("ExploreInstance");
-		exploreInstance.setIsCustomized(true);// customization.set("custom.designer.caseexplorer.ExploreInstanceEventCustomization");
+		//exploreInstance.setIsCustomized(true);// customization.set("custom.designer.caseexplorer.ExploreInstanceEventCustomization");
 		
 		// Flows
 		FlowDesign mainFlow = createFlow("Main");
@@ -293,8 +296,8 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		addContent(pageFragmentEditorHeader, fieldSelect);
 		CompositePageFragmentDesign previewHolderDesign = new CompositePageFragmentDesign();
 		previewHolderDesign.setPresentation("pageFragmentEditorPreview");
-		PageFragmentDesign previewDesign = new PageFragmentDesign();
-		previewDesign.setIsCustomized(true); //setCustomization("custom.designer.PreviewPageFragmentCustomization");
+		CustomPageFragmentDesign previewDesign = new CustomPageFragmentDesign();
+		previewDesign.setImplementationClassName("org.instantlogic.designer.pagefragment.PreviewPageFragmentCustomization");
 		addContent(previewHolderDesign, previewDesign);
 		SelectDesign compositeSelect = createSelect(createCastDeduction(pageFragmentDesign, compositePageFragmentDesign));
 		CompositePageFragmentDesign indentedContent = createCompositePageFragment();
