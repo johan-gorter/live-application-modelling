@@ -13,7 +13,7 @@ public class DesignerApplication extends org.instantlogic.interaction.Applicatio
 	}
 	
 	private static final org.instantlogic.interaction.flow.Flow[] exposedFlows = new org.instantlogic.interaction.flow.Flow[] {
-		MainFlow.INSTANCE,
+		org.instantlogic.designer.flow.MainFlow.INSTANCE,
 	};
 
 	@Override

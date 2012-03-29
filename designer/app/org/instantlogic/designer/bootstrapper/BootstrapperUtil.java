@@ -156,10 +156,10 @@ public abstract class BootstrapperUtil {
 		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
 		SelectedInstanceDeductionDesign selectedInstanceDeductionDesign = new SelectedInstanceDeductionDesign();
 		selectedInstanceDeductionDesign.setOfEntity(entity);
-		selectedInstanceDeductionDesign.setClassName(entity.getName());
+		selectedInstanceDeductionDesign.setClassName(entity.getApplication().getRootPackageName()+"."+entity.getName());
 		CastInstanceDeductionDesign castInstanceDeductionDesign = new CastInstanceDeductionDesign();
 		castInstanceDeductionDesign.setToEntity(toEntity);
-		castInstanceDeductionDesign.setClassName(toEntity.getName());
+		castInstanceDeductionDesign.setClassName(entity.getApplication().getRootPackageName()+"."+toEntity.getName());
 		castInstanceDeductionDesign.addToInputs(selectedInstanceDeductionDesign);
 		scheme.addToDeductions(selectedInstanceDeductionDesign);
 		scheme.addToDeductions(castInstanceDeductionDesign);
@@ -172,7 +172,7 @@ public abstract class BootstrapperUtil {
 		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
 		SelectedInstanceDeductionDesign selectedInstanceDeductionDesign = new SelectedInstanceDeductionDesign();
 		selectedInstanceDeductionDesign.setOfEntity(entity);
-		selectedInstanceDeductionDesign.setClassName(entity.getName());
+		selectedInstanceDeductionDesign.setClassName(entity.getApplication().getRootPackageName()+"."+entity.getName());
 		scheme.addToDeductions(selectedInstanceDeductionDesign);
 		scheme.setOutput(selectedInstanceDeductionDesign);
 		return scheme;
@@ -199,13 +199,13 @@ public abstract class BootstrapperUtil {
 		if (attribute instanceof RelationDesign) {
 			// We should come up with a solution that makes this unnecessary
 			RelationDesign relation = (RelationDesign)attribute;
-			className = relation.getTo().getName();
+			className = relation.getTo().getApplication().getRootPackageName()+"."+relation.getTo().getName();
 			source = relation.getFrom();
 		}
 		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
 		SelectedInstanceDeductionDesign selectedInstanceDeductionDesign = new SelectedInstanceDeductionDesign();
 		selectedInstanceDeductionDesign.setOfEntity(source);
-		selectedInstanceDeductionDesign.setClassName(source.getName());
+		selectedInstanceDeductionDesign.setClassName(source.getApplication().getRootPackageName()+"."+source.getName());
 		AttributeDeductionDesign attributeDeductionDesign = new AttributeDeductionDesign();
 		attributeDeductionDesign.setAttribute(attribute);
 		attributeDeductionDesign.addToInputs(selectedInstanceDeductionDesign);

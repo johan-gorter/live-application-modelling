@@ -1,20 +1,13 @@
 package ${rootPackageName}.event;
 
-import ${rootPackageName}.entity.*;
-import lbe.model.flow.*;
-import lbe.model.pageelement.*;
-import lbe.model.pageelement.impl.*;
-import lbe.model.Entity;
-import lbe.model.impl.SimpleFlowEvent;
-
-public class ${name}Event extends SimpleFlowEvent {
+public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${name}Event extends org.instantlogic.interaction.flow.impl.SimpleFlowEvent {
 
 	public static final ${name}Event INSTANCE = new <#if customization??>${customization}<#else>${name}Event</#if>();
 
-	public ${name}Event() {
-		super("${name}", new Entity[]{
+	public <#if isCustomized>Abstract</#if>${name}Event() {
+		super("${name}", new org.instantlogic.fabric.model.Entity[]{
 <#list parameters as parameter>
-			${parameter}Entity.INSTANCE,
+			${rootPackageName}.entity.${parameter}Entity.INSTANCE,
 </#list>
 		});
 	}

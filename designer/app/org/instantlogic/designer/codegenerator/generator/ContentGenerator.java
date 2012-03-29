@@ -2,6 +2,7 @@ package org.instantlogic.designer.codegenerator.generator;
 
 import org.instantlogic.designer.ButtonDesign;
 import org.instantlogic.designer.CompositePageFragmentDesign;
+import org.instantlogic.designer.CustomPageFragmentDesign;
 import org.instantlogic.designer.FieldDesign;
 import org.instantlogic.designer.HeaderDesign;
 import org.instantlogic.designer.LinkDesign;
@@ -36,11 +37,11 @@ public abstract class ContentGenerator extends AbstractGenerator {
 		} else if (fragment instanceof ButtonDesign) {
 			ButtonDesign button = (ButtonDesign)fragment;
 			model.text = TextGenerator.generate(button.getCaption(), deductionHolder);
-			model.event = button.getEvent()==null?null:button.getEvent().getName();
+			model.event = button.getEvent()==null?null:deductionHolder.getRootPackageName()+".event."+button.getEvent().getName();
 		} else if (fragment instanceof LinkDesign) {
 			LinkDesign link = (LinkDesign)fragment;
 			model.text = TextGenerator.generate(link.getCaption(), deductionHolder);
-			model.event = link.getEvent()==null?null:link.getEvent().getName();
+			model.event = link.getEvent()==null?null:deductionHolder.getRootPackageName()+".event."+link.getEvent().getName();
 		} else if (fragment instanceof CompositePageFragmentDesign) {
 			for (PageCompositionDesign composition : ((CompositePageFragmentDesign)fragment).getItems()) {
 				model.children.add(generate(composition.getPageFragment(), deductionHolder));
@@ -51,6 +52,9 @@ public abstract class ContentGenerator extends AbstractGenerator {
 			if (fragment instanceof SelectDesign) {
 				SelectDesign selectFragment = (SelectDesign)fragment;
 				model.deductionIndex = deductionHolder.addDeductionScheme(DeductionSchemeGenerator.generate(deductionHolder.rootPackageName, selectFragment.getDeduction()));
+			}
+			if (fragment instanceof CustomPageFragmentDesign) {
+				model.implementationClassName = ((CustomPageFragmentDesign)fragment).getImplementationClassName(); 
 			}
 		}
 		return model;

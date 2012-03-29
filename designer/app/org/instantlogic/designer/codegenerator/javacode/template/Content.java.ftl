@@ -4,22 +4,22 @@
   <#if content.type=="SharedFragment">
     ${content.name}PageFragment.INSTANCE
   <#elseif content.type=="Field">
-    new SimpleField(${content.entity}Entity.INSTANCE, ${content.entity}Entity.${content.attribute})<#t>
+    new org.instantlogic.interaction.page.impl.SimpleField(${content.entity}Entity.INSTANCE, ${content.entity}Entity.${content.attribute})<#t>
     <#if content.required>.setRequired()</#if><#t>
     <#if content.readOnly>.setReadOnly()</#if><#t>
   <#elseif content.type=="ConstantText">
-	<@text_macro text=content.text /><#t>
+	new org.instantlogic.interaction.page.TextPageFragment(<@text_macro text=content.text />)<#t>
   <#elseif content.type=="TemplatedText">
-	<@text_macro text=content.text /><#t>
+	new org.instantlogic.interaction.page.TextPageFragment(<@text_macro text=content.text />)<#t>
   <#elseif content.type=="Button">
-    new SimpleButton(<#if content.event??>${content.event}Event.INSTANCE<#else>null</#if>, <@text_macro text=content.text />)<#t>
+    new org.instantlogic.interaction.page.impl.SimpleButton(<#if content.event??>${content.event}Event.INSTANCE<#else>null</#if>, <@text_macro text=content.text />)<#t>
   <#elseif content.type=="Link">
-    new SimpleLink(<#if content.event??>${content.event}Event.INSTANCE<#else>null</#if>, <@text_macro text=content.text />)<#t>
+    new org.instantlogic.interaction.page.impl.SimpleLink(<#if content.event??>${content.event}Event.INSTANCE<#else>null</#if>, <@text_macro text=content.text />)<#t>
   <#elseif content.type=="CompositePageFragment" || content.type=="Select" || content.type=="Header">
-    new <#if content.customization??>${content.customization}<#else>SimpleCompositePageFragment</#if>(<#t>
+    new <#if content.customization??>${content.customization}<#else>org.instantlogic.interaction.page.impl.SimpleCompositePageFragment</#if>(<#t>
     <#if content.type=="Select">createDeduction${content.deductionIndex}(), </#if><#t>
     <#if content.type=="Header"><@text_macro text=content.text />, </#if><#t>
-    new PageFragment[]{<#lt>
+    new org.instantlogic.interaction.page.PageFragment[]{<#lt>
 	<#list content.children as childContent>
 	  <@content_macro content=childContent depth=depth+1 />
 	  <#if childContent_has_next>,</#if><#lt>
@@ -27,7 +27,7 @@
 	<#list 1..depth as i>    </#list><#t>
 	})<#t>
 	<#else>
-	new <#if content.customization??>${content.customization}<#else>SimpleCompositePageFragment</#if>()<#t>
+	new <#if content.implementationClassName??>${content.implementationClassName}<#else>org.instantlogic.interaction.page.impl.SimpleCompositePageFragment</#if>()<#t>
 	</#if>
 	<#if content.presentation??>.withPresentation("${content.presentation}")</#if><#t>
 </#macro>

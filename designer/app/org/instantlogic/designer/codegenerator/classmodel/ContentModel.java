@@ -23,6 +23,7 @@ public class ContentModel {
 	public boolean isCustomized;
 	public String presentation;
 	public final List<ContentModel> children = new ArrayList<ContentModel>();
+	public String implementationClassName;
 	
 	public String getType() {
 		return type;
@@ -69,5 +70,8 @@ public class ContentModel {
 
 	public String getName() {
 		return name;
+	}
+	public String getImplementationClassName() {
+		return implementationClassName;
 	}
 }
