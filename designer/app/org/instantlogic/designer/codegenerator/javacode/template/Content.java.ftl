@@ -2,9 +2,9 @@
 <#macro content_macro content depth>
   <#list 1..depth as i>    </#list><#t>
   <#if content.type=="SharedFragment">
-    ${content.name}PageFragment.INSTANCE
+    ${rootPackageName}.sharedpagefragment.${content.name}PageFragment.INSTANCE
   <#elseif content.type=="Field">
-    new org.instantlogic.interaction.page.impl.SimpleField(${content.entity}Entity.INSTANCE, ${content.entity}Entity.${content.attribute})<#t>
+    new org.instantlogic.interaction.page.impl.SimpleField(${rootPackageName}.entity.${content.entity}Entity.INSTANCE, ${rootPackageName}.entity.${content.entity}Entity.${content.attribute})<#t>
     <#if content.required>.setRequired()</#if><#t>
     <#if content.readOnly>.setReadOnly()</#if><#t>
   <#elseif content.type=="ConstantText">

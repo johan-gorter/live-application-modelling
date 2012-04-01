@@ -4,9 +4,6 @@ public class MainFlow extends org.instantlogic.interaction.flow.Flow {
 
 	public static final MainFlow INSTANCE = new MainFlow();
 	
-	protected MainFlow() {
-	}
-	
 	private static final org.instantlogic.interaction.flow.FlowSource[] SOURCES = new org.instantlogic.interaction.flow.FlowSource[]{
 		new org.instantlogic.interaction.flow.FlowSource(
 			null,

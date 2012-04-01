@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 
-import lbe.engine.CasePersister;
 
+import org.instantlogic.play.CasePersister;
 import org.junit.Test;
 
 import app.carinsurance.CarinsuranceCase;

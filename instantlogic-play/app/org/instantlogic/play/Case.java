@@ -1,4 +1,4 @@
-package lbe.engine;
+package org.instantlogic.play;
 
 import java.awt.image.renderable.RenderContext;
 import java.util.ArrayList;
@@ -8,13 +8,17 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
-import org.eclipse.jdt.internal.compiler.flow.FlowContext;
-import org.h2.store.Page;
 import org.instantlogic.fabric.Instance;
+import org.instantlogic.interaction.Application;
+import org.instantlogic.interaction.flow.Flow;
+import org.instantlogic.interaction.page.PageElement;
+import org.instantlogic.interaction.util.ChangeContext;
+import org.instantlogic.interaction.util.FlowContext;
+import org.instantlogic.interaction.util.FlowEventOccurrence;
+import org.instantlogic.interaction.util.PageCoordinates;
 
 import play.Play;
 import play.libs.F.Promise;
-import controllers.Application;
 
 public class Case {
 	
@@ -32,7 +36,7 @@ public class Case {
 		}
 	}
 
-	private final CaseInstance caseInstance;
+	private final Instance caseInstance;
 	private final CasePersister persister;
 	
 	private String id;
@@ -40,9 +44,9 @@ public class Case {
 	private List<Waiter> waiters = new ArrayList<Waiter>();
 	private Map<String, Session> sessions = new HashMap<String, Session>();
 	
-	public Case(CaseInstance caseInstance, String id, CasePersister persister) {
+	public Case(Instance caseInstance, String id, CasePersister persister) {
 		this.caseInstance = caseInstance;
-		this.currentCaseData=new CaseData(caseInstance, caseInstance.getVersion());
+		this.currentCaseData=new CaseData(caseInstance, caseInstance.getMetadata().getCaseAdministration().getVersion());
 		this.id = id;
 		this.persister = persister;
 	}
@@ -76,13 +80,13 @@ public class Case {
 	}
 	
 	private PageElement render(Application application, PageCoordinates pageCoordinates) {
-		FlowContext context = new FlowContext(currentCaseData, id);
+		FlowContext context = new FlowContext(currentCaseData.getCaseInstance(), id);
 		context.setFlowStack(application.createFlowStack(pageCoordinates, caseInstance));
 		return renderPage(context, pageCoordinates.format());
 	}
 	
 	private PageElement startFlow(Application application, PageCoordinates pageCoordinates, String sessionId, String userName) {
-		FlowContext context = new FlowContext(currentCaseData, id);
+		FlowContext context = new FlowContext(currentCaseData.getCaseInstance(), id);
 		Flow startFlow = getStartFlow(application, pageCoordinates);
 		startFlow.enter(new FlowEventOccurrence(null, new Instance[0]), context);
 //		context.setFlowStack(new FlowStack(null, startFlow));

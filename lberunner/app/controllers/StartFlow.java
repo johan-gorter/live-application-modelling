@@ -7,14 +7,14 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import lbe.engine.Case;
-import lbe.engine.CaseManager;
 
 import org.apache.log4j.Logger;
 import org.instantlogic.interaction.Application;
 import org.instantlogic.interaction.page.PageElement;
 import org.instantlogic.interaction.util.ChangeContext;
 import org.instantlogic.interaction.util.PageCoordinates;
+import org.instantlogic.play.Case;
+import org.instantlogic.play.CaseManager;
 
 import play.classloading.HotswapAgent;
 import play.mvc.Controller;

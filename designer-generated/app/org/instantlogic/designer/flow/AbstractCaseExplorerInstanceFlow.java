@@ -4,9 +4,6 @@ public abstract class AbstractCaseExplorerInstanceFlow extends org.instantlogic.
 
 	public static final CaseExplorerInstanceFlow INSTANCE = new CaseExplorerInstanceFlow();
 	
-	protected CaseExplorerInstanceFlow() {
-	}
-	
 	private static final org.instantlogic.interaction.flow.FlowSource[] SOURCES = new org.instantlogic.interaction.flow.FlowSource[]{
 		new org.instantlogic.interaction.flow.FlowSource(
 			org.instantlogic.designer.event.ExploreInstanceEvent.INSTANCE,

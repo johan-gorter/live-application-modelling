@@ -4,10 +4,9 @@ package org.instantlogic.designer.codegenerator.classmodel;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.instantlogic.designer.codegenerator.generator.TextGenerator;
-
 public class ContentModel {
 
+	public String rootPackageName;
 	public String type;
 	public String name;
 	public TextModel text;
@@ -73,5 +72,8 @@ public class ContentModel {
 	}
 	public String getImplementationClassName() {
 		return implementationClassName;
+	}
+	public String getRootPackageName() {
+		return rootPackageName;
 	}
 }

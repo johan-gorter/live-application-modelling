@@ -20,11 +20,11 @@ public class FieldPage extends org.instantlogic.interaction.flow.Page {
             new org.instantlogic.interaction.page.impl.SimpleLink(org.instantlogic.designer.event.FlowDetailsEvent.INSTANCE, new org.instantlogic.fabric.text.ConstantText("Flow")),
             new org.instantlogic.interaction.page.impl.SimpleLink(org.instantlogic.designer.event.PageDetailsEvent.INSTANCE, new org.instantlogic.fabric.text.ConstantText("Page")),
             new org.instantlogic.interaction.page.impl.SimpleLink(org.instantlogic.designer.event.ExploreInstanceEvent.INSTANCE, new org.instantlogic.fabric.text.ConstantText("Open in case explorer")),
-            new org.instantlogic.interaction.page.impl.SimpleField(FieldDesignEntity.INSTANCE, FieldDesignEntity.required),
-            new org.instantlogic.interaction.page.impl.SimpleField(FieldDesignEntity.INSTANCE, FieldDesignEntity.readOnly),
+            new org.instantlogic.interaction.page.impl.SimpleField(org.instantlogic.designer.entity.FieldDesignEntity.INSTANCE, org.instantlogic.designer.entity.FieldDesignEntity.required),
+            new org.instantlogic.interaction.page.impl.SimpleField(org.instantlogic.designer.entity.FieldDesignEntity.INSTANCE, org.instantlogic.designer.entity.FieldDesignEntity.readOnly),
             new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(createDeduction0(), new org.instantlogic.interaction.page.PageFragment[]{
-                new org.instantlogic.interaction.page.impl.SimpleField(DesignEntity.INSTANCE, DesignEntity.name).setRequired(),
-                new org.instantlogic.interaction.page.impl.SimpleField(AttributeDesignEntity.INSTANCE, AttributeDesignEntity.className).setRequired()
+                new org.instantlogic.interaction.page.impl.SimpleField(org.instantlogic.designer.entity.DesignEntity.INSTANCE, org.instantlogic.designer.entity.DesignEntity.name).setRequired(),
+                new org.instantlogic.interaction.page.impl.SimpleField(org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE, org.instantlogic.designer.entity.AttributeDesignEntity.className).setRequired()
             })
         }); 
 	

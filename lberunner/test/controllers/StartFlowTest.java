@@ -3,8 +3,6 @@ package controllers;
 import java.util.GregorianCalendar;
 
 import junit.framework.Assert;
-import lbe.engine.Case;
-import lbe.engine.CaseManager;
 
 import org.instantlogic.interaction.Application;
 import org.instantlogic.interaction.flow.Page.PageRootElement;
@@ -12,6 +10,8 @@ import org.instantlogic.interaction.page.PageElement;
 import org.instantlogic.interaction.util.ChangeContext;
 import org.instantlogic.interaction.util.PageCoordinates;
 import org.instantlogic.interaction.util.ChangeContext.FieldChange;
+import org.instantlogic.play.Case;
+import org.instantlogic.play.CaseManager;
 import org.junit.Test;
 
 import play.libs.F.Promise;

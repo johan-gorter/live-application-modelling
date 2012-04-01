@@ -4,9 +4,6 @@ public class AttributeFlow extends org.instantlogic.interaction.flow.Flow {
 
 	public static final AttributeFlow INSTANCE = new AttributeFlow();
 	
-	protected AttributeFlow() {
-	}
-	
 	private static final org.instantlogic.interaction.flow.FlowSource[] SOURCES = new org.instantlogic.interaction.flow.FlowSource[]{
 		new org.instantlogic.interaction.flow.FlowSource(
 			org.instantlogic.designer.event.AttributeDetailsEvent.INSTANCE,

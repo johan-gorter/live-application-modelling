@@ -7,10 +7,10 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import lbe.engine.Case;
-import lbe.engine.CaseManager;
+import javax.persistence.criteria.CriteriaBuilder.Case;
 
 import org.apache.log4j.Logger;
+import org.instantlogic.designer.DesignerApplication;
 import org.instantlogic.interaction.Application;
 import org.instantlogic.interaction.page.PageElement;
 import org.instantlogic.interaction.util.ChangeContext;
@@ -19,8 +19,6 @@ import org.instantlogic.interaction.util.PageCoordinates;
 import play.classloading.HotswapAgent;
 import play.mvc.Controller;
 import play.mvc.With;
-import app.carinsurance.CarInsuranceApplication;
-import app.designer.DesignerApplication;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

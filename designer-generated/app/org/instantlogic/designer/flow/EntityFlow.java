@@ -4,9 +4,6 @@ public class EntityFlow extends org.instantlogic.interaction.flow.Flow {
 
 	public static final EntityFlow INSTANCE = new EntityFlow();
 	
-	protected EntityFlow() {
-	}
-	
 	private static final org.instantlogic.interaction.flow.FlowSource[] SOURCES = new org.instantlogic.interaction.flow.FlowSource[]{
 		new org.instantlogic.interaction.flow.FlowSource(
 			org.instantlogic.designer.event.EntityDetailsEvent.INSTANCE,

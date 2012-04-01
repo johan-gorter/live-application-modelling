@@ -86,7 +86,7 @@ public class PageFragmentEditorPageFragment extends org.instantlogic.interaction
                 new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PageFragment[]{
                     new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(createDeduction5(), new org.instantlogic.interaction.page.PageFragment[]{
                         new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(createDeduction4(), new org.instantlogic.interaction.page.PageFragment[]{
-                                PageFragmentEditorPageFragment.INSTANCE
+                                org.instantlogic.designer.sharedpagefragment.PageFragmentEditorPageFragment.INSTANCE
 
                         })
                     })
