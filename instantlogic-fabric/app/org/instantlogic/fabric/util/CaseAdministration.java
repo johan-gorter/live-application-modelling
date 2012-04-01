@@ -3,8 +3,12 @@ package org.instantlogic.fabric.util;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.model.Relation;
 import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
 
 public class CaseAdministration {
@@ -14,6 +18,27 @@ public class CaseAdministration {
 	private long version;
 	private List<Observations> observationsStack = new ArrayList<Observations>();
 	private Observations currentObservations = null;
+	
+	private SortedMap<String, Entity<?>> allEntities;
+	
+	private static void addEntities(Entity<?> entity, SortedMap<String, Entity<?>> all) {
+		if (all.containsKey(entity.getName())) {
+			return;
+		}
+		all.put(entity.getName(), entity);
+		for (Relation<?, ?, ? extends Instance> relation : entity.getRelations()) {
+			addEntities(relation.getTo(), all);
+		}
+	}
+	
+	public SortedMap<String, Entity<?>> getAllEntities() {
+		if (allEntities==null) {
+			TreeMap<String, Entity<?>> tempResult = new TreeMap<String, Entity<?>>();
+			addEntities(instances.get("0").getMetadata().getEntity(), tempResult);
+			allEntities = tempResult;
+		}
+		return allEntities;
+	}
 	
 	private List<TransactionListener> transactionListeners = new ArrayList<TransactionListener>();
 	

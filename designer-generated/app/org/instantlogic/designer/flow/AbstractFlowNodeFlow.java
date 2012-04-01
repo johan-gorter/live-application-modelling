@@ -4,9 +4,6 @@ public abstract class AbstractFlowNodeFlow extends org.instantlogic.interaction.
 
 	public static final FlowNodeFlow INSTANCE = new FlowNodeFlow();
 	
-	protected FlowNodeFlow() {
-	}
-	
 	private static final org.instantlogic.interaction.flow.FlowSource[] SOURCES = new org.instantlogic.interaction.flow.FlowSource[]{
 	};
 

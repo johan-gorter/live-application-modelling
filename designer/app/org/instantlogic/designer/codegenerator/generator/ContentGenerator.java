@@ -19,6 +19,7 @@ public abstract class ContentGenerator extends AbstractGenerator {
 	public static ContentModel generate(PageFragmentDesign fragment, AbstractClassModel deductionHolder) {
 		ContentModel model = new ContentModel();
 		model.type=fragment.getMetadata().getEntity().getName();
+		model.rootPackageName = deductionHolder.rootPackageName;
 		if (model.type.endsWith("Design")) {
 			model.type = model.type.substring(0, model.type.length()-6);
 		}

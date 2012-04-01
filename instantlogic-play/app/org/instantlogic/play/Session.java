@@ -1,4 +1,4 @@
-package lbe.engine;
+package org.instantlogic.play;
 
 import org.instantlogic.interaction.util.PageCoordinates;
 

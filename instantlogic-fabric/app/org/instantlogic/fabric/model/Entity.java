@@ -1,9 +1,7 @@
 package org.instantlogic.fabric.model;
 
 import java.util.Iterator;
-import java.util.SortedMap;
 
-import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.Instance;
 
 
@@ -12,13 +10,6 @@ import org.instantlogic.fabric.Instance;
  */
 public abstract class Entity<I extends Instance> extends Concept {
 
-	public SortedMap<String, Entity<?>> getAllEntities() {
-		for (Relation<I, ? extends Object, ? extends Instance> relation : getRelations()) {
-			relation.getTo();
-		}
-		throw new RuntimeException("TODO");
-	}
-	
 	public static boolean extendsFrom(Entity<?> entity, Entity<?> from) {
 		if (entity==from) return true;
 		if (entity==null) return false;

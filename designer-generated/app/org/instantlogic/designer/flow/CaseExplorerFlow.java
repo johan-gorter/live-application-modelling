@@ -4,9 +4,6 @@ public class CaseExplorerFlow extends org.instantlogic.interaction.flow.Flow {
 
 	public static final CaseExplorerFlow INSTANCE = new CaseExplorerFlow();
 	
-	protected CaseExplorerFlow() {
-	}
-	
 	private static final org.instantlogic.interaction.flow.FlowSource[] SOURCES = new org.instantlogic.interaction.flow.FlowSource[]{
 		new org.instantlogic.interaction.flow.FlowSource(
 			org.instantlogic.designer.event.ExploreInstanceEvent.INSTANCE,

@@ -1,10 +1,10 @@
-package lbe.engine;
+package org.instantlogic.play;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.log4j.Logger;
-import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.Instance;
 
 import play.Play;
 import play.Play.Mode;
@@ -106,7 +106,7 @@ public class CaseManager {
 		}
 	}
 	
-	public static Case create(CaseInstance caseInstance) {
+	public static Case create(Instance caseInstance) {
 		String id = CasePersister.uniqueId();
 		Case c = new Case(caseInstance, id, CasePersister.INSTANCE);
 		caseInstance.afterLoading();
@@ -115,7 +115,7 @@ public class CaseManager {
 		return c;
 	}
 	
-	public static <T extends CaseInstance> Case getCase(String caseId, Class<T> ofCaseInstanceType) {
+	public static <T extends Instance> Case getCase(String caseId, Class<T> ofCaseInstanceType) {
 		Case result = cases.get(caseId);
 		if (result==null) {
 			T caseInstance = CasePersister.INSTANCE.load(caseId, ofCaseInstanceType);

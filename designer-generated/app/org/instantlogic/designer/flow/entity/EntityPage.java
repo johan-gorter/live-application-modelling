@@ -27,7 +27,7 @@ public class EntityPage extends org.instantlogic.interaction.flow.Page {
         new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PageFragment[]{
             new org.instantlogic.interaction.page.impl.SimpleLink(org.instantlogic.designer.event.HomeEvent.INSTANCE, new org.instantlogic.fabric.text.ConstantText("Home")),
             new org.instantlogic.interaction.page.impl.SimpleLink(org.instantlogic.designer.event.ExploreInstanceEvent.INSTANCE, new org.instantlogic.fabric.text.ConstantText("Open in case explorer")),
-            new org.instantlogic.interaction.page.impl.SimpleField(DesignEntity.INSTANCE, DesignEntity.name),
+            new org.instantlogic.interaction.page.impl.SimpleField(org.instantlogic.designer.entity.DesignEntity.INSTANCE, org.instantlogic.designer.entity.DesignEntity.name),
             new org.instantlogic.interaction.page.TextPageFragment(new org.instantlogic.fabric.text.ConstantText("Attributes")),
             new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(createDeduction1(), new org.instantlogic.interaction.page.PageFragment[]{
                 new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PageFragment[]{

@@ -1,26 +1,26 @@
-package lbe.engine;
+package org.instantlogic.play;
 
-import org.instantlogic.fabric.CaseInstance;
+import org.instantlogic.fabric.Instance;
 
 
 /**
  * Contains all attributes that have a user-set value. Not thread-safe, synchronize on Case.
  */
 public class CaseData {
-	private final int version;
+	private final long version;
 	
-	private CaseInstance caseInstance;
+	private Instance caseInstance;
 
-	public CaseData(CaseInstance caseInstance, int version) {
+	public CaseData(Instance caseInstance, long version) {
 		this.version = version;
 		this.caseInstance = caseInstance;
 	}
 
-	public int getVersion() {
+	public long getVersion() {
 		return version;
 	}
 
-	public CaseInstance getCaseInstance() {
+	public Instance getCaseInstance() {
 		return caseInstance;
 	}
 }

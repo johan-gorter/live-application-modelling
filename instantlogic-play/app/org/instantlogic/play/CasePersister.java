@@ -1,4 +1,4 @@
-package lbe.engine;
+package org.instantlogic.play;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,9 +40,9 @@ public class CasePersister {
 		sessionsDir.mkdirs();
 	}
 
-	public void persist(String id, Instance<?> caseInstance, int version) {
+	public void persist(String id, Instance caseInstance, int version) {
 		try {
-			caseInstance.getInstanceAdministration().setVersion(version);
+			caseInstance.getMetadata().getCaseAdministration().setVersion(version);
 			File file = new File(sessionsDir, id + ".tmp");
 			FileOutputStream stream = new FileOutputStream(file);
 			OutputStreamWriter writer = new OutputStreamWriter(stream, "UTF-8");
@@ -59,7 +59,7 @@ public class CasePersister {
 		}
 	}
 
-	public <T extends Instance<T>> T load(String id, Class<T> ofType) {
+	public <T extends Instance> T load(String id, Class<T> ofType) {
 		T result = null;
 		try {
 			File file = new File(sessionsDir, id + ".json");
