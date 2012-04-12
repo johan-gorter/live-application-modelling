@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+    <info
+        organisation="org.instantlogic"
+        module="instantlogic-netty"
+        status="integration">
+	</info>
+	
+	<dependencies>
+		<dependency org="org.ow2.asm" name="asm" rev="4.0" />
+		<dependency org="io.netty" name="netty" rev="3.3.1.Final" />
+		<dependency org="org.slf4j" name="slf4j-simple" rev="1.6.4"/>
+		<dependency org="com.google.code.gson" name="gson" rev="2.1"/>
+            		
+		<exclude org="com.google.protobuf" />
+		<exclude org="javax.servlet" />
+		<exclude org="org.apache.felix" />
+		<exclude org="commons-logging" />
+		<exclude org="log4j" />
+		<exclude org="org.jboss.logging" />
+	</dependencies>
+	
+</ivy-module>
