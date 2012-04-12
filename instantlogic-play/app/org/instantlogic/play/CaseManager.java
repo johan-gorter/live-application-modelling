@@ -109,7 +109,6 @@ public class CaseManager {
 	public static Case create(Instance caseInstance) {
 		String id = CasePersister.uniqueId();
 		Case c = new Case(caseInstance, id, CasePersister.INSTANCE);
-		caseInstance.afterLoading();
 		CasePersister.INSTANCE.persist(id, caseInstance, 0);
 		cases.put(c.getId(), c);
 		return c;
@@ -123,7 +122,6 @@ public class CaseManager {
 				throw new RuntimeException("Case not found, id: "+caseId);
 			}
 			result = new Case(caseInstance, caseId, CasePersister.INSTANCE);
-			caseInstance.afterLoading();
 			cases.put(caseId, result);
 		}
 		return result;

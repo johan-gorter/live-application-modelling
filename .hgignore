@@ -19,3 +19,4 @@ instantlogic-gwt/dist
 instantlogic-play/eclipse/classes
 Zandbak/
 generated-bin
+instantlogic-netty/public/yui*
