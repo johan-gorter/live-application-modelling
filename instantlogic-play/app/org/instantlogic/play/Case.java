@@ -1,6 +1,5 @@
 package org.instantlogic.play;
 
-import java.awt.image.renderable.RenderContext;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,13 +8,16 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.util.Operation;
 import org.instantlogic.interaction.Application;
 import org.instantlogic.interaction.flow.Flow;
+import org.instantlogic.interaction.flow.Page;
 import org.instantlogic.interaction.page.PageElement;
 import org.instantlogic.interaction.util.ChangeContext;
 import org.instantlogic.interaction.util.FlowContext;
 import org.instantlogic.interaction.util.FlowEventOccurrence;
 import org.instantlogic.interaction.util.PageCoordinates;
+import org.instantlogic.interaction.util.RenderContext;
 
 import play.Play;
 import play.libs.F.Promise;
@@ -136,21 +138,26 @@ public class Case {
 	}
 	
 	public synchronized void submit(Application application, PageCoordinates pageCoordinates, String sessionId, String userName, ChangeContext.FieldChange[] fieldChanges, String submit) {
-		FlowContext flowContext = new FlowContext(currentCaseData, id);
+		FlowContext flowContext = new FlowContext(currentCaseData.getCaseInstance(), id);
 		flowContext.setFlowStack(application.createFlowStack(pageCoordinates, caseInstance));
 		Page page = flowContext.getPage();
 		ChangeContext changeContext = new ChangeContext(flowContext, pageCoordinates.format(), fieldChanges, submit);
-		FlowEventOccurrence occurrence = page.submit(changeContext);
-		flow(flowContext, occurrence);
+		Operation operation = currentCaseData.getCaseInstance().getMetadata().getCaseAdministration().startOperation();
+		try {
+			FlowEventOccurrence occurrence = page.submit(changeContext);
+			flow(flowContext, occurrence);
+			operation.complete();
+		} finally {
+			operation.close();
+		}
 		getOrCreateSession(sessionId, userName).setPageCoordinates(flowContext.getFlowStack().toPageCoordinates());
 		newCaseDataVersion();
 		informWaiters();
-		this.caseInstance.afterSubmit();
 	}
 
 	public void newCaseDataVersion() {
 		currentCaseData = new CaseData(caseInstance, currentCaseData.getVersion()+1);
-		CasePersister.INSTANCE.persist(id, currentCaseData.getCaseInstance(), currentCaseData.getVersion());
+//		CasePersister.INSTANCE.persist(id, currentCaseData.getCaseInstance(), currentCaseData.getVersion());
 	}
 	
 	private void flow(FlowContext flowContext, FlowEventOccurrence occurrence) {

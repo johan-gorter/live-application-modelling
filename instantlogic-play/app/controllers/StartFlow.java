@@ -7,14 +7,14 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder.Case;
-
 import org.apache.log4j.Logger;
 import org.instantlogic.designer.DesignerApplication;
 import org.instantlogic.interaction.Application;
 import org.instantlogic.interaction.page.PageElement;
 import org.instantlogic.interaction.util.ChangeContext;
 import org.instantlogic.interaction.util.PageCoordinates;
+import org.instantlogic.play.Case;
+import org.instantlogic.play.CaseManager;
 
 import play.classloading.HotswapAgent;
 import play.mvc.Controller;
@@ -60,10 +60,10 @@ public class StartFlow extends Controller {
 		CaseManager.fireChangesIfModelChanged();
 		Application app = getApplication(application);
 		if (caseId == null) {
-			Case c = CaseManager.create((CaseInstance) app.getCaseModel().createInstance(null));
+			Case c = CaseManager.create(app.getCaseEntity().createInstance());
 			redirect("StartFlow.index", application, c.getId());
 		}
-		Case c = CaseManager.getCase(caseId, app.getCaseInstanceClass());
+		Case c = CaseManager.getCase(caseId, app.getCaseEntity().getInstanceClass());
 		String sessionId = c.startSession(Security.connected(), null);
 		renderArgs.put("sessionId", sessionId);
 		render();
@@ -85,7 +85,7 @@ public class StartFlow extends Controller {
 		CaseManager.fireChangesIfModelChanged();
 
 		Application app = getApplication(application);
-		Case c = CaseManager.getCase(caseId, app.getCaseInstanceClass());
+		Case c = CaseManager.getCase(caseId, app.getCaseEntity().getInstanceClass());
 		PageCoordinates coordinates = PageCoordinates.parse(pageCoordinates);
 
 		PageElement renderedPage = c.renderOrStartFlow(app, coordinates, sessionId, Security.connected());
@@ -103,7 +103,7 @@ public class StartFlow extends Controller {
 			renderJSON("{}");
 		}
 		Application app = getApplication(application);
-		Case c = CaseManager.getCase(caseId, app.getCaseInstanceClass());
+		Case c = CaseManager.getCase(caseId, app.getCaseEntity().getInstanceClass());
 		
 		JsonArray valuesArray = event.getAsJsonArray("values");
 		JsonElement submit = event.get("submit");
@@ -146,7 +146,7 @@ public class StartFlow extends Controller {
 		CaseManager.fireChangesIfModelChanged();
 
 		Application app = getApplication(application);
-		Case c = CaseManager.getCase(caseId, app.getCaseInstanceClass());
+		Case c = CaseManager.getCase(caseId, app.getCaseEntity().getInstanceClass());
 		
 		PageElement page = await(c.waitForChange(lastCaseVersion, app, PageCoordinates.parse(pageCoordinates), sessionId, Security.connected()));
 		renderJSON(page, dateSerializer);
