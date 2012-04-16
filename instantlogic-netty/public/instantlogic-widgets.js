@@ -17,9 +17,7 @@ YUI.add('instantlogic-widgets', function(Y) {
 	        )
 	        
 	        this.question.setContent(this.get('question'));
-	        this.answer.setContent('ANSWER TODO');
-	        
-	        debugger;
+	        this.answer.setContent('ANSWER)TODO');
 	        
 	        contentBox.appendChild(markup);
 	    }
@@ -29,6 +27,5 @@ YUI.add('instantlogic-widgets', function(Y) {
 			question: {value:null}
 		}
 	});
-	
-	
+		
 }, '3.4.1', { requires: ['instantlogic','html'] });

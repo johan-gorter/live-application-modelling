@@ -8,6 +8,7 @@ import java.net.InetSocketAddress;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.StandardWatchEventKinds;
+import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -36,15 +37,18 @@ public class NettyServer {
 		public void run() {
 			try {
 				WatchService watcher = FileSystems.getDefault().newWatchService();
-				Path dir = new File(".").toPath();
-				dir.register(watcher, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_DELETE, StandardWatchEventKinds.ENTRY_MODIFY);				
+				Path dir = new File("public").toPath();
+				WatchKey key = dir.register(watcher, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_DELETE, StandardWatchEventKinds.ENTRY_MODIFY);				
 				while (true) {
 					try {
-						watcher.take();
+						key = watcher.take();
+						logger.warn("Filesystem update detected");
 					} catch (InterruptedException x) {
 						return;
 					}
+					key.pollEvents();
 					Traveler.broadcast(FILES_UPDATED);
+					if (!key.reset()) break;
 				}
 			} catch (IOException e) {
 				throw new RuntimeException(e);
