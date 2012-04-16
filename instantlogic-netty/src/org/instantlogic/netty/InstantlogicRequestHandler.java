@@ -16,9 +16,13 @@ import org.jboss.netty.handler.codec.http.HttpRequest;
 import org.jboss.netty.handler.codec.http.HttpResponse;
 import org.jboss.netty.handler.codec.http.QueryStringDecoder;
 import org.jboss.netty.util.CharsetUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class InstantlogicRequestHandler extends HttpStaticFileServerHandler implements ChannelHandler {
 
+	private static final Logger logger = LoggerFactory.getLogger(InstantlogicRequestHandler.class);
+	
 	@Override
 	protected void handlePost(ChannelHandlerContext ctx, MessageEvent e, HttpRequest request) throws Exception {
 		if (HttpHeaders.is100ContinueExpected(request)) {
@@ -33,14 +37,16 @@ public class InstantlogicRequestHandler extends HttpStaticFileServerHandler impl
 			throw new Exception("No travelerId queryString parameter");
 		}
 		
-		Traveler session = Traveler.getOrCreate(travelerIds.get(0));
+		String travelerId = travelerIds.get(0);
+		logger.debug("Incoming request from traveler {}", travelerId);
+		Traveler traveler = Traveler.getOrCreate(travelerId);
 		
 		ChannelBuffer content = request.getContent();
 		if (content.readable()) {
-			session.handleIncomingMessage(content.toString(CharsetUtil.UTF_8));
+			traveler.handleIncomingMessages(content.toString(CharsetUtil.UTF_8));
 		}
 		
-		session.parkRequest(e);
+		traveler.parkRequest(e);
 	}
 
 	private void send100Continue(MessageEvent e) {

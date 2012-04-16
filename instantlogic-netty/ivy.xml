@@ -9,11 +9,26 @@
 	<dependencies>
 		<dependency org="org.ow2.asm" name="asm" rev="4.0" />
 		<dependency org="io.netty" name="netty" rev="3.3.1.Final" />
+		<!-- 
 		<dependency org="org.slf4j" name="slf4j-simple" rev="1.6.4"/>
+		 -->
+		<dependency org="ch.qos.logback" name="logback-classic" rev="1.0.1"/>
 		<dependency org="com.google.code.gson" name="gson" rev="2.1"/>
             		
 		<exclude org="com.google.protobuf" />
 		<exclude org="javax.servlet" />
+		<exclude org="javax.mail" />
+		<exclude org="hsqldb" />
+		<exclude org="dom4j" />
+		<exclude org="com.h2database" />
+		<exclude org="com.icegreen" />
+		<exclude org="mysql" />
+		<exclude artifact="groovy-all" />
+		<exclude artifact="janino" />
+		<exclude org="org.scala-lang" />
+		<exclude org="org.subethamail" />
+		<exclude org="postgresql" />
+		<exclude org="org.apache.geronimo.specs" />
 		<exclude org="org.apache.felix" />
 		<exclude org="commons-logging" />
 		<exclude org="log4j" />

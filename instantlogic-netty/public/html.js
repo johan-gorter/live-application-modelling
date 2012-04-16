@@ -11,7 +11,7 @@ YUI.add('html', function(Y) {
             if (attributes.hasOwnProperty(attribute)) {
                 var value = attributes[attribute];
                 if (value !== null && value !== undefined) {
-                    element[attribute] = value;
+                    element.setAttribute(attribute, value);
                 }
             }
         }
@@ -33,7 +33,7 @@ YUI.add('html', function(Y) {
             }
         }
         string += '>';
-        return Y.Node.create(document.createElement(string));
+        return Y.Node.one(document.createElement(string));
     };
 
     // Recursive function which adds attributes and childnodes to an HTML Element
@@ -73,8 +73,7 @@ YUI.add('html', function(Y) {
         // - Array, will be recursed
         createElementFactory: function(tagName) {
             return function() {
-            	debugger
-                var result = Y.Node.create(document.createElement(tagName));
+                var result = Y.Node.one(document.createElement(tagName));
                 result = addChildNodes(result, arguments, true);
                 return result;
             };

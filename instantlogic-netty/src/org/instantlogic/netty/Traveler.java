@@ -20,25 +20,33 @@ import org.jboss.netty.handler.codec.http.DefaultHttpResponse;
 import org.jboss.netty.handler.codec.http.HttpRequest;
 import org.jboss.netty.handler.codec.http.HttpResponse;
 import org.jboss.netty.util.CharsetUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 /**
  * A traveler usually has one open parked request. When another comes in, the first one is released.
  */
 public class Traveler {
+	
+	private static final Logger logger = LoggerFactory.getLogger(InstantlogicRequestHandler.class);
 
 	public static final Map<String, Traveler> travelers = new HashMap<String, Traveler>();
 	private static Gson gson = new Gson();
+
+	private String id;
 	
 	public static void broadcast(JsonObject message) {
+		logger.info("broadcasting to every traveler");
 		for (Traveler session : Traveler.travelers.values()) {
 			session.sendMessage(message);
 		}
 	}
-
 	
 	public static long placeVersion;
 	public static PlaceFragmentModel thePlace = new PlaceFragmentModel();
@@ -66,11 +74,12 @@ public class Traveler {
 		placeJson.addProperty("question", "The answer to everything?");
 	}
 	
-	public static Traveler getOrCreate(String sessionId) {
-		Traveler result = travelers.get(sessionId);
+	public static Traveler getOrCreate(String travelerId) {
+		Traveler result = travelers.get(travelerId);
 		if (result==null) {
-			result = new Traveler();
-			travelers.put(sessionId, result);
+			logger.info("Registering new traveler {}", travelerId);
+			result = new Traveler(travelerId);
+			travelers.put(travelerId, result);
 		}
 		return result;
 	}
@@ -79,6 +88,10 @@ public class Traveler {
 	private long lastSentPlaceVersion = -1;
 	private JsonArray messagesWaiting = new JsonArray();
 	
+	public Traveler(String travelerId) {
+		this.id = travelerId;
+	}
+
 	public synchronized void sendMessage(JsonObject message) {
 		messagesWaiting.add(message);
 		sendMessages();
@@ -86,24 +99,28 @@ public class Traveler {
 	
 	private synchronized void sendMessages() {
 		if (parkedRequests.size()>0) {
-			sendResponses(parkedRequests.remove(0), thePlace);
+			sendResponseMessages(parkedRequests.remove(0), thePlace);
 		}
 	}
 
-	public synchronized void handleIncomingMessage(String message) {
-		thePlace.content[0].value = message;
-		placeVersion ++;
+	public synchronized void handleIncomingMessages(String messagesText) {
+		JsonArray messages = (JsonArray) new JsonParser().parse(messagesText);
+		for (JsonElement message : messages) {
+			logger.debug("Handling message from traveler {}", id);
+			thePlace.content[0].value = message.getAsJsonObject().get("value").getAsString();			
+			placeVersion++;
+		}
 		sendMessages();
 	}
 
 	public synchronized void parkRequest(MessageEvent e) {
 		parkedRequests.add(e);
 		if (parkedRequests.size()>1 || messagesWaiting.size()>0 || lastSentPlaceVersion<placeVersion) {
-			sendResponses(parkedRequests.remove(0), thePlace);
+			sendResponseMessages(parkedRequests.remove(0), thePlace);
 		}
 	}
 
-	private synchronized void sendResponses(MessageEvent event, PlaceFragmentModel place) {
+	private synchronized void sendResponseMessages(MessageEvent event, PlaceFragmentModel place) {
 		HttpRequest request = (HttpRequest) event.getMessage();
 		
 		boolean keepAlive = isKeepAlive(request);
@@ -116,8 +133,10 @@ public class Traveler {
         	 placeMessage.add("rootFragment", placeJson);
         	 messagesWaiting.add(placeMessage);
          }
+         logger.debug("Sending {} messages to traveler {}", messagesWaiting.size(), id);
     	 response.setContent(ChannelBuffers.copiedBuffer(gson.toJson(messagesWaiting), CharsetUtil.UTF_8));
     	 lastSentPlaceVersion = placeVersion;
+    	 messagesWaiting = new JsonArray();
 
          response.setHeader(CONTENT_TYPE, "text/plain; charset=UTF-8");
  
@@ -135,7 +154,9 @@ public class Traveler {
          }		
 	}
 
-	public synchronized void pushNewPlaceValue(String command) {
-		handleIncomingMessage(command);
+	public synchronized void pushNewPlaceValue(String value) {
+		thePlace.content[0].value = value;			
+		placeVersion++;
+		sendMessages();
 	}
 }
