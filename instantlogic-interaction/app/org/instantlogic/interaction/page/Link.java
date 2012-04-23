@@ -6,10 +6,10 @@ import org.instantlogic.interaction.util.ChangeContext;
 import org.instantlogic.interaction.util.FlowEventOccurrence;
 import org.instantlogic.interaction.util.RenderContext;
 
-public abstract class Link extends PageFragment {
+public abstract class Link extends PlaceFragmentTemplate {
 
 	@Override
-	public String getElementType() {
+	public String getWidgetName() {
 		return "link";
 	}
 	
@@ -17,14 +17,14 @@ public abstract class Link extends PageFragment {
 	public String getName() {
 		return null;
 	}
-
+	
 	@Override
-	public PageElement render(RenderContext context) {
-		PageElement result = super.render(context);
+	public Fragment render(RenderContext context) {
+		Fragment result = super.render(context);
 		Text caption = getCaption();
 		if (caption!=null) {
-			result.display = caption.renderText(context);
-			result.name = getEvent().getName();
+			result.widgetData.put("text", caption.renderText(context));
+			result.widgetData.put("event", getEvent().getName());
 		}
 		return result;
 	}

@@ -18,9 +18,14 @@ public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${
 		return CONTENT;
 	}; 
 	
-	@Override
-	public String getName() {
-		return "${name}";
-	}
-	
+    @Override
+    public String getName() {
+        return "${name}";
+    }
+    
+    @Override
+    public String getId() {
+        return "${id}";
+    }
+    
 }

@@ -69,23 +69,23 @@ public class PageFragmentEditorPageFragment extends org.instantlogic.interaction
 	}
 
 	
-	public static final org.instantlogic.interaction.page.PageFragment SHARED_INSTANCE = 
-        new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PageFragment[]{
-            new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PageFragment[]{
+	public static final org.instantlogic.interaction.page.PlaceFragmentTemplate SHARED_INSTANCE = 
+        new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
+            new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
                 new org.instantlogic.interaction.page.impl.SimpleLink(org.instantlogic.designer.event.PageFragmentDetailsEvent.INSTANCE, new org.instantlogic.fabric.text.TemplatedText().add(createDeduction0())),
-                new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(createDeduction3(), new org.instantlogic.interaction.page.PageFragment[]{
-                    new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(createDeduction2(), new org.instantlogic.interaction.page.PageFragment[]{
+                new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(createDeduction3(), new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
+                    new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(createDeduction2(), new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
                         new org.instantlogic.interaction.page.impl.SimpleLink(org.instantlogic.designer.event.AttributeDetailsEvent.INSTANCE, new org.instantlogic.fabric.text.TemplatedText().add(createDeduction1()))
                     })
                 })
             }).withPresentation("pageFragmentEditorHeader NoAnimation"),
-            new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PageFragment[]{
+            new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
                 new org.instantlogic.designer.pagefragment.PreviewPageFragmentCustomization()
             }).withPresentation("pageFragmentEditorPreview"),
-            new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(createDeduction6(), new org.instantlogic.interaction.page.PageFragment[]{
-                new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PageFragment[]{
-                    new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(createDeduction5(), new org.instantlogic.interaction.page.PageFragment[]{
-                        new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(createDeduction4(), new org.instantlogic.interaction.page.PageFragment[]{
+            new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(createDeduction6(), new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
+                new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
+                    new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(createDeduction5(), new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
+                        new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(createDeduction4(), new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
                                 org.instantlogic.designer.sharedpagefragment.PageFragmentEditorPageFragment.INSTANCE
 
                         })
@@ -96,7 +96,7 @@ public class PageFragmentEditorPageFragment extends org.instantlogic.interaction
 	
 
 	@Override
-	protected org.instantlogic.interaction.page.PageFragment getDelegate() {
+	protected org.instantlogic.interaction.page.PlaceFragmentTemplate getDelegate() {
 		return SHARED_INSTANCE;
 	}
 }

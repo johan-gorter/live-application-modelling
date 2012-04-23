@@ -1,6 +1,7 @@
 package org.instantlogic.interaction;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Entity;
@@ -24,7 +25,7 @@ public abstract class Application {
 				return flowModel;
 			}
 		}
-		throw new RuntimeException("Exposed flow not found. Name: "+startFlowName);
+		throw new NoSuchElementException("Exposed flow not found. Name: "+startFlowName);
 	}
 
 	public FlowStack createFlowStack(PageCoordinates pageCoordinates, Instance caseInstance) {

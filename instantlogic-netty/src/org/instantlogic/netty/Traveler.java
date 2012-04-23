@@ -11,7 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.instantlogic.netty.place.PlaceFragmentModel;
+import org.instantlogic.netty.manager.ApplicationManager;
+import org.instantlogic.netty.manager.CaseManager;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.jboss.netty.channel.ChannelFuture;
 import org.jboss.netty.channel.ChannelFutureListener;
@@ -39,8 +40,6 @@ public class Traveler {
 	public static final Map<String, Traveler> travelers = new HashMap<String, Traveler>();
 	private static Gson gson = new Gson();
 
-	private String id;
-	
 	public static void broadcast(JsonObject message) {
 		logger.info("broadcasting to every traveler");
 		for (Traveler session : Traveler.travelers.values()) {
@@ -48,94 +47,101 @@ public class Traveler {
 		}
 	}
 	
-	public static long placeVersion;
-	public static PlaceFragmentModel thePlace = new PlaceFragmentModel();
-	static {
-		PlaceFragmentModel field = new PlaceFragmentModel();
-		field.id="1-1";
-		field.role="attribute";
-		field.question="The answer to everything";
-		field.value= "42";
-		thePlace.content = 
-			new PlaceFragmentModel[]
-				{
-					field
-				};
-		thePlace.id="1";
-	}
-	public static JsonObject placeJson = new JsonObject();
-	static {
-		placeJson.addProperty("widget", "Question");
-		placeJson.addProperty("answerWidget", "Slider");
-		placeJson.addProperty("value", 42);
-		placeJson.addProperty("min", 10);
-		placeJson.addProperty("max", 110);
-		placeJson.addProperty("length", "500px");
-		placeJson.addProperty("question", "The answer to everything?");
-	}
+//	public static JsonObject placeJson = new JsonObject();
+//	static {
+//		placeJson.addProperty("widget", "Question");
+//		placeJson.addProperty("answerWidget", "Slider");
+//		placeJson.addProperty("value", 42);
+//		placeJson.addProperty("min", 10);
+//		placeJson.addProperty("max", 110);
+//		placeJson.addProperty("length", "500px");
+//		placeJson.addProperty("question", "The answer to everything?");
+//	}
 	
-	public static Traveler getOrCreate(String travelerId) {
+	public static Traveler getOrCreate(String travelerId, String applicationName) {
 		Traveler result = travelers.get(travelerId);
 		if (result==null) {
 			logger.info("Registering new traveler {}", travelerId);
-			result = new Traveler(travelerId);
+			ApplicationManager application = ApplicationManager.getManager(applicationName);
+			result = new Traveler(travelerId, application);
 			travelers.put(travelerId, result);
 		}
 		return result;
 	}
 	
+	private String id;
 	private List<MessageEvent> parkedRequests = new ArrayList<MessageEvent>();
 	private long lastSentPlaceVersion = -1;
 	private JsonArray messagesWaiting = new JsonArray();
+	private ApplicationManager applicationManager;
+	private boolean sendPlace;
+	private String caseId;
+	private String location;
+	private CaseManager caseManager;
 	
-	public Traveler(String travelerId) {
+	public Traveler(String travelerId, ApplicationManager application) {
 		this.id = travelerId;
+		this.applicationManager = application;
 	}
 
+	/**
+	 * Sends a message to this traveler
+	 * @param message the message to send
+	 */
 	public synchronized void sendMessage(JsonObject message) {
 		messagesWaiting.add(message);
-		sendMessages();
+		deliverMessagesIfPossible();
 	}
 	
-	private synchronized void sendMessages() {
-		if (parkedRequests.size()>0) {
-			sendResponseMessages(parkedRequests.remove(0), thePlace);
-		}
-	}
-
-	public synchronized void handleIncomingMessages(String messagesText) {
+	public void handleIncomingMessages(String messagesText) {
 		JsonArray messages = (JsonArray) new JsonParser().parse(messagesText);
 		for (JsonElement message : messages) {
-			logger.debug("Handling message from traveler {}", id);
-			thePlace.content[0].value = message.getAsJsonObject().get("value").getAsString();			
-			placeVersion++;
+			String messageName = message.getAsJsonObject().get("message").getAsString();
+			logger.debug("Handling {} message from traveler {}", messageName, id);
+			if ("update".equals(messageName)) {
+				// TODO: handle update
+			} else if ("enter".equals(messageName)) {
+				String newLocation = message.getAsJsonObject().get("location").getAsString();
+				this.caseManager.enter(this, this.location, newLocation);
+				this.location = newLocation;
+				sendPlace = true;
+			}
 		}
-		sendMessages();
 	}
 
-	public synchronized void parkRequest(MessageEvent e) {
+	public void parkRequest(MessageEvent e) {
 		parkedRequests.add(e);
-		if (parkedRequests.size()>1 || messagesWaiting.size()>0 || lastSentPlaceVersion<placeVersion) {
-			sendResponseMessages(parkedRequests.remove(0), thePlace);
+		if (parkedRequests.size()>1 || sendPlace || messagesWaiting.size()>0) {
+			deliverMessages();
 		}
 	}
 
-	private synchronized void sendResponseMessages(MessageEvent event, PlaceFragmentModel place) {
+	private void deliverMessagesIfPossible() {
+		if (parkedRequests.size()>1) {
+			deliverMessages();
+		}
+	}
+	
+	private void deliverMessages() {
+		if (sendPlace) {
+			messagesWaiting.add(gson.toJsonTree(caseManager.render(this, this.location)));
+		}
+		sendResponseMessages(parkedRequests.remove(0));
+	}
+
+	/**
+	 * The parked request is returned carrying the messages waiting.
+	 * @param event
+	 */
+	private synchronized void sendResponseMessages(MessageEvent event) {
 		HttpRequest request = (HttpRequest) event.getMessage();
 		
 		boolean keepAlive = isKeepAlive(request);
  
          // Build the response object.
          HttpResponse response = new DefaultHttpResponse(HTTP_1_1, OK);
-         if (lastSentPlaceVersion<placeVersion) {
-        	 JsonObject placeMessage = new JsonObject();
-        	 placeMessage.addProperty("message", "place");
-        	 placeMessage.add("rootFragment", placeJson);
-        	 messagesWaiting.add(placeMessage);
-         }
          logger.debug("Sending {} messages to traveler {}", messagesWaiting.size(), id);
     	 response.setContent(ChannelBuffers.copiedBuffer(gson.toJson(messagesWaiting), CharsetUtil.UTF_8));
-    	 lastSentPlaceVersion = placeVersion;
     	 messagesWaiting = new JsonArray();
 
          response.setHeader(CONTENT_TYPE, "text/plain; charset=UTF-8");
@@ -154,9 +160,8 @@ public class Traveler {
          }		
 	}
 
-	public synchronized void pushNewPlaceValue(String value) {
-		thePlace.content[0].value = value;			
-		placeVersion++;
-		sendMessages();
+	public void setCaseId(String caseId) {
+		this.caseId = caseId;
+		this.caseManager = this.applicationManager.getOrCreateCase(caseId);
 	}
 }

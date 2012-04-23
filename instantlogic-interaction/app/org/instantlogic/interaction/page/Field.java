@@ -10,7 +10,7 @@ import org.instantlogic.interaction.util.ChangeContext;
 import org.instantlogic.interaction.util.FlowEventOccurrence;
 import org.instantlogic.interaction.util.RenderContext;
 
-public abstract class Field extends PageFragment {
+public abstract class Field extends PlaceFragmentTemplate {
 	
 	public Field() {}
 	
@@ -19,39 +19,39 @@ public abstract class Field extends PageFragment {
 		return getAttribute().getName()+":"+this.datatypeToString(getAttribute().getDatatype());
 	}
 	
-	@Override
-	public String getElementType() {
-		return "field";
-	}
-	
-	@Override
-	public PageElement render(RenderContext context) {
-		PageElement result = super.render(context);
-		Attribute attribute = getAttribute();
-		Object value = context.getValue(getEntity(), attribute);
-		if (attribute.isMultivalue() && value==null) {
-			value = new String[0];
-		}
-		result.datatype = datatypeToString(attribute.getDatatype());
-		result.id = result.id;
-		result.value = value;
-		result.required = isRequired();
-		result.refresh = true;
-		Text question = getQuestion();
-		if (question!=null) {
-			result.question = question.renderText(context);
-		}
-		Text explain = getExplain();
-		if (explain!=null) {
-			result.explain = explain.renderText(context);
-		}
-		result.multivalue = attribute.isMultivalue()?Boolean.TRUE:null;
-		DomainEntry[] domain = attribute.getDomain();
-		if (domain!=null) {
-			result.domain = convertDomain(domain, context);
-		}
-		return result;
-	}
+//	@Override
+//	public String getElementType() {
+//		return "field";
+//	}
+//	
+//	@Override
+//	public PageElement render(RenderContext context) {
+//		PageElement result = super.render(context);
+//		Attribute attribute = getAttribute();
+//		Object value = context.getValue(getEntity(), attribute);
+//		if (attribute.isMultivalue() && value==null) {
+//			value = new String[0];
+//		}
+//		result.datatype = datatypeToString(attribute.getDatatype());
+//		result.id = result.id;
+//		result.value = value;
+//		result.required = isRequired();
+//		result.refresh = true;
+//		Text question = getQuestion();
+//		if (question!=null) {
+//			result.question = question.renderText(context);
+//		}
+//		Text explain = getExplain();
+//		if (explain!=null) {
+//			result.explain = explain.renderText(context);
+//		}
+//		result.multivalue = attribute.isMultivalue()?Boolean.TRUE:null;
+//		DomainEntry[] domain = attribute.getDomain();
+//		if (domain!=null) {
+//			result.domain = convertDomain(domain, context);
+//		}
+//		return result;
+//	}
 	
 	private Domain[] convertDomain(DomainEntry[] domain, RenderContext context) {
 		Domain[] result = new Domain[domain.length];

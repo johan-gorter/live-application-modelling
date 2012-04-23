@@ -1,6 +1,8 @@
 package org.instantlogic.interaction.page;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.instantlogic.fabric.Instance;
@@ -10,7 +12,7 @@ import org.instantlogic.interaction.util.ChangeContext;
 import org.instantlogic.interaction.util.FlowEventOccurrence;
 import org.instantlogic.interaction.util.RenderContext;
 
-public abstract class CompositePageFragment extends PageFragment {
+public abstract class CompositePageFragment extends PlaceFragmentTemplate {
 
 	@Override
 	public String getName() {
@@ -34,61 +36,70 @@ public abstract class CompositePageFragment extends PageFragment {
 	public Deduction<? extends Object> getSelect() {
 		return null;
 	}
-
+	
 	@Override
-	public PageElement render(RenderContext context) {
-		PageElement result;
+	public Fragment render(RenderContext context) {
+		Fragment result = super.render(context);
+		result.id=result.id+"-Parent";
+		setChildren(result, context);
+		return result;
+	}
+
+	protected void setChildren(Fragment result, RenderContext context) {
+		Collection<Fragment> children = calculateChildren(context);
+		result.children = children.toArray(new Fragment[children.size()]);
+	}
+	
+	protected Collection<Fragment> calculateChildren(RenderContext context) {
+		Collection<Fragment> result;
 		Deduction<? extends Object> select = this.getSelect();
 		if (select!=null) {
-			Object value = select.deduct(context);
+			Object value = select.deduct(context).getValue();
 			if (value==null) {
 				return null;
 			} else if (value instanceof Instance) {
-				result = doRenderWithInstance((Instance)value, context);
+				result = Collections.singleton(doRenderWithInstance((Instance)value, context));
 			} else if (value instanceof Iterable) {
 				result = doLoopRender(context, (Iterable<Instance>) value);
 			} else {
 				throw new RuntimeException("Deduction of select did not yield instance(s), but "+value);
 			}
 		} else {
-			result = doRender(context);
+			result = Collections.singleton(doRender(context));
 		}
 		return result;
 	}
 
-	private PageElement doLoopRender(RenderContext context, Iterable<Instance> value) {
-		PageElement result = super.render(context);
+	private List<Fragment> doLoopRender(RenderContext context, Iterable<Instance> value) {
 		context.nextIdLevel();
-		result.name = getName()+"-Parent";
-		List<PageElement> children = new ArrayList<PageElement>();
+		List<Fragment> children = new ArrayList<Fragment>();
 		for (Object instance : (Iterable<Instance>)value) {
-			PageElement element = doRenderWithInstance((Instance)instance, context);
+			Fragment element = doRenderWithInstance((Instance)instance, context);
 			if (element!=null) {
 				children.add(element);
 			}
 		}
-		result.content = children.toArray(new PageElement[children.size()]);
 		context.previousIdLevel();
-		return result;
+		return children;
 	}
 	
-	private PageElement doRenderWithInstance(Instance instance, RenderContext context) {
+	private Fragment doRenderWithInstance(Instance instance, RenderContext context) {
 		context.pushSelectedInstance(instance);
-		PageElement result = doRender(context);
+		Fragment result = doRender(context);
 		context.popSelectedInstance(instance);
 		return result;
 	}
 
-	private PageElement doRender(RenderContext context) {
-		PageElement result = super.render(context);
-		Text display = getDisplay();
-		if (display!=null) {
-			result.display = display.renderText(context);
-		}
-		result.name = getName();
+	private Fragment doRender(RenderContext context) {
+		Fragment result = super.render(context);
+//		Text display = getDisplay();
+//		if (display!=null) {
+//			result.display = display.renderText(context);
+//		}
+//		result.name = getName();
 		context.nextIdLevel();
 		
-		result.content = renderChildren(context, getChildren(context));
+		result.children = renderChildren(context, getChildren(context));
 		
 		context.previousIdLevel();
 		return result;
@@ -142,7 +153,7 @@ public abstract class CompositePageFragment extends PageFragment {
 	private FlowEventOccurrence doSubmit(ChangeContext context) {
 		FlowEventOccurrence result = super.submit(context);
 		context.nextIdLevel();
-		for (PageFragment child: getChildren(context)) {
+		for (PlaceFragmentTemplate child: getChildren(context)) {
 			FlowEventOccurrence childResult = child.submit(context);
 			if (childResult!=null) {
 				if (result!=null) {
@@ -155,28 +166,23 @@ public abstract class CompositePageFragment extends PageFragment {
 		return result;
 	}
 
-	public static PageElement[] renderChildren(RenderContext context, PageFragment[] childModels) {
-		List<PageElement> result = new ArrayList<PageElement>(childModels.length);
-		for (PageFragment child: childModels) {
-			PageElement element = child.render(context);
+	public static Fragment[] renderChildren(RenderContext context, PlaceFragmentTemplate[] childModels) {
+		List<Fragment> result = new ArrayList<Fragment>(childModels.length);
+		for (PlaceFragmentTemplate child: childModels) {
+			Fragment element = child.render(context);
 			if (element!=null) {
 				result.add(element);
 			}
 		}
-		return result.toArray(new PageElement[result.size()]);
+		return result.toArray(new Fragment[result.size()]);
 	}
 
-	public abstract PageFragment[] getChildren(RenderContext context);
+	public abstract PlaceFragmentTemplate[] getChildren(RenderContext context);
 	
 	public static void changeValue(ChangeContext changeContext,
-			PageFragment[] childModels) {
-		for (PageFragment child: childModels) {
+			PlaceFragmentTemplate[] childModels) {
+		for (PlaceFragmentTemplate child: childModels) {
 			child.submit(changeContext);
 		}		
-	}
-	
-	@Override
-	public CompositePageFragment withPresentation(String presentation) {
-		return (CompositePageFragment)super.withPresentation(presentation);
 	}
 }

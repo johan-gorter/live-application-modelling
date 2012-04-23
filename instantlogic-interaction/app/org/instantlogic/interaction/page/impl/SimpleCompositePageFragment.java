@@ -3,24 +3,24 @@ package org.instantlogic.interaction.page.impl;
 import org.instantlogic.fabric.deduction.Deduction;
 import org.instantlogic.fabric.text.Text;
 import org.instantlogic.interaction.page.CompositePageFragment;
-import org.instantlogic.interaction.page.PageFragment;
+import org.instantlogic.interaction.page.PlaceFragmentTemplate;
 import org.instantlogic.interaction.util.RenderContext;
 
 public class SimpleCompositePageFragment extends CompositePageFragment {
 
-	private final PageFragment[] children;
+	private final PlaceFragmentTemplate[] children;
 	private final Deduction<?> select;
 	private final Text display;
 
-	public SimpleCompositePageFragment(PageFragment[] children) {
+	public SimpleCompositePageFragment(PlaceFragmentTemplate[] children) {
 		this(null, null, children);
 	}
 	
-	public SimpleCompositePageFragment(Deduction<?> relation, PageFragment[] children) {
+	public SimpleCompositePageFragment(Deduction<?> relation, PlaceFragmentTemplate[] children) {
 		this(relation, null, children);
 	}
 	
-	public SimpleCompositePageFragment(Text display, PageFragment[] children) {
+	public SimpleCompositePageFragment(Text display, PlaceFragmentTemplate[] children) {
 		this(null, display, children);
 	}
 	
@@ -30,7 +30,7 @@ public class SimpleCompositePageFragment extends CompositePageFragment {
 	 * @param display The optional header to display
 	 * @param children The children in the hierarchy.
 	 */
-	public SimpleCompositePageFragment(Deduction<?> select, Text display, PageFragment[] children) {
+	public SimpleCompositePageFragment(Deduction<?> select, Text display, PlaceFragmentTemplate[] children) {
 		this.select = select;
 		this.display = display;
 		this.children = children;
@@ -38,7 +38,7 @@ public class SimpleCompositePageFragment extends CompositePageFragment {
 	}
 	
 	@Override
-	public PageFragment[] getChildren(RenderContext context) {
+	public PlaceFragmentTemplate[] getChildren(RenderContext context) {
 		return children;
 	}
 	

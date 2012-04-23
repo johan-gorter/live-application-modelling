@@ -1,7 +1,6 @@
 package org.instantlogic.interaction.page;
 
 public class PageElement {
-//	@com.google.gson.annotations.SerializedName("type")
 	public String elementType;
 	public String name;
 	public String id;
