@@ -1,18 +1,19 @@
 package org.instantlogic.interaction.page.impl;
 
+import org.instantlogic.interaction.page.Fragment;
 import org.instantlogic.interaction.page.PageElement;
-import org.instantlogic.interaction.page.PageFragment;
+import org.instantlogic.interaction.page.PlaceFragmentTemplate;
 import org.instantlogic.interaction.util.ChangeContext;
 import org.instantlogic.interaction.util.FlowEventOccurrence;
 import org.instantlogic.interaction.util.RenderContext;
 
-public abstract class SimpleSharedPageFragment extends PageFragment {
+public abstract class SimpleSharedPageFragment extends PlaceFragmentTemplate {
 
-	protected abstract PageFragment getDelegate();
+	protected abstract PlaceFragmentTemplate getDelegate();
 	
 	@Override
-	public String getElementType() {
-		return getDelegate().getElementType();
+	public String getWidgetName() {
+		return getDelegate().getWidgetName();
 	}
 
 	@Override
@@ -21,17 +22,7 @@ public abstract class SimpleSharedPageFragment extends PageFragment {
 	}
 	
 	@Override
-	public String getPresentation() {
-		return getDelegate().getPresentation();
-	}
-	
-	@Override
-	public void setPresentation(String presentation) {
-		throw new RuntimeException("This would modify the shared pageFragment");
-	}
-	
-	@Override
-	public PageElement render(RenderContext context) {
+	public Fragment render(RenderContext context) {
 		return getDelegate().render(context);
 	}
 	

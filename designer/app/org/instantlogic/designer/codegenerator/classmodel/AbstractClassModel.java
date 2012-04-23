@@ -14,6 +14,7 @@ public abstract class AbstractClassModel {
 	
 	public String rootPackageName;
 	public String name;
+	public String id;
 	public boolean isCustomized;
 	
 	private String rootPackageInternalPrefix;

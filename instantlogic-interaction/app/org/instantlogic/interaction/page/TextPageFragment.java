@@ -3,7 +3,7 @@ package org.instantlogic.interaction.page;
 import org.instantlogic.fabric.text.Text;
 import org.instantlogic.interaction.util.RenderContext;
 
-public class TextPageFragment extends PageFragment {
+public class TextPageFragment extends PlaceFragmentTemplate {
 
 	private final Text text;
 
@@ -17,14 +17,14 @@ public class TextPageFragment extends PageFragment {
 	}
 	
 	@Override
-	public String getElementType() {
+	public String getWidgetName() {
 		return "text";
 	}
 	
 	@Override
-	public PageElement render(RenderContext context) {
-		PageElement result = super.render(context);
-		result.display = text.renderText(context);
+	public Fragment render(RenderContext context) {
+		Fragment result = super.render(context);
+		result.widgetData.put("text", text.renderText(context));
 		return result;
 	}
 }

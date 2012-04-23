@@ -81,8 +81,8 @@ public class NettyServer {
 			executor.execute(new Runnable() {
 				@Override
 				public void run() {
-					for (Traveler session : Traveler.travelers.values()) {
-						session.pushNewPlaceValue(command);
+					for (Traveler traveler : Traveler.travelers.values()) {
+						traveler.sendMessage(FILES_UPDATED);
 					}
 				}
 			});

@@ -36,10 +36,23 @@ public class InstantlogicRequestHandler extends HttpStaticFileServerHandler impl
 		if (travelerIds==null || travelerIds.size()!=1) {
 			throw new Exception("No travelerId queryString parameter");
 		}
-		
 		String travelerId = travelerIds.get(0);
-		logger.debug("Incoming request from traveler {}", travelerId);
-		Traveler traveler = Traveler.getOrCreate(travelerId);
+		
+		List<String> applications = params.get("application");
+		if (applications==null || applications.size()!=1) {
+			throw new Exception("No application queryString parameter");
+		}
+		String applicationName = applications.get(0);
+
+		List<String> cases = params.get("case");
+		if (cases==null || cases.size()!=1) {
+			throw new Exception("No case queryString parameter");
+		}
+		String caseId = cases.get(0);
+		
+		logger.debug("Incoming request from traveler {} for application {}, case {}", new Object[]{ travelerId, applicationName, caseId});
+		Traveler traveler = Traveler.getOrCreate(travelerId, applicationName);
+		traveler.setCaseId(cases.get(0));
 		
 		ChannelBuffer content = request.getContent();
 		if (content.readable()) {

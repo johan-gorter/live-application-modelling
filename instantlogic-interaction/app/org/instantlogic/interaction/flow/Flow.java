@@ -22,11 +22,11 @@ public abstract class Flow extends Concept {
 	/**
 	 * Finds the page (pagePath is in the format subflowName.subflowName.pageName)
 	 */
-	public Page getPage(String[] path, int pathIndex) {
+	public Place getPage(String[] path, int pathIndex) {
 		for (FlowNodeBase node: getNodes()) {
 			if (node.getName().equals(path[pathIndex])) {
 				if (pathIndex==path.length-1) {
-					return (Page) node;
+					return (Place) node;
 				} else {
 					return ((SubFlow)node).getFlow().getPage(path, pathIndex+1);
 				}
@@ -105,13 +105,14 @@ public abstract class Flow extends Concept {
 		context.logOccurrence(occurrence);
 		if (node instanceof SubFlow) {
 			return ((SubFlow)node).getFlow().enter(occurrence, context);
-		} else if (node instanceof Page) {
+		} else if (node instanceof Place) {
 			return null;
 		} else {
 			throw new RuntimeException("Edge did not reach something useful "+node);
 		}
 	}
-	
+
+	@Deprecated
 	public FlowStack createFlowStack(FlowStack stack, Coordinate current, Iterator<Coordinate> moreCoordinates, Instance caseInstance) {
 		stackSelectedInstances(stack, current, caseInstance);
 		if (moreCoordinates.hasNext()) {
@@ -126,7 +127,41 @@ public abstract class Flow extends Concept {
 		}
 		return stack;
 	}
+
+	public FlowStack createFlowStack(FlowStack parentStack, String current, Iterator<String> moreCoordinates, Instance caseInstance) {
+		FlowStack result = new FlowStack(parentStack, this);
+		for (Entity<? extends Instance> entity: this.getParameters()) {
+			if (!moreCoordinates.hasNext()) throw new InvalidFlowCoordinatesException("Not enough parameters for flow "+getName());
+			String instanceId = moreCoordinates.next();
+			Instance instance = caseInstance.getMetadata().getCaseAdministration().getInstanceById(instanceId);
+			if (instance==null) {
+				throw new InvalidFlowCoordinatesException("Unknown instance "+instanceId);
+			}
+			if (!entity.getInstanceClass().isAssignableFrom(instance.getClass())) {
+				throw new InvalidFlowCoordinatesException("Selected instance is not a "+entity.getInstanceClass().getName());
+			}
+			result.pushSelectedInstance(instance);
+		}
+		if (!moreCoordinates.hasNext()) {
+			return result; // Ends in a flow
+		}
+		String next = moreCoordinates.next();
+		FlowNodeBase nextNode = getNode(next);
+		result.setCurrentNode(nextNode);
+		if (nextNode instanceof SubFlow) {
+			Flow flow = ((SubFlow)nextNode).getFlow(); 
+			result = flow.createFlowStack(result, next, moreCoordinates, caseInstance);
+			return result;
+		} else {
+			// Ends on a page
+			if (moreCoordinates.hasNext()) {
+				throw new InvalidFlowCoordinatesException("Too many parameters");
+			}
+			return result;
+		}
+	}
 	
+	@Deprecated
 	protected void stackSelectedInstances(FlowStack stack, Coordinate current, Instance caseInstance) {
 		if (current.getActiveInstances().size()!=this.getParameters().length) {
 			throw new RuntimeException("Number of parameters does not match number of selected instances"); // TODO check if the right instances are selected

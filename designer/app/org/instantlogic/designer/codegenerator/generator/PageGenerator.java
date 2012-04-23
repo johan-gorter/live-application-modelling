@@ -39,6 +39,7 @@ public class PageGenerator extends AbstractGenerator {
 	private PageClassModel initModel() {
 		PageClassModel model = new PageClassModel();
 		model.name = pageDesign.getName();
+		model.id = pageDesign.getMetadata().getInstanceId();
 		model.isCustomized = pageDesign.getIsCustomized()==Boolean.TRUE;
 		model.flowname = pageDesign.getOwner().getName();
 		return model;

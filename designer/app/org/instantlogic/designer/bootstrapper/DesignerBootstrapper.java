@@ -62,6 +62,8 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createAttribute(attributeDesign, "readOnly", Boolean.class);
 		createAttribute(attributeDesign, "multivalue", Boolean.class);
 		AttributeDesign className = createAttribute(attributeDesign, "className", String.class);
+
+		// --------- Generator bookmark ---------
 		EntityDesign domainEntryDesign = createEntity("DomainEntryDesign", design);
 		
 		// Relation

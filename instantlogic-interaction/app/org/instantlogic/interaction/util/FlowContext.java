@@ -7,7 +7,7 @@ import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.fabric.util.DeductionContext;
 import org.instantlogic.interaction.flow.Flow;
 import org.instantlogic.interaction.flow.FlowNodeBase;
-import org.instantlogic.interaction.flow.Page;
+import org.instantlogic.interaction.flow.Place;
 
 
 public class FlowContext extends DeductionContext {
@@ -25,8 +25,8 @@ public class FlowContext extends DeductionContext {
 		this.caseId = caseId;
 	}
 	
-	public Page getPage() {
-		return (Page) flowStack.getCurrentNode();
+	public Place getPage() {
+		return (Place) flowStack.getCurrentNode();
 	}
 	
 	public Instance getCaseInstance() {

@@ -7,6 +7,8 @@ package org.instantlogic.fabric.model;
 public abstract class Concept implements Comparable<Concept> {
 	
 	public abstract String getName();
+	
+	private String id;
 
 	@Override
 	public int compareTo(Concept o) {
@@ -22,5 +24,9 @@ public abstract class Concept implements Comparable<Concept> {
 	@Override
 	public String toString() {
 		return getName();
+	}
+
+	public String getId() {
+		return null;
 	}
 }

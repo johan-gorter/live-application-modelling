@@ -1,6 +1,6 @@
 package org.instantlogic.designer.flow.main;
 
-public class WelcomePage extends org.instantlogic.interaction.flow.Page {
+public class WelcomePage extends org.instantlogic.interaction.flow.Place {
 
 	public static final WelcomePage INSTANCE = new WelcomePage();
 
@@ -42,21 +42,21 @@ public class WelcomePage extends org.instantlogic.interaction.flow.Page {
 
 	
 	private static org.instantlogic.interaction.page.CompositePageFragment CONTENT = 
-        new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PageFragment[]{
+        new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
             new org.instantlogic.interaction.page.TextPageFragment(new org.instantlogic.fabric.text.ConstantText("Welcome to the Designer")),
-            new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PageFragment[]{
-                new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PageFragment[]{
+            new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
+                new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
                     new org.instantlogic.interaction.page.TextPageFragment(new org.instantlogic.fabric.text.ConstantText("Entities")),
-                    new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(createDeduction1(), new org.instantlogic.interaction.page.PageFragment[]{
-                        new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PageFragment[]{
+                    new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(createDeduction1(), new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
+                        new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
                             new org.instantlogic.interaction.page.impl.SimpleLink(org.instantlogic.designer.event.EntityDetailsEvent.INSTANCE, new org.instantlogic.fabric.text.TemplatedText().add(createDeduction0()))
                         }).withPresentation("row")
                     })
                 }).withPresentation("column"),
-                new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PageFragment[]{
+                new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
                     new org.instantlogic.interaction.page.TextPageFragment(new org.instantlogic.fabric.text.ConstantText("Flows")),
-                    new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(createDeduction3(), new org.instantlogic.interaction.page.PageFragment[]{
-                        new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PageFragment[]{
+                    new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(createDeduction3(), new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
+                        new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
                             new org.instantlogic.interaction.page.impl.SimpleLink(org.instantlogic.designer.event.FlowDetailsEvent.INSTANCE, new org.instantlogic.fabric.text.TemplatedText().add(createDeduction2()))
                         }).withPresentation("row")
                     })

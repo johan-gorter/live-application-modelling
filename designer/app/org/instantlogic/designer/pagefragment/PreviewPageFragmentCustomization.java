@@ -9,10 +9,10 @@ import org.instantlogic.designer.PageFragmentDesign;
 import org.instantlogic.designer.TextDesign;
 import org.instantlogic.designer.entity.PageFragmentDesignEntity;
 import org.instantlogic.interaction.page.PageElement;
-import org.instantlogic.interaction.page.PageFragment;
+import org.instantlogic.interaction.page.PlaceFragmentTemplate;
 import org.instantlogic.interaction.util.RenderContext;
 
-public class PreviewPageFragmentCustomization extends PageFragment {
+public class PreviewPageFragmentCustomization extends PlaceFragmentTemplate {
 
 	@Override
 	public PageElement render(RenderContext context) {
