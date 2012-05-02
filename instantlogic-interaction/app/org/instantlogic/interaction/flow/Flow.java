@@ -22,11 +22,11 @@ public abstract class Flow extends Concept {
 	/**
 	 * Finds the page (pagePath is in the format subflowName.subflowName.pageName)
 	 */
-	public Place getPage(String[] path, int pathIndex) {
+	public PlaceTemplate getPage(String[] path, int pathIndex) {
 		for (FlowNodeBase node: getNodes()) {
 			if (node.getName().equals(path[pathIndex])) {
 				if (pathIndex==path.length-1) {
-					return (Place) node;
+					return (PlaceTemplate) node;
 				} else {
 					return ((SubFlow)node).getFlow().getPage(path, pathIndex+1);
 				}
@@ -105,7 +105,7 @@ public abstract class Flow extends Concept {
 		context.logOccurrence(occurrence);
 		if (node instanceof SubFlow) {
 			return ((SubFlow)node).getFlow().enter(occurrence, context);
-		} else if (node instanceof Place) {
+		} else if (node instanceof PlaceTemplate) {
 			return null;
 		} else {
 			throw new RuntimeException("Edge did not reach something useful "+node);

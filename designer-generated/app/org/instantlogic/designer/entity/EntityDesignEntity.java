@@ -202,6 +202,26 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			}
 		};
 	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.WidgetTemplateDesign>, org.instantlogic.designer.WidgetTemplateDesign> usedInField
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.WidgetTemplateDesign>, org.instantlogic.designer.WidgetTemplateDesign>(
+			"usedInField", INSTANCE, org.instantlogic.designer.entity.WidgetTemplateDesignEntity.INSTANCE, org.instantlogic.designer.WidgetTemplateDesign.class, org.instantlogic.designer.entity.WidgetTemplateDesignEntity.entity
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.WidgetTemplateDesign> get(
+					org.instantlogic.designer.EntityDesign instance) {
+				return instance.getUsedInFieldRelationValue();
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
+	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EventDesign>, org.instantlogic.designer.EventDesign> parameterInEvent
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EventDesign>, org.instantlogic.designer.EventDesign>(
 			"parameterInEvent", INSTANCE, org.instantlogic.designer.entity.EventDesignEntity.INSTANCE, org.instantlogic.designer.EventDesign.class, org.instantlogic.designer.entity.EventDesignEntity.parameters
@@ -256,6 +276,7 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 		reverseRelations,
 		entityInSelectedInstanceDeductions,
 		entityInCastDeductions,
+		usedInField,
 		parameterInEvent,
 		parameterInFlows,
 	};

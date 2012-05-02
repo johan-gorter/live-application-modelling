@@ -166,15 +166,15 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.PageFragmentHolderDesign>, org.instantlogic.designer.PageFragmentHolderDesign> sharedPageFragments
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.PageFragmentHolderDesign>, org.instantlogic.designer.PageFragmentHolderDesign>(
-			"sharedPageFragments", INSTANCE, org.instantlogic.designer.entity.PageFragmentHolderDesignEntity.INSTANCE, org.instantlogic.designer.PageFragmentHolderDesign.class, org.instantlogic.designer.entity.PageFragmentHolderDesignEntity.shared
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign>, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign> sharedTemplates
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign>, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign>(
+			"sharedTemplates", INSTANCE, org.instantlogic.designer.entity.SharedFragmentTemplateDefinitionDesignEntity.INSTANCE, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign.class, org.instantlogic.designer.entity.SharedFragmentTemplateDefinitionDesignEntity.application
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.ApplicationDesign, org.instantlogic.designer.PageFragmentHolderDesign> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.ApplicationDesign, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign> get(
 					org.instantlogic.designer.ApplicationDesign instance) {
-				return instance.getSharedPageFragmentsRelationValue();
+				return instance.getSharedTemplatesRelationValue();
 			}
 	
 			public boolean isOwner() {
@@ -201,7 +201,7 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 		flows,
 		events,
 		exposedFlows,
-		sharedPageFragments,
+		sharedTemplates,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 	};

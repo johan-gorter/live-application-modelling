@@ -7,6 +7,7 @@ public class SelectedInstanceDeductionDesignEntityGenerator extends EntityDesign
     
     public SelectedInstanceDeductionDesignEntityGenerator() {
         setName("SelectedInstanceDeductionDesign");
+        setExtendsFrom(DeductionDesignEntityGenerator.ENTITY);
     }
 
     // Attributes

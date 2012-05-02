@@ -16,7 +16,7 @@ public abstract class AbstractJavacodeGenerator {
 
 	static Configuration freemarkerConfig;
 	public static Template subFlowTemplate;
-	public static Template pageTemplate;
+	public static Template placeTemplateTemplate;
 	public static Template eventTemplate;
 	public static Template pageFragmentTemplate;
 	public static Template flowTemplate;
@@ -35,7 +35,7 @@ public abstract class AbstractJavacodeGenerator {
 			eventTemplate = freemarkerConfig.getTemplate("Event.java.ftl");
 			pageFragmentTemplate = freemarkerConfig.getTemplate("PageFragment.java.ftl");
 			flowTemplate = freemarkerConfig.getTemplate("Flow.java.ftl");
-			pageTemplate = freemarkerConfig.getTemplate("Page.java.ftl");
+			placeTemplateTemplate = freemarkerConfig.getTemplate("PlaceTemplate.java.ftl");
 			subFlowTemplate = freemarkerConfig.getTemplate("SubFlow.java.ftl");
 		} catch (Exception e) {
 			throw new RuntimeException(e);

@@ -50,27 +50,15 @@ public class TextDesign extends FragmentTemplateDesign {
 	}
 
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, HeaderDesign> textOnHeader
-		= createReverseRelationValue(org.instantlogic.designer.entity.TextDesignEntity.textOnHeader);
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, WidgetText> textForWidget
+		= createReverseRelationValue(org.instantlogic.designer.entity.TextDesignEntity.textForWidget);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, HeaderDesign> getTextOnHeaderRelationValue() {
-		return textOnHeader;
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, WidgetText> getTextForWidgetRelationValue() {
+		return textForWidget;
 	}
 
-	public org.instantlogic.designer.HeaderDesign getTextOnHeader() {
-		return textOnHeader.getValue();
-	}
-
-	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, LinkDesign> captionOnButton
-		= createReverseRelationValue(org.instantlogic.designer.entity.TextDesignEntity.captionOnButton);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, LinkDesign> getCaptionOnButtonRelationValue() {
-		return captionOnButton;
-	}
-
-	public org.instantlogic.designer.LinkDesign getCaptionOnButton() {
-		return captionOnButton.getValue();
+	public org.instantlogic.designer.WidgetText getTextForWidget() {
+		return textForWidget.getValue();
 	}
 
 

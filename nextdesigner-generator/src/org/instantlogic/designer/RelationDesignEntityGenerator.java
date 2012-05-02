@@ -7,6 +7,7 @@ public class RelationDesignEntityGenerator extends EntityDesign {
     
     public RelationDesignEntityGenerator() {
         setName("RelationDesign");
+        setExtendsFrom(AttributeDesignEntityGenerator.ENTITY);
     }
 
     // Attributes

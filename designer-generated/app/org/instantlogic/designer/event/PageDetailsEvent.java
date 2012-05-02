@@ -6,7 +6,7 @@ public class PageDetailsEvent extends org.instantlogic.interaction.flow.impl.Sim
 
 	public PageDetailsEvent() {
 		super("PageDetails", new org.instantlogic.fabric.model.Entity[]{
-			org.instantlogic.designer.entity.PlaceDesignEntity.INSTANCE,
+			org.instantlogic.designer.entity.PlaceTemplateDesignEntity.INSTANCE,
 		});
 	}
 }

@@ -10,10 +10,8 @@ import org.instantlogic.designer.EntityDesign.RelationType;
 import org.instantlogic.designer.EventDesign;
 import org.instantlogic.designer.FlowDesign;
 import org.instantlogic.designer.FlowSourceDesign;
-import org.instantlogic.designer.HeaderDesign;
 import org.instantlogic.designer.PlaceTemplateDesign;
 import org.instantlogic.designer.RelationDesign;
-import org.instantlogic.designer.SelectDesign;
 
 public class CarinsuranceBootstrapper extends BootstrapperUtil {
 

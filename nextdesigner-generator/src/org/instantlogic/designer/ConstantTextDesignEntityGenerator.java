@@ -7,6 +7,7 @@ public class ConstantTextDesignEntityGenerator extends EntityDesign {
     
     public ConstantTextDesignEntityGenerator() {
         setName("ConstantTextDesign");
+        setExtendsFrom(TextDesignEntityGenerator.ENTITY);
     }
 
     // Attributes

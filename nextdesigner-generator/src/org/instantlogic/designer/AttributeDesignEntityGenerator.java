@@ -7,6 +7,7 @@ public class AttributeDesignEntityGenerator extends EntityDesign {
     
     public AttributeDesignEntityGenerator() {
         setName("AttributeDesign");
+        setExtendsFrom(DesignEntityGenerator.ENTITY);
     }
 
     // Attributes
@@ -25,7 +26,7 @@ public class AttributeDesignEntityGenerator extends EntityDesign {
             .setReverseName("relevanceOfAttribute");
     public final RelationDesign rule = addRelation("rule", RelationType.OneToZeroOrOneAggregation, DeductionSchemeDesignEntityGenerator.ENTITY)
             .setReverseName("ruleOfAttribute");
-    public final RelationDesign default = addRelation("default", RelationType.OneToZeroOrOneAggregation, DeductionSchemeDesignEntityGenerator.ENTITY)
+    public final RelationDesign _default = addRelation("default", RelationType.OneToZeroOrOneAggregation, DeductionSchemeDesignEntityGenerator.ENTITY)
             .setReverseName("defaultOfAttribute");
 
 }

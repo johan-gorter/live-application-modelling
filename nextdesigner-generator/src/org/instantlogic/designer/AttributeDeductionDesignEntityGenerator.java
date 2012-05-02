@@ -7,6 +7,7 @@ public class AttributeDeductionDesignEntityGenerator extends EntityDesign {
     
     public AttributeDeductionDesignEntityGenerator() {
         setName("AttributeDeductionDesign");
+        setExtendsFrom(DeductionDesignEntityGenerator.ENTITY);
     }
 
     // Attributes

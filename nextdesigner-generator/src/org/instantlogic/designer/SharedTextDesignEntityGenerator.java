@@ -7,6 +7,7 @@ public class SharedTextDesignEntityGenerator extends EntityDesign {
     
     public SharedTextDesignEntityGenerator() {
         setName("SharedTextDesign");
+        setExtendsFrom(TextDesignEntityGenerator.ENTITY);
     }
 
     // Attributes

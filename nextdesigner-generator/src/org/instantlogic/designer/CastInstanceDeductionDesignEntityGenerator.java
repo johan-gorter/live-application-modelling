@@ -7,6 +7,7 @@ public class CastInstanceDeductionDesignEntityGenerator extends EntityDesign {
     
     public CastInstanceDeductionDesignEntityGenerator() {
         setName("CastInstanceDeductionDesign");
+        setExtendsFrom(DeductionDesignEntityGenerator.ENTITY);
     }
 
     // Attributes

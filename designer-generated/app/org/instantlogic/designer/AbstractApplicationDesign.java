@@ -225,34 +225,34 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 	}
 	
 	
-	private final org.instantlogic.fabric.value.RelationValues<ApplicationDesign, PageFragmentHolderDesign> sharedPageFragments
-		= createRelationValues(org.instantlogic.designer.entity.ApplicationDesignEntity.sharedPageFragments);
+	private final org.instantlogic.fabric.value.RelationValues<ApplicationDesign, SharedFragmentTemplateDefinitionDesign> sharedTemplates
+		= createRelationValues(org.instantlogic.designer.entity.ApplicationDesignEntity.sharedTemplates);
 		
-	public org.instantlogic.fabric.value.RelationValues<ApplicationDesign, PageFragmentHolderDesign> getSharedPageFragmentsRelationValue() {
-		return sharedPageFragments;
+	public org.instantlogic.fabric.value.RelationValues<ApplicationDesign, SharedFragmentTemplateDefinitionDesign> getSharedTemplatesRelationValue() {
+		return sharedTemplates;
 	}
 
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.PageFragmentHolderDesign> getSharedPageFragments() {
-		return sharedPageFragments.getValue();
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign> getSharedTemplates() {
+		return sharedTemplates.getValue();
 	}
 	
-	public ApplicationDesign addToSharedPageFragments(PageFragmentHolderDesign item) {
-		sharedPageFragments.addValue(item);
+	public ApplicationDesign addToSharedTemplates(SharedFragmentTemplateDefinitionDesign item) {
+		sharedTemplates.addValue(item);
 		return (ApplicationDesign)this;
 	}
 	
-	public ApplicationDesign addToSharedPageFragments(PageFragmentHolderDesign item, int index) {
-		sharedPageFragments.insertValue(item, index);
+	public ApplicationDesign addToSharedTemplates(SharedFragmentTemplateDefinitionDesign item, int index) {
+		sharedTemplates.insertValue(item, index);
 		return (ApplicationDesign)this;
 	}
 	
-	public ApplicationDesign removeFromSharedPageFragments(PageFragmentHolderDesign item) {
-		sharedPageFragments.removeValue(item);
+	public ApplicationDesign removeFromSharedTemplates(SharedFragmentTemplateDefinitionDesign item) {
+		sharedTemplates.removeValue(item);
 		return (ApplicationDesign)this;
 	}
 	
-	public ApplicationDesign removeFromSharedPageFragments(int index) {
-		sharedPageFragments.removeValue(index);
+	public ApplicationDesign removeFromSharedTemplates(int index) {
+		sharedTemplates.removeValue(index);
 		return (ApplicationDesign)this;
 	}
 	

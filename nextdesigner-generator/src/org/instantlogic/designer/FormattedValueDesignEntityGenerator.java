@@ -7,6 +7,7 @@ public class FormattedValueDesignEntityGenerator extends EntityDesign {
     
     public FormattedValueDesignEntityGenerator() {
         setName("FormattedValueDesign");
+        setExtendsFrom(StringProducerDesignEntityGenerator.ENTITY);
     }
 
     // Attributes

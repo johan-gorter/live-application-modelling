@@ -34,6 +34,9 @@ public class ${name}EntityGenerator extends EntityDesign {
     
     public ${name}EntityGenerator() {
         setName("${name}");
+<#if extendsFrom??>        
+        setExtendsFrom(${extendsFrom.name}EntityGenerator.ENTITY);
+</#if>
 <#if isCustomized??>
   <#if isCustomized>
         setIsCustomized(true);
@@ -43,12 +46,12 @@ public class ${name}EntityGenerator extends EntityDesign {
 
     // Attributes
 <#list attributes as attribute>
-    public final AttributeDesign ${attribute.name} = addAttribute("${attribute.name}", ${attribute.className}.class);
+    public final AttributeDesign ${attribute.javaIdentifier} = addAttribute("${attribute.name}", ${attribute.className}.class);
 </#list>
 
-    // Attributes
+    // Relations
 <#list relations as relation>
-    public final RelationDesign ${relation.name} = addRelation("${relation.name}", RelationType.<@relationType relation=relation />, ${relation.to.name}EntityGenerator.ENTITY)
+    public final RelationDesign ${relation.javaIdentifier} = addRelation("${relation.name}", RelationType.<@relationType relation=relation />, ${relation.to.name}EntityGenerator.ENTITY)
             .setReverseName("${relation.reverseName}");
 </#list>
 

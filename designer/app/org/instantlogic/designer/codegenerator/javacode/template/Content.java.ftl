@@ -13,7 +13,7 @@
     </#list>
     <#list 1..depth as i>    </#list><#t>
     })<#t>
-  <#elsif content.category=="Widget">
+  <#elseif content.category=="Widget">
     new org.instantlogic.interaction.page.WidgetFragmentTemplate("${content.id}", "${content.widgetName}")<#t>
     <#if content.event??>
       .setEvent(${content.event}Event.INSTANCE)
