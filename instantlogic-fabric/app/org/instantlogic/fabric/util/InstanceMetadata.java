@@ -49,10 +49,8 @@ public class InstanceMetadata {
 	public void getInstanceId(StringBuilder builder) {
 		if (owner!=null) {
 			owner.getMetadata().getInstanceId(builder);
-			if (builder.length()==1 && builder.toString().equals("0")) {
+			if (builder.length()==1) { // "0", the id of the case instance
 				builder.setLength(0);
-			} else {
-				builder.append("-");
 			}
 		}
 		builder.append(localId);
@@ -171,7 +169,7 @@ public class InstanceMetadata {
 			throw new RuntimeException("This instance is already owned by "+this.owner);
 		}
 		this.owner = owner;
-		this.localId = owner==null?"0":localId;
+		this.localId = owner==null?"0":(Character.toUpperCase(getEntity().getName().charAt(0)))+localId;
 		this.instanceRegistry = null;
 	}
 	

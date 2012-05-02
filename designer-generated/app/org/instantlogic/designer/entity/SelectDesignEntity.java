@@ -9,7 +9,7 @@ public class SelectDesignEntity extends org.instantlogic.fabric.model.Entity<org
 
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
-		return org.instantlogic.designer.entity.CompositePageFragmentDesignEntity.INSTANCE;
+		return org.instantlogic.designer.entity.CompositeFragmentTemplateDesignEntity.INSTANCE;
 	}
 
 	@Override

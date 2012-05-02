@@ -29,13 +29,13 @@ public class PageCompositionDesignEntity extends org.instantlogic.fabric.model.E
 	
 	// Relations
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.PageCompositionDesign, org.instantlogic.designer.PageFragmentDesign, org.instantlogic.designer.PageFragmentDesign> pageFragment
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.PageCompositionDesign, org.instantlogic.designer.PageFragmentDesign, org.instantlogic.designer.PageFragmentDesign>(
-			"pageFragment", INSTANCE, org.instantlogic.designer.entity.PageFragmentDesignEntity.INSTANCE, org.instantlogic.designer.PageFragmentDesign.class, org.instantlogic.designer.entity.PageFragmentDesignEntity.composedIn
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.PageCompositionDesign, org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentTemplateDesign> pageFragment
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.PageCompositionDesign, org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentTemplateDesign>(
+			"pageFragment", INSTANCE, org.instantlogic.designer.entity.PageFragmentDesignEntity.INSTANCE, org.instantlogic.designer.FragmentTemplateDesign.class, org.instantlogic.designer.entity.PageFragmentDesignEntity.composedIn
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.PageCompositionDesign, org.instantlogic.designer.PageFragmentDesign> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.PageCompositionDesign, org.instantlogic.designer.FragmentTemplateDesign> get(
 					org.instantlogic.designer.PageCompositionDesign instance) {
 				return instance.getPageFragmentRelationValue();
 			}
@@ -48,13 +48,13 @@ public class PageCompositionDesignEntity extends org.instantlogic.fabric.model.E
 	
 	// Reverse relations
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.PageCompositionDesign, org.instantlogic.designer.CompositePageFragmentDesign, org.instantlogic.designer.CompositePageFragmentDesign> itemIn
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.PageCompositionDesign, org.instantlogic.designer.CompositePageFragmentDesign, org.instantlogic.designer.CompositePageFragmentDesign>(
-			"itemIn", INSTANCE, org.instantlogic.designer.entity.CompositePageFragmentDesignEntity.INSTANCE, org.instantlogic.designer.CompositePageFragmentDesign.class, org.instantlogic.designer.entity.CompositePageFragmentDesignEntity.items
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.PageCompositionDesign, org.instantlogic.designer.CompositeTemplateDesign, org.instantlogic.designer.CompositeTemplateDesign> itemIn
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.PageCompositionDesign, org.instantlogic.designer.CompositeTemplateDesign, org.instantlogic.designer.CompositeTemplateDesign>(
+			"itemIn", INSTANCE, org.instantlogic.designer.entity.CompositeFragmentTemplateDesignEntity.INSTANCE, org.instantlogic.designer.CompositeTemplateDesign.class, org.instantlogic.designer.entity.CompositeFragmentTemplateDesignEntity.items
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.PageCompositionDesign, org.instantlogic.designer.CompositePageFragmentDesign> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.PageCompositionDesign, org.instantlogic.designer.CompositeTemplateDesign> get(
 					org.instantlogic.designer.PageCompositionDesign instance) {
 				return instance.getItemInRelationValue();
 			}

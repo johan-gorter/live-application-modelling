@@ -7,9 +7,11 @@ public class Fragment {
 	public String id;
 	
 	public String widget;
-	
-	public Fragment[] children;
+
+	public String answerWidget;
 	
 	public HashMap<String, Object> widgetData;
+	
+	public Fragment[] children;
 	
 }

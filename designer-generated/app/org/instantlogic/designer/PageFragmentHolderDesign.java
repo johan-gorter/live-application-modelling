@@ -12,18 +12,18 @@ public class PageFragmentHolderDesign extends Design {
 	
 	// Relations
 	
-	private final org.instantlogic.fabric.value.RelationValue<PageFragmentHolderDesign, PageFragmentDesign> pageFragment
+	private final org.instantlogic.fabric.value.RelationValue<PageFragmentHolderDesign, FragmentTemplateDesign> pageFragment
 		= createRelationValue(org.instantlogic.designer.entity.PageFragmentHolderDesignEntity.pageFragment);
 		
-	public org.instantlogic.fabric.value.RelationValue<PageFragmentHolderDesign, PageFragmentDesign> getPageFragmentRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<PageFragmentHolderDesign, FragmentTemplateDesign> getPageFragmentRelationValue() {
 		return pageFragment;
 	}
 
-	public org.instantlogic.designer.PageFragmentDesign getPageFragment() {
+	public org.instantlogic.designer.FragmentTemplateDesign getPageFragment() {
 		return pageFragment.getValue();
 	}
 	
-	public PageFragmentHolderDesign setPageFragment(org.instantlogic.designer.PageFragmentDesign newValue) {
+	public PageFragmentHolderDesign setPageFragment(org.instantlogic.designer.FragmentTemplateDesign newValue) {
 		pageFragment.setValue(newValue);
 		return (PageFragmentHolderDesign)this;
 	}

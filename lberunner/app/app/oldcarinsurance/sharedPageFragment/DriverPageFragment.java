@@ -5,7 +5,7 @@ import org.instantlogic.fabric.deduction.Deduction;
 import org.instantlogic.fabric.deduction.SelectedInstanceDeduction;
 import org.instantlogic.fabric.text.ConstantText;
 import org.instantlogic.interaction.page.PageFragment;
-import org.instantlogic.interaction.page.impl.SimpleCompositePageFragment;
+import org.instantlogic.interaction.page.impl.CompositeFragmentTemplate;
 import org.instantlogic.interaction.page.impl.SimpleField;
 import org.instantlogic.interaction.page.impl.SimpleSharedPageFragment;
 
@@ -28,9 +28,9 @@ public class DriverPageFragment extends SimpleSharedPageFragment {
 	}
 
 	public static final PageFragment SHARED_INSTANCE = 
-        new SimpleCompositePageFragment(createDeduction0(), new PageFragment[]{
-            new SimpleCompositePageFragment(new ConstantText("Driver"), new PageFragment[]{
-                new SimpleCompositePageFragment(new PageFragment[]{
+        new CompositeFragmentTemplate(createDeduction0(), new PageFragment[]{
+            new CompositeFragmentTemplate(new ConstantText("Driver"), new PageFragment[]{
+                new CompositeFragmentTemplate(new PageFragment[]{
                     new SimpleField(DriverEntity.INSTANCE, DriverEntity.dateOfBirth).setRequired(),
                     new SimpleField(DriverEntity.INSTANCE, DriverEntity.yearsInsured).setRequired(),
                     new SimpleField(DriverEntity.INSTANCE, DriverEntity.yearsDriverslicense).setRequired(),

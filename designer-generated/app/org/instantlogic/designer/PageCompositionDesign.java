@@ -12,18 +12,18 @@ public class PageCompositionDesign extends org.instantlogic.fabric.Instance {
 	
 	// Relations
 	
-	private final org.instantlogic.fabric.value.RelationValue<PageCompositionDesign, PageFragmentDesign> pageFragment
+	private final org.instantlogic.fabric.value.RelationValue<PageCompositionDesign, FragmentTemplateDesign> pageFragment
 		= createRelationValue(org.instantlogic.designer.entity.PageCompositionDesignEntity.pageFragment);
 		
-	public org.instantlogic.fabric.value.RelationValue<PageCompositionDesign, PageFragmentDesign> getPageFragmentRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<PageCompositionDesign, FragmentTemplateDesign> getPageFragmentRelationValue() {
 		return pageFragment;
 	}
 
-	public org.instantlogic.designer.PageFragmentDesign getPageFragment() {
+	public org.instantlogic.designer.FragmentTemplateDesign getPageFragment() {
 		return pageFragment.getValue();
 	}
 	
-	public PageCompositionDesign setPageFragment(org.instantlogic.designer.PageFragmentDesign newValue) {
+	public PageCompositionDesign setPageFragment(org.instantlogic.designer.FragmentTemplateDesign newValue) {
 		pageFragment.setValue(newValue);
 		return (PageCompositionDesign)this;
 	}
@@ -31,14 +31,14 @@ public class PageCompositionDesign extends org.instantlogic.fabric.Instance {
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<PageCompositionDesign, CompositePageFragmentDesign> itemIn
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<PageCompositionDesign, CompositeTemplateDesign> itemIn
 		= createReverseRelationValue(org.instantlogic.designer.entity.PageCompositionDesignEntity.itemIn);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<PageCompositionDesign, CompositePageFragmentDesign> getItemInRelationValue() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<PageCompositionDesign, CompositeTemplateDesign> getItemInRelationValue() {
 		return itemIn;
 	}
 
-	public org.instantlogic.designer.CompositePageFragmentDesign getItemIn() {
+	public org.instantlogic.designer.CompositeTemplateDesign getItemIn() {
 		return itemIn.getValue();
 	}
 

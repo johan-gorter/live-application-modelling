@@ -1,20 +1,14 @@
 package org.instantlogic.designer.bootstrapper;
 
+import java.io.File;
+
 import org.instantlogic.designer.ApplicationDesign;
+import org.instantlogic.designer.generatorgenerator.GeneratorGenerator;
 
 
 
 public class Bootstrapper {
 
-	public enum RelationType {
-		OneToZeroOrOne, 
-		OneToZeroOrOneAggregation, 
-		OneToOneAggregation, 
-		OneToMany, 
-		OneToManyAggregation, 
-		ManyToZeroOrOne, 
-		ManyToMany
-	}
 	
 	public static void main(String[] args) {
 //		createCarinsurance();
@@ -26,17 +20,13 @@ public class Bootstrapper {
 	public static void createDesigner() {
 		ApplicationDesign applicationInstance = DesignerBootstrapper.createDesigner();
 
+		new GeneratorGenerator(applicationInstance, "../nextdesigner-generator/src/org/instantlogic/designer").generate();
+		
 //		System.out.println(CasePersister.gson.toJson(applicationInstance));
 		
 //		CasePersister.INSTANCE.persist("designer", applicationInstance, (int)(System.currentTimeMillis()/1000));
 		
-		//new ApplicationGenerator(applicationInstance).update(false);
-
-//		applicationInstance.afterLoading();
-		
-		applicationInstance.getApplicationGenerator().generateJavaCode();
-		
-//		applicationInstance.afterSubmit();
+		//applicationInstance.getApplicationGenerator().generateJavaCode();
 	}
 
 	

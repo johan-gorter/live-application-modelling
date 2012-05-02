@@ -1,6 +1,6 @@
 package org.instantlogic.designer.flow.main;
 
-public class WelcomePage extends org.instantlogic.interaction.flow.Place {
+public class WelcomePage extends org.instantlogic.interaction.flow.Page {
 
 	public static final WelcomePage INSTANCE = new WelcomePage();
 
@@ -41,37 +41,46 @@ public class WelcomePage extends org.instantlogic.interaction.flow.Place {
 	}
 
 	
-	private static org.instantlogic.interaction.page.CompositePageFragment CONTENT = 
-        new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
-            new org.instantlogic.interaction.page.TextPageFragment(new org.instantlogic.fabric.text.ConstantText("Welcome to the Designer")),
-            new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
-                new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
-                    new org.instantlogic.interaction.page.TextPageFragment(new org.instantlogic.fabric.text.ConstantText("Entities")),
-                    new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(createDeduction1(), new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
-                        new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
-                            new org.instantlogic.interaction.page.impl.SimpleLink(org.instantlogic.designer.event.EntityDetailsEvent.INSTANCE, new org.instantlogic.fabric.text.TemplatedText().add(createDeduction0()))
-                        }).withPresentation("row")
+	private static org.instantlogic.interaction.page.CompositeFragmentTemplate CONTENT = 
+        new org.instantlogic.interaction.page.CompositeFragmentTemplate(C1, createDeduction0(), new org.instantlogic.interaction.page.FragmentTemplate[]{
+            new org.instantlogic.interaction.page.WidgetFragmentTemplate(C1, "ConstantText")
+
+,
+            new org.instantlogic.interaction.page.CompositeFragmentTemplate(C1, createDeduction0(), new org.instantlogic.interaction.page.FragmentTemplate[]{
+                new org.instantlogic.interaction.page.CompositeFragmentTemplate(C1, createDeduction0(), new org.instantlogic.interaction.page.FragmentTemplate[]{
+                    new org.instantlogic.interaction.page.WidgetFragmentTemplate(C1, "ConstantText")
+
+,
+                    new org.instantlogic.interaction.page.CompositeFragmentTemplate(S1, createDeduction1(), new org.instantlogic.interaction.page.FragmentTemplate[]{
+                        new org.instantlogic.interaction.page.CompositeFragmentTemplate(C1, createDeduction0(), new org.instantlogic.interaction.page.FragmentTemplate[]{
+                            new org.instantlogic.interaction.page.ActionWidgetBehavior(L1, "Link", org.instantlogic.designer.event.EntityDetailsEvent.INSTANCE)
+
+
+                        })
                     })
-                }).withPresentation("column"),
-                new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
-                    new org.instantlogic.interaction.page.TextPageFragment(new org.instantlogic.fabric.text.ConstantText("Flows")),
-                    new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(createDeduction3(), new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
-                        new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
-                            new org.instantlogic.interaction.page.impl.SimpleLink(org.instantlogic.designer.event.FlowDetailsEvent.INSTANCE, new org.instantlogic.fabric.text.TemplatedText().add(createDeduction2()))
-                        }).withPresentation("row")
+                }),
+                new org.instantlogic.interaction.page.CompositeFragmentTemplate(C1, createDeduction0(), new org.instantlogic.interaction.page.FragmentTemplate[]{
+                    new org.instantlogic.interaction.page.WidgetFragmentTemplate(C1, "ConstantText")
+
+,
+                    new org.instantlogic.interaction.page.CompositeFragmentTemplate(S1, createDeduction3(), new org.instantlogic.interaction.page.FragmentTemplate[]{
+                        new org.instantlogic.interaction.page.CompositeFragmentTemplate(C1, createDeduction0(), new org.instantlogic.interaction.page.FragmentTemplate[]{
+                            new org.instantlogic.interaction.page.ActionWidgetBehavior(L1, "Link", org.instantlogic.designer.event.FlowDetailsEvent.INSTANCE)
+
+
+                        })
                     })
-                }).withPresentation("column")
-            }).withPresentation("four-columns")
+                })
+            })
         }); 
 	
 	@Override
-	public org.instantlogic.interaction.page.CompositePageFragment getRootContainer() {
+	public org.instantlogic.interaction.page.CompositeFragmentTemplate getRootContainer() {
 		return CONTENT;
 	}; 
 	
-	@Override
-	public String getName() {
-		return "Welcome";
-	}
-	
+    @Override
+    public String getName() {
+        return "Welcome";
+    }
 }

@@ -2,7 +2,7 @@ package org.instantlogic.interaction.flow;
 
 import java.util.HashMap;
 
-import org.instantlogic.interaction.page.CompositePageFragment;
+import org.instantlogic.interaction.page.CompositeFragmentTemplate;
 import org.instantlogic.interaction.page.Fragment;
 import org.instantlogic.interaction.util.ChangeContext;
 import org.instantlogic.interaction.util.FlowEventOccurrence;
@@ -10,7 +10,7 @@ import org.instantlogic.interaction.util.RenderContext;
 
 public abstract class Place extends FlowNodeBase {
 	
-	public abstract CompositePageFragment getRootContainer();
+	public abstract CompositeFragmentTemplate getRootContainer();
 
 	public FlowEventOccurrence submit(ChangeContext changeContext) {
 		return getRootContainer().submit(changeContext);

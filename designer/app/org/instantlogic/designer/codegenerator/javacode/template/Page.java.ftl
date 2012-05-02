@@ -22,10 +22,4 @@ public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${
     public String getName() {
         return "${name}";
     }
-    
-    @Override
-    public String getId() {
-        return "${id}";
-    }
-    
 }

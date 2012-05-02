@@ -10,12 +10,9 @@ import org.instantlogic.fabric.model.Relation;
 import org.instantlogic.fabric.text.ConstantText;
 import org.instantlogic.fabric.text.Text;
 import org.instantlogic.fabric.util.DeductionContext;
-import org.instantlogic.interaction.page.CompositePageFragment;
-import org.instantlogic.interaction.page.PlaceFragmentTemplate;
-import org.instantlogic.interaction.page.TextPageFragment;
-import org.instantlogic.interaction.page.impl.SimpleButton;
-import org.instantlogic.interaction.page.impl.SimpleCompositePageFragment;
-import org.instantlogic.interaction.page.impl.SimpleField;
+import org.instantlogic.interaction.page.CompositeFragmentTemplate;
+import org.instantlogic.interaction.page.FragmentTemplate;
+import org.instantlogic.interaction.page.WidgetFragmentTemplate;
 import org.instantlogic.interaction.util.RenderContext;
 
 public class InstancePage extends AbstractInstancePage {
@@ -30,24 +27,25 @@ public class InstancePage extends AbstractInstancePage {
 		
 	}
 	
-	public static class InstanceExplorerFragment extends SimpleCompositePageFragment {
+	public static class InstanceExplorerFragment extends CompositeFragmentTemplate {
 
 		public InstanceExplorerFragment() {
 			super(null);
 		}
 
 		@Override
-		public PlaceFragmentTemplate[] getChildren(RenderContext context) {
+		public FragmentTemplate[] getChildren(RenderContext context) {
 			Instance instance = context.getSelectedInstance(null);
-			List<PlaceFragmentTemplate> children = new ArrayList<PlaceFragmentTemplate>();
-			children.add(new TextPageFragment(new ConstantText("Instance "+instance.getMetadata().getInstanceId()+" of type "+instance.getMetadata().getEntity().getName())));
+			List<FragmentTemplate> children = new ArrayList<FragmentTemplate>();
+			children.add(new WidgetFragmentTemplate(null, "Header")
+				.putText("text", new ConstantText("Instance "+instance.getMetadata().getInstanceId()+" of type "+instance.getMetadata().getEntity().getName())));
 			addFields(children, instance, context);
 			addButtons(children, instance, context);
-			return children.toArray(new PlaceFragmentTemplate[children.size()]);
+			return children.toArray(new FragmentTemplate[children.size()]);
 		}
 		
 		@SuppressWarnings("rawtypes")
-		private void addButtons(List<PlaceFragmentTemplate> children, Instance instance, RenderContext context) {
+		private void addButtons(List<FragmentTemplate> children, Instance instance, RenderContext context) {
 			for (Relation relation: instance.getMetadata().getEntity().getRelations()) {
 				addRelation(children, instance, relation);
 			}
@@ -57,46 +55,38 @@ public class InstancePage extends AbstractInstancePage {
 		}
 
 		@SuppressWarnings({ "unchecked", "rawtypes" })
-		private void addRelation(List<PlaceFragmentTemplate> children, Instance instance, Relation relation) {
-			children.add(new TextPageFragment(new ConstantText(relation.getName()+": ")));
+		private void addRelation(List<FragmentTemplate> children, Instance instance, Relation relation) {
+			children.add(new WidgetFragmentTemplate(null, "Paragraph")
+				.putText("text", new ConstantText(relation.getName()+": ")));
 			Object value = relation.get(instance).getValue();
 			if (value!=null) {
 				children.add(
-					new SimpleCompositePageFragment(relation.toDeduction(), 
-						new PlaceFragmentTemplate[]{
-							new SimpleButton(ExploreInstanceEvent.INSTANCE, new InstanceButtonText())
+					new CompositeFragmentTemplate(null, relation.toDeduction(), 
+						new FragmentTemplate[]{
+							new WidgetFragmentTemplate(null, "Button")
+								.setEvent(ExploreInstanceEvent.INSTANCE)
 						}
 					)
 				);
 			}
 		}
 
-		@Override
-		public String getElementType() {
-			return "container";
-		}
-
-		@Override
-		public String getName() {
-			return null;
-		}
-		
-		private void addFields(List<PlaceFragmentTemplate> children, Instance instance, RenderContext context) {
+		private void addFields(List<FragmentTemplate> children, Instance instance, RenderContext context) {
 			for (Attribute<? extends Instance, ? extends Object, ? extends Object> attribute:instance.getMetadata().getEntity().getAttributes()) {
-				children.add(new SimpleField(instance.getMetadata().getEntity(), attribute));
+				children.add(new WidgetFragmentTemplate(null, "").setField(instance.getMetadata().getEntity(), attribute, "Textfield"));
 			}
 		}
 	}
 	
-	private static CompositePageFragment CONTENT = 
-        new SimpleCompositePageFragment(new PlaceFragmentTemplate[]{
-            new TextPageFragment(new ConstantText("Case Explorer")),
+	private static CompositeFragmentTemplate CONTENT = 
+        new CompositeFragmentTemplate(null, new FragmentTemplate[]{
+            new WidgetFragmentTemplate(null, "Header").putText("text", new ConstantText("Case Explorer")),
             new InstanceExplorerFragment()
         }); 
 	
 	
 	@Override
-	public CompositePageFragment getRootContainer() {
+	public CompositeFragmentTemplate getRootContainer() {
 		return CONTENT;
 	}
 }

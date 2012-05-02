@@ -2,7 +2,7 @@ package org.instantlogic.designer.bootstrapper;
 
 import org.instantlogic.designer.ApplicationDesign;
 import org.instantlogic.designer.EntityDesign;
-import org.instantlogic.designer.bootstrapper.Bootstrapper.RelationType;
+import org.instantlogic.designer.EntityDesign.RelationType;
 
 public class CycleBootstrapper extends BootstrapperUtil {
 

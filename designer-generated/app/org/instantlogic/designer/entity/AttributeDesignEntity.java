@@ -210,13 +210,13 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FieldDesign>, org.instantlogic.designer.FieldDesign> fields
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FieldDesign>, org.instantlogic.designer.FieldDesign>(
-			"fields", INSTANCE, org.instantlogic.designer.entity.FieldDesignEntity.INSTANCE, org.instantlogic.designer.FieldDesign.class, org.instantlogic.designer.entity.FieldDesignEntity.attribute
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.WidgetTemplateDesign>, org.instantlogic.designer.WidgetTemplateDesign> fields
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.WidgetTemplateDesign>, org.instantlogic.designer.WidgetTemplateDesign>(
+			"fields", INSTANCE, org.instantlogic.designer.entity.FieldDesignEntity.INSTANCE, org.instantlogic.designer.WidgetTemplateDesign.class, org.instantlogic.designer.entity.FieldDesignEntity.attribute
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.FieldDesign> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.WidgetTemplateDesign> get(
 					org.instantlogic.designer.AttributeDesign instance) {
 				return instance.getFieldsRelationValue();
 			}

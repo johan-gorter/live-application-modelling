@@ -13,7 +13,7 @@ import org.instantlogic.designer.FlowDesign;
 import org.instantlogic.designer.FlowEdgeDesign;
 import org.instantlogic.designer.FlowNodeBaseDesign;
 import org.instantlogic.designer.FlowSourceDesign;
-import org.instantlogic.designer.PageDesign;
+import org.instantlogic.designer.PlaceTemplateDesign;
 import org.instantlogic.designer.SubFlowDesign;
 import org.instantlogic.designer.codegenerator.classmodel.AbstractClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.FlowClassModel;
@@ -79,7 +79,7 @@ public class FlowGenerator extends AbstractGenerator {
 		
 		List<Design> newPages = updateGenerators(pageGenerators, getPages(flowDesign.getNodes()), context);
 		for(Design newPage : newPages) {
-			PageGenerator pageGenerator = new PageGenerator((PageDesign)newPage);
+			PageGenerator pageGenerator = new PageGenerator((PlaceTemplateDesign)newPage);
 			pageGenerator.update(context);
 			pageGenerators.put(newPage.getName(), pageGenerator);
 		}
@@ -116,11 +116,11 @@ public class FlowGenerator extends AbstractGenerator {
 		return result;
 	}
 
-	private List<PageDesign> getPages(Multi<FlowNodeBaseDesign> list) {
-		ArrayList<PageDesign> result = new ArrayList<PageDesign>();
+	private List<PlaceTemplateDesign> getPages(Multi<FlowNodeBaseDesign> list) {
+		ArrayList<PlaceTemplateDesign> result = new ArrayList<PlaceTemplateDesign>();
 		for (FlowNodeBaseDesign node:list) {
-			if (node instanceof PageDesign) {
-				result.add((PageDesign) node);
+			if (node instanceof PlaceTemplateDesign) {
+				result.add((PlaceTemplateDesign) node);
 			}
 		}
 		return result;

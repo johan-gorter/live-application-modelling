@@ -1,7 +1,7 @@
 package org.instantlogic.designer.codegenerator.generator;
 
 
-import org.instantlogic.designer.PageDesign;
+import org.instantlogic.designer.PlaceTemplateDesign;
 import org.instantlogic.designer.codegenerator.classmodel.PageClassModel;
 import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
@@ -9,22 +9,22 @@ import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 public class PageGenerator extends AbstractGenerator {
 
 	
-	private PageDesign pageDesign;
+	private PlaceTemplateDesign placeTemplateDesign;
 	
-	public PageGenerator(PageDesign pageDesign) {
-		this.pageDesign = pageDesign;
+	public PageGenerator(PlaceTemplateDesign placeTemplateDesign) {
+		this.placeTemplateDesign = placeTemplateDesign;
 	}
 
 	@Override
 	public void update(GeneratedClassModels context) {
 		if (observations!=null && !observations.isOutdated()) return;
 
-		CaseAdministration caseAdministration = pageDesign.getMetadata().getCaseAdministration();
+		CaseAdministration caseAdministration = placeTemplateDesign.getMetadata().getCaseAdministration();
 		caseAdministration.startRecordingObservations();
 		
 		PageClassModel model = initModel();
 		model.rootPackageName = context.rootPackageName;
-		model.content = ContentGenerator.generate(pageDesign.getContent(), model);
+		model.content = ContentGenerator.generate(placeTemplateDesign.getContent(), model);
 
 		this.observations = new ObservationsOutdatedObserver(caseAdministration.stopRecordingObservations(), null);
 		context.updatedPages.add(model);
@@ -38,10 +38,10 @@ public class PageGenerator extends AbstractGenerator {
 
 	private PageClassModel initModel() {
 		PageClassModel model = new PageClassModel();
-		model.name = pageDesign.getName();
-		model.id = pageDesign.getMetadata().getInstanceId();
-		model.isCustomized = pageDesign.getIsCustomized()==Boolean.TRUE;
-		model.flowname = pageDesign.getOwner().getName();
+		model.name = placeTemplateDesign.getName();
+		model.id = placeTemplateDesign.getMetadata().getInstanceId();
+		model.isCustomized = placeTemplateDesign.getIsCustomized()==Boolean.TRUE;
+		model.flowname = placeTemplateDesign.getOwner().getName();
 		return model;
 	}
 }

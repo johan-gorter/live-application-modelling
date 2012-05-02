@@ -4,16 +4,16 @@ import java.util.Date;
 
 import org.instantlogic.designer.ApplicationDesign;
 import org.instantlogic.designer.AttributeDesign;
-import org.instantlogic.designer.CompositePageFragmentDesign;
+import org.instantlogic.designer.CompositeTemplateDesign;
 import org.instantlogic.designer.EntityDesign;
+import org.instantlogic.designer.EntityDesign.RelationType;
 import org.instantlogic.designer.EventDesign;
 import org.instantlogic.designer.FlowDesign;
 import org.instantlogic.designer.FlowSourceDesign;
 import org.instantlogic.designer.HeaderDesign;
-import org.instantlogic.designer.PageDesign;
+import org.instantlogic.designer.PlaceTemplateDesign;
 import org.instantlogic.designer.RelationDesign;
 import org.instantlogic.designer.SelectDesign;
-import org.instantlogic.designer.bootstrapper.Bootstrapper.RelationType;
 
 public class CarinsuranceBootstrapper extends BootstrapperUtil {
 
@@ -58,7 +58,7 @@ public class CarinsuranceBootstrapper extends BootstrapperUtil {
 		SelectDesign selectDriver = createSelect(createDeduction(driverRelation));
 		HeaderDesign driverHeader = createHeader(createConstantText("Driver"));
 		addContent(selectDriver, driverHeader);
-		CompositePageFragmentDesign driverFields = createCompositePageFragment();
+		CompositeTemplateDesign driverFields = createCompositeFragmentTemplate();
 		addContent(driverHeader, driverFields);
 		createField(driverFields, dateOfBirth, true);
 		createField(driverFields, yearsInsured, true);
@@ -72,7 +72,7 @@ public class CarinsuranceBootstrapper extends BootstrapperUtil {
 		
 		// Flows
 		FlowDesign insureFlow = createFlow("Insure");
-		PageDesign insureDriverPage = createPage(insureFlow, "Driver");
+		PlaceTemplateDesign insureDriverPage = createPage(insureFlow, "Driver");
 		FlowSourceDesign insureStartSource = createSource(insureFlow, null, insureDriverPage, null);
 		insureDriverPage.setContent(selectDriver);
 		applicationDesign.addToExposedFlows(insureFlow);

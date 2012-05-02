@@ -46,7 +46,7 @@ public class PageFlow extends org.instantlogic.interaction.flow.Flow {
 	};
 	
 	private static final org.instantlogic.fabric.model.Entity[] PARAMETERS = new org.instantlogic.fabric.model.Entity[]{
-		org.instantlogic.designer.entity.PageDesignEntity.INSTANCE,
+		org.instantlogic.designer.entity.PlaceDesignEntity.INSTANCE,
 	};
 	
 	@Override

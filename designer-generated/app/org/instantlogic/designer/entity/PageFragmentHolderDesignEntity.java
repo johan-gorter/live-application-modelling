@@ -33,13 +33,13 @@ public class PageFragmentHolderDesignEntity extends org.instantlogic.fabric.mode
 	
 	// Relations
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.PageFragmentHolderDesign, org.instantlogic.designer.PageFragmentDesign, org.instantlogic.designer.PageFragmentDesign> pageFragment
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.PageFragmentHolderDesign, org.instantlogic.designer.PageFragmentDesign, org.instantlogic.designer.PageFragmentDesign>(
-			"pageFragment", INSTANCE, org.instantlogic.designer.entity.PageFragmentDesignEntity.INSTANCE, org.instantlogic.designer.PageFragmentDesign.class, org.instantlogic.designer.entity.PageFragmentDesignEntity.holder
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.PageFragmentHolderDesign, org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentTemplateDesign> pageFragment
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.PageFragmentHolderDesign, org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentTemplateDesign>(
+			"pageFragment", INSTANCE, org.instantlogic.designer.entity.PageFragmentDesignEntity.INSTANCE, org.instantlogic.designer.FragmentTemplateDesign.class, org.instantlogic.designer.entity.PageFragmentDesignEntity.holder
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.PageFragmentHolderDesign, org.instantlogic.designer.PageFragmentDesign> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.PageFragmentHolderDesign, org.instantlogic.designer.FragmentTemplateDesign> get(
 					org.instantlogic.designer.PageFragmentHolderDesign instance) {
 				return instance.getPageFragmentRelationValue();
 			}

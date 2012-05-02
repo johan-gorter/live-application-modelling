@@ -5,15 +5,16 @@ import org.instantlogic.designer.AttributeDeductionDesign;
 import org.instantlogic.designer.AttributeDesign;
 import org.instantlogic.designer.ButtonDesign;
 import org.instantlogic.designer.CastInstanceDeductionDesign;
-import org.instantlogic.designer.CompositePageFragmentDesign;
+import org.instantlogic.designer.CompositeTemplateDesign;
 import org.instantlogic.designer.ConstantStringDesign;
 import org.instantlogic.designer.ConstantTextDesign;
 import org.instantlogic.designer.DeductionDesign;
 import org.instantlogic.designer.DeductionSchemeDesign;
 import org.instantlogic.designer.DomainEntryDesign;
 import org.instantlogic.designer.EntityDesign;
+import org.instantlogic.designer.EntityDesign.RelationType;
 import org.instantlogic.designer.EventDesign;
-import org.instantlogic.designer.FieldDesign;
+import org.instantlogic.designer.WidgetTemplateDesign;
 import org.instantlogic.designer.FlowDesign;
 import org.instantlogic.designer.FlowEdgeDesign;
 import org.instantlogic.designer.FlowNodeBaseDesign;
@@ -22,15 +23,14 @@ import org.instantlogic.designer.FormattedValueDesign;
 import org.instantlogic.designer.HeaderDesign;
 import org.instantlogic.designer.LinkDesign;
 import org.instantlogic.designer.PageCompositionDesign;
-import org.instantlogic.designer.PageDesign;
-import org.instantlogic.designer.PageFragmentDesign;
+import org.instantlogic.designer.FragmentTemplateDesign;
+import org.instantlogic.designer.PlaceTemplateDesign;
 import org.instantlogic.designer.RelationDesign;
 import org.instantlogic.designer.SelectDesign;
 import org.instantlogic.designer.SelectedInstanceDeductionDesign;
 import org.instantlogic.designer.SubFlowDesign;
 import org.instantlogic.designer.TemplatedTextDesign;
 import org.instantlogic.designer.TextDesign;
-import org.instantlogic.designer.bootstrapper.Bootstrapper.RelationType;
 
 public abstract class BootstrapperUtil {
 
@@ -50,7 +50,7 @@ public abstract class BootstrapperUtil {
 		return result;
 	}
 
-	protected static void createContainerItem(CompositePageFragmentDesign containerDesign, PageFragmentDesign element) {
+	protected static void createContainerItem(CompositeTemplateDesign containerDesign, FragmentTemplateDesign element) {
 		PageCompositionDesign item = new PageCompositionDesign();
 		item.setPageFragment(element);
 		containerDesign.addToItems(item);
@@ -125,8 +125,8 @@ public abstract class BootstrapperUtil {
 		return text;
 	}
 
-	protected static CompositePageFragmentDesign createCompositePageFragment() {
-		CompositePageFragmentDesign container = new CompositePageFragmentDesign();
+	protected static CompositeTemplateDesign createCompositeFragmentTemplate() {
+		CompositeTemplateDesign container = new CompositeTemplateDesign();
 		return container;
 	}
 
@@ -227,8 +227,8 @@ public abstract class BootstrapperUtil {
 		return header;
 	}
 
-	protected static FieldDesign createField(CompositePageFragmentDesign container, AttributeDesign attribute, boolean required) {
-		FieldDesign field = new FieldDesign();
+	protected static WidgetTemplateDesign createField(CompositeTemplateDesign container, AttributeDesign attribute, boolean required) {
+		WidgetTemplateDesign field = new WidgetTemplateDesign();
 		field.setAttribute(attribute);
 		field.setRequired(required);
 		PageCompositionDesign item = new PageCompositionDesign();
@@ -253,8 +253,8 @@ public abstract class BootstrapperUtil {
 		flow.addToEdges(edge);
 	}
 
-	protected static PageDesign createPage(FlowDesign flow, String name) {
-		PageDesign page = new PageDesign();
+	protected static PlaceTemplateDesign createPage(FlowDesign flow, String name) {
+		PlaceTemplateDesign page = new PlaceTemplateDesign();
 		page.setName(name);
 		flow.addToNodes(page);
 		return page;
@@ -278,10 +278,10 @@ public abstract class BootstrapperUtil {
 	}
 	
 	
-	protected static PageCompositionDesign addContent(CompositePageFragmentDesign compositePageFragment, PageFragmentDesign item) {
+	protected static PageCompositionDesign addContent(CompositeTemplateDesign CompositeFragmentTemplate, FragmentTemplateDesign item) {
 		PageCompositionDesign result = new PageCompositionDesign();
 		result.setPageFragment(item);
-		compositePageFragment.addToItems(result);
+		CompositeFragmentTemplate.addToItems(result);
 		return result;
 	}
 

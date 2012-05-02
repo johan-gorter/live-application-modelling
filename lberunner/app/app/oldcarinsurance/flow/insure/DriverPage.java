@@ -1,7 +1,7 @@
 package app.oldcarinsurance.flow.insure;
 
 import org.instantlogic.interaction.flow.Page;
-import org.instantlogic.interaction.page.CompositePageFragment;
+import org.instantlogic.interaction.page.CompositeFragmentTemplate;
 import org.instantlogic.interaction.page.PageFragment;
 
 import app.oldcarinsurance.button.NextButton;
@@ -22,7 +22,7 @@ public class DriverPage extends Page {
 	}
 	
 	@Override
-	public CompositePageFragment getRootContainer() {
+	public CompositeFragmentTemplate getRootContainer() {
 		return DriverContainer.INSTANCE;
 	}
 

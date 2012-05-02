@@ -2,13 +2,25 @@ package org.instantlogic.designer.codegenerator.classmodel;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ContentModel {
 
+	public enum Category {Shared, Composite, Widget}
+	
+	public Category category;
+	// Text, Button, ...
+	public String widgetName;
+	public String answerWidgetName;
+
+	//F1P2...
+	public String id;
+
 	public String rootPackageName;
-	public String type;
 	public String name;
+	
 	public TextModel text;
 
 	public int deductionIndex;
@@ -24,9 +36,8 @@ public class ContentModel {
 	public final List<ContentModel> children = new ArrayList<ContentModel>();
 	public String implementationClassName;
 	
-	public String getType() {
-		return type;
-	}
+	public final Map<String, Object> staticWidgetData = new HashMap<String, Object>();
+	
 	public boolean isRequired() {
 		return required;
 	}
@@ -66,14 +77,28 @@ public class ContentModel {
 	public String getAttribute() {
 		return attribute;
 	}
-
-	public String getName() {
-		return name;
-	}
 	public String getImplementationClassName() {
 		return implementationClassName;
 	}
 	public String getRootPackageName() {
 		return rootPackageName;
+	}
+	public Category getCategory() {
+		return category;
+	}
+	public String getWidgetName() {
+		return widgetName;
+	}
+	public String getId() {
+		return id;
+	}
+	public String getName() {
+		return name;
+	}
+	public String getAnswerWidgetName() {
+		return answerWidgetName;
+	}
+	public Map<String, Object> getStaticWidgetData() {
+		return staticWidgetData;
 	}
 }

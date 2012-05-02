@@ -5,18 +5,17 @@ public abstract class AbstractInstancePage extends org.instantlogic.interaction.
 	public static final InstancePage INSTANCE = new InstancePage();
 
 	
-	private static org.instantlogic.interaction.page.CompositePageFragment CONTENT = 
-        new org.instantlogic.interaction.page.impl.SimpleCompositePageFragment(new org.instantlogic.interaction.page.PlaceFragmentTemplate[]{
+	private static org.instantlogic.interaction.page.CompositeFragmentTemplate CONTENT = 
+        new org.instantlogic.interaction.page.CompositeFragmentTemplate("C1", null, new org.instantlogic.interaction.page.FragmentTemplate[]{
         }); 
 	
 	@Override
-	public org.instantlogic.interaction.page.CompositePageFragment getRootContainer() {
+	public org.instantlogic.interaction.page.CompositeFragmentTemplate getRootContainer() {
 		return CONTENT;
 	}; 
 	
-	@Override
-	public String getName() {
-		return "Instance";
-	}
-	
+    @Override
+    public String getName() {
+        return "Instance";
+    }
 }
