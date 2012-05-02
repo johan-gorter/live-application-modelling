@@ -7,6 +7,7 @@ public class DomainEntryDesignEntityGenerator extends EntityDesign {
     
     public DomainEntryDesignEntityGenerator() {
         setName("DomainEntryDesign");
+        setExtendsFrom(DesignEntityGenerator.ENTITY);
     }
 
     // Attributes

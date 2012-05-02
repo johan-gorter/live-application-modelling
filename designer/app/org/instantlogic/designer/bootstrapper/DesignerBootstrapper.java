@@ -3,19 +3,14 @@ package org.instantlogic.designer.bootstrapper;
 import org.instantlogic.designer.ApplicationDesign;
 import org.instantlogic.designer.AttributeDesign;
 import org.instantlogic.designer.CompositeTemplateDesign;
-import org.instantlogic.designer.CustomPageFragmentDesign;
 import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.EntityDesign.RelationType;
 import org.instantlogic.designer.EventDesign;
 import org.instantlogic.designer.FlowDesign;
 import org.instantlogic.designer.FlowSourceDesign;
 import org.instantlogic.designer.FragmentTemplateDesign;
-import org.instantlogic.designer.PageFragmentHolderDesign;
 import org.instantlogic.designer.PlaceTemplateDesign;
 import org.instantlogic.designer.RelationDesign;
-import org.instantlogic.designer.SelectDesign;
-import org.instantlogic.designer.SharedFragmentDesign;
-import org.instantlogic.designer.SubFlowDesign;
 
 public class DesignerBootstrapper extends BootstrapperUtil {
 
@@ -168,7 +163,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createRelation(compositeTemplateDesign, "selections", RelationType.OneToManyAggregation, "compositeTemplate", deductionSchemeDesign);
 
 		RelationDesign fieldAttribute = createRelation(widgetTemplateDesign, "attribute", RelationType.ManyToZeroOrOne, "usedInField", attributeDesign);
-		RelationDesign fieldEntity = createRelation(widgetTemplateDesign, "entity", RelationType.ManyToZeroOrOne, "usedInField", attributeDesign);
+		RelationDesign fieldEntity = createRelation(widgetTemplateDesign, "entity", RelationType.ManyToZeroOrOne, "usedInField", entityDesign);
 		createRelation(widgetTemplateDesign, "event", RelationType.ManyToZeroOrOne, "triggeredByWidget", eventDesign);
 		createRelation(widgetTemplateDesign, "values", RelationType.OneToManyAggregation, "widget", widgetValue);
 		createRelation(widgetTemplateDesign, "texts", RelationType.OneToManyAggregation, "widget", widgetText);
@@ -392,8 +387,8 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 
 	private static FragmentTemplateDesign putInRow(FragmentTemplateDesign content) {
 		CompositeTemplateDesign result = new CompositeTemplateDesign();
-		addContent(result, content);
-		result.setPresentation("row");
+		result.addToChildren(content);
+//		result.setPresentation("row");
 		return result;
 	}
 }

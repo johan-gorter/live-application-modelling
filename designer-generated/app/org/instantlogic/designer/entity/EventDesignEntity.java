@@ -68,15 +68,15 @@ public class EventDesignEntity extends org.instantlogic.fabric.model.Entity<org.
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EventDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.LinkDesign>, org.instantlogic.designer.LinkDesign> firesFromButtons
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EventDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.LinkDesign>, org.instantlogic.designer.LinkDesign>(
-			"firesFromButtons", INSTANCE, org.instantlogic.designer.entity.LinkDesignEntity.INSTANCE, org.instantlogic.designer.LinkDesign.class, org.instantlogic.designer.entity.LinkDesignEntity.event
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EventDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.WidgetTemplateDesign>, org.instantlogic.designer.WidgetTemplateDesign> triggeredByWidget
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EventDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.WidgetTemplateDesign>, org.instantlogic.designer.WidgetTemplateDesign>(
+			"triggeredByWidget", INSTANCE, org.instantlogic.designer.entity.WidgetTemplateDesignEntity.INSTANCE, org.instantlogic.designer.WidgetTemplateDesign.class, org.instantlogic.designer.entity.WidgetTemplateDesignEntity.event
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EventDesign, org.instantlogic.designer.LinkDesign> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EventDesign, org.instantlogic.designer.WidgetTemplateDesign> get(
 					org.instantlogic.designer.EventDesign instance) {
-				return instance.getFiresFromButtonsRelationValue();
+				return instance.getTriggeredByWidgetRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -175,7 +175,7 @@ public class EventDesignEntity extends org.instantlogic.fabric.model.Entity<org.
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		application,
-		firesFromButtons,
+		triggeredByWidget,
 		startEventInSources,
 		endEventInSources,
 		startEventInEdges,

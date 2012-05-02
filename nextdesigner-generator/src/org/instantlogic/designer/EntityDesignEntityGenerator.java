@@ -7,6 +7,7 @@ public class EntityDesignEntityGenerator extends EntityDesign {
     
     public EntityDesignEntityGenerator() {
         setName("EntityDesign");
+        setExtendsFrom(DesignEntityGenerator.ENTITY);
         setIsCustomized(true);
     }
 

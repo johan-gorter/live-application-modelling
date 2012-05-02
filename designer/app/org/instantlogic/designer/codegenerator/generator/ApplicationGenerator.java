@@ -10,7 +10,8 @@ import org.instantlogic.designer.Design;
 import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.EventDesign;
 import org.instantlogic.designer.FlowDesign;
-import org.instantlogic.designer.PageFragmentHolderDesign;
+import org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign;
+import org.instantlogic.designer.SharedTemplateDesign;
 import org.instantlogic.designer.codegenerator.classmodel.ApplicationClassModel;
 import org.instantlogic.designer.codegenerator.javacode.ApplicationJavacodeGenerator;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
@@ -70,9 +71,9 @@ public class ApplicationGenerator extends AbstractGenerator{
 			entityGenerators.put(newEntity.getName(), entityGenerator);
 		}
 		
-		List<Design> newSharedPageFragments = updateGenerators(sharedPageFragmentGenerators, applicationInstance.getSharedPageFragments(), context);
+		List<Design> newSharedPageFragments = updateGenerators(sharedPageFragmentGenerators, applicationInstance.getSharedTemplates(), context);
 		for(Design newSharedPageFragment : newSharedPageFragments) {
-			SharedPageFragmentGenerator sharedPageFragmentGenerator = new SharedPageFragmentGenerator((PageFragmentHolderDesign)newSharedPageFragment);
+			SharedPageFragmentGenerator sharedPageFragmentGenerator = new SharedPageFragmentGenerator((SharedFragmentTemplateDefinitionDesign)newSharedPageFragment);
 			sharedPageFragmentGenerator.update(context);
 			sharedPageFragmentGenerators.put(newSharedPageFragment.getName(), sharedPageFragmentGenerator);
 		}

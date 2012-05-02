@@ -1,22 +1,17 @@
 package org.instantlogic.designer.codegenerator.generator;
 
 
-import java.io.File;
-
-import org.instantlogic.designer.PageFragmentHolderDesign;
-import org.instantlogic.designer.codegenerator.classmodel.AbstractClassModel;
-import org.instantlogic.designer.codegenerator.classmodel.ContentModel;
+import org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign;
 import org.instantlogic.designer.codegenerator.classmodel.SharedPageFragmentClassModel;
-import org.instantlogic.designer.codegenerator.javacode.AbstractJavacodeGenerator;
 import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 
 public class SharedPageFragmentGenerator extends AbstractGenerator {
 
-	private PageFragmentHolderDesign pageFragmentHolderDesign;
+	private SharedFragmentTemplateDefinitionDesign definition;
 
-	public SharedPageFragmentGenerator(PageFragmentHolderDesign pageFragmentHolderDesign) {
-		this.pageFragmentHolderDesign = pageFragmentHolderDesign;
+	public SharedPageFragmentGenerator(SharedFragmentTemplateDefinitionDesign pageFragmentHolderDesign) {
+		this.definition = pageFragmentHolderDesign;
 	}
 
 
@@ -24,12 +19,12 @@ public class SharedPageFragmentGenerator extends AbstractGenerator {
 	public void update(GeneratedClassModels context) {
 		if (observations!=null && !observations.isOutdated()) { return; }
 
-		CaseAdministration caseAdministration = pageFragmentHolderDesign.getMetadata().getCaseAdministration();
+		CaseAdministration caseAdministration = definition.getMetadata().getCaseAdministration();
 		caseAdministration.startRecordingObservations();
 
 		SharedPageFragmentClassModel model = initModel(context);
 		model.rootPackageName = context.rootPackageName;
-		model.content = ContentGenerator.generate(pageFragmentHolderDesign.getPageFragment(), model);
+		model.content = ContentGenerator.generate(definition.getFragment(), model);
 		
 		this.observations = new ObservationsOutdatedObserver(caseAdministration.stopRecordingObservations(), null);
 		context.updatedSharedPageFragments.add(model);
@@ -44,8 +39,8 @@ public class SharedPageFragmentGenerator extends AbstractGenerator {
 	private SharedPageFragmentClassModel initModel(GeneratedClassModels context) {
 		SharedPageFragmentClassModel model = new SharedPageFragmentClassModel();
 		model.rootPackageName = context.rootPackageName;
-		model.name = pageFragmentHolderDesign.getName();
-		model.isCustomized = pageFragmentHolderDesign.getIsCustomized()==Boolean.TRUE;
+		model.name = definition.getName();
+		model.isCustomized = definition.getIsCustomized()==Boolean.TRUE;
 		return model;
 	}
 }

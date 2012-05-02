@@ -111,15 +111,27 @@ public class DeductionSchemeDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, SelectDesign> select
-		= createReverseRelationValue(org.instantlogic.designer.entity.DeductionSchemeDesignEntity.select);
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, CompositeTemplateDesign> compositeTemplate
+		= createReverseRelationValue(org.instantlogic.designer.entity.DeductionSchemeDesignEntity.compositeTemplate);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, SelectDesign> getSelectRelationValue() {
-		return select;
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, CompositeTemplateDesign> getCompositeTemplateRelationValue() {
+		return compositeTemplate;
 	}
 
-	public org.instantlogic.designer.SelectDesign getSelect() {
-		return select.getValue();
+	public org.instantlogic.designer.CompositeTemplateDesign getCompositeTemplate() {
+		return compositeTemplate.getValue();
+	}
+
+	
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, WidgetValue> valueForWidget
+		= createReverseRelationValue(org.instantlogic.designer.entity.DeductionSchemeDesignEntity.valueForWidget);
+
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, WidgetValue> getValueForWidgetRelationValue() {
+		return valueForWidget;
+	}
+
+	public org.instantlogic.designer.WidgetValue getValueForWidget() {
+		return valueForWidget.getValue();
 	}
 
 

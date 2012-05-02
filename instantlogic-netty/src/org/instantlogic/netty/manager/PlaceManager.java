@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.instantlogic.interaction.flow.Flow;
-import org.instantlogic.interaction.flow.Place;
+import org.instantlogic.interaction.flow.PlaceTemplate;
 import org.instantlogic.interaction.util.FlowContext;
 import org.instantlogic.interaction.util.FlowStack;
 import org.instantlogic.interaction.util.RenderContext;
@@ -44,8 +44,8 @@ public class PlaceManager {
 		if (renderContext==null) {
 			return PLACE_NOT_FOUND;
 		}
-		Place place = (Place)renderContext.getFlowContext().getFlowStack().getCurrentNode();
-		return place.render(renderContext);
+		PlaceTemplate placeTemplate = (PlaceTemplate)renderContext.getFlowContext().getFlowStack().getCurrentNode();
+		return placeTemplate.render(renderContext);
 	}
 
 	private RenderContext findPage() {

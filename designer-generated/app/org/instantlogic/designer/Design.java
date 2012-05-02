@@ -27,15 +27,27 @@ public class Design extends org.instantlogic.fabric.Instance {
 	}
 	
 	
-	private final org.instantlogic.fabric.value.ReadOnlyAttributeValue<Design, java.lang.String> javaName
-		= createReadOnlyAttributeValue(org.instantlogic.designer.entity.DesignEntity.javaName);
+	private final org.instantlogic.fabric.value.ReadOnlyAttributeValue<Design, java.lang.String> javaIdentifier
+		= createReadOnlyAttributeValue(org.instantlogic.designer.entity.DesignEntity.javaIdentifier);
 	
-	public java.lang.String getJavaName() {
-		return javaName.getValue();
+	public java.lang.String getJavaIdentifier() {
+		return javaIdentifier.getValue();
 	}
 
-	public org.instantlogic.fabric.value.ReadOnlyAttributeValue<Design, java.lang.String> getJavaNameAttributeValue() {
-		return javaName;
+	public org.instantlogic.fabric.value.ReadOnlyAttributeValue<Design, java.lang.String> getJavaIdentifierAttributeValue() {
+		return javaIdentifier;
+	}
+
+	
+	private final org.instantlogic.fabric.value.ReadOnlyAttributeValue<Design, java.lang.String> technicalName
+		= createReadOnlyAttributeValue(org.instantlogic.designer.entity.DesignEntity.technicalName);
+	
+	public java.lang.String getTechnicalName() {
+		return technicalName.getValue();
+	}
+
+	public org.instantlogic.fabric.value.ReadOnlyAttributeValue<Design, java.lang.String> getTechnicalNameAttributeValue() {
+		return technicalName;
 	}
 
 	

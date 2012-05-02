@@ -30,13 +30,13 @@ public class FlowGenerator extends AbstractGenerator {
 		this.flowDesign = flowDesign;
 	}
 	
-	private Map<String, PageGenerator> pageGenerators = new HashMap<String, PageGenerator>();
+	private Map<String, PlaceTemplateGenerator> placeTemplateGenerators = new HashMap<String, PlaceTemplateGenerator>();
 	private Map<String, SubFlowGenerator> subFlowGenerators = new HashMap<String, SubFlowGenerator>();
 
 	@Override
 	public void update(GeneratedClassModels context) {
 		if (observations!=null && !observations.isOutdated()) {
-			updateAll(pageGenerators.values(), context);
+			updateAll(placeTemplateGenerators.values(), context);
 			updateAll(subFlowGenerators.values(), context);
 			return;
 		}
@@ -77,11 +77,11 @@ public class FlowGenerator extends AbstractGenerator {
 			model.parameters.add(selectDesign.getName());
 		}
 		
-		List<Design> newPages = updateGenerators(pageGenerators, getPages(flowDesign.getNodes()), context);
+		List<Design> newPages = updateGenerators(placeTemplateGenerators, getPages(flowDesign.getNodes()), context);
 		for(Design newPage : newPages) {
-			PageGenerator pageGenerator = new PageGenerator((PlaceTemplateDesign)newPage);
-			pageGenerator.update(context);
-			pageGenerators.put(newPage.getName(), pageGenerator);
+			PlaceTemplateGenerator placeTemplateGenerator = new PlaceTemplateGenerator((PlaceTemplateDesign)newPage);
+			placeTemplateGenerator.update(context);
+			placeTemplateGenerators.put(newPage.getName(), placeTemplateGenerator);
 		}
 		List<Design> newSubFlows = updateGenerators(subFlowGenerators, getSubFlows(flowDesign.getNodes()), context);
 		for(Design newSubFlow : newSubFlows) {

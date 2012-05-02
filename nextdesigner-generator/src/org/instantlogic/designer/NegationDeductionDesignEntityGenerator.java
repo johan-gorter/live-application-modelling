@@ -7,6 +7,7 @@ public class NegationDeductionDesignEntityGenerator extends EntityDesign {
     
     public NegationDeductionDesignEntityGenerator() {
         setName("NegationDeductionDesign");
+        setExtendsFrom(DeductionDesignEntityGenerator.ENTITY);
     }
 
     // Attributes

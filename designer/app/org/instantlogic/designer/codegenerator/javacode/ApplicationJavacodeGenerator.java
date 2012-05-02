@@ -54,7 +54,7 @@ public class ApplicationJavacodeGenerator extends AbstractJavacodeGenerator {
 			deleteFile("event", event, "Event", applicationRoot);
 		}
 		for (PageClassModel page:context.updatedPages) {
-			generateFile(AbstractJavacodeGenerator.pageTemplate, page, "flow/"+page.flowname.toLowerCase(), "Page", applicationRoot);
+			generateFile(AbstractJavacodeGenerator.placeTemplateTemplate, page, "flow/"+page.flowname.toLowerCase(), "PlaceTemplate", applicationRoot);
 		}
 		for (PageClassModel page:context.deletedPages) {
 			deleteFile("flow/"+page.flowname.toLowerCase(), page, "Page", applicationRoot);

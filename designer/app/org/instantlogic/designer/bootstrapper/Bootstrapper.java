@@ -26,7 +26,7 @@ public class Bootstrapper {
 		
 //		CasePersister.INSTANCE.persist("designer", applicationInstance, (int)(System.currentTimeMillis()/1000));
 		
-		//applicationInstance.getApplicationGenerator().generateJavaCode();
+//		applicationInstance.getApplicationGenerator().generateJavaCode();
 	}
 
 	

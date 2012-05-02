@@ -27,6 +27,13 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 
 	private static org.instantlogic.fabric.deduction.Deduction<java.lang.String> createDeduction0() {
 		    org.instantlogic.fabric.deduction.Deduction<java.lang.String> d0 
+		    	= new org.instantlogic.designer.deduction.JavaIdentifierDeduction();
+		return d0;
+	}
+
+
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.String> createDeduction1() {
+		    org.instantlogic.fabric.deduction.Deduction<java.lang.String> d0 
 		    	= new org.instantlogic.designer.deduction.TechnicalNameDeduction();
 		return d0;
 	}
@@ -45,14 +52,14 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.Design, java.lang.String, java.lang.String> javaName 
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.Design, java.lang.String, java.lang.String> javaIdentifier 
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.Design, java.lang.String, java.lang.String>(
-			"javaName", INSTANCE, java.lang.String.class
+			"javaIdentifier", INSTANCE, java.lang.String.class
 		) {
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.Design, java.lang.String> get(org.instantlogic.designer.Design instance) {
-				return instance.getJavaNameAttributeValue();
+				return instance.getJavaIdentifierAttributeValue();
 			}
 			
 			public boolean isReadOnly() {
@@ -64,6 +71,30 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 			public org.instantlogic.fabric.deduction.Deduction<java.lang.String> getRule() {
 				if (rule==null) {
 					rule = createDeduction0();
+				}
+				return rule;
+			}
+		};
+	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.Design, java.lang.String, java.lang.String> technicalName 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.Design, java.lang.String, java.lang.String>(
+			"technicalName", INSTANCE, java.lang.String.class
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.Design, java.lang.String> get(org.instantlogic.designer.Design instance) {
+				return instance.getTechnicalNameAttributeValue();
+			}
+			
+			public boolean isReadOnly() {
+				return true;
+			};
+
+			private org.instantlogic.fabric.deduction.Deduction<java.lang.String> rule;
+			@Override
+			public org.instantlogic.fabric.deduction.Deduction<java.lang.String> getRule() {
+				if (rule==null) {
+					rule = createDeduction1();
 				}
 				return rule;
 			}
@@ -86,7 +117,8 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
 		name,
-		javaName,
+		javaIdentifier,
+		technicalName,
 		isCustomized,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{

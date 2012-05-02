@@ -7,6 +7,7 @@ public class ConstantStringDesignEntityGenerator extends EntityDesign {
     
     public ConstantStringDesignEntityGenerator() {
         setName("ConstantStringDesign");
+        setExtendsFrom(StringProducerDesignEntityGenerator.ENTITY);
     }
 
     // Attributes

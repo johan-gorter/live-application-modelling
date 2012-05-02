@@ -18,7 +18,7 @@ public class SingleInstanceDeductionContext extends DeductionContext {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <I extends Instance> I getSelectedInstance(Entity<I> entity) {
-		if (instance.getInstanceEntity()==entity) {
+		if (Entity.extendsFrom(instance.getInstanceEntity(), entity)) {
 			return (I)instance;
 		}
 		throw new RuntimeException("No active instance of entity "+entity.getName());

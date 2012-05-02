@@ -7,6 +7,7 @@ public class TemplatedTextDesignEntityGenerator extends EntityDesign {
     
     public TemplatedTextDesignEntityGenerator() {
         setName("TemplatedTextDesign");
+        setExtendsFrom(TextDesignEntityGenerator.ENTITY);
     }
 
     // Attributes

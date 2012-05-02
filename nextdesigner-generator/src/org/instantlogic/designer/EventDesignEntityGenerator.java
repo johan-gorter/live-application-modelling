@@ -7,6 +7,7 @@ public class EventDesignEntityGenerator extends EntityDesign {
     
     public EventDesignEntityGenerator() {
         setName("EventDesign");
+        setExtendsFrom(DesignEntityGenerator.ENTITY);
     }
 
     // Attributes

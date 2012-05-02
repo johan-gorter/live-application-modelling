@@ -9,7 +9,7 @@ public class TextDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
-		return org.instantlogic.designer.entity.PageFragmentDesignEntity.INSTANCE;
+		return org.instantlogic.designer.entity.FragmentTemplateDesignEntity.INSTANCE;
 	}
 
 	@Override
@@ -83,31 +83,15 @@ public class TextDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.TextDesign, org.instantlogic.designer.HeaderDesign, org.instantlogic.designer.HeaderDesign> textOnHeader
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.TextDesign, org.instantlogic.designer.HeaderDesign, org.instantlogic.designer.HeaderDesign>(
-			"textOnHeader", INSTANCE, org.instantlogic.designer.entity.HeaderDesignEntity.INSTANCE, org.instantlogic.designer.HeaderDesign.class, org.instantlogic.designer.entity.HeaderDesignEntity.text
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.TextDesign, org.instantlogic.designer.WidgetText, org.instantlogic.designer.WidgetText> textForWidget
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.TextDesign, org.instantlogic.designer.WidgetText, org.instantlogic.designer.WidgetText>(
+			"textForWidget", INSTANCE, org.instantlogic.designer.entity.WidgetTextEntity.INSTANCE, org.instantlogic.designer.WidgetText.class, org.instantlogic.designer.entity.WidgetTextEntity.text
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.TextDesign, org.instantlogic.designer.HeaderDesign> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.TextDesign, org.instantlogic.designer.WidgetText> get(
 					org.instantlogic.designer.TextDesign instance) {
-				return instance.getTextOnHeaderRelationValue();
-			}
-	
-			public boolean isReverse() {
-				return true;
-			}
-		};
-	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.TextDesign, org.instantlogic.designer.LinkDesign, org.instantlogic.designer.LinkDesign> captionOnButton
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.TextDesign, org.instantlogic.designer.LinkDesign, org.instantlogic.designer.LinkDesign>(
-			"captionOnButton", INSTANCE, org.instantlogic.designer.entity.LinkDesignEntity.INSTANCE, org.instantlogic.designer.LinkDesign.class, org.instantlogic.designer.entity.LinkDesignEntity.caption
-		) {
-	
-			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.TextDesign, org.instantlogic.designer.LinkDesign> get(
-					org.instantlogic.designer.TextDesign instance) {
-				return instance.getCaptionOnButtonRelationValue();
+				return instance.getTextForWidgetRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -123,8 +107,7 @@ public class TextDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 		questionOnAttribute,
 		explanationOnAttribute,
 		displayOnDomainEntry,
-		textOnHeader,
-		captionOnButton,
+		textForWidget,
 	};
 
 	@Override

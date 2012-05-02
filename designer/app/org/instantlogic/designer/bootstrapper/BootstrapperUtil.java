@@ -3,7 +3,6 @@ package org.instantlogic.designer.bootstrapper;
 import org.instantlogic.designer.ApplicationDesign;
 import org.instantlogic.designer.AttributeDeductionDesign;
 import org.instantlogic.designer.AttributeDesign;
-import org.instantlogic.designer.ButtonDesign;
 import org.instantlogic.designer.CastInstanceDeductionDesign;
 import org.instantlogic.designer.CompositeTemplateDesign;
 import org.instantlogic.designer.ConstantStringDesign;
@@ -14,46 +13,43 @@ import org.instantlogic.designer.DomainEntryDesign;
 import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.EntityDesign.RelationType;
 import org.instantlogic.designer.EventDesign;
-import org.instantlogic.designer.WidgetTemplateDesign;
 import org.instantlogic.designer.FlowDesign;
 import org.instantlogic.designer.FlowEdgeDesign;
 import org.instantlogic.designer.FlowNodeBaseDesign;
 import org.instantlogic.designer.FlowSourceDesign;
 import org.instantlogic.designer.FormattedValueDesign;
-import org.instantlogic.designer.HeaderDesign;
-import org.instantlogic.designer.LinkDesign;
-import org.instantlogic.designer.PageCompositionDesign;
 import org.instantlogic.designer.FragmentTemplateDesign;
 import org.instantlogic.designer.PlaceTemplateDesign;
 import org.instantlogic.designer.RelationDesign;
-import org.instantlogic.designer.SelectDesign;
 import org.instantlogic.designer.SelectedInstanceDeductionDesign;
 import org.instantlogic.designer.SubFlowDesign;
 import org.instantlogic.designer.TemplatedTextDesign;
 import org.instantlogic.designer.TextDesign;
+import org.instantlogic.designer.WidgetTemplateDesign;
+import org.instantlogic.designer.WidgetText;
 
 public abstract class BootstrapperUtil {
 
 	protected static ApplicationDesign applicationDesign;
 	
-	protected static ButtonDesign createButton(EventDesign event, TextDesign caption) {
-		ButtonDesign result = new ButtonDesign();
+	protected static WidgetTemplateDesign createButton(EventDesign event, TextDesign caption) {
+		WidgetTemplateDesign result = new WidgetTemplateDesign();
 		result.setEvent(event);
-		result.setCaption(caption);
+		WidgetText widgetCaption = new WidgetText();
+		widgetCaption.setName("text");
+		widgetCaption.setText(caption);
+		result.addToTexts(widgetCaption);
 		return result;
 	}
 
-	protected static LinkDesign createLink(EventDesign event, TextDesign caption) {
-		LinkDesign result = new LinkDesign();
+	protected static WidgetTemplateDesign createLink(EventDesign event, TextDesign caption) {
+		WidgetTemplateDesign result = new WidgetTemplateDesign();
 		result.setEvent(event);
-		result.setCaption(caption);
+		WidgetText widgetCaption = new WidgetText();
+		widgetCaption.setName("text");
+		widgetCaption.setText(caption);
+		result.addToTexts(widgetCaption);
 		return result;
-	}
-
-	protected static void createContainerItem(CompositeTemplateDesign containerDesign, FragmentTemplateDesign element) {
-		PageCompositionDesign item = new PageCompositionDesign();
-		item.setPageFragment(element);
-		containerDesign.addToItems(item);
 	}
 
 	protected static EntityDesign createEntity(String name, EntityDesign extendsFrom) {
@@ -130,9 +126,9 @@ public abstract class BootstrapperUtil {
 		return container;
 	}
 
-	protected static SelectDesign createSelect(DeductionSchemeDesign deduction) {
-		SelectDesign select = new SelectDesign();
-		select.setDeduction(deduction);
+	protected static CompositeTemplateDesign createSelect(DeductionSchemeDesign deduction) {
+		CompositeTemplateDesign select = new CompositeTemplateDesign();
+		select.addToSelections(deduction);
 		return select;
 	}
 	
@@ -219,21 +215,11 @@ public abstract class BootstrapperUtil {
 		scheme.setOutput(attributeDeductionDesign);
 		return scheme;
 	}
-	
 
-	protected static HeaderDesign createHeader(TextDesign text) {
-		HeaderDesign header = new HeaderDesign();
-		header.setText(text);
-		return header;
-	}
-
-	protected static WidgetTemplateDesign createField(CompositeTemplateDesign container, AttributeDesign attribute, boolean required) {
+	protected static WidgetTemplateDesign createField(CompositeTemplateDesign container, AttributeDesign attribute) {
 		WidgetTemplateDesign field = new WidgetTemplateDesign();
-		field.setAttribute(attribute);
-		field.setRequired(required);
-		PageCompositionDesign item = new PageCompositionDesign();
-		container.addToItems(item);
-		item.setPageFragment(field);
+//TODO		field.setAttribute(attribute);
+		container.addToChildren(field);
 		return field;
 	}
 
@@ -277,14 +263,6 @@ public abstract class BootstrapperUtil {
 		return subFlow;
 	}
 	
-	
-	protected static PageCompositionDesign addContent(CompositeTemplateDesign CompositeFragmentTemplate, FragmentTemplateDesign item) {
-		PageCompositionDesign result = new PageCompositionDesign();
-		result.setPageFragment(item);
-		CompositeFragmentTemplate.addToItems(result);
-		return result;
-	}
-
 	protected static EventDesign createEvent(String name, EntityDesign... parameters) {
 		EventDesign result = new EventDesign();
 		result.setName(name);

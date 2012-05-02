@@ -7,6 +7,7 @@ public class FlowNodeBaseDesignEntityGenerator extends EntityDesign {
     
     public FlowNodeBaseDesignEntityGenerator() {
         setName("FlowNodeBaseDesign");
+        setExtendsFrom(DesignEntityGenerator.ENTITY);
     }
 
     // Attributes

@@ -210,15 +210,15 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.WidgetTemplateDesign>, org.instantlogic.designer.WidgetTemplateDesign> fields
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.WidgetTemplateDesign>, org.instantlogic.designer.WidgetTemplateDesign> usedInField
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.WidgetTemplateDesign>, org.instantlogic.designer.WidgetTemplateDesign>(
-			"fields", INSTANCE, org.instantlogic.designer.entity.FieldDesignEntity.INSTANCE, org.instantlogic.designer.WidgetTemplateDesign.class, org.instantlogic.designer.entity.FieldDesignEntity.attribute
+			"usedInField", INSTANCE, org.instantlogic.designer.entity.WidgetTemplateDesignEntity.INSTANCE, org.instantlogic.designer.WidgetTemplateDesign.class, org.instantlogic.designer.entity.WidgetTemplateDesignEntity.attribute
 		) {
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.WidgetTemplateDesign> get(
 					org.instantlogic.designer.AttributeDesign instance) {
-				return instance.getFieldsRelationValue();
+				return instance.getUsedInFieldRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -246,7 +246,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		belongsToEntity,
 		attributeInDeductions,
-		fields,
+		usedInField,
 	};
 
 	@Override

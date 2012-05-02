@@ -11,7 +11,8 @@ public class DesignEntityGenerator extends EntityDesign {
 
     // Attributes
     public final AttributeDesign name = addAttribute("name", java.lang.String.class);
-    public final AttributeDesign javaName = addAttribute("javaName", java.lang.String.class);
+    public final AttributeDesign javaIdentifier = addAttribute("javaIdentifier", java.lang.String.class);
+    public final AttributeDesign technicalName = addAttribute("technicalName", java.lang.String.class);
     public final AttributeDesign isCustomized = addAttribute("isCustomized", java.lang.Boolean.class);
 
     // Attributes
