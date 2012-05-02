@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class HeaderDesign extends CompositePageFragmentDesign { 
+public class HeaderDesign extends CompositeTemplateDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {

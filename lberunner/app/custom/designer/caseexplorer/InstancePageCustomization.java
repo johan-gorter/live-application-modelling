@@ -10,11 +10,11 @@ import org.instantlogic.fabric.model.Relation;
 import org.instantlogic.fabric.text.ConstantText;
 import org.instantlogic.fabric.text.Text;
 import org.instantlogic.fabric.util.DeductionContext;
-import org.instantlogic.interaction.page.CompositePageFragment;
+import org.instantlogic.interaction.page.CompositeFragmentTemplate;
 import org.instantlogic.interaction.page.PageFragment;
 import org.instantlogic.interaction.page.TextPageFragment;
 import org.instantlogic.interaction.page.impl.SimpleButton;
-import org.instantlogic.interaction.page.impl.SimpleCompositePageFragment;
+import org.instantlogic.interaction.page.impl.CompositeFragmentTemplate;
 import org.instantlogic.interaction.page.impl.SimpleField;
 import org.instantlogic.interaction.util.RenderContext;
 
@@ -33,7 +33,7 @@ public class InstancePageCustomization extends InstancePage {
 		
 	}
 	
-	public static class InstanceExplorerFragment extends SimpleCompositePageFragment {
+	public static class InstanceExplorerFragment extends CompositeFragmentTemplate {
 
 		public InstanceExplorerFragment() {
 			super(null);
@@ -63,7 +63,7 @@ public class InstancePageCustomization extends InstancePage {
 			Object value = relation.get(instance).get();
 			if (value!=null) {
 				children.add(
-					new SimpleCompositePageFragment(relation.toDeduction(), 
+					new CompositeFragmentTemplate(relation.toDeduction(), 
 						new PageFragment[]{
 							new SimpleButton(ExploreInstanceEvent.INSTANCE, new InstanceButtonText())
 						}
@@ -89,15 +89,15 @@ public class InstancePageCustomization extends InstancePage {
 		}
 	}
 	
-	private static CompositePageFragment CONTENT = 
-        new SimpleCompositePageFragment(new PageFragment[]{
+	private static CompositeFragmentTemplate CONTENT = 
+        new CompositeFragmentTemplate(new PageFragment[]{
             new TextPageFragment(new ConstantText("Case Explorer")),
             new InstanceExplorerFragment()
         }); 
 	
 	
 	@Override
-	public CompositePageFragment getRootContainer() {
+	public CompositeFragmentTemplate getRootContainer() {
 		return CONTENT;
 	}
 }

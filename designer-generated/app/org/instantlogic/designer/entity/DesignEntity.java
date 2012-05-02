@@ -27,7 +27,7 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 
 	private static org.instantlogic.fabric.deduction.Deduction<java.lang.String> createDeduction0() {
 		    org.instantlogic.fabric.deduction.Deduction<java.lang.String> d0 
-		    	= new org.instantlogic.designer.deduction.JavaNameDeduction();
+		    	= new org.instantlogic.designer.deduction.TechnicalNameDeduction();
 		return d0;
 	}
 

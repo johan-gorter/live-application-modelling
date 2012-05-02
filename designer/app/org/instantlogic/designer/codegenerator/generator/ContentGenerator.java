@@ -1,34 +1,43 @@
 package org.instantlogic.designer.codegenerator.generator;
 
 import org.instantlogic.designer.ButtonDesign;
-import org.instantlogic.designer.CompositePageFragmentDesign;
+import org.instantlogic.designer.CompositeTemplateDesign;
 import org.instantlogic.designer.CustomPageFragmentDesign;
-import org.instantlogic.designer.FieldDesign;
+import org.instantlogic.designer.WidgetTemplateDesign;
 import org.instantlogic.designer.HeaderDesign;
 import org.instantlogic.designer.LinkDesign;
 import org.instantlogic.designer.PageCompositionDesign;
-import org.instantlogic.designer.PageFragmentDesign;
+import org.instantlogic.designer.FragmentTemplateDesign;
 import org.instantlogic.designer.SelectDesign;
 import org.instantlogic.designer.SharedFragmentDesign;
 import org.instantlogic.designer.TextDesign;
 import org.instantlogic.designer.codegenerator.classmodel.AbstractClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.ContentModel;
+import org.instantlogic.designer.codegenerator.classmodel.ContentModel.Category;
 
 public abstract class ContentGenerator extends AbstractGenerator {
 
-	public static ContentModel generate(PageFragmentDesign fragment, AbstractClassModel deductionHolder) {
+	public static ContentModel generate(FragmentTemplateDesign fragment, AbstractClassModel deductionHolder) {
 		ContentModel model = new ContentModel();
-		model.type=fragment.getMetadata().getEntity().getName();
-		model.rootPackageName = deductionHolder.rootPackageName;
-		if (model.type.endsWith("Design")) {
-			model.type = model.type.substring(0, model.type.length()-6);
+		if (fragment instanceof CompositeTemplateDesign) {
+			model.category = Category.Composite;
+		} else if (fragment instanceof SharedFragmentDesign) {
+			model.category = Category.Shared;
+		} else {
+			model.category = Category.Widget;
 		}
+		model.widgetName=fragment.getMetadata().getEntity().getName();
+		if (model.widgetName.endsWith("Design")) {
+			model.widgetName = model.widgetName.substring(0, model.widgetName.length()-6);
+		}
+		model.id=fragment.getMetadata().getInstanceLocalId();
+		model.rootPackageName = deductionHolder.rootPackageName;
 		model.presentation = fragment.getPresentation();
 		model.isCustomized = fragment.getIsCustomized() == Boolean.TRUE;
 		if (fragment instanceof SharedFragmentDesign) {
 			model.name = ((SharedFragmentDesign) fragment).getPageFragmentHolder().getName();
-		} else if (fragment instanceof FieldDesign) {
-			FieldDesign field = (FieldDesign) fragment;
+		} else if (fragment instanceof WidgetTemplateDesign) {
+			WidgetTemplateDesign field = (WidgetTemplateDesign) fragment;
 			model.required = (field.getRequired()== Boolean.TRUE);
 			model.entity = field.getAttribute().getBelongsToEntity().getName();
 			model.attribute = field.getAttribute().getName();
@@ -43,8 +52,8 @@ public abstract class ContentGenerator extends AbstractGenerator {
 			LinkDesign link = (LinkDesign)fragment;
 			model.text = TextGenerator.generate(link.getCaption(), deductionHolder);
 			model.event = link.getEvent()==null?null:deductionHolder.getRootPackageName()+".event."+link.getEvent().getName();
-		} else if (fragment instanceof CompositePageFragmentDesign) {
-			for (PageCompositionDesign composition : ((CompositePageFragmentDesign)fragment).getItems()) {
+		} else if (fragment instanceof CompositeTemplateDesign) {
+			for (PageCompositionDesign composition : ((CompositeTemplateDesign)fragment).getItems()) {
 				model.children.add(generate(composition.getPageFragment(), deductionHolder));
 			}
 			if (fragment instanceof HeaderDesign) {

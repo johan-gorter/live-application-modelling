@@ -5,53 +5,64 @@ import java.util.List;
 
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.util.AbstractDeductionContext;
+import org.instantlogic.interaction.page.FragmentTemplate;
 
 
 public class RenderContext extends AbstractDeductionContext{
 
 	private final FlowContext flowContext;
 	
-	private List<Integer> lastIds = new ArrayList<Integer>(25);
+	public List<String> prefixes = new ArrayList<String>();
 	private final String pageCoordinates;
 
 	public RenderContext(FlowContext flowContext, String pageCoordinates) {
 		super(flowContext);
 		this.pageCoordinates = pageCoordinates;
 		this.flowContext = flowContext;
-		nextIdLevel();
 	}
 
 	public Instance getCaseInstance() {
 		return flowContext.getCaseInstance();
 	}
-
-	public void nextIdLevel() {
-		lastIds.add(-1);
-	}
-
-	public void previousIdLevel() {
-		lastIds.remove(lastIds.size()-1);
+	
+	private String makeId(FragmentTemplate fragmentTemplate) {
+		String suffix = fragmentTemplate.getId();
+		if (prefixes.size()==0) return suffix;
+		StringBuilder sb = new StringBuilder();
+		sb.append(prefixes.get(prefixes.size()-1));
+		sb.append('-');
+		sb.append(suffix);
+		return sb.toString();
 	}
 	
-	public String nextId() {
-		int lastIndex = lastIds.size()-1;
-		lastIds.set(lastIndex, lastIds.get(lastIndex)+1);
-		StringBuilder result = new StringBuilder(); //We can optimize performance by reusing the StringBuilder
-		for (Integer id: lastIds) {
-			if (result.length()>0) {
-				result.append("-");
-			}
-			result.append(id);
-		}
-		return result.toString();
+	private String makeId(Instance forInstance) {
+		String suffix = forInstance.getMetadata().getInstanceId();
+		if (prefixes.size()==0) return suffix;
+		StringBuilder sb = new StringBuilder();
+		sb.append(prefixes.get(prefixes.size()-1));
+		sb.append('!');
+		sb.append(suffix);
+		return sb.toString();
+	}
+	
+	public String enterScope(FragmentTemplate fragmentTemplate) {
+		String id = makeId(fragmentTemplate);
+		prefixes.add(id);
+		return id;
+	}
+
+	public String enterScope(Instance forInstance) {
+		String id = makeId(forInstance);
+		prefixes.add(id);
+		return id;
+	}
+	
+	public void exitScope() {
+		prefixes.remove(prefixes.size()-1);
 	}
 
 	public String getCaseId() {
 		return flowContext.getCaseId();
-	}
-
-	public String getLanguage() {
-		return "en-US";
 	}
 
 	public String getPageCoordinates() {

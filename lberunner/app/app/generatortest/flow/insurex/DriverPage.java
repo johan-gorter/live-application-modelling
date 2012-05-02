@@ -2,9 +2,9 @@ package app.generatortest.flow.insurex;
 
 import org.instantlogic.fabric.text.ConstantText;
 import org.instantlogic.interaction.flow.Page;
-import org.instantlogic.interaction.page.CompositePageFragment;
+import org.instantlogic.interaction.page.CompositeFragmentTemplate;
 import org.instantlogic.interaction.page.PageFragment;
-import org.instantlogic.interaction.page.impl.SimpleCompositePageFragment;
+import org.instantlogic.interaction.page.impl.CompositeFragmentTemplate;
 import org.instantlogic.interaction.page.impl.SimpleField;
 
 import app.generatortest.data.entity.CarinsuranceCaseEntity;
@@ -15,10 +15,10 @@ public class DriverPage extends Page {
 	public static final DriverPage INSTANCE = new DriverPage();
 	
 	
-	private static CompositePageFragment CONTENT = 
-        new SimpleCompositePageFragment(CarinsuranceCaseEntity.driver.toDeduction(), new PageFragment[]{
-            new SimpleCompositePageFragment(new ConstantText("Driver"), new PageFragment[]{
-                new SimpleCompositePageFragment(new PageFragment[]{
+	private static CompositeFragmentTemplate CONTENT = 
+        new CompositeFragmentTemplate(CarinsuranceCaseEntity.driver.toDeduction(), new PageFragment[]{
+            new CompositeFragmentTemplate(new ConstantText("Driver"), new PageFragment[]{
+                new CompositeFragmentTemplate(new PageFragment[]{
                     new SimpleField(DriverEntity.INSTANCE, DriverEntity.dateOfBirth).setRequired(),
                     new SimpleField(DriverEntity.INSTANCE, DriverEntity.yearsInsured).setRequired(),
                     new SimpleField(DriverEntity.INSTANCE, DriverEntity.yearsDriverslicense).setRequired(),
@@ -32,7 +32,7 @@ public class DriverPage extends Page {
         }); 
 	
 	@Override
-	public CompositePageFragment getRootContainer() {
+	public CompositeFragmentTemplate getRootContainer() {
 		return CONTENT;
 	}; 
 	

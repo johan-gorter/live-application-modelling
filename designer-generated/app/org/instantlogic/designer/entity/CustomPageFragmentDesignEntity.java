@@ -9,7 +9,7 @@ public class CustomPageFragmentDesignEntity extends org.instantlogic.fabric.mode
 
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
-		return org.instantlogic.designer.entity.CompositePageFragmentDesignEntity.INSTANCE;
+		return org.instantlogic.designer.entity.CompositeFragmentTemplateDesignEntity.INSTANCE;
 	}
 
 	@Override

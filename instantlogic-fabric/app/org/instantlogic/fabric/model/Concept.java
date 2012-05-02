@@ -8,8 +8,6 @@ public abstract class Concept implements Comparable<Concept> {
 	
 	public abstract String getName();
 	
-	private String id;
-
 	@Override
 	public int compareTo(Concept o) {
 		String n1 = getName();
@@ -26,7 +24,4 @@ public abstract class Concept implements Comparable<Concept> {
 		return getName();
 	}
 
-	public String getId() {
-		return null;
-	}
 }

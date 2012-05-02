@@ -7,7 +7,7 @@ import org.instantlogic.interaction.util.FlowEventOccurrence;
 
 import app.designer.AttributeDeductionDesign;
 import app.designer.AttributeDesign;
-import app.designer.CompositePageFragmentDesign;
+import app.designer.CompositeFragmentTemplateDesign;
 import app.designer.EntityDesign;
 import app.designer.FieldDesign;
 import app.designer.PageCompositionDesign;
@@ -24,15 +24,15 @@ public class AddFieldFlowCustomization extends AddFieldFlow {
 	public FlowEventOccurrence enter(FlowEventOccurrence occurrence, FlowContext context) {
 		CaseInstance application = context.getCaseInstance();
 		PageDesign page = (PageDesign) context.getSelectedInstance(PageDesignEntity.INSTANCE);
-		CompositePageFragmentDesign targetFragment = page.content.get();
+		CompositeFragmentTemplateDesign targetFragment = page.content.get();
 		EntityDesign entity = null;
 		// Find a suitable spot... Fine for now
-		while (targetFragment.items.get().size()==1 && targetFragment.items.get().get(0).pageFragment.get() instanceof CompositePageFragmentDesign) {
+		while (targetFragment.items.get().size()==1 && targetFragment.items.get().get(0).pageFragment.get() instanceof CompositeFragmentTemplateDesign) {
 			if (targetFragment instanceof SelectDesign) {
 				AttributeDeductionDesign output = (AttributeDeductionDesign) ((SelectDesign)targetFragment).getDeduction().getOutput();
 				entity = ((RelationDesign)output.getAttribute()).getTo();
 			}
-			targetFragment = (CompositePageFragmentDesign) targetFragment.items.get().get(0).pageFragment.get();
+			targetFragment = (CompositeFragmentTemplateDesign) targetFragment.items.get().get(0).pageFragment.get();
 		}
 
 		// Create new attribute

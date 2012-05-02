@@ -6,7 +6,7 @@ import org.instantlogic.fabric.deduction.Deduction;
 import org.instantlogic.fabric.deduction.SelectedInstanceDeduction;
 import org.instantlogic.fabric.text.ConstantText;
 import org.instantlogic.fabric.text.Text;
-import org.instantlogic.interaction.page.CompositePageFragment;
+import org.instantlogic.interaction.page.CompositeFragmentTemplate;
 import org.instantlogic.interaction.page.PageFragment;
 import org.instantlogic.interaction.util.RenderContext;
 
@@ -14,7 +14,7 @@ import app.oldcarinsurance.CarinsuranceCase;
 import app.oldcarinsurance.Driver;
 import app.oldcarinsurance.entity.CarinsuranceCaseEntity;
 
-public class DriverContainer extends CompositePageFragment {
+public class DriverContainer extends CompositeFragmentTemplate {
 
 	public static DriverContainer INSTANCE = new DriverContainer();
 	
