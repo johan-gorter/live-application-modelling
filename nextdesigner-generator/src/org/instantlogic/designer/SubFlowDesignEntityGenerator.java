@@ -12,7 +12,7 @@ public class SubFlowDesignEntityGenerator extends EntityDesign {
 
     // Attributes
 
-    // Attributes
+    // Relations
     public final RelationDesign flow = addRelation("flow", RelationType.OneToZeroOrOne, FlowDesignEntityGenerator.ENTITY)
             .setReverseName("subFlowIn");
 

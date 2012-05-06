@@ -11,6 +11,6 @@ public class StringProducerDesignEntityGenerator extends EntityDesign {
 
     // Attributes
 
-    // Attributes
+    // Relations
 
 }

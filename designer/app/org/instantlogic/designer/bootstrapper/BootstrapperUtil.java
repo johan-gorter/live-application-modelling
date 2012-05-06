@@ -5,6 +5,7 @@ import org.instantlogic.designer.AttributeDeductionDesign;
 import org.instantlogic.designer.AttributeDesign;
 import org.instantlogic.designer.CastInstanceDeductionDesign;
 import org.instantlogic.designer.CompositeTemplateDesign;
+import org.instantlogic.designer.ConstantDeductionDesign;
 import org.instantlogic.designer.ConstantStringDesign;
 import org.instantlogic.designer.ConstantTextDesign;
 import org.instantlogic.designer.DeductionDesign;
@@ -27,6 +28,8 @@ import org.instantlogic.designer.TemplatedTextDesign;
 import org.instantlogic.designer.TextDesign;
 import org.instantlogic.designer.WidgetTemplateDesign;
 import org.instantlogic.designer.WidgetText;
+import org.instantlogic.designer.WidgetValue;
+import org.instantlogic.fabric.deduction.ConstantDeduction;
 
 public abstract class BootstrapperUtil {
 
@@ -95,6 +98,20 @@ public abstract class BootstrapperUtil {
 	protected static ConstantTextDesign createConstantText(String untranslated) {
 		ConstantTextDesign result = new ConstantTextDesign();
 		result.setUntranslated(untranslated);
+		return result;
+	}
+	
+	protected static WidgetTemplateDesign createText(String role, TextDesign text) {
+		WidgetTemplateDesign result = new WidgetTemplateDesign();
+		result.setWidgetTypeName("Text");
+		WidgetValue widgetValue = new WidgetValue();
+		widgetValue.setName("role");
+		widgetValue.setDeduction(createConstantDeduction(String.class, role));
+		result.addToValues(widgetValue);
+		WidgetText widgetText = new WidgetText();
+		widgetText.setName("text");
+		widgetText.setText(text);
+		result.addToTexts(widgetText);
 		return result;
 	}
 	
@@ -171,6 +188,17 @@ public abstract class BootstrapperUtil {
 		selectedInstanceDeductionDesign.setClassName(entity.getApplication().getRootPackageName()+"."+entity.getName());
 		scheme.addToDeductions(selectedInstanceDeductionDesign);
 		scheme.setOutput(selectedInstanceDeductionDesign);
+		return scheme;
+	}
+
+	// Deduction for an constant
+	protected static <V> DeductionSchemeDesign createConstantDeduction(Class<V> className, V value) {
+		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
+		ConstantDeductionDesign constantDeductionDesign = new ConstantDeductionDesign();
+		constantDeductionDesign.setClassName(className.getName());
+		constantDeductionDesign.setValue(value);
+		scheme.addToDeductions(constantDeductionDesign);
+		scheme.setOutput(constantDeductionDesign);
 		return scheme;
 	}
 	

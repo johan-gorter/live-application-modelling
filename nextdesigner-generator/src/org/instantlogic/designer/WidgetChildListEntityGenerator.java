@@ -12,7 +12,7 @@ public class WidgetChildListEntityGenerator extends EntityDesign {
 
     // Attributes
 
-    // Attributes
+    // Relations
     public final RelationDesign children = addRelation("children", RelationType.OneToManyAggregation, FragmentTemplateDesignEntityGenerator.ENTITY)
             .setReverseName("childrenForWidget");
 

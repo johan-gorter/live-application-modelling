@@ -7,6 +7,7 @@ import java.util.List;
 import org.instantlogic.designer.AttributeDeductionDesign;
 import org.instantlogic.designer.AttributeDesign;
 import org.instantlogic.designer.CastInstanceDeductionDesign;
+import org.instantlogic.designer.ConstantDeductionDesign;
 import org.instantlogic.designer.DeductionDesign;
 import org.instantlogic.designer.DeductionSchemeDesign;
 import org.instantlogic.designer.RelationDesign;
@@ -48,6 +49,17 @@ public class DeductionSchemeGenerator {
 			} else if (deduction instanceof CastInstanceDeductionDesign) {
 				String name = ((CastInstanceDeductionDesign)deduction).getToEntity().getName();
 				classModel.parameters.add(rootPackageName+".entity."+name+"Entity.INSTANCE");
+			} else if (deduction instanceof ConstantDeductionDesign) {
+				Object value = ((ConstantDeductionDesign)deduction).getValue();
+				String valueAsText;
+				if (value==null) {
+					valueAsText = "null";
+				} else if (String.class.getName().equals(deduction.getClassName())) {
+					valueAsText="\""+value.toString()+"\"";
+				} else {
+					valueAsText = value.toString();
+				}
+				classModel.parameters.add(valueAsText);
 			}
 			for (DeductionDesign input : deduction.getInputs()) {
 				classModel.parameters.add("d"+deductionDesigns.indexOf(input));

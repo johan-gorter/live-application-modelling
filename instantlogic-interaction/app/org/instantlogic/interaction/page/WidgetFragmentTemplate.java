@@ -86,7 +86,7 @@ public class WidgetFragmentTemplate extends FragmentTemplate {
 
 	private void handleRender(RenderContext context, Fragment result) {
 		for (Map.Entry<String, Deduction<?>> entry : widgetValues.entrySet()) {
-			result.widgetData.put(entry.getKey(), entry.getValue().deduct(context));
+			result.widgetData.put(entry.getKey(), entry.getValue().deduct(context).getValue());
 		}
 		for (Map.Entry<String, Text> entry : widgetTexts.entrySet()) {
 			result.widgetData.put(entry.getKey(), entry.getValue().renderText(context));

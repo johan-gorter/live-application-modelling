@@ -12,7 +12,7 @@ public class SharedFragmentTemplateDefinitionDesignEntityGenerator extends Entit
 
     // Attributes
 
-    // Attributes
+    // Relations
     public final RelationDesign fragment = addRelation("fragment", RelationType.OneToOneAggregation, FragmentTemplateDesignEntityGenerator.ENTITY)
             .setReverseName("sharedTemplateDefinition");
 

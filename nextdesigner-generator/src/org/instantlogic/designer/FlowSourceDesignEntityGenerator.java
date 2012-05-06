@@ -11,7 +11,7 @@ public class FlowSourceDesignEntityGenerator extends EntityDesign {
 
     // Attributes
 
-    // Attributes
+    // Relations
     public final RelationDesign startEvent = addRelation("startEvent", RelationType.ManyToZeroOrOne, EventDesignEntityGenerator.ENTITY)
             .setReverseName("startEventInSources");
     public final RelationDesign endNode = addRelation("endNode", RelationType.ManyToZeroOrOne, FlowNodeBaseDesignEntityGenerator.ENTITY)

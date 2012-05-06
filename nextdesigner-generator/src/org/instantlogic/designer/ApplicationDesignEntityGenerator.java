@@ -16,7 +16,7 @@ public class ApplicationDesignEntityGenerator extends EntityDesign {
     public final AttributeDesign sourcePath = addAttribute("sourcePath", java.lang.String.class);
     public final AttributeDesign isCustomized = addAttribute("isCustomized", java.lang.Boolean.class);
 
-    // Attributes
+    // Relations
     public final RelationDesign entities = addRelation("entities", RelationType.OneToManyAggregation, EntityDesignEntityGenerator.ENTITY)
             .setReverseName("application");
     public final RelationDesign caseEntity = addRelation("caseEntity", RelationType.OneToZeroOrOne, EntityDesignEntityGenerator.ENTITY)

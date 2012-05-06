@@ -3,6 +3,7 @@ package org.instantlogic.designer.bootstrapper;
 import org.instantlogic.designer.ApplicationDesign;
 import org.instantlogic.designer.AttributeDesign;
 import org.instantlogic.designer.CompositeTemplateDesign;
+import org.instantlogic.designer.ConstantTextDesign;
 import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.EntityDesign.RelationType;
 import org.instantlogic.designer.EventDesign;
@@ -11,6 +12,10 @@ import org.instantlogic.designer.FlowSourceDesign;
 import org.instantlogic.designer.FragmentTemplateDesign;
 import org.instantlogic.designer.PlaceTemplateDesign;
 import org.instantlogic.designer.RelationDesign;
+import org.instantlogic.designer.WidgetChildList;
+import org.instantlogic.designer.WidgetTemplateDesign;
+import org.instantlogic.designer.WidgetText;
+import org.instantlogic.designer.WidgetValue;
 
 public class DesignerBootstrapper extends BootstrapperUtil {
 
@@ -76,6 +81,8 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createAttribute(deductionDesign, "multivalue", Boolean.class);
 		createAttribute(deductionDesign, "className", String.class); // in case of an entity, see relation entity
 		createAttribute(deductionDesign, "customization", String.class);
+		EntityDesign constantDeductionDesign = createEntity("ConstantDeductionDesign", deductionDesign);
+		createAttribute(constantDeductionDesign, "value", Object.class);
 		EntityDesign selectedInstanceDeductionDesign = createEntity("SelectedInstanceDeductionDesign" , deductionDesign);
 		EntityDesign castInstanceDeductionDesign = createEntity("CastInstanceDeductionDesign" , deductionDesign);
 		EntityDesign attributeDeductionDesign = createEntity("AttributeDeductionDesign" , deductionDesign);
@@ -97,7 +104,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		EntityDesign widgetChildList = createEntity("WidgetChildList", design);
 		
 		// Text
-		EntityDesign textDesign = createEntity("TextDesign", fragmentTemplateDesign);
+		EntityDesign textDesign = createEntity("TextDesign", design);
 		EntityDesign constantTextDesign = createEntity("ConstantTextDesign", textDesign);
 		createAttribute(constantTextDesign, "untranslated", String.class);
 		EntityDesign templatedTextDesign = createEntity("TemplatedTextDesign", textDesign);
@@ -158,7 +165,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		createRelation(sharedTemplateDefinitionDesign, "fragment", RelationType.OneToOneAggregation, "sharedTemplateDefinition", fragmentTemplateDesign);
 		
 		// Page elements
-		RelationDesign content = createRelation(placeTemplateDesign, "content", RelationType.OneToOneAggregation, "contentOfPage", fragmentTemplateDesign);
+		RelationDesign content = createRelation(placeTemplateDesign, "content", RelationType.OneToZeroOrOneAggregation, "contentOfPage", fragmentTemplateDesign);
 		RelationDesign items = createRelation(compositeTemplateDesign, "children", RelationType.OneToManyAggregation, "childOf", fragmentTemplateDesign);
 		createRelation(compositeTemplateDesign, "selections", RelationType.OneToManyAggregation, "compositeTemplate", deductionSchemeDesign);
 
@@ -318,8 +325,11 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 //
 //		recursivePageFragmentEditor.setPageFragmentHolder(pageFragmentEditorHolder);
 //
-//		// Pages
-//		// Welcome page
+		// Pages
+		// Welcome page
+		welcomePage.setContent(createPageWidget("Welcome", 
+			createText("paragraph", createConstantText("Welcome to the Designer"))
+		));
 //		addContent(welcomePage.getContent(), createConstantText("Welcome to the Designer"));
 //		CompositeFragmentTemplateDesign columns = createCompositeFragmentTemplate();
 //		columns.setPresentation("four-columns");
@@ -383,6 +393,26 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		applicationDesign.addToExposedFlows(mainFlow);
 		
 		return applicationDesign;
+	}
+
+	private static WidgetTemplateDesign createPageWidget(String title, FragmentTemplateDesign... mainContentChildren) {
+		WidgetTemplateDesign pageWidget = new WidgetTemplateDesign().setWidgetTypeName("Page");
+		WidgetChildList mainContent = new WidgetChildList();
+		mainContent.setName("mainContent");
+		for (FragmentTemplateDesign child : mainContentChildren) {
+			mainContent.addToChildren(child);
+		}
+		WidgetChildList headerContent = new WidgetChildList();
+		headerContent.setName("headerContent");
+		WidgetText headerText = new WidgetText().setText(new ConstantTextDesign().setUntranslated(title));
+		headerText.setName("text");
+		WidgetValue roleValue = new WidgetValue();
+		roleValue.setName("role");
+		roleValue.setDeduction(createConstantDeduction(String.class, "header"));
+		headerContent.addToChildren(new WidgetTemplateDesign().setWidgetTypeName("text").addToValues(roleValue).addToTexts(headerText));
+		pageWidget.addToChildLists(headerContent);
+		pageWidget.addToChildLists(mainContent);
+		return pageWidget;
 	}
 
 	private static FragmentTemplateDesign putInRow(FragmentTemplateDesign content) {

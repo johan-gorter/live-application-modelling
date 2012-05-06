@@ -47,10 +47,6 @@ public class PlaceTemplateDesignEntity extends org.instantlogic.fabric.model.Ent
 			public boolean isOwner() {
 				return true;
 			}
-	
-			public boolean isAutoCreate() {
-				return true;
-			}
 			
 		};
 	

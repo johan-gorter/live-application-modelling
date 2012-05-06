@@ -12,6 +12,6 @@ public class SumDeductionDesignEntityGenerator extends EntityDesign {
 
     // Attributes
 
-    // Attributes
+    // Relations
 
 }

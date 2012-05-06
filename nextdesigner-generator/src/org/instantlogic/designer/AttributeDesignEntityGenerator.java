@@ -15,7 +15,7 @@ public class AttributeDesignEntityGenerator extends EntityDesign {
     public final AttributeDesign multivalue = addAttribute("multivalue", java.lang.Boolean.class);
     public final AttributeDesign className = addAttribute("className", java.lang.String.class);
 
-    // Attributes
+    // Relations
     public final RelationDesign question = addRelation("question", RelationType.OneToZeroOrOneAggregation, TextDesignEntityGenerator.ENTITY)
             .setReverseName("questionOnAttribute");
     public final RelationDesign explanation = addRelation("explanation", RelationType.OneToZeroOrOneAggregation, TextDesignEntityGenerator.ENTITY)

@@ -13,7 +13,7 @@ public class WidgetTemplateDesignEntityGenerator extends EntityDesign {
     // Attributes
     public final AttributeDesign widgetTypeName = addAttribute("widgetTypeName", java.lang.String.class);
 
-    // Attributes
+    // Relations
     public final RelationDesign attribute = addRelation("attribute", RelationType.ManyToZeroOrOne, AttributeDesignEntityGenerator.ENTITY)
             .setReverseName("usedInField");
     public final RelationDesign entity = addRelation("entity", RelationType.ManyToZeroOrOne, EntityDesignEntityGenerator.ENTITY)
