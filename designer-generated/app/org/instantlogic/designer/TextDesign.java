@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class TextDesign extends FragmentTemplateDesign { 
+public class TextDesign extends Design { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {

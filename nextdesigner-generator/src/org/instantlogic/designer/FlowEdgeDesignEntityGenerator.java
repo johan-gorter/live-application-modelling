@@ -11,7 +11,7 @@ public class FlowEdgeDesignEntityGenerator extends EntityDesign {
 
     // Attributes
 
-    // Attributes
+    // Relations
     public final RelationDesign startNode = addRelation("startNode", RelationType.ManyToZeroOrOne, FlowNodeBaseDesignEntityGenerator.ENTITY)
             .setReverseName("outgoingEdges");
     public final RelationDesign startEvent = addRelation("startEvent", RelationType.ManyToZeroOrOne, EventDesignEntityGenerator.ENTITY)

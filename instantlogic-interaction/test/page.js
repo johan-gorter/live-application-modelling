@@ -1,0 +1,25 @@
+{
+	"id":"W1",
+	"widget":"Page",
+	"widgetData": 
+	{
+		"headerContent":[
+		{
+			"id":"W1-W1",
+			"widget":"Header",
+			"widgetData":
+			{
+				"text":"Welcome"
+			}
+		}],
+		"mainContent":[
+		{
+			"id":"W1-W1",
+			"widget":"Text",
+			"widgetData":
+			{
+				"text":"Welcome to the Designer"
+			}
+		}]
+	}
+}

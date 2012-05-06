@@ -13,6 +13,6 @@ public class ConstantTextDesignEntityGenerator extends EntityDesign {
     // Attributes
     public final AttributeDesign untranslated = addAttribute("untranslated", java.lang.String.class);
 
-    // Attributes
+    // Relations
 
 }

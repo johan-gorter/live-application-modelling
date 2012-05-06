@@ -12,7 +12,7 @@ public class SharedTemplateDesignEntityGenerator extends EntityDesign {
 
     // Attributes
 
-    // Attributes
+    // Relations
     public final RelationDesign definition = addRelation("definition", RelationType.ManyToZeroOrOne, SharedFragmentTemplateDefinitionDesignEntityGenerator.ENTITY)
             .setReverseName("usages");
 

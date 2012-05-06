@@ -7,11 +7,11 @@ public class TextDesignEntityGenerator extends EntityDesign {
     
     public TextDesignEntityGenerator() {
         setName("TextDesign");
-        setExtendsFrom(FragmentTemplateDesignEntityGenerator.ENTITY);
+        setExtendsFrom(DesignEntityGenerator.ENTITY);
     }
 
     // Attributes
 
-    // Attributes
+    // Relations
 
 }

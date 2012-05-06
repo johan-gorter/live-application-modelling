@@ -12,7 +12,7 @@ public class FlowDesignEntityGenerator extends EntityDesign {
 
     // Attributes
 
-    // Attributes
+    // Relations
     public final RelationDesign sources = addRelation("sources", RelationType.OneToManyAggregation, FlowSourceDesignEntityGenerator.ENTITY)
             .setReverseName("owner");
     public final RelationDesign nodes = addRelation("nodes", RelationType.OneToManyAggregation, FlowNodeBaseDesignEntityGenerator.ENTITY)

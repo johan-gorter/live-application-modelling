@@ -13,7 +13,7 @@ public class EntityDesignEntityGenerator extends EntityDesign {
 
     // Attributes
 
-    // Attributes
+    // Relations
     public final RelationDesign extendsFrom = addRelation("extendsFrom", RelationType.ManyToZeroOrOne, EntityDesignEntityGenerator.ENTITY)
             .setReverseName("extensions");
     public final RelationDesign attributes = addRelation("attributes", RelationType.OneToManyAggregation, AttributeDesignEntityGenerator.ENTITY)

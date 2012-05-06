@@ -12,7 +12,7 @@ public class EventDesignEntityGenerator extends EntityDesign {
 
     // Attributes
 
-    // Attributes
+    // Relations
     public final RelationDesign parameters = addRelation("parameters", RelationType.ManyToMany, EntityDesignEntityGenerator.ENTITY)
             .setReverseName("parameterInEvent");
 

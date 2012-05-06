@@ -9,7 +9,7 @@ public class TextDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
-		return org.instantlogic.designer.entity.FragmentTemplateDesignEntity.INSTANCE;
+		return org.instantlogic.designer.entity.DesignEntity.INSTANCE;
 	}
 
 	@Override

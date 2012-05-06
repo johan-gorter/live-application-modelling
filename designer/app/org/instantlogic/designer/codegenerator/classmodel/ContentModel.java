@@ -36,7 +36,9 @@ public class ContentModel {
 	public final List<ContentModel> children = new ArrayList<ContentModel>();
 	public String implementationClassName;
 	
-	public final Map<String, Object> staticWidgetData = new HashMap<String, Object>();
+	public final Map<String, Object> values = new HashMap<String, Object>();
+	public final Map<String, TextModel> texts = new HashMap<String, TextModel>();
+	public final Map<String, List<ContentModel>> childLists = new HashMap<String, List<ContentModel>>();
 	
 	public boolean isRequired() {
 		return required;
@@ -98,7 +100,14 @@ public class ContentModel {
 	public String getAnswerWidgetName() {
 		return answerWidgetName;
 	}
-	public Map<String, Object> getStaticWidgetData() {
-		return staticWidgetData;
+	public Map<String, List<ContentModel>> getChildLists() {
+		return childLists;
 	}
+	public Map<String, Object> getValues() {
+		return values;
+	}
+	public Map<String, TextModel> getTexts() {
+		return texts;
+	}
+	
 }

@@ -12,8 +12,8 @@ public class PlaceTemplateDesignEntityGenerator extends EntityDesign {
 
     // Attributes
 
-    // Attributes
-    public final RelationDesign content = addRelation("content", RelationType.OneToOneAggregation, FragmentTemplateDesignEntityGenerator.ENTITY)
+    // Relations
+    public final RelationDesign content = addRelation("content", RelationType.OneToZeroOrOneAggregation, FragmentTemplateDesignEntityGenerator.ENTITY)
             .setReverseName("contentOfPage");
 
 }

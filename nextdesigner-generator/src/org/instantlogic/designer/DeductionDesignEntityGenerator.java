@@ -14,7 +14,7 @@ public class DeductionDesignEntityGenerator extends EntityDesign {
     public final AttributeDesign className = addAttribute("className", java.lang.String.class);
     public final AttributeDesign customization = addAttribute("customization", java.lang.String.class);
 
-    // Attributes
+    // Relations
     public final RelationDesign inputs = addRelation("inputs", RelationType.ManyToMany, DeductionDesignEntityGenerator.ENTITY)
             .setReverseName("outputs");
 

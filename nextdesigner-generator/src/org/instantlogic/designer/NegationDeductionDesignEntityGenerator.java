@@ -12,6 +12,6 @@ public class NegationDeductionDesignEntityGenerator extends EntityDesign {
 
     // Attributes
 
-    // Attributes
+    // Relations
 
 }

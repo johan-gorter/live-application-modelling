@@ -12,6 +12,6 @@ public class FragmentTemplateDesignEntityGenerator extends EntityDesign {
 
     // Attributes
 
-    // Attributes
+    // Relations
 
 }

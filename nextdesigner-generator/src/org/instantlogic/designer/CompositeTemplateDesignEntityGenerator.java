@@ -12,7 +12,7 @@ public class CompositeTemplateDesignEntityGenerator extends EntityDesign {
 
     // Attributes
 
-    // Attributes
+    // Relations
     public final RelationDesign children = addRelation("children", RelationType.OneToManyAggregation, FragmentTemplateDesignEntityGenerator.ENTITY)
             .setReverseName("childOf");
     public final RelationDesign selections = addRelation("selections", RelationType.OneToManyAggregation, DeductionSchemeDesignEntityGenerator.ENTITY)

@@ -13,6 +13,6 @@ public class ConstantStringDesignEntityGenerator extends EntityDesign {
     // Attributes
     public final AttributeDesign constant = addAttribute("constant", java.lang.String.class);
 
-    // Attributes
+    // Relations
 
 }

@@ -12,7 +12,7 @@ public class TemplatedTextDesignEntityGenerator extends EntityDesign {
 
     // Attributes
 
-    // Attributes
+    // Relations
     public final RelationDesign untranslated = addRelation("untranslated", RelationType.OneToManyAggregation, StringProducerDesignEntityGenerator.ENTITY)
             .setReverseName("untranslatedInTemplate");
 

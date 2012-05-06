@@ -12,6 +12,6 @@ public class SharedTextDesignEntityGenerator extends EntityDesign {
 
     // Attributes
 
-    // Attributes
+    // Relations
 
 }

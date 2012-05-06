@@ -12,7 +12,7 @@ public class WidgetTextEntityGenerator extends EntityDesign {
 
     // Attributes
 
-    // Attributes
+    // Relations
     public final RelationDesign text = addRelation("text", RelationType.OneToOneAggregation, TextDesignEntityGenerator.ENTITY)
             .setReverseName("textForWidget");
 
