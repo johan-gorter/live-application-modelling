@@ -95,13 +95,11 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		
 		// Page elements & Page
 		EntityDesign fragmentTemplateDesign = createEntity("FragmentTemplateDesign", design);
-		EntityDesign compositeTemplateDesign = createEntity("CompositeTemplateDesign", fragmentTemplateDesign);
-		EntityDesign widgetTemplateDesign = createEntity("WidgetTemplateDesign", fragmentTemplateDesign);
-		createAttribute(widgetTemplateDesign, "widgetTypeName", String.class);
+		createAttribute(fragmentTemplateDesign, "fragmentTypeName", String.class);
 		EntityDesign sharedTemplateDesign = createEntity("SharedTemplateDesign", fragmentTemplateDesign);
-		EntityDesign widgetValue = createEntity("WidgetValue", design);
-		EntityDesign widgetText = createEntity("WidgetText", design);
-		EntityDesign widgetChildList = createEntity("WidgetChildList", design);
+		EntityDesign fragmentValue = createEntity("FragmentValue", design);
+		EntityDesign fragmentText = createEntity("FragmentText", design);
+		EntityDesign fragmentChildList = createEntity("FragmentChildList", design);
 		
 		// Text
 		EntityDesign textDesign = createEntity("TextDesign", design);
@@ -166,18 +164,17 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		
 		// Page elements
 		RelationDesign content = createRelation(placeTemplateDesign, "content", RelationType.OneToZeroOrOneAggregation, "contentOfPage", fragmentTemplateDesign);
-		RelationDesign items = createRelation(compositeTemplateDesign, "children", RelationType.OneToManyAggregation, "childOf", fragmentTemplateDesign);
-		createRelation(compositeTemplateDesign, "selections", RelationType.OneToManyAggregation, "compositeTemplate", deductionSchemeDesign);
+		createRelation(fragmentTemplateDesign, "selections", RelationType.OneToManyAggregation, "compositeTemplate", deductionSchemeDesign);
 
-		RelationDesign fieldAttribute = createRelation(widgetTemplateDesign, "attribute", RelationType.ManyToZeroOrOne, "usedInField", attributeDesign);
-		RelationDesign fieldEntity = createRelation(widgetTemplateDesign, "entity", RelationType.ManyToZeroOrOne, "usedInField", entityDesign);
-		createRelation(widgetTemplateDesign, "event", RelationType.ManyToZeroOrOne, "triggeredByWidget", eventDesign);
-		createRelation(widgetTemplateDesign, "values", RelationType.OneToManyAggregation, "widget", widgetValue);
-		createRelation(widgetTemplateDesign, "texts", RelationType.OneToManyAggregation, "widget", widgetText);
-		createRelation(widgetTemplateDesign, "childLists", RelationType.OneToManyAggregation, "widget", widgetChildList);
-		createRelation(widgetValue, "deduction", RelationType.OneToOneAggregation, "valueForWidget", deductionSchemeDesign);
-		createRelation(widgetText, "text", RelationType.OneToOneAggregation, "textForWidget", textDesign);
-		createRelation(widgetChildList, "children", RelationType.OneToManyAggregation, "childrenForWidget", fragmentTemplateDesign);
+		RelationDesign fieldAttribute = createRelation(fragmentTemplateDesign, "attribute", RelationType.ManyToZeroOrOne, "usedInField", attributeDesign);
+		RelationDesign fieldEntity = createRelation(fragmentTemplateDesign, "entity", RelationType.ManyToZeroOrOne, "usedInField", entityDesign);
+		createRelation(fragmentTemplateDesign, "event", RelationType.ManyToZeroOrOne, "triggeredByFragment", eventDesign);
+		createRelation(fragmentTemplateDesign, "values", RelationType.OneToManyAggregation, "fragment", fragmentValue);
+		createRelation(fragmentTemplateDesign, "texts", RelationType.OneToManyAggregation, "fragment", fragmentText);
+		createRelation(fragmentTemplateDesign, "childLists", RelationType.OneToManyAggregation, "fragment", fragmentChildList);
+		createRelation(fragmentValue, "deduction", RelationType.OneToOneAggregation, "valueForFragment", deductionSchemeDesign);
+		createRelation(fragmentText, "text", RelationType.OneToOneAggregation, "textForFragment", textDesign);
+		createRelation(fragmentChildList, "children", RelationType.OneToManyAggregation, "childrenForFragment", fragmentTemplateDesign);
 		
 		// Flow
 		createRelation(eventDesign, "parameters", RelationType.ManyToMany, "parameterInEvent", entityDesign);
