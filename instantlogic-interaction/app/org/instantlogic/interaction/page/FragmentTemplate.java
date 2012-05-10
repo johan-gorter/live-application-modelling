@@ -2,6 +2,7 @@ package org.instantlogic.interaction.page;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -115,7 +116,7 @@ public class FragmentTemplate {
 	
 	
 	protected Map<String, Object> beginRender(RenderContext context) {
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> result = new LinkedHashMap<String, Object>();
 		result.put("type",getFragmentTypeName());
 		result.put("id", context.enterScope(this));
 		return result;

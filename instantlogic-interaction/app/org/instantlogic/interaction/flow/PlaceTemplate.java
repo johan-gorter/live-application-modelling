@@ -1,6 +1,7 @@
 package org.instantlogic.interaction.flow;
 
-import org.instantlogic.interaction.page.Fragment;
+import java.util.Map;
+
 import org.instantlogic.interaction.page.FragmentTemplate;
 import org.instantlogic.interaction.util.ChangeContext;
 import org.instantlogic.interaction.util.FlowEventOccurrence;
@@ -14,7 +15,7 @@ public abstract class PlaceTemplate extends FlowNodeBase {
 		return getRootContainer().submit(changeContext);
 	}
 
-	public Fragment render(final RenderContext renderContext) {
+	public Map<String, Object> render(final RenderContext renderContext) {
 		return getRootContainer().render(renderContext);
 	}
 }

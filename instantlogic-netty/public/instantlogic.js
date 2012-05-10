@@ -1,9 +1,9 @@
 YUI.add('instantlogic', function(Y) {
 	
-    Y.instantlogic = function(travelerId, container, widgetNamespaces) {
+    Y.instantlogic = function(travelerId, container, fragmentNamespaces) {
     	this.container = container;
     	this.travelerId = travelerId;
-    	this.widgetNamespaces = widgetNamespaces || [Y.instantlogic.widget];
+    	this.fragmentNamespaces = fragmentNamespaces || [Y.instantlogic.fragment];
     	this.state = 'not started';
     	
     	this.overlay = new Y.Panel({
@@ -57,21 +57,18 @@ YUI.add('instantlogic', function(Y) {
     	},
     	
     	updatePlace: function(rootFragment) {
-			var widget = this.createWidget(rootFragment);
-			widget.render(this.container);
+			var fragment = this.createFragment(rootFragment);
+			fragment.render(this.container);
     	},
     	
-    	createWidget: function(message) {
-    		if (message.widget) {
-    			for (var i=0;i<this.widgetNamespaces.length;i++) {
-    				var ns = this.widgetNamespaces[i];
-    				if (ns[message.widget]) {
-    					return new ns[message.widget](message);
-    				}
-    			}
-    			Y.error('No widgetnamespace provides a widget called '+message.widget);
-    		}
-    		return null;
+    	createFragment: function(name) {
+			for (var i=0;i<this.fragmentNamespaces.length;i++) {
+				var ns = this.fragmentNamespaces[i];
+				if (ns[name]) {
+					return new ns[name]();
+				}
+			}
+			Y.error('No fragmentnamespace provides a fragment called '+message.fragment);
     	},
     	
     	startRequest: function() {
@@ -121,57 +118,53 @@ YUI.add('instantlogic', function(Y) {
     	}
     }
     
-    //Fragment
-    Y.instantlogic.Fragment = function(id) {
+    //FragmentHolder
+    Y.instantlogic.FragmentHolder = function(id) {
     	this.node = Y.html.span({id: id, cssClass: 'fragment'});
-    	this.childFragments = null;
-    	this.widget = null;
+    	this.fragment = null;
     };
     
-    Y.instantlogic.Fragment.prototype = {
+    Y.instantlogic.FragmentHolder.prototype = {
     		
     	init: function(model, instantlogic, diff) {
         	this.model = model;
-        	if (model.widget) {
-        		this.widget = instantlogic.createWidget(model);
-    			this.widget.render(this.node);
-        	} else if (model.children) {
-        		this.childFragments = new Y.instantlogic.FragmentList(this.node, model.children, instantlogic, diff);
-        	}	
+    		this.fragment = instantlogic.createFragment(model.type);
+    		this.fragment.init(this.node, model);
+//    		this.childFragments = new Y.instantlogic.FragmentList(this.node, model.children, instantlogic, diff);
     	},
     	
     	update: function(newModel, instantlogic, diff) {
     		var oldModel = this.model;
     		this.model = newModel;
-        	function recreateWidget(newModel, instantlogic) {
-        		if (this.widget) {
-        			this.widget.destroy();
-        			this.widget = null;
+        	function recreateFragment(newModel, instantlogic) {
+        		if (this.fragment) {
+        			this.fragment.destroy();
+        			this.fragment = null;
         			this.node.setContent('');
         		}
-    			this.widget = instantlogic.createWidget(newModel);
-    			this.widget.render(this.node);
+    			this.fragment = instantlogic.createFragment(newModel);
+    			this.fragment.render(this.node);
         	}
-    		if (newModel.widget) {
+    		if (newModel.fragment) {
     			if (this.childFragments) {
     				this.childFragments.destroy();
     				this.childFragments = null;
     				this.node.setContent('');
     			}
-				if (newModel.widget != oldModel.widget) {
-					recreateWidget(newModel, instantlogic);
+				if (newModel.fragment != oldModel.fragment) {
+					recreateFragment(newModel, instantlogic);
 				} else {
 					try {
-						this.widget.setAttrs(newModel);
+						this.fragment.setAttrs(newModel);
 					} catch (err) {
-						recreateWidget(newModel, instantlogic);
+						recreateFragment(newModel, instantlogic);
 					}
 				}
     		} else if (newModel.children) {
-    			if (this.widget) {
-        			this.widget.destroy();
+    			if (this.fragment) {
+        			this.fragment.destroy();
         			this.node.setContent('');
-        			this.widget = null;
+        			this.fragment = null;
     			}
     			if (this.childFragments) {
     				this.childFragments.update(newModel.children, instantlogic, diff)
@@ -182,8 +175,8 @@ YUI.add('instantlogic', function(Y) {
     	},
     	
     	destroy: function() {
-    		if (this.widget) {
-    			this.widget.destroy();
+    		if (this.fragment) {
+    			this.fragment.destroy();
     		} else if (this.childFragments) {
     			this.childFragments.destroy();
     		}
