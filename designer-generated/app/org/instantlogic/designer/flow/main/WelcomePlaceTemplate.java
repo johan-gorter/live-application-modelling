@@ -6,13 +6,13 @@ public class WelcomePlaceTemplate extends org.instantlogic.interaction.flow.Plac
 
 	
 	private static org.instantlogic.interaction.page.FragmentTemplate CONTENT = 
-        new org.instantlogic.interaction.page.FragmentTemplate("F40P1W1", "Page")      
+        new org.instantlogic.interaction.page.FragmentTemplate("F40P1F1", "Page")      
         .putChildren("headerContent",
-                new org.instantlogic.interaction.page.FragmentTemplate("F40P1W1W1W1", "Heading1")      
+                new org.instantlogic.interaction.page.FragmentTemplate("F40P1F1F1F1", "Heading1")      
                 .putText("text", new org.instantlogic.fabric.text.ConstantText("Welcome"))
         )      
         .putChildren("mainContent",
-                new org.instantlogic.interaction.page.FragmentTemplate("F40P1W1W2W1", "Text")      
+                new org.instantlogic.interaction.page.FragmentTemplate("F40P1F1F2F1", "Paragraph")      
                 .putText("text", new org.instantlogic.fabric.text.ConstantText("Welcome to the Designer"))
         ); 
 	
