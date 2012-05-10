@@ -4,7 +4,6 @@ import org.instantlogic.designer.ApplicationDesign;
 import org.instantlogic.designer.AttributeDeductionDesign;
 import org.instantlogic.designer.AttributeDesign;
 import org.instantlogic.designer.CastInstanceDeductionDesign;
-import org.instantlogic.designer.CompositeTemplateDesign;
 import org.instantlogic.designer.ConstantDeductionDesign;
 import org.instantlogic.designer.ConstantStringDesign;
 import org.instantlogic.designer.ConstantTextDesign;
@@ -20,35 +19,33 @@ import org.instantlogic.designer.FlowNodeBaseDesign;
 import org.instantlogic.designer.FlowSourceDesign;
 import org.instantlogic.designer.FormattedValueDesign;
 import org.instantlogic.designer.FragmentTemplateDesign;
+import org.instantlogic.designer.FragmentText;
 import org.instantlogic.designer.PlaceTemplateDesign;
 import org.instantlogic.designer.RelationDesign;
 import org.instantlogic.designer.SelectedInstanceDeductionDesign;
 import org.instantlogic.designer.SubFlowDesign;
 import org.instantlogic.designer.TemplatedTextDesign;
 import org.instantlogic.designer.TextDesign;
-import org.instantlogic.designer.WidgetTemplateDesign;
-import org.instantlogic.designer.WidgetText;
-import org.instantlogic.designer.WidgetValue;
 import org.instantlogic.fabric.deduction.ConstantDeduction;
 
 public abstract class BootstrapperUtil {
 
 	protected static ApplicationDesign applicationDesign;
 	
-	protected static WidgetTemplateDesign createButton(EventDesign event, TextDesign caption) {
-		WidgetTemplateDesign result = new WidgetTemplateDesign();
+	protected static FragmentTemplateDesign createButton(EventDesign event, TextDesign caption) {
+		FragmentTemplateDesign result = new FragmentTemplateDesign();
 		result.setEvent(event);
-		WidgetText widgetCaption = new WidgetText();
+		FragmentText widgetCaption = new FragmentText();
 		widgetCaption.setName("text");
 		widgetCaption.setText(caption);
 		result.addToTexts(widgetCaption);
 		return result;
 	}
 
-	protected static WidgetTemplateDesign createLink(EventDesign event, TextDesign caption) {
-		WidgetTemplateDesign result = new WidgetTemplateDesign();
+	protected static FragmentTemplateDesign createLink(EventDesign event, TextDesign caption) {
+		FragmentTemplateDesign result = new FragmentTemplateDesign();
 		result.setEvent(event);
-		WidgetText widgetCaption = new WidgetText();
+		FragmentText widgetCaption = new FragmentText();
 		widgetCaption.setName("text");
 		widgetCaption.setText(caption);
 		result.addToTexts(widgetCaption);
@@ -101,10 +98,10 @@ public abstract class BootstrapperUtil {
 		return result;
 	}
 	
-	protected static WidgetTemplateDesign createText(TextDesign text) {
-		WidgetTemplateDesign result = new WidgetTemplateDesign();
-		result.setWidgetTypeName("Text");
-		WidgetText widgetText = new WidgetText();
+	protected static FragmentTemplateDesign createText(String fragmentTypeName, TextDesign text) {
+		FragmentTemplateDesign result = new FragmentTemplateDesign();
+		result.setFragmentTypeName(fragmentTypeName);
+		FragmentText widgetText = new FragmentText();
 		widgetText.setName("text");
 		widgetText.setText(text);
 		result.addToTexts(widgetText);
@@ -134,17 +131,6 @@ public abstract class BootstrapperUtil {
 		return text;
 	}
 
-	protected static CompositeTemplateDesign createCompositeFragmentTemplate() {
-		CompositeTemplateDesign container = new CompositeTemplateDesign();
-		return container;
-	}
-
-	protected static CompositeTemplateDesign createSelect(DeductionSchemeDesign deduction) {
-		CompositeTemplateDesign select = new CompositeTemplateDesign();
-		select.addToSelections(deduction);
-		return select;
-	}
-	
 	protected static DeductionSchemeDesign createDeductionScheme(DeductionDesign output) {
 		DeductionSchemeDesign result = new DeductionSchemeDesign();
 		addDeductions(result, output);
@@ -240,10 +226,10 @@ public abstract class BootstrapperUtil {
 		return scheme;
 	}
 
-	protected static WidgetTemplateDesign createField(CompositeTemplateDesign container, AttributeDesign attribute) {
-		WidgetTemplateDesign field = new WidgetTemplateDesign();
+	protected static FragmentTemplateDesign createField(FragmentTemplateDesign container, AttributeDesign attribute) {
+		FragmentTemplateDesign field = new FragmentTemplateDesign();
 //TODO		field.setAttribute(attribute);
-		container.addToChildren(field);
+//		container.addToChildren(field);
 		return field;
 	}
 

@@ -2,20 +2,17 @@ package org.instantlogic.designer.bootstrapper;
 
 import org.instantlogic.designer.ApplicationDesign;
 import org.instantlogic.designer.AttributeDesign;
-import org.instantlogic.designer.CompositeTemplateDesign;
 import org.instantlogic.designer.ConstantTextDesign;
 import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.EntityDesign.RelationType;
 import org.instantlogic.designer.EventDesign;
 import org.instantlogic.designer.FlowDesign;
 import org.instantlogic.designer.FlowSourceDesign;
+import org.instantlogic.designer.FragmentChildList;
 import org.instantlogic.designer.FragmentTemplateDesign;
+import org.instantlogic.designer.FragmentText;
 import org.instantlogic.designer.PlaceTemplateDesign;
 import org.instantlogic.designer.RelationDesign;
-import org.instantlogic.designer.WidgetChildList;
-import org.instantlogic.designer.WidgetTemplateDesign;
-import org.instantlogic.designer.WidgetText;
-import org.instantlogic.designer.WidgetValue;
 
 public class DesignerBootstrapper extends BootstrapperUtil {
 
@@ -325,7 +322,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		// Pages
 		// Welcome page
 		welcomePage.setContent(createPageWidget("Welcome", 
-			createText(createConstantText("Welcome to the Designer"))
+			createText("Paragraph", createConstantText("Welcome to the Designer"))
 		));
 //		addContent(welcomePage.getContent(), createConstantText("Welcome to the Designer"));
 //		CompositeFragmentTemplateDesign columns = createCompositeFragmentTemplate();
@@ -392,26 +389,26 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		return applicationDesign;
 	}
 
-	private static WidgetTemplateDesign createPageWidget(String title, FragmentTemplateDesign... mainContentChildren) {
-		WidgetTemplateDesign pageWidget = new WidgetTemplateDesign().setWidgetTypeName("Page");
-		WidgetChildList mainContent = new WidgetChildList();
+	private static FragmentTemplateDesign createPageWidget(String title, FragmentTemplateDesign... mainContentChildren) {
+		FragmentTemplateDesign pageWidget = new FragmentTemplateDesign().setFragmentTypeName("Page");
+		FragmentChildList mainContent = new FragmentChildList();
 		mainContent.setName("mainContent");
 		for (FragmentTemplateDesign child : mainContentChildren) {
 			mainContent.addToChildren(child);
 		}
-		WidgetChildList headerContent = new WidgetChildList();
+		FragmentChildList headerContent = new FragmentChildList();
 		headerContent.setName("headerContent");
-		WidgetText headerText = new WidgetText().setText(new ConstantTextDesign().setUntranslated(title));
+		FragmentText headerText = new FragmentText().setText(new ConstantTextDesign().setUntranslated(title));
 		headerText.setName("text");
-		headerContent.addToChildren(new WidgetTemplateDesign().setWidgetTypeName("Heading1").addToTexts(headerText));
+		headerContent.addToChildren(new FragmentTemplateDesign().setFragmentTypeName("Heading1").addToTexts(headerText));
 		pageWidget.addToChildLists(headerContent);
 		pageWidget.addToChildLists(mainContent);
 		return pageWidget;
 	}
 
 	private static FragmentTemplateDesign putInRow(FragmentTemplateDesign content) {
-		CompositeTemplateDesign result = new CompositeTemplateDesign();
-		result.addToChildren(content);
+		FragmentTemplateDesign result = new FragmentTemplateDesign();
+//		result.addToChildren(content);
 //		result.setPresentation("row");
 		return result;
 	}

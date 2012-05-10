@@ -1,5 +1,7 @@
 package org.instantlogic.interaction.page;
 
+import java.util.Map;
+
 import org.instantlogic.fabric.model.Attribute;
 import org.instantlogic.fabric.model.DomainEntry;
 import org.instantlogic.fabric.model.Entity;
@@ -8,23 +10,23 @@ import org.instantlogic.interaction.util.ChangeContext;
 import org.instantlogic.interaction.util.FlowEventOccurrence;
 import org.instantlogic.interaction.util.RenderContext;
 
-public class FieldWidgetBehavior extends AbstractWidgetBehavior {
+public class FieldBehavior extends AbstractWidgetBehavior {
 	
 	private final Attribute<?, ?, ?> attribute;
 	private final Entity<?> entity;
-	private final String answerWidgetName;
+	private final String answerFragmentType;
 
 	// TODO: question, etc...
 	
-	public FieldWidgetBehavior(Entity<?> entity, Attribute<?, ?, ?> attribute, String answerWidgetName) {
-		this.answerWidgetName = answerWidgetName;
+	public FieldBehavior(Entity<?> entity, Attribute<?, ?, ?> attribute, String answerFragmentType) {
+		this.answerFragmentType = answerFragmentType;
 		this.entity = entity;
 		this.attribute = attribute;
 	}
 	
 	@Override
-	public void beforeRender(RenderContext context, Fragment result) {
-		result.answerWidget = answerWidgetName;
+	public void beforeRender(RenderContext context, Map<String, Object> result) {
+		result.put("answerType", this.answerFragmentType);
 	}
 	
 	@Override

@@ -111,27 +111,27 @@ public class DeductionSchemeDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, CompositeTemplateDesign> compositeTemplate
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, FragmentTemplateDesign> compositeTemplate
 		= createReverseRelationValue(org.instantlogic.designer.entity.DeductionSchemeDesignEntity.compositeTemplate);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, CompositeTemplateDesign> getCompositeTemplateRelationValue() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, FragmentTemplateDesign> getCompositeTemplateRelationValue() {
 		return compositeTemplate;
 	}
 
-	public org.instantlogic.designer.CompositeTemplateDesign getCompositeTemplate() {
+	public org.instantlogic.designer.FragmentTemplateDesign getCompositeTemplate() {
 		return compositeTemplate.getValue();
 	}
 
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, WidgetValue> valueForWidget
-		= createReverseRelationValue(org.instantlogic.designer.entity.DeductionSchemeDesignEntity.valueForWidget);
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, FragmentValue> valueForFragment
+		= createReverseRelationValue(org.instantlogic.designer.entity.DeductionSchemeDesignEntity.valueForFragment);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, WidgetValue> getValueForWidgetRelationValue() {
-		return valueForWidget;
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, FragmentValue> getValueForFragmentRelationValue() {
+		return valueForFragment;
 	}
 
-	public org.instantlogic.designer.WidgetValue getValueForWidget() {
-		return valueForWidget.getValue();
+	public org.instantlogic.designer.FragmentValue getValueForFragment() {
+		return valueForFragment.getValue();
 	}
 
 

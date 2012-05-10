@@ -38,7 +38,7 @@ public abstract class ContentGenerator extends AbstractGenerator {
 		} else {
 			WidgetTemplateDesign widgetTemplate = (WidgetTemplateDesign) fragment;
 			model.category = Category.Widget;
-			model.widgetName= widgetTemplate.getWidgetTypeName();
+			model.fragmentTypeName= widgetTemplate.getWidgetTypeName();
 			for (WidgetValue value : widgetTemplate.getValues()) {
 				int deductionIndex = deductionHolder.addDeductionScheme(DeductionSchemeGenerator.generate(deductionHolder.rootPackageName, value.getDeduction()));
 				model.values.put(value.getName(), deductionIndex);

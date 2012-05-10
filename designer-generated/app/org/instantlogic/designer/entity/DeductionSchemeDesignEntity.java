@@ -129,13 +129,13 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.CompositeTemplateDesign, org.instantlogic.designer.CompositeTemplateDesign> compositeTemplate
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.CompositeTemplateDesign, org.instantlogic.designer.CompositeTemplateDesign>(
-			"compositeTemplate", INSTANCE, org.instantlogic.designer.entity.CompositeTemplateDesignEntity.INSTANCE, org.instantlogic.designer.CompositeTemplateDesign.class, org.instantlogic.designer.entity.CompositeTemplateDesignEntity.selections
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentTemplateDesign> compositeTemplate
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentTemplateDesign>(
+			"compositeTemplate", INSTANCE, org.instantlogic.designer.entity.FragmentTemplateDesignEntity.INSTANCE, org.instantlogic.designer.FragmentTemplateDesign.class, org.instantlogic.designer.entity.FragmentTemplateDesignEntity.selections
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.CompositeTemplateDesign> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.FragmentTemplateDesign> get(
 					org.instantlogic.designer.DeductionSchemeDesign instance) {
 				return instance.getCompositeTemplateRelationValue();
 			}
@@ -145,15 +145,15 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.WidgetValue, org.instantlogic.designer.WidgetValue> valueForWidget
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.WidgetValue, org.instantlogic.designer.WidgetValue>(
-			"valueForWidget", INSTANCE, org.instantlogic.designer.entity.WidgetValueEntity.INSTANCE, org.instantlogic.designer.WidgetValue.class, org.instantlogic.designer.entity.WidgetValueEntity.deduction
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.FragmentValue, org.instantlogic.designer.FragmentValue> valueForFragment
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.FragmentValue, org.instantlogic.designer.FragmentValue>(
+			"valueForFragment", INSTANCE, org.instantlogic.designer.entity.FragmentValueEntity.INSTANCE, org.instantlogic.designer.FragmentValue.class, org.instantlogic.designer.entity.FragmentValueEntity.deduction
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.WidgetValue> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.FragmentValue> get(
 					org.instantlogic.designer.DeductionSchemeDesign instance) {
-				return instance.getValueForWidgetRelationValue();
+				return instance.getValueForFragmentRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -173,7 +173,7 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 		defaultOfAttribute,
 		templatedText,
 		compositeTemplate,
-		valueForWidget,
+		valueForFragment,
 	};
 
 	@Override

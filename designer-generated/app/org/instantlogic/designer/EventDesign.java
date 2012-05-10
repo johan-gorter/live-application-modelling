@@ -58,15 +58,15 @@ public class EventDesign extends Design {
 	}
 
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EventDesign, WidgetTemplateDesign> triggeredByWidget
-		= createReverseRelationValues(org.instantlogic.designer.entity.EventDesignEntity.triggeredByWidget);
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EventDesign, FragmentTemplateDesign> triggeredByFragment
+		= createReverseRelationValues(org.instantlogic.designer.entity.EventDesignEntity.triggeredByFragment);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EventDesign, WidgetTemplateDesign> getTriggeredByWidgetRelationValue() {
-		return triggeredByWidget;
+	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EventDesign, FragmentTemplateDesign> getTriggeredByFragmentRelationValue() {
+		return triggeredByFragment;
 	}
 
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.WidgetTemplateDesign> getTriggeredByWidget() {
-		return triggeredByWidget.getValue();
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentTemplateDesign> getTriggeredByFragment() {
+		return triggeredByFragment.getValue();
 	}
 
 	
