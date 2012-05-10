@@ -101,13 +101,9 @@ public abstract class BootstrapperUtil {
 		return result;
 	}
 	
-	protected static WidgetTemplateDesign createText(String role, TextDesign text) {
+	protected static WidgetTemplateDesign createText(TextDesign text) {
 		WidgetTemplateDesign result = new WidgetTemplateDesign();
 		result.setWidgetTypeName("Text");
-		WidgetValue widgetValue = new WidgetValue();
-		widgetValue.setName("role");
-		widgetValue.setDeduction(createConstantDeduction(String.class, role));
-		result.addToValues(widgetValue);
 		WidgetText widgetText = new WidgetText();
 		widgetText.setName("text");
 		widgetText.setText(text);

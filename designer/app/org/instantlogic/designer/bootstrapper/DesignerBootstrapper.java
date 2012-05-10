@@ -328,7 +328,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		// Pages
 		// Welcome page
 		welcomePage.setContent(createPageWidget("Welcome", 
-			createText("paragraph", createConstantText("Welcome to the Designer"))
+			createText(createConstantText("Welcome to the Designer"))
 		));
 //		addContent(welcomePage.getContent(), createConstantText("Welcome to the Designer"));
 //		CompositeFragmentTemplateDesign columns = createCompositeFragmentTemplate();
@@ -406,10 +406,7 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		headerContent.setName("headerContent");
 		WidgetText headerText = new WidgetText().setText(new ConstantTextDesign().setUntranslated(title));
 		headerText.setName("text");
-		WidgetValue roleValue = new WidgetValue();
-		roleValue.setName("role");
-		roleValue.setDeduction(createConstantDeduction(String.class, "header"));
-		headerContent.addToChildren(new WidgetTemplateDesign().setWidgetTypeName("text").addToValues(roleValue).addToTexts(headerText));
+		headerContent.addToChildren(new WidgetTemplateDesign().setWidgetTypeName("Heading1").addToTexts(headerText));
 		pageWidget.addToChildLists(headerContent);
 		pageWidget.addToChildLists(mainContent);
 		return pageWidget;

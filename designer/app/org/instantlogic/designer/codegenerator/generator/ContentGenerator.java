@@ -19,7 +19,7 @@ public abstract class ContentGenerator extends AbstractGenerator {
 
 	public static ContentModel generate(FragmentTemplateDesign fragment, AbstractClassModel deductionHolder) {
 		ContentModel model = new ContentModel();
-		model.id=fragment.getMetadata().getInstanceLocalId();
+		model.id=fragment.getMetadata().getInstanceId();
 		model.rootPackageName = deductionHolder.rootPackageName;
 		model.isCustomized = fragment.getIsCustomized() == Boolean.TRUE;
 		if (fragment instanceof CompositeTemplateDesign) {
