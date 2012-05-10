@@ -83,15 +83,15 @@ public class TextDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.TextDesign, org.instantlogic.designer.WidgetText, org.instantlogic.designer.WidgetText> textForWidget
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.TextDesign, org.instantlogic.designer.WidgetText, org.instantlogic.designer.WidgetText>(
-			"textForWidget", INSTANCE, org.instantlogic.designer.entity.WidgetTextEntity.INSTANCE, org.instantlogic.designer.WidgetText.class, org.instantlogic.designer.entity.WidgetTextEntity.text
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.TextDesign, org.instantlogic.designer.FragmentText, org.instantlogic.designer.FragmentText> textForFragment
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.TextDesign, org.instantlogic.designer.FragmentText, org.instantlogic.designer.FragmentText>(
+			"textForFragment", INSTANCE, org.instantlogic.designer.entity.FragmentTextEntity.INSTANCE, org.instantlogic.designer.FragmentText.class, org.instantlogic.designer.entity.FragmentTextEntity.text
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.TextDesign, org.instantlogic.designer.WidgetText> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.TextDesign, org.instantlogic.designer.FragmentText> get(
 					org.instantlogic.designer.TextDesign instance) {
-				return instance.getTextForWidgetRelationValue();
+				return instance.getTextForFragmentRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -107,7 +107,7 @@ public class TextDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 		questionOnAttribute,
 		explanationOnAttribute,
 		displayOnDomainEntry,
-		textForWidget,
+		textForFragment,
 	};
 
 	@Override

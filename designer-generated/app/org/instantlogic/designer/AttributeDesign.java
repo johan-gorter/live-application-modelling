@@ -206,14 +206,14 @@ public class AttributeDesign extends Design {
 	}
 
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<AttributeDesign, WidgetTemplateDesign> usedInField
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<AttributeDesign, FragmentTemplateDesign> usedInField
 		= createReverseRelationValues(org.instantlogic.designer.entity.AttributeDesignEntity.usedInField);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<AttributeDesign, WidgetTemplateDesign> getUsedInFieldRelationValue() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValues<AttributeDesign, FragmentTemplateDesign> getUsedInFieldRelationValue() {
 		return usedInField;
 	}
 
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.WidgetTemplateDesign> getUsedInField() {
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentTemplateDesign> getUsedInField() {
 		return usedInField.getValue();
 	}
 

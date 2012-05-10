@@ -8,11 +8,11 @@ import java.util.Map;
 
 public class ContentModel {
 
-	public enum Category {Shared, Composite, Widget}
+	public enum Category {Shared, Widget}
 	
 	public Category category;
 	// Text, Button, ...
-	public String widgetName;
+	public String fragmentTypeName;
 	public String answerWidgetName;
 
 	//F1P2...
@@ -88,8 +88,8 @@ public class ContentModel {
 	public Category getCategory() {
 		return category;
 	}
-	public String getWidgetName() {
-		return widgetName;
+	public String getFragmentTypeName() {
+		return fragmentTypeName;
 	}
 	public String getId() {
 		return id;

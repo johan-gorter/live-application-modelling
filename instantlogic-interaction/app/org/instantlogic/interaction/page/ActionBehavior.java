@@ -4,11 +4,11 @@ import org.instantlogic.interaction.flow.FlowEvent;
 import org.instantlogic.interaction.util.ChangeContext;
 import org.instantlogic.interaction.util.FlowEventOccurrence;
 
-public class ActionWidgetBehavior extends AbstractWidgetBehavior {
+public class ActionBehavior extends AbstractWidgetBehavior {
 
 	private final FlowEvent event;
 	
-	public ActionWidgetBehavior(FlowEvent event) {
+	public ActionBehavior(FlowEvent event) {
 		this.event = event;
 	}
 

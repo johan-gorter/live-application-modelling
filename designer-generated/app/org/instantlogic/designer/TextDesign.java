@@ -50,15 +50,15 @@ public class TextDesign extends Design {
 	}
 
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, WidgetText> textForWidget
-		= createReverseRelationValue(org.instantlogic.designer.entity.TextDesignEntity.textForWidget);
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, FragmentText> textForFragment
+		= createReverseRelationValue(org.instantlogic.designer.entity.TextDesignEntity.textForFragment);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, WidgetText> getTextForWidgetRelationValue() {
-		return textForWidget;
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, FragmentText> getTextForFragmentRelationValue() {
+		return textForFragment;
 	}
 
-	public org.instantlogic.designer.WidgetText getTextForWidget() {
-		return textForWidget.getValue();
+	public org.instantlogic.designer.FragmentText getTextForFragment() {
+		return textForFragment.getValue();
 	}
 
 

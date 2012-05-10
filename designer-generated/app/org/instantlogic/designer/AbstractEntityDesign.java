@@ -167,14 +167,14 @@ public abstract class AbstractEntityDesign extends Design {
 	}
 
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, WidgetTemplateDesign> usedInField
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, FragmentTemplateDesign> usedInField
 		= createReverseRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.usedInField);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, WidgetTemplateDesign> getUsedInFieldRelationValue() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, FragmentTemplateDesign> getUsedInFieldRelationValue() {
 		return usedInField;
 	}
 
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.WidgetTemplateDesign> getUsedInField() {
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentTemplateDesign> getUsedInField() {
 		return usedInField.getValue();
 	}
 
