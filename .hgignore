@@ -20,3 +20,5 @@ instantlogic-play/eclipse/classes
 Zandbak/
 generated-bin
 instantlogic-netty/public/yui*
+_ReSharper*
+*.suo

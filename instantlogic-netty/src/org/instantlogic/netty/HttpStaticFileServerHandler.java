@@ -139,6 +139,10 @@ public class HttpStaticFileServerHandler extends SimpleChannelUpstreamHandler {
 			throw new Error();
 		}
 
+		int index = uri.indexOf('?');
+		if (index>=0) {
+			uri = uri.substring(0, index);
+		}
 		// Convert file separators.
 		uri = uri.replace('/', File.separatorChar);
 
