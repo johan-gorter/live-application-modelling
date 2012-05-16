@@ -1,215 +1,226 @@
-YUI.add('instantlogic', function(Y) {
-	
-    Y.instantlogic = function(travelerId, container, fragmentNamespaces) {
-    	this.container = container;
-    	this.travelerId = travelerId;
-    	this.fragmentNamespaces = fragmentNamespaces || [Y.instantlogic.fragment];
-    	this.state = 'not started';
-    	
-    	this.overlay = new Y.Panel({
-    		bodyContent: 'ONE MOMENT PLEASE',
-    		visible: false,
-    		centered: true,
-    		zIndex:10,
-    		disabled:true,
-    		modal:true
-    	});
-    	this.overlay.render();
+YUI.add('instantlogic', function (Y) {
+
+    var ns = Y.namespace('instantlogic');
+
+    // Instantlogic is a FragmentFactory
+    ns.Engine = function (application, caseId, travelerId, containerNode, fragmentNamespaces) {
+    	this.application = application;
+    	this.caseId = caseId;
+        this.containerNode = containerNode;
+        this.travelerId = travelerId;
+        if (!fragmentNamespaces || fragmentNamespaces.length == 0) Y.error('');
+        Y.each(fragmentNamespaces, function (fns) {
+            if (!fns) Y.error('Undefined namespace');
+        });
+        this.fragmentNamespaces = fragmentNamespaces;
+        this.state = 'not started';
+        this.rootFragmentHolder = null;
+
+        this.oneMomentPlease = new Y.Panel({
+            bodyContent: 'ONE MOMENT PLEASE',
+            visible: false,
+            centered: true,
+            zIndex: 10,
+            disabled: true,
+            modal: true
+        });
+        this.oneMomentPlease.render();
     };
-    
-    Y.instantlogic.prototype = {
-    	
-    	// API
-    	start: function() {
-    		this.container.setContent('One moment...');
-    		this.setState('connecting');
-    		this.startRequest();
-    	},
-    	
-    	// Private functions
-    	setState: function(state) {
-    		if (this.state==state) return;
-    		this.state=state;
-    		if (state=='connected') {
-    			this.overlay.hide();
-    		};
-    		if (state=='connecting' || state=='disconnected') {
-    			this.overlay.show();
-    			this.container.setContent('');
-    		}
-    	},
-    	
-    	processUpdates: function(updates) {
-    		var messages = Y.JSON.parse(updates);
-    		for (var i=0;i<messages.length;i++) {
-    			var message = messages[i];
-    			switch (message.message) {
-					case 'place':
-						this.updatePlace(message.rootFragment);
-						break;
-					case 'filesUpdated':
-						document.location.reload();
-						break;
-    				default:
-    					Y.error('Unknown message '+message.message);
-    			}
-    		}
-    	},
-    	
-    	updatePlace: function(rootFragment) {
-			var fragment = this.createFragment(rootFragment);
-			fragment.render(this.container);
-    	},
-    	
-    	createFragment: function(name) {
-			for (var i=0;i<this.fragmentNamespaces.length;i++) {
-				var ns = this.fragmentNamespaces[i];
-				if (ns[name]) {
-					return new ns[name]();
-				}
-			}
-			Y.error('No fragmentnamespace provides a fragment called '+message.fragment);
-    	},
-    	
-    	startRequest: function() {
-			Y.io('/place?travelerId='+travelerId, {
-				method: 'POST',
-				on: {
-					success: function(transactionid, response) {
-						this.setState('connected');
-						this.processUpdates(response.responseText);
-						this.startRequest();
-					},
-					failure: function() {
-						this.setState('disconnected');
-						var me = this;
-						setTimeout(function(){me.startRequest();}, 300);
-					}
-				},
-				context: this
-			});
-    	}
+
+    ns.Engine.prototype = {
+        // API
+        start: function () {
+            this.containerNode.setContent('One moment...');
+            this.setState('connecting');
+            this.startRequest();
+        },
+
+        // Private functions
+        setState: function (state) {
+            if (this.state == state) return;
+            this.state = state;
+            if (state == 'connected') {
+                this.oneMomentPlease.hide();
+            };
+            if (state == 'connecting' || state == 'disconnected') {
+                this.oneMomentPlease.show();
+                this.containerNode.setContent('');
+                if (this.rootFragment) {
+                    this.rootFragment.destroy();
+                    this.rootFragment = null;
+                }
+            }
+        },
+
+        processUpdates: function (updates) {
+            var messages = Y.JSON.parse(updates);
+            for (var i = 0; i < messages.length; i++) {
+                var message = messages[i];
+                switch (message.message) {
+                    case 'place':
+                        this.updatePlace(message.rootFragment);
+                        break;
+                    case 'filesUpdated':
+                        document.location.reload();
+                        break;
+                    default:
+                        Y.error('Unknown message ' + message.message);
+                }
+            }
+        },
+
+        updatePlace: function (model) {
+            var diff = new ns.Diff();
+            if (!this.rootFragmentHolder || this.rootFragmentHolder.id != model.id) {
+                if (this.rootFragmentHolder) {
+                    diff.nodeToRemove(this.rootFragmentHolder.node);
+                    this.rootFragmentHolder.destroy();
+                }
+                this.rootFragmentHolder = new Y.instantlogic.FragmentHolder(model.id, this);
+                this.containerNode.appendChild(this.rootFragmentHolder.node);
+                diff.nodeAdded(this.rootFragmentHolder.node);
+                this.rootFragmentHolder.init(model);
+            } else {
+                this.rootFragmentHolder.update(model, diff);
+            }
+            diff.applyNow();
+        },
+
+        createFragment: function (name, parentNode, fragmentFactory) {
+            for (var i = 0; i < this.fragmentNamespaces.length; i++) {
+                var fns = this.fragmentNamespaces[i];
+                if (fns[name]) {
+                    return new fns[name](parentNode, fragmentFactory || this);
+                }
+            }
+            Y.error('No fragmentnamespace provides a fragment called ' + name);
+        },
+
+        startRequest: function () {
+            Y.io('/place?application='+this.application+'&case='+this.caseId+'&travelerId=' + travelerId, {
+                method: 'POST',
+                on: {
+                    success: function (transactionid, response) {
+                        this.setState('connected');
+                        this.processUpdates(response.responseText);
+                        this.startRequest();
+                    },
+                    failure: function () {
+                        this.setState('disconnected');
+                        var me = this;
+                        setTimeout(function () { me.startRequest(); }, 300);
+                    }
+                },
+                context: this
+            });
+        }
     };
 
     // Diff
-    Y.instantlogic.Diff = function() {
-    	this.nodesAdded = [];
-    	this.nodesToRemove = [];
-    	this.nodesUpdated = [];
-    }
-    
-    Y.instantlogic.Diff.prototype = {
-    	addNodeAdded: function(node) {
-    		this.nodesAdded.push(node);
-    	},
-    	addNodeToRemove: function(node) {
-    		this.nodesToRemove.push(node);
-    	},
-    	addNodeUpdated: function(node) {
-    		this.nodesUpdated.push(node);
-    	},
-    	applyNow: function() {
-    		for (var i=0;i<this.nodesToRemove.length;i++) {
-    			this.nodesToRemove[i].remove(true);
-    		}
-    	},
-    	toString: function() {
-    		return 'Diff';
-    	}
-    }
-    
-    //FragmentHolder
-    Y.instantlogic.FragmentHolder = function(id) {
-    	this.node = Y.html.span({id: id, cssClass: 'fragment'});
-    	this.fragment = null;
+    ns.Diff = function () {
+        this.nodesAdded = [];
+        this.nodesToRemove = [];
+        this.nodesUpdated = [];
     };
-    
-    Y.instantlogic.FragmentHolder.prototype = {
-    		
-    	init: function(model, instantlogic, diff) {
-        	this.model = model;
-    		this.fragment = instantlogic.createFragment(model.type);
-    		this.fragment.init(this.node, model);
-//    		this.childFragments = new Y.instantlogic.FragmentList(this.node, model.children, instantlogic, diff);
-    	},
-    	
-    	update: function(newModel, instantlogic, diff) {
-    		var oldModel = this.model;
-    		this.model = newModel;
-        	function recreateFragment(newModel, instantlogic) {
-        		if (this.fragment) {
-        			this.fragment.destroy();
-        			this.fragment = null;
-        			this.node.setContent('');
-        		}
-    			this.fragment = instantlogic.createFragment(newModel);
-    			this.fragment.render(this.node);
-        	}
-    		if (newModel.fragment) {
-    			if (this.childFragments) {
-    				this.childFragments.destroy();
-    				this.childFragments = null;
-    				this.node.setContent('');
-    			}
-				if (newModel.fragment != oldModel.fragment) {
-					recreateFragment(newModel, instantlogic);
-				} else {
-					try {
-						this.fragment.setAttrs(newModel);
-					} catch (err) {
-						recreateFragment(newModel, instantlogic);
-					}
-				}
-    		} else if (newModel.children) {
-    			if (this.fragment) {
-        			this.fragment.destroy();
-        			this.node.setContent('');
-        			this.fragment = null;
-    			}
-    			if (this.childFragments) {
-    				this.childFragments.update(newModel.children, instantlogic, diff)
-    			} else {
-    				this.childFragments = new Y.instantlogic.FragmentList(this.node, newModel.children, instantlogic, diff);
-    			}
-    		}
-    	},
-    	
-    	destroy: function() {
-    		if (this.fragment) {
-    			this.fragment.destroy();
-    		} else if (this.childFragments) {
-    			this.childFragments.destroy();
-    		}
-    	},
-    	
-    	toString: function() {
-    		return 'Fragment '+this.node.getAttribute('id');
-    	}
-    }
-    
+
+    ns.Diff.prototype = {
+        nodeAdded: function (node) {
+            this.nodesAdded.push(node);
+        },
+        nodeToRemove: function (node) {
+            this.nodesToRemove.push(node);
+        },
+        nodeUpdated: function (node) {
+            this.nodesUpdated.push(node);
+        },
+        applyNow: function () {
+            for (var i = 0; i < this.nodesToRemove.length; i++) {
+                this.nodesToRemove[i].remove(true);
+            }
+        },
+        toString: function () {
+            return 'Diff';
+        }
+    };
+
+    //FragmentHolder
+    ns.FragmentHolder = function (id, fragmentFactory) {
+        this.id = id;
+        this.fragmentFactory = fragmentFactory;
+        this.node = Y.html.span({ 'data-fragment-id': id, cssClass: 'fragment' });
+        this.fragment = null;
+    };
+
+    ns.FragmentHolder.prototype = {
+        init: function (model) {
+            this.fragmentType = model.type;
+            this.fragment = this.fragmentFactory.createFragment(this.fragmentType, this.node);
+            this.fragment.init(model);
+        },
+
+        update: function (newModel, diff) {
+            if (this.fragmentType != newModel.type || !this.fragment.canUpdateFrom(newModel)) {
+                this.recreateFragment(newModel, diff);
+            } else {
+                this.fragment.update(newModel, diff);
+            }
+        },
+
+        recreateFragment: function (newModel, diff) {
+            this.fragment.destroy();
+            var oldNode = this.node;
+            this.node = Y.html.span({ 'data-fragment-id': id, cssClass: 'fragment' });
+            oldNode.ancestor().insertBefore(this.node, oldNode); // oldNode can be removed using animation
+            diff.nodeToRemove(oldNode);
+            diff.nodeAdded(this.node);
+            this.fragment = this.fragmentFactory.createFragment(newModel);
+            this.fragment.init(this.node, newModel);
+        },
+
+        destroy: function () {
+            this.fragment.destroy();
+        },
+
+        toString: function () {
+            return 'FragmentHolder#' + this.id;
+        }
+    };
+
     // FragmentList
-    Y.instantlogic.FragmentList = function(parentNode, models, instantlogic, diff) {
-    	this.parentNode = parentNode;
-    	this.models = models;
-    	this.fragments = [];
-    	for (var i=0;i<models.length;i++) {
-    		var fragment = new Y.instantlogic.Fragment(models[i].id);
-    		parentNode.appendChild(fragment.node);
-    		fragment.init(models[i], instantlogic, diff);
-    		this.fragments.push(fragment);
-    	}
-    }
-    
-    Y.instantlogic.FragmentList.prototype = {
-    	
-    	update: function(newModels, instantlogic, diff) {
-    		function indexOfModelWithId(models, id, start) {
-    	        for (var i = start; i < models.length; i++) {
-    	            if (models[i].id == id) { return i; }
-    	        }
-    	        return -1;
-    	    };    		
-            if (this.models.length != this.fragments.length) { throw new Error('model/fragments mismatch'); }
+    ns.FragmentList = function (parentNode, fragmentFactory) {
+        this.fragmentFactory = fragmentFactory;
+        this.parentNode = parentNode;
+    };
+
+    ns.FragmentList.prototype = {
+        init: function (models) {
+            if (!models) models = [];
+            this.models = models;
+            this.fragmentHolders = [];
+            for (var i = 0; i < models.length; i++) {
+                var fragmentHolder = new ns.FragmentHolder(models[i].id, this.fragmentFactory);
+                this.parentNode.appendChild(fragmentHolder.node);
+                fragmentHolder.init(models[i]);
+                this.fragmentHolders.push(fragmentHolder);
+            }
+        },
+
+        update: function (newModels, diff) {
+
+            function indexOfModelWithId(models, id, start) {
+                for (var i = start; i < models.length; i++) {
+                    if (models[i].id == id) {
+                        return i;
+                    }
+                }
+                return -1;
+            }
+
+            ;
+            if (!newModels) newModels = [];
+            if (this.models.length != this.fragmentHolders.length) {
+                throw new Error('model/fragments mismatch');
+            }
             var oldModels = this.models;
             this.models = newModels;
             var oldIndex = 0;
@@ -223,49 +234,77 @@ YUI.add('instantlogic', function(Y) {
                     if (findOldIndex >= 0) {
                         // remove child fragments
                         for (i = newIndex; i < newIndex + findOldIndex - oldIndex; i++) {
-                        	diff.addNodeToRemove(this.fragments[i].node);
-                            this.fragments[i].destroy();
+                            diff.nodeToRemove(this.fragmentHolders[i].node);
+                            this.fragmentHolders[i].destroy();
                         }
-                        this.fragments.splice(newIndex, findOldIndex - oldIndex);
+                        this.fragmentHolders.splice(newIndex, findOldIndex - oldIndex);
                         oldIndex = findOldIndex + 1;
-                        this.fragments[newIndex].update(newModel, instantlogic, diff);
+                        this.fragmentHolders[newIndex].update(newModel, diff);
                     } else {
-                        // New fragment
-                        var fragment = new Y.instantlogic.Fragment(newModel.id, instantlogic);
-                        this.fragments.splice(newIndex, 0, fragment);
-                        if (this.fragments.length>newIndex+1) {
-                        	this.parentNode.insertBefore(fragment.node, this.fragments[newIndex+1].node);
+                        // New fragmentHolder
+                        var fragmentHolder = new FragmentHolder(newModel.id, this.fragmentFactory);
+                        this.fragmentHolders.splice(newIndex, 0, fragmentHolder);
+                        if (this.fragmentHolders.length > newIndex + 1) {
+                            this.parentNode.insertBefore(fragmentHolder.node, this.fragmentHolders[newIndex + 1].node);
                         } else {
-                        	this.parentNode.appendChild(fragment.node);
+                            this.parentNode.appendChild(fragmentHolder.node);
                         }
-                        diff.addNodeAdded(fragment.node);
+                        diff.nodeAdded(fragmentHolder.node);
                     }
                 } else {
-                    this.fragments[newIndex].update(newModel, instantlogic, diff);
+                    this.fragmentHolders[newIndex].update(newModel, diff);
                     oldIndex++;
                 }
                 newIndex++;
             }
-            if (this.fragments.length > newIndex) {
+            if (this.fragmentHolders.length > newIndex) {
                 // Remove child fragments
-                for (i = newIndex; i < this.fragments.length; i++) {
-                	diff.addNodeToRemove(this.fragments[i].node);
+                for (i = newIndex; i < this.fragmentHolders.length; i++) {
+                    diff.nodeToRemove(this.fragmentHolders[i].node);
                     this.fragments[i].destroy();
                 }
-                this.fragments.length = newIndex;
+                this.fragmentHolders.length = newIndex;
             }
-    	},
-    	
-    	destroy: function() {
-        	for (var i=0;i<this.fragments.length;i++) {
-        		this.fragments[i].destroy();
-        	}
-    	},
+        },
 
-    	toString: function() {
-    		return 'FragmentList';
-    	}
-    	
-    } 
+        destroy: function () {
+            for (var i = 0; i < this.fragmentHolders.length; i++) {
+                this.fragmentHolders[i].destroy();
+            }
+        },
 
-}, '3.4.1', { requires: ['io-base','node','oop','panel','json','slider','html'] });
+        toString: function () {
+            return 'FragmentList';
+        }
+    };
+
+    // Fragment
+    ns.Fragment = function (parentNode, fragmentFactory) {
+        Y.assert(parentNode);
+        Y.assert(fragmentFactory);
+        this.fragmentFactory = fragmentFactory;
+        this.previousModel = {};
+        this.parentNode = parentNode;
+        this.model = null;
+    };
+
+    ns.Fragment.prototype = {
+        init: function (model) {
+            this.model = model;
+        },
+
+        canUpdateFrom: function (newModel) {
+            return true;
+        },
+
+        update: function (newModel, diff) {
+            this.previousModel = this.model;
+            this.model = newModel;
+        },
+
+        // Remove listeners, but leave the dom-tree intact
+        destroy: function () {
+        }
+    };
+
+}, '3.4.1', { requires: ['io-base', 'node', 'oop', 'panel', 'json', 'slider', 'html'] });
