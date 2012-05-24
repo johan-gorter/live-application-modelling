@@ -5,7 +5,7 @@ public class TemplatedTextDesignEntityGenerator extends EntityDesign {
 
     public static final TemplatedTextDesignEntityGenerator ENTITY = new TemplatedTextDesignEntityGenerator();
     
-    public TemplatedTextDesignEntityGenerator() {
+    private TemplatedTextDesignEntityGenerator() {
         setName("TemplatedTextDesign");
         setExtendsFrom(TextDesignEntityGenerator.ENTITY);
     }
@@ -13,7 +13,7 @@ public class TemplatedTextDesignEntityGenerator extends EntityDesign {
     // Attributes
 
     // Relations
-    public final RelationDesign untranslated = addRelation("untranslated", RelationType.OneToManyAggregation, StringProducerDesignEntityGenerator.ENTITY)
+    public static final RelationDesign untranslated = addRelation(ENTITY, "untranslated", RelationType.OneToManyAggregation, StringProducerDesignEntityGenerator.ENTITY)
             .setReverseName("untranslatedInTemplate");
 
 }

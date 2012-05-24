@@ -5,29 +5,29 @@ public class ApplicationDesignEntityGenerator extends EntityDesign {
 
     public static final ApplicationDesignEntityGenerator ENTITY = new ApplicationDesignEntityGenerator();
     
-    public ApplicationDesignEntityGenerator() {
+    private ApplicationDesignEntityGenerator() {
         setName("ApplicationDesign");
         setIsCustomized(true);
     }
 
     // Attributes
-    public final AttributeDesign name = addAttribute("name", java.lang.String.class);
-    public final AttributeDesign rootPackageName = addAttribute("rootPackageName", java.lang.String.class);
-    public final AttributeDesign sourcePath = addAttribute("sourcePath", java.lang.String.class);
-    public final AttributeDesign isCustomized = addAttribute("isCustomized", java.lang.Boolean.class);
+    public static final AttributeDesign name = addAttribute(ENTITY, "name", java.lang.String.class);
+    public static final AttributeDesign rootPackageName = addAttribute(ENTITY, "rootPackageName", java.lang.String.class);
+    public static final AttributeDesign sourcePath = addAttribute(ENTITY, "sourcePath", java.lang.String.class);
+    public static final AttributeDesign isCustomized = addAttribute(ENTITY, "isCustomized", java.lang.Boolean.class);
 
     // Relations
-    public final RelationDesign entities = addRelation("entities", RelationType.OneToManyAggregation, EntityDesignEntityGenerator.ENTITY)
+    public static final RelationDesign entities = addRelation(ENTITY, "entities", RelationType.OneToManyAggregation, EntityDesignEntityGenerator.ENTITY)
             .setReverseName("application");
-    public final RelationDesign caseEntity = addRelation("caseEntity", RelationType.OneToZeroOrOne, EntityDesignEntityGenerator.ENTITY)
+    public static final RelationDesign caseEntity = addRelation(ENTITY, "caseEntity", RelationType.OneToZeroOrOne, EntityDesignEntityGenerator.ENTITY)
             .setReverseName("caseEntityInApplication");
-    public final RelationDesign flows = addRelation("flows", RelationType.OneToManyAggregation, FlowDesignEntityGenerator.ENTITY)
+    public static final RelationDesign flows = addRelation(ENTITY, "flows", RelationType.OneToManyAggregation, FlowDesignEntityGenerator.ENTITY)
             .setReverseName("application");
-    public final RelationDesign events = addRelation("events", RelationType.OneToManyAggregation, EventDesignEntityGenerator.ENTITY)
+    public static final RelationDesign events = addRelation(ENTITY, "events", RelationType.OneToManyAggregation, EventDesignEntityGenerator.ENTITY)
             .setReverseName("application");
-    public final RelationDesign exposedFlows = addRelation("exposedFlows", RelationType.OneToMany, FlowDesignEntityGenerator.ENTITY)
+    public static final RelationDesign exposedFlows = addRelation(ENTITY, "exposedFlows", RelationType.OneToMany, FlowDesignEntityGenerator.ENTITY)
             .setReverseName("exposedFlowInApplication");
-    public final RelationDesign sharedTemplates = addRelation("sharedTemplates", RelationType.OneToManyAggregation, SharedFragmentTemplateDefinitionDesignEntityGenerator.ENTITY)
+    public static final RelationDesign sharedTemplates = addRelation(ENTITY, "sharedTemplates", RelationType.OneToManyAggregation, SharedFragmentTemplateDefinitionDesignEntityGenerator.ENTITY)
             .setReverseName("application");
 
 }

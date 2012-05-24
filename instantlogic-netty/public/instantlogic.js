@@ -8,7 +8,7 @@ YUI.add('instantlogic', function (Y) {
     	this.caseId = caseId;
         this.containerNode = containerNode;
         this.travelerId = travelerId;
-        if (!fragmentNamespaces || fragmentNamespaces.length == 0) Y.error('');
+        if (!fragmentNamespaces || fragmentNamespaces.length == 0) Y.error('No fragment namespaces');
         Y.each(fragmentNamespaces, function (fns) {
             if (!fns) Y.error('Undefined namespace');
         });
@@ -30,9 +30,12 @@ YUI.add('instantlogic', function (Y) {
     ns.Engine.prototype = {
         // API
         start: function () {
+        	this.history = new Y.HistoryHash();
+            var location = this.history.get('location');
+            if (!location) Y.error('no location given');
             this.containerNode.setContent('One moment...');
             this.setState('connecting');
-            this.startRequest();
+            this.newRequest([{message:'enter', location: location}]);
         },
 
         // Private functions
@@ -96,19 +99,21 @@ YUI.add('instantlogic', function (Y) {
             Y.error('No fragmentnamespace provides a fragment called ' + name);
         },
 
-        startRequest: function () {
+        newRequest: function (messages) {
+        	var data = (messages && messages.length>0) ? JSON.stringify(messages) : null;
             Y.io('/place?application='+this.application+'&case='+this.caseId+'&travelerId=' + travelerId, {
+            	data: data,
                 method: 'POST',
                 on: {
                     success: function (transactionid, response) {
                         this.setState('connected');
                         this.processUpdates(response.responseText);
-                        this.startRequest();
+                        this.newRequest();
                     },
                     failure: function () {
                         this.setState('disconnected');
                         var me = this;
-                        setTimeout(function () { me.startRequest(); }, 300);
+                        setTimeout(function () { me.newRequest(); }, 300);
                     }
                 },
                 context: this
@@ -280,8 +285,8 @@ YUI.add('instantlogic', function (Y) {
 
     // Fragment
     ns.Fragment = function (parentNode, fragmentFactory) {
-        Y.assert(parentNode);
-        Y.assert(fragmentFactory);
+    	if (!parentNode) Y.error();
+    	if (!fragmentFactory) Y.error();
         this.fragmentFactory = fragmentFactory;
         this.previousModel = {};
         this.parentNode = parentNode;
@@ -307,4 +312,4 @@ YUI.add('instantlogic', function (Y) {
         }
     };
 
-}, '3.4.1', { requires: ['io-base', 'node', 'oop', 'panel', 'json', 'slider', 'html'] });
+}, '3.4.1', { requires: ['io-base', 'node', 'oop', 'panel', 'json', 'slider', 'html', 'history'] });

@@ -5,13 +5,13 @@ public class ConstantTextDesignEntityGenerator extends EntityDesign {
 
     public static final ConstantTextDesignEntityGenerator ENTITY = new ConstantTextDesignEntityGenerator();
     
-    public ConstantTextDesignEntityGenerator() {
+    private ConstantTextDesignEntityGenerator() {
         setName("ConstantTextDesign");
         setExtendsFrom(TextDesignEntityGenerator.ENTITY);
     }
 
     // Attributes
-    public final AttributeDesign untranslated = addAttribute("untranslated", java.lang.String.class);
+    public static final AttributeDesign untranslated = addAttribute(ENTITY, "untranslated", java.lang.String.class);
 
     // Relations
 

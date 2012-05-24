@@ -5,7 +5,7 @@ public class TextDesignEntityGenerator extends EntityDesign {
 
     public static final TextDesignEntityGenerator ENTITY = new TextDesignEntityGenerator();
     
-    public TextDesignEntityGenerator() {
+    private TextDesignEntityGenerator() {
         setName("TextDesign");
         setExtendsFrom(DesignEntityGenerator.ENTITY);
     }

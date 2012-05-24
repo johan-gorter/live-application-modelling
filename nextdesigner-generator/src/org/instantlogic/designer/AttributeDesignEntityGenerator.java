@@ -5,28 +5,28 @@ public class AttributeDesignEntityGenerator extends EntityDesign {
 
     public static final AttributeDesignEntityGenerator ENTITY = new AttributeDesignEntityGenerator();
     
-    public AttributeDesignEntityGenerator() {
+    private AttributeDesignEntityGenerator() {
         setName("AttributeDesign");
         setExtendsFrom(DesignEntityGenerator.ENTITY);
     }
 
     // Attributes
-    public final AttributeDesign readOnly = addAttribute("readOnly", java.lang.Boolean.class);
-    public final AttributeDesign multivalue = addAttribute("multivalue", java.lang.Boolean.class);
-    public final AttributeDesign className = addAttribute("className", java.lang.String.class);
+    public static final AttributeDesign readOnly = addAttribute(ENTITY, "readOnly", java.lang.Boolean.class);
+    public static final AttributeDesign multivalue = addAttribute(ENTITY, "multivalue", java.lang.Boolean.class);
+    public static final AttributeDesign className = addAttribute(ENTITY, "className", java.lang.String.class);
 
     // Relations
-    public final RelationDesign question = addRelation("question", RelationType.OneToZeroOrOneAggregation, TextDesignEntityGenerator.ENTITY)
+    public static final RelationDesign question = addRelation(ENTITY, "question", RelationType.OneToZeroOrOneAggregation, TextDesignEntityGenerator.ENTITY)
             .setReverseName("questionOnAttribute");
-    public final RelationDesign explanation = addRelation("explanation", RelationType.OneToZeroOrOneAggregation, TextDesignEntityGenerator.ENTITY)
+    public static final RelationDesign explanation = addRelation(ENTITY, "explanation", RelationType.OneToZeroOrOneAggregation, TextDesignEntityGenerator.ENTITY)
             .setReverseName("explanationOnAttribute");
-    public final RelationDesign domain = addRelation("domain", RelationType.OneToManyAggregation, DomainEntryDesignEntityGenerator.ENTITY)
+    public static final RelationDesign domain = addRelation(ENTITY, "domain", RelationType.OneToManyAggregation, DomainEntryDesignEntityGenerator.ENTITY)
             .setReverseName("attribute");
-    public final RelationDesign relevance = addRelation("relevance", RelationType.OneToZeroOrOneAggregation, DeductionSchemeDesignEntityGenerator.ENTITY)
+    public static final RelationDesign relevance = addRelation(ENTITY, "relevance", RelationType.OneToZeroOrOneAggregation, DeductionSchemeDesignEntityGenerator.ENTITY)
             .setReverseName("relevanceOfAttribute");
-    public final RelationDesign rule = addRelation("rule", RelationType.OneToZeroOrOneAggregation, DeductionSchemeDesignEntityGenerator.ENTITY)
+    public static final RelationDesign rule = addRelation(ENTITY, "rule", RelationType.OneToZeroOrOneAggregation, DeductionSchemeDesignEntityGenerator.ENTITY)
             .setReverseName("ruleOfAttribute");
-    public final RelationDesign _default = addRelation("default", RelationType.OneToZeroOrOneAggregation, DeductionSchemeDesignEntityGenerator.ENTITY)
+    public static final RelationDesign _default = addRelation(ENTITY, "default", RelationType.OneToZeroOrOneAggregation, DeductionSchemeDesignEntityGenerator.ENTITY)
             .setReverseName("defaultOfAttribute");
 
 }

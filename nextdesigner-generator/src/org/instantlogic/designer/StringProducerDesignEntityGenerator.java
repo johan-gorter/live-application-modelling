@@ -5,7 +5,7 @@ public class StringProducerDesignEntityGenerator extends EntityDesign {
 
     public static final StringProducerDesignEntityGenerator ENTITY = new StringProducerDesignEntityGenerator();
     
-    public StringProducerDesignEntityGenerator() {
+    private StringProducerDesignEntityGenerator() {
         setName("StringProducerDesign");
     }
 

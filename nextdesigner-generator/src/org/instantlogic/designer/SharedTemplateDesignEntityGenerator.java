@@ -5,7 +5,7 @@ public class SharedTemplateDesignEntityGenerator extends EntityDesign {
 
     public static final SharedTemplateDesignEntityGenerator ENTITY = new SharedTemplateDesignEntityGenerator();
     
-    public SharedTemplateDesignEntityGenerator() {
+    private SharedTemplateDesignEntityGenerator() {
         setName("SharedTemplateDesign");
         setExtendsFrom(FragmentTemplateDesignEntityGenerator.ENTITY);
     }
@@ -13,7 +13,7 @@ public class SharedTemplateDesignEntityGenerator extends EntityDesign {
     // Attributes
 
     // Relations
-    public final RelationDesign definition = addRelation("definition", RelationType.ManyToZeroOrOne, SharedFragmentTemplateDefinitionDesignEntityGenerator.ENTITY)
+    public static final RelationDesign definition = addRelation(ENTITY, "definition", RelationType.ManyToZeroOrOne, SharedFragmentTemplateDefinitionDesignEntityGenerator.ENTITY)
             .setReverseName("usages");
 
 }

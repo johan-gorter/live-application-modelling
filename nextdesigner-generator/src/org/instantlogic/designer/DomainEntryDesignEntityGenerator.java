@@ -5,7 +5,7 @@ public class DomainEntryDesignEntityGenerator extends EntityDesign {
 
     public static final DomainEntryDesignEntityGenerator ENTITY = new DomainEntryDesignEntityGenerator();
     
-    public DomainEntryDesignEntityGenerator() {
+    private DomainEntryDesignEntityGenerator() {
         setName("DomainEntryDesign");
         setExtendsFrom(DesignEntityGenerator.ENTITY);
     }
@@ -13,7 +13,7 @@ public class DomainEntryDesignEntityGenerator extends EntityDesign {
     // Attributes
 
     // Relations
-    public final RelationDesign display = addRelation("display", RelationType.OneToZeroOrOneAggregation, TextDesignEntityGenerator.ENTITY)
+    public static final RelationDesign display = addRelation(ENTITY, "display", RelationType.OneToZeroOrOneAggregation, TextDesignEntityGenerator.ENTITY)
             .setReverseName("displayOnDomainEntry");
 
 }

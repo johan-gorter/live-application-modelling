@@ -5,16 +5,16 @@ public class DeductionSchemeDesignEntityGenerator extends EntityDesign {
 
     public static final DeductionSchemeDesignEntityGenerator ENTITY = new DeductionSchemeDesignEntityGenerator();
     
-    public DeductionSchemeDesignEntityGenerator() {
+    private DeductionSchemeDesignEntityGenerator() {
         setName("DeductionSchemeDesign");
     }
 
     // Attributes
 
     // Relations
-    public final RelationDesign deductions = addRelation("deductions", RelationType.OneToManyAggregation, DeductionDesignEntityGenerator.ENTITY)
+    public static final RelationDesign deductions = addRelation(ENTITY, "deductions", RelationType.OneToManyAggregation, DeductionDesignEntityGenerator.ENTITY)
             .setReverseName("scheme");
-    public final RelationDesign output = addRelation("output", RelationType.OneToZeroOrOne, DeductionDesignEntityGenerator.ENTITY)
+    public static final RelationDesign output = addRelation(ENTITY, "output", RelationType.OneToZeroOrOne, DeductionDesignEntityGenerator.ENTITY)
             .setReverseName("schemeOutput");
 
 }

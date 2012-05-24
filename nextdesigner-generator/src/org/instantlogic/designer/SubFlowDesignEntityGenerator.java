@@ -5,7 +5,7 @@ public class SubFlowDesignEntityGenerator extends EntityDesign {
 
     public static final SubFlowDesignEntityGenerator ENTITY = new SubFlowDesignEntityGenerator();
     
-    public SubFlowDesignEntityGenerator() {
+    private SubFlowDesignEntityGenerator() {
         setName("SubFlowDesign");
         setExtendsFrom(FlowNodeBaseDesignEntityGenerator.ENTITY);
     }
@@ -13,7 +13,7 @@ public class SubFlowDesignEntityGenerator extends EntityDesign {
     // Attributes
 
     // Relations
-    public final RelationDesign flow = addRelation("flow", RelationType.OneToZeroOrOne, FlowDesignEntityGenerator.ENTITY)
+    public static final RelationDesign flow = addRelation(ENTITY, "flow", RelationType.OneToZeroOrOne, FlowDesignEntityGenerator.ENTITY)
             .setReverseName("subFlowIn");
 
 }

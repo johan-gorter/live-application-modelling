@@ -20,13 +20,13 @@ public class Bootstrapper {
 	public static void createDesigner() {
 		ApplicationDesign applicationInstance = DesignerBootstrapper.createDesigner();
 
-//		new GeneratorGenerator(applicationInstance, "../nextdesigner-generator/src/org/instantlogic/designer").generate();
+		new GeneratorGenerator(applicationInstance, "../nextdesigner-generator/src/org/instantlogic/designer").generate();
 		
 //		System.out.println(CasePersister.gson.toJson(applicationInstance));
 		
 //		CasePersister.INSTANCE.persist("designer", applicationInstance, (int)(System.currentTimeMillis()/1000));
 		
-		applicationInstance.getApplicationGenerator().generateJavaCode();
+//		applicationInstance.getApplicationGenerator().generateJavaCode();
 	}
 
 	

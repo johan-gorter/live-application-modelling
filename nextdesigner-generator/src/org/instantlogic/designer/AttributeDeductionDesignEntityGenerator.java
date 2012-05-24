@@ -5,7 +5,7 @@ public class AttributeDeductionDesignEntityGenerator extends EntityDesign {
 
     public static final AttributeDeductionDesignEntityGenerator ENTITY = new AttributeDeductionDesignEntityGenerator();
     
-    public AttributeDeductionDesignEntityGenerator() {
+    private AttributeDeductionDesignEntityGenerator() {
         setName("AttributeDeductionDesign");
         setExtendsFrom(DeductionDesignEntityGenerator.ENTITY);
     }
@@ -13,7 +13,7 @@ public class AttributeDeductionDesignEntityGenerator extends EntityDesign {
     // Attributes
 
     // Relations
-    public final RelationDesign attribute = addRelation("attribute", RelationType.ManyToZeroOrOne, AttributeDesignEntityGenerator.ENTITY)
+    public static final RelationDesign attribute = addRelation(ENTITY, "attribute", RelationType.ManyToZeroOrOne, AttributeDesignEntityGenerator.ENTITY)
             .setReverseName("attributeInDeductions");
 
 }
