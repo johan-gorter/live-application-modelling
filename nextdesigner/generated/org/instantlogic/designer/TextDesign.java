@@ -14,15 +14,15 @@ public class TextDesign extends Design {
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, AttributeDesign> questionOnAttribute
-		= createReverseRelationValue(org.instantlogic.designer.entity.TextDesignEntity.questionOnAttribute);
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, DomainEntryDesign> displayOnDomainEntry
+		= createReverseRelationValue(org.instantlogic.designer.entity.TextDesignEntity.displayOnDomainEntry);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, AttributeDesign> getQuestionOnAttributeRelationValue() {
-		return questionOnAttribute;
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, DomainEntryDesign> getDisplayOnDomainEntryRelationValue() {
+		return displayOnDomainEntry;
 	}
 
-	public org.instantlogic.designer.AttributeDesign getQuestionOnAttribute() {
-		return questionOnAttribute.getValue();
+	public org.instantlogic.designer.DomainEntryDesign getDisplayOnDomainEntry() {
+		return displayOnDomainEntry.getValue();
 	}
 
 	
@@ -38,15 +38,15 @@ public class TextDesign extends Design {
 	}
 
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, DomainEntryDesign> displayOnDomainEntry
-		= createReverseRelationValue(org.instantlogic.designer.entity.TextDesignEntity.displayOnDomainEntry);
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, AttributeDesign> questionOnAttribute
+		= createReverseRelationValue(org.instantlogic.designer.entity.TextDesignEntity.questionOnAttribute);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, DomainEntryDesign> getDisplayOnDomainEntryRelationValue() {
-		return displayOnDomainEntry;
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextDesign, AttributeDesign> getQuestionOnAttributeRelationValue() {
+		return questionOnAttribute;
 	}
 
-	public org.instantlogic.designer.DomainEntryDesign getDisplayOnDomainEntry() {
-		return displayOnDomainEntry.getValue();
+	public org.instantlogic.designer.AttributeDesign getQuestionOnAttribute() {
+		return questionOnAttribute.getValue();
 	}
 
 	

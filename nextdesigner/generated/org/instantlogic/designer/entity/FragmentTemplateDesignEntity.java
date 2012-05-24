@@ -44,27 +44,6 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 	
 	// Relations
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DeductionSchemeDesign>, org.instantlogic.designer.DeductionSchemeDesign> selections
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DeductionSchemeDesign>, org.instantlogic.designer.DeductionSchemeDesign>(
-			"selections", INSTANCE, org.instantlogic.designer.entity.DeductionSchemeDesignEntity.INSTANCE, org.instantlogic.designer.DeductionSchemeDesign.class, org.instantlogic.designer.entity.DeductionSchemeDesignEntity.compositeTemplate
-		) {
-	
-			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.DeductionSchemeDesign> get(
-					org.instantlogic.designer.FragmentTemplateDesign instance) {
-				return instance.getSelectionsRelationValue();
-			}
-	
-			public boolean isOwner() {
-				return true;
-			}
-	
-			public boolean isMultivalue() {
-				return true;
-			}
-			
-		};
-	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDesign> attribute
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDesign>(
 			"attribute", INSTANCE, org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE, org.instantlogic.designer.AttributeDesign.class, org.instantlogic.designer.entity.AttributeDesignEntity.usedInField
@@ -74,6 +53,27 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.AttributeDesign> get(
 					org.instantlogic.designer.FragmentTemplateDesign instance) {
 				return instance.getAttributeRelationValue();
+			}
+			
+		};
+	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentChildList>, org.instantlogic.designer.FragmentChildList> childLists
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentChildList>, org.instantlogic.designer.FragmentChildList>(
+			"childLists", INSTANCE, org.instantlogic.designer.entity.FragmentChildListEntity.INSTANCE, org.instantlogic.designer.FragmentChildList.class, org.instantlogic.designer.entity.FragmentChildListEntity.fragment
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentChildList> get(
+					org.instantlogic.designer.FragmentTemplateDesign instance) {
+				return instance.getChildListsRelationValue();
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
 			}
 			
 		};
@@ -104,15 +104,15 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 			
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentValue>, org.instantlogic.designer.FragmentValue> values
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentValue>, org.instantlogic.designer.FragmentValue>(
-			"values", INSTANCE, org.instantlogic.designer.entity.FragmentValueEntity.INSTANCE, org.instantlogic.designer.FragmentValue.class, org.instantlogic.designer.entity.FragmentValueEntity.fragment
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DeductionSchemeDesign>, org.instantlogic.designer.DeductionSchemeDesign> selections
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DeductionSchemeDesign>, org.instantlogic.designer.DeductionSchemeDesign>(
+			"selections", INSTANCE, org.instantlogic.designer.entity.DeductionSchemeDesignEntity.INSTANCE, org.instantlogic.designer.DeductionSchemeDesign.class, org.instantlogic.designer.entity.DeductionSchemeDesignEntity.compositeTemplate
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentValue> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.DeductionSchemeDesign> get(
 					org.instantlogic.designer.FragmentTemplateDesign instance) {
-				return instance.getValuesRelationValue();
+				return instance.getSelectionsRelationValue();
 			}
 	
 			public boolean isOwner() {
@@ -146,15 +146,15 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 			
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentChildList>, org.instantlogic.designer.FragmentChildList> childLists
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentChildList>, org.instantlogic.designer.FragmentChildList>(
-			"childLists", INSTANCE, org.instantlogic.designer.entity.FragmentChildListEntity.INSTANCE, org.instantlogic.designer.FragmentChildList.class, org.instantlogic.designer.entity.FragmentChildListEntity.fragment
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentValue>, org.instantlogic.designer.FragmentValue> values
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentValue>, org.instantlogic.designer.FragmentValue>(
+			"values", INSTANCE, org.instantlogic.designer.entity.FragmentValueEntity.INSTANCE, org.instantlogic.designer.FragmentValue.class, org.instantlogic.designer.entity.FragmentValueEntity.fragment
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentChildList> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentValue> get(
 					org.instantlogic.designer.FragmentTemplateDesign instance) {
-				return instance.getChildListsRelationValue();
+				return instance.getValuesRelationValue();
 			}
 	
 			public boolean isOwner() {
@@ -169,15 +169,15 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 	
 	// Reverse relations
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign> sharedTemplateDefinition
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign>(
-			"sharedTemplateDefinition", INSTANCE, org.instantlogic.designer.entity.SharedFragmentTemplateDefinitionDesignEntity.INSTANCE, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign.class, org.instantlogic.designer.entity.SharedFragmentTemplateDefinitionDesignEntity.fragment
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentChildList, org.instantlogic.designer.FragmentChildList> childrenForFragment
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentChildList, org.instantlogic.designer.FragmentChildList>(
+			"childrenForFragment", INSTANCE, org.instantlogic.designer.entity.FragmentChildListEntity.INSTANCE, org.instantlogic.designer.FragmentChildList.class, org.instantlogic.designer.entity.FragmentChildListEntity.children
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentChildList> get(
 					org.instantlogic.designer.FragmentTemplateDesign instance) {
-				return instance.getSharedTemplateDefinitionRelationValue();
+				return instance.getChildrenForFragmentRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -201,15 +201,15 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentChildList, org.instantlogic.designer.FragmentChildList> childrenForFragment
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentChildList, org.instantlogic.designer.FragmentChildList>(
-			"childrenForFragment", INSTANCE, org.instantlogic.designer.entity.FragmentChildListEntity.INSTANCE, org.instantlogic.designer.FragmentChildList.class, org.instantlogic.designer.entity.FragmentChildListEntity.children
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign> sharedTemplateDefinition
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign>(
+			"sharedTemplateDefinition", INSTANCE, org.instantlogic.designer.entity.SharedFragmentTemplateDefinitionDesignEntity.INSTANCE, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign.class, org.instantlogic.designer.entity.SharedFragmentTemplateDefinitionDesignEntity.fragment
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentChildList> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign> get(
 					org.instantlogic.designer.FragmentTemplateDesign instance) {
-				return instance.getChildrenForFragmentRelationValue();
+				return instance.getSharedTemplateDefinitionRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -221,18 +221,18 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 		fragmentTypeName,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
-		selections,
 		attribute,
+		childLists,
 		entity,
 		event,
-		values,
+		selections,
 		texts,
-		childLists,
+		values,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
-		sharedTemplateDefinition,
-		contentOfPage,
 		childrenForFragment,
+		contentOfPage,
+		sharedTemplateDefinition,
 	};
 
 	@Override
