@@ -149,7 +149,7 @@ public class InstanceMetadata {
 		if (children==null) {
 			children = new HashMap<String, Instance>();
 		}
-		String childLocalId = ""+(++lastChildId);
+		String childLocalId = (Character.toUpperCase(instance.getInstanceEntity().getName().charAt(0)))+""+(++lastChildId);
 		children.put(childLocalId, instance);
 		instance.getMetadata().registerOwner(this.instance, childLocalId);
 	}
@@ -169,7 +169,7 @@ public class InstanceMetadata {
 			throw new RuntimeException("This instance is already owned by "+this.owner);
 		}
 		this.owner = owner;
-		this.localId = owner==null?"0":(Character.toUpperCase(getEntity().getName().charAt(0)))+localId;
+		this.localId = owner==null?"0":localId;
 		this.instanceRegistry = null;
 	}
 	

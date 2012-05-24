@@ -45,7 +45,51 @@ public class MiniThing extends org.instantlogic.fabric.Instance {
 	
 	
 	// Relations
+	
+	private final org.instantlogic.fabric.value.RelationValues<MiniThing, MiniThing> children
+		= createRelationValues(com.instantlogic.mini.entity.MiniThingEntity.children);
+		
+	public org.instantlogic.fabric.value.RelationValues<MiniThing, MiniThing> getChildrenRelationValue() {
+		return children;
+	}
+
+	public org.instantlogic.fabric.value.Multi<com.instantlogic.mini.MiniThing> getChildren() {
+		return children.getValue();
+	}
+	
+	public MiniThing addToChildren(MiniThing item) {
+		children.addValue(item);
+		return (MiniThing)this;
+	}
+	
+	public MiniThing addToChildren(MiniThing item, int index) {
+		children.insertValue(item, index);
+		return (MiniThing)this;
+	}
+	
+	public MiniThing removeFromChildren(MiniThing item) {
+		children.removeValue(item);
+		return (MiniThing)this;
+	}
+	
+	public MiniThing removeFromChildren(int index) {
+		children.removeValue(index);
+		return (MiniThing)this;
+	}
+	
 
 	// Reverse relations
+	
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<MiniThing, MiniThing> parent
+		= createReverseRelationValue(com.instantlogic.mini.entity.MiniThingEntity.parent);
+
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<MiniThing, MiniThing> getParentRelationValue() {
+		return parent;
+	}
+
+	public com.instantlogic.mini.MiniThing getParent() {
+		return parent.getValue();
+	}
+
 
 }

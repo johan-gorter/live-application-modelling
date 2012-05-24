@@ -5,7 +5,7 @@ public class PlaceTemplateDesignEntityGenerator extends EntityDesign {
 
     public static final PlaceTemplateDesignEntityGenerator ENTITY = new PlaceTemplateDesignEntityGenerator();
     
-    public PlaceTemplateDesignEntityGenerator() {
+    private PlaceTemplateDesignEntityGenerator() {
         setName("PlaceTemplateDesign");
         setExtendsFrom(FlowNodeBaseDesignEntityGenerator.ENTITY);
     }
@@ -13,7 +13,7 @@ public class PlaceTemplateDesignEntityGenerator extends EntityDesign {
     // Attributes
 
     // Relations
-    public final RelationDesign content = addRelation("content", RelationType.OneToZeroOrOneAggregation, FragmentTemplateDesignEntityGenerator.ENTITY)
+    public static final RelationDesign content = addRelation(ENTITY, "content", RelationType.OneToZeroOrOneAggregation, FragmentTemplateDesignEntityGenerator.ENTITY)
             .setReverseName("contentOfPage");
 
 }

@@ -5,7 +5,7 @@ public class EventDesignEntityGenerator extends EntityDesign {
 
     public static final EventDesignEntityGenerator ENTITY = new EventDesignEntityGenerator();
     
-    public EventDesignEntityGenerator() {
+    private EventDesignEntityGenerator() {
         setName("EventDesign");
         setExtendsFrom(DesignEntityGenerator.ENTITY);
     }
@@ -13,7 +13,7 @@ public class EventDesignEntityGenerator extends EntityDesign {
     // Attributes
 
     // Relations
-    public final RelationDesign parameters = addRelation("parameters", RelationType.ManyToMany, EntityDesignEntityGenerator.ENTITY)
+    public static final RelationDesign parameters = addRelation(ENTITY, "parameters", RelationType.ManyToMany, EntityDesignEntityGenerator.ENTITY)
             .setReverseName("parameterInEvent");
 
 }

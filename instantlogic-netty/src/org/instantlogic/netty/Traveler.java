@@ -124,7 +124,11 @@ public class Traveler {
 	
 	private void deliverMessages() {
 		if (sendPlace) {
-			messagesWaiting.add(gson.toJsonTree(caseManager.render(this, this.location)));
+			JsonElement rootFragment = gson.toJsonTree(caseManager.render(this, this.location));
+			JsonObject placeMessage = new JsonObject();
+			placeMessage.addProperty("message", "place");
+			placeMessage.add("rootFragment", rootFragment);
+			messagesWaiting.add(placeMessage);
 		}
 		sendResponseMessages(parkedRequests.remove(0));
 	}

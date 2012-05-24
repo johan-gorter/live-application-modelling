@@ -5,7 +5,7 @@ public class FormattedValueDesignEntityGenerator extends EntityDesign {
 
     public static final FormattedValueDesignEntityGenerator ENTITY = new FormattedValueDesignEntityGenerator();
     
-    public FormattedValueDesignEntityGenerator() {
+    private FormattedValueDesignEntityGenerator() {
         setName("FormattedValueDesign");
         setExtendsFrom(StringProducerDesignEntityGenerator.ENTITY);
     }
@@ -13,7 +13,7 @@ public class FormattedValueDesignEntityGenerator extends EntityDesign {
     // Attributes
 
     // Relations
-    public final RelationDesign deduction = addRelation("deduction", RelationType.OneToOneAggregation, DeductionSchemeDesignEntityGenerator.ENTITY)
+    public static final RelationDesign deduction = addRelation(ENTITY, "deduction", RelationType.OneToOneAggregation, DeductionSchemeDesignEntityGenerator.ENTITY)
             .setReverseName("templatedText");
 
 }

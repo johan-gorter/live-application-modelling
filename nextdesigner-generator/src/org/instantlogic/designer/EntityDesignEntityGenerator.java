@@ -5,7 +5,7 @@ public class EntityDesignEntityGenerator extends EntityDesign {
 
     public static final EntityDesignEntityGenerator ENTITY = new EntityDesignEntityGenerator();
     
-    public EntityDesignEntityGenerator() {
+    private EntityDesignEntityGenerator() {
         setName("EntityDesign");
         setExtendsFrom(DesignEntityGenerator.ENTITY);
         setIsCustomized(true);
@@ -14,11 +14,11 @@ public class EntityDesignEntityGenerator extends EntityDesign {
     // Attributes
 
     // Relations
-    public final RelationDesign extendsFrom = addRelation("extendsFrom", RelationType.ManyToZeroOrOne, EntityDesignEntityGenerator.ENTITY)
+    public static final RelationDesign extendsFrom = addRelation(ENTITY, "extendsFrom", RelationType.ManyToZeroOrOne, EntityDesignEntityGenerator.ENTITY)
             .setReverseName("extensions");
-    public final RelationDesign attributes = addRelation("attributes", RelationType.OneToManyAggregation, AttributeDesignEntityGenerator.ENTITY)
+    public static final RelationDesign attributes = addRelation(ENTITY, "attributes", RelationType.OneToManyAggregation, AttributeDesignEntityGenerator.ENTITY)
             .setReverseName("belongsToEntity");
-    public final RelationDesign relations = addRelation("relations", RelationType.OneToManyAggregation, RelationDesignEntityGenerator.ENTITY)
+    public static final RelationDesign relations = addRelation(ENTITY, "relations", RelationType.OneToManyAggregation, RelationDesignEntityGenerator.ENTITY)
             .setReverseName("from");
 
 }

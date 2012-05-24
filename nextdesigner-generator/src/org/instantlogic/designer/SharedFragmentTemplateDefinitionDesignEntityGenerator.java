@@ -5,7 +5,7 @@ public class SharedFragmentTemplateDefinitionDesignEntityGenerator extends Entit
 
     public static final SharedFragmentTemplateDefinitionDesignEntityGenerator ENTITY = new SharedFragmentTemplateDefinitionDesignEntityGenerator();
     
-    public SharedFragmentTemplateDefinitionDesignEntityGenerator() {
+    private SharedFragmentTemplateDefinitionDesignEntityGenerator() {
         setName("SharedFragmentTemplateDefinitionDesign");
         setExtendsFrom(DesignEntityGenerator.ENTITY);
     }
@@ -13,7 +13,7 @@ public class SharedFragmentTemplateDefinitionDesignEntityGenerator extends Entit
     // Attributes
 
     // Relations
-    public final RelationDesign fragment = addRelation("fragment", RelationType.OneToOneAggregation, FragmentTemplateDesignEntityGenerator.ENTITY)
+    public static final RelationDesign fragment = addRelation(ENTITY, "fragment", RelationType.OneToOneAggregation, FragmentTemplateDesignEntityGenerator.ENTITY)
             .setReverseName("sharedTemplateDefinition");
 
 }

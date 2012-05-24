@@ -5,7 +5,7 @@ public class SumDeductionDesignEntityGenerator extends EntityDesign {
 
     public static final SumDeductionDesignEntityGenerator ENTITY = new SumDeductionDesignEntityGenerator();
     
-    public SumDeductionDesignEntityGenerator() {
+    private SumDeductionDesignEntityGenerator() {
         setName("SumDeductionDesign");
         setExtendsFrom(DeductionDesignEntityGenerator.ENTITY);
     }
