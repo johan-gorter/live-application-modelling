@@ -77,6 +77,9 @@ public class EntityDesign extends AbstractEntityDesign {
 	public void registerApplication(ApplicationDesign application) {
 		if (application.getEntities().contains(this)) return;
 		application.addToEntities(this);
+		if (this.getExtendsFrom()!=null) {
+			this.getExtendsFrom().registerApplication(application);
+		}
 		for(EntityDesign entity: this.getExtensions()) {
 			entity.registerApplication(application);
 		}

@@ -23,7 +23,10 @@ public class ApplicationDesign extends AbstractApplicationDesign {
 		String packageName = getClass().getName();
 		packageName = packageName.substring(0, packageName.lastIndexOf('.'));
 		eagerlyLoadAllClasses(new File(getClass().getResource("").getFile()), packageName);
+		
 		getCaseEntity().registerApplication(this);
+
+		//TODO: flows
 		for (EntityDesign entity:getEntities()) {
 			entity.init();
 		}

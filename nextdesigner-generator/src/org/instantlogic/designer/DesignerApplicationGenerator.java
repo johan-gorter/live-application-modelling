@@ -5,6 +5,7 @@ import java.io.File;
 import org.instantlogic.designer.ApplicationDesign;
 import org.instantlogic.designer.codegenerator.generator.GeneratedClassModels;
 import org.instantlogic.designer.codegenerator.javacode.ApplicationJavacodeGenerator;
+import org.instantlogic.designer.flow.MainFlowGenerator;
 
 
 public class DesignerApplicationGenerator extends ApplicationDesign {
@@ -16,13 +17,20 @@ public class DesignerApplicationGenerator extends ApplicationDesign {
         setRootPackageName("org.instantlogic.designer");
         setSourcePath("/prive/live-business-engineering/nextdesigner/generated");
         setCaseEntity(ApplicationDesignEntityGenerator.ENTITY);
+        addToExposedFlows(MainFlowGenerator.FLOW);
+
+        //TODO: move to baseclass init
+		((MainFlowGenerator)getExposedFlows().get(0)).registerApplication(this);
+		for (FlowDesign flow: getFlows()) {
+			((MainFlowGenerator)flow).init();
+		}
+		
         init();
     }
     
     public static void main(String[] args) throws Exception {
-        ApplicationDesign applicationInstance = new DesignerApplicationGenerator();
-        GeneratedClassModels classModelUpdates = applicationInstance.getApplicationGenerator().getClassModelUpdates();
-        ApplicationJavacodeGenerator.generate(classModelUpdates, new File(applicationInstance.getSourcePath()));
+        GeneratedClassModels classModelUpdates = APPLICATION.getApplicationGenerator().getClassModelUpdates();
+        ApplicationJavacodeGenerator.generate(classModelUpdates, new File(APPLICATION.getSourcePath()));
     }
     
 }

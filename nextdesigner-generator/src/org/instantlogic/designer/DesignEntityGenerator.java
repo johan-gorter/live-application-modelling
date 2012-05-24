@@ -17,4 +17,14 @@ public class DesignEntityGenerator extends EntityDesign {
 
     // Relations
 
+    @Override
+    public void init() {
+    	super.init();
+    	
+		javaIdentifier.setReadOnly(true);
+		javaIdentifier.setRule(createCustomDeduction("org.instantlogic.designer.deduction.JavaIdentifierDeduction", "java.lang.String"));
+
+		technicalName.setReadOnly(true);
+		technicalName.setRule(createCustomDeduction("org.instantlogic.designer.deduction.TechnicalNameDeduction", "java.lang.String"));
+    }
 }
