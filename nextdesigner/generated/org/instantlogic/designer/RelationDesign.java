@@ -10,23 +10,6 @@ public class RelationDesign extends AttributeDesign {
 
 	// Attributes
 	
-	private final org.instantlogic.fabric.value.AttributeValue<RelationDesign, java.lang.Boolean> owner
-		= createAttributeValue(org.instantlogic.designer.entity.RelationDesignEntity.owner);
-	
-	public java.lang.Boolean getOwner() {
-		return owner.getValue();
-	}
-
-	public org.instantlogic.fabric.value.AttributeValue<RelationDesign, java.lang.Boolean> getOwnerAttributeValue() {
-		return owner;
-	}
-
-	public RelationDesign setOwner(java.lang.Boolean newValue) {
-		owner.setValue(newValue);
-		return (RelationDesign)this;
-	}
-	
-	
 	private final org.instantlogic.fabric.value.AttributeValue<RelationDesign, java.lang.Boolean> autoCreate
 		= createAttributeValue(org.instantlogic.designer.entity.RelationDesignEntity.autoCreate);
 	
@@ -40,6 +23,23 @@ public class RelationDesign extends AttributeDesign {
 
 	public RelationDesign setAutoCreate(java.lang.Boolean newValue) {
 		autoCreate.setValue(newValue);
+		return (RelationDesign)this;
+	}
+	
+	
+	private final org.instantlogic.fabric.value.AttributeValue<RelationDesign, java.lang.Boolean> owner
+		= createAttributeValue(org.instantlogic.designer.entity.RelationDesignEntity.owner);
+	
+	public java.lang.Boolean getOwner() {
+		return owner.getValue();
+	}
+
+	public org.instantlogic.fabric.value.AttributeValue<RelationDesign, java.lang.Boolean> getOwnerAttributeValue() {
+		return owner;
+	}
+
+	public RelationDesign setOwner(java.lang.Boolean newValue) {
+		owner.setValue(newValue);
 		return (RelationDesign)this;
 	}
 	

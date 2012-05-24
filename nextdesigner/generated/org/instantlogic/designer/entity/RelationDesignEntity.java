@@ -31,17 +31,6 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	
 	// Attributes
 	
-	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.RelationDesign, java.lang.Boolean, java.lang.Boolean> owner 
-		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.RelationDesign, java.lang.Boolean, java.lang.Boolean>(
-			"owner", INSTANCE, java.lang.Boolean.class
-		) {
-	
-			@Override
-			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.RelationDesign, java.lang.Boolean> get(org.instantlogic.designer.RelationDesign instance) {
-				return instance.getOwnerAttributeValue();
-			}
-		};
-	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.RelationDesign, java.lang.Boolean, java.lang.Boolean> autoCreate 
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.RelationDesign, java.lang.Boolean, java.lang.Boolean>(
 			"autoCreate", INSTANCE, java.lang.Boolean.class
@@ -50,6 +39,17 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.RelationDesign, java.lang.Boolean> get(org.instantlogic.designer.RelationDesign instance) {
 				return instance.getAutoCreateAttributeValue();
+			}
+		};
+	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.RelationDesign, java.lang.Boolean, java.lang.Boolean> owner 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.RelationDesign, java.lang.Boolean, java.lang.Boolean>(
+			"owner", INSTANCE, java.lang.Boolean.class
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.RelationDesign, java.lang.Boolean> get(org.instantlogic.designer.RelationDesign instance) {
+				return instance.getOwnerAttributeValue();
 			}
 		};
 	
@@ -129,8 +129,8 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 		};
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
-		owner,
 		autoCreate,
+		owner,
 		reverseMultivalue,
 		reverseName,
 	};

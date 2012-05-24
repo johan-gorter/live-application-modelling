@@ -29,28 +29,15 @@ public class FlowEdgeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	
 	// Relations
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.designer.FlowNodeBaseDesign> startNode
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.designer.FlowNodeBaseDesign>(
-			"startNode", INSTANCE, org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.INSTANCE, org.instantlogic.designer.FlowNodeBaseDesign.class, org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.outgoingEdges
-		) {
-	
-			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.FlowNodeBaseDesign> get(
-					org.instantlogic.designer.FlowEdgeDesign instance) {
-				return instance.getStartNodeRelationValue();
-			}
-			
-		};
-	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.EventDesign, org.instantlogic.designer.EventDesign> startEvent
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.EventDesign, org.instantlogic.designer.EventDesign> endEvent
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.EventDesign, org.instantlogic.designer.EventDesign>(
-			"startEvent", INSTANCE, org.instantlogic.designer.entity.EventDesignEntity.INSTANCE, org.instantlogic.designer.EventDesign.class, org.instantlogic.designer.entity.EventDesignEntity.startEventInEdges
+			"endEvent", INSTANCE, org.instantlogic.designer.entity.EventDesignEntity.INSTANCE, org.instantlogic.designer.EventDesign.class, org.instantlogic.designer.entity.EventDesignEntity.endEventInEdges
 		) {
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.EventDesign> get(
 					org.instantlogic.designer.FlowEdgeDesign instance) {
-				return instance.getStartEventRelationValue();
+				return instance.getEndEventRelationValue();
 			}
 			
 		};
@@ -68,15 +55,28 @@ public class FlowEdgeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.EventDesign, org.instantlogic.designer.EventDesign> endEvent
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.EventDesign, org.instantlogic.designer.EventDesign> startEvent
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.EventDesign, org.instantlogic.designer.EventDesign>(
-			"endEvent", INSTANCE, org.instantlogic.designer.entity.EventDesignEntity.INSTANCE, org.instantlogic.designer.EventDesign.class, org.instantlogic.designer.entity.EventDesignEntity.endEventInEdges
+			"startEvent", INSTANCE, org.instantlogic.designer.entity.EventDesignEntity.INSTANCE, org.instantlogic.designer.EventDesign.class, org.instantlogic.designer.entity.EventDesignEntity.startEventInEdges
 		) {
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.EventDesign> get(
 					org.instantlogic.designer.FlowEdgeDesign instance) {
-				return instance.getEndEventRelationValue();
+				return instance.getStartEventRelationValue();
+			}
+			
+		};
+	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.designer.FlowNodeBaseDesign> startNode
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.designer.FlowNodeBaseDesign>(
+			"startNode", INSTANCE, org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.INSTANCE, org.instantlogic.designer.FlowNodeBaseDesign.class, org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.outgoingEdges
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.FlowNodeBaseDesign> get(
+					org.instantlogic.designer.FlowEdgeDesign instance) {
+				return instance.getStartNodeRelationValue();
 			}
 			
 		};
@@ -102,10 +102,10 @@ public class FlowEdgeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
-		startNode,
-		startEvent,
-		endNode,
 		endEvent,
+		endNode,
+		startEvent,
+		startNode,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		owner,

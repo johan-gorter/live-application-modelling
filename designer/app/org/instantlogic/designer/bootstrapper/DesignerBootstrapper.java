@@ -23,8 +23,12 @@ public class DesignerBootstrapper extends BootstrapperUtil {
 		applicationDesign.setName("Designer");
 		
 		applicationDesign.setRootPackageName("org.instantlogic.designer");
-		applicationDesign.setSourcePath("/prive/live-business-engineering/designer-generated/app");
-//		applicationDesign.setSourcePath("/temp/designer-generated/app");
+//		applicationDesign.setSourcePath("/prive/live-business-engineering/designer-generated/app");
+
+		
+		applicationDesign.setSourcePath("/prive/live-business-engineering/nextdesigner/generated");
+		
+		//		applicationDesign.setSourcePath("/temp/designer-generated/app");
 		
 		//applicationDesign.name.set("NextDesigner");
 		

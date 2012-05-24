@@ -10,23 +10,6 @@ public class DeductionDesign extends org.instantlogic.fabric.Instance {
 
 	// Attributes
 	
-	private final org.instantlogic.fabric.value.AttributeValue<DeductionDesign, java.lang.Boolean> multivalue
-		= createAttributeValue(org.instantlogic.designer.entity.DeductionDesignEntity.multivalue);
-	
-	public java.lang.Boolean getMultivalue() {
-		return multivalue.getValue();
-	}
-
-	public org.instantlogic.fabric.value.AttributeValue<DeductionDesign, java.lang.Boolean> getMultivalueAttributeValue() {
-		return multivalue;
-	}
-
-	public DeductionDesign setMultivalue(java.lang.Boolean newValue) {
-		multivalue.setValue(newValue);
-		return (DeductionDesign)this;
-	}
-	
-	
 	private final org.instantlogic.fabric.value.AttributeValue<DeductionDesign, java.lang.String> className
 		= createAttributeValue(org.instantlogic.designer.entity.DeductionDesignEntity.className);
 	
@@ -57,6 +40,23 @@ public class DeductionDesign extends org.instantlogic.fabric.Instance {
 
 	public DeductionDesign setCustomization(java.lang.String newValue) {
 		customization.setValue(newValue);
+		return (DeductionDesign)this;
+	}
+	
+	
+	private final org.instantlogic.fabric.value.AttributeValue<DeductionDesign, java.lang.Boolean> multivalue
+		= createAttributeValue(org.instantlogic.designer.entity.DeductionDesignEntity.multivalue);
+	
+	public java.lang.Boolean getMultivalue() {
+		return multivalue.getValue();
+	}
+
+	public org.instantlogic.fabric.value.AttributeValue<DeductionDesign, java.lang.Boolean> getMultivalueAttributeValue() {
+		return multivalue;
+	}
+
+	public DeductionDesign setMultivalue(java.lang.Boolean newValue) {
+		multivalue.setValue(newValue);
 		return (DeductionDesign)this;
 	}
 	
@@ -97,6 +97,18 @@ public class DeductionDesign extends org.instantlogic.fabric.Instance {
 
 	// Reverse relations
 	
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<DeductionDesign, DeductionDesign> outputs
+		= createReverseRelationValues(org.instantlogic.designer.entity.DeductionDesignEntity.outputs);
+
+	public org.instantlogic.fabric.value.ReadOnlyRelationValues<DeductionDesign, DeductionDesign> getOutputsRelationValue() {
+		return outputs;
+	}
+
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DeductionDesign> getOutputs() {
+		return outputs.getValue();
+	}
+
+	
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionDesign, DeductionSchemeDesign> scheme
 		= createReverseRelationValue(org.instantlogic.designer.entity.DeductionDesignEntity.scheme);
 
@@ -118,18 +130,6 @@ public class DeductionDesign extends org.instantlogic.fabric.Instance {
 
 	public org.instantlogic.designer.DeductionSchemeDesign getSchemeOutput() {
 		return schemeOutput.getValue();
-	}
-
-	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<DeductionDesign, DeductionDesign> outputs
-		= createReverseRelationValues(org.instantlogic.designer.entity.DeductionDesignEntity.outputs);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<DeductionDesign, DeductionDesign> getOutputsRelationValue() {
-		return outputs;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DeductionDesign> getOutputs() {
-		return outputs.getValue();
 	}
 
 

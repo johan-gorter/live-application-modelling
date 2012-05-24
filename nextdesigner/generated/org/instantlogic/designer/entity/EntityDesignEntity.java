@@ -33,19 +33,6 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 	
 	// Relations
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> extendsFrom
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign>(
-			"extendsFrom", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, org.instantlogic.designer.entity.EntityDesignEntity.extensions
-		) {
-	
-			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> get(
-					org.instantlogic.designer.EntityDesign instance) {
-				return instance.getExtendsFromRelationValue();
-			}
-			
-		};
-	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.AttributeDesign>, org.instantlogic.designer.AttributeDesign> attributes
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.AttributeDesign>, org.instantlogic.designer.AttributeDesign>(
 			"attributes", INSTANCE, org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE, org.instantlogic.designer.AttributeDesign.class, org.instantlogic.designer.entity.AttributeDesignEntity.belongsToEntity
@@ -63,6 +50,19 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 	
 			public boolean isMultivalue() {
 				return true;
+			}
+			
+		};
+	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> extendsFrom
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign>(
+			"extendsFrom", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, org.instantlogic.designer.entity.EntityDesignEntity.extensions
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> get(
+					org.instantlogic.designer.EntityDesign instance) {
+				return instance.getExtendsFromRelationValue();
 			}
 			
 		};
@@ -122,35 +122,15 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EntityDesign>, org.instantlogic.designer.EntityDesign> extensions
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EntityDesign>, org.instantlogic.designer.EntityDesign>(
-			"extensions", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, org.instantlogic.designer.entity.EntityDesignEntity.extendsFrom
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.CastInstanceDeductionDesign>, org.instantlogic.designer.CastInstanceDeductionDesign> entityInCastDeductions
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.CastInstanceDeductionDesign>, org.instantlogic.designer.CastInstanceDeductionDesign>(
+			"entityInCastDeductions", INSTANCE, org.instantlogic.designer.entity.CastInstanceDeductionDesignEntity.INSTANCE, org.instantlogic.designer.CastInstanceDeductionDesign.class, org.instantlogic.designer.entity.CastInstanceDeductionDesignEntity.toEntity
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.CastInstanceDeductionDesign> get(
 					org.instantlogic.designer.EntityDesign instance) {
-				return instance.getExtensionsRelationValue();
-			}
-	
-			public boolean isReverse() {
-				return true;
-			}
-	
-			public boolean isMultivalue() {
-				return true;
-			}
-		};
-	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.RelationDesign>, org.instantlogic.designer.RelationDesign> reverseRelations
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.RelationDesign>, org.instantlogic.designer.RelationDesign>(
-			"reverseRelations", INSTANCE, org.instantlogic.designer.entity.RelationDesignEntity.INSTANCE, org.instantlogic.designer.RelationDesign.class, org.instantlogic.designer.entity.RelationDesignEntity.to
-		) {
-	
-			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.RelationDesign> get(
-					org.instantlogic.designer.EntityDesign instance) {
-				return instance.getReverseRelationsRelationValue();
+				return instance.getEntityInCastDeductionsRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -182,35 +162,15 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.CastInstanceDeductionDesign>, org.instantlogic.designer.CastInstanceDeductionDesign> entityInCastDeductions
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.CastInstanceDeductionDesign>, org.instantlogic.designer.CastInstanceDeductionDesign>(
-			"entityInCastDeductions", INSTANCE, org.instantlogic.designer.entity.CastInstanceDeductionDesignEntity.INSTANCE, org.instantlogic.designer.CastInstanceDeductionDesign.class, org.instantlogic.designer.entity.CastInstanceDeductionDesignEntity.toEntity
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EntityDesign>, org.instantlogic.designer.EntityDesign> extensions
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EntityDesign>, org.instantlogic.designer.EntityDesign>(
+			"extensions", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, org.instantlogic.designer.entity.EntityDesignEntity.extendsFrom
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.CastInstanceDeductionDesign> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> get(
 					org.instantlogic.designer.EntityDesign instance) {
-				return instance.getEntityInCastDeductionsRelationValue();
-			}
-	
-			public boolean isReverse() {
-				return true;
-			}
-	
-			public boolean isMultivalue() {
-				return true;
-			}
-		};
-	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentTemplateDesign>, org.instantlogic.designer.FragmentTemplateDesign> usedInField
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentTemplateDesign>, org.instantlogic.designer.FragmentTemplateDesign>(
-			"usedInField", INSTANCE, org.instantlogic.designer.entity.FragmentTemplateDesignEntity.INSTANCE, org.instantlogic.designer.FragmentTemplateDesign.class, org.instantlogic.designer.entity.FragmentTemplateDesignEntity.entity
-		) {
-	
-			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.FragmentTemplateDesign> get(
-					org.instantlogic.designer.EntityDesign instance) {
-				return instance.getUsedInFieldRelationValue();
+				return instance.getExtensionsRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -261,24 +221,64 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 				return true;
 			}
 		};
+	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.RelationDesign>, org.instantlogic.designer.RelationDesign> reverseRelations
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.RelationDesign>, org.instantlogic.designer.RelationDesign>(
+			"reverseRelations", INSTANCE, org.instantlogic.designer.entity.RelationDesignEntity.INSTANCE, org.instantlogic.designer.RelationDesign.class, org.instantlogic.designer.entity.RelationDesignEntity.to
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.RelationDesign> get(
+					org.instantlogic.designer.EntityDesign instance) {
+				return instance.getReverseRelationsRelationValue();
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
+	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentTemplateDesign>, org.instantlogic.designer.FragmentTemplateDesign> usedInField
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentTemplateDesign>, org.instantlogic.designer.FragmentTemplateDesign>(
+			"usedInField", INSTANCE, org.instantlogic.designer.entity.FragmentTemplateDesignEntity.INSTANCE, org.instantlogic.designer.FragmentTemplateDesign.class, org.instantlogic.designer.entity.FragmentTemplateDesignEntity.entity
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.FragmentTemplateDesign> get(
+					org.instantlogic.designer.EntityDesign instance) {
+				return instance.getUsedInFieldRelationValue();
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
-		extendsFrom,
 		attributes,
+		extendsFrom,
 		relations,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		application,
 		caseEntityInApplication,
-		extensions,
-		reverseRelations,
-		entityInSelectedInstanceDeductions,
 		entityInCastDeductions,
-		usedInField,
+		entityInSelectedInstanceDeductions,
+		extensions,
 		parameterInEvent,
 		parameterInFlows,
+		reverseRelations,
+		usedInField,
 	};
 
 	@Override

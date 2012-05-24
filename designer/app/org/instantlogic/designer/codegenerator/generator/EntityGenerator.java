@@ -2,6 +2,7 @@ package org.instantlogic.designer.codegenerator.generator;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.instantlogic.designer.AttributeDesign;
@@ -92,8 +93,15 @@ public class EntityGenerator extends AbstractGenerator {
 			}
 			model.reverseRelations.add(relation);
 		}
+		sortNames(model);
 		this.observations = new ObservationsOutdatedObserver(entityDesign.getMetadata().getCaseAdministration().stopRecordingObservations(), null);
 		context.updatedEntities.add(model);
+	}
+
+	private void sortNames(EntityClassModel model) {
+		Collections.sort(model.attributes);
+		Collections.sort(model.relations);
+		Collections.sort(model.reverseRelations);
 	}
 
 	private EntityClassModel initModel() {

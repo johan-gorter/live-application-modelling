@@ -5,7 +5,7 @@ import java.util.List;
 
 public class EntityClassModel extends AbstractClassModel {
 
-	public static class Attribute {
+	public static class Attribute implements Comparable<Attribute>{
 
 		public static class DomainEntry {
 			public String name;
@@ -63,6 +63,10 @@ public class EntityClassModel extends AbstractClassModel {
 		}
 		public Integer getRelevanceDeductionIndex() {
 			return relevanceDeductionIndex;
+		}
+		@Override
+		public int compareTo(Attribute o) {
+			return this.name.compareTo(o.name);
 		}
 	}
 	

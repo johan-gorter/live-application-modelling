@@ -12,19 +12,19 @@ public class FlowSourceDesign extends org.instantlogic.fabric.Instance {
 	
 	// Relations
 	
-	private final org.instantlogic.fabric.value.RelationValue<FlowSourceDesign, EventDesign> startEvent
-		= createRelationValue(org.instantlogic.designer.entity.FlowSourceDesignEntity.startEvent);
+	private final org.instantlogic.fabric.value.RelationValue<FlowSourceDesign, EventDesign> endEvent
+		= createRelationValue(org.instantlogic.designer.entity.FlowSourceDesignEntity.endEvent);
 		
-	public org.instantlogic.fabric.value.RelationValue<FlowSourceDesign, EventDesign> getStartEventRelationValue() {
-		return startEvent;
+	public org.instantlogic.fabric.value.RelationValue<FlowSourceDesign, EventDesign> getEndEventRelationValue() {
+		return endEvent;
 	}
 
-	public org.instantlogic.designer.EventDesign getStartEvent() {
-		return startEvent.getValue();
+	public org.instantlogic.designer.EventDesign getEndEvent() {
+		return endEvent.getValue();
 	}
 	
-	public FlowSourceDesign setStartEvent(org.instantlogic.designer.EventDesign newValue) {
-		startEvent.setValue(newValue);
+	public FlowSourceDesign setEndEvent(org.instantlogic.designer.EventDesign newValue) {
+		endEvent.setValue(newValue);
 		return (FlowSourceDesign)this;
 	}
 
@@ -46,19 +46,19 @@ public class FlowSourceDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	
-	private final org.instantlogic.fabric.value.RelationValue<FlowSourceDesign, EventDesign> endEvent
-		= createRelationValue(org.instantlogic.designer.entity.FlowSourceDesignEntity.endEvent);
+	private final org.instantlogic.fabric.value.RelationValue<FlowSourceDesign, EventDesign> startEvent
+		= createRelationValue(org.instantlogic.designer.entity.FlowSourceDesignEntity.startEvent);
 		
-	public org.instantlogic.fabric.value.RelationValue<FlowSourceDesign, EventDesign> getEndEventRelationValue() {
-		return endEvent;
+	public org.instantlogic.fabric.value.RelationValue<FlowSourceDesign, EventDesign> getStartEventRelationValue() {
+		return startEvent;
 	}
 
-	public org.instantlogic.designer.EventDesign getEndEvent() {
-		return endEvent.getValue();
+	public org.instantlogic.designer.EventDesign getStartEvent() {
+		return startEvent.getValue();
 	}
 	
-	public FlowSourceDesign setEndEvent(org.instantlogic.designer.EventDesign newValue) {
-		endEvent.setValue(newValue);
+	public FlowSourceDesign setStartEvent(org.instantlogic.designer.EventDesign newValue) {
+		startEvent.setValue(newValue);
 		return (FlowSourceDesign)this;
 	}
 
