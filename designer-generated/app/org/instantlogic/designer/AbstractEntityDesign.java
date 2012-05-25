@@ -12,23 +12,6 @@ public abstract class AbstractEntityDesign extends Design {
 	
 	// Relations
 	
-	private final org.instantlogic.fabric.value.RelationValue<EntityDesign, EntityDesign> extendsFrom
-		= createRelationValue(org.instantlogic.designer.entity.EntityDesignEntity.extendsFrom);
-		
-	public org.instantlogic.fabric.value.RelationValue<EntityDesign, EntityDesign> getExtendsFromRelationValue() {
-		return extendsFrom;
-	}
-
-	public org.instantlogic.designer.EntityDesign getExtendsFrom() {
-		return extendsFrom.getValue();
-	}
-	
-	public EntityDesign setExtendsFrom(org.instantlogic.designer.EntityDesign newValue) {
-		extendsFrom.setValue(newValue);
-		return (EntityDesign)this;
-	}
-
-	
 	private final org.instantlogic.fabric.value.RelationValues<EntityDesign, AttributeDesign> attributes
 		= createRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.attributes);
 		
@@ -60,6 +43,23 @@ public abstract class AbstractEntityDesign extends Design {
 		return (EntityDesign)this;
 	}
 	
+	
+	private final org.instantlogic.fabric.value.RelationValue<EntityDesign, EntityDesign> extendsFrom
+		= createRelationValue(org.instantlogic.designer.entity.EntityDesignEntity.extendsFrom);
+		
+	public org.instantlogic.fabric.value.RelationValue<EntityDesign, EntityDesign> getExtendsFromRelationValue() {
+		return extendsFrom;
+	}
+
+	public org.instantlogic.designer.EntityDesign getExtendsFrom() {
+		return extendsFrom.getValue();
+	}
+	
+	public EntityDesign setExtendsFrom(org.instantlogic.designer.EntityDesign newValue) {
+		extendsFrom.setValue(newValue);
+		return (EntityDesign)this;
+	}
+
 	
 	private final org.instantlogic.fabric.value.RelationValues<EntityDesign, RelationDesign> relations
 		= createRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.relations);
@@ -119,27 +119,15 @@ public abstract class AbstractEntityDesign extends Design {
 	}
 
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, EntityDesign> extensions
-		= createReverseRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.extensions);
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, CastInstanceDeductionDesign> entityInCastDeductions
+		= createReverseRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.entityInCastDeductions);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, EntityDesign> getExtensionsRelationValue() {
-		return extensions;
+	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, CastInstanceDeductionDesign> getEntityInCastDeductionsRelationValue() {
+		return entityInCastDeductions;
 	}
 
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EntityDesign> getExtensions() {
-		return extensions.getValue();
-	}
-
-	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, RelationDesign> reverseRelations
-		= createReverseRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.reverseRelations);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, RelationDesign> getReverseRelationsRelationValue() {
-		return reverseRelations;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.RelationDesign> getReverseRelations() {
-		return reverseRelations.getValue();
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.CastInstanceDeductionDesign> getEntityInCastDeductions() {
+		return entityInCastDeductions.getValue();
 	}
 
 	
@@ -155,27 +143,15 @@ public abstract class AbstractEntityDesign extends Design {
 	}
 
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, CastInstanceDeductionDesign> entityInCastDeductions
-		= createReverseRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.entityInCastDeductions);
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, EntityDesign> extensions
+		= createReverseRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.extensions);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, CastInstanceDeductionDesign> getEntityInCastDeductionsRelationValue() {
-		return entityInCastDeductions;
+	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, EntityDesign> getExtensionsRelationValue() {
+		return extensions;
 	}
 
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.CastInstanceDeductionDesign> getEntityInCastDeductions() {
-		return entityInCastDeductions.getValue();
-	}
-
-	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, FragmentTemplateDesign> usedInField
-		= createReverseRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.usedInField);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, FragmentTemplateDesign> getUsedInFieldRelationValue() {
-		return usedInField;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentTemplateDesign> getUsedInField() {
-		return usedInField.getValue();
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EntityDesign> getExtensions() {
+		return extensions.getValue();
 	}
 
 	
@@ -200,6 +176,30 @@ public abstract class AbstractEntityDesign extends Design {
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowDesign> getParameterInFlows() {
 		return parameterInFlows.getValue();
+	}
+
+	
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, RelationDesign> reverseRelations
+		= createReverseRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.reverseRelations);
+
+	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, RelationDesign> getReverseRelationsRelationValue() {
+		return reverseRelations;
+	}
+
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.RelationDesign> getReverseRelations() {
+		return reverseRelations.getValue();
+	}
+
+	
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, FragmentTemplateDesign> usedInField
+		= createReverseRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.usedInField);
+
+	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EntityDesign, FragmentTemplateDesign> getUsedInFieldRelationValue() {
+		return usedInField;
+	}
+
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentTemplateDesign> getUsedInField() {
+		return usedInField.getValue();
 	}
 
 

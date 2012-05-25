@@ -12,34 +12,34 @@ public class FlowDesign extends Design {
 	
 	// Relations
 	
-	private final org.instantlogic.fabric.value.RelationValues<FlowDesign, FlowSourceDesign> sources
-		= createRelationValues(org.instantlogic.designer.entity.FlowDesignEntity.sources);
+	private final org.instantlogic.fabric.value.RelationValues<FlowDesign, FlowEdgeDesign> edges
+		= createRelationValues(org.instantlogic.designer.entity.FlowDesignEntity.edges);
 		
-	public org.instantlogic.fabric.value.RelationValues<FlowDesign, FlowSourceDesign> getSourcesRelationValue() {
-		return sources;
+	public org.instantlogic.fabric.value.RelationValues<FlowDesign, FlowEdgeDesign> getEdgesRelationValue() {
+		return edges;
 	}
 
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowSourceDesign> getSources() {
-		return sources.getValue();
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowEdgeDesign> getEdges() {
+		return edges.getValue();
 	}
 	
-	public FlowDesign addToSources(FlowSourceDesign item) {
-		sources.addValue(item);
+	public FlowDesign addToEdges(FlowEdgeDesign item) {
+		edges.addValue(item);
 		return (FlowDesign)this;
 	}
 	
-	public FlowDesign addToSources(FlowSourceDesign item, int index) {
-		sources.insertValue(item, index);
+	public FlowDesign addToEdges(FlowEdgeDesign item, int index) {
+		edges.insertValue(item, index);
 		return (FlowDesign)this;
 	}
 	
-	public FlowDesign removeFromSources(FlowSourceDesign item) {
-		sources.removeValue(item);
+	public FlowDesign removeFromEdges(FlowEdgeDesign item) {
+		edges.removeValue(item);
 		return (FlowDesign)this;
 	}
 	
-	public FlowDesign removeFromSources(int index) {
-		sources.removeValue(index);
+	public FlowDesign removeFromEdges(int index) {
+		edges.removeValue(index);
 		return (FlowDesign)this;
 	}
 	
@@ -76,38 +76,6 @@ public class FlowDesign extends Design {
 	}
 	
 	
-	private final org.instantlogic.fabric.value.RelationValues<FlowDesign, FlowEdgeDesign> edges
-		= createRelationValues(org.instantlogic.designer.entity.FlowDesignEntity.edges);
-		
-	public org.instantlogic.fabric.value.RelationValues<FlowDesign, FlowEdgeDesign> getEdgesRelationValue() {
-		return edges;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowEdgeDesign> getEdges() {
-		return edges.getValue();
-	}
-	
-	public FlowDesign addToEdges(FlowEdgeDesign item) {
-		edges.addValue(item);
-		return (FlowDesign)this;
-	}
-	
-	public FlowDesign addToEdges(FlowEdgeDesign item, int index) {
-		edges.insertValue(item, index);
-		return (FlowDesign)this;
-	}
-	
-	public FlowDesign removeFromEdges(FlowEdgeDesign item) {
-		edges.removeValue(item);
-		return (FlowDesign)this;
-	}
-	
-	public FlowDesign removeFromEdges(int index) {
-		edges.removeValue(index);
-		return (FlowDesign)this;
-	}
-	
-	
 	private final org.instantlogic.fabric.value.RelationValues<FlowDesign, EntityDesign> parameters
 		= createRelationValues(org.instantlogic.designer.entity.FlowDesignEntity.parameters);
 		
@@ -136,6 +104,38 @@ public class FlowDesign extends Design {
 	
 	public FlowDesign removeFromParameters(int index) {
 		parameters.removeValue(index);
+		return (FlowDesign)this;
+	}
+	
+	
+	private final org.instantlogic.fabric.value.RelationValues<FlowDesign, FlowSourceDesign> sources
+		= createRelationValues(org.instantlogic.designer.entity.FlowDesignEntity.sources);
+		
+	public org.instantlogic.fabric.value.RelationValues<FlowDesign, FlowSourceDesign> getSourcesRelationValue() {
+		return sources;
+	}
+
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowSourceDesign> getSources() {
+		return sources.getValue();
+	}
+	
+	public FlowDesign addToSources(FlowSourceDesign item) {
+		sources.addValue(item);
+		return (FlowDesign)this;
+	}
+	
+	public FlowDesign addToSources(FlowSourceDesign item, int index) {
+		sources.insertValue(item, index);
+		return (FlowDesign)this;
+	}
+	
+	public FlowDesign removeFromSources(FlowSourceDesign item) {
+		sources.removeValue(item);
+		return (FlowDesign)this;
+	}
+	
+	public FlowDesign removeFromSources(int index) {
+		sources.removeValue(index);
 		return (FlowDesign)this;
 	}
 	
