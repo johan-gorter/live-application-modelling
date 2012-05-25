@@ -17,10 +17,10 @@ public class DesignerApplicationGenerator extends ApplicationDesign {
         setRootPackageName("org.instantlogic.designer");
         setSourcePath("/prive/live-business-engineering/nextdesigner/generated");
         setCaseEntity(ApplicationDesignEntityGenerator.ENTITY);
-        addToExposedFlows(MainFlowGenerator.FLOW);
+        setMainFlow(MainFlowGenerator.FLOW);
 
         //TODO: move to baseclass init
-		((MainFlowGenerator)getExposedFlows().get(0)).registerApplication(this);
+		((MainFlowGenerator)MainFlowGenerator.FLOW).registerApplication(this);
 		for (FlowDesign flow: getFlows()) {
 			((MainFlowGenerator)flow).init();
 		}

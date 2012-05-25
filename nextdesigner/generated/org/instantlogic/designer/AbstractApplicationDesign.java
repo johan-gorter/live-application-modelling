@@ -161,38 +161,6 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 	}
 	
 	
-	private final org.instantlogic.fabric.value.RelationValues<ApplicationDesign, FlowDesign> exposedFlows
-		= createRelationValues(org.instantlogic.designer.entity.ApplicationDesignEntity.exposedFlows);
-		
-	public org.instantlogic.fabric.value.RelationValues<ApplicationDesign, FlowDesign> getExposedFlowsRelationValue() {
-		return exposedFlows;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowDesign> getExposedFlows() {
-		return exposedFlows.getValue();
-	}
-	
-	public ApplicationDesign addToExposedFlows(FlowDesign item) {
-		exposedFlows.addValue(item);
-		return (ApplicationDesign)this;
-	}
-	
-	public ApplicationDesign addToExposedFlows(FlowDesign item, int index) {
-		exposedFlows.insertValue(item, index);
-		return (ApplicationDesign)this;
-	}
-	
-	public ApplicationDesign removeFromExposedFlows(FlowDesign item) {
-		exposedFlows.removeValue(item);
-		return (ApplicationDesign)this;
-	}
-	
-	public ApplicationDesign removeFromExposedFlows(int index) {
-		exposedFlows.removeValue(index);
-		return (ApplicationDesign)this;
-	}
-	
-	
 	private final org.instantlogic.fabric.value.RelationValues<ApplicationDesign, FlowDesign> flows
 		= createRelationValues(org.instantlogic.designer.entity.ApplicationDesignEntity.flows);
 		
@@ -224,6 +192,23 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 		return (ApplicationDesign)this;
 	}
 	
+	
+	private final org.instantlogic.fabric.value.RelationValue<ApplicationDesign, FlowDesign> mainFlow
+		= createRelationValue(org.instantlogic.designer.entity.ApplicationDesignEntity.mainFlow);
+		
+	public org.instantlogic.fabric.value.RelationValue<ApplicationDesign, FlowDesign> getMainFlowRelationValue() {
+		return mainFlow;
+	}
+
+	public org.instantlogic.designer.FlowDesign getMainFlow() {
+		return mainFlow.getValue();
+	}
+	
+	public ApplicationDesign setMainFlow(org.instantlogic.designer.FlowDesign newValue) {
+		mainFlow.setValue(newValue);
+		return (ApplicationDesign)this;
+	}
+
 	
 	private final org.instantlogic.fabric.value.RelationValues<ApplicationDesign, SharedFragmentTemplateDefinitionDesign> sharedTemplates
 		= createRelationValues(org.instantlogic.designer.entity.ApplicationDesignEntity.sharedTemplates);

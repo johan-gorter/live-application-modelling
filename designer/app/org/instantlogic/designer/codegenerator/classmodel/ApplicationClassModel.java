@@ -6,16 +6,16 @@ import java.util.List;
 public class ApplicationClassModel extends AbstractClassModel {
 
 	public String caseEntity;
-	public final List<String> exposedFlows  = new ArrayList<String>();
+	public String mainFlow;
 	public final List<String> entities = new ArrayList<String>();
 	
 	public String getCaseEntity() {
 		return caseEntity;
 	}
-	public List<String> getExposedFlows() {
-		return exposedFlows;
-	}
 	public List<String> getEntities() {
 		return entities;
+	}
+	public String getMainFlow() {
+		return mainFlow;
 	}
 }

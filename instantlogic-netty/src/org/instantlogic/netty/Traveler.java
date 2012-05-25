@@ -129,6 +129,7 @@ public class Traveler {
 			placeMessage.addProperty("message", "place");
 			placeMessage.add("rootFragment", rootFragment);
 			messagesWaiting.add(placeMessage);
+			sendPlace = false;
 		}
 		sendResponseMessages(parkedRequests.remove(0));
 	}

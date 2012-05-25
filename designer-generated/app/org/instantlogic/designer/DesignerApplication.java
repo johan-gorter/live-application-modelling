@@ -12,13 +12,9 @@ public class DesignerApplication extends org.instantlogic.interaction.Applicatio
 		return org.instantlogic.designer.entity.ApplicationDesignEntity.INSTANCE;
 	}
 	
-	private static final org.instantlogic.interaction.flow.Flow[] exposedFlows = new org.instantlogic.interaction.flow.Flow[] {
-		org.instantlogic.designer.flow.MainFlow.INSTANCE,
-	};
-
 	@Override
-	public org.instantlogic.interaction.flow.Flow[] getExposedFlows() {
-		return exposedFlows;
+	public org.instantlogic.interaction.flow.Flow getMainFlow() {
+		return org.instantlogic.designer.flow.MainFlow.INSTANCE;
 	}
 	
 	@Override

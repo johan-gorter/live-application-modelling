@@ -22,8 +22,8 @@ public class PlaceManager {
 	private static final JsonObject PLACE_NOT_FOUND = new JsonObject();
 	static  {
 		PLACE_NOT_FOUND.addProperty("id", "1");
-		PLACE_NOT_FOUND.addProperty("widget", "page");
-		PLACE_NOT_FOUND.addProperty("type", "error");
+		PLACE_NOT_FOUND.addProperty("fragmentType", "page");
+		PLACE_NOT_FOUND.addProperty("pageType", "error");
 		PLACE_NOT_FOUND.addProperty("reason", "notfound");
 	}
 	
@@ -50,9 +50,8 @@ public class PlaceManager {
 
 	private RenderContext findPage() {
 		try {
-			Flow flow = application.getApplication().getExposedFlow(pathElements[0]);
+			Flow flow = application.getApplication().getMainFlow();
 			Iterator<String> iterator = Arrays.asList(pathElements).iterator();
-			iterator.next();
 			FlowStack flowStack = flow.createFlowStack(null, pathElements[0], iterator, caseManager.getCase());
 			FlowContext flowContext = new FlowContext(caseManager.getCase(), caseManager.getCaseId());
 			flowContext.setFlowStack(flowStack);
