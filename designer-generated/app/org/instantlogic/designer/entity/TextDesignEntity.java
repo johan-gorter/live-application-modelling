@@ -35,15 +35,15 @@ public class TextDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 	
 	// Reverse relations
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.TextDesign, org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDesign> questionOnAttribute
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.TextDesign, org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDesign>(
-			"questionOnAttribute", INSTANCE, org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE, org.instantlogic.designer.AttributeDesign.class, org.instantlogic.designer.entity.AttributeDesignEntity.question
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.TextDesign, org.instantlogic.designer.DomainEntryDesign, org.instantlogic.designer.DomainEntryDesign> displayOnDomainEntry
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.TextDesign, org.instantlogic.designer.DomainEntryDesign, org.instantlogic.designer.DomainEntryDesign>(
+			"displayOnDomainEntry", INSTANCE, org.instantlogic.designer.entity.DomainEntryDesignEntity.INSTANCE, org.instantlogic.designer.DomainEntryDesign.class, org.instantlogic.designer.entity.DomainEntryDesignEntity.display
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.TextDesign, org.instantlogic.designer.AttributeDesign> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.TextDesign, org.instantlogic.designer.DomainEntryDesign> get(
 					org.instantlogic.designer.TextDesign instance) {
-				return instance.getQuestionOnAttributeRelationValue();
+				return instance.getDisplayOnDomainEntryRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -67,15 +67,15 @@ public class TextDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.TextDesign, org.instantlogic.designer.DomainEntryDesign, org.instantlogic.designer.DomainEntryDesign> displayOnDomainEntry
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.TextDesign, org.instantlogic.designer.DomainEntryDesign, org.instantlogic.designer.DomainEntryDesign>(
-			"displayOnDomainEntry", INSTANCE, org.instantlogic.designer.entity.DomainEntryDesignEntity.INSTANCE, org.instantlogic.designer.DomainEntryDesign.class, org.instantlogic.designer.entity.DomainEntryDesignEntity.display
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.TextDesign, org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDesign> questionOnAttribute
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.TextDesign, org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDesign>(
+			"questionOnAttribute", INSTANCE, org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE, org.instantlogic.designer.AttributeDesign.class, org.instantlogic.designer.entity.AttributeDesignEntity.question
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.TextDesign, org.instantlogic.designer.DomainEntryDesign> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.TextDesign, org.instantlogic.designer.AttributeDesign> get(
 					org.instantlogic.designer.TextDesign instance) {
-				return instance.getDisplayOnDomainEntryRelationValue();
+				return instance.getQuestionOnAttributeRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -104,9 +104,9 @@ public class TextDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
-		questionOnAttribute,
-		explanationOnAttribute,
 		displayOnDomainEntry,
+		explanationOnAttribute,
+		questionOnAttribute,
 		textForFragment,
 	};
 

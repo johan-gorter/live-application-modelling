@@ -65,6 +65,38 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 	
 	// Reverse relations
 	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentTemplateDesign> compositeTemplate
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentTemplateDesign>(
+			"compositeTemplate", INSTANCE, org.instantlogic.designer.entity.FragmentTemplateDesignEntity.INSTANCE, org.instantlogic.designer.FragmentTemplateDesign.class, org.instantlogic.designer.entity.FragmentTemplateDesignEntity.selections
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.FragmentTemplateDesign> get(
+					org.instantlogic.designer.DeductionSchemeDesign instance) {
+				return instance.getCompositeTemplateRelationValue();
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+		};
+	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDesign> defaultOfAttribute
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDesign>(
+			"defaultOfAttribute", INSTANCE, org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE, org.instantlogic.designer.AttributeDesign.class, org.instantlogic.designer.entity.AttributeDesignEntity._default
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.AttributeDesign> get(
+					org.instantlogic.designer.DeductionSchemeDesign instance) {
+				return instance.getDefaultOfAttributeRelationValue();
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+		};
+	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDesign> relevanceOfAttribute
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDesign>(
 			"relevanceOfAttribute", INSTANCE, org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE, org.instantlogic.designer.AttributeDesign.class, org.instantlogic.designer.entity.AttributeDesignEntity.relevance
@@ -97,22 +129,6 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDesign> defaultOfAttribute
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDesign>(
-			"defaultOfAttribute", INSTANCE, org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE, org.instantlogic.designer.AttributeDesign.class, org.instantlogic.designer.entity.AttributeDesignEntity._default
-		) {
-	
-			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.AttributeDesign> get(
-					org.instantlogic.designer.DeductionSchemeDesign instance) {
-				return instance.getDefaultOfAttributeRelationValue();
-			}
-	
-			public boolean isReverse() {
-				return true;
-			}
-		};
-	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.FormattedValueDesign, org.instantlogic.designer.FormattedValueDesign> templatedText
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.FormattedValueDesign, org.instantlogic.designer.FormattedValueDesign>(
 			"templatedText", INSTANCE, org.instantlogic.designer.entity.FormattedValueDesignEntity.INSTANCE, org.instantlogic.designer.FormattedValueDesign.class, org.instantlogic.designer.entity.FormattedValueDesignEntity.deduction
@@ -122,22 +138,6 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.FormattedValueDesign> get(
 					org.instantlogic.designer.DeductionSchemeDesign instance) {
 				return instance.getTemplatedTextRelationValue();
-			}
-	
-			public boolean isReverse() {
-				return true;
-			}
-		};
-	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentTemplateDesign> compositeTemplate
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentTemplateDesign>(
-			"compositeTemplate", INSTANCE, org.instantlogic.designer.entity.FragmentTemplateDesignEntity.INSTANCE, org.instantlogic.designer.FragmentTemplateDesign.class, org.instantlogic.designer.entity.FragmentTemplateDesignEntity.selections
-		) {
-	
-			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.FragmentTemplateDesign> get(
-					org.instantlogic.designer.DeductionSchemeDesign instance) {
-				return instance.getCompositeTemplateRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -168,11 +168,11 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 		output,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
+		compositeTemplate,
+		defaultOfAttribute,
 		relevanceOfAttribute,
 		ruleOfAttribute,
-		defaultOfAttribute,
 		templatedText,
-		compositeTemplate,
 		valueForFragment,
 	};
 

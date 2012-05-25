@@ -14,15 +14,15 @@ public class FlowNodeBaseDesign extends Design {
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<FlowNodeBaseDesign, FlowDesign> owner
-		= createReverseRelationValue(org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.owner);
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<FlowNodeBaseDesign, FlowEdgeDesign> incomingEdges
+		= createReverseRelationValues(org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.incomingEdges);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<FlowNodeBaseDesign, FlowDesign> getOwnerRelationValue() {
-		return owner;
+	public org.instantlogic.fabric.value.ReadOnlyRelationValues<FlowNodeBaseDesign, FlowEdgeDesign> getIncomingEdgesRelationValue() {
+		return incomingEdges;
 	}
 
-	public org.instantlogic.designer.FlowDesign getOwner() {
-		return owner.getValue();
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowEdgeDesign> getIncomingEdges() {
+		return incomingEdges.getValue();
 	}
 
 	
@@ -50,15 +50,15 @@ public class FlowNodeBaseDesign extends Design {
 	}
 
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<FlowNodeBaseDesign, FlowEdgeDesign> incomingEdges
-		= createReverseRelationValues(org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.incomingEdges);
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<FlowNodeBaseDesign, FlowDesign> owner
+		= createReverseRelationValue(org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.owner);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<FlowNodeBaseDesign, FlowEdgeDesign> getIncomingEdgesRelationValue() {
-		return incomingEdges;
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<FlowNodeBaseDesign, FlowDesign> getOwnerRelationValue() {
+		return owner;
 	}
 
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowEdgeDesign> getIncomingEdges() {
-		return incomingEdges.getValue();
+	public org.instantlogic.designer.FlowDesign getOwner() {
+		return owner.getValue();
 	}
 
 

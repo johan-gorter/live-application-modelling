@@ -35,18 +35,22 @@ public class FlowNodeBaseDesignEntity extends org.instantlogic.fabric.model.Enti
 	
 	// Reverse relations
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.designer.FlowDesign, org.instantlogic.designer.FlowDesign> owner
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.designer.FlowDesign, org.instantlogic.designer.FlowDesign>(
-			"owner", INSTANCE, org.instantlogic.designer.entity.FlowDesignEntity.INSTANCE, org.instantlogic.designer.FlowDesign.class, org.instantlogic.designer.entity.FlowDesignEntity.nodes
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowEdgeDesign>, org.instantlogic.designer.FlowEdgeDesign> incomingEdges
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowEdgeDesign>, org.instantlogic.designer.FlowEdgeDesign>(
+			"incomingEdges", INSTANCE, org.instantlogic.designer.entity.FlowEdgeDesignEntity.INSTANCE, org.instantlogic.designer.FlowEdgeDesign.class, org.instantlogic.designer.entity.FlowEdgeDesignEntity.endNode
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.designer.FlowDesign> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.designer.FlowEdgeDesign> get(
 					org.instantlogic.designer.FlowNodeBaseDesign instance) {
-				return instance.getOwnerRelationValue();
+				return instance.getIncomingEdgesRelationValue();
 			}
 	
 			public boolean isReverse() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
 				return true;
 			}
 		};
@@ -91,22 +95,18 @@ public class FlowNodeBaseDesignEntity extends org.instantlogic.fabric.model.Enti
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowEdgeDesign>, org.instantlogic.designer.FlowEdgeDesign> incomingEdges
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowEdgeDesign>, org.instantlogic.designer.FlowEdgeDesign>(
-			"incomingEdges", INSTANCE, org.instantlogic.designer.entity.FlowEdgeDesignEntity.INSTANCE, org.instantlogic.designer.FlowEdgeDesign.class, org.instantlogic.designer.entity.FlowEdgeDesignEntity.endNode
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.designer.FlowDesign, org.instantlogic.designer.FlowDesign> owner
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.designer.FlowDesign, org.instantlogic.designer.FlowDesign>(
+			"owner", INSTANCE, org.instantlogic.designer.entity.FlowDesignEntity.INSTANCE, org.instantlogic.designer.FlowDesign.class, org.instantlogic.designer.entity.FlowDesignEntity.nodes
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.designer.FlowEdgeDesign> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.designer.FlowDesign> get(
 					org.instantlogic.designer.FlowNodeBaseDesign instance) {
-				return instance.getIncomingEdgesRelationValue();
+				return instance.getOwnerRelationValue();
 			}
 	
 			public boolean isReverse() {
-				return true;
-			}
-	
-			public boolean isMultivalue() {
 				return true;
 			}
 		};
@@ -116,10 +116,10 @@ public class FlowNodeBaseDesignEntity extends org.instantlogic.fabric.model.Enti
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
-		owner,
+		incomingEdges,
 		incomingSources,
 		outgoingEdges,
-		incomingEdges,
+		owner,
 	};
 
 	@Override

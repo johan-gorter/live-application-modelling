@@ -41,14 +41,14 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 	
 	// Attributes
 	
-	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.Design, java.lang.String, java.lang.String> name 
-		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.Design, java.lang.String, java.lang.String>(
-			"name", INSTANCE, java.lang.String.class
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.Design, java.lang.Boolean, java.lang.Boolean> isCustomized 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.Design, java.lang.Boolean, java.lang.Boolean>(
+			"isCustomized", INSTANCE, java.lang.Boolean.class
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.Design, java.lang.String> get(org.instantlogic.designer.Design instance) {
-				return instance.getNameAttributeValue();
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.Design, java.lang.Boolean> get(org.instantlogic.designer.Design instance) {
+				return instance.getIsCustomizedAttributeValue();
 			}
 		};
 	
@@ -76,6 +76,17 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 			}
 		};
 	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.Design, java.lang.String, java.lang.String> name 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.Design, java.lang.String, java.lang.String>(
+			"name", INSTANCE, java.lang.String.class
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.Design, java.lang.String> get(org.instantlogic.designer.Design instance) {
+				return instance.getNameAttributeValue();
+			}
+		};
+	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.Design, java.lang.String, java.lang.String> technicalName 
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.Design, java.lang.String, java.lang.String>(
 			"technicalName", INSTANCE, java.lang.String.class
@@ -100,26 +111,15 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.Design, java.lang.Boolean, java.lang.Boolean> isCustomized 
-		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.Design, java.lang.Boolean, java.lang.Boolean>(
-			"isCustomized", INSTANCE, java.lang.Boolean.class
-		) {
-	
-			@Override
-			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.Design, java.lang.Boolean> get(org.instantlogic.designer.Design instance) {
-				return instance.getIsCustomizedAttributeValue();
-			}
-		};
-	
 	// Relations
 	
 	// Reverse relations
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
-		name,
-		javaIdentifier,
-		technicalName,
 		isCustomized,
+		javaIdentifier,
+		name,
+		technicalName,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 	};
