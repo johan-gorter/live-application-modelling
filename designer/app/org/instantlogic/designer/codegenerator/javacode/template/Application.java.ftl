@@ -12,15 +12,9 @@ public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${
 		return ${rootPackageName}.entity.${caseEntity}Entity.INSTANCE;
 	}
 	
-	private static final org.instantlogic.interaction.flow.Flow[] exposedFlows = new org.instantlogic.interaction.flow.Flow[] {
-	<#list exposedFlows as exposedFlow>
-		${rootPackageName}.flow.${exposedFlow}Flow.INSTANCE,
-	</#list>
-	};
-
 	@Override
-	public org.instantlogic.interaction.flow.Flow[] getExposedFlows() {
-		return exposedFlows;
+	public org.instantlogic.interaction.flow.Flow getMainFlow() {
+		return ${rootPackageName}.flow.${mainFlow}Flow.INSTANCE;
 	}
 	
 	@Override

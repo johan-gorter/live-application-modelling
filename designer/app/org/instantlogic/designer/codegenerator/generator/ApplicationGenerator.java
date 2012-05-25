@@ -11,7 +11,6 @@ import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.EventDesign;
 import org.instantlogic.designer.FlowDesign;
 import org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign;
-import org.instantlogic.designer.SharedTemplateDesign;
 import org.instantlogic.designer.codegenerator.classmodel.ApplicationClassModel;
 import org.instantlogic.designer.codegenerator.javacode.ApplicationJavacodeGenerator;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
@@ -60,9 +59,7 @@ public class ApplicationGenerator extends AbstractGenerator{
 			model.entities.add(entity.getName());
 		}
 		model.caseEntity = applicationInstance.getCaseEntity().getName();
-		for (FlowDesign exposed: applicationInstance.getExposedFlows()) {
-			model.exposedFlows.add(exposed.getName());
-		}
+		model.mainFlow = applicationInstance.getMainFlow().getName();
 		
 		List<Design> newEntities = updateGenerators(entityGenerators, applicationInstance.getEntities(), context);
 		for(Design newEntity : newEntities) {

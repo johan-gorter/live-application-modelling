@@ -1,20 +1,26 @@
 package org.instantlogic.interaction.page;
 
+import java.util.Map;
+
 import org.instantlogic.interaction.util.ChangeContext;
 import org.instantlogic.interaction.util.FlowEventOccurrence;
 import org.instantlogic.interaction.util.RenderContext;
 
 public abstract class SharedFragmentTemplate extends FragmentTemplate {
 
+	public SharedFragmentTemplate(String id) {
+		super(id, null);
+	}
+
 	protected abstract FragmentTemplate getDelegate();
 	
 	@Override
-	public String getWidgetName() {
-		return getDelegate().getWidgetName();
+	public String getFragmentTypeName() {
+		return getDelegate().getFragmentTypeName();
 	}
-
+	
 	@Override
-	public Fragment render(RenderContext context) {
+	public Map<String, Object> render(RenderContext context) {
 		return getDelegate().render(context);
 	}
 	

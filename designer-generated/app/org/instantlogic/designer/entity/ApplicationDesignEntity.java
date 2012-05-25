@@ -128,23 +128,6 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowDesign>, org.instantlogic.designer.FlowDesign> exposedFlows
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowDesign>, org.instantlogic.designer.FlowDesign>(
-			"exposedFlows", INSTANCE, org.instantlogic.designer.entity.FlowDesignEntity.INSTANCE, org.instantlogic.designer.FlowDesign.class, org.instantlogic.designer.entity.FlowDesignEntity.exposedFlowInApplication
-		) {
-	
-			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.ApplicationDesign, org.instantlogic.designer.FlowDesign> get(
-					org.instantlogic.designer.ApplicationDesign instance) {
-				return instance.getExposedFlowsRelationValue();
-			}
-	
-			public boolean isMultivalue() {
-				return true;
-			}
-			
-		};
-	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowDesign>, org.instantlogic.designer.FlowDesign> flows
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowDesign>, org.instantlogic.designer.FlowDesign>(
 			"flows", INSTANCE, org.instantlogic.designer.entity.FlowDesignEntity.INSTANCE, org.instantlogic.designer.FlowDesign.class, org.instantlogic.designer.entity.FlowDesignEntity.application
@@ -162,6 +145,19 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 	
 			public boolean isMultivalue() {
 				return true;
+			}
+			
+		};
+	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.designer.FlowDesign, org.instantlogic.designer.FlowDesign> mainFlow
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.designer.FlowDesign, org.instantlogic.designer.FlowDesign>(
+			"mainFlow", INSTANCE, org.instantlogic.designer.entity.FlowDesignEntity.INSTANCE, org.instantlogic.designer.FlowDesign.class, org.instantlogic.designer.entity.FlowDesignEntity.exposedFlowInApplication
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.ApplicationDesign, org.instantlogic.designer.FlowDesign> get(
+					org.instantlogic.designer.ApplicationDesign instance) {
+				return instance.getMainFlowRelationValue();
 			}
 			
 		};
@@ -199,8 +195,8 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 		caseEntity,
 		entities,
 		events,
-		exposedFlows,
 		flows,
+		mainFlow,
 		sharedTemplates,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{

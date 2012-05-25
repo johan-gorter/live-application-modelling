@@ -26,9 +26,9 @@ public class FragmentTemplate {
 	private final String id;
 	private final String fragmentTypeName;
 	
-	public FragmentTemplate(String id, String Name) {
+	public FragmentTemplate(String id, String fragmentTypeName) {
 		this.id = id;
-		this.fragmentTypeName = Name;
+		this.fragmentTypeName = fragmentTypeName;
 	}
 
 	public FragmentTemplate putValue(String DataKey, Deduction<?> value) {

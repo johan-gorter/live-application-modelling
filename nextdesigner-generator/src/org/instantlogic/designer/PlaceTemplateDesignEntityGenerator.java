@@ -7,6 +7,7 @@ public class PlaceTemplateDesignEntityGenerator extends EntityDesign {
     
     private PlaceTemplateDesignEntityGenerator() {
         setName("PlaceTemplateDesign");
+        setIsCustomized(true);
         setExtendsFrom(FlowNodeBaseDesignEntityGenerator.ENTITY);
     }
 

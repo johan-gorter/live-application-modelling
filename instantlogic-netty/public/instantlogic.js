@@ -35,7 +35,7 @@ YUI.add('instantlogic', function (Y) {
             if (!location) Y.error('no location given');
             this.containerNode.setContent('One moment...');
             this.setState('connecting');
-            this.newRequest([{message:'enter', location: location}]);
+            this.sendRequest([{message:'enter', location: location}]);
         },
 
         // Private functions
@@ -99,7 +99,7 @@ YUI.add('instantlogic', function (Y) {
             Y.error('No fragmentnamespace provides a fragment called ' + name);
         },
 
-        newRequest: function (messages) {
+        sendRequest: function (messages) {
         	var data = (messages && messages.length>0) ? JSON.stringify(messages) : null;
             Y.io('/place?application='+this.application+'&case='+this.caseId+'&travelerId=' + travelerId, {
             	data: data,
@@ -108,12 +108,12 @@ YUI.add('instantlogic', function (Y) {
                     success: function (transactionid, response) {
                         this.setState('connected');
                         this.processUpdates(response.responseText);
-                        this.newRequest();
+                        this.sendRequest();
                     },
                     failure: function () {
                         this.setState('disconnected');
                         var me = this;
-                        setTimeout(function () { me.newRequest(); }, 300);
+                        setTimeout(function () { me.sendRequest(); }, 300);
                     }
                 },
                 context: this
