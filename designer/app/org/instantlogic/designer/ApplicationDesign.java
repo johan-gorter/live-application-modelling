@@ -33,15 +33,25 @@ public class ApplicationDesign extends AbstractApplicationDesign {
 	}
 
 	private void eagerlyLoadAllClasses(File packageDir, String packageName) {
-		File[] classes = packageDir.listFiles();
+		File[] entries = packageDir.listFiles();
         String entryName;
-        for(File c: classes){
-            entryName = c.getName();
-            if (!entryName.endsWith("EntityGenerator.class")) continue;
-            entryName = entryName.substring(0, entryName.lastIndexOf('.'));
+        for(File entry: entries){
+            entryName = entry.getName();
+            if (entry.isDirectory()) {
+            	eagerlyLoadAllClasses(entry, packageName+"."+entryName);
+            	continue;
+            }
             try {
-				Class<?> cl = getClass().getClassLoader().loadClass(packageName+"."+entryName);
-				cl.getField("ENTITY").get(null);
+            	if (entryName.endsWith("EntityGenerator.class")) {
+            		entryName = entryName.substring(0, entryName.lastIndexOf('.'));
+					Class<?> cl = getClass().getClassLoader().loadClass(packageName+"."+entryName);
+					cl.getField("ENTITY").get(null);
+                } else if (entryName.endsWith("EventGenerator.class")) {
+            		entryName = entryName.substring(0, entryName.lastIndexOf('.'));
+					Class<?> cl = getClass().getClassLoader().loadClass(packageName+"."+entryName);
+					EventDesign event = (EventDesign) cl.getField("EVENT").get(null);
+					addToEvents(event);
+                }
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
 			} catch (IllegalAccessException e) {
