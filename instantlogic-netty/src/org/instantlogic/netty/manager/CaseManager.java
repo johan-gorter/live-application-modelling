@@ -17,11 +17,11 @@ public class CaseManager {
 	private Map<String, PlaceManager> activePlaces = new HashMap<String, PlaceManager>();
 	
 	public CaseManager(ApplicationManager application, String caseId, Entity<? extends Instance> caseEntity) {
-		if (caseId==null) caseId = CasePersister.uniqueId();
+		if (caseId==null) caseId = FileCasePersister.uniqueId();
 		this.caseId = caseId;
 		this.caseEntity = caseEntity;
 		this.application = application;
-		this.theCase = CasePersister.INSTANCE.loadOrCreate(caseId, caseEntity.getInstanceClass());
+		this.theCase = FileCasePersister.INSTANCE.loadOrCreate(caseId, caseEntity.getInstanceClass());
 	}
 
 	public String getCaseId() {

@@ -1,15 +1,10 @@
 package org.instantlogic.netty.manager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.instantlogic.interaction.flow.Flow;
 import org.instantlogic.interaction.flow.PlaceTemplate;
-import org.instantlogic.interaction.util.FlowContext;
-import org.instantlogic.interaction.util.FlowStack;
 import org.instantlogic.interaction.util.RenderContext;
 import org.instantlogic.netty.Traveler;
 
@@ -30,13 +25,11 @@ public class PlaceManager {
 	private final ApplicationManager application;
 	private final CaseManager caseManager;
 	private final String path;
-	private final String[] pathElements;
 	
 	public PlaceManager(ApplicationManager application, CaseManager caseManager, String path) {
 		this.application = application;
 		this.caseManager = caseManager;
 		this.path = path;
-		this.pathElements = path.split("/");
 	}
 
 	public Object render(Traveler traveler) {
@@ -50,15 +43,7 @@ public class PlaceManager {
 
 	private RenderContext findPage() {
 		try {
-			Flow flow = application.getApplication().getMainFlow();
-			Iterator<String> iterator = Arrays.asList(pathElements).iterator();
-			FlowStack flowStack = flow.createFlowStack(null, pathElements[0], iterator, caseManager.getCase());
-			FlowContext flowContext = new FlowContext(caseManager.getCase(), caseManager.getCaseId());
-			flowContext.setFlowStack(flowStack);
-			if (flowStack.getCurrentNode()==null) {
-				return null;
-			}
-			return new RenderContext(flowContext, this.path);
+			return RenderContext.create(application.getApplication().getMainFlow(), path, caseManager.getCase(), caseManager.getCaseId());
 		} catch (NoSuchElementException e) {
 			return null;
 		}

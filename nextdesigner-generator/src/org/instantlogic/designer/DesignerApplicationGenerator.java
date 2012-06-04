@@ -19,12 +19,6 @@ public class DesignerApplicationGenerator extends ApplicationDesign {
         setCaseEntity(ApplicationDesignEntityGenerator.ENTITY);
         setMainFlow(MainFlowGenerator.FLOW);
 
-        //TODO: move to baseclass init
-		((MainFlowGenerator)MainFlowGenerator.FLOW).registerApplication(this);
-		for (FlowDesign flow: getFlows()) {
-			((MainFlowGenerator)flow).init();
-		}
-		
         init();
     }
     

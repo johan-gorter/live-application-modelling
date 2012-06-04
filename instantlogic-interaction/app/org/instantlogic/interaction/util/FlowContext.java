@@ -1,6 +1,7 @@
 package org.instantlogic.interaction.util;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Entity;
@@ -12,6 +13,17 @@ import org.instantlogic.interaction.flow.PlaceTemplate;
 
 public class FlowContext extends DeductionContext {
 
+	public static FlowContext create(Flow mainFlow, String path, Instance caseInstance, String caseId) {
+		FlowStack flowStack = FlowStack.create(mainFlow, path, caseInstance);
+		FlowContext result = new FlowContext(caseInstance, caseId);
+		result.setFlowStack(flowStack);
+		if (flowStack.getCurrentNode()==null) {
+			throw new NoSuchElementException();
+		}
+		return result;
+	}
+	
+	
 	private final Instance caseInstance;
 	private final String caseId;
 	private FlowStack flowStack;
@@ -37,14 +49,15 @@ public class FlowContext extends DeductionContext {
 		return caseId;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Instance getSelectedInstance(Entity entity) {
+	public <I extends Instance> I getSelectedInstance(Entity<I> entity) {
 		if (entity == caseInstance.getInstanceEntity()) {
-			return caseInstance;
+			return (I)caseInstance;
 		}
 		Instance result = flowStack.getSelectedInstance(entity);
 		if (result!=null) {
-			return result;
+			return (I)result;
 		}
 		throw new RuntimeException("No active instance of entity "+entity.getName());
 	}

@@ -8,6 +8,7 @@ public class FragmentTemplateDesignEntityGenerator extends EntityDesign {
     private FragmentTemplateDesignEntityGenerator() {
         setName("FragmentTemplateDesign");
         setExtendsFrom(DesignEntityGenerator.ENTITY);
+        setIsCustomized(true);
     }
 
     // Attributes

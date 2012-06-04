@@ -59,7 +59,9 @@ public class ApplicationGenerator extends AbstractGenerator{
 			model.entities.add(entity.getName());
 		}
 		model.caseEntity = applicationInstance.getCaseEntity().getName();
-		model.mainFlow = applicationInstance.getMainFlow().getName();
+		if (applicationInstance.getMainFlow()!=null) {
+			model.mainFlow = applicationInstance.getMainFlow().getName();
+		}
 		
 		List<Design> newEntities = updateGenerators(entityGenerators, applicationInstance.getEntities(), context);
 		for(Design newEntity : newEntities) {
