@@ -1,6 +1,8 @@
 package org.instantlogic.interaction.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.util.AbstractDeductionContext;
@@ -9,6 +11,12 @@ import org.instantlogic.interaction.flow.FlowNodeBase;
 import org.instantlogic.interaction.util.PageCoordinates.Coordinate;
 
 public class FlowStack extends AbstractDeductionContext {
+	
+	public static FlowStack create(Flow mainFlow, String path, Instance caseInstance) {
+		String[] pathElements = path.split("/");
+		Iterator<String> iterator = Arrays.asList(pathElements).iterator();
+		return mainFlow.createFlowStack(null, pathElements[0], iterator, caseInstance);
+	}
 	
 	private final FlowStack parent;
 	

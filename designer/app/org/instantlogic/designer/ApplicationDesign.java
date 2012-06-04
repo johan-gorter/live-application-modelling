@@ -25,10 +25,15 @@ public class ApplicationDesign extends AbstractApplicationDesign {
 		eagerlyLoadAllClasses(new File(getClass().getResource("").getFile()), packageName);
 		
 		getCaseEntity().registerApplication(this);
+		if (getMainFlow()!=null) {
+			getMainFlow().registerApplication(this);
+		}
 
-		//TODO: flows
 		for (EntityDesign entity:getEntities()) {
 			entity.init();
+		}
+		for (FlowDesign flow: getFlows()) {
+			flow.init();
 		}
 	}
 

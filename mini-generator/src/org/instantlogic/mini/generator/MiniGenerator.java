@@ -1,6 +1,8 @@
 package org.instantlogic.mini.generator;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
 
 import org.instantlogic.designer.ApplicationDesign;
@@ -8,6 +10,7 @@ import org.instantlogic.designer.codegenerator.generator.GeneratedClassModels;
 import org.instantlogic.designer.codegenerator.javacode.ApplicationJavacodeGenerator;
 import org.instantlogic.designer.codegenerator.jvmbytecode.ApplicationBytecodeGenerator;
 import org.instantlogic.designer.codegenerator.jvmbytecode.BytecodeClassloader;
+import org.instantlogic.engine.persistence.json.CasePersister;
 import org.instantlogic.fabric.Instance;
 
 public class MiniGenerator {
@@ -26,5 +29,8 @@ public class MiniGenerator {
 		}
 		
 		ApplicationJavacodeGenerator.generate(classModelUpdates, new File(applicationInstance.getSourcePath()));
+		OutputStreamWriter writer = new OutputStreamWriter(System.out);
+		new CasePersister().save(applicationInstance, writer);
+		writer.flush();
 	}
 }

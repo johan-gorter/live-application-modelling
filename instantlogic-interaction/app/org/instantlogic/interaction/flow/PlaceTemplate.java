@@ -1,5 +1,7 @@
 package org.instantlogic.interaction.flow;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.instantlogic.interaction.page.FragmentTemplate;
@@ -15,7 +17,9 @@ public abstract class PlaceTemplate extends FlowNodeBase {
 		return getRootContainer().submit(changeContext);
 	}
 
-	public Map<String, Object> render(final RenderContext renderContext) {
-		return getRootContainer().render(renderContext);
+	public List<Map<String, Object>> render(final RenderContext renderContext) {
+		List<Map<String, Object>> result = new ArrayList<Map<String,Object>>();
+		getRootContainer().render(renderContext, result);
+		return result;
 	}
 }

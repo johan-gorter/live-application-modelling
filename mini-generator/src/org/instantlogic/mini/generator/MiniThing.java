@@ -13,9 +13,9 @@ public class MiniThing extends EntityDesign {
 		setName("MiniThing");
 	}
 	
-	public final AttributeDesign miniProperty = addAttribute("miniProperty", Float.class);
-	public final AttributeDesign miniProperty2 = addAttribute("miniProperty2", Float.class);
+	public final AttributeDesign miniProperty = addAttribute(this, "miniProperty", Float.class);
+	public final AttributeDesign miniProperty2 = addAttribute(this, "miniProperty2", Float.class);
 	
-	public final RelationDesign children = addRelation("children", RelationType.OneToManyAggregation, this).setReverseName("parent");
+	public final RelationDesign children = addRelation(this, "children", RelationType.OneToManyAggregation, this).setReverseName("parent");
 	
 }

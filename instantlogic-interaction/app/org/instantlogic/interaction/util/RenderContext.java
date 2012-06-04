@@ -5,11 +5,17 @@ import java.util.List;
 
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.util.AbstractDeductionContext;
+import org.instantlogic.interaction.flow.Flow;
 import org.instantlogic.interaction.page.FragmentTemplate;
 
 
 public class RenderContext extends AbstractDeductionContext{
 
+	public static RenderContext create(Flow mainFlow, String path, Instance caseInstance, String caseId) {
+		FlowContext flowContext = FlowContext.create(mainFlow, path, caseInstance, caseId);
+		return new RenderContext(flowContext, path);
+	}
+	
 	private final FlowContext flowContext;
 	
 	public List<String> prefixes = new ArrayList<String>();

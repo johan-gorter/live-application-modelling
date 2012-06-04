@@ -1,28 +1,54 @@
 package org.instantlogic.designer.flow.main;
 
+import org.instantlogic.designer.EntityDesign;
+import org.instantlogic.fabric.value.Multi;
+
 public class WelcomePlaceTemplate extends org.instantlogic.interaction.flow.PlaceTemplate {
 
 	public static final WelcomePlaceTemplate INSTANCE = new WelcomePlaceTemplate();
 
+	private static org.instantlogic.fabric.deduction.Deduction<Multi<EntityDesign>> createDeduction1() {
+		org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.ApplicationDesign> d0 = org.instantlogic.fabric.deduction.SelectedInstanceDeduction
+				.create(org.instantlogic.designer.entity.ApplicationDesignEntity.INSTANCE);
+		org.instantlogic.fabric.deduction.Deduction<Multi<EntityDesign>> d1 = org.instantlogic.fabric.deduction.AttributeDeduction.create(
+				org.instantlogic.designer.entity.ApplicationDesignEntity.entities, d0);
+		return d1;
+	}
 	
-	private static org.instantlogic.interaction.page.FragmentTemplate CONTENT = 
-        new org.instantlogic.interaction.page.FragmentTemplate("F1P2F1", "Page")      
-        .putChildren("headerContent",
-                new org.instantlogic.interaction.page.FragmentTemplate("F1P2F1F1F1", "Heading1")      
-                .putText("text", new org.instantlogic.fabric.text.ConstantText("Welcome"))
-        )      
-        .putChildren("mainContent",
-                new org.instantlogic.interaction.page.FragmentTemplate("F1P2F1F2F1", "Paragraph")      
-                .putText("text", new org.instantlogic.fabric.text.ConstantText("Welcome to the Designer"))
-        ); 
-	
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.String> createDeduction0() {
+		org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.Design> d0 = org.instantlogic.fabric.deduction.SelectedInstanceDeduction
+				.create(org.instantlogic.designer.entity.DesignEntity.INSTANCE);
+		org.instantlogic.fabric.deduction.Deduction<java.lang.String> d1 = org.instantlogic.fabric.deduction.AttributeDeduction.create(
+				org.instantlogic.designer.entity.DesignEntity.name, d0);
+		return d1;
+	}
+
+	private static org.instantlogic.interaction.page.FragmentTemplate CONTENT = new org.instantlogic.interaction.page.FragmentTemplate("F39P2F1", "Page")
+			.putChildren(
+					"headerContent",
+					new org.instantlogic.interaction.page.FragmentTemplate("F39P2F1F1F1", "Heading1").putText("text",
+							new org.instantlogic.fabric.text.ConstantText("Welcome"))).putChildren(
+					"mainContent",
+					new org.instantlogic.interaction.page.FragmentTemplate("F39P2F1F2F1", "Paragraph").putText("text",
+							new org.instantlogic.fabric.text.ConstantText("Welcome to the Designer")),
+					new org.instantlogic.interaction.page.FragmentTemplate("F39P2F1F2F2", "Table").putChildren(
+							"columns",
+							new org.instantlogic.interaction.page.FragmentTemplate("F39P2F1F2F2F1F1", "Column").putText("header",
+									new org.instantlogic.fabric.text.ConstantText("Entities"))).putChildren(
+							"rows",
+							new org.instantlogic.interaction.page.FragmentTemplate("F39P2F1F2F2F2F1", "Row").putChildren("cells",
+									new org.instantlogic.interaction.page.FragmentTemplate("F39P2F1F2F2F2F1F1F1", "Cell").putChildren("content",
+											new org.instantlogic.interaction.page.SelectionTemplate(createDeduction1(),
+											new org.instantlogic.interaction.page.FragmentTemplate("F39P2F1F2F2F2F1F1F1F1F1", "Paragraph").putText("text",
+													new org.instantlogic.fabric.text.TemplatedText().add(createDeduction0())))))));
+
 	@Override
 	public org.instantlogic.interaction.page.FragmentTemplate getRootContainer() {
 		return CONTENT;
-	}; 
-	
-    @Override
-    public String getName() {
-        return "Welcome";
-    }
+	};
+
+	@Override
+	public String getName() {
+		return "Welcome";
+	}
 }

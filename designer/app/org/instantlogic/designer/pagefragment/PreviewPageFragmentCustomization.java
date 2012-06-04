@@ -9,7 +9,7 @@ import org.instantlogic.designer.FragmentTemplateDesign;
 import org.instantlogic.designer.TextDesign;
 import org.instantlogic.designer.entity.PageFragmentDesignEntity;
 import org.instantlogic.interaction.page.Fragment;
-import org.instantlogic.interaction.page.PageElement;
+import org.instantlogic.interaction.page.PageTemplateElement;
 import org.instantlogic.interaction.page.FragmentTemplate;
 import org.instantlogic.interaction.util.RenderContext;
 
@@ -33,18 +33,18 @@ public class PreviewPageFragmentCustomization extends FragmentTemplate {
 		return result;
 	}
 	
-	private void transformToButton(PageElement result, ButtonDesign design) {
+	private void transformToButton(PageTemplateElement result, ButtonDesign design) {
 		result.id="button-"+result.id;
 		result.elementType="button";
 		result.display = previewText(design.getCaption());
 	}
 
-	private void transformToHeader(PageElement result, HeaderDesign design) {
+	private void transformToHeader(PageTemplateElement result, HeaderDesign design) {
 		result.id = "header-"+result.id;
 		result.display = previewText(design.getText());
 	}
 
-	private void transformToField(PageElement result, WidgetTemplateDesign design) {
+	private void transformToField(PageTemplateElement result, WidgetTemplateDesign design) {
 		result.id = "field-"+result.id;
 		result.elementType = "field";
 		result.datatype = datatypeToString(design.getAttribute().getClassName());
