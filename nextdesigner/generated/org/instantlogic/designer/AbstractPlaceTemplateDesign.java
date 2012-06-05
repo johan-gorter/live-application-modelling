@@ -12,18 +12,18 @@ public abstract class AbstractPlaceTemplateDesign extends FlowNodeBaseDesign {
 	
 	// Relations
 	
-	private final org.instantlogic.fabric.value.RelationValue<PlaceTemplateDesign, FragmentTemplateDesign> content
+	private final org.instantlogic.fabric.value.RelationValue<PlaceTemplateDesign, ElementDesign> content
 		= createRelationValue(org.instantlogic.designer.entity.PlaceTemplateDesignEntity.content);
 		
-	public org.instantlogic.fabric.value.RelationValue<PlaceTemplateDesign, FragmentTemplateDesign> getContentRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<PlaceTemplateDesign, ElementDesign> getContentRelationValue() {
 		return content;
 	}
 
-	public org.instantlogic.designer.FragmentTemplateDesign getContent() {
+	public org.instantlogic.designer.ElementDesign getContent() {
 		return content.getValue();
 	}
 	
-	public PlaceTemplateDesign setContent(org.instantlogic.designer.FragmentTemplateDesign newValue) {
+	public PlaceTemplateDesign setContent(org.instantlogic.designer.ElementDesign newValue) {
 		content.setValue(newValue);
 		return (PlaceTemplateDesign)this;
 	}

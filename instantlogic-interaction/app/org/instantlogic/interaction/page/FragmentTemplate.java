@@ -16,13 +16,13 @@ import org.instantlogic.interaction.util.ChangeContext;
 import org.instantlogic.interaction.util.FlowEventOccurrence;
 import org.instantlogic.interaction.util.RenderContext;
 
-public class FragmentTemplate extends AbstractTemplate {
+public class FragmentTemplate extends Element {
 
 	private final List<FragmentFilter> customFilters = new ArrayList<FragmentFilter>();
 	
-	private final Map<String, Deduction<?>> values = new HashMap<String, Deduction<?>>();
-	private final Map<String, Text> texts = new HashMap<String, Text>();
-	private final Map<String, AbstractTemplate[]> childlists = new HashMap<String, AbstractTemplate[]>();
+	private final Map<String, Deduction<?>> valueProperties = new HashMap<String, Deduction<?>>();
+	private final Map<String, Text> textProperties = new HashMap<String, Text>();
+	private final Map<String, Element[]> childlistProperties = new HashMap<String, Element[]>();
 	
 	private final String id;
 	private final String fragmentTypeName;
@@ -84,17 +84,17 @@ public class FragmentTemplate extends AbstractTemplate {
 	}
 
 	public FragmentTemplate putValue(String DataKey, Deduction<?> value) {
-		values.put(DataKey, value);
+		valueProperties.put(DataKey, value);
 		return this;
 	}
 	
 	public FragmentTemplate putText(String DataKey, Text value) {
-		texts.put(DataKey, value);
+		textProperties.put(DataKey, value);
 		return this;
 	}
 	
-	public FragmentTemplate putChildren(String DataKey, AbstractTemplate... children) {
-		childlists.put(DataKey, children);
+	public FragmentTemplate putChildren(String DataKey, Element... children) {
+		childlistProperties.put(DataKey, children);
 		return this;
 	}
 	
@@ -130,15 +130,15 @@ public class FragmentTemplate extends AbstractTemplate {
 		Map<String, Object> result = new LinkedHashMap<String, Object>();
 		result.put("type", getFragmentTypeName());
 		result.put("id", id);
-		for (Map.Entry<String, Deduction<?>> entry : values.entrySet()) {
+		for (Map.Entry<String, Deduction<?>> entry : valueProperties.entrySet()) {
 			result.put(entry.getKey(), entry.getValue().deduct(context).getValue());
 		}
-		for (Map.Entry<String, Text> entry : texts.entrySet()) {
+		for (Map.Entry<String, Text> entry : textProperties.entrySet()) {
 			result.put(entry.getKey(), entry.getValue().renderText(context));
 		}
-		for (Map.Entry<String, AbstractTemplate[]> entry : childlists.entrySet()) {
+		for (Map.Entry<String, Element[]> entry : childlistProperties.entrySet()) {
 			List<Map<String, Object>> fragments = new ArrayList<Map<String, Object>>();
-			for (AbstractTemplate template: entry.getValue()) {
+			for (Element template: entry.getValue()) {
 				template.render(context, fragments);
 			}
 			result.put(entry.getKey(), fragments);
@@ -158,8 +158,8 @@ public class FragmentTemplate extends AbstractTemplate {
 	
 	protected FlowEventOccurrence doSubmit(ChangeContext changeContext, String id) {
 		FlowEventOccurrence result=null;
-		for (AbstractTemplate[] fragmentTemplates: childlists.values()) {
-			for (AbstractTemplate template: fragmentTemplates) {
+		for (Element[] fragmentTemplates: childlistProperties.values()) {
+			for (Element template: fragmentTemplates) {
 				FlowEventOccurrence itemResult = template.submit(changeContext);
 				if (itemResult!=null) {
 					if (result!=null) {

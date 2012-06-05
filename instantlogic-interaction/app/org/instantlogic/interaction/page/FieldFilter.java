@@ -3,9 +3,7 @@ package org.instantlogic.interaction.page;
 import java.util.Map;
 
 import org.instantlogic.fabric.model.Attribute;
-import org.instantlogic.fabric.model.DomainEntry;
 import org.instantlogic.fabric.model.Entity;
-import org.instantlogic.interaction.page.PageTemplateElement.Domain;
 import org.instantlogic.interaction.util.ChangeContext;
 import org.instantlogic.interaction.util.FlowEventOccurrence;
 import org.instantlogic.interaction.util.RenderContext;
@@ -43,12 +41,11 @@ public class FieldFilter extends AbstractFragmentFilter {
 		return result;
 	}
 	
-	@SuppressWarnings("unused")
-	private Domain[] convertDomain(DomainEntry[] domain, RenderContext context) {
-		Domain[] result = new Domain[domain.length];
-		for (int i=0;i<domain.length;i++) {
-			result[i]=new Domain(domain[i].getValue(), domain[i].getDisplay().renderText(context));
-		}
-		return result;
-	}
+//	private Domain[] convertDomain(DomainEntry[] domain, RenderContext context) {
+//		Domain[] result = new Domain[domain.length];
+//		for (int i=0;i<domain.length;i++) {
+//			result[i]=new Domain(domain[i].getValue(), domain[i].getDisplay().renderText(context));
+//		}
+//		return result;
+//	}
 }
