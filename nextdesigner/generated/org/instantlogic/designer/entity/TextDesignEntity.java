@@ -83,13 +83,13 @@ public class TextDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.TextDesign, org.instantlogic.designer.FragmentText, org.instantlogic.designer.FragmentText> textForFragment
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.TextDesign, org.instantlogic.designer.FragmentText, org.instantlogic.designer.FragmentText>(
-			"textForFragment", INSTANCE, org.instantlogic.designer.entity.FragmentTextEntity.INSTANCE, org.instantlogic.designer.FragmentText.class, org.instantlogic.designer.entity.FragmentTextEntity.text
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.TextDesign, org.instantlogic.designer.PropertyDesign, org.instantlogic.designer.PropertyDesign> textForFragment
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.TextDesign, org.instantlogic.designer.PropertyDesign, org.instantlogic.designer.PropertyDesign>(
+			"textForFragment", INSTANCE, org.instantlogic.designer.entity.PropertyDesignEntity.INSTANCE, org.instantlogic.designer.PropertyDesign.class, org.instantlogic.designer.entity.PropertyDesignEntity.text
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.TextDesign, org.instantlogic.designer.FragmentText> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.TextDesign, org.instantlogic.designer.PropertyDesign> get(
 					org.instantlogic.designer.TextDesign instance) {
 				return instance.getTextForFragmentRelationValue();
 			}

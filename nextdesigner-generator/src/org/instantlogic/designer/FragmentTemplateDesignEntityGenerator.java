@@ -7,7 +7,7 @@ public class FragmentTemplateDesignEntityGenerator extends EntityDesign {
     
     private FragmentTemplateDesignEntityGenerator() {
         setName("FragmentTemplateDesign");
-        setExtendsFrom(DesignEntityGenerator.ENTITY);
+        setExtendsFrom(ElementDesignEntityGenerator.ENTITY);
         setIsCustomized(true);
     }
 
@@ -23,11 +23,6 @@ public class FragmentTemplateDesignEntityGenerator extends EntityDesign {
             .setReverseName("usedInField");
     public static final RelationDesign event = addRelation(ENTITY, "event", RelationType.ManyToZeroOrOne, EventDesignEntityGenerator.ENTITY)
             .setReverseName("triggeredByFragment");
-    public static final RelationDesign values = addRelation(ENTITY, "values", RelationType.OneToManyAggregation, FragmentValueEntityGenerator.ENTITY)
+    public static final RelationDesign properties = addRelation(ENTITY, "properties", RelationType.OneToManyAggregation, PropertyDesignEntityGenerator.ENTITY)
             .setReverseName("fragment");
-    public static final RelationDesign texts = addRelation(ENTITY, "texts", RelationType.OneToManyAggregation, FragmentTextEntityGenerator.ENTITY)
-            .setReverseName("fragment");
-    public static final RelationDesign childLists = addRelation(ENTITY, "childLists", RelationType.OneToManyAggregation, FragmentChildListEntityGenerator.ENTITY)
-            .setReverseName("fragment");
-
 }

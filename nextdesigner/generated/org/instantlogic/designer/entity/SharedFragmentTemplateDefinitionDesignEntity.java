@@ -33,13 +33,13 @@ public class SharedFragmentTemplateDefinitionDesignEntity extends org.instantlog
 	
 	// Relations
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign, org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentTemplateDesign> fragment
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign, org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentTemplateDesign>(
-			"fragment", INSTANCE, org.instantlogic.designer.entity.FragmentTemplateDesignEntity.INSTANCE, org.instantlogic.designer.FragmentTemplateDesign.class, org.instantlogic.designer.entity.FragmentTemplateDesignEntity.sharedTemplateDefinition
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign, org.instantlogic.designer.ElementDesign, org.instantlogic.designer.ElementDesign> fragment
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign, org.instantlogic.designer.ElementDesign, org.instantlogic.designer.ElementDesign>(
+			"fragment", INSTANCE, org.instantlogic.designer.entity.ElementDesignEntity.INSTANCE, org.instantlogic.designer.ElementDesign.class, org.instantlogic.designer.entity.ElementDesignEntity.sharedTemplateDefinition
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign, org.instantlogic.designer.FragmentTemplateDesign> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign, org.instantlogic.designer.ElementDesign> get(
 					org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign instance) {
 				return instance.getFragmentRelationValue();
 			}
@@ -72,13 +72,13 @@ public class SharedFragmentTemplateDefinitionDesignEntity extends org.instantlog
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.SharedTemplateDesign>, org.instantlogic.designer.SharedTemplateDesign> usages
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.SharedTemplateDesign>, org.instantlogic.designer.SharedTemplateDesign>(
-			"usages", INSTANCE, org.instantlogic.designer.entity.SharedTemplateDesignEntity.INSTANCE, org.instantlogic.designer.SharedTemplateDesign.class, org.instantlogic.designer.entity.SharedTemplateDesignEntity.definition
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.SharedElementDesign>, org.instantlogic.designer.SharedElementDesign> usages
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.SharedElementDesign>, org.instantlogic.designer.SharedElementDesign>(
+			"usages", INSTANCE, org.instantlogic.designer.entity.SharedElementDesignEntity.INSTANCE, org.instantlogic.designer.SharedElementDesign.class, org.instantlogic.designer.entity.SharedElementDesignEntity.definition
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign, org.instantlogic.designer.SharedTemplateDesign> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign, org.instantlogic.designer.SharedElementDesign> get(
 					org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign instance) {
 				return instance.getUsagesRelationValue();
 			}

@@ -12,18 +12,18 @@ public class SharedFragmentTemplateDefinitionDesign extends Design {
 	
 	// Relations
 	
-	private final org.instantlogic.fabric.value.RelationValue<SharedFragmentTemplateDefinitionDesign, FragmentTemplateDesign> fragment
+	private final org.instantlogic.fabric.value.RelationValue<SharedFragmentTemplateDefinitionDesign, ElementDesign> fragment
 		= createRelationValue(org.instantlogic.designer.entity.SharedFragmentTemplateDefinitionDesignEntity.fragment);
 		
-	public org.instantlogic.fabric.value.RelationValue<SharedFragmentTemplateDefinitionDesign, FragmentTemplateDesign> getFragmentRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<SharedFragmentTemplateDefinitionDesign, ElementDesign> getFragmentRelationValue() {
 		return fragment;
 	}
 
-	public org.instantlogic.designer.FragmentTemplateDesign getFragment() {
+	public org.instantlogic.designer.ElementDesign getFragment() {
 		return fragment.getValue();
 	}
 	
-	public SharedFragmentTemplateDefinitionDesign setFragment(org.instantlogic.designer.FragmentTemplateDesign newValue) {
+	public SharedFragmentTemplateDefinitionDesign setFragment(org.instantlogic.designer.ElementDesign newValue) {
 		fragment.setValue(newValue);
 		return (SharedFragmentTemplateDefinitionDesign)this;
 	}
@@ -43,14 +43,14 @@ public class SharedFragmentTemplateDefinitionDesign extends Design {
 	}
 
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<SharedFragmentTemplateDefinitionDesign, SharedTemplateDesign> usages
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<SharedFragmentTemplateDefinitionDesign, SharedElementDesign> usages
 		= createReverseRelationValues(org.instantlogic.designer.entity.SharedFragmentTemplateDefinitionDesignEntity.usages);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<SharedFragmentTemplateDefinitionDesign, SharedTemplateDesign> getUsagesRelationValue() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValues<SharedFragmentTemplateDefinitionDesign, SharedElementDesign> getUsagesRelationValue() {
 		return usages;
 	}
 
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.SharedTemplateDesign> getUsages() {
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.SharedElementDesign> getUsages() {
 		return usages.getValue();
 	}
 

@@ -111,6 +111,18 @@ public class DeductionSchemeDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, SelectionDesign> selection
+		= createReverseRelationValue(org.instantlogic.designer.entity.DeductionSchemeDesignEntity.selection);
+
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, SelectionDesign> getSelectionRelationValue() {
+		return selection;
+	}
+
+	public org.instantlogic.designer.SelectionDesign getSelection() {
+		return selection.getValue();
+	}
+
+	
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, FormattedValueDesign> templatedText
 		= createReverseRelationValue(org.instantlogic.designer.entity.DeductionSchemeDesignEntity.templatedText);
 
@@ -123,14 +135,14 @@ public class DeductionSchemeDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, FragmentValue> valueForFragment
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, PropertyDesign> valueForFragment
 		= createReverseRelationValue(org.instantlogic.designer.entity.DeductionSchemeDesignEntity.valueForFragment);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, FragmentValue> getValueForFragmentRelationValue() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, PropertyDesign> getValueForFragmentRelationValue() {
 		return valueForFragment;
 	}
 
-	public org.instantlogic.designer.FragmentValue getValueForFragment() {
+	public org.instantlogic.designer.PropertyDesign getValueForFragment() {
 		return valueForFragment.getValue();
 	}
 
