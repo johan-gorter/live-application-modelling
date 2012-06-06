@@ -111,38 +111,6 @@ public abstract class AbstractFragmentTemplateDesign extends ElementDesign {
 		return (FragmentTemplateDesign)this;
 	}
 	
-	
-	private final org.instantlogic.fabric.value.RelationValues<FragmentTemplateDesign, DeductionSchemeDesign> selections
-		= createRelationValues(org.instantlogic.designer.entity.FragmentTemplateDesignEntity.selections);
-		
-	public org.instantlogic.fabric.value.RelationValues<FragmentTemplateDesign, DeductionSchemeDesign> getSelectionsRelationValue() {
-		return selections;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DeductionSchemeDesign> getSelections() {
-		return selections.getValue();
-	}
-	
-	public FragmentTemplateDesign addToSelections(DeductionSchemeDesign item) {
-		selections.addValue(item);
-		return (FragmentTemplateDesign)this;
-	}
-	
-	public FragmentTemplateDesign addToSelections(DeductionSchemeDesign item, int index) {
-		selections.insertValue(item, index);
-		return (FragmentTemplateDesign)this;
-	}
-	
-	public FragmentTemplateDesign removeFromSelections(DeductionSchemeDesign item) {
-		selections.removeValue(item);
-		return (FragmentTemplateDesign)this;
-	}
-	
-	public FragmentTemplateDesign removeFromSelections(int index) {
-		selections.removeValue(index);
-		return (FragmentTemplateDesign)this;
-	}
-	
 
 	// Reverse relations
 

@@ -15,8 +15,6 @@ public class FragmentTemplateDesignEntityGenerator extends EntityDesign {
     public static final AttributeDesign fragmentTypeName = addAttribute(ENTITY, "fragmentTypeName", java.lang.String.class);
 
     // Relations
-    public static final RelationDesign selections = addRelation(ENTITY, "selections", RelationType.OneToManyAggregation, DeductionSchemeDesignEntityGenerator.ENTITY)
-            .setReverseName("compositeTemplate");
     public static final RelationDesign attribute = addRelation(ENTITY, "attribute", RelationType.ManyToZeroOrOne, AttributeDesignEntityGenerator.ENTITY)
             .setReverseName("usedInField");
     public static final RelationDesign entity = addRelation(ENTITY, "entity", RelationType.ManyToZeroOrOne, EntityDesignEntityGenerator.ENTITY)

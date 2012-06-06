@@ -10,19 +10,19 @@ public class PropertyDesign extends org.instantlogic.fabric.Instance {
 
 	// Attributes
 	
-	private final org.instantlogic.fabric.value.AttributeValue<PropertyDesign, java.lang.String> name
-		= createAttributeValue(org.instantlogic.designer.entity.PropertyDesignEntity.name);
+	private final org.instantlogic.fabric.value.AttributeValue<PropertyDesign, java.lang.String> propertyName
+		= createAttributeValue(org.instantlogic.designer.entity.PropertyDesignEntity.propertyName);
 	
-	public java.lang.String getName() {
-		return name.getValue();
+	public java.lang.String getPropertyName() {
+		return propertyName.getValue();
 	}
 
-	public org.instantlogic.fabric.value.AttributeValue<PropertyDesign, java.lang.String> getNameAttributeValue() {
-		return name;
+	public org.instantlogic.fabric.value.AttributeValue<PropertyDesign, java.lang.String> getPropertyNameAttributeValue() {
+		return propertyName;
 	}
 
-	public PropertyDesign setName(java.lang.String newValue) {
-		name.setValue(newValue);
+	public PropertyDesign setPropertyName(java.lang.String newValue) {
+		propertyName.setValue(newValue);
 		return (PropertyDesign)this;
 	}
 	
@@ -61,23 +61,6 @@ public class PropertyDesign extends org.instantlogic.fabric.Instance {
 	}
 	
 	
-	private final org.instantlogic.fabric.value.RelationValue<PropertyDesign, DeductionSchemeDesign> deduction
-		= createRelationValue(org.instantlogic.designer.entity.PropertyDesignEntity.deduction);
-		
-	public org.instantlogic.fabric.value.RelationValue<PropertyDesign, DeductionSchemeDesign> getDeductionRelationValue() {
-		return deduction;
-	}
-
-	public org.instantlogic.designer.DeductionSchemeDesign getDeduction() {
-		return deduction.getValue();
-	}
-	
-	public PropertyDesign setDeduction(org.instantlogic.designer.DeductionSchemeDesign newValue) {
-		deduction.setValue(newValue);
-		return (PropertyDesign)this;
-	}
-
-	
 	private final org.instantlogic.fabric.value.RelationValue<PropertyDesign, TextDesign> text
 		= createRelationValue(org.instantlogic.designer.entity.PropertyDesignEntity.text);
 		
@@ -91,6 +74,23 @@ public class PropertyDesign extends org.instantlogic.fabric.Instance {
 	
 	public PropertyDesign setText(org.instantlogic.designer.TextDesign newValue) {
 		text.setValue(newValue);
+		return (PropertyDesign)this;
+	}
+
+	
+	private final org.instantlogic.fabric.value.RelationValue<PropertyDesign, DeductionSchemeDesign> value
+		= createRelationValue(org.instantlogic.designer.entity.PropertyDesignEntity.value);
+		
+	public org.instantlogic.fabric.value.RelationValue<PropertyDesign, DeductionSchemeDesign> getValueRelationValue() {
+		return value;
+	}
+
+	public org.instantlogic.designer.DeductionSchemeDesign getValue() {
+		return value.getValue();
+	}
+	
+	public PropertyDesign setValue(org.instantlogic.designer.DeductionSchemeDesign newValue) {
+		value.setValue(newValue);
 		return (PropertyDesign)this;
 	}
 
