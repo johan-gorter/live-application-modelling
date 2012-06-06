@@ -22,7 +22,7 @@ public class WelcomePlaceTemplateTest {
 		
 		
 		RenderContext renderContext = RenderContext.create(MainFlow.INSTANCE, "Welcome", mini, "Mini");
-		List<Map<String, Object>> result = WelcomePlaceTemplate.INSTANCE.render(renderContext);
+		Map<String, Object> result = WelcomePlaceTemplate.INSTANCE.render(renderContext);
 		System.out.println(CasePersister.gson.toJson(result));
 	}
 

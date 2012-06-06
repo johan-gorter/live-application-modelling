@@ -96,7 +96,7 @@ YUI.add('instantlogic', function (Y) {
                     return new fns[name](parentNode, fragmentFactory || this);
                 }
             }
-            Y.error('No fragmentnamespace provides a fragment called ' + name);
+            return new ns.MessageFragment(parentNode, fragmentFactory || this, 'No fragmentnamespace provides a fragment called ' + name, 'error');
         },
 
         sendRequest: function (messages) {
@@ -311,5 +311,26 @@ YUI.add('instantlogic', function (Y) {
         destroy: function () {
         }
     };
+    
+    ns.MessageFragment = function (parentNode, fragmentFactory, message, messageCssClass) {
+        ns.MessageFragment.superclass.constructor.apply(this, arguments);
+        this.message = message;
+        this.messageCssClass = messageCssClass;
+    };
 
+    Y.extend(ns.MessageFragment, Y.instantlogic.Fragment, {
+        init: function (model) {
+        	ns.MessageFragment.superclass.init.call(this, model);
+        	var markup = Y.html.div({cssClass:'message '+this.messageCssClass}, 
+        		Y.html.div({cssClass:'icon'}),
+        		Y.html.p(this.message)
+        	);
+        	this.parentNode.appendChild(markup);
+        },
+        
+        canUpdateFrom: function (newModel) {
+        	return false;
+        }
+    });
+    
 }, '3.4.1', { requires: ['io-base', 'node', 'oop', 'panel', 'json', 'slider', 'html', 'history'] });
