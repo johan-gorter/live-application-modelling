@@ -117,4 +117,96 @@ YUI.add('instantlogic-fragment', function (Y) {
             return html.h1();
         }
     });
+    
+    // Table
+    ns.Table = function (parentNode, fragmentFactory) {
+        ns.Table.superclass.constructor.apply(this, arguments);
+    };
+
+    Y.extend(ns.Table, Y.instantlogic.Fragment, {
+        init: function (model) {
+            ns.Table.superclass.init.call(this, model);
+            this.node = html.div({cssClass: 'table'},
+            	this.headerDiv = html.div({cssClass: 'header'}),
+            	this.bodyDiv = html.div({cssClass: 'body'})
+            );
+            this.parentNode.appendChild(this.node);
+            
+            this.headerFragmentList = new FragmentList(this.headerDiv, this.fragmentFactory);
+            this.headerFragmentList.init(model.columns);
+            this.bodyFragmentList = new FragmentList(this.bodyDiv, this.fragmentFactory);
+            this.bodyFragmentList.init(model.rows);
+        },
+        
+        update: function (newModel, diff) {
+            ns.Table.superclass.update.call(this, newModel, diff);
+            this.headerFragmentList.update(newModel.columns);
+            this.bodyFragmentList.update(newModel.rows);
+        }
+    });
+    
+    // Row
+    ns.Row = function (parentNode, fragmentFactory) {
+        ns.Row.superclass.constructor.apply(this, arguments);
+    };
+
+    Y.extend(ns.Row, Y.instantlogic.Fragment, {
+        init: function (model) {
+            ns.Row.superclass.init.call(this, model);
+            this.node = html.div({cssClass: 'Row'});
+            this.parentNode.appendChild(this.node);
+            
+            this.cellsFragmentList = new FragmentList(this.node, this.fragmentFactory);
+            this.cellsFragmentList.init(model.cells);
+        },
+        
+        update: function (newModel, diff) {
+            ns.Row.superclass.update.call(this, newModel, diff);
+            this.cellsFragmentList.update(newModel.cells);
+        }
+    });
+
+    // Column
+    ns.Column = function (parentNode, fragmentFactory) {
+        ns.Column.superclass.constructor.apply(this, arguments);
+    };
+
+    Y.extend(ns.Column, Y.instantlogic.Fragment, {
+        init: function (model) {
+            ns.Column.superclass.init.call(this, model);
+            this.node = html.div({cssClass:'ColumnHeader'});
+            this.node.set('text', model.header);
+            this.parentNode.appendChild(this.node);
+        },
+
+        update: function (newModel, diff) {
+            ns.Column.superclass.update.call(this, newModel, diff);
+            if (this.previousModel.header != newModel.header) {
+                this.node.set('text', newModel.header);
+            }
+        }
+    });
+
+    // Cell
+    ns.Cell = function (parentNode, fragmentFactory) {
+        ns.Cell.superclass.constructor.apply(this, arguments);
+    };
+
+    Y.extend(ns.Cell, Y.instantlogic.Fragment, {
+        init: function (model) {
+            ns.Cell.superclass.init.call(this, model);
+            this.node = html.div({cssClass: 'Cell'});
+            this.parentNode.appendChild(this.node);
+            
+            this.contentFragmentList = new FragmentList(this.node, this.fragmentFactory);
+            this.contentFragmentList.init(model.content);
+        },
+        
+        update: function (newModel, diff) {
+            ns.Cell.superclass.update.call(this, newModel, diff);
+            this.contentFragmentList.update(newModel.content);
+        }
+    });
+
+            
 }, '3.4.1', { requires: ['instantlogic', 'html'] });

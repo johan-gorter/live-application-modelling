@@ -17,9 +17,10 @@ public abstract class PlaceTemplate extends FlowNodeBase {
 		return getRootContainer().submit(changeContext);
 	}
 
-	public List<Map<String, Object>> render(final RenderContext renderContext) {
+	public Map<String, Object> render(final RenderContext renderContext) {
 		List<Map<String, Object>> result = new ArrayList<Map<String,Object>>();
 		getRootContainer().render(renderContext, result);
-		return result;
+		if (result.size()!=1) throw new RuntimeException("Rendering resulted in more than one page root");
+		return result.get(0);
 	}
 }

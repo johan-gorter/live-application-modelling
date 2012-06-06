@@ -17,7 +17,7 @@ public class PlaceManager {
 	private static final JsonObject PLACE_NOT_FOUND = new JsonObject();
 	static  {
 		PLACE_NOT_FOUND.addProperty("id", "1");
-		PLACE_NOT_FOUND.addProperty("fragmentType", "page");
+		PLACE_NOT_FOUND.addProperty("type", "Page");
 		PLACE_NOT_FOUND.addProperty("pageType", "error");
 		PLACE_NOT_FOUND.addProperty("reason", "notfound");
 	}
