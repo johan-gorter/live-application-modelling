@@ -6,7 +6,9 @@ import org.instantlogic.designer.DesignEntityGenerator;
 import org.instantlogic.designer.FormattedValueDesign;
 import org.instantlogic.designer.FragmentTemplateDesign;
 import org.instantlogic.designer.PlaceTemplateDesign;
+import org.instantlogic.designer.SelectionDesign;
 import org.instantlogic.designer.TemplatedTextDesign;
+import org.omg.CORBA.portable.ApplicationException;
 
 public class WelcomePlaceGenerator extends PlaceTemplateDesign {
 
@@ -29,14 +31,15 @@ public class WelcomePlaceGenerator extends PlaceTemplateDesign {
 		table.setChildren("columns", entitiesColumn);
 		FragmentTemplateDesign onlyRow = new FragmentTemplateDesign("Row");
 		FragmentTemplateDesign entitiesCell = new FragmentTemplateDesign("Cell");
+		SelectionDesign selectEntity = new SelectionDesign().setSelection(createDeduction(ApplicationDesignEntityGenerator.entities));
 		FragmentTemplateDesign entityLink = createText(
 			"Paragraph", 
 			new TemplatedTextDesign().addToUntranslated(
 				new FormattedValueDesign().setDeduction(createDeduction(DesignEntityGenerator.name))
 			)
 		);
-		entityLink.addToSelections(createDeduction(ApplicationDesignEntityGenerator.entities));
-		entitiesCell.setChildren("content", entityLink);
+		selectEntity.addToChildren(entityLink);
+		entitiesCell.setChildren("content", selectEntity);
 		onlyRow.setChildren("cells", entitiesCell);
 		table.setChildren("rows", onlyRow);
 		return table;

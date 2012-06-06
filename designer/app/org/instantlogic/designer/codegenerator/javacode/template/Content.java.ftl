@@ -1,9 +1,16 @@
 <#include "Text.java.ftl">
 <#macro content_macro content depth>
   <#list 1..depth as i>    </#list><#t>
-  <#if content.category=="SharedFragment">
+  <#if content.category=="Shared">
     ${rootPackageName}.sharedpagefragment.${content.name}PageFragment.INSTANCE
-  <#elseif content.category=="Widget">
+  <#elseif content.category=="Selection">
+    new org.instantlogic.interaction.page.SelectionElement(createDeduction${content.deductionIndex}()<#lt>
+        <#list content.children as child>
+          ,<#t>
+          <@content_macro content=child depth=depth+2 />
+        </#list>
+    )<#lt>
+  <#elseif content.category=="Fragment">
     new org.instantlogic.interaction.page.FragmentTemplate("${content.id}", "${content.fragmentTypeName}")<#t>
     <#if content.event??>
       .setEvent(${content.event}Event.INSTANCE)
@@ -30,7 +37,7 @@
           <@content_macro content=childListChild depth=depth+2 />
         </#list>
       <#list 1..depth as i>    </#list><#t>
-      )<#t>
+      )<#lt>
     </#list>
   </#if>
 </#macro>

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.instantlogic.designer.ApplicationDesign;
 import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.flow.MainFlow;
+import org.instantlogic.engine.persistence.json.CasePersister;
 import org.instantlogic.interaction.util.RenderContext;
 import org.junit.Test;
 
@@ -22,7 +23,7 @@ public class WelcomePlaceTemplateTest {
 		
 		RenderContext renderContext = RenderContext.create(MainFlow.INSTANCE, "Welcome", mini, "Mini");
 		List<Map<String, Object>> result = WelcomePlaceTemplate.INSTANCE.render(renderContext);
-		
+		System.out.println(CasePersister.gson.toJson(result));
 	}
 
 }

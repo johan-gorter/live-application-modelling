@@ -2,6 +2,7 @@ package org.instantlogic.fabric.text;
 
 import org.instantlogic.fabric.deduction.Deduction;
 import org.instantlogic.fabric.util.DeductionContext;
+import org.instantlogic.fabric.util.ValueAndLevel;
 
 public class FormattedValue extends StringProducer {
 
@@ -15,8 +16,10 @@ public class FormattedValue extends StringProducer {
 	
 	@Override
 	String getValue(DeductionContext context) {
-		Object result =  deduction.deduct(context);
-		if (result==null) return "";
-		return ""+result;
+		ValueAndLevel<?> result =  deduction.deduct(context);
+		if (result.hasValue()) {
+			return result.getValue().toString();
+		}
+		return "";
 	}
 }

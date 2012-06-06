@@ -104,27 +104,6 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 			
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DeductionSchemeDesign>, org.instantlogic.designer.DeductionSchemeDesign> selections
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DeductionSchemeDesign>, org.instantlogic.designer.DeductionSchemeDesign>(
-			"selections", INSTANCE, org.instantlogic.designer.entity.DeductionSchemeDesignEntity.INSTANCE, org.instantlogic.designer.DeductionSchemeDesign.class, org.instantlogic.designer.entity.DeductionSchemeDesignEntity.compositeTemplate
-		) {
-	
-			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.DeductionSchemeDesign> get(
-					org.instantlogic.designer.FragmentTemplateDesign instance) {
-				return instance.getSelectionsRelationValue();
-			}
-	
-			public boolean isOwner() {
-				return true;
-			}
-	
-			public boolean isMultivalue() {
-				return true;
-			}
-			
-		};
-	
 	// Reverse relations
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
@@ -135,7 +114,6 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 		entity,
 		event,
 		properties,
-		selections,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 	};

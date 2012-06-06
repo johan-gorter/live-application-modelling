@@ -3,42 +3,53 @@ package org.instantlogic.designer.codegenerator.generator;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.instantlogic.designer.FragmentChildList;
+import org.instantlogic.designer.ElementDesign;
 import org.instantlogic.designer.FragmentTemplateDesign;
-import org.instantlogic.designer.FragmentText;
-import org.instantlogic.designer.FragmentValue;
-import org.instantlogic.designer.SharedTemplateDesign;
+import org.instantlogic.designer.PropertyDesign;
+import org.instantlogic.designer.SelectionDesign;
+import org.instantlogic.designer.SharedElementDesign;
 import org.instantlogic.designer.codegenerator.classmodel.AbstractClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.ContentModel;
 import org.instantlogic.designer.codegenerator.classmodel.ContentModel.Category;
 
 public abstract class ContentGenerator extends AbstractGenerator {
 
-	public static ContentModel generate(FragmentTemplateDesign fragment, AbstractClassModel deductionHolder) {
+	public static ContentModel generate(ElementDesign element, AbstractClassModel deductionHolder) {
 		ContentModel model = new ContentModel();
-		model.id=fragment.getMetadata().getInstanceId();
+		model.id=element.getMetadata().getInstanceId();
 		model.rootPackageName = deductionHolder.rootPackageName;
-		model.isCustomized = fragment.getIsCustomized() == Boolean.TRUE;
-		if (fragment instanceof SharedTemplateDesign) {
+		model.isCustomized = element.getIsCustomized() == Boolean.TRUE;
+		if (element instanceof SharedElementDesign) {
 			model.category = Category.Shared;
-			model.name = ((SharedTemplateDesign) fragment).getSharedTemplateDefinition().getName();
-		} else {
-			FragmentTemplateDesign fragmentTemplate = (FragmentTemplateDesign) fragment;
-			model.category = Category.Widget;
+			model.name = ((SharedElementDesign) element).getSharedTemplateDefinition().getName();
+		} else if (element instanceof FragmentTemplateDesign) {
+			FragmentTemplateDesign fragmentTemplate = (FragmentTemplateDesign) element;
+			model.category = Category.Fragment;
 			model.fragmentTypeName= fragmentTemplate.getFragmentTypeName();
-			for (FragmentValue value : fragmentTemplate.getValues()) {
-				int deductionIndex = deductionHolder.addDeductionScheme(DeductionSchemeGenerator.generate(deductionHolder.rootPackageName, value.getDeduction()));
-				model.values.put(value.getName(), deductionIndex);
-			}
-			for (FragmentText text : fragmentTemplate.getTexts()) {
-				model.texts.put(text.getName(), TextGenerator.generate(text.getText(), deductionHolder));
-			}
-			for (FragmentChildList childList : fragmentTemplate.getChildLists()) {
-				List<ContentModel> children = new ArrayList<ContentModel>();
-				for (FragmentTemplateDesign child : childList.getChildren()) {
-					children.add(generate(child, deductionHolder));
+			for (PropertyDesign property:fragmentTemplate.getProperties()) {
+				String propertyName = property.getPropertyName();
+				if (propertyName==null) continue;
+				if (property.getChildren().size()>0) {
+					List<ContentModel> children = new ArrayList<ContentModel>();
+					for (ElementDesign child : property.getChildren()) {
+						children.add(generate(child, deductionHolder));
+					}
+					model.childLists.put(propertyName, children);
+				} 
+				if (property.getText()!=null) {
+					model.texts.put(propertyName, TextGenerator.generate(property.getText(), deductionHolder));
+				} 
+				if (property.getValue()!=null) {
+					int deductionIndex = deductionHolder.addDeductionScheme(DeductionSchemeGenerator.generate(deductionHolder.rootPackageName, property.getValue()));
+					model.values.put(propertyName, deductionIndex);
 				}
-				model.childLists.put(childList.getName(), children);
+			}
+		} else if (element instanceof SelectionDesign) {
+			model.category = Category.Selection;
+			SelectionDesign selection = (SelectionDesign) element;
+			model.deductionIndex = deductionHolder.addDeductionScheme(DeductionSchemeGenerator.generate(deductionHolder.rootPackageName, selection.getSelection()));
+			for (ElementDesign child: selection.getChildren()) {
+				model.children.add(generate(child, deductionHolder));
 			}
 		}
 		return model;

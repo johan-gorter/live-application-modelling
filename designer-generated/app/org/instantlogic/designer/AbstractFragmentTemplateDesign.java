@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public abstract class AbstractFragmentTemplateDesign extends Design { 
+public abstract class AbstractFragmentTemplateDesign extends ElementDesign { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -46,38 +46,6 @@ public abstract class AbstractFragmentTemplateDesign extends Design {
 	}
 
 	
-	private final org.instantlogic.fabric.value.RelationValues<FragmentTemplateDesign, FragmentChildList> childLists
-		= createRelationValues(org.instantlogic.designer.entity.FragmentTemplateDesignEntity.childLists);
-		
-	public org.instantlogic.fabric.value.RelationValues<FragmentTemplateDesign, FragmentChildList> getChildListsRelationValue() {
-		return childLists;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentChildList> getChildLists() {
-		return childLists.getValue();
-	}
-	
-	public FragmentTemplateDesign addToChildLists(FragmentChildList item) {
-		childLists.addValue(item);
-		return (FragmentTemplateDesign)this;
-	}
-	
-	public FragmentTemplateDesign addToChildLists(FragmentChildList item, int index) {
-		childLists.insertValue(item, index);
-		return (FragmentTemplateDesign)this;
-	}
-	
-	public FragmentTemplateDesign removeFromChildLists(FragmentChildList item) {
-		childLists.removeValue(item);
-		return (FragmentTemplateDesign)this;
-	}
-	
-	public FragmentTemplateDesign removeFromChildLists(int index) {
-		childLists.removeValue(index);
-		return (FragmentTemplateDesign)this;
-	}
-	
-	
 	private final org.instantlogic.fabric.value.RelationValue<FragmentTemplateDesign, EntityDesign> entity
 		= createRelationValue(org.instantlogic.designer.entity.FragmentTemplateDesignEntity.entity);
 		
@@ -112,138 +80,38 @@ public abstract class AbstractFragmentTemplateDesign extends Design {
 	}
 
 	
-	private final org.instantlogic.fabric.value.RelationValues<FragmentTemplateDesign, DeductionSchemeDesign> selections
-		= createRelationValues(org.instantlogic.designer.entity.FragmentTemplateDesignEntity.selections);
+	private final org.instantlogic.fabric.value.RelationValues<FragmentTemplateDesign, PropertyDesign> properties
+		= createRelationValues(org.instantlogic.designer.entity.FragmentTemplateDesignEntity.properties);
 		
-	public org.instantlogic.fabric.value.RelationValues<FragmentTemplateDesign, DeductionSchemeDesign> getSelectionsRelationValue() {
-		return selections;
+	public org.instantlogic.fabric.value.RelationValues<FragmentTemplateDesign, PropertyDesign> getPropertiesRelationValue() {
+		return properties;
 	}
 
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DeductionSchemeDesign> getSelections() {
-		return selections.getValue();
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.PropertyDesign> getProperties() {
+		return properties.getValue();
 	}
 	
-	public FragmentTemplateDesign addToSelections(DeductionSchemeDesign item) {
-		selections.addValue(item);
+	public FragmentTemplateDesign addToProperties(PropertyDesign item) {
+		properties.addValue(item);
 		return (FragmentTemplateDesign)this;
 	}
 	
-	public FragmentTemplateDesign addToSelections(DeductionSchemeDesign item, int index) {
-		selections.insertValue(item, index);
+	public FragmentTemplateDesign addToProperties(PropertyDesign item, int index) {
+		properties.insertValue(item, index);
 		return (FragmentTemplateDesign)this;
 	}
 	
-	public FragmentTemplateDesign removeFromSelections(DeductionSchemeDesign item) {
-		selections.removeValue(item);
+	public FragmentTemplateDesign removeFromProperties(PropertyDesign item) {
+		properties.removeValue(item);
 		return (FragmentTemplateDesign)this;
 	}
 	
-	public FragmentTemplateDesign removeFromSelections(int index) {
-		selections.removeValue(index);
-		return (FragmentTemplateDesign)this;
-	}
-	
-	
-	private final org.instantlogic.fabric.value.RelationValues<FragmentTemplateDesign, FragmentText> texts
-		= createRelationValues(org.instantlogic.designer.entity.FragmentTemplateDesignEntity.texts);
-		
-	public org.instantlogic.fabric.value.RelationValues<FragmentTemplateDesign, FragmentText> getTextsRelationValue() {
-		return texts;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentText> getTexts() {
-		return texts.getValue();
-	}
-	
-	public FragmentTemplateDesign addToTexts(FragmentText item) {
-		texts.addValue(item);
-		return (FragmentTemplateDesign)this;
-	}
-	
-	public FragmentTemplateDesign addToTexts(FragmentText item, int index) {
-		texts.insertValue(item, index);
-		return (FragmentTemplateDesign)this;
-	}
-	
-	public FragmentTemplateDesign removeFromTexts(FragmentText item) {
-		texts.removeValue(item);
-		return (FragmentTemplateDesign)this;
-	}
-	
-	public FragmentTemplateDesign removeFromTexts(int index) {
-		texts.removeValue(index);
-		return (FragmentTemplateDesign)this;
-	}
-	
-	
-	private final org.instantlogic.fabric.value.RelationValues<FragmentTemplateDesign, FragmentValue> values
-		= createRelationValues(org.instantlogic.designer.entity.FragmentTemplateDesignEntity.values);
-		
-	public org.instantlogic.fabric.value.RelationValues<FragmentTemplateDesign, FragmentValue> getValuesRelationValue() {
-		return values;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentValue> getValues() {
-		return values.getValue();
-	}
-	
-	public FragmentTemplateDesign addToValues(FragmentValue item) {
-		values.addValue(item);
-		return (FragmentTemplateDesign)this;
-	}
-	
-	public FragmentTemplateDesign addToValues(FragmentValue item, int index) {
-		values.insertValue(item, index);
-		return (FragmentTemplateDesign)this;
-	}
-	
-	public FragmentTemplateDesign removeFromValues(FragmentValue item) {
-		values.removeValue(item);
-		return (FragmentTemplateDesign)this;
-	}
-	
-	public FragmentTemplateDesign removeFromValues(int index) {
-		values.removeValue(index);
+	public FragmentTemplateDesign removeFromProperties(int index) {
+		properties.removeValue(index);
 		return (FragmentTemplateDesign)this;
 	}
 	
 
 	// Reverse relations
-	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<FragmentTemplateDesign, FragmentChildList> childrenForFragment
-		= createReverseRelationValue(org.instantlogic.designer.entity.FragmentTemplateDesignEntity.childrenForFragment);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<FragmentTemplateDesign, FragmentChildList> getChildrenForFragmentRelationValue() {
-		return childrenForFragment;
-	}
-
-	public org.instantlogic.designer.FragmentChildList getChildrenForFragment() {
-		return childrenForFragment.getValue();
-	}
-
-	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<FragmentTemplateDesign, PlaceTemplateDesign> contentOfPage
-		= createReverseRelationValue(org.instantlogic.designer.entity.FragmentTemplateDesignEntity.contentOfPage);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<FragmentTemplateDesign, PlaceTemplateDesign> getContentOfPageRelationValue() {
-		return contentOfPage;
-	}
-
-	public org.instantlogic.designer.PlaceTemplateDesign getContentOfPage() {
-		return contentOfPage.getValue();
-	}
-
-	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<FragmentTemplateDesign, SharedFragmentTemplateDefinitionDesign> sharedTemplateDefinition
-		= createReverseRelationValue(org.instantlogic.designer.entity.FragmentTemplateDesignEntity.sharedTemplateDefinition);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<FragmentTemplateDesign, SharedFragmentTemplateDefinitionDesign> getSharedTemplateDefinitionRelationValue() {
-		return sharedTemplateDefinition;
-	}
-
-	public org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign getSharedTemplateDefinition() {
-		return sharedTemplateDefinition.getValue();
-	}
-
 
 }

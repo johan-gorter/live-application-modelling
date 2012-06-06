@@ -14,6 +14,18 @@ public class ElementDesign extends Design {
 
 	// Reverse relations
 	
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<ElementDesign, SelectionDesign> childOfSelection
+		= createReverseRelationValue(org.instantlogic.designer.entity.ElementDesignEntity.childOfSelection);
+
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<ElementDesign, SelectionDesign> getChildOfSelectionRelationValue() {
+		return childOfSelection;
+	}
+
+	public org.instantlogic.designer.SelectionDesign getChildOfSelection() {
+		return childOfSelection.getValue();
+	}
+
+	
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<ElementDesign, PropertyDesign> childrenForFragment
 		= createReverseRelationValue(org.instantlogic.designer.entity.ElementDesignEntity.childrenForFragment);
 

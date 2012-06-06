@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class ContentModel {
 
-	public enum Category {Shared, Widget}
+	public enum Category {Fragment, Shared, Selection}
 	
 	public Category category;
 	// Text, Button, ...

@@ -35,6 +35,22 @@ public class ElementDesignEntity extends org.instantlogic.fabric.model.Entity<or
 	
 	// Reverse relations
 	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ElementDesign, org.instantlogic.designer.SelectionDesign, org.instantlogic.designer.SelectionDesign> childOfSelection
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.ElementDesign, org.instantlogic.designer.SelectionDesign, org.instantlogic.designer.SelectionDesign>(
+			"childOfSelection", INSTANCE, org.instantlogic.designer.entity.SelectionDesignEntity.INSTANCE, org.instantlogic.designer.SelectionDesign.class, org.instantlogic.designer.entity.SelectionDesignEntity.children
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.ElementDesign, org.instantlogic.designer.SelectionDesign> get(
+					org.instantlogic.designer.ElementDesign instance) {
+				return instance.getChildOfSelectionRelationValue();
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+		};
+	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ElementDesign, org.instantlogic.designer.PropertyDesign, org.instantlogic.designer.PropertyDesign> childrenForFragment
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.ElementDesign, org.instantlogic.designer.PropertyDesign, org.instantlogic.designer.PropertyDesign>(
 			"childrenForFragment", INSTANCE, org.instantlogic.designer.entity.PropertyDesignEntity.INSTANCE, org.instantlogic.designer.PropertyDesign.class, org.instantlogic.designer.entity.PropertyDesignEntity.children
@@ -88,6 +104,7 @@ public class ElementDesignEntity extends org.instantlogic.fabric.model.Entity<or
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
+		childOfSelection,
 		childrenForFragment,
 		contentOfPage,
 		sharedTemplateDefinition,

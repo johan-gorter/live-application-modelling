@@ -63,18 +63,6 @@ public class DeductionSchemeDesign extends org.instantlogic.fabric.Instance {
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, FragmentTemplateDesign> compositeTemplate
-		= createReverseRelationValue(org.instantlogic.designer.entity.DeductionSchemeDesignEntity.compositeTemplate);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, FragmentTemplateDesign> getCompositeTemplateRelationValue() {
-		return compositeTemplate;
-	}
-
-	public org.instantlogic.designer.FragmentTemplateDesign getCompositeTemplate() {
-		return compositeTemplate.getValue();
-	}
-
-	
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, AttributeDesign> defaultOfAttribute
 		= createReverseRelationValue(org.instantlogic.designer.entity.DeductionSchemeDesignEntity.defaultOfAttribute);
 

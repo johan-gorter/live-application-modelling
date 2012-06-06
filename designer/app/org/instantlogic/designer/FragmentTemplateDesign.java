@@ -11,28 +11,28 @@ public class FragmentTemplateDesign extends AbstractFragmentTemplateDesign {
 	
 	
 	public FragmentTemplateDesign setText(String propertyName, TextDesign text) {
-		FragmentText fragmentText = new FragmentText();
-		fragmentText.setName(propertyName);
+		PropertyDesign fragmentText = new PropertyDesign();
+		fragmentText.setPropertyName(propertyName);
 		fragmentText.setText(text);
-		addToTexts(fragmentText);
+		addToProperties(fragmentText);
 		return this;
 	}
 	
-	public FragmentTemplateDesign setChildren(String propertyName, FragmentTemplateDesign... children) {
-		FragmentChildList childList= new FragmentChildList();
-		childList.setName(propertyName);
-		for (FragmentTemplateDesign child: children) {
+	public FragmentTemplateDesign setChildren(String propertyName, ElementDesign... children) {
+		PropertyDesign childList= new PropertyDesign();
+		childList.setPropertyName(propertyName);
+		for (ElementDesign child: children) {
 			childList.addToChildren(child);
 		}
-		addToChildLists(childList);
+		addToProperties(childList);
 		return this;
 	}
 	
 	public FragmentTemplateDesign setValue(String propertyName, DeductionSchemeDesign value) {
-		FragmentValue fragmentValue = new FragmentValue();
-		fragmentValue.setName(propertyName);
-		fragmentValue.setDeduction(value);
-		addToValues(fragmentValue);
+		PropertyDesign fragmentValue = new PropertyDesign();
+		fragmentValue.setPropertyName(propertyName);
+		fragmentValue.setValue(value);
+		addToProperties(fragmentValue);
 		return this;
 	}
 }
