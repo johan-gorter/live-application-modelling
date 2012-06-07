@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.interaction.util.ChangeContext.FieldChange;
+import org.instantlogic.interaction.util.FlowEventOccurrence;
 import org.instantlogic.netty.Traveler;
 
 public class CaseManager {
@@ -34,26 +36,35 @@ public class CaseManager {
 	 * @param newLocation 
 	 * @return The rendered page
 	 */
-	public synchronized Object enter(Traveler traveler, String oldPath, String newPath) {
+	public synchronized void enter(Traveler traveler, String oldPath, String newPath) {
 		if (oldPath!=null) {
 			PlaceManager oldPlace = activePlaces.get(oldPath);
 			oldPlace.leave(traveler);
 		}
-		if (newPath!=null) {
-			return render(traveler, newPath);
-		}
-		return null;
+		getActivePlace(newPath).enter(traveler);
 	}
 	
 	public synchronized Object render(Traveler traveler, String path) {
-		PlaceManager newPlace = activePlaces.get(path);
-		if (newPlace==null) {
-			newPlace = new PlaceManager(application, this, path);
-			activePlaces.put(path, newPlace);
-		}
+		PlaceManager newPlace = getActivePlace(path);
 		return newPlace.render(traveler);
 	}
 
+	private PlaceManager getActivePlace(String path) {
+		PlaceManager place = activePlaces.get(path);
+		if (place==null) {
+			place = new PlaceManager(application, this, path);
+			activePlaces.put(path, place);
+		}
+		return place;
+	}
+
+	public synchronized String submit(Traveler traveler, String path, FieldChange[] changes, String submitId) {
+		PlaceManager place = getActivePlace(path);
+		String newPath = place.submit(changes, submitId);
+		enter(traveler, path, newPath);
+		return newPath;
+	}
+	
 	public Instance getCase() {
 		return theCase;
 	}

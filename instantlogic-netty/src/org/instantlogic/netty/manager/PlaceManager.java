@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.instantlogic.interaction.flow.PlaceTemplate;
+import org.instantlogic.interaction.util.ChangeContext;
+import org.instantlogic.interaction.util.FlowEventOccurrence;
 import org.instantlogic.interaction.util.RenderContext;
+import org.instantlogic.interaction.util.ChangeContext.FieldChange;
 import org.instantlogic.netty.Traveler;
 
 import com.google.gson.JsonObject;
@@ -40,6 +43,17 @@ public class PlaceManager {
 		PlaceTemplate placeTemplate = (PlaceTemplate)renderContext.getFlowContext().getFlowStack().getCurrentNode();
 		return placeTemplate.render(renderContext);
 	}
+	
+	public String submit(FieldChange[] changes, String submitId) {
+		ChangeContext changeContext = ChangeContext.create(application.getApplication().getMainFlow(), path, caseManager.getCase(), caseManager.getCaseId(), changes, submitId);
+		PlaceTemplate placeTemplate = (PlaceTemplate)changeContext.getFlowContext().getFlowStack().getCurrentNode();
+		FlowEventOccurrence eventOccurrence = placeTemplate.submit(changeContext);
+		while (eventOccurrence!=null) {
+			eventOccurrence = changeContext.getFlowContext().step(eventOccurrence);
+		}
+		return changeContext.getFlowContext().getFlowStack().toPath();
+	}
+	
 
 	private RenderContext findPage() {
 		try {
@@ -65,5 +79,9 @@ public class PlaceManager {
 		if (this.travelers.size()==0) {
 			this.caseManager.deactivatePlace(this);
 		}
+	}
+
+	public void enter(Traveler traveler) {
+		this.travelers.add(traveler);
 	}
 }

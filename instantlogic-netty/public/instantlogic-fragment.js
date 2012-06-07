@@ -73,6 +73,33 @@ YUI.add('instantlogic-fragment', function (Y) {
             ns.Answer.superclass.destroy.call(this);
         }
     });
+    
+    // Link
+    ns.Link = function (parentNode, fragmentFactory) {
+        ns.Link.superclass.constructor.apply(this, arguments);
+    };
+
+    Y.extend(ns.Link, Y.instantlogic.Fragment, {
+        init: function (model) {
+            ns.Link.superclass.init.call(this, model);
+            this.node = html.a({href:'#'});
+            this.node.set('text', model.text);
+            this.node.on('click', this.onClick, this);
+            this.parentNode.appendChild(this.node);
+        },
+        
+        onClick: function(e) {
+            e.preventDefault();
+            this.fragmentFactory.sendEvent(this.model.id);
+        },
+
+        update: function (newModel, diff) {
+            ns.Link.superclass.update.call(this, newModel, diff);
+            if (this.previousModel.text != newModel.text) {
+                this.node.set('text', newModel.text);
+            }
+        }
+    });
 
     // Paragraph
     ns.Paragraph = function (parentNode, fragmentFactory) {
@@ -91,19 +118,11 @@ YUI.add('instantlogic-fragment', function (Y) {
             return html.p();
         },
 
-        canUpdateFrom: function (newModel) {
-            return ns.Paragraph.superclass.canUpdateFrom.call(this, newModel);
-        },
-
         update: function (newModel, diff) {
             ns.Paragraph.superclass.update.call(this, newModel, diff);
             if (this.previousModel.text != newModel.text) {
                 this.node.set('text', newModel.text);
             }
-        },
-
-        destroy: function () {
-            ns.Paragraph.superclass.destroy.call(this);
         }
     });
 

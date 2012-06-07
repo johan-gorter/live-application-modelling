@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.instantlogic.interaction.util.ChangeContext.FieldChange;
 import org.instantlogic.netty.manager.ApplicationManager;
 import org.instantlogic.netty.manager.CaseManager;
 import org.jboss.netty.buffer.ChannelBuffers;
@@ -98,8 +99,14 @@ public class Traveler {
 		for (JsonElement message : messages) {
 			String messageName = message.getAsJsonObject().get("message").getAsString();
 			logger.debug("Handling {} message from traveler {}", messageName, id);
-			if ("update".equals(messageName)) {
-				// TODO: handle update
+			if ("change".equals(messageName)) {
+				// TODO: handle change
+				sendPlace = true;
+				throw new RuntimeException("TODO");
+			} else if ("event".equals(messageName)) {
+				String id = message.getAsJsonObject().get("id").getAsString();
+				this.location = this.caseManager.submit(this, this.location, new FieldChange[0], id);
+				sendPlace = true;
 			} else if ("enter".equals(messageName)) {
 				String newLocation = message.getAsJsonObject().get("location").getAsString();
 				this.caseManager.enter(this, this.location, newLocation);
