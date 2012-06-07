@@ -8,7 +8,7 @@ import org.instantlogic.designer.FragmentTemplateDesign;
 import org.instantlogic.designer.PlaceTemplateDesign;
 import org.instantlogic.designer.SelectionDesign;
 import org.instantlogic.designer.TemplatedTextDesign;
-import org.omg.CORBA.portable.ApplicationException;
+import org.instantlogic.designer.event.EntityDetailsEventGenerator;
 
 public class WelcomePlaceGenerator extends PlaceTemplateDesign {
 
@@ -16,11 +16,14 @@ public class WelcomePlaceGenerator extends PlaceTemplateDesign {
 	
 	private WelcomePlaceGenerator() {
 		setName("Welcome");
-		
+	}
+	
+	@Override
+	public void init() {
 		setContent(createPageWidget("Welcome", 
-			createText("Paragraph", createConstantText("Welcome to the Designer")),
-			createMainTable()
-		));
+				createText("Paragraph", createConstantText("Welcome to the Designer")),
+				createMainTable()
+			));
 	}
 	
 
@@ -32,11 +35,11 @@ public class WelcomePlaceGenerator extends PlaceTemplateDesign {
 		FragmentTemplateDesign onlyRow = new FragmentTemplateDesign("Row");
 		FragmentTemplateDesign entitiesCell = new FragmentTemplateDesign("Cell");
 		SelectionDesign selectEntity = new SelectionDesign().setSelection(createDeduction(ApplicationDesignEntityGenerator.entities));
-		FragmentTemplateDesign entityLink = createText(
-			"Paragraph", 
+		FragmentTemplateDesign entityLink = createLink(
 			new TemplatedTextDesign().addToUntranslated(
 				new FormattedValueDesign().setDeduction(createDeduction(DesignEntityGenerator.name))
-			)
+			),
+			EntityDetailsEventGenerator.EVENT
 		);
 		selectEntity.addToChildren(entityLink);
 		entitiesCell.setChildren("content", selectEntity);

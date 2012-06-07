@@ -14,6 +14,11 @@ public class FlowDesign extends AbstractFlowDesign {
 	}
 	
 	public void init() {
+		for (FlowNodeBaseDesign node : this.getNodes()) {
+			if (node instanceof PlaceTemplateDesign) {
+				PlaceTemplateDesign place = ((PlaceTemplateDesign)node);
+				place.init();
+			}
+		}
 	}
-
 }

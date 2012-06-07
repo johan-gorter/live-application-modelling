@@ -1,6 +1,5 @@
 package org.instantlogic.interaction.util;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -8,7 +7,6 @@ import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.util.AbstractDeductionContext;
 import org.instantlogic.interaction.flow.Flow;
 import org.instantlogic.interaction.flow.FlowNodeBase;
-import org.instantlogic.interaction.util.PageCoordinates.Coordinate;
 
 public class FlowStack extends AbstractDeductionContext {
 	
@@ -45,23 +43,23 @@ public class FlowStack extends AbstractDeductionContext {
 	public Flow getFlow() {
 		return flow;
 	}
-
-	public PageCoordinates toPageCoordinates() {
-		Coordinate lastCoordinate;
-		PageCoordinates result;
-		if (parent==null) {
-			result = new PageCoordinates();
-			lastCoordinate = new Coordinate(flow.getName(), new ArrayList<String>());
-			result.getPath().add(lastCoordinate);
-		} else {
-			result = parent.toPageCoordinates();
-			lastCoordinate = result.getPath().get(result.getPath().size()-1);
+	
+	public String toPath() {
+		StringBuilder result = new StringBuilder();
+		if (parent!=null) {
+			parent.toPath(result);
 		}
+		toPath(result);
+		return result.toString();
+	}
+	
+	void toPath(StringBuilder result) {
+		result.append("/");
+		result.append(this.flow.getName());
 		for (Instance instance: selectedInstances) {
-			lastCoordinate.getActiveInstances().add(instance.getMetadata().getInstanceId());
+			result.append("/");
+			result.append(instance.getMetadata().getInstanceId());
 		}
-		result.addCoordinate(new Coordinate(currentNode.getName(), new ArrayList<String>()));
-		return result;
 	}
 	
 	@Override

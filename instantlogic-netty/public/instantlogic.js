@@ -2,7 +2,7 @@ YUI.add('instantlogic', function (Y) {
 
     var ns = Y.namespace('instantlogic');
 
-    // Instantlogic is a FragmentFactory
+    // Engine is a FragmentFactory
     ns.Engine = function (application, caseId, travelerId, containerNode, fragmentNamespaces) {
     	this.application = application;
     	this.caseId = caseId;
@@ -14,6 +14,8 @@ YUI.add('instantlogic', function (Y) {
         });
         this.fragmentNamespaces = fragmentNamespaces;
         this.state = 'not started';
+        this.outstandingRequests = 0;
+        this.messagesQueue = [];
         this.rootFragmentHolder = null;
 
         this.oneMomentPlease = new Y.Panel({
@@ -31,11 +33,11 @@ YUI.add('instantlogic', function (Y) {
         // API
         start: function () {
         	this.history = new Y.HistoryHash();
-            var location = this.history.get('location');
+            this.location = this.history.get('location');
             if (!location) Y.error('no location given');
             this.containerNode.setContent('One moment...');
             this.setState('connecting');
-            this.sendRequest([{message:'enter', location: location}]);
+            this.sendEnter();
         },
 
         // Private functions
@@ -98,22 +100,50 @@ YUI.add('instantlogic', function (Y) {
             }
             return new ns.MessageFragment(parentNode, fragmentFactory || this, 'No fragmentnamespace provides a fragment called ' + name, 'error');
         },
+        
+        sendEnter: function() {
+        	this.enqueueMessage({message:'enter', location: this.location});        	
+        },
+        
+        sendEvent: function(id) {
+        	this.enqueueMessage({message:'event', id:id});
+        },
+        
+        sendChange: function(id, value) {
+        	this.enqueueMessage({message:'change', id:id, value:value});
+        },
+        
+        enqueueMessage: function(message) {
+        	this.messagesQueue.push(message);
+        	this.triggerMessagesTransport();
+        },
+        
+        triggerMessagesTransport: function() {
+        	if (this.outstandingRequests<2 && this.messagesQueue.length>0) {
+        		this.transportMessages();
+        	}
+        },
 
-        sendRequest: function (messages) {
+        transportMessages: function () {
+        	var messages = this.messagesQueue;
+        	this.messagesQueue = [];
         	var data = (messages && messages.length>0) ? JSON.stringify(messages) : null;
+        	this.outstandingRequests++;
             Y.io('/place?application='+this.application+'&case='+this.caseId+'&travelerId=' + travelerId, {
             	data: data,
                 method: 'POST',
                 on: {
                     success: function (transactionid, response) {
+                    	this.outstandingRequests--;
                         this.setState('connected');
                         this.processUpdates(response.responseText);
-                        this.sendRequest();
+                        this.triggerMessagesTransport();
                     },
                     failure: function () {
+                    	this.outstandingRequests--;
                         this.setState('disconnected');
                         var me = this;
-                        setTimeout(function () { me.sendRequest(); }, 300);
+                        setTimeout(function () { me.sendEnter(); }, 300);
                     }
                 },
                 context: this

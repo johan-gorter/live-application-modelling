@@ -5,13 +5,20 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Attribute;
 import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.fabric.value.AttributeValue;
+import org.instantlogic.interaction.flow.Flow;
 
 
 public class ChangeContext extends RenderContext {
 
+	public static ChangeContext create(Flow mainFlow, String path, Instance caseInstance, String caseId, FieldChange[] changes, String submitId) {
+		FlowContext flowContext = FlowContext.create(mainFlow, path, caseInstance, caseId);
+		return new ChangeContext(flowContext, path, changes, submitId);
+	}
+	
 	public static class FieldChange {
 		private String pageElementId;
 		private Object value;
