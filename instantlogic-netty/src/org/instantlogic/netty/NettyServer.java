@@ -13,6 +13,8 @@ import java.nio.file.WatchService;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.instantlogic.designer.DesignerApplication;
+import org.instantlogic.engine.manager.ApplicationManager;
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 import org.slf4j.Logger;
@@ -57,7 +59,9 @@ public class NettyServer {
 	};
 
 	public static void main(String[] args) throws IOException {
-
+		// TODO: Discover which applications should be loaded
+		ApplicationManager.registerApplication(DesignerApplication.INSTANCE);
+		
 		ExecutorService executor = Executors.newCachedThreadPool();
 		ServerBootstrap bootstrap = new ServerBootstrap(new NioServerSocketChannelFactory(Executors.newSingleThreadExecutor(), executor));
 

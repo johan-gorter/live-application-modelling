@@ -13,7 +13,7 @@
   <#elseif content.category=="Fragment">
     new org.instantlogic.interaction.page.FragmentTemplate("${content.id}", "${content.fragmentTypeName}")<#t>
     <#if content.event??>
-      .setEvent(${content.event}Event.INSTANCE)
+      .setEvent(${rootPackageName}.event.${content.event}Event.INSTANCE)
     </#if>
     <#if content.attribute??>
       .setField(${rootPackageName}.entity.${content.entity}Entity.INSTANCE, ${rootPackageName}.entity.${content.entity}Entity.${content.attribute})

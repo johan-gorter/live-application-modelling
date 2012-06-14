@@ -2,8 +2,10 @@ package org.instantlogic.netty;
 
 import junit.framework.Assert;
 
-import org.instantlogic.netty.manager.ApplicationManager;
-import org.instantlogic.netty.manager.CaseManager;
+import org.instantlogic.designer.DesignerApplication;
+import org.instantlogic.engine.manager.ApplicationManager;
+import org.instantlogic.engine.manager.CaseManager;
+import org.instantlogic.interaction.util.TravelerInfo;
 import org.junit.Test;
 
 import com.google.gson.Gson;
@@ -12,12 +14,13 @@ public class EnteringDesignerTest {
 
 	@Test
 	public void test() {
-		ApplicationManager designerApplicationManager = ApplicationManager.applications[0];
+		ApplicationManager designerApplicationManager = new ApplicationManager(DesignerApplication.INSTANCE);
 		CaseManager testCase = designerApplicationManager.getOrCreateCase("testCase");
-		Traveler traveler = new Traveler("testTraveler", designerApplicationManager);
-		traveler.setCaseId("testCase");
+		TravelerInfo traveler = new TravelerInfo();
+		traveler.setTravelerId("testTraveler");
 		
-		Object page = testCase.enter(traveler, null, "Main/Welcome");
+		testCase.enter(traveler, null, "Welcome");
+		Object page = testCase.render(traveler, "Welcome");
 
 		Assert.assertNotNull(page);
 		

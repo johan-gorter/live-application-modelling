@@ -1,5 +1,8 @@
 YUI.add('instantlogic', function (Y) {
 
+	// Prettier url's
+	Y.HistoryHash.encode = Y.HistoryHash.decode = function(str) {return str;};
+	
     var ns = Y.namespace('instantlogic');
 
     // Engine is a FragmentFactory
@@ -33,11 +36,19 @@ YUI.add('instantlogic', function (Y) {
         // API
         start: function () {
         	this.history = new Y.HistoryHash();
+        	this.history.on('locationChange', this.onLocationChange, this);
             this.location = this.history.get('location');
             if (!location) Y.error('no location given');
             this.containerNode.setContent('One moment...');
             this.setState('connecting');
             this.sendEnter();
+        },
+        
+        onLocationChange: function(e) {
+        	if (e.src !== Y.HistoryBase.SRC_ADD) {
+        		this.location = e.newVal;
+        		this.sendEnter();
+        	}
         },
 
         // Private functions
@@ -63,6 +74,10 @@ YUI.add('instantlogic', function (Y) {
                 var message = messages[i];
                 switch (message.message) {
                     case 'place':
+                    	if (this.location!=message.location) {
+	                    	this.location = message.location;
+	                    	this.history.addValue('location', this.location);
+                    	}
                         this.updatePlace(message.rootFragment);
                         break;
                     case 'filesUpdated':
@@ -119,8 +134,10 @@ YUI.add('instantlogic', function (Y) {
         },
         
         triggerMessagesTransport: function() {
-        	if (this.outstandingRequests<2 && this.messagesQueue.length>0) {
-        		this.transportMessages();
+        	if (this.outstandingRequests<2) { // No more than 2 requests should be underway
+        		if (this.messagesQueue.length>0 || this.outstandingRequests==0) {
+        			this.transportMessages(); // Send a new (maybe empty) request
+        		}
         	}
         },
 
@@ -139,11 +156,15 @@ YUI.add('instantlogic', function (Y) {
                         this.processUpdates(response.responseText);
                         this.triggerMessagesTransport();
                     },
-                    failure: function () {
+                    failure: function (transactionid, response) {
                     	this.outstandingRequests--;
                         this.setState('disconnected');
                         var me = this;
-                        setTimeout(function () { me.sendEnter(); }, 300);
+                        if (!response.status) {
+                        	setTimeout(function () { me.sendEnter(); }, 300);
+                        } else {
+                        	alert("Server error");
+                        }
                     }
                 },
                 context: this

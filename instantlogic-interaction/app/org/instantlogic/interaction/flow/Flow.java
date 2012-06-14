@@ -37,7 +37,7 @@ public abstract class Flow extends Concept {
 	
 	public FlowEdge findEdge(FlowNodeBase from, FlowEventOccurrence occurrence) {
 		for (FlowEdge edge: getEdges()) {
-			if (edge.getStartNode()==from && occurrence.getEvent()==edge.getStartEvent()) {
+			if (occurrence.getEvent()==edge.getStartEvent()) {
 				return edge;
 			}
 		}

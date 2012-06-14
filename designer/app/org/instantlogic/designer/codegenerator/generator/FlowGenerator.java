@@ -50,7 +50,7 @@ public class FlowGenerator extends AbstractGenerator {
 		for (FlowSourceDesign source: flowDesign.getSources()) {
 			FlowClassModel.FlowSource flowSource = new FlowClassModel.FlowSource();
 			flowSource.startEvent = source.getStartEvent()==null?null:source.getStartEvent().getName();
-			flowSource.endNode = source.getEndEvent()==null?null:edgePoint(source.getEndNode());
+			flowSource.endNode = source.getEndNode()==null?null:edgePoint(source.getEndNode());
 			flowSource.endEvent = source.getEndEvent()==null?null:source.getEndEvent().getName();
 			model.sources.add(flowSource);
 		}

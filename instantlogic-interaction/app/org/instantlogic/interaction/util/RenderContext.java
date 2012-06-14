@@ -9,10 +9,10 @@ import org.instantlogic.interaction.flow.Flow;
 import org.instantlogic.interaction.page.FragmentTemplate;
 
 
-public class RenderContext extends AbstractDeductionContext{
+public class RenderContext extends AbstractDeductionContext {
 
-	public static RenderContext create(Flow mainFlow, String path, Instance caseInstance, String caseId) {
-		FlowContext flowContext = FlowContext.create(mainFlow, path, caseInstance, caseId);
+	public static RenderContext create(Flow mainFlow, String path, Instance caseInstance, String caseId, TravelerInfo travelerInfo) {
+		FlowContext flowContext = FlowContext.create(mainFlow, path, caseInstance, caseId, travelerInfo);
 		return new RenderContext(flowContext, path);
 	}
 	

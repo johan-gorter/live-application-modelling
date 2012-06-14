@@ -14,7 +14,7 @@ public class ActionFilter extends AbstractFragmentFilter {
 	
 	@Override
 	public FlowEventOccurrence submit(ChangeContext changeContext, String id, FragmentFilterChain chain) {
-		if (changeContext.getSubmit()==id) {
+		if (changeContext.getSubmit().equals(id)) {
 			return this.event.createOccurrence(changeContext);
 		}
 		return super.submit(changeContext, id, chain);
