@@ -46,20 +46,20 @@ public class FlowStack extends AbstractDeductionContext {
 	
 	public String toPath() {
 		StringBuilder result = new StringBuilder();
-		if (parent!=null) {
-			parent.toPath(result);
-		}
 		toPath(result);
 		return result.toString();
 	}
 	
 	void toPath(StringBuilder result) {
-		result.append("/");
-		result.append(this.flow.getName());
-		for (Instance instance: selectedInstances) {
+		if (parent!=null) {
+			parent.toPath(result);
 			result.append("/");
-			result.append(instance.getMetadata().getInstanceId());
+			for (Instance instance: selectedInstances) {
+				result.append(instance.getMetadata().getInstanceId());
+				result.append("/");
+			}
 		}
+		result.append(this.getCurrentNode().getName());
 	}
 	
 	@Override

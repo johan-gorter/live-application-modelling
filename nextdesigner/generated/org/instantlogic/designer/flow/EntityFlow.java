@@ -7,13 +7,13 @@ public class EntityFlow extends org.instantlogic.interaction.flow.Flow {
 	private static final org.instantlogic.interaction.flow.FlowSource[] SOURCES = new org.instantlogic.interaction.flow.FlowSource[]{
 		new org.instantlogic.interaction.flow.FlowSource(
 			null,
-			null,
+			org.instantlogic.designer.flow.entity.EntityDetailsPlaceTemplate.INSTANCE,
 			null
 		),
 	};
 
 	private static final org.instantlogic.interaction.flow.FlowNodeBase[] NODES = new org.instantlogic.interaction.flow.FlowNodeBase[]{
-		org.instantlogic.designer.flow.entity.EntityPlaceTemplate.INSTANCE,
+		org.instantlogic.designer.flow.entity.EntityDetailsPlaceTemplate.INSTANCE,
 	};
 	
 	private static final org.instantlogic.interaction.flow.FlowEdge[] EDGES = new org.instantlogic.interaction.flow.FlowEdge[]{

@@ -13,9 +13,9 @@ import org.instantlogic.interaction.flow.PlaceTemplate;
 
 public class FlowContext extends DeductionContext {
 
-	public static FlowContext create(Flow mainFlow, String path, Instance caseInstance, String caseId) {
+	public static FlowContext create(Flow mainFlow, String path, Instance caseInstance, String caseId, TravelerInfo travelerInfo) {
 		FlowStack flowStack = FlowStack.create(mainFlow, path, caseInstance);
-		FlowContext result = new FlowContext(caseInstance, caseId);
+		FlowContext result = new FlowContext(caseInstance, caseId, travelerInfo);
 		result.setFlowStack(flowStack);
 		if (flowStack.getCurrentNode()==null) {
 			throw new NoSuchElementException();
@@ -26,15 +26,17 @@ public class FlowContext extends DeductionContext {
 	
 	private final Instance caseInstance;
 	private final String caseId;
+	private final TravelerInfo traveler;
 	private FlowStack flowStack;
 	
 	// For debugging purposes
 	private FlowNodeBase lastNode;
 	private FlowEventOccurrence lastOccurrence;
 
-	public FlowContext(Instance caseInstance, String caseId) {
+	public FlowContext(Instance caseInstance, String caseId, TravelerInfo traveler) {
 		this.caseInstance = caseInstance;
 		this.caseId = caseId;
+		this.traveler = traveler;
 	}
 	
 	public PlaceTemplate getPage() {
@@ -98,5 +100,9 @@ public class FlowContext extends DeductionContext {
 	public void logOccurrence(FlowEventOccurrence occurrence) {
 		this.lastNode = flowStack.getCurrentNode();
 		this.lastOccurrence = occurrence;
+	}
+
+	public TravelerInfo getTraveler() {
+		return traveler;
 	}
 }

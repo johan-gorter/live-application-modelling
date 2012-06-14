@@ -14,8 +14,8 @@ import org.instantlogic.interaction.flow.Flow;
 
 public class ChangeContext extends RenderContext {
 
-	public static ChangeContext create(Flow mainFlow, String path, Instance caseInstance, String caseId, FieldChange[] changes, String submitId) {
-		FlowContext flowContext = FlowContext.create(mainFlow, path, caseInstance, caseId);
+	public static ChangeContext create(Flow mainFlow, String path, Instance caseInstance, String caseId, FieldChange[] changes, String submitId, TravelerInfo travelerInfo) {
+		FlowContext flowContext = FlowContext.create(mainFlow, path, caseInstance, caseId, travelerInfo);
 		return new ChangeContext(flowContext, path, changes, submitId);
 	}
 	

@@ -108,6 +108,5 @@ public class ContentModel {
 	}
 	public Map<String, TextModel> getTexts() {
 		return texts;
-	}
-	
+	}	
 }

@@ -11,9 +11,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.instantlogic.engine.manager.ApplicationManager;
+import org.instantlogic.engine.manager.CaseManager;
+import org.instantlogic.interaction.util.TravelerInfo;
 import org.instantlogic.interaction.util.ChangeContext.FieldChange;
-import org.instantlogic.netty.manager.ApplicationManager;
-import org.instantlogic.netty.manager.CaseManager;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.jboss.netty.channel.ChannelFuture;
 import org.jboss.netty.channel.ChannelFutureListener;
@@ -43,21 +44,10 @@ public class Traveler {
 
 	public static void broadcast(JsonObject message) {
 		logger.info("broadcasting to every traveler");
-		for (Traveler session : Traveler.travelers.values()) {
-			session.sendMessage(message);
+		for (Traveler traveler : Traveler.travelers.values()) {
+			traveler.sendMessage(message);
 		}
 	}
-	
-//	public static JsonObject placeJson = new JsonObject();
-//	static {
-//		placeJson.addProperty("widget", "Question");
-//		placeJson.addProperty("answerWidget", "Slider");
-//		placeJson.addProperty("value", 42);
-//		placeJson.addProperty("min", 10);
-//		placeJson.addProperty("max", 110);
-//		placeJson.addProperty("length", "500px");
-//		placeJson.addProperty("question", "The answer to everything?");
-//	}
 	
 	public static Traveler getOrCreate(String travelerId, String applicationName) {
 		Traveler result = travelers.get(travelerId);
@@ -70,7 +60,7 @@ public class Traveler {
 		return result;
 	}
 	
-	private String id;
+	private final TravelerInfo travelerInfo;
 	private List<MessageEvent> parkedRequests = new ArrayList<MessageEvent>();
 	private long lastSentPlaceVersion = -1;
 	private JsonArray messagesWaiting = new JsonArray();
@@ -81,7 +71,8 @@ public class Traveler {
 	private CaseManager caseManager;
 	
 	public Traveler(String travelerId, ApplicationManager application) {
-		this.id = travelerId;
+		travelerInfo = new TravelerInfo();
+		travelerInfo.setTravelerId(travelerId);
 		this.applicationManager = application;
 	}
 
@@ -98,18 +89,18 @@ public class Traveler {
 		JsonArray messages = (JsonArray) new JsonParser().parse(messagesText);
 		for (JsonElement message : messages) {
 			String messageName = message.getAsJsonObject().get("message").getAsString();
-			logger.debug("Handling {} message from traveler {}", messageName, id);
+			logger.debug("Handling {} message from traveler {}", messageName, travelerInfo.getTravelerId());
 			if ("change".equals(messageName)) {
 				// TODO: handle change
 				sendPlace = true;
 				throw new RuntimeException("TODO");
 			} else if ("event".equals(messageName)) {
 				String id = message.getAsJsonObject().get("id").getAsString();
-				this.location = this.caseManager.submit(this, this.location, new FieldChange[0], id);
+				this.location = this.caseManager.submit(travelerInfo, this.location, new FieldChange[0], id);
 				sendPlace = true;
 			} else if ("enter".equals(messageName)) {
 				String newLocation = message.getAsJsonObject().get("location").getAsString();
-				this.caseManager.enter(this, this.location, newLocation);
+				this.caseManager.enter(travelerInfo, this.location, newLocation);
 				this.location = newLocation;
 				sendPlace = true;
 			}
@@ -131,9 +122,10 @@ public class Traveler {
 	
 	private void deliverMessages() {
 		if (sendPlace) {
-			JsonElement rootFragment = gson.toJsonTree(caseManager.render(this, this.location));
+			JsonElement rootFragment = gson.toJsonTree(caseManager.render(travelerInfo, this.location));
 			JsonObject placeMessage = new JsonObject();
 			placeMessage.addProperty("message", "place");
+			placeMessage.addProperty("location", location);
 			placeMessage.add("rootFragment", rootFragment);
 			messagesWaiting.add(placeMessage);
 			sendPlace = false;
@@ -152,7 +144,7 @@ public class Traveler {
  
          // Build the response object.
          HttpResponse response = new DefaultHttpResponse(HTTP_1_1, OK);
-         logger.debug("Sending {} messages to traveler {}", messagesWaiting.size(), id);
+         logger.debug("Sending {} messages to traveler {}", messagesWaiting.size(), travelerInfo.getTravelerId());
     	 response.setContent(ChannelBuffers.copiedBuffer(gson.toJson(messagesWaiting), CharsetUtil.UTF_8));
     	 messagesWaiting = new JsonArray();
 

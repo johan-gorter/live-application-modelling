@@ -82,6 +82,7 @@ public class SelectionElement extends Element {
 		if (value instanceof Instance) {
 			Instance instance = (Instance) value;
 			changeContext.enterScope(instance);
+			changeContext.pushSelectedInstance(instance);
 			for (Element template: children) {
 				FlowEventOccurrence itemResult = template.submit(changeContext);
 				if (itemResult!=null) {
@@ -91,6 +92,7 @@ public class SelectionElement extends Element {
 					result = itemResult;
 				}
 			}
+			changeContext.popSelectedInstance(instance);
 			changeContext.exitScope();
 		} else {
 			throw new RuntimeException("Not sure how to handle selection of primitives");

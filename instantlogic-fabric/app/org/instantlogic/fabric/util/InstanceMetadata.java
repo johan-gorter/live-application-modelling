@@ -1,10 +1,12 @@
 package org.instantlogic.fabric.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.instantlogic.fabric.Instance;
@@ -22,7 +24,8 @@ public class InstanceMetadata {
 	
 	private String localId="0";
 	private int lastChildId=0;
-	private HashMap<String, Instance> children;
+	private Map<String, Instance> children;
+	private Map<String, Instance> unmodifiableChildren = Collections.emptyMap();
 	
 
 	public InstanceMetadata(Instance instance) {
@@ -131,11 +134,9 @@ public class InstanceMetadata {
 	@SuppressWarnings("unchecked")
 	public <T extends Instance> T getInstanceOwner(Entity<T> ofEntity) {
 		if (ofEntity==null) throw new IllegalArgumentException();
-		Class<T> instanceClass = ofEntity.getInstanceClass();
 		Instance candidate = owner;
 		while (candidate!=null) {
 			if (Entity.extendsFrom(candidate.getInstanceEntity(), ofEntity)) return (T)candidate;
-//			if (instanceClass.isAssignableFrom(candidate.getClass())) return (T)candidate;  // Causes problems with GWT
 			candidate = candidate.getMetadata().getInstanceOwner();
 		}
 		return null;
@@ -148,6 +149,7 @@ public class InstanceMetadata {
 	public void adopt(Instance instance) {
 		if (children==null) {
 			children = new HashMap<String, Instance>();
+			this.unmodifiableChildren = Collections.unmodifiableMap(children);
 		}
 		String childLocalId = (Character.toUpperCase(instance.getInstanceEntity().getName().charAt(0)))+""+(++lastChildId);
 		children.put(childLocalId, instance);
@@ -180,5 +182,17 @@ public class InstanceMetadata {
 	@Override
 	public String toString() {
 		return "InstanceMetadata("+instance.toString()+")";
+	}
+
+	public Map<String, Instance> getChildren() {
+		return unmodifiableChildren;
+	}
+	
+	public Instance getChild(String localId) {
+		Instance result = children.get(localId);
+		if (result==null) {
+			throw new NoSuchElementException("Child "+localId);
+		}
+		return result;
 	}
 }

@@ -3,6 +3,8 @@ package org.instantlogic.fabric.util;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -13,7 +15,7 @@ import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
 
 public class CaseAdministration {
 
-	private HashMap<String, Instance> instances = new HashMap<String, Instance>();
+	private final Instance rootInstance;
 	
 	private long version;
 	private List<Observations> observationsStack = new ArrayList<Observations>();
@@ -34,7 +36,7 @@ public class CaseAdministration {
 	public SortedMap<String, Entity<?>> getAllEntities() {
 		if (allEntities==null) {
 			TreeMap<String, Entity<?>> tempResult = new TreeMap<String, Entity<?>>();
-			addEntities(instances.get("0").getMetadata().getEntity(), tempResult);
+			addEntities(rootInstance.getMetadata().getEntity(), tempResult);
 			allEntities = tempResult;
 		}
 		return allEntities;
@@ -43,14 +45,28 @@ public class CaseAdministration {
 	private List<TransactionListener> transactionListeners = new ArrayList<TransactionListener>();
 	
 	private Operation currentOperation;
+
 	
 	public CaseAdministration(Instance rootInstance) {
-		instances.put("0", rootInstance);
+		this.rootInstance = rootInstance;
 	}
 	
 	public Instance getInstanceById(String id) {
-		return instances.get(id);
+		if ("0".equals(id)) return rootInstance;
+		Instance result = rootInstance;
+		StringBuilder currentLocalId = new StringBuilder(15);
+		for (int i=0;i<id.length();i++) {
+			char nextChar = id.charAt(i);
+			if (i>0 && nextChar>'9') {
+				result = result.getMetadata().getChild(currentLocalId.toString());
+				currentLocalId.setLength(0);
+			}
+			currentLocalId.append(nextChar);
+		}
+		result = result.getMetadata().getChild(currentLocalId.toString());
+		return result;
 	}
+
 
 	public void registerObservation(ReadOnlyAttributeValue<? extends Instance, ? extends Object> attributeValueObserved) {
 		if (currentObservations!=null) {
