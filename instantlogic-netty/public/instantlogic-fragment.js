@@ -228,4 +228,4 @@ YUI.add('instantlogic-fragment', function (Y) {
     });
 
             
-}, '3.4.1', { requires: ['instantlogic', 'html'] });
+}, '0.7.0', { requires: ['instantlogic', 'html'] });

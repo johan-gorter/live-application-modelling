@@ -1,10 +1,17 @@
 package org.instantlogic.netty;
 
-import static org.jboss.netty.handler.codec.http.HttpHeaders.*;
-import static org.jboss.netty.handler.codec.http.HttpHeaders.Names.*;
-import static org.jboss.netty.handler.codec.http.HttpMethod.*;
-import static org.jboss.netty.handler.codec.http.HttpResponseStatus.*;
-import static org.jboss.netty.handler.codec.http.HttpVersion.*;
+import static org.jboss.netty.handler.codec.http.HttpHeaders.isKeepAlive;
+import static org.jboss.netty.handler.codec.http.HttpHeaders.setContentLength;
+import static org.jboss.netty.handler.codec.http.HttpHeaders.Names.CONTENT_TYPE;
+import static org.jboss.netty.handler.codec.http.HttpMethod.GET;
+import static org.jboss.netty.handler.codec.http.HttpMethod.POST;
+import static org.jboss.netty.handler.codec.http.HttpResponseStatus.BAD_REQUEST;
+import static org.jboss.netty.handler.codec.http.HttpResponseStatus.FORBIDDEN;
+import static org.jboss.netty.handler.codec.http.HttpResponseStatus.INTERNAL_SERVER_ERROR;
+import static org.jboss.netty.handler.codec.http.HttpResponseStatus.METHOD_NOT_ALLOWED;
+import static org.jboss.netty.handler.codec.http.HttpResponseStatus.NOT_FOUND;
+import static org.jboss.netty.handler.codec.http.HttpResponseStatus.OK;
+import static org.jboss.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -31,6 +38,8 @@ import org.jboss.netty.handler.codec.http.HttpResponseStatus;
 import org.jboss.netty.handler.ssl.SslHandler;
 import org.jboss.netty.handler.stream.ChunkedFile;
 import org.jboss.netty.util.CharsetUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A simple handler that serves incoming HTTP requests to send their respective
@@ -40,6 +49,10 @@ import org.jboss.netty.util.CharsetUtil;
  */
 public class HttpStaticFileServerHandler extends SimpleChannelUpstreamHandler {
 
+	private static final Logger logger = LoggerFactory.getLogger(HttpStaticFileServerHandler.class);
+	
+	private boolean sendingError = false;
+	
 	@Override
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) throws Exception {
 		HttpRequest request = (HttpRequest) e.getMessage();
@@ -78,8 +91,14 @@ public class HttpStaticFileServerHandler extends SimpleChannelUpstreamHandler {
 		long fileLength = raf.length();
 
 		HttpResponse response = new DefaultHttpResponse(HTTP_1_1, OK);
+		if (path.endsWith(".css")) {
+			response.setHeader(CONTENT_TYPE, "text/css; charset=UTF-8");
+		} else if (path.endsWith(".js")) {
+			response.setHeader(CONTENT_TYPE, "text/javascript; charset=UTF-8");
+		} else if (path.endsWith(".html")) {
+			response.setHeader(CONTENT_TYPE, "text/html; charset=UTF-8");
+		}
 		setContentLength(response, fileLength);
-
 		Channel ch = e.getChannel();
 
 		// Write the initial line and the header.
@@ -120,13 +139,15 @@ public class HttpStaticFileServerHandler extends SimpleChannelUpstreamHandler {
 	public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e) throws Exception {
 		Channel ch = e.getChannel();
 		Throwable cause = e.getCause();
+		logger.error("Exception caught", cause);
+		if (sendingError) return;
+
 		if (cause instanceof TooLongFrameException) {
 			sendError(ctx, BAD_REQUEST);
 			return;
 		}
 
-		cause.printStackTrace();
-		if (ch.isConnected()) {
+		if (ch.isOpen()) {
 			sendError(ctx, INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -157,6 +178,7 @@ public class HttpStaticFileServerHandler extends SimpleChannelUpstreamHandler {
 	}
 
 	protected void sendError(ChannelHandlerContext ctx, HttpResponseStatus status) {
+		sendingError = true;
 		HttpResponse response = new DefaultHttpResponse(HTTP_1_1, status);
 		response.setHeader(CONTENT_TYPE, "text/plain; charset=UTF-8");
 		response.setContent(ChannelBuffers.copiedBuffer("Failure: " + status.toString() + "\r\n", CharsetUtil.UTF_8));

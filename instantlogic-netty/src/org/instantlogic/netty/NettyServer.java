@@ -12,6 +12,8 @@ import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import org.instantlogic.designer.DesignerApplication;
 import org.instantlogic.engine.manager.ApplicationManager;
@@ -58,6 +60,20 @@ public class NettyServer {
 		}
 	};
 
+	private static Runnable sweeper = new Runnable() {
+		@Override
+		public void run() {
+			Traveler.sweep();
+		}
+	};
+
+	private static Runnable filesUpdatedBroadcaster = new Runnable() {
+		@Override
+		public void run() {
+			Traveler.broadcast(FILES_UPDATED);
+		}
+	};
+
 	public static void main(String[] args) throws IOException {
 		// TODO: Discover which applications should be loaded
 		ApplicationManager.registerApplication(DesignerApplication.INSTANCE);
@@ -71,9 +87,12 @@ public class NettyServer {
 		if (WATCH_FILES) {
 			executor.execute(fileWatcher);
 		}
-		// Bind and start to accept incoming connections.
+		
 		bootstrap.bind(new InetSocketAddress(8080));
 		logger.info("Server started");
+		
+		ScheduledThreadPoolExecutor scheduler = new ScheduledThreadPoolExecutor(1);
+		scheduler.scheduleWithFixedDelay(sweeper, 10, 10, TimeUnit.SECONDS); // This may be a bit short for mobile devices on the road
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		while (true) {
@@ -81,16 +100,13 @@ public class NettyServer {
 			final String command = in.readLine();
 			if ("quit".equalsIgnoreCase(command)) {
 				break;
+			} else if ("sweep".equalsIgnoreCase(command)){
+				Traveler.sweep();
+			} else {
+				executor.execute(filesUpdatedBroadcaster);
 			}
-			executor.execute(new Runnable() {
-				@Override
-				public void run() {
-					for (Traveler traveler : Traveler.travelers.values()) {
-						traveler.sendMessage(FILES_UPDATED);
-					}
-				}
-			});
 		}
+		scheduler.shutdown();
 		executor.shutdown();
 	}
 }
