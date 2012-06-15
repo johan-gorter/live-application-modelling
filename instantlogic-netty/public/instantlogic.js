@@ -17,7 +17,8 @@ YUI.add('instantlogic', function (Y) {
         });
         this.fragmentNamespaces = fragmentNamespaces;
         this.state = 'not started';
-        this.outstandingRequests = 0;
+        this.outstandingRequestCount = 0;
+        this.outstandingRequests = {};
         this.messagesQueue = [];
         this.rootFragmentHolder = null;
 
@@ -27,9 +28,9 @@ YUI.add('instantlogic', function (Y) {
             centered: true,
             zIndex: 10,
             disabled: true,
-            modal: true
+            modal: true,
+            render: true
         });
-        this.oneMomentPlease.render();
     };
 
     ns.Engine.prototype = {
@@ -42,6 +43,17 @@ YUI.add('instantlogic', function (Y) {
             this.containerNode.setContent('One moment...');
             this.setState('connecting');
             this.sendEnter();
+            var me = this;
+            window.onbeforeunload = function() {
+            	me.stop();
+            }
+        },
+        
+        stop: function() {
+        	this.setState('stopped');
+        	for (var id in this.outstandingRequests) {
+        		this.outstandingRequests[id].abort();
+        	}
         },
         
         onLocationChange: function(e) {
@@ -61,9 +73,9 @@ YUI.add('instantlogic', function (Y) {
             if (state == 'connecting' || state == 'disconnected') {
                 this.oneMomentPlease.show();
                 this.containerNode.setContent('');
-                if (this.rootFragment) {
-                    this.rootFragment.destroy();
-                    this.rootFragment = null;
+                if (this.rootFragmentHolder) {
+                    this.rootFragmentHolder.destroy();
+                    this.rootFragmentHolder = null;
                 }
             }
         },
@@ -134,10 +146,12 @@ YUI.add('instantlogic', function (Y) {
         },
         
         triggerMessagesTransport: function() {
-        	if (this.outstandingRequests<2) { // No more than 2 requests should be underway
-        		if (this.messagesQueue.length>0 || this.outstandingRequests==0) {
-        			this.transportMessages(); // Send a new (maybe empty) request
-        		}
+        	if (this.state=='connected' || this.state=='connecting') {
+	        	if (this.outstandingRequestCount<2) { // No more than 2 requests should be underway
+	        		if (this.messagesQueue.length>0 || this.outstandingRequestCount==0) {
+	        			this.transportMessages(); // Send a new (maybe empty) request
+	        		}
+	        	}
         	}
         },
 
@@ -145,30 +159,36 @@ YUI.add('instantlogic', function (Y) {
         	var messages = this.messagesQueue;
         	this.messagesQueue = [];
         	var data = (messages && messages.length>0) ? JSON.stringify(messages) : null;
-        	this.outstandingRequests++;
-            Y.io('/place?application='+this.application+'&case='+this.caseId+'&travelerId=' + travelerId, {
+        	var transaction = Y.io('/place?application='+this.application+'&case='+this.caseId+'&travelerId=' + travelerId, {
             	data: data,
                 method: 'POST',
                 on: {
                     success: function (transactionid, response) {
-                    	this.outstandingRequests--;
+                    	this.outstandingRequestCount--;
+                    	delete this.outstandingRequests[transactionid];
                         this.setState('connected');
                         this.processUpdates(response.responseText);
                         this.triggerMessagesTransport();
                     },
                     failure: function (transactionid, response) {
-                    	this.outstandingRequests--;
-                        this.setState('disconnected');
-                        var me = this;
-                        if (!response.status) {
-                        	setTimeout(function () { me.sendEnter(); }, 300);
+                    	this.outstandingRequestCount--;
+                    	delete this.outstandingRequests[transactionid];
+                        if (!response.status || response.status > 600) {
+                            this.setState('disconnected');
+                            var me = this;
+                        	setTimeout(function () {
+                        		me.setState('connecting');
+                        		me.sendEnter(); 
+                        	}, 300);
                         } else {
-                        	alert("Server error");
+                        	this.setState('error');
                         }
                     }
                 },
                 context: this
             });
+        	this.outstandingRequests[transaction.id]=transaction;
+        	this.outstandingRequestCount++;
         }
     };
 
@@ -384,4 +404,4 @@ YUI.add('instantlogic', function (Y) {
         }
     });
     
-}, '3.4.1', { requires: ['io-base', 'node', 'oop', 'panel', 'json', 'slider', 'html', 'history'] });
+}, '0.7.0', { requires: ['io-base', 'node', 'oop', 'panel', 'json', 'slider', 'html', 'history'] });

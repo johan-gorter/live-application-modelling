@@ -78,8 +78,6 @@ public class CaseManager {
 	}
 
 	public void leave(String location, TravelerInfo traveler) {
-		// TODO Auto-generated method stub
-		
+		this.activePlaces.get(location).leave(traveler);
 	}
-
 }

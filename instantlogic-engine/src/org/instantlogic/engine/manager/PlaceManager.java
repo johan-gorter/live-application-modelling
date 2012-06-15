@@ -12,8 +12,12 @@ import org.instantlogic.interaction.util.ChangeContext.FieldChange;
 import org.instantlogic.interaction.util.FlowEventOccurrence;
 import org.instantlogic.interaction.util.RenderContext;
 import org.instantlogic.interaction.util.TravelerInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PlaceManager {
+	
+	private static final Logger logger = LoggerFactory.getLogger(PlaceManager.class);
 	
 	private List<TravelerInfo> travelers = new ArrayList<TravelerInfo>();
 
@@ -27,12 +31,12 @@ public class PlaceManager {
 	
 	private final ApplicationManager application;
 	private final CaseManager caseManager;
-	private final String path;
+	private final String location;
 	
 	public PlaceManager(ApplicationManager application, CaseManager caseManager, String path) {
 		this.application = application;
 		this.caseManager = caseManager;
-		this.path = path;
+		this.location = path;
 	}
 
 	public Map<String, Object> render(TravelerInfo traveler) {
@@ -45,7 +49,7 @@ public class PlaceManager {
 	}
 	
 	public String submit(FieldChange[] changes, String submitId, TravelerInfo traveler) {
-		ChangeContext changeContext = ChangeContext.create(application.getApplication().getMainFlow(), path, caseManager.getCase(), caseManager.getCaseId(), changes, submitId, traveler);
+		ChangeContext changeContext = ChangeContext.create(application.getApplication().getMainFlow(), location, caseManager.getCase(), caseManager.getCaseId(), changes, submitId, traveler);
 		PlaceTemplate placeTemplate = (PlaceTemplate)changeContext.getFlowContext().getFlowStack().getCurrentNode();
 		FlowEventOccurrence eventOccurrence = placeTemplate.submit(changeContext);
 		while (eventOccurrence!=null) {
@@ -57,31 +61,22 @@ public class PlaceManager {
 
 	private RenderContext findPage(TravelerInfo traveler) {
 		try {
-			return RenderContext.create(application.getApplication().getMainFlow(), path, caseManager.getCase(), caseManager.getCaseId(), traveler);
+			return RenderContext.create(application.getApplication().getMainFlow(), location, caseManager.getCase(), caseManager.getCaseId(), traveler);
 		} catch (NoSuchElementException e) {
 			return null;
 		}
 	}
 		
-//		if (flowStack.getCurrentNode()==null) { // Not on a page, enter the flow until a page is reached
-//			FlowEventOccurrence occurrence = new FlowEventOccurrence(null);
-//			do {
-//				occurrence = flowContext.step(occurrence);
-//			} while (occurrence!=null);
-//			flowContext.getFlowStack().toPageCoordinates();
-//			
-//		}
-//		return new RenderContext(flowContext, this.path);
-//	}
-
 	public void leave(TravelerInfo traveler) {
 		this.travelers.remove(traveler);
 		if (this.travelers.size()==0) {
+			logger.debug("Place {} got deactivated", this.location);
 			this.caseManager.deactivatePlace(this);
 		}
 	}
 
 	public void enter(TravelerInfo traveler) {
+		logger.debug("Traveler {} enters place {}", traveler.getTravelerId(), this.location);
 		this.travelers.add(traveler);
 	}
 }

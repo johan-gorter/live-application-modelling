@@ -87,4 +87,4 @@ YUI.add('html', function(Y) {
 		Y.html[name] = Y.html.createElementFactory(name);
 	}
 	
-}, '3.4.1', {requires: ['node']});
+}, '0.7.0', {requires: ['node']});
