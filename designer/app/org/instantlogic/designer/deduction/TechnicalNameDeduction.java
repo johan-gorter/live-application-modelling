@@ -10,9 +10,9 @@ public class TechnicalNameDeduction extends Deduction<String> {
 
 	@Override
 	public ValueAndLevel<String> deduct(DeductionContext context) {
-		Design design = context.getSelectedInstance(DesignEntity.INSTANCE);
-		if (design.getName()==null) return ValueAndLevel.inconclusive();
-		StringBuilder sb = new StringBuilder(design.getName());
+		String name = getName(context);
+		if (name==null) return ValueAndLevel.inconclusive();
+		StringBuilder sb = new StringBuilder(name);
 		if (sb.length()==0) {
 			return ValueAndLevel.deduced("_");
 		}
@@ -35,6 +35,11 @@ public class TechnicalNameDeduction extends Deduction<String> {
 			i++;
 		}
 		return ValueAndLevel.deduced(sb.toString());
+	}
+
+	protected String getName(DeductionContext context) {
+		Design design = context.getSelectedInstance(DesignEntity.INSTANCE);
+		return design.getName();
 	}
 
 }

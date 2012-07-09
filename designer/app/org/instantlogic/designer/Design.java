@@ -29,4 +29,10 @@ public class Design extends AbstractDesign {
 		scheme.setOutput(attributeDeductionDesign);
 		return scheme;
 	}
+	
+	public String getTechnicalNameCapitalized() {
+		StringBuffer result = new StringBuffer(getTechnicalName());
+		result.setCharAt(0, Character.toUpperCase(result.charAt(0)));
+		return result.toString();
+	}
 }

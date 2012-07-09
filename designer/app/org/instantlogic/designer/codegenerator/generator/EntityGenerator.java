@@ -36,7 +36,9 @@ public class EntityGenerator extends AbstractGenerator {
 		}
 		for (AttributeDesign attributeDesign: entityDesign.getAttributes()) {
 			EntityClassModel.Attribute attribute = new EntityClassModel.Attribute();
-			attribute.name = javaSafeName(attributeDesign.getName());
+			attribute.name = attributeDesign.getName();
+			attribute.technicalName = attributeDesign.getTechnicalName();
+			attribute.javaIdentifier = attributeDesign.getJavaIdentifier();
 			attribute.itemClassName = attributeDesign.getClassName();
 			attribute.multivalue = (attributeDesign.getMultivalue()==Boolean.TRUE);
 			if (attribute.multivalue) {
@@ -64,7 +66,8 @@ public class EntityGenerator extends AbstractGenerator {
 		}
 		for (RelationDesign relationDesign: entityDesign.getRelations()) {
 			EntityClassModel.Relation relation = new EntityClassModel.Relation();
-			relation.name = javaSafeName(relationDesign.getName());
+			relation.name = relationDesign.getName();
+			relation.technicalName = relationDesign.getTechnicalName();
 			relation.multivalue = (relationDesign.getMultivalue()==Boolean.TRUE);
 			relation.readonly = (relationDesign.getReadOnly()==Boolean.TRUE);
 			relation.owner = (relationDesign.getOwner()==Boolean.TRUE);
@@ -83,7 +86,8 @@ public class EntityGenerator extends AbstractGenerator {
 		}
 		for (RelationDesign relationDesign: entityDesign.getReverseRelations()) {
 			EntityClassModel.Relation relation = new EntityClassModel.Relation();
-			relation.name = javaSafeName(relationDesign.getReverseName());
+			relation.name = relationDesign.getReverseName();
+			//TODO
 			relation.multivalue = (relationDesign.getReverseMultivalue()==Boolean.TRUE);
 			relation.reverseName = javaSafeName(relationDesign.getName());
 			relation.item = relationDesign.getFrom().getName();
@@ -107,6 +111,7 @@ public class EntityGenerator extends AbstractGenerator {
 	private EntityClassModel initModel() {
 		EntityClassModel model = new EntityClassModel();
 		model.name = entityDesign.getName();
+		model.technicalNameCapitalized = entityDesign.getTechnicalNameCapitalized();
 		model.isCustomized = entityDesign.getIsCustomized()==Boolean.TRUE;
 		return model;
 	}

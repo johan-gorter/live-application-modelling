@@ -20,6 +20,8 @@ public class EntityClassModel extends AbstractClassModel {
 		}
 		
 		public String name;
+		public String technicalName;
+		public String javaIdentifier;
 		public String className;
 		public String itemClassName;
 		public TextModel question;
@@ -68,6 +70,12 @@ public class EntityClassModel extends AbstractClassModel {
 		public int compareTo(Attribute o) {
 			return this.name.compareTo(o.name);
 		}
+		public String getTechnicalName() {
+			return technicalName;
+		}
+		public String getJavaIdentifier() {
+			return javaIdentifier;
+		}
 	}
 	
 	public static class Relation extends Attribute {
@@ -105,6 +113,7 @@ public class EntityClassModel extends AbstractClassModel {
 	
 	private String internalName;
 	private String internalEntityName;
+	public String technicalNameCapitalized;
 	
 	
 	
@@ -122,15 +131,18 @@ public class EntityClassModel extends AbstractClassModel {
 	}
 	public String getInternalName() {
 		if (internalName==null) {
-			internalName = getRootPackageInternalPrefix()+name;
+			internalName = getRootPackageInternalPrefix()+technicalNameCapitalized;
 		}
 		return internalName;
 	}
 	public String getInternalEntityName() {
 		if (internalEntityName==null) {
-			internalEntityName = getRootPackageInternalPrefix()+"entity/"+name+"Entity";
+			internalEntityName = getRootPackageInternalPrefix()+"entity/"+technicalNameCapitalized+"Entity";
 		}
 		return internalEntityName;
+	}
+	public String getTechnicalNameCapitalized() {
+		return technicalNameCapitalized;
 	}
 	
 }

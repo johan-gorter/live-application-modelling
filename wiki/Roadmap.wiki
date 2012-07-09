@@ -1,0 +1,18 @@
+Roadmap
+
+Version 0.7 - Showcase
+- Izzy issue management demo application
+- Basic Designer application
+- Users see each other
+
+Version 0.8 - Prototyping
+- Screen layouting finished
+
+Version 0.9 - Beta
+- API stabilized
+- Logic design complete
+
+Version 1.0
+- Security tested
+- Scaleable
+- Source control solution

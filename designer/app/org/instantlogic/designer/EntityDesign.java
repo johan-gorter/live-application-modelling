@@ -14,21 +14,39 @@ public class EntityDesign extends AbstractEntityDesign {
 		ManyToMany
 	}
 	
+	public EntityDesign() {}
+	
+	public EntityDesign(String name) {
+		setName(name);
+	}
+	
 	protected static AttributeDesign addAttribute(EntityDesign from, String name, Class<?> type) {
-		return addAttribute(from, name, type.getName());
+		return from.addAttribute(name,  type);
 	}
 	
 	protected static AttributeDesign addAttribute(EntityDesign from, String name, String className) {
-		AttributeDesign result = new AttributeDesign();
-		result.setName(name);
-		result.setClassName(className);
-		from.addToAttributes(result);
-		return result;
+		return from.addAttribute(name, className);
 	}
 	
 	protected static RelationDesign addRelation(EntityDesign from, String name, RelationType relationType, EntityDesign to) {
+		return from.addRelation(name, relationType, to);
+	}
+
+	public AttributeDesign addAttribute(String name, Class<?> type) {
+		return addAttribute(name, type.getName());
+	}
+
+	public AttributeDesign addAttribute(String name, String className) {
+		AttributeDesign result = new AttributeDesign();
+		result.setName(name);
+		result.setClassName(className);
+		addToAttributes(result);
+		return result;
+	}
+	
+	public RelationDesign addRelation(String name, RelationType relationType, EntityDesign to) {
 		RelationDesign relation = new RelationDesign();
-		from.addToRelations(relation);
+		addToRelations(relation);
 		relation.setTo(to);
 		relation.setName(name);
 		relation.setOwner(relationType==RelationType.OneToManyAggregation || relationType==RelationType.OneToZeroOrOneAggregation || relationType==RelationType.OneToOneAggregation);

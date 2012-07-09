@@ -38,17 +38,18 @@ public class AttributeValueImplTest {
 		PrintListener listener2 = new PrintListener("Listener2", period.getDaysBetween());
 		try {
 			period.getDaysBetweenAttribute().addValueChangeObserver(listener1);
-			period.getDaysBetweenAttribute().addValueChangeObserver(new ConstraintEnforcer());
+			period.getDaysBetweenAttribute().addValueChangeObserver(new PeriodsPerYearReporter());
 			period.getDaysBetweenAttribute().addValueChangeObserver(listener2);
+			
 			period.setTo(date(2012,2,1));
 			assertEquals(1, listener1.getNrOfUpdates());
 			assertEquals(1, listener2.getNrOfUpdates());
 			assertEquals(31, listener1.getLastValue());
 			assertEquals(31, listener2.getLastValue());
-			period.setTo(date(2011,1,1));
+			period.setTo(date(2012,1,1));
 			fail();
-		} catch(InvalidPeriodException expected) {
-			System.out.println("Exception caught");
+		} catch(ArithmeticException expected) {
+			System.out.println("ArithmeticException caught");
 			assertEquals(1, listener1.getNrOfUpdates());
 			assertEquals(3, listener2.getNrOfUpdates());
 			assertEquals(31, listener1.getLastValue());
@@ -61,25 +62,19 @@ public class AttributeValueImplTest {
 		}
 	}
 
-	public static class ConstraintEnforcer implements ValueChangeObserver{
+	public static class PeriodsPerYearReporter implements ValueChangeObserver {
 
 		@Override
 		public void valueChanged(ValueChangeEvent event) {
-			
 			if (event.getNewValue().hasValue()) {
 				int daysBetween = (Integer) event.getNewValue().getValue();
-				if (daysBetween<0) {
-					throw new InvalidPeriodException();
-				}
+				System.out.println("PeriodsPerYearReporter: number of days between: "+daysBetween);
+				System.out.println("PeriodsPerYearReporter: periods per year: " + 365/daysBetween);
 			}
 		}
 	}
 	
-	public static class InvalidPeriodException extends RuntimeException {
-		
-	}
-	
-	public static class PrintListener implements ValueChangeObserver{
+	public static class PrintListener implements ValueChangeObserver {
 
 		private String name;
 		
@@ -96,7 +91,7 @@ public class AttributeValueImplTest {
 		public void valueChanged(ValueChangeEvent event) {
 			assertEquals(lastValue, event.getOldValue().getValue());
 			if (event.getNewValue().equals(event.getOldValue())) {
-				fail();
+				fail("Same value not expected in this test");
 			}
 			lastValue = (Integer)event.getNewValue().getValue();
 			nrOfUpdates ++;
