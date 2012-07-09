@@ -1,0 +1,23 @@
+The library instantlogic-fabric.jar provides the base for instantlogic projects. It is very lightweight and has no dependencies.
+
+Using instantlogic-fabric, it is possible to create in-memory data structures that are
+- Observable
+- Transactional
+- Rule based
+
+The main classes that it provides are Entity, Attribute, Relation and Instance. Their function are closely related to traditional Object oriented concepts:
+
+=== Attribute ===
+An attribute can be compared to a field. An attribute can be stored or its value can be deduced by a business rule. Attribute value changes can be observed.
+Attribute value changes are transactional, they can be rolled back.
+
+=== Relation ===
+A relation can be compared to a pointer. A relation can be an owning (parent-child) relation or an association. 
+
+=== Entity ===
+An entity can be compared to a class, with some enhancements.
+
+=== Instance ===
+An instance can be compared to an object. An instance can be owned by another instance, thus creating a hierarchy. Every instance has a unique id in the hierarchy. 
+The root instance, the one without an owner, is called the 'case'.
+

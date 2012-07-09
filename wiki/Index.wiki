@@ -1,0 +1,6 @@
+The main goals for instantlogic are
+
+1) Achieve the highest level of cooperation and interactivity possible in both using and designing applications
+2) Make designing applications as non-technical as possible
+3) Easy integration between modelling and programming
+

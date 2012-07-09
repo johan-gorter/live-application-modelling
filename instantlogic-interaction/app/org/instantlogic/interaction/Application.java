@@ -16,7 +16,9 @@ public abstract class Application {
 	
 	public abstract String getName();
 	
-	public abstract Flow getMainFlow();
+	public Flow getMainFlow() {
+		return null;
+	}
 
 	public FlowStack createFlowStack(PageCoordinates pageCoordinates, Instance caseInstance) {
 		Iterator<Coordinate> coordinates = pageCoordinates.getPath().iterator();
