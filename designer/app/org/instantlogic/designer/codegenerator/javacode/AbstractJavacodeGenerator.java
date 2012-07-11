@@ -50,7 +50,7 @@ public abstract class AbstractJavacodeGenerator {
 				root.mkdirs();
 			}
 			String prefix = classModel.isCustomized?"Abstract":"";
-			File output = new File(root, prefix+classModel.name+postfix+".java");
+			File output = new File(root, prefix+classModel.technicalNameCapitalized+postfix+".java");
 			writer = new OutputStreamWriter(new FileOutputStream(output), "UTF-8");
 			template.process(classModel, writer);
 		} catch (Exception e) {
@@ -67,7 +67,7 @@ public abstract class AbstractJavacodeGenerator {
 
 	static void deleteFile(String subDirectory, AbstractClassModel classModel, String postfix, File root) {
 		String prefix = classModel.isCustomized?"Abstract":"";
-		new File(new File(root, subDirectory), prefix + classModel.name + postfix + ".java").delete();
+		new File(new File(root, subDirectory), prefix + classModel.technicalNameCapitalized + postfix + ".java").delete();
 	}
 	
 	protected static void purge(File dir) {

@@ -28,6 +28,20 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	}
 
 	// Deductions
+
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.String> createDeduction0() {
+		    org.instantlogic.fabric.deduction.Deduction<java.lang.String> d0 
+		    	= new org.instantlogic.designer.deduction.ReverseTechnicalNameDeduction();
+		return d0;
+	}
+
+
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.String> createDeduction1() {
+		    org.instantlogic.fabric.deduction.Deduction<java.lang.String> d0 
+		    	= new org.instantlogic.designer.deduction.ReverseJavaIdentifierDeduction();
+		return d0;
+	}
+
 	
 	// Attributes
 	
@@ -53,6 +67,30 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			}
 		};
 	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.RelationDesign, java.lang.String, java.lang.String> reverseJavaIdentifer 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.RelationDesign, java.lang.String, java.lang.String>(
+			"reverseJavaIdentifer", INSTANCE, java.lang.String.class
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.RelationDesign, java.lang.String> get(org.instantlogic.designer.RelationDesign instance) {
+				return instance.getReverseJavaIdentiferAttributeValue();
+			}
+			
+			public boolean isReadOnly() {
+				return true;
+			};
+
+			private org.instantlogic.fabric.deduction.Deduction<java.lang.String> rule;
+			@Override
+			public org.instantlogic.fabric.deduction.Deduction<java.lang.String> getRule() {
+				if (rule==null) {
+					rule = createDeduction1();
+				}
+				return rule;
+			}
+		};
+	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.RelationDesign, java.lang.Boolean, java.lang.Boolean> reverseMultivalue 
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.RelationDesign, java.lang.Boolean, java.lang.Boolean>(
 			"reverseMultivalue", INSTANCE, java.lang.Boolean.class
@@ -72,6 +110,30 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.RelationDesign, java.lang.String> get(org.instantlogic.designer.RelationDesign instance) {
 				return instance.getReverseNameAttributeValue();
+			}
+		};
+	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.RelationDesign, java.lang.String, java.lang.String> reverseTechnicalName 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.RelationDesign, java.lang.String, java.lang.String>(
+			"reverseTechnicalName", INSTANCE, java.lang.String.class
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.RelationDesign, java.lang.String> get(org.instantlogic.designer.RelationDesign instance) {
+				return instance.getReverseTechnicalNameAttributeValue();
+			}
+			
+			public boolean isReadOnly() {
+				return true;
+			};
+
+			private org.instantlogic.fabric.deduction.Deduction<java.lang.String> rule;
+			@Override
+			public org.instantlogic.fabric.deduction.Deduction<java.lang.String> getRule() {
+				if (rule==null) {
+					rule = createDeduction0();
+				}
+				return rule;
 			}
 		};
 	
@@ -131,8 +193,10 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
 		autoCreate,
 		owner,
+		reverseJavaIdentifer,
 		reverseMultivalue,
 		reverseName,
+		reverseTechnicalName,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		to,

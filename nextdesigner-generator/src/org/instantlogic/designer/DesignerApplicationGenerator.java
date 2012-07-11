@@ -15,7 +15,7 @@ public class DesignerApplicationGenerator extends ApplicationDesign {
     public DesignerApplicationGenerator() {
         setName("Designer");
         setRootPackageName("org.instantlogic.designer");
-        setSourcePath("/prive/live-business-engineering/nextdesigner/generated");
+        setSourcePath("../nextdesigner/generated");
         setCaseEntity(ApplicationDesignEntityGenerator.ENTITY);
         setMainFlow(MainFlowGenerator.FLOW);
 

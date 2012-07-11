@@ -14,13 +14,18 @@ public class JavaIdentifierDeduction extends Deduction<String> {
 	
 	@Override
 	public ValueAndLevel<String> deduct(DeductionContext context) {
-		Design design = context.getSelectedInstance(DesignEntity.INSTANCE);
-		String result = design.getTechnicalName();
+		String result = getTechnicalName(context);
 		if (result==null) return ValueAndLevel.inconclusive();
 		if (Arrays.binarySearch(RESERVED_WORDS, result)>=0) {
 			return ValueAndLevel.deduced("_"+result);
 		}
 		return ValueAndLevel.deduced(result);
 	}
+	
+	protected String getTechnicalName(DeductionContext context) {
+		Design design = context.getSelectedInstance(DesignEntity.INSTANCE);
+		return design.getTechnicalName();
+	}
+	
 
 }

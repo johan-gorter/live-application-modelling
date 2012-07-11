@@ -1,7 +1,6 @@
 package org.instantlogic.designer.codegenerator.generator;
 
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,9 +14,7 @@ import org.instantlogic.designer.FlowNodeBaseDesign;
 import org.instantlogic.designer.FlowSourceDesign;
 import org.instantlogic.designer.PlaceTemplateDesign;
 import org.instantlogic.designer.SubFlowDesign;
-import org.instantlogic.designer.codegenerator.classmodel.AbstractClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.FlowClassModel;
-import org.instantlogic.designer.codegenerator.javacode.AbstractJavacodeGenerator;
 import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 import org.instantlogic.fabric.value.Multi;
@@ -49,14 +46,14 @@ public class FlowGenerator extends AbstractGenerator {
 		
 		for (FlowSourceDesign source: flowDesign.getSources()) {
 			FlowClassModel.FlowSource flowSource = new FlowClassModel.FlowSource();
-			flowSource.startEvent = source.getStartEvent()==null?null:source.getStartEvent().getName();
+			flowSource.startEvent = source.getStartEvent()==null?null:source.getStartEvent().getTechnicalNameCapitalized();
 			flowSource.endNode = source.getEndNode()==null?null:edgePoint(source.getEndNode());
-			flowSource.endEvent = source.getEndEvent()==null?null:source.getEndEvent().getName();
+			flowSource.endEvent = source.getEndEvent()==null?null:source.getEndEvent().getTechnicalNameCapitalized();
 			model.sources.add(flowSource);
 		}
 		for (FlowNodeBaseDesign nodeDesign: flowDesign.getNodes()) {
 			FlowClassModel.FlowNode node = new FlowClassModel.FlowNode();
-			node.name = nodeDesign.getName();
+			node.name = nodeDesign.getTechnicalNameCapitalized();
 			node.type = nodeDesign.getInstanceEntity().getName();
 			node.type = node.type.substring(0, node.type.length()-6); // remove Design
 			model.nodes.add(node);
@@ -65,16 +62,16 @@ public class FlowGenerator extends AbstractGenerator {
 			FlowClassModel.FlowEdge edge = new FlowClassModel.FlowEdge();
 			edge.startNode = edgePoint(edgeDesign.getStartNode());
 			if (edgeDesign.getStartEvent()!=null) {
-				edge.startEvent = edgeDesign.getStartEvent().getName();
+				edge.startEvent = edgeDesign.getStartEvent().getTechnicalNameCapitalized();
 			}
 			edge.endNode = edgePoint(edgeDesign.getEndNode());
 			if (edgeDesign.getEndEvent()!=null) {
-				edge.endEvent = edgeDesign.getEndEvent().getName();
+				edge.endEvent = edgeDesign.getEndEvent().getTechnicalNameCapitalized();
 			}
 			model.edges.add(edge);
 		}
 		for (EntityDesign selectDesign: flowDesign.getParameters()) {
-			model.parameters.add(selectDesign.getName());
+			model.parameters.add(selectDesign.getTechnicalNameCapitalized());
 		}
 		
 		List<Design> newPages = updateGenerators(placeTemplateGenerators, getPages(flowDesign.getNodes()), context);
@@ -102,6 +99,7 @@ public class FlowGenerator extends AbstractGenerator {
 	private FlowClassModel initModel() {
 		FlowClassModel model = new FlowClassModel();
 		model.name = flowDesign.getName();
+		model.technicalNameCapitalized = flowDesign.getTechnicalNameCapitalized();
 		model.isCustomized = flowDesign.getIsCustomized()==Boolean.TRUE;
 		return model;
 	}
@@ -127,7 +125,7 @@ public class FlowGenerator extends AbstractGenerator {
 	}
 
 	private static String edgePoint(FlowNodeBaseDesign flowNodeBaseDesign) {
-		String name = flowNodeBaseDesign.getName();
+		String name = flowNodeBaseDesign.getTechnicalNameCapitalized();
 		String typeName = flowNodeBaseDesign.getInstanceEntity().getName();
 		typeName = typeName.substring(0, typeName.length()-6);// Remove Design
 		return name+typeName+".INSTANCE";

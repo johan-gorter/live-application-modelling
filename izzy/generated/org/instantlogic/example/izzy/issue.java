@@ -1,127 +1,127 @@
 package org.instantlogic.example.izzy;
 
 
-public class issue extends org.instantlogic.fabric.Instance { 
+public class Issue extends org.instantlogic.fabric.Instance { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
-		return org.instantlogic.example.izzy.entity.issueEntity.INSTANCE;
+		return org.instantlogic.example.izzy.entity.IssueEntity.INSTANCE;
 	}
 
 	// Attributes
 	
-	private final org.instantlogic.fabric.value.AttributeValue<issue, java.lang.String> description
-		= createAttributeValue(org.instantlogic.example.izzy.entity.issueEntity.description);
+	private final org.instantlogic.fabric.value.AttributeValue<Issue, java.lang.String> description
+		= createAttributeValue(org.instantlogic.example.izzy.entity.IssueEntity.description);
 	
 	public java.lang.String getDescription() {
 		return description.getValue();
 	}
 
-	public org.instantlogic.fabric.value.AttributeValue<issue, java.lang.String> getDescriptionAttributeValue() {
+	public org.instantlogic.fabric.value.AttributeValue<Issue, java.lang.String> getDescriptionAttributeValue() {
 		return description;
 	}
 
-	public issue setDescription(java.lang.String newValue) {
+	public Issue setDescription(java.lang.String newValue) {
 		description.setValue(newValue);
-		return (issue)this;
+		return (Issue)this;
 	}
 	
 	
-	private final org.instantlogic.fabric.value.AttributeValue<issue, java.lang.String> headline
-		= createAttributeValue(org.instantlogic.example.izzy.entity.issueEntity.headline);
+	private final org.instantlogic.fabric.value.AttributeValue<Issue, java.lang.String> headline
+		= createAttributeValue(org.instantlogic.example.izzy.entity.IssueEntity.headline);
 	
 	public java.lang.String getHeadline() {
 		return headline.getValue();
 	}
 
-	public org.instantlogic.fabric.value.AttributeValue<issue, java.lang.String> getHeadlineAttributeValue() {
+	public org.instantlogic.fabric.value.AttributeValue<Issue, java.lang.String> getHeadlineAttributeValue() {
 		return headline;
 	}
 
-	public issue setHeadline(java.lang.String newValue) {
+	public Issue setHeadline(java.lang.String newValue) {
 		headline.setValue(newValue);
-		return (issue)this;
+		return (Issue)this;
 	}
 	
 	
 	// Relations
 	
-	private final org.instantlogic.fabric.value.RelationValue<issue, user> assignee
-		= createRelationValue(org.instantlogic.example.izzy.entity.issueEntity.assignee);
+	private final org.instantlogic.fabric.value.RelationValue<Issue, User> assignee
+		= createRelationValue(org.instantlogic.example.izzy.entity.IssueEntity.assignee);
 		
-	public org.instantlogic.fabric.value.RelationValue<issue, user> getAssigneeRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<Issue, User> getAssigneeRelationValue() {
 		return assignee;
 	}
 
-	public org.instantlogic.example.izzy.user getAssignee() {
+	public org.instantlogic.example.izzy.User getAssignee() {
 		return assignee.getValue();
 	}
 	
-	public issue setAssignee(org.instantlogic.example.izzy.user newValue) {
+	public Issue setAssignee(org.instantlogic.example.izzy.User newValue) {
 		assignee.setValue(newValue);
-		return (issue)this;
+		return (Issue)this;
 	}
 
 	
-	private final org.instantlogic.fabric.value.RelationValues<issue, comment> comments
-		= createRelationValues(org.instantlogic.example.izzy.entity.issueEntity.comments);
+	private final org.instantlogic.fabric.value.RelationValues<Issue, Comment> comments
+		= createRelationValues(org.instantlogic.example.izzy.entity.IssueEntity.comments);
 		
-	public org.instantlogic.fabric.value.RelationValues<issue, comment> getCommentsRelationValue() {
+	public org.instantlogic.fabric.value.RelationValues<Issue, Comment> getCommentsRelationValue() {
 		return comments;
 	}
 
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.comment> getComments() {
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.Comment> getComments() {
 		return comments.getValue();
 	}
 	
-	public issue addToComments(comment item) {
+	public Issue addToComments(Comment item) {
 		comments.addValue(item);
-		return (issue)this;
+		return (Issue)this;
 	}
 	
-	public issue addToComments(comment item, int index) {
+	public Issue addToComments(Comment item, int index) {
 		comments.insertValue(item, index);
-		return (issue)this;
+		return (Issue)this;
 	}
 	
-	public issue removeFromComments(comment item) {
+	public Issue removeFromComments(Comment item) {
 		comments.removeValue(item);
-		return (issue)this;
+		return (Issue)this;
 	}
 	
-	public issue removeFromComments(int index) {
+	public Issue removeFromComments(int index) {
 		comments.removeValue(index);
-		return (issue)this;
+		return (Issue)this;
 	}
 	
 	
-	private final org.instantlogic.fabric.value.RelationValue<issue, user> reporter
-		= createRelationValue(org.instantlogic.example.izzy.entity.issueEntity.reporter);
+	private final org.instantlogic.fabric.value.RelationValue<Issue, User> reporter
+		= createRelationValue(org.instantlogic.example.izzy.entity.IssueEntity.reporter);
 		
-	public org.instantlogic.fabric.value.RelationValue<issue, user> getReporterRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<Issue, User> getReporterRelationValue() {
 		return reporter;
 	}
 
-	public org.instantlogic.example.izzy.user getReporter() {
+	public org.instantlogic.example.izzy.User getReporter() {
 		return reporter.getValue();
 	}
 	
-	public issue setReporter(org.instantlogic.example.izzy.user newValue) {
+	public Issue setReporter(org.instantlogic.example.izzy.User newValue) {
 		reporter.setValue(newValue);
-		return (issue)this;
+		return (Issue)this;
 	}
 
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<issue, project> project
-		= createReverseRelationValue(org.instantlogic.example.izzy.entity.issueEntity.project);
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<Issue, Project> project
+		= createReverseRelationValue(org.instantlogic.example.izzy.entity.IssueEntity.project);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<issue, project> getProjectRelationValue() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<Issue, Project> getProjectRelationValue() {
 		return project;
 	}
 
-	public org.instantlogic.example.izzy.project getProject() {
+	public org.instantlogic.example.izzy.Project getProject() {
 		return project.getValue();
 	}
 

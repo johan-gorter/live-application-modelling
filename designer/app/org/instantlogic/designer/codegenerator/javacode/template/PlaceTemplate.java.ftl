@@ -2,9 +2,9 @@ package ${rootPackageName}.flow.${flowname?lower_case};
 <#include "Content.java.ftl">
 <#include "DeductionScheme.java.ftl">
 
-public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${name}PlaceTemplate extends org.instantlogic.interaction.flow.PlaceTemplate {
+public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${technicalNameCapitalized}PlaceTemplate extends org.instantlogic.interaction.flow.PlaceTemplate {
 
-	public static final ${name}PlaceTemplate INSTANCE = new ${name}PlaceTemplate();
+	public static final ${technicalNameCapitalized}PlaceTemplate INSTANCE = new ${technicalNameCapitalized}PlaceTemplate();
 
 <#list deductionSchemes as scheme>
 	<@deductionscheme_macro scheme=scheme />

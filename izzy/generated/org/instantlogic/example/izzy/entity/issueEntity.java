@@ -1,21 +1,21 @@
 package org.instantlogic.example.izzy.entity;
 
-public class issueEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.example.izzy.issue> {
+public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.example.izzy.Issue> {
 
-	public static final issueEntity INSTANCE = new issueEntity();
+	public static final IssueEntity INSTANCE = new IssueEntity();
 	
-	protected issueEntity() {
+	protected IssueEntity() {
 	}
 
 
 	@Override
-	public org.instantlogic.example.izzy.issue createInstance() {
-		return new org.instantlogic.example.izzy.issue();
+	public org.instantlogic.example.izzy.Issue createInstance() {
+		return new org.instantlogic.example.izzy.Issue();
 	}
 	
 	@Override
-	public Class<org.instantlogic.example.izzy.issue> getInstanceClass() {
-		return org.instantlogic.example.izzy.issue.class;
+	public Class<org.instantlogic.example.izzy.Issue> getInstanceClass() {
+		return org.instantlogic.example.izzy.Issue.class;
 	}
 	
 	@Override
@@ -27,51 +27,51 @@ public class issueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 	
 	// Attributes
 	
-	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.example.izzy.issue, java.lang.String, java.lang.String> description 
-		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.example.izzy.issue, java.lang.String, java.lang.String>(
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.example.izzy.Issue, java.lang.String, java.lang.String> description 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.example.izzy.Issue, java.lang.String, java.lang.String>(
 			"description", INSTANCE, java.lang.String.class
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.example.izzy.issue, java.lang.String> get(org.instantlogic.example.izzy.issue instance) {
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.example.izzy.Issue, java.lang.String> get(org.instantlogic.example.izzy.Issue instance) {
 				return instance.getDescriptionAttributeValue();
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.example.izzy.issue, java.lang.String, java.lang.String> headline 
-		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.example.izzy.issue, java.lang.String, java.lang.String>(
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.example.izzy.Issue, java.lang.String, java.lang.String> headline 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.example.izzy.Issue, java.lang.String, java.lang.String>(
 			"headline", INSTANCE, java.lang.String.class
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.example.izzy.issue, java.lang.String> get(org.instantlogic.example.izzy.issue instance) {
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.example.izzy.Issue, java.lang.String> get(org.instantlogic.example.izzy.Issue instance) {
 				return instance.getHeadlineAttributeValue();
 			}
 		};
 	
 	// Relations
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.example.izzy.issue, org.instantlogic.example.izzy.user, org.instantlogic.example.izzy.user> assignee
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.example.izzy.issue, org.instantlogic.example.izzy.user, org.instantlogic.example.izzy.user>(
-			"assignee", INSTANCE, org.instantlogic.example.izzy.entity.userEntity.INSTANCE, org.instantlogic.example.izzy.user.class, org.instantlogic.example.izzy.entity.userEntity.assigned issues
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.example.izzy.Issue, org.instantlogic.example.izzy.User, org.instantlogic.example.izzy.User> assignee
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.example.izzy.Issue, org.instantlogic.example.izzy.User, org.instantlogic.example.izzy.User>(
+			"assignee", INSTANCE, org.instantlogic.example.izzy.entity.UserEntity.INSTANCE, org.instantlogic.example.izzy.User.class, org.instantlogic.example.izzy.entity.UserEntity.assignedIssues
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.example.izzy.issue, org.instantlogic.example.izzy.user> get(
-					org.instantlogic.example.izzy.issue instance) {
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.example.izzy.Issue, org.instantlogic.example.izzy.User> get(
+					org.instantlogic.example.izzy.Issue instance) {
 				return instance.getAssigneeRelationValue();
 			}
 			
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.example.izzy.issue, org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.comment>, org.instantlogic.example.izzy.comment> comments
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.example.izzy.issue, org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.comment>, org.instantlogic.example.izzy.comment>(
-			"comments", INSTANCE, org.instantlogic.example.izzy.entity.commentEntity.INSTANCE, org.instantlogic.example.izzy.comment.class, org.instantlogic.example.izzy.entity.commentEntity.issue
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.example.izzy.Issue, org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.Comment>, org.instantlogic.example.izzy.Comment> comments
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.example.izzy.Issue, org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.Comment>, org.instantlogic.example.izzy.Comment>(
+			"comments", INSTANCE, org.instantlogic.example.izzy.entity.CommentEntity.INSTANCE, org.instantlogic.example.izzy.Comment.class, org.instantlogic.example.izzy.entity.CommentEntity.issue
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.example.izzy.issue, org.instantlogic.example.izzy.comment> get(
-					org.instantlogic.example.izzy.issue instance) {
+			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.example.izzy.Issue, org.instantlogic.example.izzy.Comment> get(
+					org.instantlogic.example.izzy.Issue instance) {
 				return instance.getCommentsRelationValue();
 			}
 	
@@ -85,14 +85,14 @@ public class issueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 			
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.example.izzy.issue, org.instantlogic.example.izzy.user, org.instantlogic.example.izzy.user> reporter
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.example.izzy.issue, org.instantlogic.example.izzy.user, org.instantlogic.example.izzy.user>(
-			"reporter", INSTANCE, org.instantlogic.example.izzy.entity.userEntity.INSTANCE, org.instantlogic.example.izzy.user.class, org.instantlogic.example.izzy.entity.userEntity.reported issues
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.example.izzy.Issue, org.instantlogic.example.izzy.User, org.instantlogic.example.izzy.User> reporter
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.example.izzy.Issue, org.instantlogic.example.izzy.User, org.instantlogic.example.izzy.User>(
+			"reporter", INSTANCE, org.instantlogic.example.izzy.entity.UserEntity.INSTANCE, org.instantlogic.example.izzy.User.class, org.instantlogic.example.izzy.entity.UserEntity.reportedIssues
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.example.izzy.issue, org.instantlogic.example.izzy.user> get(
-					org.instantlogic.example.izzy.issue instance) {
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.example.izzy.Issue, org.instantlogic.example.izzy.User> get(
+					org.instantlogic.example.izzy.Issue instance) {
 				return instance.getReporterRelationValue();
 			}
 			
@@ -100,14 +100,14 @@ public class issueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 	
 	// Reverse relations
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.example.izzy.issue, org.instantlogic.example.izzy.project, org.instantlogic.example.izzy.project> project
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.example.izzy.issue, org.instantlogic.example.izzy.project, org.instantlogic.example.izzy.project>(
-			"project", INSTANCE, org.instantlogic.example.izzy.entity.projectEntity.INSTANCE, org.instantlogic.example.izzy.project.class, org.instantlogic.example.izzy.entity.projectEntity.issues
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.example.izzy.Issue, org.instantlogic.example.izzy.Project, org.instantlogic.example.izzy.Project> project
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.example.izzy.Issue, org.instantlogic.example.izzy.Project, org.instantlogic.example.izzy.Project>(
+			"project", INSTANCE, org.instantlogic.example.izzy.entity.ProjectEntity.INSTANCE, org.instantlogic.example.izzy.Project.class, org.instantlogic.example.izzy.entity.ProjectEntity.issues
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.example.izzy.issue, org.instantlogic.example.izzy.project> get(
-					org.instantlogic.example.izzy.issue instance) {
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.example.izzy.Issue, org.instantlogic.example.izzy.Project> get(
+					org.instantlogic.example.izzy.Issue instance) {
 				return instance.getProjectRelationValue();
 			}
 	

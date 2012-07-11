@@ -66,15 +66,15 @@ public class AttributeDesign extends Design {
 	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, DeductionSchemeDesign> _default
 		= createRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity._default);
 		
-	public org.instantlogic.fabric.value.RelationValue<AttributeDesign, DeductionSchemeDesign> get_defaultRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<AttributeDesign, DeductionSchemeDesign> getDefaultRelationValue() {
 		return _default;
 	}
 
-	public org.instantlogic.designer.DeductionSchemeDesign get_default() {
+	public org.instantlogic.designer.DeductionSchemeDesign getDefault() {
 		return _default.getValue();
 	}
 	
-	public AttributeDesign set_default(org.instantlogic.designer.DeductionSchemeDesign newValue) {
+	public AttributeDesign setDefault(org.instantlogic.designer.DeductionSchemeDesign newValue) {
 		_default.setValue(newValue);
 		return (AttributeDesign)this;
 	}

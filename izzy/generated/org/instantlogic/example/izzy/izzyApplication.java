@@ -1,17 +1,21 @@
 package org.instantlogic.example.izzy;
 
-public class izzyApplication extends org.instantlogic.interaction.Application {
+public class IzzyApplication extends org.instantlogic.interaction.Application {
 
-	public static final izzyApplication INSTANCE = new izzyApplication();
+	public static final IzzyApplication INSTANCE = new IzzyApplication();
 	
-	protected izzyApplication() {
+	protected IzzyApplication() {
 	}
 	
 	@Override
-	public org.instantlogic.fabric.model.Entity<org.instantlogic.example.izzy.project> getCaseEntity() {
-		return org.instantlogic.example.izzy.entity.projectEntity.INSTANCE;
+	public org.instantlogic.fabric.model.Entity<org.instantlogic.example.izzy.Project> getCaseEntity() {
+		return org.instantlogic.example.izzy.entity.ProjectEntity.INSTANCE;
 	}
 
+	@Override
+	public org.instantlogic.interaction.flow.Flow getMainFlow() {
+		return org.instantlogic.example.izzy.flow.MainFlow.INSTANCE;
+	}
 	
 	@Override
 	public String getName() {

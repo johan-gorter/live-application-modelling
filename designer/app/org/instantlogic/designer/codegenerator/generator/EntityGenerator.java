@@ -68,16 +68,18 @@ public class EntityGenerator extends AbstractGenerator {
 			EntityClassModel.Relation relation = new EntityClassModel.Relation();
 			relation.name = relationDesign.getName();
 			relation.technicalName = relationDesign.getTechnicalName();
+			relation.javaIdentifier = relationDesign.getJavaIdentifier();
 			relation.multivalue = (relationDesign.getMultivalue()==Boolean.TRUE);
 			relation.readonly = (relationDesign.getReadOnly()==Boolean.TRUE);
 			relation.owner = (relationDesign.getOwner()==Boolean.TRUE);
 			relation.autoCreate = (relationDesign.getAutoCreate()==Boolean.TRUE);
-			relation.item = relationDesign.getTo().getName();
+			relation.item = relationDesign.getTo().getTechnicalNameCapitalized();
 			relation.to = model.rootPackageName+"."+relation.item;
 			if (relation.multivalue) {
 				relation.to = "org.instantlogic.fabric.value.Multi<"+relation.to+">";
 			}
 			relation.reverseName=relationDesign.getReverseName();
+			relation.reverseJavaIdentifier = relationDesign.getReverseJavaIdentifer();
 			if (relationDesign.getRule()!=null) {
 				relation.ruleDeductionIndex = model.addDeductionScheme(DeductionSchemeGenerator.generate(model.rootPackageName, relationDesign.getRule()));
 			}
@@ -87,10 +89,12 @@ public class EntityGenerator extends AbstractGenerator {
 		for (RelationDesign relationDesign: entityDesign.getReverseRelations()) {
 			EntityClassModel.Relation relation = new EntityClassModel.Relation();
 			relation.name = relationDesign.getReverseName();
-			//TODO
+			relation.technicalName = relationDesign.getReverseTechnicalName();
+			relation.javaIdentifier = relationDesign.getReverseJavaIdentifer();
 			relation.multivalue = (relationDesign.getReverseMultivalue()==Boolean.TRUE);
-			relation.reverseName = javaSafeName(relationDesign.getName());
-			relation.item = relationDesign.getFrom().getName();
+			relation.reverseName = relationDesign.getTechnicalNameCapitalized();
+			relation.reverseJavaIdentifier = relationDesign.getJavaIdentifier();
+			relation.item = relationDesign.getFrom().getTechnicalNameCapitalized();
 			relation.to = model.rootPackageName+"."+relation.item;
 			if (relation.multivalue) {
 				relation.to = "org.instantlogic.fabric.value.Multi<"+relation.to+">";

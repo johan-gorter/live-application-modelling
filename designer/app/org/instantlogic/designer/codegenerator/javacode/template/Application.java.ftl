@@ -1,10 +1,10 @@
 package ${rootPackageName};
 
-public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${name}Application extends org.instantlogic.interaction.Application {
+public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${technicalNameCapitalized}Application extends org.instantlogic.interaction.Application {
 
-	public static final ${name}Application INSTANCE = new ${name}Application();
+	public static final ${technicalNameCapitalized}Application INSTANCE = new ${technicalNameCapitalized}Application();
 	
-	protected ${name}Application() {
+	protected ${technicalNameCapitalized}Application() {
 	}
 	
 	@Override

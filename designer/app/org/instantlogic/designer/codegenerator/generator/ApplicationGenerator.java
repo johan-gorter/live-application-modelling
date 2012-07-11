@@ -13,6 +13,7 @@ import org.instantlogic.designer.FlowDesign;
 import org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign;
 import org.instantlogic.designer.codegenerator.classmodel.ApplicationClassModel;
 import org.instantlogic.designer.codegenerator.javacode.ApplicationJavacodeGenerator;
+import org.instantlogic.designer.deduction.TechnicalNameDeduction;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 
 public class ApplicationGenerator extends AbstractGenerator{
@@ -51,16 +52,17 @@ public class ApplicationGenerator extends AbstractGenerator{
 		
 		applicationInstance.getMetadata().getCaseAdministration().startRecordingObservations();
 		ApplicationClassModel model = new ApplicationClassModel();
-
+		
 		model.rootPackageName = applicationInstance.getRootPackageName();
 		model.name = applicationInstance.getName();
+		model.technicalNameCapitalized = TechnicalNameDeduction.capitalizeFirst(TechnicalNameDeduction.makeTechnicalName(applicationInstance.getName()));
 		model.isCustomized = applicationInstance.getIsCustomized()==Boolean.TRUE;
 		for (EntityDesign entity: applicationInstance.getEntities()) {
 			model.entities.add(entity.getName());
 		}
-		model.caseEntity = applicationInstance.getCaseEntity().getName();
+		model.caseEntity = applicationInstance.getCaseEntity().getTechnicalNameCapitalized();
 		if (applicationInstance.getMainFlow()!=null) {
-			model.mainFlow = applicationInstance.getMainFlow().getName();
+			model.mainFlow = applicationInstance.getMainFlow().getTechnicalNameCapitalized();
 		}
 		
 		List<Design> newEntities = updateGenerators(entityGenerators, applicationInstance.getEntities(), context);

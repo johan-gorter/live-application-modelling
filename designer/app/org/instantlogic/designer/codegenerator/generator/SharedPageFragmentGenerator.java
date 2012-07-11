@@ -40,6 +40,7 @@ public class SharedPageFragmentGenerator extends AbstractGenerator {
 		SharedPageFragmentClassModel model = new SharedPageFragmentClassModel();
 		model.rootPackageName = context.rootPackageName;
 		model.name = definition.getName();
+		model.technicalNameCapitalized = definition.getTechnicalNameCapitalized();
 		model.isCustomized = definition.getIsCustomized()==Boolean.TRUE;
 		return model;
 	}

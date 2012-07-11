@@ -14,6 +14,7 @@ public abstract class AbstractClassModel {
 	
 	public String rootPackageName;
 	public String name;
+	public String technicalNameCapitalized;
 	public String id;
 	public boolean isCustomized;
 	
@@ -47,5 +48,9 @@ public abstract class AbstractClassModel {
 			rootPackageInternalPrefix = rootPackageName.replace(".", "/")+"/";
 		}
 		return rootPackageInternalPrefix;
+	}
+
+	public String getTechnicalNameCapitalized() {
+		return technicalNameCapitalized;
 	}
 }

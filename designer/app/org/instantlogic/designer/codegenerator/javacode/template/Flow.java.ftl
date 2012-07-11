@@ -1,8 +1,8 @@
 package ${rootPackageName}.flow;
 
-public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${name}Flow extends org.instantlogic.interaction.flow.Flow {
+public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${technicalNameCapitalized}Flow extends org.instantlogic.interaction.flow.Flow {
 
-	public static final ${name}Flow INSTANCE = new <#if customization??>${customization}<#else>${name}Flow</#if>();
+	public static final ${technicalNameCapitalized}Flow INSTANCE = new <#if customization??>${customization}<#else>${technicalNameCapitalized}Flow</#if>();
 	
 	private static final org.instantlogic.interaction.flow.FlowSource[] SOURCES = new org.instantlogic.interaction.flow.FlowSource[]{
 	<#list sources as source>

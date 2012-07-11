@@ -39,9 +39,10 @@ public class PlaceTemplateGenerator extends AbstractGenerator {
 	private PageClassModel initModel() {
 		PageClassModel model = new PageClassModel();
 		model.name = placeTemplateDesign.getName();
+		model.technicalNameCapitalized = placeTemplateDesign.getTechnicalNameCapitalized();
 		model.id = placeTemplateDesign.getMetadata().getInstanceId();
 		model.isCustomized = placeTemplateDesign.getIsCustomized()==Boolean.TRUE;
-		model.flowname = placeTemplateDesign.getOwner().getName();
+		model.flowname = placeTemplateDesign.getOwner().getTechnicalName();
 		return model;
 	}
 }
