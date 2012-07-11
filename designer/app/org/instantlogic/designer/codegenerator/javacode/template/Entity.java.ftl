@@ -2,11 +2,11 @@ package ${rootPackageName}.entity;
 <#include "Text.java.ftl">
 <#include "DeductionScheme.java.ftl">
 
-public class ${name}Entity extends org.instantlogic.fabric.model.Entity<${rootPackageName}.${name}> {
+public class ${technicalNameCapitalized}Entity extends org.instantlogic.fabric.model.Entity<${rootPackageName}.${technicalNameCapitalized}> {
 
-	public static final ${name}Entity INSTANCE = new ${name}Entity();
+	public static final ${technicalNameCapitalized}Entity INSTANCE = new ${technicalNameCapitalized}Entity();
 	
-	protected ${name}Entity() {
+	protected ${technicalNameCapitalized}Entity() {
 	}
 
 	<#if extendsFrom??>
@@ -17,13 +17,13 @@ public class ${name}Entity extends org.instantlogic.fabric.model.Entity<${rootPa
 	</#if>
 
 	@Override
-	public ${rootPackageName}.${name} createInstance() {
-		return new ${rootPackageName}.${name}();
+	public ${rootPackageName}.${technicalNameCapitalized} createInstance() {
+		return new ${rootPackageName}.${technicalNameCapitalized}();
 	}
 	
 	@Override
-	public Class<${rootPackageName}.${name}> getInstanceClass() {
-		return ${rootPackageName}.${name}.class;
+	public Class<${rootPackageName}.${technicalNameCapitalized}> getInstanceClass() {
+		return ${rootPackageName}.${technicalNameCapitalized}.class;
 	}
 	
 	@Override
@@ -39,14 +39,14 @@ public class ${name}Entity extends org.instantlogic.fabric.model.Entity<${rootPa
 	// Attributes
 	<#list attributes as attribute>
 	
-	public static final org.instantlogic.fabric.model.Attribute<${rootPackageName}.${name}, ${attribute.className}, ${attribute.itemClassName}> ${attribute.name} 
-		= new org.instantlogic.fabric.model.impl.SimpleAttribute<${rootPackageName}.${name}, ${attribute.className}, ${attribute.itemClassName}>(
+	public static final org.instantlogic.fabric.model.Attribute<${rootPackageName}.${technicalNameCapitalized}, ${attribute.className}, ${attribute.itemClassName}> ${attribute.javaIdentifier} 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<${rootPackageName}.${technicalNameCapitalized}, ${attribute.className}, ${attribute.itemClassName}>(
 			"${attribute.name}", INSTANCE, ${attribute.itemClassName}.class
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<#if attribute.multivalue>s</#if><${rootPackageName}.${name}, ${attribute.itemClassName}> get(${rootPackageName}.${name} instance) {
-				return instance.get${attribute.name?cap_first}AttributeValue();
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<#if attribute.multivalue>s</#if><${rootPackageName}.${technicalNameCapitalized}, ${attribute.itemClassName}> get(${rootPackageName}.${technicalNameCapitalized} instance) {
+				return instance.get${attribute.technicalName?cap_first}AttributeValue();
 			}
 			<#if attribute.multivalue>
 	
@@ -98,15 +98,15 @@ public class ${name}Entity extends org.instantlogic.fabric.model.Entity<${rootPa
 	// Relations
 	<#list relations as relation>
 	
-	public static final org.instantlogic.fabric.model.Relation<${rootPackageName}.${name}, ${relation.to}, ${rootPackageName}.${relation.item}> ${relation.name}
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<${rootPackageName}.${name}, ${relation.to}, ${rootPackageName}.${relation.item}>(
-			"${relation.name}", INSTANCE, ${rootPackageName}.entity.${relation.item}Entity.INSTANCE, ${rootPackageName}.${relation.item}.class, ${rootPackageName}.entity.${relation.item}Entity.${relation.reverseName}
+	public static final org.instantlogic.fabric.model.Relation<${rootPackageName}.${technicalNameCapitalized}, ${relation.to}, ${rootPackageName}.${relation.item}> ${relation.javaIdentifier}
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<${rootPackageName}.${technicalNameCapitalized}, ${relation.to}, ${rootPackageName}.${relation.item}>(
+			"${relation.technicalName}", INSTANCE, ${rootPackageName}.entity.${relation.item}Entity.INSTANCE, ${rootPackageName}.${relation.item}.class, ${rootPackageName}.entity.${relation.item}Entity.${relation.reverseJavaIdentifier}
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<#if relation.multivalue>s</#if><${rootPackageName}.${name}, ${rootPackageName}.${relation.item}> get(
-					${rootPackageName}.${name} instance) {
-				return instance.get${relation.name?cap_first}RelationValue();
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<#if relation.multivalue>s</#if><${rootPackageName}.${technicalNameCapitalized}, ${rootPackageName}.${relation.item}> get(
+					${rootPackageName}.${technicalNameCapitalized} instance) {
+				return instance.get${relation.technicalName?cap_first}RelationValue();
 			}
 			<#if relation.owner>
 	
@@ -150,15 +150,15 @@ public class ${name}Entity extends org.instantlogic.fabric.model.Entity<${rootPa
 	// Reverse relations
 	<#list reverseRelations as relation>
 	
-	public static final org.instantlogic.fabric.model.Relation<${rootPackageName}.${name}, ${relation.to}, ${rootPackageName}.${relation.item}> ${relation.name}
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<${rootPackageName}.${name}, ${relation.to}, ${rootPackageName}.${relation.item}>(
-			"${relation.name}", INSTANCE, ${rootPackageName}.entity.${relation.item}Entity.INSTANCE, ${rootPackageName}.${relation.item}.class, ${rootPackageName}.entity.${relation.item}Entity.${relation.reverseName}
+	public static final org.instantlogic.fabric.model.Relation<${rootPackageName}.${technicalNameCapitalized}, ${relation.to}, ${rootPackageName}.${relation.item}> ${relation.javaIdentifier}
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<${rootPackageName}.${technicalNameCapitalized}, ${relation.to}, ${rootPackageName}.${relation.item}>(
+			"${relation.technicalName}", INSTANCE, ${rootPackageName}.entity.${relation.item}Entity.INSTANCE, ${rootPackageName}.${relation.item}.class, ${rootPackageName}.entity.${relation.item}Entity.${relation.reverseJavaIdentifier}
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<#if relation.multivalue>s</#if><${rootPackageName}.${name}, ${rootPackageName}.${relation.item}> get(
-					${rootPackageName}.${name} instance) {
-				return instance.get${relation.name?cap_first}RelationValue();
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<#if relation.multivalue>s</#if><${rootPackageName}.${technicalNameCapitalized}, ${rootPackageName}.${relation.item}> get(
+					${rootPackageName}.${technicalNameCapitalized} instance) {
+				return instance.get${relation.technicalName?cap_first}RelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -175,17 +175,17 @@ public class ${name}Entity extends org.instantlogic.fabric.model.Entity<${rootPa
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
 		<#list attributes as attribute>
-		${attribute.name},
+		${attribute.javaIdentifier},
 		</#list>
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		<#list relations as relation>
-		${relation.name},
+		${relation.javaIdentifier},
 		</#list>
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		<#list reverseRelations as relation>
-		${relation.name},
+		${relation.javaIdentifier},
 		</#list>
 	};
 

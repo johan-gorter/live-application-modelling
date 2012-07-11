@@ -1,6 +1,5 @@
 package org.instantlogic.designer.codegenerator.generator;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -8,9 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.instantlogic.designer.DeductionSchemeDesign;
 import org.instantlogic.designer.Design;
-import org.instantlogic.designer.codegenerator.classmodel.AbstractClassModel;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 
 public abstract class AbstractGenerator {

@@ -2,6 +2,12 @@ package org.instantlogic.designer;
 
 public class PlaceTemplateDesign extends AbstractPlaceTemplateDesign {
 
+	public PlaceTemplateDesign() {}
+	
+	public PlaceTemplateDesign(String name) {
+		setName(name);
+	}
+	
 	public void init() {
 	}
 	

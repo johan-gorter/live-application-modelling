@@ -1,5 +1,7 @@
 package org.instantlogic.designer;
 
+import org.instantlogic.designer.deduction.TechnicalNameDeduction;
+
 public class Design extends AbstractDesign {
 
 	// Create a deduction scheme for an attribute or a relation
@@ -31,8 +33,6 @@ public class Design extends AbstractDesign {
 	}
 	
 	public String getTechnicalNameCapitalized() {
-		StringBuffer result = new StringBuffer(getTechnicalName());
-		result.setCharAt(0, Character.toUpperCase(result.charAt(0)));
-		return result.toString();
+		return TechnicalNameDeduction.capitalizeFirst(getTechnicalName());
 	}
 }

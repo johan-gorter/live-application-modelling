@@ -50,6 +50,7 @@ public class EventGenerator extends AbstractGenerator {
 	private EventClassModel initModel() {
 		EventClassModel model = new EventClassModel();
 		model.name = eventDesign.getName();
+		model.technicalNameCapitalized = eventDesign.getTechnicalNameCapitalized();
 		model.isCustomized = eventDesign.getIsCustomized()==Boolean.TRUE;
 		return model;
 	}

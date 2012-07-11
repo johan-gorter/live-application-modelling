@@ -1,8 +1,8 @@
 package ${rootPackageName}.flow.${flowname?lower_case};
 
-public class ${name}SubFlow extends org.instantlogic.interaction.flow.SubFlow {
+public class ${technicalNameCapitalized}SubFlow extends org.instantlogic.interaction.flow.SubFlow {
 
-	public static final ${name}SubFlow INSTANCE = new ${name}SubFlow();
+	public static final ${technicalNameCapitalized}SubFlow INSTANCE = new ${technicalNameCapitalized}SubFlow();
 	
 	@Override
 	public org.instantlogic.interaction.flow.Flow getFlow() {

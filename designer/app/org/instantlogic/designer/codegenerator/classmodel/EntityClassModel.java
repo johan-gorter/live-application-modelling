@@ -84,6 +84,7 @@ public class EntityClassModel extends AbstractClassModel {
 		public String item;
 		public String reverseName;
 		public boolean autoCreate;
+		public String reverseJavaIdentifier;
 		
 		public boolean isOwner() {
 			return owner;
@@ -104,6 +105,10 @@ public class EntityClassModel extends AbstractClassModel {
 		public boolean isAutoCreate() {
 			return autoCreate;
 		}
+
+		public String getReverseJavaIdentifier() {
+			return reverseJavaIdentifier;
+		}
 	}
 
 	public String extendsFrom;
@@ -113,9 +118,6 @@ public class EntityClassModel extends AbstractClassModel {
 	
 	private String internalName;
 	private String internalEntityName;
-	public String technicalNameCapitalized;
-	
-	
 	
 	public List<Attribute> getAttributes() {
 		return attributes;
@@ -141,8 +143,4 @@ public class EntityClassModel extends AbstractClassModel {
 		}
 		return internalEntityName;
 	}
-	public String getTechnicalNameCapitalized() {
-		return technicalNameCapitalized;
-	}
-	
 }

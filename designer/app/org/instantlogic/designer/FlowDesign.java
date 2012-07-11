@@ -2,6 +2,12 @@ package org.instantlogic.designer;
 
 public class FlowDesign extends AbstractFlowDesign {
 
+	public FlowDesign(){}
+	
+	public FlowDesign(String name) {
+		setName(name);
+	}
+	
 	public void registerApplication(ApplicationDesign application) {
 		application.addToFlows(this);
 		for (FlowNodeBaseDesign node : this.getNodes()) {
@@ -21,5 +27,13 @@ public class FlowDesign extends AbstractFlowDesign {
 				place.init();
 			}
 		}
+	}
+
+	public SubFlowDesign addSubFlow(FlowDesign flow) {
+		SubFlowDesign result = new SubFlowDesign();
+		addToNodes(result);
+		result.setFlow(flow);
+		result.setName(flow.getName());
+		return result;
 	}
 }

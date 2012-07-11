@@ -1,78 +1,78 @@
 package org.instantlogic.example.izzy;
 
 
-public class project extends org.instantlogic.fabric.Instance { 
+public class Project extends org.instantlogic.fabric.Instance { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
-		return org.instantlogic.example.izzy.entity.projectEntity.INSTANCE;
+		return org.instantlogic.example.izzy.entity.ProjectEntity.INSTANCE;
 	}
 
 	// Attributes
 	
 	// Relations
 	
-	private final org.instantlogic.fabric.value.RelationValues<project, issue> issues
-		= createRelationValues(org.instantlogic.example.izzy.entity.projectEntity.issues);
+	private final org.instantlogic.fabric.value.RelationValues<Project, Issue> issues
+		= createRelationValues(org.instantlogic.example.izzy.entity.ProjectEntity.issues);
 		
-	public org.instantlogic.fabric.value.RelationValues<project, issue> getIssuesRelationValue() {
+	public org.instantlogic.fabric.value.RelationValues<Project, Issue> getIssuesRelationValue() {
 		return issues;
 	}
 
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.issue> getIssues() {
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.Issue> getIssues() {
 		return issues.getValue();
 	}
 	
-	public project addToIssues(issue item) {
+	public Project addToIssues(Issue item) {
 		issues.addValue(item);
-		return (project)this;
+		return (Project)this;
 	}
 	
-	public project addToIssues(issue item, int index) {
+	public Project addToIssues(Issue item, int index) {
 		issues.insertValue(item, index);
-		return (project)this;
+		return (Project)this;
 	}
 	
-	public project removeFromIssues(issue item) {
+	public Project removeFromIssues(Issue item) {
 		issues.removeValue(item);
-		return (project)this;
+		return (Project)this;
 	}
 	
-	public project removeFromIssues(int index) {
+	public Project removeFromIssues(int index) {
 		issues.removeValue(index);
-		return (project)this;
+		return (Project)this;
 	}
 	
 	
-	private final org.instantlogic.fabric.value.RelationValues<project, user> users
-		= createRelationValues(org.instantlogic.example.izzy.entity.projectEntity.users);
+	private final org.instantlogic.fabric.value.RelationValues<Project, User> users
+		= createRelationValues(org.instantlogic.example.izzy.entity.ProjectEntity.users);
 		
-	public org.instantlogic.fabric.value.RelationValues<project, user> getUsersRelationValue() {
+	public org.instantlogic.fabric.value.RelationValues<Project, User> getUsersRelationValue() {
 		return users;
 	}
 
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.user> getUsers() {
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.User> getUsers() {
 		return users.getValue();
 	}
 	
-	public project addToUsers(user item) {
+	public Project addToUsers(User item) {
 		users.addValue(item);
-		return (project)this;
+		return (Project)this;
 	}
 	
-	public project addToUsers(user item, int index) {
+	public Project addToUsers(User item, int index) {
 		users.insertValue(item, index);
-		return (project)this;
+		return (Project)this;
 	}
 	
-	public project removeFromUsers(user item) {
+	public Project removeFromUsers(User item) {
 		users.removeValue(item);
-		return (project)this;
+		return (Project)this;
 	}
 	
-	public project removeFromUsers(int index) {
+	public Project removeFromUsers(int index) {
 		users.removeValue(index);
-		return (project)this;
+		return (Project)this;
 	}
 	
 

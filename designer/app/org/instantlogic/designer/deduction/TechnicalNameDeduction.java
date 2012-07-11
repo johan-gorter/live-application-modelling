@@ -12,15 +12,19 @@ public class TechnicalNameDeduction extends Deduction<String> {
 	public ValueAndLevel<String> deduct(DeductionContext context) {
 		String name = getName(context);
 		if (name==null) return ValueAndLevel.inconclusive();
+		return ValueAndLevel.deduced(makeTechnicalName(name));
+	}
+
+	public static String makeTechnicalName(String name) {
 		StringBuilder sb = new StringBuilder(name);
 		if (sb.length()==0) {
-			return ValueAndLevel.deduced("_");
+			return "_";
 		}
 		boolean nextLetterToUppercase = false;
 		for (int i=0;i<sb.length();) {
 			char ch = sb.charAt(i);
 			if (!Character.isLetterOrDigit(ch) && ch!='_') {
-				sb.delete(i, i);
+				sb.delete(i, i+1);
 				nextLetterToUppercase = true;
 				continue;
 			}
@@ -34,7 +38,7 @@ public class TechnicalNameDeduction extends Deduction<String> {
 			}
 			i++;
 		}
-		return ValueAndLevel.deduced(sb.toString());
+		return sb.toString();
 	}
 
 	protected String getName(DeductionContext context) {
@@ -42,4 +46,9 @@ public class TechnicalNameDeduction extends Deduction<String> {
 		return design.getName();
 	}
 
+	public static String capitalizeFirst(String name) {
+		StringBuffer result = new StringBuffer(name);
+		result.setCharAt(0, Character.toUpperCase(result.charAt(0)));
+		return result.toString();
+	}
 }
