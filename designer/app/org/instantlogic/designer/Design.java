@@ -11,13 +11,13 @@ public class Design extends AbstractDesign {
 		if (attribute instanceof RelationDesign) {
 			// We should come up with a solution that makes this unnecessary
 			RelationDesign relation = (RelationDesign)attribute;
-			className = relation.getTo().getApplication().getRootPackageName()+"."+relation.getTo().getName();
+			className = relation.getTo().getApplication().getRootPackageName()+"."+relation.getTo().getTechnicalNameCapitalized();
 			source = relation.getFrom();
 		}
 		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
 		SelectedInstanceDeductionDesign selectedInstanceDeductionDesign = new SelectedInstanceDeductionDesign();
 		selectedInstanceDeductionDesign.setOfEntity(source);
-		selectedInstanceDeductionDesign.setClassName(source.getApplication().getRootPackageName()+"."+source.getName());
+		selectedInstanceDeductionDesign.setClassName(source.getApplication().getRootPackageName()+"."+source.getTechnicalNameCapitalized());
 		AttributeDeductionDesign attributeDeductionDesign = new AttributeDeductionDesign();
 		attributeDeductionDesign.setAttribute(attribute);
 		attributeDeductionDesign.addToInputs(selectedInstanceDeductionDesign);

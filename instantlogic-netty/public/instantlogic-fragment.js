@@ -101,6 +101,14 @@ YUI.add('instantlogic-fragment', function (Y) {
         }
     });
 
+    // Button
+    ns.Button = function (parentNode, fragmentFactory) {
+        ns.Button.superclass.constructor.apply(this, arguments);
+    };
+
+    Y.extend(ns.Button, ns.Link, {
+    });
+    
     // Paragraph
     ns.Paragraph = function (parentNode, fragmentFactory) {
         ns.Paragraph.superclass.constructor.apply(this, arguments);

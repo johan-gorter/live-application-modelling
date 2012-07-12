@@ -6,9 +6,12 @@ public class DashboardPlaceTemplate extends org.instantlogic.interaction.flow.Pl
 
 	
 	private static org.instantlogic.interaction.page.FragmentTemplate CONTENT = 
-        new org.instantlogic.interaction.page.FragmentTemplate("F1P2F1", "Page")      
+        new org.instantlogic.interaction.page.FragmentTemplate("F7P3F1", "Page")      
         .putChildren("mainContent",
-                new org.instantlogic.interaction.page.FragmentTemplate("F1P2F1P1F1", "Button")        )
+                new org.instantlogic.interaction.page.FragmentTemplate("F7P3F1P1F1", "Button")      .setEvent(org.instantlogic.example.izzy.event.CreateIssueEvent.INSTANCE)
+      
+                .putText("text", new org.instantlogic.fabric.text.ConstantText("Create issue"))
+        )
 ; 
 	
 	@Override
