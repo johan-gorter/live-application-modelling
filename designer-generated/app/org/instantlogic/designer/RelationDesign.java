@@ -44,15 +44,15 @@ public class RelationDesign extends AttributeDesign {
 	}
 	
 	
-	private final org.instantlogic.fabric.value.ReadOnlyAttributeValue<RelationDesign, java.lang.String> reverseJavaIdentifer
-		= createReadOnlyAttributeValue(org.instantlogic.designer.entity.RelationDesignEntity.reverseJavaIdentifer);
+	private final org.instantlogic.fabric.value.ReadOnlyAttributeValue<RelationDesign, java.lang.String> reverseJavaIdentifier
+		= createReadOnlyAttributeValue(org.instantlogic.designer.entity.RelationDesignEntity.reverseJavaIdentifier);
 	
-	public java.lang.String getReverseJavaIdentifer() {
-		return reverseJavaIdentifer.getValue();
+	public java.lang.String getReverseJavaIdentifier() {
+		return reverseJavaIdentifier.getValue();
 	}
 
-	public org.instantlogic.fabric.value.ReadOnlyAttributeValue<RelationDesign, java.lang.String> getReverseJavaIdentiferAttributeValue() {
-		return reverseJavaIdentifer;
+	public org.instantlogic.fabric.value.ReadOnlyAttributeValue<RelationDesign, java.lang.String> getReverseJavaIdentifierAttributeValue() {
+		return reverseJavaIdentifier;
 	}
 
 	

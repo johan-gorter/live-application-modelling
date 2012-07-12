@@ -34,7 +34,7 @@ public class EventGenerator extends AbstractGenerator {
 		model.rootPackageName = context.rootPackageName;
 
 		for (EntityDesign parameter: eventDesign.getParameters()) {
-			model.parameters.add(parameter.getName());
+			model.parameters.add(parameter.getTechnicalNameCapitalized());
 		}
 		
 		this.observations = new ObservationsOutdatedObserver(caseAdministration.stopRecordingObservations(), null);

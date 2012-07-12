@@ -67,14 +67,14 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.RelationDesign, java.lang.String, java.lang.String> reverseJavaIdentifer 
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.RelationDesign, java.lang.String, java.lang.String> reverseJavaIdentifier 
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.RelationDesign, java.lang.String, java.lang.String>(
-			"reverseJavaIdentifer", INSTANCE, java.lang.String.class
+			"reverseJavaIdentifier", INSTANCE, java.lang.String.class
 		) {
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.RelationDesign, java.lang.String> get(org.instantlogic.designer.RelationDesign instance) {
-				return instance.getReverseJavaIdentiferAttributeValue();
+				return instance.getReverseJavaIdentifierAttributeValue();
 			}
 			
 			public boolean isReadOnly() {
@@ -193,7 +193,7 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
 		autoCreate,
 		owner,
-		reverseJavaIdentifer,
+		reverseJavaIdentifier,
 		reverseMultivalue,
 		reverseName,
 		reverseTechnicalName,

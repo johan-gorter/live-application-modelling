@@ -34,20 +34,20 @@ public class DeductionSchemeGenerator {
 			}
 			classModel.resultType = deduction.getClassName();
 			if (deduction instanceof SelectedInstanceDeductionDesign) {
-				String name = ((SelectedInstanceDeductionDesign)deduction).getOfEntity().getName();
+				String name = ((SelectedInstanceDeductionDesign)deduction).getOfEntity().getTechnicalNameCapitalized();
 				classModel.parameters.add(rootPackageName+".entity."+name+"Entity.INSTANCE");
 			} else if (deduction instanceof AttributeDeductionDesign) {
 				AttributeDesign attribute = ((AttributeDeductionDesign)deduction).getAttribute(); 
-				String name = attribute.getName();
-				String entityName = (attribute instanceof RelationDesign)?((RelationDesign)attribute).getFrom().getName():attribute.getBelongsToEntity().getName();
+				String name = attribute.getJavaIdentifier();
+				String entityName = (attribute instanceof RelationDesign)?((RelationDesign)attribute).getFrom().getTechnicalNameCapitalized():attribute.getBelongsToEntity().getTechnicalNameCapitalized();
 				classModel.parameters.add(rootPackageName+".entity."+entityName+"Entity."+name);
 			} else if (deduction instanceof ReverseRelationDeductionDesign) {
 				RelationDesign relation = ((ReverseRelationDeductionDesign)deduction).getRelation(); 
-				String name = relation.getName();
-				String entityName = relation.getFrom().getName();
+				String name = relation.getJavaIdentifier();
+				String entityName = relation.getFrom().getTechnicalNameCapitalized();
 				classModel.parameters.add(rootPackageName+".entity."+entityName+"Entity."+name);
 			} else if (deduction instanceof CastInstanceDeductionDesign) {
-				String name = ((CastInstanceDeductionDesign)deduction).getToEntity().getName();
+				String name = ((CastInstanceDeductionDesign)deduction).getToEntity().getTechnicalNameCapitalized();
 				classModel.parameters.add(rootPackageName+".entity."+name+"Entity.INSTANCE");
 			} else if (deduction instanceof ConstantDeductionDesign) {
 				Object value = ((ConstantDeductionDesign)deduction).getValue();

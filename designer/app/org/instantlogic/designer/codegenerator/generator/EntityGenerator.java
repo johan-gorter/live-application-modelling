@@ -79,7 +79,7 @@ public class EntityGenerator extends AbstractGenerator {
 				relation.to = "org.instantlogic.fabric.value.Multi<"+relation.to+">";
 			}
 			relation.reverseName=relationDesign.getReverseName();
-			relation.reverseJavaIdentifier = relationDesign.getReverseJavaIdentifer();
+			relation.reverseJavaIdentifier = relationDesign.getReverseJavaIdentifier();
 			if (relationDesign.getRule()!=null) {
 				relation.ruleDeductionIndex = model.addDeductionScheme(DeductionSchemeGenerator.generate(model.rootPackageName, relationDesign.getRule()));
 			}
@@ -90,7 +90,7 @@ public class EntityGenerator extends AbstractGenerator {
 			EntityClassModel.Relation relation = new EntityClassModel.Relation();
 			relation.name = relationDesign.getReverseName();
 			relation.technicalName = relationDesign.getReverseTechnicalName();
-			relation.javaIdentifier = relationDesign.getReverseJavaIdentifer();
+			relation.javaIdentifier = relationDesign.getReverseJavaIdentifier();
 			relation.multivalue = (relationDesign.getReverseMultivalue()==Boolean.TRUE);
 			relation.reverseName = relationDesign.getTechnicalNameCapitalized();
 			relation.reverseJavaIdentifier = relationDesign.getJavaIdentifier();

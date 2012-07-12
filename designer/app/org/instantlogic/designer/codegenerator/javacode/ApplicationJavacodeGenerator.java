@@ -62,7 +62,7 @@ public class ApplicationJavacodeGenerator extends AbstractJavacodeGenerator {
 		for (FlowClassModel flow:context.updatedFlows) {
 			generateFile(AbstractJavacodeGenerator.flowTemplate, flow, "flow", "Flow", applicationRoot);
 			if (applicationRoot!=null) {
-				new File(new File(applicationRoot,"flow"), flow.name.toLowerCase()).mkdirs();
+				new File(new File(applicationRoot,"flow"), flow.technicalNameCapitalized.toLowerCase()).mkdirs();
 			}
 		}
 		for (FlowClassModel flow:context.deletedFlows) {
