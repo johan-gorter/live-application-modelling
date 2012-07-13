@@ -11,7 +11,6 @@ import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.FlowDesign;
 import org.instantlogic.designer.FlowEdgeDesign;
 import org.instantlogic.designer.FlowNodeBaseDesign;
-import org.instantlogic.designer.FlowSourceDesign;
 import org.instantlogic.designer.PlaceTemplateDesign;
 import org.instantlogic.designer.SubFlowDesign;
 import org.instantlogic.designer.codegenerator.classmodel.FlowClassModel;
@@ -44,13 +43,6 @@ public class FlowGenerator extends AbstractGenerator {
 		FlowClassModel model = initModel();
 		model.rootPackageName = context.rootPackageName;
 		
-		for (FlowSourceDesign source: flowDesign.getSources()) {
-			FlowClassModel.FlowSource flowSource = new FlowClassModel.FlowSource();
-			flowSource.startEvent = source.getStartEvent()==null?null:source.getStartEvent().getTechnicalNameCapitalized();
-			flowSource.endNode = source.getEndNode()==null?null:edgePoint(source.getEndNode());
-			flowSource.endEvent = source.getEndEvent()==null?null:source.getEndEvent().getTechnicalNameCapitalized();
-			model.sources.add(flowSource);
-		}
 		for (FlowNodeBaseDesign nodeDesign: flowDesign.getNodes()) {
 			FlowClassModel.FlowNode node = new FlowClassModel.FlowNode();
 			node.name = nodeDesign.getTechnicalNameCapitalized();
@@ -60,14 +52,13 @@ public class FlowGenerator extends AbstractGenerator {
 		}
 		for (FlowEdgeDesign edgeDesign: flowDesign.getEdges()) {
 			FlowClassModel.FlowEdge edge = new FlowClassModel.FlowEdge();
-			edge.startNode = edgePoint(edgeDesign.getStartNode());
+			if (edge.startNode!=null) {
+				edge.startNode = edgePoint(edgeDesign.getStartNode());
+			}
 			if (edgeDesign.getStartEvent()!=null) {
-				edge.startEvent = edgeDesign.getStartEvent().getTechnicalNameCapitalized();
+				edge.event = edgeDesign.getStartEvent().getTechnicalNameCapitalized();
 			}
 			edge.endNode = edgePoint(edgeDesign.getEndNode());
-			if (edgeDesign.getEndEvent()!=null) {
-				edge.endEvent = edgeDesign.getEndEvent().getTechnicalNameCapitalized();
-			}
 			model.edges.add(edge);
 		}
 		for (EntityDesign selectDesign: flowDesign.getParameters()) {

@@ -3,9 +3,12 @@ package org.instantlogic.engine.manager;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.instantlogic.engine.manager.PlaceManager.RenderedPage;
 import org.instantlogic.engine.persistence.json.FileCasePersister;
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
+import org.instantlogic.fabric.util.ValueChangeObserver;
 import org.instantlogic.interaction.util.ChangeContext.FieldChange;
 import org.instantlogic.interaction.util.FlowEventOccurrence;
 import org.instantlogic.interaction.util.TravelerInfo;
@@ -48,7 +51,7 @@ public class CaseManager {
 		getActivePlace(newPath).enter(traveler);
 	}
 	
-	public synchronized Map<String, Object> render(TravelerInfo traveler, String path) {
+	public synchronized RenderedPage render(TravelerInfo traveler, String path) {
 		PlaceManager newPlace = getActivePlace(path);
 		return newPlace.render(traveler);
 	}
@@ -79,5 +82,15 @@ public class CaseManager {
 
 	public void leave(String location, TravelerInfo traveler) {
 		this.activePlaces.get(location).leave(traveler);
+	}
+
+	// Strange API due to the synchronization border
+	public synchronized RenderedPage renderAndObserve(TravelerInfo travelerInfo, String location, ObservationsOutdatedObserver placeOutdatedObserverToRemove, ValueChangeObserver placeOutdatedValueChangeObserver) {
+		if (placeOutdatedObserverToRemove!=null) {
+			placeOutdatedObserverToRemove.remove();
+		}
+		RenderedPage renderedPage = render(travelerInfo, location); 
+		renderedPage.placeOutdatedObserver = new ObservationsOutdatedObserver(renderedPage.observations, placeOutdatedValueChangeObserver);
+		return renderedPage;
 	}
 }

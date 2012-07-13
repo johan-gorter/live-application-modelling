@@ -14,6 +14,7 @@ public class CreateIssueFlow extends AbstractCreateIssueFlow {
 		Issue issue = new Issue();
 		Project project = context.getSelectedInstance(ProjectEntity.INSTANCE);
 		project.addToIssues(issue);
+		issue.setHeadline("Headline-"+issue.getMetadata().getInstanceId());
 		return new FlowEventOccurrence(IssueDetailsEvent.INSTANCE, issue);
 	}
 }

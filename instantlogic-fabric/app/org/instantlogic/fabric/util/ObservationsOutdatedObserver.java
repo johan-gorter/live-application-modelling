@@ -36,6 +36,7 @@ public class ObservationsOutdatedObserver {
 	}
 	
 	public void remove() {
+		if (outdated) return;
 		for (ReadOnlyAttributeValue<? extends Instance,? extends Object> valueObserved: this.observations.getValuesObserved()) {
 			valueObserved.removeNextValueChangeObserver(observer);
 		}

@@ -312,7 +312,7 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 			if (index<0) throw new NoSuchElementException();
 			nextValueChangeObservers.set(index, null);
 		} else {
-			if (!nextValueChangeObservers.remove(observer)) throw new NoSuchElementException();
+			if (!nextValueChangeObservers.remove(observer)) throw new NoSuchElementException(observer.toString());
 		}
 	}
 	

@@ -1,24 +1,16 @@
-0.7:
-Ritadministratie
-- Afwijking zichtbaar
-- Demo pagina
-- Stresstest feature op demo pagina
-- Look and feel moderniseren
-- route inzichtelijker maken (laatste lokatie naar links)
-
+0.7
 Fabric
-- Tijdelijke listeners Operation + Transaction
-- inheritance van attributen mogelijk maken
+? inheritance van attributen mogelijk maken
+? Alias verplicht voor selected instances
 
 Interaction
-- Play -> ASM
 - gebruikers elkaar laten zien
 - Look and feel showcasebaar
 
 0.8
-- Serialisatie
-- Android apps
-- CaseExplorer dynamisch
+? Serialisatie
+? Android apps onderzoeken
+? CaseExplorer dynamisch
 
 
 
@@ -27,3 +19,11 @@ Interaction
 1) Achieve the highest level of cooperation and interactivity possible in both using and designing applications
 2) Make designing applications as non-technical as possible
 3) Easy integration with programming
+
+
+Ritadministratie
+- Afwijking zichtbaar
+- Demo pagina
+- Stresstest feature op demo pagina
+- Look and feel moderniseren
+- route inzichtelijker maken (laatste lokatie naar links)

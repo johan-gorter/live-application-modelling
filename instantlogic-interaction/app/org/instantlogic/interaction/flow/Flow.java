@@ -15,9 +15,8 @@ import org.instantlogic.interaction.util.PageCoordinates.Coordinate;
 public abstract class Flow extends Concept {
 	
 	public abstract FlowNodeBase[] getNodes();
-	public abstract FlowSource[] getSources();
 	public abstract FlowEdge[] getEdges();
-	public abstract Entity[] getParameters();
+	public abstract Entity<? extends Instance>[] getParameters();
 
 	/**
 	 * Finds the page (pagePath is in the format subflowName.subflowName.pageName)
@@ -36,8 +35,17 @@ public abstract class Flow extends Concept {
 	}
 	
 	public FlowEdge findEdge(FlowNodeBase from, FlowEventOccurrence occurrence) {
+		if (from !=null) {
+			// Find an edge with the right start node
+			for (FlowEdge edge: getEdges()) {
+				if (occurrence.getEvent()==edge.getEvent() && edge.getStartNode()==from) {
+					return edge;
+				}
+			}
+		}
 		for (FlowEdge edge: getEdges()) {
-			if (occurrence.getEvent()==edge.getStartEvent()) {
+			// Find an edge without a start node (wildcard, matches any node)
+			if (occurrence.getEvent()==edge.getEvent() && edge.getStartNode()==null) {
 				return edge;
 			}
 		}
@@ -45,36 +53,14 @@ public abstract class Flow extends Concept {
 	}
 	
 	public FlowEventOccurrence enter(FlowEventOccurrence occurrence, FlowContext context) {
-		FlowSource source = findSource(occurrence.getEvent());
+		FlowEdge edge = findEdge(null, occurrence);
 		context.pushFlowContext(this);
 		acceptParameters(context, occurrence.getParameters());
-		if (source.getEndNode()==null) {
-			return occurrence; // Pop the event, because this source does not reach anything
-		} else {
-			return reach(source.getEndEvent(), source.getEndNode(), occurrence, context);
-		}
-	}
-	
-	private FlowEventOccurrence nextOccurrence(FlowEventOccurrence occurrence, FlowEvent newEvent) {
-		return new FlowEventOccurrence(newEvent, occurrence.getParameters()); // todo: pick the right parameters
-	}
-	
-	private FlowSource findSource(FlowEvent event) {
-		FlowSource defaultSource = null;
-		FlowSource[] sources = getSources();
-		for (FlowSource source: sources) {
-			if (source.getStartEvent()==null) {
-				defaultSource = source;
-				continue;
-			}
-			if (source.getStartEvent()==event) return source;
-		}
-		if (defaultSource!=null) return defaultSource;
-		throw new RuntimeException("Flow "+getName()+" does not have a source for event: "+event.getName());
+		return reach(edge.getEndNode(), occurrence, context);
 	}
 	
 	protected void acceptParameters(FlowContext context, Instance[] selectedInstances) {
-		nextParameter: for (Entity entity : this.getParameters()) {
+		nextParameter: for (Entity<? extends Instance> entity : this.getParameters()) {
 			for (Instance instance: selectedInstances) {
 				if (Entity.extendsFrom(instance.getInstanceEntity(), entity)) {
 					context.getFlowStack().pushSelectedInstance(instance);
@@ -93,14 +79,11 @@ public abstract class Flow extends Concept {
 			context.popFlowContext();
 			return occurrence;
 		}
-		return reach(edge.getEndEvent(), edge.getEndNode(), occurrence, context);
+		return reach(edge.getEndNode(), occurrence, context);
 	}
 
 	// The end of an edge or source has been reached
-	private FlowEventOccurrence reach(FlowEvent endEvent, FlowNodeBase node, FlowEventOccurrence occurrence, FlowContext context) {
-		if (endEvent!=null) {
-			occurrence = nextOccurrence(occurrence, endEvent);
-		}
+	private FlowEventOccurrence reach(FlowNodeBase node, FlowEventOccurrence occurrence, FlowContext context) {
 		context.getFlowStack().setCurrentNode(node);
 		context.logOccurrence(occurrence);
 		if (node instanceof SubFlow) {

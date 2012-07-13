@@ -11,10 +11,11 @@ import org.instantlogic.designer.EntityDesign.RelationType;
 import org.instantlogic.designer.EventDesign;
 import org.instantlogic.designer.FlowDesign;
 import org.instantlogic.designer.FlowEdgeDesign;
-import org.instantlogic.designer.FlowSourceDesign;
 import org.instantlogic.designer.FormattedValueDesign;
 import org.instantlogic.designer.FragmentTemplateDesign;
 import org.instantlogic.designer.PlaceTemplateDesign;
+import org.instantlogic.designer.RelationDesign;
+import org.instantlogic.designer.SelectionDesign;
 import org.instantlogic.designer.SubFlowDesign;
 import org.instantlogic.designer.TemplatedTextDesign;
 import org.instantlogic.designer.codegenerator.generator.GeneratedClassModels;
@@ -36,7 +37,7 @@ public class IzzyGenerator extends Design {
 		
 		// Relations
 		project.addRelation("users", RelationType.OneToManyAggregation, user).setReverseName("project");
-		project.addRelation("issues", RelationType.OneToManyAggregation, issue).setReverseName("project");
+		RelationDesign projectIssues = project.addRelation("issues", RelationType.OneToManyAggregation, issue).setReverseName("project");
 		issue.addRelation("reporter", RelationType.ManyToZeroOrOne, user).setReverseName("reported issues");
 		issue.addRelation("assignee", RelationType.ManyToZeroOrOne, user).setReverseName("assigned issues");
 		issue.addRelation("comments", RelationType.OneToManyAggregation, comment).setReverseName("issue");
@@ -55,8 +56,25 @@ public class IzzyGenerator extends Design {
 		PlaceTemplateDesign dashboardPlaceTemplate = new PlaceTemplateDesign("dashboard")
 			.setContent(
 				new FragmentTemplateDesign("Page")
-					.setChildren(
-						"mainContent",
+					.setChildren("mainContent",
+						new FragmentTemplateDesign("Table")
+							.setChildren("columns", 
+								new FragmentTemplateDesign("Column")
+									.setText("header", createConstantText("Headline"))
+							)
+							.setChildren("rows",
+								new SelectionDesign().setSelection(createDeduction(projectIssues)).addToChildren(
+									new FragmentTemplateDesign("Row")
+										.setChildren("cells",
+											new FragmentTemplateDesign("Cell")
+												.setChildren("content",
+													new FragmentTemplateDesign("Link")
+														.setText("text", new TemplatedTextDesign().addToUntranslated(new FormattedValueDesign().setDeduction(createDeduction(issueHeadline))))
+														.setEvent(issueDetailsEvent)
+												)
+										)
+								)
+							),
 						new FragmentTemplateDesign("Button")
 							.setText("text", new ConstantTextDesign().setUntranslated("Create issue"))
 							.setEvent(createIssueEvent)
@@ -72,7 +90,8 @@ public class IzzyGenerator extends Design {
 		
 		// Flows
 		FlowDesign mainFlow = new FlowDesign("main");
-		FlowDesign issueFlow = new FlowDesign("issue");
+		FlowDesign issueFlow = new FlowDesign("issue")
+			.addToParameters(issue);
 		FlowDesign createIssueFlow = new FlowDesign("create issue");
 		createIssueFlow.setIsCustomized(true);
 
@@ -90,9 +109,12 @@ public class IzzyGenerator extends Design {
 			.setStartEvent(createIssueEvent)
 			.setEndNode(mainFlowCreateIssueSubFlow)
 		);
-
+		
+		// Issue flow
 		issueFlow.addToNodes(issueDetailsPlaceTemplate);
-		issueFlow.addToSources(new FlowSourceDesign().setEndNode(issueDetailsPlaceTemplate));
+		issueFlow.addToEdges(new FlowEdgeDesign()
+			.setStartEvent(issueDetailsEvent)
+			.setEndNode(issueDetailsPlaceTemplate));
 
 		// Application
 		izzy.setSourcePath("../izzy/generated");

@@ -4,9 +4,6 @@ public abstract class AbstractCreateIssueFlow extends org.instantlogic.interacti
 
 	public static final CreateIssueFlow INSTANCE = new CreateIssueFlow();
 	
-	private static final org.instantlogic.interaction.flow.FlowSource[] SOURCES = new org.instantlogic.interaction.flow.FlowSource[]{
-	};
-
 	private static final org.instantlogic.interaction.flow.FlowNodeBase[] NODES = new org.instantlogic.interaction.flow.FlowNodeBase[]{
 	};
 	
@@ -19,11 +16,6 @@ public abstract class AbstractCreateIssueFlow extends org.instantlogic.interacti
 	@Override
 	public String getName() {
 		return "create issue";
-	}
-
-	@Override
-	public org.instantlogic.interaction.flow.FlowSource[] getSources() {
-		return SOURCES;
 	}
 
 	@Override
