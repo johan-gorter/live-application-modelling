@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import org.instantlogic.fabric.util.CaseAdministration;
+import org.instantlogic.fabric.util.Observations;
+import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 import org.instantlogic.interaction.flow.PlaceTemplate;
 import org.instantlogic.interaction.util.ChangeContext;
 import org.instantlogic.interaction.util.ChangeContext.FieldChange;
@@ -16,6 +19,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class PlaceManager {
+	
+	public class RenderedPage {
+		public RenderedPage(Map<String, Object> content, Observations observations) {
+			this.content = content;
+			this.observations = observations;
+		}
+		public final Map<String, Object> content;
+		public final Observations observations;
+		public ObservationsOutdatedObserver placeOutdatedObserver;
+	}
 	
 	private static final Logger logger = LoggerFactory.getLogger(PlaceManager.class);
 	
@@ -39,13 +52,18 @@ public class PlaceManager {
 		this.location = path;
 	}
 
-	public Map<String, Object> render(TravelerInfo traveler) {
+	public RenderedPage render(TravelerInfo traveler) {
 		RenderContext renderContext = findPage(traveler);
 		if (renderContext==null) {
-			return PLACE_NOT_FOUND;
+			return new RenderedPage(PLACE_NOT_FOUND, new Observations());
 		}
 		PlaceTemplate placeTemplate = (PlaceTemplate)renderContext.getFlowContext().getFlowStack().getCurrentNode();
-		return placeTemplate.render(renderContext);
+		
+		CaseAdministration caseAdministration = renderContext.getCaseInstance().getMetadata().getCaseAdministration();
+		caseAdministration.startRecordingObservations();
+		Map<String, Object> content = placeTemplate.render(renderContext);
+		Observations observations = caseAdministration.stopRecordingObservations();
+		return new RenderedPage(content, observations);
 	}
 	
 	public String submit(FieldChange[] changes, String submitId, TravelerInfo traveler) {

@@ -13,6 +13,12 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.instantlogic.engine.manager.ApplicationManager;
 import org.instantlogic.engine.manager.CaseManager;
+import org.instantlogic.engine.manager.PlaceManager.RenderedPage;
+import org.instantlogic.fabric.util.AbstractTransactionListener;
+import org.instantlogic.fabric.util.CaseAdministration;
+import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
+import org.instantlogic.fabric.util.ValueChangeEvent;
+import org.instantlogic.fabric.util.ValueChangeObserver;
 import org.instantlogic.interaction.util.ChangeContext.FieldChange;
 import org.instantlogic.interaction.util.TravelerInfo;
 import org.jboss.netty.buffer.ChannelBuffers;
@@ -71,7 +77,6 @@ public class Traveler {
 	
 	private final TravelerInfo travelerInfo;
 	private List<MessageEvent> parkedRequests = new ArrayList<MessageEvent>();
-	private long lastSentPlaceVersion = -1;
 	private JsonArray messagesWaiting = new JsonArray();
 	private ApplicationManager applicationManager;
 	private boolean sendPlace;
@@ -79,6 +84,20 @@ public class Traveler {
 	private String location;
 	private CaseManager caseManager;
 	private State state = State.ACTIVE;
+	private ObservationsOutdatedObserver placeOutdatedObserver;
+	private final ValueChangeObserver placeOutdatedValueChangeObserver = new ValueChangeObserver() {
+		@Override
+		public void valueChanged(ValueChangeEvent event) {
+			event.getOperation().addTransactionListener(placeOutdatedTransactionListener);
+		}
+	}; 
+	private final AbstractTransactionListener placeOutdatedTransactionListener = new AbstractTransactionListener() {
+		@Override
+		public void transactionCompleted(CaseAdministration instanceAdministration, boolean committed) {
+			sendPlace = true;
+			deliverMessagesIfPossible();
+		}
+	};
 
 	private ChannelFutureListener channelClosed = new ChannelFutureListener() {
 		@Override
@@ -106,6 +125,7 @@ public class Traveler {
 		if (state==State.MAY_BE_OBANDONED) {
 			state = State.REMOVED;
 			logger.info("Removing traveler {}", travelerInfo.getTravelerId());
+			this.placeOutdatedObserver = null;
 			travelers.remove(travelerInfo.getTravelerId());
 			this.caseManager.leave(this.location, travelerInfo);
 		}
@@ -158,7 +178,9 @@ public class Traveler {
 	
 	private void deliverMessages() {
 		if (sendPlace) {
-			JsonElement rootFragment = gson.toJsonTree(caseManager.render(travelerInfo, this.location));
+			RenderedPage renderedPage = caseManager.renderAndObserve(travelerInfo, this.location, placeOutdatedObserver, placeOutdatedValueChangeObserver);
+			placeOutdatedObserver = renderedPage.placeOutdatedObserver;
+			JsonElement rootFragment = gson.toJsonTree(renderedPage.content);
 			JsonObject placeMessage = new JsonObject();
 			placeMessage.addProperty("message", "place");
 			placeMessage.addProperty("location", location);

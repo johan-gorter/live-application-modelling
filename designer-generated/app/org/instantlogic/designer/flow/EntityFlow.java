@@ -4,14 +4,6 @@ public class EntityFlow extends org.instantlogic.interaction.flow.Flow {
 
 	public static final EntityFlow INSTANCE = new EntityFlow();
 	
-	private static final org.instantlogic.interaction.flow.FlowSource[] SOURCES = new org.instantlogic.interaction.flow.FlowSource[]{
-		new org.instantlogic.interaction.flow.FlowSource(
-			null,
-			org.instantlogic.designer.flow.entity.EntityDetailsPlaceTemplate.INSTANCE,
-			null
-		),
-	};
-
 	private static final org.instantlogic.interaction.flow.FlowNodeBase[] NODES = new org.instantlogic.interaction.flow.FlowNodeBase[]{
 		org.instantlogic.designer.flow.entity.EntityDetailsPlaceTemplate.INSTANCE,
 	};
@@ -26,11 +18,6 @@ public class EntityFlow extends org.instantlogic.interaction.flow.Flow {
 	@Override
 	public String getName() {
 		return "Entity";
-	}
-
-	@Override
-	public org.instantlogic.interaction.flow.FlowSource[] getSources() {
-		return SOURCES;
 	}
 
 	@Override

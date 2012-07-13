@@ -81,6 +81,13 @@ public class CaseAdministration {
 		currentObservations = new Observations();
 	}
 
+	public void startRecordingObservations(Observations appendTo) {
+		if (currentObservations!=null) {
+			observationsStack.add(currentObservations);
+		}
+		currentObservations = appendTo;
+	}
+
 	public Observations stopRecordingObservations() {
 		Observations result = currentObservations;
 		if (result==null) throw new IllegalStateException();

@@ -1,6 +1,7 @@
 package org.instantlogic.fabric.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.instantlogic.fabric.model.Attribute;
@@ -11,20 +12,33 @@ import org.instantlogic.fabric.value.AttributeValues;
 public class Operation {
 	
 	public enum OperationState {STARTED, UNDOING, COMPLETED, CLOSED}
-	private final CaseAdministration instanceAdministration;
+	private final CaseAdministration caseAdministration;
 	private final List<ValueChangeEvent> eventsToUndo = new ArrayList<ValueChangeEvent>();
 	private final Operation partOfOperation;
 	private OperationState state;
 	private int recordingUndoEventsPaused;
+	// Only used on the Operation root, allows for temporary listeners on the current transaction
+	private List<TransactionListener> transactionListeners;
 
-	public Operation(CaseAdministration instanceAdministration, Operation partOfOperation) {
-		this.instanceAdministration = instanceAdministration;
+	public Operation(CaseAdministration caseAdministration, Operation partOfOperation) {
+		this.caseAdministration = caseAdministration;
 		this.partOfOperation = partOfOperation;
+	}
+	
+	public void addTransactionListener(TransactionListener transactionListener) {
+		if (partOfOperation!=null) {
+			partOfOperation.addTransactionListener(transactionListener);
+		} else {
+			if (transactionListeners==null) {
+				transactionListeners = new ArrayList<TransactionListener>();
+			}
+			transactionListeners.add(transactionListener);
+		}
 	}
 	
 	public void start() {
 		state = OperationState.STARTED;
-		this.instanceAdministration.fireTransactionStarted();
+		this.caseAdministration.fireTransactionStarted();
 	}
 
 	public void complete() {
@@ -52,25 +66,42 @@ public class Operation {
 			if (partOfOperation!=null && partOfOperation.state == OperationState.UNDOING) return; // The undo operation on our parent crashed here, we have done enough damage.
 			undo();
 			state=OperationState.CLOSED;
+			this.caseAdministration.popCurrentOperation(partOfOperation);
 		} else if (state==OperationState.COMPLETED) {
 			if (partOfOperation==null) {
 				boolean committed = false;
+				if (transactionListeners==null) {
+					transactionListeners = Collections.emptyList();
+				}
 				try {
-					this.instanceAdministration.fireTransactionPreparing();
-					this.instanceAdministration.fireTransactionCommitting();
+					// Prepare
+					for (TransactionListener transactionListener : transactionListeners) {
+						transactionListener.transactionPreparing(this.caseAdministration);
+					}
+					this.caseAdministration.fireTransactionPreparing();
+					// Commit
+					for (TransactionListener transactionListener : transactionListeners) {
+						transactionListener.transactionCommitting(this.caseAdministration);
+					}
+					this.caseAdministration.fireTransactionCommitting();
 					committed = true;
 				} finally {
-					this.instanceAdministration.fireTransactionCompleted(committed);
+					this.caseAdministration.popCurrentOperation(partOfOperation);
+					// Completed
+					for (TransactionListener transactionListener : transactionListeners) {
+						transactionListener.transactionCompleted(this.caseAdministration, committed);
+					}
+					this.caseAdministration.fireTransactionCompleted(committed);
 				}
 			} else {
 				for (ValueChangeEvent event: this.eventsToUndo) {
 					partOfOperation.addEventToUndo(event);
 				}
+				this.caseAdministration.popCurrentOperation(partOfOperation);
 			}
 		} else {
 			throw new IllegalStateException(""+state);
 		}
-		this.instanceAdministration.popCurrentOperation(partOfOperation);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

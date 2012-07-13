@@ -65,6 +65,8 @@ public class FlowContext extends DeductionContext {
 	}
 
 	public FlowEventOccurrence step(FlowEventOccurrence occurrence) {
+		lastOccurrence = occurrence;
+		lastNode = flowStack.getCurrentNode();
 		return flowStack.getFlow().step(flowStack.getCurrentNode(), occurrence, this);
 	}
 

@@ -6,8 +6,7 @@ public interface ValueChangeObserver {
 	/**
 	 * Listener interface for value changes
 	 * 
-	 * @param The event.
-	 * @return if the listener must be maintained. (return true to keep listening, false removes the listener)
+	 * @param event The event that changed a value.
 	 */
 	public void valueChanged(ValueChangeEvent event);
 	

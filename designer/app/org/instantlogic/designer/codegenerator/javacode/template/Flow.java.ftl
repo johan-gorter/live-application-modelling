@@ -4,16 +4,6 @@ public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${
 
 	public static final ${technicalNameCapitalized}Flow INSTANCE = new <#if customization??>${customization}<#else>${technicalNameCapitalized}Flow</#if>();
 	
-	private static final org.instantlogic.interaction.flow.FlowSource[] SOURCES = new org.instantlogic.interaction.flow.FlowSource[]{
-	<#list sources as source>
-		new org.instantlogic.interaction.flow.FlowSource(
-			<#if source.startEvent??>${rootPackageName}.event.${source.startEvent}Event.INSTANCE<#else>null</#if>,
-			<#if source.endNode??>${rootPackageName}.flow.${name?lower_case}.${source.endNode}<#else>null</#if>,
-			<#if source.endEvent??>${rootPackageName}.event.${source.endEvent}Event.INSTANCE<#else>null</#if>
-		),
-	</#list>
-	};
-
 	private static final org.instantlogic.interaction.flow.FlowNodeBase[] NODES = new org.instantlogic.interaction.flow.FlowNodeBase[]{
 	<#list nodes as node>
 		${rootPackageName}.flow.${name?lower_case}.${node.name}${node.type}.INSTANCE,
@@ -23,10 +13,9 @@ public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${
 	private static final org.instantlogic.interaction.flow.FlowEdge[] EDGES = new org.instantlogic.interaction.flow.FlowEdge[]{
 	<#list edges as edge>
 		new org.instantlogic.interaction.flow.FlowEdge(
-			${rootPackageName}.flow.${name?lower_case}.${edge.startNode}, 
-			<#if edge.startEvent??>${rootPackageName}.event.${edge.startEvent}Event.INSTANCE<#else>null</#if>,
-			${rootPackageName}.flow.${name?lower_case}.${edge.endNode},
-			<#if edge.endEvent??>${rootPackageName}.event.${edge.endEvent}Event.INSTANCE<#else>null</#if>
+			<#if edge.startNode??>${rootPackageName}.flow.${name?lower_case}.${edge.startNode}<#else>null</#if>, 
+			<#if edge.event??>${rootPackageName}.event.${edge.event}Event.INSTANCE<#else>null</#if>,
+			${rootPackageName}.flow.${name?lower_case}.${edge.endNode}
 		),
 	</#list>
 	};
@@ -40,11 +29,6 @@ public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${
 	@Override
 	public String getName() {
 		return "${name}";
-	}
-
-	@Override
-	public org.instantlogic.interaction.flow.FlowSource[] getSources() {
-		return SOURCES;
 	}
 
 	@Override

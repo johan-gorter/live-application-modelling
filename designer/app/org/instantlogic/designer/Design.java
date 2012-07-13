@@ -32,6 +32,12 @@ public class Design extends AbstractDesign {
 		return scheme;
 	}
 	
+	protected static ConstantTextDesign createConstantText(String untranslated) {
+		ConstantTextDesign result = new ConstantTextDesign();
+		result.setUntranslated(untranslated);
+		return result;
+	}
+	
 	public String getTechnicalNameCapitalized() {
 		return TechnicalNameDeduction.capitalizeFirst(getTechnicalName());
 	}
