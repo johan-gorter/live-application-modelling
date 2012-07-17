@@ -5,6 +5,13 @@ public class TravelerInfo {
 	private String travelerId;
 	private String authenticatedUsername;
 	
+	public TravelerInfo() {
+	}
+
+	public TravelerInfo(String travelerId) {
+		this.travelerId = travelerId;
+	}
+
 	public String getTravelerId() {
 		return travelerId;
 	}
