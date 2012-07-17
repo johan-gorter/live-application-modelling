@@ -1,14 +1,12 @@
 package org.instantlogic.engine.manager;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
 
-import org.instantlogic.engine.EngineTestApplication;
-import org.instantlogic.engine.EngineTestApplication.Case;
-import org.instantlogic.engine.EngineTestApplication.Item;
 import org.instantlogic.engine.manager.PlaceManager.RenderedPage;
-import org.instantlogic.fabric.Instance;
+import org.instantlogic.example.izzy.Issue;
+import org.instantlogic.example.izzy.IzzyApplication;
+import org.instantlogic.example.izzy.Project;
 import org.instantlogic.fabric.util.ValueChangeEvent;
 import org.instantlogic.fabric.util.ValueChangeObserver;
 import org.instantlogic.interaction.util.TravelerInfo;
@@ -30,7 +28,7 @@ public class PlaceManagerTest {
 
 	@Before
 	public void setUp() {
-		ApplicationManager.registerApplication(EngineTestApplication.INSTANCE);
+		ApplicationManager.registerApplication(IzzyApplication.INSTANCE);
 	}
 	
 	@After
@@ -41,13 +39,13 @@ public class PlaceManagerTest {
 	
 	@Test
 	public void test() {
-		ApplicationManager applicationManager = ApplicationManager.getManager("EngineTest");
-		CaseManager case1 = applicationManager.getOrCreateCase("case1");
+		ApplicationManager applicationManager = ApplicationManager.getManager("izzy");
+		CaseManager case1 = applicationManager.getOrCreateCase("project1");
 		TravelerInfo traveler1 = new TravelerInfo("traveler1");
-		case1.enter(traveler1, null, "Home");
-		RenderedPage page = case1.renderAndObserve(traveler1, "Home", null, placeOutdatedValueChangeObserver);
+		case1.enter(traveler1, null, "dashboard");
+		RenderedPage page = case1.renderAndObserve(traveler1, "dashboard", null, placeOutdatedValueChangeObserver);
 		assertNull(lastEvent);
-		((Case)case1.getCase()).addToItems(new Item());
+		((Project)case1.getCase()).addToIssues(new Issue());
 		assertNotNull(lastEvent);
 	}
 

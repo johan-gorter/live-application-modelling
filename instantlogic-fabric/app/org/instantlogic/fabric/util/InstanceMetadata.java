@@ -189,6 +189,9 @@ public class InstanceMetadata {
 	}
 	
 	public Instance getChild(String localId) {
+		if (children==null) {
+			throw new NoSuchElementException("Child "+localId);
+		}
 		Instance result = children.get(localId);
 		if (result==null) {
 			throw new NoSuchElementException("Child "+localId);
