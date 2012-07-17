@@ -22,8 +22,17 @@ YUI.add('instantlogic', function (Y) {
         this.messagesQueue = [];
         this.rootFragmentHolder = null;
 
-        this.oneMomentPlease = new Y.Panel({
+        this.oneMomentPleasePanel = new Y.Panel({
             bodyContent: 'ONE MOMENT PLEASE',
+            visible: false,
+            centered: true,
+            zIndex: 10,
+            disabled: true,
+            modal: true,
+            render: true
+        });
+        this.errorPanel = new Y.Panel({
+            bodyContent: 'ERROR',
             visible: false,
             centered: true,
             zIndex: 10,
@@ -53,6 +62,7 @@ YUI.add('instantlogic', function (Y) {
         	this.setState('stopped');
         	for (var id in this.outstandingRequests) {
         		this.outstandingRequests[id].abort();
+        		this.outstandingRequestCount--;
         	}
         },
         
@@ -67,16 +77,21 @@ YUI.add('instantlogic', function (Y) {
         setState: function (state) {
             if (this.state == state) return;
             this.state = state;
-            if (state == 'connected') {
-                this.oneMomentPlease.hide();
+            if (state == 'connected' || state == 'error') {
+                this.oneMomentPleasePanel.hide();
             };
             if (state == 'connecting' || state == 'disconnected') {
-                this.oneMomentPlease.show();
+                this.oneMomentPleasePanel.show();
                 this.containerNode.setContent('');
                 if (this.rootFragmentHolder) {
                     this.rootFragmentHolder.destroy();
                     this.rootFragmentHolder = null;
                 }
+            }
+            if (state == 'error') {
+            	this.errorPanel.show();
+            } else {
+            	this.errorPanel.hide();
             }
         },
 
@@ -165,6 +180,7 @@ YUI.add('instantlogic', function (Y) {
                 on: {
                     success: function (transactionid, response) {
                     	this.outstandingRequestCount--;
+                    	if (!this.outstandingRequests[transactionid]) Y.error();
                     	delete this.outstandingRequests[transactionid];
                         this.setState('connected');
                         this.processUpdates(response.responseText);
@@ -318,7 +334,7 @@ YUI.add('instantlogic', function (Y) {
                         this.fragmentHolders[newIndex].update(newModel, diff);
                     } else {
                         // New fragmentHolder
-                        var fragmentHolder = new FragmentHolder(newModel.id, this.fragmentFactory);
+                        var fragmentHolder = new ns.FragmentHolder(newModel.id, this.fragmentFactory);
                         this.fragmentHolders.splice(newIndex, 0, fragmentHolder);
                         if (this.fragmentHolders.length > newIndex + 1) {
                             this.parentNode.insertBefore(fragmentHolder.node, this.fragmentHolders[newIndex + 1].node);

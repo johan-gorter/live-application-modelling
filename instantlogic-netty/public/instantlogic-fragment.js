@@ -30,8 +30,8 @@ YUI.add('instantlogic-fragment', function (Y) {
 
         update: function (newModel, diff) {
             ns.Page.superclass.update.call(this, newModel, diff);
-            this.headerFragmentList.update(newModel.headerContent);
-            this.mainFragmentList.update(newModel.mainContent);
+            this.headerFragmentList.update(newModel.headerContent, diff);
+            this.mainFragmentList.update(newModel.mainContent, diff);
         },
 
         destroy: function () {
@@ -167,8 +167,8 @@ YUI.add('instantlogic-fragment', function (Y) {
         
         update: function (newModel, diff) {
             ns.Table.superclass.update.call(this, newModel, diff);
-            this.headerFragmentList.update(newModel.columns);
-            this.bodyFragmentList.update(newModel.rows);
+            this.headerFragmentList.update(newModel.columns, diff);
+            this.bodyFragmentList.update(newModel.rows, diff);
         }
     });
     
@@ -189,7 +189,7 @@ YUI.add('instantlogic-fragment', function (Y) {
         
         update: function (newModel, diff) {
             ns.Row.superclass.update.call(this, newModel, diff);
-            this.cellsFragmentList.update(newModel.cells);
+            this.cellsFragmentList.update(newModel.cells, diff);
         }
     });
 
@@ -231,7 +231,7 @@ YUI.add('instantlogic-fragment', function (Y) {
         
         update: function (newModel, diff) {
             ns.Cell.superclass.update.call(this, newModel, diff);
-            this.contentFragmentList.update(newModel.content);
+            this.contentFragmentList.update(newModel.content, diff);
         }
     });
 

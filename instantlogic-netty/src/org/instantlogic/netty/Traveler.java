@@ -236,4 +236,9 @@ public class Traveler {
 			}
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return "Traveler "+travelerInfo.getTravelerId();
+	}
 }
