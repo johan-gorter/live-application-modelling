@@ -49,6 +49,17 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 			}
 		};
 	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.example.izzy.Issue, java.lang.Integer, java.lang.Integer> number 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.example.izzy.Issue, java.lang.Integer, java.lang.Integer>(
+			"number", INSTANCE, java.lang.Integer.class
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.example.izzy.Issue, java.lang.Integer> get(org.instantlogic.example.izzy.Issue instance) {
+				return instance.getNumberAttributeValue();
+			}
+		};
+	
 	// Relations
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.example.izzy.Issue, org.instantlogic.example.izzy.User, org.instantlogic.example.izzy.User> assignee
@@ -119,6 +130,7 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
 		description,
 		headline,
+		number,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		assignee,

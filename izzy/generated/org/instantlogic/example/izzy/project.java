@@ -10,6 +10,23 @@ public class Project extends org.instantlogic.fabric.Instance {
 
 	// Attributes
 	
+	private final org.instantlogic.fabric.value.AttributeValue<Project, java.lang.Integer> lastIssueNumber
+		= createAttributeValue(org.instantlogic.example.izzy.entity.ProjectEntity.lastIssueNumber);
+	
+	public java.lang.Integer getLastIssueNumber() {
+		return lastIssueNumber.getValue();
+	}
+
+	public org.instantlogic.fabric.value.AttributeValue<Project, java.lang.Integer> getLastIssueNumberAttributeValue() {
+		return lastIssueNumber;
+	}
+
+	public Project setLastIssueNumber(java.lang.Integer newValue) {
+		lastIssueNumber.setValue(newValue);
+		return (Project)this;
+	}
+	
+	
 	// Relations
 	
 	private final org.instantlogic.fabric.value.RelationValues<Project, Issue> issues

@@ -1,1 +1,12 @@
 .yui3-widget-mask {	background-color: #666666; }
+
+/* Page elements */
+
+/* Global rules */
+a { color: #000000 }
+
+/* Fragments */
+
+.column-header {font-weight: bold; }
+.cells {display:inline-block;border-bottom: solid 1px black;}
+.cell {display:inline-block; width:200px;overflow:hidden;white-space:no-wrap;}
