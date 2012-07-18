@@ -13,8 +13,11 @@ public class CreateIssueFlow extends AbstractCreateIssueFlow {
 	public FlowEventOccurrence enter(FlowEventOccurrence occurrence, FlowContext context) {
 		Issue issue = new Issue();
 		Project project = context.getSelectedInstance(ProjectEntity.INSTANCE);
+		Integer lastIssueNumber = project.getLastIssueNumber();
+		project.setLastIssueNumber(lastIssueNumber+1);
+		issue.setNumber(lastIssueNumber+1);
+		issue.setHeadline("Headline-"+issue.getMetadata().getInstanceId()); // TODO: remove
 		project.addToIssues(issue);
-		issue.setHeadline("Headline-"+issue.getMetadata().getInstanceId());
 		return new FlowEventOccurrence(IssueDetailsEvent.INSTANCE, issue);
 	}
 }

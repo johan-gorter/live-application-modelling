@@ -5,7 +5,6 @@ YUI.add('instantlogic', function (Y) {
 	
     var ns = Y.namespace('instantlogic');
 
-    // Engine is a FragmentFactory
     ns.Engine = function (application, caseId, travelerId, containerNode, fragmentNamespaces) {
     	this.application = application;
     	this.caseId = caseId;
@@ -133,14 +132,14 @@ YUI.add('instantlogic', function (Y) {
             diff.applyNow();
         },
 
-        createFragment: function (name, parentNode, fragmentFactory) {
+        createFragment: function (name, parentNode, engine) {
             for (var i = 0; i < this.fragmentNamespaces.length; i++) {
                 var fns = this.fragmentNamespaces[i];
                 if (fns[name]) {
-                    return new fns[name](parentNode, fragmentFactory || this);
+                    return new fns[name](parentNode, engine || this);
                 }
             }
-            return new ns.MessageFragment(parentNode, fragmentFactory || this, 'No fragmentnamespace provides a fragment called ' + name, 'error');
+            return new ns.MessageFragment(parentNode, engine || this, 'No fragmentnamespace provides a fragment called ' + name, 'error');
         },
         
         sendEnter: function() {
@@ -236,17 +235,17 @@ YUI.add('instantlogic', function (Y) {
     };
 
     //FragmentHolder
-    ns.FragmentHolder = function (id, fragmentFactory) {
+    ns.FragmentHolder = function (id, engine) {
         this.id = id;
-        this.fragmentFactory = fragmentFactory;
-        this.node = Y.html.span({ 'data-fragment-id': id, cssClass: 'fragment' });
+        this.engine = engine;
+        this.node = Y.html.span({ 'data-fragment-id': id, className: 'fragment' });
         this.fragment = null;
     };
 
     ns.FragmentHolder.prototype = {
         init: function (model) {
             this.fragmentType = model.type;
-            this.fragment = this.fragmentFactory.createFragment(this.fragmentType, this.node);
+            this.fragment = this.engine.createFragment(this.fragmentType, this.node);
             this.fragment.init(model);
         },
 
@@ -261,11 +260,11 @@ YUI.add('instantlogic', function (Y) {
         recreateFragment: function (newModel, diff) {
             this.fragment.destroy();
             var oldNode = this.node;
-            this.node = Y.html.span({ 'data-fragment-id': id, cssClass: 'fragment' });
+            this.node = Y.html.span({ 'data-fragment-id': id, className: 'fragment' });
             oldNode.ancestor().insertBefore(this.node, oldNode); // oldNode can be removed using animation
             diff.nodeToRemove(oldNode);
             diff.nodeAdded(this.node);
-            this.fragment = this.fragmentFactory.createFragment(newModel);
+            this.fragment = this.engine.createFragment(newModel);
             this.fragment.init(this.node, newModel);
         },
 
@@ -279,8 +278,8 @@ YUI.add('instantlogic', function (Y) {
     };
 
     // FragmentList
-    ns.FragmentList = function (parentNode, fragmentFactory) {
-        this.fragmentFactory = fragmentFactory;
+    ns.FragmentList = function (parentNode, engine) {
+        this.engine = engine;
         this.parentNode = parentNode;
     };
 
@@ -290,7 +289,7 @@ YUI.add('instantlogic', function (Y) {
             this.models = models;
             this.fragmentHolders = [];
             for (var i = 0; i < models.length; i++) {
-                var fragmentHolder = new ns.FragmentHolder(models[i].id, this.fragmentFactory);
+                var fragmentHolder = new ns.FragmentHolder(models[i].id, this.engine);
                 this.parentNode.appendChild(fragmentHolder.node);
                 fragmentHolder.init(models[i]);
                 this.fragmentHolders.push(fragmentHolder);
@@ -334,13 +333,14 @@ YUI.add('instantlogic', function (Y) {
                         this.fragmentHolders[newIndex].update(newModel, diff);
                     } else {
                         // New fragmentHolder
-                        var fragmentHolder = new ns.FragmentHolder(newModel.id, this.fragmentFactory);
+                        var fragmentHolder = new ns.FragmentHolder(newModel.id, this.engine);
                         this.fragmentHolders.splice(newIndex, 0, fragmentHolder);
                         if (this.fragmentHolders.length > newIndex + 1) {
                             this.parentNode.insertBefore(fragmentHolder.node, this.fragmentHolders[newIndex + 1].node);
                         } else {
                             this.parentNode.appendChild(fragmentHolder.node);
                         }
+                        fragmentHolder.init(newModel);
                         diff.nodeAdded(fragmentHolder.node);
                     }
                 } else {
@@ -371,10 +371,10 @@ YUI.add('instantlogic', function (Y) {
     };
 
     // Fragment
-    ns.Fragment = function (parentNode, fragmentFactory) {
+    ns.Fragment = function (parentNode, engine) {
     	if (!parentNode) Y.error();
-    	if (!fragmentFactory) Y.error();
-        this.fragmentFactory = fragmentFactory;
+    	if (!engine) Y.error();
+        this.engine = engine;
         this.previousModel = {};
         this.parentNode = parentNode;
         this.model = null;
@@ -399,17 +399,17 @@ YUI.add('instantlogic', function (Y) {
         }
     };
     
-    ns.MessageFragment = function (parentNode, fragmentFactory, message, messageCssClass) {
+    ns.MessageFragment = function (parentNode, engine, message, messageclassName) {
         ns.MessageFragment.superclass.constructor.apply(this, arguments);
         this.message = message;
-        this.messageCssClass = messageCssClass;
+        this.messageclassName = messageclassName;
     };
 
     Y.extend(ns.MessageFragment, Y.instantlogic.Fragment, {
         init: function (model) {
         	ns.MessageFragment.superclass.init.call(this, model);
-        	var markup = Y.html.div({cssClass:'message '+this.messageCssClass}, 
-        		Y.html.div({cssClass:'icon'}),
+        	var markup = Y.html.div({className:'message '+this.messageclassName}, 
+        		Y.html.div({className:'icon'}),
         		Y.html.p(this.message)
         	);
         	this.parentNode.appendChild(markup);

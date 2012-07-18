@@ -44,6 +44,23 @@ public class Issue extends org.instantlogic.fabric.Instance {
 	}
 	
 	
+	private final org.instantlogic.fabric.value.AttributeValue<Issue, java.lang.Integer> number
+		= createAttributeValue(org.instantlogic.example.izzy.entity.IssueEntity.number);
+	
+	public java.lang.Integer getNumber() {
+		return number.getValue();
+	}
+
+	public org.instantlogic.fabric.value.AttributeValue<Issue, java.lang.Integer> getNumberAttributeValue() {
+		return number;
+	}
+
+	public Issue setNumber(java.lang.Integer newValue) {
+		number.setValue(newValue);
+		return (Issue)this;
+	}
+	
+	
 	// Relations
 	
 	private final org.instantlogic.fabric.value.RelationValue<Issue, User> assignee

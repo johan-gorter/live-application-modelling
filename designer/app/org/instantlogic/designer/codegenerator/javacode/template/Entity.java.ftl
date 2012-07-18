@@ -68,17 +68,39 @@ public class ${technicalNameCapitalized}Entity extends org.instantlogic.fabric.m
 				return true;
 			};
 			</#if>
-			<#if attribute.ruleDeductionIndex??>
+            <#if attribute.relevanceDeductionIndex??>
 
-			private org.instantlogic.fabric.deduction.Deduction<${attribute.itemClassName}> rule;
-			@Override
-			public org.instantlogic.fabric.deduction.Deduction<${attribute.itemClassName}> getRule() {
-				if (rule==null) {
-					rule = createDeduction${attribute.ruleDeductionIndex}();
-				}
-				return rule;
-			}
-			</#if>
+            private org.instantlogic.fabric.deduction.Deduction<Boolean> relevance;
+            @Override
+            public org.instantlogic.fabric.deduction.Deduction<Boolean> getRelevance() {
+                if (relevance==null) {
+                    relevance = createDeduction${attribute.relevanceDeductionIndex}();
+                }
+                return relevance;
+            }
+            </#if>
+            <#if attribute.ruleDeductionIndex??>
+
+            private org.instantlogic.fabric.deduction.Deduction<${attribute.itemClassName}> rule;
+            @Override
+            public org.instantlogic.fabric.deduction.Deduction<${attribute.itemClassName}> getRule() {
+                if (rule==null) {
+                    rule = createDeduction${attribute.ruleDeductionIndex}();
+                }
+                return rule;
+            }
+            </#if>
+            <#if attribute.defaultDeductionIndex??>
+
+            private org.instantlogic.fabric.deduction.Deduction<${attribute.itemClassName}> defaultDeduction;
+            @Override
+            public org.instantlogic.fabric.deduction.Deduction<${attribute.itemClassName}> getDefault() {
+                if (defaultDeduction==null) {
+                    defaultDeduction = createDeduction${attribute.defaultDeductionIndex}();
+                }
+                return defaultDeduction;
+            }
+            </#if>
 			<#if attribute.domain??>
 			
 			private final DomainEntry[] domain = new DomainEntry[] {

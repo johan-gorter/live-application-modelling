@@ -32,6 +32,16 @@ public class Design extends AbstractDesign {
 		return scheme;
 	}
 	
+	protected static <V> DeductionSchemeDesign createConstantDeduction(Class<V> className, V value) {
+		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
+		ConstantDeductionDesign constantDeductionDesign = new ConstantDeductionDesign();
+		constantDeductionDesign.setClassName(className.getName());
+		constantDeductionDesign.setValue(value);
+		scheme.addToDeductions(constantDeductionDesign);
+		scheme.setOutput(constantDeductionDesign);
+		return scheme;
+	}
+	
 	protected static ConstantTextDesign createConstantText(String untranslated) {
 		ConstantTextDesign result = new ConstantTextDesign();
 		result.setUntranslated(untranslated);

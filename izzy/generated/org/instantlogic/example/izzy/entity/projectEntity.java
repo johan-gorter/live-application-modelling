@@ -24,8 +24,35 @@ public class ProjectEntity extends org.instantlogic.fabric.model.Entity<org.inst
 	}
 
 	// Deductions
+
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.Integer> createDeduction0() {
+		  	org.instantlogic.fabric.deduction.Deduction<java.lang.Integer> d0 
+		  		= org.instantlogic.fabric.deduction.ConstantDeduction.create(0);
+		return d0;
+	}
+
 	
 	// Attributes
+	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.example.izzy.Project, java.lang.Integer, java.lang.Integer> lastIssueNumber 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.example.izzy.Project, java.lang.Integer, java.lang.Integer>(
+			"last issue number", INSTANCE, java.lang.Integer.class
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.example.izzy.Project, java.lang.Integer> get(org.instantlogic.example.izzy.Project instance) {
+				return instance.getLastIssueNumberAttributeValue();
+			}
+
+            private org.instantlogic.fabric.deduction.Deduction<java.lang.Integer> defaultDeduction;
+            @Override
+            public org.instantlogic.fabric.deduction.Deduction<java.lang.Integer> getDefault() {
+                if (defaultDeduction==null) {
+                    defaultDeduction = createDeduction0();
+                }
+                return defaultDeduction;
+            }
+		};
 	
 	// Relations
 	
@@ -74,6 +101,7 @@ public class ProjectEntity extends org.instantlogic.fabric.model.Entity<org.inst
 	// Reverse relations
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
+		lastIssueNumber,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		issues,

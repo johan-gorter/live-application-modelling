@@ -59,8 +59,14 @@ public class EntityGenerator extends AbstractGenerator {
 			if (domain.size()>0) {
 				attribute.domain = generateDomain(domain, model);
 			}
+			if (attributeDesign.getRelevance()!=null) {
+				attribute.relevanceDeductionIndex = model.addDeductionScheme(DeductionSchemeGenerator.generate(model.rootPackageName, attributeDesign.getRelevance()));
+			}
 			if (attributeDesign.getRule()!=null) {
 				attribute.ruleDeductionIndex = model.addDeductionScheme(DeductionSchemeGenerator.generate(model.rootPackageName, attributeDesign.getRule()));
+			}
+			if (attributeDesign.getDefault()!=null) {
+				attribute.defaultDeductionIndex = model.addDeductionScheme(DeductionSchemeGenerator.generate(model.rootPackageName, attributeDesign.getDefault()));
 			}
 			model.attributes.add(attribute);
 		}

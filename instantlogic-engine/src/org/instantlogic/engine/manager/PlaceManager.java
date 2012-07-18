@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
 import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.util.Observations;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
+import org.instantlogic.fabric.util.Operation;
 import org.instantlogic.interaction.flow.PlaceTemplate;
 import org.instantlogic.interaction.util.ChangeContext;
 import org.instantlogic.interaction.util.ChangeContext.FieldChange;
@@ -67,13 +68,20 @@ public class PlaceManager {
 	}
 	
 	public String submit(FieldChange[] changes, String submitId, TravelerInfo traveler) {
-		ChangeContext changeContext = ChangeContext.create(application.getApplication().getMainFlow(), location, caseManager.getCase(), caseManager.getCaseId(), changes, submitId, traveler);
-		PlaceTemplate placeTemplate = (PlaceTemplate)changeContext.getFlowContext().getFlowStack().getCurrentNode();
-		FlowEventOccurrence eventOccurrence = placeTemplate.submit(changeContext);
-		while (eventOccurrence!=null) {
-			eventOccurrence = changeContext.getFlowContext().step(eventOccurrence);
+		CaseAdministration caseAdministration = caseManager.getCase().getMetadata().getCaseAdministration();
+		Operation operation = caseAdministration.startOperation();
+		try {
+			ChangeContext changeContext = ChangeContext.create(application.getApplication().getMainFlow(), location, caseManager.getCase(), caseManager.getCaseId(), changes, submitId, traveler);
+			PlaceTemplate placeTemplate = (PlaceTemplate)changeContext.getFlowContext().getFlowStack().getCurrentNode();
+			FlowEventOccurrence eventOccurrence = placeTemplate.submit(changeContext);
+			while (eventOccurrence!=null) {
+				eventOccurrence = changeContext.getFlowContext().step(eventOccurrence);
+			}
+			operation.complete();
+			return changeContext.getFlowContext().getFlowStack().toPath();
+		} finally {
+			operation.close();
 		}
-		return changeContext.getFlowContext().getFlowStack().toPath();
 	}
 	
 
