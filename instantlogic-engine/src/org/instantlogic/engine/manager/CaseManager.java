@@ -1,16 +1,17 @@
 package org.instantlogic.engine.manager;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.instantlogic.engine.manager.PlaceManager.RenderedPage;
 import org.instantlogic.engine.persistence.json.FileCasePersister;
+import org.instantlogic.engine.presence.Presence;
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 import org.instantlogic.fabric.util.ValueChangeObserver;
 import org.instantlogic.interaction.util.ChangeContext.FieldChange;
-import org.instantlogic.interaction.util.FlowEventOccurrence;
 import org.instantlogic.interaction.util.TravelerInfo;
 
 /**
@@ -23,13 +24,15 @@ public class CaseManager {
 	private ApplicationManager application;
 	private Instance theCase;
 	
-	private Map<String, PlaceManager> activePlaces = new HashMap<String, PlaceManager>();
+	private final Map<String, PlaceManager> activePlaces = new HashMap<String, PlaceManager>();
+	private final Presence presence;
 	
 	public CaseManager(ApplicationManager application, String caseId, Entity<? extends Instance> caseEntity) {
 		if (caseId==null) caseId = FileCasePersister.uniqueId();
 		this.caseId = caseId;
 		this.caseEntity = caseEntity;
 		this.application = application;
+		this.presence = new Presence();
 		this.theCase = FileCasePersister.INSTANCE.loadOrCreate(caseId, caseEntity.getInstanceClass());
 	}
 
@@ -92,5 +95,11 @@ public class CaseManager {
 		RenderedPage renderedPage = render(travelerInfo, location); 
 		renderedPage.placeOutdatedObserver = new ObservationsOutdatedObserver(renderedPage.observations, placeOutdatedValueChangeObserver);
 		return renderedPage;
+	}
+
+	public Map<String, Object> renderPresence(TravelerInfo travelerInfo) {
+		Map<String, Object> result = new LinkedHashMap<String, Object>();
+		result.put("applicationName", this.application.getApplication().getName());
+		return result;
 	}
 }

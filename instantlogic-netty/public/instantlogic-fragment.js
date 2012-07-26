@@ -4,8 +4,33 @@ YUI.add('instantlogic-fragment', function (Y) {
     var html = Y.html;
     var FragmentList = Y.instantlogic.FragmentList;
 
-    // Page
+    // Presence
+    ns.Presence = function (parentNode, engine) {
+        ns.Presence.superclass.constructor.apply(this, arguments);
+    };
 
+    Y.extend(ns.Presence, Y.instantlogic.Fragment, {
+    	init: function(model) {
+            ns.Presence.superclass.init.call(this, model);
+            var markup = html.div({ className: 'top-bar' },
+            	html.div({className: 'top-bar-content'},
+            		this.applicationNameSpan = html.span({className: 'application-name'},
+            			model.applicationName || ''
+            		),
+            		html.div({className: 'case-name'},
+            			this.caseNameSpan = html.span(model.caseName || '')
+            		),
+            		this.login = html.div({className: 'login'},
+            			this.avatarDiv = html.div({className: 'avatar'}),
+            			this.loginNameSpan = html.span(model.loginName || '')
+            		)
+                ),
+                html.div({className:'chat'})
+            );
+    	}
+    });
+    
+    // Page
     ns.Page = function (parentNode, engine) {
         ns.Page.superclass.constructor.apply(this, arguments);
     };
