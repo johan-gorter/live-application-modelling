@@ -5,10 +5,11 @@ YUI.add('instantlogic', function (Y) {
 	
     var ns = Y.namespace('instantlogic');
 
-    ns.Engine = function (application, caseId, travelerId, containerNode, fragmentNamespaces) {
+    ns.Engine = function (application, caseId, travelerId, presenceNode, placeNode, fragmentNamespaces) {
     	this.application = application;
     	this.caseId = caseId;
-        this.containerNode = containerNode;
+    	this.presenceNode = presenceNode;
+        this.placeNode = placeNode;
         this.travelerId = travelerId;
         if (!fragmentNamespaces || fragmentNamespaces.length == 0) Y.error('No fragment namespaces');
         Y.each(fragmentNamespaces, function (fns) {
@@ -19,7 +20,8 @@ YUI.add('instantlogic', function (Y) {
         this.outstandingRequestCount = 0;
         this.outstandingRequests = {};
         this.messagesQueue = [];
-        this.rootFragmentHolder = null;
+        this.placeFragmentHolder = null;
+        this.presenceFragmentHolder = null;
 
         this.oneMomentPleasePanel = new Y.Panel({
             bodyContent: 'ONE MOMENT PLEASE',
@@ -48,7 +50,7 @@ YUI.add('instantlogic', function (Y) {
         	this.history.on('locationChange', this.onLocationChange, this);
             this.location = this.history.get('location');
             if (!location) Y.error('no location given');
-            this.containerNode.setContent('One moment...');
+            this.presenceNode.setContent('One moment...');
             this.setState('connecting');
             this.sendEnter();
             var me = this;
@@ -81,10 +83,15 @@ YUI.add('instantlogic', function (Y) {
             };
             if (state == 'connecting' || state == 'disconnected') {
                 this.oneMomentPleasePanel.show();
-                this.containerNode.setContent('');
-                if (this.rootFragmentHolder) {
-                    this.rootFragmentHolder.destroy();
-                    this.rootFragmentHolder = null;
+                this.placeNode.setContent('');
+                if (this.placeFragmentHolder) {
+                    this.placeFragmentHolder.destroy();
+                    this.placeFragmentHolder = null;
+                }
+                this.presenceNode.setContent('');
+                if (this.presenceFragmentHolder) {
+                    this.presenceFragmentHolder.destroy();
+                    this.presenceFragmentHolder = null;
                 }
             }
             if (state == 'error') {
@@ -106,6 +113,9 @@ YUI.add('instantlogic', function (Y) {
                     	}
                         this.updatePlace(message.rootFragment);
                         break;
+                    case 'presence':
+                    	this.updatePresence(message.rootFragment);
+                    	break;
                     case 'filesUpdated':
                         document.location.reload();
                         break;
@@ -115,19 +125,32 @@ YUI.add('instantlogic', function (Y) {
             }
         },
 
+        updatePresence: function (model) {
+            var diff = new ns.Diff();
+            if (!this.presenceFragmentHolder) {
+                this.presenceFragmentHolder = new Y.instantlogic.FragmentHolder(model.id, this);
+                this.presenceNode.appendChild(this.presenceFragmentHolder.node);
+                diff.nodeAdded(this.presenceFragmentHolder.node);
+                this.presenceFragmentHolder.init(model);
+            } else {
+                this.presenceFragmentHolder.update(model, diff);
+            }
+            diff.applyNow();
+        },
+
         updatePlace: function (model) {
             var diff = new ns.Diff();
-            if (!this.rootFragmentHolder || this.rootFragmentHolder.id != model.id) {
-                if (this.rootFragmentHolder) {
-                    diff.nodeToRemove(this.rootFragmentHolder.node);
-                    this.rootFragmentHolder.destroy();
+            if (!this.placeFragmentHolder || this.placeFragmentHolder.id != model.id) {
+                if (this.placeFragmentHolder) {
+                    diff.nodeToRemove(this.placeFragmentHolder.node);
+                    this.placeFragmentHolder.destroy();
                 }
-                this.rootFragmentHolder = new Y.instantlogic.FragmentHolder(model.id, this);
-                this.containerNode.appendChild(this.rootFragmentHolder.node);
-                diff.nodeAdded(this.rootFragmentHolder.node);
-                this.rootFragmentHolder.init(model);
+                this.placeFragmentHolder = new Y.instantlogic.FragmentHolder(model.id, this);
+                this.placeNode.appendChild(this.placeFragmentHolder.node);
+                diff.nodeAdded(this.placeFragmentHolder.node);
+                this.placeFragmentHolder.init(model);
             } else {
-                this.rootFragmentHolder.update(model, diff);
+                this.placeFragmentHolder.update(model, diff);
             }
             diff.applyNow();
         },

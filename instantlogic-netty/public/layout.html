@@ -17,24 +17,10 @@
 <script type="text/javascript" src="/instantlogic.js"></script>
 <script type="text/javascript" src="/instantlogic-fragment.js"></script>
 
-<script type="text/javascript">
-	var travelerId = ''+Math.floor(Math.random()*100000000000);
-
-	YUI({filter: 'raw'}).use('instantlogic', 'node', 'instantlogic-fragment', 'html', 'history', function(Y) {
-        var applicationMatch = /application=([^&]*)/g.exec(location.search);
-        if (!applicationMatch) Y.error('Missing application querystring parameter');
-        var caseMatch = /case=([^&]*)/g.exec(location.search);
-        if (!caseMatch) Y.error('Missing case querystring parameter');
-		new Y.instantlogic.Engine(applicationMatch[1], caseMatch[1], travelerId, Y.one('#presence'), Y.one('#place'), [Y.instantlogic.fragment]).start();
-	});
-</script>
-
 </head>
 <body class="yui3-skin-sam">
-    <div id="presence">
-        One moment..
-    </div>
-	<div id="place">
+	<div id="instantlogic">
+		One moment..
 	</div>
 </body>
 </html>

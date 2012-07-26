@@ -79,6 +79,7 @@ public class Traveler {
 	private List<MessageEvent> parkedRequests = new ArrayList<MessageEvent>();
 	private JsonArray messagesWaiting = new JsonArray();
 	private ApplicationManager applicationManager;
+	private boolean sendPresence;
 	private boolean sendPlace;
 	private String caseId;
 	private String location;
@@ -152,6 +153,7 @@ public class Traveler {
 				this.caseManager.enter(travelerInfo, this.location, newLocation);
 				this.location = newLocation;
 				sendPlace = true;
+				sendPresence = true;
 			}
 		}
 	}
@@ -165,7 +167,7 @@ public class Traveler {
 		state = State.ACTIVE;
 		e.getChannel().getCloseFuture().addListener(channelClosed);
 		parkedRequests.add(e);
-		if (parkedRequests.size()>1 || sendPlace || messagesWaiting.size()>0) {
+		if (parkedRequests.size()>1 || sendPlace || sendPresence || messagesWaiting.size()>0) {
 			deliverMessages();
 		}
 	}
@@ -177,6 +179,13 @@ public class Traveler {
 	}
 	
 	private void deliverMessages() {
+		if (sendPresence) {
+			JsonElement rootFragment = gson.toJsonTree(caseManager.renderPresence(travelerInfo));
+			JsonObject placeMessage = new JsonObject();
+			placeMessage.addProperty("message", "place");
+			placeMessage.addProperty("location", location);
+			placeMessage.add("rootFragment", rootFragment);
+		}
 		if (sendPlace) {
 			RenderedPage renderedPage = caseManager.renderAndObserve(travelerInfo, this.location, placeOutdatedObserver, placeOutdatedValueChangeObserver);
 			placeOutdatedObserver = renderedPage.placeOutdatedObserver;
