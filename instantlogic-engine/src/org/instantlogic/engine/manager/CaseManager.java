@@ -1,10 +1,12 @@
 package org.instantlogic.engine.manager;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-import org.instantlogic.engine.Client;
+import org.instantlogic.engine.TravelerProxy;
 import org.instantlogic.engine.message.Message;
 import org.instantlogic.engine.persistence.json.FileCasePersister;
 import org.instantlogic.engine.presence.Presence;
@@ -30,38 +32,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Only a single thread access the CaseManager at the same time.
+ * Only a single thread accesses the CaseManager at the same time.
  */
 public class CaseManager {
 
 	private static final Logger logger = LoggerFactory.getLogger(CaseManager.class);
 	
-	public static class RenderedPage {
-		public RenderedPage(Map<String, Object> content, Observations observations) {
-			this.content = content;
-			this.observations = observations;
-		}
-		public final Map<String, Object> content;
-		public final Observations observations;
-		public ObservationsOutdatedObserver placeOutdatedObserver;
-	}
-	
-	private static final Map<String, Object> PLACE_NOT_FOUND = new LinkedHashMap<String, Object>();
-	static  {
-		PLACE_NOT_FOUND.put("id", "1");
-		PLACE_NOT_FOUND.put("type", "Page");
-		PLACE_NOT_FOUND.put("pageType", "error");
-		PLACE_NOT_FOUND.put("reason", "notfound");
-	}
-	
 	private final String caseId;
-	private ApplicationManager application;
-	private Instance theCase;
-
 	/**
 	 * Administration for users, travelers and places.
 	 */
 	private final Presence presence;
+	private final ApplicationManager application;
+	private final Instance theCase;
 	
 	public CaseManager(ApplicationManager application, String caseId) {
 		if (caseId==null) caseId = FileCasePersister.uniqueId();
@@ -71,42 +54,28 @@ public class CaseManager {
 		this.theCase = FileCasePersister.INSTANCE.loadOrCreate(caseId, application.getApplication().getCaseEntity().getInstanceClass());
 	}
 
-	public void processMessage(Client client, Message message) {
-		Traveler traveler = getTraveler(client.getTraveler());
+	public void processMessage(TravelerProxy travelerProxy, Message message) {
+		Traveler traveler = getTraveler(travelerProxy);
 		message.execute(traveler, this.presence, this.theCase);
 	}
 
 	public void sendUpdates() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public String getCaseId() {
-		return caseId;
-	}
-	
-	/**
-	 * Even if the path does not exist, the placeManager gets created.
-	 * @param path
-	 * @param newLocation 
-	 * @return The rendered page
-	 */
-	public void goTo(TravelerInfo travelerInfo, String newPath) {
-		Traveler traveler = getTraveler(travelerInfo);
-		this.presence.enter(traveler, newPath);
-	}
-	
-	// Strange API due to the synchronization border
-	public RenderedPage renderAndObserve(TravelerInfo travelerInfo, ObservationsOutdatedObserver placeOutdatedObserverToRemove, ValueChangeObserver placeOutdatedValueChangeObserver) {
-		Traveler traveler = getTraveler(travelerInfo);
-		if (placeOutdatedObserverToRemove!=null) {
-			placeOutdatedObserverToRemove.remove();
+		// Render the places (this may update the place titles needed for rendering the presence)
+		for (User user : this.presence.getUsers()) {
+			for (Traveler traveler: user.getTravelers()) {
+				traveler.queuePlaceIfNeeded();
+			}
 		}
-		RenderedPage renderedPage = render(traveler, travelerInfo); 
-		renderedPage.placeOutdatedObserver = new ObservationsOutdatedObserver(renderedPage.observations, placeOutdatedValueChangeObserver);
-		return renderedPage;
+		// Render the presence and send
+		for (User user : this.presence.getUsers()) {
+			for (Traveler traveler: user.getTravelers()) {
+				traveler.queuePresenceIfNeeded();
+				traveler.sendQueuedUpdates();
+			}
+		}
 	}
-
+	
+	
 	public Map<String, Object> renderPresence(TravelerInfo travelerInfo) {
 		Traveler traveler = getTraveler(travelerInfo);
 		FlowContext flowContext = new FlowContext(this.presence, "presence", travelerInfo);
@@ -121,13 +90,13 @@ public class CaseManager {
 		return result;
 	}
 	
-	public RenderedPage render(TravelerInfo travelerInfo) {
-		Traveler traveler = getTraveler(travelerInfo);
-		return render(traveler, travelerInfo);
+	public RenderedPage render(TravelerProxy travelerProxy) {
+		Traveler traveler = getTraveler(travelerProxy);
+		return render(traveler, travelerProxy);
 	}
 	
-	private RenderedPage render(Traveler traveler, TravelerInfo travelerInfo) {
-		RenderContext renderContext = findPage(traveler, travelerInfo);
+	private RenderedPage render(Traveler traveler, TravelerProxy travelerProxy) {
+		RenderContext renderContext = findPage(traveler, travelerProxy);
 		if (renderContext==null) {
 			return new RenderedPage(PLACE_NOT_FOUND, new Observations());
 		}
@@ -166,7 +135,8 @@ public class CaseManager {
 		}
 	}
 
-	private Traveler getTraveler(TravelerInfo travelerInfo) {
+	private Traveler getTraveler(TravelerProxy travelerProxy) {
+		TravelerInfo travelerInfo = travelerProxy.getTravelerInfo();
 		User user = null;
 		for (User userKandidate: presence.getUsers()) {
 			if (userKandidate.getUserName().equals(travelerInfo.getAuthenticatedUsername())) {
@@ -184,7 +154,7 @@ public class CaseManager {
 				return traveler;
 			}
 		}
-		Traveler traveler = new Traveler();
+		Traveler traveler = new Traveler(travelerProxy);
 		traveler.setId(travelerInfo.getTravelerId());
 		user.addToTravelers(traveler);
 		return traveler;
@@ -192,5 +162,13 @@ public class CaseManager {
 
 	public Instance getCase() {
 		return theCase;
+	}
+
+	public ApplicationManager getApplicationManager() {
+		return application;
+	}
+	
+	public String getCaseId() {
+		return caseId;
 	}
 }

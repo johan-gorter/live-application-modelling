@@ -5,9 +5,9 @@ import java.util.List;
 import org.instantlogic.engine.manager.Update;
 import org.instantlogic.interaction.util.TravelerInfo;
 
-public interface Client {
+public interface TravelerProxy {
 
-	TravelerInfo getTraveler();
+	TravelerInfo getTravelerInfo();
 	
 	void sendUpdates(List<Update> messages);
 

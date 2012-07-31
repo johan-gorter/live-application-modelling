@@ -10,6 +10,7 @@ public class TravelerEntityGenerator extends EntityDesign {
     
     private TravelerEntityGenerator() {
         setName("Traveler");
+        setIsCustomized(true);
     }
     
     // Attributes

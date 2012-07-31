@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.instantlogic.engine.Client;
+import org.instantlogic.engine.TravelerProxy;
 import org.instantlogic.engine.manager.ApplicationManager;
 import org.instantlogic.engine.manager.CaseManager;
 import org.instantlogic.engine.manager.CaseManager.RenderedPage;
@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 /**
  * A traveler usually has one open parked request. When another comes in, the first one is released.
  */
-public class NettyTraveler implements Client {
+public class NettyTraveler implements TravelerProxy {
 	
 	enum State {ACTIVE, MAY_BE_OBANDONED, REMOVED}
 	

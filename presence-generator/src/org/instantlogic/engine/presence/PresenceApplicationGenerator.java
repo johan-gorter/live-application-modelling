@@ -14,7 +14,7 @@ public class PresenceApplicationGenerator extends ApplicationDesign {
     public PresenceApplicationGenerator() {
         setName("Presence");
         setRootPackageName("org.instantlogic.engine.presence");
-        setSourcePath("../presence/generated");
+        setSourcePath("../instantlogic-engine/generated");
         setCaseEntity(PresenceEntityGenerator.ENTITY);
         setMainFlow(MainFlowGenerator.FLOW);
 
