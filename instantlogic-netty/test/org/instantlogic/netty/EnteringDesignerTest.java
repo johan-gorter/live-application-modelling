@@ -16,11 +16,11 @@ public class EnteringDesignerTest {
 	public void test() {
 		ApplicationManager designerApplicationManager = new ApplicationManager(DesignerApplication.INSTANCE);
 		CaseManager testCase = designerApplicationManager.getOrCreateCase("testCase");
-		TravelerInfo traveler = new TravelerInfo();
-		traveler.setTravelerId("testTraveler");
+		TravelerInfo traveler = new TravelerInfo("testUserTraveler");
+		traveler.setAuthenticatedUsername("testUser");
 		
-		testCase.enter(traveler, null, "Welcome");
-		Object page = testCase.render(traveler, "Welcome");
+		testCase.goTo(traveler, "Welcome");
+		Object page = testCase.render(traveler);
 
 		Assert.assertNotNull(page);
 		

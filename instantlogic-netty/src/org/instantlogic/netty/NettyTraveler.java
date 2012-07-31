@@ -11,9 +11,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.instantlogic.engine.Client;
 import org.instantlogic.engine.manager.ApplicationManager;
 import org.instantlogic.engine.manager.CaseManager;
-import org.instantlogic.engine.manager.PlaceManager.RenderedPage;
+import org.instantlogic.engine.manager.CaseManager.RenderedPage;
 import org.instantlogic.fabric.util.AbstractTransactionListener;
 import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
@@ -42,36 +43,36 @@ import com.google.gson.JsonParser;
 /**
  * A traveler usually has one open parked request. When another comes in, the first one is released.
  */
-public class Traveler {
+public class NettyTraveler implements Client {
 	
 	enum State {ACTIVE, MAY_BE_OBANDONED, REMOVED}
 	
 	private static final Logger logger = LoggerFactory.getLogger(InstantlogicRequestHandler.class);
 
-	private static final Map<String, Traveler> travelers = new ConcurrentHashMap<String, Traveler>();
+	private static final Map<String, NettyTraveler> nettyTravelers = new ConcurrentHashMap<String, NettyTraveler>();
 	private static Gson gson = new Gson();
 
 	public static void broadcast(JsonObject message) {
-		logger.info("broadcasting to all {} travelers", travelers.size());
-		for (Traveler traveler : travelers.values()) {
-			traveler.sendMessage(message);
+		logger.info("broadcasting to all {} travelers", nettyTravelers.size());
+		for (NettyTraveler nettyTraveler : nettyTravelers.values()) {
+			nettyTraveler.sendMessage(message);
 		}
 	}
 	
-	public static Traveler getOrCreate(String travelerId, String applicationName) {
-		Traveler result = travelers.get(travelerId);
+	public static NettyTraveler getOrCreate(String travelerId, String applicationName) {
+		NettyTraveler result = nettyTravelers.get(travelerId);
 		if (result==null) {
 			logger.info("Registering new traveler {}", travelerId);
 			ApplicationManager application = ApplicationManager.getManager(applicationName);
-			result = new Traveler(travelerId, application);
-			travelers.put(travelerId, result);
+			result = new NettyTraveler(travelerId, application);
+			nettyTravelers.put(travelerId, result);
 		}
 		return result;
 	}
 	
 	public static void sweep() {
-		for(Traveler traveler : travelers.values()) {
-			traveler.check();
+		for(NettyTraveler nettyTraveler : nettyTravelers.values()) {
+			nettyTraveler.check();
 		}
 	}
 	
@@ -107,7 +108,7 @@ public class Traveler {
 		}
 	};
 	
-	private Traveler(String travelerId, ApplicationManager application) {
+	private NettyTraveler(String travelerId, ApplicationManager application) {
 		travelerInfo = new TravelerInfo();
 		travelerInfo.setTravelerId(travelerId);
 		this.applicationManager = application;
@@ -127,8 +128,8 @@ public class Traveler {
 			state = State.REMOVED;
 			logger.info("Removing traveler {}", travelerInfo.getTravelerId());
 			this.placeOutdatedObserver = null;
-			travelers.remove(travelerInfo.getTravelerId());
-			this.caseManager.leave(this.location, travelerInfo);
+			nettyTravelers.remove(travelerInfo.getTravelerId());
+			this.caseManager.goTo(travelerInfo,null);
 		}
 		if (state==State.ACTIVE && parkedRequests.size()==0) {
 			state = State.MAY_BE_OBANDONED;
@@ -150,7 +151,7 @@ public class Traveler {
 				sendPlace = true;
 			} else if ("enter".equals(messageName)) {
 				String newLocation = message.getAsJsonObject().get("location").getAsString();
-				this.caseManager.enter(travelerInfo, this.location, newLocation);
+				this.caseManager.goTo(travelerInfo, newLocation);
 				this.location = newLocation;
 				sendPlace = true;
 				sendPresence = true;
@@ -161,8 +162,8 @@ public class Traveler {
 	public synchronized void parkRequest(MessageEvent e) {
 		if (state==State.REMOVED) {
 			logger.info("Rare race condition");
-			travelers.put(travelerInfo.getTravelerId(), this);
-			this.caseManager.enter(travelerInfo, null, this.location);
+			nettyTravelers.put(travelerInfo.getTravelerId(), this);
+			this.caseManager.goTo(travelerInfo, this.location);
 		}
 		state = State.ACTIVE;
 		e.getChannel().getCloseFuture().addListener(channelClosed);
@@ -187,7 +188,7 @@ public class Traveler {
 			placeMessage.add("rootFragment", rootFragment);
 		}
 		if (sendPlace) {
-			RenderedPage renderedPage = caseManager.renderAndObserve(travelerInfo, this.location, placeOutdatedObserver, placeOutdatedValueChangeObserver);
+			RenderedPage renderedPage = caseManager.renderAndObserve(travelerInfo, placeOutdatedObserver, placeOutdatedValueChangeObserver);
 			placeOutdatedObserver = renderedPage.placeOutdatedObserver;
 			JsonElement rootFragment = gson.toJsonTree(renderedPage.content);
 			JsonObject placeMessage = new JsonObject();

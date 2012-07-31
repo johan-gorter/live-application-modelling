@@ -3,7 +3,7 @@ package org.instantlogic.engine.manager;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-import org.instantlogic.engine.manager.PlaceManager.RenderedPage;
+import org.instantlogic.engine.manager.CaseManager.RenderedPage;
 import org.instantlogic.example.izzy.Issue;
 import org.instantlogic.example.izzy.IzzyApplication;
 import org.instantlogic.example.izzy.Project;
@@ -42,8 +42,9 @@ public class PlaceManagerTest {
 		ApplicationManager applicationManager = ApplicationManager.getManager("izzy");
 		CaseManager case1 = applicationManager.getOrCreateCase("project1");
 		TravelerInfo traveler1 = new TravelerInfo("traveler1");
-		case1.enter(traveler1, null, "dashboard");
-		RenderedPage page = case1.renderAndObserve(traveler1, "dashboard", null, placeOutdatedValueChangeObserver);
+		traveler1.setAuthenticatedUsername("user1");
+		case1.goTo(traveler1, "dashboard");
+		RenderedPage page = case1.renderAndObserve(traveler1, null, placeOutdatedValueChangeObserver);
 		assertNull(lastEvent);
 		((Project)case1.getCase()).addToIssues(new Issue());
 		assertNotNull(lastEvent);

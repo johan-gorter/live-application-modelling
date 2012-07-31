@@ -31,7 +31,7 @@ public class ApplicationManager {
 	public synchronized CaseManager getOrCreateCase(String caseId) {
 		CaseManager result = caseId==null?null:activeCases.get(caseId);
 		if (result == null) {
-			result = new CaseManager(this, caseId, application.getCaseEntity());
+			result = new CaseManager(this, caseId);
 			activeCases.put(result.getCaseId(), result);
 		}
 		return result;
