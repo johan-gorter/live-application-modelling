@@ -52,7 +52,7 @@ public class NettyServer {
 						return;
 					}
 					key.pollEvents();
-					Traveler.broadcast(FILES_UPDATED);
+					NettyTraveler.broadcast(FILES_UPDATED);
 					if (!key.reset()) break;
 				}
 			} catch (IOException e) {
@@ -64,14 +64,14 @@ public class NettyServer {
 	private static Runnable sweeper = new Runnable() {
 		@Override
 		public void run() {
-			Traveler.sweep();
+			NettyTraveler.sweep();
 		}
 	};
 
 	private static Runnable filesUpdatedBroadcaster = new Runnable() {
 		@Override
 		public void run() {
-			Traveler.broadcast(FILES_UPDATED);
+			NettyTraveler.broadcast(FILES_UPDATED);
 		}
 	};
 
@@ -103,7 +103,7 @@ public class NettyServer {
 			if ("quit".equalsIgnoreCase(command)) {
 				break;
 			} else if ("sweep".equalsIgnoreCase(command)){
-				Traveler.sweep();
+				NettyTraveler.sweep();
 			} else {
 				executor.execute(filesUpdatedBroadcaster);
 			}
