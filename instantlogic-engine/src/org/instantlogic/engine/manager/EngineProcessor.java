@@ -4,9 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.instantlogic.engine.Client;
+import org.instantlogic.engine.TravelerProxy;
 import org.instantlogic.engine.message.Message;
-import org.instantlogic.interaction.util.TravelerInfo;
 
 public class EngineProcessor {
 
@@ -23,8 +22,8 @@ public class EngineProcessor {
 		return result;
 	}
 	
-	public void process(String application, String caseId, Client client, List<Message> messages) {
+	public void process(String application, String caseId, TravelerProxy travelerProxy, List<Message> messages) {
 		CaseProcessor caseProcessor = getCaseProcessor(application, caseId);
-		caseProcessor.processMessages(client, messages);
+		caseProcessor.processMessages(travelerProxy, messages);
 	}
 }

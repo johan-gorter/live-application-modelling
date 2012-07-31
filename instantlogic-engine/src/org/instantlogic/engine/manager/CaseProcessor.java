@@ -3,7 +3,7 @@ package org.instantlogic.engine.manager;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.instantlogic.engine.Client;
+import org.instantlogic.engine.TravelerProxy;
 import org.instantlogic.engine.message.Message;
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Entity;
@@ -15,12 +15,12 @@ import org.instantlogic.interaction.util.TravelerInfo;
 public class CaseProcessor {
 
 	public static class QueueEntry {
-		public final Client client; 
+		public final TravelerProxy travelerProxy; 
 		public final List<Message> messages;
 		public final QueueEntry previousEntry;
 		
-		public QueueEntry(Client client, List<Message> messages, QueueEntry previousEntry) {
-			this.client = client;
+		public QueueEntry(TravelerProxy travelerProxy, List<Message> messages, QueueEntry previousEntry) {
+			this.travelerProxy = travelerProxy;
 			this.messages = messages;
 			this.previousEntry = previousEntry;
 		}
@@ -36,15 +36,15 @@ public class CaseProcessor {
 		this.caseManager = new CaseManager(applicationManager,caseId);
 	}
 
-	public void processMessages(Client client, List<Message> messages) {
+	public void processMessages(TravelerProxy travelerProxy, List<Message> messages) {
 		List<QueueEntry> processEntries;
 		synchronized (queueLock) {
 			if (queueBeingProcessed) {
-				queueHead = new QueueEntry(client, messages, queueHead);
-				return; // Another thread is doing the processing
+				queueHead = new QueueEntry(travelerProxy, messages, queueHead);
+				return; // Another thread is doing the processing for us
 			} else {
 				processEntries = new ArrayList<QueueEntry>();
-				processEntries.add(new QueueEntry(client, messages, queueHead));
+				processEntries.add(new QueueEntry(travelerProxy, messages, queueHead));
 				QueueEntry entry = queueHead;
 				while (entry!=null) {
 					processEntries.add(entry);
@@ -59,7 +59,7 @@ public class CaseProcessor {
 				for (int i=processEntries.size()-1;i>=0;i--) {
 					QueueEntry entry = processEntries.get(i);
 					for (Message message: entry.messages) {
-						caseManager.processMessage(entry.client, message);
+						caseManager.processMessage(entry.travelerProxy, message);
 					}
 				}
 				processEntries.clear();

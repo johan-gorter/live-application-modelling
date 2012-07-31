@@ -1,7 +1,7 @@
 package org.instantlogic.engine.presence;
 
 
-public class Traveler extends org.instantlogic.fabric.Instance { 
+public abstract class AbstractTraveler extends org.instantlogic.fabric.Instance { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {

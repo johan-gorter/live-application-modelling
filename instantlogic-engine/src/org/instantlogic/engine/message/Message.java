@@ -4,10 +4,9 @@ import org.instantlogic.engine.presence.Presence;
 import org.instantlogic.engine.presence.Traveler;
 import org.instantlogic.fabric.Instance;
 
-public class Message {
+public abstract class Message {
 
-	public void execute(Traveler traveler, Presence presence, Instance theCase) {
-	}
+	public abstract void execute(Traveler traveler, Presence presence, Instance theCase);
 
 	
 }
