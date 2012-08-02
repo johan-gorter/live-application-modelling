@@ -11,7 +11,7 @@ import org.instantlogic.designer.DesignerApplication;
 import org.instantlogic.engine.manager.ApplicationManager;
 import org.instantlogic.engine.manager.CaseManager;
 import org.instantlogic.engine.persistence.json.CasePersister;
-import org.instantlogic.interaction.util.ChangeContext.FieldChange;
+import org.instantlogic.interaction.util.SubmitContext.FieldChange;
 import org.instantlogic.interaction.util.TravelerInfo;
 import org.junit.Test;
 

@@ -1,7 +1,7 @@
 package org.instantlogic.interaction.page;
 
 import org.instantlogic.interaction.flow.FlowEvent;
-import org.instantlogic.interaction.util.ChangeContext;
+import org.instantlogic.interaction.util.SubmitContext;
 import org.instantlogic.interaction.util.FlowEventOccurrence;
 
 public class ActionFilter extends AbstractFragmentFilter {
@@ -13,10 +13,10 @@ public class ActionFilter extends AbstractFragmentFilter {
 	}
 	
 	@Override
-	public FlowEventOccurrence submit(ChangeContext changeContext, String id, FragmentFilterChain chain) {
-		if (changeContext.getSubmit().equals(id)) {
-			return this.event.createOccurrence(changeContext);
+	public FlowEventOccurrence submit(SubmitContext submitContext, String id, FragmentFilterChain chain) {
+		if (submitContext.getPageElementId().equals(id)) {
+			return this.event.createOccurrence(submitContext);
 		}
-		return super.submit(changeContext, id, chain);
+		return super.submit(submitContext, id, chain);
 	}
 }

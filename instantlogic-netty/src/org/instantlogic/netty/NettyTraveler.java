@@ -20,7 +20,7 @@ import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 import org.instantlogic.fabric.util.ValueChangeEvent;
 import org.instantlogic.fabric.util.ValueChangeObserver;
-import org.instantlogic.interaction.util.ChangeContext.FieldChange;
+import org.instantlogic.interaction.util.SubmitContext.FieldChange;
 import org.instantlogic.interaction.util.TravelerInfo;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.jboss.netty.channel.Channel;

@@ -1,9 +1,5 @@
 package org.instantlogic.engine.manager;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.instantlogic.engine.TravelerProxy;
@@ -12,21 +8,13 @@ import org.instantlogic.engine.persistence.json.FileCasePersister;
 import org.instantlogic.engine.presence.Presence;
 import org.instantlogic.engine.presence.Traveler;
 import org.instantlogic.engine.presence.User;
-import org.instantlogic.engine.presence.flow.MainFlow;
-import org.instantlogic.engine.presence.flow.main.PresencePlaceTemplate;
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.util.CaseAdministration;
-import org.instantlogic.fabric.util.Observations;
-import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 import org.instantlogic.fabric.util.Operation;
-import org.instantlogic.fabric.util.ValueChangeObserver;
 import org.instantlogic.interaction.flow.PlaceTemplate;
-import org.instantlogic.interaction.util.ChangeContext;
-import org.instantlogic.interaction.util.ChangeContext.FieldChange;
-import org.instantlogic.interaction.util.FlowContext;
 import org.instantlogic.interaction.util.FlowEventOccurrence;
-import org.instantlogic.interaction.util.FlowStack;
 import org.instantlogic.interaction.util.RenderContext;
+import org.instantlogic.interaction.util.SubmitContext;
 import org.instantlogic.interaction.util.TravelerInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,7 +44,7 @@ public class CaseManager {
 
 	public void processMessage(TravelerProxy travelerProxy, Message message) {
 		Traveler traveler = getTraveler(travelerProxy);
-		message.execute(traveler, this.presence, this.theCase);
+		message.execute(application.getApplication(), traveler, this.presence, this.theCase);
 	}
 
 	public void sendUpdates() {
@@ -75,52 +63,18 @@ public class CaseManager {
 		}
 	}
 	
-	
-	public Map<String, Object> renderPresence(TravelerInfo travelerInfo) {
-		Traveler traveler = getTraveler(travelerInfo);
-		FlowContext flowContext = new FlowContext(this.presence, "presence", travelerInfo);
-		FlowStack flowStack = new FlowStack(null, MainFlow.INSTANCE);
-		flowStack.pushSelectedInstance(traveler.getUser());
-		flowContext.setFlowStack(flowStack);
-		RenderContext renderContext = new RenderContext(flowContext, traveler.getUser().getMetadata().getInstanceId()+"/Presence");
-		CaseAdministration caseAdministration = presence.getMetadata().getCaseAdministration();
-		caseAdministration.startRecordingObservations();
-		Map<String, Object> result = PresencePlaceTemplate.INSTANCE.render(renderContext);
-		Observations observations = caseAdministration.stopRecordingObservations();
-		return result;
-	}
-	
-	public RenderedPage render(TravelerProxy travelerProxy) {
-		Traveler traveler = getTraveler(travelerProxy);
-		return render(traveler, travelerProxy);
-	}
-	
-	private RenderedPage render(Traveler traveler, TravelerProxy travelerProxy) {
-		RenderContext renderContext = findPage(traveler, travelerProxy);
-		if (renderContext==null) {
-			return new RenderedPage(PLACE_NOT_FOUND, new Observations());
-		}
-		PlaceTemplate placeTemplate = (PlaceTemplate)renderContext.getFlowContext().getFlowStack().getCurrentNode();
-		
-		CaseAdministration caseAdministration = renderContext.getCaseInstance().getMetadata().getCaseAdministration();
-		caseAdministration.startRecordingObservations();
-		Map<String, Object> content = placeTemplate.render(renderContext);
-		Observations observations = caseAdministration.stopRecordingObservations();
-		return new RenderedPage(content, observations);
-	}
-	
-	public String submit(TravelerInfo traveler, String path, FieldChange[] changes, String submitId) {
+	public String submit(TravelerInfo traveler, String path, String submitId) {
 		CaseAdministration caseAdministration = this.theCase.getMetadata().getCaseAdministration();
 		Operation operation = caseAdministration.startOperation();
 		try {
-			ChangeContext changeContext = ChangeContext.create(application.getApplication().getMainFlow(), path, theCase, caseId, changes, submitId, traveler);
-			PlaceTemplate placeTemplate = (PlaceTemplate)changeContext.getFlowContext().getFlowStack().getCurrentNode();
-			FlowEventOccurrence eventOccurrence = placeTemplate.submit(changeContext);
+			SubmitContext submitContext = SubmitContext.create(application.getApplication().getMainFlow(), path, theCase, caseId, submitId, traveler);
+			PlaceTemplate placeTemplate = (PlaceTemplate)submitContext.getFlowContext().getFlowStack().getCurrentNode();
+			FlowEventOccurrence eventOccurrence = placeTemplate.submit(submitContext);
 			while (eventOccurrence!=null) {
-				eventOccurrence = changeContext.getFlowContext().step(eventOccurrence);
+				eventOccurrence = submitContext.getFlowContext().step(eventOccurrence);
 			}
 			operation.complete();
-			return changeContext.getFlowContext().getFlowStack().toPath();
+			return submitContext.getFlowContext().getFlowStack().toPath();
 		} finally {
 			operation.close();
 		}
@@ -154,7 +108,7 @@ public class CaseManager {
 				return traveler;
 			}
 		}
-		Traveler traveler = new Traveler(travelerProxy);
+		Traveler traveler = new Traveler(travelerProxy, this);
 		traveler.setId(travelerInfo.getTravelerId());
 		user.addToTravelers(traveler);
 		return traveler;
@@ -170,5 +124,9 @@ public class CaseManager {
 	
 	public String getCaseId() {
 		return caseId;
+	}
+
+	public Presence getPresence() {
+		return this.presence;
 	}
 }

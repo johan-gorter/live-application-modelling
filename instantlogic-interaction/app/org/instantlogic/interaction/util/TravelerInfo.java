@@ -1,8 +1,7 @@
 package org.instantlogic.interaction.util;
 
-import java.util.List;
 
-public abstract class TravelerInfo {
+public final class TravelerInfo {
 
 	private String travelerId;
 	private String authenticatedUsername;

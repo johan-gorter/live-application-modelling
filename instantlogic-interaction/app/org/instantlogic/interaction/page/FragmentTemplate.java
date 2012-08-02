@@ -13,6 +13,7 @@ import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.fabric.text.Text;
 import org.instantlogic.interaction.flow.FlowEvent;
 import org.instantlogic.interaction.util.ChangeContext;
+import org.instantlogic.interaction.util.SubmitContext;
 import org.instantlogic.interaction.util.FlowEventOccurrence;
 import org.instantlogic.interaction.util.RenderContext;
 
@@ -64,11 +65,20 @@ public class FragmentTemplate extends Element {
 		}
 
 		@Override
-		public FlowEventOccurrence submit(ChangeContext context) {
+		public FlowEventOccurrence submit(SubmitContext context) {
 			if (iterator.hasNext()) {
 				return iterator.next().submit(context, id, this);
 			} else {
 				return doSubmit(context, id);
+			}
+		}
+
+		@Override
+		public void change(ChangeContext context) {
+			if (iterator.hasNext()) {
+				iterator.next().change(context, id, this);
+			} else {
+				doChange(context, id);
 			}
 		}
 	};
@@ -147,20 +157,21 @@ public class FragmentTemplate extends Element {
 	}
 
 	@Override
-	public FlowEventOccurrence submit(ChangeContext changeContext) {
+	public FlowEventOccurrence submit(SubmitContext submitContext) {
 		initFilters();
-		String id = changeContext.enterScope(this);
+		String id = submitContext.enterScope(this);
 		FilterChain chain = new FilterChain(id);
-		FlowEventOccurrence result = chain.submit(changeContext); // Chain ends with a call to doSubmit
-		changeContext.exitScope();
+		FlowEventOccurrence result = chain.submit(submitContext); // Chain ends with a call to doSubmit
+		submitContext.exitScope();
 		return result;
 	}
 	
-	protected FlowEventOccurrence doSubmit(ChangeContext changeContext, String id) {
+	protected FlowEventOccurrence doSubmit(SubmitContext submitContext, String id) {
+		// This can be optimized by going to the right element straight away
 		FlowEventOccurrence result=null;
 		for (Element[] fragmentTemplates: childlistProperties.values()) {
 			for (Element template: fragmentTemplates) {
-				FlowEventOccurrence itemResult = template.submit(changeContext);
+				FlowEventOccurrence itemResult = template.submit(submitContext);
 				if (itemResult!=null) {
 					if (result!=null) {
 						throw new RuntimeException("More than one FlowEventOccurrence");
@@ -170,5 +181,23 @@ public class FragmentTemplate extends Element {
 			}
 		}
 		return result;
+	}
+
+	@Override
+	public void change(ChangeContext changeContext) {
+		initFilters();
+		String id = changeContext.enterScope(this);
+		FilterChain chain = new FilterChain(id);
+		chain.change(changeContext); // Chain ends with a call to doSubmit
+		changeContext.exitScope();
+	}
+	
+	public void doChange(ChangeContext changeContext, String id) {
+		// This can be optimized by going to the right element straight away
+		for (Element[] fragmentTemplates: childlistProperties.values()) {
+			for (Element template: fragmentTemplates) {
+				template.change(changeContext);
+			}
+		}
 	}
 }

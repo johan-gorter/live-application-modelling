@@ -5,7 +5,6 @@ import java.util.Map;
 import org.instantlogic.fabric.model.Attribute;
 import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.interaction.util.ChangeContext;
-import org.instantlogic.interaction.util.FlowEventOccurrence;
 import org.instantlogic.interaction.util.RenderContext;
 
 public class FieldFilter extends AbstractFragmentFilter {
@@ -31,14 +30,11 @@ public class FieldFilter extends AbstractFragmentFilter {
 	}
 	
 	@Override
-	public FlowEventOccurrence submit(ChangeContext changeContext, String id, FragmentFilterChain chain) {
-		FlowEventOccurrence result = super.submit(changeContext, id, chain);
-		for (ChangeContext.FieldChange fieldChange: changeContext.getFieldChanges()) {
-			if (fieldChange.getPageElementId().equals(id)) {
-				changeContext.setValue(this.entity, this.attribute, fieldChange.getValue());
-			}
+	public void change(ChangeContext changeContext, String id, FragmentFilterChain chain) {
+		super.change(changeContext, id, chain);
+		if (changeContext.getPageElementId().equals(id)) {
+			changeContext.setValue(this.entity, this.attribute, changeContext.getValue());
 		}
-		return result;
 	}
 	
 //	private Domain[] convertDomain(DomainEntry[] domain, RenderContext context) {

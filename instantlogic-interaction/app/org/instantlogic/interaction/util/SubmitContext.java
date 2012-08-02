@@ -12,27 +12,25 @@ import org.instantlogic.fabric.value.AttributeValue;
 import org.instantlogic.interaction.flow.Flow;
 
 
-public class ChangeContext extends RenderContext {
+public class SubmitContext extends RenderContext {
 
-	public static ChangeContext create(Flow mainFlow, String path, Instance caseInstance, String caseId, String pageElementId, Object value, TravelerInfo travelerInfo) {
+	public static SubmitContext create(Flow mainFlow, String path, Instance caseInstance, String caseId, String pageElementId, TravelerInfo travelerInfo) {
 		FlowContext flowContext = FlowContext.create(mainFlow, path, caseInstance, caseId, travelerInfo);
-		return new ChangeContext(flowContext, path, pageElementId, value);
+		return new SubmitContext(flowContext, path, pageElementId);
 	}
 	
 	private String pageElementId;
-	private Object value;
-
-	public ChangeContext(FlowContext flowContext, String pageCoordinates, String pageElementId, Object value) {
+	
+	public SubmitContext(FlowContext flowContext, String pageCoordinates, String pageElementId) {
 		super(flowContext, pageCoordinates);
 		this.pageElementId = pageElementId;
-		this.value = value;
 	}
 
 	public void setValue(Entity entity, Attribute attribute, Object value) {
 		((AttributeValue)getAttributeValue(entity, attribute)).setValue(parse(value, attribute));
 	}
 	
-	private static final DateFormat DATE_INTERNATIONAL = new SimpleDateFormat("yyyy/MM/dd");
+	private static final DateFormat DATE_INTERNATIONAL = new SimpleDateFormat("dd/MM/yyyy");
 	
 	public Object parse(Object value, Attribute attribute) {
 		if (attribute.getDatatype()==Date.class && value instanceof String) {
@@ -48,10 +46,4 @@ public class ChangeContext extends RenderContext {
 	public String getPageElementId() {
 		return pageElementId;
 	}
-
-	public Object getValue() {
-		return value;
-	}
-
-	
 }
