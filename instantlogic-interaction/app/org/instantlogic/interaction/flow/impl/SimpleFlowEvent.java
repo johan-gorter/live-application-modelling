@@ -3,7 +3,7 @@ package org.instantlogic.interaction.flow.impl;
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.interaction.flow.FlowEvent;
-import org.instantlogic.interaction.util.ChangeContext;
+import org.instantlogic.interaction.util.SubmitContext;
 import org.instantlogic.interaction.util.FlowEventOccurrence;
 
 public class SimpleFlowEvent extends FlowEvent {
@@ -28,7 +28,7 @@ public class SimpleFlowEvent extends FlowEvent {
 	}
 
 	@Override
-	public FlowEventOccurrence createOccurrence(ChangeContext context) {
+	public FlowEventOccurrence createOccurrence(SubmitContext context) {
 		Instance[] parameters = new Instance[parameterTypes.length];
 		for (int i=0;i<parameters.length;i++) {
 			parameters[i]=context.getSelectedInstance(parameterTypes[i]);
