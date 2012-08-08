@@ -1,6 +1,6 @@
 package org.instantlogic.engine.manager;
 
-import java.util.NoSuchElementException;
+import java.util.List;
 
 import org.instantlogic.engine.TravelerProxy;
 import org.instantlogic.engine.message.Message;
@@ -11,10 +11,6 @@ import org.instantlogic.engine.presence.User;
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.util.Operation;
-import org.instantlogic.interaction.flow.PlaceTemplate;
-import org.instantlogic.interaction.util.FlowEventOccurrence;
-import org.instantlogic.interaction.util.RenderContext;
-import org.instantlogic.interaction.util.SubmitContext;
 import org.instantlogic.interaction.util.TravelerInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,61 +35,71 @@ public class CaseManager {
 		this.caseId = caseId;
 		this.application = application;
 		this.presence = new Presence();
+		this.presence.setApplicationName(application.getApplication().getName());
+		this.presence.setCaseName(caseId);
 		this.theCase = FileCasePersister.INSTANCE.loadOrCreate(caseId, application.getApplication().getCaseEntity().getInstanceClass());
-	}
-
-	public void processMessage(TravelerProxy travelerProxy, Message message) {
-		Traveler traveler = getTraveler(travelerProxy);
-		message.execute(application.getApplication(), traveler, this.presence, this.theCase);
 	}
 
 	public void sendUpdates() {
 		// Render the places (this may update the place titles needed for rendering the presence)
 		for (User user : this.presence.getUsers()) {
 			for (Traveler traveler: user.getTravelers()) {
-				traveler.queuePlaceIfNeeded();
+				try {
+					traveler.queuePlaceIfNeeded();
+				} catch (Exception e) {
+					logger.error("Exception sending updates to traveler " + traveler.getId(), e);
+					traveler.sendException(e, true);
+				}
 			}
 		}
 		// Render the presence and send
 		for (User user : this.presence.getUsers()) {
 			for (Traveler traveler: user.getTravelers()) {
-				traveler.queuePresenceIfNeeded();
+				try {
+					traveler.queuePresenceIfNeeded();
+				} catch (Exception e) {
+					logger.error("Exception sending presence to traveler " + traveler.getId(), e);
+					traveler.sendException(e, true);
+				}
 				traveler.sendQueuedUpdates();
 			}
 		}
 	}
 	
-	public String submit(TravelerInfo traveler, String path, String submitId) {
+	public void processMessages(TravelerProxy travelerProxy, List<Message> messages) {
 		CaseAdministration caseAdministration = this.theCase.getMetadata().getCaseAdministration();
-		Operation operation = caseAdministration.startOperation();
+		CaseAdministration presenceCaseAdministration = presence.getMetadata().getCaseAdministration();
+		Traveler traveler = getTraveler(travelerProxy);
 		try {
-			SubmitContext submitContext = SubmitContext.create(application.getApplication().getMainFlow(), path, theCase, caseId, submitId, traveler);
-			PlaceTemplate placeTemplate = (PlaceTemplate)submitContext.getFlowContext().getFlowStack().getCurrentNode();
-			FlowEventOccurrence eventOccurrence = placeTemplate.submit(submitContext);
-			while (eventOccurrence!=null) {
-				eventOccurrence = submitContext.getFlowContext().step(eventOccurrence);
+			Operation operation = caseAdministration.startOperation();
+			Operation presenceOperation = presenceCaseAdministration.startOperation();
+			try {
+				for (Message message:messages) {
+					message.execute(application.getApplication(), traveler, this.presence, this.theCase);
+				}
+				operation.complete();
+				presenceOperation.complete();
+			} finally {
+				operation.close();
+				presenceOperation.close();
 			}
-			operation.complete();
-			return submitContext.getFlowContext().getFlowStack().toPath();
-		} finally {
-			operation.close();
+		} catch (Exception e) {
+			logger.error("Exception processing messages from traveler " + traveler.getId(), e);
+			traveler.sendException(e, false);
 		}
 	}
 	
-
-	private RenderContext findPage(Traveler traveler, TravelerInfo travelerInfo) {
-		try {
-			return RenderContext.create(application.getApplication().getMainFlow(), traveler.getCurrentPlace().getUrl(), theCase, caseId, travelerInfo);
-		} catch (NoSuchElementException e) {
-			return null;
-		}
+	private boolean equals(Object obj1, Object obj2) {
+		if (obj1==null && obj2==null) return true;
+		if (obj1==null || obj2==null) return false;
+		return obj1.equals(obj2);
 	}
-
+	
 	private Traveler getTraveler(TravelerProxy travelerProxy) {
 		TravelerInfo travelerInfo = travelerProxy.getTravelerInfo();
 		User user = null;
 		for (User userKandidate: presence.getUsers()) {
-			if (userKandidate.getUserName().equals(travelerInfo.getAuthenticatedUsername())) {
+			if (equals(userKandidate.getUserName(),travelerInfo.getAuthenticatedUsername())) {
 				user = userKandidate;
 				break;
 			}

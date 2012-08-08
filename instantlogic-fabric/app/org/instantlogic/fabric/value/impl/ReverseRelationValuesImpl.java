@@ -43,11 +43,11 @@ public class ReverseRelationValuesImpl<I extends Instance, From extends Instance
 			throw new RuntimeException("Reverse value not found: "+reverseValue);
 		}
 		this.values.remove(index);
-		fireEvent(new ValueChangeEvent(this, ValueAndLevel.deduced(this.reverseValue), index, reverseValue, operation));
+		fireEvent(new ValueChangeEvent(this, ValueAndLevel.deduced(this.reverseValue), MultiValueUpdateType.DELETE, index, reverseValue, operation));
 	}
 	
 	@Override
 	public Relation<I, Multi<From>, ? extends Object> getModel() {
-		return getModel();
+		return (Relation<I, Multi<From>, ? extends Object>) super.getModel();
 	}
 }

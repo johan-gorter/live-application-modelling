@@ -14,9 +14,10 @@ YUI.add('instantlogic-fragment', function (Y) {
             ns.Presence.superclass.init.call(this, model);
             var markup = html.div({ className: 'top-bar' },
             	html.div({className: 'top-bar-content'},
-            		this.applicationNameSpan = html.span({className: 'application-name'},
+            		this.applicationNameSpan = html.div({className: 'application-name'},
             			model.applicationName || ''
             		),
+            		html.div({className: 'minus'}, ' - '),
             		html.div({className: 'case-name'},
             			this.caseNameSpan = html.span(model.caseName || '')
             		),
@@ -27,6 +28,7 @@ YUI.add('instantlogic-fragment', function (Y) {
                 ),
                 html.div({className:'chat'})
             );
+            this.parentNode.appendChild(markup);
     	}
     });
     

@@ -5,9 +5,6 @@ import java.util.List;
 
 import org.instantlogic.engine.TravelerProxy;
 import org.instantlogic.engine.message.Message;
-import org.instantlogic.fabric.Instance;
-import org.instantlogic.fabric.model.Entity;
-import org.instantlogic.interaction.util.TravelerInfo;
 
 /**
  *	This class makes sure the CaseManager is only accessed by one thread at a time. 
@@ -43,24 +40,22 @@ public class CaseProcessor {
 				queueHead = new QueueEntry(travelerProxy, messages, queueHead);
 				return; // Another thread is doing the processing for us
 			} else {
-				processEntries = new ArrayList<QueueEntry>();
+				processEntries = new ArrayList<QueueEntry>(); // Holds the incoming messages plus the queued ones
 				processEntries.add(new QueueEntry(travelerProxy, messages, queueHead));
 				QueueEntry entry = queueHead;
 				while (entry!=null) {
 					processEntries.add(entry);
 					entry = entry.previousEntry;
 				}
-				queueBeingProcessed = true;
 				queueHead = null;
+				queueBeingProcessed = true;
 			}
 		}
 		do {
 			do {
 				for (int i=processEntries.size()-1;i>=0;i--) {
 					QueueEntry entry = processEntries.get(i);
-					for (Message message: entry.messages) {
-						caseManager.processMessage(entry.travelerProxy, message);
-					}
+					caseManager.processMessages(travelerProxy, entry.messages);
 				}
 				processEntries.clear();
 				synchronized (queueLock) {
@@ -70,6 +65,7 @@ public class CaseProcessor {
 						processEntries.add(entry);
 						entry = entry.previousEntry;
 					}
+					queueHead = null;
 				}
 			} while (processEntries.size()>0);
 			caseManager.sendUpdates();
@@ -84,6 +80,7 @@ public class CaseProcessor {
 						processEntries.add(entry);
 						entry = entry.previousEntry;
 					}
+					queueHead = null;
 				}
 			}
 		} while (processEntries.size()>0);

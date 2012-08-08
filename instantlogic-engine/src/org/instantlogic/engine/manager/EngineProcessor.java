@@ -9,9 +9,9 @@ import org.instantlogic.engine.message.Message;
 
 public class EngineProcessor {
 
-	private Map<String, CaseProcessor> caseProcessors = new ConcurrentHashMap<String, CaseProcessor>();
+	private static Map<String, CaseProcessor> caseProcessors = new ConcurrentHashMap<String, CaseProcessor>();
 	
-	public synchronized CaseProcessor getCaseProcessor(String application, String caseId) {
+	public static synchronized CaseProcessor getCaseProcessor(String application, String caseId) {
 		String key = application+":"+caseId;
 		CaseProcessor result = caseProcessors.get(key);
 		if (result==null) {
@@ -22,7 +22,7 @@ public class EngineProcessor {
 		return result;
 	}
 	
-	public void process(String application, String caseId, TravelerProxy travelerProxy, List<Message> messages) {
+	public static void process(String application, String caseId, TravelerProxy travelerProxy, List<Message> messages) {
 		CaseProcessor caseProcessor = getCaseProcessor(application, caseId);
 		caseProcessor.processMessages(travelerProxy, messages);
 	}

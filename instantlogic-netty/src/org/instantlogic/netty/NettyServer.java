@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.Thread.UncaughtExceptionHandler;
 import java.net.InetSocketAddress;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
@@ -13,17 +14,17 @@ import java.nio.file.WatchService;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 import org.instantlogic.designer.DesignerApplication;
 import org.instantlogic.engine.manager.ApplicationManager;
+import org.instantlogic.engine.manager.Update;
 import org.instantlogic.example.izzy.IzzyApplication;
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.google.gson.JsonObject;
 
 public class NettyServer {
 
@@ -31,10 +32,7 @@ public class NettyServer {
 
 	private static final boolean WATCH_FILES = true;
 	
-	private static final JsonObject FILES_UPDATED = new JsonObject();
-	static {
-		FILES_UPDATED.addProperty("message", "filesUpdated");
-	}
+	private static final Update FILES_UPDATED = new Update("filesUpdated");
 
 	private static Runnable fileWatcher = new Runnable() {
 
@@ -75,13 +73,31 @@ public class NettyServer {
 		}
 	};
 
+	private static final ThreadFactory factory = new ThreadFactory() {
+		
+		@Override
+		public Thread newThread(Runnable target) {
+			final Thread thread = new Thread(target);
+	        logger.debug("Creating new worker thread");
+	        thread.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+	 
+	            @Override
+	            public void uncaughtException(Thread t, Throwable e) {
+	                logger.error("Uncaught Exception in executor", e);
+	            }
+	 
+	        });
+	        return thread;
+		}
+	};
+
 	public static void main(String[] args) throws IOException {
 		// TODO: Discover which applications should be loaded
 		ApplicationManager.registerApplication(DesignerApplication.INSTANCE);
 		ApplicationManager.registerApplication(IzzyApplication.INSTANCE);
 		
-		ExecutorService executor = Executors.newCachedThreadPool();
-		ServerBootstrap bootstrap = new ServerBootstrap(new NioServerSocketChannelFactory(Executors.newSingleThreadExecutor(), executor));
+		ExecutorService executor = Executors.newCachedThreadPool(factory);
+		ServerBootstrap bootstrap = new ServerBootstrap(new NioServerSocketChannelFactory(Executors.newSingleThreadExecutor(factory), executor));
 
 		// Set up the event pipeline factory.
 		bootstrap.setPipelineFactory(new InstantlogicPipelineFactory());
@@ -93,7 +109,7 @@ public class NettyServer {
 		bootstrap.bind(new InetSocketAddress(8080));
 		logger.info("Server started");
 		
-		ScheduledThreadPoolExecutor scheduler = new ScheduledThreadPoolExecutor(1);
+		ScheduledThreadPoolExecutor scheduler = new ScheduledThreadPoolExecutor(1,factory);
 		scheduler.scheduleWithFixedDelay(sweeper, 10, 10, TimeUnit.SECONDS); // This may be a bit short for mobile devices on the road
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));

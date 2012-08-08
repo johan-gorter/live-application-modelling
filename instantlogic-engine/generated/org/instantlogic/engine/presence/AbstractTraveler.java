@@ -58,4 +58,6 @@ public abstract class AbstractTraveler extends org.instantlogic.fabric.Instance 
 	public org.instantlogic.engine.presence.User getUser() {
 		return user.getValue();
 	}
+
+
 }

@@ -51,8 +51,7 @@ public class InstantlogicRequestHandler extends HttpStaticFileServerHandler impl
 		String caseId = cases.get(0);
 		
 		logger.debug("Incoming request from traveler {} for application {}, case {}", new Object[]{ travelerId, applicationName, caseId});
-		NettyTraveler nettyTraveler = NettyTraveler.getOrCreate(travelerId, applicationName);
-		nettyTraveler.setCaseId(cases.get(0));
+		NettyTraveler nettyTraveler = NettyTraveler.getOrCreate(travelerId, applicationName, caseId);
 		
 		ChannelBuffer content = request.getContent();
 		if (content.readable()) {
