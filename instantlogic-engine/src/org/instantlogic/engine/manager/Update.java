@@ -7,7 +7,22 @@ public class Update {
 	private String name;
 	private String location;
 	private Map<String, Object> rootFragment;
+	private String exceptionMessage;
+	private Boolean exceptionRendering;
 	
+	public Update() {
+	}
+	
+	public Update(String name) {
+		this.name = name;
+	}
+
+	public Update(Exception exception, boolean exceptionRendering) {
+		this.name = "exception";
+		this.exceptionMessage = exception.getMessage();
+		this.exceptionRendering = exceptionRendering;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -25,5 +40,21 @@ public class Update {
 	}
 	public void setRootFragment(Map<String, Object> rootFragment) {
 		this.rootFragment = rootFragment;
-	}	
+	}
+
+	public Boolean getExceptionRendering() {
+		return exceptionRendering;
+	}
+
+	public void setExceptionRendering(Boolean exceptionRendering) {
+		this.exceptionRendering = exceptionRendering;
+	}
+
+	public String getExceptionMessage() {
+		return exceptionMessage;
+	}
+
+	public void setExceptionMessage(String exceptionMessage) {
+		this.exceptionMessage = exceptionMessage;
+	}
 }

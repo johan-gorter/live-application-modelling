@@ -9,6 +9,7 @@ public class PlaceEntityGenerator extends EntityDesign {
     
     private PlaceEntityGenerator() {
         setName("Place");
+        setIsCustomized(true);
     }
     
     // Attributes

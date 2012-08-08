@@ -1,11 +1,13 @@
 package org.instantlogic.engine.manager;
 
+import java.util.Collections;
 import java.util.List;
 
 import junit.framework.Assert;
 
 import org.instantlogic.engine.TravelerProxy;
 import org.instantlogic.engine.message.EnterMessage;
+import org.instantlogic.engine.message.Message;
 import org.instantlogic.example.izzy.Issue;
 import org.instantlogic.example.izzy.IzzyApplication;
 import org.instantlogic.example.izzy.Project;
@@ -44,7 +46,8 @@ public class PlaceManagerTest {
 	private TravelerProxy proxy = new TravelerProxy() {
 		
 		@Override
-		public void sendUpdates(List<Update> messages) {
+		public void sendUpdates(List<Update> updates) {
+			lastUpdates = updates;
 		}
 		
 		@Override
@@ -61,9 +64,9 @@ public class PlaceManagerTest {
 	public void test() {
 		ApplicationManager applicationManager = ApplicationManager.getManager("izzy");
 		CaseManager case1 = applicationManager.getOrCreateCase("project1");
-		case1.processMessage(proxy, new EnterMessage("dashboard"));
+		case1.processMessages(proxy, Collections.singletonList((Message)new EnterMessage("dashboard")));
 		case1.sendUpdates();
-		Assert.assertEquals(1, lastUpdates.size());
+		Assert.assertEquals(2, lastUpdates.size());
 		lastUpdates = null;
 		((Project)case1.getCase()).addToIssues(new Issue());
 		case1.sendUpdates();

@@ -105,7 +105,7 @@ YUI.add('instantlogic', function (Y) {
             var messages = Y.JSON.parse(updates);
             for (var i = 0; i < messages.length; i++) {
                 var message = messages[i];
-                switch (message.message) {
+                switch (message.name) {
                     case 'place':
                     	if (this.location!=message.location) {
 	                    	this.location = message.location;
@@ -119,8 +119,11 @@ YUI.add('instantlogic', function (Y) {
                     case 'filesUpdated':
                         document.location.reload();
                         break;
+                    case 'exception':
+                    	this.setState('error');
+                        break;
                     default:
-                        Y.error('Unknown message ' + message.message);
+                        Y.error('Unknown message ' + message.name);
                 }
             }
         },
@@ -170,7 +173,7 @@ YUI.add('instantlogic', function (Y) {
         },
         
         sendEvent: function(id) {
-        	this.enqueueMessage({message:'event', id:id});
+        	this.enqueueMessage({message:'submit', id:id});
         },
         
         sendChange: function(id, value) {

@@ -7,20 +7,20 @@ import static org.jboss.netty.handler.codec.http.HttpResponseStatus.OK;
 import static org.jboss.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.instantlogic.engine.TravelerProxy;
-import org.instantlogic.engine.manager.ApplicationManager;
-import org.instantlogic.engine.manager.CaseManager;
-import org.instantlogic.engine.manager.CaseManager.RenderedPage;
-import org.instantlogic.fabric.util.AbstractTransactionListener;
-import org.instantlogic.fabric.util.CaseAdministration;
-import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
-import org.instantlogic.fabric.util.ValueChangeEvent;
-import org.instantlogic.fabric.util.ValueChangeObserver;
-import org.instantlogic.interaction.util.SubmitContext.FieldChange;
+import org.instantlogic.engine.manager.CaseProcessor;
+import org.instantlogic.engine.manager.EngineProcessor;
+import org.instantlogic.engine.manager.Update;
+import org.instantlogic.engine.message.ChangeMessage;
+import org.instantlogic.engine.message.EnterMessage;
+import org.instantlogic.engine.message.Message;
+import org.instantlogic.engine.message.SubmitMessage;
 import org.instantlogic.interaction.util.TravelerInfo;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.jboss.netty.channel.Channel;
@@ -37,8 +37,8 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 
 /**
  * A traveler usually has one open parked request. When another comes in, the first one is released.
@@ -52,19 +52,19 @@ public class NettyTraveler implements TravelerProxy {
 	private static final Map<String, NettyTraveler> nettyTravelers = new ConcurrentHashMap<String, NettyTraveler>();
 	private static Gson gson = new Gson();
 
-	public static void broadcast(JsonObject message) {
+	public static void broadcast(Update message) {
 		logger.info("broadcasting to all {} travelers", nettyTravelers.size());
 		for (NettyTraveler nettyTraveler : nettyTravelers.values()) {
 			nettyTraveler.sendMessage(message);
 		}
 	}
 	
-	public static NettyTraveler getOrCreate(String travelerId, String applicationName) {
+	public static NettyTraveler getOrCreate(String travelerId, String applicationName, String caseId) {
 		NettyTraveler result = nettyTravelers.get(travelerId);
 		if (result==null) {
 			logger.info("Registering new traveler {}", travelerId);
-			ApplicationManager application = ApplicationManager.getManager(applicationName);
-			result = new NettyTraveler(travelerId, application);
+			CaseProcessor caseProcessor = EngineProcessor.getCaseProcessor(applicationName, caseId);
+			result = new NettyTraveler(travelerId, caseProcessor);
 			nettyTravelers.put(travelerId, result);
 		}
 		return result;
@@ -77,29 +77,11 @@ public class NettyTraveler implements TravelerProxy {
 	}
 	
 	private final TravelerInfo travelerInfo;
+	private final CaseProcessor caseProcessor;
+	
 	private List<MessageEvent> parkedRequests = new ArrayList<MessageEvent>();
-	private JsonArray messagesWaiting = new JsonArray();
-	private ApplicationManager applicationManager;
-	private boolean sendPresence;
-	private boolean sendPlace;
-	private String caseId;
-	private String location;
-	private CaseManager caseManager;
+	private List<Update> updatesWaiting = new ArrayList<Update>();
 	private State state = State.ACTIVE;
-	private ObservationsOutdatedObserver placeOutdatedObserver;
-	private final ValueChangeObserver placeOutdatedValueChangeObserver = new ValueChangeObserver() {
-		@Override
-		public void valueChanged(ValueChangeEvent event) {
-			event.getOperation().addTransactionListener(placeOutdatedTransactionListener);
-		}
-	}; 
-	private final AbstractTransactionListener placeOutdatedTransactionListener = new AbstractTransactionListener() {
-		@Override
-		public void transactionCompleted(CaseAdministration instanceAdministration, boolean committed) {
-			sendPlace = true;
-			deliverMessagesIfPossible();
-		}
-	};
 
 	private ChannelFutureListener channelClosed = new ChannelFutureListener() {
 		@Override
@@ -108,18 +90,17 @@ public class NettyTraveler implements TravelerProxy {
 		}
 	};
 	
-	private NettyTraveler(String travelerId, ApplicationManager application) {
-		travelerInfo = new TravelerInfo();
-		travelerInfo.setTravelerId(travelerId);
-		this.applicationManager = application;
+	private NettyTraveler(String travelerId, CaseProcessor caseProcessor) {
+		travelerInfo = new TravelerInfo(travelerId);
+		this.caseProcessor = caseProcessor;
 	}
 
 	/**
 	 * Sends a message to this traveler
-	 * @param message the message to send
+	 * @param update the message to send
 	 */
-	public synchronized void sendMessage(JsonObject message) {
-		messagesWaiting.add(message);
+	public synchronized void sendMessage(Update update) {
+		updatesWaiting.add(update);
 		deliverMessagesIfPossible();
 	}
 	
@@ -127,9 +108,8 @@ public class NettyTraveler implements TravelerProxy {
 		if (state==State.MAY_BE_OBANDONED) {
 			state = State.REMOVED;
 			logger.info("Removing traveler {}", travelerInfo.getTravelerId());
-			this.placeOutdatedObserver = null;
 			nettyTravelers.remove(travelerInfo.getTravelerId());
-			this.caseManager.goTo(travelerInfo,null);
+			this.caseProcessor.processMessages(this, Collections.singletonList((Message)new EnterMessage(null)));
 		}
 		if (state==State.ACTIVE && parkedRequests.size()==0) {
 			state = State.MAY_BE_OBANDONED;
@@ -137,70 +117,59 @@ public class NettyTraveler implements TravelerProxy {
 	}
 	
 	public synchronized void handleIncomingMessages(String messagesText) {
-		JsonArray messages = (JsonArray) new JsonParser().parse(messagesText);
-		for (JsonElement message : messages) {
+		JsonArray jsonMessages = (JsonArray) new JsonParser().parse(messagesText);
+		List<Message> messages = new ArrayList<Message>(jsonMessages.size());
+		for (JsonElement message : jsonMessages) {
 			String messageName = message.getAsJsonObject().get("message").getAsString();
 			logger.debug("Handling {} message from traveler {}", messageName, travelerInfo.getTravelerId());
 			if ("change".equals(messageName)) {
-				// TODO: handle change
-				sendPlace = true;
-				throw new RuntimeException("TODO");
-			} else if ("event".equals(messageName)) {
-				String id = message.getAsJsonObject().get("id").getAsString();
-				this.location = this.caseManager.submit(travelerInfo, this.location, new FieldChange[0], id);
-				sendPlace = true;
+				String placeElementId = message.getAsJsonObject().get("id").getAsString();
+				Object value = null;
+				if (message.getAsJsonObject().has("value")) {
+					value = getPrimitiveValue(message.getAsJsonObject().get("value").getAsJsonPrimitive());
+				}
+				messages.add(new ChangeMessage(placeElementId, value));
+			} else if ("submit".equals(messageName)) {
+				String placeElementId = message.getAsJsonObject().get("id").getAsString();
+				messages.add(new SubmitMessage(placeElementId));
 			} else if ("enter".equals(messageName)) {
-				String newLocation = message.getAsJsonObject().get("location").getAsString();
-				this.caseManager.goTo(travelerInfo, newLocation);
-				this.location = newLocation;
-				sendPlace = true;
-				sendPresence = true;
+				JsonElement locationElement = message.getAsJsonObject().get("location");
+				String newLocation = locationElement==null?null:locationElement.getAsString();
+				messages.add(new EnterMessage(newLocation));
 			}
 		}
+		this.caseProcessor.processMessages(this, messages);
+	}
+
+	private Object getPrimitiveValue(JsonPrimitive jsonPrimitive) {
+		if (jsonPrimitive.isBoolean()) {
+			return jsonPrimitive.getAsBoolean();
+		}
+		if (jsonPrimitive.isNumber()) {
+			return jsonPrimitive.getAsNumber();
+		}
+		return jsonPrimitive.getAsString();
 	}
 
 	public synchronized void parkRequest(MessageEvent e) {
 		if (state==State.REMOVED) {
-			logger.info("Rare race condition");
-			nettyTravelers.put(travelerInfo.getTravelerId(), this);
-			this.caseManager.goTo(travelerInfo, this.location);
+			logger.error("Rare race condition");
+			throw new RuntimeException("This traveler was removed");
 		}
 		state = State.ACTIVE;
 		e.getChannel().getCloseFuture().addListener(channelClosed);
 		parkedRequests.add(e);
-		if (parkedRequests.size()>1 || sendPlace || sendPresence || messagesWaiting.size()>0) {
-			deliverMessages();
+		if (parkedRequests.size()>1 || updatesWaiting.size()>0) {
+			sendResponseMessages(parkedRequests.remove(0));
 		}
 	}
 
 	private void deliverMessagesIfPossible() {
 		if (parkedRequests.size()>0) {
-			deliverMessages();
+			sendResponseMessages(parkedRequests.remove(0));
 		}
 	}
 	
-	private void deliverMessages() {
-		if (sendPresence) {
-			JsonElement rootFragment = gson.toJsonTree(caseManager.renderPresence(travelerInfo));
-			JsonObject placeMessage = new JsonObject();
-			placeMessage.addProperty("message", "place");
-			placeMessage.addProperty("location", location);
-			placeMessage.add("rootFragment", rootFragment);
-		}
-		if (sendPlace) {
-			RenderedPage renderedPage = caseManager.renderAndObserve(travelerInfo, placeOutdatedObserver, placeOutdatedValueChangeObserver);
-			placeOutdatedObserver = renderedPage.placeOutdatedObserver;
-			JsonElement rootFragment = gson.toJsonTree(renderedPage.content);
-			JsonObject placeMessage = new JsonObject();
-			placeMessage.addProperty("message", "place");
-			placeMessage.addProperty("location", location);
-			placeMessage.add("rootFragment", rootFragment);
-			messagesWaiting.add(placeMessage);
-			sendPlace = false;
-		}
-		sendResponseMessages(parkedRequests.remove(0));
-	}
-
 	/**
 	 * The parked request is returned carrying the messages waiting.
 	 * @param event
@@ -212,9 +181,9 @@ public class NettyTraveler implements TravelerProxy {
  
         // Build the response object.
         HttpResponse response = new DefaultHttpResponse(HTTP_1_1, OK);
-        logger.debug("Sending {} messages to traveler {}", messagesWaiting.size(), travelerInfo.getTravelerId());
-    	response.setContent(ChannelBuffers.copiedBuffer(gson.toJson(messagesWaiting), CharsetUtil.UTF_8));
-    	messagesWaiting = new JsonArray();
+        logger.debug("Sending {} messages to traveler {}", updatesWaiting.size(), travelerInfo.getTravelerId());
+    	response.setContent(ChannelBuffers.copiedBuffer(gson.toJson(updatesWaiting), CharsetUtil.UTF_8)); // gson.toJsonTree(update)
+    	updatesWaiting = new ArrayList<Update>();
 
     	response.setHeader(CONTENT_TYPE, "text/plain; charset=UTF-8");
  
@@ -232,11 +201,6 @@ public class NettyTraveler implements TravelerProxy {
         }		
 	}
 
-	public void setCaseId(String caseId) {
-		this.caseId = caseId;
-		this.caseManager = this.applicationManager.getOrCreateCase(caseId);
-	}
-	
 	synchronized void removeParkedRequestForChannel(Channel channel) {
 		for (int i=0;i<parkedRequests.size();i++) {
 			if (parkedRequests.get(i).getChannel()==channel) {
@@ -250,5 +214,28 @@ public class NettyTraveler implements TravelerProxy {
 	@Override
 	public String toString() {
 		return "Traveler "+travelerInfo.getTravelerId();
+	}
+
+	@Override
+	public TravelerInfo getTravelerInfo() {
+		return travelerInfo;
+	}
+
+	@Override
+	public synchronized void sendUpdates(List<Update> newUpdates) {
+		// Remove old updates with the same name
+		Iterator<Update> updatesWaitingIterator = updatesWaiting.iterator();
+		while (updatesWaitingIterator.hasNext()) {
+			Update update = updatesWaitingIterator.next();
+			for (Update newUpdate: newUpdates) {
+				if (update.getName().equals(newUpdate.getName())) {
+					updatesWaitingIterator.remove();
+				}
+			}
+		}
+		for (Update update: newUpdates) {
+			this.updatesWaiting.add(update);
+		}
+		deliverMessagesIfPossible();
 	}
 }

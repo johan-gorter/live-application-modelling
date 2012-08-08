@@ -16,6 +16,5 @@ public class EnterMessage extends Message {
 	@Override
 	public void execute(Application application, Traveler traveler, Presence presence, Instance theCase) {
 		presence.enter(traveler, newLocation); // Update presence
-		traveler.setCurrentPlace(newValue)
 	}
 }

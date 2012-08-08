@@ -15,6 +15,7 @@ import static org.jboss.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -140,7 +141,7 @@ public class HttpStaticFileServerHandler extends SimpleChannelUpstreamHandler {
 		Channel ch = e.getChannel();
 		Throwable cause = e.getCause();
 		logger.error("Exception caught", cause);
-		if (sendingError) return;
+		if (sendingError || e.getCause() instanceof IOException) return;
 
 		if (cause instanceof TooLongFrameException) {
 			sendError(ctx, BAD_REQUEST);
