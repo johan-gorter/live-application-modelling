@@ -108,8 +108,8 @@ public class FragmentTemplate extends Element {
 		return this;
 	}
 	
-	public FragmentTemplate setField(Entity<?> entity, Attribute<?, ?, ?> attribute, String answerFragmentTypeName) {
-		this.field = new FieldFilter(entity, attribute, answerFragmentTypeName);
+	public FragmentTemplate setField(Entity<?> entity, Attribute<?, ?, ?> attribute) {
+		this.field = new FieldFilter(entity, attribute);
 		return this;
 	}
 	

@@ -47,6 +47,10 @@ public abstract class ContentGenerator extends AbstractGenerator {
 			if (fragmentTemplate.getEvent()!=null) {
 				model.event = fragmentTemplate.getEvent().getTechnicalNameCapitalized();
 			}
+			if (fragmentTemplate.getAttribute()!=null) {
+				model.entity = fragmentTemplate.getEntity().getTechnicalNameCapitalized();
+				model.attribute = fragmentTemplate.getAttribute().getTechnicalName();
+			}
 		} else if (element instanceof SelectionDesign) {
 			model.category = Category.Selection;
 			SelectionDesign selection = (SelectionDesign) element;

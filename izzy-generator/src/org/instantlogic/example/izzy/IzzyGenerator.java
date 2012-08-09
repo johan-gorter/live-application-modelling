@@ -138,7 +138,9 @@ public class IzzyGenerator extends Design {
 					new FragmentTemplateDesign("Paragraph")
 						.setText("text", new TemplatedTextDesign().addToUntranslated(new FormattedValueDesign().setDeduction(createDeduction(issueNumber)))),
 					new FragmentTemplateDesign("Paragraph")
-						.setText("text", new TemplatedTextDesign().addToUntranslated(new FormattedValueDesign().setDeduction(createDeduction(issueHeadline))))
+						.setText("text", new TemplatedTextDesign().addToUntranslated(new FormattedValueDesign().setDeduction(createDeduction(issueHeadline)))),
+					new FragmentTemplateDesign("Input")
+						.setEntity(issue).setAttribute(issueHeadline)
 				)
 			);
 	}

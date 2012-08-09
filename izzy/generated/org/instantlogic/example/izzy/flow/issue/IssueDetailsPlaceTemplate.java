@@ -31,6 +31,8 @@ public class IssueDetailsPlaceTemplate extends org.instantlogic.interaction.flow
 ,
                 new org.instantlogic.interaction.page.FragmentTemplate("F8P1F1P1F2", "Paragraph")      
                 .putText("text", new org.instantlogic.fabric.text.TemplatedText().add(createDeduction1()))
+,
+                new org.instantlogic.interaction.page.FragmentTemplate("F8P1F1P1F3", "Input")      .setField(org.instantlogic.example.izzy.entity.IssueEntity.INSTANCE, org.instantlogic.example.izzy.entity.IssueEntity.headline)
         )
 ; 
 	
