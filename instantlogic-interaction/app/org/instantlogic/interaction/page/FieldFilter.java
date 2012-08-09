@@ -2,6 +2,7 @@ package org.instantlogic.interaction.page;
 
 import java.util.Map;
 
+import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Attribute;
 import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.interaction.util.ChangeContext;
@@ -11,12 +12,8 @@ public class FieldFilter extends AbstractFragmentFilter {
 	
 	private final Attribute<?, ?, ?> attribute;
 	private final Entity<?> entity;
-	private final String answerFragmentType;
-
-	// TODO: question, etc...
 	
-	public FieldFilter(Entity<?> entity, Attribute<?, ?, ?> attribute, String answerFragmentType) {
-		this.answerFragmentType = answerFragmentType;
+	public FieldFilter(Entity<?> entity, Attribute<?, ?, ?> attribute) {
 		this.entity = entity;
 		this.attribute = attribute;
 	}
@@ -24,8 +21,21 @@ public class FieldFilter extends AbstractFragmentFilter {
 	@Override
 	public Map<String, Object> render(RenderContext context, String id, FragmentFilterChain chain) {
 		Map<String, Object> result = super.render(context, id, chain);
-		result.put("answerType", this.answerFragmentType);
-		// TODO: add question etc if not yet present
+		if (!result.containsKey("questionText")) {
+			if (attribute.getQuestion()!=null) {
+				result.put("questionText", attribute.getQuestion().renderText(context));
+			} else {
+				result.put("questionText", attribute.getName());
+			}
+		}
+		if (!result.containsKey("explainText")) {
+			if (attribute.getExplain()!=null) {
+				result.put("explainText", attribute.getExplain().renderText(context));
+			}
+		}
+		Object value = context.getValue((Entity)entity, (Attribute)attribute);
+		Instance instance = (Instance)context.getSelectedInstance(entity);
+		result.put("value", value);
 		return result;
 	}
 	

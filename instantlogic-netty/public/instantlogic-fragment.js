@@ -68,36 +68,63 @@ YUI.add('instantlogic-fragment', function (Y) {
         }
     });
 
-    // Answer
-    ns.Answer = function (parentNode, engine) {
-        ns.Answer.superclass.constructor.apply(this, arguments);
+    // Input
+    ns.Input = function (parentNode, engine) {
+        ns.Input.superclass.constructor.apply(this, arguments);
     };
 
-    Y.extend(ns.Answer, Y.instantlogic.Fragment, {
+    Y.extend(ns.Input, Y.instantlogic.Fragment, {
         init: function (model) {
-            ns.Answer.superclass.init.call(this, model);
+            ns.Input.superclass.init.call(this, model);
             var markup = html.form({ action: '.' },
-                this.question = html.div({ className: 'question' }),
-                this.answer = html.div({ className: 'answer' })
+                this.questionDiv = html.div({ className: 'question' }),
+                this.answerDiv = html.div({ className: 'answer' })
             );
             this.parentNode.appendChild(markup);
-            this.question.set('text', model.question || '');
-            this.answer.setContent('ANSWER_TODO');
+            this.questionDiv.set('text', model.question || '');
+            this.value = this.render(model.value);
+            this.initInput(model);
+        },
+        
+        initInput: function (model) {
+        	this.input = html.input({type:'text', value: this.value});
+        	this.input.on('change', this.inputChange, this);
+        	this.answerDiv.setContent(this.input);
         },
 
         canUpdateFrom: function (newModel) {
-            return ns.Answer.superclass.canUpdateFrom.call(this, newModel);
+            return ns.Input.superclass.canUpdateFrom.call(this, newModel);
         },
 
         update: function (newModel, diff) {
-            ns.Answer.superclass.update.call(this, newModel, diff);
+            ns.Input.superclass.update.call(this, newModel, diff);
             if (this.previousModel.question != newModel.question) {
                 this.question.set('text', model.question || '');
             }
+            this.updateInput(newModel);
+        },
+        
+        updateInput: function(newModel, diff) {
+        	var newValue = this.render(newModel.value);
+        	if (newValue!=this.value) {
+        		this.input.set('value', newValue);
+        	}
+        },
+        
+        render: function(modelValue) {
+        	return ''+modelValue;
+        },
+        
+        parse: function(value) {
+        	return value;
+        },
+        
+        inputChange: function() {
+        	this.engine.sendChange(this.model.id, this.parse(this.input.get('value')));
         },
 
         destroy: function () {
-            ns.Answer.superclass.destroy.call(this);
+            ns.Input.superclass.destroy.call(this);
         }
     });
     
