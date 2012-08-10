@@ -3,14 +3,13 @@ package org.instantlogic.engine.presence.flow.main;
 import org.instantlogic.designer.FragmentTemplateDesign;
 import org.instantlogic.designer.PlaceTemplateDesign;
 import org.instantlogic.engine.presence.PresenceEntityGenerator;
-import org.instantlogic.engine.presence.UserEntityGenerator;
 
-public class PresencePlaceTemplateGenerator extends PlaceTemplateDesign {
+public class AnonymousPlaceTemplateGenerator extends PlaceTemplateDesign {
 
-	public static final PresencePlaceTemplateGenerator PLACE = new PresencePlaceTemplateGenerator();
+	public static final AnonymousPlaceTemplateGenerator PLACE = new AnonymousPlaceTemplateGenerator();
 	
-	private PresencePlaceTemplateGenerator() {
-		setName("Presence");
+	private AnonymousPlaceTemplateGenerator() {
+		setName("Anonymous");
 	}
 	
 	@Override
@@ -19,7 +18,7 @@ public class PresencePlaceTemplateGenerator extends PlaceTemplateDesign {
 			new FragmentTemplateDesign("Presence")
 				.setValue("applicationName", createDeduction(PresenceEntityGenerator.applicationName))
 				.setValue("caseName", createDeduction(PresenceEntityGenerator.caseName))
-				.setValue("userName", createDeduction(UserEntityGenerator.userName))
+				.setChildren("content", new FragmentTemplateDesign("Login"))
 		);
 	}
 }

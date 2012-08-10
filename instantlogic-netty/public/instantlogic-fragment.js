@@ -26,9 +26,19 @@ YUI.add('instantlogic-fragment', function (Y) {
             			this.loginNameSpan = html.span(model.loginName || '')
             		)
                 ),
-                html.div({className:'chat'})
+                this.chatDiv = html.div({className:'chat'}),
+                this.contentDiv = html.div()
             );
             this.parentNode.appendChild(markup);
+            
+            this.contentFragmentList = new FragmentList(this.contentDiv, this.engine);
+            debugger
+            this.contentFragmentList.init(model.content);
+    	},
+    	
+    	update: function (newModel, diff) {
+            ns.Presence.superclass.update.call(this, newModel, diff);
+            this.contentFragmentList.update(newModel.content, diff);
     	}
     });
     
