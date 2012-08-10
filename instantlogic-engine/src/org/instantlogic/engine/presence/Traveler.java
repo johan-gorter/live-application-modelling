@@ -11,6 +11,8 @@ import org.instantlogic.engine.TravelerProxy;
 import org.instantlogic.engine.manager.CaseManager;
 import org.instantlogic.engine.manager.Update;
 import org.instantlogic.engine.presence.flow.MainFlow;
+import org.instantlogic.engine.presence.flow.UserFlow;
+import org.instantlogic.engine.presence.flow.main.AnonymousPlaceTemplate;
 import org.instantlogic.engine.presence.flow.main.PresencePlaceTemplate;
 import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.util.Observations;
@@ -119,25 +121,30 @@ public class Traveler extends AbstractTraveler {
 		return update;
 	}	
 	public void queuePresenceIfNeeded() {
-		if (this.presenceOutdated) {
-			queue.add(renderPresence());
+		if (this.travelerInfo.getAuthenticatedUsername()==null) {
+			FlowStack flowStack = new FlowStack(null, MainFlow.INSTANCE);
+			queue.add(render("Anonymous", flowStack, AnonymousPlaceTemplate.INSTANCE));
+		} else if (this.presenceOutdated) {
+			String location = "User/"+getUser().getMetadata().getInstanceId()+"/Presence";
+			FlowStack flowStack = new FlowStack(null, MainFlow.INSTANCE);
+			flowStack = new FlowStack(flowStack, UserFlow.INSTANCE);
+			flowStack.pushSelectedInstance(getUser());
+			queue.add(render(location, flowStack, PresencePlaceTemplate.INSTANCE));
 		}
 	}
 	
-	public Update renderPresence() {
+	public Update render(String location, FlowStack flowStack, PlaceTemplate placeTemplate) {
 		if (presenceOutdatedObserver!=null) {
 			presenceOutdatedObserver.remove();
 			presenceOutdatedObserver = null;
 		}
 
 		FlowContext flowContext = new FlowContext(caseManager.getPresence(), "presence", getTravelerInfo());
-		FlowStack flowStack = new FlowStack(null, MainFlow.INSTANCE);
-		flowStack.pushSelectedInstance(getUser());
 		flowContext.setFlowStack(flowStack);
-		RenderContext renderContext = new RenderContext(flowContext, getUser().getMetadata().getInstanceId()+"/Presence");
+		RenderContext renderContext = new RenderContext(flowContext, location);
 		CaseAdministration caseAdministration = caseManager.getPresence().getMetadata().getCaseAdministration();
 		caseAdministration.startRecordingObservations();
-		Map<String, Object> result = PresencePlaceTemplate.INSTANCE.render(renderContext);
+		Map<String, Object> result = placeTemplate.render(renderContext);
 		Observations observations = caseAdministration.stopRecordingObservations();
 
 		presenceOutdated = false;

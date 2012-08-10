@@ -138,7 +138,11 @@ public class NettyTraveler implements TravelerProxy {
 				messages.add(new EnterMessage(newLocation));
 			}
 		}
-		this.caseProcessor.processMessages(this, messages);
+		if (getTravelerInfo().getAuthenticatedUsername()==null) {
+			this.caseProcessor.processMessages(this, Collections.<Message>emptyList()); // Not logged in, discard messages
+		} else {
+			this.caseProcessor.processMessages(this, messages);
+		}
 	}
 
 	private Object getPrimitiveValue(JsonPrimitive jsonPrimitive) {
