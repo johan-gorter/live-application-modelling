@@ -19,3 +19,11 @@ a {color: #000000}
 .cells {display:inline-block;border-bottom: solid 1px black;}
 .cell {display:inline-block; width:200px;overflow:hidden;white-space:no-wrap;}
 
+.login {position:fixed; top: 200px; width:100%; }
+.login .window {position: relative;margin: 0 auto; width: 400px; background-color: #2E2E2E; color: #FFFFFF; padding: 10px;}
+
+.input {width: 100%;margin:5px 0;}
+.input .question {display: inline-block; width:50%; }
+.input .answer {display: inline-block; width:50%; }
+
+.buttons {width: 100%;margin:5px 0;}

@@ -13,7 +13,7 @@ public class DomainEntryDesignEntityGenerator extends EntityDesign {
     // Attributes
 
     // Relations
-    public static final RelationDesign display = addRelation(ENTITY, "display", RelationType.OneToZeroOrOneAggregation, TextDesignEntityGenerator.ENTITY)
+    public static final RelationDesign display = addRelation(ENTITY, "display", RelationType.OneToZeroOrOneAggregation, TextTemplateDesignEntityGenerator.ENTITY)
             .setReverseName("displayOnDomainEntry");
 
 }

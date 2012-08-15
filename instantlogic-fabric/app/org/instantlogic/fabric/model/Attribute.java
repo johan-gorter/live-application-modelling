@@ -4,7 +4,7 @@ import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.deduction.AttributeDeduction;
 import org.instantlogic.fabric.deduction.Deduction;
 import org.instantlogic.fabric.deduction.SelectedInstanceDeduction;
-import org.instantlogic.fabric.text.Text;
+import org.instantlogic.fabric.text.TextTemplate;
 import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
 
 /**
@@ -20,9 +20,9 @@ public abstract class Attribute<I extends Instance, Value extends Object, Item e
 	
 	public abstract Class<Item> getDatatype();
 
-	public abstract Text getQuestion();
+	public abstract TextTemplate getQuestion();
 
-	public Text getExplain() {
+	public TextTemplate getExplain() {
 		return null;
 	}
 

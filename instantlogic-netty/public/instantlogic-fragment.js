@@ -21,7 +21,7 @@ YUI.add('instantlogic-fragment', function (Y) {
             		html.div({className: 'case-name'},
             			this.caseNameSpan = html.span(model.caseName || '')
             		),
-            		this.login = html.div({className: 'login'},
+            		this.me = html.div({className: 'me'},
             			this.avatarDiv = html.div({className: 'avatar'}),
             			this.loginNameSpan = html.span(model.loginName || '')
             		)
@@ -32,7 +32,6 @@ YUI.add('instantlogic-fragment', function (Y) {
             this.parentNode.appendChild(markup);
             
             this.contentFragmentList = new FragmentList(this.contentDiv, this.engine);
-            debugger
             this.contentFragmentList.init(model.content);
     	},
     	
@@ -42,8 +41,39 @@ YUI.add('instantlogic-fragment', function (Y) {
     	}
     });
     
+    // Login
+    ns.Login = function(parentNode, engine) {
+    	ns.Login.superclass.constructor.apply(this, arguments);
+    }
+    
+    Y.extend(ns.Login, Y.instantlogic.Fragment, {
+    	init: function(model) {
+    		ns.Login.superclass.init.call(this, model);
+    		var markup = html.div({className: 'login'},
+				html.div({className: 'window'},
+					html.h2('Please login'),
+	    			html.div({className: 'input'},
+		    			html.div({className: 'question'}, 'Username'),
+		    			html.div({className: 'answer'},
+		    				this.usernameInput = html.input({type: 'text'})
+		    			)
+	    			),
+	    			html.div({className: 'buttons'},
+	    				this.loginButton = html.button('Login')
+	    			)
+	    		)
+    		);
+    		this.parentNode.appendChild(markup);
+    		this.loginButton.on('click', this.loginClick, this)''
+    	},
+    	
+    	loginClick: function() {
+    		this.engine.enqueueMessage({message: 'presence', id: 'login', this.usernameInput.get('value'));
+    	}
+    });
+    
     // Page
-    ns.Page = function (parentNode, engine) {
+    ns.Page = function(parentNode, engine) {
         ns.Page.superclass.constructor.apply(this, arguments);
     };
 
@@ -167,7 +197,7 @@ YUI.add('instantlogic-fragment', function (Y) {
         
         onClick: function(e) {
             e.preventDefault();
-            this.engine.sendEvent(this.model.id);
+            this.engine.sendSubmit(this.model.id);
         }
     });
 

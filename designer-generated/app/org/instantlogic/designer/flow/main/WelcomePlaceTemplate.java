@@ -27,17 +27,17 @@ public class WelcomePlaceTemplate extends org.instantlogic.interaction.flow.Plac
         new org.instantlogic.interaction.page.FragmentTemplate("F39P2F1", "Page")      
         .putChildren("headerContent",
                 new org.instantlogic.interaction.page.FragmentTemplate("F39P2F1P1F1", "Heading1")      
-                .putText("text", new org.instantlogic.fabric.text.ConstantText("Welcome"))
+                .putText("text", new org.instantlogic.fabric.text.ConstantTextTemplate("Welcome"))
         )
       
         .putChildren("mainContent",
                 new org.instantlogic.interaction.page.FragmentTemplate("F39P2F1P2F1", "Paragraph")      
-                .putText("text", new org.instantlogic.fabric.text.ConstantText("Welcome to the Designer"))
+                .putText("text", new org.instantlogic.fabric.text.ConstantTextTemplate("Welcome to the Designer"))
 ,
                 new org.instantlogic.interaction.page.FragmentTemplate("F39P2F1P2F2", "Table")      
                 .putChildren("columns",
                         new org.instantlogic.interaction.page.FragmentTemplate("F39P2F1P2F2P1F1", "Column")      
-                        .putText("header", new org.instantlogic.fabric.text.ConstantText("Entities"))
+                        .putText("header", new org.instantlogic.fabric.text.ConstantTextTemplate("Entities"))
                 )
       
                 .putChildren("rows",
@@ -48,7 +48,7 @@ public class WelcomePlaceTemplate extends org.instantlogic.interaction.flow.Plac
                                         new org.instantlogic.interaction.page.SelectionElement(createDeduction0()
 ,                                                new org.instantlogic.interaction.page.FragmentTemplate("F39P2F1P2F2P2F1P1F1P1S1F2", "Link")      .setEvent(org.instantlogic.designer.event.EntityDetailsEvent.INSTANCE)
       
-                                                .putText("text", new org.instantlogic.fabric.text.TemplatedText().add(createDeduction1()))
+                                                .putText("text", new org.instantlogic.fabric.text.TextTemplate().add(createDeduction1()))
 )
                                 )
                         )

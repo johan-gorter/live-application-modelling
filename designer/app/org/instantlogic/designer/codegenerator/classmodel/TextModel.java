@@ -5,7 +5,7 @@ import java.util.List;
 
 public class TextModel {
 
-	public static class StringProducer
+	public static class StringTemplate
 	{
 		public String type;
 		public String constant;
@@ -22,21 +22,9 @@ public class TextModel {
 		}
 	}
 	
-	public String type;
+	public final List<StringTemplate> untranslated = new ArrayList<StringTemplate>();
 	
-	public String untranslatedConstant;
-	
-	public final List<StringProducer> stringProducers = new ArrayList<StringProducer>();
-	
-	public String getUntranslatedConstant() {
-		return untranslatedConstant;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public List<StringProducer> getStringProducers() {
-		return stringProducers;
+	public List<StringTemplate> getUntranslated() {
+		return untranslated;
 	}
 }

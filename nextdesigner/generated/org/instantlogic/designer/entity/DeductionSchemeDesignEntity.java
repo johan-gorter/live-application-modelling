@@ -129,13 +129,13 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.FormattedValueDesign, org.instantlogic.designer.FormattedValueDesign> templatedText
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.FormattedValueDesign, org.instantlogic.designer.FormattedValueDesign>(
-			"templatedText", INSTANCE, org.instantlogic.designer.entity.FormattedValueDesignEntity.INSTANCE, org.instantlogic.designer.FormattedValueDesign.class, org.instantlogic.designer.entity.FormattedValueDesignEntity.deduction
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.StringTemplateDesign, org.instantlogic.designer.StringTemplateDesign> templatedText
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.StringTemplateDesign, org.instantlogic.designer.StringTemplateDesign>(
+			"templatedText", INSTANCE, org.instantlogic.designer.entity.StringTemplateDesignEntity.INSTANCE, org.instantlogic.designer.StringTemplateDesign.class, org.instantlogic.designer.entity.StringTemplateDesignEntity.deduction
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.FormattedValueDesign> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.StringTemplateDesign> get(
 					org.instantlogic.designer.DeductionSchemeDesign instance) {
 				return instance.getTemplatedTextRelationValue();
 			}

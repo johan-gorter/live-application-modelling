@@ -123,17 +123,17 @@ public class Traveler extends AbstractTraveler {
 	public void queuePresenceIfNeeded() {
 		if (this.travelerInfo.getAuthenticatedUsername()==null) {
 			FlowStack flowStack = new FlowStack(null, MainFlow.INSTANCE);
-			queue.add(render("Anonymous", flowStack, AnonymousPlaceTemplate.INSTANCE));
+			queue.add(renderPresence("Anonymous", flowStack, AnonymousPlaceTemplate.INSTANCE));
 		} else if (this.presenceOutdated) {
 			String location = "User/"+getUser().getMetadata().getInstanceId()+"/Presence";
 			FlowStack flowStack = new FlowStack(null, MainFlow.INSTANCE);
 			flowStack = new FlowStack(flowStack, UserFlow.INSTANCE);
 			flowStack.pushSelectedInstance(getUser());
-			queue.add(render(location, flowStack, PresencePlaceTemplate.INSTANCE));
+			queue.add(renderPresence(location, flowStack, PresencePlaceTemplate.INSTANCE));
 		}
 	}
 	
-	public Update render(String location, FlowStack flowStack, PlaceTemplate placeTemplate) {
+	public Update renderPresence(String location, FlowStack flowStack, PlaceTemplate placeTemplate) {
 		if (presenceOutdatedObserver!=null) {
 			presenceOutdatedObserver.remove();
 			presenceOutdatedObserver = null;

@@ -58,51 +58,15 @@ public abstract class AbstractEventDesign extends Design {
 	}
 
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EventDesign, FlowEdgeDesign> endEventInEdges
-		= createReverseRelationValues(org.instantlogic.designer.entity.EventDesignEntity.endEventInEdges);
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EventDesign, FlowEdgeDesign> eventInEdges
+		= createReverseRelationValues(org.instantlogic.designer.entity.EventDesignEntity.eventInEdges);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EventDesign, FlowEdgeDesign> getEndEventInEdgesRelationValue() {
-		return endEventInEdges;
+	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EventDesign, FlowEdgeDesign> getEventInEdgesRelationValue() {
+		return eventInEdges;
 	}
 
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowEdgeDesign> getEndEventInEdges() {
-		return endEventInEdges.getValue();
-	}
-
-	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EventDesign, FlowSourceDesign> endEventInSources
-		= createReverseRelationValues(org.instantlogic.designer.entity.EventDesignEntity.endEventInSources);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EventDesign, FlowSourceDesign> getEndEventInSourcesRelationValue() {
-		return endEventInSources;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowSourceDesign> getEndEventInSources() {
-		return endEventInSources.getValue();
-	}
-
-	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EventDesign, FlowEdgeDesign> startEventInEdges
-		= createReverseRelationValues(org.instantlogic.designer.entity.EventDesignEntity.startEventInEdges);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EventDesign, FlowEdgeDesign> getStartEventInEdgesRelationValue() {
-		return startEventInEdges;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowEdgeDesign> getStartEventInEdges() {
-		return startEventInEdges.getValue();
-	}
-
-	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EventDesign, FlowSourceDesign> startEventInSources
-		= createReverseRelationValues(org.instantlogic.designer.entity.EventDesignEntity.startEventInSources);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EventDesign, FlowSourceDesign> getStartEventInSourcesRelationValue() {
-		return startEventInSources;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowSourceDesign> getStartEventInSources() {
-		return startEventInSources.getValue();
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowEdgeDesign> getEventInEdges() {
+		return eventInEdges.getValue();
 	}
 
 	

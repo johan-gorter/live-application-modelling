@@ -112,35 +112,35 @@ public class AttributeDesign extends Design {
 	}
 	
 	
-	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, TextDesign> explanation
+	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, TextTemplateDesign> explanation
 		= createRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity.explanation);
 		
-	public org.instantlogic.fabric.value.RelationValue<AttributeDesign, TextDesign> getExplanationRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<AttributeDesign, TextTemplateDesign> getExplanationRelationValue() {
 		return explanation;
 	}
 
-	public org.instantlogic.designer.TextDesign getExplanation() {
+	public org.instantlogic.designer.TextTemplateDesign getExplanation() {
 		return explanation.getValue();
 	}
 	
-	public AttributeDesign setExplanation(org.instantlogic.designer.TextDesign newValue) {
+	public AttributeDesign setExplanation(org.instantlogic.designer.TextTemplateDesign newValue) {
 		explanation.setValue(newValue);
 		return (AttributeDesign)this;
 	}
 
 	
-	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, TextDesign> question
+	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, TextTemplateDesign> question
 		= createRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity.question);
 		
-	public org.instantlogic.fabric.value.RelationValue<AttributeDesign, TextDesign> getQuestionRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<AttributeDesign, TextTemplateDesign> getQuestionRelationValue() {
 		return question;
 	}
 
-	public org.instantlogic.designer.TextDesign getQuestion() {
+	public org.instantlogic.designer.TextTemplateDesign getQuestion() {
 		return question.getValue();
 	}
 	
-	public AttributeDesign setQuestion(org.instantlogic.designer.TextDesign newValue) {
+	public AttributeDesign setQuestion(org.instantlogic.designer.TextTemplateDesign newValue) {
 		question.setValue(newValue);
 		return (AttributeDesign)this;
 	}

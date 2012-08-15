@@ -1,13 +1,13 @@
 package org.instantlogic.fabric.model;
 
-import org.instantlogic.fabric.text.Text;
+import org.instantlogic.fabric.text.TextTemplate;
 
 public class DomainEntry {
 
 	private final String value;
-	private final Text display;
+	private final TextTemplate display;
 	
-	public DomainEntry(String value, Text display) {
+	public DomainEntry(String value, TextTemplate display) {
 		this.value = value;
 		this.display = display;
 	}
@@ -16,7 +16,7 @@ public class DomainEntry {
 		return value;
 	}
 
-	public Text getDisplay() {
+	public TextTemplate getDisplay() {
 		return display;
 	}
 }

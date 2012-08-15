@@ -39,7 +39,7 @@ public class DashboardPlaceTemplate extends org.instantlogic.interaction.flow.Pl
                 .putChildren("columns",
                         new org.instantlogic.interaction.page.FragmentTemplate("F7P3F1P1F1P1F1", "Column"),
                         new org.instantlogic.interaction.page.FragmentTemplate("F7P3F1P1F1P1F2", "Column")      
-                        .putText("header", new org.instantlogic.fabric.text.ConstantText("Headline"))
+                        .putText("header", new org.instantlogic.fabric.text.ConstantTextTemplate("Headline"))
                 )
       
                 .putChildren("rows",
@@ -52,13 +52,13 @@ public class DashboardPlaceTemplate extends org.instantlogic.interaction.flow.Pl
                                                 new org.instantlogic.interaction.page.FragmentTemplate("F7P3F1P1F1P2S1F2P1F1P1F1", "Cell")      
                                                 .putChildren("content",
                                                         new org.instantlogic.interaction.page.FragmentTemplate("F7P3F1P1F1P2S1F2P1F1P1F1P1F1", "Paragraph")      
-                                                        .putText("text", new org.instantlogic.fabric.text.TemplatedText().add(createDeduction1()))
+                                                        .putText("text", new org.instantlogic.fabric.text.TextTemplate().add(createDeduction1()))
                                                 )
 ,
                                                 new org.instantlogic.interaction.page.FragmentTemplate("F7P3F1P1F1P2S1F2P1F1P1F2", "Cell")      
                                                 .putChildren("content",
                                                         new org.instantlogic.interaction.page.FragmentTemplate("F7P3F1P1F1P2S1F2P1F1P1F2P1F1", "Paragraph")      
-                                                        .putText("text", new org.instantlogic.fabric.text.TemplatedText().add(createDeduction2()))
+                                                        .putText("text", new org.instantlogic.fabric.text.TextTemplate().add(createDeduction2()))
                                                 )
                                         )
                                 )
@@ -67,7 +67,7 @@ public class DashboardPlaceTemplate extends org.instantlogic.interaction.flow.Pl
 ,
                 new org.instantlogic.interaction.page.FragmentTemplate("F7P3F1P1F2", "Button")      .setEvent(org.instantlogic.example.izzy.event.CreateIssueEvent.INSTANCE)
       
-                .putText("text", new org.instantlogic.fabric.text.ConstantText("Create issue"))
+                .putText("text", new org.instantlogic.fabric.text.ConstantTextTemplate("Create issue"))
         )
 ; 
 	
