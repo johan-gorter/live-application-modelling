@@ -12,23 +12,6 @@ public class FlowEdgeDesign extends org.instantlogic.fabric.Instance {
 	
 	// Relations
 	
-	private final org.instantlogic.fabric.value.RelationValue<FlowEdgeDesign, EventDesign> endEvent
-		= createRelationValue(org.instantlogic.designer.entity.FlowEdgeDesignEntity.endEvent);
-		
-	public org.instantlogic.fabric.value.RelationValue<FlowEdgeDesign, EventDesign> getEndEventRelationValue() {
-		return endEvent;
-	}
-
-	public org.instantlogic.designer.EventDesign getEndEvent() {
-		return endEvent.getValue();
-	}
-	
-	public FlowEdgeDesign setEndEvent(org.instantlogic.designer.EventDesign newValue) {
-		endEvent.setValue(newValue);
-		return (FlowEdgeDesign)this;
-	}
-
-	
 	private final org.instantlogic.fabric.value.RelationValue<FlowEdgeDesign, FlowNodeBaseDesign> endNode
 		= createRelationValue(org.instantlogic.designer.entity.FlowEdgeDesignEntity.endNode);
 		
@@ -46,19 +29,19 @@ public class FlowEdgeDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	
-	private final org.instantlogic.fabric.value.RelationValue<FlowEdgeDesign, EventDesign> startEvent
-		= createRelationValue(org.instantlogic.designer.entity.FlowEdgeDesignEntity.startEvent);
+	private final org.instantlogic.fabric.value.RelationValue<FlowEdgeDesign, EventDesign> event
+		= createRelationValue(org.instantlogic.designer.entity.FlowEdgeDesignEntity.event);
 		
-	public org.instantlogic.fabric.value.RelationValue<FlowEdgeDesign, EventDesign> getStartEventRelationValue() {
-		return startEvent;
+	public org.instantlogic.fabric.value.RelationValue<FlowEdgeDesign, EventDesign> getEventRelationValue() {
+		return event;
 	}
 
-	public org.instantlogic.designer.EventDesign getStartEvent() {
-		return startEvent.getValue();
+	public org.instantlogic.designer.EventDesign getEvent() {
+		return event.getValue();
 	}
 	
-	public FlowEdgeDesign setStartEvent(org.instantlogic.designer.EventDesign newValue) {
-		startEvent.setValue(newValue);
+	public FlowEdgeDesign setEvent(org.instantlogic.designer.EventDesign newValue) {
+		event.setValue(newValue);
 		return (FlowEdgeDesign)this;
 	}
 

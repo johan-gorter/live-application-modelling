@@ -12,18 +12,18 @@ public class DomainEntryDesign extends Design {
 	
 	// Relations
 	
-	private final org.instantlogic.fabric.value.RelationValue<DomainEntryDesign, TextDesign> display
+	private final org.instantlogic.fabric.value.RelationValue<DomainEntryDesign, TextTemplateDesign> display
 		= createRelationValue(org.instantlogic.designer.entity.DomainEntryDesignEntity.display);
 		
-	public org.instantlogic.fabric.value.RelationValue<DomainEntryDesign, TextDesign> getDisplayRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<DomainEntryDesign, TextTemplateDesign> getDisplayRelationValue() {
 		return display;
 	}
 
-	public org.instantlogic.designer.TextDesign getDisplay() {
+	public org.instantlogic.designer.TextTemplateDesign getDisplay() {
 		return display.getValue();
 	}
 	
-	public DomainEntryDesign setDisplay(org.instantlogic.designer.TextDesign newValue) {
+	public DomainEntryDesign setDisplay(org.instantlogic.designer.TextTemplateDesign newValue) {
 		display.setValue(newValue);
 		return (DomainEntryDesign)this;
 	}

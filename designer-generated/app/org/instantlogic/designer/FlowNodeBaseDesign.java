@@ -26,18 +26,6 @@ public class FlowNodeBaseDesign extends Design {
 	}
 
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<FlowNodeBaseDesign, FlowSourceDesign> incomingSources
-		= createReverseRelationValues(org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.incomingSources);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<FlowNodeBaseDesign, FlowSourceDesign> getIncomingSourcesRelationValue() {
-		return incomingSources;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowSourceDesign> getIncomingSources() {
-		return incomingSources.getValue();
-	}
-
-	
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<FlowNodeBaseDesign, FlowEdgeDesign> outgoingEdges
 		= createReverseRelationValues(org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.outgoingEdges);
 

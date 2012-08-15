@@ -11,14 +11,14 @@ public class PlaceTemplateDesign extends AbstractPlaceTemplateDesign {
 	public void init() {
 	}
 	
-	protected static FragmentTemplateDesign createText(String fragmentTypeName, TextDesign text) {
+	protected static FragmentTemplateDesign createText(String fragmentTypeName, TextTemplateDesign text) {
 		FragmentTemplateDesign result = new FragmentTemplateDesign();
 		result.setFragmentTypeName(fragmentTypeName);
 		result.setText("text", text);
 		return result;
 	}
 	
-	protected static FragmentTemplateDesign createLink(TextDesign text, EventDesign event) {
+	protected static FragmentTemplateDesign createLink(TextTemplateDesign text, EventDesign event) {
 		FragmentTemplateDesign result = new FragmentTemplateDesign();
 		result.setFragmentTypeName("Link");
 		result.setText("text", text);
