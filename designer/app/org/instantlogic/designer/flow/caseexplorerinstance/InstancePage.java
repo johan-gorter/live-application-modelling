@@ -7,8 +7,8 @@ import org.instantlogic.designer.event.ExploreInstanceEvent;
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Attribute;
 import org.instantlogic.fabric.model.Relation;
-import org.instantlogic.fabric.text.ConstantText;
-import org.instantlogic.fabric.text.Text;
+import org.instantlogic.fabric.text.ConstantTextTemplate;
+import org.instantlogic.fabric.text.TextTemplate;
 import org.instantlogic.fabric.util.DeductionContext;
 import org.instantlogic.interaction.page.CompositeFragmentTemplate;
 import org.instantlogic.interaction.page.FragmentTemplate;
@@ -17,7 +17,7 @@ import org.instantlogic.interaction.util.RenderContext;
 
 public class InstancePage extends AbstractInstancePage {
 
-	public static class InstanceButtonText extends Text {
+	public static class InstanceButtonText extends TextTemplate {
 
 		@Override
 		public String renderText(DeductionContext context) {
@@ -38,7 +38,7 @@ public class InstancePage extends AbstractInstancePage {
 			Instance instance = context.getSelectedInstance(null);
 			List<FragmentTemplate> children = new ArrayList<FragmentTemplate>();
 			children.add(new WidgetFragmentTemplate(null, "Header")
-				.putText("text", new ConstantText("Instance "+instance.getMetadata().getInstanceId()+" of type "+instance.getMetadata().getEntity().getName())));
+				.putText("text", new ConstantTextTemplate("Instance "+instance.getMetadata().getInstanceId()+" of type "+instance.getMetadata().getEntity().getName())));
 			addFields(children, instance, context);
 			addButtons(children, instance, context);
 			return children.toArray(new FragmentTemplate[children.size()]);
@@ -57,7 +57,7 @@ public class InstancePage extends AbstractInstancePage {
 		@SuppressWarnings({ "unchecked", "rawtypes" })
 		private void addRelation(List<FragmentTemplate> children, Instance instance, Relation relation) {
 			children.add(new WidgetFragmentTemplate(null, "Paragraph")
-				.putText("text", new ConstantText(relation.getName()+": ")));
+				.putText("text", new ConstantTextTemplate(relation.getName()+": ")));
 			Object value = relation.get(instance).getValue();
 			if (value!=null) {
 				children.add(
@@ -80,7 +80,7 @@ public class InstancePage extends AbstractInstancePage {
 	
 	private static CompositeFragmentTemplate CONTENT = 
         new CompositeFragmentTemplate(null, new FragmentTemplate[]{
-            new WidgetFragmentTemplate(null, "Header").putText("text", new ConstantText("Case Explorer")),
+            new WidgetFragmentTemplate(null, "Header").putText("text", new ConstantTextTemplate("Case Explorer")),
             new InstanceExplorerFragment()
         }); 
 	

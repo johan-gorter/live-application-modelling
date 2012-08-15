@@ -10,7 +10,7 @@ import java.util.Map;
 import org.instantlogic.fabric.deduction.Deduction;
 import org.instantlogic.fabric.model.Attribute;
 import org.instantlogic.fabric.model.Entity;
-import org.instantlogic.fabric.text.Text;
+import org.instantlogic.fabric.text.TextTemplate;
 import org.instantlogic.interaction.flow.FlowEvent;
 import org.instantlogic.interaction.util.ChangeContext;
 import org.instantlogic.interaction.util.SubmitContext;
@@ -22,7 +22,7 @@ public class FragmentTemplate extends Element {
 	private final List<FragmentFilter> customFilters = new ArrayList<FragmentFilter>();
 	
 	private final Map<String, Deduction<?>> valueProperties = new HashMap<String, Deduction<?>>();
-	private final Map<String, Text> textProperties = new HashMap<String, Text>();
+	private final Map<String, TextTemplate> textProperties = new HashMap<String, TextTemplate>();
 	private final Map<String, Element[]> childlistProperties = new HashMap<String, Element[]>();
 	
 	private final String id;
@@ -98,7 +98,7 @@ public class FragmentTemplate extends Element {
 		return this;
 	}
 	
-	public FragmentTemplate putText(String DataKey, Text value) {
+	public FragmentTemplate putText(String DataKey, TextTemplate value) {
 		textProperties.put(DataKey, value);
 		return this;
 	}
@@ -143,7 +143,7 @@ public class FragmentTemplate extends Element {
 		for (Map.Entry<String, Deduction<?>> entry : valueProperties.entrySet()) {
 			result.put(entry.getKey(), entry.getValue().deduct(context).getValue());
 		}
-		for (Map.Entry<String, Text> entry : textProperties.entrySet()) {
+		for (Map.Entry<String, TextTemplate> entry : textProperties.entrySet()) {
 			result.put(entry.getKey(), entry.getValue().renderText(context));
 		}
 		for (Map.Entry<String, Element[]> entry : childlistProperties.entrySet()) {

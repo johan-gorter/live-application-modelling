@@ -17,7 +17,7 @@ public class PropertyDesignEntityGenerator extends EntityDesign {
     // Relations
     public static final RelationDesign children = addRelation(ENTITY, "children", RelationType.OneToManyAggregation, ElementDesignEntityGenerator.ENTITY)
             .setReverseName("childrenForFragment");
-    public static final RelationDesign text = addRelation(ENTITY, "text", RelationType.OneToZeroOrOneAggregation, TextDesignEntityGenerator.ENTITY)
+    public static final RelationDesign text = addRelation(ENTITY, "text", RelationType.OneToZeroOrOneAggregation, TextTemplateDesignEntityGenerator.ENTITY)
             .setReverseName("textForFragment");
     public static final RelationDesign value = addRelation(ENTITY, "value", RelationType.OneToZeroOrOneAggregation, DeductionSchemeDesignEntityGenerator.ENTITY)
             .setReverseName("valueForFragment");

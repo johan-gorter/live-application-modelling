@@ -33,13 +33,13 @@ public class DomainEntryDesignEntity extends org.instantlogic.fabric.model.Entit
 	
 	// Relations
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DomainEntryDesign, org.instantlogic.designer.TextDesign, org.instantlogic.designer.TextDesign> display
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DomainEntryDesign, org.instantlogic.designer.TextDesign, org.instantlogic.designer.TextDesign>(
-			"display", INSTANCE, org.instantlogic.designer.entity.TextDesignEntity.INSTANCE, org.instantlogic.designer.TextDesign.class, org.instantlogic.designer.entity.TextDesignEntity.displayOnDomainEntry
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DomainEntryDesign, org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.TextTemplateDesign> display
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DomainEntryDesign, org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.TextTemplateDesign>(
+			"display", INSTANCE, org.instantlogic.designer.entity.TextTemplateDesignEntity.INSTANCE, org.instantlogic.designer.TextTemplateDesign.class, org.instantlogic.designer.entity.TextTemplateDesignEntity.displayOnDomainEntry
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DomainEntryDesign, org.instantlogic.designer.TextDesign> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DomainEntryDesign, org.instantlogic.designer.TextTemplateDesign> get(
 					org.instantlogic.designer.DomainEntryDesign instance) {
 				return instance.getDisplayRelationValue();
 			}

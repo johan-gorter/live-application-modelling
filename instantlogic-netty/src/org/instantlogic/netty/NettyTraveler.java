@@ -20,6 +20,7 @@ import org.instantlogic.engine.manager.Update;
 import org.instantlogic.engine.message.ChangeMessage;
 import org.instantlogic.engine.message.EnterMessage;
 import org.instantlogic.engine.message.Message;
+import org.instantlogic.engine.message.PresenceMessage;
 import org.instantlogic.engine.message.SubmitMessage;
 import org.instantlogic.interaction.util.TravelerInfo;
 import org.jboss.netty.buffer.ChannelBuffers;
@@ -136,13 +137,16 @@ public class NettyTraveler implements TravelerProxy {
 				JsonElement locationElement = message.getAsJsonObject().get("location");
 				String newLocation = locationElement==null?null:locationElement.getAsString();
 				messages.add(new EnterMessage(newLocation));
+			} else if ("presence".equals(messageName)) {
+				String command = message.getAsJsonObject().get("command").getAsString();
+				Object data = null;
+				if (message.getAsJsonObject().has("value")) {
+					data = getPrimitiveValue(message.getAsJsonObject().get("data").getAsJsonPrimitive());
+				}
+				messages.add(new PresenceMessage(command, data));
 			}
 		}
-		if (getTravelerInfo().getAuthenticatedUsername()==null) {
-			this.caseProcessor.processMessages(this, Collections.<Message>emptyList()); // Not logged in, discard messages
-		} else {
-			this.caseProcessor.processMessages(this, messages);
-		}
+		this.caseProcessor.processMessages(this, messages);
 	}
 
 	private Object getPrimitiveValue(JsonPrimitive jsonPrimitive) {

@@ -107,38 +107,6 @@ public abstract class AbstractFlowDesign extends Design {
 		return (FlowDesign)this;
 	}
 	
-	
-	private final org.instantlogic.fabric.value.RelationValues<FlowDesign, FlowSourceDesign> sources
-		= createRelationValues(org.instantlogic.designer.entity.FlowDesignEntity.sources);
-		
-	public org.instantlogic.fabric.value.RelationValues<FlowDesign, FlowSourceDesign> getSourcesRelationValue() {
-		return sources;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowSourceDesign> getSources() {
-		return sources.getValue();
-	}
-	
-	public FlowDesign addToSources(FlowSourceDesign item) {
-		sources.addValue(item);
-		return (FlowDesign)this;
-	}
-	
-	public FlowDesign addToSources(FlowSourceDesign item, int index) {
-		sources.insertValue(item, index);
-		return (FlowDesign)this;
-	}
-	
-	public FlowDesign removeFromSources(FlowSourceDesign item) {
-		sources.removeValue(item);
-		return (FlowDesign)this;
-	}
-	
-	public FlowDesign removeFromSources(int index) {
-		sources.removeValue(index);
-		return (FlowDesign)this;
-	}
-	
 
 	// Reverse relations
 	

@@ -16,9 +16,9 @@ public class AttributeDesignEntityGenerator extends EntityDesign {
     public static final AttributeDesign className = addAttribute(ENTITY, "className", java.lang.String.class);
 
     // Relations
-    public static final RelationDesign question = addRelation(ENTITY, "question", RelationType.OneToZeroOrOneAggregation, TextDesignEntityGenerator.ENTITY)
+    public static final RelationDesign question = addRelation(ENTITY, "question", RelationType.OneToZeroOrOneAggregation, TextTemplateDesignEntityGenerator.ENTITY)
             .setReverseName("questionOnAttribute");
-    public static final RelationDesign explanation = addRelation(ENTITY, "explanation", RelationType.OneToZeroOrOneAggregation, TextDesignEntityGenerator.ENTITY)
+    public static final RelationDesign explanation = addRelation(ENTITY, "explanation", RelationType.OneToZeroOrOneAggregation, TextTemplateDesignEntityGenerator.ENTITY)
             .setReverseName("explanationOnAttribute");
     public static final RelationDesign domain = addRelation(ENTITY, "domain", RelationType.OneToManyAggregation, DomainEntryDesignEntityGenerator.ENTITY)
             .setReverseName("attribute");

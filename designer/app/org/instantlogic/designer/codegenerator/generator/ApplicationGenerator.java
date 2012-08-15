@@ -86,13 +86,14 @@ public class ApplicationGenerator extends AbstractGenerator{
 			eventGenerators.put(newEvent.getName(), eventGenerator);
 		}
 		
-		
-		List<Design> newFlows = updateGenerators(flowGenerators, applicationInstance.getFlows(), context);
-		for(Design newFlow : newFlows) {
-			FlowGenerator flowGenerator = new FlowGenerator((FlowDesign)newFlow);
-			flowGenerator.update(context);
-			flowGenerators.put(newFlow.getName(), flowGenerator);
-		}
+
+// Temporary turned off
+//		List<Design> newFlows = updateGenerators(flowGenerators, applicationInstance.getFlows(), context);
+//		for(Design newFlow : newFlows) {
+//			FlowGenerator flowGenerator = new FlowGenerator((FlowDesign)newFlow);
+//			flowGenerator.update(context);
+//			flowGenerators.put(newFlow.getName(), flowGenerator);
+//		}
 		
 		this.observations = new ObservationsOutdatedObserver(applicationInstance.getMetadata().getCaseAdministration().stopRecordingObservations(), null);
 		context.updatedApplication = model;

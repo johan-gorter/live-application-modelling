@@ -172,7 +172,7 @@ YUI.add('instantlogic', function (Y) {
         	this.enqueueMessage({message:'enter', location: this.location});        	
         },
         
-        sendEvent: function(id) {
+        sendSubmit: function(id) {
         	this.enqueueMessage({message:'submit', id:id});
         },
         

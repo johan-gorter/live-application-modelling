@@ -3,8 +3,8 @@ package org.instantlogic.fabric.model.impl;
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Attribute;
 import org.instantlogic.fabric.model.Entity;
-import org.instantlogic.fabric.text.ConstantText;
-import org.instantlogic.fabric.text.Text;
+import org.instantlogic.fabric.text.ConstantTextTemplate;
+import org.instantlogic.fabric.text.TextTemplate;
 
 
 public abstract class SimpleAttribute<I extends Instance, Value extends Object, Item extends Object> extends Attribute<I, Value, Item> {
@@ -12,7 +12,7 @@ public abstract class SimpleAttribute<I extends Instance, Value extends Object, 
 	private final String name;
 	private final Entity<I> entity;
 	private final Class<Item> valueClass;
-	private Text question = null;
+	private TextTemplate question = null;
 	
 	public SimpleAttribute(String name, Entity<I> entity, Class<Item> valueClass) {
 		this.name = name;
@@ -31,9 +31,9 @@ public abstract class SimpleAttribute<I extends Instance, Value extends Object, 
 	}
 
 	@Override
-	public Text getQuestion() {
+	public TextTemplate getQuestion() {
 		if (question!=null) return question;
-		return new ConstantText("["+name+"]");
+		return new ConstantTextTemplate("["+name+"]");
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public abstract class SimpleAttribute<I extends Instance, Value extends Object, 
 		return name;
 	}
 
-	public void setQuestion(Text question) {
+	public void setQuestion(TextTemplate question) {
 		this.question = question;
 	}
 }

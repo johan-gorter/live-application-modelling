@@ -1,7 +1,7 @@
 package org.instantlogic.fabric.model;
 
 import org.instantlogic.fabric.Instance;
-import org.instantlogic.fabric.text.Text;
+import org.instantlogic.fabric.text.TextTemplate;
 
 
 public abstract class Relation<I extends Instance, Value extends Object, To extends Instance> extends Attribute<I, Value, To> {
@@ -23,7 +23,7 @@ public abstract class Relation<I extends Instance, Value extends Object, To exte
 	public abstract To createTo(I from);
 	
 	@Override
-	public Text getQuestion() {
+	public TextTemplate getQuestion() {
 		return null;
 	}
 	

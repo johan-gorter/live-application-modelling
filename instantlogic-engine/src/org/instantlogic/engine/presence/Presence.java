@@ -24,4 +24,12 @@ public class Presence extends AbstractPresence {
 		traveler.setCurrentPlace(place);
 		return place;
 	}
+
+	public void executeCommand(Traveler traveler, String command, Object data) {
+		switch (command) {
+			case "login":
+				traveler.getTravelerInfo().setAuthenticatedUsername((String)data);
+				break;
+		}
+	}
 }

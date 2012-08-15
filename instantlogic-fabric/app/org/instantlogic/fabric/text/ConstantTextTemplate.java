@@ -3,11 +3,11 @@ package org.instantlogic.fabric.text;
 
 import org.instantlogic.fabric.util.DeductionContext;
 
-public class ConstantText extends Text {
+public class ConstantTextTemplate extends TextTemplate {
 
 	private final String untranslated;
 	
-	public ConstantText(String untranslated) {
+	public ConstantTextTemplate(String untranslated) {
 		this.untranslated = untranslated;
 	}
 	
@@ -16,7 +16,7 @@ public class ConstantText extends Text {
 		return untranslated;
 	}
 	
-	public ConstantText addTranslation(String languageCode, String translated) {
+	public ConstantTextTemplate addTranslation(String languageCode, String translated) {
 		// TODO translations
 		throw new UnsupportedOperationException();
 	}

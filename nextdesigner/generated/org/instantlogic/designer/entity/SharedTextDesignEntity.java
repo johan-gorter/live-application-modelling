@@ -9,7 +9,7 @@ public class SharedTextDesignEntity extends org.instantlogic.fabric.model.Entity
 
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
-		return org.instantlogic.designer.entity.TextDesignEntity.INSTANCE;
+		return org.instantlogic.designer.entity.TextTemplateDesignEntity.INSTANCE;
 	}
 
 	@Override
