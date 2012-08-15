@@ -10,7 +10,7 @@ public class FragmentTemplateDesign extends AbstractFragmentTemplateDesign {
 	}
 	
 	
-	public FragmentTemplateDesign setText(String propertyName, TextDesign text) {
+	public FragmentTemplateDesign setText(String propertyName, TextTemplateDesign text) {
 		PropertyDesign fragmentText = new PropertyDesign();
 		fragmentText.setPropertyName(propertyName);
 		fragmentText.setText(text);

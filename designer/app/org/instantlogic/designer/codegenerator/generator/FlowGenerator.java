@@ -55,8 +55,8 @@ public class FlowGenerator extends AbstractGenerator {
 			if (edge.startNode!=null) {
 				edge.startNode = edgePoint(edgeDesign.getStartNode());
 			}
-			if (edgeDesign.getStartEvent()!=null) {
-				edge.event = edgeDesign.getStartEvent().getTechnicalNameCapitalized();
+			if (edgeDesign.getEvent()!=null) {
+				edge.event = edgeDesign.getEvent().getTechnicalNameCapitalized();
 			}
 			edge.endNode = edgePoint(edgeDesign.getEndNode());
 			model.edges.add(edge);

@@ -9,7 +9,7 @@ import org.instantlogic.designer.AttributeDesign;
 import org.instantlogic.designer.DomainEntryDesign;
 import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.RelationDesign;
-import org.instantlogic.designer.TextDesign;
+import org.instantlogic.designer.TextTemplateDesign;
 import org.instantlogic.designer.codegenerator.classmodel.EntityClassModel;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 import org.instantlogic.fabric.value.Multi;
@@ -47,11 +47,11 @@ public class EntityGenerator extends AbstractGenerator {
 				attribute.className=attribute.itemClassName;
 			}
 			attribute.readonly = (attributeDesign.getReadOnly()==Boolean.TRUE);
-			TextDesign question = attributeDesign.getQuestion();
+			TextTemplateDesign question = attributeDesign.getQuestion();
 			if (question!=null) {
 				attribute.question = TextGenerator.generate(question, model);
 			}
-			TextDesign explanation = attributeDesign.getExplanation();
+			TextTemplateDesign explanation = attributeDesign.getExplanation();
 			if (explanation!=null) {
 				attribute.explanation = TextGenerator.generate(explanation, model);
 			}

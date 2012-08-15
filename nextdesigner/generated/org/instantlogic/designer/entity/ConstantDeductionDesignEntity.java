@@ -31,11 +31,23 @@ public class ConstantDeductionDesignEntity extends org.instantlogic.fabric.model
 	
 	// Attributes
 	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.ConstantDeductionDesign, java.lang.Object, java.lang.Object> value 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.ConstantDeductionDesign, java.lang.Object, java.lang.Object>(
+			"value", INSTANCE, java.lang.Object.class
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.ConstantDeductionDesign, java.lang.Object> get(org.instantlogic.designer.ConstantDeductionDesign instance) {
+				return instance.getValueAttributeValue();
+			}
+		};
+	
 	// Relations
 	
 	// Reverse relations
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
+		value,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 	};

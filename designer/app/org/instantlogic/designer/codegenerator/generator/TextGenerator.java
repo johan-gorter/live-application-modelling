@@ -1,31 +1,26 @@
 package org.instantlogic.designer.codegenerator.generator;
 
 
-import org.instantlogic.designer.ConstantStringDesign;
 import org.instantlogic.designer.DeductionSchemeDesign;
-import org.instantlogic.designer.FormattedValueDesign;
-import org.instantlogic.designer.StringProducerDesign;
-import org.instantlogic.designer.TemplatedTextDesign;
-import org.instantlogic.designer.TextDesign;
+import org.instantlogic.designer.StringTemplateDesign;
+import org.instantlogic.designer.TextTemplateDesign;
 import org.instantlogic.designer.codegenerator.classmodel.AbstractClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.TextModel;
 import org.instantlogic.fabric.value.Multi;
 
 public abstract class TextGenerator extends AbstractGenerator {
 
-	public static TextModel generate(TextDesign text, AbstractClassModel deductionSchemeHolder) {
+	public static TextModel generate(TextTemplateDesign text, AbstractClassModel deductionSchemeHolder) {
 		TextModel model = new TextModel();
-		TemplatedTextDesign templatedText = (TemplatedTextDesign) text;
-		Multi<StringProducerDesign> list = templatedText.getUntranslated();
-		for (StringProducerDesign spInstance : list) {
+		Multi<StringTemplateDesign> list = text.getUntranslated();
+		for (StringTemplateDesign spInstance : list) {
 			TextModel.StringTemplate result = new TextModel.StringTemplate();
-			if (spInstance instanceof ConstantStringDesign) {
+			if (spInstance.getConstantText()!=null) {
 				result.type = "constant";
-				result.constant = ((ConstantStringDesign)spInstance).getConstant();
-			} else if (spInstance instanceof FormattedValueDesign) {
+				result.constant = spInstance.getConstantText();
+			} else {
 				result.type = "formattedValue";
-				FormattedValueDesign fvInstance = (FormattedValueDesign)spInstance;
-				DeductionSchemeDesign scheme = fvInstance.getDeduction();
+				DeductionSchemeDesign scheme = spInstance.getDeduction();
 				result.deductionIndex = deductionSchemeHolder.addDeductionScheme(DeductionSchemeGenerator.generate(deductionSchemeHolder.rootPackageName, scheme));
 			}
 			model.untranslated.add(result);

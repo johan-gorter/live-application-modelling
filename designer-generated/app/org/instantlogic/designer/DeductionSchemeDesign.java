@@ -111,14 +111,14 @@ public class DeductionSchemeDesign extends org.instantlogic.fabric.Instance {
 	}
 
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, FormattedValueDesign> templatedText
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, StringTemplateDesign> templatedText
 		= createReverseRelationValue(org.instantlogic.designer.entity.DeductionSchemeDesignEntity.templatedText);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, FormattedValueDesign> getTemplatedTextRelationValue() {
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionSchemeDesign, StringTemplateDesign> getTemplatedTextRelationValue() {
 		return templatedText;
 	}
 
-	public org.instantlogic.designer.FormattedValueDesign getTemplatedText() {
+	public org.instantlogic.designer.StringTemplateDesign getTemplatedText() {
 		return templatedText.getValue();
 	}
 

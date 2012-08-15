@@ -12,6 +12,8 @@ public class ConstantDeductionDesignEntityGenerator extends EntityDesign {
 
     // Attributes
 
+    public static final AttributeDesign value = addAttribute(ENTITY, "value", java.lang.Object.class);
+    
     // Relations
 
 }

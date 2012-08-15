@@ -4,20 +4,19 @@ import java.io.File;
 
 import org.instantlogic.designer.ApplicationDesign;
 import org.instantlogic.designer.AttributeDesign;
-import org.instantlogic.designer.ConstantTextDesign;
 import org.instantlogic.designer.Design;
 import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.EntityDesign.RelationType;
 import org.instantlogic.designer.EventDesign;
 import org.instantlogic.designer.FlowDesign;
 import org.instantlogic.designer.FlowEdgeDesign;
-import org.instantlogic.designer.FormattedValueDesign;
 import org.instantlogic.designer.FragmentTemplateDesign;
 import org.instantlogic.designer.PlaceTemplateDesign;
 import org.instantlogic.designer.RelationDesign;
 import org.instantlogic.designer.SelectionDesign;
+import org.instantlogic.designer.StringTemplateDesign;
 import org.instantlogic.designer.SubFlowDesign;
-import org.instantlogic.designer.TemplatedTextDesign;
+import org.instantlogic.designer.TextTemplateDesign;
 import org.instantlogic.designer.codegenerator.generator.GeneratedClassModels;
 import org.instantlogic.designer.codegenerator.javacode.ApplicationJavacodeGenerator;
 
@@ -109,7 +108,7 @@ public class IzzyGenerator extends Design {
 	private static void initIssueFlow() {
 		issueFlow.addToNodes(issueDetailsPlaceTemplate);
 		issueFlow.addToEdges(new FlowEdgeDesign()
-			.setStartEvent(issueDetailsEvent)
+			.setEvent(issueDetailsEvent)
 			.setEndNode(issueDetailsPlaceTemplate));
 	}
 
@@ -119,12 +118,12 @@ public class IzzyGenerator extends Design {
 		mainFlow.addToNodes(dashboardPlaceTemplate);
 		mainFlow.addToEdges(new FlowEdgeDesign()
 			.setStartNode(dashboardPlaceTemplate)
-			.setStartEvent(issueDetailsEvent)
+			.setEvent(issueDetailsEvent)
 			.setEndNode(mainFlowIssueSubFlow)
 		);
 		mainFlow.addToEdges(new FlowEdgeDesign()
 			.setStartNode(dashboardPlaceTemplate)
-			.setStartEvent(createIssueEvent)
+			.setEvent(createIssueEvent)
 			.setEndNode(mainFlowCreateIssueSubFlow)
 		);
 	}
@@ -136,9 +135,9 @@ public class IzzyGenerator extends Design {
 			.setContent(new FragmentTemplateDesign("Page")
 				.setChildren("mainContent", 
 					new FragmentTemplateDesign("Paragraph")
-						.setText("text", new TemplatedTextDesign().addToUntranslated(new FormattedValueDesign().setDeduction(createDeduction(issueNumber)))),
+						.setText("text", new TextTemplateDesign().addToUntranslated(new StringTemplateDesign().setDeduction(createDeduction(issueNumber)))),
 					new FragmentTemplateDesign("Paragraph")
-						.setText("text", new TemplatedTextDesign().addToUntranslated(new FormattedValueDesign().setDeduction(createDeduction(issueHeadline)))),
+						.setText("text", new TextTemplateDesign().addToUntranslated(new StringTemplateDesign().setDeduction(createDeduction(issueHeadline)))),
 					new FragmentTemplateDesign("Input")
 						.setEntity(issue).setAttribute(issueHeadline)
 				)
@@ -166,19 +165,19 @@ public class IzzyGenerator extends Design {
 													new FragmentTemplateDesign("Cell")
 														.setChildren("content",
 															new FragmentTemplateDesign("Paragraph")
-																.setText("text", new TemplatedTextDesign().addToUntranslated(new FormattedValueDesign().setDeduction(createDeduction(issueNumber))))
+																.setText("text", new TextTemplateDesign().addToUntranslated(new StringTemplateDesign().setDeduction(createDeduction(issueNumber))))
 														),
 													new FragmentTemplateDesign("Cell")
 														.setChildren("content",
 															new FragmentTemplateDesign("Paragraph")
-																.setText("text", new TemplatedTextDesign().addToUntranslated(new FormattedValueDesign().setDeduction(createDeduction(issueHeadline))))
+																.setText("text", new TextTemplateDesign().addToUntranslated(new StringTemplateDesign().setDeduction(createDeduction(issueHeadline))))
 														)
 												)
 										)
 								)
 							),
 						new FragmentTemplateDesign("Button")
-							.setText("text", new ConstantTextDesign().setUntranslated("Create issue"))
+							.setText("text", new TextTemplateDesign().addToUntranslated(new StringTemplateDesign().setConstantText("Create issue")))
 							.setEvent(createIssueEvent)
 					)
 			);

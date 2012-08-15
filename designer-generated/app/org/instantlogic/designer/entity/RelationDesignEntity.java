@@ -81,14 +81,14 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 				return true;
 			};
 
-			private org.instantlogic.fabric.deduction.Deduction<java.lang.String> rule;
-			@Override
-			public org.instantlogic.fabric.deduction.Deduction<java.lang.String> getRule() {
-				if (rule==null) {
-					rule = createDeduction1();
-				}
-				return rule;
-			}
+            private org.instantlogic.fabric.deduction.Deduction<java.lang.String> rule;
+            @Override
+            public org.instantlogic.fabric.deduction.Deduction<java.lang.String> getRule() {
+                if (rule==null) {
+                    rule = createDeduction1();
+                }
+                return rule;
+            }
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.RelationDesign, java.lang.Boolean, java.lang.Boolean> reverseMultivalue 
@@ -127,14 +127,14 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 				return true;
 			};
 
-			private org.instantlogic.fabric.deduction.Deduction<java.lang.String> rule;
-			@Override
-			public org.instantlogic.fabric.deduction.Deduction<java.lang.String> getRule() {
-				if (rule==null) {
-					rule = createDeduction0();
-				}
-				return rule;
-			}
+            private org.instantlogic.fabric.deduction.Deduction<java.lang.String> rule;
+            @Override
+            public org.instantlogic.fabric.deduction.Deduction<java.lang.String> getRule() {
+                if (rule==null) {
+                    rule = createDeduction0();
+                }
+                return rule;
+            }
 		};
 	
 	// Relations

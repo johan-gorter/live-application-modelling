@@ -66,14 +66,14 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 				return true;
 			};
 
-			private org.instantlogic.fabric.deduction.Deduction<java.lang.String> rule;
-			@Override
-			public org.instantlogic.fabric.deduction.Deduction<java.lang.String> getRule() {
-				if (rule==null) {
-					rule = createDeduction0();
-				}
-				return rule;
-			}
+            private org.instantlogic.fabric.deduction.Deduction<java.lang.String> rule;
+            @Override
+            public org.instantlogic.fabric.deduction.Deduction<java.lang.String> getRule() {
+                if (rule==null) {
+                    rule = createDeduction0();
+                }
+                return rule;
+            }
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.Design, java.lang.String, java.lang.String> name 
@@ -101,14 +101,14 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 				return true;
 			};
 
-			private org.instantlogic.fabric.deduction.Deduction<java.lang.String> rule;
-			@Override
-			public org.instantlogic.fabric.deduction.Deduction<java.lang.String> getRule() {
-				if (rule==null) {
-					rule = createDeduction1();
-				}
-				return rule;
-			}
+            private org.instantlogic.fabric.deduction.Deduction<java.lang.String> rule;
+            @Override
+            public org.instantlogic.fabric.deduction.Deduction<java.lang.String> getRule() {
+                if (rule==null) {
+                    rule = createDeduction1();
+                }
+                return rule;
+            }
 		};
 	
 	// Relations

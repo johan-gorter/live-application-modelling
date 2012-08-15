@@ -42,9 +42,11 @@ public class Design extends AbstractDesign {
 		return scheme;
 	}
 	
-	protected static ConstantTextDesign createConstantText(String untranslated) {
-		ConstantTextDesign result = new ConstantTextDesign();
-		result.setUntranslated(untranslated);
+	protected static TextTemplateDesign createConstantText(String untranslated) {
+		TextTemplateDesign result = new TextTemplateDesign();
+		StringTemplateDesign stringTemplateDesign = new StringTemplateDesign();
+		stringTemplateDesign.setConstantText(untranslated);
+		result.addToUntranslated(stringTemplateDesign);
 		return result;
 	}
 	
