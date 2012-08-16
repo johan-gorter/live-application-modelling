@@ -1,5 +1,6 @@
 package org.instantlogic.engine.manager;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.instantlogic.engine.TravelerProxy;
@@ -64,6 +65,10 @@ public class CaseManager {
 				traveler.sendQueuedUpdates();
 			}
 		}
+	}
+	
+	public void processMessages(TravelerProxy travelerProxy, Message... messages) {
+		processMessages(travelerProxy, Arrays.asList(messages));
 	}
 	
 	public void processMessages(TravelerProxy travelerProxy, List<Message> messages) {

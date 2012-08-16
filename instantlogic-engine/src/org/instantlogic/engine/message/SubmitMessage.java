@@ -1,5 +1,7 @@
 package org.instantlogic.engine.message;
 
+import java.util.Map;
+
 import org.instantlogic.engine.presence.Presence;
 import org.instantlogic.engine.presence.Traveler;
 import org.instantlogic.fabric.Instance;
@@ -15,6 +17,10 @@ public class SubmitMessage extends Message {
 	
 	public SubmitMessage(String placeElementId) {
 		this.placeElementId = placeElementId;
+	}
+
+	public SubmitMessage(Map<String, Object> fragment) {
+		this.placeElementId = (String) fragment.get("id");
 	}
 
 	@Override

@@ -24,6 +24,6 @@ public class EngineProcessor {
 	
 	public static void process(String application, String caseId, TravelerProxy travelerProxy, List<Message> messages) {
 		CaseProcessor caseProcessor = getCaseProcessor(application, caseId);
-		caseProcessor.processMessages(travelerProxy, messages);
+		caseProcessor.processMessagesAndSendUpdates(travelerProxy, messages);
 	}
 }
