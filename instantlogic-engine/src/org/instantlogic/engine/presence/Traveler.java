@@ -55,8 +55,8 @@ public class Traveler extends AbstractTraveler {
 		}
 	};
 	
-	private ObservationsOutdatedObserver placeOutdatedObserver;
 
+	private ObservationsOutdatedObserver presenceOutdatedObserver;
 	private final ValueChangeObserver presenceOutdatedValueChangeObserver = new ValueChangeObserver() {
 		@Override
 		public void valueChanged(ValueChangeEvent event) {
@@ -65,8 +65,8 @@ public class Traveler extends AbstractTraveler {
 		}
 	};
 	
-	private ObservationsOutdatedObserver presenceOutdatedObserver;
-	private ValueChangeObserver currentPlaceChangedObserver = new ValueChangeObserver() {
+	private ObservationsOutdatedObserver placeOutdatedObserver;
+	private ValueChangeObserver placeOutdatedValueChangedObserver = new ValueChangeObserver() {
 		
 		@Override
 		public void valueChanged(ValueChangeEvent event) {
@@ -85,7 +85,7 @@ public class Traveler extends AbstractTraveler {
 		this.proxy = proxy;
 		this.travelerInfo = proxy.getTravelerInfo();
 		setId(travelerInfo.getTravelerId());
-		this.getCurrentPlaceRelationValue().addValueChangeObserver(currentPlaceChangedObserver);
+		this.getCurrentPlaceRelationValue().addValueChangeObserver(placeOutdatedValueChangedObserver);
 	}
 	
 	public void queuePlaceIfNeeded() {
@@ -196,7 +196,6 @@ public class Traveler extends AbstractTraveler {
 			placeOutdatedObserver.remove();
 			placeOutdatedObserver = null;
 		}
-		
 		this.proxy.sendUpdates(Collections.singletonList(new Update(exception, rendering)));
 	}
 }

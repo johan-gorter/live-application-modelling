@@ -1,76 +1,43 @@
 package org.instantlogic.engine.manager;
 
 import java.util.Collections;
-import java.util.List;
 
 import junit.framework.Assert;
 
-import org.instantlogic.engine.TravelerProxy;
 import org.instantlogic.engine.message.EnterMessage;
 import org.instantlogic.engine.message.Message;
+import org.instantlogic.engine.util.TravelerProxyStub;
 import org.instantlogic.example.izzy.Issue;
 import org.instantlogic.example.izzy.IzzyApplication;
 import org.instantlogic.example.izzy.Project;
-import org.instantlogic.fabric.util.ValueChangeEvent;
-import org.instantlogic.fabric.util.ValueChangeObserver;
 import org.instantlogic.interaction.util.TravelerInfo;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class PlaceManagerTest {
-
-	protected ValueChangeEvent lastEvent;
-	
-	private ValueChangeObserver placeOutdatedValueChangeObserver = new ValueChangeObserver() {
-		@Override
-		public void valueChanged(ValueChangeEvent event) {
-			lastEvent = event;
-		}
-	};
-
 
 	@Before
 	public void setUp() {
 		ApplicationManager.registerApplication(IzzyApplication.INSTANCE);
 		travelerInfo = new TravelerInfo("traveler1");
 		travelerInfo.setAuthenticatedUsername("user1");
-		lastUpdates = null;
+		traveler1 = new TravelerProxyStub(travelerInfo);
 	}
 	
-	@After
-	public void tearDown() {
-		lastEvent = null;
-	}
-	
-	private TravelerProxy proxy = new TravelerProxy() {
-		
-		@Override
-		public void sendUpdates(List<Update> updates) {
-			lastUpdates = updates;
-		}
-		
-		@Override
-		public TravelerInfo getTravelerInfo() {
-			return travelerInfo;
-		}
-	};
+	private TravelerProxyStub traveler1;
 	
 	protected TravelerInfo travelerInfo;
-	
-	protected List<Update> lastUpdates;
 	
 	@Test
 	public void test() {
 		ApplicationManager applicationManager = ApplicationManager.getManager("izzy");
 		CaseManager case1 = applicationManager.getOrCreateCase("project1");
-		case1.processMessages(proxy, Collections.singletonList((Message)new EnterMessage("dashboard")));
+		case1.processMessages(traveler1, Collections.singletonList((Message)new EnterMessage("dashboard")));
 		case1.sendUpdates();
-		Assert.assertEquals(2, lastUpdates.size());
-		lastUpdates = null;
+		Assert.assertEquals(2, traveler1.getLastUpdates().size());
+		traveler1.clearLastUpdates();
 		((Project)case1.getCase()).addToIssues(new Issue());
 		case1.sendUpdates();
-		Assert.assertEquals(1, lastUpdates.size());
+		Assert.assertEquals(1, traveler1.getLastUpdates().size());
 	}
-
 }

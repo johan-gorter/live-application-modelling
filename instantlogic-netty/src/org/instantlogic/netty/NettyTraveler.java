@@ -110,7 +110,7 @@ public class NettyTraveler implements TravelerProxy {
 			state = State.REMOVED;
 			logger.info("Removing traveler {}", travelerInfo.getTravelerId());
 			nettyTravelers.remove(travelerInfo.getTravelerId());
-			this.caseProcessor.processMessages(this, Collections.singletonList((Message)new EnterMessage(null)));
+			this.caseProcessor.processMessagesAndSendUpdates(this, Collections.singletonList((Message)new EnterMessage(null)));
 		}
 		if (state==State.ACTIVE && parkedRequests.size()==0) {
 			state = State.MAY_BE_OBANDONED;
@@ -146,7 +146,7 @@ public class NettyTraveler implements TravelerProxy {
 				messages.add(new PresenceMessage(command, data));
 			}
 		}
-		this.caseProcessor.processMessages(this, messages);
+		this.caseProcessor.processMessagesAndSendUpdates(this, messages); // Will also queue updates
 	}
 
 	private Object getPrimitiveValue(JsonPrimitive jsonPrimitive) {

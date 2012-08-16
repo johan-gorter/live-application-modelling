@@ -33,7 +33,7 @@ public class CaseProcessor {
 		this.caseManager = new CaseManager(applicationManager,caseId);
 	}
 
-	public void processMessages(TravelerProxy travelerProxy, List<Message> messages) {
+	public void processMessagesAndSendUpdates(TravelerProxy travelerProxy, List<Message> messages) {
 		List<QueueEntry> processEntries;
 		synchronized (queueLock) {
 			if (queueBeingProcessed) {
