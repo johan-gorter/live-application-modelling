@@ -1,6 +1,8 @@
 package org.instantlogic.fabric.model;
 
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.instantlogic.fabric.Instance;
 
@@ -70,13 +72,29 @@ public abstract class Entity<I extends Instance> extends Concept {
 		public void remove() {
 			throw new UnsupportedOperationException("Not implemented");
 		}
-		
+	}
+	
+	private final Map<String, I> staticInstances = new LinkedHashMap<String, I>();
+	
+	protected I addStaticInstance(String name, I instance) {
+		staticInstances.put(name, instance);
+		return instance;
 	}
 	
 	public Entity<?> extendsEntity() {
 		return null;
 	}
 	
+	public abstract Attribute<I, ? extends Object, ? extends Object>[] getLocalAttributes();
+	
+	public abstract Relation<I, ? extends Object, ? extends Instance>[] getLocalRelations();
+
+	public abstract Relation<? extends Instance, ? extends Object, I>[] getLocalReverseRelations();
+
+	public abstract I createInstance();
+	
+	public abstract Class<I> getInstanceClass();
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public final Iterable<Attribute<I, ? extends Object, ? extends Object>> getAttributes() {
 		Entity<?> extendsEntity = extendsEntity();
@@ -106,15 +124,8 @@ public abstract class Entity<I extends Instance> extends Concept {
 		}
 		return new BaseEntityFirstIterable(baseEntityIterator, getLocalReverseRelations());
 	}
-	
-	public abstract Attribute<I, ? extends Object, ? extends Object>[] getLocalAttributes();
-	
-	public abstract Relation<I, ? extends Object, ? extends Instance>[] getLocalRelations();
 
-	public abstract Relation<? extends Instance, ? extends Object, I>[] getLocalReverseRelations();
-
-	public abstract I createInstance();
-	
-	public abstract Class<I> getInstanceClass();
-
+	public Map<String, I> getStaticInstances() {
+		return staticInstances;
+	}
 }

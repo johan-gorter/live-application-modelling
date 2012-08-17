@@ -4,6 +4,7 @@ public class ElementDesignEntity extends org.instantlogic.fabric.model.Entity<or
 
 	public static final ElementDesignEntity INSTANCE = new ElementDesignEntity();
 	
+	
 	protected ElementDesignEntity() {
 	}
 

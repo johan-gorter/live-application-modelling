@@ -4,6 +4,7 @@ public class SelectionDesignEntity extends org.instantlogic.fabric.model.Entity<
 
 	public static final SelectionDesignEntity INSTANCE = new SelectionDesignEntity();
 	
+	
 	protected SelectionDesignEntity() {
 	}
 
@@ -35,7 +36,8 @@ public class SelectionDesignEntity extends org.instantlogic.fabric.model.Entity<
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.SelectionDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.ElementDesign>, org.instantlogic.designer.ElementDesign> children
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.SelectionDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.ElementDesign>, org.instantlogic.designer.ElementDesign>(
-			"children", INSTANCE, org.instantlogic.designer.entity.ElementDesignEntity.INSTANCE, org.instantlogic.designer.ElementDesign.class, org.instantlogic.designer.entity.ElementDesignEntity.childOfSelection
+			"children", INSTANCE, org.instantlogic.designer.entity.ElementDesignEntity.INSTANCE, org.instantlogic.designer.ElementDesign.class, 
+			org.instantlogic.designer.entity.ElementDesignEntity.childOfSelection
 		) {
 	
 			@Override
@@ -56,7 +58,8 @@ public class SelectionDesignEntity extends org.instantlogic.fabric.model.Entity<
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.SelectionDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign> selection
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.SelectionDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign>(
-			"selection", INSTANCE, org.instantlogic.designer.entity.DeductionSchemeDesignEntity.INSTANCE, org.instantlogic.designer.DeductionSchemeDesign.class, org.instantlogic.designer.entity.DeductionSchemeDesignEntity.selection
+			"selection", INSTANCE, org.instantlogic.designer.entity.DeductionSchemeDesignEntity.INSTANCE, org.instantlogic.designer.DeductionSchemeDesign.class, 
+			org.instantlogic.designer.entity.DeductionSchemeDesignEntity.selection
 		) {
 	
 			@Override

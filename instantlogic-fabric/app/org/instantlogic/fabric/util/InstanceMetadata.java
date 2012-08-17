@@ -11,6 +11,7 @@ import java.util.NoSuchElementException;
 
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.text.TextTemplate;
 
 public class InstanceMetadata {
 
@@ -27,6 +28,7 @@ public class InstanceMetadata {
 	private Map<String, Instance> children;
 	private Map<String, Instance> unmodifiableChildren = Collections.emptyMap();
 	
+	private TextTemplate staticDescription;
 
 	public InstanceMetadata(Instance instance) {
 		this.instance = instance;
@@ -197,5 +199,16 @@ public class InstanceMetadata {
 			throw new NoSuchElementException("Child "+localId);
 		}
 		return result;
+	}
+
+	/**
+	 * Only used in static instances
+	 */
+	public TextTemplate getStaticDescription() {
+		return staticDescription;
+	}
+
+	public void setStaticDescription(TextTemplate staticDescription) {
+		this.staticDescription = staticDescription;
 	}
 }

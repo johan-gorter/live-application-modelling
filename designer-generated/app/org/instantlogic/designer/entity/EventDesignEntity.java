@@ -4,6 +4,7 @@ public class EventDesignEntity extends org.instantlogic.fabric.model.Entity<org.
 
 	public static final EventDesignEntity INSTANCE = new EventDesignEntity();
 	
+	
 	protected EventDesignEntity() {
 	}
 
@@ -35,7 +36,8 @@ public class EventDesignEntity extends org.instantlogic.fabric.model.Entity<org.
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EventDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EntityDesign>, org.instantlogic.designer.EntityDesign> parameters
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EventDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EntityDesign>, org.instantlogic.designer.EntityDesign>(
-			"parameters", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, org.instantlogic.designer.entity.EntityDesignEntity.parameterInEvent
+			"parameters", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, 
+			org.instantlogic.designer.entity.EntityDesignEntity.parameterInEvent
 		) {
 	
 			@Override

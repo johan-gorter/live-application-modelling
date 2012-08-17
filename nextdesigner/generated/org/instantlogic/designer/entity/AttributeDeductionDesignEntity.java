@@ -4,6 +4,7 @@ public class AttributeDeductionDesignEntity extends org.instantlogic.fabric.mode
 
 	public static final AttributeDeductionDesignEntity INSTANCE = new AttributeDeductionDesignEntity();
 	
+	
 	protected AttributeDeductionDesignEntity() {
 	}
 
@@ -35,7 +36,8 @@ public class AttributeDeductionDesignEntity extends org.instantlogic.fabric.mode
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDeductionDesign, org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDesign> attribute
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDeductionDesign, org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDesign>(
-			"attribute", INSTANCE, org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE, org.instantlogic.designer.AttributeDesign.class, org.instantlogic.designer.entity.AttributeDesignEntity.attributeInDeductions
+			"attribute", INSTANCE, org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE, org.instantlogic.designer.AttributeDesign.class, 
+			org.instantlogic.designer.entity.AttributeDesignEntity.attributeInDeductions
 		) {
 	
 			@Override

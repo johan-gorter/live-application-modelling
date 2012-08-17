@@ -4,6 +4,7 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 
 	public static final DesignEntity INSTANCE = new DesignEntity();
 	
+	
 	protected DesignEntity() {
 	}
 

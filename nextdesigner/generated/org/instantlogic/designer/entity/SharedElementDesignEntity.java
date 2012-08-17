@@ -4,6 +4,7 @@ public class SharedElementDesignEntity extends org.instantlogic.fabric.model.Ent
 
 	public static final SharedElementDesignEntity INSTANCE = new SharedElementDesignEntity();
 	
+	
 	protected SharedElementDesignEntity() {
 	}
 
@@ -35,7 +36,8 @@ public class SharedElementDesignEntity extends org.instantlogic.fabric.model.Ent
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.SharedElementDesign, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign> definition
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.SharedElementDesign, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign>(
-			"definition", INSTANCE, org.instantlogic.designer.entity.SharedFragmentTemplateDefinitionDesignEntity.INSTANCE, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign.class, org.instantlogic.designer.entity.SharedFragmentTemplateDefinitionDesignEntity.usages
+			"definition", INSTANCE, org.instantlogic.designer.entity.SharedFragmentTemplateDefinitionDesignEntity.INSTANCE, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign.class, 
+			org.instantlogic.designer.entity.SharedFragmentTemplateDefinitionDesignEntity.usages
 		) {
 	
 			@Override

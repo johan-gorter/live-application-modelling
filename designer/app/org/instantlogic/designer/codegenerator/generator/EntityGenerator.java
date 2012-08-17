@@ -9,8 +9,10 @@ import org.instantlogic.designer.AttributeDesign;
 import org.instantlogic.designer.DomainEntryDesign;
 import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.RelationDesign;
+import org.instantlogic.designer.StaticInstanceDesign;
 import org.instantlogic.designer.TextTemplateDesign;
 import org.instantlogic.designer.codegenerator.classmodel.EntityClassModel;
+import org.instantlogic.designer.codegenerator.classmodel.EntityClassModel.StaticInstance;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 import org.instantlogic.fabric.value.Multi;
 
@@ -93,21 +95,30 @@ public class EntityGenerator extends AbstractGenerator {
 			model.relations.add(relation);
 		}
 		for (RelationDesign relationDesign: entityDesign.getReverseRelations()) {
-			EntityClassModel.Relation relation = new EntityClassModel.Relation();
-			relation.name = relationDesign.getReverseName();
-			relation.technicalName = relationDesign.getReverseTechnicalName();
-			relation.javaIdentifier = relationDesign.getReverseJavaIdentifier();
-			relation.multivalue = (relationDesign.getReverseMultivalue()==Boolean.TRUE);
-			relation.reverseName = relationDesign.getTechnicalNameCapitalized();
-			relation.reverseJavaIdentifier = relationDesign.getJavaIdentifier();
-			relation.item = relationDesign.getFrom().getTechnicalNameCapitalized();
-			relation.to = model.rootPackageName+"."+relation.item;
-			if (relation.multivalue) {
-				relation.to = "org.instantlogic.fabric.value.Multi<"+relation.to+">";
+			if (relationDesign.getReverseName()!=null) {
+				EntityClassModel.Relation relation = new EntityClassModel.Relation();
+				relation.name = relationDesign.getReverseName();
+				relation.technicalName = relationDesign.getReverseTechnicalName();
+				relation.javaIdentifier = relationDesign.getReverseJavaIdentifier();
+				relation.multivalue = (relationDesign.getReverseMultivalue()==Boolean.TRUE);
+				relation.reverseName = relationDesign.getTechnicalNameCapitalized();
+				relation.reverseJavaIdentifier = relationDesign.getJavaIdentifier();
+				relation.item = relationDesign.getFrom().getTechnicalNameCapitalized();
+				relation.to = model.rootPackageName+"."+relation.item;
+				if (relation.multivalue) {
+					relation.to = "org.instantlogic.fabric.value.Multi<"+relation.to+">";
+				}
+				model.reverseRelations.add(relation);
 			}
-			model.reverseRelations.add(relation);
 		}
 		sortNames(model);
+		for (StaticInstanceDesign staticInstanceDesign: entityDesign.getStaticInstances()) {
+			StaticInstance staticInstance = new StaticInstance();
+			staticInstance.name = staticInstanceDesign.getName();
+			staticInstance.javaIdentifier = staticInstanceDesign.getJavaIdentifier();
+			staticInstance.description = TextGenerator.generate(staticInstanceDesign.getDescription(), model);
+			model.staticInstances.add(staticInstance);
+		}
 		this.observations = new ObservationsOutdatedObserver(entityDesign.getMetadata().getCaseAdministration().stopRecordingObservations(), null);
 		context.updatedEntities.add(model);
 	}

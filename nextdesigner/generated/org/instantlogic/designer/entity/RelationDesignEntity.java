@@ -4,6 +4,7 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 
 	public static final RelationDesignEntity INSTANCE = new RelationDesignEntity();
 	
+	
 	protected RelationDesignEntity() {
 	}
 
@@ -141,7 +142,8 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.RelationDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> to
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.RelationDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign>(
-			"to", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, org.instantlogic.designer.entity.EntityDesignEntity.reverseRelations
+			"to", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, 
+			org.instantlogic.designer.entity.EntityDesignEntity.reverseRelations
 		) {
 	
 			@Override

@@ -4,6 +4,7 @@ public class DomainEntryDesignEntity extends org.instantlogic.fabric.model.Entit
 
 	public static final DomainEntryDesignEntity INSTANCE = new DomainEntryDesignEntity();
 	
+	
 	protected DomainEntryDesignEntity() {
 	}
 
@@ -35,7 +36,8 @@ public class DomainEntryDesignEntity extends org.instantlogic.fabric.model.Entit
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DomainEntryDesign, org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.TextTemplateDesign> display
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DomainEntryDesign, org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.TextTemplateDesign>(
-			"display", INSTANCE, org.instantlogic.designer.entity.TextTemplateDesignEntity.INSTANCE, org.instantlogic.designer.TextTemplateDesign.class, org.instantlogic.designer.entity.TextTemplateDesignEntity.displayOnDomainEntry
+			"display", INSTANCE, org.instantlogic.designer.entity.TextTemplateDesignEntity.INSTANCE, org.instantlogic.designer.TextTemplateDesign.class, 
+			org.instantlogic.designer.entity.TextTemplateDesignEntity.displayOnDomainEntry
 		) {
 	
 			@Override

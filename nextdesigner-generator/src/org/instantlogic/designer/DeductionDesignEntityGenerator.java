@@ -7,6 +7,7 @@ public class DeductionDesignEntityGenerator extends EntityDesign {
     
     private DeductionDesignEntityGenerator() {
         setName("DeductionDesign");
+        setIsCustomized(true);
     }
 
     // Attributes

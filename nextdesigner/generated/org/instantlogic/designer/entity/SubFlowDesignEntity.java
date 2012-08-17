@@ -4,6 +4,7 @@ public class SubFlowDesignEntity extends org.instantlogic.fabric.model.Entity<or
 
 	public static final SubFlowDesignEntity INSTANCE = new SubFlowDesignEntity();
 	
+	
 	protected SubFlowDesignEntity() {
 	}
 
@@ -35,7 +36,8 @@ public class SubFlowDesignEntity extends org.instantlogic.fabric.model.Entity<or
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.SubFlowDesign, org.instantlogic.designer.FlowDesign, org.instantlogic.designer.FlowDesign> flow
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.SubFlowDesign, org.instantlogic.designer.FlowDesign, org.instantlogic.designer.FlowDesign>(
-			"flow", INSTANCE, org.instantlogic.designer.entity.FlowDesignEntity.INSTANCE, org.instantlogic.designer.FlowDesign.class, org.instantlogic.designer.entity.FlowDesignEntity.subFlowIn
+			"flow", INSTANCE, org.instantlogic.designer.entity.FlowDesignEntity.INSTANCE, org.instantlogic.designer.FlowDesign.class, 
+			org.instantlogic.designer.entity.FlowDesignEntity.subFlowIn
 		) {
 	
 			@Override
