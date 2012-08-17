@@ -4,6 +4,7 @@ public class SumDeductionDesignEntity extends org.instantlogic.fabric.model.Enti
 
 	public static final SumDeductionDesignEntity INSTANCE = new SumDeductionDesignEntity();
 	
+	
 	protected SumDeductionDesignEntity() {
 	}
 

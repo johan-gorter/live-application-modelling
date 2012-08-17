@@ -4,6 +4,7 @@ public class NegationDeductionDesignEntity extends org.instantlogic.fabric.model
 
 	public static final NegationDeductionDesignEntity INSTANCE = new NegationDeductionDesignEntity();
 	
+	
 	protected NegationDeductionDesignEntity() {
 	}
 
