@@ -4,6 +4,7 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 
 	public static final EntityDesignEntity INSTANCE = new EntityDesignEntity();
 	
+	
 	protected EntityDesignEntity() {
 	}
 
@@ -35,7 +36,8 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.AttributeDesign>, org.instantlogic.designer.AttributeDesign> attributes
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.AttributeDesign>, org.instantlogic.designer.AttributeDesign>(
-			"attributes", INSTANCE, org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE, org.instantlogic.designer.AttributeDesign.class, org.instantlogic.designer.entity.AttributeDesignEntity.belongsToEntity
+			"attributes", INSTANCE, org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE, org.instantlogic.designer.AttributeDesign.class, 
+			org.instantlogic.designer.entity.AttributeDesignEntity.belongsToEntity
 		) {
 	
 			@Override
@@ -56,7 +58,8 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> extendsFrom
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign>(
-			"extendsFrom", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, org.instantlogic.designer.entity.EntityDesignEntity.extensions
+			"extendsFrom", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, 
+			org.instantlogic.designer.entity.EntityDesignEntity.extensions
 		) {
 	
 			@Override
@@ -69,13 +72,36 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.RelationDesign>, org.instantlogic.designer.RelationDesign> relations
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.RelationDesign>, org.instantlogic.designer.RelationDesign>(
-			"relations", INSTANCE, org.instantlogic.designer.entity.RelationDesignEntity.INSTANCE, org.instantlogic.designer.RelationDesign.class, org.instantlogic.designer.entity.RelationDesignEntity.from
+			"relations", INSTANCE, org.instantlogic.designer.entity.RelationDesignEntity.INSTANCE, org.instantlogic.designer.RelationDesign.class, 
+			org.instantlogic.designer.entity.RelationDesignEntity.from
 		) {
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.RelationDesign> get(
 					org.instantlogic.designer.EntityDesign instance) {
 				return instance.getRelationsRelationValue();
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+			
+		};
+	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.StaticInstanceDesign>, org.instantlogic.designer.StaticInstanceDesign> staticInstances
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.StaticInstanceDesign>, org.instantlogic.designer.StaticInstanceDesign>(
+			"staticInstances", INSTANCE, org.instantlogic.designer.entity.StaticInstanceDesignEntity.INSTANCE, org.instantlogic.designer.StaticInstanceDesign.class, 
+			org.instantlogic.designer.entity.StaticInstanceDesignEntity.entity
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.StaticInstanceDesign> get(
+					org.instantlogic.designer.EntityDesign instance) {
+				return instance.getStaticInstancesRelationValue();
 			}
 	
 			public boolean isOwner() {
@@ -268,6 +294,7 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 		attributes,
 		extendsFrom,
 		relations,
+		staticInstances,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		application,

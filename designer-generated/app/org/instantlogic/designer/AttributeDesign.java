@@ -63,6 +63,23 @@ public class AttributeDesign extends Design {
 	
 	// Relations
 	
+	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, DataCategoryDesign> dataCategory
+		= createRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity.dataCategory);
+		
+	public org.instantlogic.fabric.value.RelationValue<AttributeDesign, DataCategoryDesign> getDataCategoryRelationValue() {
+		return dataCategory;
+	}
+
+	public org.instantlogic.designer.DataCategoryDesign getDataCategory() {
+		return dataCategory.getValue();
+	}
+	
+	public AttributeDesign setDataCategory(org.instantlogic.designer.DataCategoryDesign newValue) {
+		dataCategory.setValue(newValue);
+		return (AttributeDesign)this;
+	}
+
+	
 	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, DeductionSchemeDesign> _default
 		= createRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity._default);
 		

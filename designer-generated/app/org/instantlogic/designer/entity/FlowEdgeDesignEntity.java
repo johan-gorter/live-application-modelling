@@ -4,6 +4,7 @@ public class FlowEdgeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 
 	public static final FlowEdgeDesignEntity INSTANCE = new FlowEdgeDesignEntity();
 	
+	
 	protected FlowEdgeDesignEntity() {
 	}
 
@@ -31,7 +32,8 @@ public class FlowEdgeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.designer.FlowNodeBaseDesign> endNode
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.designer.FlowNodeBaseDesign>(
-			"endNode", INSTANCE, org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.INSTANCE, org.instantlogic.designer.FlowNodeBaseDesign.class, org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.incomingEdges
+			"endNode", INSTANCE, org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.INSTANCE, org.instantlogic.designer.FlowNodeBaseDesign.class, 
+			org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.incomingEdges
 		) {
 	
 			@Override
@@ -44,7 +46,8 @@ public class FlowEdgeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.EventDesign, org.instantlogic.designer.EventDesign> event
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.EventDesign, org.instantlogic.designer.EventDesign>(
-			"event", INSTANCE, org.instantlogic.designer.entity.EventDesignEntity.INSTANCE, org.instantlogic.designer.EventDesign.class, org.instantlogic.designer.entity.EventDesignEntity.eventInEdges
+			"event", INSTANCE, org.instantlogic.designer.entity.EventDesignEntity.INSTANCE, org.instantlogic.designer.EventDesign.class, 
+			org.instantlogic.designer.entity.EventDesignEntity.eventInEdges
 		) {
 	
 			@Override
@@ -57,7 +60,8 @@ public class FlowEdgeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.designer.FlowNodeBaseDesign> startNode
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.designer.FlowNodeBaseDesign>(
-			"startNode", INSTANCE, org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.INSTANCE, org.instantlogic.designer.FlowNodeBaseDesign.class, org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.outgoingEdges
+			"startNode", INSTANCE, org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.INSTANCE, org.instantlogic.designer.FlowNodeBaseDesign.class, 
+			org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.outgoingEdges
 		) {
 	
 			@Override

@@ -20,5 +20,7 @@ public class EntityDesignEntityGenerator extends EntityDesign {
             .setReverseName("belongsToEntity");
     public static final RelationDesign relations = addRelation(ENTITY, "relations", RelationType.OneToManyAggregation, RelationDesignEntityGenerator.ENTITY)
             .setReverseName("from");
+    public static final RelationDesign staticInstances = addRelation(ENTITY, "staticInstances", RelationType.OneToManyAggregation, StaticInstanceDesignEntityGenerator.ENTITY)
+            .setReverseName("entity");
 
 }

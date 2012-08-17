@@ -110,8 +110,25 @@ public class EntityClassModel extends AbstractClassModel {
 			return reverseJavaIdentifier;
 		}
 	}
+	
+	public static class StaticInstance {
+		public String name;
+		public String javaIdentifier;
+		public TextModel description;
+		
+		public String getName() {
+			return name;
+		}
+		public TextModel getDescription() {
+			return description;
+		}
+		public String getJavaIdentifier() {
+			return javaIdentifier;
+		}
+	}
 
 	public String extendsFrom;
+	public final List<StaticInstance> staticInstances = new ArrayList<StaticInstance>();
 	public final List<Attribute> attributes = new ArrayList<Attribute>();
 	public final List<Relation> relations = new ArrayList<Relation>();
 	public final List<Relation> reverseRelations = new ArrayList<Relation>();
@@ -142,5 +159,8 @@ public class EntityClassModel extends AbstractClassModel {
 			internalEntityName = getRootPackageInternalPrefix()+"entity/"+technicalNameCapitalized+"Entity";
 		}
 		return internalEntityName;
+	}
+	public List<StaticInstance> getStaticInstances() {
+		return staticInstances;
 	}
 }

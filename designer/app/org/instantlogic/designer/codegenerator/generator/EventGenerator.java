@@ -1,15 +1,9 @@
 package org.instantlogic.designer.codegenerator.generator;
 
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.EventDesign;
-import org.instantlogic.designer.codegenerator.classmodel.AbstractClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.EventClassModel;
-import org.instantlogic.designer.codegenerator.javacode.AbstractJavacodeGenerator;
 import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 

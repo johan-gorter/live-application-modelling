@@ -4,6 +4,7 @@ public class TextTemplateDesignEntity extends org.instantlogic.fabric.model.Enti
 
 	public static final TextTemplateDesignEntity INSTANCE = new TextTemplateDesignEntity();
 	
+	
 	protected TextTemplateDesignEntity() {
 	}
 
@@ -35,7 +36,8 @@ public class TextTemplateDesignEntity extends org.instantlogic.fabric.model.Enti
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.TextTemplateDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.StringTemplateDesign>, org.instantlogic.designer.StringTemplateDesign> untranslated
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.TextTemplateDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.StringTemplateDesign>, org.instantlogic.designer.StringTemplateDesign>(
-			"untranslated", INSTANCE, org.instantlogic.designer.entity.StringTemplateDesignEntity.INSTANCE, org.instantlogic.designer.StringTemplateDesign.class, org.instantlogic.designer.entity.StringTemplateDesignEntity.untranslatedInTemplate
+			"untranslated", INSTANCE, org.instantlogic.designer.entity.StringTemplateDesignEntity.INSTANCE, org.instantlogic.designer.StringTemplateDesign.class, 
+			org.instantlogic.designer.entity.StringTemplateDesignEntity.untranslatedInTemplate
 		) {
 	
 			@Override
@@ -55,6 +57,22 @@ public class TextTemplateDesignEntity extends org.instantlogic.fabric.model.Enti
 		};
 	
 	// Reverse relations
+	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.StaticInstanceDesign, org.instantlogic.designer.StaticInstanceDesign> descriptionOnStaticInstance
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.StaticInstanceDesign, org.instantlogic.designer.StaticInstanceDesign>(
+			"descriptionOnStaticInstance", INSTANCE, org.instantlogic.designer.entity.StaticInstanceDesignEntity.INSTANCE, org.instantlogic.designer.StaticInstanceDesign.class, org.instantlogic.designer.entity.StaticInstanceDesignEntity.description
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.StaticInstanceDesign> get(
+					org.instantlogic.designer.TextTemplateDesign instance) {
+				return instance.getDescriptionOnStaticInstanceRelationValue();
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.DomainEntryDesign, org.instantlogic.designer.DomainEntryDesign> displayOnDomainEntry
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.DomainEntryDesign, org.instantlogic.designer.DomainEntryDesign>(
@@ -126,6 +144,7 @@ public class TextTemplateDesignEntity extends org.instantlogic.fabric.model.Enti
 		untranslated,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
+		descriptionOnStaticInstance,
 		displayOnDomainEntry,
 		explanationOnAttribute,
 		questionOnAttribute,

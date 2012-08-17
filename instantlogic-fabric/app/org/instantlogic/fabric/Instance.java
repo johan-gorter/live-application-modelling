@@ -1,19 +1,10 @@
 package org.instantlogic.fabric;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.NoSuchElementException;
-
 import org.instantlogic.fabric.model.Attribute;
 import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.fabric.model.Relation;
-import org.instantlogic.fabric.util.CaseAdministration;
+import org.instantlogic.fabric.text.TextTemplate;
 import org.instantlogic.fabric.util.InstanceMetadata;
-import org.instantlogic.fabric.util.ValueChangeEvent;
-import org.instantlogic.fabric.util.ValueChangeObserver;
 import org.instantlogic.fabric.value.AttributeValue;
 import org.instantlogic.fabric.value.AttributeValues;
 import org.instantlogic.fabric.value.Multi;

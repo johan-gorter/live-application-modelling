@@ -92,6 +92,38 @@ public abstract class AbstractEntityDesign extends Design {
 		return (EntityDesign)this;
 	}
 	
+	
+	private final org.instantlogic.fabric.value.RelationValues<EntityDesign, StaticInstanceDesign> staticInstances
+		= createRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.staticInstances);
+		
+	public org.instantlogic.fabric.value.RelationValues<EntityDesign, StaticInstanceDesign> getStaticInstancesRelationValue() {
+		return staticInstances;
+	}
+
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.StaticInstanceDesign> getStaticInstances() {
+		return staticInstances.getValue();
+	}
+	
+	public EntityDesign addToStaticInstances(StaticInstanceDesign item) {
+		staticInstances.addValue(item);
+		return (EntityDesign)this;
+	}
+	
+	public EntityDesign addToStaticInstances(StaticInstanceDesign item, int index) {
+		staticInstances.insertValue(item, index);
+		return (EntityDesign)this;
+	}
+	
+	public EntityDesign removeFromStaticInstances(StaticInstanceDesign item) {
+		staticInstances.removeValue(item);
+		return (EntityDesign)this;
+	}
+	
+	public EntityDesign removeFromStaticInstances(int index) {
+		staticInstances.removeValue(index);
+		return (EntityDesign)this;
+	}
+	
 
 	// Reverse relations
 	

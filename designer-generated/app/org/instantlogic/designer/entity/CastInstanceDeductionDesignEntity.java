@@ -4,6 +4,7 @@ public class CastInstanceDeductionDesignEntity extends org.instantlogic.fabric.m
 
 	public static final CastInstanceDeductionDesignEntity INSTANCE = new CastInstanceDeductionDesignEntity();
 	
+	
 	protected CastInstanceDeductionDesignEntity() {
 	}
 
@@ -35,7 +36,8 @@ public class CastInstanceDeductionDesignEntity extends org.instantlogic.fabric.m
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.CastInstanceDeductionDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> toEntity
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.CastInstanceDeductionDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign>(
-			"toEntity", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, org.instantlogic.designer.entity.EntityDesignEntity.entityInCastDeductions
+			"toEntity", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, 
+			org.instantlogic.designer.entity.EntityDesignEntity.entityInCastDeductions
 		) {
 	
 			@Override

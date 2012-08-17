@@ -4,6 +4,7 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 
 	public static final DeductionSchemeDesignEntity INSTANCE = new DeductionSchemeDesignEntity();
 	
+	
 	protected DeductionSchemeDesignEntity() {
 	}
 
@@ -31,7 +32,8 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DeductionDesign>, org.instantlogic.designer.DeductionDesign> deductions
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DeductionDesign>, org.instantlogic.designer.DeductionDesign>(
-			"deductions", INSTANCE, org.instantlogic.designer.entity.DeductionDesignEntity.INSTANCE, org.instantlogic.designer.DeductionDesign.class, org.instantlogic.designer.entity.DeductionDesignEntity.scheme
+			"deductions", INSTANCE, org.instantlogic.designer.entity.DeductionDesignEntity.INSTANCE, org.instantlogic.designer.DeductionDesign.class, 
+			org.instantlogic.designer.entity.DeductionDesignEntity.scheme
 		) {
 	
 			@Override
@@ -52,7 +54,8 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionDesign, org.instantlogic.designer.DeductionDesign> output
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionDesign, org.instantlogic.designer.DeductionDesign>(
-			"output", INSTANCE, org.instantlogic.designer.entity.DeductionDesignEntity.INSTANCE, org.instantlogic.designer.DeductionDesign.class, org.instantlogic.designer.entity.DeductionDesignEntity.schemeOutput
+			"output", INSTANCE, org.instantlogic.designer.entity.DeductionDesignEntity.INSTANCE, org.instantlogic.designer.DeductionDesign.class, 
+			org.instantlogic.designer.entity.DeductionDesignEntity.schemeOutput
 		) {
 	
 			@Override

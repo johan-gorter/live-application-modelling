@@ -6,7 +6,15 @@ public class ${technicalNameCapitalized}Entity extends org.instantlogic.fabric.m
 
 	public static final ${technicalNameCapitalized}Entity INSTANCE = new ${technicalNameCapitalized}Entity();
 	
+	<#list staticInstances as staticInstance>
+	public final ${rootPackageName}.${technicalNameCapitalized} ${staticInstance.javaIdentifier};
+	</#list>
+	
 	protected ${technicalNameCapitalized}Entity() {
+	   <#list staticInstances as staticInstance>
+	   ${staticInstance.javaIdentifier} = addStaticInstance("${staticInstance.name}", createInstance());
+	   <#if staticInstance.description??>${staticInstance.javaIdentifier}.getMetadata().setStaticDescription(<@text_macro text=staticInstance.description />);</#if>
+	   </#list>
 	}
 
 	<#if extendsFrom??>
@@ -122,7 +130,8 @@ public class ${technicalNameCapitalized}Entity extends org.instantlogic.fabric.m
 	
 	public static final org.instantlogic.fabric.model.Relation<${rootPackageName}.${technicalNameCapitalized}, ${relation.to}, ${rootPackageName}.${relation.item}> ${relation.javaIdentifier}
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<${rootPackageName}.${technicalNameCapitalized}, ${relation.to}, ${rootPackageName}.${relation.item}>(
-			"${relation.technicalName}", INSTANCE, ${rootPackageName}.entity.${relation.item}Entity.INSTANCE, ${rootPackageName}.${relation.item}.class, ${rootPackageName}.entity.${relation.item}Entity.${relation.reverseJavaIdentifier}
+			"${relation.technicalName}", INSTANCE, ${rootPackageName}.entity.${relation.item}Entity.INSTANCE, ${rootPackageName}.${relation.item}.class, 
+			<#if relation.reverseName??>${rootPackageName}.entity.${relation.item}Entity.${relation.reverseJavaIdentifier}<#else>null</#if>
 		) {
 	
 			@Override

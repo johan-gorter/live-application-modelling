@@ -4,6 +4,7 @@ public class PlaceTemplateDesignEntity extends org.instantlogic.fabric.model.Ent
 
 	public static final PlaceTemplateDesignEntity INSTANCE = new PlaceTemplateDesignEntity();
 	
+	
 	protected PlaceTemplateDesignEntity() {
 	}
 
@@ -35,7 +36,8 @@ public class PlaceTemplateDesignEntity extends org.instantlogic.fabric.model.Ent
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.PlaceTemplateDesign, org.instantlogic.designer.ElementDesign, org.instantlogic.designer.ElementDesign> content
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.PlaceTemplateDesign, org.instantlogic.designer.ElementDesign, org.instantlogic.designer.ElementDesign>(
-			"content", INSTANCE, org.instantlogic.designer.entity.ElementDesignEntity.INSTANCE, org.instantlogic.designer.ElementDesign.class, org.instantlogic.designer.entity.ElementDesignEntity.contentOfPage
+			"content", INSTANCE, org.instantlogic.designer.entity.ElementDesignEntity.INSTANCE, org.instantlogic.designer.ElementDesign.class, 
+			org.instantlogic.designer.entity.ElementDesignEntity.contentOfPage
 		) {
 	
 			@Override
