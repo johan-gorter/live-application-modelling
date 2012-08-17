@@ -4,6 +4,7 @@ public class ConstantDeductionDesignEntity extends org.instantlogic.fabric.model
 
 	public static final ConstantDeductionDesignEntity INSTANCE = new ConstantDeductionDesignEntity();
 	
+	
 	protected ConstantDeductionDesignEntity() {
 	}
 

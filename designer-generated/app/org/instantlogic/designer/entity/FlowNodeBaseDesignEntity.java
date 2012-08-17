@@ -4,6 +4,7 @@ public class FlowNodeBaseDesignEntity extends org.instantlogic.fabric.model.Enti
 
 	public static final FlowNodeBaseDesignEntity INSTANCE = new FlowNodeBaseDesignEntity();
 	
+	
 	protected FlowNodeBaseDesignEntity() {
 	}
 
