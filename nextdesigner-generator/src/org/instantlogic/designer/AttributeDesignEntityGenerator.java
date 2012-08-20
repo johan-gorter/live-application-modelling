@@ -13,10 +13,11 @@ public class AttributeDesignEntityGenerator extends EntityDesign {
     // Attributes
     public static final AttributeDesign readOnly = addAttribute(ENTITY, "readOnly", java.lang.Boolean.class);
     public static final AttributeDesign multivalue = addAttribute(ENTITY, "multivalue", java.lang.Boolean.class);
-    public static final AttributeDesign className = addAttribute(ENTITY, "className", java.lang.String.class);
+    public static final AttributeDesign javaClassName = addAttribute(ENTITY, "javaClassName", java.lang.String.class);
 
     // Relations
     public static final RelationDesign dataCategory = addRelation(ENTITY, "dataCategory", RelationType.OneToZeroOrOne, DataCategoryDesignEntityGenerator.ENTITY);
+    public static final RelationDesign numberDataCategory = addRelation(ENTITY, "numberDataCategory", RelationType.OneToZeroOrOne, NumberDataCategoryDesignEntityGenerator.ENTITY);
     
     public static final RelationDesign question = addRelation(ENTITY, "question", RelationType.OneToZeroOrOneAggregation, TextTemplateDesignEntityGenerator.ENTITY)
             .setReverseName("questionOnAttribute");

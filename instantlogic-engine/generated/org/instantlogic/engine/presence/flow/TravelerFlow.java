@@ -1,23 +1,23 @@
 package org.instantlogic.engine.presence.flow;
 
-public class UserFlow extends org.instantlogic.interaction.flow.Flow {
+public class TravelerFlow extends org.instantlogic.interaction.flow.Flow {
 
-	public static final UserFlow INSTANCE = new UserFlow();
+	public static final TravelerFlow INSTANCE = new TravelerFlow();
 	
 	private static final org.instantlogic.interaction.flow.FlowNodeBase[] NODES = new org.instantlogic.interaction.flow.FlowNodeBase[]{
-		org.instantlogic.engine.presence.flow.user.PresencePlaceTemplate.INSTANCE,
+		org.instantlogic.engine.presence.flow.traveler.PresencePlaceTemplate.INSTANCE,
 	};
 	
 	private static final org.instantlogic.interaction.flow.FlowEdge[] EDGES = new org.instantlogic.interaction.flow.FlowEdge[]{
 	};
 	
 	private static final org.instantlogic.fabric.model.Entity[] PARAMETERS = new org.instantlogic.fabric.model.Entity[]{
-		org.instantlogic.engine.presence.entity.UserEntity.INSTANCE,
+		org.instantlogic.engine.presence.entity.TravelerEntity.INSTANCE,
 	};
 	
 	@Override
 	public String getName() {
-		return "User";
+		return "Traveler";
 	}
 
 	@Override

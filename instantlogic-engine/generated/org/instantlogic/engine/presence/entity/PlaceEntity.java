@@ -4,6 +4,7 @@ public class PlaceEntity extends org.instantlogic.fabric.model.Entity<org.instan
 
 	public static final PlaceEntity INSTANCE = new PlaceEntity();
 	
+	
 	protected PlaceEntity() {
 	}
 

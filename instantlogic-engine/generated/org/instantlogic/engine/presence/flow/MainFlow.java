@@ -6,7 +6,7 @@ public class MainFlow extends org.instantlogic.interaction.flow.Flow {
 	
 	private static final org.instantlogic.interaction.flow.FlowNodeBase[] NODES = new org.instantlogic.interaction.flow.FlowNodeBase[]{
 		org.instantlogic.engine.presence.flow.main.AnonymousPlaceTemplate.INSTANCE,
-		org.instantlogic.engine.presence.flow.main.UserSubFlow.INSTANCE,
+		org.instantlogic.engine.presence.flow.main.TravelerSubFlow.INSTANCE,
 	};
 	
 	private static final org.instantlogic.interaction.flow.FlowEdge[] EDGES = new org.instantlogic.interaction.flow.FlowEdge[]{

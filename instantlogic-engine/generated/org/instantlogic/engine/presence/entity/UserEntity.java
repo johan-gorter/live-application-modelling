@@ -4,6 +4,7 @@ public class UserEntity extends org.instantlogic.fabric.model.Entity<org.instant
 
 	public static final UserEntity INSTANCE = new UserEntity();
 	
+	
 	protected UserEntity() {
 	}
 
@@ -42,7 +43,8 @@ public class UserEntity extends org.instantlogic.fabric.model.Entity<org.instant
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.engine.presence.User, org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.Traveler>, org.instantlogic.engine.presence.Traveler> travelers
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.engine.presence.User, org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.Traveler>, org.instantlogic.engine.presence.Traveler>(
-			"travelers", INSTANCE, org.instantlogic.engine.presence.entity.TravelerEntity.INSTANCE, org.instantlogic.engine.presence.Traveler.class, org.instantlogic.engine.presence.entity.TravelerEntity.user
+			"travelers", INSTANCE, org.instantlogic.engine.presence.entity.TravelerEntity.INSTANCE, org.instantlogic.engine.presence.Traveler.class, 
+			org.instantlogic.engine.presence.entity.TravelerEntity.user
 		) {
 	
 			@Override

@@ -4,6 +4,7 @@ public class PresenceEntity extends org.instantlogic.fabric.model.Entity<org.ins
 
 	public static final PresenceEntity INSTANCE = new PresenceEntity();
 	
+	
 	protected PresenceEntity() {
 	}
 
@@ -53,7 +54,8 @@ public class PresenceEntity extends org.instantlogic.fabric.model.Entity<org.ins
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.engine.presence.Presence, org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.Place>, org.instantlogic.engine.presence.Place> activePlaces
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.engine.presence.Presence, org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.Place>, org.instantlogic.engine.presence.Place>(
-			"activePlaces", INSTANCE, org.instantlogic.engine.presence.entity.PlaceEntity.INSTANCE, org.instantlogic.engine.presence.Place.class, org.instantlogic.engine.presence.entity.PlaceEntity.presence
+			"activePlaces", INSTANCE, org.instantlogic.engine.presence.entity.PlaceEntity.INSTANCE, org.instantlogic.engine.presence.Place.class, 
+			org.instantlogic.engine.presence.entity.PlaceEntity.presence
 		) {
 	
 			@Override
@@ -74,7 +76,8 @@ public class PresenceEntity extends org.instantlogic.fabric.model.Entity<org.ins
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.engine.presence.Presence, org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.User>, org.instantlogic.engine.presence.User> users
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.engine.presence.Presence, org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.User>, org.instantlogic.engine.presence.User>(
-			"users", INSTANCE, org.instantlogic.engine.presence.entity.UserEntity.INSTANCE, org.instantlogic.engine.presence.User.class, org.instantlogic.engine.presence.entity.UserEntity.presence
+			"users", INSTANCE, org.instantlogic.engine.presence.entity.UserEntity.INSTANCE, org.instantlogic.engine.presence.User.class, 
+			org.instantlogic.engine.presence.entity.UserEntity.presence
 		) {
 	
 			@Override

@@ -16,9 +16,9 @@ public class MainFlowGenerator extends FlowDesign {
 	@Override
 	public void registerApplication(ApplicationDesign application) {
 		addToNodes(AnonymousPlaceTemplateGenerator.PLACE);
-		SubFlowDesign userSubFlow = new SubFlowDesign().setFlow(UserFlowGenerator.FLOW);
-		userSubFlow.setName("User");
-		addToNodes(userSubFlow);
+		SubFlowDesign travelerSubFlow = new SubFlowDesign().setFlow(TravelerFlowGenerator.FLOW);
+		travelerSubFlow.setName("Traveler");
+		addToNodes(travelerSubFlow);
 		
 		super.registerApplication(application);
 	}
