@@ -31,12 +31,30 @@ public class PresencePlaceTemplate extends org.instantlogic.interaction.flow.Pla
 		return d1;
 	}
 
+
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> createDeduction3() {
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.engine.presence.Traveler> d0 
+		  		= org.instantlogic.fabric.deduction.SelectedInstanceDeduction.create(org.instantlogic.engine.presence.entity.TravelerEntity.INSTANCE);
+		  	org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> d1 
+		  		= org.instantlogic.fabric.deduction.AttributeDeduction.create(org.instantlogic.engine.presence.entity.TravelerEntity.communicatorVisible, d0);
+		return d1;
+	}
+
 	
 	private static org.instantlogic.interaction.page.FragmentTemplate CONTENT = 
         new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1", "Presence")      
         .putValue("applicationName", createDeduction0())      
         .putValue("userName", createDeduction2())      
-        .putValue("caseName", createDeduction1()); 
+        .putValue("caseName", createDeduction1())      
+        .putChildren("content",
+                new org.instantlogic.interaction.page.IfElseElement(createDeduction3(),
+        new org.instantlogic.interaction.page.Element[] {
+                        new org.instantlogic.interaction.page.FragmentTemplate("0", "Communicator")        },
+        new org.instantlogic.interaction.page.Element[] {
+                        new org.instantlogic.interaction.page.FragmentTemplate("0", "ShowCommunicatorButton")        }
+)
+        )
+; 
 	
 	@Override
 	public org.instantlogic.interaction.page.FragmentTemplate getRootContainer() {

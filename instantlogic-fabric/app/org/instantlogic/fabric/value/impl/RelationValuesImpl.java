@@ -28,6 +28,7 @@ public class RelationValuesImpl<I extends Instance, To extends Instance>
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	protected void beforeFiringChange(ValueChangeEvent event) {
+		if (model.getReverseRelation()==null) return;
 		MultiValueUpdateType type = event.getMultiValueUpdateType();
 		To item = (To) event.getItemValue();
 		Operation operation = event.getOperation();

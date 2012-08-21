@@ -6,7 +6,7 @@ public class Design extends AbstractDesign {
 
 	// Create a deduction scheme for an attribute or a relation
 	protected static DeductionSchemeDesign createDeduction(AttributeDesign attribute) {
-		String className = attribute.getClassName();
+		String className = attribute.getJavaClassName();
 		EntityDesign source = attribute.getBelongsToEntity();
 		if (attribute instanceof RelationDesign) {
 			// We should come up with a solution that makes this unnecessary

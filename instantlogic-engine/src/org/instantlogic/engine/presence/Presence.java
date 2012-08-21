@@ -25,10 +25,10 @@ public class Presence extends AbstractPresence {
 		return place;
 	}
 
-	public void executeCommand(Traveler traveler, String command, Object data) {
+	public void executeCommand(Traveler traveler, String command, String id, Object value) {
 		switch (command) {
 			case "login":
-				traveler.getTravelerInfo().setAuthenticatedUsername((String)data);
+				traveler.getTravelerInfo().setAuthenticatedUsername((String)value);
 				break;
 		}
 	}

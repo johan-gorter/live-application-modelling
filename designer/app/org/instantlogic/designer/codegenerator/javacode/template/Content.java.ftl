@@ -10,6 +10,21 @@
           <@content_macro content=child depth=depth+2 />
         </#list>
     )<#lt>
+  <#elseif content.category=="IfElse">
+    new org.instantlogic.interaction.page.IfElseElement(createDeduction${content.deductionIndex}(),<#lt>
+        new org.instantlogic.interaction.page.Element[] {
+        <#list content.children as child>
+          <@content_macro content=child depth=depth+2 />
+          <#if child_has_next>,</#if><#t>
+        </#list>
+        },
+        new org.instantlogic.interaction.page.Element[] {
+        <#list content.elseChildren as child>
+          <@content_macro content=child depth=depth+2 />
+          <#if child_has_next>,</#if><#t>
+        </#list>
+        }
+    )<#lt>
   <#elseif content.category=="Fragment">
     new org.instantlogic.interaction.page.FragmentTemplate("${content.id}", "${content.fragmentTypeName}")<#t>
     <#if content.event??>

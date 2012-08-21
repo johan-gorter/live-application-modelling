@@ -10,19 +10,19 @@ public class AttributeDesign extends Design {
 
 	// Attributes
 	
-	private final org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.String> className
-		= createAttributeValue(org.instantlogic.designer.entity.AttributeDesignEntity.className);
+	private final org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.String> javaClassName
+		= createAttributeValue(org.instantlogic.designer.entity.AttributeDesignEntity.javaClassName);
 	
-	public java.lang.String getClassName() {
-		return className.getValue();
+	public java.lang.String getJavaClassName() {
+		return javaClassName.getValue();
 	}
 
-	public org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.String> getClassNameAttributeValue() {
-		return className;
+	public org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.String> getJavaClassNameAttributeValue() {
+		return javaClassName;
 	}
 
-	public AttributeDesign setClassName(java.lang.String newValue) {
-		className.setValue(newValue);
+	public AttributeDesign setJavaClassName(java.lang.String newValue) {
+		javaClassName.setValue(newValue);
 		return (AttributeDesign)this;
 	}
 	
@@ -142,6 +142,23 @@ public class AttributeDesign extends Design {
 	
 	public AttributeDesign setExplanation(org.instantlogic.designer.TextTemplateDesign newValue) {
 		explanation.setValue(newValue);
+		return (AttributeDesign)this;
+	}
+
+	
+	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, NumberDataCategoryDesign> numberDataCategory
+		= createRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity.numberDataCategory);
+		
+	public org.instantlogic.fabric.value.RelationValue<AttributeDesign, NumberDataCategoryDesign> getNumberDataCategoryRelationValue() {
+		return numberDataCategory;
+	}
+
+	public org.instantlogic.designer.NumberDataCategoryDesign getNumberDataCategory() {
+		return numberDataCategory.getValue();
+	}
+	
+	public AttributeDesign setNumberDataCategory(org.instantlogic.designer.NumberDataCategoryDesign newValue) {
+		numberDataCategory.setValue(newValue);
 		return (AttributeDesign)this;
 	}
 

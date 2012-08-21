@@ -10,6 +10,23 @@ public abstract class AbstractTraveler extends org.instantlogic.fabric.Instance 
 
 	// Attributes
 	
+	private final org.instantlogic.fabric.value.AttributeValue<Traveler, java.lang.Boolean> communicatorVisible
+		= createAttributeValue(org.instantlogic.engine.presence.entity.TravelerEntity.communicatorVisible);
+	
+	public java.lang.Boolean getCommunicatorVisible() {
+		return communicatorVisible.getValue();
+	}
+
+	public org.instantlogic.fabric.value.AttributeValue<Traveler, java.lang.Boolean> getCommunicatorVisibleAttributeValue() {
+		return communicatorVisible;
+	}
+
+	public Traveler setCommunicatorVisible(java.lang.Boolean newValue) {
+		communicatorVisible.setValue(newValue);
+		return (Traveler)this;
+	}
+	
+	
 	private final org.instantlogic.fabric.value.AttributeValue<Traveler, java.lang.String> id
 		= createAttributeValue(org.instantlogic.engine.presence.entity.TravelerEntity.id);
 	

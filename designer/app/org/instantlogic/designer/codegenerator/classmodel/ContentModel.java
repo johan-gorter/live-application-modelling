@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class ContentModel {
 
-	public enum Category {Fragment, Shared, Selection}
+	public enum Category {Fragment, Shared, Selection, IfElse}
 	
 	public Category category;
 	// Text, Button, ...
@@ -34,6 +34,7 @@ public class ContentModel {
 	public boolean isCustomized;
 	public String presentation;
 	public final List<ContentModel> children = new ArrayList<ContentModel>();
+	public final List<ContentModel> elseChildren = new ArrayList<ContentModel>();
 	public String implementationClassName;
 	
 	public final Map<String, Object> values = new HashMap<String, Object>();
@@ -108,5 +109,8 @@ public class ContentModel {
 	}
 	public Map<String, TextModel> getTexts() {
 		return texts;
+	}
+	public List<ContentModel> getElseChildren() {
+		return elseChildren;
 	}	
 }

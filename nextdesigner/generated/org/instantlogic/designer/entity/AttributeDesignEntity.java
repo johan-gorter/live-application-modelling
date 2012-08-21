@@ -32,14 +32,14 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 	
 	// Attributes
 	
-	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.AttributeDesign, java.lang.String, java.lang.String> className 
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.AttributeDesign, java.lang.String, java.lang.String> javaClassName 
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.AttributeDesign, java.lang.String, java.lang.String>(
-			"className", INSTANCE, java.lang.String.class
+			"javaClassName", INSTANCE, java.lang.String.class
 		) {
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.AttributeDesign, java.lang.String> get(org.instantlogic.designer.AttributeDesign instance) {
-				return instance.getClassNameAttributeValue();
+				return instance.getJavaClassNameAttributeValue();
 			}
 		};
 	
@@ -135,6 +135,20 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 	
 			public boolean isOwner() {
 				return true;
+			}
+			
+		};
+	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.NumberDataCategoryDesign, org.instantlogic.designer.NumberDataCategoryDesign> numberDataCategory
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.NumberDataCategoryDesign, org.instantlogic.designer.NumberDataCategoryDesign>(
+			"numberDataCategory", INSTANCE, org.instantlogic.designer.entity.NumberDataCategoryDesignEntity.INSTANCE, org.instantlogic.designer.NumberDataCategoryDesign.class, 
+			null
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.NumberDataCategoryDesign> get(
+					org.instantlogic.designer.AttributeDesign instance) {
+				return instance.getNumberDataCategoryRelationValue();
 			}
 			
 		};
@@ -252,7 +266,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 		};
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
-		className,
+		javaClassName,
 		multivalue,
 		readOnly,
 	};
@@ -261,6 +275,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 		_default,
 		domain,
 		explanation,
+		numberDataCategory,
 		question,
 		relevance,
 		rule,
