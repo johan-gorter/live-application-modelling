@@ -41,7 +41,7 @@ public class EntityGenerator extends AbstractGenerator {
 			attribute.name = attributeDesign.getName();
 			attribute.technicalName = attributeDesign.getTechnicalName();
 			attribute.javaIdentifier = attributeDesign.getJavaIdentifier();
-			attribute.itemClassName = attributeDesign.getClassName();
+			attribute.itemClassName = attributeDesign.getJavaClassName();
 			attribute.multivalue = (attributeDesign.getMultivalue()==Boolean.TRUE);
 			if (attribute.multivalue) {
 				attribute.className="org.instantlogic.fabric.value.Multi<"+attribute.itemClassName+">";

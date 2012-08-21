@@ -34,7 +34,7 @@ public final class Deductions {
 	}
 	
 	public static DeductionDesign attribute(AttributeDesign attribute, DeductionDesign instance) {
-		String className = attribute.getClassName();
+		String className = attribute.getJavaClassName();
 		if (attribute instanceof RelationDesign) {
 			// We should come up with a solution that makes this unnecessary
 			RelationDesign relation = (RelationDesign)attribute;
@@ -43,7 +43,6 @@ public final class Deductions {
 		AttributeDeductionDesign attributeDeductionDesign = new AttributeDeductionDesign();
 		attributeDeductionDesign.addToInputs(instance);
 		attributeDeductionDesign.setAttribute(attribute);
-		attributeDeductionDesign.addToInputs(instance);
 		if (attribute.getMultivalue()==Boolean.TRUE) {
 			attributeDeductionDesign.setClassName("org.instantlogic.fabric.value.Multi<"+className+">");
 		} else {

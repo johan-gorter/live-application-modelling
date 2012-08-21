@@ -6,7 +6,8 @@ public class DataCategoryDesignEntity extends org.instantlogic.fabric.model.Enti
 	
 	public final org.instantlogic.designer.DataCategoryDesign text;
 	public final org.instantlogic.designer.DataCategoryDesign number;
-	public final org.instantlogic.designer.DataCategoryDesign choice;
+	public final org.instantlogic.designer.DataCategoryDesign dateTime;
+	public final org.instantlogic.designer.DataCategoryDesign _boolean;
 	
 	protected DataCategoryDesignEntity() {
 	   text = addStaticInstance("text", createInstance());
@@ -15,8 +16,11 @@ public class DataCategoryDesignEntity extends org.instantlogic.fabric.model.Enti
 	   number = addStaticInstance("number", createInstance());
 	   number.getMetadata().setStaticDescription(new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Number"))
 );
-	   choice = addStaticInstance("choice", createInstance());
-	   choice.getMetadata().setStaticDescription(new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Choice"))
+	   dateTime = addStaticInstance("dateTime", createInstance());
+	   dateTime.getMetadata().setStaticDescription(new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Date/Time"))
+);
+	   _boolean = addStaticInstance("boolean", createInstance());
+	   _boolean.getMetadata().setStaticDescription(new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Yes-No"))
 );
 	}
 

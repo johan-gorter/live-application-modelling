@@ -8,6 +8,9 @@ import org.instantlogic.interaction.util.SubmitContext;
 import org.instantlogic.interaction.util.FlowEventOccurrence;
 import org.instantlogic.interaction.util.RenderContext;
 
+/**
+ * Can be a FragementTemplate or a server-side processing instruction (loop, if/else)
+ */
 public abstract class Element {
 
 	public abstract void render(RenderContext context, List<Map<String, Object>> appendTo);

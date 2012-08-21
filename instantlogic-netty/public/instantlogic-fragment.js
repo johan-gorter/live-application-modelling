@@ -64,11 +64,11 @@ YUI.add('instantlogic-fragment', function (Y) {
 	    		)
     		);
     		this.parentNode.appendChild(markup);
-    		this.loginButton.on('click', this.loginClick, this)''
+    		this.loginButton.on('click', this.loginClick, this);
     	},
     	
     	loginClick: function() {
-    		this.engine.enqueueMessage({message: 'presence', id: 'login', this.usernameInput.get('value'));
+    		this.engine.enqueueMessage({message: 'presence', command: 'login', value: this.usernameInput.get('value')});
     	}
     });
     

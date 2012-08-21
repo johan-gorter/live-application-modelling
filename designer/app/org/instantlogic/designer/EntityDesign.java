@@ -39,7 +39,7 @@ public class EntityDesign extends AbstractEntityDesign {
 	public AttributeDesign addAttribute(String name, String className) {
 		AttributeDesign result = new AttributeDesign();
 		result.setName(name);
-		result.setClassName(className);
+		result.setJavaClassName(className);
 		addToAttributes(result);
 		return result;
 	}

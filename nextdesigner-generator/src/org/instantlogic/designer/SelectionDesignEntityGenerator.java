@@ -1,6 +1,5 @@
 package org.instantlogic.designer;
 
-import org.instantlogic.designer.EntityDesign.RelationType;
 
 
 public class SelectionDesignEntityGenerator extends EntityDesign {

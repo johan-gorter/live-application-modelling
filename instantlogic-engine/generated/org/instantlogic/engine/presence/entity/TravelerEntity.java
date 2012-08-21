@@ -25,8 +25,35 @@ public class TravelerEntity extends org.instantlogic.fabric.model.Entity<org.ins
 	}
 
 	// Deductions
+
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> createDeduction0() {
+		  	org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> d0 
+		  		= org.instantlogic.fabric.deduction.ConstantDeduction.create(false);
+		return d0;
+	}
+
 	
 	// Attributes
+	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.engine.presence.Traveler, java.lang.Boolean, java.lang.Boolean> communicatorVisible 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.engine.presence.Traveler, java.lang.Boolean, java.lang.Boolean>(
+			"communicatorVisible", INSTANCE, java.lang.Boolean.class
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.engine.presence.Traveler, java.lang.Boolean> get(org.instantlogic.engine.presence.Traveler instance) {
+				return instance.getCommunicatorVisibleAttributeValue();
+			}
+
+            private org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> defaultDeduction;
+            @Override
+            public org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> getDefault() {
+                if (defaultDeduction==null) {
+                    defaultDeduction = createDeduction0();
+                }
+                return defaultDeduction;
+            }
+		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.engine.presence.Traveler, java.lang.String, java.lang.String> id 
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.engine.presence.Traveler, java.lang.String, java.lang.String>(
@@ -74,6 +101,7 @@ public class TravelerEntity extends org.instantlogic.fabric.model.Entity<org.ins
 		};
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
+		communicatorVisible,
 		id,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{

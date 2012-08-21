@@ -7,17 +7,28 @@ import org.instantlogic.interaction.Application;
 
 public class PresenceMessage extends Message {
 
+	/**
+	 * What action to take (setCommunicatorVisible, login, etc...)
+	 */
 	private final String command;
-	private final Object data;
+	/**
+	 * On which element (chatId). optional.
+	 */
+	public final String id;
+	/**
+	 * A (new) value (true, chat message, etc...)
+	 */
+	private final Object value;
 
-	public PresenceMessage(String command, Object data) {
+	public PresenceMessage(String command, String id, Object value) {
 		this.command = command;
-		this.data = data;
+		this.id = id;
+		this.value = value;
 	}
 
 	@Override
 	public void execute(Application application, Traveler traveler, Presence presence, Instance theCase) {
-		presence.executeCommand(traveler, command, data);
+		presence.executeCommand(traveler, command, id, value);
 	}
 
 }

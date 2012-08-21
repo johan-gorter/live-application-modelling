@@ -139,11 +139,15 @@ public class NettyTraveler implements TravelerProxy {
 				messages.add(new EnterMessage(newLocation));
 			} else if ("presence".equals(messageName)) {
 				String command = message.getAsJsonObject().get("command").getAsString();
-				Object data = null;
-				if (message.getAsJsonObject().has("value")) {
-					data = getPrimitiveValue(message.getAsJsonObject().get("data").getAsJsonPrimitive());
+				String id = null;
+				Object value = null;
+				if (message.getAsJsonObject().has("id")) {
+					id = message.getAsJsonObject().get("id").getAsString();
 				}
-				messages.add(new PresenceMessage(command, data));
+				if (message.getAsJsonObject().has("value")) {
+					value = getPrimitiveValue(message.getAsJsonObject().get("value").getAsJsonPrimitive());
+				}
+				messages.add(new PresenceMessage(command, id, value));
 			}
 		}
 		this.caseProcessor.processMessagesAndSendUpdates(this, messages); // Will also queue updates

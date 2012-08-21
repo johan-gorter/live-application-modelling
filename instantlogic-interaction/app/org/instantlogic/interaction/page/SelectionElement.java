@@ -28,6 +28,9 @@ public class SelectionElement extends Element {
 	@Override
 	public void render(RenderContext context, List<Map<String, Object>> appendTo) {
 		ValueAndLevel<?> valueAndLevel = selection.deduct(context);
+		if (!valueAndLevel.isConclusive()) {
+			throw new RuntimeException("Selection did not yield a conclusive result"); // TODO: render an error
+		}
 		if (valueAndLevel.hasValue()) {
 			Object value = valueAndLevel.getValue();
 			if (value instanceof Multi<?>) {
@@ -37,7 +40,7 @@ public class SelectionElement extends Element {
 			} else  {
 				renderWith(value, context, appendTo);
 			}
-		}
+		} 
 	}
 
 	private void renderWith(Object value, RenderContext context, List<Map<String, Object>> appendTo) {

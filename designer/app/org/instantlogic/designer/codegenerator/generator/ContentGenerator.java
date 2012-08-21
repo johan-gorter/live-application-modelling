@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.instantlogic.designer.ElementDesign;
 import org.instantlogic.designer.FragmentTemplateDesign;
+import org.instantlogic.designer.IfElseDesign;
 import org.instantlogic.designer.PropertyDesign;
 import org.instantlogic.designer.SelectionDesign;
 import org.instantlogic.designer.SharedElementDesign;
@@ -57,6 +58,16 @@ public abstract class ContentGenerator extends AbstractGenerator {
 			model.deductionIndex = deductionHolder.addDeductionScheme(DeductionSchemeGenerator.generate(deductionHolder.rootPackageName, selection.getSelection()));
 			for (ElementDesign child: selection.getChildren()) {
 				model.children.add(generate(child, deductionHolder));
+			}
+		} else if (element instanceof IfElseDesign) {
+			model.category = Category.IfElse;
+			IfElseDesign ifElse = (IfElseDesign) element;
+			model.deductionIndex = deductionHolder.addDeductionScheme(DeductionSchemeGenerator.generate(deductionHolder.rootPackageName, ifElse.getCondition()));
+			for (ElementDesign child: ifElse.getIfChildren()) {
+				model.children.add(generate(child, deductionHolder));
+			}
+			for (ElementDesign child: ifElse.getElseChildren()) {
+				model.elseChildren.add(generate(child, deductionHolder));
 			}
 		}
 		return model;

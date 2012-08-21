@@ -44,6 +44,7 @@ public class RelationValueImpl<I extends Instance, To extends Instance>
 	
 	@Override
 	protected void beforeFiringChange(ValueChangeEvent event) {
+		if (model.getReverseRelation()==null) return;
 		To oldStoredValue = (To) event.getOldStoredValue();
 		To newStoredValue = (To) event.getNewStoredValue();
 		Operation operation = event.getOperation();
