@@ -28,22 +28,30 @@ public class RelationValuesImpl<I extends Instance, To extends Instance>
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	protected void beforeFiringChange(ValueChangeEvent event) {
-		if (model.getReverseRelation()==null) return;
 		MultiValueUpdateType type = event.getMultiValueUpdateType();
 		To item = (To) event.getItemValue();
 		Operation operation = event.getOperation();
-		super.beforeFiringChange(event);
-		if (type == MultiValueUpdateType.INSERT) {
-			if (getModel().getReverseRelation().isMultivalue()) {
-				((ReverseRelationValuesImpl)model.getReverseRelation().get(item)).addReverse(forInstance, operation);
-			} else {
-				((ReverseRelationValueImpl)model.getReverseRelation().get(item)).setReverse(forInstance, model.isOwner(), operation);
+		if (model.isOwner()) {
+			if (type == MultiValueUpdateType.INSERT) {
+				forInstance.getMetadata().adopt(item);
+			} else { // Remove
+				forInstance.getMetadata().reject(item);
 			}
-		} else { // Remove
-			if (getModel().getReverseRelation().isMultivalue()) {
-				((ReverseRelationValuesImpl)model.getReverseRelation().get(item)).removeReverse(forInstance, operation);
-			} else {
-				((ReverseRelationValueImpl)model.getReverseRelation().get(item)).setReverse(null, model.isOwner(), operation);
+		}
+		super.beforeFiringChange(event);
+		if (model.getReverseRelation()!=null) {
+			if (type == MultiValueUpdateType.INSERT) {
+				if (getModel().getReverseRelation().isMultivalue()) {
+					((ReverseRelationValuesImpl)model.getReverseRelation().get(item)).addReverse(forInstance, operation);
+				} else {
+					((ReverseRelationValueImpl)model.getReverseRelation().get(item)).setReverse(forInstance, operation);
+				}
+			} else { // Remove
+				if (getModel().getReverseRelation().isMultivalue()) {
+					((ReverseRelationValuesImpl)model.getReverseRelation().get(item)).removeReverse(forInstance, operation);
+				} else {
+					((ReverseRelationValueImpl)model.getReverseRelation().get(item)).setReverse(null, operation);
+				}
 			}
 		}
 	};

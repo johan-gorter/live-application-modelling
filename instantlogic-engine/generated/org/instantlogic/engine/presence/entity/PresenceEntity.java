@@ -74,16 +74,38 @@ public class PresenceEntity extends org.instantlogic.fabric.model.Entity<org.ins
 			
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.engine.presence.Presence, org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.User>, org.instantlogic.engine.presence.User> users
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.engine.presence.Presence, org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.Traveler>, org.instantlogic.engine.presence.Traveler> activeTravelers
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.engine.presence.Presence, org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.Traveler>, org.instantlogic.engine.presence.Traveler>(
+			"activeTravelers", INSTANCE, org.instantlogic.engine.presence.entity.TravelerEntity.INSTANCE, org.instantlogic.engine.presence.Traveler.class, 
+			org.instantlogic.engine.presence.entity.TravelerEntity.presence
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.engine.presence.Presence, org.instantlogic.engine.presence.Traveler> get(
+					org.instantlogic.engine.presence.Presence instance) {
+				return instance.getActiveTravelersRelationValue();
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+			
+		};
+	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.engine.presence.Presence, org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.User>, org.instantlogic.engine.presence.User> activeUsers
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.engine.presence.Presence, org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.User>, org.instantlogic.engine.presence.User>(
-			"users", INSTANCE, org.instantlogic.engine.presence.entity.UserEntity.INSTANCE, org.instantlogic.engine.presence.User.class, 
+			"activeUsers", INSTANCE, org.instantlogic.engine.presence.entity.UserEntity.INSTANCE, org.instantlogic.engine.presence.User.class, 
 			org.instantlogic.engine.presence.entity.UserEntity.presence
 		) {
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.engine.presence.Presence, org.instantlogic.engine.presence.User> get(
 					org.instantlogic.engine.presence.Presence instance) {
-				return instance.getUsersRelationValue();
+				return instance.getActiveUsersRelationValue();
 			}
 	
 			public boolean isOwner() {
@@ -104,7 +126,8 @@ public class PresenceEntity extends org.instantlogic.fabric.model.Entity<org.ins
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		activePlaces,
-		users,
+		activeTravelers,
+		activeUsers,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 	};

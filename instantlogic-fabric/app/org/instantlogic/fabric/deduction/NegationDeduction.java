@@ -15,6 +15,7 @@ public class NegationDeduction<V extends Number> extends Deduction<V> {
 		this.input = input;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public ValueAndLevel<V> deduct(DeductionContext context) {
 		Number value = input.deduct(context).getValue();

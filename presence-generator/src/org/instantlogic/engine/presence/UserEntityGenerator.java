@@ -2,7 +2,6 @@ package org.instantlogic.engine.presence;
 
 import org.instantlogic.designer.AttributeDesign;
 import org.instantlogic.designer.EntityDesign;
-import org.instantlogic.designer.RelationDesign;
 
 public class UserEntityGenerator extends EntityDesign {
 
@@ -13,9 +12,7 @@ public class UserEntityGenerator extends EntityDesign {
     }
 
     // Attributes
-    public static final AttributeDesign userName = addAttribute(ENTITY, "userName", java.lang.String.class);
+    public static final AttributeDesign username = addAttribute(ENTITY, "username", java.lang.String.class);
     
     // Relations
-    public static final RelationDesign travelers = addRelation(ENTITY, "travelers", RelationType.OneToManyAggregation, TravelerEntityGenerator.ENTITY)
-            .setReverseName("user");
 }

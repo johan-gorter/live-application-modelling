@@ -5,7 +5,7 @@ public class TravelerFlow extends org.instantlogic.interaction.flow.Flow {
 	public static final TravelerFlow INSTANCE = new TravelerFlow();
 	
 	private static final org.instantlogic.interaction.flow.FlowNodeBase[] NODES = new org.instantlogic.interaction.flow.FlowNodeBase[]{
-		org.instantlogic.engine.presence.flow.traveler.PresencePlaceTemplate.INSTANCE,
+		org.instantlogic.engine.presence.flow.traveler.TravelerPlaceTemplate.INSTANCE,
 	};
 	
 	private static final org.instantlogic.interaction.flow.FlowEdge[] EDGES = new org.instantlogic.interaction.flow.FlowEdge[]{

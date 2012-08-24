@@ -22,6 +22,9 @@ public class TravelerEntityGenerator extends EntityDesign {
     public static final RelationDesign currentPlace = addRelation(ENTITY, "currentPlace", RelationType.ManyToZeroOrOne, PlaceEntityGenerator.ENTITY)
     	.setReverseName("visitingTravelers");
     
+    public static final RelationDesign user = addRelation(ENTITY, "user", RelationType.ManyToZeroOrOne, UserEntityGenerator.ENTITY)
+            .setReverseName("travelers");
+    
     @Override
     public void init() {
     	communicatorVisible.setDefault(Deductions.toScheme(Deductions.constant(Boolean.class, false)));

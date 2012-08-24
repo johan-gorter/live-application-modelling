@@ -28,46 +28,24 @@ public class UserEntity extends org.instantlogic.fabric.model.Entity<org.instant
 	
 	// Attributes
 	
-	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.engine.presence.User, java.lang.String, java.lang.String> userName 
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.engine.presence.User, java.lang.String, java.lang.String> username 
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.engine.presence.User, java.lang.String, java.lang.String>(
-			"userName", INSTANCE, java.lang.String.class
+			"username", INSTANCE, java.lang.String.class
 		) {
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.engine.presence.User, java.lang.String> get(org.instantlogic.engine.presence.User instance) {
-				return instance.getUserNameAttributeValue();
+				return instance.getUsernameAttributeValue();
 			}
 		};
 	
 	// Relations
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.engine.presence.User, org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.Traveler>, org.instantlogic.engine.presence.Traveler> travelers
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.engine.presence.User, org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.Traveler>, org.instantlogic.engine.presence.Traveler>(
-			"travelers", INSTANCE, org.instantlogic.engine.presence.entity.TravelerEntity.INSTANCE, org.instantlogic.engine.presence.Traveler.class, 
-			org.instantlogic.engine.presence.entity.TravelerEntity.user
-		) {
-	
-			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.engine.presence.User, org.instantlogic.engine.presence.Traveler> get(
-					org.instantlogic.engine.presence.User instance) {
-				return instance.getTravelersRelationValue();
-			}
-	
-			public boolean isOwner() {
-				return true;
-			}
-	
-			public boolean isMultivalue() {
-				return true;
-			}
-			
-		};
-	
 	// Reverse relations
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.engine.presence.User, org.instantlogic.engine.presence.Presence, org.instantlogic.engine.presence.Presence> presence
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.engine.presence.User, org.instantlogic.engine.presence.Presence, org.instantlogic.engine.presence.Presence>(
-			"presence", INSTANCE, org.instantlogic.engine.presence.entity.PresenceEntity.INSTANCE, org.instantlogic.engine.presence.Presence.class, org.instantlogic.engine.presence.entity.PresenceEntity.users
+			"presence", INSTANCE, org.instantlogic.engine.presence.entity.PresenceEntity.INSTANCE, org.instantlogic.engine.presence.Presence.class, org.instantlogic.engine.presence.entity.PresenceEntity.activeUsers
 		) {
 	
 			@Override
@@ -80,15 +58,35 @@ public class UserEntity extends org.instantlogic.fabric.model.Entity<org.instant
 				return true;
 			}
 		};
+	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.engine.presence.User, org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.Traveler>, org.instantlogic.engine.presence.Traveler> travelers
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.engine.presence.User, org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.Traveler>, org.instantlogic.engine.presence.Traveler>(
+			"travelers", INSTANCE, org.instantlogic.engine.presence.entity.TravelerEntity.INSTANCE, org.instantlogic.engine.presence.Traveler.class, org.instantlogic.engine.presence.entity.TravelerEntity.user
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.engine.presence.User, org.instantlogic.engine.presence.Traveler> get(
+					org.instantlogic.engine.presence.User instance) {
+				return instance.getTravelersRelationValue();
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
-		userName,
+		username,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
-		travelers,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		presence,
+		travelers,
 	};
 
 	@Override

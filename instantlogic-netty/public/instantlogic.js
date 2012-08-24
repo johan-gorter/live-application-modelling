@@ -286,11 +286,11 @@ YUI.add('instantlogic', function (Y) {
         recreateFragment: function (newModel, diff) {
             this.fragment.destroy();
             var oldNode = this.node;
-            this.node = Y.html.span({ 'data-fragment-id': id, className: 'fragment' });
+            this.node = Y.html.span({ 'data-fragment-id': newModel.id, className: 'fragment' });
             oldNode.ancestor().insertBefore(this.node, oldNode); // oldNode can be removed using animation
             diff.nodeToRemove(oldNode);
             diff.nodeAdded(this.node);
-            this.fragment = this.engine.createFragment(newModel);
+            this.fragment = this.engine.createFragment(newModel.type, this.node, this.engine);
             this.fragment.init(this.node, newModel);
         },
 
@@ -379,7 +379,7 @@ YUI.add('instantlogic', function (Y) {
                 // Remove child fragments
                 for (i = newIndex; i < this.fragmentHolders.length; i++) {
                     diff.nodeToRemove(this.fragmentHolders[i].node);
-                    this.fragments[i].destroy();
+                    this.fragmentHolders[i].destroy();
                 }
                 this.fragmentHolders.length = newIndex;
             }
@@ -401,7 +401,7 @@ YUI.add('instantlogic', function (Y) {
     	if (!parentNode) Y.error();
     	if (!engine) Y.error();
         this.engine = engine;
-        this.previousModel = {};
+        this.oldModel = {};
         this.parentNode = parentNode;
         this.model = null;
     };
@@ -416,7 +416,7 @@ YUI.add('instantlogic', function (Y) {
         },
 
         update: function (newModel, diff) {
-            this.previousModel = this.model;
+            this.oldModel = this.model;
             this.model = newModel;
         },
 

@@ -21,13 +21,8 @@ YUI.add('instantlogic-fragment', function (Y) {
             		html.div({className: 'case-name'},
             			this.caseNameSpan = html.span(model.caseName || '')
             		),
-            		this.me = html.div({className: 'me'},
-            			this.avatarDiv = html.div({className: 'avatar'}),
-            			this.loginNameSpan = html.span(model.loginName || '')
-            		)
-                ),
-                this.chatDiv = html.div({className:'chat'}),
-                this.contentDiv = html.div()
+                    this.contentDiv = html.div()
+                )
             );
             this.parentNode.appendChild(markup);
             
@@ -36,11 +31,80 @@ YUI.add('instantlogic-fragment', function (Y) {
     	},
     	
     	update: function (newModel, diff) {
+    		ns.Presence.superclass.update.call(this, newModel, diff);
+    		if (this.oldModel.caseName != newModel.caseName) {
+    			this.caseNameSpan.set('text', newModel.caseName);
+    		}
+    		if (this.oldModel.userName != newModel.userName) {
+    			this.loginNameSpan.set('text', newModel.userName);
+    		}
+    		
             ns.Presence.superclass.update.call(this, newModel, diff);
             this.contentFragmentList.update(newModel.content, diff);
     	}
     });
     
+    // Me
+    ns.Me = function (parentNode, engine) {
+        ns.Me.superclass.constructor.apply(this, arguments);
+    };
+    
+    Y.extend(ns.Me, Y.instantlogic.Fragment, {
+    	init: function(model) {
+    		ns.Me.superclass.init.call(this, model);
+    		var markup = html.div({className: 'me'},
+				this.avatarDiv = html.div({className: 'avatar'}, html.img({src:'/avatar.png'})),
+				this.loginNameSpan = html.div({className: 'username'}, model.username || '')
+    		)
+    		this.parentNode.appendChild(markup);
+    	}
+    });
+    
+    // ShowCommunicatorButton
+    ns.ShowCommunicatorButton = function(parentNode, engine) {
+    	ns.ShowCommunicatorButton.superclass.constructor.apply(this, arguments);
+    };
+    
+    Y.extend(ns.ShowCommunicatorButton, Y.instantlogic.Fragment, {
+    	init: function(model) {
+    		ns.ShowCommunicatorButton.superclass.init.call(this, model);
+    		var markup = html.div({className: 'show-communicator-button'},
+    			this.button = html.button('Communicator')
+    		)
+    		this.parentNode.appendChild(markup);
+    		this.button.on('click', this.onClick, this);
+    	},
+    	onClick: function() {
+    		this.engine.enqueueMessage({message: 'presence', command: 'setCommunicatorVisible', value:true});
+    	}
+    });
+    
+    function createFragment(options, overrides) {
+    	var constructor = function(parentNode, engine) {
+    		constructor.superclass.constructor.apply(this, arguments);
+    	}
+    	Y.extend(constructor, options.baseClass || Y.instantlogic.Fragment, overrides);
+    	return constructor;
+    }
+    
+    // Communicator
+    ns.Communicator = createFragment({}, {
+    	init: function(model) {
+    		ns.Communicator.superclass.init.call(this, model);
+    		var markup = html.div({className:'communicator'},
+    			this.hideButton = html.button('Hide communicator')
+    		)
+    		this.parentNode.appendChild(markup);
+    		this.hideButton.on('click', this.onHideClick, this);
+    	},
+    	update: function(newModel, diff) {
+    		ns.Communicator.superclass.update.call(this, newModel);
+    	},
+    	onHideClick: function() {
+    		this.engine.enqueueMessage({message: 'presence', command: 'setCommunicatorVisible', value:false});
+    	}
+    });
+
     // Login
     ns.Login = function(parentNode, engine) {
     	ns.Login.superclass.constructor.apply(this, arguments);
@@ -71,7 +135,7 @@ YUI.add('instantlogic-fragment', function (Y) {
     		this.engine.enqueueMessage({message: 'presence', command: 'login', value: this.usernameInput.get('value')});
     	}
     });
-    
+
     // Page
     ns.Page = function(parentNode, engine) {
         ns.Page.superclass.constructor.apply(this, arguments);
@@ -138,7 +202,7 @@ YUI.add('instantlogic-fragment', function (Y) {
 
         update: function (newModel, diff) {
             ns.Input.superclass.update.call(this, newModel, diff);
-            if (this.previousModel.question != newModel.question) {
+            if (this.oldModel.question != newModel.question) {
                 this.question.set('text', model.question || '');
             }
             this.updateInput(newModel);
@@ -189,7 +253,7 @@ YUI.add('instantlogic-fragment', function (Y) {
         
         update: function (newModel, diff) {
             ns.Link.superclass.update.call(this, newModel, diff);
-            if (this.previousModel.text != newModel.text) {
+            if (this.oldModel.text != newModel.text) {
                 this.textSpan.set('text', newModel.text || '');
             }
             this.contentList.update(newModel.content, diff);
@@ -228,7 +292,7 @@ YUI.add('instantlogic-fragment', function (Y) {
 
         update: function (newModel, diff) {
             ns.Paragraph.superclass.update.call(this, newModel, diff);
-            if (this.previousModel.text != newModel.text) {
+            if (this.oldModel.text != newModel.text) {
                 this.node.set('text', newModel.text || '');
             }
         }
@@ -313,7 +377,7 @@ YUI.add('instantlogic-fragment', function (Y) {
 
         update: function (newModel, diff) {
             ns.Column.superclass.update.call(this, newModel, diff);
-            if (this.previousModel.header != newModel.header) {
+            if (this.oldModel.header != newModel.header) {
                 this.node.set('text', newModel.header || '');
             }
         }

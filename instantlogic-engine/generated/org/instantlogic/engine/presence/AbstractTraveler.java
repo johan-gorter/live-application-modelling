@@ -62,18 +62,35 @@ public abstract class AbstractTraveler extends org.instantlogic.fabric.Instance 
 		return (Traveler)this;
 	}
 
-
-	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<Traveler, User> user
-		= createReverseRelationValue(org.instantlogic.engine.presence.entity.TravelerEntity.user);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<Traveler, User> getUserRelationValue() {
+	private final org.instantlogic.fabric.value.RelationValue<Traveler, User> user
+		= createRelationValue(org.instantlogic.engine.presence.entity.TravelerEntity.user);
+		
+	public org.instantlogic.fabric.value.RelationValue<Traveler, User> getUserRelationValue() {
 		return user;
 	}
 
 	public org.instantlogic.engine.presence.User getUser() {
 		return user.getValue();
+	}
+	
+	public Traveler setUser(org.instantlogic.engine.presence.User newValue) {
+		user.setValue(newValue);
+		return (Traveler)this;
+	}
+
+
+	// Reverse relations
+	
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<Traveler, Presence> presence
+		= createReverseRelationValue(org.instantlogic.engine.presence.entity.TravelerEntity.presence);
+
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<Traveler, Presence> getPresenceRelationValue() {
+		return presence;
+	}
+
+	public org.instantlogic.engine.presence.Presence getPresence() {
+		return presence.getValue();
 	}
 
 
