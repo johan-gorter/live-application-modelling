@@ -6,6 +6,7 @@ import org.instantlogic.designer.ConstantDeductionDesign;
 import org.instantlogic.designer.DeductionDesign;
 import org.instantlogic.designer.DeductionSchemeDesign;
 import org.instantlogic.designer.EntityDesign;
+import org.instantlogic.designer.HasValueDeductionDesign;
 import org.instantlogic.designer.RelationDesign;
 import org.instantlogic.designer.ReverseRelationDeductionDesign;
 import org.instantlogic.designer.SelectedInstanceDeductionDesign;
@@ -30,10 +31,24 @@ public final class Deductions {
 	}
 	
 	public static DeductionDesign relation(RelationDesign relation, DeductionDesign instance) {
+		if (instance==null) {
+			instance = selectedInstance(relation.getFrom());
+		}
 		return attribute(relation, instance);
+	}
+
+	public static DeductionDesign relation(RelationDesign relation) {
+		return relation(relation, null);
+	}
+	
+	public static DeductionDesign attribute(AttributeDesign attribute) {
+		return attribute(attribute, null);
 	}
 	
 	public static DeductionDesign attribute(AttributeDesign attribute, DeductionDesign instance) {
+		if (instance==null) {
+			instance = selectedInstance(attribute.getBelongsToEntity());
+		}
 		String className = attribute.getJavaClassName();
 		if (attribute instanceof RelationDesign) {
 			// We should come up with a solution that makes this unnecessary
@@ -51,6 +66,14 @@ public final class Deductions {
 		return attributeDeductionDesign;
 	}
 
+	public static DeductionDesign hasValue(DeductionDesign input) {
+		HasValueDeductionDesign deduction = new HasValueDeductionDesign();
+		deduction.addToInputs(input);
+		deduction.setClassName("java.lang.Boolean");
+		return deduction;
+	}
+
+	
 	public static DeductionDesign reverseRelation(RelationDesign relation, DeductionDesign instance) {
 		String className = relation.getFrom().getApplication().getRootPackageName()+"."+relation.getFrom().getTechnicalNameCapitalized();
 		ReverseRelationDeductionDesign deduction = new ReverseRelationDeductionDesign();

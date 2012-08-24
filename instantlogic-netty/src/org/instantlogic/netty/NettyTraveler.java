@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.instantlogic.engine.TravelerProxy;
@@ -28,6 +29,10 @@ import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelFuture;
 import org.jboss.netty.channel.ChannelFutureListener;
 import org.jboss.netty.channel.MessageEvent;
+import org.jboss.netty.handler.codec.http.Cookie;
+import org.jboss.netty.handler.codec.http.CookieDecoder;
+import org.jboss.netty.handler.codec.http.CookieEncoder;
+import org.jboss.netty.handler.codec.http.DefaultCookie;
 import org.jboss.netty.handler.codec.http.DefaultHttpResponse;
 import org.jboss.netty.handler.codec.http.HttpRequest;
 import org.jboss.netty.handler.codec.http.HttpResponse;
@@ -198,7 +203,7 @@ public class NettyTraveler implements TravelerProxy {
     	updatesWaiting = new ArrayList<Update>();
 
     	response.setHeader(CONTENT_TYPE, "text/plain; charset=UTF-8");
- 
+    	handleOutgoingAuthentication(request, response, travelerInfo.getAuthenticatedUsername());
         if (keepAlive) {
             // Add 'Content-Length' header only for a keep-alive connection.
             response.setHeader(CONTENT_LENGTH, response.getContent().readableBytes());
@@ -249,5 +254,46 @@ public class NettyTraveler implements TravelerProxy {
 			this.updatesWaiting.add(update);
 		}
 		deliverMessagesIfPossible();
+	}
+
+	public void verifyIncomingAuthentication(HttpRequest request) {
+		String username = readAuthentication(request);
+		if (username==null) {
+			if (travelerInfo.getAuthenticatedUsername()!=null) {
+				throw new RuntimeException("AuthenticatedUsername disappeared");
+			}
+		} else {
+			if (travelerInfo.getAuthenticatedUsername()==null) {
+				travelerInfo.setAuthenticatedUsername(username);
+			} else if (username.equals(travelerInfo.getAuthenticatedUsername())) {
+				return;
+			} else {
+				throw new RuntimeException("Traveler switched authenticatedUsername");
+			}
+		}
+	}
+	
+	// This is obviously only intended to be used in demonstrations, there is no real security!
+	private void handleOutgoingAuthentication(HttpRequest request, HttpResponse response, String authenticatedUsername) {
+		if (authenticatedUsername!=null && !authenticatedUsername.equals(readAuthentication(request))) {
+    		CookieEncoder encoder = new CookieEncoder(true);
+    		DefaultCookie cookie = new DefaultCookie("who-am-i", travelerInfo.getAuthenticatedUsername());
+    		cookie.setHttpOnly(true);
+    		cookie.setMaxAge(60*60*24*365);
+    		encoder.addCookie(cookie);
+    		response.setHeader("Set-Cookie", encoder.encode());
+		}
+	}
+	
+	private String readAuthentication(HttpRequest request) {
+		String requestCookie = request.getHeader("Cookie");
+		if (requestCookie==null) return null;
+		Set<Cookie> cookies = new CookieDecoder().decode(requestCookie);
+		for(Cookie cookie : cookies) {
+			if ("who-am-i".equals(cookie.getName())) {
+				 return cookie.getValue();
+			}
+		}
+		return null;
 	}
 }

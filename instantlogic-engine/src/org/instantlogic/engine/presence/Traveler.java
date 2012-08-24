@@ -12,8 +12,7 @@ import org.instantlogic.engine.manager.CaseManager;
 import org.instantlogic.engine.manager.Update;
 import org.instantlogic.engine.presence.flow.MainFlow;
 import org.instantlogic.engine.presence.flow.TravelerFlow;
-import org.instantlogic.engine.presence.flow.main.AnonymousPlaceTemplate;
-import org.instantlogic.engine.presence.flow.traveler.PresencePlaceTemplate;
+import org.instantlogic.engine.presence.flow.traveler.TravelerPlaceTemplate;
 import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.util.Observations;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
@@ -119,17 +118,15 @@ public class Traveler extends AbstractTraveler {
 		placeOutdated = false;
 		placeOutdatedObserver = new ObservationsOutdatedObserver(observations, placeOutdatedValueChangeObserver);
 		return update;
-	}	
+	}
+	
 	public void queuePresenceIfNeeded() {
-		if (this.travelerInfo.getAuthenticatedUsername()==null) {
-			FlowStack flowStack = new FlowStack(null, MainFlow.INSTANCE);
-			queue.add(renderPresence("Anonymous", flowStack, AnonymousPlaceTemplate.INSTANCE));
-		} else if (this.presenceOutdated) {
+		if (this.presenceOutdated) {
 			String location = "Traveler/"+getMetadata().getInstanceId()+"/Presence";
 			FlowStack flowStack = new FlowStack(null, MainFlow.INSTANCE);
 			flowStack = new FlowStack(flowStack, TravelerFlow.INSTANCE);
 			flowStack.pushSelectedInstance(this);
-			queue.add(renderPresence(location, flowStack, PresencePlaceTemplate.INSTANCE));
+			queue.add(renderPresence(location, flowStack, TravelerPlaceTemplate.INSTANCE));
 		}
 	}
 	

@@ -22,6 +22,7 @@ public class RelationValueImpl<I extends Instance, To extends Instance>
 		this.model = model;
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public ValueAndLevel<To> getValueAndLevel() {
 		ValueAndLevel<To> result = super.getValueAndLevel();
@@ -30,11 +31,14 @@ public class RelationValueImpl<I extends Instance, To extends Instance>
 			To resultValue = (To) model.createTo(forInstance);
 			setStoredValue(resultValue);
 			invalidateCachedValue();
-			ReadOnlyAttributeValue<To, ? extends Object> newReverseRelationValue = model.getReverseRelation().get(resultValue);
-			if (getModel().getReverseRelation().isMultivalue()) {
-				((ReverseRelationValuesImpl)newReverseRelationValue).addReverse(forInstance, null);
-			} else {
-				((ReverseRelationValueImpl)newReverseRelationValue).setReverse(forInstance, model.isOwner(), null);
+			forInstance.getMetadata().adopt(resultValue);
+			if (model.getReverseRelation()!=null) {
+				ReadOnlyAttributeValue<To, ? extends Object> newReverseRelationValue = model.getReverseRelation().get(resultValue);
+				if (getModel().getReverseRelation().isMultivalue()) {
+					((ReverseRelationValuesImpl)newReverseRelationValue).addReverse(forInstance, null);
+				} else {
+					((ReverseRelationValueImpl)newReverseRelationValue).setReverse(forInstance, null);
+				}
 			}
 			forInstance.getMetadata().adopt(resultValue);
 			return ValueAndLevel.stored(resultValue);
@@ -42,27 +46,37 @@ public class RelationValueImpl<I extends Instance, To extends Instance>
 		return result;
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	protected void beforeFiringChange(ValueChangeEvent event) {
-		if (model.getReverseRelation()==null) return;
 		To oldStoredValue = (To) event.getOldStoredValue();
 		To newStoredValue = (To) event.getNewStoredValue();
 		Operation operation = event.getOperation();
 		super.beforeFiringChange(event);
-		if (oldStoredValue!=null) {
-			ReadOnlyAttributeValue<To, ? extends Object> oldReverseRelationValue = model.getReverseRelation().get(oldStoredValue);
-			if (getModel().getReverseRelation().isMultivalue()) {
-				((ReverseRelationValuesImpl)oldReverseRelationValue).removeReverse(forInstance, operation);
-			} else {
-				((ReverseRelationValueImpl)oldReverseRelationValue).setReverse(forInstance, model.isOwner(), operation);
+		if (model.isOwner()) {
+			if (oldStoredValue!=null) {
+				forInstance.getMetadata().reject(oldStoredValue);
+			}
+			if (newStoredValue!=null) {
+				forInstance.getMetadata().adopt(newStoredValue);
 			}
 		}
-		if (newStoredValue!=null) {
-			ReadOnlyAttributeValue<To, ? extends Object> newReverseRelationValue = model.getReverseRelation().get(newStoredValue);
-			if (getModel().getReverseRelation().isMultivalue()) {
-				((ReverseRelationValuesImpl)newReverseRelationValue).addReverse(forInstance, operation);
-			} else {
-				((ReverseRelationValueImpl)newReverseRelationValue).setReverse(forInstance, model.isOwner(), operation);
+		if (model.getReverseRelation()!=null) {
+			if (oldStoredValue!=null) {
+				ReadOnlyAttributeValue<To, ? extends Object> oldReverseRelationValue = model.getReverseRelation().get(oldStoredValue);
+				if (getModel().getReverseRelation().isMultivalue()) {
+					((ReverseRelationValuesImpl)oldReverseRelationValue).removeReverse(forInstance, operation);
+				} else {
+					((ReverseRelationValueImpl)oldReverseRelationValue).setReverse(forInstance, operation);
+				}
+			}
+			if (newStoredValue!=null) {
+				ReadOnlyAttributeValue<To, ? extends Object> newReverseRelationValue = model.getReverseRelation().get(newStoredValue);
+				if (getModel().getReverseRelation().isMultivalue()) {
+					((ReverseRelationValuesImpl)newReverseRelationValue).addReverse(forInstance, operation);
+				} else {
+					((ReverseRelationValueImpl)newReverseRelationValue).setReverse(forInstance, operation);
+				}
 			}
 		}
 	}

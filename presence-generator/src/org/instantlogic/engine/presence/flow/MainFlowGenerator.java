@@ -3,7 +3,6 @@ package org.instantlogic.engine.presence.flow;
 import org.instantlogic.designer.ApplicationDesign;
 import org.instantlogic.designer.FlowDesign;
 import org.instantlogic.designer.SubFlowDesign;
-import org.instantlogic.engine.presence.flow.main.AnonymousPlaceTemplateGenerator;
 
 public class MainFlowGenerator extends FlowDesign {
 	
@@ -15,7 +14,6 @@ public class MainFlowGenerator extends FlowDesign {
 	
 	@Override
 	public void registerApplication(ApplicationDesign application) {
-		addToNodes(AnonymousPlaceTemplateGenerator.PLACE);
 		SubFlowDesign travelerSubFlow = new SubFlowDesign().setFlow(TravelerFlowGenerator.FLOW);
 		travelerSubFlow.setName("Traveler");
 		addToNodes(travelerSubFlow);

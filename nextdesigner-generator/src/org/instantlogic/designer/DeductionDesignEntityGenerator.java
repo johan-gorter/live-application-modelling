@@ -11,8 +11,8 @@ public class DeductionDesignEntityGenerator extends EntityDesign {
     }
 
     // Attributes
-    public static final AttributeDesign multivalue = addAttribute(ENTITY, "multivalue", java.lang.Boolean.class);
-    public static final AttributeDesign className = addAttribute(ENTITY, "className", java.lang.String.class);
+    public static final AttributeDesign multivalue = addAttribute(ENTITY, "multivalue", java.lang.Boolean.class); // TODO: actually use this attribute
+    public static final AttributeDesign javaClassName = addAttribute(ENTITY, "javaClassName", java.lang.String.class);
     public static final AttributeDesign customization = addAttribute(ENTITY, "customization", java.lang.String.class);
 
     // Relations

@@ -56,11 +56,7 @@ public class InstantlogicRequestHandler extends HttpStaticFileServerHandler impl
 		logger.debug("Incoming request from traveler {} for application {}, case {}", new Object[]{ travelerId, applicationName, caseId});
 		NettyTraveler nettyTraveler = NettyTraveler.getOrCreate(travelerId, applicationName, caseId);
 		
-		String value = request.getHeader("Cookie");
-		if (value!=null) {
-			Set<Cookie> cookies = new CookieDecoder().decode(value);
-			handleAuthentication(cookies, nettyTraveler);
-		}
+		nettyTraveler.verifyIncomingAuthentication(request);
 		
 		ChannelBuffer content = request.getContent();
 		if (content.readable()) {
@@ -68,24 +64,6 @@ public class InstantlogicRequestHandler extends HttpStaticFileServerHandler impl
 		}
 		
 		nettyTraveler.parkRequest(e);
-	}
-
-	private void handleAuthentication(Set<Cookie> cookies, NettyTraveler nettyTraveler) {
-		for (Cookie cookie:cookies) {
-			if ("who-am-i".equals(cookie.getName())) {
-				String username = cookie.getValue();
-				if (nettyTraveler.getTravelerInfo().getAuthenticatedUsername()==null) {
-					nettyTraveler.getTravelerInfo().setAuthenticatedUsername(username);
-				} else if (username.equals(nettyTraveler.getTravelerInfo().getAuthenticatedUsername())) {
-					return;
-				} else {
-					throw new RuntimeException("Traveler switched authenticatedUsername");
-				}
-			}
-		}
-		if (nettyTraveler.getTravelerInfo().getAuthenticatedUsername()!=null) {
-			throw new RuntimeException("AuthenticatedUsername disappeared");
-		}
 	}
 
 	private void send100Continue(MessageEvent e) {

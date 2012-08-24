@@ -43,27 +43,23 @@ public class CaseManager {
 
 	public void sendUpdates() {
 		// Render the places (this may update the place titles needed for rendering the presence)
-		for (User user : this.presence.getUsers()) {
-			for (Traveler traveler: user.getTravelers()) {
-				try {
-					traveler.queuePlaceIfNeeded();
-				} catch (Exception e) {
-					logger.error("Exception sending updates to traveler " + traveler.getId(), e);
-					traveler.sendException(e, true);
-				}
+		for (Traveler traveler: presence.getActiveTravelers()) {
+			try {
+				traveler.queuePlaceIfNeeded();
+			} catch (Exception e) {
+				logger.error("Exception sending updates to traveler " + traveler.getId(), e);
+				traveler.sendException(e, true);
 			}
 		}
 		// Render the presence and send
-		for (User user : this.presence.getUsers()) {
-			for (Traveler traveler: user.getTravelers()) {
-				try {
-					traveler.queuePresenceIfNeeded();
-				} catch (Exception e) {
-					logger.error("Exception sending presence to traveler " + traveler.getId(), e);
-					traveler.sendException(e, true);
-				}
-				traveler.sendQueuedUpdates();
+		for (Traveler traveler: presence.getActiveTravelers()) {
+			try {
+				traveler.queuePresenceIfNeeded();
+			} catch (Exception e) {
+				logger.error("Exception sending presence to traveler " + traveler.getId(), e);
+				traveler.sendException(e, true);
 			}
+			traveler.sendQueuedUpdates();
 		}
 	}
 	
@@ -74,7 +70,7 @@ public class CaseManager {
 	public void processMessages(TravelerProxy travelerProxy, List<Message> messages) {
 		CaseAdministration caseAdministration = this.theCase.getMetadata().getCaseAdministration();
 		CaseAdministration presenceCaseAdministration = presence.getMetadata().getCaseAdministration();
-		Traveler traveler = getTraveler(travelerProxy);
+		Traveler traveler = presence.getTraveler(travelerProxy, this);
 		try {
 			Operation operation = caseAdministration.startOperation();
 			Operation presenceOperation = presenceCaseAdministration.startOperation();
@@ -94,37 +90,6 @@ public class CaseManager {
 		}
 	}
 	
-	private boolean equals(Object obj1, Object obj2) {
-		if (obj1==null && obj2==null) return true;
-		if (obj1==null || obj2==null) return false;
-		return obj1.equals(obj2);
-	}
-	
-	private Traveler getTraveler(TravelerProxy travelerProxy) {
-		TravelerInfo travelerInfo = travelerProxy.getTravelerInfo();
-		User user = null;
-		for (User userKandidate: presence.getUsers()) {
-			if (equals(userKandidate.getUserName(),travelerInfo.getAuthenticatedUsername())) {
-				user = userKandidate;
-				break;
-			}
-		}
-		if (user==null) {
-			user = new User();
-			user.setUserName(travelerInfo.getAuthenticatedUsername());
-			presence.addToUsers(user);
-		}
-		for (Traveler traveler: user.getTravelers()) {
-			if (traveler.getId().equals(travelerInfo.getTravelerId())) {
-				return traveler;
-			}
-		}
-		Traveler traveler = new Traveler(travelerProxy, this);
-		traveler.setId(travelerInfo.getTravelerId());
-		user.addToTravelers(traveler);
-		return traveler;
-	}
-
 	public Instance getCase() {
 		return theCase;
 	}

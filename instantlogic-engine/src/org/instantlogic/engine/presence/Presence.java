@@ -1,5 +1,8 @@
 package org.instantlogic.engine.presence;
 
+import org.instantlogic.engine.TravelerProxy;
+import org.instantlogic.engine.manager.CaseManager;
+import org.instantlogic.interaction.util.TravelerInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +32,50 @@ public class Presence extends AbstractPresence {
 		switch (command) {
 			case "login":
 				traveler.getTravelerInfo().setAuthenticatedUsername((String)value);
+				traveler.setUser(findOrActivateUser((String)value));
+				break;
+			case "setCommunicatorVisible":
+				traveler.setCommunicatorVisible((Boolean)value);
 				break;
 		}
+	}
+	
+	public Traveler getTraveler(TravelerProxy travelerProxy, CaseManager caseManager) {
+		TravelerInfo travelerInfo = travelerProxy.getTravelerInfo();
+
+		Traveler traveler = null;
+		for (Traveler travelerKandidate: getActiveTravelers()) {
+			if (travelerKandidate.getId().equals(travelerInfo.getTravelerId())) {
+				traveler = travelerKandidate;
+			}
+		}
+		if (traveler == null) {
+			traveler = new Traveler(travelerProxy, caseManager);
+			traveler.setId(travelerInfo.getTravelerId());
+			addToActiveTravelers(traveler);
+		}
+		
+		if (travelerInfo.getAuthenticatedUsername()!=null) {
+			User user = null;
+			if (traveler.getUser()==null || traveler.getUser().getUsername()!=travelerInfo.getAuthenticatedUsername()) {
+				user = findOrActivateUser(travelerInfo.getAuthenticatedUsername());
+				traveler.setUser(user);
+			}
+		} else {
+			traveler.setUser(null);
+		}
+		return traveler;
+	}
+
+	private User findOrActivateUser(String username) {
+		for (User userKandidate: getActiveUsers()) {
+			if (userKandidate.getUsername().equals(username)) {
+				return userKandidate;
+			}
+		}
+		User user = new User();
+		user.setUsername(username);
+		addToActiveUsers(user);
+		return user;
 	}
 }

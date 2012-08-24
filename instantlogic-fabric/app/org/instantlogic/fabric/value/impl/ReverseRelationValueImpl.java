@@ -31,18 +31,10 @@ public class ReverseRelationValueImpl<I extends Instance, From extends Instance>
 		return (Relation<I, From, From>) super.getModel();
 	}
 
-	public void setReverse(From reverseValue, boolean isOwner, Operation operation) {
+	public void setReverse(From reverseValue, Operation operation) {
 		From oldValue = this.reverseValue;
 		this.reverseValue = reverseValue;
 		if (operation==null) return;
-		if (isOwner) {
-			if (oldValue!=null) {
-				oldValue.getMetadata().reject(forInstance);
-			}
-			if (reverseValue!=null) {
-				reverseValue.getMetadata().adopt(forInstance);
-			}
-		}
 		fireValueChanged(ValueAndLevel.deducedOrMissing(oldValue), null, null, operation);
 	}
 	

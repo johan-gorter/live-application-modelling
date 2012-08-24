@@ -78,34 +78,66 @@ public abstract class AbstractPresence extends org.instantlogic.fabric.Instance 
 	}
 	
 	
-	private final org.instantlogic.fabric.value.RelationValues<Presence, User> users
-		= createRelationValues(org.instantlogic.engine.presence.entity.PresenceEntity.users);
+	private final org.instantlogic.fabric.value.RelationValues<Presence, Traveler> activeTravelers
+		= createRelationValues(org.instantlogic.engine.presence.entity.PresenceEntity.activeTravelers);
 		
-	public org.instantlogic.fabric.value.RelationValues<Presence, User> getUsersRelationValue() {
-		return users;
+	public org.instantlogic.fabric.value.RelationValues<Presence, Traveler> getActiveTravelersRelationValue() {
+		return activeTravelers;
 	}
 
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.User> getUsers() {
-		return users.getValue();
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.Traveler> getActiveTravelers() {
+		return activeTravelers.getValue();
 	}
 	
-	public Presence addToUsers(User item) {
-		users.addValue(item);
+	public Presence addToActiveTravelers(Traveler item) {
+		activeTravelers.addValue(item);
 		return (Presence)this;
 	}
 	
-	public Presence addToUsers(User item, int index) {
-		users.insertValue(item, index);
+	public Presence addToActiveTravelers(Traveler item, int index) {
+		activeTravelers.insertValue(item, index);
 		return (Presence)this;
 	}
 	
-	public Presence removeFromUsers(User item) {
-		users.removeValue(item);
+	public Presence removeFromActiveTravelers(Traveler item) {
+		activeTravelers.removeValue(item);
 		return (Presence)this;
 	}
 	
-	public Presence removeFromUsers(int index) {
-		users.removeValue(index);
+	public Presence removeFromActiveTravelers(int index) {
+		activeTravelers.removeValue(index);
+		return (Presence)this;
+	}
+	
+	
+	private final org.instantlogic.fabric.value.RelationValues<Presence, User> activeUsers
+		= createRelationValues(org.instantlogic.engine.presence.entity.PresenceEntity.activeUsers);
+		
+	public org.instantlogic.fabric.value.RelationValues<Presence, User> getActiveUsersRelationValue() {
+		return activeUsers;
+	}
+
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.User> getActiveUsers() {
+		return activeUsers.getValue();
+	}
+	
+	public Presence addToActiveUsers(User item) {
+		activeUsers.addValue(item);
+		return (Presence)this;
+	}
+	
+	public Presence addToActiveUsers(User item, int index) {
+		activeUsers.insertValue(item, index);
+		return (Presence)this;
+	}
+	
+	public Presence removeFromActiveUsers(User item) {
+		activeUsers.removeValue(item);
+		return (Presence)this;
+	}
+	
+	public Presence removeFromActiveUsers(int index) {
+		activeUsers.removeValue(index);
 		return (Presence)this;
 	}
 	

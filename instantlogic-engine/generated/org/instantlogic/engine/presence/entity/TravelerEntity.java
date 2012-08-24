@@ -82,17 +82,31 @@ public class TravelerEntity extends org.instantlogic.fabric.model.Entity<org.ins
 			
 		};
 	
-	// Reverse relations
-	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.engine.presence.Traveler, org.instantlogic.engine.presence.User, org.instantlogic.engine.presence.User> user
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.engine.presence.Traveler, org.instantlogic.engine.presence.User, org.instantlogic.engine.presence.User>(
-			"user", INSTANCE, org.instantlogic.engine.presence.entity.UserEntity.INSTANCE, org.instantlogic.engine.presence.User.class, org.instantlogic.engine.presence.entity.UserEntity.travelers
+			"user", INSTANCE, org.instantlogic.engine.presence.entity.UserEntity.INSTANCE, org.instantlogic.engine.presence.User.class, 
+			org.instantlogic.engine.presence.entity.UserEntity.travelers
 		) {
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.engine.presence.Traveler, org.instantlogic.engine.presence.User> get(
 					org.instantlogic.engine.presence.Traveler instance) {
 				return instance.getUserRelationValue();
+			}
+			
+		};
+	
+	// Reverse relations
+	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.engine.presence.Traveler, org.instantlogic.engine.presence.Presence, org.instantlogic.engine.presence.Presence> presence
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.engine.presence.Traveler, org.instantlogic.engine.presence.Presence, org.instantlogic.engine.presence.Presence>(
+			"presence", INSTANCE, org.instantlogic.engine.presence.entity.PresenceEntity.INSTANCE, org.instantlogic.engine.presence.Presence.class, org.instantlogic.engine.presence.entity.PresenceEntity.activeTravelers
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.engine.presence.Traveler, org.instantlogic.engine.presence.Presence> get(
+					org.instantlogic.engine.presence.Traveler instance) {
+				return instance.getPresenceRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -106,9 +120,10 @@ public class TravelerEntity extends org.instantlogic.fabric.model.Entity<org.ins
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		currentPlace,
+		user,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
-		user,
+		presence,
 	};
 
 	@Override
