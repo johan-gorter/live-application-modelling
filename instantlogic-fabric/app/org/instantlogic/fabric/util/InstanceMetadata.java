@@ -11,7 +11,12 @@ import java.util.NoSuchElementException;
 
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.model.Relation;
 import org.instantlogic.fabric.text.TextTemplate;
+import org.instantlogic.fabric.value.Multi;
+import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
+import org.instantlogic.fabric.value.RelationValue;
+import org.instantlogic.fabric.value.RelationValues;
 
 public class InstanceMetadata {
 
@@ -169,10 +174,14 @@ public class InstanceMetadata {
 	}
 	
 	protected void registerOwner(Instance owner, String localId) {
+		// TODO: allow 'migration' to another owner
 		if (this.owner!=null && owner!=null) {
 			throw new RuntimeException("This instance is already owned by "+this.owner);
 		}
 		this.owner = owner;
+		if (owner==null) {
+			remove();
+		}
 		this.localId = owner==null?"0":localId;
 		this.instanceRegistry = null;
 	}
@@ -199,6 +208,30 @@ public class InstanceMetadata {
 			throw new NoSuchElementException("Child "+localId);
 		}
 		return result;
+	}
+	
+	/**
+	 * Clears all relations to other instances. Applies recursively to children
+	 */
+	private void remove() {
+		if (children!=null) {
+			Instance[] toRemove = children.values().toArray(new Instance[children.size()]);
+			for(Instance instance: toRemove) { // depth-first
+				instance.getMetadata().remove();
+			}
+		}
+		for (Relation relation : getEntity().getRelations()) {
+			if (!relation.isReadOnly() && relation.isMultivalue()) {
+				RelationValues values = ((RelationValues)relation.get(instance));
+				if (values.hasStoredValue()) { // No default
+					for (int i=((Multi)values.getValue()).size();i>=0;i--)
+					values.removeValue(i);
+				}
+			} else if (!relation.isReadOnly()) { // single value
+				((RelationValue)relation.get(instance)).setValue(null);
+			}
+		}
+		// TODO: clear reverse relations as well
 	}
 
 	/**

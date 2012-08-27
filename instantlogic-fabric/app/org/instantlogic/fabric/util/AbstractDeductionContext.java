@@ -64,4 +64,21 @@ public abstract class AbstractDeductionContext extends DeductionContext {
 		}
 	}
 	
+	@Override
+	public String printDiagnostics() {
+		StringBuffer sb = new StringBuffer(getClass().getName());
+		sb.append("(");
+		for (Instance i : selectedInstances) {
+			sb.append(i.toString());
+			sb.append(",");
+		}
+		if (parent==null) {
+			sb.setLength(sb.length()-1);
+		} else {
+			sb.append("parent: ");
+			sb.append(parent.printDiagnostics());
+		}
+		sb.append(")");
+		return sb.toString();
+	}
 }

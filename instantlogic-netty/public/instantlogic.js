@@ -65,6 +65,7 @@ YUI.add('instantlogic', function (Y) {
         		this.outstandingRequests[id].abort();
         		this.outstandingRequestCount--;
         	}
+        	// TODO: send leave message immediately
         },
         
         onLocationChange: function(e) {

@@ -20,6 +20,7 @@ import org.instantlogic.engine.manager.EngineProcessor;
 import org.instantlogic.engine.manager.Update;
 import org.instantlogic.engine.message.ChangeMessage;
 import org.instantlogic.engine.message.EnterMessage;
+import org.instantlogic.engine.message.LeaveMessage;
 import org.instantlogic.engine.message.Message;
 import org.instantlogic.engine.message.PresenceMessage;
 import org.instantlogic.engine.message.SubmitMessage;
@@ -115,7 +116,7 @@ public class NettyTraveler implements TravelerProxy {
 			state = State.REMOVED;
 			logger.info("Removing traveler {}", travelerInfo.getTravelerId());
 			nettyTravelers.remove(travelerInfo.getTravelerId());
-			this.caseProcessor.processMessagesAndSendUpdates(this, Collections.singletonList((Message)new EnterMessage(null)));
+			this.caseProcessor.processMessagesAndSendUpdates(this, Collections.singletonList((Message)new LeaveMessage()));
 		}
 		if (state==State.ACTIVE && parkedRequests.size()==0) {
 			state = State.MAY_BE_OBANDONED;
@@ -139,9 +140,10 @@ public class NettyTraveler implements TravelerProxy {
 				String placeElementId = message.getAsJsonObject().get("id").getAsString();
 				messages.add(new SubmitMessage(placeElementId));
 			} else if ("enter".equals(messageName)) {
-				JsonElement locationElement = message.getAsJsonObject().get("location");
-				String newLocation = locationElement==null?null:locationElement.getAsString();
+				String newLocation = message.getAsJsonObject().get("location").getAsString();
 				messages.add(new EnterMessage(newLocation));
+			} else if ("leave".equals(messageName)) {
+				messages.add(new LeaveMessage());
 			} else if ("presence".equals(messageName)) {
 				String command = message.getAsJsonObject().get("command").getAsString();
 				String id = null;
