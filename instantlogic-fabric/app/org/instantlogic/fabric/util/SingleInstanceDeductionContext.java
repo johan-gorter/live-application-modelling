@@ -29,4 +29,9 @@ public class SingleInstanceDeductionContext extends DeductionContext {
 		result.add(instance);
 	}
 
+	@Override
+	public String printDiagnostics() {
+		return "SingleInstanceDeductionContext("+instance+")";
+	}
+
 }

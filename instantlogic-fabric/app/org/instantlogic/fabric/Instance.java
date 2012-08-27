@@ -92,6 +92,9 @@ public abstract class Instance {
 		return getInstanceEntity().toString()+"#"+instanceId+name;
 	}
 
+	/**
+	 * Suggestions for a better name: getInstanceOptions, getInstanceOperations, getInstanceData, instance() ...
+	 */
 	public InstanceMetadata getMetadata() {
 		return metadata;
 	}

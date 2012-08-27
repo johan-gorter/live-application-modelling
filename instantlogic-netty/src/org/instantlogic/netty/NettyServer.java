@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.instantlogic.designer.DesignerApplication;
 import org.instantlogic.engine.manager.ApplicationManager;
+import org.instantlogic.engine.manager.EngineProcessor;
 import org.instantlogic.engine.manager.Update;
 import org.instantlogic.example.izzy.IzzyApplication;
 import org.jboss.netty.bootstrap.ServerBootstrap;
@@ -118,6 +119,10 @@ public class NettyServer {
 			final String command = in.readLine();
 			if ("quit".equalsIgnoreCase(command)) {
 				break;
+			} else if ("case".equalsIgnoreCase(command)) {
+				System.out.println(EngineProcessor.printCaseDiagnostics());
+			} else if ("presence".equalsIgnoreCase(command)) {
+				System.out.println(EngineProcessor.printPresenceDiagnostics());
 			} else if ("sweep".equalsIgnoreCase(command)){
 				NettyTraveler.sweep();
 			} else {

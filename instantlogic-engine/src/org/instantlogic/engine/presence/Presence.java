@@ -12,7 +12,7 @@ public class Presence extends AbstractPresence {
 	
 	public Place enter(Traveler traveler, String url) {
 		traveler.setCurrentPlace(null);
-		if (url==null) return null;
+		if (url==null) throw new IllegalArgumentException("url");
 		traveler.placeUpdated();
 		for (Place place : getActivePlaces()) {
 			if (place.getUrl().equals(url)) {
@@ -40,7 +40,7 @@ public class Presence extends AbstractPresence {
 		}
 	}
 	
-	public Traveler getTraveler(TravelerProxy travelerProxy, CaseManager caseManager) {
+	public Traveler findOrAddTraveler(TravelerProxy travelerProxy, CaseManager caseManager) {
 		TravelerInfo travelerInfo = travelerProxy.getTravelerInfo();
 
 		Traveler traveler = null;
@@ -78,4 +78,5 @@ public class Presence extends AbstractPresence {
 		addToActiveUsers(user);
 		return user;
 	}
+
 }

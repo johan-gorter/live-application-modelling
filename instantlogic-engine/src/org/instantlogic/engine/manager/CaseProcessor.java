@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.instantlogic.engine.TravelerProxy;
 import org.instantlogic.engine.message.Message;
+import org.instantlogic.engine.persistence.json.CasePersister;
 
 /**
  *	This class makes sure the CaseManager is only accessed by one thread at a time. 
@@ -85,4 +86,13 @@ public class CaseProcessor {
 			}
 		} while (processEntries.size()>0);
 	}
+
+	public void printCaseDiagnostics(StringBuffer sb) {
+		caseManager.printCaseDiagnostics(sb);
+	}
+	
+	public void printPresenceDiagnostics(StringBuffer sb) {
+		caseManager.printPresenceDiagnostics(sb);
+	}
+	
 }

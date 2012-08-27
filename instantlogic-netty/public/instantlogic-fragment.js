@@ -92,16 +92,46 @@ YUI.add('instantlogic-fragment', function (Y) {
     	init: function(model) {
     		ns.Communicator.superclass.init.call(this, model);
     		var markup = html.div({className:'communicator'},
-    			this.hideButton = html.button('Hide communicator')
+    			this.hideButton = html.button('Hide communicator'),
+    			this.usersDiv = html.div()
     		)
     		this.parentNode.appendChild(markup);
     		this.hideButton.on('click', this.onHideClick, this);
+            this.usersFragmentList = new FragmentList(this.usersDiv, this.engine);
+            this.usersFragmentList.init(model.users);
     	},
     	update: function(newModel, diff) {
     		ns.Communicator.superclass.update.call(this, newModel);
+            this.usersFragmentList.update(newModel.users, diff);
     	},
     	onHideClick: function() {
     		this.engine.enqueueMessage({message: 'presence', command: 'setCommunicatorVisible', value:false});
+    	}
+    });
+
+    // User
+    ns.User = createFragment({}, {
+    	init: function(model) {
+    		ns.User.superclass.init.call(this, model);
+    		var markup = html.div({className:'user'},
+    			this.usernameDiv = html.div(model.username || '')
+    		)
+    		this.parentNode.appendChild(markup);
+    	},
+    	update: function(newModel, diff) {
+    	}
+    });
+
+    // Traveler
+    ns.Traveler = createFragment({}, {
+    	init: function(model) {
+    		ns.Traveler.superclass.init.call(this, model);
+    		var markup = html.div({className:'traveler'},
+    			this.TravelernameDiv = html.div(model.placeUrl || '')
+    		)
+    		this.parentNode.appendChild(markup);
+    	},
+    	update: function(newModel, diff) {
     	}
     });
 

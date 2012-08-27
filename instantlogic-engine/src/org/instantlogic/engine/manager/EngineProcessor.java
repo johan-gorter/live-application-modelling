@@ -26,4 +26,20 @@ public class EngineProcessor {
 		CaseProcessor caseProcessor = getCaseProcessor(application, caseId);
 		caseProcessor.processMessagesAndSendUpdates(travelerProxy, messages);
 	}
+
+	public static String printCaseDiagnostics() {
+		StringBuffer sb = new StringBuffer();
+		for (CaseProcessor caseProcessor : caseProcessors.values()) {
+			caseProcessor.printCaseDiagnostics(sb);
+		}
+		return sb.toString();
+	}
+
+	public static String printPresenceDiagnostics() {
+		StringBuffer sb = new StringBuffer();
+		for (CaseProcessor caseProcessor : caseProcessors.values()) {
+			caseProcessor.printPresenceDiagnostics(sb);
+		}
+		return sb.toString();
+	}
 }

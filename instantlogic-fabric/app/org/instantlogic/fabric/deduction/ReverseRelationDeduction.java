@@ -8,7 +8,13 @@ import org.instantlogic.fabric.util.ValueAndLevel;
 
 public class ReverseRelationDeduction<From extends Instance, To extends Instance> extends AttributeDeduction<From, To> {
 
-	public static <From extends Instance, To extends Instance> ReverseRelationDeduction<From, To> create(Relation<From, ? extends Object, To> relation, Deduction<To> input) {
+	/*
+	 * Return value can either be a 
+	 *   ReverseRelationDeduction<From, To>
+	 * or a 
+	 *   ReverseRelationDeduction<Multi<From>, To>
+	 */
+	public static <From extends Instance, To extends Instance> ReverseRelationDeduction create(Relation<From, ? extends Object, To> relation, Deduction<To> input) {
 		return new ReverseRelationDeduction<From, To>(relation, input);
 	}
 	

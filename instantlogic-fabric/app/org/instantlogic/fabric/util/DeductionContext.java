@@ -32,4 +32,6 @@ public abstract class DeductionContext {
 	 */
 	protected abstract void addSelectedInstances(List<Instance> result);
 
+	public abstract String printDiagnostics();
+
 }

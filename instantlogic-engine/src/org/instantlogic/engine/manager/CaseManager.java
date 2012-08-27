@@ -5,14 +5,13 @@ import java.util.List;
 
 import org.instantlogic.engine.TravelerProxy;
 import org.instantlogic.engine.message.Message;
+import org.instantlogic.engine.persistence.json.CasePersister;
 import org.instantlogic.engine.persistence.json.FileCasePersister;
 import org.instantlogic.engine.presence.Presence;
 import org.instantlogic.engine.presence.Traveler;
-import org.instantlogic.engine.presence.User;
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.util.Operation;
-import org.instantlogic.interaction.util.TravelerInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,12 +23,12 @@ public class CaseManager {
 	private static final Logger logger = LoggerFactory.getLogger(CaseManager.class);
 	
 	private final String caseId;
+	private final Instance theCase;
 	/**
 	 * Administration for users, travelers and places.
 	 */
 	private final Presence presence;
 	private final ApplicationManager application;
-	private final Instance theCase;
 	
 	public CaseManager(ApplicationManager application, String caseId) {
 		if (caseId==null) caseId = FileCasePersister.uniqueId();
@@ -70,7 +69,7 @@ public class CaseManager {
 	public void processMessages(TravelerProxy travelerProxy, List<Message> messages) {
 		CaseAdministration caseAdministration = this.theCase.getMetadata().getCaseAdministration();
 		CaseAdministration presenceCaseAdministration = presence.getMetadata().getCaseAdministration();
-		Traveler traveler = presence.getTraveler(travelerProxy, this);
+		Traveler traveler = presence.findOrAddTraveler(travelerProxy, this);
 		try {
 			Operation operation = caseAdministration.startOperation();
 			Operation presenceOperation = presenceCaseAdministration.startOperation();
@@ -105,4 +104,13 @@ public class CaseManager {
 	public Presence getPresence() {
 		return this.presence;
 	}
+
+	public void printCaseDiagnostics(StringBuffer sb) {
+		sb.append(CasePersister.gson.toJson(theCase));
+	}
+
+	public void printPresenceDiagnostics(StringBuffer sb) {
+		sb.append(CasePersister.gson.toJson(presence));
+	}
+
 }

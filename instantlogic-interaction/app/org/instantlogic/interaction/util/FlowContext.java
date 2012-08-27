@@ -107,4 +107,9 @@ public class FlowContext extends DeductionContext {
 	public TravelerInfo getTraveler() {
 		return traveler;
 	}
+
+	@Override
+	public String printDiagnostics() {
+		return flowStack.printDiagnostics();
+	}
 }

@@ -9,6 +9,7 @@ public class UserEntityGenerator extends EntityDesign {
     
     private UserEntityGenerator() {
         setName("User");
+        setIsCustomized(true);
     }
 
     // Attributes

@@ -1,9 +1,11 @@
-package org.instantlogic.engine.manager;
+package org.instantlogic.engine.presence;
 
 import java.util.Map;
 
 import junit.framework.Assert;
 
+import org.instantlogic.engine.manager.ApplicationManager;
+import org.instantlogic.engine.manager.CaseManager;
 import org.instantlogic.engine.message.EnterMessage;
 import org.instantlogic.engine.message.SubmitMessage;
 import org.instantlogic.engine.util.FragmentQuery;
