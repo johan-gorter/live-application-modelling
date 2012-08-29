@@ -131,16 +131,21 @@ public class Issue extends org.instantlogic.fabric.Instance {
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<Issue, Project> project
+	private final org.instantlogic.fabric.value.RelationValue<Issue, Project> project
 		= createReverseRelationValue(org.instantlogic.example.izzy.entity.IssueEntity.project);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<Issue, Project> getProjectRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<Issue, Project> getProjectRelationValue() {
 		return project;
 	}
 
 	public org.instantlogic.example.izzy.Project getProject() {
 		return project.getValue();
 	}
+
+    public Issue setProject(org.instantlogic.example.izzy.Project newValue) {
+        project.setValue(newValue);
+        return (Issue)this;
+    }
 
 
 }

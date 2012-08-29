@@ -42,15 +42,15 @@ public class RelationValuesImpl<I extends Instance, To extends Instance>
 		if (model.getReverseRelation()!=null) {
 			if (type == MultiValueUpdateType.INSERT) {
 				if (getModel().getReverseRelation().isMultivalue()) {
-					((ReverseRelationValuesImpl)model.getReverseRelation().get(item)).addReverse(forInstance, operation);
+					((ReverseRelationValuesImpl)model.getReverseRelation().get(item)).internalAddReverse(forInstance, operation);
 				} else {
-					((ReverseRelationValueImpl)model.getReverseRelation().get(item)).setReverse(forInstance, operation);
+					((ReverseRelationValueImpl)model.getReverseRelation().get(item)).internalSetReverse(forInstance, operation);
 				}
 			} else { // Remove
 				if (getModel().getReverseRelation().isMultivalue()) {
-					((ReverseRelationValuesImpl)model.getReverseRelation().get(item)).removeReverse(forInstance, operation);
+					((ReverseRelationValuesImpl)model.getReverseRelation().get(item)).internalRemoveReverse(forInstance, operation);
 				} else {
-					((ReverseRelationValueImpl)model.getReverseRelation().get(item)).setReverse(null, operation);
+					((ReverseRelationValueImpl)model.getReverseRelation().get(item)).internalSetReverse(null, operation);
 				}
 			}
 		}

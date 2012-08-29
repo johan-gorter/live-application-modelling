@@ -4,6 +4,7 @@ public class CommentEntity extends org.instantlogic.fabric.model.Entity<org.inst
 
 	public static final CommentEntity INSTANCE = new CommentEntity();
 	
+	
 	protected CommentEntity() {
 	}
 
@@ -42,7 +43,8 @@ public class CommentEntity extends org.instantlogic.fabric.model.Entity<org.inst
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.example.izzy.Comment, org.instantlogic.example.izzy.User, org.instantlogic.example.izzy.User> by
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.example.izzy.Comment, org.instantlogic.example.izzy.User, org.instantlogic.example.izzy.User>(
-			"by", INSTANCE, org.instantlogic.example.izzy.entity.UserEntity.INSTANCE, org.instantlogic.example.izzy.User.class, org.instantlogic.example.izzy.entity.UserEntity.comments
+			"by", INSTANCE, org.instantlogic.example.izzy.entity.UserEntity.INSTANCE, org.instantlogic.example.izzy.User.class, 
+			org.instantlogic.example.izzy.entity.UserEntity.comments
 		) {
 	
 			@Override

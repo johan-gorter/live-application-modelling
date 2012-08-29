@@ -7,12 +7,14 @@ import org.instantlogic.fabric.model.Relation;
 import org.instantlogic.fabric.util.Operation;
 import org.instantlogic.fabric.util.ValueAndLevel;
 import org.instantlogic.fabric.value.AttributeValue;
-import org.instantlogic.fabric.value.ReadOnlyRelationValue;
+import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
+import org.instantlogic.fabric.value.RelationValue;
+import org.instantlogic.fabric.value.RelationValues;
 
 
 public class ReverseRelationValueImpl<I extends Instance, From extends Instance>
 	extends ReadOnlyRelationValueImpl<I, From>
-	implements ReadOnlyRelationValue<I, From>{
+	implements RelationValue<I, From>{
 
 	private From reverseValue;
 	
@@ -31,11 +33,45 @@ public class ReverseRelationValueImpl<I extends Instance, From extends Instance>
 		return (Relation<I, From, From>) super.getModel();
 	}
 
-	public void setReverse(From reverseValue, Operation operation) {
+	void internalSetReverse(From reverseValue, Operation operation) {
 		From oldValue = this.reverseValue;
 		this.reverseValue = reverseValue;
 		if (operation==null) return;
 		fireValueChanged(ValueAndLevel.deducedOrMissing(oldValue), null, null, operation);
+	}
+	
+	@Override
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void setValue(From newEntity) {
+		if (newEntity==reverseValue) return;
+		Relation<From,? extends Object,I> relation = ((Relation<I, From, From>)model).getReverseRelation();
+		if (reverseValue!=null) {
+			// Remove forInstance from the old relation
+			ReadOnlyAttributeValue<From, ? extends Object> value = relation.get(reverseValue);
+			if (relation.isMultivalue()) {
+				((RelationValues)value).removeValue(forInstance);
+			} else {
+				if (value.getValue()!=forInstance) {
+					throw new RuntimeException("Reverse value not in sync while changing reverse relation");
+				}
+				((AttributeValue<From, ? extends Object>)value).setValue(null);
+			}
+		}
+		if (reverseValue!=null) {
+			throw new IllegalStateException("The reverse relation was not cleared from the other end");
+		}
+		if (newEntity!=null) {
+			// Add forInstance to the new entity
+			AttributeValue<From, ? extends Object> value = (AttributeValue<From, ? extends Object>)relation.get(newEntity);
+			if (relation.isMultivalue()) {
+				((RelationValues)value).removeValue(forInstance);
+			} else {
+				if (value.getValue()!=forInstance) {
+					throw new RuntimeException("Reverse value not in sync while changing reverse relation");
+				}
+				value.setValue(null);
+			}
+		}
 	}
 	
 	public void clear() {
@@ -50,5 +86,10 @@ public class ReverseRelationValueImpl<I extends Instance, From extends Instance>
 			value.setValue(null);
 		}
 		if (!result) throw new RuntimeException("Reverse value not in sync while clearing reverse relation");
+	}
+
+	@Override
+	public boolean isStored() {
+		return reverseValue!=null;
 	}
 }

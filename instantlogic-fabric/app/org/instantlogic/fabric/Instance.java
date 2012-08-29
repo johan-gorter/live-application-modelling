@@ -3,7 +3,6 @@ package org.instantlogic.fabric;
 import org.instantlogic.fabric.model.Attribute;
 import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.fabric.model.Relation;
-import org.instantlogic.fabric.text.TextTemplate;
 import org.instantlogic.fabric.util.InstanceMetadata;
 import org.instantlogic.fabric.value.AttributeValue;
 import org.instantlogic.fabric.value.AttributeValues;
@@ -66,12 +65,12 @@ public abstract class Instance {
 	}
 
 	@SuppressWarnings("unchecked")
-	protected<To extends Instance, I extends Instance> ReadOnlyRelationValue<I, To> createReverseRelationValue(Relation<I, To, To> relation) {
+	protected<To extends Instance, I extends Instance> RelationValue<I, To> createReverseRelationValue(Relation<I, To, To> relation) {
 		return new ReverseRelationValueImpl<I, To>((I)this, relation);
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected<To extends Instance, I extends Instance> ReadOnlyRelationValues<I, To> createReverseRelationValues(Relation<I, Multi<To>, To> relation) {
+	protected<To extends Instance, I extends Instance> RelationValues<I, To> createReverseRelationValues(Relation<I, Multi<To>, To> relation) {
 		return new ReverseRelationValuesImpl<I, To>((I)this, relation);
 	}
 	

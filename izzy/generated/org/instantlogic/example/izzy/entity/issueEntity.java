@@ -4,6 +4,7 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 
 	public static final IssueEntity INSTANCE = new IssueEntity();
 	
+	
 	protected IssueEntity() {
 	}
 
@@ -64,7 +65,8 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.example.izzy.Issue, org.instantlogic.example.izzy.User, org.instantlogic.example.izzy.User> assignee
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.example.izzy.Issue, org.instantlogic.example.izzy.User, org.instantlogic.example.izzy.User>(
-			"assignee", INSTANCE, org.instantlogic.example.izzy.entity.UserEntity.INSTANCE, org.instantlogic.example.izzy.User.class, org.instantlogic.example.izzy.entity.UserEntity.assignedIssues
+			"assignee", INSTANCE, org.instantlogic.example.izzy.entity.UserEntity.INSTANCE, org.instantlogic.example.izzy.User.class, 
+			org.instantlogic.example.izzy.entity.UserEntity.assignedIssues
 		) {
 	
 			@Override
@@ -77,7 +79,8 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.example.izzy.Issue, org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.Comment>, org.instantlogic.example.izzy.Comment> comments
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.example.izzy.Issue, org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.Comment>, org.instantlogic.example.izzy.Comment>(
-			"comments", INSTANCE, org.instantlogic.example.izzy.entity.CommentEntity.INSTANCE, org.instantlogic.example.izzy.Comment.class, org.instantlogic.example.izzy.entity.CommentEntity.issue
+			"comments", INSTANCE, org.instantlogic.example.izzy.entity.CommentEntity.INSTANCE, org.instantlogic.example.izzy.Comment.class, 
+			org.instantlogic.example.izzy.entity.CommentEntity.issue
 		) {
 	
 			@Override
@@ -98,7 +101,8 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.example.izzy.Issue, org.instantlogic.example.izzy.User, org.instantlogic.example.izzy.User> reporter
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.example.izzy.Issue, org.instantlogic.example.izzy.User, org.instantlogic.example.izzy.User>(
-			"reporter", INSTANCE, org.instantlogic.example.izzy.entity.UserEntity.INSTANCE, org.instantlogic.example.izzy.User.class, org.instantlogic.example.izzy.entity.UserEntity.reportedIssues
+			"reporter", INSTANCE, org.instantlogic.example.izzy.entity.UserEntity.INSTANCE, org.instantlogic.example.izzy.User.class, 
+			org.instantlogic.example.izzy.entity.UserEntity.reportedIssues
 		) {
 	
 			@Override

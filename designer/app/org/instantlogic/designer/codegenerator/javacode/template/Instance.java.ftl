@@ -101,16 +101,33 @@ public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${
 	// Reverse relations
 	<#list reverseRelations as relation>
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<#if relation.multivalue>s</#if><${technicalNameCapitalized}, ${relation.item}> ${relation.javaIdentifier}
+	private final org.instantlogic.fabric.value.RelationValue<#if relation.multivalue>s</#if><${technicalNameCapitalized}, ${relation.item}> ${relation.javaIdentifier}
 		= createReverseRelationValue<#if relation.multivalue>s</#if>(${rootPackageName}.entity.${technicalNameCapitalized}Entity.${relation.javaIdentifier});
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<#if relation.multivalue>s</#if><${technicalNameCapitalized}, ${relation.item}> get${relation.technicalName?cap_first}RelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<#if relation.multivalue>s</#if><${technicalNameCapitalized}, ${relation.item}> get${relation.technicalName?cap_first}RelationValue() {
 		return ${relation.javaIdentifier};
 	}
 
 	public ${relation.to} get${relation.technicalName?cap_first}() {
 		return ${relation.javaIdentifier}.getValue();
 	}
+
+    <#if relation.multivalue>
+    public ${technicalNameCapitalized} addTo${relation.technicalName?cap_first}(${relation.item} item) {
+        ${relation.javaIdentifier}.addValue(item);
+        return (${technicalNameCapitalized})this;
+    }
+
+    public ${technicalNameCapitalized} removeFrom${relation.technicalName?cap_first}(${relation.item} item) {
+        ${relation.javaIdentifier}.removeValue(item);
+        return (${technicalNameCapitalized})this;
+    }
+    <#else>
+    public ${technicalNameCapitalized} set${relation.technicalName?cap_first}(${relation.to} newValue) {
+        ${relation.javaIdentifier}.setValue(newValue);
+        return (${technicalNameCapitalized})this;
+    }
+    </#if>
 
 	</#list>
 
