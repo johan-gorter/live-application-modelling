@@ -178,10 +178,14 @@ public class InstanceMetadata {
 			// 'Migration' to another owner is not allowed, because this would change instance Id's
 			throw new RuntimeException("This instance is already owned by "+this.owner);
 		}
+		if (this.owner!=null) {
+			this.caseAdministration = this.owner.getMetadata().getCaseAdministration();
+		}
 		this.owner = owner;
+		
 		if (owner==null) {
-			this.caseAdministration = new CaseAdministration(instance);
-			clearRelationsAfterSplit(this.caseAdministration);
+			clearRelationsAfterSplit(this.instance);
+			this.caseAdministration = null;
 			this.localId="0";
 		} else {
 			this.caseAdministration = null;
@@ -216,10 +220,10 @@ public class InstanceMetadata {
 	/**
 	 * Clears all relations to instances in other cases. Applies recursively to children
 	 */
-	private void clearRelationsAfterSplit(CaseAdministration newCaseAdministration) {
+	private void clearRelationsAfterSplit(Instance newCase) {
 		if (children!=null) {
 			for(Instance instance: children.values()) { // depth-first
-				instance.getMetadata().clearRelationsAfterSplit(newCaseAdministration);
+				instance.getMetadata().clearRelationsAfterSplit(newCase);
 			}
 		}
 		for (Relation relation : getEntity().getRelations()) {
@@ -229,7 +233,7 @@ public class InstanceMetadata {
 					if (values.hasStoredValue()) { // No default
 						Multi<? extends Instance> multi = (Multi<? extends Instance>)values.getValue();
 						for (int i=multi.size()-1;i>=0;i--) {
-							if (multi.get(i).getMetadata().getCaseAdministration()!=newCaseAdministration) {
+							if (multi.get(i).getMetadata().getCase()!=newCase) {
 								values.removeValue(i);
 							}
 						}
@@ -237,7 +241,7 @@ public class InstanceMetadata {
 				} else { // single value
 					ReadOnlyAttributeValue value = relation.get(instance);
 					if (value.hasStoredValue()) { // No default
-						if (((Instance)value.getValue()).getMetadata().getCaseAdministration()!=newCaseAdministration) {
+						if (((Instance)value.getValue()).getMetadata().getCase()!=newCase) {
 							((RelationValue)value).setValue(null);
 						}
 					}
@@ -250,20 +254,28 @@ public class InstanceMetadata {
 					RelationValues values = ((RelationValues)relation.get(instance));
 					Multi<? extends Instance> multi = (Multi<? extends Instance>)values.getValue();
 					for (int i=multi.size()-1;i>=0;i--) {
-						if (multi.get(i).getMetadata().getCaseAdministration()!=newCaseAdministration) {
+						if (multi.get(i).getMetadata().getCase()!=newCase) {
 							values.removeValue(i);
 						}
 					}
 				} else { // single value
 					ReadOnlyAttributeValue value = relation.get(instance);
 					if (value.getValue()!=null) {
-						if (((Instance)value.getValue()).getMetadata().getCaseAdministration()!=newCaseAdministration) {
+						if (((Instance)value.getValue()).getMetadata().getCase()!=newCase) {
 							((RelationValue)value).setValue(null);
 						}
 					}
 				}
 			}
 		}
+	}
+
+	private Instance getCase() {
+		Instance result = instance;
+		while (result.getMetadata().getInstanceOwner()!=null) {
+			result = result.getMetadata().getInstanceOwner();
+		}
+		return result;
 	}
 
 	/**

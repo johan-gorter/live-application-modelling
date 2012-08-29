@@ -165,8 +165,6 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 		List<ValueChangeObserver> iterating = null;
 		ListIterator<ValueChangeObserver> iterator = null;
 		try {
-			// Listeners must undo their actions when they receive the undo event
-			event.getOperation().pauseRecordingUndoEvents(); 
 			// Reverse relations and such
 			beforeFiringChange(event);
 			// NextValueChangeObservers
@@ -196,7 +194,6 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 			success = true;
 		} finally {
 			if (success) {
-				event.getOperation().resumeRecordingUndoEvents();
 				if (clearIteratingOnExit && iteratingValueChangeObservers == iterating) {
 					iteratingValueChangeObservers = null;
 				}
@@ -239,7 +236,6 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 						lastMisinfomedIndex--;
 					}
 				} finally {
-					event.getOperation().resumeRecordingUndoEvents();
 					if (clearIteratingOnExit && iteratingValueChangeObservers == iterating) {
 						iteratingValueChangeObservers = null;
 					}
