@@ -129,11 +129,11 @@ public class Operation {
 		}
 	}
 
-	public void pauseRecordingUndoEvents() {
+	private void pauseRecordingUndoEvents() {
 		this.recordingUndoEventsPaused ++;
 	}
 
-	public void resumeRecordingUndoEvents() {
+	private void resumeRecordingUndoEvents() {
 		if (recordingUndoEventsPaused==0) throw new IllegalStateException();
 		this.recordingUndoEventsPaused --;
 	}

@@ -38,11 +38,11 @@ public class PresenceActiveTest {
 		System.out.println(CasePersister.gson.toJson(presence));
 		ensurePresenceConsistency();
 		
-// Rollback would be awesome if it worked...
-//		operation.close();
-//		System.out.println(CasePersister.gson.toJson(presence));
-//		ensurePresenceConsistency();
-//		ensureInitialTotals();
+		// Rollback is an awesome feature
+		operation.close();
+		System.out.println(CasePersister.gson.toJson(presence));
+		ensurePresenceConsistency();
+		ensureInitialTotals();
 	}
 
 	private void ensureInitialTotals() {
