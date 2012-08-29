@@ -4,6 +4,7 @@ public class UserEntity extends org.instantlogic.fabric.model.Entity<org.instant
 
 	public static final UserEntity INSTANCE = new UserEntity();
 	
+	
 	protected UserEntity() {
 	}
 

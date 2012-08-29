@@ -26,7 +26,7 @@ public class InstanceMetadata {
 	// When this value is the same as globalValueChangeListeners, copy globalValueChangeListeners on write and clear this field.
 	private List<GlobalValueChangeListener> iteratingGlobalValueChangeListeners = null; 
 	// Only available on the top instance, instances with an owner get the registry from the top instance (TODO: cache and invalidate for performance)
-	private CaseAdministration instanceRegistry; 
+	private CaseAdministration caseAdministration; 
 	
 	private String localId="0";
 	private int lastChildId=0;
@@ -46,14 +46,14 @@ public class InstanceMetadata {
 	
 	
 	public CaseAdministration getCaseAdministration() {
-		if (instanceRegistry==null) {
+		if (caseAdministration==null) {
 			if (owner!=null) {
 				return owner.getMetadata().getCaseAdministration();
 			} else {
-				instanceRegistry = new CaseAdministration(instance);
+				caseAdministration = new CaseAdministration(instance);
 			}
 		}
-		return instanceRegistry;
+		return caseAdministration;
 	}
 	
 	public void getInstanceId(StringBuilder builder) {
@@ -174,16 +174,19 @@ public class InstanceMetadata {
 	}
 	
 	protected void registerOwner(Instance owner, String localId) {
-		// TODO: allow 'migration' to another owner
 		if (this.owner!=null && owner!=null) {
+			// 'Migration' to another owner is not allowed, because this would change instance Id's
 			throw new RuntimeException("This instance is already owned by "+this.owner);
 		}
 		this.owner = owner;
 		if (owner==null) {
-			remove();
+			this.caseAdministration = new CaseAdministration(instance);
+			clearRelationsAfterSplit(this.caseAdministration);
+			this.localId="0";
+		} else {
+			this.caseAdministration = null;
+			this.localId = localId;			
 		}
-		this.localId = owner==null?"0":localId;
-		this.instanceRegistry = null;
 	}
 	
 	public Entity<?> getEntity() {
@@ -211,27 +214,56 @@ public class InstanceMetadata {
 	}
 	
 	/**
-	 * Clears all relations to other instances. Applies recursively to children
+	 * Clears all relations to instances in other cases. Applies recursively to children
 	 */
-	private void remove() {
+	private void clearRelationsAfterSplit(CaseAdministration newCaseAdministration) {
 		if (children!=null) {
-			Instance[] toRemove = children.values().toArray(new Instance[children.size()]);
-			for(Instance instance: toRemove) { // depth-first
-				instance.getMetadata().remove();
+			for(Instance instance: children.values()) { // depth-first
+				instance.getMetadata().clearRelationsAfterSplit(newCaseAdministration);
 			}
 		}
 		for (Relation relation : getEntity().getRelations()) {
-			if (!relation.isReadOnly() && relation.isMultivalue()) {
-				RelationValues values = ((RelationValues)relation.get(instance));
-				if (values.hasStoredValue()) { // No default
-					for (int i=((Multi)values.getValue()).size();i>=0;i--)
-					values.removeValue(i);
+			if (!relation.isReadOnly() && !relation.isOwner()) { 
+				if (relation.isMultivalue()) {
+					RelationValues values = ((RelationValues)relation.get(instance));
+					if (values.hasStoredValue()) { // No default
+						Multi<? extends Instance> multi = (Multi<? extends Instance>)values.getValue();
+						for (int i=multi.size()-1;i>=0;i--) {
+							if (multi.get(i).getMetadata().getCaseAdministration()!=newCaseAdministration) {
+								values.removeValue(i);
+							}
+						}
+					}
+				} else { // single value
+					ReadOnlyAttributeValue value = relation.get(instance);
+					if (value.hasStoredValue()) { // No default
+						if (((Instance)value.getValue()).getMetadata().getCaseAdministration()!=newCaseAdministration) {
+							((RelationValue)value).setValue(null);
+						}
+					}
 				}
-			} else if (!relation.isReadOnly()) { // single value
-				((RelationValue)relation.get(instance)).setValue(null);
 			}
 		}
-		// TODO: clear reverse relations as well
+		for (Relation relation : getEntity().getReverseRelations()) {
+			if (!relation.getReverseRelation().isOwner()) {
+				if (relation.isMultivalue()) {
+					RelationValues values = ((RelationValues)relation.get(instance));
+					Multi<? extends Instance> multi = (Multi<? extends Instance>)values.getValue();
+					for (int i=multi.size()-1;i>=0;i--) {
+						if (multi.get(i).getMetadata().getCaseAdministration()!=newCaseAdministration) {
+							values.removeValue(i);
+						}
+					}
+				} else { // single value
+					ReadOnlyAttributeValue value = relation.get(instance);
+					if (value.getValue()!=null) {
+						if (((Instance)value.getValue()).getMetadata().getCaseAdministration()!=newCaseAdministration) {
+							((RelationValue)value).setValue(null);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	/**

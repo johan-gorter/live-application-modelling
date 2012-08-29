@@ -31,10 +31,10 @@ public class User extends org.instantlogic.fabric.Instance {
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<User, Issue> assignedIssues
+	private final org.instantlogic.fabric.value.RelationValues<User, Issue> assignedIssues
 		= createReverseRelationValues(org.instantlogic.example.izzy.entity.UserEntity.assignedIssues);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<User, Issue> getAssignedIssuesRelationValue() {
+	public org.instantlogic.fabric.value.RelationValues<User, Issue> getAssignedIssuesRelationValue() {
 		return assignedIssues;
 	}
 
@@ -42,11 +42,21 @@ public class User extends org.instantlogic.fabric.Instance {
 		return assignedIssues.getValue();
 	}
 
+    public User addToAssignedIssues(Issue item) {
+        assignedIssues.addValue(item);
+        return (User)this;
+    }
+
+    public User removeFromAssignedIssues(Issue item) {
+        assignedIssues.removeValue(item);
+        return (User)this;
+    }
+
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<User, Comment> comments
+	private final org.instantlogic.fabric.value.RelationValue<User, Comment> comments
 		= createReverseRelationValue(org.instantlogic.example.izzy.entity.UserEntity.comments);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<User, Comment> getCommentsRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<User, Comment> getCommentsRelationValue() {
 		return comments;
 	}
 
@@ -54,11 +64,16 @@ public class User extends org.instantlogic.fabric.Instance {
 		return comments.getValue();
 	}
 
+    public User setComments(org.instantlogic.example.izzy.Comment newValue) {
+        comments.setValue(newValue);
+        return (User)this;
+    }
+
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<User, Project> project
+	private final org.instantlogic.fabric.value.RelationValue<User, Project> project
 		= createReverseRelationValue(org.instantlogic.example.izzy.entity.UserEntity.project);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<User, Project> getProjectRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<User, Project> getProjectRelationValue() {
 		return project;
 	}
 
@@ -66,17 +81,32 @@ public class User extends org.instantlogic.fabric.Instance {
 		return project.getValue();
 	}
 
+    public User setProject(org.instantlogic.example.izzy.Project newValue) {
+        project.setValue(newValue);
+        return (User)this;
+    }
+
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<User, Issue> reportedIssues
+	private final org.instantlogic.fabric.value.RelationValues<User, Issue> reportedIssues
 		= createReverseRelationValues(org.instantlogic.example.izzy.entity.UserEntity.reportedIssues);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<User, Issue> getReportedIssuesRelationValue() {
+	public org.instantlogic.fabric.value.RelationValues<User, Issue> getReportedIssuesRelationValue() {
 		return reportedIssues;
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.Issue> getReportedIssues() {
 		return reportedIssues.getValue();
 	}
+
+    public User addToReportedIssues(Issue item) {
+        reportedIssues.addValue(item);
+        return (User)this;
+    }
+
+    public User removeFromReportedIssues(Issue item) {
+        reportedIssues.removeValue(item);
+        return (User)this;
+    }
 
 
 }

@@ -4,6 +4,7 @@ public class ProjectEntity extends org.instantlogic.fabric.model.Entity<org.inst
 
 	public static final ProjectEntity INSTANCE = new ProjectEntity();
 	
+	
 	protected ProjectEntity() {
 	}
 
@@ -58,7 +59,8 @@ public class ProjectEntity extends org.instantlogic.fabric.model.Entity<org.inst
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.example.izzy.Project, org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.Issue>, org.instantlogic.example.izzy.Issue> issues
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.example.izzy.Project, org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.Issue>, org.instantlogic.example.izzy.Issue>(
-			"issues", INSTANCE, org.instantlogic.example.izzy.entity.IssueEntity.INSTANCE, org.instantlogic.example.izzy.Issue.class, org.instantlogic.example.izzy.entity.IssueEntity.project
+			"issues", INSTANCE, org.instantlogic.example.izzy.entity.IssueEntity.INSTANCE, org.instantlogic.example.izzy.Issue.class, 
+			org.instantlogic.example.izzy.entity.IssueEntity.project
 		) {
 	
 			@Override
@@ -79,7 +81,8 @@ public class ProjectEntity extends org.instantlogic.fabric.model.Entity<org.inst
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.example.izzy.Project, org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.User>, org.instantlogic.example.izzy.User> users
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.example.izzy.Project, org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.User>, org.instantlogic.example.izzy.User>(
-			"users", INSTANCE, org.instantlogic.example.izzy.entity.UserEntity.INSTANCE, org.instantlogic.example.izzy.User.class, org.instantlogic.example.izzy.entity.UserEntity.project
+			"users", INSTANCE, org.instantlogic.example.izzy.entity.UserEntity.INSTANCE, org.instantlogic.example.izzy.User.class, 
+			org.instantlogic.example.izzy.entity.UserEntity.project
 		) {
 	
 			@Override

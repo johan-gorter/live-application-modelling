@@ -35,9 +35,9 @@ public class RelationValueImpl<I extends Instance, To extends Instance>
 			if (model.getReverseRelation()!=null) {
 				ReadOnlyAttributeValue<To, ? extends Object> newReverseRelationValue = model.getReverseRelation().get(resultValue);
 				if (getModel().getReverseRelation().isMultivalue()) {
-					((ReverseRelationValuesImpl)newReverseRelationValue).addReverse(forInstance, null);
+					((ReverseRelationValuesImpl)newReverseRelationValue).internalAddReverse(forInstance, null);
 				} else {
-					((ReverseRelationValueImpl)newReverseRelationValue).setReverse(forInstance, null);
+					((ReverseRelationValueImpl)newReverseRelationValue).internalSetReverse(forInstance, null);
 				}
 			}
 			forInstance.getMetadata().adopt(resultValue);
@@ -65,17 +65,17 @@ public class RelationValueImpl<I extends Instance, To extends Instance>
 			if (oldStoredValue!=null) {
 				ReadOnlyAttributeValue<To, ? extends Object> oldReverseRelationValue = model.getReverseRelation().get(oldStoredValue);
 				if (getModel().getReverseRelation().isMultivalue()) {
-					((ReverseRelationValuesImpl)oldReverseRelationValue).removeReverse(forInstance, operation);
+					((ReverseRelationValuesImpl)oldReverseRelationValue).internalRemoveReverse(forInstance, operation);
 				} else {
-					((ReverseRelationValueImpl)oldReverseRelationValue).setReverse(forInstance, operation);
+					((ReverseRelationValueImpl)oldReverseRelationValue).internalSetReverse(null, operation);
 				}
 			}
 			if (newStoredValue!=null) {
 				ReadOnlyAttributeValue<To, ? extends Object> newReverseRelationValue = model.getReverseRelation().get(newStoredValue);
 				if (getModel().getReverseRelation().isMultivalue()) {
-					((ReverseRelationValuesImpl)newReverseRelationValue).addReverse(forInstance, operation);
+					((ReverseRelationValuesImpl)newReverseRelationValue).internalAddReverse(forInstance, operation);
 				} else {
-					((ReverseRelationValueImpl)newReverseRelationValue).setReverse(forInstance, operation);
+					((ReverseRelationValueImpl)newReverseRelationValue).internalSetReverse(forInstance, operation);
 				}
 			}
 		}

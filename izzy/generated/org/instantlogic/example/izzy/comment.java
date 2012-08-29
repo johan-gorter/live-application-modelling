@@ -48,16 +48,21 @@ public class Comment extends org.instantlogic.fabric.Instance {
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<Comment, Issue> issue
+	private final org.instantlogic.fabric.value.RelationValue<Comment, Issue> issue
 		= createReverseRelationValue(org.instantlogic.example.izzy.entity.CommentEntity.issue);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<Comment, Issue> getIssueRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<Comment, Issue> getIssueRelationValue() {
 		return issue;
 	}
 
 	public org.instantlogic.example.izzy.Issue getIssue() {
 		return issue.getValue();
 	}
+
+    public Comment setIssue(org.instantlogic.example.izzy.Issue newValue) {
+        issue.setValue(newValue);
+        return (Comment)this;
+    }
 
 
 }
