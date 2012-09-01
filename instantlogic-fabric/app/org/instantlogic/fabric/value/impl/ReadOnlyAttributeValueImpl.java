@@ -181,6 +181,7 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 			}
 			// NextValueChangeObservers
 			iteratingNextValueChangeObservers = true;
+			lastInformedNextIndex = nextValueChangeObservers.size(); // observers may have changed since beforeFiringChange
 			while (lastInformedNextIndex>0) {
 				ValueChangeObserver observer = nextValueChangeObservers.get(lastInformedNextIndex-1);
 				if (observer!=null) {

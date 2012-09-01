@@ -79,62 +79,94 @@ YUI.add('instantlogic-fragment', function (Y) {
     	}
     });
     
-    function createFragment(options, overrides) {
+    function createFragment(options) {
     	var constructor = function(parentNode, engine) {
     		constructor.superclass.constructor.apply(this, arguments);
     	}
-    	Y.extend(constructor, options.baseClass || Y.instantlogic.Fragment, overrides);
+    	Y.extend(constructor, options.baseClass || Y.instantlogic.Fragment, options.overrides);
+    	constructor.prototype.init = function(model) {
+    		constructor.superclass.init.call(this, model);
+    		this.markup = options.createMarkup.apply(this);
+    		this.parentNode.appendChild(this.markup);
+    		if (options.fragmentLists) {
+    			this.fragmentLists = [];
+    			var results = options.fragmentLists.call(this, model);
+    			for (var i=0;i<results.length;i++) {
+    				var list = new FragmentList(results[i][0], this.engine);
+    				list.init(results[i][1]);
+    				this.fragmentLists.push(list);
+    			}
+    		}
+    		if (options.texts) {
+    			var results = options.texts.call(this, model);
+    			for (var i=0;i<results.length;i++) {
+    				results[i][0].set('text', results[i][1] || '');
+    			}
+    		}
+    	}
+    	constructor.prototype.update = function(newModel, diff) {
+    		constructor.superclass.update.call(this, newModel, diff);
+    		if (this.fragmentLists) {
+    			var results = options.fragmentLists.call(this, newModel);
+    			for (var i=0;i<results.length;i++) {
+    				this.fragmentLists[i].update(results[i][1], diff);
+    			}
+    		}
+    		if (options.texts) {
+    			var newResults = options.texts.call(this, newModel);
+    			var oldResults = options.texts.call(this, this.oldModel);
+    			for (var i=0;i<newResults.length;i++) {
+    				if (newResults[i][1]!=oldResults[i][1]) {
+    					newResults[i][0].set('text', newResults[i][1] || '');
+    				}
+    			}
+    		}
+    	}
     	return constructor;
     }
     
     // Communicator
-    ns.Communicator = createFragment({}, {
-    	init: function(model) {
-    		ns.Communicator.superclass.init.call(this, model);
+    ns.Communicator = createFragment({
+    	createMarkup: function() {
     		var markup = html.div({className:'communicator'},
     			this.hideButton = html.button('Hide communicator'),
     			this.usersDiv = html.div()
     		)
-    		this.parentNode.appendChild(markup);
     		this.hideButton.on('click', this.onHideClick, this);
-            this.usersFragmentList = new FragmentList(this.usersDiv, this.engine);
-            this.usersFragmentList.init(model.users);
+            return markup;
     	},
-    	update: function(newModel, diff) {
-    		ns.Communicator.superclass.update.call(this, newModel);
-            this.usersFragmentList.update(newModel.users, diff);
+    	fragmentLists: function(model) {
+    		return [[this.usersDiv, model.users]];
     	},
-    	onHideClick: function() {
-    		this.engine.enqueueMessage({message: 'presence', command: 'setCommunicatorVisible', value:false});
+    	overrides: {
+        	onHideClick: function() {
+        		this.engine.enqueueMessage({message: 'presence', command: 'setCommunicatorVisible', value:false});
+        	}
     	}
     });
 
     // User
-    ns.User = createFragment({}, {
-    	init: function(model) {
-    		ns.User.superclass.init.call(this, model);
-    		var markup = html.div({className:'user'},
-    			this.usernameDiv = html.div(model.username || '')
-    		)
-    		this.parentNode.appendChild(markup);
+    ns.User = createFragment({ 
+    	createMarkup: function() {
+    		return html.div({className:'user'},
+    			this.usernameDiv = html.div()
+    		);
     	},
-    	update: function(newModel, diff) {
+    	texts: function(model) {
+    		return [[this.usernameDiv, model.username]];
     	}
     });
 
     // Traveler
-    ns.Traveler = createFragment({}, {
-    	init: function(model) {
-    		ns.Traveler.superclass.init.call(this, model);
-    		var markup = html.div({className:'traveler'},
-    			this.travelernameDiv = html.div(model.placeUrl || '')
+    ns.Traveler = createFragment({
+    	createMarkup: function(model) {
+    		return html.div({className:'traveler'},
+    			this.travelernameDiv = html.div()
     		)
     		this.parentNode.appendChild(markup);
     	},
-    	update: function(newModel, diff) {
-    		if (newModel.placeUrl != newModel.placeUrl) {
-    			this.travelernameDiv.set('text', newModel.placeUrl || '')
-    		}
+    	texts: function(model) {
+    		return [[this.travelernameDiv, model.placeUrl]];
     	}
     });
 
