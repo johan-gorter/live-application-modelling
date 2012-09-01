@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.deduction.Deduction;
 import org.instantlogic.fabric.model.Attribute;
+import org.instantlogic.fabric.model.Relation;
 import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.util.Observations;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
@@ -162,11 +163,22 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 		int lastInformedNextIndex = nextValueChangeObservers.size();
 		boolean success = false;
 		boolean instanceInformed = false;
+		boolean undoEventRecorded = false;
 		List<ValueChangeObserver> iterating = null;
 		ListIterator<ValueChangeObserver> iterator = null;
+		boolean postponeRecordUndo = event.storedValueChanged() && event.getAttribute() instanceof Relation && ((Relation)event.getAttribute()).isOwner(); // Undo event must be recorded after case-split 
 		try {
+			if (event.storedValueChanged() && !postponeRecordUndo) {
+				event.getOperation().addEventToUndo(event);
+				undoEventRecorded = true;
+			}
 			// Reverse relations and such
 			beforeFiringChange(event);
+			// Record for undo
+			if (event.storedValueChanged() && postponeRecordUndo) {
+				event.getOperation().addEventToUndo(event);
+				undoEventRecorded = true;
+			}
 			// NextValueChangeObservers
 			iteratingNextValueChangeObservers = true;
 			while (lastInformedNextIndex>0) {
@@ -198,9 +210,6 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 					iteratingValueChangeObservers = null;
 				}
 				iteratingNextValueChangeObservers = false;
-				if (event.storedValueChanged()) {
-					event.getOperation().addEventToUndo(event);
-				}
 			} else {
 				// The rollback procedure
 				try {
@@ -234,6 +243,9 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 						}
 						nextValueChangeObservers.remove(lastInformedNextIndex);
 						lastMisinfomedIndex--;
+					}
+					if (undoEventRecorded) {
+						event.getOperation().popEventToUndo(event);
 					}
 				} finally {
 					if (clearIteratingOnExit && iteratingValueChangeObservers == iterating) {

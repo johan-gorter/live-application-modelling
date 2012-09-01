@@ -55,4 +55,24 @@ public class RelationValuesImpl<I extends Instance, To extends Instance>
 			}
 		}
 	};
+	
+	@Override
+	public void addValue(To item) {
+		checkCase(item);
+		super.addValue(item);
+	}
+	
+	@Override
+	public void insertValue(To item, int index) {
+		checkCase(item);
+		super.insertValue(item, index);
+	};
+
+	private void checkCase(To value) {
+		if (!model.isOwner()) { 
+			if (value!=null && value.getMetadata().getCaseAdministration()!=forInstance.getMetadata().getCaseAdministration()) {
+				throw new IllegalArgumentException("The item "+value+" is not owned by the "+forInstance.getMetadata().getCase().getMetadata().getEntity().getName()+" the "+forInstance+" belongs to");
+			}
+		}
+	};
 }

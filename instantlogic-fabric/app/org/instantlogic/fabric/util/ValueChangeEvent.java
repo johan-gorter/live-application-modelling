@@ -112,19 +112,6 @@ public class ValueChangeEvent {
 		return newStoredValue!=oldStoredValue || (multiValueUpdateType!=null && oldValue.getValueLevel()==ValueLevel.STORED);
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("ValueChangeEvent [attributeValue=")
-				.append(attributeValue).append(", oldValue=").append(oldValue)
-				.append(", oldStoredValue=").append(oldStoredValue)
-				.append(", newStoredValue=").append(newStoredValue)
-				.append(", multiValueUpdateType=").append(multiValueUpdateType)
-				.append(", index=").append(index).append(", itemValue=")
-				.append(itemValue).append("]");
-		return builder.toString();
-	}
-
 	public Operation getOperation() {
 		return operation;
 	}
@@ -150,5 +137,34 @@ public class ValueChangeEvent {
 
 	public Object getItemValue() {
 		return itemValue;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		if (this.multiValueUpdateType!=null) {
+			if (this.multiValueUpdateType==MultiValueUpdateType.INSERT) {
+				builder.append("insert ");
+			} else {
+				builder.append("remove ");
+			}
+			builder.append(attributeValue);
+			builder.append(" ");
+			builder.append(itemValue);
+			builder.append(", index=").append(index);
+		} else {
+			if (storedValueChanged()) {
+				builder.append("setStored ");
+				builder.append(attributeValue);
+				builder.append("=");
+				builder.append(newStoredValue);
+				builder.append(", was ");
+				builder.append(oldStoredValue);
+			} else {
+				builder.append("changed, was ");
+				builder.append(oldValue);
+			}
+		}
+		return builder.toString();
 	}
 }

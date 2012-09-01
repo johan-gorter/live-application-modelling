@@ -22,6 +22,14 @@ public class RelationValueImpl<I extends Instance, To extends Instance>
 		this.model = model;
 	}
 	
+	@Override
+	public void setValue(To value) {
+		if (value!=null && value.getMetadata().getCaseAdministration()!=forInstance.getMetadata().getCaseAdministration()) {
+			throw new IllegalArgumentException("The value "+value+" is not owned by the "+forInstance.getMetadata().getCase().getMetadata().getEntity().getName()+" the "+forInstance+" belongs to");
+		}
+		super.setValue(value);
+	}
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public ValueAndLevel<To> getValueAndLevel() {
