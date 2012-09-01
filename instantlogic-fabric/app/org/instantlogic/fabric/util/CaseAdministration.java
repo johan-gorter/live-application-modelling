@@ -45,7 +45,6 @@ public class CaseAdministration {
 	private List<TransactionListener> transactionListeners = new ArrayList<TransactionListener>();
 	
 	private Operation currentOperation;
-
 	
 	public CaseAdministration(Instance rootInstance) {
 		this.rootInstance = rootInstance;

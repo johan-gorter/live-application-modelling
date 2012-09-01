@@ -48,10 +48,10 @@ public abstract class AbstractPlace extends org.instantlogic.fabric.Instance {
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<Place, Presence> presence
+	private final org.instantlogic.fabric.value.RelationValue<Place, Presence> presence
 		= createReverseRelationValue(org.instantlogic.engine.presence.entity.PlaceEntity.presence);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<Place, Presence> getPresenceRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<Place, Presence> getPresenceRelationValue() {
 		return presence;
 	}
 
@@ -59,17 +59,32 @@ public abstract class AbstractPlace extends org.instantlogic.fabric.Instance {
 		return presence.getValue();
 	}
 
+    public Place setPresence(org.instantlogic.engine.presence.Presence newValue) {
+        presence.setValue(newValue);
+        return (Place)this;
+    }
+
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<Place, Traveler> visitingTravelers
+	private final org.instantlogic.fabric.value.RelationValues<Place, Traveler> visitingTravelers
 		= createReverseRelationValues(org.instantlogic.engine.presence.entity.PlaceEntity.visitingTravelers);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<Place, Traveler> getVisitingTravelersRelationValue() {
+	public org.instantlogic.fabric.value.RelationValues<Place, Traveler> getVisitingTravelersRelationValue() {
 		return visitingTravelers;
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.Traveler> getVisitingTravelers() {
 		return visitingTravelers.getValue();
 	}
+
+    public Place addToVisitingTravelers(Traveler item) {
+        visitingTravelers.addValue(item);
+        return (Place)this;
+    }
+
+    public Place removeFromVisitingTravelers(Traveler item) {
+        visitingTravelers.removeValue(item);
+        return (Place)this;
+    }
 
 
 }

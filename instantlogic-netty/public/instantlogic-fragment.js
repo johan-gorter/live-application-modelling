@@ -127,11 +127,14 @@ YUI.add('instantlogic-fragment', function (Y) {
     	init: function(model) {
     		ns.Traveler.superclass.init.call(this, model);
     		var markup = html.div({className:'traveler'},
-    			this.TravelernameDiv = html.div(model.placeUrl || '')
+    			this.travelernameDiv = html.div(model.placeUrl || '')
     		)
     		this.parentNode.appendChild(markup);
     	},
     	update: function(newModel, diff) {
+    		if (newModel.placeUrl != newModel.placeUrl) {
+    			this.travelernameDiv.set('text', newModel.placeUrl || '')
+    		}
     	}
     });
 

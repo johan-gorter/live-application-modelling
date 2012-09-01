@@ -61,6 +61,15 @@ public class Operation {
 		}
 	}
 	
+	public void popEventToUndo(ValueChangeEvent event) {
+		if (recordingUndoEventsPaused==0) {
+			ValueChangeEvent check = this.eventsToUndo.remove(eventsToUndo.size()-1);
+			if (event!=check) {
+				throw new RuntimeException("wrong event to pop in eventsToUndo");
+			}
+		}
+	}
+	
 	public void close() {
 		if (state==OperationState.STARTED) { // We were not completed, we should undo (called from a finally block)
 			if (partOfOperation!=null && partOfOperation.state == OperationState.UNDOING) return; // The undo operation on our parent crashed here, we have done enough damage.

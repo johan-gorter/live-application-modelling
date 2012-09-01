@@ -270,7 +270,7 @@ public class InstanceMetadata {
 		}
 	}
 
-	private Instance getCase() {
+	public Instance getCase() {
 		Instance result = instance;
 		while (result.getMetadata().getInstanceOwner()!=null) {
 			result = result.getMetadata().getInstanceOwner();
