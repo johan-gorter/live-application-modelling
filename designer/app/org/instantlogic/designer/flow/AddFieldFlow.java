@@ -35,7 +35,7 @@ public class AddFieldFlow extends AbstractAddFieldFlow {
 		// Create new attribute
 		AttributeDesign attribute = new AttributeDesign();
 		attribute.setName("NewAttribute"+application.getMetadata().getCaseAdministration().getVersion());
-		attribute.setClassName("java.lang.String");
+		attribute.setJavaClassName("java.lang.String");
 		entity.addToAttributes(attribute);
 		
 		WidgetTemplateDesign field = new WidgetTemplateDesign();

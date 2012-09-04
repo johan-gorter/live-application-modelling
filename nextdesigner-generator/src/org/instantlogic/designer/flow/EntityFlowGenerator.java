@@ -20,7 +20,9 @@ public class EntityFlowGenerator extends FlowDesign {
 		addToParameters(EntityDesignEntityGenerator.ENTITY);
 
 		addToNodes(EntityDetailsPlaceGenerator.PLACE);
-		addToEdges(new FlowEdgeDesign().setEndNode(EntityDetailsPlaceGenerator.PLACE));
+		new FlowEdgeDesign()
+			.setOwner(this)
+			.setEndNode(EntityDetailsPlaceGenerator.PLACE);
 
 		super.init();
 	}

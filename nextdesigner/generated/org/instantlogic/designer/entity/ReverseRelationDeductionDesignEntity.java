@@ -37,7 +37,7 @@ public class ReverseRelationDeductionDesignEntity extends org.instantlogic.fabri
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ReverseRelationDeductionDesign, org.instantlogic.designer.RelationDesign, org.instantlogic.designer.RelationDesign> relation
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.ReverseRelationDeductionDesign, org.instantlogic.designer.RelationDesign, org.instantlogic.designer.RelationDesign>(
 			"relation", INSTANCE, org.instantlogic.designer.entity.RelationDesignEntity.INSTANCE, org.instantlogic.designer.RelationDesign.class, 
-			org.instantlogic.designer.entity.RelationDesignEntity.relationInDeductions
+			null
 		) {
 	
 			@Override

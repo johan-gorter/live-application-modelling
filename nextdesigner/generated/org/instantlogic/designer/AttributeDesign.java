@@ -148,38 +148,6 @@ public class AttributeDesign extends Design {
 	}
 
 	
-	private final org.instantlogic.fabric.value.RelationValues<AttributeDesign, DomainEntryDesign> domain
-		= createRelationValues(org.instantlogic.designer.entity.AttributeDesignEntity.domain);
-		
-	public org.instantlogic.fabric.value.RelationValues<AttributeDesign, DomainEntryDesign> getDomainRelationValue() {
-		return domain;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DomainEntryDesign> getDomain() {
-		return domain.getValue();
-	}
-	
-	public AttributeDesign addToDomain(DomainEntryDesign item) {
-		domain.addValue(item);
-		return (AttributeDesign)this;
-	}
-	
-	public AttributeDesign addToDomain(DomainEntryDesign item, int index) {
-		domain.insertValue(item, index);
-		return (AttributeDesign)this;
-	}
-	
-	public AttributeDesign removeFromDomain(DomainEntryDesign item) {
-		domain.removeValue(item);
-		return (AttributeDesign)this;
-	}
-	
-	public AttributeDesign removeFromDomain(int index) {
-		domain.removeValue(index);
-		return (AttributeDesign)this;
-	}
-	
-	
 	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, TextTemplateDesign> explanation
 		= createRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity.explanation);
 		
@@ -267,28 +235,6 @@ public class AttributeDesign extends Design {
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.RelationValues<AttributeDesign, AttributeDeductionDesign> attributeInDeductions
-		= createReverseRelationValues(org.instantlogic.designer.entity.AttributeDesignEntity.attributeInDeductions);
-
-	public org.instantlogic.fabric.value.RelationValues<AttributeDesign, AttributeDeductionDesign> getAttributeInDeductionsRelationValue() {
-		return attributeInDeductions;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.AttributeDeductionDesign> getAttributeInDeductions() {
-		return attributeInDeductions.getValue();
-	}
-
-    public AttributeDesign addToAttributeInDeductions(AttributeDeductionDesign item) {
-        attributeInDeductions.addValue(item);
-        return (AttributeDesign)this;
-    }
-
-    public AttributeDesign removeFromAttributeInDeductions(AttributeDeductionDesign item) {
-        attributeInDeductions.removeValue(item);
-        return (AttributeDesign)this;
-    }
-
-	
 	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, EntityDesign> belongsToEntity
 		= createReverseRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity.belongsToEntity);
 
@@ -302,28 +248,6 @@ public class AttributeDesign extends Design {
 
     public AttributeDesign setBelongsToEntity(org.instantlogic.designer.EntityDesign newValue) {
         belongsToEntity.setValue(newValue);
-        return (AttributeDesign)this;
-    }
-
-	
-	private final org.instantlogic.fabric.value.RelationValues<AttributeDesign, FragmentTemplateDesign> usedInField
-		= createReverseRelationValues(org.instantlogic.designer.entity.AttributeDesignEntity.usedInField);
-
-	public org.instantlogic.fabric.value.RelationValues<AttributeDesign, FragmentTemplateDesign> getUsedInFieldRelationValue() {
-		return usedInField;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentTemplateDesign> getUsedInField() {
-		return usedInField.getValue();
-	}
-
-    public AttributeDesign addToUsedInField(FragmentTemplateDesign item) {
-        usedInField.addValue(item);
-        return (AttributeDesign)this;
-    }
-
-    public AttributeDesign removeFromUsedInField(FragmentTemplateDesign item) {
-        usedInField.removeValue(item);
         return (AttributeDesign)this;
     }
 

@@ -13,6 +13,7 @@ import org.instantlogic.fabric.util.ValueChangeEvent;
 import org.instantlogic.fabric.util.ValueChangeEvent.MultiValueUpdateType;
 import org.instantlogic.fabric.value.AttributeValue;
 import org.instantlogic.fabric.value.Multi;
+import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
 import org.instantlogic.fabric.value.RelationValues;
 
 
@@ -70,7 +71,7 @@ public class ReverseRelationValuesImpl<I extends Instance, From extends Instance
 		if (newEntity==null) throw new IllegalArgumentException("addValue null");
 		Relation<From,? extends Object,I> relation = ((Relation<I, Multi<From>, From>)model).getReverseRelation();
 		// Add forInstance to the new entity
-		AttributeValue<From, ? extends Object> value = (AttributeValue<From, ? extends Object>)relation.get(newEntity);
+		ReadOnlyAttributeValue<From, ? extends Object> value = (ReadOnlyAttributeValue<From, ? extends Object>)relation.get(newEntity);
 		if (relation.isMultivalue()) {
 			((RelationValues)value).addValue(forInstance);
 		} else {
@@ -85,7 +86,7 @@ public class ReverseRelationValuesImpl<I extends Instance, From extends Instance
 		if (oldEntity==null) throw new IllegalArgumentException("removeValue null");
 		Relation<From,? extends Object,I> relation = ((Relation<I, Multi<From>, From>)model).getReverseRelation();
 		// Add forInstance to the new entity
-		AttributeValue<From, ? extends Object> value = (AttributeValue<From, ? extends Object>)relation.get(oldEntity);
+		ReadOnlyAttributeValue<From, ? extends Object> value = (ReadOnlyAttributeValue<From, ? extends Object>)relation.get(oldEntity);
 		if (relation.isMultivalue()) {
 			((RelationValues)value).removeValue(forInstance);
 		} else {

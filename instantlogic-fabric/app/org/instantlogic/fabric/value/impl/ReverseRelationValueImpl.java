@@ -62,14 +62,14 @@ public class ReverseRelationValueImpl<I extends Instance, From extends Instance>
 		}
 		if (newEntity!=null) {
 			// Add forInstance to the new entity
-			AttributeValue<From, ? extends Object> value = (AttributeValue<From, ? extends Object>)relation.get(newEntity);
+			ReadOnlyAttributeValue<From, ? extends Object> value = (ReadOnlyAttributeValue<From, ? extends Object>)relation.get(newEntity);
 			if (relation.isMultivalue()) {
-				((RelationValues)value).removeValue(forInstance);
+				((RelationValues)value).addValue(forInstance);
 			} else {
 				if (value.getValue()!=forInstance) {
 					throw new RuntimeException("Reverse value not in sync while changing reverse relation");
 				}
-				value.setValue(null);
+				((AttributeValue)value).setValue(forInstance);
 			}
 		}
 	}

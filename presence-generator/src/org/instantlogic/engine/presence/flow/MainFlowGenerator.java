@@ -13,11 +13,10 @@ public class MainFlowGenerator extends FlowDesign {
 	}
 	
 	@Override
-	public void registerApplication(ApplicationDesign application) {
+	public void init() {
 		SubFlowDesign travelerSubFlow = new SubFlowDesign().setFlow(TravelerFlowGenerator.FLOW);
 		travelerSubFlow.setName("Traveler");
 		addToNodes(travelerSubFlow);
-		
-		super.registerApplication(application);
+		super.init();
 	}
 }

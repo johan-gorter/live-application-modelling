@@ -144,67 +144,6 @@ public abstract class AbstractEntityDesign extends Design {
     }
 
 	
-	private final org.instantlogic.fabric.value.RelationValue<EntityDesign, ApplicationDesign> caseEntityInApplication
-		= createReverseRelationValue(org.instantlogic.designer.entity.EntityDesignEntity.caseEntityInApplication);
-
-	public org.instantlogic.fabric.value.RelationValue<EntityDesign, ApplicationDesign> getCaseEntityInApplicationRelationValue() {
-		return caseEntityInApplication;
-	}
-
-	public org.instantlogic.designer.ApplicationDesign getCaseEntityInApplication() {
-		return caseEntityInApplication.getValue();
-	}
-
-    public EntityDesign setCaseEntityInApplication(org.instantlogic.designer.ApplicationDesign newValue) {
-        caseEntityInApplication.setValue(newValue);
-        return (EntityDesign)this;
-    }
-
-	
-	private final org.instantlogic.fabric.value.RelationValues<EntityDesign, CastInstanceDeductionDesign> entityInCastDeductions
-		= createReverseRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.entityInCastDeductions);
-
-	public org.instantlogic.fabric.value.RelationValues<EntityDesign, CastInstanceDeductionDesign> getEntityInCastDeductionsRelationValue() {
-		return entityInCastDeductions;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.CastInstanceDeductionDesign> getEntityInCastDeductions() {
-		return entityInCastDeductions.getValue();
-	}
-
-    public EntityDesign addToEntityInCastDeductions(CastInstanceDeductionDesign item) {
-        entityInCastDeductions.addValue(item);
-        return (EntityDesign)this;
-    }
-
-    public EntityDesign removeFromEntityInCastDeductions(CastInstanceDeductionDesign item) {
-        entityInCastDeductions.removeValue(item);
-        return (EntityDesign)this;
-    }
-
-	
-	private final org.instantlogic.fabric.value.RelationValues<EntityDesign, SelectedInstanceDeductionDesign> entityInSelectedInstanceDeductions
-		= createReverseRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.entityInSelectedInstanceDeductions);
-
-	public org.instantlogic.fabric.value.RelationValues<EntityDesign, SelectedInstanceDeductionDesign> getEntityInSelectedInstanceDeductionsRelationValue() {
-		return entityInSelectedInstanceDeductions;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.SelectedInstanceDeductionDesign> getEntityInSelectedInstanceDeductions() {
-		return entityInSelectedInstanceDeductions.getValue();
-	}
-
-    public EntityDesign addToEntityInSelectedInstanceDeductions(SelectedInstanceDeductionDesign item) {
-        entityInSelectedInstanceDeductions.addValue(item);
-        return (EntityDesign)this;
-    }
-
-    public EntityDesign removeFromEntityInSelectedInstanceDeductions(SelectedInstanceDeductionDesign item) {
-        entityInSelectedInstanceDeductions.removeValue(item);
-        return (EntityDesign)this;
-    }
-
-	
 	private final org.instantlogic.fabric.value.RelationValues<EntityDesign, EntityDesign> extensions
 		= createReverseRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.extensions);
 
@@ -227,50 +166,6 @@ public abstract class AbstractEntityDesign extends Design {
     }
 
 	
-	private final org.instantlogic.fabric.value.RelationValues<EntityDesign, EventDesign> parameterInEvent
-		= createReverseRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.parameterInEvent);
-
-	public org.instantlogic.fabric.value.RelationValues<EntityDesign, EventDesign> getParameterInEventRelationValue() {
-		return parameterInEvent;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EventDesign> getParameterInEvent() {
-		return parameterInEvent.getValue();
-	}
-
-    public EntityDesign addToParameterInEvent(EventDesign item) {
-        parameterInEvent.addValue(item);
-        return (EntityDesign)this;
-    }
-
-    public EntityDesign removeFromParameterInEvent(EventDesign item) {
-        parameterInEvent.removeValue(item);
-        return (EntityDesign)this;
-    }
-
-	
-	private final org.instantlogic.fabric.value.RelationValues<EntityDesign, FlowDesign> parameterInFlows
-		= createReverseRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.parameterInFlows);
-
-	public org.instantlogic.fabric.value.RelationValues<EntityDesign, FlowDesign> getParameterInFlowsRelationValue() {
-		return parameterInFlows;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowDesign> getParameterInFlows() {
-		return parameterInFlows.getValue();
-	}
-
-    public EntityDesign addToParameterInFlows(FlowDesign item) {
-        parameterInFlows.addValue(item);
-        return (EntityDesign)this;
-    }
-
-    public EntityDesign removeFromParameterInFlows(FlowDesign item) {
-        parameterInFlows.removeValue(item);
-        return (EntityDesign)this;
-    }
-
-	
 	private final org.instantlogic.fabric.value.RelationValues<EntityDesign, RelationDesign> reverseRelations
 		= createReverseRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.reverseRelations);
 
@@ -289,28 +184,6 @@ public abstract class AbstractEntityDesign extends Design {
 
     public EntityDesign removeFromReverseRelations(RelationDesign item) {
         reverseRelations.removeValue(item);
-        return (EntityDesign)this;
-    }
-
-	
-	private final org.instantlogic.fabric.value.RelationValues<EntityDesign, FragmentTemplateDesign> usedInField
-		= createReverseRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.usedInField);
-
-	public org.instantlogic.fabric.value.RelationValues<EntityDesign, FragmentTemplateDesign> getUsedInFieldRelationValue() {
-		return usedInField;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentTemplateDesign> getUsedInField() {
-		return usedInField.getValue();
-	}
-
-    public EntityDesign addToUsedInField(FragmentTemplateDesign item) {
-        usedInField.addValue(item);
-        return (EntityDesign)this;
-    }
-
-    public EntityDesign removeFromUsedInField(FragmentTemplateDesign item) {
-        usedInField.removeValue(item);
         return (EntityDesign)this;
     }
 

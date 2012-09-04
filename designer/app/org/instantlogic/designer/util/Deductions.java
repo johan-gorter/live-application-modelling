@@ -19,7 +19,7 @@ public final class Deductions {
 
 	public static <V> DeductionDesign constant(Class<V> className, V value) {
 		ConstantDeductionDesign constantDeductionDesign = new ConstantDeductionDesign();
-		constantDeductionDesign.setClassName(className.getName());
+		constantDeductionDesign.setJavaClassName(className.getName());
 		constantDeductionDesign.setValue(value);
 		return constantDeductionDesign;
 	}
@@ -27,7 +27,7 @@ public final class Deductions {
 	public static DeductionDesign selectedInstance(EntityDesign entity) {
 		SelectedInstanceDeductionDesign selectedInstanceDeductionDesign = new SelectedInstanceDeductionDesign();
 		selectedInstanceDeductionDesign.setOfEntity(entity);
-		selectedInstanceDeductionDesign.setClassName(entity.getApplication().getRootPackageName()+"."+entity.getTechnicalNameCapitalized());
+		selectedInstanceDeductionDesign.setJavaClassName(entity.getApplication().getRootPackageName()+"."+entity.getTechnicalNameCapitalized());
 		return selectedInstanceDeductionDesign;
 	}
 	
@@ -60,9 +60,9 @@ public final class Deductions {
 		attributeDeductionDesign.addToInputs(instance);
 		attributeDeductionDesign.setAttribute(attribute);
 		if (attribute.getMultivalue()==Boolean.TRUE) {
-			attributeDeductionDesign.setClassName("org.instantlogic.fabric.value.Multi<"+className+">");
+			attributeDeductionDesign.setJavaClassName("org.instantlogic.fabric.value.Multi<"+className+">");
 		} else {
-			attributeDeductionDesign.setClassName(className);	
+			attributeDeductionDesign.setJavaClassName(className);	
 		}
 		return attributeDeductionDesign;
 	}
@@ -70,7 +70,7 @@ public final class Deductions {
 	public static DeductionDesign hasValue(DeductionDesign input) {
 		HasValueDeductionDesign deduction = new HasValueDeductionDesign();
 		deduction.addToInputs(input);
-		deduction.setClassName("java.lang.Boolean");
+		deduction.setJavaClassName("java.lang.Boolean");
 		return deduction;
 	}
 
@@ -81,9 +81,9 @@ public final class Deductions {
 		deduction.addToInputs(instance);
 		deduction.setRelation(relation);
 		if (relation.getReverseMultivalue()==Boolean.TRUE) {
-			deduction.setClassName("org.instantlogic.fabric.value.Multi<"+className+">");
+			deduction.setJavaClassName("org.instantlogic.fabric.value.Multi<"+className+">");
 		} else {
-			deduction.setClassName(className);	
+			deduction.setJavaClassName(className);	
 		}
 		return deduction; 
 	}
@@ -110,7 +110,7 @@ public final class Deductions {
 	private static DeductionDesign custom(String javaClassName, String resultClassName) {
 		DeductionDesign result = new DeductionDesign();
 		result.setCustomization(javaClassName);
-		result.setClassName(resultClassName);
+		result.setJavaClassName(resultClassName);
 		return result;
 	}
 }

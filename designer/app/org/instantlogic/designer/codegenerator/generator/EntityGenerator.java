@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.instantlogic.designer.AttributeDesign;
-import org.instantlogic.designer.DomainEntryDesign;
 import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.RelationDesign;
 import org.instantlogic.designer.StaticInstanceDesign;
@@ -56,10 +55,6 @@ public class EntityGenerator extends AbstractGenerator {
 			TextTemplateDesign explanation = attributeDesign.getExplanation();
 			if (explanation!=null) {
 				attribute.explanation = TextGenerator.generate(explanation, model);
-			}
-			Multi<DomainEntryDesign> domain = attributeDesign.getDomain();
-			if (domain.size()>0) {
-				attribute.domain = generateDomain(domain, model);
 			}
 			if (attributeDesign.getRelevance()!=null) {
 				attribute.relevanceDeductionIndex = model.addDeductionScheme(DeductionSchemeGenerator.generate(model.rootPackageName, attributeDesign.getRelevance()));
@@ -137,17 +132,6 @@ public class EntityGenerator extends AbstractGenerator {
 		return model;
 	}
 	
-	private List<EntityClassModel.Attribute.DomainEntry> generateDomain(Multi<DomainEntryDesign> domain, EntityClassModel model) {
-		List<EntityClassModel.Attribute.DomainEntry> result = new ArrayList<EntityClassModel.Attribute.DomainEntry>();
-		for (DomainEntryDesign entry: domain) {
-			EntityClassModel.Attribute.DomainEntry resultEntry = new EntityClassModel.Attribute.DomainEntry();
-			resultEntry.name = entry.getName();
-			resultEntry.display = TextGenerator.generate(entry.getDisplay(), model);
-			result.add(resultEntry);
-		}
-		return result;
-	}
-
 	@Override
 	public void delete(GeneratedClassModels context) {
 		EntityClassModel model = initModel();

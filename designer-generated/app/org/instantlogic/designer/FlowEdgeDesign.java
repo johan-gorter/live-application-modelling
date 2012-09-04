@@ -65,16 +65,21 @@ public class FlowEdgeDesign extends org.instantlogic.fabric.Instance {
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<FlowEdgeDesign, FlowDesign> owner
+	private final org.instantlogic.fabric.value.RelationValue<FlowEdgeDesign, FlowDesign> owner
 		= createReverseRelationValue(org.instantlogic.designer.entity.FlowEdgeDesignEntity.owner);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<FlowEdgeDesign, FlowDesign> getOwnerRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<FlowEdgeDesign, FlowDesign> getOwnerRelationValue() {
 		return owner;
 	}
 
 	public org.instantlogic.designer.FlowDesign getOwner() {
 		return owner.getValue();
 	}
+
+    public FlowEdgeDesign setOwner(org.instantlogic.designer.FlowDesign newValue) {
+        owner.setValue(newValue);
+        return (FlowEdgeDesign)this;
+    }
 
 
 }

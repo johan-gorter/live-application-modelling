@@ -15,8 +15,7 @@ public class StaticInstanceDesignEntityGenerator extends EntityDesign {
     // Attributes
 
     // Relations
-    public static final RelationDesign description = addRelation(ENTITY, "description", RelationType.OneToZeroOrOneAggregation, TextTemplateDesignEntityGenerator.ENTITY)
-        .setReverseName("descriptionOnStaticInstance");
+    public static final RelationDesign description = addRelation(ENTITY, "description", RelationType.OneToZeroOrOneAggregation, TextTemplateDesignEntityGenerator.ENTITY);
     
     //TODO: pairs of attribute and value
 }

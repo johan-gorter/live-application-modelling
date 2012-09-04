@@ -24,32 +24,32 @@ public class WelcomePlaceTemplate extends org.instantlogic.interaction.flow.Plac
 
 	
 	private static org.instantlogic.interaction.page.FragmentTemplate CONTENT = 
-        new org.instantlogic.interaction.page.FragmentTemplate("F38P1F1", "Page")      
+        new org.instantlogic.interaction.page.FragmentTemplate("F19P2F1", "Page")      
         .putChildren("headerContent",
-                new org.instantlogic.interaction.page.FragmentTemplate("F38P1F1P1F1", "Heading1")      
+                new org.instantlogic.interaction.page.FragmentTemplate("F19P2F1P1F1", "Heading1")      
                 .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Welcome"))
 )
         )
       
         .putChildren("mainContent",
-                new org.instantlogic.interaction.page.FragmentTemplate("F38P1F1P2F1", "Paragraph")      
+                new org.instantlogic.interaction.page.FragmentTemplate("F19P2F1P2F1", "Paragraph")      
                 .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Welcome to the Designer"))
 )
 ,
-                new org.instantlogic.interaction.page.FragmentTemplate("F38P1F1P2F2", "Table")      
+                new org.instantlogic.interaction.page.FragmentTemplate("F19P2F1P2F2", "Table")      
                 .putChildren("columns",
-                        new org.instantlogic.interaction.page.FragmentTemplate("F38P1F1P2F2P1F1", "Column")      
+                        new org.instantlogic.interaction.page.FragmentTemplate("F19P2F1P2F2P1F1", "Column")      
                         .putText("header", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Entities"))
 )
                 )
       
                 .putChildren("rows",
-                        new org.instantlogic.interaction.page.FragmentTemplate("F38P1F1P2F2P2F1", "Row")      
+                        new org.instantlogic.interaction.page.FragmentTemplate("F19P2F1P2F2P2F1", "Row")      
                         .putChildren("cells",
-                                new org.instantlogic.interaction.page.FragmentTemplate("F38P1F1P2F2P2F1P1F1", "Cell")      
+                                new org.instantlogic.interaction.page.FragmentTemplate("F19P2F1P2F2P2F1P1F1", "Cell")      
                                 .putChildren("content",
                                         new org.instantlogic.interaction.page.SelectionElement(createDeduction0()
-,                                                new org.instantlogic.interaction.page.FragmentTemplate("F38P1F1P2F2P2F1P1F1P1S1F2", "Link")      .setEvent(org.instantlogic.designer.event.EntityDetailsEvent.INSTANCE)
+,                                                new org.instantlogic.interaction.page.FragmentTemplate("F19P2F1P2F2P2F1P1F1P1S1F2", "Link")      .setEvent(org.instantlogic.designer.event.EntityDetailsEvent.INSTANCE)
       
                                                 .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction1()))
 )

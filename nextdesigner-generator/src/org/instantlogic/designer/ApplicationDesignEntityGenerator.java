@@ -20,14 +20,12 @@ public class ApplicationDesignEntityGenerator extends EntityDesign {
     // Relations
     public static final RelationDesign entities = addRelation(ENTITY, "entities", RelationType.OneToManyAggregation, EntityDesignEntityGenerator.ENTITY)
             .setReverseName("application");
-    public static final RelationDesign caseEntity = addRelation(ENTITY, "caseEntity", RelationType.OneToZeroOrOne, EntityDesignEntityGenerator.ENTITY)
-            .setReverseName("caseEntityInApplication");
+    public static final RelationDesign caseEntity = addRelation(ENTITY, "caseEntity", RelationType.OneToZeroOrOne, EntityDesignEntityGenerator.ENTITY);
     public static final RelationDesign flows = addRelation(ENTITY, "flows", RelationType.OneToManyAggregation, FlowDesignEntityGenerator.ENTITY)
             .setReverseName("application");
     public static final RelationDesign events = addRelation(ENTITY, "events", RelationType.OneToManyAggregation, EventDesignEntityGenerator.ENTITY)
             .setReverseName("application");
-    public static final RelationDesign mainFlow = addRelation(ENTITY, "mainFlow", RelationType.OneToZeroOrOne, FlowDesignEntityGenerator.ENTITY)
-            .setReverseName("exposedFlowInApplication");
+    public static final RelationDesign mainFlow = addRelation(ENTITY, "mainFlow", RelationType.OneToZeroOrOne, FlowDesignEntityGenerator.ENTITY);
     public static final RelationDesign sharedTemplates = addRelation(ENTITY, "sharedTemplates", RelationType.OneToManyAggregation, SharedFragmentTemplateDefinitionDesignEntityGenerator.ENTITY)
             .setReverseName("application");
 

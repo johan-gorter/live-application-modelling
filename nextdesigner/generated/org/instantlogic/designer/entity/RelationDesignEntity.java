@@ -171,26 +171,6 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 				return true;
 			}
 		};
-	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.RelationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.ReverseRelationDeductionDesign>, org.instantlogic.designer.ReverseRelationDeductionDesign> relationInDeductions
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.RelationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.ReverseRelationDeductionDesign>, org.instantlogic.designer.ReverseRelationDeductionDesign>(
-			"relationInDeductions", INSTANCE, org.instantlogic.designer.entity.ReverseRelationDeductionDesignEntity.INSTANCE, org.instantlogic.designer.ReverseRelationDeductionDesign.class, org.instantlogic.designer.entity.ReverseRelationDeductionDesignEntity.relation
-		) {
-	
-			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.RelationDesign, org.instantlogic.designer.ReverseRelationDeductionDesign> get(
-					org.instantlogic.designer.RelationDesign instance) {
-				return instance.getRelationInDeductionsRelationValue();
-			}
-	
-			public boolean isReverse() {
-				return true;
-			}
-	
-			public boolean isMultivalue() {
-				return true;
-			}
-		};
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
 		autoCreate,
@@ -205,7 +185,6 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		from,
-		relationInDeductions,
 	};
 
 	@Override

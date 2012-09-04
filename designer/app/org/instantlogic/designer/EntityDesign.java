@@ -64,7 +64,7 @@ public class EntityDesign extends AbstractEntityDesign {
 		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
 		DeductionDesign customDeductionDesign = new DeductionDesign();
 		customDeductionDesign.setCustomization(customization);
-		customDeductionDesign.setClassName(resultClassName);
+		customDeductionDesign.setJavaClassName(resultClassName);
 		scheme.addToDeductions(customDeductionDesign);
 		scheme.setOutput(customDeductionDesign);
 		return scheme;
@@ -73,7 +73,7 @@ public class EntityDesign extends AbstractEntityDesign {
 	protected DeductionDesign selectedInstanceDeduction(EntityDesign entity) {
 		return new SelectedInstanceDeductionDesign()
 				.setOfEntity(entity)
-				.setClassName(entity.getApplication().getRootPackageName()+"."+entity.getName());
+				.setJavaClassName(entity.getApplication().getRootPackageName()+"."+entity.getName());
 	}
 	
 	protected static DeductionSchemeDesign createDeductionScheme(DeductionDesign output) {
