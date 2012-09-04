@@ -123,10 +123,10 @@ public class RelationDesign extends AttributeDesign {
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<RelationDesign, EntityDesign> from
+	private final org.instantlogic.fabric.value.RelationValue<RelationDesign, EntityDesign> from
 		= createReverseRelationValue(org.instantlogic.designer.entity.RelationDesignEntity.from);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<RelationDesign, EntityDesign> getFromRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<RelationDesign, EntityDesign> getFromRelationValue() {
 		return from;
 	}
 
@@ -134,17 +134,10 @@ public class RelationDesign extends AttributeDesign {
 		return from.getValue();
 	}
 
-	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<RelationDesign, ReverseRelationDeductionDesign> relationInDeductions
-		= createReverseRelationValues(org.instantlogic.designer.entity.RelationDesignEntity.relationInDeductions);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<RelationDesign, ReverseRelationDeductionDesign> getRelationInDeductionsRelationValue() {
-		return relationInDeductions;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.ReverseRelationDeductionDesign> getRelationInDeductions() {
-		return relationInDeductions.getValue();
-	}
+    public RelationDesign setFrom(org.instantlogic.designer.EntityDesign newValue) {
+        from.setValue(newValue);
+        return (RelationDesign)this;
+    }
 
 
 }

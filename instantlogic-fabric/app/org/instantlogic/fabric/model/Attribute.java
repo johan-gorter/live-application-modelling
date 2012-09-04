@@ -34,10 +34,6 @@ public abstract class Attribute<I extends Instance, Value extends Object, Item e
 		return false;
 	}
 
-	public DomainEntry[] getDomain() {
-		return null;
-	}
-	
 	public Deduction<Boolean> getRelevance() {
 		return null;
 	}

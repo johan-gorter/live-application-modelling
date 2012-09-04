@@ -15,7 +15,6 @@ public class EventDesignEntityGenerator extends EntityDesign {
     // Attributes
 
     // Relations
-    public static final RelationDesign parameters = addRelation(ENTITY, "parameters", RelationType.ManyToMany, EntityDesignEntityGenerator.ENTITY)
-            .setReverseName("parameterInEvent");
+    public static final RelationDesign parameters = addRelation(ENTITY, "parameters", RelationType.ManyToMany, EntityDesignEntityGenerator.ENTITY);
 
 }

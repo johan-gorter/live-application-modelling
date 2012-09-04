@@ -14,7 +14,6 @@ public class AttributeDeductionDesignEntityGenerator extends EntityDesign {
     // Attributes
 
     // Relations
-    public static final RelationDesign attribute = addRelation(ENTITY, "attribute", RelationType.ManyToZeroOrOne, AttributeDesignEntityGenerator.ENTITY)
-            .setReverseName("attributeInDeductions");
+    public static final RelationDesign attribute = addRelation(ENTITY, "attribute", RelationType.ManyToZeroOrOne, AttributeDesignEntityGenerator.ENTITY);
 
 }

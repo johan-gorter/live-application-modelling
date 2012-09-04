@@ -14,10 +14,10 @@ public class FlowNodeBaseDesign extends Design {
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<FlowNodeBaseDesign, FlowEdgeDesign> incomingEdges
+	private final org.instantlogic.fabric.value.RelationValues<FlowNodeBaseDesign, FlowEdgeDesign> incomingEdges
 		= createReverseRelationValues(org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.incomingEdges);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<FlowNodeBaseDesign, FlowEdgeDesign> getIncomingEdgesRelationValue() {
+	public org.instantlogic.fabric.value.RelationValues<FlowNodeBaseDesign, FlowEdgeDesign> getIncomingEdgesRelationValue() {
 		return incomingEdges;
 	}
 
@@ -25,11 +25,21 @@ public class FlowNodeBaseDesign extends Design {
 		return incomingEdges.getValue();
 	}
 
+    public FlowNodeBaseDesign addToIncomingEdges(FlowEdgeDesign item) {
+        incomingEdges.addValue(item);
+        return (FlowNodeBaseDesign)this;
+    }
+
+    public FlowNodeBaseDesign removeFromIncomingEdges(FlowEdgeDesign item) {
+        incomingEdges.removeValue(item);
+        return (FlowNodeBaseDesign)this;
+    }
+
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<FlowNodeBaseDesign, FlowEdgeDesign> outgoingEdges
+	private final org.instantlogic.fabric.value.RelationValues<FlowNodeBaseDesign, FlowEdgeDesign> outgoingEdges
 		= createReverseRelationValues(org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.outgoingEdges);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<FlowNodeBaseDesign, FlowEdgeDesign> getOutgoingEdgesRelationValue() {
+	public org.instantlogic.fabric.value.RelationValues<FlowNodeBaseDesign, FlowEdgeDesign> getOutgoingEdgesRelationValue() {
 		return outgoingEdges;
 	}
 
@@ -37,17 +47,32 @@ public class FlowNodeBaseDesign extends Design {
 		return outgoingEdges.getValue();
 	}
 
+    public FlowNodeBaseDesign addToOutgoingEdges(FlowEdgeDesign item) {
+        outgoingEdges.addValue(item);
+        return (FlowNodeBaseDesign)this;
+    }
+
+    public FlowNodeBaseDesign removeFromOutgoingEdges(FlowEdgeDesign item) {
+        outgoingEdges.removeValue(item);
+        return (FlowNodeBaseDesign)this;
+    }
+
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<FlowNodeBaseDesign, FlowDesign> owner
+	private final org.instantlogic.fabric.value.RelationValue<FlowNodeBaseDesign, FlowDesign> owner
 		= createReverseRelationValue(org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.owner);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<FlowNodeBaseDesign, FlowDesign> getOwnerRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<FlowNodeBaseDesign, FlowDesign> getOwnerRelationValue() {
 		return owner;
 	}
 
 	public org.instantlogic.designer.FlowDesign getOwner() {
 		return owner.getValue();
 	}
+
+    public FlowNodeBaseDesign setOwner(org.instantlogic.designer.FlowDesign newValue) {
+        owner.setValue(newValue);
+        return (FlowNodeBaseDesign)this;
+    }
 
 
 }

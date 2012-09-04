@@ -29,8 +29,26 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 	}
 
 	// Deductions
+
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.String> createDeduction0() {
+		    org.instantlogic.fabric.deduction.Deduction<java.lang.String> d0 
+		    	= new org.instantlogic.designer.deduction.AttributeJavaClassNameDeduction();
+		return d0;
+	}
+
 	
 	// Attributes
+	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.AttributeDesign, java.lang.Boolean, java.lang.Boolean> exactRounding 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.AttributeDesign, java.lang.Boolean, java.lang.Boolean>(
+			"exactRounding", INSTANCE, java.lang.Boolean.class
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.AttributeDesign, java.lang.Boolean> get(org.instantlogic.designer.AttributeDesign instance) {
+				return instance.getExactRoundingAttributeValue();
+			}
+		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.AttributeDesign, java.lang.String, java.lang.String> javaClassName 
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.AttributeDesign, java.lang.String, java.lang.String>(
@@ -41,6 +59,15 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.AttributeDesign, java.lang.String> get(org.instantlogic.designer.AttributeDesign instance) {
 				return instance.getJavaClassNameAttributeValue();
 			}
+
+            private org.instantlogic.fabric.deduction.Deduction<java.lang.String> defaultDeduction;
+            @Override
+            public org.instantlogic.fabric.deduction.Deduction<java.lang.String> getDefault() {
+                if (defaultDeduction==null) {
+                    defaultDeduction = createDeduction0();
+                }
+                return defaultDeduction;
+            }
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.AttributeDesign, java.lang.Boolean, java.lang.Boolean> multivalue 
@@ -54,6 +81,17 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			}
 		};
 	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.AttributeDesign, java.lang.Boolean, java.lang.Boolean> percentage 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.AttributeDesign, java.lang.Boolean, java.lang.Boolean>(
+			"percentage", INSTANCE, java.lang.Boolean.class
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.AttributeDesign, java.lang.Boolean> get(org.instantlogic.designer.AttributeDesign instance) {
+				return instance.getPercentageAttributeValue();
+			}
+		};
+	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.AttributeDesign, java.lang.Boolean, java.lang.Boolean> readOnly 
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.AttributeDesign, java.lang.Boolean, java.lang.Boolean>(
 			"readOnly", INSTANCE, java.lang.Boolean.class
@@ -62,6 +100,17 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.AttributeDesign, java.lang.Boolean> get(org.instantlogic.designer.AttributeDesign instance) {
 				return instance.getReadOnlyAttributeValue();
+			}
+		};
+	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.AttributeDesign, java.lang.Boolean, java.lang.Boolean> wholeNumber 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.AttributeDesign, java.lang.Boolean, java.lang.Boolean>(
+			"wholeNumber", INSTANCE, java.lang.Boolean.class
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.AttributeDesign, java.lang.Boolean> get(org.instantlogic.designer.AttributeDesign instance) {
+				return instance.getWholeNumberAttributeValue();
 			}
 		};
 	
@@ -84,7 +133,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign> _default
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign>(
 			"default", INSTANCE, org.instantlogic.designer.entity.DeductionSchemeDesignEntity.INSTANCE, org.instantlogic.designer.DeductionSchemeDesign.class, 
-			org.instantlogic.designer.entity.DeductionSchemeDesignEntity.defaultOfAttribute
+			null
 		) {
 	
 			@Override
@@ -99,32 +148,10 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DomainEntryDesign>, org.instantlogic.designer.DomainEntryDesign> domain
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DomainEntryDesign>, org.instantlogic.designer.DomainEntryDesign>(
-			"domain", INSTANCE, org.instantlogic.designer.entity.DomainEntryDesignEntity.INSTANCE, org.instantlogic.designer.DomainEntryDesign.class, 
-			org.instantlogic.designer.entity.DomainEntryDesignEntity.attribute
-		) {
-	
-			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DomainEntryDesign> get(
-					org.instantlogic.designer.AttributeDesign instance) {
-				return instance.getDomainRelationValue();
-			}
-	
-			public boolean isOwner() {
-				return true;
-			}
-	
-			public boolean isMultivalue() {
-				return true;
-			}
-			
-		};
-	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.TextTemplateDesign> explanation
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.TextTemplateDesign>(
 			"explanation", INSTANCE, org.instantlogic.designer.entity.TextTemplateDesignEntity.INSTANCE, org.instantlogic.designer.TextTemplateDesign.class, 
-			org.instantlogic.designer.entity.TextTemplateDesignEntity.explanationOnAttribute
+			null
 		) {
 	
 			@Override
@@ -139,24 +166,10 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.NumberDataCategoryDesign, org.instantlogic.designer.NumberDataCategoryDesign> numberDataCategory
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.NumberDataCategoryDesign, org.instantlogic.designer.NumberDataCategoryDesign>(
-			"numberDataCategory", INSTANCE, org.instantlogic.designer.entity.NumberDataCategoryDesignEntity.INSTANCE, org.instantlogic.designer.NumberDataCategoryDesign.class, 
-			null
-		) {
-	
-			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.NumberDataCategoryDesign> get(
-					org.instantlogic.designer.AttributeDesign instance) {
-				return instance.getNumberDataCategoryRelationValue();
-			}
-			
-		};
-	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.TextTemplateDesign> question
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.TextTemplateDesign>(
 			"question", INSTANCE, org.instantlogic.designer.entity.TextTemplateDesignEntity.INSTANCE, org.instantlogic.designer.TextTemplateDesign.class, 
-			org.instantlogic.designer.entity.TextTemplateDesignEntity.questionOnAttribute
+			null
 		) {
 	
 			@Override
@@ -174,7 +187,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign> relevance
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign>(
 			"relevance", INSTANCE, org.instantlogic.designer.entity.DeductionSchemeDesignEntity.INSTANCE, org.instantlogic.designer.DeductionSchemeDesign.class, 
-			org.instantlogic.designer.entity.DeductionSchemeDesignEntity.relevanceOfAttribute
+			null
 		) {
 	
 			@Override
@@ -192,7 +205,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign> rule
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign>(
 			"rule", INSTANCE, org.instantlogic.designer.entity.DeductionSchemeDesignEntity.INSTANCE, org.instantlogic.designer.DeductionSchemeDesign.class, 
-			org.instantlogic.designer.entity.DeductionSchemeDesignEntity.ruleOfAttribute
+			null
 		) {
 	
 			@Override
@@ -207,27 +220,21 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			
 		};
 	
-	// Reverse relations
-	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.AttributeDeductionDesign>, org.instantlogic.designer.AttributeDeductionDesign> attributeInDeductions
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.AttributeDeductionDesign>, org.instantlogic.designer.AttributeDeductionDesign>(
-			"attributeInDeductions", INSTANCE, org.instantlogic.designer.entity.AttributeDeductionDesignEntity.INSTANCE, org.instantlogic.designer.AttributeDeductionDesign.class, org.instantlogic.designer.entity.AttributeDeductionDesignEntity.attribute
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.TextDataCategoryDesign, org.instantlogic.designer.TextDataCategoryDesign> textDataCategory
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.TextDataCategoryDesign, org.instantlogic.designer.TextDataCategoryDesign>(
+			"textDataCategory", INSTANCE, org.instantlogic.designer.entity.TextDataCategoryDesignEntity.INSTANCE, org.instantlogic.designer.TextDataCategoryDesign.class, 
+			null
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDeductionDesign> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.TextDataCategoryDesign> get(
 					org.instantlogic.designer.AttributeDesign instance) {
-				return instance.getAttributeInDeductionsRelationValue();
+				return instance.getTextDataCategoryRelationValue();
 			}
-	
-			public boolean isReverse() {
-				return true;
-			}
-	
-			public boolean isMultivalue() {
-				return true;
-			}
+			
 		};
+	
+	// Reverse relations
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> belongsToEntity
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign>(
@@ -244,46 +251,26 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 				return true;
 			}
 		};
-	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentTemplateDesign>, org.instantlogic.designer.FragmentTemplateDesign> usedInField
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentTemplateDesign>, org.instantlogic.designer.FragmentTemplateDesign>(
-			"usedInField", INSTANCE, org.instantlogic.designer.entity.FragmentTemplateDesignEntity.INSTANCE, org.instantlogic.designer.FragmentTemplateDesign.class, org.instantlogic.designer.entity.FragmentTemplateDesignEntity.attribute
-		) {
-	
-			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.FragmentTemplateDesign> get(
-					org.instantlogic.designer.AttributeDesign instance) {
-				return instance.getUsedInFieldRelationValue();
-			}
-	
-			public boolean isReverse() {
-				return true;
-			}
-	
-			public boolean isMultivalue() {
-				return true;
-			}
-		};
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
+		exactRounding,
 		javaClassName,
 		multivalue,
+		percentage,
 		readOnly,
+		wholeNumber,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		dataCategory,
 		_default,
-		domain,
 		explanation,
-		numberDataCategory,
 		question,
 		relevance,
 		rule,
+		textDataCategory,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
-		attributeInDeductions,
 		belongsToEntity,
-		usedInField,
 	};
 
 	@Override

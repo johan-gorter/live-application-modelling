@@ -37,7 +37,7 @@ public class StaticInstanceDesignEntity extends org.instantlogic.fabric.model.En
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.StaticInstanceDesign, org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.TextTemplateDesign> description
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.StaticInstanceDesign, org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.TextTemplateDesign>(
 			"description", INSTANCE, org.instantlogic.designer.entity.TextTemplateDesignEntity.INSTANCE, org.instantlogic.designer.TextTemplateDesign.class, 
-			org.instantlogic.designer.entity.TextTemplateDesignEntity.descriptionOnStaticInstance
+			null
 		) {
 	
 			@Override

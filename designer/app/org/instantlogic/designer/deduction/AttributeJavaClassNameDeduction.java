@@ -5,10 +5,8 @@ import java.util.Date;
 
 import org.instantlogic.designer.AttributeDesign;
 import org.instantlogic.designer.DataCategoryDesign;
-import org.instantlogic.designer.NumberDataCategoryDesign;
 import org.instantlogic.designer.entity.AttributeDesignEntity;
 import org.instantlogic.designer.entity.DataCategoryDesignEntity;
-import org.instantlogic.designer.entity.NumberDataCategoryDesignEntity;
 import org.instantlogic.fabric.deduction.Deduction;
 import org.instantlogic.fabric.util.DeductionContext;
 import org.instantlogic.fabric.util.ValueAndLevel;
@@ -35,19 +33,9 @@ public class AttributeJavaClassNameDeduction extends Deduction<String> {
 			return String.class;
 		}
 		if (dataCategory == DataCategoryDesignEntity.INSTANCE.number) {
-			NumberDataCategoryDesign numberDataCategory = attribute.getNumberDataCategory();
-			if (numberDataCategory == NumberDataCategoryDesignEntity.INSTANCE._int) {
-				return Integer.class;
-			}
-			if (numberDataCategory == NumberDataCategoryDesignEntity.INSTANCE._double) {
-				return Double.class;
-			}
-			if (numberDataCategory == NumberDataCategoryDesignEntity.INSTANCE.decimal) {
-				return BigDecimal.class;
-			}
-			if (numberDataCategory == NumberDataCategoryDesignEntity.INSTANCE.percentage) {
-				return Double.class; // stored as a number between 0 and 1 instead of 0 and 100
-			}
+			if (attribute.getWholeNumber()==Boolean.TRUE) return Integer.class;
+			if (attribute.getExactRounding()==Boolean.TRUE) return BigDecimal.class;
+			return Double.class;
 		}
 		return null;
 	}

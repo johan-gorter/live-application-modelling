@@ -37,7 +37,7 @@ public class SelectedInstanceDeductionDesignEntity extends org.instantlogic.fabr
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.SelectedInstanceDeductionDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> ofEntity
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.SelectedInstanceDeductionDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign>(
 			"ofEntity", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, 
-			org.instantlogic.designer.entity.EntityDesignEntity.entityInSelectedInstanceDeductions
+			null
 		) {
 	
 			@Override

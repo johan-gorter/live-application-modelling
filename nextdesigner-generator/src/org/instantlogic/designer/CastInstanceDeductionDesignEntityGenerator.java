@@ -14,7 +14,6 @@ public class CastInstanceDeductionDesignEntityGenerator extends EntityDesign {
     // Attributes
 
     // Relations
-    public static final RelationDesign toEntity = addRelation(ENTITY, "toEntity", RelationType.ManyToZeroOrOne, EntityDesignEntityGenerator.ENTITY)
-            .setReverseName("entityInCastDeductions");
+    public static final RelationDesign toEntity = addRelation(ENTITY, "toEntity", RelationType.ManyToZeroOrOne, EntityDesignEntityGenerator.ENTITY);
 
 }

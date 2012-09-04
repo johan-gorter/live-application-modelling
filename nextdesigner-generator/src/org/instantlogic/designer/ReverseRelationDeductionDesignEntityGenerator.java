@@ -14,7 +14,6 @@ public class ReverseRelationDeductionDesignEntityGenerator extends EntityDesign 
     // Attributes
 
     // Relations
-    public static final RelationDesign relation = addRelation(ENTITY, "relation", RelationType.ManyToZeroOrOne, RelationDesignEntityGenerator.ENTITY)
-            .setReverseName("relationInDeductions");
+    public static final RelationDesign relation = addRelation(ENTITY, "relation", RelationType.ManyToZeroOrOne, RelationDesignEntityGenerator.ENTITY);
 
 }

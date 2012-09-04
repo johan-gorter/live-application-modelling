@@ -59,7 +59,7 @@ public class SelectionDesignEntity extends org.instantlogic.fabric.model.Entity<
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.SelectionDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign> selection
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.SelectionDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign>(
 			"selection", INSTANCE, org.instantlogic.designer.entity.DeductionSchemeDesignEntity.INSTANCE, org.instantlogic.designer.DeductionSchemeDesign.class, 
-			org.instantlogic.designer.entity.DeductionSchemeDesignEntity.selection
+			null
 		) {
 	
 			@Override

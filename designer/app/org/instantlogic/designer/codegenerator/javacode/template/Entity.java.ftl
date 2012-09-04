@@ -109,19 +109,6 @@ public class ${technicalNameCapitalized}Entity extends org.instantlogic.fabric.m
                 return defaultDeduction;
             }
             </#if>
-			<#if attribute.domain??>
-			
-			private final DomainEntry[] domain = new DomainEntry[] {
-				<#list attribute.domain as entry>
-				new DomainEntry("${entry.name}", <@text_macro text=entry.display />),
-				</#list>
-			};
-
-			@Override
-			public DomainEntry[] getDomain() {
-				return domain;
-			};
-			</#if>
 		};
 	</#list>
 	

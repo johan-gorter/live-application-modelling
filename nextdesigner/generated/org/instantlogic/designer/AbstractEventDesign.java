@@ -62,49 +62,5 @@ public abstract class AbstractEventDesign extends Design {
         return (EventDesign)this;
     }
 
-	
-	private final org.instantlogic.fabric.value.RelationValues<EventDesign, FlowEdgeDesign> eventInEdges
-		= createReverseRelationValues(org.instantlogic.designer.entity.EventDesignEntity.eventInEdges);
-
-	public org.instantlogic.fabric.value.RelationValues<EventDesign, FlowEdgeDesign> getEventInEdgesRelationValue() {
-		return eventInEdges;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowEdgeDesign> getEventInEdges() {
-		return eventInEdges.getValue();
-	}
-
-    public EventDesign addToEventInEdges(FlowEdgeDesign item) {
-        eventInEdges.addValue(item);
-        return (EventDesign)this;
-    }
-
-    public EventDesign removeFromEventInEdges(FlowEdgeDesign item) {
-        eventInEdges.removeValue(item);
-        return (EventDesign)this;
-    }
-
-	
-	private final org.instantlogic.fabric.value.RelationValues<EventDesign, FragmentTemplateDesign> triggeredByFragment
-		= createReverseRelationValues(org.instantlogic.designer.entity.EventDesignEntity.triggeredByFragment);
-
-	public org.instantlogic.fabric.value.RelationValues<EventDesign, FragmentTemplateDesign> getTriggeredByFragmentRelationValue() {
-		return triggeredByFragment;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentTemplateDesign> getTriggeredByFragment() {
-		return triggeredByFragment.getValue();
-	}
-
-    public EventDesign addToTriggeredByFragment(FragmentTemplateDesign item) {
-        triggeredByFragment.addValue(item);
-        return (EventDesign)this;
-    }
-
-    public EventDesign removeFromTriggeredByFragment(FragmentTemplateDesign item) {
-        triggeredByFragment.removeValue(item);
-        return (EventDesign)this;
-    }
-
 
 }

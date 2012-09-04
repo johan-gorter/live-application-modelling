@@ -63,7 +63,7 @@ public abstract class BootstrapperUtil {
 	protected static AttributeDesign createAttribute(EntityDesign entity, String name, String className) {
 		AttributeDesign attribute = new AttributeDesign();
 		attribute.setName(name);
-		attribute.setClassName(className);
+		attribute.setJavaClassName(className);
 		entity.addToAttributes(attribute);
 		return attribute;
 	}
@@ -151,10 +151,10 @@ public abstract class BootstrapperUtil {
 		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
 		SelectedInstanceDeductionDesign selectedInstanceDeductionDesign = new SelectedInstanceDeductionDesign();
 		selectedInstanceDeductionDesign.setOfEntity(entity);
-		selectedInstanceDeductionDesign.setClassName(entity.getApplication().getRootPackageName()+"."+entity.getName());
+		selectedInstanceDeductionDesign.setJavaClassName(entity.getApplication().getRootPackageName()+"."+entity.getName());
 		CastInstanceDeductionDesign castInstanceDeductionDesign = new CastInstanceDeductionDesign();
 		castInstanceDeductionDesign.setToEntity(toEntity);
-		castInstanceDeductionDesign.setClassName(entity.getApplication().getRootPackageName()+"."+toEntity.getName());
+		castInstanceDeductionDesign.setJavaClassName(entity.getApplication().getRootPackageName()+"."+toEntity.getName());
 		castInstanceDeductionDesign.addToInputs(selectedInstanceDeductionDesign);
 		scheme.addToDeductions(selectedInstanceDeductionDesign);
 		scheme.addToDeductions(castInstanceDeductionDesign);
@@ -167,7 +167,7 @@ public abstract class BootstrapperUtil {
 		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
 		SelectedInstanceDeductionDesign selectedInstanceDeductionDesign = new SelectedInstanceDeductionDesign();
 		selectedInstanceDeductionDesign.setOfEntity(entity);
-		selectedInstanceDeductionDesign.setClassName(entity.getApplication().getRootPackageName()+"."+entity.getName());
+		selectedInstanceDeductionDesign.setJavaClassName(entity.getApplication().getRootPackageName()+"."+entity.getName());
 		scheme.addToDeductions(selectedInstanceDeductionDesign);
 		scheme.setOutput(selectedInstanceDeductionDesign);
 		return scheme;
@@ -177,7 +177,7 @@ public abstract class BootstrapperUtil {
 	protected static <V> DeductionSchemeDesign createConstantDeduction(Class<V> className, V value) {
 		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
 		ConstantDeductionDesign constantDeductionDesign = new ConstantDeductionDesign();
-		constantDeductionDesign.setClassName(className.getName());
+		constantDeductionDesign.setJavaClassName(className.getName());
 		constantDeductionDesign.setValue(value);
 		scheme.addToDeductions(constantDeductionDesign);
 		scheme.setOutput(constantDeductionDesign);
@@ -192,7 +192,7 @@ public abstract class BootstrapperUtil {
 		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
 		DeductionDesign customDeductionDesign = new DeductionDesign();
 		customDeductionDesign.setCustomization(customization);
-		customDeductionDesign.setClassName(resultClassName);
+		customDeductionDesign.setJavaClassName(resultClassName);
 		scheme.addToDeductions(customDeductionDesign);
 		scheme.setOutput(customDeductionDesign);
 		return scheme;
@@ -211,14 +211,14 @@ public abstract class BootstrapperUtil {
 		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
 		SelectedInstanceDeductionDesign selectedInstanceDeductionDesign = new SelectedInstanceDeductionDesign();
 		selectedInstanceDeductionDesign.setOfEntity(source);
-		selectedInstanceDeductionDesign.setClassName(source.getApplication().getRootPackageName()+"."+source.getName());
+		selectedInstanceDeductionDesign.setJavaClassName(source.getApplication().getRootPackageName()+"."+source.getName());
 		AttributeDeductionDesign attributeDeductionDesign = new AttributeDeductionDesign();
 		attributeDeductionDesign.setAttribute(attribute);
 		attributeDeductionDesign.addToInputs(selectedInstanceDeductionDesign);
 		if (attribute.getMultivalue()==Boolean.TRUE) {
-			attributeDeductionDesign.setClassName("org.instantlogic.fabric.value.Multi<"+className+">");
+			attributeDeductionDesign.setJavaClassName("org.instantlogic.fabric.value.Multi<"+className+">");
 		} else {
-			attributeDeductionDesign.setClassName(className);	
+			attributeDeductionDesign.setJavaClassName(className);	
 		}
 		scheme.addToDeductions(selectedInstanceDeductionDesign);
 		scheme.addToDeductions(attributeDeductionDesign);

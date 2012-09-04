@@ -139,27 +139,5 @@ public class RelationDesign extends AttributeDesign {
         return (RelationDesign)this;
     }
 
-	
-	private final org.instantlogic.fabric.value.RelationValues<RelationDesign, ReverseRelationDeductionDesign> relationInDeductions
-		= createReverseRelationValues(org.instantlogic.designer.entity.RelationDesignEntity.relationInDeductions);
-
-	public org.instantlogic.fabric.value.RelationValues<RelationDesign, ReverseRelationDeductionDesign> getRelationInDeductionsRelationValue() {
-		return relationInDeductions;
-	}
-
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.ReverseRelationDeductionDesign> getRelationInDeductions() {
-		return relationInDeductions.getValue();
-	}
-
-    public RelationDesign addToRelationInDeductions(ReverseRelationDeductionDesign item) {
-        relationInDeductions.addValue(item);
-        return (RelationDesign)this;
-    }
-
-    public RelationDesign removeFromRelationInDeductions(ReverseRelationDeductionDesign item) {
-        relationInDeductions.removeValue(item);
-        return (RelationDesign)this;
-    }
-
 
 }

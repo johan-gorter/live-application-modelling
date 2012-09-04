@@ -1,6 +1,5 @@
 package org.instantlogic.engine.presence.flow;
 
-import org.instantlogic.designer.ApplicationDesign;
 import org.instantlogic.designer.FlowDesign;
 import org.instantlogic.engine.presence.TravelerEntityGenerator;
 import org.instantlogic.engine.presence.flow.traveler.TravelerPlaceTemplateGenerator;
@@ -14,11 +13,10 @@ public class TravelerFlowGenerator extends FlowDesign {
 	}
 	
 	@Override
-	public void registerApplication(ApplicationDesign application) {
+	public void init() {
 		addToParameters(TravelerEntityGenerator.ENTITY);
 		
 		addToNodes(TravelerPlaceTemplateGenerator.PLACE);
-		
-		super.registerApplication(application);
+		super.init();
 	}
 }

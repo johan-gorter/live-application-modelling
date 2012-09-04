@@ -19,7 +19,6 @@ public class FlowDesignEntityGenerator extends EntityDesign {
             .setReverseName("owner");
     public static final RelationDesign edges = addRelation(ENTITY, "edges", RelationType.OneToManyAggregation, FlowEdgeDesignEntityGenerator.ENTITY)
             .setReverseName("owner");
-    public static final RelationDesign parameters = addRelation(ENTITY, "parameters", RelationType.ManyToMany, EntityDesignEntityGenerator.ENTITY)
-            .setReverseName("parameterInFlows");
+    public static final RelationDesign parameters = addRelation(ENTITY, "parameters", RelationType.ManyToMany, EntityDesignEntityGenerator.ENTITY);
 
 }

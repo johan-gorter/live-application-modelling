@@ -127,23 +127,6 @@ public abstract class AbstractFlowDesign extends Design {
     }
 
 	
-	private final org.instantlogic.fabric.value.RelationValue<FlowDesign, ApplicationDesign> exposedFlowInApplication
-		= createReverseRelationValue(org.instantlogic.designer.entity.FlowDesignEntity.exposedFlowInApplication);
-
-	public org.instantlogic.fabric.value.RelationValue<FlowDesign, ApplicationDesign> getExposedFlowInApplicationRelationValue() {
-		return exposedFlowInApplication;
-	}
-
-	public org.instantlogic.designer.ApplicationDesign getExposedFlowInApplication() {
-		return exposedFlowInApplication.getValue();
-	}
-
-    public FlowDesign setExposedFlowInApplication(org.instantlogic.designer.ApplicationDesign newValue) {
-        exposedFlowInApplication.setValue(newValue);
-        return (FlowDesign)this;
-    }
-
-	
 	private final org.instantlogic.fabric.value.RelationValue<FlowDesign, SubFlowDesign> subFlowIn
 		= createReverseRelationValue(org.instantlogic.designer.entity.FlowDesignEntity.subFlowIn);
 

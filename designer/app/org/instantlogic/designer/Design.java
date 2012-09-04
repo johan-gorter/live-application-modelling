@@ -16,18 +16,18 @@ public class Design extends AbstractDesign {
 		}
 		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
 		SelectedInstanceDeductionDesign selectedInstanceDeductionDesign = new SelectedInstanceDeductionDesign();
+		scheme.addToDeductions(selectedInstanceDeductionDesign);
 		selectedInstanceDeductionDesign.setOfEntity(source);
-		selectedInstanceDeductionDesign.setClassName(source.getApplication().getRootPackageName()+"."+source.getTechnicalNameCapitalized());
+		selectedInstanceDeductionDesign.setJavaClassName(source.getApplication().getRootPackageName()+"."+source.getTechnicalNameCapitalized());
 		AttributeDeductionDesign attributeDeductionDesign = new AttributeDeductionDesign();
+		scheme.addToDeductions(attributeDeductionDesign);
 		attributeDeductionDesign.setAttribute(attribute);
 		attributeDeductionDesign.addToInputs(selectedInstanceDeductionDesign);
 		if (attribute.getMultivalue()==Boolean.TRUE) {
-			attributeDeductionDesign.setClassName("org.instantlogic.fabric.value.Multi<"+className+">");
+			attributeDeductionDesign.setJavaClassName("org.instantlogic.fabric.value.Multi<"+className+">");
 		} else {
-			attributeDeductionDesign.setClassName(className);	
+			attributeDeductionDesign.setJavaClassName(className);	
 		}
-		scheme.addToDeductions(selectedInstanceDeductionDesign);
-		scheme.addToDeductions(attributeDeductionDesign);
 		scheme.setOutput(attributeDeductionDesign);
 		return scheme;
 	}
@@ -35,7 +35,7 @@ public class Design extends AbstractDesign {
 	protected static <V> DeductionSchemeDesign createConstantDeduction(Class<V> className, V value) {
 		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
 		ConstantDeductionDesign constantDeductionDesign = new ConstantDeductionDesign();
-		constantDeductionDesign.setClassName(className.getName());
+		constantDeductionDesign.setJavaClassName(className.getName());
 		constantDeductionDesign.setValue(value);
 		scheme.addToDeductions(constantDeductionDesign);
 		scheme.setOutput(constantDeductionDesign);

@@ -14,7 +14,6 @@ public class SelectedInstanceDeductionDesignEntityGenerator extends EntityDesign
     // Attributes
 
     // Relations
-    public static final RelationDesign ofEntity = addRelation(ENTITY, "ofEntity", RelationType.ManyToZeroOrOne, EntityDesignEntityGenerator.ENTITY)
-            .setReverseName("entityInSelectedInstanceDeductions");
+    public static final RelationDesign ofEntity = addRelation(ENTITY, "ofEntity", RelationType.ManyToZeroOrOne, EntityDesignEntityGenerator.ENTITY);
 
 }

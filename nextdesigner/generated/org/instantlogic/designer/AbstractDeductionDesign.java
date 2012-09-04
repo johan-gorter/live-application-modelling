@@ -135,22 +135,5 @@ public abstract class AbstractDeductionDesign extends org.instantlogic.fabric.In
         return (DeductionDesign)this;
     }
 
-	
-	private final org.instantlogic.fabric.value.RelationValue<DeductionDesign, DeductionSchemeDesign> schemeOutput
-		= createReverseRelationValue(org.instantlogic.designer.entity.DeductionDesignEntity.schemeOutput);
-
-	public org.instantlogic.fabric.value.RelationValue<DeductionDesign, DeductionSchemeDesign> getSchemeOutputRelationValue() {
-		return schemeOutput;
-	}
-
-	public org.instantlogic.designer.DeductionSchemeDesign getSchemeOutput() {
-		return schemeOutput.getValue();
-	}
-
-    public DeductionDesign setSchemeOutput(org.instantlogic.designer.DeductionSchemeDesign newValue) {
-        schemeOutput.setValue(newValue);
-        return (DeductionDesign)this;
-    }
-
 
 }
