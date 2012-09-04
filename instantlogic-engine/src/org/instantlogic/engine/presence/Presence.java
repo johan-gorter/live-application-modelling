@@ -22,7 +22,7 @@ public class Presence extends AbstractPresence {
 		}
 		Place place = new Place();
 		place.setUrl(url);
-		logger.debug("Activating place {}", traveler.getId(), place.getUrl());
+		logger.debug("Activating place {}", place.getUrl());
 		addToActivePlaces(place);
 		traveler.setCurrentPlace(place);
 		return place;
@@ -57,7 +57,7 @@ public class Presence extends AbstractPresence {
 		
 		if (travelerInfo.getAuthenticatedUsername()!=null) {
 			User user = null;
-			if (traveler.getUser()==null || traveler.getUser().getUsername()!=travelerInfo.getAuthenticatedUsername()) {
+			if (traveler.getUser()==null || !travelerInfo.getAuthenticatedUsername().equals(traveler.getUser().getUsername())) {
 				user = findOrActivateUser(travelerInfo.getAuthenticatedUsername());
 				traveler.setUser(user);
 			}
@@ -78,5 +78,4 @@ public class Presence extends AbstractPresence {
 		addToActiveUsers(user);
 		return user;
 	}
-
 }

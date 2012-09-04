@@ -6,6 +6,7 @@ public class FlowEdgeDesignEntityGenerator extends EntityDesign {
     public static final FlowEdgeDesignEntityGenerator ENTITY = new FlowEdgeDesignEntityGenerator();
     
     private FlowEdgeDesignEntityGenerator() {
+    	DesignerApplicationGenerator.APPLICATION.addToEntities(this);
         setName("FlowEdgeDesign");
     }
 

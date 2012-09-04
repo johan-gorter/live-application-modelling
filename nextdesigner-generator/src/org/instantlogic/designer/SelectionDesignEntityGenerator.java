@@ -7,13 +7,13 @@ public class SelectionDesignEntityGenerator extends EntityDesign {
     public static final SelectionDesignEntityGenerator ENTITY = new SelectionDesignEntityGenerator();
     
     private SelectionDesignEntityGenerator() {
+    	DesignerApplicationGenerator.APPLICATION.addToEntities(this);
         setName("SelectionDesign");
         setExtendsFrom(ElementDesignEntityGenerator.ENTITY);
     }
 
     // Relations
-    public static final RelationDesign selection = addRelation(ENTITY, "selection", RelationType.OneToOneAggregation, DeductionSchemeDesignEntityGenerator.ENTITY)
-            .setReverseName("selection");
+    public static final RelationDesign selection = addRelation(ENTITY, "selection", RelationType.OneToOneAggregation, DeductionSchemeDesignEntityGenerator.ENTITY);
     
     public static final RelationDesign children = addRelation(ENTITY, "children", RelationType.OneToManyAggregation, ElementDesignEntityGenerator.ENTITY)
             .setReverseName("childOfSelection");

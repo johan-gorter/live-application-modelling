@@ -6,6 +6,7 @@ public class SelectedInstanceDeductionDesignEntityGenerator extends EntityDesign
     public static final SelectedInstanceDeductionDesignEntityGenerator ENTITY = new SelectedInstanceDeductionDesignEntityGenerator();
     
     private SelectedInstanceDeductionDesignEntityGenerator() {
+    	DesignerApplicationGenerator.APPLICATION.addToEntities(this);
         setName("SelectedInstanceDeductionDesign");
         setExtendsFrom(DeductionDesignEntityGenerator.ENTITY);
     }

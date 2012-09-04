@@ -6,6 +6,7 @@ public class ConstantDeductionDesignEntityGenerator extends EntityDesign {
     public static final ConstantDeductionDesignEntityGenerator ENTITY = new ConstantDeductionDesignEntityGenerator();
     
     private ConstantDeductionDesignEntityGenerator() {
+    	DesignerApplicationGenerator.APPLICATION.addToEntities(this);
         setName("ConstantDeductionDesign");
         setExtendsFrom(DeductionDesignEntityGenerator.ENTITY);
     }

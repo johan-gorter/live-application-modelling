@@ -6,6 +6,7 @@ public class DomainEntryDesignEntityGenerator extends EntityDesign {
     public static final DomainEntryDesignEntityGenerator ENTITY = new DomainEntryDesignEntityGenerator();
     
     private DomainEntryDesignEntityGenerator() {
+    	DesignerApplicationGenerator.APPLICATION.addToEntities(this);
         setName("DomainEntryDesign");
         setExtendsFrom(DesignEntityGenerator.ENTITY);
     }

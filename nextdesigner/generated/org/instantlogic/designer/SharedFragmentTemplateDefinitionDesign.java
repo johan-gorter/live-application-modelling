@@ -31,10 +31,10 @@ public class SharedFragmentTemplateDefinitionDesign extends Design {
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<SharedFragmentTemplateDefinitionDesign, ApplicationDesign> application
+	private final org.instantlogic.fabric.value.RelationValue<SharedFragmentTemplateDefinitionDesign, ApplicationDesign> application
 		= createReverseRelationValue(org.instantlogic.designer.entity.SharedFragmentTemplateDefinitionDesignEntity.application);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<SharedFragmentTemplateDefinitionDesign, ApplicationDesign> getApplicationRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<SharedFragmentTemplateDefinitionDesign, ApplicationDesign> getApplicationRelationValue() {
 		return application;
 	}
 
@@ -42,17 +42,32 @@ public class SharedFragmentTemplateDefinitionDesign extends Design {
 		return application.getValue();
 	}
 
+    public SharedFragmentTemplateDefinitionDesign setApplication(org.instantlogic.designer.ApplicationDesign newValue) {
+        application.setValue(newValue);
+        return (SharedFragmentTemplateDefinitionDesign)this;
+    }
+
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<SharedFragmentTemplateDefinitionDesign, SharedElementDesign> usages
+	private final org.instantlogic.fabric.value.RelationValues<SharedFragmentTemplateDefinitionDesign, SharedElementDesign> usages
 		= createReverseRelationValues(org.instantlogic.designer.entity.SharedFragmentTemplateDefinitionDesignEntity.usages);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<SharedFragmentTemplateDefinitionDesign, SharedElementDesign> getUsagesRelationValue() {
+	public org.instantlogic.fabric.value.RelationValues<SharedFragmentTemplateDefinitionDesign, SharedElementDesign> getUsagesRelationValue() {
 		return usages;
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.SharedElementDesign> getUsages() {
 		return usages.getValue();
 	}
+
+    public SharedFragmentTemplateDefinitionDesign addToUsages(SharedElementDesign item) {
+        usages.addValue(item);
+        return (SharedFragmentTemplateDefinitionDesign)this;
+    }
+
+    public SharedFragmentTemplateDefinitionDesign removeFromUsages(SharedElementDesign item) {
+        usages.removeValue(item);
+        return (SharedFragmentTemplateDefinitionDesign)this;
+    }
 
 
 }

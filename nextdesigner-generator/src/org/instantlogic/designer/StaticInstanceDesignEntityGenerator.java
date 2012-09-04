@@ -7,6 +7,7 @@ public class StaticInstanceDesignEntityGenerator extends EntityDesign {
     public static final StaticInstanceDesignEntityGenerator ENTITY = new StaticInstanceDesignEntityGenerator();
     
     private StaticInstanceDesignEntityGenerator() {
+    	DesignerApplicationGenerator.APPLICATION.addToEntities(this);
         setName("StaticInstanceDesign");
         setExtendsFrom(DesignEntityGenerator.ENTITY);
     }

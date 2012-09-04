@@ -48,16 +48,21 @@ public class StringTemplateDesign extends org.instantlogic.fabric.Instance {
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<StringTemplateDesign, TextTemplateDesign> untranslatedInTemplate
+	private final org.instantlogic.fabric.value.RelationValue<StringTemplateDesign, TextTemplateDesign> untranslatedInTemplate
 		= createReverseRelationValue(org.instantlogic.designer.entity.StringTemplateDesignEntity.untranslatedInTemplate);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<StringTemplateDesign, TextTemplateDesign> getUntranslatedInTemplateRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<StringTemplateDesign, TextTemplateDesign> getUntranslatedInTemplateRelationValue() {
 		return untranslatedInTemplate;
 	}
 
 	public org.instantlogic.designer.TextTemplateDesign getUntranslatedInTemplate() {
 		return untranslatedInTemplate.getValue();
 	}
+
+    public StringTemplateDesign setUntranslatedInTemplate(org.instantlogic.designer.TextTemplateDesign newValue) {
+        untranslatedInTemplate.setValue(newValue);
+        return (StringTemplateDesign)this;
+    }
 
 
 }

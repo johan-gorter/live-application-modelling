@@ -10,6 +10,23 @@ public class AttributeDesign extends Design {
 
 	// Attributes
 	
+	private final org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.Boolean> exactRounding
+		= createAttributeValue(org.instantlogic.designer.entity.AttributeDesignEntity.exactRounding);
+	
+	public java.lang.Boolean getExactRounding() {
+		return exactRounding.getValue();
+	}
+
+	public org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.Boolean> getExactRoundingAttributeValue() {
+		return exactRounding;
+	}
+
+	public AttributeDesign setExactRounding(java.lang.Boolean newValue) {
+		exactRounding.setValue(newValue);
+		return (AttributeDesign)this;
+	}
+	
+	
 	private final org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.String> javaClassName
 		= createAttributeValue(org.instantlogic.designer.entity.AttributeDesignEntity.javaClassName);
 	
@@ -44,6 +61,23 @@ public class AttributeDesign extends Design {
 	}
 	
 	
+	private final org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.Boolean> percentage
+		= createAttributeValue(org.instantlogic.designer.entity.AttributeDesignEntity.percentage);
+	
+	public java.lang.Boolean getPercentage() {
+		return percentage.getValue();
+	}
+
+	public org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.Boolean> getPercentageAttributeValue() {
+		return percentage;
+	}
+
+	public AttributeDesign setPercentage(java.lang.Boolean newValue) {
+		percentage.setValue(newValue);
+		return (AttributeDesign)this;
+	}
+	
+	
 	private final org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.Boolean> readOnly
 		= createAttributeValue(org.instantlogic.designer.entity.AttributeDesignEntity.readOnly);
 	
@@ -57,6 +91,23 @@ public class AttributeDesign extends Design {
 
 	public AttributeDesign setReadOnly(java.lang.Boolean newValue) {
 		readOnly.setValue(newValue);
+		return (AttributeDesign)this;
+	}
+	
+	
+	private final org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.Boolean> wholeNumber
+		= createAttributeValue(org.instantlogic.designer.entity.AttributeDesignEntity.wholeNumber);
+	
+	public java.lang.Boolean getWholeNumber() {
+		return wholeNumber.getValue();
+	}
+
+	public org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.Boolean> getWholeNumberAttributeValue() {
+		return wholeNumber;
+	}
+
+	public AttributeDesign setWholeNumber(java.lang.Boolean newValue) {
+		wholeNumber.setValue(newValue);
 		return (AttributeDesign)this;
 	}
 	
@@ -146,23 +197,6 @@ public class AttributeDesign extends Design {
 	}
 
 	
-	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, NumberDataCategoryDesign> numberDataCategory
-		= createRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity.numberDataCategory);
-		
-	public org.instantlogic.fabric.value.RelationValue<AttributeDesign, NumberDataCategoryDesign> getNumberDataCategoryRelationValue() {
-		return numberDataCategory;
-	}
-
-	public org.instantlogic.designer.NumberDataCategoryDesign getNumberDataCategory() {
-		return numberDataCategory.getValue();
-	}
-	
-	public AttributeDesign setNumberDataCategory(org.instantlogic.designer.NumberDataCategoryDesign newValue) {
-		numberDataCategory.setValue(newValue);
-		return (AttributeDesign)this;
-	}
-
-	
 	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, TextTemplateDesign> question
 		= createRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity.question);
 		
@@ -213,13 +247,30 @@ public class AttributeDesign extends Design {
 		return (AttributeDesign)this;
 	}
 
+	
+	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, TextDataCategoryDesign> textDataCategory
+		= createRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity.textDataCategory);
+		
+	public org.instantlogic.fabric.value.RelationValue<AttributeDesign, TextDataCategoryDesign> getTextDataCategoryRelationValue() {
+		return textDataCategory;
+	}
+
+	public org.instantlogic.designer.TextDataCategoryDesign getTextDataCategory() {
+		return textDataCategory.getValue();
+	}
+	
+	public AttributeDesign setTextDataCategory(org.instantlogic.designer.TextDataCategoryDesign newValue) {
+		textDataCategory.setValue(newValue);
+		return (AttributeDesign)this;
+	}
+
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<AttributeDesign, AttributeDeductionDesign> attributeInDeductions
+	private final org.instantlogic.fabric.value.RelationValues<AttributeDesign, AttributeDeductionDesign> attributeInDeductions
 		= createReverseRelationValues(org.instantlogic.designer.entity.AttributeDesignEntity.attributeInDeductions);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<AttributeDesign, AttributeDeductionDesign> getAttributeInDeductionsRelationValue() {
+	public org.instantlogic.fabric.value.RelationValues<AttributeDesign, AttributeDeductionDesign> getAttributeInDeductionsRelationValue() {
 		return attributeInDeductions;
 	}
 
@@ -227,11 +278,21 @@ public class AttributeDesign extends Design {
 		return attributeInDeductions.getValue();
 	}
 
+    public AttributeDesign addToAttributeInDeductions(AttributeDeductionDesign item) {
+        attributeInDeductions.addValue(item);
+        return (AttributeDesign)this;
+    }
+
+    public AttributeDesign removeFromAttributeInDeductions(AttributeDeductionDesign item) {
+        attributeInDeductions.removeValue(item);
+        return (AttributeDesign)this;
+    }
+
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<AttributeDesign, EntityDesign> belongsToEntity
+	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, EntityDesign> belongsToEntity
 		= createReverseRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity.belongsToEntity);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<AttributeDesign, EntityDesign> getBelongsToEntityRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<AttributeDesign, EntityDesign> getBelongsToEntityRelationValue() {
 		return belongsToEntity;
 	}
 
@@ -239,17 +300,32 @@ public class AttributeDesign extends Design {
 		return belongsToEntity.getValue();
 	}
 
+    public AttributeDesign setBelongsToEntity(org.instantlogic.designer.EntityDesign newValue) {
+        belongsToEntity.setValue(newValue);
+        return (AttributeDesign)this;
+    }
+
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<AttributeDesign, FragmentTemplateDesign> usedInField
+	private final org.instantlogic.fabric.value.RelationValues<AttributeDesign, FragmentTemplateDesign> usedInField
 		= createReverseRelationValues(org.instantlogic.designer.entity.AttributeDesignEntity.usedInField);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<AttributeDesign, FragmentTemplateDesign> getUsedInFieldRelationValue() {
+	public org.instantlogic.fabric.value.RelationValues<AttributeDesign, FragmentTemplateDesign> getUsedInFieldRelationValue() {
 		return usedInField;
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentTemplateDesign> getUsedInField() {
 		return usedInField.getValue();
 	}
+
+    public AttributeDesign addToUsedInField(FragmentTemplateDesign item) {
+        usedInField.addValue(item);
+        return (AttributeDesign)this;
+    }
+
+    public AttributeDesign removeFromUsedInField(FragmentTemplateDesign item) {
+        usedInField.removeValue(item);
+        return (AttributeDesign)this;
+    }
 
 
 }

@@ -10,6 +10,7 @@ import org.instantlogic.designer.HasValueDeductionDesign;
 import org.instantlogic.designer.RelationDesign;
 import org.instantlogic.designer.ReverseRelationDeductionDesign;
 import org.instantlogic.designer.SelectedInstanceDeductionDesign;
+import org.instantlogic.designer.deduction.AttributeJavaClassNameDeduction;
 
 /**
  * Utilities for creating Deduction(Scheme)Designs
@@ -90,8 +91,8 @@ public final class Deductions {
 	
 	public static DeductionSchemeDesign toScheme(DeductionDesign deduction) {
 		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
-		scheme.setOutput(deduction);
 		addToScheme(scheme, deduction);
+		scheme.setOutput(deduction);
 		return scheme;
 	}
 
@@ -100,5 +101,16 @@ public final class Deductions {
 		for (DeductionDesign input : deduction.getInputs()) {
 			addToScheme(scheme, input);
 		}
+	}
+
+	public static DeductionDesign custom(Class<AttributeJavaClassNameDeduction> deductionClass, Class<?> resultClass) {
+		return custom(deductionClass.getName(), resultClass.getName());
+	}
+
+	private static DeductionDesign custom(String javaClassName, String resultClassName) {
+		DeductionDesign result = new DeductionDesign();
+		result.setCustomization(javaClassName);
+		result.setClassName(resultClassName);
+		return result;
 	}
 }

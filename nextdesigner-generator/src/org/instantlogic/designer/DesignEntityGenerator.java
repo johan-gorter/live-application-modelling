@@ -6,6 +6,7 @@ public class DesignEntityGenerator extends EntityDesign {
     public static final DesignEntityGenerator ENTITY = new DesignEntityGenerator();
     
     private DesignEntityGenerator() {
+    	DesignerApplicationGenerator.APPLICATION.addToEntities(this);
     	setIsCustomized(true);
         setName("Design");
     }

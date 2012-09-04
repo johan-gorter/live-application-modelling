@@ -6,6 +6,7 @@ public class StringTemplateDesignEntityGenerator extends EntityDesign {
     public static final StringTemplateDesignEntityGenerator ENTITY = new StringTemplateDesignEntityGenerator();
     
     private StringTemplateDesignEntityGenerator() {
+    	DesignerApplicationGenerator.APPLICATION.addToEntities(this);
         setName("StringTemplateDesign");
     }
 
@@ -13,7 +14,6 @@ public class StringTemplateDesignEntityGenerator extends EntityDesign {
     public static final AttributeDesign constantText = addAttribute(ENTITY, "constantText", java.lang.String.class);
 
     // Relations
-    public static final RelationDesign deduction = addRelation(ENTITY, "deduction", RelationType.OneToOneAggregation, DeductionSchemeDesignEntityGenerator.ENTITY)
-            .setReverseName("templatedText");
+    public static final RelationDesign deduction = addRelation(ENTITY, "deduction", RelationType.OneToOneAggregation, DeductionSchemeDesignEntityGenerator.ENTITY);
 
 }

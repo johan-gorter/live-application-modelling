@@ -6,6 +6,7 @@ public class DataCategoryDesignEntityGenerator extends EntityDesign {
     public static final DataCategoryDesignEntityGenerator ENTITY = new DataCategoryDesignEntityGenerator();
     
     private DataCategoryDesignEntityGenerator() {
+    	DesignerApplicationGenerator.APPLICATION.addToEntities(this);
         setName("DataCategoryDesign");
         addToStaticInstances((StaticInstanceDesign) new StaticInstanceDesign().setDescription(createConstantText("Text")).setName("text"));
         addToStaticInstances((StaticInstanceDesign) new StaticInstanceDesign().setDescription(createConstantText("Number")).setName("number"));

@@ -8,18 +8,6 @@ public class FlowDesign extends AbstractFlowDesign {
 		setName(name);
 	}
 	
-	public void registerApplication(ApplicationDesign application) {
-		application.addToFlows(this);
-		for (FlowNodeBaseDesign node : this.getNodes()) {
-			if (node instanceof SubFlowDesign) {
-				FlowDesign subFlow = ((SubFlowDesign)node).getFlow();
-				if (!application.getFlows().contains(subFlow)) {
-					subFlow.registerApplication(application);
-				}
-			}
-		}
-	}
-	
 	public void init() {
 		for (FlowNodeBaseDesign node : this.getNodes()) {
 			if (node instanceof PlaceTemplateDesign) {

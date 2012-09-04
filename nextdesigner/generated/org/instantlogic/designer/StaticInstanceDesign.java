@@ -31,16 +31,21 @@ public class StaticInstanceDesign extends Design {
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<StaticInstanceDesign, EntityDesign> entity
+	private final org.instantlogic.fabric.value.RelationValue<StaticInstanceDesign, EntityDesign> entity
 		= createReverseRelationValue(org.instantlogic.designer.entity.StaticInstanceDesignEntity.entity);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<StaticInstanceDesign, EntityDesign> getEntityRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<StaticInstanceDesign, EntityDesign> getEntityRelationValue() {
 		return entity;
 	}
 
 	public org.instantlogic.designer.EntityDesign getEntity() {
 		return entity.getValue();
 	}
+
+    public StaticInstanceDesign setEntity(org.instantlogic.designer.EntityDesign newValue) {
+        entity.setValue(newValue);
+        return (StaticInstanceDesign)this;
+    }
 
 
 }

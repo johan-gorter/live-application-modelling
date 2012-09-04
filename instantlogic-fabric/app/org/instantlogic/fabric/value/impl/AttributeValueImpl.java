@@ -19,6 +19,8 @@ public class AttributeValueImpl<I extends Instance, Value extends Object>
 
 	@Override
 	public void setValue(Value value) {
+		// Note: If the current value is based on a rule, the new value is still stored, but it is not visible. 
+		if (value==storedValue) return;
 		Operation operation = forInstance.getMetadata().getCaseAdministration().startOperation();
 		try {
 			Value oldStoredValue = storedValue;

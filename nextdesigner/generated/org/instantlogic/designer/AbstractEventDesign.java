@@ -46,10 +46,10 @@ public abstract class AbstractEventDesign extends Design {
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<EventDesign, ApplicationDesign> application
+	private final org.instantlogic.fabric.value.RelationValue<EventDesign, ApplicationDesign> application
 		= createReverseRelationValue(org.instantlogic.designer.entity.EventDesignEntity.application);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<EventDesign, ApplicationDesign> getApplicationRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<EventDesign, ApplicationDesign> getApplicationRelationValue() {
 		return application;
 	}
 
@@ -57,11 +57,16 @@ public abstract class AbstractEventDesign extends Design {
 		return application.getValue();
 	}
 
+    public EventDesign setApplication(org.instantlogic.designer.ApplicationDesign newValue) {
+        application.setValue(newValue);
+        return (EventDesign)this;
+    }
+
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EventDesign, FlowEdgeDesign> eventInEdges
+	private final org.instantlogic.fabric.value.RelationValues<EventDesign, FlowEdgeDesign> eventInEdges
 		= createReverseRelationValues(org.instantlogic.designer.entity.EventDesignEntity.eventInEdges);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EventDesign, FlowEdgeDesign> getEventInEdgesRelationValue() {
+	public org.instantlogic.fabric.value.RelationValues<EventDesign, FlowEdgeDesign> getEventInEdgesRelationValue() {
 		return eventInEdges;
 	}
 
@@ -69,17 +74,37 @@ public abstract class AbstractEventDesign extends Design {
 		return eventInEdges.getValue();
 	}
 
+    public EventDesign addToEventInEdges(FlowEdgeDesign item) {
+        eventInEdges.addValue(item);
+        return (EventDesign)this;
+    }
+
+    public EventDesign removeFromEventInEdges(FlowEdgeDesign item) {
+        eventInEdges.removeValue(item);
+        return (EventDesign)this;
+    }
+
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValues<EventDesign, FragmentTemplateDesign> triggeredByFragment
+	private final org.instantlogic.fabric.value.RelationValues<EventDesign, FragmentTemplateDesign> triggeredByFragment
 		= createReverseRelationValues(org.instantlogic.designer.entity.EventDesignEntity.triggeredByFragment);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValues<EventDesign, FragmentTemplateDesign> getTriggeredByFragmentRelationValue() {
+	public org.instantlogic.fabric.value.RelationValues<EventDesign, FragmentTemplateDesign> getTriggeredByFragmentRelationValue() {
 		return triggeredByFragment;
 	}
 
 	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentTemplateDesign> getTriggeredByFragment() {
 		return triggeredByFragment.getValue();
 	}
+
+    public EventDesign addToTriggeredByFragment(FragmentTemplateDesign item) {
+        triggeredByFragment.addValue(item);
+        return (EventDesign)this;
+    }
+
+    public EventDesign removeFromTriggeredByFragment(FragmentTemplateDesign item) {
+        triggeredByFragment.removeValue(item);
+        return (EventDesign)this;
+    }
 
 
 }

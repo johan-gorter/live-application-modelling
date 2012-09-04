@@ -6,6 +6,7 @@ public class FlowDesignEntityGenerator extends EntityDesign {
     public static final FlowDesignEntityGenerator ENTITY = new FlowDesignEntityGenerator();
     
     private FlowDesignEntityGenerator() {
+    	DesignerApplicationGenerator.APPLICATION.addToEntities(this);
         setName("FlowDesign");
         setIsCustomized(true);
         setExtendsFrom(DesignEntityGenerator.ENTITY);
