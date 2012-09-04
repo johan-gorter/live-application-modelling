@@ -28,17 +28,6 @@ public class DeductionDesignEntity extends org.instantlogic.fabric.model.Entity<
 	
 	// Attributes
 	
-	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.DeductionDesign, java.lang.String, java.lang.String> className 
-		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.DeductionDesign, java.lang.String, java.lang.String>(
-			"className", INSTANCE, java.lang.String.class
-		) {
-	
-			@Override
-			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.DeductionDesign, java.lang.String> get(org.instantlogic.designer.DeductionDesign instance) {
-				return instance.getClassNameAttributeValue();
-			}
-		};
-	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.DeductionDesign, java.lang.String, java.lang.String> customization 
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.DeductionDesign, java.lang.String, java.lang.String>(
 			"customization", INSTANCE, java.lang.String.class
@@ -47,6 +36,17 @@ public class DeductionDesignEntity extends org.instantlogic.fabric.model.Entity<
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.DeductionDesign, java.lang.String> get(org.instantlogic.designer.DeductionDesign instance) {
 				return instance.getCustomizationAttributeValue();
+			}
+		};
+	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.DeductionDesign, java.lang.String, java.lang.String> javaClassName 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.DeductionDesign, java.lang.String, java.lang.String>(
+			"javaClassName", INSTANCE, java.lang.String.class
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.DeductionDesign, java.lang.String> get(org.instantlogic.designer.DeductionDesign instance) {
+				return instance.getJavaClassNameAttributeValue();
 			}
 		};
 	
@@ -136,8 +136,8 @@ public class DeductionDesignEntity extends org.instantlogic.fabric.model.Entity<
 		};
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
-		className,
 		customization,
+		javaClassName,
 		multivalue,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{

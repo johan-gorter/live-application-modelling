@@ -7,6 +7,7 @@ public class TextTemplateDesignEntityGenerator extends EntityDesign {
     public static final TextTemplateDesignEntityGenerator ENTITY = new TextTemplateDesignEntityGenerator();
     
     private TextTemplateDesignEntityGenerator() {
+    	DesignerApplicationGenerator.APPLICATION.addToEntities(this);
         setName("TextTemplateDesign");
         setExtendsFrom(DesignEntityGenerator.ENTITY);
     }

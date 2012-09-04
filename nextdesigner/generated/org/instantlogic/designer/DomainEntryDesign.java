@@ -31,16 +31,21 @@ public class DomainEntryDesign extends Design {
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<DomainEntryDesign, AttributeDesign> attribute
-		= createReverseRelationValue(org.instantlogic.designer.entity.DomainEntryDesignEntity.attribute);
+	private final org.instantlogic.fabric.value.RelationValue<DomainEntryDesign, AttributeDesign> attributes
+		= createReverseRelationValue(org.instantlogic.designer.entity.DomainEntryDesignEntity.attributes);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<DomainEntryDesign, AttributeDesign> getAttributeRelationValue() {
-		return attribute;
+	public org.instantlogic.fabric.value.RelationValue<DomainEntryDesign, AttributeDesign> getAttributesRelationValue() {
+		return attributes;
 	}
 
-	public org.instantlogic.designer.AttributeDesign getAttribute() {
-		return attribute.getValue();
+	public org.instantlogic.designer.AttributeDesign getAttributes() {
+		return attributes.getValue();
 	}
+
+    public DomainEntryDesign setAttributes(org.instantlogic.designer.AttributeDesign newValue) {
+        attributes.setValue(newValue);
+        return (DomainEntryDesign)this;
+    }
 
 
 }

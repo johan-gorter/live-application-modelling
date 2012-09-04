@@ -10,9 +10,10 @@ import org.instantlogic.designer.flow.MainFlowGenerator;
 
 public class DesignerApplicationGenerator extends ApplicationDesign {
 
-    public static final DesignerApplicationGenerator APPLICATION = new DesignerApplicationGenerator();
+    public static DesignerApplicationGenerator APPLICATION = new DesignerApplicationGenerator();
     
     public DesignerApplicationGenerator() {
+        APPLICATION = this;
         setName("Designer");
         setRootPackageName("org.instantlogic.designer");
         setSourcePath("../nextdesigner/generated");

@@ -6,6 +6,7 @@ public class FragmentTemplateDesignEntityGenerator extends EntityDesign {
     public static final FragmentTemplateDesignEntityGenerator ENTITY = new FragmentTemplateDesignEntityGenerator();
     
     private FragmentTemplateDesignEntityGenerator() {
+    	DesignerApplicationGenerator.APPLICATION.addToEntities(this);
         setName("FragmentTemplateDesign");
         setExtendsFrom(ElementDesignEntityGenerator.ENTITY);
         setIsCustomized(true);

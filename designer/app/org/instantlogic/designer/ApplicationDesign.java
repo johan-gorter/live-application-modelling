@@ -25,10 +25,6 @@ public class ApplicationDesign extends AbstractApplicationDesign {
 		eagerlyLoadAllClasses(new File(getClass().getResource("").getFile()), packageName);
 		
 		getCaseEntity().registerApplication(this);
-		if (getMainFlow()!=null) {
-			getMainFlow().registerApplication(this);
-		}
-
 		for (EntityDesign entity:getEntities()) {
 			entity.init();
 		}
@@ -55,7 +51,10 @@ public class ApplicationDesign extends AbstractApplicationDesign {
             		entryName = entryName.substring(0, entryName.lastIndexOf('.'));
 					Class<?> cl = getClass().getClassLoader().loadClass(packageName+"."+entryName);
 					EventDesign event = (EventDesign) cl.getField("EVENT").get(null);
-					addToEvents(event);
+                } else if (entryName.endsWith("FlowGenerator.class")) {
+            		entryName = entryName.substring(0, entryName.lastIndexOf('.'));
+					Class<?> cl = getClass().getClassLoader().loadClass(packageName+"."+entryName);
+					cl.getField("FLOW").get(null);
                 }
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);

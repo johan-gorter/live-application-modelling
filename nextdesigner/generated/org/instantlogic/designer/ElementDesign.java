@@ -14,10 +14,10 @@ public class ElementDesign extends Design {
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<ElementDesign, SelectionDesign> childOfSelection
+	private final org.instantlogic.fabric.value.RelationValue<ElementDesign, SelectionDesign> childOfSelection
 		= createReverseRelationValue(org.instantlogic.designer.entity.ElementDesignEntity.childOfSelection);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<ElementDesign, SelectionDesign> getChildOfSelectionRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<ElementDesign, SelectionDesign> getChildOfSelectionRelationValue() {
 		return childOfSelection;
 	}
 
@@ -25,11 +25,16 @@ public class ElementDesign extends Design {
 		return childOfSelection.getValue();
 	}
 
+    public ElementDesign setChildOfSelection(org.instantlogic.designer.SelectionDesign newValue) {
+        childOfSelection.setValue(newValue);
+        return (ElementDesign)this;
+    }
+
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<ElementDesign, PropertyDesign> childrenForFragment
+	private final org.instantlogic.fabric.value.RelationValue<ElementDesign, PropertyDesign> childrenForFragment
 		= createReverseRelationValue(org.instantlogic.designer.entity.ElementDesignEntity.childrenForFragment);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<ElementDesign, PropertyDesign> getChildrenForFragmentRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<ElementDesign, PropertyDesign> getChildrenForFragmentRelationValue() {
 		return childrenForFragment;
 	}
 
@@ -37,11 +42,16 @@ public class ElementDesign extends Design {
 		return childrenForFragment.getValue();
 	}
 
+    public ElementDesign setChildrenForFragment(org.instantlogic.designer.PropertyDesign newValue) {
+        childrenForFragment.setValue(newValue);
+        return (ElementDesign)this;
+    }
+
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<ElementDesign, PlaceTemplateDesign> contentOfPage
+	private final org.instantlogic.fabric.value.RelationValue<ElementDesign, PlaceTemplateDesign> contentOfPage
 		= createReverseRelationValue(org.instantlogic.designer.entity.ElementDesignEntity.contentOfPage);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<ElementDesign, PlaceTemplateDesign> getContentOfPageRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<ElementDesign, PlaceTemplateDesign> getContentOfPageRelationValue() {
 		return contentOfPage;
 	}
 
@@ -49,17 +59,27 @@ public class ElementDesign extends Design {
 		return contentOfPage.getValue();
 	}
 
+    public ElementDesign setContentOfPage(org.instantlogic.designer.PlaceTemplateDesign newValue) {
+        contentOfPage.setValue(newValue);
+        return (ElementDesign)this;
+    }
+
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<ElementDesign, SharedFragmentTemplateDefinitionDesign> sharedTemplateDefinition
+	private final org.instantlogic.fabric.value.RelationValue<ElementDesign, SharedFragmentTemplateDefinitionDesign> sharedTemplateDefinition
 		= createReverseRelationValue(org.instantlogic.designer.entity.ElementDesignEntity.sharedTemplateDefinition);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<ElementDesign, SharedFragmentTemplateDefinitionDesign> getSharedTemplateDefinitionRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<ElementDesign, SharedFragmentTemplateDefinitionDesign> getSharedTemplateDefinitionRelationValue() {
 		return sharedTemplateDefinition;
 	}
 
 	public org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign getSharedTemplateDefinition() {
 		return sharedTemplateDefinition.getValue();
 	}
+
+    public ElementDesign setSharedTemplateDefinition(org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign newValue) {
+        sharedTemplateDefinition.setValue(newValue);
+        return (ElementDesign)this;
+    }
 
 
 }

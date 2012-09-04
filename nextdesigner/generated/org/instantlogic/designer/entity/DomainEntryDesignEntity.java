@@ -54,15 +54,15 @@ public class DomainEntryDesignEntity extends org.instantlogic.fabric.model.Entit
 	
 	// Reverse relations
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DomainEntryDesign, org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDesign> attribute
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DomainEntryDesign, org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDesign> attributes
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DomainEntryDesign, org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDesign>(
-			"attribute", INSTANCE, org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE, org.instantlogic.designer.AttributeDesign.class, org.instantlogic.designer.entity.AttributeDesignEntity.domain
+			"attributes", INSTANCE, org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE, org.instantlogic.designer.AttributeDesign.class, org.instantlogic.designer.entity.AttributeDesignEntity.domain
 		) {
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DomainEntryDesign, org.instantlogic.designer.AttributeDesign> get(
 					org.instantlogic.designer.DomainEntryDesign instance) {
-				return instance.getAttributeRelationValue();
+				return instance.getAttributesRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -76,7 +76,7 @@ public class DomainEntryDesignEntity extends org.instantlogic.fabric.model.Entit
 		display,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
-		attribute,
+		attributes,
 	};
 
 	@Override

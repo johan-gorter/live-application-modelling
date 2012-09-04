@@ -24,10 +24,16 @@ public class RelationValueImpl<I extends Instance, To extends Instance>
 	
 	@Override
 	public void setValue(To value) {
-		if (value!=null && value.getMetadata().getCaseAdministration()!=forInstance.getMetadata().getCaseAdministration()) {
-			throw new IllegalArgumentException("The value "+value+" is not owned by the "+forInstance.getMetadata().getCase().getMetadata().getEntity().getName()+" the "+forInstance+" belongs to");
-		}
+		checkCase(value);
 		super.setValue(value);
+	}
+
+	private void checkCase(To value) { // Copy in RelationValuesImpl
+		if (!model.isOwner() && model.getReverseRelation()!=null) {
+			if (value!=null && value.getMetadata().getCaseAdministration()!=forInstance.getMetadata().getCaseAdministration()) {
+				throw new IllegalArgumentException("The value "+value+" is not owned by the "+forInstance.getMetadata().getCase().getMetadata().getEntity().getName()+" the "+forInstance+" belongs to");
+			}
+		}
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })

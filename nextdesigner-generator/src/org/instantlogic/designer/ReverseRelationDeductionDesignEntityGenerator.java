@@ -6,6 +6,7 @@ public class ReverseRelationDeductionDesignEntityGenerator extends EntityDesign 
     public static final ReverseRelationDeductionDesignEntityGenerator ENTITY = new ReverseRelationDeductionDesignEntityGenerator();
     
     private ReverseRelationDeductionDesignEntityGenerator() {
+    	DesignerApplicationGenerator.APPLICATION.addToEntities(this);
         setName("ReverseRelationDeductionDesign");
         setExtendsFrom(DeductionDesignEntityGenerator.ENTITY);
     }

@@ -7,6 +7,7 @@ public class IfElseDesignEntityGenerator extends EntityDesign {
     public static final IfElseDesignEntityGenerator ENTITY = new IfElseDesignEntityGenerator();
     
     private IfElseDesignEntityGenerator() {
+    	DesignerApplicationGenerator.APPLICATION.addToEntities(this);
         setName("IfElseDesign");
         setExtendsFrom(ElementDesignEntityGenerator.ENTITY);
     }

@@ -66,7 +66,7 @@ public class PropertyDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.PropertyDesign, org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.TextTemplateDesign> text
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.PropertyDesign, org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.TextTemplateDesign>(
 			"text", INSTANCE, org.instantlogic.designer.entity.TextTemplateDesignEntity.INSTANCE, org.instantlogic.designer.TextTemplateDesign.class, 
-			org.instantlogic.designer.entity.TextTemplateDesignEntity.textForFragment
+			null
 		) {
 	
 			@Override
@@ -84,7 +84,7 @@ public class PropertyDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.PropertyDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign> value
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.PropertyDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign>(
 			"value", INSTANCE, org.instantlogic.designer.entity.DeductionSchemeDesignEntity.INSTANCE, org.instantlogic.designer.DeductionSchemeDesign.class, 
-			org.instantlogic.designer.entity.DeductionSchemeDesignEntity.valueForFragment
+			null
 		) {
 	
 			@Override

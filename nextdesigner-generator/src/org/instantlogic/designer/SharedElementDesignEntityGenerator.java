@@ -6,6 +6,7 @@ public class SharedElementDesignEntityGenerator extends EntityDesign {
     public static final SharedElementDesignEntityGenerator ENTITY = new SharedElementDesignEntityGenerator();
     
     private SharedElementDesignEntityGenerator() {
+    	DesignerApplicationGenerator.APPLICATION.addToEntities(this);
         setName("SharedElementDesign");
         setExtendsFrom(ElementDesignEntityGenerator.ENTITY);
     }

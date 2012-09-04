@@ -6,6 +6,7 @@ public class DeductionDesignEntityGenerator extends EntityDesign {
     public static final DeductionDesignEntityGenerator ENTITY = new DeductionDesignEntityGenerator();
     
     private DeductionDesignEntityGenerator() {
+    	DesignerApplicationGenerator.APPLICATION.addToEntities(this);
         setName("DeductionDesign");
         setIsCustomized(true);
     }

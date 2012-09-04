@@ -28,4 +28,9 @@ public final class TravelerInfo {
 	public void setAuthenticatedUsername(String authenticatedUsername) {
 		this.authenticatedUsername = authenticatedUsername;
 	}
+	
+	@Override
+	public String toString() {
+		return authenticatedUsername+"-"+travelerId;
+	}
 }

@@ -46,10 +46,10 @@ public class TextTemplateDesign extends Design {
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<TextTemplateDesign, StaticInstanceDesign> descriptionOnStaticInstance
+	private final org.instantlogic.fabric.value.RelationValue<TextTemplateDesign, StaticInstanceDesign> descriptionOnStaticInstance
 		= createReverseRelationValue(org.instantlogic.designer.entity.TextTemplateDesignEntity.descriptionOnStaticInstance);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextTemplateDesign, StaticInstanceDesign> getDescriptionOnStaticInstanceRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<TextTemplateDesign, StaticInstanceDesign> getDescriptionOnStaticInstanceRelationValue() {
 		return descriptionOnStaticInstance;
 	}
 
@@ -57,11 +57,16 @@ public class TextTemplateDesign extends Design {
 		return descriptionOnStaticInstance.getValue();
 	}
 
+    public TextTemplateDesign setDescriptionOnStaticInstance(org.instantlogic.designer.StaticInstanceDesign newValue) {
+        descriptionOnStaticInstance.setValue(newValue);
+        return (TextTemplateDesign)this;
+    }
+
 	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<TextTemplateDesign, DomainEntryDesign> displayOnDomainEntry
+	private final org.instantlogic.fabric.value.RelationValue<TextTemplateDesign, DomainEntryDesign> displayOnDomainEntry
 		= createReverseRelationValue(org.instantlogic.designer.entity.TextTemplateDesignEntity.displayOnDomainEntry);
 
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextTemplateDesign, DomainEntryDesign> getDisplayOnDomainEntryRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<TextTemplateDesign, DomainEntryDesign> getDisplayOnDomainEntryRelationValue() {
 		return displayOnDomainEntry;
 	}
 
@@ -69,41 +74,10 @@ public class TextTemplateDesign extends Design {
 		return displayOnDomainEntry.getValue();
 	}
 
-	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<TextTemplateDesign, AttributeDesign> explanationOnAttribute
-		= createReverseRelationValue(org.instantlogic.designer.entity.TextTemplateDesignEntity.explanationOnAttribute);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextTemplateDesign, AttributeDesign> getExplanationOnAttributeRelationValue() {
-		return explanationOnAttribute;
-	}
-
-	public org.instantlogic.designer.AttributeDesign getExplanationOnAttribute() {
-		return explanationOnAttribute.getValue();
-	}
-
-	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<TextTemplateDesign, AttributeDesign> questionOnAttribute
-		= createReverseRelationValue(org.instantlogic.designer.entity.TextTemplateDesignEntity.questionOnAttribute);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextTemplateDesign, AttributeDesign> getQuestionOnAttributeRelationValue() {
-		return questionOnAttribute;
-	}
-
-	public org.instantlogic.designer.AttributeDesign getQuestionOnAttribute() {
-		return questionOnAttribute.getValue();
-	}
-
-	
-	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<TextTemplateDesign, PropertyDesign> textForFragment
-		= createReverseRelationValue(org.instantlogic.designer.entity.TextTemplateDesignEntity.textForFragment);
-
-	public org.instantlogic.fabric.value.ReadOnlyRelationValue<TextTemplateDesign, PropertyDesign> getTextForFragmentRelationValue() {
-		return textForFragment;
-	}
-
-	public org.instantlogic.designer.PropertyDesign getTextForFragment() {
-		return textForFragment.getValue();
-	}
+    public TextTemplateDesign setDisplayOnDomainEntry(org.instantlogic.designer.DomainEntryDesign newValue) {
+        displayOnDomainEntry.setValue(newValue);
+        return (TextTemplateDesign)this;
+    }
 
 
 }

@@ -6,6 +6,7 @@ public class SubFlowDesignEntityGenerator extends EntityDesign {
     public static final SubFlowDesignEntityGenerator ENTITY = new SubFlowDesignEntityGenerator();
     
     private SubFlowDesignEntityGenerator() {
+    	DesignerApplicationGenerator.APPLICATION.addToEntities(this);
         setName("SubFlowDesign");
         setExtendsFrom(FlowNodeBaseDesignEntityGenerator.ENTITY);
     }

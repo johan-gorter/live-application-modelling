@@ -54,7 +54,7 @@ public class NettyTraveler implements TravelerProxy {
 	
 	enum State {ACTIVE, MAY_BE_OBANDONED, REMOVED}
 	
-	private static final Logger logger = LoggerFactory.getLogger(InstantlogicRequestHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(NettyTraveler.class);
 
 	private static final Map<String, NettyTraveler> nettyTravelers = new ConcurrentHashMap<String, NettyTraveler>();
 	private static Gson gson = new Gson();
@@ -128,7 +128,7 @@ public class NettyTraveler implements TravelerProxy {
 		List<Message> messages = new ArrayList<Message>(jsonMessages.size());
 		for (JsonElement message : jsonMessages) {
 			String messageName = message.getAsJsonObject().get("message").getAsString();
-			logger.debug("Handling {} message from traveler {}", messageName, travelerInfo.getTravelerId());
+			logger.debug("Handling {} message from traveler {}-{}", new Object[]{ messageName, travelerInfo.getAuthenticatedUsername(), travelerInfo.getTravelerId()});
 			if ("change".equals(messageName)) {
 				String placeElementId = message.getAsJsonObject().get("id").getAsString();
 				Object value = null;

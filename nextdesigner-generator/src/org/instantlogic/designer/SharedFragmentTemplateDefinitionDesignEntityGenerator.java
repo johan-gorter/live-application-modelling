@@ -6,6 +6,7 @@ public class SharedFragmentTemplateDefinitionDesignEntityGenerator extends Entit
     public static final SharedFragmentTemplateDefinitionDesignEntityGenerator ENTITY = new SharedFragmentTemplateDefinitionDesignEntityGenerator();
     
     private SharedFragmentTemplateDefinitionDesignEntityGenerator() {
+    	DesignerApplicationGenerator.APPLICATION.addToEntities(this);
         setName("SharedFragmentTemplateDefinitionDesign");
         setExtendsFrom(DesignEntityGenerator.ENTITY);
     }
