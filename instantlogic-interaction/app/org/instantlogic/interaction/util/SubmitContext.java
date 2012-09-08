@@ -33,7 +33,7 @@ public class SubmitContext extends RenderContext {
 	private static final DateFormat DATE_INTERNATIONAL = new SimpleDateFormat("dd/MM/yyyy");
 	
 	public Object parse(Object value, Attribute attribute) {
-		if (attribute.getDatatype()==Date.class && value instanceof String) {
+		if (attribute.getJavaClassName()==Date.class && value instanceof String) {
 			try {
 				return DATE_INTERNATIONAL.parseObject((String)value);
 			} catch (ParseException e) {

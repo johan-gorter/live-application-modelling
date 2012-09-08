@@ -224,15 +224,15 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 	}
 
 	private Object toPrimitive(Attribute attribute, JsonElement value) {
-		if (attribute.getDatatype() == Date.class) {
+		if (attribute.getJavaClassName() == Date.class) {
 			try {
 				return UNIVERSAL_DATE.parse(value.getAsString());
 			} catch (ParseException e) {
 				throw new RuntimeException(e);
 			}
-		} else if (attribute.getDatatype() == Boolean.class) {
+		} else if (attribute.getJavaClassName() == Boolean.class) {
 			return value.getAsBoolean();
-		} else if (Number.class.isAssignableFrom(attribute.getDatatype())) {
+		} else if (Number.class.isAssignableFrom(attribute.getJavaClassName())) {
 			return value.getAsNumber();
 		} else {
 			return value.getAsString();

@@ -33,6 +33,9 @@ public class FieldFilter extends AbstractFragmentFilter {
 				result.put("explainText", attribute.getExplain().renderText(context));
 			}
 		}
+		if (!result.containsKey("dataType")) {
+			
+		}
 		Object value = context.getValue((Entity)entity, (Attribute)attribute);
 		Instance instance = (Instance)context.getSelectedInstance(entity);
 		result.put("value", value);
