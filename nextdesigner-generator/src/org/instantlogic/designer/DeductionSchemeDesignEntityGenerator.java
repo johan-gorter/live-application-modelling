@@ -8,6 +8,7 @@ public class DeductionSchemeDesignEntityGenerator extends EntityDesign {
     private DeductionSchemeDesignEntityGenerator() {
     	DesignerApplicationGenerator.APPLICATION.addToEntities(this);
         setName("DeductionSchemeDesign");
+        setIsCustomized(true);
     }
 
     // Attributes

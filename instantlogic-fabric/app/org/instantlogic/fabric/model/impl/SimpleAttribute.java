@@ -3,7 +3,6 @@ package org.instantlogic.fabric.model.impl;
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Attribute;
 import org.instantlogic.fabric.model.Entity;
-import org.instantlogic.fabric.text.ConstantTextTemplate;
 import org.instantlogic.fabric.text.TextTemplate;
 
 
@@ -11,13 +10,13 @@ public abstract class SimpleAttribute<I extends Instance, Value extends Object, 
 
 	private final String name;
 	private final Entity<I> entity;
-	private final Class<Item> valueClass;
+	private final Class<Item> javaClassName;
 	private TextTemplate question = null;
 	
-	public SimpleAttribute(String name, Entity<I> entity, Class<Item> valueClass) {
+	public SimpleAttribute(String name, Entity<I> entity, Class<Item> javaClassName) {
 		this.name = name;
 		this.entity = entity;
-		this.valueClass = valueClass;
+		this.javaClassName = javaClassName;
 	}
 
 	@Override
@@ -26,14 +25,13 @@ public abstract class SimpleAttribute<I extends Instance, Value extends Object, 
 	}
 
 	@Override
-	public Class<Item> getDatatype() {
-		return valueClass;
+	public Class<Item> getJavaClassName() {
+		return javaClassName;
 	}
 
 	@Override
 	public TextTemplate getQuestion() {
-		if (question!=null) return question;
-		return new ConstantTextTemplate("["+name+"]");
+		return question;
 	}
 
 	@Override

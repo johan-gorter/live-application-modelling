@@ -78,7 +78,7 @@ public abstract class SimpleRelation<I extends Instance, Value extends Object, T
 	};
 	
 	@Override
-	public Class<To> getDatatype() {
+	public Class<To> getJavaClassName() {
 		return valueClass;
 	}
 }

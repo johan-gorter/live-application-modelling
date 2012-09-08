@@ -18,7 +18,7 @@ public abstract class Attribute<I extends Instance, Value extends Object, Item e
 
 	public abstract Entity<I> getEntity();
 	
-	public abstract Class<Item> getDatatype();
+	public abstract Class<Item> getJavaClassName();
 
 	public abstract TextTemplate getQuestion();
 

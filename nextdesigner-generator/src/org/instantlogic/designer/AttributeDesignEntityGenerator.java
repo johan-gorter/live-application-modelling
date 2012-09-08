@@ -24,9 +24,12 @@ public class AttributeDesignEntityGenerator extends EntityDesign {
     public static final AttributeDesign wholeNumber = addAttribute(ENTITY, "wholeNumber", java.lang.Boolean.class);
     public static final AttributeDesign exactRounding = addAttribute(ENTITY, "exactRounding", java.lang.Boolean.class);
 
+    // Only relevant when dataCategory == text
+    public static final AttributeDesign multiLine = addAttribute(ENTITY, "multiLine", java.lang.Boolean.class);
+    public static final AttributeDesign formatted = addAttribute(ENTITY, "formatted", java.lang.Boolean.class);
+    
     // Relations
     public static final RelationDesign dataCategory = addRelation(ENTITY, "dataCategory", RelationType.OneToZeroOrOne, DataCategoryDesignEntityGenerator.ENTITY);
-    public static final RelationDesign textDataCategory = addRelation(ENTITY, "textDataCategory", RelationType.OneToZeroOrOne, TextDataCategoryDesignEntityGenerator.ENTITY);
     
     public static final RelationDesign question = addRelation(ENTITY, "question", RelationType.OneToZeroOrOneAggregation, TextTemplateDesignEntityGenerator.ENTITY);
     public static final RelationDesign explanation = addRelation(ENTITY, "explanation", RelationType.OneToZeroOrOneAggregation, TextTemplateDesignEntityGenerator.ENTITY);
