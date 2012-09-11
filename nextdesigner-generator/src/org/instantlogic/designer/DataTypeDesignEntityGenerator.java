@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
+import org.instantlogic.designer.deduction.DataTypeEntityDeduction;
 import org.instantlogic.designer.deduction.DataTypeJavaClassNameDeduction;
-import org.instantlogic.designer.util.Deductions;
 
 public class DataTypeDesignEntityGenerator extends EntityDesign {
 
@@ -32,7 +32,10 @@ public class DataTypeDesignEntityGenerator extends EntityDesign {
 
     @Override
     public void init() {
-    	javaClassName.setDefault(Deductions.toScheme(Deductions.custom(DataTypeJavaClassNameDeduction.class, String.class)));
+    	javaClassName.setDefault(new DeductionSchemeDesign().deduceCustom(DataTypeJavaClassNameDeduction.class, String.class).getScheme());
+    	
+    	entity.setReadOnly(true);
+    	entity.setRule(new DeductionSchemeDesign().deduceCustom(DataTypeEntityDeduction.class, EntityDesign.class).getScheme());
     	// TODO: relevance for all attributes/relations
     	// TODO: rule for entity: attribute = missing, relation = to
     }

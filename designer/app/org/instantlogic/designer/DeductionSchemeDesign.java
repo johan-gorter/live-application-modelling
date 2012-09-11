@@ -1,5 +1,7 @@
 package org.instantlogic.designer;
 
+import org.instantlogic.designer.deduction.DataTypeJavaClassNameDeduction;
+
 
 public class DeductionSchemeDesign extends AbstractDeductionSchemeDesign {
 
@@ -53,5 +55,60 @@ public class DeductionSchemeDesign extends AbstractDeductionSchemeDesign {
 
 	public DeductionDesign deduceRelation(RelationDesign relation) {
 		return deduceRelation(relation, null);
+	}
+	
+	public <V> DeductionDesign deduceConstant(Class<V> className, V value) {
+		ConstantDeductionDesign constantDeductionDesign = new ConstantDeductionDesign();
+
+		addToDeductions(constantDeductionDesign);
+		setOutput(constantDeductionDesign);
+		
+		constantDeductionDesign.setJavaClassName(className.getName());
+		constantDeductionDesign.setValue(value);
+		return constantDeductionDesign;
+	}
+	
+	public DeductionDesign deduceCustom(Class<?> deductionClass, Class<?> resultClass) {
+		return deduceCustom(deductionClass.getName(), resultClass.getName());
+	}
+
+	public DeductionDesign deduceCustom(String javaClassName, String resultClassName) {
+		DeductionDesign result = new DeductionDesign();
+
+		addToDeductions(result);
+		setOutput(result);
+		
+		result.setCustomization(javaClassName);
+		result.setJavaClassName(resultClassName);
+		return result;
+	}
+	
+	public DeductionDesign deduceHasValue(DeductionDesign input) {
+		HasValueDeductionDesign result = new HasValueDeductionDesign();
+
+		addToDeductions(result);
+		setOutput(result);
+		
+		result.addToInputs(input);
+		result.setJavaClassName("java.lang.Boolean");
+		return result;
+	}
+
+	
+	public DeductionDesign deduceReverseRelation(RelationDesign relation, DeductionDesign instance) {
+		String className = relation.getFrom().getApplication().getRootPackageName()+"."+relation.getFrom().getTechnicalNameCapitalized();
+		ReverseRelationDeductionDesign result = new ReverseRelationDeductionDesign();
+		
+		addToDeductions(result);
+		setOutput(result);
+		
+		result.addToInputs(instance);
+		result.setRelation(relation);
+		if (relation.getReverseMultivalue()==Boolean.TRUE) {
+			result.setJavaClassName("org.instantlogic.fabric.value.Multi<"+className+">");
+		} else {
+			result.setJavaClassName(className);	
+		}
+		return result; 
 	}
 }

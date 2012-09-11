@@ -1,6 +1,7 @@
 package org.instantlogic.designer;
 
 
+
 public class ApplicationDesignEntityGenerator extends EntityDesign {
 
     public static final ApplicationDesignEntityGenerator ENTITY = new ApplicationDesignEntityGenerator();
@@ -28,5 +29,4 @@ public class ApplicationDesignEntityGenerator extends EntityDesign {
     public static final RelationDesign mainFlow = addRelation(ENTITY, "mainFlow", RelationType.OneToZeroOrOne, FlowDesignEntityGenerator.ENTITY);
     public static final RelationDesign sharedTemplates = addRelation(ENTITY, "sharedTemplates", RelationType.OneToManyAggregation, SharedFragmentTemplateDefinitionDesignEntityGenerator.ENTITY)
             .setReverseName("application");
-
 }

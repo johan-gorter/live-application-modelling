@@ -1,6 +1,6 @@
 package org.instantlogic.designer;
 
-import org.instantlogic.designer.util.Deductions;
+import org.instantlogic.designer.deduction.DeductionTypeDeduction;
 
 
 public class DeductionDesignEntityGenerator extends EntityDesign {
@@ -22,11 +22,11 @@ public class DeductionDesignEntityGenerator extends EntityDesign {
     public static final RelationDesign type = addRelation(ENTITY, "type", RelationType.ManyToZeroOrOne, DataTypeDesignEntityGenerator.ENTITY);
     
     public static final RelationDesign inputs = addRelation(ENTITY, "inputs", RelationType.ManyToMany, DeductionDesignEntityGenerator.ENTITY)
-            .setReverseName("outputs");
+    	.setReverseName("outputs");
     
     @Override
     public void init() {
     	type.setReadOnly(true);
-    	type.setRule(Deductions.toScheme(Deductions.custom("org.instantlogic.designer.deduction.DeductionTypeDeduction", "org.instantlogic.designer.DataTypeDesign")));
+    	type.setRule(new DeductionSchemeDesign().deduceCustom(DeductionTypeDeduction.class, DataTypeDesign.class).getScheme());
     }
 }
