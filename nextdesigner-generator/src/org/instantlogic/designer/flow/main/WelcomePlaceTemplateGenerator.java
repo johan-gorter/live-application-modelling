@@ -1,6 +1,7 @@
 package org.instantlogic.designer.flow.main;
 
 import org.instantlogic.designer.ApplicationDesignEntityGenerator;
+import org.instantlogic.designer.DeductionSchemeDesign;
 import org.instantlogic.designer.DesignEntityGenerator;
 import org.instantlogic.designer.FragmentTemplateDesign;
 import org.instantlogic.designer.PlaceTemplateDesign;
@@ -19,34 +20,41 @@ public class WelcomePlaceTemplateGenerator extends PlaceTemplateDesign {
 	
 	@Override
 	public void init() {
+		DeductionSchemeDesign entitiesDeduction, entityName;
+		FragmentTemplateDesign link;
+		
 		setContent(createPageWidget("Welcome", 
-				createText("Paragraph", createConstantText("Welcome to the Designer")),
-				createMainTable()
-			));
+			createText("Paragraph", createConstantText("Welcome to the Designer")),
+			new FragmentTemplateDesign("Table")
+				.setChildren("columns", 
+					new FragmentTemplateDesign("Column")
+						.setText("header", createConstantText("Entities"))
+				)
+				.setChildren("rows",
+					new FragmentTemplateDesign("Row")
+						.setChildren("cells",
+							new FragmentTemplateDesign("Cell")
+								.setChildren("content",
+									new SelectionDesign()
+										.setSelection(entitiesDeduction = new DeductionSchemeDesign())
+										.addToChildren(
+											link = new FragmentTemplateDesign("Link")
+												.setText("text", 
+													new TextTemplateDesign().addToUntranslated(
+														new StringTemplateDesign().setDeduction(entityName = new DeductionSchemeDesign())
+													)
+											)
+										)
+								)
+						)
+				)
+		));
+		
+		entitiesDeduction.deduceRelation(ApplicationDesignEntityGenerator.entities);
+		entityName.deduceAttribute(DesignEntityGenerator.name);
+		link.setEvent(EntityDetailsEventGenerator.EVENT);
 	}
 	
-
-	private FragmentTemplateDesign createMainTable() {
-		FragmentTemplateDesign table = new FragmentTemplateDesign("Table");
-		FragmentTemplateDesign entitiesColumn = new FragmentTemplateDesign("Column");
-		entitiesColumn.setText("header", createConstantText("Entities"));
-		table.setChildren("columns", entitiesColumn);
-		FragmentTemplateDesign onlyRow = new FragmentTemplateDesign("Row");
-		FragmentTemplateDesign entitiesCell = new FragmentTemplateDesign("Cell");
-		SelectionDesign selectEntity = new SelectionDesign().setSelection(createDeduction(ApplicationDesignEntityGenerator.entities));
-		FragmentTemplateDesign entityLink = createLink(
-			new TextTemplateDesign().addToUntranslated(
-				new StringTemplateDesign().setDeduction(createDeduction(DesignEntityGenerator.name))
-			),
-			EntityDetailsEventGenerator.EVENT
-		);
-		selectEntity.addToChildren(entityLink);
-		entitiesCell.setChildren("content", selectEntity);
-		onlyRow.setChildren("cells", entitiesCell);
-		table.setChildren("rows", onlyRow);
-		return table;
-	}
-
 
 	private static FragmentTemplateDesign createPageWidget(String title, FragmentTemplateDesign... mainContentChildren) {
 		FragmentTemplateDesign pageWidget = new FragmentTemplateDesign("Page");

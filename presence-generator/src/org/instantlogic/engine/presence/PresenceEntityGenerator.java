@@ -9,6 +9,7 @@ public class PresenceEntityGenerator extends EntityDesign {
     public static final PresenceEntityGenerator ENTITY = new PresenceEntityGenerator();
     
     private PresenceEntityGenerator() {
+    	setApplication(PresenceApplicationGenerator.APPLICATION);
         setName("Presence");
         setIsCustomized(true);
     }

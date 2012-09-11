@@ -3,26 +3,26 @@ package org.instantlogic.designer.deduction;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import org.instantlogic.designer.AttributeDesign;
 import org.instantlogic.designer.DataCategoryDesign;
-import org.instantlogic.designer.entity.AttributeDesignEntity;
+import org.instantlogic.designer.DataTypeDesign;
 import org.instantlogic.designer.entity.DataCategoryDesignEntity;
+import org.instantlogic.designer.entity.DataTypeDesignEntity;
 import org.instantlogic.fabric.deduction.Deduction;
 import org.instantlogic.fabric.util.DeductionContext;
 import org.instantlogic.fabric.util.ValueAndLevel;
 
-public class AttributeJavaClassNameDeduction extends Deduction<String> {
+public class DataTypeJavaClassNameDeduction extends Deduction<String> {
 
 	@Override
 	public ValueAndLevel<String> deduct(DeductionContext context) {
-		AttributeDesign attribute = context.getSelectedInstance(AttributeDesignEntity.INSTANCE);
-		Class<?> result = determineJavaClass(attribute);
+		DataTypeDesign dataType = context.getSelectedInstance(DataTypeDesignEntity.INSTANCE);
+		Class<?> result = determineJavaClass(dataType);
 		if (result==null) return ValueAndLevel.inconclusive();
 		return ValueAndLevel.deduced(result.getName());
 	}
 
-	private Class<?> determineJavaClass(AttributeDesign attribute) {
-		DataCategoryDesign dataCategory = attribute.getDataCategory();
+	private Class<?> determineJavaClass(DataTypeDesign type) {
+		DataCategoryDesign dataCategory = type.getDataCategory();
 		if (dataCategory == DataCategoryDesignEntity.INSTANCE._boolean) {
 			return Boolean.class;
 		}
@@ -33,8 +33,8 @@ public class AttributeJavaClassNameDeduction extends Deduction<String> {
 			return String.class;
 		}
 		if (dataCategory == DataCategoryDesignEntity.INSTANCE.number) {
-			if (attribute.getWholeNumber()==Boolean.TRUE) return Integer.class;
-			if (attribute.getExactRounding()==Boolean.TRUE) return BigDecimal.class;
+			if (type.getWholeNumber()==Boolean.TRUE) return Integer.class;
+			if (type.getExactRounding()==Boolean.TRUE) return BigDecimal.class;
 			return Double.class;
 		}
 		return null;

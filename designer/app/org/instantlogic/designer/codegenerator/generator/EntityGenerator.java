@@ -40,8 +40,8 @@ public class EntityGenerator extends AbstractGenerator {
 			attribute.name = attributeDesign.getName();
 			attribute.technicalName = attributeDesign.getTechnicalName();
 			attribute.javaIdentifier = attributeDesign.getJavaIdentifier();
-			attribute.itemClassName = attributeDesign.getJavaClassName();
-			attribute.multivalue = (attributeDesign.getMultivalue()==Boolean.TRUE);
+			attribute.itemClassName = attributeDesign.getDataType().getJavaClassName();
+			attribute.multivalue = (attributeDesign.getDataType().getMultivalue()==Boolean.TRUE);
 			if (attribute.multivalue) {
 				attribute.className="org.instantlogic.fabric.value.Multi<"+attribute.itemClassName+">";
 			} else {
@@ -72,7 +72,7 @@ public class EntityGenerator extends AbstractGenerator {
 			relation.name = relationDesign.getName();
 			relation.technicalName = relationDesign.getTechnicalName();
 			relation.javaIdentifier = relationDesign.getJavaIdentifier();
-			relation.multivalue = (relationDesign.getMultivalue()==Boolean.TRUE);
+			relation.multivalue = (relationDesign.getDataType().getMultivalue()==Boolean.TRUE);
 			relation.readonly = (relationDesign.getReadOnly()==Boolean.TRUE);
 			relation.owner = (relationDesign.getOwner()==Boolean.TRUE);
 			relation.autoCreate = (relationDesign.getAutoCreate()==Boolean.TRUE);

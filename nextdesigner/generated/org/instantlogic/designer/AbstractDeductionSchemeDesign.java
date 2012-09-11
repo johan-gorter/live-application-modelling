@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class DeductionSchemeDesign extends org.instantlogic.fabric.Instance { 
+public abstract class AbstractDeductionSchemeDesign extends org.instantlogic.fabric.Instance { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {

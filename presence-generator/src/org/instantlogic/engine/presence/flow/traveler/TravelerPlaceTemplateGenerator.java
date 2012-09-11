@@ -2,6 +2,7 @@ package org.instantlogic.engine.presence.flow.traveler;
 
 import static org.instantlogic.designer.util.Deductions.*;
 
+import org.instantlogic.designer.DeductionSchemeDesign;
 import org.instantlogic.designer.ElementDesign;
 import org.instantlogic.designer.FragmentTemplateDesign;
 import org.instantlogic.designer.IfElseDesign;
@@ -11,21 +12,24 @@ import org.instantlogic.engine.presence.PlaceEntityGenerator;
 import org.instantlogic.engine.presence.PresenceEntityGenerator;
 import org.instantlogic.engine.presence.TravelerEntityGenerator;
 import org.instantlogic.engine.presence.UserEntityGenerator;
+import org.instantlogic.engine.presence.flow.TravelerFlowGenerator;
 
 public class TravelerPlaceTemplateGenerator extends PlaceTemplateDesign {
 
 	public static final TravelerPlaceTemplateGenerator PLACE = new TravelerPlaceTemplateGenerator();
 	
 	private TravelerPlaceTemplateGenerator() {
+		setOwner(TravelerFlowGenerator.FLOW);
 		setName("Traveler");
 	}
 	
 	@Override
 	public void init() {
+		DeductionSchemeDesign applicationNameDeduction, caseNameDeduction;
 		setContent(
 			new FragmentTemplateDesign("Presence")
-				.setValue("applicationName", createDeduction(PresenceEntityGenerator.applicationName))
-				.setValue("caseName", createDeduction(PresenceEntityGenerator.caseName))
+				.setValue("applicationName", applicationNameDeduction = new DeductionSchemeDesign())
+				.setValue("caseName", caseNameDeduction = new DeductionSchemeDesign())
 				.setChildren("content", new ElementDesign[]{
 					new IfElseDesign()
 						.setCondition(toScheme(hasValue(relation(TravelerEntityGenerator.user, selectedInstance(TravelerEntityGenerator.ENTITY)))))
@@ -59,5 +63,8 @@ public class TravelerPlaceTemplateGenerator extends PlaceTemplateDesign {
 					
 				})
 		);
+		
+		applicationNameDeduction.deduceAttribute(PresenceEntityGenerator.applicationName);
+		caseNameDeduction.deduceAttribute(PresenceEntityGenerator.caseName);
 	}
 }

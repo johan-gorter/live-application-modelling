@@ -8,6 +8,8 @@ public class DataCategoryDesignEntity extends org.instantlogic.fabric.model.Enti
 	public final org.instantlogic.designer.DataCategoryDesign number;
 	public final org.instantlogic.designer.DataCategoryDesign dateTime;
 	public final org.instantlogic.designer.DataCategoryDesign _boolean;
+	public final org.instantlogic.designer.DataCategoryDesign entity;
+	public final org.instantlogic.designer.DataCategoryDesign custom;
 	
 	protected DataCategoryDesignEntity() {
 	   text = addStaticInstance("text", createInstance());
@@ -21,6 +23,12 @@ public class DataCategoryDesignEntity extends org.instantlogic.fabric.model.Enti
 );
 	   _boolean = addStaticInstance("boolean", createInstance());
 	   _boolean.getMetadata().setStaticDescription(new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Yes-No"))
+);
+	   entity = addStaticInstance("entity", createInstance());
+	   entity.getMetadata().setStaticDescription(new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Entity"))
+);
+	   custom = addStaticInstance("custom", createInstance());
+	   custom.getMetadata().setStaticDescription(new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Custom"))
 );
 	}
 

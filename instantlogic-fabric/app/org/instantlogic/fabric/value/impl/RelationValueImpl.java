@@ -29,7 +29,7 @@ public class RelationValueImpl<I extends Instance, To extends Instance>
 	}
 
 	private void checkCase(To value) { // Copy in RelationValuesImpl
-		if (!model.isOwner() && model.getReverseRelation()!=null) {
+		if (!model.isOwner()) {
 			if (value!=null && value.getMetadata().getCaseAdministration()!=forInstance.getMetadata().getCaseAdministration()) {
 				throw new IllegalArgumentException("The value "+value+" is not owned by the "+forInstance.getMetadata().getCase().getMetadata().getEntity().getName()+" the "+forInstance+" belongs to");
 			}
@@ -54,7 +54,6 @@ public class RelationValueImpl<I extends Instance, To extends Instance>
 					((ReverseRelationValueImpl)newReverseRelationValue).internalSetReverse(forInstance, null);
 				}
 			}
-			forInstance.getMetadata().adopt(resultValue);
 			return ValueAndLevel.stored(resultValue);
 		}
 		return result;

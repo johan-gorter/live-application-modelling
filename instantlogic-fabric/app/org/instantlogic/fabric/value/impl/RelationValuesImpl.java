@@ -69,7 +69,7 @@ public class RelationValuesImpl<I extends Instance, To extends Instance>
 	};
 
 	private void checkCase(To value) { // Copy in RelationValueImpl
-		if (!model.isOwner() && model.getReverseRelation()!=null) { // ReverseRelation is a hack, it is now possible to get cross-case relations, which leads to problems. Solution: Check for cross-case relations before preparing the transaction and remove this method altogether 
+		if (!model.isOwner()) { 
 			if (value!=null && value.getMetadata().getCaseAdministration()!=forInstance.getMetadata().getCaseAdministration()) {
 				throw new IllegalArgumentException("The item "+value+" is not owned by the "+forInstance.getMetadata().getCase().getMetadata().getEntity().getName()+" the "+forInstance+" belongs to");
 			}

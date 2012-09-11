@@ -4,34 +4,7 @@ import org.instantlogic.designer.deduction.TechnicalNameDeduction;
 
 public class Design extends AbstractDesign {
 
-	// Create a deduction scheme for an attribute or a relation
-	protected static DeductionSchemeDesign createDeduction(AttributeDesign attribute) {
-		String className = attribute.getJavaClassName();
-		EntityDesign source = attribute.getBelongsToEntity();
-		if (attribute instanceof RelationDesign) {
-			// We should come up with a solution that makes this unnecessary
-			RelationDesign relation = (RelationDesign)attribute;
-			className = relation.getTo().getApplication().getRootPackageName()+"."+relation.getTo().getTechnicalNameCapitalized();
-			source = relation.getFrom();
-		}
-		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
-		SelectedInstanceDeductionDesign selectedInstanceDeductionDesign = new SelectedInstanceDeductionDesign();
-		scheme.addToDeductions(selectedInstanceDeductionDesign);
-		selectedInstanceDeductionDesign.setOfEntity(source);
-		selectedInstanceDeductionDesign.setJavaClassName(source.getApplication().getRootPackageName()+"."+source.getTechnicalNameCapitalized());
-		AttributeDeductionDesign attributeDeductionDesign = new AttributeDeductionDesign();
-		scheme.addToDeductions(attributeDeductionDesign);
-		attributeDeductionDesign.setAttribute(attribute);
-		attributeDeductionDesign.addToInputs(selectedInstanceDeductionDesign);
-		if (attribute.getMultivalue()==Boolean.TRUE) {
-			attributeDeductionDesign.setJavaClassName("org.instantlogic.fabric.value.Multi<"+className+">");
-		} else {
-			attributeDeductionDesign.setJavaClassName(className);	
-		}
-		scheme.setOutput(attributeDeductionDesign);
-		return scheme;
-	}
-	
+	@Deprecated
 	protected static <V> DeductionSchemeDesign createConstantDeduction(Class<V> className, V value) {
 		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
 		ConstantDeductionDesign constantDeductionDesign = new ConstantDeductionDesign();

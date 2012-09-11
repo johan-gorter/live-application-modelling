@@ -12,6 +12,7 @@ public class DataCategoryDesignEntityGenerator extends EntityDesign {
         addToStaticInstances((StaticInstanceDesign) new StaticInstanceDesign().setDescription(createConstantText("Number")).setName("number"));
         addToStaticInstances((StaticInstanceDesign) new StaticInstanceDesign().setDescription(createConstantText("Date/Time")).setName("dateTime"));
         addToStaticInstances((StaticInstanceDesign) new StaticInstanceDesign().setDescription(createConstantText("Yes-No")).setName("boolean"));
+        addToStaticInstances((StaticInstanceDesign) new StaticInstanceDesign().setDescription(createConstantText("Entity")).setName("entity"));
         addToStaticInstances((StaticInstanceDesign) new StaticInstanceDesign().setDescription(createConstantText("Custom")).setName("custom"));
     }
 }
