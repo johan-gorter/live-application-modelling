@@ -10,6 +10,7 @@ public class TravelerEntityGenerator extends EntityDesign {
     public static final TravelerEntityGenerator ENTITY = new TravelerEntityGenerator();
     
     private TravelerEntityGenerator() {
+    	setApplication(PresenceApplicationGenerator.APPLICATION);
         setName("Traveler");
         setIsCustomized(true);
     }

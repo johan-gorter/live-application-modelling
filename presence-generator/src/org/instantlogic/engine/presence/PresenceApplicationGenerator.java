@@ -9,9 +9,10 @@ import org.instantlogic.engine.presence.flow.MainFlowGenerator;
 
 public class PresenceApplicationGenerator extends ApplicationDesign {
 
-    public static final PresenceApplicationGenerator APPLICATION = new PresenceApplicationGenerator();
+    public static PresenceApplicationGenerator APPLICATION = new PresenceApplicationGenerator();
     
     public PresenceApplicationGenerator() {
+    	APPLICATION = this;
         setName("Presence");
         setRootPackageName("org.instantlogic.engine.presence");
         setSourcePath("../instantlogic-engine/generated");

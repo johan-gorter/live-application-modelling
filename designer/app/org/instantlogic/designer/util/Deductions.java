@@ -10,7 +10,7 @@ import org.instantlogic.designer.HasValueDeductionDesign;
 import org.instantlogic.designer.RelationDesign;
 import org.instantlogic.designer.ReverseRelationDeductionDesign;
 import org.instantlogic.designer.SelectedInstanceDeductionDesign;
-import org.instantlogic.designer.deduction.AttributeJavaClassNameDeduction;
+import org.instantlogic.designer.deduction.DataTypeJavaClassNameDeduction;
 
 /**
  * Utilities for creating Deduction(Scheme)Designs
@@ -50,7 +50,7 @@ public final class Deductions {
 		if (instance==null) {
 			instance = selectedInstance(attribute.getBelongsToEntity());
 		}
-		String className = attribute.getJavaClassName();
+		String className = attribute.getDataType().getJavaClassName();
 		if (attribute instanceof RelationDesign) {
 			// We should come up with a solution that makes this unnecessary
 			RelationDesign relation = (RelationDesign)attribute;
@@ -59,7 +59,7 @@ public final class Deductions {
 		AttributeDeductionDesign attributeDeductionDesign = new AttributeDeductionDesign();
 		attributeDeductionDesign.addToInputs(instance);
 		attributeDeductionDesign.setAttribute(attribute);
-		if (attribute.getMultivalue()==Boolean.TRUE) {
+		if (attribute.getDataType().getMultivalue()==Boolean.TRUE) {
 			attributeDeductionDesign.setJavaClassName("org.instantlogic.fabric.value.Multi<"+className+">");
 		} else {
 			attributeDeductionDesign.setJavaClassName(className);	
@@ -103,11 +103,11 @@ public final class Deductions {
 		}
 	}
 
-	public static DeductionDesign custom(Class<AttributeJavaClassNameDeduction> deductionClass, Class<?> resultClass) {
+	public static DeductionDesign custom(Class<DataTypeJavaClassNameDeduction> deductionClass, Class<?> resultClass) {
 		return custom(deductionClass.getName(), resultClass.getName());
 	}
 
-	private static DeductionDesign custom(String javaClassName, String resultClassName) {
+	public static DeductionDesign custom(String javaClassName, String resultClassName) {
 		DeductionDesign result = new DeductionDesign();
 		result.setCustomization(javaClassName);
 		result.setJavaClassName(resultClassName);

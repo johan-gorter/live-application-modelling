@@ -94,6 +94,18 @@ public abstract class AbstractDeductionDesign extends org.instantlogic.fabric.In
 		return (DeductionDesign)this;
 	}
 	
+	
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionDesign, DataTypeDesign> type
+		= createReadOnlyRelationValue(org.instantlogic.designer.entity.DeductionDesignEntity.type);
+		
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionDesign, DataTypeDesign> getTypeRelationValue() {
+		return type;
+	}
+
+	public org.instantlogic.designer.DataTypeDesign getType() {
+		return type.getValue();
+	}
+	
 
 	// Reverse relations
 	

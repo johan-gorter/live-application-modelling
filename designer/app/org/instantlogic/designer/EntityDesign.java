@@ -39,7 +39,7 @@ public class EntityDesign extends AbstractEntityDesign {
 	public AttributeDesign addAttribute(String name, String className) {
 		AttributeDesign result = new AttributeDesign();
 		result.setName(name);
-		result.setJavaClassName(className);
+		result.getDataType().setJavaClassName(className);
 		addToAttributes(result);
 		return result;
 	}
@@ -51,7 +51,7 @@ public class EntityDesign extends AbstractEntityDesign {
 		relation.setName(name);
 		relation.setOwner(relationType==RelationType.OneToManyAggregation || relationType==RelationType.OneToZeroOrOneAggregation || relationType==RelationType.OneToOneAggregation);
 		relation.setAutoCreate(relationType==RelationType.OneToOneAggregation);
-		relation.setMultivalue(relationType==RelationType.OneToMany || relationType==RelationType.OneToManyAggregation || relationType==RelationType.ManyToMany);
+		relation.getDataType().setMultivalue(relationType==RelationType.OneToMany || relationType==RelationType.OneToManyAggregation || relationType==RelationType.ManyToMany);
 		relation.setReverseMultivalue(relationType==RelationType.ManyToMany || relationType==RelationType.ManyToZeroOrOne);
 		return relation;
 	}

@@ -1,5 +1,6 @@
 package org.instantlogic.designer.flow.entity;
 
+import org.instantlogic.designer.DeductionSchemeDesign;
 import org.instantlogic.designer.DesignEntityGenerator;
 import org.instantlogic.designer.FragmentTemplateDesign;
 import org.instantlogic.designer.PlaceTemplateDesign;
@@ -16,11 +17,15 @@ public class EntityDetailsPlaceGenerator extends PlaceTemplateDesign {
 	
 	@Override
 	public void init() {
+		DeductionSchemeDesign entityName;
+		
 		setContent(createPageWidget("Entity",
 				createText("Paragraph",
-					new TextTemplateDesign().addToUntranslated(new StringTemplateDesign().setDeduction(createDeduction(DesignEntityGenerator.name))))
+					new TextTemplateDesign().addToUntranslated(new StringTemplateDesign().setDeduction(entityName = new DeductionSchemeDesign())))
 				)
 			);
+		
+		entityName.deduceAttribute(DesignEntityGenerator.name);
 	}
 
 	private static FragmentTemplateDesign createPageWidget(String title, FragmentTemplateDesign... mainContentChildren) {

@@ -10,74 +10,6 @@ public class AttributeDesign extends Design {
 
 	// Attributes
 	
-	private final org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.Boolean> exactRounding
-		= createAttributeValue(org.instantlogic.designer.entity.AttributeDesignEntity.exactRounding);
-	
-	public java.lang.Boolean getExactRounding() {
-		return exactRounding.getValue();
-	}
-
-	public org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.Boolean> getExactRoundingAttributeValue() {
-		return exactRounding;
-	}
-
-	public AttributeDesign setExactRounding(java.lang.Boolean newValue) {
-		exactRounding.setValue(newValue);
-		return (AttributeDesign)this;
-	}
-	
-	
-	private final org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.String> javaClassName
-		= createAttributeValue(org.instantlogic.designer.entity.AttributeDesignEntity.javaClassName);
-	
-	public java.lang.String getJavaClassName() {
-		return javaClassName.getValue();
-	}
-
-	public org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.String> getJavaClassNameAttributeValue() {
-		return javaClassName;
-	}
-
-	public AttributeDesign setJavaClassName(java.lang.String newValue) {
-		javaClassName.setValue(newValue);
-		return (AttributeDesign)this;
-	}
-	
-	
-	private final org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.Boolean> multivalue
-		= createAttributeValue(org.instantlogic.designer.entity.AttributeDesignEntity.multivalue);
-	
-	public java.lang.Boolean getMultivalue() {
-		return multivalue.getValue();
-	}
-
-	public org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.Boolean> getMultivalueAttributeValue() {
-		return multivalue;
-	}
-
-	public AttributeDesign setMultivalue(java.lang.Boolean newValue) {
-		multivalue.setValue(newValue);
-		return (AttributeDesign)this;
-	}
-	
-	
-	private final org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.Boolean> percentage
-		= createAttributeValue(org.instantlogic.designer.entity.AttributeDesignEntity.percentage);
-	
-	public java.lang.Boolean getPercentage() {
-		return percentage.getValue();
-	}
-
-	public org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.Boolean> getPercentageAttributeValue() {
-		return percentage;
-	}
-
-	public AttributeDesign setPercentage(java.lang.Boolean newValue) {
-		percentage.setValue(newValue);
-		return (AttributeDesign)this;
-	}
-	
-	
 	private final org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.Boolean> readOnly
 		= createAttributeValue(org.instantlogic.designer.entity.AttributeDesignEntity.readOnly);
 	
@@ -95,38 +27,21 @@ public class AttributeDesign extends Design {
 	}
 	
 	
-	private final org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.Boolean> wholeNumber
-		= createAttributeValue(org.instantlogic.designer.entity.AttributeDesignEntity.wholeNumber);
-	
-	public java.lang.Boolean getWholeNumber() {
-		return wholeNumber.getValue();
-	}
-
-	public org.instantlogic.fabric.value.AttributeValue<AttributeDesign, java.lang.Boolean> getWholeNumberAttributeValue() {
-		return wholeNumber;
-	}
-
-	public AttributeDesign setWholeNumber(java.lang.Boolean newValue) {
-		wholeNumber.setValue(newValue);
-		return (AttributeDesign)this;
-	}
-	
-	
 	// Relations
 	
-	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, DataCategoryDesign> dataCategory
-		= createRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity.dataCategory);
+	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, DataTypeDesign> dataType
+		= createRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity.dataType);
 		
-	public org.instantlogic.fabric.value.RelationValue<AttributeDesign, DataCategoryDesign> getDataCategoryRelationValue() {
-		return dataCategory;
+	public org.instantlogic.fabric.value.RelationValue<AttributeDesign, DataTypeDesign> getDataTypeRelationValue() {
+		return dataType;
 	}
 
-	public org.instantlogic.designer.DataCategoryDesign getDataCategory() {
-		return dataCategory.getValue();
+	public org.instantlogic.designer.DataTypeDesign getDataType() {
+		return dataType.getValue();
 	}
 	
-	public AttributeDesign setDataCategory(org.instantlogic.designer.DataCategoryDesign newValue) {
-		dataCategory.setValue(newValue);
+	public AttributeDesign setDataType(org.instantlogic.designer.DataTypeDesign newValue) {
+		dataType.setValue(newValue);
 		return (AttributeDesign)this;
 	}
 
@@ -212,23 +127,6 @@ public class AttributeDesign extends Design {
 	
 	public AttributeDesign setRule(org.instantlogic.designer.DeductionSchemeDesign newValue) {
 		rule.setValue(newValue);
-		return (AttributeDesign)this;
-	}
-
-	
-	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, TextDataCategoryDesign> textDataCategory
-		= createRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity.textDataCategory);
-		
-	public org.instantlogic.fabric.value.RelationValue<AttributeDesign, TextDataCategoryDesign> getTextDataCategoryRelationValue() {
-		return textDataCategory;
-	}
-
-	public org.instantlogic.designer.TextDataCategoryDesign getTextDataCategory() {
-		return textDataCategory.getValue();
-	}
-	
-	public AttributeDesign setTextDataCategory(org.instantlogic.designer.TextDataCategoryDesign newValue) {
-		textDataCategory.setValue(newValue);
 		return (AttributeDesign)this;
 	}
 
