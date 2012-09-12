@@ -28,7 +28,7 @@ public class DeductionDesignEntity extends org.instantlogic.fabric.model.Entity<
 
 	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.DataTypeDesign> createDeduction0() {
 		    org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.DataTypeDesign> d0 
-		    	= new org.instantlogic.designer.deduction.DeductionTypeDeduction();
+		    	= new org.instantlogic.designer.deduction.DeductionDataTypeDeduction();
 		return d0;
 	}
 
@@ -70,6 +70,33 @@ public class DeductionDesignEntity extends org.instantlogic.fabric.model.Entity<
 	
 	// Relations
 	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DeductionDesign, org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.DataTypeDesign> dataType
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DeductionDesign, org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.DataTypeDesign>(
+			"dataType", INSTANCE, org.instantlogic.designer.entity.DataTypeDesignEntity.INSTANCE, org.instantlogic.designer.DataTypeDesign.class, 
+			null
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionDesign, org.instantlogic.designer.DataTypeDesign> get(
+					org.instantlogic.designer.DeductionDesign instance) {
+				return instance.getDataTypeRelationValue();
+			}
+	
+			public boolean isReadOnly() {
+				return true;
+			}
+
+			private org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.DataTypeDesign> rule;
+			@Override
+			public org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.DataTypeDesign> getRule() {
+				if (rule==null) {
+					rule  = createDeduction0();
+				}
+				return rule;
+			}
+			
+		};
+	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DeductionDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DeductionDesign>, org.instantlogic.designer.DeductionDesign> inputs
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DeductionDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DeductionDesign>, org.instantlogic.designer.DeductionDesign>(
 			"inputs", INSTANCE, org.instantlogic.designer.entity.DeductionDesignEntity.INSTANCE, org.instantlogic.designer.DeductionDesign.class, 
@@ -84,33 +111,6 @@ public class DeductionDesignEntity extends org.instantlogic.fabric.model.Entity<
 	
 			public boolean isMultivalue() {
 				return true;
-			}
-			
-		};
-	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DeductionDesign, org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.DataTypeDesign> type
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DeductionDesign, org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.DataTypeDesign>(
-			"type", INSTANCE, org.instantlogic.designer.entity.DataTypeDesignEntity.INSTANCE, org.instantlogic.designer.DataTypeDesign.class, 
-			null
-		) {
-	
-			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionDesign, org.instantlogic.designer.DataTypeDesign> get(
-					org.instantlogic.designer.DeductionDesign instance) {
-				return instance.getTypeRelationValue();
-			}
-	
-			public boolean isReadOnly() {
-				return true;
-			}
-
-			private org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.DataTypeDesign> rule;
-			@Override
-			public org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.DataTypeDesign> getRule() {
-				if (rule==null) {
-					rule  = createDeduction0();
-				}
-				return rule;
 			}
 			
 		};
@@ -159,8 +159,8 @@ public class DeductionDesignEntity extends org.instantlogic.fabric.model.Entity<
 		multivalue,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
+		dataType,
 		inputs,
-		type,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		outputs,

@@ -14,6 +14,9 @@ public class DataTypeDataCategoryDeduction extends Deduction<DataCategoryDesign>
 	@Override
 	public ValueAndLevel<DataCategoryDesign> deduct(DeductionContext context) {
 		DataTypeDesign dataType = context.getSelectedInstance(DataTypeDesignEntity.INSTANCE);
+		if (dataType == DataTypeDesignEntity.INSTANCE._boolean) { 
+			return ValueAndLevel.deduced(DataCategoryDesignEntity.INSTANCE._boolean); // Hack until static instances are fully supported
+		}
 		if (dataType.getAttribute()!=null && !(dataType.getAttribute() instanceof RelationDesign)) {
 			return ValueAndLevel.inconclusive();
 		}

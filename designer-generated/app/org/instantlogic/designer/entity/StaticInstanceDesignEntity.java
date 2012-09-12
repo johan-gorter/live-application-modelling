@@ -52,6 +52,28 @@ public class StaticInstanceDesignEntity extends org.instantlogic.fabric.model.En
 			
 		};
 	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.StaticInstanceDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.StaticInstanceValueDesign>, org.instantlogic.designer.StaticInstanceValueDesign> values
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.StaticInstanceDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.StaticInstanceValueDesign>, org.instantlogic.designer.StaticInstanceValueDesign>(
+			"values", INSTANCE, org.instantlogic.designer.entity.StaticInstanceValueDesignEntity.INSTANCE, org.instantlogic.designer.StaticInstanceValueDesign.class, 
+			null
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.StaticInstanceDesign, org.instantlogic.designer.StaticInstanceValueDesign> get(
+					org.instantlogic.designer.StaticInstanceDesign instance) {
+				return instance.getValuesRelationValue();
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+			
+		};
+	
 	// Reverse relations
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.StaticInstanceDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> entity
@@ -74,6 +96,7 @@ public class StaticInstanceDesignEntity extends org.instantlogic.fabric.model.En
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		description,
+		values,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		entity,
