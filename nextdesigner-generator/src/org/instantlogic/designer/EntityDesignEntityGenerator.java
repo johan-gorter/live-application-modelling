@@ -1,6 +1,7 @@
 package org.instantlogic.designer;
 
 
+
 public class EntityDesignEntityGenerator extends EntityDesign {
 
     public static final EntityDesignEntityGenerator ENTITY = new EntityDesignEntityGenerator();
@@ -24,4 +25,6 @@ public class EntityDesignEntityGenerator extends EntityDesign {
     public static final RelationDesign staticInstances = addRelation(ENTITY, "staticInstances", RelationType.OneToManyAggregation, StaticInstanceDesignEntityGenerator.ENTITY)
             .setReverseName("entity");
 
+    public static final RelationDesign dataType = addRelation(ENTITY, "dataType", RelationType.OneToOneAggregation, DataTypeDesignEntityGenerator.ENTITY)
+    		.setReverseName("forEntity");
 }

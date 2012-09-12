@@ -104,6 +104,23 @@ public class RelationDesign extends AttributeDesign {
 	
 	// Relations
 	
+	private final org.instantlogic.fabric.value.RelationValue<RelationDesign, DataTypeDesign> reverseDataType
+		= createRelationValue(org.instantlogic.designer.entity.RelationDesignEntity.reverseDataType);
+		
+	public org.instantlogic.fabric.value.RelationValue<RelationDesign, DataTypeDesign> getReverseDataTypeRelationValue() {
+		return reverseDataType;
+	}
+
+	public org.instantlogic.designer.DataTypeDesign getReverseDataType() {
+		return reverseDataType.getValue();
+	}
+	
+	public RelationDesign setReverseDataType(org.instantlogic.designer.DataTypeDesign newValue) {
+		reverseDataType.setValue(newValue);
+		return (RelationDesign)this;
+	}
+
+	
 	private final org.instantlogic.fabric.value.RelationValue<RelationDesign, EntityDesign> to
 		= createRelationValue(org.instantlogic.designer.entity.RelationDesignEntity.to);
 		

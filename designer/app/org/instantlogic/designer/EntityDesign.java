@@ -56,42 +56,6 @@ public class EntityDesign extends AbstractEntityDesign {
 		return relation;
 	}
 	
-	protected DeductionSchemeDesign createCustomDeduction(String customization, Class resultClass) {
-		return createCustomDeduction(customization, resultClass.getName());
-	}
-	
-	protected DeductionSchemeDesign createCustomDeduction(String customization, String resultClassName) {
-		DeductionSchemeDesign scheme = new DeductionSchemeDesign();
-		DeductionDesign customDeductionDesign = new DeductionDesign();
-		customDeductionDesign.setCustomization(customization);
-		customDeductionDesign.setJavaClassName(resultClassName);
-		scheme.addToDeductions(customDeductionDesign);
-		scheme.setOutput(customDeductionDesign);
-		return scheme;
-	}
-	
-	protected DeductionDesign selectedInstanceDeduction(EntityDesign entity) {
-		return new SelectedInstanceDeductionDesign()
-				.setOfEntity(entity)
-				.setJavaClassName(entity.getApplication().getRootPackageName()+"."+entity.getName());
-	}
-	
-	protected static DeductionSchemeDesign createDeductionScheme(DeductionDesign output) {
-		DeductionSchemeDesign result = new DeductionSchemeDesign();
-		addDeductions(result, output);
-		result.setOutput(output);
-		return result;
-	}
-	
-	
-	private static void addDeductions(DeductionSchemeDesign result, DeductionDesign deduction) {
-		if (result.getDeductions().asList().contains(deduction)) return;
-		result.addToDeductions(deduction);
-		for(DeductionDesign input: deduction.getInputs()) {
-			addDeductions(result, input);
-		}
-	}
-	
 	public void registerApplication(ApplicationDesign application) {
 		if (application.getEntities().contains(this)) return;
 		application.addToEntities(this);

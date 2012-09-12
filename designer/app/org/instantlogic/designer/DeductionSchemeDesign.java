@@ -1,6 +1,5 @@
 package org.instantlogic.designer;
 
-import org.instantlogic.designer.deduction.DataTypeJavaClassNameDeduction;
 
 
 public class DeductionSchemeDesign extends AbstractDeductionSchemeDesign {
@@ -17,19 +16,14 @@ public class DeductionSchemeDesign extends AbstractDeductionSchemeDesign {
 	}
 
 	public DeductionDesign deduceAttribute(AttributeDesign attribute) {
-		return attribute(attribute, null);
+		return deduceAttribute(attribute, null);
 	}
 
-	public DeductionDesign attribute(AttributeDesign attribute, DeductionDesign instanceDeduction) {
+	public DeductionDesign deduceAttribute(AttributeDesign attribute, DeductionDesign instanceDeduction) {
 		if (instanceDeduction==null) {
 			instanceDeduction = deduceSelectedInstance(attribute.getBelongsToEntity());
 		}
 		String className = attribute.getDataType().getJavaClassName();
-		if (attribute instanceof RelationDesign) {
-			// We should come up with a solution that makes this unnecessary
-			RelationDesign relation = (RelationDesign)attribute;
-			className = relation.getTo().getApplication().getRootPackageName()+"."+relation.getTo().getTechnicalNameCapitalized();
-		}
 		AttributeDeductionDesign attributeDeductionDesign = new AttributeDeductionDesign();
 		
 		addToDeductions(attributeDeductionDesign);
@@ -50,7 +44,7 @@ public class DeductionSchemeDesign extends AbstractDeductionSchemeDesign {
 		if (instance==null) {
 			instance = deduceSelectedInstance(relation.getFrom());
 		}
-		return attribute(relation, instance);
+		return deduceAttribute(relation, instance);
 	}
 
 	public DeductionDesign deduceRelation(RelationDesign relation) {

@@ -16,12 +16,17 @@ public class DataTypeJavaClassNameDeduction extends Deduction<String> {
 	@Override
 	public ValueAndLevel<String> deduct(DeductionContext context) {
 		DataTypeDesign dataType = context.getSelectedInstance(DataTypeDesignEntity.INSTANCE);
-		Class<?> result = determineJavaClass(dataType);
-		if (result==null) return ValueAndLevel.inconclusive();
-		return ValueAndLevel.deduced(result.getName());
+		Class<?> result = determinePrimitiveJavaClass(dataType);
+		if (result!=null) {
+			return ValueAndLevel.deduced(result.getName());
+		}
+		if (dataType.getDataCategory() == DataCategoryDesignEntity.INSTANCE.entity) {
+			return ValueAndLevel.deduced(dataType.getEntity().getApplication().getRootPackageName()+"."+dataType.getEntity().getTechnicalNameCapitalized());
+		}
+		return ValueAndLevel.inconclusive();
 	}
 
-	private Class<?> determineJavaClass(DataTypeDesign type) {
+	private Class<?> determinePrimitiveJavaClass(DataTypeDesign type) {
 		DataCategoryDesign dataCategory = type.getDataCategory();
 		if (dataCategory == DataCategoryDesignEntity.INSTANCE._boolean) {
 			return Boolean.class;

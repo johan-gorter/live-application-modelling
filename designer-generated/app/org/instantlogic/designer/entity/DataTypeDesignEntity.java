@@ -32,6 +32,20 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 		return d0;
 	}
 
+
+	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.DataCategoryDesign> createDeduction1() {
+		    org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.DataCategoryDesign> d0 
+		    	= new org.instantlogic.designer.deduction.DataTypeDataCategoryDeduction();
+		return d0;
+	}
+
+
+	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> createDeduction2() {
+		    org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> d0 
+		    	= new org.instantlogic.designer.deduction.DataTypeEntityDeduction();
+		return d0;
+	}
+
 	
 	// Attributes
 	
@@ -134,6 +148,15 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 					org.instantlogic.designer.DataTypeDesign instance) {
 				return instance.getDataCategoryRelationValue();
 			}
+
+			private org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.DataCategoryDesign> rule;
+			@Override
+			public org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.DataCategoryDesign> getRule() {
+				if (rule==null) {
+					rule  = createDeduction1();
+				}
+				return rule;
+			}
 			
 		};
 	
@@ -148,10 +171,71 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 					org.instantlogic.designer.DataTypeDesign instance) {
 				return instance.getEntityRelationValue();
 			}
+	
+			public boolean isReadOnly() {
+				return true;
+			}
+
+			private org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> rule;
+			@Override
+			public org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> getRule() {
+				if (rule==null) {
+					rule  = createDeduction2();
+				}
+				return rule;
+			}
 			
 		};
 	
 	// Reverse relations
+	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDesign> attribute
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDesign>(
+			"attribute", INSTANCE, org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE, org.instantlogic.designer.AttributeDesign.class, org.instantlogic.designer.entity.AttributeDesignEntity.dataType
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.AttributeDesign> get(
+					org.instantlogic.designer.DataTypeDesign instance) {
+				return instance.getAttributeRelationValue();
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+		};
+	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> forEntity
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign>(
+			"forEntity", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, org.instantlogic.designer.entity.EntityDesignEntity.dataType
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.EntityDesign> get(
+					org.instantlogic.designer.DataTypeDesign instance) {
+				return instance.getForEntityRelationValue();
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+		};
+	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.RelationDesign, org.instantlogic.designer.RelationDesign> reverseRelation
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.RelationDesign, org.instantlogic.designer.RelationDesign>(
+			"reverseRelation", INSTANCE, org.instantlogic.designer.entity.RelationDesignEntity.INSTANCE, org.instantlogic.designer.RelationDesign.class, org.instantlogic.designer.entity.RelationDesignEntity.reverseDataType
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.RelationDesign> get(
+					org.instantlogic.designer.DataTypeDesign instance) {
+				return instance.getReverseRelationRelationValue();
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+		};
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
 		exactRounding,
@@ -167,6 +251,9 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 		entity,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
+		attribute,
+		forEntity,
+		reverseRelation,
 	};
 
 	@Override

@@ -29,6 +29,13 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 	}
 
 	// Deductions
+
+	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> createDeduction0() {
+		    org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> d0 
+		    	= new org.instantlogic.designer.deduction.AttributeBelongsToDeduction();
+		return d0;
+	}
+
 	
 	// Attributes
 	
@@ -45,10 +52,37 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 	
 	// Relations
 	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> belongsToEntity
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign>(
+			"belongsToEntity", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, 
+			null
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.EntityDesign> get(
+					org.instantlogic.designer.AttributeDesign instance) {
+				return instance.getBelongsToEntityRelationValue();
+			}
+	
+			public boolean isReadOnly() {
+				return true;
+			}
+
+			private org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> rule;
+			@Override
+			public org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> getRule() {
+				if (rule==null) {
+					rule  = createDeduction0();
+				}
+				return rule;
+			}
+			
+		};
+	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.DataTypeDesign> dataType
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.DataTypeDesign>(
 			"dataType", INSTANCE, org.instantlogic.designer.entity.DataTypeDesignEntity.INSTANCE, org.instantlogic.designer.DataTypeDesign.class, 
-			null
+			org.instantlogic.designer.entity.DataTypeDesignEntity.attribute
 		) {
 	
 			@Override
@@ -159,15 +193,15 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 	
 	// Reverse relations
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> belongsToEntity
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> attributeOf
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign>(
-			"belongsToEntity", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, org.instantlogic.designer.entity.EntityDesignEntity.attributes
+			"attributeOf", INSTANCE, org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE, org.instantlogic.designer.EntityDesign.class, org.instantlogic.designer.entity.EntityDesignEntity.attributes
 		) {
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.EntityDesign> get(
 					org.instantlogic.designer.AttributeDesign instance) {
-				return instance.getBelongsToEntityRelationValue();
+				return instance.getAttributeOfRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -179,6 +213,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 		readOnly,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
+		belongsToEntity,
 		dataType,
 		_default,
 		explanation,
@@ -187,7 +222,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 		rule,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
-		belongsToEntity,
+		attributeOf,
 	};
 
 	@Override

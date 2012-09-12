@@ -29,6 +29,18 @@ public class AttributeDesign extends Design {
 	
 	// Relations
 	
+	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<AttributeDesign, EntityDesign> belongsToEntity
+		= createReadOnlyRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity.belongsToEntity);
+		
+	public org.instantlogic.fabric.value.ReadOnlyRelationValue<AttributeDesign, EntityDesign> getBelongsToEntityRelationValue() {
+		return belongsToEntity;
+	}
+
+	public org.instantlogic.designer.EntityDesign getBelongsToEntity() {
+		return belongsToEntity.getValue();
+	}
+	
+	
 	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, DataTypeDesign> dataType
 		= createRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity.dataType);
 		
@@ -133,19 +145,19 @@ public class AttributeDesign extends Design {
 
 	// Reverse relations
 	
-	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, EntityDesign> belongsToEntity
-		= createReverseRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity.belongsToEntity);
+	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, EntityDesign> attributeOf
+		= createReverseRelationValue(org.instantlogic.designer.entity.AttributeDesignEntity.attributeOf);
 
-	public org.instantlogic.fabric.value.RelationValue<AttributeDesign, EntityDesign> getBelongsToEntityRelationValue() {
-		return belongsToEntity;
+	public org.instantlogic.fabric.value.RelationValue<AttributeDesign, EntityDesign> getAttributeOfRelationValue() {
+		return attributeOf;
 	}
 
-	public org.instantlogic.designer.EntityDesign getBelongsToEntity() {
-		return belongsToEntity.getValue();
+	public org.instantlogic.designer.EntityDesign getAttributeOf() {
+		return attributeOf.getValue();
 	}
 
-    public AttributeDesign setBelongsToEntity(org.instantlogic.designer.EntityDesign newValue) {
-        belongsToEntity.setValue(newValue);
+    public AttributeDesign setAttributeOf(org.instantlogic.designer.EntityDesign newValue) {
+        attributeOf.setValue(newValue);
         return (AttributeDesign)this;
     }
 

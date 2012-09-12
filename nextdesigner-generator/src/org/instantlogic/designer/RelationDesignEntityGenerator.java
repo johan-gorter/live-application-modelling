@@ -1,5 +1,9 @@
 package org.instantlogic.designer;
 
+import org.instantlogic.designer.deduction.ReverseJavaIdentifierDeduction;
+import org.instantlogic.designer.deduction.ReverseTechnicalNameDeduction;
+
+
 
 public class RelationDesignEntityGenerator extends EntityDesign {
 
@@ -22,16 +26,20 @@ public class RelationDesignEntityGenerator extends EntityDesign {
     // Relations
     public static final RelationDesign to = addRelation(ENTITY, "to", RelationType.ManyToZeroOrOne, EntityDesignEntityGenerator.ENTITY)
             .setReverseName("reverseRelations");
+    
+    public static final RelationDesign reverseDataType = addRelation(ENTITY, "reverseDataType", RelationType.OneToOneAggregation, DataTypeDesignEntityGenerator.ENTITY)
+    		.setReverseName("reverseRelation");
+    
 
     @Override
     public void init() {
     	super.init();
     	
     	reverseTechnicalName.setReadOnly(true);
-    	reverseTechnicalName.setRule(createCustomDeduction("org.instantlogic.designer.deduction.ReverseTechnicalNameDeduction", "java.lang.String"));
+    	reverseTechnicalName.setRule(new DeductionSchemeDesign().deduceCustom(ReverseTechnicalNameDeduction.class, String.class).getScheme());
 
     	reverseJavaIdentifier.setReadOnly(true);
-    	reverseJavaIdentifier.setRule(createCustomDeduction("org.instantlogic.designer.deduction.ReverseJavaIdentifierDeduction", "java.lang.String"));
+    	reverseJavaIdentifier.setRule(new DeductionSchemeDesign().deduceCustom(ReverseJavaIdentifierDeduction.class, String.class).getScheme());
     }
     
 }
