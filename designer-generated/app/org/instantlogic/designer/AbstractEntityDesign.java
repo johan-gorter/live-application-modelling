@@ -44,6 +44,23 @@ public abstract class AbstractEntityDesign extends Design {
 	}
 	
 	
+	private final org.instantlogic.fabric.value.RelationValue<EntityDesign, DataTypeDesign> dataType
+		= createRelationValue(org.instantlogic.designer.entity.EntityDesignEntity.dataType);
+		
+	public org.instantlogic.fabric.value.RelationValue<EntityDesign, DataTypeDesign> getDataTypeRelationValue() {
+		return dataType;
+	}
+
+	public org.instantlogic.designer.DataTypeDesign getDataType() {
+		return dataType.getValue();
+	}
+	
+	public EntityDesign setDataType(org.instantlogic.designer.DataTypeDesign newValue) {
+		dataType.setValue(newValue);
+		return (EntityDesign)this;
+	}
+
+	
 	private final org.instantlogic.fabric.value.RelationValue<EntityDesign, EntityDesign> extendsFrom
 		= createRelationValue(org.instantlogic.designer.entity.EntityDesignEntity.extendsFrom);
 		

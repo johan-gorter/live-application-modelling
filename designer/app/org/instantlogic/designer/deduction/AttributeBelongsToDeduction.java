@@ -5,7 +5,6 @@ import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.RelationDesign;
 import org.instantlogic.designer.entity.AttributeDesignEntity;
 import org.instantlogic.fabric.deduction.Deduction;
-import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.fabric.util.DeductionContext;
 import org.instantlogic.fabric.util.ValueAndLevel;
 

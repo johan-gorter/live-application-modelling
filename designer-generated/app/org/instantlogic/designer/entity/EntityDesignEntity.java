@@ -37,7 +37,7 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.AttributeDesign>, org.instantlogic.designer.AttributeDesign> attributes
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.AttributeDesign>, org.instantlogic.designer.AttributeDesign>(
 			"attributes", INSTANCE, org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE, org.instantlogic.designer.AttributeDesign.class, 
-			org.instantlogic.designer.entity.AttributeDesignEntity.belongsToEntity
+			org.instantlogic.designer.entity.AttributeDesignEntity.attributeOf
 		) {
 	
 			@Override
@@ -51,6 +51,28 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			}
 	
 			public boolean isMultivalue() {
+				return true;
+			}
+			
+		};
+	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.DataTypeDesign> dataType
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.DataTypeDesign>(
+			"dataType", INSTANCE, org.instantlogic.designer.entity.DataTypeDesignEntity.INSTANCE, org.instantlogic.designer.DataTypeDesign.class, 
+			org.instantlogic.designer.entity.DataTypeDesignEntity.forEntity
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.DataTypeDesign> get(
+					org.instantlogic.designer.EntityDesign instance) {
+				return instance.getDataTypeRelationValue();
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isAutoCreate() {
 				return true;
 			}
 			
@@ -176,6 +198,7 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		attributes,
+		dataType,
 		extendsFrom,
 		relations,
 		staticInstances,

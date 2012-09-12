@@ -1,9 +1,9 @@
 package org.instantlogic.engine.presence;
 
 import org.instantlogic.designer.AttributeDesign;
+import org.instantlogic.designer.DeductionSchemeDesign;
 import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.RelationDesign;
-import org.instantlogic.designer.util.Deductions;
 
 public class TravelerEntityGenerator extends EntityDesign {
 
@@ -28,6 +28,6 @@ public class TravelerEntityGenerator extends EntityDesign {
     
     @Override
     public void init() {
-    	communicatorVisible.setDefault(Deductions.toScheme(Deductions.constant(Boolean.class, false)));
+    	communicatorVisible.setDefault(new DeductionSchemeDesign().deduceConstant(Boolean.class, false).getScheme());
     }
 }

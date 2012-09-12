@@ -1,7 +1,5 @@
 package org.instantlogic.engine.presence.flow.traveler;
 
-import static org.instantlogic.designer.util.Deductions.*;
-
 import org.instantlogic.designer.DeductionSchemeDesign;
 import org.instantlogic.designer.ElementDesign;
 import org.instantlogic.designer.FragmentTemplateDesign;
@@ -25,34 +23,36 @@ public class TravelerPlaceTemplateGenerator extends PlaceTemplateDesign {
 	
 	@Override
 	public void init() {
-		DeductionSchemeDesign applicationNameDeduction, caseNameDeduction;
+		DeductionSchemeDesign applicationNameDeduction, caseNameDeduction, userHasValue, travelerUsername, communicatorVisible, 
+			activeUsers, username, userTravelers, travelerId, travelerPlaceUrl;
+		
 		setContent(
 			new FragmentTemplateDesign("Presence")
 				.setValue("applicationName", applicationNameDeduction = new DeductionSchemeDesign())
 				.setValue("caseName", caseNameDeduction = new DeductionSchemeDesign())
 				.setChildren("content", new ElementDesign[]{
 					new IfElseDesign()
-						.setCondition(toScheme(hasValue(relation(TravelerEntityGenerator.user, selectedInstance(TravelerEntityGenerator.ENTITY)))))
+						.setCondition(userHasValue = new DeductionSchemeDesign())
 						.addToIfChildren(
 							new FragmentTemplateDesign("Me")
-								.setValue("username", toScheme(attribute(UserEntityGenerator.username, relation(TravelerEntityGenerator.user, selectedInstance(TravelerEntityGenerator.ENTITY)))))
+								.setValue("username", travelerUsername = new DeductionSchemeDesign())
 						)
 						.addToIfChildren(
 							new IfElseDesign()
-								.setCondition(toScheme(attribute(TravelerEntityGenerator.communicatorVisible, selectedInstance(TravelerEntityGenerator.ENTITY))))
+								.setCondition(communicatorVisible = new DeductionSchemeDesign())
 								.addToIfChildren(
 									new FragmentTemplateDesign("Communicator")
 										.setChildren("users", 
 											new SelectionDesign()
-												.setSelection(toScheme(relation(PresenceEntityGenerator.activeUsers, selectedInstance(PresenceEntityGenerator.ENTITY))))
+												.setSelection(activeUsers = new DeductionSchemeDesign())
 												.addToChildren(new FragmentTemplateDesign("User")
-													.setValue("username", toScheme(attribute(UserEntityGenerator.username, selectedInstance(UserEntityGenerator.ENTITY))))
+													.setValue("username", username = new DeductionSchemeDesign())
 												)
 												.addToChildren(new SelectionDesign()
-													.setSelection(toScheme(reverseRelation(TravelerEntityGenerator.user, selectedInstance(UserEntityGenerator.ENTITY))))
+													.setSelection(userTravelers = new DeductionSchemeDesign())
 													.addToChildren(new FragmentTemplateDesign("Traveler")
-														.setValue("travelerId", toScheme(attribute(TravelerEntityGenerator.id)))
-														.setValue("placeUrl", toScheme(attribute(PlaceEntityGenerator.url, relation(TravelerEntityGenerator.currentPlace))))
+														.setValue("travelerId", travelerId = new DeductionSchemeDesign())
+														.setValue("placeUrl", travelerPlaceUrl = new DeductionSchemeDesign())
 													)
 												)
 										)
@@ -66,5 +66,19 @@ public class TravelerPlaceTemplateGenerator extends PlaceTemplateDesign {
 		
 		applicationNameDeduction.deduceAttribute(PresenceEntityGenerator.applicationName);
 		caseNameDeduction.deduceAttribute(PresenceEntityGenerator.caseName);
+		userHasValue.deduceHasValue(
+			userHasValue.deduceRelation(TravelerEntityGenerator.user, 
+				userHasValue.deduceSelectedInstance(TravelerEntityGenerator.ENTITY)));
+		travelerUsername.deduceAttribute(UserEntityGenerator.username, 
+			travelerUsername.deduceRelation(TravelerEntityGenerator.user, 
+				travelerUsername.deduceSelectedInstance(TravelerEntityGenerator.ENTITY)));
+		communicatorVisible.deduceAttribute(TravelerEntityGenerator.communicatorVisible);
+		activeUsers.deduceRelation(PresenceEntityGenerator.activeUsers);
+		username.deduceAttribute(UserEntityGenerator.username);
+		userTravelers.deduceReverseRelation(TravelerEntityGenerator.user, 
+			userTravelers.deduceSelectedInstance(UserEntityGenerator.ENTITY));
+		travelerId.deduceAttribute(TravelerEntityGenerator.id);
+		travelerPlaceUrl.deduceAttribute(PlaceEntityGenerator.url, 
+			travelerPlaceUrl.deduceRelation(TravelerEntityGenerator.currentPlace));
 	}
 }
