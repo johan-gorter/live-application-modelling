@@ -13,6 +13,7 @@ public class DataTypeDesignEntityGenerator extends EntityDesign {
         setName("DataTypeDesign");
     }
     
+    
     public static final RelationDesign dataCategory = addRelation(ENTITY, "dataCategory", RelationType.OneToZeroOrOne, DataCategoryDesignEntityGenerator.ENTITY);
 
     public static final RelationDesign entity = addRelation(ENTITY, "entity", RelationType.OneToZeroOrOne, EntityDesignEntityGenerator.ENTITY);
@@ -33,6 +34,9 @@ public class DataTypeDesignEntityGenerator extends EntityDesign {
 
     @Override
     public void init() {
+        // static instances
+        addToStaticInstances((StaticInstanceDesign) new StaticInstanceDesign().setDescription(createConstantText("Boolean")).setName("boolean"));
+        
     	javaClassName.setDefault(new DeductionSchemeDesign().deduceCustom(DataTypeJavaClassNameDeduction.class, String.class).getScheme());
     	
     	entity.setReadOnly(true);

@@ -9,6 +9,7 @@ public class StaticInstanceDesignEntityGenerator extends EntityDesign {
     private StaticInstanceDesignEntityGenerator() {
     	DesignerApplicationGenerator.APPLICATION.addToEntities(this);
         setName("StaticInstanceDesign");
+        setIsCustomized(true);
         setExtendsFrom(DesignEntityGenerator.ENTITY);
     }
 
@@ -17,5 +18,5 @@ public class StaticInstanceDesignEntityGenerator extends EntityDesign {
     // Relations
     public static final RelationDesign description = addRelation(ENTITY, "description", RelationType.OneToZeroOrOneAggregation, TextTemplateDesignEntityGenerator.ENTITY);
     
-    //TODO: pairs of attribute and value
+    public static final RelationDesign values = addRelation(ENTITY, "values", RelationType.OneToManyAggregation, StaticInstanceValueDesignEntityGenerator.ENTITY);
 }

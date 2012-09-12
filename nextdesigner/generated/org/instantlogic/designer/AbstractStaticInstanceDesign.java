@@ -1,7 +1,7 @@
 package org.instantlogic.designer;
 
 
-public class StaticInstanceDesign extends Design { 
+public abstract class AbstractStaticInstanceDesign extends Design { 
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -28,6 +28,38 @@ public class StaticInstanceDesign extends Design {
 		return (StaticInstanceDesign)this;
 	}
 
+	
+	private final org.instantlogic.fabric.value.RelationValues<StaticInstanceDesign, StaticInstanceValueDesign> values
+		= createRelationValues(org.instantlogic.designer.entity.StaticInstanceDesignEntity.values);
+		
+	public org.instantlogic.fabric.value.RelationValues<StaticInstanceDesign, StaticInstanceValueDesign> getValuesRelationValue() {
+		return values;
+	}
+
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.StaticInstanceValueDesign> getValues() {
+		return values.getValue();
+	}
+	
+	public StaticInstanceDesign addToValues(StaticInstanceValueDesign item) {
+		values.addValue(item);
+		return (StaticInstanceDesign)this;
+	}
+	
+	public StaticInstanceDesign addToValues(StaticInstanceValueDesign item, int index) {
+		values.insertValue(item, index);
+		return (StaticInstanceDesign)this;
+	}
+	
+	public StaticInstanceDesign removeFromValues(StaticInstanceValueDesign item) {
+		values.removeValue(item);
+		return (StaticInstanceDesign)this;
+	}
+	
+	public StaticInstanceDesign removeFromValues(int index) {
+		values.removeValue(index);
+		return (StaticInstanceDesign)this;
+	}
+	
 
 	// Reverse relations
 	

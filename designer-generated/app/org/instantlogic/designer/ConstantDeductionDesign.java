@@ -28,6 +28,23 @@ public class ConstantDeductionDesign extends DeductionDesign {
 	
 	
 	// Relations
+	
+	private final org.instantlogic.fabric.value.RelationValue<ConstantDeductionDesign, DataTypeDesign> constantDataType
+		= createRelationValue(org.instantlogic.designer.entity.ConstantDeductionDesignEntity.constantDataType);
+		
+	public org.instantlogic.fabric.value.RelationValue<ConstantDeductionDesign, DataTypeDesign> getConstantDataTypeRelationValue() {
+		return constantDataType;
+	}
+
+	public org.instantlogic.designer.DataTypeDesign getConstantDataType() {
+		return constantDataType.getValue();
+	}
+	
+	public ConstantDeductionDesign setConstantDataType(org.instantlogic.designer.DataTypeDesign newValue) {
+		constantDataType.setValue(newValue);
+		return (ConstantDeductionDesign)this;
+	}
+
 
 	// Reverse relations
 

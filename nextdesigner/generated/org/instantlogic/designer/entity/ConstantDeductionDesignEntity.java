@@ -45,12 +45,35 @@ public class ConstantDeductionDesignEntity extends org.instantlogic.fabric.model
 	
 	// Relations
 	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ConstantDeductionDesign, org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.DataTypeDesign> constantDataType
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.ConstantDeductionDesign, org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.DataTypeDesign>(
+			"constantDataType", INSTANCE, org.instantlogic.designer.entity.DataTypeDesignEntity.INSTANCE, org.instantlogic.designer.DataTypeDesign.class, 
+			org.instantlogic.designer.entity.DataTypeDesignEntity.constantDeductionDesign
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.ConstantDeductionDesign, org.instantlogic.designer.DataTypeDesign> get(
+					org.instantlogic.designer.ConstantDeductionDesign instance) {
+				return instance.getConstantDataTypeRelationValue();
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+	
+			public boolean isAutoCreate() {
+				return true;
+			}
+			
+		};
+	
 	// Reverse relations
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
 		value,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
+		constantDataType,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 	};

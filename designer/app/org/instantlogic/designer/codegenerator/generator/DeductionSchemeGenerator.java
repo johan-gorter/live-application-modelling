@@ -32,7 +32,7 @@ public class DeductionSchemeGenerator {
 			if (deduction.getJavaClassName()==null) {
 				throw new RuntimeException("Resulting classname was not specified for deduction "+deduction);
 			}
-			classModel.resultType = deduction.getJavaClassName();
+			classModel.resultType = deduction.getDataType().getJavaClassName();
 			if (deduction instanceof SelectedInstanceDeductionDesign) {
 				String name = ((SelectedInstanceDeductionDesign)deduction).getOfEntity().getTechnicalNameCapitalized();
 				classModel.parameters.add(rootPackageName+".entity."+name+"Entity.INSTANCE");
