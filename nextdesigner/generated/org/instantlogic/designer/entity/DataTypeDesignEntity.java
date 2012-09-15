@@ -30,21 +30,35 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 
 	// Deductions
 
-	private static org.instantlogic.fabric.deduction.Deduction<java.lang.String> createDeduction0() {
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> createDeduction0() {
+		    org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> d0 
+		    	= new org.instantlogic.designer.deduction.DataTypeMultivalueDeduction();
+		return d0;
+	}
+
+
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> createDeduction1() {
+		  	org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> d0 
+		  		= org.instantlogic.fabric.deduction.ConstantDeduction.create(false);
+		return d0;
+	}
+
+
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.String> createDeduction2() {
 		    org.instantlogic.fabric.deduction.Deduction<java.lang.String> d0 
 		    	= new org.instantlogic.designer.deduction.DataTypeJavaClassNameDeduction();
 		return d0;
 	}
 
 
-	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.DataCategoryDesign> createDeduction1() {
+	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.DataCategoryDesign> createDeduction3() {
 		    org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.DataCategoryDesign> d0 
 		    	= new org.instantlogic.designer.deduction.DataTypeDataCategoryDeduction();
 		return d0;
 	}
 
 
-	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> createDeduction2() {
+	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> createDeduction4() {
 		    org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> d0 
 		    	= new org.instantlogic.designer.deduction.DataTypeEntityDeduction();
 		return d0;
@@ -89,7 +103,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
             @Override
             public org.instantlogic.fabric.deduction.Deduction<java.lang.String> getDefault() {
                 if (defaultDeduction==null) {
-                    defaultDeduction = createDeduction0();
+                    defaultDeduction = createDeduction2();
                 }
                 return defaultDeduction;
             }
@@ -115,6 +129,24 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.DataTypeDesign, java.lang.Boolean> get(org.instantlogic.designer.DataTypeDesign instance) {
 				return instance.getMultivalueAttributeValue();
 			}
+
+            private org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> rule;
+            @Override
+            public org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> getRule() {
+                if (rule==null) {
+                    rule = createDeduction0();
+                }
+                return rule;
+            }
+
+            private org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> defaultDeduction;
+            @Override
+            public org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> getDefault() {
+                if (defaultDeduction==null) {
+                    defaultDeduction = createDeduction1();
+                }
+                return defaultDeduction;
+            }
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.DataTypeDesign, java.lang.Boolean, java.lang.Boolean> percentage 
@@ -157,7 +189,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			@Override
 			public org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.DataCategoryDesign> getRule() {
 				if (rule==null) {
-					rule  = createDeduction1();
+					rule  = createDeduction3();
 				}
 				return rule;
 			}
@@ -184,7 +216,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			@Override
 			public org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> getRule() {
 				if (rule==null) {
-					rule  = createDeduction2();
+					rule  = createDeduction4();
 				}
 				return rule;
 			}

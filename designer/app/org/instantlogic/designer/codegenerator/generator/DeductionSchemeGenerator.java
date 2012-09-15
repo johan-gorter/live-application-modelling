@@ -33,7 +33,7 @@ public class DeductionSchemeGenerator {
 				throw new RuntimeException("Resulting classname was not specified for deduction "+deduction);
 			}
 			classModel.resultType = deduction.getDataType().getJavaClassName();
-			if (deduction.getDataType().getMultivalue()) {
+			if (deduction.getDataType().getMultivalue() == Boolean.TRUE) {
 				classModel.resultType="org.instantlogic.fabric.value.Multi<"+classModel.resultType+">";
 			}
 			if (deduction instanceof SelectedInstanceDeductionDesign) {

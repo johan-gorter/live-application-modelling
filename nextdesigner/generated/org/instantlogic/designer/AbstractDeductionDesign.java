@@ -10,57 +10,6 @@ public abstract class AbstractDeductionDesign extends org.instantlogic.fabric.In
 
 	// Attributes
 	
-	private final org.instantlogic.fabric.value.AttributeValue<DeductionDesign, java.lang.String> customization
-		= createAttributeValue(org.instantlogic.designer.entity.DeductionDesignEntity.customization);
-	
-	public java.lang.String getCustomization() {
-		return customization.getValue();
-	}
-
-	public org.instantlogic.fabric.value.AttributeValue<DeductionDesign, java.lang.String> getCustomizationAttributeValue() {
-		return customization;
-	}
-
-	public DeductionDesign setCustomization(java.lang.String newValue) {
-		customization.setValue(newValue);
-		return (DeductionDesign)this;
-	}
-	
-	
-	private final org.instantlogic.fabric.value.AttributeValue<DeductionDesign, java.lang.String> javaClassName
-		= createAttributeValue(org.instantlogic.designer.entity.DeductionDesignEntity.javaClassName);
-	
-	public java.lang.String getJavaClassName() {
-		return javaClassName.getValue();
-	}
-
-	public org.instantlogic.fabric.value.AttributeValue<DeductionDesign, java.lang.String> getJavaClassNameAttributeValue() {
-		return javaClassName;
-	}
-
-	public DeductionDesign setJavaClassName(java.lang.String newValue) {
-		javaClassName.setValue(newValue);
-		return (DeductionDesign)this;
-	}
-	
-	
-	private final org.instantlogic.fabric.value.AttributeValue<DeductionDesign, java.lang.Boolean> multivalue
-		= createAttributeValue(org.instantlogic.designer.entity.DeductionDesignEntity.multivalue);
-	
-	public java.lang.Boolean getMultivalue() {
-		return multivalue.getValue();
-	}
-
-	public org.instantlogic.fabric.value.AttributeValue<DeductionDesign, java.lang.Boolean> getMultivalueAttributeValue() {
-		return multivalue;
-	}
-
-	public DeductionDesign setMultivalue(java.lang.Boolean newValue) {
-		multivalue.setValue(newValue);
-		return (DeductionDesign)this;
-	}
-	
-	
 	// Relations
 	
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<DeductionDesign, DataTypeDesign> dataType

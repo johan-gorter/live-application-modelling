@@ -11,7 +11,6 @@ public class DeductionSchemeDesign extends AbstractDeductionSchemeDesign {
 		setOutput(selectedInstanceDeductionDesign);
 		
 		selectedInstanceDeductionDesign.setOfEntity(entity);
-		selectedInstanceDeductionDesign.setJavaClassName(entity.getApplication().getRootPackageName()+"."+entity.getTechnicalNameCapitalized());
 		return selectedInstanceDeductionDesign;
 	}
 
@@ -23,7 +22,6 @@ public class DeductionSchemeDesign extends AbstractDeductionSchemeDesign {
 		if (instanceDeduction==null) {
 			instanceDeduction = deduceSelectedInstance(attribute.getBelongsToEntity());
 		}
-		String className = attribute.getDataType().getJavaClassName();
 		AttributeDeductionDesign attributeDeductionDesign = new AttributeDeductionDesign();
 		
 		addToDeductions(attributeDeductionDesign);
@@ -31,11 +29,6 @@ public class DeductionSchemeDesign extends AbstractDeductionSchemeDesign {
 		
 		attributeDeductionDesign.addToInputs(instanceDeduction);
 		attributeDeductionDesign.setAttribute(attribute);
-		if (attribute.getDataType().getMultivalue()==Boolean.TRUE) {
-			attributeDeductionDesign.setJavaClassName("org.instantlogic.fabric.value.Multi<"+className+">");
-		} else {
-			attributeDeductionDesign.setJavaClassName(className);	
-		}
 		return attributeDeductionDesign;
 		
 	}
@@ -57,7 +50,6 @@ public class DeductionSchemeDesign extends AbstractDeductionSchemeDesign {
 		addToDeductions(constantDeductionDesign);
 		setOutput(constantDeductionDesign);
 		
-		constantDeductionDesign.setJavaClassName(className.getName());
 		constantDeductionDesign.setValue(value);
 		return constantDeductionDesign;
 	}
@@ -84,7 +76,6 @@ public class DeductionSchemeDesign extends AbstractDeductionSchemeDesign {
 		setOutput(result);
 		
 		result.addToInputs(input);
-		result.setJavaClassName("java.lang.Boolean");
 		return result;
 	}
 
@@ -98,11 +89,6 @@ public class DeductionSchemeDesign extends AbstractDeductionSchemeDesign {
 		
 		result.addToInputs(instance);
 		result.setRelation(relation);
-		if (relation.getReverseMultivalue()==Boolean.TRUE) {
-			result.setJavaClassName("org.instantlogic.fabric.value.Multi<"+className+">");
-		} else {
-			result.setJavaClassName(className);	
-		}
 		return result; 
 	}
 }
