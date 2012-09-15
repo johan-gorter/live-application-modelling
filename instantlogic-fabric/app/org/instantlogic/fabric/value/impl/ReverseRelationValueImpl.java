@@ -44,7 +44,7 @@ public class ReverseRelationValueImpl<I extends Instance, From extends Instance>
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void setValue(From newEntity) {
 		if (newEntity==reverseValue) return;
-		Relation<From,? extends Object,I> relation = ((Relation<I, From, From>)model).getReverseRelation();
+		Relation<From,? extends Object,I> relation = ((Relation<I, From, From>)getModel()).getReverseRelation();
 		if (reverseValue!=null) {
 			// Remove forInstance from the old relation
 			ReadOnlyAttributeValue<From, ? extends Object> value = relation.get(reverseValue);
@@ -74,9 +74,10 @@ public class ReverseRelationValueImpl<I extends Instance, From extends Instance>
 		}
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public void clear() {
 		if (reverseValue==null) return;
-		Relation<From,? extends Object,I> relation = ((Relation<I, From, From>)model).getReverseRelation();
+		Relation<From,? extends Object,I> relation = ((Relation<I, From, From>)getModel()).getReverseRelation();
 		AttributeValue<From, ? extends Object> value = (AttributeValue<From, ? extends Object>)relation.get(reverseValue);
 		boolean result = false;
 		if (relation.isMultivalue()) {
@@ -92,4 +93,10 @@ public class ReverseRelationValueImpl<I extends Instance, From extends Instance>
 	public boolean isStored() {
 		return reverseValue!=null;
 	}
+	
+	@Override
+	protected String valueToString() {
+		return super.valueToString()+",reverseValue:"+reverseValue;
+	}	
+	
 }
