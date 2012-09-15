@@ -66,10 +66,11 @@ public class ReverseRelationValuesImpl<I extends Instance, From extends Instance
 		return result;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addValue(From newEntity) {
 		if (newEntity==null) throw new IllegalArgumentException("addValue null");
-		Relation<From,? extends Object,I> relation = ((Relation<I, Multi<From>, From>)model).getReverseRelation();
+		Relation<From,? extends Object,I> relation = ((Relation<I, Multi<From>, From>)getModel()).getReverseRelation();
 		// Add forInstance to the new entity
 		ReadOnlyAttributeValue<From, ? extends Object> value = (ReadOnlyAttributeValue<From, ? extends Object>)relation.get(newEntity);
 		if (relation.isMultivalue()) {
@@ -80,11 +81,12 @@ public class ReverseRelationValuesImpl<I extends Instance, From extends Instance
 		// The statements above added newEntity to values 
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void removeValue(From oldEntity) {
 		if (!values.contains(oldEntity)) throw new NoSuchElementException("oldEntity was not present in reverse values");
 		if (oldEntity==null) throw new IllegalArgumentException("removeValue null");
-		Relation<From,? extends Object,I> relation = ((Relation<I, Multi<From>, From>)model).getReverseRelation();
+		Relation<From,? extends Object,I> relation = ((Relation<I, Multi<From>, From>)getModel()).getReverseRelation();
 		// Add forInstance to the new entity
 		ReadOnlyAttributeValue<From, ? extends Object> value = (ReadOnlyAttributeValue<From, ? extends Object>)relation.get(oldEntity);
 		if (relation.isMultivalue()) {
@@ -94,4 +96,9 @@ public class ReverseRelationValuesImpl<I extends Instance, From extends Instance
 		}
 		// The statements above removed newEntity from values 
 	}
+
+	@Override
+	protected String valueToString() {
+		return super.valueToString()+",reverseValue:"+reverseValue;
+	}	
 }

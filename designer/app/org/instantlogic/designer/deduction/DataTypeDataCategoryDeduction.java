@@ -20,6 +20,9 @@ public class DataTypeDataCategoryDeduction extends Deduction<DataCategoryDesign>
 		if (dataType.getAttribute()!=null && !(dataType.getAttribute() instanceof RelationDesign)) {
 			return ValueAndLevel.inconclusive();
 		}
+		if (dataType.getConstantDeductionDesign()!=null || dataType.getCustomDeductionDesign()!=null) {
+			return ValueAndLevel.deduced(DataCategoryDesignEntity.INSTANCE.custom);
+		}
 		return ValueAndLevel.deduced(DataCategoryDesignEntity.INSTANCE.entity);
 	}
 

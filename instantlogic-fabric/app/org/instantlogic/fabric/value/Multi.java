@@ -33,8 +33,19 @@ public class Multi<T> implements Iterable<T> {
 		return asList().iterator();
 	}
 
-
 	public T get(int i) {
 		return items.get(i);
+	}
+	
+	@Override
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("[");
+		for (T item : items) {
+			if (sb.length()>1) sb.append(",");
+			sb.append(item);
+		}
+		sb.append("]");
+		return sb.toString();
 	}
 }

@@ -93,4 +93,9 @@ public class AttributeValuesImpl<I extends Instance, Item extends Object>
 		ensureStored();
 		return storedValue;
 	}
+	
+	@Override
+	protected String valueToString() {
+		return super.valueToString()+",stored:"+storedValue;
+	}	
 }

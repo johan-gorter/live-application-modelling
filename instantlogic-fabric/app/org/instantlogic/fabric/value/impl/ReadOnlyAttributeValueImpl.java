@@ -18,32 +18,41 @@ import org.instantlogic.fabric.util.SingleInstanceDeductionContext;
 import org.instantlogic.fabric.util.ValueAndLevel;
 import org.instantlogic.fabric.util.ValueChangeEvent;
 import org.instantlogic.fabric.util.ValueChangeObserver;
+import org.instantlogic.fabric.util.ValueLevel;
 import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
 
 public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object> implements ReadOnlyAttributeValue<I, Value> {
 
-	public enum ValueDetermination {RELEVANCE, RULE, STORED, DEFAULT, NONE}
+	// While debugging it is convenient that these properties are not immediately visible
+	public class Metadata {
+		protected final Attribute<I, Value, ? extends Object> model;
+
+		transient ArrayList<ValueChangeObserver> valueChangeObservers = new ArrayList<ValueChangeObserver>(); 
+		// When this value is the same as globalValueChangeListeners, copy globalValueChangeListeners on write and clear this field.
+		transient ArrayList<ValueChangeObserver> iteratingValueChangeObservers = null; 
+		transient ArrayList<ValueChangeObserver> nextValueChangeObservers = new ArrayList<ValueChangeObserver>(); 
+		transient boolean iteratingNextValueChangeObservers = false;
+		private transient ObservationsOutdatedObserver basedOn;
+		
+		public Metadata(Attribute<I, Value, ? extends Object> model) {
+			this.model = model;
+		}
+	}
 	
-	protected final Attribute<I, Value, ? extends Object> model;
+	private final Metadata metadata;
+	
 	protected final I forInstance;
 	
-	transient ArrayList<ValueChangeObserver> valueChangeObservers = new ArrayList<ValueChangeObserver>(); 
-	// When this value is the same as globalValueChangeListeners, copy globalValueChangeListeners on write and clear this field.
-	transient ArrayList<ValueChangeObserver> iteratingValueChangeObservers = null; 
-	transient ArrayList<ValueChangeObserver> nextValueChangeObservers = new ArrayList<ValueChangeObserver>(); 
-	transient boolean iteratingNextValueChangeObservers = false;
-	
 	private transient ValueAndLevel<Value> cached;
-	private transient ObservationsOutdatedObserver basedOn;
 	
 	private ValueChangeObserver valueChangeListener = new ValueChangeObserver() {
 
 		@Override
 		public void valueChanged(ValueChangeEvent event) {
 			ValueAndLevel<Value> oldCached = cached;
-			ObservationsOutdatedObserver oldBasedOn = basedOn;
+			ObservationsOutdatedObserver oldBasedOn = metadata.basedOn;
 			cached = null;
-			basedOn = null;
+			metadata.basedOn = null;
 			boolean success = false;
 			try {
 				fireValueChanged(oldCached, getStoredValue(), getStoredValue(), event.getOperation());
@@ -51,10 +60,10 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 			} finally {
 				if (!success) {
 					// Rollback everything
-					if (basedOn!=null) {
-						basedOn.remove();
+					if (metadata.basedOn!=null) {
+						metadata.basedOn.remove();
 					}
-					basedOn = oldBasedOn;
+					metadata.basedOn = oldBasedOn;
 					cached = oldCached;
 				}
 			}
@@ -63,11 +72,11 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 	
 	public ReadOnlyAttributeValueImpl(I forInstance, Attribute<I, Value, ? extends Object> model) {
 		this.forInstance = forInstance;
-		this.model = model;
+		this.metadata = new Metadata(model);
 	}
 	
 	public Attribute<I, Value, ? extends Object> getModel() {
-		return model;
+		return metadata.model;
 	}
 	
 	/**
@@ -76,9 +85,9 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 	 */
 	protected ValueAndLevel<Value> invalidateCachedValue() {
 		ValueAndLevel<Value> result = cached;
-		if (basedOn!=null) {
-			basedOn.remove();
-			basedOn = null;
+		if (metadata.basedOn!=null) {
+			metadata.basedOn.remove();
+			metadata.basedOn = null;
 		}
 		cached = null;
 		return result;
@@ -107,7 +116,7 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 			calculateValue();
 			Observations observations = registry.stopRecordingObservations();
 			if (observations.size()>0) {
-				basedOn = new ObservationsOutdatedObserver(observations, valueChangeListener);
+				metadata.basedOn = new ObservationsOutdatedObserver(observations, valueChangeListener);
 			}
 		}
 	}
@@ -157,10 +166,10 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 	/**
 	 * Takes extra care to undo pending changes when exceptions occur
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected void fireEvent(ValueChangeEvent event) {
 		boolean clearIteratingOnExit = false;
-		int lastInformedNextIndex = nextValueChangeObservers.size();
+		int lastInformedNextIndex = metadata.nextValueChangeObservers.size();
 		boolean success = false;
 		boolean instanceInformed = false;
 		boolean undoEventRecorded = false;
@@ -180,22 +189,22 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 				undoEventRecorded = true;
 			}
 			// NextValueChangeObservers
-			iteratingNextValueChangeObservers = true;
-			lastInformedNextIndex = nextValueChangeObservers.size(); // observers may have changed since beforeFiringChange
+			metadata.iteratingNextValueChangeObservers = true;
+			lastInformedNextIndex = metadata.nextValueChangeObservers.size(); // observers may have changed since beforeFiringChange
 			while (lastInformedNextIndex>0) {
-				ValueChangeObserver observer = nextValueChangeObservers.get(lastInformedNextIndex-1);
+				ValueChangeObserver observer = metadata.nextValueChangeObservers.get(lastInformedNextIndex-1);
 				if (observer!=null) {
 					observer.valueChanged(event);
 				}
 				lastInformedNextIndex--;
-				nextValueChangeObservers.remove(lastInformedNextIndex);
+				metadata.nextValueChangeObservers.remove(lastInformedNextIndex);
 			}
 			// ValueChangeObservers
-			if (iteratingValueChangeObservers != valueChangeObservers) {
-				iteratingValueChangeObservers = valueChangeObservers;
+			if (metadata.iteratingValueChangeObservers != metadata.valueChangeObservers) {
+				metadata.iteratingValueChangeObservers = metadata.valueChangeObservers;
 				clearIteratingOnExit = true;
 			}
-			iterating = iteratingValueChangeObservers;
+			iterating = metadata.iteratingValueChangeObservers;
 			iterator = iterating.listIterator(iterating.size());
 			while (iterator.hasPrevious()) {
 				ValueChangeObserver listener = iterator.previous();
@@ -207,10 +216,10 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 			success = true;
 		} finally {
 			if (success) {
-				if (clearIteratingOnExit && iteratingValueChangeObservers == iterating) {
-					iteratingValueChangeObservers = null;
+				if (clearIteratingOnExit && metadata.iteratingValueChangeObservers == iterating) {
+					metadata.iteratingValueChangeObservers = null;
 				}
-				iteratingNextValueChangeObservers = false;
+				metadata.iteratingNextValueChangeObservers = false;
 			} else {
 				// The rollback procedure
 				try {
@@ -236,23 +245,23 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 						}
 					}
 					// Newly added nextValueChangeObservers
-					int lastMisinfomedIndex = nextValueChangeObservers.size()-1;
+					int lastMisinfomedIndex = metadata.nextValueChangeObservers.size()-1;
 					while (lastInformedNextIndex <= lastMisinfomedIndex) {
-						ValueChangeObserver observer = nextValueChangeObservers.get(lastInformedNextIndex);
+						ValueChangeObserver observer = metadata.nextValueChangeObservers.get(lastInformedNextIndex);
 						if (observer!=null) {
 							observer.valueChanged(undoEvent);
 						}
-						nextValueChangeObservers.remove(lastInformedNextIndex);
+						metadata.nextValueChangeObservers.remove(lastInformedNextIndex);
 						lastMisinfomedIndex--;
 					}
 					if (undoEventRecorded) {
 						event.getOperation().popEventToUndo(event);
 					}
 				} finally {
-					if (clearIteratingOnExit && iteratingValueChangeObservers == iterating) {
-						iteratingValueChangeObservers = null;
+					if (clearIteratingOnExit && metadata.iteratingValueChangeObservers == iterating) {
+						metadata.iteratingValueChangeObservers = null;
 					}
-					iteratingNextValueChangeObservers = false;
+					metadata.iteratingNextValueChangeObservers = false;
 				}
 			}
 		}
@@ -280,8 +289,8 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 	}
 	
 	private void copyGlobalValueChangeListenersIfNeeded() {
-		if (iteratingValueChangeObservers==valueChangeObservers) {
-			valueChangeObservers = new ArrayList<ValueChangeObserver>(valueChangeObservers);
+		if (metadata.iteratingValueChangeObservers==metadata.valueChangeObservers) {
+			metadata.valueChangeObservers = new ArrayList<ValueChangeObserver>(metadata.valueChangeObservers);
 		}
 	}
 	
@@ -291,13 +300,13 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 		// This statement usually does nothing. The value is normally already deduced. Listening to changes on an unknown value is rarely useful.
 		ensureCached(forInstance.getMetadata().getCaseAdministration());
 		copyGlobalValueChangeListenersIfNeeded();
-		valueChangeObservers.add(observer);
+		metadata.valueChangeObservers.add(observer);
 	}
 
 	@Override
 	public void removeValueChangeObserver(ValueChangeObserver observer) {
 		copyGlobalValueChangeListenersIfNeeded();
-		Iterator<ValueChangeObserver> iterator = this.valueChangeObservers.iterator();
+		Iterator<ValueChangeObserver> iterator = this.metadata.valueChangeObservers.iterator();
 		while (iterator.hasNext()) {
 			ValueChangeObserver entry = iterator.next();
 			if (entry==observer) {
@@ -310,18 +319,18 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 	
 	@Override
 	public void addNextValueChangeObserver(ValueChangeObserver observer) {
-		nextValueChangeObservers.add(observer);
+		metadata.nextValueChangeObservers.add(observer);
 	}
 
 	@Override
 	public void removeNextValueChangeObserver(ValueChangeObserver observer) {
-		if (iteratingNextValueChangeObservers) {
+		if (metadata.iteratingNextValueChangeObservers) {
 			// We need to be careful
-			int index = nextValueChangeObservers.indexOf(observer);
+			int index = metadata.nextValueChangeObservers.indexOf(observer);
 			if (index<0) throw new NoSuchElementException();
-			nextValueChangeObservers.set(index, null);
+			metadata.nextValueChangeObservers.set(index, null);
 		} else {
-			if (!nextValueChangeObservers.remove(observer)) throw new NoSuchElementException(observer.toString());
+			if (!metadata.nextValueChangeObservers.remove(observer)) throw new NoSuchElementException(observer.toString());
 		}
 	}
 	
@@ -332,12 +341,29 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 	
 	@Override
 	public String toString() {
-		return this.forInstance.toString()+"."+this.model.toString();
+		return this.forInstance.toString()+"."+this.metadata.model.toString()+"="+valueToString();
 	}
 	
+	protected String valueToString() {
+		if (cached==null) {
+			return "stale";
+		} else if (cached.getValueLevel()==ValueLevel.INCONCLUSIVE) {
+			return "inconclusive";
+		} else if (cached.getValueLevel()==ValueLevel.MISSING) {
+			return "missing";
+		} else if (cached.getValueLevel()==ValueLevel.IRRELEVANT) {
+			return "irrelevant";
+		} else if (cached.getValueLevel()==ValueLevel.DEDUCED) {
+			return "deduced:"+cached.getValue();
+		} else if (cached.getValueLevel()==ValueLevel.STORED) {
+			return "stored:"+cached.getValue();
+		}
+		return "";
+	}
+
 	@Override
 	public int hashCode() {
-		return forInstance.getMetadata().getInstanceLocalId().hashCode()+model.getName().hashCode();
+		return forInstance.getMetadata().getInstanceLocalId().hashCode()+metadata.model.getName().hashCode();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -346,7 +372,7 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 		if (other==null || other.getClass()!=getClass()) return false;
 		ReadOnlyAttributeValueImpl<? extends Instance, ? extends Object> o = 
 			(ReadOnlyAttributeValueImpl<? extends Instance, ? extends Object>) other;
-		return (o.forInstance==forInstance && o.model==model);
+		return (o.forInstance==forInstance && o.metadata.model==metadata.model);
 	}
 
 }

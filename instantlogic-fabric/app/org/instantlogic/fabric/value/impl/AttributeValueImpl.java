@@ -45,9 +45,13 @@ public class AttributeValueImpl<I extends Instance, Value extends Object>
 	protected void setStoredValue(Value newStoredValue) {
 		storedValue = newStoredValue;
 	}
-	
 
 	public boolean isStored() {
 		return storedValue!=null;
+	}
+	
+	@Override
+	protected String valueToString() {
+		return super.valueToString()+",stored:"+storedValue;
 	}
 }
