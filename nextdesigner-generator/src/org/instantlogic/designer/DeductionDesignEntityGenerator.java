@@ -13,12 +13,6 @@ public class DeductionDesignEntityGenerator extends EntityDesign {
         setIsCustomized(true);
     }
 
-    // Attributes
-    // TODO: remove these 3
-    public static final AttributeDesign multivalue = addAttribute(ENTITY, "multivalue", java.lang.Boolean.class);
-    public static final AttributeDesign javaClassName = addAttribute(ENTITY, "javaClassName", java.lang.String.class);
-    public static final AttributeDesign customization = addAttribute(ENTITY, "customization", java.lang.String.class);
-
     // Relations
     public static final RelationDesign dataType = addRelation(ENTITY, "dataType", RelationType.ManyToZeroOrOne, DataTypeDesignEntityGenerator.ENTITY);
     
