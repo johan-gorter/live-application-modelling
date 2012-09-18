@@ -4,6 +4,7 @@ import org.instantlogic.designer.AttributeDesign;
 import org.instantlogic.designer.DeductionSchemeDesign;
 import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.RelationDesign;
+import org.instantlogic.designer.entity.DataCategoryDesignEntity;
 
 public class TravelerEntityGenerator extends EntityDesign {
 
@@ -16,8 +17,8 @@ public class TravelerEntityGenerator extends EntityDesign {
     }
     
     // Attributes
-    public static final AttributeDesign id = addAttribute(ENTITY, "id", java.lang.String.class);
-    public static final AttributeDesign communicatorVisible = addAttribute(ENTITY, "communicatorVisible", java.lang.Boolean.class);
+    public static final AttributeDesign id = addAttribute(ENTITY, "id", DataCategoryDesignEntity.INSTANCE.text);
+    public static final AttributeDesign communicatorVisible = addAttribute(ENTITY, "communicatorVisible", DataCategoryDesignEntity.INSTANCE._boolean);
 
     // Relations
     public static final RelationDesign currentPlace = addRelation(ENTITY, "currentPlace", RelationType.ManyToZeroOrOne, PlaceEntityGenerator.ENTITY)

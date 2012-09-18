@@ -51,6 +51,17 @@ public class ${technicalNameCapitalized}Entity extends org.instantlogic.fabric.m
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<${rootPackageName}.${technicalNameCapitalized}, ${attribute.className}, ${attribute.itemClassName}>(
 			"${attribute.name}", INSTANCE, ${attribute.itemClassName}.class
 		) {
+			{
+			<#list attribute.dataType?keys as key>
+			<#if attribute.dataType[key]?is_string>
+				dataType.put("${key}", "${attribute.dataType[key]}");
+			<#elseif attribute.dataType[key]?is_boolean>
+				dataType.put("${key}", <#if attribute.dataType[key]>true<#else>false</#if>);
+			<#else>
+				dataType.put("${key}", ${attribute.dataType[key]});
+			</#if>
+			</#list>
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<#if attribute.multivalue>s</#if><${rootPackageName}.${technicalNameCapitalized}, ${attribute.itemClassName}> get(${rootPackageName}.${technicalNameCapitalized} instance) {

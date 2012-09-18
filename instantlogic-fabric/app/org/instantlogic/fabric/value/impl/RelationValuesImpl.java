@@ -69,8 +69,8 @@ public class RelationValuesImpl<I extends Instance, To extends Instance>
 	};
 
 	private void checkCase(To value) { // Copy in RelationValueImpl
-		if (!model.isOwner()) { 
-			if (value!=null && value.getMetadata().getCaseAdministration()!=forInstance.getMetadata().getCaseAdministration()) {
+		if (!model.isOwner() && value!=null && !value.getMetadata().isStatic()) { 
+			if (value.getMetadata().getCaseAdministration()!=forInstance.getMetadata().getCaseAdministration()) {
 				throw new IllegalArgumentException("The item "+value+" is not owned by the "+forInstance.getMetadata().getCase().getMetadata().getEntity().getName()+" the "+forInstance+" belongs to");
 			}
 		}

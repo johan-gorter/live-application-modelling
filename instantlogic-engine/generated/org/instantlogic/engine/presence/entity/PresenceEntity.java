@@ -4,7 +4,6 @@ public class PresenceEntity extends org.instantlogic.fabric.model.Entity<org.ins
 
 	public static final PresenceEntity INSTANCE = new PresenceEntity();
 	
-	
 	protected PresenceEntity() {
 	}
 
@@ -32,7 +31,11 @@ public class PresenceEntity extends org.instantlogic.fabric.model.Entity<org.ins
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.engine.presence.Presence, java.lang.String, java.lang.String>(
 			"applicationName", INSTANCE, java.lang.String.class
 		) {
-	
+
+			{
+				dataType.put("category", "text");
+			}
+			
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.engine.presence.Presence, java.lang.String> get(org.instantlogic.engine.presence.Presence instance) {
 				return instance.getApplicationNameAttributeValue();
@@ -43,7 +46,11 @@ public class PresenceEntity extends org.instantlogic.fabric.model.Entity<org.ins
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.engine.presence.Presence, java.lang.String, java.lang.String>(
 			"caseName", INSTANCE, java.lang.String.class
 		) {
-	
+
+			{
+				dataType.put("category", "text");
+			}
+			
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.engine.presence.Presence, java.lang.String> get(org.instantlogic.engine.presence.Presence instance) {
 				return instance.getCaseNameAttributeValue();

@@ -32,6 +32,11 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.example.izzy.Issue, java.lang.String, java.lang.String>(
 			"description", INSTANCE, java.lang.String.class
 		) {
+			{
+				dataType.put("category", "text");
+				dataType.put("multiLine", true);
+				dataType.put("formatted", true);
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.example.izzy.Issue, java.lang.String> get(org.instantlogic.example.izzy.Issue instance) {
@@ -43,6 +48,9 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.example.izzy.Issue, java.lang.String, java.lang.String>(
 			"headline", INSTANCE, java.lang.String.class
 		) {
+			{
+				dataType.put("category", "text");
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.example.izzy.Issue, java.lang.String> get(org.instantlogic.example.izzy.Issue instance) {
@@ -54,6 +62,8 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.example.izzy.Issue, java.lang.Integer, java.lang.Integer>(
 			"number", INSTANCE, java.lang.Integer.class
 		) {
+			{
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.example.izzy.Issue, java.lang.Integer> get(org.instantlogic.example.izzy.Issue instance) {

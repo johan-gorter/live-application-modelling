@@ -39,6 +39,8 @@ public class ProjectEntity extends org.instantlogic.fabric.model.Entity<org.inst
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.example.izzy.Project, java.lang.Integer, java.lang.Integer>(
 			"last issue number", INSTANCE, java.lang.Integer.class
 		) {
+			{
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.example.izzy.Project, java.lang.Integer> get(org.instantlogic.example.izzy.Project instance) {

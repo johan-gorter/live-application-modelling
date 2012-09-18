@@ -1,7 +1,9 @@
 package org.instantlogic.designer.codegenerator.classmodel;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EntityClassModel extends AbstractClassModel {
 
@@ -32,7 +34,11 @@ public class EntityClassModel extends AbstractClassModel {
 		public Integer relevanceDeductionIndex;
 		public Integer ruleDeductionIndex;
 		public Integer defaultDeductionIndex;
+		public final Map<String, Object> dataType = new LinkedHashMap<String, Object>();
 		
+		public Map<String, Object> getDataType() {
+			return dataType;
+		}
 		public String getName() {
 			return name;
 		}

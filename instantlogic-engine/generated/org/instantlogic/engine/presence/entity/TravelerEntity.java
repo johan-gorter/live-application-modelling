@@ -4,7 +4,6 @@ public class TravelerEntity extends org.instantlogic.fabric.model.Entity<org.ins
 
 	public static final TravelerEntity INSTANCE = new TravelerEntity();
 	
-	
 	protected TravelerEntity() {
 	}
 
@@ -39,7 +38,11 @@ public class TravelerEntity extends org.instantlogic.fabric.model.Entity<org.ins
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.engine.presence.Traveler, java.lang.Boolean, java.lang.Boolean>(
 			"communicatorVisible", INSTANCE, java.lang.Boolean.class
 		) {
-	
+
+			{
+				dataType.put("category", "boolean");
+			}
+			
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.engine.presence.Traveler, java.lang.Boolean> get(org.instantlogic.engine.presence.Traveler instance) {
 				return instance.getCommunicatorVisibleAttributeValue();
@@ -59,7 +62,11 @@ public class TravelerEntity extends org.instantlogic.fabric.model.Entity<org.ins
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.engine.presence.Traveler, java.lang.String, java.lang.String>(
 			"id", INSTANCE, java.lang.String.class
 		) {
-	
+
+			{
+				dataType.put("category", "text");
+			}
+			
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.engine.presence.Traveler, java.lang.String> get(org.instantlogic.engine.presence.Traveler instance) {
 				return instance.getIdAttributeValue();

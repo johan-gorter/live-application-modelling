@@ -32,6 +32,9 @@ public class CommentEntity extends org.instantlogic.fabric.model.Entity<org.inst
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.example.izzy.Comment, java.lang.String, java.lang.String>(
 			"text", INSTANCE, java.lang.String.class
 		) {
+			{
+				dataType.put("category", "text");
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.example.izzy.Comment, java.lang.String> get(org.instantlogic.example.izzy.Comment instance) {

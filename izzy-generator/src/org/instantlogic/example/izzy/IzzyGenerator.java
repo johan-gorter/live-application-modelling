@@ -4,6 +4,7 @@ import java.io.File;
 
 import org.instantlogic.designer.ApplicationDesign;
 import org.instantlogic.designer.AttributeDesign;
+import org.instantlogic.designer.DeductionSchemeDesign;
 import org.instantlogic.designer.Design;
 import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.EntityDesign.RelationType;
@@ -19,6 +20,7 @@ import org.instantlogic.designer.SubFlowDesign;
 import org.instantlogic.designer.TextTemplateDesign;
 import org.instantlogic.designer.codegenerator.generator.GeneratedClassModels;
 import org.instantlogic.designer.codegenerator.javacode.ApplicationJavacodeGenerator;
+import org.instantlogic.designer.entity.DataCategoryDesignEntity;
 
 public class IzzyGenerator extends Design {
 	private static ApplicationDesign izzy;
@@ -43,18 +45,21 @@ public class IzzyGenerator extends Design {
 	private static FlowDesign createIssueFlow;
 	private static AttributeDesign issueDescription;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) { 
 		izzy = new ApplicationDesign();
-		project = new EntityDesign("project");
-		project.addAttribute("last issue number", Integer.class).setDefault(createConstantDeduction(Integer.class, 0));
-		user = new EntityDesign("user");
-		user.addAttribute("username", String.class);
-		issue = new EntityDesign("issue");
+		project = new EntityDesign("project").setApplication(izzy);
+		project.addAttribute("last issue number", Integer.class)
+			.setDefault(new DeductionSchemeDesign().deduceConstant(Integer.class, 0).getScheme());
+		user = new EntityDesign("user").setApplication(izzy);
+		user.addAttribute("username", DataCategoryDesignEntity.INSTANCE.text);
+		issue = new EntityDesign("issue").setApplication(izzy);
 		issueNumber = issue.addAttribute("number", Integer.class);
-		issueHeadline = issue.addAttribute("headline", String.class);
-		issueDescription = issue.addAttribute("description", String.class);
-		comment = new EntityDesign("comment");
-		comment.addAttribute("text", String.class);
+		issueHeadline = issue.addAttribute("headline", DataCategoryDesignEntity.INSTANCE.text);
+		issueDescription = issue.addAttribute("description", DataCategoryDesignEntity.INSTANCE.text);
+		issueDescription.getDataType().setMultiLine(true).setFormatted(true);
+		comment = new EntityDesign("comment").setApplication(izzy);
+		comment.addAttribute("text", DataCategoryDesignEntity.INSTANCE.text);
+		comment.getDataType().setMultiLine(true).setFormatted(true);
 		
 		// Relations
 		project.addRelation("users", RelationType.OneToManyAggregation, user).setReverseName("project");
@@ -69,27 +74,23 @@ public class IzzyGenerator extends Design {
 		izzy.setRootPackageName("org.instantlogic.example.izzy");
 		izzy.getCaseEntity().registerApplication(izzy);
 		
-		createIssueEvent = new EventDesign("create issue");
-		issueDetailsEvent = new EventDesign("issue details").addToParameters(issue);
+		createIssueEvent = new EventDesign("create issue").setApplication(izzy);
+		issueDetailsEvent = new EventDesign("issue details").setApplication(izzy).addToParameters(issue);
 		
+		mainFlow = new FlowDesign("main").setApplication(izzy);
+		issueFlow = new FlowDesign("issue").setApplication(izzy).addToParameters(issue);
+		createIssueFlow = new FlowDesign("create issue").setApplication(izzy);
+		createIssueFlow.setIsCustomized(true);
+
 		createDashboardPlaceTemplate();
 		createIssueDetailsPlaceTemplate();
 		
-		mainFlow = new FlowDesign("main");
-		issueFlow = new FlowDesign("issue").addToParameters(issue);
-		createIssueFlow = new FlowDesign("create issue");
-		createIssueFlow.setIsCustomized(true);
-
 		initMainFlow();
 		initIssueFlow();
 
 		// Application
 		izzy.setSourcePath("../izzy/generated");
-		izzy
-			.addToEvents(createIssueEvent)
-			.addToEvents(issueDetailsEvent);
 		izzy.setMainFlow(mainFlow);
-		izzy.getMainFlow().registerApplication(izzy);
 
 		// Finished with the design, what to do next
 		
@@ -106,46 +107,55 @@ public class IzzyGenerator extends Design {
 	// Flows
 
 	private static void initIssueFlow() {
-		issueFlow.addToNodes(issueDetailsPlaceTemplate);
-		issueFlow.addToEdges(new FlowEdgeDesign()
+		new FlowEdgeDesign()
+			.setOwner(issueFlow)
 			.setEvent(issueDetailsEvent)
-			.setEndNode(issueDetailsPlaceTemplate));
+			.setEndNode(issueDetailsPlaceTemplate);
 	}
 
 	private static void initMainFlow() {
 		SubFlowDesign mainFlowIssueSubFlow = mainFlow.addSubFlow(issueFlow);
 		SubFlowDesign mainFlowCreateIssueSubFlow = mainFlow.addSubFlow(createIssueFlow);
-		mainFlow.addToNodes(dashboardPlaceTemplate);
-		mainFlow.addToEdges(new FlowEdgeDesign()
+		new FlowEdgeDesign()
+			.setOwner(mainFlow)
 			.setStartNode(dashboardPlaceTemplate)
 			.setEvent(issueDetailsEvent)
-			.setEndNode(mainFlowIssueSubFlow)
-		);
-		mainFlow.addToEdges(new FlowEdgeDesign()
+			.setEndNode(mainFlowIssueSubFlow);
+		new FlowEdgeDesign()
+			.setOwner(mainFlow)
 			.setStartNode(dashboardPlaceTemplate)
 			.setEvent(createIssueEvent)
-			.setEndNode(mainFlowCreateIssueSubFlow)
-		);
+			.setEndNode(mainFlowCreateIssueSubFlow);
 	}
 	
 	// Place templates
 
 	private static void createIssueDetailsPlaceTemplate() {
+		DeductionSchemeDesign number, headline;
+		FragmentTemplateDesign headlineInput;
 		issueDetailsPlaceTemplate = new PlaceTemplateDesign("issueDetails")
+			.setOwner(issueFlow)
 			.setContent(new FragmentTemplateDesign("Page")
 				.setChildren("mainContent", 
 					new FragmentTemplateDesign("Paragraph")
-						.setText("text", new TextTemplateDesign().addToUntranslated(new StringTemplateDesign().setDeduction(createDeduction(issueNumber)))),
+						.setText("text", new TextTemplateDesign().addToUntranslated(
+							new StringTemplateDesign().setDeduction(number = new DeductionSchemeDesign()))),
 					new FragmentTemplateDesign("Paragraph")
-						.setText("text", new TextTemplateDesign().addToUntranslated(new StringTemplateDesign().setDeduction(createDeduction(issueHeadline)))),
-					new FragmentTemplateDesign("Input")
-						.setEntity(issue).setAttribute(issueHeadline)
+						.setText("text", new TextTemplateDesign().addToUntranslated(
+							new StringTemplateDesign().setDeduction(headline = new DeductionSchemeDesign()))),
+					headlineInput = new FragmentTemplateDesign("Input")
 				)
 			);
+		number.deduceAttribute(issueNumber);
+		headline.deduceAttribute(issueHeadline);
+		headlineInput.setEntity(issue).setAttribute(issueHeadline);
 	}
 
 	private static void createDashboardPlaceTemplate() {
+		DeductionSchemeDesign issues, number, headline;
+		FragmentTemplateDesign detailsLink, createButton;
 		dashboardPlaceTemplate = new PlaceTemplateDesign("dashboard")
+			.setOwner(mainFlow)
 			.setContent(
 				new FragmentTemplateDesign("Page")
 					.setChildren("mainContent",
@@ -156,30 +166,35 @@ public class IzzyGenerator extends Design {
 									.setText("header", createConstantText("Headline"))
 							)
 							.setChildren("rows",
-								new SelectionDesign().setSelection(createDeduction(projectIssues)).addToChildren(
+								new SelectionDesign().setSelection(issues = new DeductionSchemeDesign()).addToChildren(
 									new FragmentTemplateDesign("Row")
 										.setChildren("cells",
-											new FragmentTemplateDesign("Link")
-												.setEvent(issueDetailsEvent)
+											detailsLink = new FragmentTemplateDesign("Link")
 												.setChildren("content", 
 													new FragmentTemplateDesign("Cell")
 														.setChildren("content",
 															new FragmentTemplateDesign("Paragraph")
-																.setText("text", new TextTemplateDesign().addToUntranslated(new StringTemplateDesign().setDeduction(createDeduction(issueNumber))))
+																.setText("text", new TextTemplateDesign().addToUntranslated(
+																		new StringTemplateDesign().setDeduction(number = new DeductionSchemeDesign())))
 														),
 													new FragmentTemplateDesign("Cell")
 														.setChildren("content",
 															new FragmentTemplateDesign("Paragraph")
-																.setText("text", new TextTemplateDesign().addToUntranslated(new StringTemplateDesign().setDeduction(createDeduction(issueHeadline))))
+																.setText("text", new TextTemplateDesign().addToUntranslated(
+																		new StringTemplateDesign().setDeduction(headline = new DeductionSchemeDesign())))
 														)
 												)
 										)
 								)
 							),
-						new FragmentTemplateDesign("Button")
+						createButton = new FragmentTemplateDesign("Button")
 							.setText("text", new TextTemplateDesign().addToUntranslated(new StringTemplateDesign().setConstantText("Create issue")))
-							.setEvent(createIssueEvent)
 					)
 			);
+		issues.deduceAttribute(projectIssues);
+		number.deduceAttribute(issueNumber);
+		headline.deduceAttribute(issueHeadline);
+		detailsLink.setEvent(issueDetailsEvent);
+		createButton.setEvent(createIssueEvent);
 	}
 }
