@@ -3,6 +3,7 @@ package org.instantlogic.engine.presence;
 
 public abstract class AbstractPresence extends org.instantlogic.fabric.Instance { 
 
+
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.engine.presence.entity.PresenceEntity.INSTANCE;

@@ -78,6 +78,7 @@ public abstract class Entity<I extends Instance> extends Concept {
 	
 	protected I addStaticInstance(String name, I instance) {
 		staticInstances.put(name, instance);
+		instance.getMetadata().makeStatic(name);
 		return instance;
 	}
 	

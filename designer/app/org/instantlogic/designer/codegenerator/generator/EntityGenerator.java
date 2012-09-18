@@ -1,19 +1,18 @@
 package org.instantlogic.designer.codegenerator.generator;
 
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import org.instantlogic.designer.AttributeDesign;
+import org.instantlogic.designer.DataTypeDesign;
 import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.RelationDesign;
 import org.instantlogic.designer.StaticInstanceDesign;
 import org.instantlogic.designer.TextTemplateDesign;
 import org.instantlogic.designer.codegenerator.classmodel.EntityClassModel;
+import org.instantlogic.designer.codegenerator.classmodel.EntityClassModel.Attribute;
 import org.instantlogic.designer.codegenerator.classmodel.EntityClassModel.StaticInstance;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
-import org.instantlogic.fabric.value.Multi;
 
 public class EntityGenerator extends AbstractGenerator {
 
@@ -40,6 +39,7 @@ public class EntityGenerator extends AbstractGenerator {
 			attribute.name = attributeDesign.getName();
 			attribute.technicalName = attributeDesign.getTechnicalName();
 			attribute.javaIdentifier = attributeDesign.getJavaIdentifier();
+			setDatatype(attribute, attributeDesign.getDataType());
 			attribute.itemClassName = attributeDesign.getDataType().getJavaClassName();
 			attribute.multivalue = (attributeDesign.getDataType().getMultivalue()==Boolean.TRUE);
 			if (attribute.multivalue) {
@@ -116,6 +116,28 @@ public class EntityGenerator extends AbstractGenerator {
 		}
 		this.observations = new ObservationsOutdatedObserver(entityDesign.getMetadata().getCaseAdministration().stopRecordingObservations(), null);
 		context.updatedEntities.add(model);
+	}
+
+	private void setDatatype(Attribute attribute, DataTypeDesign dataType) {
+		if (dataType.getDataCategory()!=null) {
+			attribute.dataType.put("category", dataType.getDataCategory().getMetadata().getStaticName());
+		}
+		if (dataType.getPercentage() == Boolean.TRUE) {
+			attribute.dataType.put("percentage", true);
+		}
+		if (dataType.getWholeNumber() == Boolean.TRUE) {
+			attribute.dataType.put("wholeNumber", true);
+		}
+		if (dataType.getExactRounding() == Boolean.TRUE) {
+			attribute.dataType.put("exactRounding", true);
+		}
+		if (dataType.getMultiLine() == Boolean.TRUE) {
+			attribute.dataType.put("multiLine", true);
+		}
+		if (dataType.getFormatted() == Boolean.TRUE) {
+			attribute.dataType.put("formatted", true);
+		}
+		// In the future: Unit-prefix, unit-suffix, decimalPlaces
 	}
 
 	private void sortNames(EntityClassModel model) {

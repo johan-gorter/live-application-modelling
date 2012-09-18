@@ -23,6 +23,10 @@ public class EntityDesign extends AbstractEntityDesign {
 	protected static AttributeDesign addAttribute(EntityDesign from, String name, Class<?> type) {
 		return from.addAttribute(name,  type);
 	}
+
+	protected static AttributeDesign addAttribute(EntityDesign from, String name, DataCategoryDesign dataCategory) {
+		return from.addAttribute(name, dataCategory);
+	}
 	
 	protected static AttributeDesign addAttribute(EntityDesign from, String name, String className) {
 		return from.addAttribute(name, className);
@@ -40,6 +44,14 @@ public class EntityDesign extends AbstractEntityDesign {
 		AttributeDesign result = new AttributeDesign();
 		result.setName(name);
 		result.getDataType().setJavaClassName(className);
+		addToAttributes(result);
+		return result;
+	}
+
+	public AttributeDesign addAttribute(String name, DataCategoryDesign dataCategory) {
+		AttributeDesign result = new AttributeDesign();
+		result.setName(name);
+		result.getDataType().setDataCategory(dataCategory);
 		addToAttributes(result);
 		return result;
 	}

@@ -1,6 +1,7 @@
 package org.instantlogic.designer;
 
 import org.instantlogic.designer.deduction.AttributeBelongsToDeduction;
+import org.instantlogic.designer.entity.DataCategoryDesignEntity;
 
 public class AttributeDesignEntityGenerator extends EntityDesign {
 
@@ -13,7 +14,7 @@ public class AttributeDesignEntityGenerator extends EntityDesign {
     }
 
     // Attributes
-    public static final AttributeDesign readOnly = addAttribute(ENTITY, "readOnly", java.lang.Boolean.class);
+    public static final AttributeDesign readOnly = addAttribute(ENTITY, "readOnly", DataCategoryDesignEntity.INSTANCE._boolean);
     
     // Relations
     public static final RelationDesign dataType = addRelation(ENTITY, "dataType", RelationType.OneToOneAggregation, DataTypeDesignEntityGenerator.ENTITY)

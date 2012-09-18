@@ -1,5 +1,8 @@
 package org.instantlogic.fabric.model.impl;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Attribute;
 import org.instantlogic.fabric.model.Entity;
@@ -11,6 +14,7 @@ public abstract class SimpleAttribute<I extends Instance, Value extends Object, 
 	private final String name;
 	private final Entity<I> entity;
 	private final Class<Item> javaClassName;
+	protected final Map<String, Object> dataType = new LinkedHashMap<String, Object>();
 	private TextTemplate question = null;
 	
 	public SimpleAttribute(String name, Entity<I> entity, Class<Item> javaClassName) {
@@ -41,5 +45,10 @@ public abstract class SimpleAttribute<I extends Instance, Value extends Object, 
 
 	public void setQuestion(TextTemplate question) {
 		this.question = question;
+	}
+	
+	@Override
+	public Map<String, Object> getDataType() {
+		return dataType;
 	}
 }

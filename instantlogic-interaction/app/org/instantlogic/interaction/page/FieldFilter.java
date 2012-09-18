@@ -2,7 +2,6 @@ package org.instantlogic.interaction.page;
 
 import java.util.Map;
 
-import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Attribute;
 import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.interaction.util.ChangeContext;
@@ -18,6 +17,7 @@ public class FieldFilter extends AbstractFragmentFilter {
 		this.attribute = attribute;
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public Map<String, Object> render(RenderContext context, String id, FragmentFilterChain chain) {
 		Map<String, Object> result = super.render(context, id, chain);
@@ -34,10 +34,12 @@ public class FieldFilter extends AbstractFragmentFilter {
 			}
 		}
 		if (!result.containsKey("dataType")) {
-			
+			Map<String, Object> dataType = attribute.getDataType();
+			if (dataType!=null) {
+				result.put("dataType", dataType);
+			}
 		}
 		Object value = context.getValue((Entity)entity, (Attribute)attribute);
-		Instance instance = (Instance)context.getSelectedInstance(entity);
 		result.put("value", value);
 		return result;
 	}

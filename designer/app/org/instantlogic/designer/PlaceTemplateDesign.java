@@ -26,4 +26,8 @@ public class PlaceTemplateDesign extends AbstractPlaceTemplateDesign {
 		return result;
 	}
 	
+    public PlaceTemplateDesign setOwner(org.instantlogic.designer.FlowDesign newValue) {
+    	super.setOwner(newValue);
+    	return this;
+    }
 }

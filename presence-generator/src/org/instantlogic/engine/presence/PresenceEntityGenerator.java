@@ -1,8 +1,10 @@
 package org.instantlogic.engine.presence;
 
 import org.instantlogic.designer.AttributeDesign;
+import org.instantlogic.designer.DataCategoryDesign;
 import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.RelationDesign;
+import org.instantlogic.designer.entity.DataCategoryDesignEntity;
 
 public class PresenceEntityGenerator extends EntityDesign {
 
@@ -15,8 +17,8 @@ public class PresenceEntityGenerator extends EntityDesign {
     }
 
     // Attributes
-    public static final AttributeDesign applicationName = addAttribute(ENTITY, "applicationName", java.lang.String.class);
-    public static final AttributeDesign caseName = addAttribute(ENTITY, "caseName", java.lang.String.class);
+    public static final AttributeDesign applicationName = addAttribute(ENTITY, "applicationName", DataCategoryDesignEntity.INSTANCE.text);
+    public static final AttributeDesign caseName = addAttribute(ENTITY, "caseName", DataCategoryDesignEntity.INSTANCE.text);
 
     // Relations
     public static final RelationDesign activeUsers = addRelation(ENTITY, "activeUsers", RelationType.OneToManyAggregation, UserEntityGenerator.ENTITY)

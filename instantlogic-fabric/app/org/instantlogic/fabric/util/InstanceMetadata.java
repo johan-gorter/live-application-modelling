@@ -34,6 +34,7 @@ public class InstanceMetadata {
 	private Map<String, Instance> unmodifiableChildren = Collections.emptyMap();
 	
 	private TextTemplate staticDescription;
+	private String staticName;
 
 	public InstanceMetadata(Instance instance) {
 		this.instance = instance;
@@ -174,6 +175,7 @@ public class InstanceMetadata {
 	}
 	
 	protected void registerOwner(Instance owner, String localId) {
+		if (this.isStatic()) throw new RuntimeException("Static instances cannot be owned by a case, they are global");
 		if (this.owner!=null && owner!=null) {
 			// 'Migration' to another owner is not allowed, because this would change instance Id's
 			throw new RuntimeException("This instance is already owned by "+this.owner);
@@ -287,5 +289,17 @@ public class InstanceMetadata {
 
 	public void setStaticDescription(TextTemplate staticDescription) {
 		this.staticDescription = staticDescription;
+	}
+
+	public void makeStatic(String name) {
+		this.staticName = name;
+	}
+	
+	public boolean isStatic() {
+		return this.staticName!=null;
+	}
+
+	public String getStaticName() {
+		return staticName;
 	}
 }

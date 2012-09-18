@@ -32,6 +32,9 @@ public class UserEntity extends org.instantlogic.fabric.model.Entity<org.instant
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.example.izzy.User, java.lang.String, java.lang.String>(
 			"username", INSTANCE, java.lang.String.class
 		) {
+			{
+				dataType.put("category", "text");
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.example.izzy.User, java.lang.String> get(org.instantlogic.example.izzy.User instance) {

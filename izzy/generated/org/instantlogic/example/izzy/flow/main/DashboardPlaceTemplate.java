@@ -33,33 +33,33 @@ public class DashboardPlaceTemplate extends org.instantlogic.interaction.flow.Pl
 
 	
 	private static org.instantlogic.interaction.page.FragmentTemplate CONTENT = 
-        new org.instantlogic.interaction.page.FragmentTemplate("F7P3F1", "Page")      
+        new org.instantlogic.interaction.page.FragmentTemplate("F7P1F1", "Page")      
         .putChildren("mainContent",
-                new org.instantlogic.interaction.page.FragmentTemplate("F7P3F1P1F1", "Table")      
+                new org.instantlogic.interaction.page.FragmentTemplate("F7P1F1P1F1", "Table")      
                 .putChildren("columns",
-                        new org.instantlogic.interaction.page.FragmentTemplate("F7P3F1P1F1P1F1", "Column"),
-                        new org.instantlogic.interaction.page.FragmentTemplate("F7P3F1P1F1P1F2", "Column")      
+                        new org.instantlogic.interaction.page.FragmentTemplate("F7P1F1P1F1P1F1", "Column"),
+                        new org.instantlogic.interaction.page.FragmentTemplate("F7P1F1P1F1P1F2", "Column")      
                         .putText("header", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Headline"))
 )
                 )
       
                 .putChildren("rows",
                         new org.instantlogic.interaction.page.SelectionElement(createDeduction0()
-,                                new org.instantlogic.interaction.page.FragmentTemplate("F7P3F1P1F1P2S1F2", "Row")      
+,                                new org.instantlogic.interaction.page.FragmentTemplate("F7P1F1P1F1P2S1F2", "Row")      
                                 .putChildren("cells",
-                                        new org.instantlogic.interaction.page.FragmentTemplate("F7P3F1P1F1P2S1F2P1F1", "Link")      .setEvent(org.instantlogic.example.izzy.event.IssueDetailsEvent.INSTANCE)
+                                        new org.instantlogic.interaction.page.FragmentTemplate("F7P1F1P1F1P2S1F2P1F1", "Link")      .setEvent(org.instantlogic.example.izzy.event.IssueDetailsEvent.INSTANCE)
       
                                         .putChildren("content",
-                                                new org.instantlogic.interaction.page.FragmentTemplate("F7P3F1P1F1P2S1F2P1F1P1F1", "Cell")      
+                                                new org.instantlogic.interaction.page.FragmentTemplate("F7P1F1P1F1P2S1F2P1F1P1F1", "Cell")      
                                                 .putChildren("content",
-                                                        new org.instantlogic.interaction.page.FragmentTemplate("F7P3F1P1F1P2S1F2P1F1P1F1P1F1", "Paragraph")      
+                                                        new org.instantlogic.interaction.page.FragmentTemplate("F7P1F1P1F1P2S1F2P1F1P1F1P1F1", "Paragraph")      
                                                         .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction1()))
 )
                                                 )
 ,
-                                                new org.instantlogic.interaction.page.FragmentTemplate("F7P3F1P1F1P2S1F2P1F1P1F2", "Cell")      
+                                                new org.instantlogic.interaction.page.FragmentTemplate("F7P1F1P1F1P2S1F2P1F1P1F2", "Cell")      
                                                 .putChildren("content",
-                                                        new org.instantlogic.interaction.page.FragmentTemplate("F7P3F1P1F1P2S1F2P1F1P1F2P1F1", "Paragraph")      
+                                                        new org.instantlogic.interaction.page.FragmentTemplate("F7P1F1P1F1P2S1F2P1F1P1F2P1F1", "Paragraph")      
                                                         .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction2()))
 )
                                                 )
@@ -68,7 +68,7 @@ public class DashboardPlaceTemplate extends org.instantlogic.interaction.flow.Pl
 )
                 )
 ,
-                new org.instantlogic.interaction.page.FragmentTemplate("F7P3F1P1F2", "Button")      .setEvent(org.instantlogic.example.izzy.event.CreateIssueEvent.INSTANCE)
+                new org.instantlogic.interaction.page.FragmentTemplate("F7P1F1P1F2", "Button")      .setEvent(org.instantlogic.example.izzy.event.CreateIssueEvent.INSTANCE)
       
                 .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Create issue"))
 )

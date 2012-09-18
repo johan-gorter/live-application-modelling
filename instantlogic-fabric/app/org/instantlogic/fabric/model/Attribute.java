@@ -1,5 +1,8 @@
 package org.instantlogic.fabric.model;
 
+import java.util.List;
+import java.util.Map;
+
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.deduction.AttributeDeduction;
 import org.instantlogic.fabric.deduction.Deduction;
@@ -30,6 +33,13 @@ public abstract class Attribute<I extends Instance, Value extends Object, Item e
 		return false;
 	}
 
+	/**
+	 * @return a list of data type characteristics, like [category = number, exactRounding = true, decimalPlaces = 2, unitPrefix = $] or [category = text, multiline = true, formatted = true]
+	 */
+	public Map<String, Object> getDataType() {
+		return null;
+	}
+	
 	public boolean isReadOnly() {
 		return false;
 	}
