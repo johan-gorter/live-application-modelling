@@ -132,23 +132,26 @@ public class IzzyGenerator extends Design {
 
 	private static void createIssueDetailsPlaceTemplate() {
 		DeductionSchemeDesign number, headline;
-		FragmentTemplateDesign headlineInput;
+		FragmentTemplateDesign headlineInput, descriptionInput;
 		issueDetailsPlaceTemplate = new PlaceTemplateDesign("issueDetails")
 			.setOwner(issueFlow)
 			.setContent(new FragmentTemplateDesign("Page")
 				.setChildren("mainContent", 
 					new FragmentTemplateDesign("Paragraph")
-						.setText("text", new TextTemplateDesign().addToUntranslated(
-							new StringTemplateDesign().setDeduction(number = new DeductionSchemeDesign()))),
-					new FragmentTemplateDesign("Paragraph")
-						.setText("text", new TextTemplateDesign().addToUntranslated(
-							new StringTemplateDesign().setDeduction(headline = new DeductionSchemeDesign()))),
-					headlineInput = new FragmentTemplateDesign("Input")
+						.setText("text", new TextTemplateDesign()
+							.addToUntranslated(new StringTemplateDesign().setConstantText("Issue "))
+							.addToUntranslated(new StringTemplateDesign().setDeduction(number = new DeductionSchemeDesign()))
+							.addToUntranslated(new StringTemplateDesign().setConstantText(": "))
+							.addToUntranslated(new StringTemplateDesign().setDeduction(headline = new DeductionSchemeDesign()))
+						),
+					headlineInput = new FragmentTemplateDesign("Input"),
+					descriptionInput = new FragmentTemplateDesign("Input")
 				)
 			);
 		number.deduceAttribute(issueNumber);
 		headline.deduceAttribute(issueHeadline);
 		headlineInput.setEntity(issue).setAttribute(issueHeadline);
+		descriptionInput.setEntity(issue).setAttribute(issueDescription);
 	}
 
 	private static void createDashboardPlaceTemplate() {

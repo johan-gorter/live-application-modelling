@@ -16,7 +16,7 @@ public class CreateIssueFlow extends AbstractCreateIssueFlow {
 		Integer lastIssueNumber = project.getLastIssueNumber();
 		project.setLastIssueNumber(lastIssueNumber+1);
 		issue.setNumber(lastIssueNumber+1);
-		issue.setHeadline("Headline-"+issue.getMetadata().getInstanceId()); // TODO: remove
+		issue.setHeadline("New issue");
 		project.addToIssues(issue);
 		return new FlowEventOccurrence(IssueDetailsEvent.INSTANCE, issue);
 	}

@@ -5,17 +5,29 @@ YUI.add('instantlogic', function (Y) {
 	
     var ns = Y.namespace('instantlogic');
 
-    ns.Engine = function (application, caseId, travelerId, presenceNode, placeNode, fragmentNamespaces) {
+    ns.createBaseConfiguration = function(YUI) {
+    	return {
+    		fragmentNamespaces: [YUI.instantlogic.fragments, YUI.instantlogic.presence],
+    		createAnswer: YUI.instantlogic.answers.createAnswer
+    	}
+    }
+    
+    
+    ns.Engine = function (application, caseId, travelerId, presenceNode, placeNode, configuration) {
     	this.application = application;
     	this.caseId = caseId;
     	this.presenceNode = presenceNode;
         this.placeNode = placeNode;
         this.travelerId = travelerId;
-        if (!fragmentNamespaces || fragmentNamespaces.length == 0) Y.error('No fragment namespaces');
-        Y.each(fragmentNamespaces, function (fns) {
+        if (!configuration.fragmentNamespaces || configuration.fragmentNamespaces.length == 0) Y.error('No fragment namespaces');
+        Y.each(configuration.fragmentNamespaces, function (fns) {
             if (!fns) Y.error('Undefined namespace');
         });
-        this.fragmentNamespaces = fragmentNamespaces;
+        this.fragmentNamespaces = configuration.fragmentNamespaces;
+        if (!configuration.createAnswer) {
+        	Y.error('undefined createAnswer');
+        }
+        this.createAnswerFunction = configuration.createAnswer;
         this.state = 'not started';
         this.outstandingRequestCount = 0;
         this.outstandingRequests = {};
@@ -167,6 +179,10 @@ YUI.add('instantlogic', function (Y) {
                 }
             }
             return new ns.MessageFragment(parentNode, engine || this, 'No fragmentnamespace provides a fragment called ' + name, 'error');
+        },
+        
+        createAnswer: function(model) {
+        	return this.createAnswerFunction(model);
         },
         
         sendEnter: function() {
@@ -446,5 +462,69 @@ YUI.add('instantlogic', function (Y) {
         	return false;
         }
     });
+    
+    /*
+     * Create a subclass of Fragment or one of its subclasses, the options parameter can contain the following:
+     * - baseClass: optional, choose another baseClass than Y.instantlolgic.Fragment
+     * - overrides: optional, object containing methods to be overridden in/added to the baseClass 
+     * - createMarkup: function for creating the markup, this markup will be appended to this.parentNode
+     * - texts: function(model), optional, must return an array of tuples with [0]: the div from the markup
+     * and [1]: the text from the model to render there
+     * - fragmentLists: function(model), optional, must return an array of tuples with [0]: the div from the markup 
+     * and [1]: the list of elements in the model to render there
+     * - postInit: function(model), optional, runs after the init phase has been completed
+     * - postUpdate: function(newModel, diff), optional, runs after the update phase has been completed
+     * */
+    ns.createFragment = function(options) {
+    	var constructor = function(parentNode, engine) {
+    		constructor.superclass.constructor.apply(this, arguments);
+    	}
+    	Y.extend(constructor, options.baseClass || Y.instantlogic.Fragment, options.overrides);
+    	constructor.prototype.init = function(model) {
+    		constructor.superclass.init.call(this, model);
+    		this.markup = options.createMarkup.apply(this);
+    		this.parentNode.appendChild(this.markup);
+    		if (options.fragmentLists) {
+    			this.fragmentLists = [];
+    			var results = options.fragmentLists.call(this, model);
+    			for (var i=0;i<results.length;i++) {
+    				var list = new FragmentList(results[i][0], this.engine);
+    				list.init(results[i][1]);
+    				this.fragmentLists.push(list);
+    			}
+    		}
+    		if (options.texts) {
+    			var results = options.texts.call(this, model);
+    			for (var i=0;i<results.length;i++) {
+    				results[i][0].set('text', results[i][1] || '');
+    			}
+    		}
+    		if (options.postInit) {
+    			options.postInit.call(this, model);
+    		}
+    	}
+    	constructor.prototype.update = function(newModel, diff) {
+    		constructor.superclass.update.call(this, newModel, diff);
+    		if (this.fragmentLists) {
+    			var results = options.fragmentLists.call(this, newModel);
+    			for (var i=0;i<results.length;i++) {
+    				this.fragmentLists[i].update(results[i][1], diff);
+    			}
+    		}
+    		if (options.texts) {
+    			var newResults = options.texts.call(this, newModel);
+    			var oldResults = options.texts.call(this, this.oldModel);
+    			for (var i=0;i<newResults.length;i++) {
+    				if (newResults[i][1]!=oldResults[i][1]) {
+    					newResults[i][0].set('text', newResults[i][1] || '');
+    				}
+    			}
+    		}
+    		if (options.postUpdate) {
+    			options.postUpdate.call(this, newModel, diff);
+    		}
+    	}
+    	return constructor;
+    };
     
 }, '0.7.0', { requires: ['io-base', 'node', 'oop', 'panel', 'json', 'slider', 'html', 'history'] });
