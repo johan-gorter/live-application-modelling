@@ -13,6 +13,15 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 		return org.instantlogic.designer.entity.DesignEntity.INSTANCE;
 	}
 
+	private static final org.instantlogic.fabric.model.Entity<?>[] EXTENSIONS = new org.instantlogic.fabric.model.Entity<?>[] {
+		org.instantlogic.designer.entity.RelationDesignEntity.INSTANCE
+	};
+	 
+	@Override
+	public org.instantlogic.fabric.model.Entity[] extensions() {
+		return EXTENSIONS;
+	}
+	
 	@Override
 	public org.instantlogic.designer.AttributeDesign createInstance() {
 		return new org.instantlogic.designer.AttributeDesign();
@@ -43,6 +52,9 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.AttributeDesign, java.lang.Boolean, java.lang.Boolean>(
 			"readOnly", INSTANCE, java.lang.Boolean.class
 		) {
+			{
+				dataType.put("category", "boolean");
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.AttributeDesign, java.lang.Boolean> get(org.instantlogic.designer.AttributeDesign instance) {

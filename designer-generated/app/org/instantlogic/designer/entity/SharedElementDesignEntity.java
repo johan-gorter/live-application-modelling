@@ -13,6 +13,7 @@ public class SharedElementDesignEntity extends org.instantlogic.fabric.model.Ent
 		return org.instantlogic.designer.entity.ElementDesignEntity.INSTANCE;
 	}
 
+	
 	@Override
 	public org.instantlogic.designer.SharedElementDesign createInstance() {
 		return new org.instantlogic.designer.SharedElementDesign();

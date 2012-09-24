@@ -33,6 +33,7 @@ public class DataCategoryDesignEntity extends org.instantlogic.fabric.model.Enti
 	}
 
 
+	
 	@Override
 	public org.instantlogic.designer.DataCategoryDesign createInstance() {
 		return new org.instantlogic.designer.DataCategoryDesign();

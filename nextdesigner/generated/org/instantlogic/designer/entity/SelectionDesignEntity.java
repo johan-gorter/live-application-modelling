@@ -13,6 +13,7 @@ public class SelectionDesignEntity extends org.instantlogic.fabric.model.Entity<
 		return org.instantlogic.designer.entity.ElementDesignEntity.INSTANCE;
 	}
 
+	
 	@Override
 	public org.instantlogic.designer.SelectionDesign createInstance() {
 		return new org.instantlogic.designer.SelectionDesign();

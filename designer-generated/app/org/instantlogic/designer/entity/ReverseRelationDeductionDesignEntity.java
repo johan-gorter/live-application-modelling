@@ -13,6 +13,7 @@ public class ReverseRelationDeductionDesignEntity extends org.instantlogic.fabri
 		return org.instantlogic.designer.entity.DeductionDesignEntity.INSTANCE;
 	}
 
+	
 	@Override
 	public org.instantlogic.designer.ReverseRelationDeductionDesign createInstance() {
 		return new org.instantlogic.designer.ReverseRelationDeductionDesign();

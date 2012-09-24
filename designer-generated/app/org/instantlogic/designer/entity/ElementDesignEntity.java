@@ -13,6 +13,18 @@ public class ElementDesignEntity extends org.instantlogic.fabric.model.Entity<or
 		return org.instantlogic.designer.entity.DesignEntity.INSTANCE;
 	}
 
+	private static final org.instantlogic.fabric.model.Entity<?>[] EXTENSIONS = new org.instantlogic.fabric.model.Entity<?>[] {
+		org.instantlogic.designer.entity.FragmentTemplateDesignEntity.INSTANCE,
+		org.instantlogic.designer.entity.IfElseDesignEntity.INSTANCE,
+		org.instantlogic.designer.entity.SelectionDesignEntity.INSTANCE,
+		org.instantlogic.designer.entity.SharedElementDesignEntity.INSTANCE
+	};
+	 
+	@Override
+	public org.instantlogic.fabric.model.Entity[] extensions() {
+		return EXTENSIONS;
+	}
+	
 	@Override
 	public org.instantlogic.designer.ElementDesign createInstance() {
 		return new org.instantlogic.designer.ElementDesign();

@@ -16,8 +16,9 @@ Interaction
 
 --------- Uitgangspunten ------------
 
-1) Achieve the highest level of cooperation and interactivity possible in both using and designing applications
-2) Make designing applications as non-technical as possible
+OBJECTIVES
+1) Create cooperative and interactive web applications
+2) Make web application creation as non-technical as possible by using modeling techniques and business-rules 
 3) Easy integration with programming
 
 

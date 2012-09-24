@@ -13,6 +13,16 @@ public class FlowNodeBaseDesignEntity extends org.instantlogic.fabric.model.Enti
 		return org.instantlogic.designer.entity.DesignEntity.INSTANCE;
 	}
 
+	private static final org.instantlogic.fabric.model.Entity<?>[] EXTENSIONS = new org.instantlogic.fabric.model.Entity<?>[] {
+		org.instantlogic.designer.entity.PlaceTemplateDesignEntity.INSTANCE,
+		org.instantlogic.designer.entity.SubFlowDesignEntity.INSTANCE
+	};
+	 
+	@Override
+	public org.instantlogic.fabric.model.Entity[] extensions() {
+		return EXTENSIONS;
+	}
+	
 	@Override
 	public org.instantlogic.designer.FlowNodeBaseDesign createInstance() {
 		return new org.instantlogic.designer.FlowNodeBaseDesign();

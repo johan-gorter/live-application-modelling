@@ -13,6 +13,7 @@ public class AttributeDeductionDesignEntity extends org.instantlogic.fabric.mode
 		return org.instantlogic.designer.entity.DeductionDesignEntity.INSTANCE;
 	}
 
+	
 	@Override
 	public org.instantlogic.designer.AttributeDeductionDesign createInstance() {
 		return new org.instantlogic.designer.AttributeDeductionDesign();

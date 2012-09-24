@@ -11,7 +11,7 @@ public class EntityFlow extends org.instantlogic.interaction.flow.Flow {
 	private static final org.instantlogic.interaction.flow.FlowEdge[] EDGES = new org.instantlogic.interaction.flow.FlowEdge[]{
 		new org.instantlogic.interaction.flow.FlowEdge(
 			null, 
-			null,
+			org.instantlogic.designer.event.EntityDetailsEvent.INSTANCE,
 			org.instantlogic.designer.flow.entity.EntityDetailsPlaceTemplate.INSTANCE
 		),
 	};

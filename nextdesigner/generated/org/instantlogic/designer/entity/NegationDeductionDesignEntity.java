@@ -13,6 +13,7 @@ public class NegationDeductionDesignEntity extends org.instantlogic.fabric.model
 		return org.instantlogic.designer.entity.DeductionDesignEntity.INSTANCE;
 	}
 
+	
 	@Override
 	public org.instantlogic.designer.NegationDeductionDesign createInstance() {
 		return new org.instantlogic.designer.NegationDeductionDesign();

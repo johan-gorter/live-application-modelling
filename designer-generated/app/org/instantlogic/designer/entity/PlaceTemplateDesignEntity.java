@@ -13,6 +13,7 @@ public class PlaceTemplateDesignEntity extends org.instantlogic.fabric.model.Ent
 		return org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.INSTANCE;
 	}
 
+	
 	@Override
 	public org.instantlogic.designer.PlaceTemplateDesign createInstance() {
 		return new org.instantlogic.designer.PlaceTemplateDesign();
@@ -52,12 +53,31 @@ public class PlaceTemplateDesignEntity extends org.instantlogic.fabric.model.Ent
 			
 		};
 	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.PlaceTemplateDesign, org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.TextTemplateDesign> title
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.PlaceTemplateDesign, org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.TextTemplateDesign>(
+			"title", INSTANCE, org.instantlogic.designer.entity.TextTemplateDesignEntity.INSTANCE, org.instantlogic.designer.TextTemplateDesign.class, 
+			org.instantlogic.designer.entity.TextTemplateDesignEntity.titleOfPlaceTemplate
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.PlaceTemplateDesign, org.instantlogic.designer.TextTemplateDesign> get(
+					org.instantlogic.designer.PlaceTemplateDesign instance) {
+				return instance.getTitleRelationValue();
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+			
+		};
+	
 	// Reverse relations
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		content,
+		title,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 	};

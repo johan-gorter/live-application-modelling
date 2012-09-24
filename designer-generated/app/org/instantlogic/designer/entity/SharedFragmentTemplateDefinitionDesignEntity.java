@@ -13,6 +13,7 @@ public class SharedFragmentTemplateDefinitionDesignEntity extends org.instantlog
 		return org.instantlogic.designer.entity.DesignEntity.INSTANCE;
 	}
 
+	
 	@Override
 	public org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign createInstance() {
 		return new org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign();

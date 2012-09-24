@@ -9,6 +9,7 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 	}
 
 
+	
 	@Override
 	public org.instantlogic.designer.ApplicationDesign createInstance() {
 		return new org.instantlogic.designer.ApplicationDesign();
@@ -32,6 +33,8 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.ApplicationDesign, java.lang.Boolean, java.lang.Boolean>(
 			"isCustomized", INSTANCE, java.lang.Boolean.class
 		) {
+			{
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.ApplicationDesign, java.lang.Boolean> get(org.instantlogic.designer.ApplicationDesign instance) {
@@ -43,6 +46,8 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.ApplicationDesign, java.lang.String, java.lang.String>(
 			"name", INSTANCE, java.lang.String.class
 		) {
+			{
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.ApplicationDesign, java.lang.String> get(org.instantlogic.designer.ApplicationDesign instance) {
@@ -54,6 +59,8 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.ApplicationDesign, java.lang.String, java.lang.String>(
 			"rootPackageName", INSTANCE, java.lang.String.class
 		) {
+			{
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.ApplicationDesign, java.lang.String> get(org.instantlogic.designer.ApplicationDesign instance) {
@@ -65,6 +72,8 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.ApplicationDesign, java.lang.String, java.lang.String>(
 			"sourcePath", INSTANCE, java.lang.String.class
 		) {
+			{
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.ApplicationDesign, java.lang.String> get(org.instantlogic.designer.ApplicationDesign instance) {

@@ -32,7 +32,10 @@ public class EntityGenerator extends AbstractGenerator {
 
 		model.rootPackageName = context.rootPackageName;
 		if (entityDesign.getExtendsFrom()!=null) {
-			model.extendsFrom = entityDesign.getExtendsFrom().getName();
+			model.extendsFrom = entityDesign.getExtendsFrom().getTechnicalNameCapitalized();
+		}
+		for (EntityDesign extension : entityDesign.getExtensions()) {
+			model.extensions.add(extension.getTechnicalNameCapitalized());
 		}
 		for (AttributeDesign attributeDesign: entityDesign.getAttributes()) {
 			EntityClassModel.Attribute attribute = new EntityClassModel.Attribute();

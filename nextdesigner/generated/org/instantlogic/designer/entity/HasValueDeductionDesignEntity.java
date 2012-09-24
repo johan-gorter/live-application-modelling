@@ -13,6 +13,7 @@ public class HasValueDeductionDesignEntity extends org.instantlogic.fabric.model
 		return org.instantlogic.designer.entity.DeductionDesignEntity.INSTANCE;
 	}
 
+	
 	@Override
 	public org.instantlogic.designer.HasValueDeductionDesign createInstance() {
 		return new org.instantlogic.designer.HasValueDeductionDesign();

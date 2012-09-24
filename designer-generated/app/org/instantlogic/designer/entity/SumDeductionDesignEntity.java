@@ -13,6 +13,7 @@ public class SumDeductionDesignEntity extends org.instantlogic.fabric.model.Enti
 		return org.instantlogic.designer.entity.DeductionDesignEntity.INSTANCE;
 	}
 
+	
 	@Override
 	public org.instantlogic.designer.SumDeductionDesign createInstance() {
 		return new org.instantlogic.designer.SumDeductionDesign();

@@ -13,6 +13,7 @@ public class IfElseDesignEntity extends org.instantlogic.fabric.model.Entity<org
 		return org.instantlogic.designer.entity.ElementDesignEntity.INSTANCE;
 	}
 
+	
 	@Override
 	public org.instantlogic.designer.IfElseDesign createInstance() {
 		return new org.instantlogic.designer.IfElseDesign();

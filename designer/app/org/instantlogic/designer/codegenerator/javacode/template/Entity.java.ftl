@@ -24,6 +24,19 @@ public class ${technicalNameCapitalized}Entity extends org.instantlogic.fabric.m
 	}
 	</#if>
 
+	<#if extensions?size != 0>
+	private static final org.instantlogic.fabric.model.Entity<?>[] EXTENSIONS = new org.instantlogic.fabric.model.Entity<?>[] {
+		<#list extensions as extension>
+		${rootPackageName}.entity.${extension}Entity.INSTANCE<#if extension_has_next>,</#if>
+		</#list>
+	};
+	 
+	@Override
+	public org.instantlogic.fabric.model.Entity[] extensions() {
+		return EXTENSIONS;
+	}
+	</#if>
+	
 	@Override
 	public ${rootPackageName}.${technicalNameCapitalized} createInstance() {
 		return new ${rootPackageName}.${technicalNameCapitalized}();

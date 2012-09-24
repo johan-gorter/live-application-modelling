@@ -12,6 +12,8 @@ import org.instantlogic.fabric.Instance;
  */
 public abstract class Entity<I extends Instance> extends Concept {
 
+	private static final Entity<?>[] NO_ENTITIES = new Entity[0];
+
 	public static boolean extendsFrom(Entity<?> entity, Entity<?> from) {
 		if (entity==from) return true;
 		if (entity==null) return false;
@@ -84,6 +86,10 @@ public abstract class Entity<I extends Instance> extends Concept {
 	
 	public Entity<?> extendsEntity() {
 		return null;
+	}
+
+	public Entity<?>[] extensions() {
+		return NO_ENTITIES;
 	}
 	
 	public abstract Attribute<I, ? extends Object, ? extends Object>[] getLocalAttributes();

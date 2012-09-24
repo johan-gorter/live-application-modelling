@@ -134,6 +134,7 @@ public class EntityClassModel extends AbstractClassModel {
 	}
 
 	public String extendsFrom;
+	public final List<String> extensions = new ArrayList<String>();
 	public final List<StaticInstance> staticInstances = new ArrayList<StaticInstance>();
 	public final List<Attribute> attributes = new ArrayList<Attribute>();
 	public final List<Relation> relations = new ArrayList<Relation>();
@@ -142,6 +143,9 @@ public class EntityClassModel extends AbstractClassModel {
 	private String internalName;
 	private String internalEntityName;
 	
+	public List<String> getExtensions() {
+		return extensions;
+	}
 	public List<Attribute> getAttributes() {
 		return attributes;
 	}

@@ -13,6 +13,7 @@ public class EventDesignEntity extends org.instantlogic.fabric.model.Entity<org.
 		return org.instantlogic.designer.entity.DesignEntity.INSTANCE;
 	}
 
+	
 	@Override
 	public org.instantlogic.designer.EventDesign createInstance() {
 		return new org.instantlogic.designer.EventDesign();

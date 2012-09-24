@@ -13,6 +13,7 @@ public class SubFlowDesignEntity extends org.instantlogic.fabric.model.Entity<or
 		return org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.INSTANCE;
 	}
 
+	
 	@Override
 	public org.instantlogic.designer.SubFlowDesign createInstance() {
 		return new org.instantlogic.designer.SubFlowDesign();
