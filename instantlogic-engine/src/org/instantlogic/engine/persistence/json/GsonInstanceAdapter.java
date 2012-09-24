@@ -12,6 +12,7 @@ import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Attribute;
 import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.fabric.model.Relation;
+import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.value.AttributeValue;
 import org.instantlogic.fabric.value.AttributeValues;
 import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
@@ -73,6 +74,8 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 							if (relation.isOwner()) {
 								JsonElement childElement = context.serialize(targetInstance);
 								values.add(childElement);
+							} else if (targetInstance.getMetadata().isStatic()) {
+								values.add(serializeStaticInstance(targetInstance));
 							} else {
 								values.add(new JsonPrimitive(targetInstance.getMetadata().getInstanceId()));
 							}
@@ -83,6 +86,8 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 						if (relation.isOwner()) {
 							JsonElement childElement = context.serialize(targetInstance);
 							result.add(relation.getName(), childElement);
+						} else if (targetInstance.getMetadata().isStatic()) {
+							result.add(relation.getName(), serializeStaticInstance(targetInstance));
 						} else {
 							result.add(relation.getName(), new JsonPrimitive(targetInstance.getMetadata().getInstanceId()));
 						}
@@ -178,12 +183,21 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 						if (relation.isMultivalue()) {
 							RelationValues values = (RelationValues) relationValue;
 							for (JsonElement item : ((JsonArray) value)) {
-								String itemId = item.getAsString();
-								values.addValue(instances.get(itemId));
+								if (item instanceof JsonObject) {
+									// probably a static instance
+									values.addValue(deserializeStaticInstance((JsonObject)item, result.getMetadata().getCaseAdministration()));
+								} else {
+									String itemId = item.getAsString(); // Id of another instance
+									values.addValue(instances.get(itemId));
+								}
 							}
 						} else {
-							String itemId = value.getAsString();
-							((RelationValue)relationValue).setValue(instances.get(itemId));
+							if (value instanceof JsonObject) {
+								((RelationValue)relationValue).setValue(deserializeStaticInstance((JsonObject)value, result.getMetadata().getCaseAdministration()));
+							} else {
+								String itemId = value.getAsString();
+								((RelationValue)relationValue).setValue(instances.get(itemId));
+							}
 						}
 					} else {
 						// Recurse
@@ -203,6 +217,20 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 				}
 			}
 		}
+	}
+
+	private Instance deserializeStaticInstance(JsonObject value, CaseAdministration caseAdministration) {
+		String entityName = value.get("entityName").getAsString();
+		Entity<?> entity = caseAdministration.getAllEntities().get(entityName);
+		String instanceName = value.get("instanceName").getAsString();
+		return entity.getStaticInstances().get(instanceName);
+	}
+	
+	private JsonElement serializeStaticInstance(Instance instance) {
+		JsonObject result = new JsonObject();
+		result.addProperty("instanceName", instance.getMetadata().getStaticName());
+		result.addProperty("entityName", instance.getMetadata().getEntity().getName());
+		return result;
 	}
 
 	private void setMultivalueRelation(Relation relation, RelationValues relationValue, JsonElement value, Instance owner, Instance caseInstance, Map<String, Instance> instances) {

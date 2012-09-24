@@ -13,6 +13,7 @@ public class ConstantDeductionDesignEntity extends org.instantlogic.fabric.model
 		return org.instantlogic.designer.entity.DeductionDesignEntity.INSTANCE;
 	}
 
+	
 	@Override
 	public org.instantlogic.designer.ConstantDeductionDesign createInstance() {
 		return new org.instantlogic.designer.ConstantDeductionDesign();
@@ -36,6 +37,8 @@ public class ConstantDeductionDesignEntity extends org.instantlogic.fabric.model
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.ConstantDeductionDesign, java.lang.Object, java.lang.Object>(
 			"value", INSTANCE, java.lang.Object.class
 		) {
+			{
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.ConstantDeductionDesign, java.lang.Object> get(org.instantlogic.designer.ConstantDeductionDesign instance) {

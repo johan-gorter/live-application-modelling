@@ -13,6 +13,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	}
 
 
+	
 	@Override
 	public org.instantlogic.designer.DataTypeDesign createInstance() {
 		return new org.instantlogic.designer.DataTypeDesign();
@@ -71,6 +72,8 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.DataTypeDesign, java.lang.Boolean, java.lang.Boolean>(
 			"exactRounding", INSTANCE, java.lang.Boolean.class
 		) {
+			{
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.DataTypeDesign, java.lang.Boolean> get(org.instantlogic.designer.DataTypeDesign instance) {
@@ -82,6 +85,8 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.DataTypeDesign, java.lang.Boolean, java.lang.Boolean>(
 			"formatted", INSTANCE, java.lang.Boolean.class
 		) {
+			{
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.DataTypeDesign, java.lang.Boolean> get(org.instantlogic.designer.DataTypeDesign instance) {
@@ -93,6 +98,8 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.DataTypeDesign, java.lang.String, java.lang.String>(
 			"javaClassName", INSTANCE, java.lang.String.class
 		) {
+			{
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.DataTypeDesign, java.lang.String> get(org.instantlogic.designer.DataTypeDesign instance) {
@@ -113,6 +120,8 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.DataTypeDesign, java.lang.Boolean, java.lang.Boolean>(
 			"multiLine", INSTANCE, java.lang.Boolean.class
 		) {
+			{
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.DataTypeDesign, java.lang.Boolean> get(org.instantlogic.designer.DataTypeDesign instance) {
@@ -124,6 +133,8 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.DataTypeDesign, java.lang.Boolean, java.lang.Boolean>(
 			"multivalue", INSTANCE, java.lang.Boolean.class
 		) {
+			{
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.DataTypeDesign, java.lang.Boolean> get(org.instantlogic.designer.DataTypeDesign instance) {
@@ -153,6 +164,8 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.DataTypeDesign, java.lang.Boolean, java.lang.Boolean>(
 			"percentage", INSTANCE, java.lang.Boolean.class
 		) {
+			{
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.DataTypeDesign, java.lang.Boolean> get(org.instantlogic.designer.DataTypeDesign instance) {
@@ -164,6 +177,8 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.DataTypeDesign, java.lang.Boolean, java.lang.Boolean>(
 			"wholeNumber", INSTANCE, java.lang.Boolean.class
 		) {
+			{
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.DataTypeDesign, java.lang.Boolean> get(org.instantlogic.designer.DataTypeDesign instance) {

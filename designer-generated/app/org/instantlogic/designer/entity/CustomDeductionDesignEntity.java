@@ -13,6 +13,7 @@ public class CustomDeductionDesignEntity extends org.instantlogic.fabric.model.E
 		return org.instantlogic.designer.entity.DeductionDesignEntity.INSTANCE;
 	}
 
+	
 	@Override
 	public org.instantlogic.designer.CustomDeductionDesign createInstance() {
 		return new org.instantlogic.designer.CustomDeductionDesign();
@@ -36,6 +37,8 @@ public class CustomDeductionDesignEntity extends org.instantlogic.fabric.model.E
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.CustomDeductionDesign, java.lang.String, java.lang.String>(
 			"implementationClassName", INSTANCE, java.lang.String.class
 		) {
+			{
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.CustomDeductionDesign, java.lang.String> get(org.instantlogic.designer.CustomDeductionDesign instance) {

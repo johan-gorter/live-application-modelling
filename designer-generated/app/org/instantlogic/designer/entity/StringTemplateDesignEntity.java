@@ -9,6 +9,7 @@ public class StringTemplateDesignEntity extends org.instantlogic.fabric.model.En
 	}
 
 
+	
 	@Override
 	public org.instantlogic.designer.StringTemplateDesign createInstance() {
 		return new org.instantlogic.designer.StringTemplateDesign();
@@ -32,6 +33,8 @@ public class StringTemplateDesignEntity extends org.instantlogic.fabric.model.En
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.StringTemplateDesign, java.lang.String, java.lang.String>(
 			"constantText", INSTANCE, java.lang.String.class
 		) {
+			{
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.StringTemplateDesign, java.lang.String> get(org.instantlogic.designer.StringTemplateDesign instance) {

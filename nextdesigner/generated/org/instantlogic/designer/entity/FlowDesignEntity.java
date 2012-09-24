@@ -13,6 +13,7 @@ public class FlowDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 		return org.instantlogic.designer.entity.DesignEntity.INSTANCE;
 	}
 
+	
 	@Override
 	public org.instantlogic.designer.FlowDesign createInstance() {
 		return new org.instantlogic.designer.FlowDesign();

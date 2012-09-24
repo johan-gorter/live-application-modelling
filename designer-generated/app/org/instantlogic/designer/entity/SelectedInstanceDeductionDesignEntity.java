@@ -13,6 +13,7 @@ public class SelectedInstanceDeductionDesignEntity extends org.instantlogic.fabr
 		return org.instantlogic.designer.entity.DeductionDesignEntity.INSTANCE;
 	}
 
+	
 	@Override
 	public org.instantlogic.designer.SelectedInstanceDeductionDesign createInstance() {
 		return new org.instantlogic.designer.SelectedInstanceDeductionDesign();

@@ -9,6 +9,7 @@ public class StaticInstanceValueDesignEntity extends org.instantlogic.fabric.mod
 	}
 
 
+	
 	@Override
 	public org.instantlogic.designer.StaticInstanceValueDesign createInstance() {
 		return new org.instantlogic.designer.StaticInstanceValueDesign();
@@ -32,6 +33,8 @@ public class StaticInstanceValueDesignEntity extends org.instantlogic.fabric.mod
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.StaticInstanceValueDesign, java.lang.Object, java.lang.Object>(
 			"value", INSTANCE, java.lang.Object.class
 		) {
+			{
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.StaticInstanceValueDesign, java.lang.Object> get(org.instantlogic.designer.StaticInstanceValueDesign instance) {

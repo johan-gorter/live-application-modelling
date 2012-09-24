@@ -9,6 +9,7 @@ public class PropertyDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	}
 
 
+	
 	@Override
 	public org.instantlogic.designer.PropertyDesign createInstance() {
 		return new org.instantlogic.designer.PropertyDesign();
@@ -32,6 +33,8 @@ public class PropertyDesignEntity extends org.instantlogic.fabric.model.Entity<o
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.PropertyDesign, java.lang.String, java.lang.String>(
 			"propertyName", INSTANCE, java.lang.String.class
 		) {
+			{
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.PropertyDesign, java.lang.String> get(org.instantlogic.designer.PropertyDesign instance) {

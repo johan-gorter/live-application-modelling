@@ -9,6 +9,7 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 	}
 
 
+	
 	@Override
 	public org.instantlogic.designer.DeductionSchemeDesign createInstance() {
 		return new org.instantlogic.designer.DeductionSchemeDesign();

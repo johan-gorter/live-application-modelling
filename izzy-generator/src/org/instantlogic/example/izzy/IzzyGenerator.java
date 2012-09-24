@@ -1,6 +1,8 @@
 package org.instantlogic.example.izzy;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 import org.instantlogic.designer.ApplicationDesign;
 import org.instantlogic.designer.AttributeDesign;
@@ -21,6 +23,7 @@ import org.instantlogic.designer.TextTemplateDesign;
 import org.instantlogic.designer.codegenerator.generator.GeneratedClassModels;
 import org.instantlogic.designer.codegenerator.javacode.ApplicationJavacodeGenerator;
 import org.instantlogic.designer.entity.DataCategoryDesignEntity;
+import org.instantlogic.engine.persistence.json.CasePersister;
 
 public class IzzyGenerator extends Design {
 	private static ApplicationDesign izzy;
@@ -45,7 +48,7 @@ public class IzzyGenerator extends Design {
 	private static FlowDesign createIssueFlow;
 	private static AttributeDesign issueDescription;
 
-	public static void main(String[] args) { 
+	public static void main(String[] args) throws IOException { 
 		izzy = new ApplicationDesign();
 		project = new EntityDesign("project").setApplication(izzy);
 		project.addAttribute("last issue number", Integer.class)
@@ -99,9 +102,9 @@ public class IzzyGenerator extends Design {
 		ApplicationJavacodeGenerator.generate(classModelUpdates, new File(izzy.getSourcePath()));
 		
 		// Display the design in json format
-		//OutputStreamWriter writer = new OutputStreamWriter(System.out);
-		//new CasePersister().save(applicationInstance, writer);
-		//writer.flush();
+		OutputStreamWriter writer = new OutputStreamWriter(System.out);
+		new CasePersister().save(izzy, writer);
+		writer.flush();
 	}
 	
 	// Flows

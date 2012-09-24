@@ -15,16 +15,14 @@ public class EntityDetailsPlaceTemplate extends org.instantlogic.interaction.flo
 
 	
 	private static org.instantlogic.interaction.page.FragmentTemplate CONTENT = 
-        new org.instantlogic.interaction.page.FragmentTemplate("F28P1F1", "Page")      
-        .putChildren("headerContent",
-                new org.instantlogic.interaction.page.FragmentTemplate("F28P1F1P1F1", "Heading1")      
-                .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Entity"))
-)
-        )
-      
+        new org.instantlogic.interaction.page.FragmentTemplate("F29P1F1", "Page")      
         .putChildren("mainContent",
-                new org.instantlogic.interaction.page.FragmentTemplate("F28P1F1P2F1", "Paragraph")      
-                .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction0()))
+                new org.instantlogic.interaction.page.FragmentTemplate("F29P1F1P1F1", "Heading1")      
+                .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Entity "),new org.instantlogic.fabric.text.StringTemplate(createDeduction0()))
+)
+,
+                new org.instantlogic.interaction.page.FragmentTemplate("F29P1F1P1F2", "Heading2")      
+                .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Attributes"))
 )
         )
 ; 

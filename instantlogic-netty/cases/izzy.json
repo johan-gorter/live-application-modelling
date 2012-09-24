@@ -1,9 +1,709 @@
 {
   "instanceId": "0",
   "entityName": "ApplicationDesign",
-  "version": 1,
-  "entities": [],
-  "events": [],
-  "flows": [],
+  "version": 0,
+  "name": "izzy",
+  "rootPackageName": "org.instantlogic.example.izzy",
+  "sourcePath": "../izzy/generated",
+  "caseEntity": "E1",
+  "entities": [
+    {
+      "instanceId": "E1",
+      "entityName": "EntityDesign",
+      "name": "project",
+      "attributes": [
+        {
+          "instanceId": "E1A1",
+          "entityName": "AttributeDesign",
+          "name": "last issue number",
+          "dataType": {
+            "instanceId": "E1A1D1",
+            "entityName": "DataTypeDesign",
+            "javaClassName": "java.lang.Integer"
+          },
+          "default": {
+            "instanceId": "E1A1D2",
+            "entityName": "DeductionSchemeDesign",
+            "deductions": [
+              {
+                "instanceId": "E1A1D2C1",
+                "entityName": "ConstantDeductionDesign",
+                "value": 0,
+                "inputs": [],
+                "constantDataType": {
+                  "instanceId": "E1A1D2C1D1",
+                  "entityName": "DataTypeDesign"
+                }
+              }
+            ],
+            "output": "E1A1D2C1"
+          }
+        }
+      ],
+      "dataType": {
+        "instanceId": "E1D4",
+        "entityName": "DataTypeDesign"
+      },
+      "relations": [
+        {
+          "instanceId": "E1R2",
+          "entityName": "RelationDesign",
+          "name": "users",
+          "autoCreate": false,
+          "owner": true,
+          "reverseMultivalue": false,
+          "reverseName": "project",
+          "dataType": {
+            "instanceId": "E1R2D1",
+            "entityName": "DataTypeDesign",
+            "multivalue": true
+          },
+          "to": "E2"
+        },
+        {
+          "instanceId": "E1R3",
+          "entityName": "RelationDesign",
+          "name": "issues",
+          "autoCreate": false,
+          "owner": true,
+          "reverseMultivalue": false,
+          "reverseName": "project",
+          "dataType": {
+            "instanceId": "E1R3D1",
+            "entityName": "DataTypeDesign",
+            "multivalue": true
+          },
+          "to": "E3"
+        }
+      ],
+      "staticInstances": []
+    },
+    {
+      "instanceId": "E2",
+      "entityName": "EntityDesign",
+      "name": "user",
+      "attributes": [
+        {
+          "instanceId": "E2A1",
+          "entityName": "AttributeDesign",
+          "name": "username",
+          "dataType": {
+            "instanceId": "E2A1D1",
+            "entityName": "DataTypeDesign",
+            "dataCategory": {
+              "instanceName": "text",
+              "entityName": "DataCategoryDesign"
+            }
+          }
+        }
+      ],
+      "relations": [],
+      "staticInstances": []
+    },
+    {
+      "instanceId": "E3",
+      "entityName": "EntityDesign",
+      "name": "issue",
+      "attributes": [
+        {
+          "instanceId": "E3A1",
+          "entityName": "AttributeDesign",
+          "name": "number",
+          "dataType": {
+            "instanceId": "E3A1D1",
+            "entityName": "DataTypeDesign",
+            "javaClassName": "java.lang.Integer"
+          }
+        },
+        {
+          "instanceId": "E3A2",
+          "entityName": "AttributeDesign",
+          "name": "headline",
+          "dataType": {
+            "instanceId": "E3A2D1",
+            "entityName": "DataTypeDesign",
+            "dataCategory": {
+              "instanceName": "text",
+              "entityName": "DataCategoryDesign"
+            }
+          }
+        },
+        {
+          "instanceId": "E3A3",
+          "entityName": "AttributeDesign",
+          "name": "description",
+          "dataType": {
+            "instanceId": "E3A3D1",
+            "entityName": "DataTypeDesign",
+            "formatted": true,
+            "multiLine": true,
+            "dataCategory": {
+              "instanceName": "text",
+              "entityName": "DataCategoryDesign"
+            }
+          }
+        }
+      ],
+      "dataType": {
+        "instanceId": "E3D7",
+        "entityName": "DataTypeDesign"
+      },
+      "relations": [
+        {
+          "instanceId": "E3R4",
+          "entityName": "RelationDesign",
+          "name": "reporter",
+          "autoCreate": false,
+          "owner": false,
+          "reverseMultivalue": true,
+          "reverseName": "reported issues",
+          "dataType": {
+            "instanceId": "E3R4D1",
+            "entityName": "DataTypeDesign",
+            "multivalue": false
+          },
+          "to": "E2"
+        },
+        {
+          "instanceId": "E3R5",
+          "entityName": "RelationDesign",
+          "name": "assignee",
+          "autoCreate": false,
+          "owner": false,
+          "reverseMultivalue": true,
+          "reverseName": "assigned issues",
+          "dataType": {
+            "instanceId": "E3R5D1",
+            "entityName": "DataTypeDesign",
+            "multivalue": false
+          },
+          "to": "E2"
+        },
+        {
+          "instanceId": "E3R6",
+          "entityName": "RelationDesign",
+          "name": "comments",
+          "autoCreate": false,
+          "owner": true,
+          "reverseMultivalue": false,
+          "reverseName": "issue",
+          "dataType": {
+            "instanceId": "E3R6D1",
+            "entityName": "DataTypeDesign",
+            "multivalue": true
+          },
+          "to": "E4"
+        }
+      ],
+      "staticInstances": []
+    },
+    {
+      "instanceId": "E4",
+      "entityName": "EntityDesign",
+      "name": "comment",
+      "attributes": [
+        {
+          "instanceId": "E4A1",
+          "entityName": "AttributeDesign",
+          "name": "text",
+          "dataType": {
+            "instanceId": "E4A1D1",
+            "entityName": "DataTypeDesign",
+            "dataCategory": {
+              "instanceName": "text",
+              "entityName": "DataCategoryDesign"
+            }
+          }
+        }
+      ],
+      "dataType": {
+        "instanceId": "E4D2",
+        "entityName": "DataTypeDesign",
+        "formatted": true,
+        "multiLine": true
+      },
+      "relations": [
+        {
+          "instanceId": "E4R3",
+          "entityName": "RelationDesign",
+          "name": "by",
+          "autoCreate": false,
+          "owner": false,
+          "reverseMultivalue": false,
+          "reverseName": "comments",
+          "dataType": {
+            "instanceId": "E4R3D1",
+            "entityName": "DataTypeDesign",
+            "multivalue": false
+          },
+          "to": "E2"
+        }
+      ],
+      "staticInstances": []
+    }
+  ],
+  "events": [
+    {
+      "instanceId": "E5",
+      "entityName": "EventDesign",
+      "name": "create issue",
+      "parameters": []
+    },
+    {
+      "instanceId": "E6",
+      "entityName": "EventDesign",
+      "name": "issue details",
+      "parameters": [
+        "E3"
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "instanceId": "F7",
+      "entityName": "FlowDesign",
+      "name": "main",
+      "edges": [
+        {
+          "instanceId": "F7F4",
+          "entityName": "FlowEdgeDesign",
+          "endNode": "F7S2",
+          "event": "E6",
+          "startNode": "F7P1"
+        },
+        {
+          "instanceId": "F7F5",
+          "entityName": "FlowEdgeDesign",
+          "endNode": "F7S3",
+          "event": "E5",
+          "startNode": "F7P1"
+        }
+      ],
+      "nodes": [
+        {
+          "instanceId": "F7P1",
+          "entityName": "PlaceTemplateDesign",
+          "name": "dashboard",
+          "content": {
+            "instanceId": "F7P1F1",
+            "entityName": "FragmentTemplateDesign",
+            "fragmentTypeName": "Page",
+            "properties": [
+              {
+                "instanceId": "F7P1F1P1",
+                "entityName": "PropertyDesign",
+                "propertyName": "mainContent",
+                "children": [
+                  {
+                    "instanceId": "F7P1F1P1F1",
+                    "entityName": "FragmentTemplateDesign",
+                    "fragmentTypeName": "Table",
+                    "properties": [
+                      {
+                        "instanceId": "F7P1F1P1F1P1",
+                        "entityName": "PropertyDesign",
+                        "propertyName": "columns",
+                        "children": [
+                          {
+                            "instanceId": "F7P1F1P1F1P1F1",
+                            "entityName": "FragmentTemplateDesign",
+                            "fragmentTypeName": "Column",
+                            "properties": []
+                          },
+                          {
+                            "instanceId": "F7P1F1P1F1P1F2",
+                            "entityName": "FragmentTemplateDesign",
+                            "fragmentTypeName": "Column",
+                            "properties": [
+                              {
+                                "instanceId": "F7P1F1P1F1P1F2P1",
+                                "entityName": "PropertyDesign",
+                                "propertyName": "header",
+                                "children": [],
+                                "text": {
+                                  "instanceId": "F7P1F1P1F1P1F2P1T1",
+                                  "entityName": "TextTemplateDesign",
+                                  "untranslated": [
+                                    {
+                                      "instanceId": "F7P1F1P1F1P1F2P1T1S1",
+                                      "entityName": "StringTemplateDesign",
+                                      "constantText": "Headline"
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "instanceId": "F7P1F1P1F1P2",
+                        "entityName": "PropertyDesign",
+                        "propertyName": "rows",
+                        "children": [
+                          {
+                            "instanceId": "F7P1F1P1F1P2S1",
+                            "entityName": "SelectionDesign",
+                            "children": [
+                              {
+                                "instanceId": "F7P1F1P1F1P2S1F2",
+                                "entityName": "FragmentTemplateDesign",
+                                "fragmentTypeName": "Row",
+                                "properties": [
+                                  {
+                                    "instanceId": "F7P1F1P1F1P2S1F2P1",
+                                    "entityName": "PropertyDesign",
+                                    "propertyName": "cells",
+                                    "children": [
+                                      {
+                                        "instanceId": "F7P1F1P1F1P2S1F2P1F1",
+                                        "entityName": "FragmentTemplateDesign",
+                                        "fragmentTypeName": "Link",
+                                        "event": "E6",
+                                        "properties": [
+                                          {
+                                            "instanceId": "F7P1F1P1F1P2S1F2P1F1P1",
+                                            "entityName": "PropertyDesign",
+                                            "propertyName": "content",
+                                            "children": [
+                                              {
+                                                "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F1",
+                                                "entityName": "FragmentTemplateDesign",
+                                                "fragmentTypeName": "Cell",
+                                                "properties": [
+                                                  {
+                                                    "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F1P1",
+                                                    "entityName": "PropertyDesign",
+                                                    "propertyName": "content",
+                                                    "children": [
+                                                      {
+                                                        "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F1P1F1",
+                                                        "entityName": "FragmentTemplateDesign",
+                                                        "fragmentTypeName": "Paragraph",
+                                                        "properties": [
+                                                          {
+                                                            "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F1P1F1P1",
+                                                            "entityName": "PropertyDesign",
+                                                            "propertyName": "text",
+                                                            "children": [],
+                                                            "text": {
+                                                              "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F1P1F1P1T1",
+                                                              "entityName": "TextTemplateDesign",
+                                                              "untranslated": [
+                                                                {
+                                                                  "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F1P1F1P1T1S1",
+                                                                  "entityName": "StringTemplateDesign",
+                                                                  "deduction": {
+                                                                    "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F1P1F1P1T1S1D1",
+                                                                    "entityName": "DeductionSchemeDesign",
+                                                                    "deductions": [
+                                                                      {
+                                                                        "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F1P1F1P1T1S1D1S1",
+                                                                        "entityName": "SelectedInstanceDeductionDesign",
+                                                                        "inputs": [],
+                                                                        "ofEntity": "E3"
+                                                                      },
+                                                                      {
+                                                                        "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F1P1F1P1T1S1D1A2",
+                                                                        "entityName": "AttributeDeductionDesign",
+                                                                        "inputs": [
+                                                                          "F7P1F1P1F1P2S1F2P1F1P1F1P1F1P1T1S1D1S1"
+                                                                        ],
+                                                                        "attribute": "E3A1"
+                                                                      }
+                                                                    ],
+                                                                    "output": "F7P1F1P1F1P2S1F2P1F1P1F1P1F1P1T1S1D1A2"
+                                                                  }
+                                                                }
+                                                              ]
+                                                            }
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F2",
+                                                "entityName": "FragmentTemplateDesign",
+                                                "fragmentTypeName": "Cell",
+                                                "properties": [
+                                                  {
+                                                    "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F2P1",
+                                                    "entityName": "PropertyDesign",
+                                                    "propertyName": "content",
+                                                    "children": [
+                                                      {
+                                                        "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F2P1F1",
+                                                        "entityName": "FragmentTemplateDesign",
+                                                        "fragmentTypeName": "Paragraph",
+                                                        "properties": [
+                                                          {
+                                                            "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F2P1F1P1",
+                                                            "entityName": "PropertyDesign",
+                                                            "propertyName": "text",
+                                                            "children": [],
+                                                            "text": {
+                                                              "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F2P1F1P1T1",
+                                                              "entityName": "TextTemplateDesign",
+                                                              "untranslated": [
+                                                                {
+                                                                  "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F2P1F1P1T1S1",
+                                                                  "entityName": "StringTemplateDesign",
+                                                                  "deduction": {
+                                                                    "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F2P1F1P1T1S1D1",
+                                                                    "entityName": "DeductionSchemeDesign",
+                                                                    "deductions": [
+                                                                      {
+                                                                        "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F2P1F1P1T1S1D1S1",
+                                                                        "entityName": "SelectedInstanceDeductionDesign",
+                                                                        "inputs": [],
+                                                                        "ofEntity": "E3"
+                                                                      },
+                                                                      {
+                                                                        "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F2P1F1P1T1S1D1A2",
+                                                                        "entityName": "AttributeDeductionDesign",
+                                                                        "inputs": [
+                                                                          "F7P1F1P1F1P2S1F2P1F1P1F2P1F1P1T1S1D1S1"
+                                                                        ],
+                                                                        "attribute": "E3A2"
+                                                                      }
+                                                                    ],
+                                                                    "output": "F7P1F1P1F1P2S1F2P1F1P1F2P1F1P1T1S1D1A2"
+                                                                  }
+                                                                }
+                                                              ]
+                                                            }
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ],
+                            "selection": {
+                              "instanceId": "F7P1F1P1F1P2S1D1",
+                              "entityName": "DeductionSchemeDesign",
+                              "deductions": [
+                                {
+                                  "instanceId": "F7P1F1P1F1P2S1D1S1",
+                                  "entityName": "SelectedInstanceDeductionDesign",
+                                  "inputs": [],
+                                  "ofEntity": "E1"
+                                },
+                                {
+                                  "instanceId": "F7P1F1P1F1P2S1D1A2",
+                                  "entityName": "AttributeDeductionDesign",
+                                  "inputs": [
+                                    "F7P1F1P1F1P2S1D1S1"
+                                  ],
+                                  "attribute": "E1R3"
+                                }
+                              ],
+                              "output": "F7P1F1P1F1P2S1D1A2"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "instanceId": "F7P1F1P1F2",
+                    "entityName": "FragmentTemplateDesign",
+                    "fragmentTypeName": "Button",
+                    "event": "E5",
+                    "properties": [
+                      {
+                        "instanceId": "F7P1F1P1F2P1",
+                        "entityName": "PropertyDesign",
+                        "propertyName": "text",
+                        "children": [],
+                        "text": {
+                          "instanceId": "F7P1F1P1F2P1T1",
+                          "entityName": "TextTemplateDesign",
+                          "untranslated": [
+                            {
+                              "instanceId": "F7P1F1P1F2P1T1S1",
+                              "entityName": "StringTemplateDesign",
+                              "constantText": "Create issue"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "instanceId": "F7S2",
+          "entityName": "SubFlowDesign",
+          "name": "issue",
+          "flow": "F8"
+        },
+        {
+          "instanceId": "F7S3",
+          "entityName": "SubFlowDesign",
+          "name": "create issue",
+          "flow": "F9"
+        }
+      ],
+      "parameters": []
+    },
+    {
+      "instanceId": "F8",
+      "entityName": "FlowDesign",
+      "name": "issue",
+      "edges": [
+        {
+          "instanceId": "F8F2",
+          "entityName": "FlowEdgeDesign",
+          "endNode": "F8P1",
+          "event": "E6"
+        }
+      ],
+      "nodes": [
+        {
+          "instanceId": "F8P1",
+          "entityName": "PlaceTemplateDesign",
+          "name": "issueDetails",
+          "content": {
+            "instanceId": "F8P1F1",
+            "entityName": "FragmentTemplateDesign",
+            "fragmentTypeName": "Page",
+            "properties": [
+              {
+                "instanceId": "F8P1F1P1",
+                "entityName": "PropertyDesign",
+                "propertyName": "mainContent",
+                "children": [
+                  {
+                    "instanceId": "F8P1F1P1F1",
+                    "entityName": "FragmentTemplateDesign",
+                    "fragmentTypeName": "Paragraph",
+                    "properties": [
+                      {
+                        "instanceId": "F8P1F1P1F1P1",
+                        "entityName": "PropertyDesign",
+                        "propertyName": "text",
+                        "children": [],
+                        "text": {
+                          "instanceId": "F8P1F1P1F1P1T1",
+                          "entityName": "TextTemplateDesign",
+                          "untranslated": [
+                            {
+                              "instanceId": "F8P1F1P1F1P1T1S1",
+                              "entityName": "StringTemplateDesign",
+                              "constantText": "Issue "
+                            },
+                            {
+                              "instanceId": "F8P1F1P1F1P1T1S2",
+                              "entityName": "StringTemplateDesign",
+                              "deduction": {
+                                "instanceId": "F8P1F1P1F1P1T1S2D1",
+                                "entityName": "DeductionSchemeDesign",
+                                "deductions": [
+                                  {
+                                    "instanceId": "F8P1F1P1F1P1T1S2D1S1",
+                                    "entityName": "SelectedInstanceDeductionDesign",
+                                    "inputs": [],
+                                    "ofEntity": "E3"
+                                  },
+                                  {
+                                    "instanceId": "F8P1F1P1F1P1T1S2D1A2",
+                                    "entityName": "AttributeDeductionDesign",
+                                    "inputs": [
+                                      "F8P1F1P1F1P1T1S2D1S1"
+                                    ],
+                                    "attribute": "E3A1"
+                                  }
+                                ],
+                                "output": "F8P1F1P1F1P1T1S2D1A2"
+                              }
+                            },
+                            {
+                              "instanceId": "F8P1F1P1F1P1T1S3",
+                              "entityName": "StringTemplateDesign",
+                              "constantText": ": "
+                            },
+                            {
+                              "instanceId": "F8P1F1P1F1P1T1S4",
+                              "entityName": "StringTemplateDesign",
+                              "deduction": {
+                                "instanceId": "F8P1F1P1F1P1T1S4D1",
+                                "entityName": "DeductionSchemeDesign",
+                                "deductions": [
+                                  {
+                                    "instanceId": "F8P1F1P1F1P1T1S4D1S1",
+                                    "entityName": "SelectedInstanceDeductionDesign",
+                                    "inputs": [],
+                                    "ofEntity": "E3"
+                                  },
+                                  {
+                                    "instanceId": "F8P1F1P1F1P1T1S4D1A2",
+                                    "entityName": "AttributeDeductionDesign",
+                                    "inputs": [
+                                      "F8P1F1P1F1P1T1S4D1S1"
+                                    ],
+                                    "attribute": "E3A2"
+                                  }
+                                ],
+                                "output": "F8P1F1P1F1P1T1S4D1A2"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "instanceId": "F8P1F1P1F2",
+                    "entityName": "FragmentTemplateDesign",
+                    "fragmentTypeName": "Input",
+                    "attribute": "E3A2",
+                    "entity": "E3",
+                    "properties": []
+                  },
+                  {
+                    "instanceId": "F8P1F1P1F3",
+                    "entityName": "FragmentTemplateDesign",
+                    "fragmentTypeName": "Input",
+                    "attribute": "E3A3",
+                    "entity": "E3",
+                    "properties": []
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        "E3"
+      ]
+    },
+    {
+      "instanceId": "F9",
+      "entityName": "FlowDesign",
+      "isCustomized": true,
+      "name": "create issue",
+      "edges": [],
+      "nodes": [],
+      "parameters": []
+    }
+  ],
+  "mainFlow": "F7",
   "sharedTemplates": []
 }

@@ -1,10 +1,7 @@
 package org.instantlogic.fabric.util;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -28,6 +25,12 @@ public class CaseAdministration {
 			return;
 		}
 		all.put(entity.getName(), entity);
+		if (entity.extendsEntity()!=null) {
+			addEntities(entity.extendsEntity(), all);
+		}
+		for (Entity<?> extension : entity.extensions()) {
+			addEntities(extension, all);
+		}
 		for (Relation<?, ?, ? extends Instance> relation : entity.getRelations()) {
 			addEntities(relation.getTo(), all);
 		}

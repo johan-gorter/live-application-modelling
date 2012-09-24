@@ -19,19 +19,18 @@ public class EntityDetailsPlaceGenerator extends PlaceTemplateDesign {
 	public void init() {
 		DeductionSchemeDesign entityName;
 		
-		setContent(createPageWidget("Entity",
-				createText("Paragraph",
-					new TextTemplateDesign().addToUntranslated(new StringTemplateDesign().setDeduction(entityName = new DeductionSchemeDesign())))
-				)
-			);
+		setContent(new FragmentTemplateDesign("Page")
+			.setChildren("mainContent", 
+				
+				createText("Heading1", new TextTemplateDesign()
+					.addToUntranslated(new StringTemplateDesign().setConstantText("Entity "))
+					.addToUntranslated(new StringTemplateDesign().setDeduction(entityName = new DeductionSchemeDesign()))
+				),
+				
+				createText("Heading2",
+					new TextTemplateDesign().addToUntranslated(new StringTemplateDesign().setConstantText("Attributes"))))
+				);
 		
 		entityName.deduceAttribute(DesignEntityGenerator.name);
-	}
-
-	private static FragmentTemplateDesign createPageWidget(String title, FragmentTemplateDesign... mainContentChildren) {
-		FragmentTemplateDesign pageWidget = new FragmentTemplateDesign("Page");
-		pageWidget.setChildren("headerContent", createText("Heading1", new TextTemplateDesign().addToUntranslated(new StringTemplateDesign().setConstantText((title)))));
-		pageWidget.setChildren("mainContent", mainContentChildren);
-		return pageWidget;
 	}
 }

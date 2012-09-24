@@ -4,6 +4,7 @@ import org.instantlogic.designer.DesignerApplicationGenerator;
 import org.instantlogic.designer.EntityDesignEntityGenerator;
 import org.instantlogic.designer.FlowDesign;
 import org.instantlogic.designer.FlowEdgeDesign;
+import org.instantlogic.designer.event.EntityDetailsEventGenerator;
 import org.instantlogic.designer.flow.entity.EntityDetailsPlaceGenerator;
 
 public class EntityFlowGenerator extends FlowDesign {
@@ -22,6 +23,7 @@ public class EntityFlowGenerator extends FlowDesign {
 		addToNodes(EntityDetailsPlaceGenerator.PLACE);
 		new FlowEdgeDesign()
 			.setOwner(this)
+			.setEvent(EntityDetailsEventGenerator.EVENT)
 			.setEndNode(EntityDetailsPlaceGenerator.PLACE);
 
 		super.init();

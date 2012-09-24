@@ -13,6 +13,7 @@ public class TextTemplateDesignEntity extends org.instantlogic.fabric.model.Enti
 		return org.instantlogic.designer.entity.DesignEntity.INSTANCE;
 	}
 
+	
 	@Override
 	public org.instantlogic.designer.TextTemplateDesign createInstance() {
 		return new org.instantlogic.designer.TextTemplateDesign();
@@ -57,6 +58,22 @@ public class TextTemplateDesignEntity extends org.instantlogic.fabric.model.Enti
 		};
 	
 	// Reverse relations
+	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.PlaceTemplateDesign, org.instantlogic.designer.PlaceTemplateDesign> titleOfPlaceTemplate
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.PlaceTemplateDesign, org.instantlogic.designer.PlaceTemplateDesign>(
+			"titleOfPlaceTemplate", INSTANCE, org.instantlogic.designer.entity.PlaceTemplateDesignEntity.INSTANCE, org.instantlogic.designer.PlaceTemplateDesign.class, org.instantlogic.designer.entity.PlaceTemplateDesignEntity.title
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.PlaceTemplateDesign> get(
+					org.instantlogic.designer.TextTemplateDesign instance) {
+				return instance.getTitleOfPlaceTemplateRelationValue();
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+		};
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
 	};
@@ -64,6 +81,7 @@ public class TextTemplateDesignEntity extends org.instantlogic.fabric.model.Enti
 		untranslated,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
+		titleOfPlaceTemplate,
 	};
 
 	@Override

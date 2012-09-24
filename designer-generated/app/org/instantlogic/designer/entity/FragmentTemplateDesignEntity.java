@@ -13,6 +13,7 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 		return org.instantlogic.designer.entity.ElementDesignEntity.INSTANCE;
 	}
 
+	
 	@Override
 	public org.instantlogic.designer.FragmentTemplateDesign createInstance() {
 		return new org.instantlogic.designer.FragmentTemplateDesign();
@@ -36,6 +37,8 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.FragmentTemplateDesign, java.lang.String, java.lang.String>(
 			"fragmentTypeName", INSTANCE, java.lang.String.class
 		) {
+			{
+			}
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.FragmentTemplateDesign, java.lang.String> get(org.instantlogic.designer.FragmentTemplateDesign instance) {

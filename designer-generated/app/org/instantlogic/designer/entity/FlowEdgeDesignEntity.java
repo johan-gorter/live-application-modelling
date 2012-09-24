@@ -9,6 +9,7 @@ public class FlowEdgeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	}
 
 
+	
 	@Override
 	public org.instantlogic.designer.FlowEdgeDesign createInstance() {
 		return new org.instantlogic.designer.FlowEdgeDesign();

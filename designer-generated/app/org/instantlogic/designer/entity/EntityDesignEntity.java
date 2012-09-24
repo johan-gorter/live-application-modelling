@@ -13,6 +13,7 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 		return org.instantlogic.designer.entity.DesignEntity.INSTANCE;
 	}
 
+	
 	@Override
 	public org.instantlogic.designer.EntityDesign createInstance() {
 		return new org.instantlogic.designer.EntityDesign();

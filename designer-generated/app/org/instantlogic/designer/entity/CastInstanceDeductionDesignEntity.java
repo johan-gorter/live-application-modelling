@@ -13,6 +13,7 @@ public class CastInstanceDeductionDesignEntity extends org.instantlogic.fabric.m
 		return org.instantlogic.designer.entity.DeductionDesignEntity.INSTANCE;
 	}
 
+	
 	@Override
 	public org.instantlogic.designer.CastInstanceDeductionDesign createInstance() {
 		return new org.instantlogic.designer.CastInstanceDeductionDesign();

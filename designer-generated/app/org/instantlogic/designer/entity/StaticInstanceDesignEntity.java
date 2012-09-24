@@ -13,6 +13,7 @@ public class StaticInstanceDesignEntity extends org.instantlogic.fabric.model.En
 		return org.instantlogic.designer.entity.DesignEntity.INSTANCE;
 	}
 
+	
 	@Override
 	public org.instantlogic.designer.StaticInstanceDesign createInstance() {
 		return new org.instantlogic.designer.StaticInstanceDesign();

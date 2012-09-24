@@ -9,6 +9,23 @@ public class DeductionDesignEntity extends org.instantlogic.fabric.model.Entity<
 	}
 
 
+	private static final org.instantlogic.fabric.model.Entity<?>[] EXTENSIONS = new org.instantlogic.fabric.model.Entity<?>[] {
+		org.instantlogic.designer.entity.AttributeDeductionDesignEntity.INSTANCE,
+		org.instantlogic.designer.entity.CastInstanceDeductionDesignEntity.INSTANCE,
+		org.instantlogic.designer.entity.ConstantDeductionDesignEntity.INSTANCE,
+		org.instantlogic.designer.entity.CustomDeductionDesignEntity.INSTANCE,
+		org.instantlogic.designer.entity.HasValueDeductionDesignEntity.INSTANCE,
+		org.instantlogic.designer.entity.NegationDeductionDesignEntity.INSTANCE,
+		org.instantlogic.designer.entity.ReverseRelationDeductionDesignEntity.INSTANCE,
+		org.instantlogic.designer.entity.SelectedInstanceDeductionDesignEntity.INSTANCE,
+		org.instantlogic.designer.entity.SumDeductionDesignEntity.INSTANCE
+	};
+	 
+	@Override
+	public org.instantlogic.fabric.model.Entity[] extensions() {
+		return EXTENSIONS;
+	}
+	
 	@Override
 	public org.instantlogic.designer.DeductionDesign createInstance() {
 		return new org.instantlogic.designer.DeductionDesign();
