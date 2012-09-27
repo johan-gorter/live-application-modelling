@@ -1,33 +1,28 @@
 package org.instantlogic.designer.flow;
 
-public class MainFlow extends org.instantlogic.interaction.flow.Flow {
+public class AttributeFlow extends org.instantlogic.interaction.flow.Flow {
 
-	public static final MainFlow INSTANCE = new MainFlow();
+	public static final AttributeFlow INSTANCE = new AttributeFlow();
 	
 	private static final org.instantlogic.interaction.flow.FlowNodeBase[] NODES = new org.instantlogic.interaction.flow.FlowNodeBase[]{
-		org.instantlogic.designer.flow.main.EntitySubFlow.INSTANCE,
-		org.instantlogic.designer.flow.main.WelcomePlaceTemplate.INSTANCE,
+		org.instantlogic.designer.flow.attribute.AttributeDetailsPlaceTemplate.INSTANCE,
 	};
 	
 	private static final org.instantlogic.interaction.flow.FlowEdge[] EDGES = new org.instantlogic.interaction.flow.FlowEdge[]{
 		new org.instantlogic.interaction.flow.FlowEdge(
 			null, 
-			org.instantlogic.designer.event.EntityDetailsEvent.INSTANCE,
-			org.instantlogic.designer.flow.main.EntitySubFlow.INSTANCE
-		),
-		new org.instantlogic.interaction.flow.FlowEdge(
-			null, 
-			org.instantlogic.designer.event.HomeEvent.INSTANCE,
-			org.instantlogic.designer.flow.main.WelcomePlaceTemplate.INSTANCE
+			org.instantlogic.designer.event.AttributeDetailsEvent.INSTANCE,
+			org.instantlogic.designer.flow.attribute.AttributeDetailsPlaceTemplate.INSTANCE
 		),
 	};
 	
 	private static final org.instantlogic.fabric.model.Entity[] PARAMETERS = new org.instantlogic.fabric.model.Entity[]{
+		org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE,
 	};
 	
 	@Override
 	public String getName() {
-		return "Main";
+		return "Attribute";
 	}
 
 	@Override

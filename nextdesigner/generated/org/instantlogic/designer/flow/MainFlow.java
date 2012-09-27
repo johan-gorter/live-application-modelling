@@ -15,6 +15,11 @@ public class MainFlow extends org.instantlogic.interaction.flow.Flow {
 			org.instantlogic.designer.event.EntityDetailsEvent.INSTANCE,
 			org.instantlogic.designer.flow.main.EntitySubFlow.INSTANCE
 		),
+		new org.instantlogic.interaction.flow.FlowEdge(
+			null, 
+			org.instantlogic.designer.event.HomeEvent.INSTANCE,
+			org.instantlogic.designer.flow.main.WelcomePlaceTemplate.INSTANCE
+		),
 	};
 	
 	private static final org.instantlogic.fabric.model.Entity[] PARAMETERS = new org.instantlogic.fabric.model.Entity[]{

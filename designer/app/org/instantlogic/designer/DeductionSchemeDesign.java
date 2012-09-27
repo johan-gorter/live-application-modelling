@@ -54,14 +54,17 @@ public class DeductionSchemeDesign extends AbstractDeductionSchemeDesign {
 		return constantDeductionDesign;
 	}
 	
-	public DeductionDesign deduceCustom(Class<?> deductionClass, Class<?> resultClass) {
-		return deduceCustom(deductionClass.getName(), resultClass.getName());
+	public DeductionDesign deduceCustom(Class<?> deductionClass, Class<?> resultClass, DeductionDesign... inputs) {
+		return deduceCustom(deductionClass.getName(), resultClass.getName(), inputs);
 	}
 
-	public DeductionDesign deduceCustom(String javaClassName, String resultClassName) {
+	public DeductionDesign deduceCustom(String javaClassName, String resultClassName, DeductionDesign... inputs) {
 		CustomDeductionDesign result = new CustomDeductionDesign();
 
 		addToDeductions(result);
+		for (DeductionDesign input : inputs) {
+			result.addToInputs(input);
+		}
 		setOutput(result);
 		
 		result.setImplementationClassName(javaClassName);

@@ -32,7 +32,7 @@ public class ContentModel {
 	public String relationName;
 	public String event;
 	public boolean isCustomized;
-	public String presentation;
+	public String[] styleNames;
 	public final List<ContentModel> children = new ArrayList<ContentModel>();
 	public final List<ContentModel> elseChildren = new ArrayList<ContentModel>();
 	public String implementationClassName;
@@ -67,9 +67,6 @@ public class ContentModel {
 	}
 	public boolean getIsCustomized() {
 		return isCustomized;
-	}
-	public String getPresentation() {
-		return presentation;
 	}
 	public int getDeductionIndex() {
 		return deductionIndex;
@@ -112,5 +109,8 @@ public class ContentModel {
 	}
 	public List<ContentModel> getElseChildren() {
 		return elseChildren;
-	}	
+	}
+	public String[] getStyleNames() {
+		return styleNames;
+	}
 }

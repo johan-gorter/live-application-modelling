@@ -27,6 +27,9 @@
     )<#lt>
   <#elseif content.category=="Fragment">
     new org.instantlogic.interaction.page.FragmentTemplate("${content.id}", "${content.fragmentTypeName}")<#t>
+    <#if content.styleNames??>
+      .setStyleNames(new String[]{<#list content.styleNames as name>"${name}"<#if name_has_next>, </#if></#list>})
+    </#if>
     <#if content.event??>
       .setEvent(${rootPackageName}.event.${content.event}Event.INSTANCE)
     </#if>
