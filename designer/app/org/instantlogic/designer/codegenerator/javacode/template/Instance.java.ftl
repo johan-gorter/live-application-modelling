@@ -30,17 +30,17 @@ public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${
 	
 	</#if>
 	<#if !attribute.readonly && attribute.multivalue>	
-	public ${technicalNameCapitalized} addTo${attribute.technicalName?cap_first}(${attribute.className} item) {
+	public ${technicalNameCapitalized} addTo${attribute.technicalName?cap_first}(${attribute.itemClassName} item) {
 		${attribute.javaIdentifier}.addValue(item);
 		return (${technicalNameCapitalized})this;
 	}
 	
-	public ${technicalNameCapitalized} addTo${attribute.technicalName?cap_first}(${attribute.className} item, int index) {
+	public ${technicalNameCapitalized} addTo${attribute.technicalName?cap_first}(${attribute.itemClassName} item, int index) {
 		${attribute.javaIdentifier}.insertValue(item, index);
 		return (${technicalNameCapitalized})this;
 	}
 	
-	public ${technicalNameCapitalized} removeFrom${attribute.technicalName?cap_first}(${attribute.className} item) {
+	public ${technicalNameCapitalized} removeFrom${attribute.technicalName?cap_first}(${attribute.itemClassName} item) {
 		${attribute.javaIdentifier}.removeValue(item);
 		return (${technicalNameCapitalized})this;
 	}

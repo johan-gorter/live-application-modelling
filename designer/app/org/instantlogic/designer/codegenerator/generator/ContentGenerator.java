@@ -48,6 +48,9 @@ public abstract class ContentGenerator extends AbstractGenerator {
 			if (fragmentTemplate.getEvent()!=null) {
 				model.event = fragmentTemplate.getEvent().getTechnicalNameCapitalized();
 			}
+			if (fragmentTemplate.getStyleNames().size()>0) {
+				model.styleNames = fragmentTemplate.getStyleNames().asList().toArray(new String[fragmentTemplate.getStyleNames().size()]);
+			}
 			if (fragmentTemplate.getAttribute()!=null) {
 				model.entity = fragmentTemplate.getEntity().getTechnicalNameCapitalized();
 				model.attribute = fragmentTemplate.getAttribute().getTechnicalName();

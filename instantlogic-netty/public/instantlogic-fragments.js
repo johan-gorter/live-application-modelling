@@ -3,45 +3,26 @@ YUI.add('instantlogic-fragments', function (Y) {
     var ns = Y.namespace('instantlogic.fragments');
     var html = Y.html;
     var FragmentList = Y.instantlogic.FragmentList;
+    var createFragment = Y.instantlogic.createFragment;
 
     // Page
-    ns.Page = function(parentNode, engine) {
-        ns.Page.superclass.constructor.apply(this, arguments);
-    };
-
-    Y.extend(ns.Page, Y.instantlogic.Fragment, {
-        init: function (model) {
-            ns.Page.superclass.init.call(this, model);
-            var markup = html.div({ className: 'page' },
+    ns.Page = createFragment({
+    	createMarkup: function() {
+    		return html.div({ className: 'page' },
                 this.headerDiv = html.div({ className: 'header' }),
                 this.mainDiv = html.div({ className: 'main' })
             );
-            this.parentNode.appendChild(markup);
-            this.headerFragmentList = new FragmentList(this.headerDiv, this.engine);
-            this.headerFragmentList.init(model.headerContent);
-            this.mainFragmentList = new FragmentList(this.mainDiv, this.engine);
-            this.mainFragmentList.init(model.mainContent);
-        },
-
-        canUpdateFrom: function (newModel) {
-            return ns.Page.superclass.canUpdateFrom.call(this, newModel);
-        },
-
-        update: function (newModel, diff) {
-            ns.Page.superclass.update.call(this, newModel, diff);
-            this.headerFragmentList.update(newModel.headerContent, diff);
-            this.mainFragmentList.update(newModel.mainContent, diff);
-        },
-
-        destroy: function () {
-            ns.Page.superclass.destroy.call(this);
-            this.headerFragmentList.destroy();
-            this.mainFragmentList.destroy();
-        }
+    	},
+    	fragmentLists: function(model) {
+    		return [
+    		    [this.headerDiv, model.headerContent], 
+    		    [this.mainDiv, model.mainContent]
+    		];
+    	}
     });
-
+    
     // Input
-    ns.Input = Y.instantlogic.createFragment({ 
+    ns.Input = createFragment({ 
     	createMarkup: function() {
     		return html.form({ action: '.' },
 	        	html.div({className: 'input'},
@@ -79,81 +60,113 @@ YUI.add('instantlogic-fragments', function (Y) {
     });
     
     // Link
-    ns.Link = function (parentNode, engine) {
-        ns.Link.superclass.constructor.apply(this, arguments);
-    };
-
-    Y.extend(ns.Link, Y.instantlogic.Fragment, {
-        init: function (model) {
-            ns.Link.superclass.init.call(this, model);
-            this.node = html.a({href:'#'},
+    ns.Link = createFragment({
+    	createMarkup: function() {
+            return this.node = html.a({href:'#'},
             	this.textSpan = html.span(),
             	this.contentSpan = html.span()
             )
-            this.textSpan.set('text', model.text || '');
-            this.contentList = new FragmentList(this.contentSpan, this.engine);
-            this.contentList.init(model.content);
-            this.node.on('click', this.onClick, this);
-            this.parentNode.appendChild(this.node);
-        },
-        
-        update: function (newModel, diff) {
-            ns.Link.superclass.update.call(this, newModel, diff);
-            if (this.oldModel.text != newModel.text) {
-                this.textSpan.set('text', newModel.text || '');
+    	},
+    	texts: function(model) {
+    		return [[this.textSpan, model.text]];
+    	},
+    	fragmentLists: function(model) {
+    		return [[this.contentSpan, model.content]];
+    	},
+    	postInit: function(model) {
+    		this.node.on('click', this.onClick, this);
+    	},
+    	overrides: {
+            onClick: function(e) {
+                e.preventDefault();
+                this.engine.sendSubmit(this.model.id);
             }
-            this.contentList.update(newModel.content, diff);
-        },
-        
-        onClick: function(e) {
-            e.preventDefault();
-            this.engine.sendSubmit(this.model.id);
-        }
+    	}
+    });
+    
+    // Button
+    ns.Button = createFragment({
+    	baseClass: ns.Link
+    });
+    
+    // Renders its content on a new line, essentially just a div.
+    ns.Block = createFragment({
+    	createMarkup: function() {
+    		return html.div();
+    	},
+		fragmentLists: function(model) {
+			return [[this.markup, model.content]];
+		}
     });
 
-    // Button
-    ns.Button = function (parentNode, engine) {
-        ns.Button.superclass.constructor.apply(this, arguments);
-    };
-
-    Y.extend(ns.Button, ns.Link, {
+    // Text: just a span. Subclasses can implement createNode
+    ns.Text = createFragment({
+    	createMarkup: function() {
+    		var result = this.createNode();
+    		this.textSpan = html.span();
+			result.appendChild(this.textSpan);
+			return result;
+    	},
+    	texts: function(model) {
+    		return [[this.textSpan, model.text]];
+    	},
+    	overrides: {
+	        createNode: function () {
+	            return html.span(); // Baseclasses can override this to provide a p, h1, etc...
+	        }
+    	}
     });
     
     // Paragraph
-    ns.Paragraph = function (parentNode, engine) {
-        ns.Paragraph.superclass.constructor.apply(this, arguments);
-    };
-
-    Y.extend(ns.Paragraph, Y.instantlogic.Fragment, {
-        init: function (model) {
-            ns.Paragraph.superclass.init.call(this, model);
-            this.node = this.createNode();
-            this.node.set('text', model.text || '');
-            this.parentNode.appendChild(this.node);
-        },
-
-        createNode: function () {
-            return html.p();
-        },
-
-        update: function (newModel, diff) {
-            ns.Paragraph.superclass.update.call(this, newModel, diff);
-            if (this.oldModel.text != newModel.text) {
-                this.node.set('text', newModel.text || '');
+    ns.Paragraph = createFragment({
+    	baseClass: ns.Text,
+    	overrides: {
+            createNode: function() {
+                return html.p();
             }
-        }
+    	}
     });
 
     // Heading1
-    ns.Heading1 = function (parentNode, engine) {
-        ns.Heading1.superclass.constructor.apply(this, arguments);
-    };
-
-    Y.extend(ns.Heading1, ns.Paragraph, {
-        createNode: function() {
-            return html.h1();
-        }
+    ns.Heading1 = createFragment({
+    	baseClass: ns.Text,
+    	overrides: {
+            createNode: function() {
+                return html.h1();
+            }
+    	}
     });
+
+    // Heading2
+    ns.Heading2 = createFragment({
+    	baseClass: ns.Text,
+    	overrides: {
+            createNode: function() {
+                return html.h2();
+            }
+    	}
+    });
+    
+    // Heading3
+    ns.Heading3 = createFragment({
+    	baseClass: ns.Text,
+    	overrides: {
+            createNode: function() {
+                return html.h3();
+            }
+    	}
+    });
+    
+    // Strong
+    ns.Strong = createFragment({
+    	baseClass: ns.Text,
+    	overrides: {
+            createNode: function() {
+                return html.strong();
+            }
+    	}
+    });
+    
     
     // Table
     ns.Table = function (parentNode, engine) {

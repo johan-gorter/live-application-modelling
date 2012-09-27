@@ -28,6 +28,8 @@ public class FragmentTemplate extends Element {
 	private final String id;
 	private final String fragmentTypeName;
 
+	private String[] styleNames;
+
 	private FieldFilter field;
 	private ActionFilter event;
 
@@ -118,6 +120,11 @@ public class FragmentTemplate extends Element {
 		return this;
 	}
 	
+	public FragmentTemplate setStyleNames(String[] styleNames) {
+		this.styleNames = styleNames;
+		return this;
+	}
+	
 	public String getId() {
 		return id;
 	}
@@ -140,6 +147,9 @@ public class FragmentTemplate extends Element {
 		Map<String, Object> result = new LinkedHashMap<String, Object>();
 		result.put("type", getFragmentTypeName());
 		result.put("id", id);
+		if (styleNames!=null) {
+			result.put("styleNames", styleNames);
+		}
 		for (Map.Entry<String, Deduction<?>> entry : valueProperties.entrySet()) {
 			result.put(entry.getKey(), entry.getValue().deduct(context).getValue());
 		}

@@ -46,6 +46,23 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 			}
 		};
 	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.fabric.value.Multi<java.lang.String>, java.lang.String> styleNames 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.fabric.value.Multi<java.lang.String>, java.lang.String>(
+			"styleNames", INSTANCE, java.lang.String.class
+		) {
+			{
+			}
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValues<org.instantlogic.designer.FragmentTemplateDesign, java.lang.String> get(org.instantlogic.designer.FragmentTemplateDesign instance) {
+				return instance.getStyleNamesAttributeValue();
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
+	
 	// Relations
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDesign> attribute
@@ -116,6 +133,7 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
 		fragmentTypeName,
+		styleNames,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		attribute,

@@ -5,6 +5,7 @@ public class EntityFlow extends org.instantlogic.interaction.flow.Flow {
 	public static final EntityFlow INSTANCE = new EntityFlow();
 	
 	private static final org.instantlogic.interaction.flow.FlowNodeBase[] NODES = new org.instantlogic.interaction.flow.FlowNodeBase[]{
+		org.instantlogic.designer.flow.entity.AttributeSubFlow.INSTANCE,
 		org.instantlogic.designer.flow.entity.EntityDetailsPlaceTemplate.INSTANCE,
 	};
 	
@@ -13,6 +14,11 @@ public class EntityFlow extends org.instantlogic.interaction.flow.Flow {
 			null, 
 			org.instantlogic.designer.event.EntityDetailsEvent.INSTANCE,
 			org.instantlogic.designer.flow.entity.EntityDetailsPlaceTemplate.INSTANCE
+		),
+		new org.instantlogic.interaction.flow.FlowEdge(
+			null, 
+			org.instantlogic.designer.event.AttributeDetailsEvent.INSTANCE,
+			org.instantlogic.designer.flow.entity.AttributeSubFlow.INSTANCE
 		),
 	};
 	

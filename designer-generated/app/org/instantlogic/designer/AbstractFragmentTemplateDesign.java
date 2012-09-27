@@ -27,6 +27,38 @@ public abstract class AbstractFragmentTemplateDesign extends ElementDesign {
 	}
 	
 	
+	private final org.instantlogic.fabric.value.AttributeValues<FragmentTemplateDesign, java.lang.String> styleNames
+		= createAttributeValues(org.instantlogic.designer.entity.FragmentTemplateDesignEntity.styleNames);
+	
+	public org.instantlogic.fabric.value.Multi<java.lang.String> getStyleNames() {
+		return styleNames.getValue();
+	}
+
+	public org.instantlogic.fabric.value.AttributeValues<FragmentTemplateDesign, java.lang.String> getStyleNamesAttributeValue() {
+		return styleNames;
+	}
+
+	public FragmentTemplateDesign addToStyleNames(java.lang.String item) {
+		styleNames.addValue(item);
+		return (FragmentTemplateDesign)this;
+	}
+	
+	public FragmentTemplateDesign addToStyleNames(java.lang.String item, int index) {
+		styleNames.insertValue(item, index);
+		return (FragmentTemplateDesign)this;
+	}
+	
+	public FragmentTemplateDesign removeFromStyleNames(java.lang.String item) {
+		styleNames.removeValue(item);
+		return (FragmentTemplateDesign)this;
+	}
+	
+	public FragmentTemplateDesign removeFromStyleNames(int index) {
+		styleNames.removeValue(index);
+		return (FragmentTemplateDesign)this;
+	}
+	
+	
 	// Relations
 	
 	private final org.instantlogic.fabric.value.RelationValue<FragmentTemplateDesign, AttributeDesign> attribute

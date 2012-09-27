@@ -290,6 +290,9 @@ YUI.add('instantlogic', function (Y) {
             this.fragmentType = model.type;
             this.fragment = this.engine.createFragment(this.fragmentType, this.node);
             this.fragment.init(model);
+            if (this.fragment.markup) {
+            	this.node.appendChild(this.fragment.markup);
+            }
         },
 
         update: function (newModel, diff) {
@@ -465,7 +468,7 @@ YUI.add('instantlogic', function (Y) {
     
     /*
      * Create a subclass of Fragment or one of its subclasses, the options parameter can contain the following:
-     * - baseClass: optional, choose another baseClass than Y.instantlolgic.Fragment
+     * - baseClass: optional, choose another baseClass than Y.instantlogic.Fragment
      * - overrides: optional, object containing methods to be overridden in/added to the baseClass 
      * - createMarkup: function for creating the markup, this markup will be appended to this.parentNode
      * - texts: function(model), optional, must return an array of tuples with [0]: the div from the markup
@@ -480,15 +483,22 @@ YUI.add('instantlogic', function (Y) {
     		constructor.superclass.constructor.apply(this, arguments);
     	}
     	Y.extend(constructor, options.baseClass || Y.instantlogic.Fragment, options.overrides);
+    	
     	constructor.prototype.init = function(model) {
     		constructor.superclass.init.call(this, model);
-    		this.markup = options.createMarkup.apply(this);
-    		this.parentNode.appendChild(this.markup);
+    		if (options.createMarkup) {
+	    		this.markup = options.createMarkup.apply(this);
+	    		if (model.styleNames) {
+	    			for (var i=0;i<model.styleNames.length;i++) {
+	    				this.markup.addClass(model.styleNames[i]);
+	    			}
+	    		}
+    		}
     		if (options.fragmentLists) {
     			this.fragmentLists = [];
     			var results = options.fragmentLists.call(this, model);
     			for (var i=0;i<results.length;i++) {
-    				var list = new FragmentList(results[i][0], this.engine);
+    				var list = new ns.FragmentList(results[i][0], this.engine);
     				list.init(results[i][1]);
     				this.fragmentLists.push(list);
     			}
@@ -502,7 +512,8 @@ YUI.add('instantlogic', function (Y) {
     		if (options.postInit) {
     			options.postInit.call(this, model);
     		}
-    	}
+    	};
+    	
     	constructor.prototype.update = function(newModel, diff) {
     		constructor.superclass.update.call(this, newModel, diff);
     		if (this.fragmentLists) {
@@ -524,6 +535,16 @@ YUI.add('instantlogic', function (Y) {
     			options.postUpdate.call(this, newModel, diff);
     		}
     	}
+
+    	constructor.prototype.destroy = function() {
+    		constructor.superclass.destroy.call(this);
+    		if (this.fragmentLists) {
+    			for (var i=0;i<this.fragmentLists;i++) {
+    				this.fragmentLists[i].destroy();
+    			}
+    		}
+    	};
+    	
     	return constructor;
     };
     
