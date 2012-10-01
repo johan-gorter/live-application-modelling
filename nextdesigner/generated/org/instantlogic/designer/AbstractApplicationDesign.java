@@ -210,34 +210,34 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 	}
 
 	
-	private final org.instantlogic.fabric.value.RelationValues<ApplicationDesign, SharedFragmentTemplateDefinitionDesign> sharedTemplates
-		= createRelationValues(org.instantlogic.designer.entity.ApplicationDesignEntity.sharedTemplates);
+	private final org.instantlogic.fabric.value.RelationValues<ApplicationDesign, SharedElementDefinitionDesign> sharedElements
+		= createRelationValues(org.instantlogic.designer.entity.ApplicationDesignEntity.sharedElements);
 		
-	public org.instantlogic.fabric.value.RelationValues<ApplicationDesign, SharedFragmentTemplateDefinitionDesign> getSharedTemplatesRelationValue() {
-		return sharedTemplates;
+	public org.instantlogic.fabric.value.RelationValues<ApplicationDesign, SharedElementDefinitionDesign> getSharedElementsRelationValue() {
+		return sharedElements;
 	}
 
-	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign> getSharedTemplates() {
-		return sharedTemplates.getValue();
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.SharedElementDefinitionDesign> getSharedElements() {
+		return sharedElements.getValue();
 	}
 	
-	public ApplicationDesign addToSharedTemplates(SharedFragmentTemplateDefinitionDesign item) {
-		sharedTemplates.addValue(item);
+	public ApplicationDesign addToSharedElements(SharedElementDefinitionDesign item) {
+		sharedElements.addValue(item);
 		return (ApplicationDesign)this;
 	}
 	
-	public ApplicationDesign addToSharedTemplates(SharedFragmentTemplateDefinitionDesign item, int index) {
-		sharedTemplates.insertValue(item, index);
+	public ApplicationDesign addToSharedElements(SharedElementDefinitionDesign item, int index) {
+		sharedElements.insertValue(item, index);
 		return (ApplicationDesign)this;
 	}
 	
-	public ApplicationDesign removeFromSharedTemplates(SharedFragmentTemplateDefinitionDesign item) {
-		sharedTemplates.removeValue(item);
+	public ApplicationDesign removeFromSharedElements(SharedElementDefinitionDesign item) {
+		sharedElements.removeValue(item);
 		return (ApplicationDesign)this;
 	}
 	
-	public ApplicationDesign removeFromSharedTemplates(int index) {
-		sharedTemplates.removeValue(index);
+	public ApplicationDesign removeFromSharedElements(int index) {
+		sharedElements.removeValue(index);
 		return (ApplicationDesign)this;
 	}
 	

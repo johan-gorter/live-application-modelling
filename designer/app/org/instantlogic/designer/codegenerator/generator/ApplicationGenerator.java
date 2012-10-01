@@ -10,7 +10,7 @@ import org.instantlogic.designer.Design;
 import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.EventDesign;
 import org.instantlogic.designer.FlowDesign;
-import org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign;
+import org.instantlogic.designer.SharedElementDefinitionDesign;
 import org.instantlogic.designer.codegenerator.classmodel.ApplicationClassModel;
 import org.instantlogic.designer.codegenerator.javacode.ApplicationJavacodeGenerator;
 import org.instantlogic.designer.deduction.TechnicalNameDeduction;
@@ -23,7 +23,7 @@ public class ApplicationGenerator extends AbstractGenerator{
 	private Map<String, EntityGenerator> entityGenerators=new HashMap<String, EntityGenerator>();
 	private Map<String, EventGenerator> eventGenerators = new HashMap<String, EventGenerator>(); 
 	private Map<String, FlowGenerator> flowGenerators = new HashMap<String, FlowGenerator>(); 
-	private Map<String, SharedPageFragmentGenerator> sharedPageFragmentGenerators = new HashMap<String, SharedPageFragmentGenerator>();
+	private Map<String, SharedElementDefinitionGenerator> sharedPageFragmentGenerators = new HashMap<String, SharedElementDefinitionGenerator>();
 
 	public ApplicationGenerator(ApplicationDesign applicationInstance) {
 		this.applicationInstance = applicationInstance;
@@ -72,9 +72,11 @@ public class ApplicationGenerator extends AbstractGenerator{
 			entityGenerators.put(newEntity.getName(), entityGenerator);
 		}
 		
-		List<Design> newSharedPageFragments = updateGenerators(sharedPageFragmentGenerators, applicationInstance.getSharedTemplates(), context);
+		// Comment from here to temporarely skip the interaction part
+		
+		List<Design> newSharedPageFragments = updateGenerators(sharedPageFragmentGenerators, applicationInstance.getSharedElements(), context);
 		for(Design newSharedPageFragment : newSharedPageFragments) {
-			SharedPageFragmentGenerator sharedPageFragmentGenerator = new SharedPageFragmentGenerator((SharedFragmentTemplateDefinitionDesign)newSharedPageFragment);
+			SharedElementDefinitionGenerator sharedPageFragmentGenerator = new SharedElementDefinitionGenerator((SharedElementDefinitionDesign)newSharedPageFragment);
 			sharedPageFragmentGenerator.update(context);
 			sharedPageFragmentGenerators.put(newSharedPageFragment.getName(), sharedPageFragmentGenerator);
 		}

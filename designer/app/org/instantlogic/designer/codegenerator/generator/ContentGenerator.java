@@ -22,7 +22,7 @@ public abstract class ContentGenerator extends AbstractGenerator {
 		model.isCustomized = element.getIsCustomized() == Boolean.TRUE;
 		if (element instanceof SharedElementDesign) {
 			model.category = Category.Shared;
-			model.name = ((SharedElementDesign) element).getSharedTemplateDefinition().getName();
+			model.name = ((SharedElementDesign) element).getDefinition().getName();
 		} else if (element instanceof FragmentTemplateDesign) {
 			FragmentTemplateDesign fragmentTemplate = (FragmentTemplateDesign) element;
 			model.category = Category.Fragment;
@@ -72,6 +72,8 @@ public abstract class ContentGenerator extends AbstractGenerator {
 			for (ElementDesign child: ifElse.getElseChildren()) {
 				model.elseChildren.add(generate(child, deductionHolder));
 			}
+		} else {
+			throw new RuntimeException("What the");
 		}
 		return model;
 	}

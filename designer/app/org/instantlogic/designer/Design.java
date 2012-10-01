@@ -4,6 +4,13 @@ import org.instantlogic.designer.deduction.TechnicalNameDeduction;
 
 public class Design extends AbstractDesign {
 
+	protected static FragmentTemplateDesign createText(String fragmentTypeName, TextTemplateDesign text) {
+		FragmentTemplateDesign result = new FragmentTemplateDesign();
+		result.setFragmentTypeName(fragmentTypeName);
+		result.setText("text", text);
+		return result;
+	}
+	
 	protected static TextTemplateDesign createConstantText(String untranslated) {
 		TextTemplateDesign result = new TextTemplateDesign();
 		StringTemplateDesign stringTemplateDesign = new StringTemplateDesign();

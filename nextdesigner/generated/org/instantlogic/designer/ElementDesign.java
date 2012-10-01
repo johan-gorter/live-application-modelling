@@ -65,19 +65,19 @@ public class ElementDesign extends Design {
     }
 
 	
-	private final org.instantlogic.fabric.value.RelationValue<ElementDesign, SharedFragmentTemplateDefinitionDesign> sharedTemplateDefinition
-		= createReverseRelationValue(org.instantlogic.designer.entity.ElementDesignEntity.sharedTemplateDefinition);
+	private final org.instantlogic.fabric.value.RelationValue<ElementDesign, SharedElementDefinitionDesign> partOfSharedElementDefinition
+		= createReverseRelationValue(org.instantlogic.designer.entity.ElementDesignEntity.partOfSharedElementDefinition);
 
-	public org.instantlogic.fabric.value.RelationValue<ElementDesign, SharedFragmentTemplateDefinitionDesign> getSharedTemplateDefinitionRelationValue() {
-		return sharedTemplateDefinition;
+	public org.instantlogic.fabric.value.RelationValue<ElementDesign, SharedElementDefinitionDesign> getPartOfSharedElementDefinitionRelationValue() {
+		return partOfSharedElementDefinition;
 	}
 
-	public org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign getSharedTemplateDefinition() {
-		return sharedTemplateDefinition.getValue();
+	public org.instantlogic.designer.SharedElementDefinitionDesign getPartOfSharedElementDefinition() {
+		return partOfSharedElementDefinition.getValue();
 	}
 
-    public ElementDesign setSharedTemplateDefinition(org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign newValue) {
-        sharedTemplateDefinition.setValue(newValue);
+    public ElementDesign setPartOfSharedElementDefinition(org.instantlogic.designer.SharedElementDefinitionDesign newValue) {
+        partOfSharedElementDefinition.setValue(newValue);
         return (ElementDesign)this;
     }
 

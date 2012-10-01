@@ -33,7 +33,7 @@ a {color: #000000;text-decoration: none;}
 
 .buttons {width: 100%;margin:5px 0;}
 
-.inactive-card {border: solid 1px #888888; border-bottom: 0; margin-bottom: 5px; margin-top: 50px; border-radius: 10px 10px 0 0; color: #888888; padding: 10px;}
-.card {border: solid 1px #000000; border-radius: 10px; padding: 10px; }
+.inactive-card {border: solid 1px #AAAAAA; border-bottom: 0; margin-bottom: 5px; margin-top: 50px; border-radius: 10px 10px 0 0; color: #888888; padding: 10px;}
+.card {border: solid 1px #666666; border-radius: 10px; padding: 10px; }
 
 .card h1, .inactive-card h1 {margin: 0 0 5px 0;}

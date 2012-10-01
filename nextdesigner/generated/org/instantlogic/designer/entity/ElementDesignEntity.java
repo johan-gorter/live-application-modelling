@@ -96,15 +96,15 @@ public class ElementDesignEntity extends org.instantlogic.fabric.model.Entity<or
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ElementDesign, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign> sharedTemplateDefinition
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.ElementDesign, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign>(
-			"sharedTemplateDefinition", INSTANCE, org.instantlogic.designer.entity.SharedFragmentTemplateDefinitionDesignEntity.INSTANCE, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign.class, org.instantlogic.designer.entity.SharedFragmentTemplateDefinitionDesignEntity.fragment
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ElementDesign, org.instantlogic.designer.SharedElementDefinitionDesign, org.instantlogic.designer.SharedElementDefinitionDesign> partOfSharedElementDefinition
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.ElementDesign, org.instantlogic.designer.SharedElementDefinitionDesign, org.instantlogic.designer.SharedElementDefinitionDesign>(
+			"partOfSharedElementDefinition", INSTANCE, org.instantlogic.designer.entity.SharedElementDefinitionDesignEntity.INSTANCE, org.instantlogic.designer.SharedElementDefinitionDesign.class, org.instantlogic.designer.entity.SharedElementDefinitionDesignEntity.fragment
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.ElementDesign, org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.ElementDesign, org.instantlogic.designer.SharedElementDefinitionDesign> get(
 					org.instantlogic.designer.ElementDesign instance) {
-				return instance.getSharedTemplateDefinitionRelationValue();
+				return instance.getPartOfSharedElementDefinitionRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -120,7 +120,7 @@ public class ElementDesignEntity extends org.instantlogic.fabric.model.Entity<or
 		childOfSelection,
 		childrenForFragment,
 		contentOfPage,
-		sharedTemplateDefinition,
+		partOfSharedElementDefinition,
 	};
 
 	@Override
