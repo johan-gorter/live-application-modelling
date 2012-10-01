@@ -28,6 +28,9 @@ public class ApplicationDesign extends AbstractApplicationDesign {
 		for (EntityDesign entity:getEntities()) {
 			entity.init();
 		}
+		for (SharedElementDefinitionDesign sharedTemplate: getSharedElements()) {
+			sharedTemplate.init();
+		}
 		for (FlowDesign flow: getFlows()) {
 			flow.init();
 		}
@@ -55,6 +58,10 @@ public class ApplicationDesign extends AbstractApplicationDesign {
             		entryName = entryName.substring(0, entryName.lastIndexOf('.'));
 					Class<?> cl = getClass().getClassLoader().loadClass(packageName+"."+entryName);
 					cl.getField("FLOW").get(null);
+                } else if (entryName.endsWith("SharedElement.class")) {
+            		entryName = entryName.substring(0, entryName.lastIndexOf('.'));
+					Class<?> cl = getClass().getClassLoader().loadClass(packageName+"."+entryName);
+					cl.getField("TEMPLATE").get(null);
                 }
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);

@@ -14,7 +14,7 @@ public class SharedElementDesignEntityGenerator extends EntityDesign {
     // Attributes
 
     // Relations
-    public static final RelationDesign definition = addRelation(ENTITY, "definition", RelationType.ManyToZeroOrOne, SharedFragmentTemplateDefinitionDesignEntityGenerator.ENTITY)
+    public static final RelationDesign definition = addRelation(ENTITY, "definition", RelationType.ManyToZeroOrOne, SharedElementDefinitionDesignEntityGenerator.ENTITY)
             .setReverseName("usages");
 
 }

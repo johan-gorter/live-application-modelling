@@ -12,18 +12,18 @@ public class SharedElementDesign extends ElementDesign {
 	
 	// Relations
 	
-	private final org.instantlogic.fabric.value.RelationValue<SharedElementDesign, SharedFragmentTemplateDefinitionDesign> definition
+	private final org.instantlogic.fabric.value.RelationValue<SharedElementDesign, SharedElementDefinitionDesign> definition
 		= createRelationValue(org.instantlogic.designer.entity.SharedElementDesignEntity.definition);
 		
-	public org.instantlogic.fabric.value.RelationValue<SharedElementDesign, SharedFragmentTemplateDefinitionDesign> getDefinitionRelationValue() {
+	public org.instantlogic.fabric.value.RelationValue<SharedElementDesign, SharedElementDefinitionDesign> getDefinitionRelationValue() {
 		return definition;
 	}
 
-	public org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign getDefinition() {
+	public org.instantlogic.designer.SharedElementDefinitionDesign getDefinition() {
 		return definition.getValue();
 	}
 	
-	public SharedElementDesign setDefinition(org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign newValue) {
+	public SharedElementDesign setDefinition(org.instantlogic.designer.SharedElementDefinitionDesign newValue) {
 		definition.setValue(newValue);
 		return (SharedElementDesign)this;
 	}

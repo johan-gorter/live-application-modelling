@@ -3,12 +3,13 @@ package org.instantlogic.interaction.page;
 import java.util.List;
 import java.util.Map;
 
+import org.instantlogic.interaction.util.ChangeContext;
 import org.instantlogic.interaction.util.SubmitContext;
 import org.instantlogic.interaction.util.FlowEventOccurrence;
 import org.instantlogic.interaction.util.RenderContext;
 
 
-public abstract class SharedElement extends Element {
+public class SharedElement extends Element {
 
 	private final Element delegate;
 	
@@ -24,5 +25,11 @@ public abstract class SharedElement extends Element {
 	@Override
 	public FlowEventOccurrence submit(SubmitContext submitContext) {
 		return delegate.submit(submitContext);
+	}
+
+	@Override
+	public void change(ChangeContext changeContext) {
+		delegate.change(changeContext);
+		
 	}
 }

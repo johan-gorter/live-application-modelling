@@ -1,16 +1,16 @@
 package org.instantlogic.designer.codegenerator.generator;
 
 
-import org.instantlogic.designer.SharedFragmentTemplateDefinitionDesign;
+import org.instantlogic.designer.SharedElementDefinitionDesign;
 import org.instantlogic.designer.codegenerator.classmodel.SharedPageFragmentClassModel;
 import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 
-public class SharedPageFragmentGenerator extends AbstractGenerator {
+public class SharedElementDefinitionGenerator extends AbstractGenerator {
 
-	private SharedFragmentTemplateDefinitionDesign definition;
+	private SharedElementDefinitionDesign definition;
 
-	public SharedPageFragmentGenerator(SharedFragmentTemplateDefinitionDesign pageFragmentHolderDesign) {
+	public SharedElementDefinitionGenerator(SharedElementDefinitionDesign pageFragmentHolderDesign) {
 		this.definition = pageFragmentHolderDesign;
 	}
 

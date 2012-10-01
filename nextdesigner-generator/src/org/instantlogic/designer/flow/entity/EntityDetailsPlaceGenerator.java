@@ -1,6 +1,5 @@
 package org.instantlogic.designer.flow.entity;
 
-import org.instantlogic.designer.ApplicationDesignEntityGenerator;
 import org.instantlogic.designer.AttributeDesignEntityGenerator;
 import org.instantlogic.designer.DeductionSchemeDesign;
 import org.instantlogic.designer.DesignEntityGenerator;
@@ -8,11 +7,12 @@ import org.instantlogic.designer.EntityDesignEntityGenerator;
 import org.instantlogic.designer.FragmentTemplateDesign;
 import org.instantlogic.designer.PlaceTemplateDesign;
 import org.instantlogic.designer.SelectionDesign;
+import org.instantlogic.designer.SharedElementDesign;
 import org.instantlogic.designer.StringTemplateDesign;
 import org.instantlogic.designer.TextTemplateDesign;
 import org.instantlogic.designer.deduction.CapitalizeFirstDeduction;
 import org.instantlogic.designer.event.AttributeDetailsEventGenerator;
-import org.instantlogic.designer.event.HomeEventGenerator;
+import org.instantlogic.designer.sharedfragment.ApplicationContextSharedElement;
 
 public class EntityDetailsPlaceGenerator extends PlaceTemplateDesign {
 
@@ -24,22 +24,14 @@ public class EntityDetailsPlaceGenerator extends PlaceTemplateDesign {
 	
 	@Override
 	public void init() {
-		DeductionSchemeDesign entityName, attributes, attributeName, applicationName;
-		FragmentTemplateDesign nameInput, attributeLink, applicationLink;
+		DeductionSchemeDesign entityName, attributes, attributeName;
+		FragmentTemplateDesign nameInput, attributeLink;
+		SharedElementDesign applicationContext;
 		
 		setContent(new FragmentTemplateDesign("Page")
 			.setChildren("mainContent", 
 				
-				applicationLink = new FragmentTemplateDesign("Link")
-					.setChildren("content",
-						new  FragmentTemplateDesign("Block")
-							.addToStyleNames("inactive-card")
-							.setChildren("content",
-								createText("Heading1", new TextTemplateDesign()
-									.addToUntranslated(new StringTemplateDesign().setDeduction(applicationName = new DeductionSchemeDesign()))
-									.addToUntranslated(new StringTemplateDesign().setConstantText(" (Application)")))
-							)
-					),
+				applicationContext = new SharedElementDesign(),	
 				
 				new FragmentTemplateDesign("Block")
 					.addToStyleNames("card")
@@ -71,8 +63,7 @@ public class EntityDetailsPlaceGenerator extends PlaceTemplateDesign {
 			)
 		);
 		
-		applicationName.deduceAttribute(ApplicationDesignEntityGenerator.name);
-		applicationLink.setEvent(HomeEventGenerator.EVENT);
+		applicationContext.setDefinition(ApplicationContextSharedElement.TEMPLATE);
 		
 		entityName.deduceCustom(CapitalizeFirstDeduction.class, String.class, entityName.deduceAttribute(DesignEntityGenerator.name));
 		attributes.deduceAttribute(EntityDesignEntityGenerator.attributes);
