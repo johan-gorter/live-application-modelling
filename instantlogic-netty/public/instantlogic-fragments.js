@@ -88,8 +88,18 @@ YUI.add('instantlogic-fragments', function (Y) {
     ns.Button = createFragment({
     	baseClass: ns.Link
     });
+
+    // Group: Just renders its content, essentially just a span.
+    ns.Group = createFragment({
+    	createMarkup: function() {
+    		return html.span();
+    	},
+		fragmentLists: function(model) {
+			return [[this.markup, model.content]];
+		}
+    });
     
-    // Renders its content on a new line, essentially just a div.
+    // Block: Renders its content on a new line, essentially just a div.
     ns.Block = createFragment({
     	createMarkup: function() {
     		return html.div();

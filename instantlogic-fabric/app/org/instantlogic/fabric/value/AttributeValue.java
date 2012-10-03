@@ -8,4 +8,6 @@ public interface AttributeValue<I extends Instance, V extends Object> extends Re
 	
 	boolean isStored();
 	
+	public V getStoredValue();
+	
 }

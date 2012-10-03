@@ -39,7 +39,28 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 
 	// Deductions
 
-	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> createDeduction0() {
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> createDeduction0() {
+		  	org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> d0 
+		  		= org.instantlogic.fabric.deduction.ConstantDeduction.create(true);
+		return d0;
+	}
+
+
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> createDeduction1() {
+		  	org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> d0 
+		  		= org.instantlogic.fabric.deduction.ConstantDeduction.create(false);
+		return d0;
+	}
+
+
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> createDeduction2() {
+		  	org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> d0 
+		  		= org.instantlogic.fabric.deduction.ConstantDeduction.create(false);
+		return d0;
+	}
+
+
+	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> createDeduction3() {
 		    org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> d0 
 		    	= new org.instantlogic.designer.deduction.AttributeBelongsToDeduction();
 		return d0;
@@ -48,9 +69,9 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 	
 	// Attributes
 	
-	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.AttributeDesign, java.lang.Boolean, java.lang.Boolean> readOnly 
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.AttributeDesign, java.lang.Boolean, java.lang.Boolean> hasDefault 
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.AttributeDesign, java.lang.Boolean, java.lang.Boolean>(
-			"readOnly", INSTANCE, java.lang.Boolean.class
+			"hasDefault", INSTANCE, java.lang.Boolean.class
 		) {
 			{
 				dataType.put("category", "boolean");
@@ -58,8 +79,77 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.AttributeDesign, java.lang.Boolean> get(org.instantlogic.designer.AttributeDesign instance) {
-				return instance.getReadOnlyAttributeValue();
+				return instance.getHasDefaultAttributeValue();
 			}
+		};
+	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.AttributeDesign, java.lang.Boolean, java.lang.Boolean> hasRelevance 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.AttributeDesign, java.lang.Boolean, java.lang.Boolean>(
+			"hasRelevance", INSTANCE, java.lang.Boolean.class
+		) {
+			{
+				dataType.put("category", "boolean");
+			}
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.AttributeDesign, java.lang.Boolean> get(org.instantlogic.designer.AttributeDesign instance) {
+				return instance.getHasRelevanceAttributeValue();
+			}
+
+            private org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> defaultDeduction;
+            @Override
+            public org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> getDefault() {
+                if (defaultDeduction==null) {
+                    defaultDeduction = createDeduction1();
+                }
+                return defaultDeduction;
+            }
+		};
+	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.AttributeDesign, java.lang.Boolean, java.lang.Boolean> hasRule 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.AttributeDesign, java.lang.Boolean, java.lang.Boolean>(
+			"hasRule", INSTANCE, java.lang.Boolean.class
+		) {
+			{
+				dataType.put("category", "boolean");
+			}
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.AttributeDesign, java.lang.Boolean> get(org.instantlogic.designer.AttributeDesign instance) {
+				return instance.getHasRuleAttributeValue();
+			}
+
+            private org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> defaultDeduction;
+            @Override
+            public org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> getDefault() {
+                if (defaultDeduction==null) {
+                    defaultDeduction = createDeduction2();
+                }
+                return defaultDeduction;
+            }
+		};
+	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.AttributeDesign, java.lang.Boolean, java.lang.Boolean> writeable 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.AttributeDesign, java.lang.Boolean, java.lang.Boolean>(
+			"writeable", INSTANCE, java.lang.Boolean.class
+		) {
+			{
+				dataType.put("category", "boolean");
+			}
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.AttributeDesign, java.lang.Boolean> get(org.instantlogic.designer.AttributeDesign instance) {
+				return instance.getWriteableAttributeValue();
+			}
+
+            private org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> defaultDeduction;
+            @Override
+            public org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> getDefault() {
+                if (defaultDeduction==null) {
+                    defaultDeduction = createDeduction0();
+                }
+                return defaultDeduction;
+            }
 		};
 	
 	// Relations
@@ -84,7 +174,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			@Override
 			public org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> getRule() {
 				if (rule==null) {
-					rule  = createDeduction0();
+					rule  = createDeduction3();
 				}
 				return rule;
 			}
@@ -116,7 +206,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign> _default
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign>(
 			"default", INSTANCE, org.instantlogic.designer.entity.DeductionSchemeDesignEntity.INSTANCE, org.instantlogic.designer.DeductionSchemeDesign.class, 
-			null
+			org.instantlogic.designer.entity.DeductionSchemeDesignEntity.defaultOfAttribute
 		) {
 	
 			@Override
@@ -170,7 +260,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign> relevance
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign>(
 			"relevance", INSTANCE, org.instantlogic.designer.entity.DeductionSchemeDesignEntity.INSTANCE, org.instantlogic.designer.DeductionSchemeDesign.class, 
-			null
+			org.instantlogic.designer.entity.DeductionSchemeDesignEntity.relevanceOfAttribute
 		) {
 	
 			@Override
@@ -188,7 +278,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign> rule
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign>(
 			"rule", INSTANCE, org.instantlogic.designer.entity.DeductionSchemeDesignEntity.INSTANCE, org.instantlogic.designer.DeductionSchemeDesign.class, 
-			null
+			org.instantlogic.designer.entity.DeductionSchemeDesignEntity.ruleOfAttribute
 		) {
 	
 			@Override
@@ -222,7 +312,10 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 		};
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
-		readOnly,
+		hasDefault,
+		hasRelevance,
+		hasRule,
+		writeable,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		belongsToEntity,

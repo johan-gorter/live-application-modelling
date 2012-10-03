@@ -14,7 +14,7 @@ public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${
 
 	public static ${name}PageFragment INSTANCE = new ${name}PageFragment();
 	
-	protected ApplicationContextPageFragment() {
+	protected <#if isCustomized>Abstract</#if>${name}PageFragment() {
 		super(SHARED_INSTANCE);
 	}
 	

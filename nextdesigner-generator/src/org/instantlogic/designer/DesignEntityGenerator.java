@@ -1,5 +1,6 @@
 package org.instantlogic.designer;
 
+import org.instantlogic.designer.deduction.DefaultDesignNameDeduction;
 import org.instantlogic.designer.deduction.JavaIdentifierDeduction;
 import org.instantlogic.designer.deduction.TechnicalNameDeduction;
 
@@ -26,10 +27,12 @@ public class DesignEntityGenerator extends EntityDesign {
     public void init() {
     	super.init();
     	
-		javaIdentifier.setReadOnly(true);
+    	name.setDefault(new DeductionSchemeDesign().deduceCustom(DefaultDesignNameDeduction.class, String.class).getScheme());
+    	
+		javaIdentifier.setWriteable(false);
 		javaIdentifier.setRule(new DeductionSchemeDesign().deduceCustom(JavaIdentifierDeduction.class, String.class).getScheme());
 
-		technicalName.setReadOnly(true);
+		technicalName.setWriteable(false);
 		technicalName.setRule(new DeductionSchemeDesign().deduceCustom(TechnicalNameDeduction.class, String.class).getScheme());
     }
 }

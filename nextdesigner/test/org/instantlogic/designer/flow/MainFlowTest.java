@@ -24,7 +24,6 @@ public class MainFlowTest {
 		traveler.setTravelerId("testTraveler");
 		String path = "Welcome";
 		
-		testCase.enter(traveler, null, path);
 		Map<String, Object> page = testCase.render(traveler, path);
 
 		System.out.println(CasePersister.gson.toJson(page));

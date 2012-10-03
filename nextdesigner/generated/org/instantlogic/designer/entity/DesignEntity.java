@@ -45,12 +45,19 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 
 	private static org.instantlogic.fabric.deduction.Deduction<java.lang.String> createDeduction0() {
 		    org.instantlogic.fabric.deduction.Deduction<java.lang.String> d0 
-		    	= new org.instantlogic.designer.deduction.JavaIdentifierDeduction();
+		    	= new org.instantlogic.designer.deduction.DefaultDesignNameDeduction();
 		return d0;
 	}
 
 
 	private static org.instantlogic.fabric.deduction.Deduction<java.lang.String> createDeduction1() {
+		    org.instantlogic.fabric.deduction.Deduction<java.lang.String> d0 
+		    	= new org.instantlogic.designer.deduction.JavaIdentifierDeduction();
+		return d0;
+	}
+
+
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.String> createDeduction2() {
 		    org.instantlogic.fabric.deduction.Deduction<java.lang.String> d0 
 		    	= new org.instantlogic.designer.deduction.TechnicalNameDeduction();
 		return d0;
@@ -92,7 +99,7 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
             @Override
             public org.instantlogic.fabric.deduction.Deduction<java.lang.String> getRule() {
                 if (rule==null) {
-                    rule = createDeduction0();
+                    rule = createDeduction1();
                 }
                 return rule;
             }
@@ -109,6 +116,15 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.Design, java.lang.String> get(org.instantlogic.designer.Design instance) {
 				return instance.getNameAttributeValue();
 			}
+
+            private org.instantlogic.fabric.deduction.Deduction<java.lang.String> defaultDeduction;
+            @Override
+            public org.instantlogic.fabric.deduction.Deduction<java.lang.String> getDefault() {
+                if (defaultDeduction==null) {
+                    defaultDeduction = createDeduction0();
+                }
+                return defaultDeduction;
+            }
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.Design, java.lang.String, java.lang.String> technicalName 
@@ -131,7 +147,7 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
             @Override
             public org.instantlogic.fabric.deduction.Deduction<java.lang.String> getRule() {
                 if (rule==null) {
-                    rule = createDeduction1();
+                    rule = createDeduction2();
                 }
                 return rule;
             }

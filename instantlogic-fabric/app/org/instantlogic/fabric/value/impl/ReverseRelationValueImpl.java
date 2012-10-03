@@ -51,7 +51,7 @@ public class ReverseRelationValueImpl<I extends Instance, From extends Instance>
 			if (relation.isMultivalue()) {
 				((RelationValues)value).removeValue(forInstance);
 			} else {
-				if (value.getValue()!=forInstance) {
+				if (((AttributeValue)value).getStoredValue()!=forInstance) {
 					throw new RuntimeException("Reverse value not in sync while changing reverse relation");
 				}
 				((AttributeValue<From, ? extends Object>)value).setValue(null);
@@ -66,16 +66,13 @@ public class ReverseRelationValueImpl<I extends Instance, From extends Instance>
 			if (relation.isMultivalue()) {
 				((RelationValues)value).addValue(forInstance);
 			} else {
-				if (value.getValue()!=forInstance) {
-					throw new RuntimeException("Reverse value not in sync while changing reverse relation");
-				}
 				((AttributeValue)value).setValue(forInstance);
 			}
 		}
 	}
 	
 	@SuppressWarnings("rawtypes")
-	public void clear() {
+	public void clear() { // From looking at this method, it seems non-functional at the moment
 		if (reverseValue==null) return;
 		Relation<From,? extends Object,I> relation = ((Relation<I, From, From>)getModel()).getReverseRelation();
 		AttributeValue<From, ? extends Object> value = (AttributeValue<From, ? extends Object>)relation.get(reverseValue);
@@ -83,7 +80,7 @@ public class ReverseRelationValueImpl<I extends Instance, From extends Instance>
 		if (relation.isMultivalue()) {
 			result = ((List)value).remove(forInstance);
 		} else {
-			result = value.getValue()==forInstance;
+			result = value.getStoredValue()==forInstance;
 			value.setValue(null);
 		}
 		if (!result) throw new RuntimeException("Reverse value not in sync while clearing reverse relation");
@@ -97,6 +94,11 @@ public class ReverseRelationValueImpl<I extends Instance, From extends Instance>
 	@Override
 	protected String valueToString() {
 		return super.valueToString()+",reverseValue:"+reverseValue;
-	}	
+	}
+	
+	@Override
+	public From getStoredValue() {
+		return reverseValue;
+	}
 	
 }
