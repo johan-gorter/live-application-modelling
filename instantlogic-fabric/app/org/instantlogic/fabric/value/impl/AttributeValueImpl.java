@@ -34,7 +34,7 @@ public class AttributeValueImpl<I extends Instance, Value extends Object>
 	}
 	
 	@Override
-	protected Value getStoredValue() {
+	public Value getStoredValue() {
 		return storedValue;
 	}
 	

@@ -3,8 +3,8 @@ package org.instantlogic.designer.flow;
 import org.instantlogic.designer.DesignerApplicationGenerator;
 import org.instantlogic.designer.EntityDesignEntityGenerator;
 import org.instantlogic.designer.FlowDesign;
-import org.instantlogic.designer.FlowEdgeDesign;
 import org.instantlogic.designer.SubFlowDesign;
+import org.instantlogic.designer.event.AddAttributeEventGenerator;
 import org.instantlogic.designer.event.AttributeDetailsEventGenerator;
 import org.instantlogic.designer.event.EntityDetailsEventGenerator;
 import org.instantlogic.designer.flow.entity.EntityDetailsPlaceGenerator;
@@ -23,16 +23,19 @@ public class EntityFlowGenerator extends FlowDesign {
 		addToParameters(EntityDesignEntityGenerator.ENTITY);
 
 		SubFlowDesign attributeSubFlow = addSubFlow(AttributeFlowGenerator.FLOW);
+		SubFlowDesign addAttributeSubFlow = addSubFlow(AddAttributeFlowGenerator.FLOW);
 
 		addToNodes(EntityDetailsPlaceGenerator.PLACE);
 		
-		new FlowEdgeDesign()
-			.setOwner(this)
+		newEdge()
 			.setEvent(EntityDetailsEventGenerator.EVENT)
 			.setEndNode(EntityDetailsPlaceGenerator.PLACE);
 
-		new FlowEdgeDesign()
-			.setOwner(this)
+		newEdge()
+			.setEvent(AddAttributeEventGenerator.EVENT)
+			.setEndNode(addAttributeSubFlow);
+		
+		newEdge()
 			.setEvent(AttributeDetailsEventGenerator.EVENT)
 			.setEndNode(attributeSubFlow);
 		

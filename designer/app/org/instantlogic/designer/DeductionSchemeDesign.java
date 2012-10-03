@@ -4,6 +4,11 @@ package org.instantlogic.designer;
 
 public class DeductionSchemeDesign extends AbstractDeductionSchemeDesign {
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static DeductionSchemeDesign constant(Object value) {
+		return new DeductionSchemeDesign().deduceConstant((Class)value.getClass(), value).getScheme();
+	}
+	
 	public DeductionDesign deduceSelectedInstance(EntityDesign entity) {
 		SelectedInstanceDeductionDesign selectedInstanceDeductionDesign = new SelectedInstanceDeductionDesign();
 		

@@ -18,12 +18,12 @@ public class DataTypeDataCategoryDeduction extends Deduction<DataCategoryDesign>
 			return ValueAndLevel.deduced(DataCategoryDesignEntity.INSTANCE._boolean); // Hack until static instances are fully supported
 		}
 		if (dataType.getAttribute()!=null && !(dataType.getAttribute() instanceof RelationDesign)) {
-			return ValueAndLevel.inconclusive();
+			return ValueAndLevel.inconclusive(); // Just a normal attribute
 		}
 		if (dataType.getConstantDeductionDesign()!=null || dataType.getCustomDeductionDesign()!=null) {
 			return ValueAndLevel.deduced(DataCategoryDesignEntity.INSTANCE.custom);
 		}
-		return ValueAndLevel.deduced(DataCategoryDesignEntity.INSTANCE.entity);
+		return ValueAndLevel.deduced(DataCategoryDesignEntity.INSTANCE.entity); // A (reverse) relation
 	}
 
 }

@@ -11,7 +11,7 @@ import org.instantlogic.designer.event.HomeEventGenerator;
 
 public class ApplicationContextSharedElement extends SharedElementDefinitionDesign {
 
-	public static final ApplicationContextSharedElement TEMPLATE = new ApplicationContextSharedElement();
+	public static final ApplicationContextSharedElement DEFINITION = new ApplicationContextSharedElement();
 	
 	private ApplicationContextSharedElement() {
 		DesignerApplicationGenerator.APPLICATION.addToSharedElements(this);

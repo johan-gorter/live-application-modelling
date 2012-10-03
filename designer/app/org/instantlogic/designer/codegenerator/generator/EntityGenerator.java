@@ -50,7 +50,7 @@ public class EntityGenerator extends AbstractGenerator {
 			} else {
 				attribute.className=attribute.itemClassName;
 			}
-			attribute.readonly = (attributeDesign.getReadOnly()==Boolean.TRUE);
+			attribute.readonly = (attributeDesign.getWriteable()==Boolean.FALSE);
 			TextTemplateDesign question = attributeDesign.getQuestion();
 			if (question!=null) {
 				attribute.question = TextGenerator.generate(question, model);
@@ -76,7 +76,7 @@ public class EntityGenerator extends AbstractGenerator {
 			relation.technicalName = relationDesign.getTechnicalName();
 			relation.javaIdentifier = relationDesign.getJavaIdentifier();
 			relation.multivalue = (relationDesign.getDataType().getMultivalue()==Boolean.TRUE);
-			relation.readonly = (relationDesign.getReadOnly()==Boolean.TRUE);
+			relation.readonly = (relationDesign.getWriteable()==Boolean.FALSE);
 			relation.owner = (relationDesign.getOwner()==Boolean.TRUE);
 			relation.autoCreate = (relationDesign.getAutoCreate()==Boolean.TRUE);
 			relation.item = relationDesign.getTo().getTechnicalNameCapitalized();

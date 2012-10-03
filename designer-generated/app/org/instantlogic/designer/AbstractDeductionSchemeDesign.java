@@ -62,5 +62,56 @@ public abstract class AbstractDeductionSchemeDesign extends org.instantlogic.fab
 
 
 	// Reverse relations
+	
+	private final org.instantlogic.fabric.value.RelationValue<DeductionSchemeDesign, AttributeDesign> defaultOfAttribute
+		= createReverseRelationValue(org.instantlogic.designer.entity.DeductionSchemeDesignEntity.defaultOfAttribute);
+
+	public org.instantlogic.fabric.value.RelationValue<DeductionSchemeDesign, AttributeDesign> getDefaultOfAttributeRelationValue() {
+		return defaultOfAttribute;
+	}
+
+	public org.instantlogic.designer.AttributeDesign getDefaultOfAttribute() {
+		return defaultOfAttribute.getValue();
+	}
+
+    public DeductionSchemeDesign setDefaultOfAttribute(org.instantlogic.designer.AttributeDesign newValue) {
+        defaultOfAttribute.setValue(newValue);
+        return (DeductionSchemeDesign)this;
+    }
+
+	
+	private final org.instantlogic.fabric.value.RelationValue<DeductionSchemeDesign, AttributeDesign> relevanceOfAttribute
+		= createReverseRelationValue(org.instantlogic.designer.entity.DeductionSchemeDesignEntity.relevanceOfAttribute);
+
+	public org.instantlogic.fabric.value.RelationValue<DeductionSchemeDesign, AttributeDesign> getRelevanceOfAttributeRelationValue() {
+		return relevanceOfAttribute;
+	}
+
+	public org.instantlogic.designer.AttributeDesign getRelevanceOfAttribute() {
+		return relevanceOfAttribute.getValue();
+	}
+
+    public DeductionSchemeDesign setRelevanceOfAttribute(org.instantlogic.designer.AttributeDesign newValue) {
+        relevanceOfAttribute.setValue(newValue);
+        return (DeductionSchemeDesign)this;
+    }
+
+	
+	private final org.instantlogic.fabric.value.RelationValue<DeductionSchemeDesign, AttributeDesign> ruleOfAttribute
+		= createReverseRelationValue(org.instantlogic.designer.entity.DeductionSchemeDesignEntity.ruleOfAttribute);
+
+	public org.instantlogic.fabric.value.RelationValue<DeductionSchemeDesign, AttributeDesign> getRuleOfAttributeRelationValue() {
+		return ruleOfAttribute;
+	}
+
+	public org.instantlogic.designer.AttributeDesign getRuleOfAttribute() {
+		return ruleOfAttribute.getValue();
+	}
+
+    public DeductionSchemeDesign setRuleOfAttribute(org.instantlogic.designer.AttributeDesign newValue) {
+        ruleOfAttribute.setValue(newValue);
+        return (DeductionSchemeDesign)this;
+    }
+
 
 }

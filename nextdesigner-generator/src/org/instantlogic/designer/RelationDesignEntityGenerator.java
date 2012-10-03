@@ -35,10 +35,10 @@ public class RelationDesignEntityGenerator extends EntityDesign {
     public void init() {
     	super.init();
     	
-    	reverseTechnicalName.setReadOnly(true);
+    	reverseTechnicalName.setWriteable(false);
     	reverseTechnicalName.setRule(new DeductionSchemeDesign().deduceCustom(ReverseTechnicalNameDeduction.class, String.class).getScheme());
 
-    	reverseJavaIdentifier.setReadOnly(true);
+    	reverseJavaIdentifier.setWriteable(false);
     	reverseJavaIdentifier.setRule(new DeductionSchemeDesign().deduceCustom(ReverseJavaIdentifierDeduction.class, String.class).getScheme());
     }
     

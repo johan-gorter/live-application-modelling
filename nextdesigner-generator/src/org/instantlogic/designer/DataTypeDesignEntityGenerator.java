@@ -4,6 +4,7 @@ import org.instantlogic.designer.deduction.DataTypeDataCategoryDeduction;
 import org.instantlogic.designer.deduction.DataTypeEntityDeduction;
 import org.instantlogic.designer.deduction.DataTypeJavaClassNameDeduction;
 import org.instantlogic.designer.deduction.DataTypeMultivalueDeduction;
+import org.instantlogic.designer.entity.DataCategoryDesignEntity;
 
 public class DataTypeDesignEntityGenerator extends EntityDesign {
 
@@ -40,13 +41,14 @@ public class DataTypeDesignEntityGenerator extends EntityDesign {
         
     	javaClassName.setDefault(new DeductionSchemeDesign().deduceCustom(DataTypeJavaClassNameDeduction.class, String.class).getScheme());
     	
-    	entity.setReadOnly(true);
+    	entity.setWriteable(false);
     	entity.setRule(new DeductionSchemeDesign().deduceCustom(DataTypeEntityDeduction.class, EntityDesign.class).getScheme());
     	
     	dataCategory.setRule(new DeductionSchemeDesign().deduceCustom(DataTypeDataCategoryDeduction.class, DataCategoryDesign.class).getScheme());
+    	dataCategory.setDefault(DeductionSchemeDesign.constant(DataCategoryDesignEntity.INSTANCE.text));
     	
-    	multivalue.setDefault(new DeductionSchemeDesign().deduceConstant(Boolean.class, false).getScheme());
     	multivalue.setRule(new DeductionSchemeDesign().deduceCustom(DataTypeMultivalueDeduction.class, Boolean.class).getScheme());
+    	multivalue.setDefault(DeductionSchemeDesign.constant(false));
     	
     	// TODO: relevance for all attributes/relations
     }

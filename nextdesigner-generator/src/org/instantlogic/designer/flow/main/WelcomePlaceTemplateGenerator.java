@@ -10,6 +10,7 @@ import org.instantlogic.designer.SelectionDesign;
 import org.instantlogic.designer.StringTemplateDesign;
 import org.instantlogic.designer.TextTemplateDesign;
 import org.instantlogic.designer.deduction.CapitalizeFirstDeduction;
+import org.instantlogic.designer.event.AddEntityEventGenerator;
 import org.instantlogic.designer.event.EntityDetailsEventGenerator;
 import org.instantlogic.designer.event.FlowDetailsEventGenerator;
 
@@ -24,7 +25,9 @@ public class WelcomePlaceTemplateGenerator extends PlaceTemplateDesign {
 	@Override
 	public void init() {
 		DeductionSchemeDesign applicationName, entitiesDeduction, flowsDeduction, entityName, flowName;
-		FragmentTemplateDesign entityLink, flowLink;
+		FragmentTemplateDesign entityLink, flowLink, addEntityButton;
+		
+		setTitle(createConstantText("Welcome"));
 		
 		setContent(new FragmentTemplateDesign("Page")
 			.setChildren("mainContent", 
@@ -62,6 +65,9 @@ public class WelcomePlaceTemplateGenerator extends PlaceTemplateDesign {
 									)
 							),
 							
+							addEntityButton = new FragmentTemplateDesign("Button")
+								.setText("text", createConstantText("Add entity")),
+							
 							new FragmentTemplateDesign("Table")
 								.setChildren("columns", 
 									new FragmentTemplateDesign("Column")
@@ -94,6 +100,7 @@ public class WelcomePlaceTemplateGenerator extends PlaceTemplateDesign {
 		entityName.deduceAttribute(DesignEntityGenerator.name);
 		flowName.deduceAttribute(DesignEntityGenerator.name, flowName.deduceSelectedInstance(FlowDesignEntityGenerator.ENTITY));
 		entityLink.setEvent(EntityDetailsEventGenerator.EVENT);
+		addEntityButton.setEvent(AddEntityEventGenerator.EVENT);
 		flowLink.setEvent(FlowDetailsEventGenerator.EVENT);
 	}
 }

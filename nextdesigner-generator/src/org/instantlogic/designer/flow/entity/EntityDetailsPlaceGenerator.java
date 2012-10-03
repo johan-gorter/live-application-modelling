@@ -11,6 +11,7 @@ import org.instantlogic.designer.SharedElementDesign;
 import org.instantlogic.designer.StringTemplateDesign;
 import org.instantlogic.designer.TextTemplateDesign;
 import org.instantlogic.designer.deduction.CapitalizeFirstDeduction;
+import org.instantlogic.designer.event.AddAttributeEventGenerator;
 import org.instantlogic.designer.event.AttributeDetailsEventGenerator;
 import org.instantlogic.designer.sharedfragment.ApplicationContextSharedElement;
 
@@ -25,8 +26,15 @@ public class EntityDetailsPlaceGenerator extends PlaceTemplateDesign {
 	@Override
 	public void init() {
 		DeductionSchemeDesign entityName, attributes, attributeName;
-		FragmentTemplateDesign nameInput, attributeLink;
+		FragmentTemplateDesign nameInput, attributeLink, addAttributeButton;
 		SharedElementDesign applicationContext;
+		
+		setTitle(new TextTemplateDesign()
+					.addToUntranslated(new StringTemplateDesign().setDeduction(entityName = new DeductionSchemeDesign()))
+					.addToUntranslated(new StringTemplateDesign().setConstantText(" (Entity)"))
+		);
+		
+		entityName.deduceCustom(CapitalizeFirstDeduction.class, String.class, entityName.deduceAttribute(DesignEntityGenerator.name));
 		
 		setContent(new FragmentTemplateDesign("Page")
 			.setChildren("mainContent", 
@@ -37,8 +45,8 @@ public class EntityDetailsPlaceGenerator extends PlaceTemplateDesign {
 					.addToStyleNames("card")
 					.setChildren("content",
 						createText("Heading1", new TextTemplateDesign()
-							.addToUntranslated(new StringTemplateDesign().setConstantText("Entity "))
 							.addToUntranslated(new StringTemplateDesign().setDeduction(entityName = new DeductionSchemeDesign()))
+							.addToUntranslated(new StringTemplateDesign().setConstantText(" (Entity)"))
 						),
 						
 						nameInput = new FragmentTemplateDesign("Input"),
@@ -58,17 +66,20 @@ public class EntityDetailsPlaceGenerator extends PlaceTemplateDesign {
 													.setText("text", new TextTemplateDesign().addToUntranslated(new StringTemplateDesign().setDeduction(attributeName = new DeductionSchemeDesign())))
 											)
 									)
-							)
+							),
+						
+						addAttributeButton = new FragmentTemplateDesign("Button").setText("text", createConstantText("Add attribute"))
 					)
 			)
 		);
 		
-		applicationContext.setDefinition(ApplicationContextSharedElement.TEMPLATE);
+		applicationContext.setDefinition(ApplicationContextSharedElement.DEFINITION);
 		
 		entityName.deduceCustom(CapitalizeFirstDeduction.class, String.class, entityName.deduceAttribute(DesignEntityGenerator.name));
 		attributes.deduceAttribute(EntityDesignEntityGenerator.attributes);
 		attributeName.deduceAttribute(DesignEntityGenerator.name, attributeName.deduceSelectedInstance(AttributeDesignEntityGenerator.ENTITY));
 		attributeLink.setEvent(AttributeDetailsEventGenerator.EVENT);
 		nameInput.setEntity(DesignEntityGenerator.ENTITY).setAttribute(DesignEntityGenerator.name);
+		addAttributeButton.setEvent(AddAttributeEventGenerator.EVENT);
 	}
 }

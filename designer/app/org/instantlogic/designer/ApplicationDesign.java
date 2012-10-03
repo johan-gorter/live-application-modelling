@@ -61,7 +61,7 @@ public class ApplicationDesign extends AbstractApplicationDesign {
                 } else if (entryName.endsWith("SharedElement.class")) {
             		entryName = entryName.substring(0, entryName.lastIndexOf('.'));
 					Class<?> cl = getClass().getClassLoader().loadClass(packageName+"."+entryName);
-					cl.getField("TEMPLATE").get(null);
+					cl.getField("DEFINITION").get(null);
                 }
 			} catch (ClassNotFoundException e) {
 				throw new RuntimeException(e);
