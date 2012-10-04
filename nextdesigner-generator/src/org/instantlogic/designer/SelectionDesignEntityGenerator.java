@@ -13,7 +13,8 @@ public class SelectionDesignEntityGenerator extends EntityDesign {
     }
 
     // Relations
-    public static final RelationDesign selection = addRelation(ENTITY, "selection", RelationType.OneToOneAggregation, DeductionSchemeDesignEntityGenerator.ENTITY);
+    public static final RelationDesign selection = addRelation(ENTITY, "selection", RelationType.OneToOneAggregation, DeductionSchemeDesignEntityGenerator.ENTITY)
+    		.setReverseName("selectionElement");
     
     public static final RelationDesign children = addRelation(ENTITY, "children", RelationType.OneToManyAggregation, ElementDesignEntityGenerator.ENTITY)
             .setReverseName("childOfSelection");

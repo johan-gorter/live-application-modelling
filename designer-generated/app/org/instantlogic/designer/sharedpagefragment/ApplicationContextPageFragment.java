@@ -21,8 +21,7 @@ public class ApplicationContextPageFragment extends org.instantlogic.interaction
       
                 .putChildren("content",
                         new org.instantlogic.interaction.page.FragmentTemplate("S45F1P1F1P1F1", "Heading1")      
-                        .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction0()),new org.instantlogic.fabric.text.StringTemplate(" (Application)"))
-)
+                        .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction0()),new org.instantlogic.fabric.text.StringTemplate(" (Application)")))
                 )
         )
 ; 

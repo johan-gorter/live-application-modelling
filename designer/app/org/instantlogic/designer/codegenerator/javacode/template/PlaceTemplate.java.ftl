@@ -1,5 +1,6 @@
 package ${rootPackageName}.flow.${flowname?lower_case};
 <#include "Content.java.ftl">
+<#include "Text.java.ftl">
 <#include "DeductionScheme.java.ftl">
 
 public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${technicalNameCapitalized}PlaceTemplate extends org.instantlogic.interaction.flow.PlaceTemplate {
@@ -12,6 +13,14 @@ public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${
 	
 	private static org.instantlogic.interaction.page.FragmentTemplate CONTENT = 
 <@content_macro content=content depth=2 />; 
+	
+	<#if title??>
+	private static final org.instantlogic.fabric.text.TextTemplate TITLE = <@text_macro text=title />;
+	@Override
+	protected org.instantlogic.fabric.text.TextTemplate getTitle() {
+		return TITLE;
+	}
+	</#if>
 	
 	@Override
 	public org.instantlogic.interaction.page.FragmentTemplate getRootContainer() {

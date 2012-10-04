@@ -7,7 +7,7 @@ import org.instantlogic.designer.codegenerator.classmodel.ApplicationClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.EntityClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.EventClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.FlowClassModel;
-import org.instantlogic.designer.codegenerator.classmodel.PageClassModel;
+import org.instantlogic.designer.codegenerator.classmodel.PlaceClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.SharedPageFragmentClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.SubFlowClassModel;
 
@@ -29,9 +29,9 @@ public class GeneratedClassModels {
 
 	public final List<FlowClassModel> deletedFlows = new ArrayList<FlowClassModel>();
 	
-	public final List<PageClassModel> updatedPages = new ArrayList<PageClassModel>();
+	public final List<PlaceClassModel> updatedPages = new ArrayList<PlaceClassModel>();
 
-	public final List<PageClassModel> deletedPages = new ArrayList<PageClassModel>();
+	public final List<PlaceClassModel> deletedPages = new ArrayList<PlaceClassModel>();
 	
 	public final List<SubFlowClassModel> updatedSubFlows = new ArrayList<SubFlowClassModel>();
 

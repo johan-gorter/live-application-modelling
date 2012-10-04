@@ -6,7 +6,7 @@ import java.io.File;
 import org.instantlogic.designer.codegenerator.classmodel.EntityClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.EventClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.FlowClassModel;
-import org.instantlogic.designer.codegenerator.classmodel.PageClassModel;
+import org.instantlogic.designer.codegenerator.classmodel.PlaceClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.SharedPageFragmentClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.SubFlowClassModel;
 import org.instantlogic.designer.codegenerator.generator.GeneratedClassModels;
@@ -53,10 +53,10 @@ public class ApplicationJavacodeGenerator extends AbstractJavacodeGenerator {
 		for (EventClassModel event:context.deletedEvents) {
 			deleteFile("event", event, "Event", applicationRoot);
 		}
-		for (PageClassModel page:context.updatedPages) {
+		for (PlaceClassModel page:context.updatedPages) {
 			generateFile(AbstractJavacodeGenerator.placeTemplateTemplate, page, "flow/"+page.flowname.toLowerCase(), "PlaceTemplate", applicationRoot);
 		}
-		for (PageClassModel page:context.deletedPages) {
+		for (PlaceClassModel page:context.deletedPages) {
 			deleteFile("flow/"+page.flowname.toLowerCase(), page, "Page", applicationRoot);
 		}
 		for (FlowClassModel flow:context.updatedFlows) {

@@ -1,8 +1,6 @@
 package org.instantlogic.designer.deduction;
 
 import org.instantlogic.designer.DataTypeDesign;
-import org.instantlogic.designer.EntityDesign;
-import org.instantlogic.designer.RelationDesign;
 import org.instantlogic.designer.entity.DataTypeDesignEntity;
 import org.instantlogic.fabric.deduction.Deduction;
 import org.instantlogic.fabric.util.DeductionContext;

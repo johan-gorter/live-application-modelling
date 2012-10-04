@@ -8,8 +8,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	
 	protected DataTypeDesignEntity() {
 	   _boolean = addStaticInstance("boolean", createInstance());
-	   _boolean.getMetadata().setStaticDescription(new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Boolean"))
-);
+	   _boolean.getMetadata().setStaticDescription(new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Boolean")));
 	}
 
 
@@ -238,6 +237,24 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			
 		};
 	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign> options
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign>(
+			"options", INSTANCE, org.instantlogic.designer.entity.DeductionSchemeDesignEntity.INSTANCE, org.instantlogic.designer.DeductionSchemeDesign.class, 
+			org.instantlogic.designer.entity.DeductionSchemeDesignEntity.optionsFor
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.DeductionSchemeDesign> get(
+					org.instantlogic.designer.DataTypeDesign instance) {
+				return instance.getOptionsRelationValue();
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+			
+		};
+	
 	// Reverse relations
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.AttributeDesign> attribute
@@ -332,6 +349,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		dataCategory,
 		entity,
+		options,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		attribute,

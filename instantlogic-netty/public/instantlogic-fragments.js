@@ -18,6 +18,14 @@ YUI.add('instantlogic-fragments', function (Y) {
     		    [this.headerDiv, model.headerContent], 
     		    [this.mainDiv, model.mainContent]
     		];
+    	},
+    	postInit: function(model) {
+    		document.title = model.title || '';
+    	},
+    	postUpdate: function(newModel) {
+    		if (newModel.title!=this.oldModel.title) {
+    			document.title = newModel.title || '';
+    		}
     	}
     });
     

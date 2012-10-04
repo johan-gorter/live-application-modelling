@@ -1,7 +1,8 @@
 package org.instantlogic.designer.codegenerator.classmodel;
 
-public class PageClassModel extends AbstractClassModel {
+public class PlaceClassModel extends AbstractClassModel {
 
+	public TextModel title;
 	public String flowname;
 	public ContentModel content;
 
@@ -11,6 +12,10 @@ public class PageClassModel extends AbstractClassModel {
 
 	public ContentModel getContent() {
 		return content;
+	}
+
+	public TextModel getTitle() {
+		return title;
 	}
 
 

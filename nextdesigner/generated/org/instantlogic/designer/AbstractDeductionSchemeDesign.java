@@ -80,6 +80,23 @@ public abstract class AbstractDeductionSchemeDesign extends org.instantlogic.fab
     }
 
 	
+	private final org.instantlogic.fabric.value.RelationValue<DeductionSchemeDesign, DataTypeDesign> optionsFor
+		= createReverseRelationValue(org.instantlogic.designer.entity.DeductionSchemeDesignEntity.optionsFor);
+
+	public org.instantlogic.fabric.value.RelationValue<DeductionSchemeDesign, DataTypeDesign> getOptionsForRelationValue() {
+		return optionsFor;
+	}
+
+	public org.instantlogic.designer.DataTypeDesign getOptionsFor() {
+		return optionsFor.getValue();
+	}
+
+    public DeductionSchemeDesign setOptionsFor(org.instantlogic.designer.DataTypeDesign newValue) {
+        optionsFor.setValue(newValue);
+        return (DeductionSchemeDesign)this;
+    }
+
+	
 	private final org.instantlogic.fabric.value.RelationValue<DeductionSchemeDesign, AttributeDesign> relevanceOfAttribute
 		= createReverseRelationValue(org.instantlogic.designer.entity.DeductionSchemeDesignEntity.relevanceOfAttribute);
 
@@ -110,6 +127,23 @@ public abstract class AbstractDeductionSchemeDesign extends org.instantlogic.fab
 
     public DeductionSchemeDesign setRuleOfAttribute(org.instantlogic.designer.AttributeDesign newValue) {
         ruleOfAttribute.setValue(newValue);
+        return (DeductionSchemeDesign)this;
+    }
+
+	
+	private final org.instantlogic.fabric.value.RelationValue<DeductionSchemeDesign, SelectionDesign> selectionElement
+		= createReverseRelationValue(org.instantlogic.designer.entity.DeductionSchemeDesignEntity.selectionElement);
+
+	public org.instantlogic.fabric.value.RelationValue<DeductionSchemeDesign, SelectionDesign> getSelectionElementRelationValue() {
+		return selectionElement;
+	}
+
+	public org.instantlogic.designer.SelectionDesign getSelectionElement() {
+		return selectionElement.getValue();
+	}
+
+    public DeductionSchemeDesign setSelectionElement(org.instantlogic.designer.SelectionDesign newValue) {
+        selectionElement.setValue(newValue);
         return (DeductionSchemeDesign)this;
     }
 
