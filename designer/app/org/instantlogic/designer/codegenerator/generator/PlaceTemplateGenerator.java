@@ -2,7 +2,7 @@ package org.instantlogic.designer.codegenerator.generator;
 
 
 import org.instantlogic.designer.PlaceTemplateDesign;
-import org.instantlogic.designer.codegenerator.classmodel.PageClassModel;
+import org.instantlogic.designer.codegenerator.classmodel.PlaceClassModel;
 import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 
@@ -22,9 +22,10 @@ public class PlaceTemplateGenerator extends AbstractGenerator {
 		CaseAdministration caseAdministration = placeTemplateDesign.getMetadata().getCaseAdministration();
 		caseAdministration.startRecordingObservations();
 		
-		PageClassModel model = initModel();
+		PlaceClassModel model = initModel();
 		model.rootPackageName = context.rootPackageName;
 		model.content = ContentGenerator.generate(placeTemplateDesign.getContent(), model);
+		model.title = TextGenerator.generate(placeTemplateDesign.getTitle(), model);
 
 		this.observations = new ObservationsOutdatedObserver(caseAdministration.stopRecordingObservations(), null);
 		context.updatedPages.add(model);
@@ -32,12 +33,12 @@ public class PlaceTemplateGenerator extends AbstractGenerator {
 
 	@Override
 	public void delete(GeneratedClassModels context) {
-		PageClassModel model = initModel();
+		PlaceClassModel model = initModel();
 		context.deletedPages.add(model);
 	}
 
-	private PageClassModel initModel() {
-		PageClassModel model = new PageClassModel();
+	private PlaceClassModel initModel() {
+		PlaceClassModel model = new PlaceClassModel();
 		model.name = placeTemplateDesign.getName();
 		model.technicalNameCapitalized = placeTemplateDesign.getTechnicalNameCapitalized();
 		model.id = placeTemplateDesign.getMetadata().getInstanceId();

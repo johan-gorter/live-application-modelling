@@ -1,6 +1,5 @@
 package org.instantlogic.fabric.model;
 
-import java.util.List;
 import java.util.Map;
 
 import org.instantlogic.fabric.Instance;
@@ -53,6 +52,11 @@ public abstract class Attribute<I extends Instance, Value extends Object, Item e
 	}
 	
 	public Deduction<Value> getDefault() {
+		return null;
+	}
+	
+	// This is meant to be used to fill the options of a dropdown.
+	public Deduction<Iterable<Value>> getOptionsDeduction() {
 		return null;
 	}
 	

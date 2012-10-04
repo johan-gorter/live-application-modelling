@@ -1,6 +1,7 @@
 package org.instantlogic.designer;
 
 import org.instantlogic.designer.deduction.DataTypeDataCategoryDeduction;
+import org.instantlogic.designer.deduction.DataTypeDataCategoryOptionsDeduction;
 import org.instantlogic.designer.deduction.DataTypeEntityDeduction;
 import org.instantlogic.designer.deduction.DataTypeJavaClassNameDeduction;
 import org.instantlogic.designer.deduction.DataTypeMultivalueDeduction;
@@ -33,6 +34,10 @@ public class DataTypeDesignEntityGenerator extends EntityDesign {
     // Only relevant when dataCategory == text
     public static final AttributeDesign multiLine = addAttribute(ENTITY, "multiLine", java.lang.Boolean.class);
     public static final AttributeDesign formatted = addAttribute(ENTITY, "formatted", java.lang.Boolean.class);
+    
+    // Only relevant when dataCategory == entity
+    public static final RelationDesign options = addRelation(ENTITY, "options", RelationType.OneToZeroOrOneAggregation, DeductionSchemeDesignEntityGenerator.ENTITY)
+    		.setReverseName("optionsFor");
 
     @Override
     public void init() {
@@ -50,6 +55,7 @@ public class DataTypeDesignEntityGenerator extends EntityDesign {
     	multivalue.setRule(new DeductionSchemeDesign().deduceCustom(DataTypeMultivalueDeduction.class, Boolean.class).getScheme());
     	multivalue.setDefault(DeductionSchemeDesign.constant(false));
     	
+    	dataCategory.getDataType().setOptions(new DeductionSchemeDesign().deduceCustom(DataTypeDataCategoryOptionsDeduction.class.getName(), "org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DataCategoryDesign>").getScheme());
     	// TODO: relevance for all attributes/relations
     }
 

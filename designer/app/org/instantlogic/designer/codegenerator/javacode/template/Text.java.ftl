@@ -8,5 +8,5 @@ new org.instantlogic.fabric.text.TextTemplate(<#t>
 		new org.instantlogic.fabric.text.StringTemplate(createDeduction${st.deductionIndex}())<#t>
 	</#if>
 	<#if st_has_next>,</#if><#t>
-</#list>)
+</#list>)<#t>
 </#macro>

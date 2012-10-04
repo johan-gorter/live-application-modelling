@@ -11,6 +11,7 @@ import org.instantlogic.fabric.value.Multi;
 public abstract class TextGenerator extends AbstractGenerator {
 
 	public static TextModel generate(TextTemplateDesign text, AbstractClassModel deductionSchemeHolder) {
+		if (text==null) return null;
 		TextModel model = new TextModel();
 		Multi<StringTemplateDesign> list = text.getUntranslated();
 		for (StringTemplateDesign spInstance : list) {

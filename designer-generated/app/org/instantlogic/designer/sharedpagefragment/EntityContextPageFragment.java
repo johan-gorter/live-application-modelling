@@ -25,8 +25,7 @@ public class EntityContextPageFragment extends org.instantlogic.interaction.page
       
                         .putChildren("content",
                                 new org.instantlogic.interaction.page.FragmentTemplate("S46F1P1F2P1F1P1F1", "Heading1")      
-                                .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction0()),new org.instantlogic.fabric.text.StringTemplate(" (Entity)"))
-)
+                                .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction0()),new org.instantlogic.fabric.text.StringTemplate(" (Entity)")))
                         )
                 )
         )

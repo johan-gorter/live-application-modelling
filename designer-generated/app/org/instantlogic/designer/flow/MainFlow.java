@@ -18,7 +18,7 @@ public class MainFlow extends org.instantlogic.interaction.flow.Flow {
 		),
 		new org.instantlogic.interaction.flow.FlowEdge(
 			null, 
-			org.instantlogic.designer.event.AttributeDetailsEvent.INSTANCE,
+			org.instantlogic.designer.event.AddEntityEvent.INSTANCE,
 			org.instantlogic.designer.flow.main.AddEntitySubFlow.INSTANCE
 		),
 		new org.instantlogic.interaction.flow.FlowEdge(
