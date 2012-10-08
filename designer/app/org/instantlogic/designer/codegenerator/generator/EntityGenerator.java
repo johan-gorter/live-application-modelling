@@ -89,7 +89,9 @@ public class EntityGenerator extends AbstractGenerator {
 			if (relationDesign.getRule()!=null) {
 				relation.ruleDeductionIndex = model.addDeductionScheme(DeductionSchemeGenerator.generate(model.rootPackageName, relationDesign.getRule()));
 			}
-			
+			if (relationDesign.getOptions()!=null) {
+				relation.optionsDeductionIndex = model.addDeductionScheme(DeductionSchemeGenerator.generate(model.rootPackageName, relationDesign.getOptions()));
+			}
 			model.relations.add(relation);
 		}
 		for (RelationDesign relationDesign: entityDesign.getReverseRelations()) {

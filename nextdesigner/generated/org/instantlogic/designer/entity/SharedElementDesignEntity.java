@@ -46,7 +46,6 @@ public class SharedElementDesignEntity extends org.instantlogic.fabric.model.Ent
 					org.instantlogic.designer.SharedElementDesign instance) {
 				return instance.getDefinitionRelationValue();
 			}
-			
 		};
 	
 	// Reverse relations

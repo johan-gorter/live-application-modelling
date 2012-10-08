@@ -34,6 +34,7 @@ public class EntityClassModel extends AbstractClassModel {
 		public Integer relevanceDeductionIndex;
 		public Integer ruleDeductionIndex;
 		public Integer defaultDeductionIndex;
+		public Integer optionsDeductionIndex;
 		public final Map<String, Object> dataType = new LinkedHashMap<String, Object>();
 		
 		public Map<String, Object> getDataType() {
@@ -81,6 +82,9 @@ public class EntityClassModel extends AbstractClassModel {
 		}
 		public String getJavaIdentifier() {
 			return javaIdentifier;
+		}
+		public Integer getOptionsDeductionIndex() {
+			return optionsDeductionIndex;
 		}
 	}
 	

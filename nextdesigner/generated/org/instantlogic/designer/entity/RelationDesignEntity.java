@@ -60,6 +60,19 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			}
 		};
 	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.RelationDesign, java.lang.Boolean, java.lang.Boolean> hasOptions 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.RelationDesign, java.lang.Boolean, java.lang.Boolean>(
+			"hasOptions", INSTANCE, java.lang.Boolean.class
+		) {
+			{
+			}
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.RelationDesign, java.lang.Boolean> get(org.instantlogic.designer.RelationDesign instance) {
+				return instance.getHasOptionsAttributeValue();
+			}
+		};
+	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.RelationDesign, java.lang.Boolean, java.lang.Boolean> owner 
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.RelationDesign, java.lang.Boolean, java.lang.Boolean>(
 			"owner", INSTANCE, java.lang.Boolean.class
@@ -153,6 +166,23 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	
 	// Relations
 	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.RelationDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign> options
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.RelationDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign>(
+			"options", INSTANCE, org.instantlogic.designer.entity.DeductionSchemeDesignEntity.INSTANCE, org.instantlogic.designer.DeductionSchemeDesign.class, 
+			org.instantlogic.designer.entity.DeductionSchemeDesignEntity.optionsOfRelation
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.RelationDesign, org.instantlogic.designer.DeductionSchemeDesign> get(
+					org.instantlogic.designer.RelationDesign instance) {
+				return instance.getOptionsRelationValue();
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+		};
+	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.RelationDesign, org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.DataTypeDesign> reverseDataType
 		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.RelationDesign, org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.DataTypeDesign>(
 			"reverseDataType", INSTANCE, org.instantlogic.designer.entity.DataTypeDesignEntity.INSTANCE, org.instantlogic.designer.DataTypeDesign.class, 
@@ -172,7 +202,6 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			public boolean isAutoCreate() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.RelationDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> to
@@ -186,7 +215,6 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 					org.instantlogic.designer.RelationDesign instance) {
 				return instance.getToRelationValue();
 			}
-			
 		};
 	
 	// Reverse relations
@@ -209,6 +237,7 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
 		autoCreate,
+		hasOptions,
 		owner,
 		reverseJavaIdentifier,
 		reverseMultivalue,
@@ -216,6 +245,7 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 		reverseTechnicalName,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
+		options,
 		reverseDataType,
 		to,
 	};

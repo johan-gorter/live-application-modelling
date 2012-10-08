@@ -94,7 +94,6 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 					org.instantlogic.designer.ApplicationDesign instance) {
 				return instance.getCaseEntityRelationValue();
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EntityDesign>, org.instantlogic.designer.EntityDesign> entities
@@ -116,7 +115,6 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EventDesign>, org.instantlogic.designer.EventDesign> events
@@ -138,7 +136,6 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowDesign>, org.instantlogic.designer.FlowDesign> flows
@@ -160,7 +157,6 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.designer.FlowDesign, org.instantlogic.designer.FlowDesign> mainFlow
@@ -174,7 +170,6 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 					org.instantlogic.designer.ApplicationDesign instance) {
 				return instance.getMainFlowRelationValue();
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.SharedElementDefinitionDesign>, org.instantlogic.designer.SharedElementDefinitionDesign> sharedElements
@@ -196,7 +191,6 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	// Reverse relations

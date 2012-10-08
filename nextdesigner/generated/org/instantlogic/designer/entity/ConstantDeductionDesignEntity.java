@@ -67,7 +67,6 @@ public class ConstantDeductionDesignEntity extends org.instantlogic.fabric.model
 			public boolean isAutoCreate() {
 				return true;
 			}
-			
 		};
 	
 	// Reverse relations

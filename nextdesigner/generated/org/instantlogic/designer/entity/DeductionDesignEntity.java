@@ -78,7 +78,6 @@ public class DeductionDesignEntity extends org.instantlogic.fabric.model.Entity<
 				}
 				return rule;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DeductionDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DeductionDesign>, org.instantlogic.designer.DeductionDesign> inputs
@@ -96,7 +95,6 @@ public class DeductionDesignEntity extends org.instantlogic.fabric.model.Entity<
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	// Reverse relations

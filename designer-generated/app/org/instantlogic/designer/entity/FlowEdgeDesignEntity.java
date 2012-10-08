@@ -42,7 +42,6 @@ public class FlowEdgeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 					org.instantlogic.designer.FlowEdgeDesign instance) {
 				return instance.getEndNodeRelationValue();
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.EventDesign, org.instantlogic.designer.EventDesign> event
@@ -56,7 +55,6 @@ public class FlowEdgeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 					org.instantlogic.designer.FlowEdgeDesign instance) {
 				return instance.getEventRelationValue();
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FlowEdgeDesign, org.instantlogic.designer.FlowNodeBaseDesign, org.instantlogic.designer.FlowNodeBaseDesign> startNode
@@ -70,7 +68,6 @@ public class FlowEdgeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 					org.instantlogic.designer.FlowEdgeDesign instance) {
 				return instance.getStartNodeRelationValue();
 			}
-			
 		};
 	
 	// Reverse relations

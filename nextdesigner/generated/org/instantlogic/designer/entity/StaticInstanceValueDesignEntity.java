@@ -55,7 +55,6 @@ public class StaticInstanceValueDesignEntity extends org.instantlogic.fabric.mod
 					org.instantlogic.designer.StaticInstanceValueDesign instance) {
 				return instance.getAttributeRelationValue();
 			}
-			
 		};
 	
 	// Reverse relations

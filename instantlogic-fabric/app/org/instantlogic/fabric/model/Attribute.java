@@ -55,11 +55,6 @@ public abstract class Attribute<I extends Instance, Value extends Object, Item e
 		return null;
 	}
 	
-	// This is meant to be used to fill the options of a dropdown.
-	public Deduction<Iterable<Value>> getOptionsDeduction() {
-		return null;
-	}
-	
 	public abstract ReadOnlyAttributeValue<I, Value> get(I instance);
 	
 	public AttributeDeduction<Value, I> toDeduction() {

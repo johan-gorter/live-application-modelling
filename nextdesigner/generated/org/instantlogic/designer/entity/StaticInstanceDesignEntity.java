@@ -50,7 +50,6 @@ public class StaticInstanceDesignEntity extends org.instantlogic.fabric.model.En
 			public boolean isOwner() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.StaticInstanceDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.StaticInstanceValueDesign>, org.instantlogic.designer.StaticInstanceValueDesign> values
@@ -72,7 +71,6 @@ public class StaticInstanceDesignEntity extends org.instantlogic.fabric.model.En
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	// Reverse relations

@@ -178,7 +178,6 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 				}
 				return rule;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.DataTypeDesign> dataType
@@ -200,7 +199,6 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			public boolean isAutoCreate() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign> _default
@@ -218,7 +216,6 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			public boolean isOwner() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.TextTemplateDesign> explanation
@@ -236,7 +233,6 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			public boolean isOwner() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.TextTemplateDesign> question
@@ -254,7 +250,6 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			public boolean isOwner() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign> relevance
@@ -272,7 +267,6 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			public boolean isOwner() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign> rule
@@ -290,7 +284,6 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			public boolean isOwner() {
 				return true;
 			}
-			
 		};
 	
 	// Reverse relations

@@ -50,7 +50,6 @@ public class EventDesignEntity extends org.instantlogic.fabric.model.Entity<org.
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	// Reverse relations

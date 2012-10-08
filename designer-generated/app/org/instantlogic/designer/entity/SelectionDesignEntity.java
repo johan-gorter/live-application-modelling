@@ -54,7 +54,6 @@ public class SelectionDesignEntity extends org.instantlogic.fabric.model.Entity<
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.SelectionDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign> selection
@@ -76,7 +75,6 @@ public class SelectionDesignEntity extends org.instantlogic.fabric.model.Entity<
 			public boolean isAutoCreate() {
 				return true;
 			}
-			
 		};
 	
 	// Reverse relations

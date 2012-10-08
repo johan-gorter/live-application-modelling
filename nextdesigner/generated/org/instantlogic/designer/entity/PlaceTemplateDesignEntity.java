@@ -50,7 +50,6 @@ public class PlaceTemplateDesignEntity extends org.instantlogic.fabric.model.Ent
 			public boolean isOwner() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.PlaceTemplateDesign, org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.TextTemplateDesign> title
@@ -68,7 +67,6 @@ public class PlaceTemplateDesignEntity extends org.instantlogic.fabric.model.Ent
 			public boolean isOwner() {
 				return true;
 			}
-			
 		};
 	
 	// Reverse relations
