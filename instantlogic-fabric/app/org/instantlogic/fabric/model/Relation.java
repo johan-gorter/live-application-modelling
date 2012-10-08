@@ -1,6 +1,7 @@
 package org.instantlogic.fabric.model;
 
 import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.deduction.Deduction;
 import org.instantlogic.fabric.text.TextTemplate;
 
 
@@ -27,4 +28,8 @@ public abstract class Relation<I extends Instance, Value extends Object, To exte
 		return null;
 	}
 	
+	// This is meant to be used to fill the options of a dropdown.
+	public Deduction<? extends Iterable<To>> getOptions() {
+		return null;
+	}
 }

@@ -54,7 +54,6 @@ public class FlowDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FlowDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FlowNodeBaseDesign>, org.instantlogic.designer.FlowNodeBaseDesign> nodes
@@ -76,7 +75,6 @@ public class FlowDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FlowDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EntityDesign>, org.instantlogic.designer.EntityDesign> parameters
@@ -94,7 +92,6 @@ public class FlowDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	// Reverse relations

@@ -63,7 +63,6 @@ public class PropertyDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.PropertyDesign, org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.TextTemplateDesign> text
@@ -81,7 +80,6 @@ public class PropertyDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			public boolean isOwner() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.PropertyDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign> value
@@ -99,7 +97,6 @@ public class PropertyDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			public boolean isOwner() {
 				return true;
 			}
-			
 		};
 	
 	// Reverse relations

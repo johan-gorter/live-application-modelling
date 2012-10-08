@@ -50,7 +50,6 @@ public class SharedElementDefinitionDesignEntity extends org.instantlogic.fabric
 			public boolean isOwner() {
 				return true;
 			}
-			
 		};
 	
 	// Reverse relations

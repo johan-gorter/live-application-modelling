@@ -58,7 +58,14 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	}
 
 
-	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> createDeduction4() {
+	private static org.instantlogic.fabric.deduction.Deduction<? extends Iterable> createDeduction4() {
+		    org.instantlogic.fabric.deduction.Deduction<? extends Iterable> d0 
+		    	= new org.instantlogic.designer.deduction.DataTypeDataCategoryOptionsDeduction();
+		return d0;
+	}
+
+
+	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> createDeduction5() {
 		    org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> d0 
 		    	= new org.instantlogic.designer.deduction.DataTypeEntityDeduction();
 		return d0;
@@ -208,6 +215,14 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 				return rule;
 			}
 			
+			private org.instantlogic.fabric.deduction.Deduction<? extends java.lang.Iterable<org.instantlogic.designer.DataCategoryDesign>> options;
+			@Override
+			public org.instantlogic.fabric.deduction.Deduction<? extends java.lang.Iterable<org.instantlogic.designer.DataCategoryDesign>> getOptions() {
+				if (options==null) {
+					options = (org.instantlogic.fabric.deduction.Deduction)createDeduction4();
+				}
+				return options;
+			};
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> entity
@@ -230,29 +245,10 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			@Override
 			public org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> getRule() {
 				if (rule==null) {
-					rule  = createDeduction4();
+					rule  = createDeduction5();
 				}
 				return rule;
 			}
-			
-		};
-	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign> options
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionSchemeDesign>(
-			"options", INSTANCE, org.instantlogic.designer.entity.DeductionSchemeDesignEntity.INSTANCE, org.instantlogic.designer.DeductionSchemeDesign.class, 
-			org.instantlogic.designer.entity.DeductionSchemeDesignEntity.optionsFor
-		) {
-	
-			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.DeductionSchemeDesign> get(
-					org.instantlogic.designer.DataTypeDesign instance) {
-				return instance.getOptionsRelationValue();
-			}
-	
-			public boolean isOwner() {
-				return true;
-			}
-			
 		};
 	
 	// Reverse relations
@@ -349,7 +345,6 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		dataCategory,
 		entity,
-		options,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		attribute,

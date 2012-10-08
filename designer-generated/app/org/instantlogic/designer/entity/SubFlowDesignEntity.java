@@ -46,7 +46,6 @@ public class SubFlowDesignEntity extends org.instantlogic.fabric.model.Entity<or
 					org.instantlogic.designer.SubFlowDesign instance) {
 				return instance.getFlowRelationValue();
 			}
-			
 		};
 	
 	// Reverse relations

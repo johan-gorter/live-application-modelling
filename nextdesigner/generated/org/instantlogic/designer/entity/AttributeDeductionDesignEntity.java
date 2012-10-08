@@ -46,7 +46,6 @@ public class AttributeDeductionDesignEntity extends org.instantlogic.fabric.mode
 					org.instantlogic.designer.AttributeDeductionDesign instance) {
 				return instance.getAttributeRelationValue();
 			}
-			
 		};
 	
 	// Reverse relations

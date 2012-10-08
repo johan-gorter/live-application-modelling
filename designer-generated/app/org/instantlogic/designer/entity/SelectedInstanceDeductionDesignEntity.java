@@ -46,7 +46,6 @@ public class SelectedInstanceDeductionDesignEntity extends org.instantlogic.fabr
 					org.instantlogic.designer.SelectedInstanceDeductionDesign instance) {
 				return instance.getOfEntityRelationValue();
 			}
-			
 		};
 	
 	// Reverse relations

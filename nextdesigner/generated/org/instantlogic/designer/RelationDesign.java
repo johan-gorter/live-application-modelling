@@ -27,6 +27,23 @@ public class RelationDesign extends AttributeDesign {
 	}
 	
 	
+	private final org.instantlogic.fabric.value.AttributeValue<RelationDesign, java.lang.Boolean> hasOptions
+		= createAttributeValue(org.instantlogic.designer.entity.RelationDesignEntity.hasOptions);
+	
+	public java.lang.Boolean getHasOptions() {
+		return hasOptions.getValue();
+	}
+
+	public org.instantlogic.fabric.value.AttributeValue<RelationDesign, java.lang.Boolean> getHasOptionsAttributeValue() {
+		return hasOptions;
+	}
+
+	public RelationDesign setHasOptions(java.lang.Boolean newValue) {
+		hasOptions.setValue(newValue);
+		return (RelationDesign)this;
+	}
+	
+	
 	private final org.instantlogic.fabric.value.AttributeValue<RelationDesign, java.lang.Boolean> owner
 		= createAttributeValue(org.instantlogic.designer.entity.RelationDesignEntity.owner);
 	
@@ -103,6 +120,23 @@ public class RelationDesign extends AttributeDesign {
 
 	
 	// Relations
+	
+	private final org.instantlogic.fabric.value.RelationValue<RelationDesign, DeductionSchemeDesign> options
+		= createRelationValue(org.instantlogic.designer.entity.RelationDesignEntity.options);
+		
+	public org.instantlogic.fabric.value.RelationValue<RelationDesign, DeductionSchemeDesign> getOptionsRelationValue() {
+		return options;
+	}
+
+	public org.instantlogic.designer.DeductionSchemeDesign getOptions() {
+		return options.getValue();
+	}
+	
+	public RelationDesign setOptions(org.instantlogic.designer.DeductionSchemeDesign newValue) {
+		options.setValue(newValue);
+		return (RelationDesign)this;
+	}
+
 	
 	private final org.instantlogic.fabric.value.RelationValue<RelationDesign, DataTypeDesign> reverseDataType
 		= createRelationValue(org.instantlogic.designer.entity.RelationDesignEntity.reverseDataType);

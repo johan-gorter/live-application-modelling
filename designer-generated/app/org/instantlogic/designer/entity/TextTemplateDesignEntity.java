@@ -54,7 +54,6 @@ public class TextTemplateDesignEntity extends org.instantlogic.fabric.model.Enti
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	// Reverse relations

@@ -27,13 +27,15 @@
         if (!applicationMatch) Y.error('Missing application querystring parameter');
         var caseMatch = /case=([^&]*)/g.exec(location.search);
         if (!caseMatch) Y.error('Missing case querystring parameter');
+        var configuration = Y.instantlogic.createBaseConfiguration(Y); 
+        configuration.debug = true;
 		new Y.instantlogic.Engine(
 			applicationMatch[1], 
 			caseMatch[1], 
 			travelerId, 
 			Y.one('#presence'), 
 			Y.one('#place'), 
-			Y.instantlogic.createBaseConfiguration(Y)
+			configuration
 		).start();
 	});
 </script>

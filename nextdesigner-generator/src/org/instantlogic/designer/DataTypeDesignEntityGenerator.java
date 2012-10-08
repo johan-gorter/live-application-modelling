@@ -16,13 +16,12 @@ public class DataTypeDesignEntityGenerator extends EntityDesign {
         setName("DataTypeDesign");
     }
     
-    
     public static final RelationDesign dataCategory = addRelation(ENTITY, "dataCategory", RelationType.OneToZeroOrOne, DataCategoryDesignEntityGenerator.ENTITY);
 
     public static final RelationDesign entity = addRelation(ENTITY, "entity", RelationType.OneToZeroOrOne, EntityDesignEntityGenerator.ENTITY);
     public static final AttributeDesign multivalue = addAttribute(ENTITY, "multivalue", java.lang.Boolean.class);
    
-    //Classname of a single item
+    // Classname of a single item
     public static final AttributeDesign javaClassName = addAttribute(ENTITY, "javaClassName", java.lang.String.class);
     
     // Only relevant when dataCategory == number
@@ -35,10 +34,6 @@ public class DataTypeDesignEntityGenerator extends EntityDesign {
     public static final AttributeDesign multiLine = addAttribute(ENTITY, "multiLine", java.lang.Boolean.class);
     public static final AttributeDesign formatted = addAttribute(ENTITY, "formatted", java.lang.Boolean.class);
     
-    // Only relevant when dataCategory == entity
-    public static final RelationDesign options = addRelation(ENTITY, "options", RelationType.OneToZeroOrOneAggregation, DeductionSchemeDesignEntityGenerator.ENTITY)
-    		.setReverseName("optionsFor");
-
     @Override
     public void init() {
         // static instances
@@ -51,11 +46,11 @@ public class DataTypeDesignEntityGenerator extends EntityDesign {
     	
     	dataCategory.setRule(new DeductionSchemeDesign().deduceCustom(DataTypeDataCategoryDeduction.class, DataCategoryDesign.class).getScheme());
     	dataCategory.setDefault(DeductionSchemeDesign.constant(DataCategoryDesignEntity.INSTANCE.text));
+    	dataCategory.setOptions(new DeductionSchemeDesign().deduceCustom(DataTypeDataCategoryOptionsDeduction.class.getName(), "? extends Iterable").getScheme());
     	
     	multivalue.setRule(new DeductionSchemeDesign().deduceCustom(DataTypeMultivalueDeduction.class, Boolean.class).getScheme());
     	multivalue.setDefault(DeductionSchemeDesign.constant(false));
-    	
-    	dataCategory.getDataType().setOptions(new DeductionSchemeDesign().deduceCustom(DataTypeDataCategoryOptionsDeduction.class.getName(), "org.instantlogic.fabric.value.Multi<org.instantlogic.designer.DataCategoryDesign>").getScheme());
+
     	// TODO: relevance for all attributes/relations
     }
 

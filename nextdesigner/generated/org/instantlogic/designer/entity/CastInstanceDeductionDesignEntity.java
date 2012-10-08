@@ -46,7 +46,6 @@ public class CastInstanceDeductionDesignEntity extends org.instantlogic.fabric.m
 					org.instantlogic.designer.CastInstanceDeductionDesign instance) {
 				return instance.getToEntityRelationValue();
 			}
-			
 		};
 	
 	// Reverse relations

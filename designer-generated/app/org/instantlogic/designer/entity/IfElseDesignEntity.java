@@ -54,7 +54,6 @@ public class IfElseDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			public boolean isAutoCreate() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.IfElseDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.ElementDesign>, org.instantlogic.designer.ElementDesign> elseChildren
@@ -76,7 +75,6 @@ public class IfElseDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.IfElseDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.ElementDesign>, org.instantlogic.designer.ElementDesign> ifChildren
@@ -98,7 +96,6 @@ public class IfElseDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	// Reverse relations

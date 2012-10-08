@@ -14,6 +14,7 @@ YUI.add('instantlogic', function (Y) {
     
     
     ns.Engine = function (application, caseId, travelerId, presenceNode, placeNode, configuration) {
+    	this.configuration = configuration;
     	this.application = application;
     	this.caseId = caseId;
     	this.presenceNode = presenceNode;
@@ -282,6 +283,12 @@ YUI.add('instantlogic', function (Y) {
         this.id = id;
         this.engine = engine;
         this.node = Y.html.span({ 'data-fragment-id': id, className: 'fragment' });
+        if (engine.configuration.debug) {
+        	var debugButton = Y.html.div({className: 'fragment-debug'});
+        	this.node.appendChild(debugButton);
+        	var me = this;
+        	debugButton.on('click', function() {window.console.log('Fragment:', me.fragment.model)})
+        }
         this.fragment = null;
     };
 
@@ -351,9 +358,8 @@ YUI.add('instantlogic', function (Y) {
                     }
                 }
                 return -1;
-            }
-
-            ;
+            };
+            
             if (!newModels) newModels = [];
             if (this.models.length != this.fragmentHolders.length) {
                 throw new Error('model/fragments mismatch');

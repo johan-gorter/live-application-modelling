@@ -54,7 +54,6 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.DataTypeDesign> dataType
@@ -76,7 +75,6 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			public boolean isAutoCreate() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> extendsFrom
@@ -90,7 +88,6 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 					org.instantlogic.designer.EntityDesign instance) {
 				return instance.getExtendsFromRelationValue();
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.RelationDesign>, org.instantlogic.designer.RelationDesign> relations
@@ -112,7 +109,6 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.StaticInstanceDesign>, org.instantlogic.designer.StaticInstanceDesign> staticInstances
@@ -134,7 +130,6 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	// Reverse relations

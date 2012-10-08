@@ -63,7 +63,6 @@ public class StringTemplateDesignEntity extends org.instantlogic.fabric.model.En
 			public boolean isAutoCreate() {
 				return true;
 			}
-			
 		};
 	
 	// Reverse relations

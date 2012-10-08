@@ -46,7 +46,6 @@ public class ReverseRelationDeductionDesignEntity extends org.instantlogic.fabri
 					org.instantlogic.designer.ReverseRelationDeductionDesign instance) {
 				return instance.getRelationRelationValue();
 			}
-			
 		};
 	
 	// Reverse relations

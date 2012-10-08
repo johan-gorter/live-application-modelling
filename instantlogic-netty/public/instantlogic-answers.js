@@ -9,11 +9,13 @@ YUI.add('instantlogic-answers', function (Y) {
 	// getValue: function() This method should return the current value
     
     ns.createAnswer = function(model) {
-    	if (model.dataType.multiLine) {
-    		return new ns.TextareaAnswer();
-    	}
-    	if (model.dataType.category == 'boolean') {
-    		return new ns.CheckboxAnswer();
+    	if (model.dataType) {
+	    	if (model.dataType.multiLine) {
+	    		return new ns.TextareaAnswer();
+	    	}
+	    	if (model.dataType.category == 'boolean') {
+	    		return new ns.CheckboxAnswer();
+	    	}
     	}
     	return new ns.TextAnswer();
     };

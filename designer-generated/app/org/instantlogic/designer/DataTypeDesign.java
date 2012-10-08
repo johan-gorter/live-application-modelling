@@ -159,23 +159,6 @@ public class DataTypeDesign extends org.instantlogic.fabric.Instance {
 		return entity.getValue();
 	}
 	
-	
-	private final org.instantlogic.fabric.value.RelationValue<DataTypeDesign, DeductionSchemeDesign> options
-		= createRelationValue(org.instantlogic.designer.entity.DataTypeDesignEntity.options);
-		
-	public org.instantlogic.fabric.value.RelationValue<DataTypeDesign, DeductionSchemeDesign> getOptionsRelationValue() {
-		return options;
-	}
-
-	public org.instantlogic.designer.DeductionSchemeDesign getOptions() {
-		return options.getValue();
-	}
-	
-	public DataTypeDesign setOptions(org.instantlogic.designer.DeductionSchemeDesign newValue) {
-		options.setValue(newValue);
-		return (DataTypeDesign)this;
-	}
-
 
 	// Reverse relations
 	

@@ -76,7 +76,6 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 					org.instantlogic.designer.FragmentTemplateDesign instance) {
 				return instance.getAttributeRelationValue();
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> entity
@@ -90,7 +89,6 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 					org.instantlogic.designer.FragmentTemplateDesign instance) {
 				return instance.getEntityRelationValue();
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.EventDesign, org.instantlogic.designer.EventDesign> event
@@ -104,7 +102,6 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 					org.instantlogic.designer.FragmentTemplateDesign instance) {
 				return instance.getEventRelationValue();
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.PropertyDesign>, org.instantlogic.designer.PropertyDesign> properties
@@ -126,7 +123,6 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	// Reverse relations

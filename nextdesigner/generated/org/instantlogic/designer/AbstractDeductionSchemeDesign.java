@@ -80,19 +80,19 @@ public abstract class AbstractDeductionSchemeDesign extends org.instantlogic.fab
     }
 
 	
-	private final org.instantlogic.fabric.value.RelationValue<DeductionSchemeDesign, DataTypeDesign> optionsFor
-		= createReverseRelationValue(org.instantlogic.designer.entity.DeductionSchemeDesignEntity.optionsFor);
+	private final org.instantlogic.fabric.value.RelationValue<DeductionSchemeDesign, RelationDesign> optionsOfRelation
+		= createReverseRelationValue(org.instantlogic.designer.entity.DeductionSchemeDesignEntity.optionsOfRelation);
 
-	public org.instantlogic.fabric.value.RelationValue<DeductionSchemeDesign, DataTypeDesign> getOptionsForRelationValue() {
-		return optionsFor;
+	public org.instantlogic.fabric.value.RelationValue<DeductionSchemeDesign, RelationDesign> getOptionsOfRelationRelationValue() {
+		return optionsOfRelation;
 	}
 
-	public org.instantlogic.designer.DataTypeDesign getOptionsFor() {
-		return optionsFor.getValue();
+	public org.instantlogic.designer.RelationDesign getOptionsOfRelation() {
+		return optionsOfRelation.getValue();
 	}
 
-    public DeductionSchemeDesign setOptionsFor(org.instantlogic.designer.DataTypeDesign newValue) {
-        optionsFor.setValue(newValue);
+    public DeductionSchemeDesign setOptionsOfRelation(org.instantlogic.designer.RelationDesign newValue) {
+        optionsOfRelation.setValue(newValue);
         return (DeductionSchemeDesign)this;
     }
 

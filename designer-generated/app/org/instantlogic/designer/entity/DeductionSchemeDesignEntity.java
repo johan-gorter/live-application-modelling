@@ -50,7 +50,6 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DeductionDesign, org.instantlogic.designer.DeductionDesign> output
@@ -64,7 +63,6 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 					org.instantlogic.designer.DeductionSchemeDesign instance) {
 				return instance.getOutputRelationValue();
 			}
-			
 		};
 	
 	// Reverse relations
@@ -85,15 +83,15 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 			}
 		};
 	
-	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.DataTypeDesign> optionsFor
-		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.DataTypeDesign>(
-			"optionsFor", INSTANCE, org.instantlogic.designer.entity.DataTypeDesignEntity.INSTANCE, org.instantlogic.designer.DataTypeDesign.class, org.instantlogic.designer.entity.DataTypeDesignEntity.options
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.RelationDesign, org.instantlogic.designer.RelationDesign> optionsOfRelation
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.RelationDesign, org.instantlogic.designer.RelationDesign>(
+			"optionsOfRelation", INSTANCE, org.instantlogic.designer.entity.RelationDesignEntity.INSTANCE, org.instantlogic.designer.RelationDesign.class, org.instantlogic.designer.entity.RelationDesignEntity.options
 		) {
 	
 			@Override
-			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.DataTypeDesign> get(
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.DeductionSchemeDesign, org.instantlogic.designer.RelationDesign> get(
 					org.instantlogic.designer.DeductionSchemeDesign instance) {
-				return instance.getOptionsForRelationValue();
+				return instance.getOptionsOfRelationRelationValue();
 			}
 	
 			public boolean isReverse() {
@@ -157,7 +155,7 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		defaultOfAttribute,
-		optionsFor,
+		optionsOfRelation,
 		relevanceOfAttribute,
 		ruleOfAttribute,
 		selectionElement,

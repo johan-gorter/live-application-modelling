@@ -185,7 +185,17 @@ public class ${technicalNameCapitalized}Entity extends org.instantlogic.fabric.m
 				return rule;
 			}
 			</#if>
+			<#if relation.optionsDeductionIndex??>
 			
+			private org.instantlogic.fabric.deduction.Deduction<? extends java.lang.Iterable<${relation.to}>> options;
+			@Override
+			public org.instantlogic.fabric.deduction.Deduction<? extends java.lang.Iterable<${relation.to}>> getOptions() {
+				if (options==null) {
+					options = (org.instantlogic.fabric.deduction.Deduction)createDeduction${relation.optionsDeductionIndex}();
+				}
+				return options;
+			};
+			</#if>
 		};
 	</#list>
 	
