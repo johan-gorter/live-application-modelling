@@ -283,18 +283,13 @@ YUI.add('instantlogic', function (Y) {
         this.id = id;
         this.engine = engine;
         this.node = Y.html.span({ 'data-fragment-id': id, className: 'fragment' });
-        if (engine.configuration.debug) {
-        	var debugButton = Y.html.div({className: 'fragment-debug'});
-        	this.node.appendChild(debugButton);
-        	var me = this;
-        	debugButton.on('click', function() {window.console.log('Fragment:', me.fragment.model)})
-        }
         this.fragment = null;
     };
 
     ns.FragmentHolder.prototype = {
         init: function (model) {
             this.fragmentType = model.type;
+            if (this.engine.configuration.debug) this.addDebugTool();
             this.fragment = this.engine.createFragment(this.fragmentType, this.node);
             this.fragment.init(model);
             if (this.fragment.markup) {
@@ -323,6 +318,56 @@ YUI.add('instantlogic', function (Y) {
 
         destroy: function () {
             this.fragment.destroy();
+        },
+        
+        addDebugTool: function() {
+        	var h = Y.html;
+        	var button;
+        	var openMenu;
+        	function closeMenu() {
+        		if (openMenu) {
+        			debugTool.removeClass('openMenu');
+        			openMenu.remove(true);
+        			openMenu = null;
+        		}
+        	}
+        	var me = this;
+        	var debugTool = 
+        		h.div({className: 'fragment-debug'},
+        			h.div({className: 'fragment-debug-info-outer'}, 
+        				h.div({className: 'fragment-debug-info'}, this.fragmentType)
+        			),
+        			button = h.div({className: 'fragment-debug-button'})
+        		);
+        	this.node.appendChild(debugTool);
+        	button.on('hover', function() {debugTool.addClass('hover')}, function() {closeMenu();debugTool.removeClass('hover')});
+        	button.on('click', function(e) {
+        		if (openMenu) {
+        			closeMenu();
+            		if (e.target!=button) {
+            			debugTool.removeClass('hover');
+            		}
+        			return;
+        		}
+        		var logLink, locateLink, editLink, insertAboveLink, insertBelowLink;
+        		openMenu =
+        			h.div({className: 'fragment-debug-menu'},
+        				h.ul(
+        					h.li(logLink = h.a({href:'#'}, 'Log fragment data')),
+        					h.li(locateLink = h.a({href:'#', target:'designer'}, 'Locate')),
+        					h.li(editLink = h.a({href:'#', target:'designer'}, 'Edit')),
+        					h.li(insertAboveLink = h.a({href:'#', target:'designer'}, 'Insert above')),
+        					// TODO Insert inside(start of) each fragmentList
+        					h.li(insertBelowLink = h.a({href:'#', target:'designer'}, 'Insert below'))
+        				)
+        			);
+    			button.appendChild(openMenu)
+    			logLink.on('click', function(e){
+    				window.console.log('Fragment:', me.fragment.model);
+    				window.console.log(JSON.stringify(me.fragment.model, null, ' '));
+    				e.preventDefault();
+    			});
+        	});
         },
 
         toString: function () {
@@ -554,4 +599,4 @@ YUI.add('instantlogic', function (Y) {
     	return constructor;
     };
     
-}, '0.7.0', { requires: ['io-base', 'node', 'oop', 'panel', 'json', 'slider', 'html', 'history'] });
+}, '0.7.0', { requires: ['io-base', 'node', 'oop', 'panel', 'json', 'event', 'html', 'history'] });

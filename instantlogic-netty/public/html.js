@@ -46,14 +46,14 @@ YUI.add('html', function(Y) {
                 element.appendChild(document.createTextNode(child));
             } else if (Y.Lang.isArray(child)) { // Recursion
                 addChildNodes(element, child, false);
+            } else if (child instanceof Y.Node) {
+            	element.appendChild(child);
             } else if (i === 0 && !child.nodeName && isRoot) { // Attributes object
                 if (ie67mode) {
                     element = createIE67Element(element.tagName.toLowerCase(), child);
                 } else {
                     setAttributes(element, child);
                 }
-            } else if (child instanceof Y.Node) {
-            	element.appendChild(child);
             } else if (child.nodeName) { // HTMLElement
                 element.appendChild(child);
             } else {
