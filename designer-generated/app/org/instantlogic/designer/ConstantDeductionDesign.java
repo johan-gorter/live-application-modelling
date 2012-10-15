@@ -44,6 +44,12 @@ public class ConstantDeductionDesign extends DeductionDesign {
 		constantDataType.setValue(newValue);
 		return (ConstantDeductionDesign)this;
 	}
+	
+	public org.instantlogic.designer.DataTypeDesign newConstantDataType() {
+		org.instantlogic.designer.DataTypeDesign newValue = new org.instantlogic.designer.DataTypeDesign(); 
+		constantDataType.setValue(newValue);
+		return newValue;
+	}
 
 
 	// Reverse relations

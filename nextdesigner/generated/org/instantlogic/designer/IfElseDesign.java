@@ -27,6 +27,12 @@ public class IfElseDesign extends ElementDesign {
 		condition.setValue(newValue);
 		return (IfElseDesign)this;
 	}
+	
+	public org.instantlogic.designer.DeductionSchemeDesign newCondition() {
+		org.instantlogic.designer.DeductionSchemeDesign newValue = new org.instantlogic.designer.DeductionSchemeDesign(); 
+		condition.setValue(newValue);
+		return newValue;
+	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValues<IfElseDesign, ElementDesign> elseChildren

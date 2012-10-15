@@ -27,6 +27,12 @@ public class FlowEdgeDesign extends org.instantlogic.fabric.Instance {
 		endNode.setValue(newValue);
 		return (FlowEdgeDesign)this;
 	}
+	
+	public org.instantlogic.designer.FlowNodeBaseDesign newEndNode() {
+		org.instantlogic.designer.FlowNodeBaseDesign newValue = new org.instantlogic.designer.FlowNodeBaseDesign(); 
+		endNode.setValue(newValue);
+		return newValue;
+	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValue<FlowEdgeDesign, EventDesign> event
@@ -44,6 +50,12 @@ public class FlowEdgeDesign extends org.instantlogic.fabric.Instance {
 		event.setValue(newValue);
 		return (FlowEdgeDesign)this;
 	}
+	
+	public org.instantlogic.designer.EventDesign newEvent() {
+		org.instantlogic.designer.EventDesign newValue = new org.instantlogic.designer.EventDesign(); 
+		event.setValue(newValue);
+		return newValue;
+	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValue<FlowEdgeDesign, FlowNodeBaseDesign> startNode
@@ -60,6 +72,12 @@ public class FlowEdgeDesign extends org.instantlogic.fabric.Instance {
 	public FlowEdgeDesign setStartNode(org.instantlogic.designer.FlowNodeBaseDesign newValue) {
 		startNode.setValue(newValue);
 		return (FlowEdgeDesign)this;
+	}
+	
+	public org.instantlogic.designer.FlowNodeBaseDesign newStartNode() {
+		org.instantlogic.designer.FlowNodeBaseDesign newValue = new org.instantlogic.designer.FlowNodeBaseDesign(); 
+		startNode.setValue(newValue);
+		return newValue;
 	}
 
 

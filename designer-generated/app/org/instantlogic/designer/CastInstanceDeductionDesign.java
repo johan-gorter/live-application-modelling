@@ -27,6 +27,12 @@ public class CastInstanceDeductionDesign extends DeductionDesign {
 		toEntity.setValue(newValue);
 		return (CastInstanceDeductionDesign)this;
 	}
+	
+	public org.instantlogic.designer.EntityDesign newToEntity() {
+		org.instantlogic.designer.EntityDesign newValue = new org.instantlogic.designer.EntityDesign(); 
+		toEntity.setValue(newValue);
+		return newValue;
+	}
 
 
 	// Reverse relations

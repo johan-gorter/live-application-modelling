@@ -59,6 +59,12 @@ public class SelectionDesign extends ElementDesign {
 		selection.setValue(newValue);
 		return (SelectionDesign)this;
 	}
+	
+	public org.instantlogic.designer.DeductionSchemeDesign newSelection() {
+		org.instantlogic.designer.DeductionSchemeDesign newValue = new org.instantlogic.designer.DeductionSchemeDesign(); 
+		selection.setValue(newValue);
+		return newValue;
+	}
 
 
 	// Reverse relations

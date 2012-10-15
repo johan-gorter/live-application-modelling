@@ -27,6 +27,12 @@ public class SubFlowDesign extends FlowNodeBaseDesign {
 		flow.setValue(newValue);
 		return (SubFlowDesign)this;
 	}
+	
+	public org.instantlogic.designer.FlowDesign newFlow() {
+		org.instantlogic.designer.FlowDesign newValue = new org.instantlogic.designer.FlowDesign(); 
+		flow.setValue(newValue);
+		return newValue;
+	}
 
 
 	// Reverse relations

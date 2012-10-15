@@ -95,6 +95,12 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 		caseEntity.setValue(newValue);
 		return (ApplicationDesign)this;
 	}
+	
+	public org.instantlogic.designer.EntityDesign newCaseEntity() {
+		org.instantlogic.designer.EntityDesign newValue = new org.instantlogic.designer.EntityDesign(); 
+		caseEntity.setValue(newValue);
+		return newValue;
+	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValues<ApplicationDesign, EntityDesign> entities
@@ -207,6 +213,12 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 	public ApplicationDesign setMainFlow(org.instantlogic.designer.FlowDesign newValue) {
 		mainFlow.setValue(newValue);
 		return (ApplicationDesign)this;
+	}
+	
+	public org.instantlogic.designer.FlowDesign newMainFlow() {
+		org.instantlogic.designer.FlowDesign newValue = new org.instantlogic.designer.FlowDesign(); 
+		mainFlow.setValue(newValue);
+		return newValue;
 	}
 
 	

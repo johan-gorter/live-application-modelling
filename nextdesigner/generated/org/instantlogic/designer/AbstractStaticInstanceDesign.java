@@ -27,6 +27,12 @@ public abstract class AbstractStaticInstanceDesign extends Design {
 		description.setValue(newValue);
 		return (StaticInstanceDesign)this;
 	}
+	
+	public org.instantlogic.designer.TextTemplateDesign newDescription() {
+		org.instantlogic.designer.TextTemplateDesign newValue = new org.instantlogic.designer.TextTemplateDesign(); 
+		description.setValue(newValue);
+		return newValue;
+	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValues<StaticInstanceDesign, StaticInstanceValueDesign> values

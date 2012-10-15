@@ -27,6 +27,12 @@ public abstract class AbstractSharedElementDefinitionDesign extends Design {
 		fragment.setValue(newValue);
 		return (SharedElementDefinitionDesign)this;
 	}
+	
+	public org.instantlogic.designer.ElementDesign newFragment() {
+		org.instantlogic.designer.ElementDesign newValue = new org.instantlogic.designer.ElementDesign(); 
+		fragment.setValue(newValue);
+		return newValue;
+	}
 
 
 	// Reverse relations

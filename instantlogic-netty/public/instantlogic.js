@@ -324,12 +324,17 @@ YUI.add('instantlogic', function (Y) {
         	var h = Y.html;
         	var button;
         	var openMenu;
-        	function closeMenu() {
-        		if (openMenu) {
-        			debugTool.removeClass('openMenu');
-        			openMenu.remove(true);
-        			openMenu = null;
-        		}
+        	var hoverMenu = false;
+        	function checkMenuClose() {
+        		setTimeout(function(){
+	        		if (!debugTool.hasClass('hover') && !hoverMenu) { 
+		        		if (openMenu) {
+		        			debugTool.removeClass('openMenu');
+		        			openMenu.destroy(true);
+		        			openMenu = null;
+		        		}
+		        	}
+        		});
         	}
         	var me = this;
         	var debugTool = 
@@ -337,36 +342,44 @@ YUI.add('instantlogic', function (Y) {
         			h.div({className: 'fragment-debug-info-outer'}, 
         				h.div({className: 'fragment-debug-info'}, this.fragmentType)
         			),
-        			button = h.div({className: 'fragment-debug-button'})
+        			button = h.div({className: 'fragment-debug-button'}, this.fragmentType.substr(0,1).toLowerCase())
         		);
         	this.node.appendChild(debugTool);
-        	button.on('hover', function() {debugTool.addClass('hover')}, function() {closeMenu();debugTool.removeClass('hover')});
+        	button.on('hover', function() {debugTool.addClass('hover')}, function() {debugTool.removeClass('hover');checkMenuClose()});
         	button.on('click', function(e) {
         		if (openMenu) {
-        			closeMenu();
-            		if (e.target!=button) {
-            			debugTool.removeClass('hover');
-            		}
+        			debugTool.removeClass('openMenu');
+        			openMenu.destroy(true);
+        			openMenu = null;
         			return;
         		}
-        		var logLink, locateLink, editLink, insertAboveLink, insertBelowLink;
-        		openMenu =
-        			h.div({className: 'fragment-debug-menu'},
-        				h.ul(
-        					h.li(logLink = h.a({href:'#'}, 'Log fragment data')),
-        					h.li(locateLink = h.a({href:'#', target:'designer'}, 'Locate')),
-        					h.li(editLink = h.a({href:'#', target:'designer'}, 'Edit')),
-        					h.li(insertAboveLink = h.a({href:'#', target:'designer'}, 'Insert above')),
-        					// TODO Insert inside(start of) each fragmentList
-        					h.li(insertBelowLink = h.a({href:'#', target:'designer'}, 'Insert below'))
-        				)
-        			);
-    			button.appendChild(openMenu)
+        		var logLink, locateLink, editLink, insertAboveLink, insertBelowLink, menuBody;
+        		openMenu = new Y.Overlay({
+        			bodyContent:
+	        			menuBody = h.div({className: 'fragment-debug-menu'},
+	        				h.ul(
+	        					h.li(logLink = h.a({href:'#'}, 'Log fragment data')),
+	        					h.li(locateLink = h.a({href:'#', target:'designer'}, 'Locate')),
+	        					h.li(editLink = h.a({href:'#', target:'designer'}, 'Edit')),
+	        					h.li(insertAboveLink = h.a({href:'#', target:'designer'}, 'Insert above')),
+	        					// TODO Insert inside(start of) each fragmentList
+	        					h.li(insertBelowLink = h.a({href:'#', target:'designer'}, 'Insert below'))
+	        				)
+	        			),
+	        		align: {node: button, points: [Y.WidgetPositionAlign.TL, Y.WidgetPositionAlign.TR]},
+	        		zIndex: 10001
+	        	});
+        		openMenu.render();
+        		menuBody.on('hover', function(){hoverMenu=true}, function(){hoverMenu=false;checkMenuClose();});
     			logLink.on('click', function(e){
     				window.console.log('Fragment:', me.fragment.model);
     				window.console.log(JSON.stringify(me.fragment.model, null, ' '));
     				e.preventDefault();
+    				hoverMenu=false;
+    				checkMenuClose();
     			});
+    			debugTool.addClass('openMenu');
+    			e.preventDefault();
         	});
         },
 
@@ -599,4 +612,4 @@ YUI.add('instantlogic', function (Y) {
     	return constructor;
     };
     
-}, '0.7.0', { requires: ['io-base', 'node', 'oop', 'panel', 'json', 'event', 'html', 'history'] });
+}, '0.7.0', { requires: ['io-base', 'node', 'oop', 'panel', 'json', 'event', 'html', 'history', 'overlay'] });

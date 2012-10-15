@@ -107,6 +107,12 @@ public abstract class AbstractAttributeDesign extends Design {
 		dataType.setValue(newValue);
 		return (AttributeDesign)this;
 	}
+	
+	public org.instantlogic.designer.DataTypeDesign newDataType() {
+		org.instantlogic.designer.DataTypeDesign newValue = new org.instantlogic.designer.DataTypeDesign(); 
+		dataType.setValue(newValue);
+		return newValue;
+	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, DeductionSchemeDesign> _default
@@ -123,6 +129,12 @@ public abstract class AbstractAttributeDesign extends Design {
 	public AttributeDesign setDefault(org.instantlogic.designer.DeductionSchemeDesign newValue) {
 		_default.setValue(newValue);
 		return (AttributeDesign)this;
+	}
+	
+	public org.instantlogic.designer.DeductionSchemeDesign newDefault() {
+		org.instantlogic.designer.DeductionSchemeDesign newValue = new org.instantlogic.designer.DeductionSchemeDesign(); 
+		_default.setValue(newValue);
+		return newValue;
 	}
 
 	
@@ -141,6 +153,12 @@ public abstract class AbstractAttributeDesign extends Design {
 		explanation.setValue(newValue);
 		return (AttributeDesign)this;
 	}
+	
+	public org.instantlogic.designer.TextTemplateDesign newExplanation() {
+		org.instantlogic.designer.TextTemplateDesign newValue = new org.instantlogic.designer.TextTemplateDesign(); 
+		explanation.setValue(newValue);
+		return newValue;
+	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, TextTemplateDesign> question
@@ -157,6 +175,12 @@ public abstract class AbstractAttributeDesign extends Design {
 	public AttributeDesign setQuestion(org.instantlogic.designer.TextTemplateDesign newValue) {
 		question.setValue(newValue);
 		return (AttributeDesign)this;
+	}
+	
+	public org.instantlogic.designer.TextTemplateDesign newQuestion() {
+		org.instantlogic.designer.TextTemplateDesign newValue = new org.instantlogic.designer.TextTemplateDesign(); 
+		question.setValue(newValue);
+		return newValue;
 	}
 
 	
@@ -175,6 +199,12 @@ public abstract class AbstractAttributeDesign extends Design {
 		relevance.setValue(newValue);
 		return (AttributeDesign)this;
 	}
+	
+	public org.instantlogic.designer.DeductionSchemeDesign newRelevance() {
+		org.instantlogic.designer.DeductionSchemeDesign newValue = new org.instantlogic.designer.DeductionSchemeDesign(); 
+		relevance.setValue(newValue);
+		return newValue;
+	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValue<AttributeDesign, DeductionSchemeDesign> rule
@@ -191,6 +221,12 @@ public abstract class AbstractAttributeDesign extends Design {
 	public AttributeDesign setRule(org.instantlogic.designer.DeductionSchemeDesign newValue) {
 		rule.setValue(newValue);
 		return (AttributeDesign)this;
+	}
+	
+	public org.instantlogic.designer.DeductionSchemeDesign newRule() {
+		org.instantlogic.designer.DeductionSchemeDesign newValue = new org.instantlogic.designer.DeductionSchemeDesign(); 
+		rule.setValue(newValue);
+		return newValue;
 	}
 
 

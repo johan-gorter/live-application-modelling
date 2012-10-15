@@ -27,6 +27,12 @@ public class ReverseRelationDeductionDesign extends DeductionDesign {
 		relation.setValue(newValue);
 		return (ReverseRelationDeductionDesign)this;
 	}
+	
+	public org.instantlogic.designer.RelationDesign newRelation() {
+		org.instantlogic.designer.RelationDesign newValue = new org.instantlogic.designer.RelationDesign(); 
+		relation.setValue(newValue);
+		return newValue;
+	}
 
 
 	// Reverse relations

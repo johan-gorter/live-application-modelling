@@ -136,6 +136,12 @@ public class RelationDesign extends AttributeDesign {
 		options.setValue(newValue);
 		return (RelationDesign)this;
 	}
+	
+	public org.instantlogic.designer.DeductionSchemeDesign newOptions() {
+		org.instantlogic.designer.DeductionSchemeDesign newValue = new org.instantlogic.designer.DeductionSchemeDesign(); 
+		options.setValue(newValue);
+		return newValue;
+	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValue<RelationDesign, DataTypeDesign> reverseDataType
@@ -153,6 +159,12 @@ public class RelationDesign extends AttributeDesign {
 		reverseDataType.setValue(newValue);
 		return (RelationDesign)this;
 	}
+	
+	public org.instantlogic.designer.DataTypeDesign newReverseDataType() {
+		org.instantlogic.designer.DataTypeDesign newValue = new org.instantlogic.designer.DataTypeDesign(); 
+		reverseDataType.setValue(newValue);
+		return newValue;
+	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValue<RelationDesign, EntityDesign> to
@@ -169,6 +181,12 @@ public class RelationDesign extends AttributeDesign {
 	public RelationDesign setTo(org.instantlogic.designer.EntityDesign newValue) {
 		to.setValue(newValue);
 		return (RelationDesign)this;
+	}
+	
+	public org.instantlogic.designer.EntityDesign newTo() {
+		org.instantlogic.designer.EntityDesign newValue = new org.instantlogic.designer.EntityDesign(); 
+		to.setValue(newValue);
+		return newValue;
 	}
 
 

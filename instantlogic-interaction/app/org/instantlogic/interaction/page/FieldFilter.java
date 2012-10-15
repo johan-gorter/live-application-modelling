@@ -48,7 +48,7 @@ public class FieldFilter extends AbstractFragmentFilter {
 				for(Instance value : values) {
 					Map resultOption = new HashMap<String, Object>();
 					if (value.getMetadata().getStaticName()!=null) {
-						resultOption.put("id", value.getMetadata().getStaticName());						
+						resultOption.put("id", value.getMetadata().getEntity().getName()+"!"+value.getMetadata().getStaticName());						
 					} else {
 						resultOption.put("id", value.getMetadata().getInstanceId());						
 					}
@@ -79,7 +79,7 @@ public class FieldFilter extends AbstractFragmentFilter {
 		if (value instanceof Instance) {
 			InstanceMetadata metadata = ((Instance)value).getMetadata();
 			if (metadata.getStaticName()!=null) {
-				return metadata.getStaticName();
+				return metadata.getEntity().getName()+"!"+metadata.getStaticName();
 			} else {
 				return metadata.getInstanceId();
 			}

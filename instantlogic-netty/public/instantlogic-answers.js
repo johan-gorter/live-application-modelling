@@ -17,6 +17,9 @@ YUI.add('instantlogic-answers', function (Y) {
 	    		return new ns.CheckboxAnswer();
 	    	}
     	}
+    	if (model.options) {
+    		return new ns.DropdownAnswer(model);
+    	}
     	return new ns.TextAnswer();
     };
     
@@ -63,5 +66,34 @@ YUI.add('instantlogic-answers', function (Y) {
     		return this.input.get('checked');
     	}
     };
+    
+    ns.DropdownAnswer = function(model) {
+    	this.model = model;
+    }
+    ns.DropdownAnswer.prototype = {
+    	createMarkup: function() {
+    		this.input = html.select({ 
+                id: this.model.id, 
+                name: this.model.id, 
+                disabled: this.model.readonly
+            }, this.createOptions(this.model.options));
+    		return this.input;
+    	},
+        createOptions: function(options) {
+            var result = [];
+            result.push(html.option({value: ''}, ''));
+            for (var i=0;i<options.length;i++) {
+                var entry = options[i];
+                result.push(html.option({value: entry.id}, entry.text));
+            }
+            return result;
+        },
+    	updateValue: function(newValue) {
+    		return this.input.set('value', newValue);
+    	},
+    	getValue: function() {
+    		return this.input.get('value');
+    	}
+    }
 
 }, '0.7.0', { requires: ['instantlogic', 'html'] });

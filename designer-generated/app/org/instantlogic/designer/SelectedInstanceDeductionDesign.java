@@ -27,6 +27,12 @@ public class SelectedInstanceDeductionDesign extends DeductionDesign {
 		ofEntity.setValue(newValue);
 		return (SelectedInstanceDeductionDesign)this;
 	}
+	
+	public org.instantlogic.designer.EntityDesign newOfEntity() {
+		org.instantlogic.designer.EntityDesign newValue = new org.instantlogic.designer.EntityDesign(); 
+		ofEntity.setValue(newValue);
+		return newValue;
+	}
 
 
 	// Reverse relations

@@ -44,6 +44,12 @@ public class StringTemplateDesign extends org.instantlogic.fabric.Instance {
 		deduction.setValue(newValue);
 		return (StringTemplateDesign)this;
 	}
+	
+	public org.instantlogic.designer.DeductionSchemeDesign newDeduction() {
+		org.instantlogic.designer.DeductionSchemeDesign newValue = new org.instantlogic.designer.DeductionSchemeDesign(); 
+		deduction.setValue(newValue);
+		return newValue;
+	}
 
 
 	// Reverse relations

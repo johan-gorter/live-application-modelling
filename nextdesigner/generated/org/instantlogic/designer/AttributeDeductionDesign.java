@@ -27,6 +27,12 @@ public class AttributeDeductionDesign extends DeductionDesign {
 		attribute.setValue(newValue);
 		return (AttributeDeductionDesign)this;
 	}
+	
+	public org.instantlogic.designer.AttributeDesign newAttribute() {
+		org.instantlogic.designer.AttributeDesign newValue = new org.instantlogic.designer.AttributeDesign(); 
+		attribute.setValue(newValue);
+		return newValue;
+	}
 
 
 	// Reverse relations
