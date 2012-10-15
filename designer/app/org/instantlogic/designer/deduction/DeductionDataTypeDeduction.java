@@ -6,6 +6,7 @@ import org.instantlogic.designer.ConstantDeductionDesign;
 import org.instantlogic.designer.CustomDeductionDesign;
 import org.instantlogic.designer.DataTypeDesign;
 import org.instantlogic.designer.DeductionDesign;
+import org.instantlogic.designer.EqualsDeductionDesign;
 import org.instantlogic.designer.HasValueDeductionDesign;
 import org.instantlogic.designer.NegationDeductionDesign;
 import org.instantlogic.designer.ReverseRelationDeductionDesign;
@@ -36,7 +37,10 @@ public class DeductionDataTypeDeduction extends Deduction<DataTypeDesign> {
 		if (deductionDesign instanceof CustomDeductionDesign) {
 			return ValueAndLevel.deduced(((CustomDeductionDesign)deductionDesign).getCustomDataType());
 		}
-		if (deductionDesign instanceof HasValueDeductionDesign || deductionDesign instanceof CastInstanceDeductionDesign || deductionDesign instanceof NegationDeductionDesign) {
+		if (deductionDesign instanceof HasValueDeductionDesign 
+				|| deductionDesign instanceof CastInstanceDeductionDesign 
+				|| deductionDesign instanceof NegationDeductionDesign
+				|| deductionDesign instanceof EqualsDeductionDesign) {
 			return ValueAndLevel.deduced(DataTypeDesignEntity.INSTANCE._boolean);
 		}
 		if (deductionDesign instanceof CastInstanceDeductionDesign) {

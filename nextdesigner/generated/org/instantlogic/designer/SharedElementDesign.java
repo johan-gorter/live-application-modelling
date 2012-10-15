@@ -27,6 +27,12 @@ public class SharedElementDesign extends ElementDesign {
 		definition.setValue(newValue);
 		return (SharedElementDesign)this;
 	}
+	
+	public org.instantlogic.designer.SharedElementDefinitionDesign newDefinition() {
+		org.instantlogic.designer.SharedElementDefinitionDesign newValue = new org.instantlogic.designer.SharedElementDefinitionDesign(); 
+		definition.setValue(newValue);
+		return newValue;
+	}
 
 
 	// Reverse relations

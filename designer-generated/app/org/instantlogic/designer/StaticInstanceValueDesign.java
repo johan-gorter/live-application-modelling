@@ -44,6 +44,12 @@ public class StaticInstanceValueDesign extends org.instantlogic.fabric.Instance 
 		attribute.setValue(newValue);
 		return (StaticInstanceValueDesign)this;
 	}
+	
+	public org.instantlogic.designer.AttributeDesign newAttribute() {
+		org.instantlogic.designer.AttributeDesign newValue = new org.instantlogic.designer.AttributeDesign(); 
+		attribute.setValue(newValue);
+		return newValue;
+	}
 
 
 	// Reverse relations

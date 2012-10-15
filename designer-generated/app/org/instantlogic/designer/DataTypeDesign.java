@@ -146,6 +146,12 @@ public class DataTypeDesign extends org.instantlogic.fabric.Instance {
 		dataCategory.setValue(newValue);
 		return (DataTypeDesign)this;
 	}
+	
+	public org.instantlogic.designer.DataCategoryDesign newDataCategory() {
+		org.instantlogic.designer.DataCategoryDesign newValue = new org.instantlogic.designer.DataCategoryDesign(); 
+		dataCategory.setValue(newValue);
+		return newValue;
+	}
 
 	
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<DataTypeDesign, EntityDesign> entity

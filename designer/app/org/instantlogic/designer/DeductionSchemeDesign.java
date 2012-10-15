@@ -87,6 +87,17 @@ public class DeductionSchemeDesign extends AbstractDeductionSchemeDesign {
 		return result;
 	}
 
+	public DeductionDesign deduceEquals(DeductionDesign... inputs) {
+		EqualsDeductionDesign result = new EqualsDeductionDesign();
+
+		addToDeductions(result);
+		setOutput(result);
+		
+		for (DeductionDesign input: inputs) {
+			result.addToInputs(input);
+		}
+		return result;
+	}
 	
 	public DeductionDesign deduceReverseRelation(RelationDesign relation, DeductionDesign instance) {
 		String className = relation.getFrom().getApplication().getRootPackageName()+"."+relation.getFrom().getTechnicalNameCapitalized();

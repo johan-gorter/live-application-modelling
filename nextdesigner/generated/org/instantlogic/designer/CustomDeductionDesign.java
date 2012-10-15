@@ -44,6 +44,12 @@ public class CustomDeductionDesign extends DeductionDesign {
 		customDataType.setValue(newValue);
 		return (CustomDeductionDesign)this;
 	}
+	
+	public org.instantlogic.designer.DataTypeDesign newCustomDataType() {
+		org.instantlogic.designer.DataTypeDesign newValue = new org.instantlogic.designer.DataTypeDesign(); 
+		customDataType.setValue(newValue);
+		return newValue;
+	}
 
 
 	// Reverse relations

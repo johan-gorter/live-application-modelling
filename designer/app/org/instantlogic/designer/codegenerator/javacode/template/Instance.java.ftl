@@ -72,6 +72,12 @@ public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${
 		${relation.javaIdentifier}.setValue(newValue);
 		return (${technicalNameCapitalized})this;
 	}
+	
+	public ${relation.to} new${relation.technicalName?cap_first}() {
+		${relation.to} newValue = new ${relation.to}(); 
+		${relation.javaIdentifier}.setValue(newValue);
+		return newValue;
+	}
 
 	</#if>
 	<#if !relation.readonly && relation.multivalue>	

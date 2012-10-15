@@ -8,6 +8,8 @@ import java.util.Date;
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Attribute;
 import org.instantlogic.fabric.model.Entity;
+import org.instantlogic.fabric.model.Relation;
+import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.value.AttributeValue;
 import org.instantlogic.interaction.flow.Flow;
 
@@ -42,6 +44,19 @@ public class ChangeContext extends RenderContext {
 				throw new RuntimeException(e);
 			}
 		}
+		if (attribute instanceof Relation) {
+			String id = (String)value;
+			if (id==null || id.length()==0) return null;
+			CaseAdministration administration = this.getCaseInstance().getMetadata().getCaseAdministration();
+			int split = id.indexOf('!');
+			if (split>=0) { // Static instance
+				Entity<?> entity = administration.getAllEntities().get(id.substring(0,split));
+				return entity.getStaticInstances().get(id.substring(split+1));
+			} else {
+				Instance instance = administration.getInstanceById(id);
+				return instance;
+			}
+		}
 		return value;
 	}
 
@@ -52,6 +67,4 @@ public class ChangeContext extends RenderContext {
 	public Object getValue() {
 		return value;
 	}
-
-	
 }

@@ -27,6 +27,12 @@ public abstract class AbstractPlaceTemplateDesign extends FlowNodeBaseDesign {
 		content.setValue(newValue);
 		return (PlaceTemplateDesign)this;
 	}
+	
+	public org.instantlogic.designer.ElementDesign newContent() {
+		org.instantlogic.designer.ElementDesign newValue = new org.instantlogic.designer.ElementDesign(); 
+		content.setValue(newValue);
+		return newValue;
+	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValue<PlaceTemplateDesign, TextTemplateDesign> title
@@ -43,6 +49,12 @@ public abstract class AbstractPlaceTemplateDesign extends FlowNodeBaseDesign {
 	public PlaceTemplateDesign setTitle(org.instantlogic.designer.TextTemplateDesign newValue) {
 		title.setValue(newValue);
 		return (PlaceTemplateDesign)this;
+	}
+	
+	public org.instantlogic.designer.TextTemplateDesign newTitle() {
+		org.instantlogic.designer.TextTemplateDesign newValue = new org.instantlogic.designer.TextTemplateDesign(); 
+		title.setValue(newValue);
+		return newValue;
 	}
 
 

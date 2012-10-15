@@ -76,6 +76,12 @@ public class PropertyDesign extends org.instantlogic.fabric.Instance {
 		text.setValue(newValue);
 		return (PropertyDesign)this;
 	}
+	
+	public org.instantlogic.designer.TextTemplateDesign newText() {
+		org.instantlogic.designer.TextTemplateDesign newValue = new org.instantlogic.designer.TextTemplateDesign(); 
+		text.setValue(newValue);
+		return newValue;
+	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValue<PropertyDesign, DeductionSchemeDesign> value
@@ -92,6 +98,12 @@ public class PropertyDesign extends org.instantlogic.fabric.Instance {
 	public PropertyDesign setValue(org.instantlogic.designer.DeductionSchemeDesign newValue) {
 		value.setValue(newValue);
 		return (PropertyDesign)this;
+	}
+	
+	public org.instantlogic.designer.DeductionSchemeDesign newValue() {
+		org.instantlogic.designer.DeductionSchemeDesign newValue = new org.instantlogic.designer.DeductionSchemeDesign(); 
+		value.setValue(newValue);
+		return newValue;
 	}
 
 

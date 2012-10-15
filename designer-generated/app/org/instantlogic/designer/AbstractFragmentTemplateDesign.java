@@ -76,6 +76,12 @@ public abstract class AbstractFragmentTemplateDesign extends ElementDesign {
 		attribute.setValue(newValue);
 		return (FragmentTemplateDesign)this;
 	}
+	
+	public org.instantlogic.designer.AttributeDesign newAttribute() {
+		org.instantlogic.designer.AttributeDesign newValue = new org.instantlogic.designer.AttributeDesign(); 
+		attribute.setValue(newValue);
+		return newValue;
+	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValue<FragmentTemplateDesign, EntityDesign> entity
@@ -93,6 +99,12 @@ public abstract class AbstractFragmentTemplateDesign extends ElementDesign {
 		entity.setValue(newValue);
 		return (FragmentTemplateDesign)this;
 	}
+	
+	public org.instantlogic.designer.EntityDesign newEntity() {
+		org.instantlogic.designer.EntityDesign newValue = new org.instantlogic.designer.EntityDesign(); 
+		entity.setValue(newValue);
+		return newValue;
+	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValue<FragmentTemplateDesign, EventDesign> event
@@ -109,6 +121,12 @@ public abstract class AbstractFragmentTemplateDesign extends ElementDesign {
 	public FragmentTemplateDesign setEvent(org.instantlogic.designer.EventDesign newValue) {
 		event.setValue(newValue);
 		return (FragmentTemplateDesign)this;
+	}
+	
+	public org.instantlogic.designer.EventDesign newEvent() {
+		org.instantlogic.designer.EventDesign newValue = new org.instantlogic.designer.EventDesign(); 
+		event.setValue(newValue);
+		return newValue;
 	}
 
 	

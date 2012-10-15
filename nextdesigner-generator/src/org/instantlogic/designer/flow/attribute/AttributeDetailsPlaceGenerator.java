@@ -23,7 +23,7 @@ public class AttributeDetailsPlaceGenerator extends PlaceTemplateDesign {
 	@Override
 	public void init() {
 		DeductionSchemeDesign attributeName;
-		FragmentTemplateDesign nameInput, categoryInput, hasRelevanceInput, hasRuleInput, writeableInput, hasDefaultInput;
+		FragmentTemplateDesign nameInput, categoryInput, multilineInput, formattedInput, hasRelevanceInput, hasRuleInput, writeableInput, hasDefaultInput;
 		SharedElementDesign entityContext;
 		SelectionDesign selectDataType;
 
@@ -51,7 +51,9 @@ public class AttributeDetailsPlaceGenerator extends PlaceTemplateDesign {
 						
 						new FragmentTemplateDesign("Heading2").setText("text", createConstantText("Data type")),
 						selectDataType = new SelectionDesign()
-							.addToChildren(categoryInput = new FragmentTemplateDesign("Input")),
+							.addToChildren(categoryInput = new FragmentTemplateDesign("Input"))
+							.addToChildren(multilineInput = new FragmentTemplateDesign("Input"))
+							.addToChildren(formattedInput = new FragmentTemplateDesign("Input")),
 						new FragmentTemplateDesign("Heading2").setText("text", createConstantText("Value")),
 						hasRelevanceInput = new FragmentTemplateDesign("Input"),
 						hasRuleInput = new FragmentTemplateDesign("Input"),
@@ -70,6 +72,9 @@ public class AttributeDetailsPlaceGenerator extends PlaceTemplateDesign {
 		selectDataType.getSelection().deduceAttribute(AttributeDesignEntityGenerator.dataType).getScheme();
 		
 		categoryInput.setEntity(DataTypeDesignEntityGenerator.ENTITY).setAttribute(DataTypeDesignEntityGenerator.dataCategory);
+		
+		multilineInput.setEntity(DataTypeDesignEntityGenerator.ENTITY).setAttribute(DataTypeDesignEntityGenerator.multiLine);
+		formattedInput.setEntity(DataTypeDesignEntityGenerator.ENTITY).setAttribute(DataTypeDesignEntityGenerator.formatted);
 		
 		hasRelevanceInput.setEntity(AttributeDesignEntityGenerator.ENTITY).setAttribute(AttributeDesignEntityGenerator.hasRelevance);
 		hasRuleInput.setEntity(AttributeDesignEntityGenerator.ENTITY).setAttribute(AttributeDesignEntityGenerator.hasRule);

@@ -51,6 +51,10 @@ public class DataTypeDesignEntityGenerator extends EntityDesign {
     	multivalue.setRule(new DeductionSchemeDesign().deduceCustom(DataTypeMultivalueDeduction.class, Boolean.class).getScheme());
     	multivalue.setDefault(DeductionSchemeDesign.constant(false));
 
+    	multiLine.newRelevance().deduceEquals(
+    			multiLine.getRelevance().deduceAttribute(dataCategory), 
+    			multiLine.getRelevance().deduceConstant(DataCategoryDesign.class, DataCategoryDesignEntity.INSTANCE.text));
+    	formatted.newRelevance().deduceAttribute(multiLine);
     	// TODO: relevance for all attributes/relations
     }
 

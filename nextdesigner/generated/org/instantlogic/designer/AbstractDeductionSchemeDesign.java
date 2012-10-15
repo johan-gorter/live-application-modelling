@@ -59,6 +59,12 @@ public abstract class AbstractDeductionSchemeDesign extends org.instantlogic.fab
 		output.setValue(newValue);
 		return (DeductionSchemeDesign)this;
 	}
+	
+	public org.instantlogic.designer.DeductionDesign newOutput() {
+		org.instantlogic.designer.DeductionDesign newValue = new org.instantlogic.designer.DeductionDesign(); 
+		output.setValue(newValue);
+		return newValue;
+	}
 
 
 	// Reverse relations

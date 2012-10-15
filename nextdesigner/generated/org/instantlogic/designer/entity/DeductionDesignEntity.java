@@ -14,6 +14,7 @@ public class DeductionDesignEntity extends org.instantlogic.fabric.model.Entity<
 		org.instantlogic.designer.entity.CastInstanceDeductionDesignEntity.INSTANCE,
 		org.instantlogic.designer.entity.ConstantDeductionDesignEntity.INSTANCE,
 		org.instantlogic.designer.entity.CustomDeductionDesignEntity.INSTANCE,
+		org.instantlogic.designer.entity.EqualsDeductionDesignEntity.INSTANCE,
 		org.instantlogic.designer.entity.HasValueDeductionDesignEntity.INSTANCE,
 		org.instantlogic.designer.entity.NegationDeductionDesignEntity.INSTANCE,
 		org.instantlogic.designer.entity.ReverseRelationDeductionDesignEntity.INSTANCE,
