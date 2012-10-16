@@ -1,5 +1,6 @@
 package org.instantlogic.fabric.model;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -76,14 +77,6 @@ public abstract class Entity<I extends Instance> extends Concept {
 		}
 	}
 	
-	private final Map<String, I> staticInstances = new LinkedHashMap<String, I>();
-	
-	protected I addStaticInstance(String name, I instance) {
-		staticInstances.put(name, instance);
-		instance.getMetadata().makeStatic(name);
-		return instance;
-	}
-	
 	public Entity<?> extendsEntity() {
 		return null;
 	}
@@ -132,7 +125,13 @@ public abstract class Entity<I extends Instance> extends Concept {
 		return new BaseEntityFirstIterable(baseEntityIterator, getLocalReverseRelations());
 	}
 
+	protected I addStaticInstance(String name, I instance) {
+//		staticInstances.put(name, instance);
+		instance.getMetadata().makeStatic(name);
+		return instance;
+	}
+	
 	public Map<String, I> getStaticInstances() {
-		return staticInstances;
+		return Collections.EMPTY_MAP;
 	}
 }

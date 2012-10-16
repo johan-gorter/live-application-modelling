@@ -3,6 +3,25 @@ package org.instantlogic.designer;
 
 public class DataTypeDesign extends org.instantlogic.fabric.Instance { 
 
+	private static final java.util.Map<String, DataTypeDesign> _staticInstances = new java.util.LinkedHashMap<String, DataTypeDesign>();
+	
+	public static java.util.Map<String, DataTypeDesign> getStaticDataTypeDesignInstances() {
+		return _staticInstances;
+	}
+	
+	private static DataTypeDesign addStaticInstance(String name, DataTypeDesign instance) {
+		_staticInstances.put(name, instance);
+		instance.getMetadata().makeStatic(name);
+		return instance;
+	}
+	
+	public static final DataTypeDesign _boolean;
+	
+	static {
+	   _boolean = addStaticInstance("boolean", new DataTypeDesign());
+	   _boolean.getMetadata().setStaticDescription(new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Boolean")));
+	}
+
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.DataTypeDesignEntity.INSTANCE;

@@ -35,6 +35,7 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 		private transient ObservationsOutdatedObserver basedOn;
 		
 		public Metadata(Attribute<I, Value, ? extends Object> model) {
+			if (model==null) throw new IllegalArgumentException("model cannot be null");
 			this.model = model;
 		}
 	}
