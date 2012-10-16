@@ -4,13 +4,6 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 
 	public static final DataTypeDesignEntity INSTANCE = new DataTypeDesignEntity();
 	
-	public final org.instantlogic.designer.DataTypeDesign _boolean;
-	
-	protected DataTypeDesignEntity() {
-	   _boolean = addStaticInstance("boolean", createInstance());
-	   _boolean.getMetadata().setStaticDescription(new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Boolean")));
-	}
-
 
 	
 	@Override
@@ -51,21 +44,43 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	}
 
 
-	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.DataCategoryDesign> createDeduction3() {
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> createDeduction3() {
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.DataTypeDesign> d0 
+		  		= org.instantlogic.fabric.deduction.SelectedInstanceDeduction.create(org.instantlogic.designer.entity.DataTypeDesignEntity.INSTANCE);
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.DataCategoryDesign> d1 
+		  		= org.instantlogic.fabric.deduction.AttributeDeduction.create(org.instantlogic.designer.entity.DataTypeDesignEntity.dataCategory, d0);
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.DataCategoryDesign> d2 
+		  		= org.instantlogic.fabric.deduction.ConstantDeduction.create(org.instantlogic.designer.DataCategoryDesign.text);
+		  	org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> d3 
+		  		= org.instantlogic.fabric.deduction.EqualsDeduction.create(d1, d2);
+		return d3;
+	}
+
+
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> createDeduction4() {
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.DataTypeDesign> d0 
+		  		= org.instantlogic.fabric.deduction.SelectedInstanceDeduction.create(org.instantlogic.designer.entity.DataTypeDesignEntity.INSTANCE);
+		  	org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> d1 
+		  		= org.instantlogic.fabric.deduction.AttributeDeduction.create(org.instantlogic.designer.entity.DataTypeDesignEntity.multiLine, d0);
+		return d1;
+	}
+
+
+	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.DataCategoryDesign> createDeduction5() {
 		    org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.DataCategoryDesign> d0 
 		    	= new org.instantlogic.designer.deduction.DataTypeDataCategoryDeduction();
 		return d0;
 	}
 
 
-	private static org.instantlogic.fabric.deduction.Deduction<? extends Iterable> createDeduction4() {
+	private static org.instantlogic.fabric.deduction.Deduction<? extends Iterable> createDeduction6() {
 		    org.instantlogic.fabric.deduction.Deduction<? extends Iterable> d0 
 		    	= new org.instantlogic.designer.deduction.DataTypeDataCategoryOptionsDeduction();
 		return d0;
 	}
 
 
-	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> createDeduction5() {
+	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> createDeduction7() {
 		    org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> d0 
 		    	= new org.instantlogic.designer.deduction.DataTypeEntityDeduction();
 		return d0;
@@ -98,6 +113,15 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.DataTypeDesign, java.lang.Boolean> get(org.instantlogic.designer.DataTypeDesign instance) {
 				return instance.getFormattedAttributeValue();
 			}
+
+            private org.instantlogic.fabric.deduction.Deduction<Boolean> relevance;
+            @Override
+            public org.instantlogic.fabric.deduction.Deduction<Boolean> getRelevance() {
+                if (relevance==null) {
+                    relevance = createDeduction4();
+                }
+                return relevance;
+            }
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.DataTypeDesign, java.lang.String, java.lang.String> javaClassName 
@@ -133,6 +157,15 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.DataTypeDesign, java.lang.Boolean> get(org.instantlogic.designer.DataTypeDesign instance) {
 				return instance.getMultiLineAttributeValue();
 			}
+
+            private org.instantlogic.fabric.deduction.Deduction<Boolean> relevance;
+            @Override
+            public org.instantlogic.fabric.deduction.Deduction<Boolean> getRelevance() {
+                if (relevance==null) {
+                    relevance = createDeduction3();
+                }
+                return relevance;
+            }
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.DataTypeDesign, java.lang.Boolean, java.lang.Boolean> multivalue 
@@ -210,7 +243,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			@Override
 			public org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.DataCategoryDesign> getRule() {
 				if (rule==null) {
-					rule  = createDeduction3();
+					rule  = createDeduction5();
 				}
 				return rule;
 			}
@@ -219,7 +252,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			@Override
 			public org.instantlogic.fabric.deduction.Deduction<? extends java.lang.Iterable<org.instantlogic.designer.DataCategoryDesign>> getOptions() {
 				if (options==null) {
-					options = (org.instantlogic.fabric.deduction.Deduction)createDeduction4();
+					options = (org.instantlogic.fabric.deduction.Deduction)createDeduction6();
 				}
 				return options;
 			};
@@ -245,7 +278,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			@Override
 			public org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> getRule() {
 				if (rule==null) {
-					rule  = createDeduction5();
+					rule  = createDeduction7();
 				}
 				return rule;
 			}
@@ -367,5 +400,10 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.DataTypeDesign> getStaticInstances() {
+		return org.instantlogic.designer.DataTypeDesign.getStaticDataTypeDesignInstances();
 	}
 }
