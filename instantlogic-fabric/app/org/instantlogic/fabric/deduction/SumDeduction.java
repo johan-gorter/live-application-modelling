@@ -30,7 +30,7 @@ public class SumDeduction<V extends Number> extends Deduction<V> {
 				result = result.intValue()+term.intValue();
 			}
 		}
-		return ValueAndLevel.deduced((V)result);
+		return ValueAndLevel.rule((V)result);
 	}
 	
 }

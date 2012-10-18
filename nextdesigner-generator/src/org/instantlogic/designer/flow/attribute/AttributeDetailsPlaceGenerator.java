@@ -23,7 +23,9 @@ public class AttributeDetailsPlaceGenerator extends PlaceTemplateDesign {
 	@Override
 	public void init() {
 		DeductionSchemeDesign attributeName;
-		FragmentTemplateDesign nameInput, categoryInput, multilineInput, formattedInput, hasRelevanceInput, hasRuleInput, writeableInput, hasDefaultInput;
+		FragmentTemplateDesign nameInput, categoryInput, multilineInput, formattedInput,
+			percentageInput, exactRoundingInput, wholeNumberInput,
+			hasRelevanceInput, hasRuleInput, writeableInput, hasDefaultInput;
 		SharedElementDesign entityContext;
 		SelectionDesign selectDataType;
 
@@ -53,7 +55,10 @@ public class AttributeDetailsPlaceGenerator extends PlaceTemplateDesign {
 						selectDataType = new SelectionDesign()
 							.addToChildren(categoryInput = new FragmentTemplateDesign("Input"))
 							.addToChildren(multilineInput = new FragmentTemplateDesign("Input"))
-							.addToChildren(formattedInput = new FragmentTemplateDesign("Input")),
+							.addToChildren(formattedInput = new FragmentTemplateDesign("Input"))
+							.addToChildren(percentageInput = new FragmentTemplateDesign("Input"))
+							.addToChildren(wholeNumberInput = new FragmentTemplateDesign("Input"))
+							.addToChildren(exactRoundingInput = new FragmentTemplateDesign("Input")),
 						new FragmentTemplateDesign("Heading2").setText("text", createConstantText("Value")),
 						hasRelevanceInput = new FragmentTemplateDesign("Input"),
 						hasRuleInput = new FragmentTemplateDesign("Input"),
@@ -75,6 +80,10 @@ public class AttributeDetailsPlaceGenerator extends PlaceTemplateDesign {
 		
 		multilineInput.setEntity(DataTypeDesignEntityGenerator.ENTITY).setAttribute(DataTypeDesignEntityGenerator.multiLine);
 		formattedInput.setEntity(DataTypeDesignEntityGenerator.ENTITY).setAttribute(DataTypeDesignEntityGenerator.formatted);
+		
+		percentageInput.setEntity(DataTypeDesignEntityGenerator.ENTITY).setAttribute(DataTypeDesignEntityGenerator.percentage);
+		exactRoundingInput.setEntity(DataTypeDesignEntityGenerator.ENTITY).setAttribute(DataTypeDesignEntityGenerator.exactRounding);
+		wholeNumberInput.setEntity(DataTypeDesignEntityGenerator.ENTITY).setAttribute(DataTypeDesignEntityGenerator.wholeNumber);
 		
 		hasRelevanceInput.setEntity(AttributeDesignEntityGenerator.ENTITY).setAttribute(AttributeDesignEntityGenerator.hasRelevance);
 		hasRuleInput.setEntity(AttributeDesignEntityGenerator.ENTITY).setAttribute(AttributeDesignEntityGenerator.hasRule);

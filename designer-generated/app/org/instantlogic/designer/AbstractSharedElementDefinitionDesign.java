@@ -3,6 +3,22 @@ package org.instantlogic.designer;
 
 public abstract class AbstractSharedElementDefinitionDesign extends Design { 
 
+	private static final java.util.Map<String, SharedElementDefinitionDesign> _staticInstances = new java.util.LinkedHashMap<String, SharedElementDefinitionDesign>();
+	
+	public static java.util.Map<String, SharedElementDefinitionDesign> getStaticSharedElementDefinitionDesignInstances() {
+		return _staticInstances;
+	}
+	
+	private static SharedElementDefinitionDesign addStaticInstance(String name, SharedElementDefinitionDesign instance) {
+		_staticInstances.put(name, instance);
+		instance.getMetadata().makeStatic(name);
+		return instance;
+	}
+	
+	
+	static {
+	}
+
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.SharedElementDefinitionDesignEntity.INSTANCE;

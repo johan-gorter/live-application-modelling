@@ -2,7 +2,6 @@ package org.instantlogic.fabric.model;
 
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.instantlogic.fabric.Instance;
@@ -131,6 +130,7 @@ public abstract class Entity<I extends Instance> extends Concept {
 		return instance;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Map<String, I> getStaticInstances() {
 		return Collections.EMPTY_MAP;
 	}

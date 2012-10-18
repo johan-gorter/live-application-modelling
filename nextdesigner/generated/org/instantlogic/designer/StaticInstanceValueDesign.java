@@ -3,6 +3,22 @@ package org.instantlogic.designer;
 
 public class StaticInstanceValueDesign extends org.instantlogic.fabric.Instance { 
 
+	private static final java.util.Map<String, StaticInstanceValueDesign> _staticInstances = new java.util.LinkedHashMap<String, StaticInstanceValueDesign>();
+	
+	public static java.util.Map<String, StaticInstanceValueDesign> getStaticStaticInstanceValueDesignInstances() {
+		return _staticInstances;
+	}
+	
+	private static StaticInstanceValueDesign addStaticInstance(String name, StaticInstanceValueDesign instance) {
+		_staticInstances.put(name, instance);
+		instance.getMetadata().makeStatic(name);
+		return instance;
+	}
+	
+	
+	static {
+	}
+
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.StaticInstanceValueDesignEntity.INSTANCE;

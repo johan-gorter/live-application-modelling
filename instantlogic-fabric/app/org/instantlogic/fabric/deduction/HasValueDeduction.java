@@ -22,6 +22,6 @@ public class HasValueDeduction extends Deduction<Boolean> { // V extends I
 	@Override
 	public ValueAndLevel<Boolean> deduct(DeductionContext context) {
 		ValueAndLevel<? extends Object> inputValue = input.deduct(context);
-		return ValueAndLevel.deduced(inputValue.hasValue()?Boolean.TRUE:Boolean.FALSE);
+		return ValueAndLevel.rule(inputValue.hasValue()?Boolean.TRUE:Boolean.FALSE);
 	}
 }

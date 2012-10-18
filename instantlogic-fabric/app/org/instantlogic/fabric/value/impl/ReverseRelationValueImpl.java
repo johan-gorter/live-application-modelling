@@ -24,7 +24,7 @@ public class ReverseRelationValueImpl<I extends Instance, From extends Instance>
 	
 	@Override
 	public ValueAndLevel<From> getValueAndLevel() {
-		return ValueAndLevel.deducedOrInconclusive(reverseValue);
+		return ValueAndLevel.rule(reverseValue);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -37,7 +37,7 @@ public class ReverseRelationValueImpl<I extends Instance, From extends Instance>
 		From oldValue = this.reverseValue;
 		this.reverseValue = reverseValue;
 		if (operation==null) return;
-		fireValueChanged(ValueAndLevel.deducedOrMissing(oldValue), null, null, operation);
+		fireValueChanged(ValueAndLevel.rule(oldValue), null, null, operation);
 	}
 	
 	@Override

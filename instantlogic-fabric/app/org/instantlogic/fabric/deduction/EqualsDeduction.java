@@ -10,8 +10,8 @@ import org.instantlogic.fabric.util.ValueLevel;
  */
 public class EqualsDeduction extends Deduction<Boolean> { 
 
-	public static EqualsDeduction create(Deduction<? extends Object> input) {
-		return new EqualsDeduction(input);
+	public static EqualsDeduction create(Deduction<?>... inputs) {
+		return new EqualsDeduction(inputs);
 	}
 	
 	private Deduction<?>[] inputs;
@@ -22,7 +22,7 @@ public class EqualsDeduction extends Deduction<Boolean> {
 
 	@Override
 	public ValueAndLevel<Boolean> deduct(DeductionContext context) {
-		if (inputs.length<2) return ValueAndLevel.deduced(Boolean.TRUE);
+		if (inputs.length<2) return ValueAndLevel.rule(Boolean.TRUE);
 		ValueAndLevel<?> firstValue = inputs[0].deduct(context);
 		if (firstValue.getValueLevel()==ValueLevel.INCONCLUSIVE || firstValue.getValueLevel()==ValueLevel.IRRELEVANT) {
 			return ValueAndLevel.inconclusive();
@@ -33,12 +33,12 @@ public class EqualsDeduction extends Deduction<Boolean> {
 				return ValueAndLevel.inconclusive();
 			}
 			if (firstValue.getValue()==null && nextValue.getValue()!=null) {
-				return ValueAndLevel.deduced(Boolean.FALSE);
+				return ValueAndLevel.rule(Boolean.FALSE);
 			}
 			if (!firstValue.getValue().equals(nextValue.getValue())) {
-				return ValueAndLevel.deduced(Boolean.FALSE);
+				return ValueAndLevel.rule(Boolean.FALSE);
 			}
 		}
-		return ValueAndLevel.deduced(Boolean.TRUE);
+		return ValueAndLevel.rule(Boolean.TRUE);
 	}
 }

@@ -1,7 +1,6 @@
 package org.instantlogic.designer;
 
 import org.instantlogic.designer.deduction.AttributeBelongsToDeduction;
-import org.instantlogic.designer.entity.DataCategoryDesignEntity;
 
 public class AttributeDesignEntityGenerator extends EntityDesign {
 
@@ -15,10 +14,10 @@ public class AttributeDesignEntityGenerator extends EntityDesign {
     }
 
     // Attributes
-    public static final AttributeDesign writeable = addAttribute(ENTITY, "writeable", DataCategoryDesignEntity.INSTANCE._boolean); // writeable == Not readonly
-    public static final AttributeDesign hasRelevance = addAttribute(ENTITY, "hasRelevance", DataCategoryDesignEntity.INSTANCE._boolean);
-    public static final AttributeDesign hasRule = addAttribute(ENTITY, "hasRule", DataCategoryDesignEntity.INSTANCE._boolean);
-    public static final AttributeDesign hasDefault = addAttribute(ENTITY, "hasDefault", DataCategoryDesignEntity.INSTANCE._boolean);
+    public static final AttributeDesign writeable = addAttribute(ENTITY, "writeable", DataCategoryDesign._boolean); // writeable == Not readonly
+    public static final AttributeDesign hasRelevance = addAttribute(ENTITY, "hasRelevance", DataCategoryDesign._boolean);
+    public static final AttributeDesign hasRule = addAttribute(ENTITY, "hasRule", DataCategoryDesign._boolean);
+    public static final AttributeDesign hasDefault = addAttribute(ENTITY, "hasDefault", DataCategoryDesign._boolean);
     
     // Relations
     public static final RelationDesign dataType = addRelation(ENTITY, "dataType", RelationType.OneToOneAggregation, DataTypeDesignEntityGenerator.ENTITY)

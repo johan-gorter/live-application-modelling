@@ -4,10 +4,6 @@ public class CastInstanceDeductionDesignEntity extends org.instantlogic.fabric.m
 
 	public static final CastInstanceDeductionDesignEntity INSTANCE = new CastInstanceDeductionDesignEntity();
 	
-	
-	protected CastInstanceDeductionDesignEntity() {
-	}
-
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
 		return org.instantlogic.designer.entity.DeductionDesignEntity.INSTANCE;
@@ -71,5 +67,10 @@ public class CastInstanceDeductionDesignEntity extends org.instantlogic.fabric.m
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.CastInstanceDeductionDesign> getStaticInstances() {
+		return org.instantlogic.designer.CastInstanceDeductionDesign.getStaticCastInstanceDeductionDesignInstances();
 	}
 }

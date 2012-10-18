@@ -6,17 +6,6 @@ public class ${technicalNameCapitalized}Entity extends org.instantlogic.fabric.m
 
 	public static final ${technicalNameCapitalized}Entity INSTANCE = new ${technicalNameCapitalized}Entity();
 	
-	<#list staticInstances as staticInstance>
-	public final ${rootPackageName}.${technicalNameCapitalized} ${staticInstance.javaIdentifier};
-	</#list>
-	
-	protected ${technicalNameCapitalized}Entity() {
-	   <#list staticInstances as staticInstance>
-	   ${staticInstance.javaIdentifier} = addStaticInstance("${staticInstance.name}", createInstance());
-	   <#if staticInstance.description??>${staticInstance.javaIdentifier}.getMetadata().setStaticDescription(<@text_macro text=staticInstance.description />);</#if>
-	   </#list>
-	}
-
 	<#if extendsFrom??>
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
@@ -254,5 +243,10 @@ public class ${technicalNameCapitalized}Entity extends org.instantlogic.fabric.m
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, ${rootPackageName}.${technicalNameCapitalized}> getStaticInstances() {
+		return ${rootPackageName}.${technicalNameCapitalized}.getStatic${technicalNameCapitalized}Instances();
 	}
 }

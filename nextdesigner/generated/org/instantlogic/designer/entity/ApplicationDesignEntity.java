@@ -4,10 +4,6 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 
 	public static final ApplicationDesignEntity INSTANCE = new ApplicationDesignEntity();
 	
-	
-	protected ApplicationDesignEntity() {
-	}
-
 
 	
 	@Override
@@ -225,5 +221,10 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.ApplicationDesign> getStaticInstances() {
+		return org.instantlogic.designer.ApplicationDesign.getStaticApplicationDesignInstances();
 	}
 }

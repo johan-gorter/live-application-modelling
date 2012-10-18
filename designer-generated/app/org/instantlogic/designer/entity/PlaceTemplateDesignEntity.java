@@ -4,10 +4,6 @@ public class PlaceTemplateDesignEntity extends org.instantlogic.fabric.model.Ent
 
 	public static final PlaceTemplateDesignEntity INSTANCE = new PlaceTemplateDesignEntity();
 	
-	
-	protected PlaceTemplateDesignEntity() {
-	}
-
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
 		return org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.INSTANCE;
@@ -93,5 +89,10 @@ public class PlaceTemplateDesignEntity extends org.instantlogic.fabric.model.Ent
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.PlaceTemplateDesign> getStaticInstances() {
+		return org.instantlogic.designer.PlaceTemplateDesign.getStaticPlaceTemplateDesignInstances();
 	}
 }

@@ -4,10 +4,6 @@ public class StringTemplateDesignEntity extends org.instantlogic.fabric.model.En
 
 	public static final StringTemplateDesignEntity INSTANCE = new StringTemplateDesignEntity();
 	
-	
-	protected StringTemplateDesignEntity() {
-	}
-
 
 	
 	@Override
@@ -106,5 +102,10 @@ public class StringTemplateDesignEntity extends org.instantlogic.fabric.model.En
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.StringTemplateDesign> getStaticInstances() {
+		return org.instantlogic.designer.StringTemplateDesign.getStaticStringTemplateDesignInstances();
 	}
 }

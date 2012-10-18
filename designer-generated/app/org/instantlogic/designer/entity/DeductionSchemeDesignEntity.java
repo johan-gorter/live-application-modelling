@@ -4,10 +4,6 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 
 	public static final DeductionSchemeDesignEntity INSTANCE = new DeductionSchemeDesignEntity();
 	
-	
-	protected DeductionSchemeDesignEntity() {
-	}
-
 
 	
 	@Override
@@ -174,5 +170,10 @@ public class DeductionSchemeDesignEntity extends org.instantlogic.fabric.model.E
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.DeductionSchemeDesign> getStaticInstances() {
+		return org.instantlogic.designer.DeductionSchemeDesign.getStaticDeductionSchemeDesignInstances();
 	}
 }

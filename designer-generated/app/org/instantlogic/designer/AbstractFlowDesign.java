@@ -3,6 +3,22 @@ package org.instantlogic.designer;
 
 public abstract class AbstractFlowDesign extends Design { 
 
+	private static final java.util.Map<String, FlowDesign> _staticInstances = new java.util.LinkedHashMap<String, FlowDesign>();
+	
+	public static java.util.Map<String, FlowDesign> getStaticFlowDesignInstances() {
+		return _staticInstances;
+	}
+	
+	private static FlowDesign addStaticInstance(String name, FlowDesign instance) {
+		_staticInstances.put(name, instance);
+		instance.getMetadata().makeStatic(name);
+		return instance;
+	}
+	
+	
+	static {
+	}
+
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.FlowDesignEntity.INSTANCE;

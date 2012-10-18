@@ -3,6 +3,21 @@ package org.instantlogic.engine.presence;
 
 public abstract class AbstractTraveler extends org.instantlogic.fabric.Instance { 
 
+	private static final java.util.Map<String, Traveler> _staticInstances = new java.util.LinkedHashMap<String, Traveler>();
+	
+	public static java.util.Map<String, Traveler> getStaticTravelerInstances() {
+		return _staticInstances;
+	}
+	
+	private static Traveler addStaticInstance(String name, Traveler instance) {
+		_staticInstances.put(name, instance);
+		instance.getMetadata().makeStatic(name);
+		return instance;
+	}
+	
+	
+	static {
+	}
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
@@ -62,6 +77,12 @@ public abstract class AbstractTraveler extends org.instantlogic.fabric.Instance 
 		currentPlace.setValue(newValue);
 		return (Traveler)this;
 	}
+	
+	public org.instantlogic.engine.presence.Place newCurrentPlace() {
+		org.instantlogic.engine.presence.Place newValue = new org.instantlogic.engine.presence.Place(); 
+		currentPlace.setValue(newValue);
+		return newValue;
+	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValue<Traveler, User> user
@@ -78,6 +99,12 @@ public abstract class AbstractTraveler extends org.instantlogic.fabric.Instance 
 	public Traveler setUser(org.instantlogic.engine.presence.User newValue) {
 		user.setValue(newValue);
 		return (Traveler)this;
+	}
+	
+	public org.instantlogic.engine.presence.User newUser() {
+		org.instantlogic.engine.presence.User newValue = new org.instantlogic.engine.presence.User(); 
+		user.setValue(newValue);
+		return newValue;
 	}
 
 

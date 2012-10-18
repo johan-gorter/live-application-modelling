@@ -6,6 +6,7 @@ import java.io.OutputStreamWriter;
 
 import org.instantlogic.designer.ApplicationDesign;
 import org.instantlogic.designer.AttributeDesign;
+import org.instantlogic.designer.DataCategoryDesign;
 import org.instantlogic.designer.DeductionSchemeDesign;
 import org.instantlogic.designer.Design;
 import org.instantlogic.designer.EntityDesign;
@@ -22,7 +23,6 @@ import org.instantlogic.designer.SubFlowDesign;
 import org.instantlogic.designer.TextTemplateDesign;
 import org.instantlogic.designer.codegenerator.generator.GeneratedClassModels;
 import org.instantlogic.designer.codegenerator.javacode.ApplicationJavacodeGenerator;
-import org.instantlogic.designer.entity.DataCategoryDesignEntity;
 import org.instantlogic.engine.persistence.json.CasePersister;
 
 public class IzzyGenerator extends Design {
@@ -54,14 +54,14 @@ public class IzzyGenerator extends Design {
 		project.addAttribute("last issue number", Integer.class)
 			.setDefault(new DeductionSchemeDesign().deduceConstant(Integer.class, 0).getScheme());
 		user = new EntityDesign("user").setApplication(izzy);
-		user.addAttribute("username", DataCategoryDesignEntity.INSTANCE.text);
+		user.addAttribute("username", DataCategoryDesign.text);
 		issue = new EntityDesign("issue").setApplication(izzy);
 		issueNumber = issue.addAttribute("number", Integer.class);
-		issueHeadline = issue.addAttribute("headline", DataCategoryDesignEntity.INSTANCE.text);
-		issueDescription = issue.addAttribute("description", DataCategoryDesignEntity.INSTANCE.text);
+		issueHeadline = issue.addAttribute("headline", DataCategoryDesign.text);
+		issueDescription = issue.addAttribute("description", DataCategoryDesign.text);
 		issueDescription.getDataType().setMultiLine(true).setFormatted(true);
 		comment = new EntityDesign("comment").setApplication(izzy);
-		comment.addAttribute("text", DataCategoryDesignEntity.INSTANCE.text);
+		comment.addAttribute("text", DataCategoryDesign.text);
 		comment.getDataType().setMultiLine(true).setFormatted(true);
 		
 		// Relations

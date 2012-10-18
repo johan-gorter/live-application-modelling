@@ -20,7 +20,7 @@ public class FirstDeduction<V> extends Deduction<V> {
 		for(Deduction<V> input: inputs) {
 			ValueAndLevel<V> result = input.deduct(context);
 			if (result.isConclusive()) {
-				return ValueAndLevel.deduced(result.getValue());
+				return ValueAndLevel.rule(result.getValue());
 			}
 		}
 		return null;

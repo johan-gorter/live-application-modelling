@@ -3,6 +3,22 @@ package org.instantlogic.designer;
 
 public abstract class AbstractFragmentTemplateDesign extends ElementDesign { 
 
+	private static final java.util.Map<String, FragmentTemplateDesign> _staticInstances = new java.util.LinkedHashMap<String, FragmentTemplateDesign>();
+	
+	public static java.util.Map<String, FragmentTemplateDesign> getStaticFragmentTemplateDesignInstances() {
+		return _staticInstances;
+	}
+	
+	private static FragmentTemplateDesign addStaticInstance(String name, FragmentTemplateDesign instance) {
+		_staticInstances.put(name, instance);
+		instance.getMetadata().makeStatic(name);
+		return instance;
+	}
+	
+	
+	static {
+	}
+
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.FragmentTemplateDesignEntity.INSTANCE;

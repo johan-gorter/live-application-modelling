@@ -4,10 +4,6 @@ public class SelectionDesignEntity extends org.instantlogic.fabric.model.Entity<
 
 	public static final SelectionDesignEntity INSTANCE = new SelectionDesignEntity();
 	
-	
-	protected SelectionDesignEntity() {
-	}
-
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
 		return org.instantlogic.designer.entity.ElementDesignEntity.INSTANCE;
@@ -101,5 +97,10 @@ public class SelectionDesignEntity extends org.instantlogic.fabric.model.Entity<
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.SelectionDesign> getStaticInstances() {
+		return org.instantlogic.designer.SelectionDesign.getStaticSelectionDesignInstances();
 	}
 }

@@ -4,10 +4,6 @@ public class NegationDeductionDesignEntity extends org.instantlogic.fabric.model
 
 	public static final NegationDeductionDesignEntity INSTANCE = new NegationDeductionDesignEntity();
 	
-	
-	protected NegationDeductionDesignEntity() {
-	}
-
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
 		return org.instantlogic.designer.entity.DeductionDesignEntity.INSTANCE;
@@ -57,5 +53,10 @@ public class NegationDeductionDesignEntity extends org.instantlogic.fabric.model
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.NegationDeductionDesign> getStaticInstances() {
+		return org.instantlogic.designer.NegationDeductionDesign.getStaticNegationDeductionDesignInstances();
 	}
 }

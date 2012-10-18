@@ -1,7 +1,31 @@
 package ${rootPackageName};
+<#include "Text.java.ftl">
 
 
 public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${technicalNameCapitalized} extends <#if extendsFrom??>${extendsFrom}<#else>org.instantlogic.fabric.Instance</#if> { 
+
+	private static final java.util.Map<String, ${technicalNameCapitalized}> _staticInstances = new java.util.LinkedHashMap<String, ${technicalNameCapitalized}>();
+	
+	public static java.util.Map<String, ${technicalNameCapitalized}> getStatic${technicalNameCapitalized}Instances() {
+		return _staticInstances;
+	}
+	
+	private static ${technicalNameCapitalized} addStaticInstance(String name, ${technicalNameCapitalized} instance) {
+		_staticInstances.put(name, instance);
+		instance.getMetadata().makeStatic(name);
+		return instance;
+	}
+	
+	<#list staticInstances as staticInstance>
+	public static final ${technicalNameCapitalized} ${staticInstance.javaIdentifier};
+	</#list>
+	
+	static {
+	   <#list staticInstances as staticInstance>
+	   ${staticInstance.javaIdentifier} = addStaticInstance("${staticInstance.name}", new ${technicalNameCapitalized}());
+	   <#if staticInstance.description??>${staticInstance.javaIdentifier}.getMetadata().setStaticDescription(<@text_macro text=staticInstance.description />);</#if>
+	   </#list>
+	}
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {

@@ -1,8 +1,8 @@
 package org.instantlogic.engine.presence;
 
 import org.instantlogic.designer.AttributeDesign;
+import org.instantlogic.designer.DataCategoryDesign;
 import org.instantlogic.designer.EntityDesign;
-import org.instantlogic.designer.entity.DataCategoryDesignEntity;
 
 public class UserEntityGenerator extends EntityDesign {
 
@@ -15,7 +15,7 @@ public class UserEntityGenerator extends EntityDesign {
     }
 
     // Attributes
-    public static final AttributeDesign username = addAttribute(ENTITY, "username", DataCategoryDesignEntity.INSTANCE.text);
+    public static final AttributeDesign username = addAttribute(ENTITY, "username", DataCategoryDesign.text);
     
     // Relations
 }

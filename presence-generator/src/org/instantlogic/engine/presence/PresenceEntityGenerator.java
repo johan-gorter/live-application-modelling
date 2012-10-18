@@ -17,8 +17,8 @@ public class PresenceEntityGenerator extends EntityDesign {
     }
 
     // Attributes
-    public static final AttributeDesign applicationName = addAttribute(ENTITY, "applicationName", DataCategoryDesignEntity.INSTANCE.text);
-    public static final AttributeDesign caseName = addAttribute(ENTITY, "caseName", DataCategoryDesignEntity.INSTANCE.text);
+    public static final AttributeDesign applicationName = addAttribute(ENTITY, "applicationName", DataCategoryDesign.text);
+    public static final AttributeDesign caseName = addAttribute(ENTITY, "caseName", DataCategoryDesign.text);
 
     // Relations
     public static final RelationDesign activeUsers = addRelation(ENTITY, "activeUsers", RelationType.OneToManyAggregation, UserEntityGenerator.ENTITY)

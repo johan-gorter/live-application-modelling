@@ -12,7 +12,7 @@ public class DataTypeMultivalueDeduction extends Deduction<Boolean> {
 	public ValueAndLevel<Boolean> deduct(DeductionContext context) {
 		DataTypeDesign dataType = context.getSelectedInstance(DataTypeDesignEntity.INSTANCE);
 		if (dataType.getReverseRelation()!=null) {
-			return ValueAndLevel.deduced(dataType.getReverseRelation().getReverseMultivalue());
+			return ValueAndLevel.rule(dataType.getReverseRelation().getReverseMultivalue());
 		}
 		return ValueAndLevel.inconclusive();
 	}

@@ -139,7 +139,9 @@ public class FragmentTemplate extends Element {
 		String id = context.enterScope(this);
 		FilterChain chain = new FilterChain(id);
 		Map<String, Object> rendering = chain.render(context); // Chain ends with a call to doRender
-		appendTo.add(rendering);
+		if (rendering!=null) {
+			appendTo.add(rendering);
+		}
 		context.exitScope();
 	}
 	

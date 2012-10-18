@@ -30,13 +30,13 @@ public class ReverseRelationValuesImpl<I extends Instance, From extends Instance
 	
 	@Override
 	public ValueAndLevel<Multi<From>> getValueAndLevel() {
-		return ValueAndLevel.deducedOrInconclusive(reverseValue);
+		return ValueAndLevel.rule(reverseValue);
 	}
 
 	public void internalAddReverse(From reverseValue, Operation operation) {
 		this.values.add(reverseValue);
 		if (operation!=null) {
-			fireEvent(new ValueChangeEvent(this, ValueAndLevel.deduced(this.reverseValue), MultiValueUpdateType.INSERT, this.values.size()-1, reverseValue, operation));
+			fireEvent(new ValueChangeEvent(this, ValueAndLevel.rule(this.reverseValue), MultiValueUpdateType.INSERT, this.values.size()-1, reverseValue, operation));
 		}
 	}
 
@@ -46,7 +46,7 @@ public class ReverseRelationValuesImpl<I extends Instance, From extends Instance
 			throw new RuntimeException("Reverse value not found: "+reverseValue);
 		}
 		this.values.remove(index);
-		fireEvent(new ValueChangeEvent(this, ValueAndLevel.deduced(this.reverseValue), MultiValueUpdateType.DELETE, index, reverseValue, operation));
+		fireEvent(new ValueChangeEvent(this, ValueAndLevel.rule(this.reverseValue), MultiValueUpdateType.DELETE, index, reverseValue, operation));
 	}
 	
 	@Override

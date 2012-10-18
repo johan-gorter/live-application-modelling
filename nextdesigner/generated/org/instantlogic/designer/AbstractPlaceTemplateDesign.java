@@ -3,6 +3,22 @@ package org.instantlogic.designer;
 
 public abstract class AbstractPlaceTemplateDesign extends FlowNodeBaseDesign { 
 
+	private static final java.util.Map<String, PlaceTemplateDesign> _staticInstances = new java.util.LinkedHashMap<String, PlaceTemplateDesign>();
+	
+	public static java.util.Map<String, PlaceTemplateDesign> getStaticPlaceTemplateDesignInstances() {
+		return _staticInstances;
+	}
+	
+	private static PlaceTemplateDesign addStaticInstance(String name, PlaceTemplateDesign instance) {
+		_staticInstances.put(name, instance);
+		instance.getMetadata().makeStatic(name);
+		return instance;
+	}
+	
+	
+	static {
+	}
+
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.PlaceTemplateDesignEntity.INSTANCE;

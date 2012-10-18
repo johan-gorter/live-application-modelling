@@ -94,6 +94,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			"exactRounding", INSTANCE, java.lang.Boolean.class
 		) {
 			{
+				dataType.put("category", "boolean");
 			}
 	
 			@Override
@@ -107,6 +108,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			"formatted", INSTANCE, java.lang.Boolean.class
 		) {
 			{
+				dataType.put("category", "boolean");
 			}
 	
 			@Override
@@ -129,6 +131,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			"javaClassName", INSTANCE, java.lang.String.class
 		) {
 			{
+				dataType.put("category", "text");
 			}
 	
 			@Override
@@ -151,6 +154,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			"multiLine", INSTANCE, java.lang.Boolean.class
 		) {
 			{
+				dataType.put("category", "boolean");
 			}
 	
 			@Override
@@ -173,6 +177,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			"multivalue", INSTANCE, java.lang.Boolean.class
 		) {
 			{
+				dataType.put("category", "boolean");
 			}
 	
 			@Override
@@ -204,6 +209,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			"percentage", INSTANCE, java.lang.Boolean.class
 		) {
 			{
+				dataType.put("category", "boolean");
 			}
 	
 			@Override
@@ -217,6 +223,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			"wholeNumber", INSTANCE, java.lang.Boolean.class
 		) {
 			{
+				dataType.put("category", "boolean");
 			}
 	
 			@Override

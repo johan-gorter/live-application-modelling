@@ -4,10 +4,6 @@ public class AttributeDeductionDesignEntity extends org.instantlogic.fabric.mode
 
 	public static final AttributeDeductionDesignEntity INSTANCE = new AttributeDeductionDesignEntity();
 	
-	
-	protected AttributeDeductionDesignEntity() {
-	}
-
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
 		return org.instantlogic.designer.entity.DeductionDesignEntity.INSTANCE;
@@ -71,5 +67,10 @@ public class AttributeDeductionDesignEntity extends org.instantlogic.fabric.mode
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.AttributeDeductionDesign> getStaticInstances() {
+		return org.instantlogic.designer.AttributeDeductionDesign.getStaticAttributeDeductionDesignInstances();
 	}
 }

@@ -12,13 +12,11 @@ public class ConstantDeduction<V> extends Deduction<V> {
 	private final ValueAndLevel<V> constant;
 	
 	public ConstantDeduction(V constant) {
-		this.constant = ValueAndLevel.deduced(constant);
+		this.constant = ValueAndLevel.rule(constant);
 	}
 
 	@Override
 	public ValueAndLevel<V> deduct(DeductionContext context) {
 		return constant;
 	}
-
-	
 }

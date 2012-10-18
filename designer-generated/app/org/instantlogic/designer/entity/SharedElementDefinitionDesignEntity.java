@@ -4,10 +4,6 @@ public class SharedElementDefinitionDesignEntity extends org.instantlogic.fabric
 
 	public static final SharedElementDefinitionDesignEntity INSTANCE = new SharedElementDefinitionDesignEntity();
 	
-	
-	protected SharedElementDefinitionDesignEntity() {
-	}
-
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
 		return org.instantlogic.designer.entity.DesignEntity.INSTANCE;
@@ -113,5 +109,10 @@ public class SharedElementDefinitionDesignEntity extends org.instantlogic.fabric
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.SharedElementDefinitionDesign> getStaticInstances() {
+		return org.instantlogic.designer.SharedElementDefinitionDesign.getStaticSharedElementDefinitionDesignInstances();
 	}
 }

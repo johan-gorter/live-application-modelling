@@ -3,6 +3,22 @@ package org.instantlogic.designer;
 
 public class ReverseRelationDeductionDesign extends DeductionDesign { 
 
+	private static final java.util.Map<String, ReverseRelationDeductionDesign> _staticInstances = new java.util.LinkedHashMap<String, ReverseRelationDeductionDesign>();
+	
+	public static java.util.Map<String, ReverseRelationDeductionDesign> getStaticReverseRelationDeductionDesignInstances() {
+		return _staticInstances;
+	}
+	
+	private static ReverseRelationDeductionDesign addStaticInstance(String name, ReverseRelationDeductionDesign instance) {
+		_staticInstances.put(name, instance);
+		instance.getMetadata().makeStatic(name);
+		return instance;
+	}
+	
+	
+	static {
+	}
+
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.ReverseRelationDeductionDesignEntity.INSTANCE;

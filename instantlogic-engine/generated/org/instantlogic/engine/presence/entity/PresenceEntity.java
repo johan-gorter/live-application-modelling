@@ -4,10 +4,8 @@ public class PresenceEntity extends org.instantlogic.fabric.model.Entity<org.ins
 
 	public static final PresenceEntity INSTANCE = new PresenceEntity();
 	
-	protected PresenceEntity() {
-	}
 
-
+	
 	@Override
 	public org.instantlogic.engine.presence.Presence createInstance() {
 		return new org.instantlogic.engine.presence.Presence();
@@ -31,11 +29,10 @@ public class PresenceEntity extends org.instantlogic.fabric.model.Entity<org.ins
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.engine.presence.Presence, java.lang.String, java.lang.String>(
 			"applicationName", INSTANCE, java.lang.String.class
 		) {
-
 			{
 				dataType.put("category", "text");
 			}
-			
+	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.engine.presence.Presence, java.lang.String> get(org.instantlogic.engine.presence.Presence instance) {
 				return instance.getApplicationNameAttributeValue();
@@ -46,11 +43,10 @@ public class PresenceEntity extends org.instantlogic.fabric.model.Entity<org.ins
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.engine.presence.Presence, java.lang.String, java.lang.String>(
 			"caseName", INSTANCE, java.lang.String.class
 		) {
-
 			{
 				dataType.put("category", "text");
 			}
-			
+	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.engine.presence.Presence, java.lang.String> get(org.instantlogic.engine.presence.Presence instance) {
 				return instance.getCaseNameAttributeValue();
@@ -78,7 +74,6 @@ public class PresenceEntity extends org.instantlogic.fabric.model.Entity<org.ins
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.engine.presence.Presence, org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.Traveler>, org.instantlogic.engine.presence.Traveler> activeTravelers
@@ -100,7 +95,6 @@ public class PresenceEntity extends org.instantlogic.fabric.model.Entity<org.ins
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.engine.presence.Presence, org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.User>, org.instantlogic.engine.presence.User> activeUsers
@@ -122,7 +116,6 @@ public class PresenceEntity extends org.instantlogic.fabric.model.Entity<org.ins
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	// Reverse relations
@@ -152,5 +145,10 @@ public class PresenceEntity extends org.instantlogic.fabric.model.Entity<org.ins
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.engine.presence.Presence> getStaticInstances() {
+		return org.instantlogic.engine.presence.Presence.getStaticPresenceInstances();
 	}
 }

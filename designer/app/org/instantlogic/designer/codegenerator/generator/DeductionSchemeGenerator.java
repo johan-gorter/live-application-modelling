@@ -16,6 +16,8 @@ import org.instantlogic.designer.ReverseRelationDeductionDesign;
 import org.instantlogic.designer.SelectedInstanceDeductionDesign;
 import org.instantlogic.designer.codegenerator.classmodel.DeductionModel;
 import org.instantlogic.designer.codegenerator.classmodel.DeductionSchemeModel;
+import org.instantlogic.designer.deduction.TechnicalNameDeduction;
+import org.instantlogic.fabric.Instance;
 
 public class DeductionSchemeGenerator {
 	
@@ -57,6 +59,8 @@ public class DeductionSchemeGenerator {
 				String valueAsText;
 				if (value==null) {
 					valueAsText = "null";
+				} else if (value instanceof Instance) { // Must be a static instance
+					valueAsText = ((Instance)value).getMetadata().getEntity().getInstanceClass().getName() + "."+TechnicalNameDeduction.makeTechnicalName(((Instance)value).getMetadata().getStaticName());
 				} else if (String.class.getName().equals(deduction.getDataType().getJavaClassName())) {
 					valueAsText="\""+value.toString()+"\"";
 				} else {

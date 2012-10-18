@@ -17,9 +17,9 @@ public class JavaIdentifierDeduction extends Deduction<String> {
 		String result = getTechnicalName(context);
 		if (result==null) return ValueAndLevel.inconclusive();
 		if (Arrays.binarySearch(RESERVED_WORDS, result)>=0) {
-			return ValueAndLevel.deduced("_"+result);
+			return ValueAndLevel.rule("_"+result);
 		}
-		return ValueAndLevel.deduced(result);
+		return ValueAndLevel.rule(result);
 	}
 	
 	protected String getTechnicalName(DeductionContext context) {

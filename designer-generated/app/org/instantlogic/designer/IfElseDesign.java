@@ -3,6 +3,22 @@ package org.instantlogic.designer;
 
 public class IfElseDesign extends ElementDesign { 
 
+	private static final java.util.Map<String, IfElseDesign> _staticInstances = new java.util.LinkedHashMap<String, IfElseDesign>();
+	
+	public static java.util.Map<String, IfElseDesign> getStaticIfElseDesignInstances() {
+		return _staticInstances;
+	}
+	
+	private static IfElseDesign addStaticInstance(String name, IfElseDesign instance) {
+		_staticInstances.put(name, instance);
+		instance.getMetadata().makeStatic(name);
+		return instance;
+	}
+	
+	
+	static {
+	}
+
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.IfElseDesignEntity.INSTANCE;

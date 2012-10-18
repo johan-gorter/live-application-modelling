@@ -3,6 +3,22 @@ package org.instantlogic.designer;
 
 public class SubFlowDesign extends FlowNodeBaseDesign { 
 
+	private static final java.util.Map<String, SubFlowDesign> _staticInstances = new java.util.LinkedHashMap<String, SubFlowDesign>();
+	
+	public static java.util.Map<String, SubFlowDesign> getStaticSubFlowDesignInstances() {
+		return _staticInstances;
+	}
+	
+	private static SubFlowDesign addStaticInstance(String name, SubFlowDesign instance) {
+		_staticInstances.put(name, instance);
+		instance.getMetadata().makeStatic(name);
+		return instance;
+	}
+	
+	
+	static {
+	}
+
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.SubFlowDesignEntity.INSTANCE;

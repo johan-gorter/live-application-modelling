@@ -3,6 +3,22 @@ package org.instantlogic.designer;
 
 public class PropertyDesign extends org.instantlogic.fabric.Instance { 
 
+	private static final java.util.Map<String, PropertyDesign> _staticInstances = new java.util.LinkedHashMap<String, PropertyDesign>();
+	
+	public static java.util.Map<String, PropertyDesign> getStaticPropertyDesignInstances() {
+		return _staticInstances;
+	}
+	
+	private static PropertyDesign addStaticInstance(String name, PropertyDesign instance) {
+		_staticInstances.put(name, instance);
+		instance.getMetadata().makeStatic(name);
+		return instance;
+	}
+	
+	
+	static {
+	}
+
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.PropertyDesignEntity.INSTANCE;

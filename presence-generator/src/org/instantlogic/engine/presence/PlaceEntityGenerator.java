@@ -1,8 +1,8 @@
 package org.instantlogic.engine.presence;
 
 import org.instantlogic.designer.AttributeDesign;
+import org.instantlogic.designer.DataCategoryDesign;
 import org.instantlogic.designer.EntityDesign;
-import org.instantlogic.designer.entity.DataCategoryDesignEntity;
 
 public class PlaceEntityGenerator extends EntityDesign {
 
@@ -15,7 +15,7 @@ public class PlaceEntityGenerator extends EntityDesign {
     }
     
     // Attributes
-    public static final AttributeDesign url = addAttribute(ENTITY, "url", DataCategoryDesignEntity.INSTANCE.text);
-    public static final AttributeDesign description = addAttribute(ENTITY, "description", DataCategoryDesignEntity.INSTANCE.text);
+    public static final AttributeDesign url = addAttribute(ENTITY, "url", DataCategoryDesign.text);
+    public static final AttributeDesign description = addAttribute(ENTITY, "description", DataCategoryDesign.text);
     
 }

@@ -16,6 +16,6 @@ public class CapitalizeFirstDeduction extends Deduction<String> {
 	public ValueAndLevel<String> deduct(DeductionContext context) {
 		ValueAndLevel<String> inputString = input.deduct(context);
 		if (!inputString.hasValue()) return ValueAndLevel.inconclusive();
-		return ValueAndLevel.deduced(TechnicalNameDeduction.capitalizeFirst(inputString.getValue()));
+		return ValueAndLevel.rule(TechnicalNameDeduction.capitalizeFirst(inputString.getValue()));
 	}
 }
