@@ -347,6 +347,8 @@ YUI.add('instantlogic', function (Y) {
         	this.node.appendChild(debugTool);
         	button.on('hover', function() {debugTool.addClass('hover')}, function() {debugTool.removeClass('hover');checkMenuClose()});
         	button.on('click', function(e) {
+    			e.preventDefault();
+    			e.stopPropagation();
         		if (openMenu) {
         			debugTool.removeClass('openMenu');
         			openMenu.destroy(true);
@@ -379,7 +381,6 @@ YUI.add('instantlogic', function (Y) {
     				checkMenuClose();
     			});
     			debugTool.addClass('openMenu');
-    			e.preventDefault();
         	});
         },
 

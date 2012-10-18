@@ -4,10 +4,6 @@ public class ReverseRelationDeductionDesignEntity extends org.instantlogic.fabri
 
 	public static final ReverseRelationDeductionDesignEntity INSTANCE = new ReverseRelationDeductionDesignEntity();
 	
-	
-	protected ReverseRelationDeductionDesignEntity() {
-	}
-
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
 		return org.instantlogic.designer.entity.DeductionDesignEntity.INSTANCE;
@@ -71,5 +67,10 @@ public class ReverseRelationDeductionDesignEntity extends org.instantlogic.fabri
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.ReverseRelationDeductionDesign> getStaticInstances() {
+		return org.instantlogic.designer.ReverseRelationDeductionDesign.getStaticReverseRelationDeductionDesignInstances();
 	}
 }

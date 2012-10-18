@@ -3,6 +3,22 @@ package org.instantlogic.designer;
 
 public class SelectedInstanceDeductionDesign extends DeductionDesign { 
 
+	private static final java.util.Map<String, SelectedInstanceDeductionDesign> _staticInstances = new java.util.LinkedHashMap<String, SelectedInstanceDeductionDesign>();
+	
+	public static java.util.Map<String, SelectedInstanceDeductionDesign> getStaticSelectedInstanceDeductionDesignInstances() {
+		return _staticInstances;
+	}
+	
+	private static SelectedInstanceDeductionDesign addStaticInstance(String name, SelectedInstanceDeductionDesign instance) {
+		_staticInstances.put(name, instance);
+		instance.getMetadata().makeStatic(name);
+		return instance;
+	}
+	
+	
+	static {
+	}
+
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.SelectedInstanceDeductionDesignEntity.INSTANCE;

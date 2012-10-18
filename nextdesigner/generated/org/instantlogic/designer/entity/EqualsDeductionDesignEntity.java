@@ -4,10 +4,6 @@ public class EqualsDeductionDesignEntity extends org.instantlogic.fabric.model.E
 
 	public static final EqualsDeductionDesignEntity INSTANCE = new EqualsDeductionDesignEntity();
 	
-	
-	protected EqualsDeductionDesignEntity() {
-	}
-
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
 		return org.instantlogic.designer.entity.DeductionDesignEntity.INSTANCE;
@@ -57,5 +53,10 @@ public class EqualsDeductionDesignEntity extends org.instantlogic.fabric.model.E
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.EqualsDeductionDesign> getStaticInstances() {
+		return org.instantlogic.designer.EqualsDeductionDesign.getStaticEqualsDeductionDesignInstances();
 	}
 }

@@ -140,7 +140,7 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 		if (ruleDeduction!=null) {
 			ValueAndLevel<Value> result = ruleDeduction.deduct(context);
 			if (result.isConclusive()) {
-				cached = result;
+				cached = ValueAndLevel.rule(result.getValue());
 				return;
 			}
 		}
@@ -153,8 +153,10 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 		Deduction<Value> defaultDeduction = attribute.getDefault();
 		if (defaultDeduction!=null) {
 			ValueAndLevel<Value> defaultValue = defaultDeduction.deduct(context);
-			cached = defaultValue;
-			return;
+			if (defaultValue.isConclusive()) {
+				cached = ValueAndLevel.def(defaultValue.getValue());
+				return;
+			}
 		}
 		cached = ValueAndLevel.inconclusive();
 	}
@@ -350,12 +352,12 @@ public class ReadOnlyAttributeValueImpl<I extends Instance, Value extends Object
 			return "stale";
 		} else if (cached.getValueLevel()==ValueLevel.INCONCLUSIVE) {
 			return "inconclusive";
-		} else if (cached.getValueLevel()==ValueLevel.MISSING) {
-			return "missing";
+		} else if (cached.getValueLevel()==ValueLevel.RULE) {
+			return "rule:"+cached.getValue();
 		} else if (cached.getValueLevel()==ValueLevel.IRRELEVANT) {
 			return "irrelevant";
-		} else if (cached.getValueLevel()==ValueLevel.DEDUCED) {
-			return "deduced:"+cached.getValue();
+		} else if (cached.getValueLevel()==ValueLevel.DEFAULT) {
+			return "default:"+cached.getValue();
 		} else if (cached.getValueLevel()==ValueLevel.STORED) {
 			return "stored:"+cached.getValue();
 		}

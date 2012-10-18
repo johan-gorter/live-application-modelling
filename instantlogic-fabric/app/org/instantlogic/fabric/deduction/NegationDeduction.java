@@ -21,13 +21,13 @@ public class NegationDeduction<V extends Number> extends Deduction<V> {
 		Number value = input.deduct(context).getValue();
 		if (value==null) return ValueAndLevel.inconclusive();
 		if (value instanceof Long) {
-			return ValueAndLevel.deduced((V)Long.valueOf(-value.longValue()));
+			return ValueAndLevel.rule((V)Long.valueOf(-value.longValue()));
 		}
 		if (value instanceof Integer) {
-			return ValueAndLevel.deduced((V)Integer.valueOf(-value.intValue()));
+			return ValueAndLevel.rule((V)Integer.valueOf(-value.intValue()));
 		}
 		if (value instanceof Double) {
-			return ValueAndLevel.deduced((V)Double.valueOf(-value.doubleValue()));
+			return ValueAndLevel.rule((V)Double.valueOf(-value.doubleValue()));
 		}
 		throw new RuntimeException("Exotic number class not supported: "+value.getClass());
 	}

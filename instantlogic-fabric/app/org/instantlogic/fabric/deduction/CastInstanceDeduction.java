@@ -26,8 +26,8 @@ public class CastInstanceDeduction<I extends Instance, V extends Instance> exten
 	public ValueAndLevel<V> deduct(DeductionContext context) {
 		ValueAndLevel<I> candidate = instanceDeduction.deduct(context);
 		if (Entity.extendsFrom(candidate.getValue().getInstanceEntity(), toEntity)) {
-			return ValueAndLevel.deduced((V)candidate.getValue());
+			return ValueAndLevel.rule((V)candidate.getValue());
 		}
-		return null;
+		return ValueAndLevel.rule(null);
 	}
 }

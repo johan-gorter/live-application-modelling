@@ -4,28 +4,6 @@ public class DataCategoryDesignEntity extends org.instantlogic.fabric.model.Enti
 
 	public static final DataCategoryDesignEntity INSTANCE = new DataCategoryDesignEntity();
 	
-	public final org.instantlogic.designer.DataCategoryDesign text;
-	public final org.instantlogic.designer.DataCategoryDesign number;
-	public final org.instantlogic.designer.DataCategoryDesign dateTime;
-	public final org.instantlogic.designer.DataCategoryDesign _boolean;
-	public final org.instantlogic.designer.DataCategoryDesign entity;
-	public final org.instantlogic.designer.DataCategoryDesign custom;
-	
-	protected DataCategoryDesignEntity() {
-	   text = addStaticInstance("text", createInstance());
-	   text.getMetadata().setStaticDescription(new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Text")));
-	   number = addStaticInstance("number", createInstance());
-	   number.getMetadata().setStaticDescription(new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Number")));
-	   dateTime = addStaticInstance("dateTime", createInstance());
-	   dateTime.getMetadata().setStaticDescription(new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Date/Time")));
-	   _boolean = addStaticInstance("boolean", createInstance());
-	   _boolean.getMetadata().setStaticDescription(new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Yes-No")));
-	   entity = addStaticInstance("entity", createInstance());
-	   entity.getMetadata().setStaticDescription(new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Entity")));
-	   custom = addStaticInstance("custom", createInstance());
-	   custom.getMetadata().setStaticDescription(new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Custom")));
-	}
-
 
 	
 	@Override
@@ -71,5 +49,10 @@ public class DataCategoryDesignEntity extends org.instantlogic.fabric.model.Enti
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.DataCategoryDesign> getStaticInstances() {
+		return org.instantlogic.designer.DataCategoryDesign.getStaticDataCategoryDesignInstances();
 	}
 }

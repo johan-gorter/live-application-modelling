@@ -4,10 +4,6 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 
 	public static final FragmentTemplateDesignEntity INSTANCE = new FragmentTemplateDesignEntity();
 	
-	
-	protected FragmentTemplateDesignEntity() {
-	}
-
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
 		return org.instantlogic.designer.entity.ElementDesignEntity.INSTANCE;
@@ -153,5 +149,10 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.FragmentTemplateDesign> getStaticInstances() {
+		return org.instantlogic.designer.FragmentTemplateDesign.getStaticFragmentTemplateDesignInstances();
 	}
 }

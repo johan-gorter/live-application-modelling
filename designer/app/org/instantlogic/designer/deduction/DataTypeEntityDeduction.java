@@ -14,21 +14,21 @@ public class DataTypeEntityDeduction extends Deduction<EntityDesign> {
 	public ValueAndLevel<EntityDesign> deduct(DeductionContext context) {
 		DataTypeDesign dataType = context.getSelectedInstance(DataTypeDesignEntity.INSTANCE);
 		if (dataType.getAttribute()!=null && dataType.getAttribute() instanceof RelationDesign) {
-			return ValueAndLevel.deduced(((RelationDesign)dataType.getAttribute()).getTo());
+			return ValueAndLevel.rule(((RelationDesign)dataType.getAttribute()).getTo());
 		}
 		if (dataType.getReverseRelation()!=null) {
-			return ValueAndLevel.deduced(dataType.getReverseRelation().getFrom());
+			return ValueAndLevel.rule(dataType.getReverseRelation().getFrom());
 		}
 		if (dataType.getForEntity()!=null) {
-			return ValueAndLevel.deduced(dataType.getForEntity());
+			return ValueAndLevel.rule(dataType.getForEntity());
 		}
 		if (dataType.getConstantDeductionDesign()!=null) {
 			Object value = dataType.getConstantDeductionDesign().getValue();
 			if (value instanceof EntityDesign) {
-				return ValueAndLevel.deduced((EntityDesign)value);
+				return ValueAndLevel.rule((EntityDesign)value);
 			}
 		}
-		return ValueAndLevel.missing();
+		return ValueAndLevel.rule(null);
 	}
 
 }

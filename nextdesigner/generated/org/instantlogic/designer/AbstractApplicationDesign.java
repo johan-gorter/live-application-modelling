@@ -3,6 +3,22 @@ package org.instantlogic.designer;
 
 public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.Instance { 
 
+	private static final java.util.Map<String, ApplicationDesign> _staticInstances = new java.util.LinkedHashMap<String, ApplicationDesign>();
+	
+	public static java.util.Map<String, ApplicationDesign> getStaticApplicationDesignInstances() {
+		return _staticInstances;
+	}
+	
+	private static ApplicationDesign addStaticInstance(String name, ApplicationDesign instance) {
+		_staticInstances.put(name, instance);
+		instance.getMetadata().makeStatic(name);
+		return instance;
+	}
+	
+	
+	static {
+	}
+
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.ApplicationDesignEntity.INSTANCE;

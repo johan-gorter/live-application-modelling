@@ -4,10 +4,6 @@ public class CustomDeductionDesignEntity extends org.instantlogic.fabric.model.E
 
 	public static final CustomDeductionDesignEntity INSTANCE = new CustomDeductionDesignEntity();
 	
-	
-	protected CustomDeductionDesignEntity() {
-	}
-
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
 		return org.instantlogic.designer.entity.DeductionDesignEntity.INSTANCE;
@@ -93,5 +89,10 @@ public class CustomDeductionDesignEntity extends org.instantlogic.fabric.model.E
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.CustomDeductionDesign> getStaticInstances() {
+		return org.instantlogic.designer.CustomDeductionDesign.getStaticCustomDeductionDesignInstances();
 	}
 }

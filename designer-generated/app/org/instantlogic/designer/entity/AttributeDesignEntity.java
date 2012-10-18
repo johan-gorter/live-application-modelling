@@ -4,10 +4,6 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 
 	public static final AttributeDesignEntity INSTANCE = new AttributeDesignEntity();
 	
-	
-	protected AttributeDesignEntity() {
-	}
-
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
 		return org.instantlogic.designer.entity.DesignEntity.INSTANCE;
@@ -336,5 +332,10 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.AttributeDesign> getStaticInstances() {
+		return org.instantlogic.designer.AttributeDesign.getStaticAttributeDesignInstances();
 	}
 }

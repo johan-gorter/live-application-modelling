@@ -14,6 +14,7 @@ public class ReverseRelationDeduction<From extends Instance, To extends Instance
 	 * or a 
 	 *   ReverseRelationDeduction<Multi<From>, To>
 	 */
+	@SuppressWarnings("rawtypes")
 	public static <From extends Instance, To extends Instance> ReverseRelationDeduction create(Relation<From, ? extends Object, To> relation, Deduction<To> input) {
 		return new ReverseRelationDeduction<From, To>(relation, input);
 	}

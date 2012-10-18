@@ -26,7 +26,7 @@ public class PeriodEntity extends Entity<Period> {
 			if (from==null || to==null) {
 				return ValueAndLevel.inconclusive();
 			}
-			return ValueAndLevel.deduced((int)((to.getTime() - from.getTime())/MILLISECONDS_PER_DAY));
+			return ValueAndLevel.rule((int)((to.getTime() - from.getTime())/MILLISECONDS_PER_DAY));
 		}
 
 	}

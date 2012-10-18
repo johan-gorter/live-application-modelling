@@ -3,6 +3,22 @@ package org.instantlogic.designer;
 
 public class RelationDesign extends AttributeDesign { 
 
+	private static final java.util.Map<String, RelationDesign> _staticInstances = new java.util.LinkedHashMap<String, RelationDesign>();
+	
+	public static java.util.Map<String, RelationDesign> getStaticRelationDesignInstances() {
+		return _staticInstances;
+	}
+	
+	private static RelationDesign addStaticInstance(String name, RelationDesign instance) {
+		_staticInstances.put(name, instance);
+		instance.getMetadata().makeStatic(name);
+		return instance;
+	}
+	
+	
+	static {
+	}
+
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.RelationDesignEntity.INSTANCE;

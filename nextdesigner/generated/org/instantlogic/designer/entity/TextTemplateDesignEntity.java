@@ -4,10 +4,6 @@ public class TextTemplateDesignEntity extends org.instantlogic.fabric.model.Enti
 
 	public static final TextTemplateDesignEntity INSTANCE = new TextTemplateDesignEntity();
 	
-	
-	protected TextTemplateDesignEntity() {
-	}
-
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
 		return org.instantlogic.designer.entity.DesignEntity.INSTANCE;
@@ -96,5 +92,10 @@ public class TextTemplateDesignEntity extends org.instantlogic.fabric.model.Enti
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.TextTemplateDesign> getStaticInstances() {
+		return org.instantlogic.designer.TextTemplateDesign.getStaticTextTemplateDesignInstances();
 	}
 }

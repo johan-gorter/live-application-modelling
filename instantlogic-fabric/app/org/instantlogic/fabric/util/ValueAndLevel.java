@@ -5,36 +5,28 @@ public class ValueAndLevel<V extends Object> {
 	private V value;
 	private ValueLevel valueLevel;
 	
-	public static <V> ValueAndLevel<V> inconclusive() {
-		return new ValueAndLevel<V>(null, ValueLevel.INCONCLUSIVE);
-	}
-	
-	public static <V> ValueAndLevel<V> missing() {
-		return new ValueAndLevel<V>(null, ValueLevel.MISSING);
-	}
-	
 	public static <V> ValueAndLevel<V> irrelevant() {
 		return new ValueAndLevel<V>(null, ValueLevel.IRRELEVANT);
 	}
 
-	public static <V> ValueAndLevel<V> deducedOrInconclusive(V value) {
-		if (value==null) return inconclusive();
-		return new ValueAndLevel<V>(value, ValueLevel.DEDUCED);
-	}
-	
-	public static <V> ValueAndLevel<V> deducedOrMissing(V value) {
-		if (value==null) return missing();
-		return new ValueAndLevel<V>(value, ValueLevel.DEDUCED);
-	}
-	
-	public static <V> ValueAndLevel<V> deduced(V value) {
-		if (value==null) throw new IllegalArgumentException("value");
-		return new ValueAndLevel<V>(value, ValueLevel.DEDUCED);
+	public static <V> ValueAndLevel<V> rule(V value) {
+		return new ValueAndLevel<V>(value, ValueLevel.RULE);
 	}
 	
 	public static <V> ValueAndLevel<V> stored(V value) {
 		if (value==null) throw new IllegalArgumentException("value");
 		return new ValueAndLevel<V>(value, ValueLevel.STORED);
+	}
+	
+	/**
+	 * def is short for default (default is a reserved word in Java)
+	 */
+	public static <V> ValueAndLevel<V> def(V value) {
+		return new ValueAndLevel<V>(value, ValueLevel.DEFAULT);
+	}
+	
+	public static <V> ValueAndLevel<V> inconclusive() {
+		return new ValueAndLevel<V>(null, ValueLevel.INCONCLUSIVE);
 	}
 	
 	private ValueAndLevel(V value, ValueLevel valueLevel) {

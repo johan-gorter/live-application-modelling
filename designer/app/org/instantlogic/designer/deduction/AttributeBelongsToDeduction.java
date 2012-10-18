@@ -14,9 +14,9 @@ public class AttributeBelongsToDeduction extends Deduction<EntityDesign> {
 	public ValueAndLevel<EntityDesign> deduct(DeductionContext context) {
 		AttributeDesign attributeDesign = context.getSelectedInstance(AttributeDesignEntity.INSTANCE);
 		if (attributeDesign instanceof RelationDesign) {
-			return ValueAndLevel.deduced(((RelationDesign)attributeDesign).getFrom());
+			return ValueAndLevel.rule(((RelationDesign)attributeDesign).getFrom());
 		}
-		return ValueAndLevel.deduced(attributeDesign.getAttributeOf());
+		return ValueAndLevel.rule(attributeDesign.getAttributeOf());
 	}
 
 }

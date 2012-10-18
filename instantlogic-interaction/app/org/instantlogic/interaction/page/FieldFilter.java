@@ -11,6 +11,8 @@ import org.instantlogic.fabric.model.Attribute;
 import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.fabric.model.Relation;
 import org.instantlogic.fabric.util.InstanceMetadata;
+import org.instantlogic.fabric.util.ValueAndLevel;
+import org.instantlogic.fabric.util.ValueLevel;
 import org.instantlogic.interaction.util.ChangeContext;
 import org.instantlogic.interaction.util.RenderContext;
 
@@ -27,6 +29,8 @@ public class FieldFilter extends AbstractFragmentFilter {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public Map<String, Object> render(RenderContext context, String id, FragmentFilterChain chain) {
+		ValueAndLevel valueAndLevel = context.getAttributeValue((Entity)entity, (Attribute)attribute).getValueAndLevel();
+		if (valueAndLevel.getValueLevel()==ValueLevel.IRRELEVANT) return null;
 		Map<String, Object> result = super.render(context, id, chain);
 		if (!result.containsKey("questionText")) {
 			if (attribute.getQuestion()!=null) {
@@ -70,8 +74,11 @@ public class FieldFilter extends AbstractFragmentFilter {
 				result.put("dataType", dataType);
 			}
 		}
-		Object value = context.getValue((Entity)entity, (Attribute)attribute);
-		result.put("value", safeValue(value));
+		result.put("valueLevel", valueAndLevel.getValueLevel().toString().toLowerCase());
+		if (valueAndLevel.getValueLevel()==ValueLevel.RULE) {
+			result.put("readOnly", true);
+		}
+		result.put("value", safeValue(valueAndLevel.getValue()));
 		return result;
 	}
 	

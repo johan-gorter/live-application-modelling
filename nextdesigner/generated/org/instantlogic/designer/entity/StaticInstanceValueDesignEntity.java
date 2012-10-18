@@ -4,10 +4,6 @@ public class StaticInstanceValueDesignEntity extends org.instantlogic.fabric.mod
 
 	public static final StaticInstanceValueDesignEntity INSTANCE = new StaticInstanceValueDesignEntity();
 	
-	
-	protected StaticInstanceValueDesignEntity() {
-	}
-
 
 	
 	@Override
@@ -81,5 +77,10 @@ public class StaticInstanceValueDesignEntity extends org.instantlogic.fabric.mod
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.StaticInstanceValueDesign> getStaticInstances() {
+		return org.instantlogic.designer.StaticInstanceValueDesign.getStaticStaticInstanceValueDesignInstances();
 	}
 }

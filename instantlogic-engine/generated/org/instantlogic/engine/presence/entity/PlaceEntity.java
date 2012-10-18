@@ -4,10 +4,8 @@ public class PlaceEntity extends org.instantlogic.fabric.model.Entity<org.instan
 
 	public static final PlaceEntity INSTANCE = new PlaceEntity();
 	
-	protected PlaceEntity() {
-	}
 
-
+	
 	@Override
 	public org.instantlogic.engine.presence.Place createInstance() {
 		return new org.instantlogic.engine.presence.Place();
@@ -31,11 +29,10 @@ public class PlaceEntity extends org.instantlogic.fabric.model.Entity<org.instan
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.engine.presence.Place, java.lang.String, java.lang.String>(
 			"description", INSTANCE, java.lang.String.class
 		) {
-
 			{
 				dataType.put("category", "text");
 			}
-			
+	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.engine.presence.Place, java.lang.String> get(org.instantlogic.engine.presence.Place instance) {
 				return instance.getDescriptionAttributeValue();
@@ -46,11 +43,10 @@ public class PlaceEntity extends org.instantlogic.fabric.model.Entity<org.instan
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.engine.presence.Place, java.lang.String, java.lang.String>(
 			"url", INSTANCE, java.lang.String.class
 		) {
-
 			{
 				dataType.put("category", "text");
 			}
-			
+	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.engine.presence.Place, java.lang.String> get(org.instantlogic.engine.presence.Place instance) {
 				return instance.getUrlAttributeValue();
@@ -121,5 +117,10 @@ public class PlaceEntity extends org.instantlogic.fabric.model.Entity<org.instan
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.engine.presence.Place> getStaticInstances() {
+		return org.instantlogic.engine.presence.Place.getStaticPlaceInstances();
 	}
 }

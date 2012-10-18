@@ -4,10 +4,6 @@ public class IfElseDesignEntity extends org.instantlogic.fabric.model.Entity<org
 
 	public static final IfElseDesignEntity INSTANCE = new IfElseDesignEntity();
 	
-	
-	protected IfElseDesignEntity() {
-	}
-
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
 		return org.instantlogic.designer.entity.ElementDesignEntity.INSTANCE;
@@ -123,5 +119,10 @@ public class IfElseDesignEntity extends org.instantlogic.fabric.model.Entity<org
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.IfElseDesign> getStaticInstances() {
+		return org.instantlogic.designer.IfElseDesign.getStaticIfElseDesignInstances();
 	}
 }

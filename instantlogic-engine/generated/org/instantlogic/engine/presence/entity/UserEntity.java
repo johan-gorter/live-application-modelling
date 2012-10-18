@@ -4,10 +4,8 @@ public class UserEntity extends org.instantlogic.fabric.model.Entity<org.instant
 
 	public static final UserEntity INSTANCE = new UserEntity();
 	
-	protected UserEntity() {
-	}
 
-
+	
 	@Override
 	public org.instantlogic.engine.presence.User createInstance() {
 		return new org.instantlogic.engine.presence.User();
@@ -31,11 +29,10 @@ public class UserEntity extends org.instantlogic.fabric.model.Entity<org.instant
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.engine.presence.User, java.lang.String, java.lang.String>(
 			"username", INSTANCE, java.lang.String.class
 		) {
-
 			{
 				dataType.put("category", "text");
 			}
-			
+	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.engine.presence.User, java.lang.String> get(org.instantlogic.engine.presence.User instance) {
 				return instance.getUsernameAttributeValue();
@@ -105,5 +102,10 @@ public class UserEntity extends org.instantlogic.fabric.model.Entity<org.instant
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.engine.presence.User> getStaticInstances() {
+		return org.instantlogic.engine.presence.User.getStaticUserInstances();
 	}
 }

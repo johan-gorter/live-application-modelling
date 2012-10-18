@@ -4,10 +4,8 @@ public class TravelerEntity extends org.instantlogic.fabric.model.Entity<org.ins
 
 	public static final TravelerEntity INSTANCE = new TravelerEntity();
 	
-	protected TravelerEntity() {
-	}
 
-
+	
 	@Override
 	public org.instantlogic.engine.presence.Traveler createInstance() {
 		return new org.instantlogic.engine.presence.Traveler();
@@ -38,11 +36,10 @@ public class TravelerEntity extends org.instantlogic.fabric.model.Entity<org.ins
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.engine.presence.Traveler, java.lang.Boolean, java.lang.Boolean>(
 			"communicatorVisible", INSTANCE, java.lang.Boolean.class
 		) {
-
 			{
 				dataType.put("category", "boolean");
 			}
-			
+	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.engine.presence.Traveler, java.lang.Boolean> get(org.instantlogic.engine.presence.Traveler instance) {
 				return instance.getCommunicatorVisibleAttributeValue();
@@ -62,11 +59,10 @@ public class TravelerEntity extends org.instantlogic.fabric.model.Entity<org.ins
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.engine.presence.Traveler, java.lang.String, java.lang.String>(
 			"id", INSTANCE, java.lang.String.class
 		) {
-
 			{
 				dataType.put("category", "text");
 			}
-			
+	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.engine.presence.Traveler, java.lang.String> get(org.instantlogic.engine.presence.Traveler instance) {
 				return instance.getIdAttributeValue();
@@ -86,7 +82,6 @@ public class TravelerEntity extends org.instantlogic.fabric.model.Entity<org.ins
 					org.instantlogic.engine.presence.Traveler instance) {
 				return instance.getCurrentPlaceRelationValue();
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.engine.presence.Traveler, org.instantlogic.engine.presence.User, org.instantlogic.engine.presence.User> user
@@ -100,7 +95,6 @@ public class TravelerEntity extends org.instantlogic.fabric.model.Entity<org.ins
 					org.instantlogic.engine.presence.Traveler instance) {
 				return instance.getUserRelationValue();
 			}
-			
 		};
 	
 	// Reverse relations
@@ -146,5 +140,10 @@ public class TravelerEntity extends org.instantlogic.fabric.model.Entity<org.ins
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.engine.presence.Traveler> getStaticInstances() {
+		return org.instantlogic.engine.presence.Traveler.getStaticTravelerInstances();
 	}
 }

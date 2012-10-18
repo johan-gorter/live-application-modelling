@@ -4,10 +4,6 @@ public class PropertyDesignEntity extends org.instantlogic.fabric.model.Entity<o
 
 	public static final PropertyDesignEntity INSTANCE = new PropertyDesignEntity();
 	
-	
-	protected PropertyDesignEntity() {
-	}
-
 
 	
 	@Override
@@ -142,5 +138,10 @@ public class PropertyDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.PropertyDesign> getStaticInstances() {
+		return org.instantlogic.designer.PropertyDesign.getStaticPropertyDesignInstances();
 	}
 }

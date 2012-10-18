@@ -3,6 +3,22 @@ package org.instantlogic.designer;
 
 public class TextTemplateDesign extends Design { 
 
+	private static final java.util.Map<String, TextTemplateDesign> _staticInstances = new java.util.LinkedHashMap<String, TextTemplateDesign>();
+	
+	public static java.util.Map<String, TextTemplateDesign> getStaticTextTemplateDesignInstances() {
+		return _staticInstances;
+	}
+	
+	private static TextTemplateDesign addStaticInstance(String name, TextTemplateDesign instance) {
+		_staticInstances.put(name, instance);
+		instance.getMetadata().makeStatic(name);
+		return instance;
+	}
+	
+	
+	static {
+	}
+
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.TextTemplateDesignEntity.INSTANCE;

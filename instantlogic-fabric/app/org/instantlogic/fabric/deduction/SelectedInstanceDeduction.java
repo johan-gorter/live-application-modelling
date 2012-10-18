@@ -20,7 +20,7 @@ public class SelectedInstanceDeduction<V extends Instance> extends Deduction<V> 
 	
 	@Override
 	public ValueAndLevel<V> deduct(DeductionContext context) {
-		return ValueAndLevel.deduced((V)context.getSelectedInstance(ofEntity)); // Will throw an exception if no such entity is selected. (This should have been validated at design time)
+		return ValueAndLevel.rule((V)context.getSelectedInstance(ofEntity)); // Will throw an exception if no such entity is selected. (This should have been validated at design time)
 	}
 
 }

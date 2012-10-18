@@ -4,10 +4,6 @@ public class SumDeductionDesignEntity extends org.instantlogic.fabric.model.Enti
 
 	public static final SumDeductionDesignEntity INSTANCE = new SumDeductionDesignEntity();
 	
-	
-	protected SumDeductionDesignEntity() {
-	}
-
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
 		return org.instantlogic.designer.entity.DeductionDesignEntity.INSTANCE;
@@ -57,5 +53,10 @@ public class SumDeductionDesignEntity extends org.instantlogic.fabric.model.Enti
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.SumDeductionDesign> getStaticInstances() {
+		return org.instantlogic.designer.SumDeductionDesign.getStaticSumDeductionDesignInstances();
 	}
 }

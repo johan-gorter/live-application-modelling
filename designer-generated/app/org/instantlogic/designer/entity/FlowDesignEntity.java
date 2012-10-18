@@ -4,10 +4,6 @@ public class FlowDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 
 	public static final FlowDesignEntity INSTANCE = new FlowDesignEntity();
 	
-	
-	protected FlowDesignEntity() {
-	}
-
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
 		return org.instantlogic.designer.entity.DesignEntity.INSTANCE;
@@ -153,5 +149,10 @@ public class FlowDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.FlowDesign> getStaticInstances() {
+		return org.instantlogic.designer.FlowDesign.getStaticFlowDesignInstances();
 	}
 }

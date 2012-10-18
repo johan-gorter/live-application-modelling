@@ -11,7 +11,6 @@ import org.instantlogic.designer.HasValueDeductionDesign;
 import org.instantlogic.designer.NegationDeductionDesign;
 import org.instantlogic.designer.ReverseRelationDeductionDesign;
 import org.instantlogic.designer.SelectedInstanceDeductionDesign;
-import org.instantlogic.designer.entity.DataTypeDesignEntity;
 import org.instantlogic.designer.entity.DeductionDesignEntity;
 import org.instantlogic.fabric.deduction.Deduction;
 import org.instantlogic.fabric.util.DeductionContext;
@@ -23,28 +22,28 @@ public class DeductionDataTypeDeduction extends Deduction<DataTypeDesign> {
 	public ValueAndLevel<DataTypeDesign> deduct(DeductionContext context) {
 		DeductionDesign deductionDesign = context.getSelectedInstance(DeductionDesignEntity.INSTANCE);
 		if (deductionDesign instanceof AttributeDeductionDesign) {
-			return ValueAndLevel.deduced(((AttributeDeductionDesign)deductionDesign).getAttribute().getDataType());
+			return ValueAndLevel.rule(((AttributeDeductionDesign)deductionDesign).getAttribute().getDataType());
 		}
 		if (deductionDesign instanceof ReverseRelationDeductionDesign) {
-			return ValueAndLevel.deduced(((ReverseRelationDeductionDesign)deductionDesign).getRelation().getReverseDataType());
+			return ValueAndLevel.rule(((ReverseRelationDeductionDesign)deductionDesign).getRelation().getReverseDataType());
 		}
 		if (deductionDesign instanceof SelectedInstanceDeductionDesign) {
-			return ValueAndLevel.deduced(((SelectedInstanceDeductionDesign)deductionDesign).getOfEntity().getDataType());
+			return ValueAndLevel.rule(((SelectedInstanceDeductionDesign)deductionDesign).getOfEntity().getDataType());
 		}
 		if (deductionDesign instanceof ConstantDeductionDesign) {
-			return ValueAndLevel.deduced(((ConstantDeductionDesign)deductionDesign).getConstantDataType());
+			return ValueAndLevel.rule(((ConstantDeductionDesign)deductionDesign).getConstantDataType());
 		}
 		if (deductionDesign instanceof CustomDeductionDesign) {
-			return ValueAndLevel.deduced(((CustomDeductionDesign)deductionDesign).getCustomDataType());
+			return ValueAndLevel.rule(((CustomDeductionDesign)deductionDesign).getCustomDataType());
 		}
 		if (deductionDesign instanceof HasValueDeductionDesign 
 				|| deductionDesign instanceof CastInstanceDeductionDesign 
 				|| deductionDesign instanceof NegationDeductionDesign
 				|| deductionDesign instanceof EqualsDeductionDesign) {
-			return ValueAndLevel.deduced(DataTypeDesignEntity.INSTANCE._boolean);
+			return ValueAndLevel.rule(DataTypeDesign._boolean);
 		}
 		if (deductionDesign instanceof CastInstanceDeductionDesign) {
-			return ValueAndLevel.deduced(((CastInstanceDeductionDesign)deductionDesign).getToEntity().getDataType());
+			return ValueAndLevel.rule(((CastInstanceDeductionDesign)deductionDesign).getToEntity().getDataType());
 		}
 		return ValueAndLevel.inconclusive();
 	}

@@ -3,6 +3,21 @@ package org.instantlogic.engine.presence;
 
 public abstract class AbstractPlace extends org.instantlogic.fabric.Instance { 
 
+	private static final java.util.Map<String, Place> _staticInstances = new java.util.LinkedHashMap<String, Place>();
+	
+	public static java.util.Map<String, Place> getStaticPlaceInstances() {
+		return _staticInstances;
+	}
+	
+	private static Place addStaticInstance(String name, Place instance) {
+		_staticInstances.put(name, instance);
+		instance.getMetadata().makeStatic(name);
+		return instance;
+	}
+	
+	
+	static {
+	}
 
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {

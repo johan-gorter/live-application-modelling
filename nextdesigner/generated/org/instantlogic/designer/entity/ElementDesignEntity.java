@@ -4,10 +4,6 @@ public class ElementDesignEntity extends org.instantlogic.fabric.model.Entity<or
 
 	public static final ElementDesignEntity INSTANCE = new ElementDesignEntity();
 	
-	
-	protected ElementDesignEntity() {
-	}
-
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
 		return org.instantlogic.designer.entity.DesignEntity.INSTANCE;
@@ -136,5 +132,10 @@ public class ElementDesignEntity extends org.instantlogic.fabric.model.Entity<or
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.designer.ElementDesign> getStaticInstances() {
+		return org.instantlogic.designer.ElementDesign.getStaticElementDesignInstances();
 	}
 }

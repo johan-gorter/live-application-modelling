@@ -12,7 +12,7 @@ public class TechnicalNameDeduction extends Deduction<String> {
 	public ValueAndLevel<String> deduct(DeductionContext context) {
 		String name = getName(context);
 		if (name==null) return ValueAndLevel.inconclusive();
-		return ValueAndLevel.deduced(makeTechnicalName(name));
+		return ValueAndLevel.rule(makeTechnicalName(name));
 	}
 
 	public static String makeTechnicalName(String name) {
