@@ -11,9 +11,9 @@ import org.instantlogic.interaction.util.RenderContext;
 
 public class SharedElement extends Element {
 
-	private final Element delegate;
+	private Element delegate;
 	
-	public SharedElement(Element delegate) {
+	protected void setElement(Element delegate) {
 		this.delegate = delegate;
 	}
 

@@ -6,6 +6,7 @@ public class MainFlow extends org.instantlogic.interaction.flow.Flow {
 	
 	private static final org.instantlogic.interaction.flow.FlowNodeBase[] NODES = new org.instantlogic.interaction.flow.FlowNodeBase[]{
 		org.instantlogic.designer.flow.main.EntitySubFlow.INSTANCE,
+		org.instantlogic.designer.flow.main.FlowSubFlow.INSTANCE,
 		org.instantlogic.designer.flow.main.AddEntitySubFlow.INSTANCE,
 		org.instantlogic.designer.flow.main.WelcomePlaceTemplate.INSTANCE,
 	};
@@ -15,6 +16,11 @@ public class MainFlow extends org.instantlogic.interaction.flow.Flow {
 			null, 
 			org.instantlogic.designer.event.EntityDetailsEvent.INSTANCE,
 			org.instantlogic.designer.flow.main.EntitySubFlow.INSTANCE
+		),
+		new org.instantlogic.interaction.flow.FlowEdge(
+			null, 
+			org.instantlogic.designer.event.FlowDetailsEvent.INSTANCE,
+			org.instantlogic.designer.flow.main.FlowSubFlow.INSTANCE
 		),
 		new org.instantlogic.interaction.flow.FlowEdge(
 			null, 

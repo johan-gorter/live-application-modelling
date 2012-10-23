@@ -5,6 +5,7 @@ import org.instantlogic.designer.FlowDesign;
 import org.instantlogic.designer.SubFlowDesign;
 import org.instantlogic.designer.event.AddEntityEventGenerator;
 import org.instantlogic.designer.event.EntityDetailsEventGenerator;
+import org.instantlogic.designer.event.FlowDetailsEventGenerator;
 import org.instantlogic.designer.event.HomeEventGenerator;
 import org.instantlogic.designer.flow.main.WelcomePlaceTemplateGenerator;
 
@@ -20,6 +21,7 @@ public class MainFlowGenerator extends FlowDesign {
 	@Override
 	public void init() {
 		SubFlowDesign entitySubFlow = addSubFlow(EntityFlowGenerator.FLOW); 
+		SubFlowDesign flowSubFlow = addSubFlow(FlowFlowGenerator.FLOW);
 		SubFlowDesign addEntitySubFlow = addSubFlow(AddEntityFlowGenerator.FLOW); 
 
 		addToNodes(WelcomePlaceTemplateGenerator.PLACE);
@@ -27,6 +29,10 @@ public class MainFlowGenerator extends FlowDesign {
 		newEdge()
 			.setEvent(EntityDetailsEventGenerator.EVENT)
 			.setEndNode(entitySubFlow);
+
+		newEdge()
+			.setEvent(FlowDetailsEventGenerator.EVENT)
+			.setEndNode(flowSubFlow);
 
 		newEdge()
 			.setEvent(AddEntityEventGenerator.EVENT)
