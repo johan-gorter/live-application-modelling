@@ -1,45 +1,34 @@
 package org.instantlogic.designer.flow;
 
-public class MainFlow extends org.instantlogic.interaction.flow.Flow {
+public class FlowFlow extends org.instantlogic.interaction.flow.Flow {
 
-	public static final MainFlow INSTANCE = new MainFlow();
+	public static final FlowFlow INSTANCE = new FlowFlow();
 	
 	private static final org.instantlogic.interaction.flow.FlowNodeBase[] NODES = new org.instantlogic.interaction.flow.FlowNodeBase[]{
-		org.instantlogic.designer.flow.main.EntitySubFlow.INSTANCE,
-		org.instantlogic.designer.flow.main.FlowSubFlow.INSTANCE,
-		org.instantlogic.designer.flow.main.AddEntitySubFlow.INSTANCE,
-		org.instantlogic.designer.flow.main.WelcomePlaceTemplate.INSTANCE,
+		org.instantlogic.designer.flow.flow.FlowNodeSubFlow.INSTANCE,
+		org.instantlogic.designer.flow.flow.FlowDetailsPlaceTemplate.INSTANCE,
 	};
 	
 	private static final org.instantlogic.interaction.flow.FlowEdge[] EDGES = new org.instantlogic.interaction.flow.FlowEdge[]{
 		new org.instantlogic.interaction.flow.FlowEdge(
 			null, 
-			org.instantlogic.designer.event.EntityDetailsEvent.INSTANCE,
-			org.instantlogic.designer.flow.main.EntitySubFlow.INSTANCE
-		),
-		new org.instantlogic.interaction.flow.FlowEdge(
-			null, 
 			org.instantlogic.designer.event.FlowDetailsEvent.INSTANCE,
-			org.instantlogic.designer.flow.main.FlowSubFlow.INSTANCE
+			org.instantlogic.designer.flow.flow.FlowDetailsPlaceTemplate.INSTANCE
 		),
 		new org.instantlogic.interaction.flow.FlowEdge(
 			null, 
-			org.instantlogic.designer.event.AddEntityEvent.INSTANCE,
-			org.instantlogic.designer.flow.main.AddEntitySubFlow.INSTANCE
-		),
-		new org.instantlogic.interaction.flow.FlowEdge(
-			null, 
-			org.instantlogic.designer.event.HomeEvent.INSTANCE,
-			org.instantlogic.designer.flow.main.WelcomePlaceTemplate.INSTANCE
+			org.instantlogic.designer.event.FlowNodeDetailsEvent.INSTANCE,
+			org.instantlogic.designer.flow.flow.FlowNodeSubFlow.INSTANCE
 		),
 	};
 	
 	private static final org.instantlogic.fabric.model.Entity[] PARAMETERS = new org.instantlogic.fabric.model.Entity[]{
+		org.instantlogic.designer.entity.FlowDesignEntity.INSTANCE,
 	};
 	
 	@Override
 	public String getName() {
-		return "Main";
+		return "Flow";
 	}
 
 	@Override

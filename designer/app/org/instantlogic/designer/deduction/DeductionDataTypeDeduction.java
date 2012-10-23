@@ -37,7 +37,6 @@ public class DeductionDataTypeDeduction extends Deduction<DataTypeDesign> {
 			return ValueAndLevel.rule(((CustomDeductionDesign)deductionDesign).getCustomDataType());
 		}
 		if (deductionDesign instanceof HasValueDeductionDesign 
-				|| deductionDesign instanceof CastInstanceDeductionDesign 
 				|| deductionDesign instanceof NegationDeductionDesign
 				|| deductionDesign instanceof EqualsDeductionDesign) {
 			return ValueAndLevel.rule(DataTypeDesign._boolean);
