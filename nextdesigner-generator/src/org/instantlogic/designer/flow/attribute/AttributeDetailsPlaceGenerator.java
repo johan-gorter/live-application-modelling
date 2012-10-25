@@ -10,7 +10,7 @@ import org.instantlogic.designer.SelectionDesign;
 import org.instantlogic.designer.SharedElementDesign;
 import org.instantlogic.designer.StringTemplateDesign;
 import org.instantlogic.designer.TextTemplateDesign;
-import org.instantlogic.designer.sharedfragment.EntityContextSharedElement;
+import org.instantlogic.designer.sharedfragment.EntityContextSharedElementGenerator;
 
 public class AttributeDetailsPlaceGenerator extends PlaceTemplateDesign {
 
@@ -68,7 +68,7 @@ public class AttributeDetailsPlaceGenerator extends PlaceTemplateDesign {
 			)
 		);
 		
-		entityContext.setDefinition(EntityContextSharedElement.DEFINITION);
+		entityContext.setDefinition(EntityContextSharedElementGenerator.DEFINITION);
 		attributeName.deduceAttribute(DesignEntityGenerator.name);
 		
 		nameInput.setEntity(DesignEntityGenerator.ENTITY).setAttribute(DesignEntityGenerator.name);

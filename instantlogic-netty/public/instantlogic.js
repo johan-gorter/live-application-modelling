@@ -546,11 +546,13 @@ YUI.add('instantlogic', function (Y) {
     ns.createFragment = function(options) {
     	var constructor = function(parentNode, engine) {
     		constructor.superclass.constructor.apply(this, arguments);
+    		this.statePerSubclass = { next: this.statePerSubclass };
     	}
     	Y.extend(constructor, options.baseClass || Y.instantlogic.Fragment, options.overrides);
     	
-    	constructor.prototype.init = function(model) {
-    		constructor.superclass.init.call(this, model);
+    	constructor.prototype.init = function(model, nextState) {
+    		var state = nextState || this.statePerSubclass;
+    		constructor.superclass.init.call(this, model, state.next);
     		if (options.createMarkup) {
 	    		this.markup = options.createMarkup.apply(this);
 	    		if (model.styleNames) {
@@ -560,12 +562,12 @@ YUI.add('instantlogic', function (Y) {
 	    		}
     		}
     		if (options.fragmentLists) {
-    			this.fragmentLists = [];
+    			state.fragmentLists = []; // Scope: this subclass only
     			var results = options.fragmentLists.call(this, model);
     			for (var i=0;i<results.length;i++) {
     				var list = new ns.FragmentList(results[i][0], this.engine);
     				list.init(results[i][1]);
-    				this.fragmentLists.push(list);
+    				state.fragmentLists.push(list);
     			}
     		}
     		if (options.texts) {
@@ -579,12 +581,13 @@ YUI.add('instantlogic', function (Y) {
     		}
     	};
     	
-    	constructor.prototype.update = function(newModel, diff) {
-    		constructor.superclass.update.call(this, newModel, diff);
-    		if (this.fragmentLists) {
+    	constructor.prototype.update = function(newModel, diff, nextState) {
+    		var state = nextState || this.statePerSubclass;
+    		constructor.superclass.update.call(this, newModel, diff, state.next);
+    		if (state.fragmentLists) {
     			var results = options.fragmentLists.call(this, newModel);
     			for (var i=0;i<results.length;i++) {
-    				this.fragmentLists[i].update(results[i][1], diff);
+    				state.fragmentLists[i].update(results[i][1], diff);
     			}
     		}
     		if (options.texts) {
@@ -601,11 +604,12 @@ YUI.add('instantlogic', function (Y) {
     		}
     	}
 
-    	constructor.prototype.destroy = function() {
-    		constructor.superclass.destroy.call(this);
-    		if (this.fragmentLists) {
+    	constructor.prototype.destroy = function(nextState) {
+    		var state = nextState || this.statePerSubclass;
+    		constructor.superclass.destroy.call(this, state.next);
+    		if (state.fragmentLists) {
     			for (var i=0;i<this.fragmentLists;i++) {
-    				this.fragmentLists[i].destroy();
+    				state.fragmentLists[i].destroy();
     			}
     		}
     	};

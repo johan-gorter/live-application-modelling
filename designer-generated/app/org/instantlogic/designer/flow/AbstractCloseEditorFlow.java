@@ -1,34 +1,21 @@
 package org.instantlogic.designer.flow;
 
-public class FlowFlow extends org.instantlogic.interaction.flow.Flow {
+public abstract class AbstractCloseEditorFlow extends org.instantlogic.interaction.flow.Flow {
 
-	public static final FlowFlow INSTANCE = new FlowFlow();
+	public static final CloseEditorFlow INSTANCE = new CloseEditorFlow();
 	
 	private static final org.instantlogic.interaction.flow.FlowNodeBase[] NODES = new org.instantlogic.interaction.flow.FlowNodeBase[]{
-		org.instantlogic.designer.flow.flow.FlowNodeSubFlow.INSTANCE,
-		org.instantlogic.designer.flow.flow.FlowDetailsPlaceTemplate.INSTANCE,
 	};
 	
 	private static final org.instantlogic.interaction.flow.FlowEdge[] EDGES = new org.instantlogic.interaction.flow.FlowEdge[]{
-		new org.instantlogic.interaction.flow.FlowEdge(
-			null, 
-			org.instantlogic.designer.event.FlowDetailsEvent.INSTANCE,
-			org.instantlogic.designer.flow.flow.FlowDetailsPlaceTemplate.INSTANCE
-		),
-		new org.instantlogic.interaction.flow.FlowEdge(
-			null, 
-			org.instantlogic.designer.event.FlowNodeDetailsEvent.INSTANCE,
-			org.instantlogic.designer.flow.flow.FlowNodeSubFlow.INSTANCE
-		),
 	};
 	
 	private static final org.instantlogic.fabric.model.Entity[] PARAMETERS = new org.instantlogic.fabric.model.Entity[]{
-		org.instantlogic.designer.entity.FlowDesignEntity.INSTANCE,
 	};
 	
 	@Override
 	public String getName() {
-		return "Flow";
+		return "CloseEditor";
 	}
 
 	@Override

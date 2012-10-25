@@ -11,11 +11,11 @@ import org.instantlogic.designer.StringTemplateDesign;
 import org.instantlogic.designer.TextTemplateDesign;
 import org.instantlogic.designer.event.FlowDetailsEventGenerator;
 
-public class FlowContextSharedElement extends SharedElementDefinitionDesign {
+public class FlowContextSharedElementGenerator extends SharedElementDefinitionDesign {
 
-	public static final FlowContextSharedElement DEFINITION = new FlowContextSharedElement();
+	public static final FlowContextSharedElementGenerator DEFINITION = new FlowContextSharedElementGenerator();
 	
-	private FlowContextSharedElement() {
+	private FlowContextSharedElementGenerator() {
 		DesignerApplicationGenerator.APPLICATION.addToSharedElements(this);
 		setName("EntityContext");
 	}
@@ -43,7 +43,7 @@ public class FlowContextSharedElement extends SharedElementDefinitionDesign {
 				)
 		);
 	
-		applicationContext.setDefinition(ApplicationContextSharedElement.DEFINITION);
+		applicationContext.setDefinition(ApplicationContextSharedElementGenerator.DEFINITION);
 		flowName.deduceAttribute(DesignEntityGenerator.name, flowName.deduceSelectedInstance(FlowDesignEntityGenerator.ENTITY));
 		flowLink.setEvent(FlowDetailsEventGenerator.EVENT);
 	}

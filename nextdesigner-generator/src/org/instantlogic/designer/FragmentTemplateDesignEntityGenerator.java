@@ -15,6 +15,7 @@ public class FragmentTemplateDesignEntityGenerator extends EntityDesign {
     // Attributes
     public static final AttributeDesign fragmentTypeName = addAttribute(ENTITY, "fragmentTypeName", java.lang.String.class);
     public static final AttributeDesign styleNames = addAttribute(ENTITY, "styleNames", java.lang.String.class);
+    public static final AttributeDesign fragmentFilters = addAttribute(ENTITY, "fragmentFilters", java.lang.String.class);
 
     // Relations
     public static final RelationDesign attribute = addRelation(ENTITY, "attribute", RelationType.ManyToZeroOrOne, AttributeDesignEntityGenerator.ENTITY);
@@ -26,5 +27,6 @@ public class FragmentTemplateDesignEntityGenerator extends EntityDesign {
     @Override
     public void init() {
     	styleNames.getDataType().setMultivalue(true);
+    	fragmentFilters.getDataType().setMultivalue(true);
     }
 }

@@ -2,6 +2,7 @@ package org.instantlogic.designer.codegenerator.generator;
 
 
 import java.util.Collections;
+import java.util.Map;
 
 import org.instantlogic.designer.AttributeDesign;
 import org.instantlogic.designer.DataTypeDesign;
@@ -124,23 +125,27 @@ public class EntityGenerator extends AbstractGenerator {
 	}
 
 	private void setDatatype(Attribute attribute, DataTypeDesign dataType) {
+		exportDatatype(attribute.dataType, dataType);
+	}
+	
+	public static void exportDatatype(Map<String, Object> to, DataTypeDesign dataType) {
 		if (dataType.getDataCategory()!=null) {
-			attribute.dataType.put("category", dataType.getDataCategory().getMetadata().getStaticName());
+			to.put("category", dataType.getDataCategory().getMetadata().getStaticName());
 		}
 		if (dataType.getPercentage() == Boolean.TRUE) {
-			attribute.dataType.put("percentage", true);
+			to.put("percentage", true);
 		}
 		if (dataType.getWholeNumber() == Boolean.TRUE) {
-			attribute.dataType.put("wholeNumber", true);
+			to.put("wholeNumber", true);
 		}
 		if (dataType.getExactRounding() == Boolean.TRUE) {
-			attribute.dataType.put("exactRounding", true);
+			to.put("exactRounding", true);
 		}
 		if (dataType.getMultiLine() == Boolean.TRUE) {
-			attribute.dataType.put("multiLine", true);
+			to.put("multiLine", true);
 		}
 		if (dataType.getFormatted() == Boolean.TRUE) {
-			attribute.dataType.put("formatted", true);
+			to.put("formatted", true);
 		}
 		// In the future: Unit-prefix, unit-suffix, decimalPlaces
 	}
