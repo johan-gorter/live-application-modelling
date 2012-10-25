@@ -11,11 +11,11 @@ import org.instantlogic.designer.StringTemplateDesign;
 import org.instantlogic.designer.TextTemplateDesign;
 import org.instantlogic.designer.event.EntityDetailsEventGenerator;
 
-public class EntityContextSharedElement extends SharedElementDefinitionDesign {
+public class EntityContextSharedElementGenerator extends SharedElementDefinitionDesign {
 
-	public static final EntityContextSharedElement DEFINITION = new EntityContextSharedElement();
+	public static final EntityContextSharedElementGenerator DEFINITION = new EntityContextSharedElementGenerator();
 	
-	private EntityContextSharedElement() {
+	private EntityContextSharedElementGenerator() {
 		DesignerApplicationGenerator.APPLICATION.addToSharedElements(this);
 		setName("EntityContext");
 	}
@@ -43,7 +43,7 @@ public class EntityContextSharedElement extends SharedElementDefinitionDesign {
 				)
 		);
 	
-		applicationContext.setDefinition(ApplicationContextSharedElement.DEFINITION);
+		applicationContext.setDefinition(ApplicationContextSharedElementGenerator.DEFINITION);
 		entityName.deduceAttribute(DesignEntityGenerator.name, entityName.deduceSelectedInstance(EntityDesignEntityGenerator.ENTITY));
 		entityLink.setEvent(EntityDetailsEventGenerator.EVENT);
 	}

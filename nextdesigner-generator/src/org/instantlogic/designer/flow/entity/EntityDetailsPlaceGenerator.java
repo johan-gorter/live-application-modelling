@@ -13,7 +13,7 @@ import org.instantlogic.designer.TextTemplateDesign;
 import org.instantlogic.designer.deduction.CapitalizeFirstDeduction;
 import org.instantlogic.designer.event.AddAttributeEventGenerator;
 import org.instantlogic.designer.event.AttributeDetailsEventGenerator;
-import org.instantlogic.designer.sharedfragment.ApplicationContextSharedElement;
+import org.instantlogic.designer.sharedfragment.ApplicationContextSharedElementGenerator;
 
 public class EntityDetailsPlaceGenerator extends PlaceTemplateDesign {
 
@@ -73,7 +73,7 @@ public class EntityDetailsPlaceGenerator extends PlaceTemplateDesign {
 			)
 		);
 		
-		applicationContext.setDefinition(ApplicationContextSharedElement.DEFINITION);
+		applicationContext.setDefinition(ApplicationContextSharedElementGenerator.DEFINITION);
 		
 		entityName.deduceCustom(CapitalizeFirstDeduction.class, String.class, entityName.deduceAttribute(DesignEntityGenerator.name));
 		attributes.deduceAttribute(EntityDesignEntityGenerator.attributes);

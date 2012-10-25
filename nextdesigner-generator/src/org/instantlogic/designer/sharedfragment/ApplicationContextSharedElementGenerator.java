@@ -9,11 +9,11 @@ import org.instantlogic.designer.StringTemplateDesign;
 import org.instantlogic.designer.TextTemplateDesign;
 import org.instantlogic.designer.event.HomeEventGenerator;
 
-public class ApplicationContextSharedElement extends SharedElementDefinitionDesign {
+public class ApplicationContextSharedElementGenerator extends SharedElementDefinitionDesign {
 
-	public static final ApplicationContextSharedElement DEFINITION = new ApplicationContextSharedElement();
+	public static final ApplicationContextSharedElementGenerator DEFINITION = new ApplicationContextSharedElementGenerator();
 	
-	private ApplicationContextSharedElement() {
+	private ApplicationContextSharedElementGenerator() {
 		DesignerApplicationGenerator.APPLICATION.addToSharedElements(this);
 		setName("ApplicationContext");
 	}

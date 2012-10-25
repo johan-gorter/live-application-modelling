@@ -33,6 +33,7 @@ public class ContentModel {
 	public String event;
 	public boolean isCustomized;
 	public String[] styleNames;
+	public String[] fragmentFilters;
 	public final List<ContentModel> children = new ArrayList<ContentModel>();
 	public final List<ContentModel> elseChildren = new ArrayList<ContentModel>();
 	public String implementationClassName;
@@ -112,5 +113,8 @@ public class ContentModel {
 	}
 	public String[] getStyleNames() {
 		return styleNames;
+	}
+	public String[] getFragmentFilters() {
+		return fragmentFilters;
 	}
 }

@@ -26,6 +26,23 @@ public class ElementDesign extends Design {
 
 	// Attributes
 	
+	private final org.instantlogic.fabric.value.AttributeValue<ElementDesign, java.lang.Boolean> editorOpen
+		= createAttributeValue(org.instantlogic.designer.entity.ElementDesignEntity.editorOpen);
+	
+	public java.lang.Boolean getEditorOpen() {
+		return editorOpen.getValue();
+	}
+
+	public org.instantlogic.fabric.value.AttributeValue<ElementDesign, java.lang.Boolean> getEditorOpenAttributeValue() {
+		return editorOpen;
+	}
+
+	public ElementDesign setEditorOpen(java.lang.Boolean newValue) {
+		editorOpen.setValue(newValue);
+		return (ElementDesign)this;
+	}
+	
+	
 	// Relations
 
 	// Reverse relations

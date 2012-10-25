@@ -9,8 +9,8 @@ import org.instantlogic.designer.SelectionDesign;
 import org.instantlogic.designer.SharedElementDesign;
 import org.instantlogic.designer.StringTemplateDesign;
 import org.instantlogic.designer.TextTemplateDesign;
-import org.instantlogic.designer.sharedfragment.ElementEditorSharedElement;
-import org.instantlogic.designer.sharedfragment.FlowContextSharedElement;
+import org.instantlogic.designer.sharedfragment.ElementEditorSharedElementGenerator;
+import org.instantlogic.designer.sharedfragment.FlowContextSharedElementGenerator;
 
 public class PlaceTemplateDetailsPlaceGenerator extends PlaceTemplateDesign {
 
@@ -56,12 +56,12 @@ public class PlaceTemplateDetailsPlaceGenerator extends PlaceTemplateDesign {
 				)
 		);
 		
-		flowContext.setDefinition(FlowContextSharedElement.DEFINITION);
+		flowContext.setDefinition(FlowContextSharedElementGenerator.DEFINITION);
 		placeName.deduceAttribute(DesignEntityGenerator.name);
 		
 		placeNameInput.setEntity(DesignEntityGenerator.ENTITY).setAttribute(DesignEntityGenerator.name);
 		
 		selectContent.newSelection().deduceAttribute(PlaceTemplateDesignEntityGenerator.content);
-		elementEditor.setDefinition(ElementEditorSharedElement.DEFINITION);
+		elementEditor.setDefinition(ElementEditorSharedElementGenerator.DEFINITION);
 	}
 }

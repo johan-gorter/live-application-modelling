@@ -29,6 +29,23 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 	
 	// Attributes
 	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.fabric.value.Multi<java.lang.String>, java.lang.String> fragmentFilters 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.fabric.value.Multi<java.lang.String>, java.lang.String>(
+			"fragmentFilters", INSTANCE, java.lang.String.class
+		) {
+			{
+			}
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValues<org.instantlogic.designer.FragmentTemplateDesign, java.lang.String> get(org.instantlogic.designer.FragmentTemplateDesign instance) {
+				return instance.getFragmentFiltersAttributeValue();
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
+	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.FragmentTemplateDesign, java.lang.String, java.lang.String> fragmentTypeName 
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.FragmentTemplateDesign, java.lang.String, java.lang.String>(
 			"fragmentTypeName", INSTANCE, java.lang.String.class
@@ -124,6 +141,7 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 	// Reverse relations
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
+		fragmentFilters,
 		fragmentTypeName,
 		styleNames,
 	};

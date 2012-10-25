@@ -12,7 +12,7 @@ import org.instantlogic.designer.StringTemplateDesign;
 import org.instantlogic.designer.TextTemplateDesign;
 import org.instantlogic.designer.deduction.CapitalizeFirstDeduction;
 import org.instantlogic.designer.event.FlowNodeDetailsEventGenerator;
-import org.instantlogic.designer.sharedfragment.ApplicationContextSharedElement;
+import org.instantlogic.designer.sharedfragment.ApplicationContextSharedElementGenerator;
 
 public class FlowDetailsPlaceGenerator extends PlaceTemplateDesign {
 
@@ -70,7 +70,7 @@ public class FlowDetailsPlaceGenerator extends PlaceTemplateDesign {
 			)
 		);
 		
-		applicationContext.setDefinition(ApplicationContextSharedElement.DEFINITION);
+		applicationContext.setDefinition(ApplicationContextSharedElementGenerator.DEFINITION);
 		
 		flowName.deduceCustom(CapitalizeFirstDeduction.class, String.class, flowName.deduceAttribute(DesignEntityGenerator.name));
 		nodes.deduceAttribute(FlowDesignEntityGenerator.nodes);

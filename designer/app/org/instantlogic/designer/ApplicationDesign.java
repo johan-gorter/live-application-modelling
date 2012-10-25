@@ -58,7 +58,7 @@ public class ApplicationDesign extends AbstractApplicationDesign {
             		entryName = entryName.substring(0, entryName.lastIndexOf('.'));
 					Class<?> cl = getClass().getClassLoader().loadClass(packageName+"."+entryName);
 					cl.getField("FLOW").get(null);
-                } else if (entryName.endsWith("SharedElement.class")) {
+                } else if (entryName.endsWith("SharedElementGenerator.class")) {
             		entryName = entryName.substring(0, entryName.lastIndexOf('.'));
 					Class<?> cl = getClass().getClassLoader().loadClass(packageName+"."+entryName);
 					cl.getField("DEFINITION").get(null);

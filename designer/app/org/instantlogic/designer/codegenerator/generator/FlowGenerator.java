@@ -1,6 +1,5 @@
 package org.instantlogic.designer.codegenerator.generator;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,66 +20,75 @@ import org.instantlogic.fabric.value.Multi;
 public class FlowGenerator extends AbstractGenerator {
 
 	private FlowDesign flowDesign;
-	
+
 	public FlowGenerator(FlowDesign flowDesign) {
 		this.flowDesign = flowDesign;
 	}
-	
+
 	private Map<String, PlaceTemplateGenerator> placeTemplateGenerators = new HashMap<String, PlaceTemplateGenerator>();
 	private Map<String, SubFlowGenerator> subFlowGenerators = new HashMap<String, SubFlowGenerator>();
 
 	@Override
 	public void update(GeneratedClassModels context) {
-		if (observations!=null && !observations.isOutdated()) {
+		if (observations != null && !observations.isOutdated()) {
 			updateAll(placeTemplateGenerators.values(), context);
 			updateAll(subFlowGenerators.values(), context);
 			return;
 		}
-		
-		CaseAdministration caseAdministration = flowDesign.getMetadata().getCaseAdministration();
+
+		CaseAdministration caseAdministration = flowDesign.getMetadata()
+				.getCaseAdministration();
 		caseAdministration.startRecordingObservations();
-		
+
 		FlowClassModel model = initModel();
 		model.rootPackageName = context.rootPackageName;
-		
-		for (FlowNodeBaseDesign nodeDesign: flowDesign.getNodes()) {
+
+		for (FlowNodeBaseDesign nodeDesign : flowDesign.getNodes()) {
 			FlowClassModel.FlowNode node = new FlowClassModel.FlowNode();
 			node.name = nodeDesign.getTechnicalNameCapitalized();
 			node.type = nodeDesign.getInstanceEntity().getName();
-			node.type = node.type.substring(0, node.type.length()-6); // remove Design
+			node.type = node.type.substring(0, node.type.length() - 6); // remove
+																		// Design
 			model.nodes.add(node);
 		}
-		for (FlowEdgeDesign edgeDesign: flowDesign.getEdges()) {
+		for (FlowEdgeDesign edgeDesign : flowDesign.getEdges()) {
 			FlowClassModel.FlowEdge edge = new FlowClassModel.FlowEdge();
-			if (edge.startNode!=null) {
+			if (edgeDesign.getStartNode() != null) {
 				edge.startNode = edgePoint(edgeDesign.getStartNode());
 			}
-			if (edgeDesign.getEvent()!=null) {
-				edge.event = edgeDesign.getEvent().getTechnicalNameCapitalized();
+			if (edgeDesign.getEvent() != null) {
+				edge.event = edgeDesign.getEvent()
+						.getTechnicalNameCapitalized();
 			}
 			edge.endNode = edgePoint(edgeDesign.getEndNode());
 			model.edges.add(edge);
 		}
-		for (EntityDesign selectDesign: flowDesign.getParameters()) {
+		for (EntityDesign selectDesign : flowDesign.getParameters()) {
 			model.parameters.add(selectDesign.getTechnicalNameCapitalized());
 		}
-		
-		List<Design> newPages = updateGenerators(placeTemplateGenerators, getPages(flowDesign.getNodes()), context);
-		for(Design newPage : newPages) {
-			PlaceTemplateGenerator placeTemplateGenerator = new PlaceTemplateGenerator((PlaceTemplateDesign)newPage);
+
+		List<Design> newPages = updateGenerators(placeTemplateGenerators,
+				getPages(flowDesign.getNodes()), context);
+		for (Design newPage : newPages) {
+			PlaceTemplateGenerator placeTemplateGenerator = new PlaceTemplateGenerator(
+					(PlaceTemplateDesign) newPage);
 			placeTemplateGenerator.update(context);
-			placeTemplateGenerators.put(newPage.getName(), placeTemplateGenerator);
+			placeTemplateGenerators.put(newPage.getName(),
+					placeTemplateGenerator);
 		}
-		List<Design> newSubFlows = updateGenerators(subFlowGenerators, getSubFlows(flowDesign.getNodes()), context);
-		for(Design newSubFlow : newSubFlows) {
-			SubFlowGenerator subFlowGenerator = new SubFlowGenerator((SubFlowDesign)newSubFlow);
+		List<Design> newSubFlows = updateGenerators(subFlowGenerators,
+				getSubFlows(flowDesign.getNodes()), context);
+		for (Design newSubFlow : newSubFlows) {
+			SubFlowGenerator subFlowGenerator = new SubFlowGenerator(
+					(SubFlowDesign) newSubFlow);
 			subFlowGenerator.update(context);
 			subFlowGenerators.put(newSubFlow.getName(), subFlowGenerator);
 		}
-		this.observations = new ObservationsOutdatedObserver(caseAdministration.stopRecordingObservations(), null);
+		this.observations = new ObservationsOutdatedObserver(
+				caseAdministration.stopRecordingObservations(), null);
 		context.updatedFlows.add(model);
 	}
-	
+
 	@Override
 	public void delete(GeneratedClassModels context) {
 		FlowClassModel model = initModel();
@@ -90,14 +98,15 @@ public class FlowGenerator extends AbstractGenerator {
 	private FlowClassModel initModel() {
 		FlowClassModel model = new FlowClassModel();
 		model.name = flowDesign.getName();
-		model.technicalNameCapitalized = flowDesign.getTechnicalNameCapitalized();
-		model.isCustomized = flowDesign.getIsCustomized()==Boolean.TRUE;
+		model.technicalNameCapitalized = flowDesign
+				.getTechnicalNameCapitalized();
+		model.isCustomized = flowDesign.getIsCustomized() == Boolean.TRUE;
 		return model;
 	}
 
 	private List<SubFlowDesign> getSubFlows(Multi<FlowNodeBaseDesign> list) {
 		ArrayList<SubFlowDesign> result = new ArrayList<SubFlowDesign>();
-		for (FlowNodeBaseDesign node:list) {
+		for (FlowNodeBaseDesign node : list) {
 			if (node instanceof SubFlowDesign) {
 				result.add((SubFlowDesign) node);
 			}
@@ -107,7 +116,7 @@ public class FlowGenerator extends AbstractGenerator {
 
 	private List<PlaceTemplateDesign> getPages(Multi<FlowNodeBaseDesign> list) {
 		ArrayList<PlaceTemplateDesign> result = new ArrayList<PlaceTemplateDesign>();
-		for (FlowNodeBaseDesign node:list) {
+		for (FlowNodeBaseDesign node : list) {
 			if (node instanceof PlaceTemplateDesign) {
 				result.add((PlaceTemplateDesign) node);
 			}
@@ -118,7 +127,7 @@ public class FlowGenerator extends AbstractGenerator {
 	private static String edgePoint(FlowNodeBaseDesign flowNodeBaseDesign) {
 		String name = flowNodeBaseDesign.getTechnicalNameCapitalized();
 		String typeName = flowNodeBaseDesign.getInstanceEntity().getName();
-		typeName = typeName.substring(0, typeName.length()-6);// Remove Design
-		return name+typeName+".INSTANCE";
+		typeName = typeName.substring(0, typeName.length() - 6);// Remove Design
+		return name + typeName + ".INSTANCE";
 	}
 }

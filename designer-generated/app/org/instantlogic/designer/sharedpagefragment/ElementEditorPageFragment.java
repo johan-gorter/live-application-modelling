@@ -89,10 +89,6 @@ public class ElementEditorPageFragment extends org.instantlogic.interaction.page
                                 .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction2())))
                         )
 ,                        new org.instantlogic.interaction.page.FragmentTemplate("S57F1P1S1F3", "Block")      .setStyleNames(new String[]{"preview"})
-      
-                        .putChildren("content",
-                                new org.instantlogic.interaction.page.FragmentTemplate("S57F1P1S1F3P1F1", "Block")          .addCustomFilter(new org.instantlogic.designer.fragmentfilter.PreviewFragmentFilter())
-                        )
 ,                        new org.instantlogic.interaction.page.SelectionElement(createDeduction3()
 ,                                new org.instantlogic.interaction.page.FragmentTemplate("S57F1P1S1S4F1", "Paragraph")      
                                 .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction4())))
