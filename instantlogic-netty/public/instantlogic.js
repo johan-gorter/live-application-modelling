@@ -133,6 +133,16 @@ YUI.add('instantlogic', function (Y) {
                     case 'filesUpdated':
                         document.location.reload();
                         break;
+                    case 'cssFilesUpdated':
+                		var i,a,s;a=document.getElementsByTagName('link'); // Code taken from ReCSS
+                		for(i=0;i<a.length;i++){
+                			s=a[i];
+                			if(s.rel.toLowerCase().indexOf('stylesheet')>=0&&s.href) {
+                				var h=s.href.replace(/(&|%5C?)forceReload=\d+/,'');
+                				s.href=h+(h.indexOf('?')>=0?'&':'?')+'forceReload='+(new Date().valueOf())
+                			}
+                		}
+                        break;
                     case 'exception':
                     	this.setState('error');
                         break;

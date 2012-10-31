@@ -4,11 +4,8 @@ public class UserEntity extends org.instantlogic.fabric.model.Entity<org.instant
 
 	public static final UserEntity INSTANCE = new UserEntity();
 	
+
 	
-	protected UserEntity() {
-	}
-
-
 	@Override
 	public org.instantlogic.example.izzy.User createInstance() {
 		return new org.instantlogic.example.izzy.User();
@@ -143,5 +140,10 @@ public class UserEntity extends org.instantlogic.fabric.model.Entity<org.instant
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.example.izzy.User> getStaticInstances() {
+		return org.instantlogic.example.izzy.User.getStaticUserInstances();
 	}
 }

@@ -3,6 +3,22 @@ package org.instantlogic.example.izzy;
 
 public class Issue extends org.instantlogic.fabric.Instance { 
 
+	private static final java.util.Map<String, Issue> _staticInstances = new java.util.LinkedHashMap<String, Issue>();
+	
+	public static java.util.Map<String, Issue> getStaticIssueInstances() {
+		return _staticInstances;
+	}
+	
+	private static Issue addStaticInstance(String name, Issue instance) {
+		_staticInstances.put(name, instance);
+		instance.getMetadata().makeStatic(name);
+		return instance;
+	}
+	
+	
+	static {
+	}
+
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.example.izzy.entity.IssueEntity.INSTANCE;
@@ -78,6 +94,12 @@ public class Issue extends org.instantlogic.fabric.Instance {
 		assignee.setValue(newValue);
 		return (Issue)this;
 	}
+	
+	public org.instantlogic.example.izzy.User newAssignee() {
+		org.instantlogic.example.izzy.User newValue = new org.instantlogic.example.izzy.User(); 
+		assignee.setValue(newValue);
+		return newValue;
+	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValues<Issue, Comment> comments
@@ -126,6 +148,12 @@ public class Issue extends org.instantlogic.fabric.Instance {
 	public Issue setReporter(org.instantlogic.example.izzy.User newValue) {
 		reporter.setValue(newValue);
 		return (Issue)this;
+	}
+	
+	public org.instantlogic.example.izzy.User newReporter() {
+		org.instantlogic.example.izzy.User newValue = new org.instantlogic.example.izzy.User(); 
+		reporter.setValue(newValue);
+		return newValue;
 	}
 
 

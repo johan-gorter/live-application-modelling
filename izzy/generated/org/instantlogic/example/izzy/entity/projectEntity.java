@@ -4,11 +4,8 @@ public class ProjectEntity extends org.instantlogic.fabric.model.Entity<org.inst
 
 	public static final ProjectEntity INSTANCE = new ProjectEntity();
 	
+
 	
-	protected ProjectEntity() {
-	}
-
-
 	@Override
 	public org.instantlogic.example.izzy.Project createInstance() {
 		return new org.instantlogic.example.izzy.Project();
@@ -78,7 +75,6 @@ public class ProjectEntity extends org.instantlogic.fabric.model.Entity<org.inst
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.example.izzy.Project, org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.User>, org.instantlogic.example.izzy.User> users
@@ -100,7 +96,6 @@ public class ProjectEntity extends org.instantlogic.fabric.model.Entity<org.inst
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	// Reverse relations
@@ -128,5 +123,10 @@ public class ProjectEntity extends org.instantlogic.fabric.model.Entity<org.inst
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.example.izzy.Project> getStaticInstances() {
+		return org.instantlogic.example.izzy.Project.getStaticProjectInstances();
 	}
 }

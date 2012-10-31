@@ -53,7 +53,8 @@ public class WelcomePlaceTemplate extends org.instantlogic.interaction.flow.Plac
 
 	
 	private static org.instantlogic.interaction.page.FragmentTemplate CONTENT = 
-        new org.instantlogic.interaction.page.FragmentTemplate("F20P4F2", "Page")      
+        new org.instantlogic.interaction.page.FragmentTemplate("F20P4F2", "Page")      .setStyleNames(new String[]{"margin", "designer"})
+      
         .putChildren("mainContent",
                 new org.instantlogic.interaction.page.FragmentTemplate("F20P4F2P1F1", "Block")      .setStyleNames(new String[]{"card"})
       

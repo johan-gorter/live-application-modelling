@@ -3,6 +3,22 @@ package org.instantlogic.example.izzy;
 
 public class Comment extends org.instantlogic.fabric.Instance { 
 
+	private static final java.util.Map<String, Comment> _staticInstances = new java.util.LinkedHashMap<String, Comment>();
+	
+	public static java.util.Map<String, Comment> getStaticCommentInstances() {
+		return _staticInstances;
+	}
+	
+	private static Comment addStaticInstance(String name, Comment instance) {
+		_staticInstances.put(name, instance);
+		instance.getMetadata().makeStatic(name);
+		return instance;
+	}
+	
+	
+	static {
+	}
+
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.example.izzy.entity.CommentEntity.INSTANCE;
@@ -43,6 +59,12 @@ public class Comment extends org.instantlogic.fabric.Instance {
 	public Comment setBy(org.instantlogic.example.izzy.User newValue) {
 		by.setValue(newValue);
 		return (Comment)this;
+	}
+	
+	public org.instantlogic.example.izzy.User newBy() {
+		org.instantlogic.example.izzy.User newValue = new org.instantlogic.example.izzy.User(); 
+		by.setValue(newValue);
+		return newValue;
 	}
 
 

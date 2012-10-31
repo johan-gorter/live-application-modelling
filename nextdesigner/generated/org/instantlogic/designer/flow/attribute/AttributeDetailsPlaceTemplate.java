@@ -33,7 +33,8 @@ public class AttributeDetailsPlaceTemplate extends org.instantlogic.interaction.
 
 	
 	private static org.instantlogic.interaction.page.FragmentTemplate CONTENT = 
-        new org.instantlogic.interaction.page.FragmentTemplate("F39P1F2", "Page")      
+        new org.instantlogic.interaction.page.FragmentTemplate("F39P1F2", "Page")      .setStyleNames(new String[]{"margin", "designer"})
+      
         .putChildren("mainContent",
                     org.instantlogic.designer.sharedpagefragment.EntityContextPageFragment.INSTANCE
 ,

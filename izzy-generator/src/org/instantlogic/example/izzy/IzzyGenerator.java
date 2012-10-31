@@ -139,6 +139,7 @@ public class IzzyGenerator extends Design {
 		issueDetailsPlaceTemplate = new PlaceTemplateDesign("issueDetails")
 			.setOwner(issueFlow)
 			.setContent(new FragmentTemplateDesign("Page")
+				.addToStyleNames("margin").addToStyleNames("izzy")
 				.setChildren("mainContent", 
 					new FragmentTemplateDesign("Paragraph")
 						.setText("text", new TextTemplateDesign()
@@ -164,6 +165,7 @@ public class IzzyGenerator extends Design {
 			.setOwner(mainFlow)
 			.setContent(
 				new FragmentTemplateDesign("Page")
+					.addToStyleNames("margin").addToStyleNames("izzy")
 					.setChildren("mainContent",
 						new FragmentTemplateDesign("Table")
 							.setChildren("columns", 

@@ -24,6 +24,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
@@ -45,18 +46,18 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 		}
 		for (Attribute attribute : entity.getAttributes()) {
 			if (!attribute.isReadOnly()) {
-				AttributeValue attributeValue = (AttributeValue) attribute.get(src);
-				if (attributeValue.isStored()) {
+				ReadOnlyAttributeValue attributeValue = (ReadOnlyAttributeValue) attribute.get(src);
+				if (attributeValue.hasStoredValue()) {
 					if (attribute.isMultivalue()) {
 						AttributeValues attributeValues = (AttributeValues) attributeValue;
 						JsonArray values = new JsonArray();
 						for (Object value : (Iterable) attributeValues.getValue()) {
-							JsonPrimitive valueItem = toJsonPrimitive(value);
+							JsonElement valueItem = toJsonPrimitive(value);
 							values.add(valueItem);
 						}
 						result.add(attribute.getName(), values);
 					} else {
-						JsonPrimitive value = toJsonPrimitive(attributeValue.getValue());
+						JsonElement value = toJsonPrimitive(attributeValue.getValue());
 						result.add(attribute.getName(), value);
 					}
 				}
@@ -98,8 +99,10 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 		return result;
 	}
 
-	private JsonPrimitive toJsonPrimitive(Object value) {
-		if (value instanceof Date) {
+	private JsonElement toJsonPrimitive(Object value) {
+		if (value==null) {
+			return JsonNull.INSTANCE;
+		} else if (value instanceof Date) {
 			return new JsonPrimitive(UNIVERSAL_DATE.format(value));
 		} else if (value instanceof Boolean) {
 			return new JsonPrimitive((Boolean) value);

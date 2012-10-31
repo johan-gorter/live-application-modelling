@@ -35,6 +35,7 @@ public class PlaceTemplateDetailsPlaceGenerator extends PlaceTemplateDesign {
 		placeName.deduceAttribute(DesignEntityGenerator.name);
 		
 		setContent(new FragmentTemplateDesign("Page")
+			.addToStyleNames("margin").addToStyleNames("designer")
 			.setChildren("mainContent", 
 
 				flowContext = new SharedElementDesign(),
@@ -51,7 +52,12 @@ public class PlaceTemplateDetailsPlaceGenerator extends PlaceTemplateDesign {
 						
 						new FragmentTemplateDesign("Heading2").setText("text", createConstantText("Content")),
 						selectContent = new SelectionDesign()
-							.addToChildren(elementEditor = new SharedElementDesign())
+							.addToChildren(
+								new FragmentTemplateDesign("Block").addToStyleNames("element-editor")
+									.setChildren("content", 
+											elementEditor = new SharedElementDesign()
+									)
+							)
 					)
 				)
 		);
