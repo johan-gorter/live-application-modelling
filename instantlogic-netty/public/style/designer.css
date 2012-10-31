@@ -1,0 +1,13 @@
+.designer .inactive-card {border: solid 1px #CCCCCC; border-bottom: 0; margin-bottom: 10px; border-radius: 10px 10px 0 0; color: #666666; padding: 10px;}
+.designer.w920 .inactive-card {margin-left: -230px; padding-left:229px; }
+.designer .card {border: solid 1px #999999; border-radius: 10px; padding: 10px; overflow:hidden;display:block;position:relative;}
+.designer.w920  .card {margin-left: -230px; padding-left:229px; }
+.designer .card h1, .inactive-card h1 {margin: 0 0 5px 0;}
+
+/* Element editor */
+.designer.w920 .element-editor {margin-left: -225px;}
+.designer .element-editor .button {position:absolute;left:175px;}
+.designer .element-editor .info {display:inline-block;width:245px;border-top: solid 1px #606060;}
+.designer .element-editor .preview {display:inline-block;width:725px;border:solid 1px #606060;}
+
+

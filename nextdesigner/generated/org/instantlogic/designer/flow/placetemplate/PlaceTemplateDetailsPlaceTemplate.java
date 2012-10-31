@@ -33,7 +33,8 @@ public class PlaceTemplateDetailsPlaceTemplate extends org.instantlogic.interact
 
 	
 	private static org.instantlogic.interaction.page.FragmentTemplate CONTENT = 
-        new org.instantlogic.interaction.page.FragmentTemplate("F46P1F2", "Page")      
+        new org.instantlogic.interaction.page.FragmentTemplate("F46P1F2", "Page")      .setStyleNames(new String[]{"margin", "designer"})
+      
         .putChildren("mainContent",
                     org.instantlogic.designer.sharedpagefragment.EntityContextPageFragment.INSTANCE
 ,
@@ -49,7 +50,11 @@ public class PlaceTemplateDetailsPlaceTemplate extends org.instantlogic.interact
                         .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Content")))
 ,
                         new org.instantlogic.interaction.page.SelectionElement(createDeduction1()
-,                                    org.instantlogic.designer.sharedpagefragment.ElementEditorPageFragment.INSTANCE
+,                                new org.instantlogic.interaction.page.FragmentTemplate("F46P1F2P1F2P1S4F1", "Block")      .setStyleNames(new String[]{"element-editor"})
+      
+                                .putChildren("content",
+                                            org.instantlogic.designer.sharedpagefragment.ElementEditorPageFragment.INSTANCE
+                                )
 )
                 )
         )

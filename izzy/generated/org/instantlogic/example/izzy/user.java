@@ -3,6 +3,22 @@ package org.instantlogic.example.izzy;
 
 public class User extends org.instantlogic.fabric.Instance { 
 
+	private static final java.util.Map<String, User> _staticInstances = new java.util.LinkedHashMap<String, User>();
+	
+	public static java.util.Map<String, User> getStaticUserInstances() {
+		return _staticInstances;
+	}
+	
+	private static User addStaticInstance(String name, User instance) {
+		_staticInstances.put(name, instance);
+		instance.getMetadata().makeStatic(name);
+		return instance;
+	}
+	
+	
+	static {
+	}
+
 	@Override
 	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.example.izzy.entity.UserEntity.INSTANCE;

@@ -8,10 +8,13 @@ YUI.add('instantlogic-fragments', function (Y) {
     // Page
     ns.Page = createFragment({
     	createMarkup: function() {
-    		return html.div({ className: 'page' },
-                this.headerDiv = html.div({ className: 'header' }),
-                this.mainDiv = html.div({ className: 'main' })
+    		var markup = html.div({ className: 'outer-page' },
+    			html.div({ className: 'page' },
+	                this.headerDiv = html.div({ className: 'header' }),
+	                this.mainDiv = html.div({ className: 'main' })
+                )
             );
+    		return markup;
     	},
     	fragmentLists: function(model) {
     		return [
@@ -21,10 +24,29 @@ YUI.add('instantlogic-fragments', function (Y) {
     	},
     	postInit: function(model) {
     		document.title = model.title || '';
+    		this.setWidthStyles();
+    		Y.one(window).on('resize', this.setWidthStyles, this);
     	},
     	postUpdate: function(newModel) {
     		if (newModel.title!=this.oldModel.title) {
     			document.title = newModel.title || '';
+    		}
+    	},
+    	overrides: {
+    		setWidthStyles: function() {
+    			var cssClass = 'outer-page';
+    			if (this.model.styleNames) {
+	    			for (var i=0;i<this.model.styleNames.length;i++) {
+	    				cssClass+=' ';
+	    				cssClass+=this.model.styleNames[i];
+	    			}
+    			}
+    			var width = window.document.body.clientWidth;
+    			if (width>=690) {cssClass+=' w'} else {cssClass+= ' s';}
+    			cssClass+='690';
+    			if (width>=920) {cssClass+=' w'} else {cssClass+= ' s';}
+    			cssClass+='920';
+    			this.markup.setAttribute('class', cssClass);
     		}
     	}
     });
@@ -70,7 +92,7 @@ YUI.add('instantlogic-fragments', function (Y) {
     // Link
     ns.Link = createFragment({
     	createMarkup: function() {
-            return this.node = html.a({href:'#'},
+            return this.node = html.a({href:'#', className: this.cssClassName()},
             	this.textSpan = html.span(),
             	this.contentSpan = html.span()
             )
@@ -85,6 +107,9 @@ YUI.add('instantlogic-fragments', function (Y) {
     		this.node.on('click', this.onClick, this);
     	},
     	overrides: {
+    		cssClassName: function() {
+    			return 'link';
+    		},
             onClick: function(e) {
                 e.preventDefault();
                 this.engine.sendSubmit(this.model.id);
@@ -94,7 +119,12 @@ YUI.add('instantlogic-fragments', function (Y) {
     
     // Button
     ns.Button = createFragment({
-    	baseClass: ns.Link
+    	baseClass: ns.Link,
+    	overrides: {
+    		cssClassName: function() {
+    			return 'button';
+    		}
+    	}
     });
 
     // Group: Just renders its content, essentially just a span.

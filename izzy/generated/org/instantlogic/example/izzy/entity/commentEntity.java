@@ -4,11 +4,8 @@ public class CommentEntity extends org.instantlogic.fabric.model.Entity<org.inst
 
 	public static final CommentEntity INSTANCE = new CommentEntity();
 	
+
 	
-	protected CommentEntity() {
-	}
-
-
 	@Override
 	public org.instantlogic.example.izzy.Comment createInstance() {
 		return new org.instantlogic.example.izzy.Comment();
@@ -55,7 +52,6 @@ public class CommentEntity extends org.instantlogic.fabric.model.Entity<org.inst
 					org.instantlogic.example.izzy.Comment instance) {
 				return instance.getByRelationValue();
 			}
-			
 		};
 	
 	// Reverse relations
@@ -99,5 +95,10 @@ public class CommentEntity extends org.instantlogic.fabric.model.Entity<org.inst
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.example.izzy.Comment> getStaticInstances() {
+		return org.instantlogic.example.izzy.Comment.getStaticCommentInstances();
 	}
 }

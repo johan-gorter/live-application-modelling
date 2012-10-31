@@ -4,11 +4,8 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 
 	public static final IssueEntity INSTANCE = new IssueEntity();
 	
+
 	
-	protected IssueEntity() {
-	}
-
-
 	@Override
 	public org.instantlogic.example.izzy.Issue createInstance() {
 		return new org.instantlogic.example.izzy.Issue();
@@ -84,7 +81,6 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 					org.instantlogic.example.izzy.Issue instance) {
 				return instance.getAssigneeRelationValue();
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.example.izzy.Issue, org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.Comment>, org.instantlogic.example.izzy.Comment> comments
@@ -106,7 +102,6 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 			public boolean isMultivalue() {
 				return true;
 			}
-			
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.example.izzy.Issue, org.instantlogic.example.izzy.User, org.instantlogic.example.izzy.User> reporter
@@ -120,7 +115,6 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 					org.instantlogic.example.izzy.Issue instance) {
 				return instance.getReporterRelationValue();
 			}
-			
 		};
 	
 	// Reverse relations
@@ -168,5 +162,10 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	
+	@Override
+	public java.util.Map<String, org.instantlogic.example.izzy.Issue> getStaticInstances() {
+		return org.instantlogic.example.izzy.Issue.getStaticIssueInstances();
 	}
 }

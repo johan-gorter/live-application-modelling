@@ -9,6 +9,7 @@ import java.net.InetSocketAddress;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.StandardWatchEventKinds;
+import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.util.concurrent.ExecutorService;
@@ -34,31 +35,49 @@ public class NettyServer {
 	private static final boolean WATCH_FILES = true;
 	
 	private static final Update FILES_UPDATED = new Update("filesUpdated");
+	private static final Update CSS_FILES_UPDATED = new Update("cssFilesUpdated");
 
 	private static Runnable fileWatcher = new Runnable() {
-
 		@Override
 		public void run() {
-			try {
-				WatchService watcher = FileSystems.getDefault().newWatchService();
-				Path dir = new File("public").toPath();
-				WatchKey key = dir.register(watcher, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_DELETE, StandardWatchEventKinds.ENTRY_MODIFY);				
-				while (true) {
-					try {
-						key = watcher.take();
-						logger.warn("Filesystem update detected");
-					} catch (InterruptedException x) {
-						return;
-					}
-					key.pollEvents();
-					NettyTraveler.broadcast(FILES_UPDATED);
-					if (!key.reset()) break;
-				}
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
+			watch("public");
 		}
 	};
+	
+	private static Runnable fileWatcherStyle = new Runnable() {
+		@Override
+		public void run() {
+			watch("public/style");
+		}
+	};
+	
+	private static void watch(String dirPath) {
+		try {
+			WatchService watcher = FileSystems.getDefault().newWatchService();
+			Path dir = new File(dirPath).toPath();
+			WatchKey key = dir.register(watcher, StandardWatchEventKinds.ENTRY_CREATE, StandardWatchEventKinds.ENTRY_DELETE, StandardWatchEventKinds.ENTRY_MODIFY);				
+			while (true) {
+				try {
+					key = watcher.take();
+					logger.warn("Filesystem update detected");
+				} catch (InterruptedException x) {
+					return;
+				}
+				boolean cssOnly = true;
+				for (WatchEvent<?> event : key.pollEvents()) {
+					Path path = (Path) event.context();
+					if (path!=null && !path.toString().endsWith(".css")) {
+						cssOnly = false;
+						break;
+					}
+				}
+				NettyTraveler.broadcast(cssOnly?CSS_FILES_UPDATED:FILES_UPDATED);
+				if (!key.reset()) break;
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	private static Runnable sweeper = new Runnable() {
 		@Override
@@ -105,6 +124,7 @@ public class NettyServer {
 
 		if (WATCH_FILES) {
 			executor.execute(fileWatcher);
+			executor.execute(fileWatcherStyle);
 		}
 		
 		bootstrap.bind(new InetSocketAddress(8080));

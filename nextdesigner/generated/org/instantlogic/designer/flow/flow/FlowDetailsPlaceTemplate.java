@@ -46,7 +46,8 @@ public class FlowDetailsPlaceTemplate extends org.instantlogic.interaction.flow.
 
 	
 	private static org.instantlogic.interaction.page.FragmentTemplate CONTENT = 
-        new org.instantlogic.interaction.page.FragmentTemplate("F42P2F2", "Page")      
+        new org.instantlogic.interaction.page.FragmentTemplate("F42P2F2", "Page")      .setStyleNames(new String[]{"margin", "designer"})
+      
         .putChildren("mainContent",
                     org.instantlogic.designer.sharedpagefragment.ApplicationContextPageFragment.INSTANCE
 ,
