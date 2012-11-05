@@ -8,7 +8,7 @@ YUI.add('instantlogic-fragments', function (Y) {
     // Page
     ns.Page = createFragment({
     	createMarkup: function() {
-    		var markup = html.div({ className: 'outer-page' },
+    		var markup = html.div({ className: 'container' },
     			html.div({ className: 'page' },
 	                this.headerDiv = html.div({ className: 'header' }),
 	                this.mainDiv = html.div({ className: 'main' })
@@ -212,6 +212,32 @@ YUI.add('instantlogic-fragments', function (Y) {
             createNode: function() {
                 return html.strong();
             }
+    	}
+    });
+    
+    // ElementEditor (uses a new node, next to the designer styled node)
+    ns.ElementEditor = function(parentNode, engine) {
+    	ns.ElementEditor.superclass.constructor.apply(this, arguments);
+    }
+    
+    Y.extend(ns.ElementEditor, Y.instantlogic.Fragment, {
+    	init: function (model) {
+    		var pageRootNode = this.parentNode.ancestor('.designer');
+    		this.node = editorRoot = html.div({className:'element-editor'});
+    		pageRootNode.ancestor().appendChild(editorRoot);
+            this.contentFragmentList = new FragmentList(this.node, this.engine);
+            this.contentFragmentList.init(model.content);
+    	},
+    	
+    	update: function(newModel, diff) {
+            ns.ElementEditor.superclass.update.call(this, newModel, diff);
+            this.contentFragmentList.update(newModel.content, diff);
+    	},
+    	
+    	destroy: function() {
+    		ns.ElementEditor.superclass.destroy.call(this);
+    		this.contentFragmentList.destroy();
+    		this.node.remove();
     	}
     });
     

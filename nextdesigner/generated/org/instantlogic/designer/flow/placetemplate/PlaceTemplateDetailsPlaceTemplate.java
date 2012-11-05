@@ -50,8 +50,7 @@ public class PlaceTemplateDetailsPlaceTemplate extends org.instantlogic.interact
                         .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Content")))
 ,
                         new org.instantlogic.interaction.page.SelectionElement(createDeduction1()
-,                                new org.instantlogic.interaction.page.FragmentTemplate("F46P1F2P1F2P1S4F1", "Block")      .setStyleNames(new String[]{"element-editor"})
-      
+,                                new org.instantlogic.interaction.page.FragmentTemplate("F46P1F2P1F2P1S4F1", "ElementEditor")      
                                 .putChildren("content",
                                             org.instantlogic.designer.sharedpagefragment.ElementEditorPageFragment.INSTANCE
                                 )
