@@ -12,7 +12,6 @@ YUI.add('instantlogic', function (Y) {
     	}
     }
     
-    
     ns.Engine = function (application, caseId, travelerId, presenceNode, placeNode, configuration) {
     	this.configuration = configuration;
     	this.application = application;
@@ -302,9 +301,6 @@ YUI.add('instantlogic', function (Y) {
             if (this.engine.configuration.debug) this.addDebugTool();
             this.fragment = this.engine.createFragment(this.fragmentType, this.node);
             this.fragment.init(model);
-            if (this.fragment.markup) {
-            	this.node.appendChild(this.fragment.markup);
-            }
         },
 
         update: function (newModel, diff) {
@@ -564,12 +560,16 @@ YUI.add('instantlogic', function (Y) {
     		var state = nextState || this.statePerSubclass;
     		constructor.superclass.init.call(this, model, state.next);
     		if (options.createMarkup) {
+    			if (this.markup!=null) {
+    				this.markup.remove();
+    			}
 	    		this.markup = options.createMarkup.apply(this);
 	    		if (model.styleNames) {
 	    			for (var i=0;i<model.styleNames.length;i++) {
 	    				this.markup.addClass(model.styleNames[i]);
 	    			}
 	    		}
+	    		this.parentNode.appendChild(this.markup);
     		}
     		if (options.fragmentLists) {
     			state.fragmentLists = []; // Scope: this subclass only

@@ -53,7 +53,7 @@ public class PlaceTemplateDetailsPlaceGenerator extends PlaceTemplateDesign {
 						new FragmentTemplateDesign("Heading2").setText("text", createConstantText("Content")),
 						selectContent = new SelectionDesign()
 							.addToChildren(
-								new FragmentTemplateDesign("Block").addToStyleNames("element-editor")
+								new FragmentTemplateDesign("ElementEditor")
 									.setChildren("content", 
 											elementEditor = new SharedElementDesign()
 									)
