@@ -17,7 +17,7 @@ public class FlowContextSharedElementGenerator extends SharedElementDefinitionDe
 	
 	private FlowContextSharedElementGenerator() {
 		DesignerApplicationGenerator.APPLICATION.addToSharedElements(this);
-		setName("EntityContext");
+		setName("FlowContext");
 	}
 	
 	@Override
@@ -35,7 +35,7 @@ public class FlowContextSharedElementGenerator extends SharedElementDefinitionDe
 							new  FragmentTemplateDesign("Block")
 								.addToStyleNames("inactive-card")
 								.setChildren("content",
-									createText("Heading1", new TextTemplateDesign()
+									createText("Heading3", new TextTemplateDesign()
 										.addToUntranslated(new StringTemplateDesign().setDeduction(flowName = new DeductionSchemeDesign()))
 										.addToUntranslated(new StringTemplateDesign().setConstantText(" (Flow)")))
 								)

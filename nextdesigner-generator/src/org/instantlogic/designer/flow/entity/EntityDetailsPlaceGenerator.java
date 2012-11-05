@@ -45,14 +45,14 @@ public class EntityDetailsPlaceGenerator extends PlaceTemplateDesign {
 				new FragmentTemplateDesign("Block")
 					.addToStyleNames("card")
 					.setChildren("content",
-						createText("Heading1", new TextTemplateDesign()
+						createText("Heading3", new TextTemplateDesign()
 							.addToUntranslated(new StringTemplateDesign().setDeduction(entityName = new DeductionSchemeDesign()))
 							.addToUntranslated(new StringTemplateDesign().setConstantText(" (Entity)"))
 						),
 						
 						nameInput = new FragmentTemplateDesign("Input"),
 						
-						createText("Heading2",
+						createText("Heading4",
 							new TextTemplateDesign().addToUntranslated(new StringTemplateDesign().setConstantText("Attributes"))
 						),
 						

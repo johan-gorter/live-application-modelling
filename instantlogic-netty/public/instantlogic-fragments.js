@@ -24,8 +24,6 @@ YUI.add('instantlogic-fragments', function (Y) {
     	},
     	postInit: function(model) {
     		document.title = model.title || '';
-    		this.setWidthStyles();
-    		Y.one(window).on('resize', this.setWidthStyles, this);
     	},
     	postUpdate: function(newModel) {
     		if (newModel.title!=this.oldModel.title) {
@@ -33,31 +31,16 @@ YUI.add('instantlogic-fragments', function (Y) {
     		}
     	},
     	overrides: {
-    		setWidthStyles: function() {
-    			var cssClass = 'outer-page';
-    			if (this.model.styleNames) {
-	    			for (var i=0;i<this.model.styleNames.length;i++) {
-	    				cssClass+=' ';
-	    				cssClass+=this.model.styleNames[i];
-	    			}
-    			}
-    			var width = window.document.body.clientWidth;
-    			if (width>=690) {cssClass+=' w'} else {cssClass+= ' s';}
-    			cssClass+='690';
-    			if (width>=920) {cssClass+=' w'} else {cssClass+= ' s';}
-    			cssClass+='920';
-    			this.markup.setAttribute('class', cssClass);
-    		}
     	}
     });
     
     // Input
     ns.Input = createFragment({ 
     	createMarkup: function() {
-    		return html.form({ action: '.' },
-	        	html.div({className: 'input'},
-	                this.questionDiv = html.div({ className: 'question' }),
-	                this.answerDiv = html.div({ className: 'answer' })
+    		return html.form({ action: '.', className: 'form-horizontal' },
+	        	html.div({className: 'control-group'},
+	                this.questionDiv = html.div({ className: 'control-label' }),
+	                this.answerDiv = html.div({ className: 'controls' })
 	            )
     		);
     	},
@@ -122,7 +105,7 @@ YUI.add('instantlogic-fragments', function (Y) {
     	baseClass: ns.Link,
     	overrides: {
     		cssClassName: function() {
-    			return 'button';
+    			return 'btn';
     		}
     	}
     });
@@ -205,6 +188,26 @@ YUI.add('instantlogic-fragments', function (Y) {
     	}
     });
     
+    // Heading4
+    ns.Heading4 = createFragment({
+    	baseClass: ns.Text,
+    	overrides: {
+            createNode: function() {
+                return html.h4();
+            }
+    	}
+    });
+    
+    // Heading5
+    ns.Heading5 = createFragment({
+    	baseClass: ns.Text,
+    	overrides: {
+            createNode: function() {
+                return html.h5();
+            }
+    	}
+    });
+    
     // Strong
     ns.Strong = createFragment({
     	baseClass: ns.Text,
@@ -250,9 +253,9 @@ YUI.add('instantlogic-fragments', function (Y) {
     Y.extend(ns.Table, Y.instantlogic.Fragment, {
         init: function (model) {
             ns.Table.superclass.init.call(this, model);
-            this.node = html.div({className: 'table'},
-            	html.div({className: 'tableheader row'},
-            		this.headerDiv = html.div({className:'cells'})
+            this.node = html.div({className: 'divtable'},
+            	html.div({className: 'tableheader divtable-row'},
+            		this.headerDiv = html.div({className:'divtable-cells'})
             	),
             	this.bodyDiv = html.div({className: 'tablebody'})
             );
@@ -280,8 +283,8 @@ YUI.add('instantlogic-fragments', function (Y) {
         init: function (model) {
             ns.Row.superclass.init.call(this, model);
             this.node = 
-            	html.div({className: 'row'},
-            		this.cellsDiv = html.div({className: 'cells'})
+            	html.div({className: 'divtable-row'},
+            		this.cellsDiv = html.div({className: 'divtable-cells'})
             	);
             this.parentNode.appendChild(this.node);
             
@@ -303,7 +306,7 @@ YUI.add('instantlogic-fragments', function (Y) {
     Y.extend(ns.Column, Y.instantlogic.Fragment, {
         init: function (model) {
             ns.Column.superclass.init.call(this, model);
-            this.node = html.div({className:'column-header cell'});
+            this.node = html.div({className:'divtable-column-header divtable-cell'});
             this.node.set('text', model.header || '');
             this.parentNode.appendChild(this.node);
         },
@@ -324,7 +327,7 @@ YUI.add('instantlogic-fragments', function (Y) {
     Y.extend(ns.Cell, Y.instantlogic.Fragment, {
         init: function (model) {
             ns.Cell.superclass.init.call(this, model);
-            this.node = html.div({className: 'cell'});
+            this.node = html.div({className: 'divtable-cell'});
             this.parentNode.appendChild(this.node);
             
             this.contentFragmentList = new FragmentList(this.node, this.engine);
