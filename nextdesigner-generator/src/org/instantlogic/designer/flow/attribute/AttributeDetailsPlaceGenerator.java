@@ -45,14 +45,14 @@ public class AttributeDetailsPlaceGenerator extends PlaceTemplateDesign {
 				new FragmentTemplateDesign("Block")
 					.addToStyleNames("card")
 					.setChildren("content",
-						createText("Heading1", new TextTemplateDesign()
+						createText("Heading3", new TextTemplateDesign()
 							.addToUntranslated(new StringTemplateDesign().setDeduction(attributeName = new DeductionSchemeDesign()))
 							.addToUntranslated(new StringTemplateDesign().setConstantText(" (Attribute)"))
 						),
 					
 						nameInput = new FragmentTemplateDesign("Input"),
 						
-						new FragmentTemplateDesign("Heading2").setText("text", createConstantText("Data type")),
+						new FragmentTemplateDesign("Heading4").setText("text", createConstantText("Data type")),
 						selectDataType = new SelectionDesign()
 							.addToChildren(categoryInput = new FragmentTemplateDesign("Input"))
 							.addToChildren(multilineInput = new FragmentTemplateDesign("Input"))
@@ -60,7 +60,7 @@ public class AttributeDetailsPlaceGenerator extends PlaceTemplateDesign {
 							.addToChildren(percentageInput = new FragmentTemplateDesign("Input"))
 							.addToChildren(wholeNumberInput = new FragmentTemplateDesign("Input"))
 							.addToChildren(exactRoundingInput = new FragmentTemplateDesign("Input")),
-						new FragmentTemplateDesign("Heading2").setText("text", createConstantText("Value")),
+						new FragmentTemplateDesign("Heading4").setText("text", createConstantText("Value")),
 						hasRelevanceInput = new FragmentTemplateDesign("Input"),
 						hasRuleInput = new FragmentTemplateDesign("Input"),
 						writeableInput = new FragmentTemplateDesign("Input"),

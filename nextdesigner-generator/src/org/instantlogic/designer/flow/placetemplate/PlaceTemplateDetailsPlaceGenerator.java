@@ -43,14 +43,14 @@ public class PlaceTemplateDetailsPlaceGenerator extends PlaceTemplateDesign {
 				new FragmentTemplateDesign("Block")
 					.addToStyleNames("card")
 					.setChildren("content",
-						createText("Heading1", new TextTemplateDesign()
+						createText("Heading3", new TextTemplateDesign()
 							.addToUntranslated(new StringTemplateDesign().setDeduction(placeName = new DeductionSchemeDesign()))
 							.addToUntranslated(new StringTemplateDesign().setConstantText(" (Place template)"))
 						),
 					
 						placeNameInput = new FragmentTemplateDesign("Input"),
 						
-						new FragmentTemplateDesign("Heading2").setText("text", createConstantText("Content")),
+						new FragmentTemplateDesign("Heading4").setText("text", createConstantText("Content")),
 						selectContent = new SelectionDesign()
 							.addToChildren(
 								new FragmentTemplateDesign("ElementEditor")

@@ -41,12 +41,12 @@ public class AttributeDetailsPlaceTemplate extends org.instantlogic.interaction.
                 new org.instantlogic.interaction.page.FragmentTemplate("F39P1F2P1F2", "Block")      .setStyleNames(new String[]{"card"})
       
                 .putChildren("content",
-                        new org.instantlogic.interaction.page.FragmentTemplate("F39P1F2P1F2P1F1", "Heading1")      
+                        new org.instantlogic.interaction.page.FragmentTemplate("F39P1F2P1F2P1F1", "Heading3")      
                         .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction0()),new org.instantlogic.fabric.text.StringTemplate(" (Attribute)")))
 ,
                         new org.instantlogic.interaction.page.FragmentTemplate("F39P1F2P1F2P1F2", "Input")      .setField(org.instantlogic.designer.entity.DesignEntity.INSTANCE, org.instantlogic.designer.entity.DesignEntity.name)
 ,
-                        new org.instantlogic.interaction.page.FragmentTemplate("F39P1F2P1F2P1F3", "Heading2")      
+                        new org.instantlogic.interaction.page.FragmentTemplate("F39P1F2P1F2P1F3", "Heading4")      
                         .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Data type")))
 ,
                         new org.instantlogic.interaction.page.SelectionElement(createDeduction1()
@@ -58,7 +58,7 @@ public class AttributeDetailsPlaceTemplate extends org.instantlogic.interaction.
 ,                                new org.instantlogic.interaction.page.FragmentTemplate("F39P1F2P1F2P1S4F6", "Input")      .setField(org.instantlogic.designer.entity.DataTypeDesignEntity.INSTANCE, org.instantlogic.designer.entity.DataTypeDesignEntity.exactRounding)
 )
 ,
-                        new org.instantlogic.interaction.page.FragmentTemplate("F39P1F2P1F2P1F5", "Heading2")      
+                        new org.instantlogic.interaction.page.FragmentTemplate("F39P1F2P1F2P1F5", "Heading4")      
                         .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Value")))
 ,
                         new org.instantlogic.interaction.page.FragmentTemplate("F39P1F2P1F2P1F6", "Input")      .setField(org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE, org.instantlogic.designer.entity.AttributeDesignEntity.hasRelevance)

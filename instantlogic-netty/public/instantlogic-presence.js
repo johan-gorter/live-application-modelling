@@ -12,16 +12,20 @@ YUI.add('instantlogic-presence', function (Y) {
     Y.extend(ns.Presence, Y.instantlogic.Fragment, {
     	init: function(model) {
             ns.Presence.superclass.init.call(this, model);
-            var markup = html.div({ className: 'top-bar' },
-            	html.div({className: 'top-bar-content'},
-            		this.applicationNameSpan = html.div({className: 'application-name'},
-            			model.applicationName || ''
-            		),
-            		html.div({className: 'minus'}, ' - '),
-            		html.div({className: 'case-name'},
-            			this.caseNameSpan = html.span(model.caseName || '')
-            		),
-                    this.contentDiv = html.div()
+            var markup = html.div({ className: 'navbar navbar-inverse navbar-fixed-top' },
+            	html.div({className: 'navbar-inner'},
+            		html.div({className:'container'},
+            			html.div({className:'nav-collapse collapse'},
+		            		html.p({className: 'navbar-text pull-left'},
+		            			this.applicationNameSpan = html.span({className: 'application-name'}, model.applicationName || ''),
+			            		html.span({className: 'minus'}, ' - '),
+			            		html.span({className: 'case-name'},
+			            			this.caseNameSpan = html.span(model.caseName || '')
+			            		)
+		            		),
+		            		this.contentDiv = html.p({className: 'navbar-text pull-right'})
+            			)
+	                )
                 )
             );
             this.parentNode.appendChild(markup);
@@ -52,9 +56,9 @@ YUI.add('instantlogic-presence', function (Y) {
     Y.extend(ns.Me, Y.instantlogic.Fragment, {
     	init: function(model) {
     		ns.Me.superclass.init.call(this, model);
-    		var markup = html.div({className: 'me'},
-				this.avatarDiv = html.div({className: 'avatar'}, html.img({src:'/avatar.png'})),
-				this.loginNameSpan = html.div({className: 'username'}, model.username || '')
+    		var markup = html.span({className: 'me'},
+				this.avatarDiv = html.span({className: 'avatar'}, html.img({src:'/avatar.png'})),
+				this.loginNameSpan = html.span({className: 'username'}, model.username || '')
     		)
     		this.parentNode.appendChild(markup);
     	}
@@ -68,8 +72,8 @@ YUI.add('instantlogic-presence', function (Y) {
     Y.extend(ns.ShowCommunicatorButton, Y.instantlogic.Fragment, {
     	init: function(model) {
     		ns.ShowCommunicatorButton.superclass.init.call(this, model);
-    		var markup = html.div({className: 'show-communicator-button'},
-    			this.button = html.button('Communicator')
+    		var markup = html.span({className: 'show-communicator-button'},
+    			this.button = html.button({className:'btn'},'Communicator')
     		)
     		this.parentNode.appendChild(markup);
     		this.button.on('click', this.onClick, this);

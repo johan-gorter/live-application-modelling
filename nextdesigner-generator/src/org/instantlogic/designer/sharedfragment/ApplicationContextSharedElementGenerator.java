@@ -29,7 +29,7 @@ public class ApplicationContextSharedElementGenerator extends SharedElementDefin
 					new  FragmentTemplateDesign("Block")
 						.addToStyleNames("inactive-card")
 						.setChildren("content",
-							createText("Heading1", new TextTemplateDesign()
+							createText("Heading3", new TextTemplateDesign()
 								.addToUntranslated(new StringTemplateDesign().setDeduction(applicationName = new DeductionSchemeDesign()))
 								.addToUntranslated(new StringTemplateDesign().setConstantText(" (Application)")))
 						)

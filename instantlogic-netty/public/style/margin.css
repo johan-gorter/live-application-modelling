@@ -13,3 +13,9 @@
 .margin.w920 .input {width: 920px;margin:5px 0 5px -230px;}
 .margin.w920 .input .question {display: inline-block; width:225px; text-align:right; margin-right:5px;}
 .margin.w920 .input .answer {display: inline-block; width:575px; }
+
+/* Fragments */
+.divtable-column-header {font-weight: bold;}
+.divtable-cells {display:inline-block;border-bottom: solid 1px black;}
+.divtable-cell {display:inline-block; width:200px;overflow:hidden;white-space:no-wrap;}
+
