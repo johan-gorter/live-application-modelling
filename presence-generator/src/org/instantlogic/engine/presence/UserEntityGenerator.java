@@ -9,7 +9,7 @@ public class UserEntityGenerator extends EntityDesign {
     public static final UserEntityGenerator ENTITY = new UserEntityGenerator();
     
     private UserEntityGenerator() {
-    	setApplication(PresenceApplicationGenerator.APPLICATION);
+    	PresenceApplicationGenerator.APPLICATION.addToEntities(this);
         setName("User");
         setIsCustomized(true);
     }

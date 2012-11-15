@@ -4,14 +4,13 @@ import org.instantlogic.designer.AttributeDesign;
 import org.instantlogic.designer.DataCategoryDesign;
 import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.RelationDesign;
-import org.instantlogic.designer.entity.DataCategoryDesignEntity;
 
 public class PresenceEntityGenerator extends EntityDesign {
 
     public static final PresenceEntityGenerator ENTITY = new PresenceEntityGenerator();
     
     private PresenceEntityGenerator() {
-    	setApplication(PresenceApplicationGenerator.APPLICATION);
+    	PresenceApplicationGenerator.APPLICATION.addToEntities(this);
         setName("Presence");
         setIsCustomized(true);
     }

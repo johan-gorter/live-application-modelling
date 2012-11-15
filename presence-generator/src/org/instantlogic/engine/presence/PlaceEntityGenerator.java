@@ -9,7 +9,7 @@ public class PlaceEntityGenerator extends EntityDesign {
     public static final PlaceEntityGenerator ENTITY = new PlaceEntityGenerator();
     
     private PlaceEntityGenerator() {
-    	setApplication(PresenceApplicationGenerator.APPLICATION);
+    	PresenceApplicationGenerator.APPLICATION.addToEntities(this);
         setName("Place");
         setIsCustomized(true);
     }

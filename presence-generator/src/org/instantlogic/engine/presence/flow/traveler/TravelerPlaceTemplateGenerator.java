@@ -10,14 +10,12 @@ import org.instantlogic.engine.presence.PlaceEntityGenerator;
 import org.instantlogic.engine.presence.PresenceEntityGenerator;
 import org.instantlogic.engine.presence.TravelerEntityGenerator;
 import org.instantlogic.engine.presence.UserEntityGenerator;
-import org.instantlogic.engine.presence.flow.TravelerFlowGenerator;
 
 public class TravelerPlaceTemplateGenerator extends PlaceTemplateDesign {
 
 	public static final TravelerPlaceTemplateGenerator PLACE = new TravelerPlaceTemplateGenerator();
 	
 	private TravelerPlaceTemplateGenerator() {
-		setOwner(TravelerFlowGenerator.FLOW);
 		setName("Traveler");
 	}
 	
@@ -25,6 +23,7 @@ public class TravelerPlaceTemplateGenerator extends PlaceTemplateDesign {
 	public void init() {
 		DeductionSchemeDesign applicationNameDeduction, caseNameDeduction, userHasValue, travelerUsername, communicatorVisible, 
 			activeUsers, username, userTravelers, travelerId, travelerPlaceUrl;
+		FragmentTemplateDesign debugVisible;
 		
 		setContent(
 			new FragmentTemplateDesign("Presence")
@@ -36,6 +35,9 @@ public class TravelerPlaceTemplateGenerator extends PlaceTemplateDesign {
 						.addToIfChildren(
 							new FragmentTemplateDesign("Me")
 								.setValue("username", travelerUsername = new DeductionSchemeDesign())
+						)
+						.addToIfChildren(
+							debugVisible = new FragmentTemplateDesign("DebugVisibleToggle")
 						)
 						.addToIfChildren(
 							new IfElseDesign()
@@ -80,5 +82,7 @@ public class TravelerPlaceTemplateGenerator extends PlaceTemplateDesign {
 		travelerId.deduceAttribute(TravelerEntityGenerator.id);
 		travelerPlaceUrl.deduceAttribute(PlaceEntityGenerator.url, 
 			travelerPlaceUrl.deduceRelation(TravelerEntityGenerator.currentPlace));
+		
+		debugVisible.setEntity(TravelerEntityGenerator.ENTITY).setAttribute(TravelerEntityGenerator.debugVisible);
 	}
 }

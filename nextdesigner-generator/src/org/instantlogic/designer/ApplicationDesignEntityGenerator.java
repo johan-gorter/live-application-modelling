@@ -17,6 +17,7 @@ public class ApplicationDesignEntityGenerator extends EntityDesign {
     public static final AttributeDesign rootPackageName = addAttribute(ENTITY, "rootPackageName", java.lang.String.class);
     public static final AttributeDesign sourcePath = addAttribute(ENTITY, "sourcePath", java.lang.String.class);
     public static final AttributeDesign isCustomized = addAttribute(ENTITY, "isCustomized", java.lang.Boolean.class);
+    public static final AttributeDesign themeNames = addAttribute(ENTITY, "themeNames", java.lang.String.class);
 
     // Relations
     public static final RelationDesign entities = addRelation(ENTITY, "entities", RelationType.OneToManyAggregation, EntityDesignEntityGenerator.ENTITY)
@@ -29,4 +30,9 @@ public class ApplicationDesignEntityGenerator extends EntityDesign {
     public static final RelationDesign mainFlow = addRelation(ENTITY, "mainFlow", RelationType.OneToZeroOrOne, FlowDesignEntityGenerator.ENTITY);
     public static final RelationDesign sharedElements = addRelation(ENTITY, "sharedElements", RelationType.OneToManyAggregation, SharedElementDefinitionDesignEntityGenerator.ENTITY)
             .setReverseName("application");
+    
+    @Override
+    public void init() {
+    	themeNames.getDataType().setMultivalue(true);
+    }
 }

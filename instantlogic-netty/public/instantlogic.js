@@ -86,6 +86,15 @@ YUI.add('instantlogic', function (Y) {
         		this.sendEnter();
         	}
         },
+        
+        recomposePlace: function () {
+        	var model = this.placeFragmentHolder.fragment.model;
+        	this.placeFragmentHolder.destroy();
+        	this.placeFragmentHolder.node.remove();
+            this.placeFragmentHolder = new Y.instantlogic.FragmentHolder(model.id, this);
+            this.placeNode.appendChild(this.placeFragmentHolder.node);
+            this.placeFragmentHolder.init(model);
+        },
 
         // Private functions
         setState: function (state) {
@@ -241,7 +250,7 @@ YUI.add('instantlogic', function (Y) {
                     failure: function (transactionid, response) {
                     	this.outstandingRequestCount--;
                     	delete this.outstandingRequests[transactionid];
-                        if (!response.status || response.status > 600) {
+                        if (!response || !response.status || response.status > 600) {
                             this.setState('disconnected');
                             var me = this;
                         	setTimeout(function () {

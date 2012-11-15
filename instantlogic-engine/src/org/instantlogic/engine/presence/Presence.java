@@ -37,6 +37,9 @@ public class Presence extends AbstractPresence {
 			case "setCommunicatorVisible":
 				traveler.setCommunicatorVisible((Boolean)value);
 				break;
+			case "setDebugVisible":
+				traveler.setDebugVisible((Boolean)value);
+				break;
 		}
 	}
 	
