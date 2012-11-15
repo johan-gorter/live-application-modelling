@@ -11,7 +11,7 @@ public class TravelerEntityGenerator extends EntityDesign {
     public static final TravelerEntityGenerator ENTITY = new TravelerEntityGenerator();
     
     private TravelerEntityGenerator() {
-    	setApplication(PresenceApplicationGenerator.APPLICATION);
+    	PresenceApplicationGenerator.APPLICATION.addToEntities(this);
         setName("Traveler");
         setIsCustomized(true);
     }
@@ -19,6 +19,7 @@ public class TravelerEntityGenerator extends EntityDesign {
     // Attributes
     public static final AttributeDesign id = addAttribute(ENTITY, "id", DataCategoryDesign.text);
     public static final AttributeDesign communicatorVisible = addAttribute(ENTITY, "communicatorVisible", DataCategoryDesign._boolean);
+    public static final AttributeDesign debugVisible = addAttribute(ENTITY, "debugVisible", DataCategoryDesign._boolean);
 
     // Relations
     public static final RelationDesign currentPlace = addRelation(ENTITY, "currentPlace", RelationType.ManyToZeroOrOne, PlaceEntityGenerator.ENTITY)
@@ -30,5 +31,6 @@ public class TravelerEntityGenerator extends EntityDesign {
     @Override
     public void init() {
     	communicatorVisible.setDefault(new DeductionSchemeDesign().deduceConstant(Boolean.class, false).getScheme());
+    	debugVisible.setQuestion(createConstantText("debug"));
     }
 }

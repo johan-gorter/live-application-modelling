@@ -43,6 +43,23 @@ public abstract class AbstractTraveler extends org.instantlogic.fabric.Instance 
 	}
 	
 	
+	private final org.instantlogic.fabric.value.AttributeValue<Traveler, java.lang.Boolean> debugVisible
+		= createAttributeValue(org.instantlogic.engine.presence.entity.TravelerEntity.debugVisible);
+	
+	public java.lang.Boolean getDebugVisible() {
+		return debugVisible.getValue();
+	}
+
+	public org.instantlogic.fabric.value.AttributeValue<Traveler, java.lang.Boolean> getDebugVisibleAttributeValue() {
+		return debugVisible;
+	}
+
+	public Traveler setDebugVisible(java.lang.Boolean newValue) {
+		debugVisible.setValue(newValue);
+		return (Traveler)this;
+	}
+	
+	
 	private final org.instantlogic.fabric.value.AttributeValue<Traveler, java.lang.String> id
 		= createAttributeValue(org.instantlogic.engine.presence.entity.TravelerEntity.id);
 	

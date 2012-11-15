@@ -87,7 +87,7 @@ YUI.add('instantlogic-presence', function (Y) {
     ns.Communicator = Y.instantlogic.createFragment({
     	createMarkup: function() {
     		var markup = html.div({className:'communicator'},
-    			this.hideButton = html.button('Hide communicator'),
+    			this.hideButton = html.button({className:'btn'},'Hide communicator'),
     			this.usersDiv = html.div()
     		)
     		this.hideButton.on('click', this.onHideClick, this);
@@ -127,6 +127,42 @@ YUI.add('instantlogic-presence', function (Y) {
     		return [[this.travelernameDiv, model.placeUrl]];
     	}
     });
+    
+    ns.DebugVisibleToggle = Y.instantlogic.createFragment({
+    	createMarkup: function(model) {
+    		var markup = html.form({ action: '.', className: 'form-inline debug-visible' },
+    			html.label({className:'checkbox'},
+    				this.input = html.input({type:'checkbox'}), 'Debug'
+    			)
+    		);
+    		this.input.on('change', this.inputChange, this);
+    		return markup;
+    	},
+    	postInit: function(model) {
+    		this.input.set('checked', model.value);
+    		this.setDebug(model.value);
+    	},
+    	postUpdate: function(newModel, diff) {
+    		if (newModel.value!=this.oldModel.value) {
+    			this.input.set('checked', newModel.value);
+        		this.setDebug(newModel.value);
+    		}
+    	},
+    	overrides: {
+            inputChange: function() {
+            	this.engine.enqueueMessage({message: 'presence', command: 'setDebugVisible', value: this.input.get('checked')});
+            },
+            setDebug:function(newValue) {
+            	var engine = this.engine;
+            	if (engine.configuration.debug!=newValue) {
+            		engine.configuration.debug = newValue;
+            		setTimeout(function(){
+            			engine.recomposePlace();
+            		});
+            	}
+            }
+    	}
+    }); 
 
     // Login
     ns.Login = function(parentNode, engine) {
@@ -150,7 +186,6 @@ YUI.add('instantlogic-presence', function (Y) {
 	    			)
 	    		)
     		);
-    		this.parentNode.appendChild(markup);
     		this.loginButton.on('click', this.loginClick, this);
     	},
     	
@@ -159,4 +194,4 @@ YUI.add('instantlogic-presence', function (Y) {
     	}
     });
     
-}, '0.7.0', { requires: ['instantlogic', 'html'] });
+}, '0.7.0', { requires: ['instantlogic', 'html', 'instantlogic-fragments'] });

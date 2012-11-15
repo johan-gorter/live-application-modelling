@@ -55,6 +55,26 @@ public class TravelerEntity extends org.instantlogic.fabric.model.Entity<org.ins
             }
 		};
 	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.engine.presence.Traveler, java.lang.Boolean, java.lang.Boolean> debugVisible 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.engine.presence.Traveler, java.lang.Boolean, java.lang.Boolean>(
+			"debugVisible", INSTANCE, java.lang.Boolean.class
+		) {
+			{
+				dataType.put("category", "boolean");
+			}
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.engine.presence.Traveler, java.lang.Boolean> get(org.instantlogic.engine.presence.Traveler instance) {
+				return instance.getDebugVisibleAttributeValue();
+			}
+			
+			private final org.instantlogic.fabric.text.TextTemplate question = new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("debug"));
+			@Override
+			public org.instantlogic.fabric.text.TextTemplate getQuestion() {
+				return question;
+			}
+		};
+	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.engine.presence.Traveler, java.lang.String, java.lang.String> id 
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.engine.presence.Traveler, java.lang.String, java.lang.String>(
 			"id", INSTANCE, java.lang.String.class
@@ -117,6 +137,7 @@ public class TravelerEntity extends org.instantlogic.fabric.model.Entity<org.ins
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
 		communicatorVisible,
+		debugVisible,
 		id,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{

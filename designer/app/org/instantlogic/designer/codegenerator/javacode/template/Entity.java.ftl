@@ -77,9 +77,9 @@ public class ${technicalNameCapitalized}Entity extends org.instantlogic.fabric.m
 			</#if>
 			<#if attribute.question??>
 			
-			private final Text question = <@text_macro text=attribute.question />;
+			private final org.instantlogic.fabric.text.TextTemplate question = <@text_macro text=attribute.question />;
 			@Override
-			public Text getQuestion() {
+			public org.instantlogic.fabric.text.TextTemplate getQuestion() {
 				return question;
 			}
 			</#if>
