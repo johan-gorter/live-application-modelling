@@ -20,11 +20,12 @@
 <script type="text/javascript" src="/instantlogic-presence.js"></script>
 <script type="text/javascript" src="/instantlogic-fragments.js"></script>
 <script type="text/javascript" src="/instantlogic-answers.js"></script>
+<script type="text/javascript" src="/instantlogic-designer.js"></script>
 
 <script type="text/javascript">
 	var travelerId = ''+Math.floor(Math.random()*100000000000);
 
-	YUI({filter: 'raw'}).use('node', 'instantlogic', 'instantlogic-presence', 'instantlogic-fragments', 'instantlogic-answers', 'html', 'history', function(Y) {
+	YUI({filter: 'raw'}).use('node', 'instantlogic', 'instantlogic-presence', 'instantlogic-fragments', 'instantlogic-answers', 'instantlogic-designer', 'html', 'history', function(Y) {
         var applicationMatch = /application=([^&]*)/g.exec(location.search);
         if (!applicationMatch) Y.error('Missing application querystring parameter');
         var caseMatch = /case=([^&]*)/g.exec(location.search);
@@ -40,7 +41,6 @@
 		).start();
 	});
 </script>
-
 </head>
 <body class="yui3-skin-sam">
     <div id="presence">

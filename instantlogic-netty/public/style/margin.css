@@ -7,6 +7,7 @@
 /* Global rules */
 .margin a {color: #000000;text-decoration: none;}
 .margin .error {color:red;}
+.animate-vertically {display:block;overflow:hidden;position:relative;}
 
 /* Fields */
 .margin .input {margin: 5px 0;}
