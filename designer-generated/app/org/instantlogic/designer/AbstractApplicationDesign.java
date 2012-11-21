@@ -94,6 +94,38 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 	}
 	
 	
+	private final org.instantlogic.fabric.value.AttributeValues<ApplicationDesign, java.lang.String> themeNames
+		= createAttributeValues(org.instantlogic.designer.entity.ApplicationDesignEntity.themeNames);
+	
+	public org.instantlogic.fabric.value.Multi<java.lang.String> getThemeNames() {
+		return themeNames.getValue();
+	}
+
+	public org.instantlogic.fabric.value.AttributeValues<ApplicationDesign, java.lang.String> getThemeNamesAttributeValue() {
+		return themeNames;
+	}
+
+	public ApplicationDesign addToThemeNames(java.lang.String item) {
+		themeNames.addValue(item);
+		return (ApplicationDesign)this;
+	}
+	
+	public ApplicationDesign addToThemeNames(java.lang.String item, int index) {
+		themeNames.insertValue(item, index);
+		return (ApplicationDesign)this;
+	}
+	
+	public ApplicationDesign removeFromThemeNames(java.lang.String item) {
+		themeNames.removeValue(item);
+		return (ApplicationDesign)this;
+	}
+	
+	public ApplicationDesign removeFromThemeNames(int index) {
+		themeNames.removeValue(index);
+		return (ApplicationDesign)this;
+	}
+	
+	
 	// Relations
 	
 	private final org.instantlogic.fabric.value.RelationValue<ApplicationDesign, EntityDesign> caseEntity

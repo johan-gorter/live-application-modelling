@@ -44,6 +44,13 @@ public class ElementDesignEntity extends org.instantlogic.fabric.model.Entity<or
 		return d0;
 	}
 
+
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.String> createDeduction1() {
+		  	org.instantlogic.fabric.deduction.Deduction<java.lang.String> d0 
+		  		= org.instantlogic.fabric.deduction.ConstantDeduction.create("mobile");
+		return d0;
+	}
+
 	
 	// Attributes
 	
@@ -64,6 +71,28 @@ public class ElementDesignEntity extends org.instantlogic.fabric.model.Entity<or
             public org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> getDefault() {
                 if (defaultDeduction==null) {
                     defaultDeduction = createDeduction0();
+                }
+                return defaultDeduction;
+            }
+		};
+	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.ElementDesign, java.lang.String, java.lang.String> previewMode 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.ElementDesign, java.lang.String, java.lang.String>(
+			"previewMode", INSTANCE, java.lang.String.class
+		) {
+			{
+			}
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.ElementDesign, java.lang.String> get(org.instantlogic.designer.ElementDesign instance) {
+				return instance.getPreviewModeAttributeValue();
+			}
+
+            private org.instantlogic.fabric.deduction.Deduction<java.lang.String> defaultDeduction;
+            @Override
+            public org.instantlogic.fabric.deduction.Deduction<java.lang.String> getDefault() {
+                if (defaultDeduction==null) {
+                    defaultDeduction = createDeduction1();
                 }
                 return defaultDeduction;
             }
@@ -139,6 +168,7 @@ public class ElementDesignEntity extends org.instantlogic.fabric.model.Entity<or
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
 		editorOpen,
+		previewMode,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 	};

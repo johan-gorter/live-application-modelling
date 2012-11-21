@@ -26,7 +26,7 @@ public class ElementEditorSharedElementGenerator extends SharedElementDefinition
 	
 	@Override
 	public void init() {
-		DeductionSchemeDesign fragmentType, propertyName, editorOpen;
+		DeductionSchemeDesign fragmentType, propertyName, editorOpen1, editorOpen2, previewMode;
 		SelectionDesign asFragmentTemplate, selectProperties, selectPropertyChildren;
 		FragmentTemplateDesign fragmentTypeNameInput;
 		FragmentTemplateDesign openEditorButton, closeEditorButton;
@@ -38,25 +38,36 @@ public class ElementEditorSharedElementGenerator extends SharedElementDefinition
 					asFragmentTemplate = new SelectionDesign()
 						.addToChildren(
 							new IfElseDesign()
-								.setCondition(editorOpen = new DeductionSchemeDesign())
+								.setCondition(editorOpen1 = new DeductionSchemeDesign())
 								.addToIfChildren(
 									new FragmentTemplateDesign("Block").addToStyleNames("editor")
 										.setChildren("content", 
-											fragmentTypeNameInput = new FragmentTemplateDesign("Input"),
-											closeEditorButton = new FragmentTemplateDesign("Button").setText("text", createConstantText("Close editor")))
+											fragmentTypeNameInput = new FragmentTemplateDesign("Input")
 										)
-								.addToElseChildren(openEditorButton = new FragmentTemplateDesign("Button").setText("text", createConstantText("Open editor")))
+								)
 						)
-						.addToChildren(new FragmentTemplateDesign("Block").addToStyleNames("info")
+						.addToChildren(new FragmentTemplateDesign("PreviewLine")
+							.setValue("previewMode", previewMode = new DeductionSchemeDesign())
 							.setChildren("content", 
-								new FragmentTemplateDesign("Paragraph").setText("text", new TextTemplateDesign()
-									.addToUntranslated(new StringTemplateDesign().setDeduction(fragmentType = new DeductionSchemeDesign())))
+								new IfElseDesign()
+									.setCondition(editorOpen2 = new DeductionSchemeDesign())
+									.addToIfChildren(
+										closeEditorButton = new FragmentTemplateDesign("Button").setText("text", createConstantText("Close editor")).addToStyleNames("editor-toggle")
+									)
+									.addToElseChildren(
+										openEditorButton = new FragmentTemplateDesign("Button").setText("text", createConstantText("Edit")).addToStyleNames("editor-toggle")
+									),
+								new FragmentTemplateDesign("Block").addToStyleNames("info")
+									.setChildren("content", 
+										new FragmentTemplateDesign("Paragraph").setText("text", new TextTemplateDesign()
+											.addToUntranslated(new StringTemplateDesign().setDeduction(fragmentType = new DeductionSchemeDesign())))
+									),
+								new FragmentTemplateDesign("Preview")
+									.setChildren("content",
+										new FragmentTemplateDesign("ReplacedByFilter").addToFragmentFilters("org.instantlogic.designer.fragmentfilter.PreviewFragmentFilter")
+									)
 							)
 						)
-						.addToChildren(new FragmentTemplateDesign("Block").addToStyleNames("preview")
-							.setChildren("content",
-								new FragmentTemplateDesign("Block").addToFragmentFilters("org.instantlogic.designer.fragmentfilter.PreviewFragmentFilter"))
-							)
 						.addToChildren(
 							selectProperties = new SelectionDesign()
 								.addToChildren(
@@ -75,7 +86,9 @@ public class ElementEditorSharedElementGenerator extends SharedElementDefinition
 		asFragmentTemplate.newSelection()
 			.deduceCastInstance(asFragmentTemplate.getSelection()
 				.deduceSelectedInstance(ElementDesignEntityGenerator.ENTITY), FragmentTemplateDesignEntityGenerator.ENTITY);
-		editorOpen.deduceAttribute(ElementDesignEntityGenerator.editorOpen);
+		editorOpen1.deduceAttribute(ElementDesignEntityGenerator.editorOpen);
+		editorOpen2.deduceAttribute(ElementDesignEntityGenerator.editorOpen);
+		previewMode.deduceAttribute(ElementDesignEntityGenerator.previewMode);
 		fragmentTypeNameInput.setEntity(FragmentTemplateDesignEntityGenerator.ENTITY).setAttribute(FragmentTemplateDesignEntityGenerator.fragmentTypeName);
 		closeEditorButton.setEvent(CloseEditorEventGenerator.EVENT);
 		openEditorButton.setEvent(OpenEditorEventGenerator.EVENT);

@@ -77,6 +77,23 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			}
 		};
 	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<java.lang.String>, java.lang.String> themeNames 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<java.lang.String>, java.lang.String>(
+			"themeNames", INSTANCE, java.lang.String.class
+		) {
+			{
+			}
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValues<org.instantlogic.designer.ApplicationDesign, java.lang.String> get(org.instantlogic.designer.ApplicationDesign instance) {
+				return instance.getThemeNamesAttributeValue();
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
+	
 	// Relations
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> caseEntity
@@ -196,6 +213,7 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 		name,
 		rootPackageName,
 		sourcePath,
+		themeNames,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		caseEntity,

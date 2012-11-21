@@ -7,7 +7,7 @@ YUI.add('instantlogic', function (Y) {
 
     ns.createBaseConfiguration = function(YUI) {
     	return {
-    		fragmentNamespaces: [YUI.instantlogic.fragments, YUI.instantlogic.presence],
+    		fragmentNamespaces: [YUI.instantlogic.fragments, YUI.instantlogic.presence, YUI.instantlogic.designer],
     		createAnswer: YUI.instantlogic.answers.createAnswer
     	}
     }
@@ -167,10 +167,11 @@ YUI.add('instantlogic', function (Y) {
                 this.presenceNode.appendChild(this.presenceFragmentHolder.node);
                 diff.nodeAdded(this.presenceFragmentHolder.node);
                 this.presenceFragmentHolder.init(model);
+                diff.apply(false);
             } else {
                 this.presenceFragmentHolder.update(model, diff);
+                diff.apply(!this.configuration.noAnimation);
             }
-            diff.applyNow();
         },
 
         updatePlace: function (model) {
@@ -184,10 +185,11 @@ YUI.add('instantlogic', function (Y) {
                 this.placeNode.appendChild(this.placeFragmentHolder.node);
                 diff.nodeAdded(this.placeFragmentHolder.node);
                 this.placeFragmentHolder.init(model);
+                diff.apply(false);
             } else {
                 this.placeFragmentHolder.update(model, diff);
+                diff.apply(!this.configuration.noAnimation);
             }
-            diff.applyNow();
         },
 
         createFragment: function (name, parentNode, engine) {
@@ -286,10 +288,70 @@ YUI.add('instantlogic', function (Y) {
         nodeUpdated: function (node) {
             this.nodesUpdated.push(node);
         },
+        apply: function(usingAnimation) {
+        	if (usingAnimation) {
+        		this.applyUsingAnimation();
+        	} else {
+        		this.applyNow();
+        	}
+        },
         applyNow: function () {
             for (var i = 0; i < this.nodesToRemove.length; i++) {
                 this.nodesToRemove[i].remove(true);
             }
+        },
+        applyUsingAnimation: function() {
+            var me = this;
+        	// Deletes
+            for (var i = 0; i < this.nodesToRemove.length; i++) {
+            	this.scanNodeForRemoval(this.nodesToRemove[i]);
+            }
+            setTimeout(function(){
+                for (var i = 0; i < me.nodesToRemove.length; i++) {
+                	me.nodesToRemove[i].remove();
+                }
+            }, 1000);
+            // Additions
+            for (var i = 0; i < this.nodesAdded.length; i++) {
+            	this.scanNodeForAdditions(this.nodesAdded[i]);
+            }
+        },
+        scanNodeForRemoval: function(node) {
+        	var deleteMe=true;
+        	node.get('children').each(function(subNode) {
+        		if (subNode.get('nodeType')!=1) {
+        			subNode.remove();
+        		} else { // An element
+        			if (subNode.hasClass('animate-vertically')) {
+        				subNode.transition({duration:1, eading:'ease-out', height:0, opacity:0});
+        				deleteMe = false;
+        			} else {
+        				var deleteSubNode = this.scanNodeForRemoval(subNode);
+        				if (deleteSubNode) {
+        					subNode.remove();
+        				} else {
+        					deleteMe = false;
+        				}
+        			}
+        		}
+        	}, this);
+    		return deleteMe;
+        },
+        scanNodeForAdditions: function(node) {
+        	if (node.hasClass('animate-vertically')) {
+        		var height = node.get('clientHeight');
+        		var oldHeight = node.getStyle('height');
+        		node.setStyle('height', '0px')
+        		node.transition({duration:1, eading:'ease-out', height:height+'px'}, function() {
+        			node.setStyle('height', null);
+        		});
+        	} else {
+            	node.get('children').each(function(subNode) {
+            		if (subNode.get('nodeType')==1) {
+            			this.scanNodeForAdditions(subNode);
+            		}
+            	}, this);
+        	}
         },
         toString: function () {
             return 'Diff';
@@ -636,4 +698,4 @@ YUI.add('instantlogic', function (Y) {
     	return constructor;
     };
     
-}, '0.7.0', { requires: ['io-base', 'node', 'oop', 'panel', 'json', 'event', 'html', 'history', 'overlay'] });
+}, '0.7.0', { requires: ['io-base', 'node', 'oop', 'panel', 'json', 'event', 'html', 'history', 'overlay', 'transition'] });

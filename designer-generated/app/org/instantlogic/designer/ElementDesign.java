@@ -26,6 +26,23 @@ public class ElementDesign extends Design {
 
 	// Attributes
 	
+	private final org.instantlogic.fabric.value.AttributeValue<ElementDesign, java.lang.Boolean> collapsed
+		= createAttributeValue(org.instantlogic.designer.entity.ElementDesignEntity.collapsed);
+	
+	public java.lang.Boolean getCollapsed() {
+		return collapsed.getValue();
+	}
+
+	public org.instantlogic.fabric.value.AttributeValue<ElementDesign, java.lang.Boolean> getCollapsedAttributeValue() {
+		return collapsed;
+	}
+
+	public ElementDesign setCollapsed(java.lang.Boolean newValue) {
+		collapsed.setValue(newValue);
+		return (ElementDesign)this;
+	}
+	
+	
 	private final org.instantlogic.fabric.value.AttributeValue<ElementDesign, java.lang.Boolean> editorOpen
 		= createAttributeValue(org.instantlogic.designer.entity.ElementDesignEntity.editorOpen);
 	
@@ -39,6 +56,23 @@ public class ElementDesign extends Design {
 
 	public ElementDesign setEditorOpen(java.lang.Boolean newValue) {
 		editorOpen.setValue(newValue);
+		return (ElementDesign)this;
+	}
+	
+	
+	private final org.instantlogic.fabric.value.AttributeValue<ElementDesign, java.lang.String> previewMode
+		= createAttributeValue(org.instantlogic.designer.entity.ElementDesignEntity.previewMode);
+	
+	public java.lang.String getPreviewMode() {
+		return previewMode.getValue();
+	}
+
+	public org.instantlogic.fabric.value.AttributeValue<ElementDesign, java.lang.String> getPreviewModeAttributeValue() {
+		return previewMode;
+	}
+
+	public ElementDesign setPreviewMode(java.lang.String newValue) {
+		previewMode.setValue(newValue);
 		return (ElementDesign)this;
 	}
 	

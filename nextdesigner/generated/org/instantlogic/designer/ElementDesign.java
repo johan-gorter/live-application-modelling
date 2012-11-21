@@ -43,6 +43,23 @@ public class ElementDesign extends Design {
 	}
 	
 	
+	private final org.instantlogic.fabric.value.AttributeValue<ElementDesign, java.lang.String> previewMode
+		= createAttributeValue(org.instantlogic.designer.entity.ElementDesignEntity.previewMode);
+	
+	public java.lang.String getPreviewMode() {
+		return previewMode.getValue();
+	}
+
+	public org.instantlogic.fabric.value.AttributeValue<ElementDesign, java.lang.String> getPreviewModeAttributeValue() {
+		return previewMode;
+	}
+
+	public ElementDesign setPreviewMode(java.lang.String newValue) {
+		previewMode.setValue(newValue);
+		return (ElementDesign)this;
+	}
+	
+	
 	// Relations
 
 	// Reverse relations

@@ -123,7 +123,7 @@ YUI.add('instantlogic-fragments', function (Y) {
     // Block: Renders its content on a new line, essentially just a div.
     ns.Block = createFragment({
     	createMarkup: function() {
-    		return html.div();
+    		return html.div({className: 'animate-vertically'});
     	},
 		fragmentLists: function(model) {
 			return [[this.markup, model.content]];
@@ -217,33 +217,6 @@ YUI.add('instantlogic-fragments', function (Y) {
             }
     	}
     });
-    
-    // ElementEditor (uses a new node, next to the designer styled node)
-    ns.ElementEditor = function(parentNode, engine) {
-    	ns.ElementEditor.superclass.constructor.apply(this, arguments);
-    }
-    
-    Y.extend(ns.ElementEditor, Y.instantlogic.Fragment, {
-    	init: function (model) {
-    		var pageRootNode = this.parentNode.ancestor('.designer');
-    		this.node = editorRoot = html.div({className:'element-editor'});
-    		pageRootNode.ancestor().appendChild(editorRoot);
-            this.contentFragmentList = new FragmentList(this.node, this.engine);
-            this.contentFragmentList.init(model.content);
-    	},
-    	
-    	update: function(newModel, diff) {
-            ns.ElementEditor.superclass.update.call(this, newModel, diff);
-            this.contentFragmentList.update(newModel.content, diff);
-    	},
-    	
-    	destroy: function() {
-    		ns.ElementEditor.superclass.destroy.call(this);
-    		this.contentFragmentList.destroy();
-    		this.node.remove();
-    	}
-    });
-    
     
     // Table
     ns.Table = function (parentNode, engine) {

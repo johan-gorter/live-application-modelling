@@ -2,9 +2,12 @@
 .designer .card {border: solid 1px #999999; border-radius: 10px; padding: 0 9px 9px 9px; overflow:hidden;display:block;position:relative;}
 
 /* Element editor */
-.designer .element-editor .button {position:absolute;left:175px;}
-.designer .element-editor .info {display:inline-block;width:245px;border-top: solid 1px #606060;}
-.designer .element-editor .preview {display:inline-block;width:725px;border:solid 1px #606060;}
+.designer .editor {border-top: solid 1px #606060;}
+.designer .preview-line {border-top: solid 1px #606060;width:100%;}
+.designer .preview-line .info {display:inline-block;vertical-align:top;width:300px;}
+.designer .preview-line .preview-container {display:inline-block;width:600px;}
+.designer .preview-line .preview-container iframe {width: 600px;height:100px;overflow:hidden;border:0;}
+.designer .preview-line .editor-toggle {position:absolute;top:0px;left:200px;width:80px;z-index:1;}
 
 .element-editor {width:898px;margin: 0 auto;border: solid 1px #999999; border-top: solid 0px; position: relative; top:-10px; background-color: #FFFFFF; border-radius: 0 0 10px 10px; padding:10px;}
 

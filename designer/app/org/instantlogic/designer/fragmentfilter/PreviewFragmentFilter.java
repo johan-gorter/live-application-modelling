@@ -53,7 +53,7 @@ public class PreviewFragmentFilter implements FragmentFilter {
 	}
 
 	private void addField(Map<String, Object> result, AttributeDesign attribute, EntityDesign entity) {
-		// Behavior should be the same as FielFilter
+		// Behavior should be the same as FieldFilter
 		if (attribute.getQuestion()!=null) {
 			result.put("questionText", renderText(attribute.getQuestion()));
 		} else {

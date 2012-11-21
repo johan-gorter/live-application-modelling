@@ -2,6 +2,8 @@ YUI.add('html', function(Y) {
 	
     // Internet explorer 6 or 7?
     var ie67mode = Y.UA.ie >= 6 && Y.UA.ie < 8;
+    var previousDocumentStack = [];
+    var currentDocument = document;
 
     // Private utility functions
 
@@ -17,7 +19,7 @@ YUI.add('html', function(Y) {
         }
     };
 
-    // IE does not implement the standard way of creating elements and adding attributes like 'name'
+    // IE<=7 does not implement the standard way of creating elements and adding attributes like 'name'
     var createIE67Element = function(tagName, attributes) {
         var string = '<' + tagName + ' ';
         for (var attribute in attributes) {
@@ -65,7 +67,7 @@ YUI.add('html', function(Y) {
 	
 	Y.html = {
         // Returns a function which can be used to create elements with a specific tagName.
-        // See generic.js for examples. The returned function can handle the following:
+        // The returned function can handle the following:
         // - (Optional first argument) object containing attributes for the element
         //       Note: Use 'className' instead of 'class'. Also use 'htmlFor' instead of 'for'
         // - Other HTMLElements
@@ -73,10 +75,19 @@ YUI.add('html', function(Y) {
         // - Array, will be recursed
         createElementFactory: function(tagName) {
             return function() {
-                var result = Y.Node.one(document.createElement(tagName));
+                var result = Y.Node.one(currentDocument.createElement(tagName));
                 result = addChildNodes(result, arguments, true);
                 return result;
             };
+        },
+        
+        pushDocument: function(doc) {
+        	previousDocumentStack.push(currentDocument);
+        	currentDocument = doc;
+        },
+        
+        popDocument: function() {
+        	currentDocument = previousDocumentStack.pop();
         }
 	};
 	
