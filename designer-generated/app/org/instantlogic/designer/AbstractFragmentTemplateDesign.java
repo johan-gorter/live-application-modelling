@@ -209,6 +209,29 @@ public abstract class AbstractFragmentTemplateDesign extends ElementDesign {
 		return (FragmentTemplateDesign)this;
 	}
 	
+	
+	private final org.instantlogic.fabric.value.RelationValue<FragmentTemplateDesign, FragmentTypeDesign> type
+		= createRelationValue(org.instantlogic.designer.entity.FragmentTemplateDesignEntity.type);
+		
+	public org.instantlogic.fabric.value.RelationValue<FragmentTemplateDesign, FragmentTypeDesign> getTypeRelationValue() {
+		return type;
+	}
+
+	public org.instantlogic.designer.FragmentTypeDesign getType() {
+		return type.getValue();
+	}
+	
+	public FragmentTemplateDesign setType(org.instantlogic.designer.FragmentTypeDesign newValue) {
+		type.setValue(newValue);
+		return (FragmentTemplateDesign)this;
+	}
+	
+	public org.instantlogic.designer.FragmentTypeDesign newType() {
+		org.instantlogic.designer.FragmentTypeDesign newValue = new org.instantlogic.designer.FragmentTypeDesign(); 
+		type.setValue(newValue);
+		return newValue;
+	}
+
 
 	// Reverse relations
 

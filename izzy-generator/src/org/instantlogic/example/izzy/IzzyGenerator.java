@@ -15,6 +15,7 @@ import org.instantlogic.designer.EventDesign;
 import org.instantlogic.designer.FlowDesign;
 import org.instantlogic.designer.FlowEdgeDesign;
 import org.instantlogic.designer.FragmentTemplateDesign;
+import org.instantlogic.designer.FragmentTypeDesign;
 import org.instantlogic.designer.PlaceTemplateDesign;
 import org.instantlogic.designer.RelationDesign;
 import org.instantlogic.designer.SelectionDesign;
@@ -39,7 +40,7 @@ public class IzzyGenerator extends Design {
 	
 	private static EventDesign createIssueEvent;
 	private static EventDesign issueDetailsEvent;
-
+	
 	private static PlaceTemplateDesign dashboardPlaceTemplate;
 	private static PlaceTemplateDesign issueDetailsPlaceTemplate;
 
@@ -85,12 +86,17 @@ public class IzzyGenerator extends Design {
 		createIssueFlow = new FlowDesign("create issue").setApplication(izzy);
 		createIssueFlow.setIsCustomized(true);
 
+		createFragmentTypes();
+		
 		createDashboardPlaceTemplate();
 		createIssueDetailsPlaceTemplate();
 		
 		initMainFlow();
 		initIssueFlow();
 
+		dashboardPlaceTemplate.lookUpTypes();
+		issueDetailsPlaceTemplate.lookUpTypes();
+		
 		// Application
 		izzy.setSourcePath("../izzy/generated");
 		izzy.setMainFlow(mainFlow);
@@ -108,6 +114,18 @@ public class IzzyGenerator extends Design {
 	}
 	
 	// Flows
+
+	private static void createFragmentTypes() {
+		izzy.addToFragmentTypes((FragmentTypeDesign) new FragmentTypeDesign().setName("Page"));
+		izzy.addToFragmentTypes((FragmentTypeDesign) new FragmentTypeDesign().setName("Paragraph"));
+		izzy.addToFragmentTypes((FragmentTypeDesign) new FragmentTypeDesign().setHasAttribute(true).setName("Input"));
+		izzy.addToFragmentTypes((FragmentTypeDesign) new FragmentTypeDesign().setName("Table"));
+		izzy.addToFragmentTypes((FragmentTypeDesign) new FragmentTypeDesign().setName("Row"));
+		izzy.addToFragmentTypes((FragmentTypeDesign) new FragmentTypeDesign().setName("Column"));
+		izzy.addToFragmentTypes((FragmentTypeDesign) new FragmentTypeDesign().setName("Cell"));
+		izzy.addToFragmentTypes((FragmentTypeDesign) new FragmentTypeDesign().setHasEvent(true).setName("Link"));
+		izzy.addToFragmentTypes((FragmentTypeDesign) new FragmentTypeDesign().setHasEvent(true).setName("Button"));
+	}
 
 	private static void initIssueFlow() {
 		new FlowEdgeDesign()

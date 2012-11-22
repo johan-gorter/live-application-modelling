@@ -21,6 +21,10 @@ public class SingleInstanceDeductionContext extends DeductionContext {
 		if (Entity.extendsFrom(instance.getInstanceEntity(), entity)) {
 			return (I)instance;
 		}
+		Instance instanceCase = instance.getMetadata().getCase(); // The case to which the instance belongs is also checked.
+		if (Entity.extendsFrom(instanceCase.getInstanceEntity(), entity)) {
+			return (I)instanceCase;
+		}
 		throw new RuntimeException("No active instance of entity "+entity.getName());
 	}
 

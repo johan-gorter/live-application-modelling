@@ -78,53 +78,53 @@ public class ElementEditorPageFragment extends org.instantlogic.interaction.page
 
 	
 	public static final org.instantlogic.interaction.page.Element SHARED_INSTANCE = 
-        new org.instantlogic.interaction.page.FragmentTemplate("S57F1", "Block")      .setStyleNames(new String[]{"element"})
+        new org.instantlogic.interaction.page.FragmentTemplate("S58F1", "Block")      .setStyleNames(new String[]{"element"})
       
         .putChildren("content",
                 new org.instantlogic.interaction.page.SelectionElement(createDeduction0()
 ,                        new org.instantlogic.interaction.page.IfElseElement(createDeduction1(),
         new org.instantlogic.interaction.page.Element[] {
-                                new org.instantlogic.interaction.page.FragmentTemplate("S57F1P1S1I1F2", "Block")      .setStyleNames(new String[]{"editor"})
+                                new org.instantlogic.interaction.page.FragmentTemplate("S58F1P1S1I1F2", "Block")      .setStyleNames(new String[]{"editor"})
       
                                 .putChildren("content",
-                                        new org.instantlogic.interaction.page.FragmentTemplate("S57F1P1S1I1F2P1F1", "Input")      .setField(org.instantlogic.designer.entity.FragmentTemplateDesignEntity.INSTANCE, org.instantlogic.designer.entity.FragmentTemplateDesignEntity.fragmentTypeName)
+                                        new org.instantlogic.interaction.page.FragmentTemplate("S58F1P1S1I1F2P1F1", "Input")      .setField(org.instantlogic.designer.entity.FragmentTemplateDesignEntity.INSTANCE, org.instantlogic.designer.entity.FragmentTemplateDesignEntity.type)
                                 )
         },
         new org.instantlogic.interaction.page.Element[] {
         }
 )
-,                        new org.instantlogic.interaction.page.FragmentTemplate("S57F1P1S1F2", "PreviewLine")      
+,                        new org.instantlogic.interaction.page.FragmentTemplate("S58F1P1S1F2", "PreviewLine")      
                         .putValue("previewMode", createDeduction2())      
                         .putChildren("content",
                                 new org.instantlogic.interaction.page.IfElseElement(createDeduction3(),
         new org.instantlogic.interaction.page.Element[] {
-                                        new org.instantlogic.interaction.page.FragmentTemplate("S57F1P1S1F2P2I1F2", "Button")      .setStyleNames(new String[]{"editor-toggle"})
+                                        new org.instantlogic.interaction.page.FragmentTemplate("S58F1P1S1F2P2I1F2", "Button")      .setStyleNames(new String[]{"editor-toggle"})
       .setEvent(org.instantlogic.designer.event.CloseEditorEvent.INSTANCE)
       
                                         .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Close editor")))
         },
         new org.instantlogic.interaction.page.Element[] {
-                                        new org.instantlogic.interaction.page.FragmentTemplate("S57F1P1S1F2P2I1F3", "Button")      .setStyleNames(new String[]{"editor-toggle"})
+                                        new org.instantlogic.interaction.page.FragmentTemplate("S58F1P1S1F2P2I1F3", "Button")      .setStyleNames(new String[]{"editor-toggle"})
       .setEvent(org.instantlogic.designer.event.OpenEditorEvent.INSTANCE)
       
                                         .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Edit")))
         }
 )
 ,
-                                new org.instantlogic.interaction.page.FragmentTemplate("S57F1P1S1F2P2F2", "Block")      .setStyleNames(new String[]{"info"})
+                                new org.instantlogic.interaction.page.FragmentTemplate("S58F1P1S1F2P2F2", "Block")      .setStyleNames(new String[]{"info"})
       
                                 .putChildren("content",
-                                        new org.instantlogic.interaction.page.FragmentTemplate("S57F1P1S1F2P2F2P1F1", "Paragraph")      
+                                        new org.instantlogic.interaction.page.FragmentTemplate("S58F1P1S1F2P2F2P1F1", "Paragraph")      
                                         .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction4())))
                                 )
 ,
-                                new org.instantlogic.interaction.page.FragmentTemplate("S57F1P1S1F2P2F3", "Preview")      
+                                new org.instantlogic.interaction.page.FragmentTemplate("S58F1P1S1F2P2F3", "Preview")      
                                 .putChildren("content",
-                                        new org.instantlogic.interaction.page.FragmentTemplate("S57F1P1S1F2P2F3P1F1", "ReplacedByFilter")          .addCustomFilter(new org.instantlogic.designer.fragmentfilter.PreviewFragmentFilter())
+                                        new org.instantlogic.interaction.page.FragmentTemplate("S58F1P1S1F2P2F3P1F1", "PreviewPlaceholder")          .addCustomFilter(new org.instantlogic.designer.fragmentfilter.PreviewFragmentFilter())
                                 )
                         )
 ,                        new org.instantlogic.interaction.page.SelectionElement(createDeduction5()
-,                                new org.instantlogic.interaction.page.FragmentTemplate("S57F1P1S1S3F1", "Paragraph")      
+,                                new org.instantlogic.interaction.page.FragmentTemplate("S58F1P1S1S3F1", "Paragraph")      
                                 .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction6())))
 ,                                new org.instantlogic.interaction.page.SelectionElement(createDeduction7()
 ,                                            org.instantlogic.designer.sharedpagefragment.ElementEditorPageFragment.INSTANCE

@@ -45,14 +45,7 @@ public class ElementDesignEntity extends org.instantlogic.fabric.model.Entity<or
 	}
 
 
-	private static org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> createDeduction1() {
-		  	org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> d0 
-		  		= org.instantlogic.fabric.deduction.ConstantDeduction.create(true);
-		return d0;
-	}
-
-
-	private static org.instantlogic.fabric.deduction.Deduction<java.lang.String> createDeduction2() {
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.String> createDeduction1() {
 		  	org.instantlogic.fabric.deduction.Deduction<java.lang.String> d0 
 		  		= org.instantlogic.fabric.deduction.ConstantDeduction.create("mobile");
 		return d0;
@@ -60,28 +53,6 @@ public class ElementDesignEntity extends org.instantlogic.fabric.model.Entity<or
 
 	
 	// Attributes
-	
-	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.ElementDesign, java.lang.Boolean, java.lang.Boolean> collapsed 
-		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.ElementDesign, java.lang.Boolean, java.lang.Boolean>(
-			"collapsed", INSTANCE, java.lang.Boolean.class
-		) {
-			{
-			}
-	
-			@Override
-			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.ElementDesign, java.lang.Boolean> get(org.instantlogic.designer.ElementDesign instance) {
-				return instance.getCollapsedAttributeValue();
-			}
-
-            private org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> defaultDeduction;
-            @Override
-            public org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> getDefault() {
-                if (defaultDeduction==null) {
-                    defaultDeduction = createDeduction1();
-                }
-                return defaultDeduction;
-            }
-		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.ElementDesign, java.lang.Boolean, java.lang.Boolean> editorOpen 
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.ElementDesign, java.lang.Boolean, java.lang.Boolean>(
@@ -121,7 +92,7 @@ public class ElementDesignEntity extends org.instantlogic.fabric.model.Entity<or
             @Override
             public org.instantlogic.fabric.deduction.Deduction<java.lang.String> getDefault() {
                 if (defaultDeduction==null) {
-                    defaultDeduction = createDeduction2();
+                    defaultDeduction = createDeduction1();
                 }
                 return defaultDeduction;
             }
@@ -196,7 +167,6 @@ public class ElementDesignEntity extends org.instantlogic.fabric.model.Entity<or
 		};
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
-		collapsed,
 		editorOpen,
 		previewMode,
 	};

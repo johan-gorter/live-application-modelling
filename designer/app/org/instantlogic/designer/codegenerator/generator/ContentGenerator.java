@@ -26,7 +26,11 @@ public abstract class ContentGenerator extends AbstractGenerator {
 		} else if (element instanceof FragmentTemplateDesign) {
 			FragmentTemplateDesign fragmentTemplate = (FragmentTemplateDesign) element;
 			model.category = Category.Fragment;
-			model.fragmentTypeName= fragmentTemplate.getFragmentTypeName();
+			if (fragmentTemplate.getType()!=null) {
+				model.fragmentTypeName = fragmentTemplate.getType().getName(); // Official way
+			} else {
+				model.fragmentTypeName= fragmentTemplate.getFragmentTypeName(); // Unofficial way				
+			}
 			for (PropertyDesign property:fragmentTemplate.getProperties()) {
 				String propertyName = property.getPropertyName();
 				if (propertyName==null) continue;
