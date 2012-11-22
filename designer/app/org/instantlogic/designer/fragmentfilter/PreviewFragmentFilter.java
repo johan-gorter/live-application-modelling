@@ -32,7 +32,11 @@ public class PreviewFragmentFilter implements FragmentFilter {
 		Map<String, Object> result = chain.render(renderContext);
 		if (element instanceof FragmentTemplateDesign) {
 			FragmentTemplateDesign template = (FragmentTemplateDesign) element;
-			result.put("type", template.getFragmentTypeName());
+			if (template.getType()!=null) {
+				result.put("type", template.getType().getName()); // Official way
+			} else {
+				result.put("type", template.getFragmentTypeName()); // Unofficial way
+			}
 			for (PropertyDesign property : template.getProperties()) {
 				if (property.getChildren().size()>0) {
 					result.put(property.getName(), createDummyBlock(property.getName()));

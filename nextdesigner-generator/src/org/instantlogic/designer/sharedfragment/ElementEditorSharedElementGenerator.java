@@ -28,7 +28,7 @@ public class ElementEditorSharedElementGenerator extends SharedElementDefinition
 	public void init() {
 		DeductionSchemeDesign fragmentType, propertyName, editorOpen1, editorOpen2, previewMode;
 		SelectionDesign asFragmentTemplate, selectProperties, selectPropertyChildren;
-		FragmentTemplateDesign fragmentTypeNameInput;
+		FragmentTemplateDesign fragmentTypeInput;
 		FragmentTemplateDesign openEditorButton, closeEditorButton;
 		SharedElementDesign recursiveElementEditor;
 		
@@ -42,7 +42,7 @@ public class ElementEditorSharedElementGenerator extends SharedElementDefinition
 								.addToIfChildren(
 									new FragmentTemplateDesign("Block").addToStyleNames("editor")
 										.setChildren("content", 
-											fragmentTypeNameInput = new FragmentTemplateDesign("Input")
+											fragmentTypeInput = new FragmentTemplateDesign("Input")
 										)
 								)
 						)
@@ -64,7 +64,7 @@ public class ElementEditorSharedElementGenerator extends SharedElementDefinition
 									),
 								new FragmentTemplateDesign("Preview")
 									.setChildren("content",
-										new FragmentTemplateDesign("ReplacedByFilter").addToFragmentFilters("org.instantlogic.designer.fragmentfilter.PreviewFragmentFilter")
+										new FragmentTemplateDesign("PreviewPlaceholder").addToFragmentFilters("org.instantlogic.designer.fragmentfilter.PreviewFragmentFilter")
 									)
 							)
 						)
@@ -89,7 +89,7 @@ public class ElementEditorSharedElementGenerator extends SharedElementDefinition
 		editorOpen1.deduceAttribute(ElementDesignEntityGenerator.editorOpen);
 		editorOpen2.deduceAttribute(ElementDesignEntityGenerator.editorOpen);
 		previewMode.deduceAttribute(ElementDesignEntityGenerator.previewMode);
-		fragmentTypeNameInput.setEntity(FragmentTemplateDesignEntityGenerator.ENTITY).setAttribute(FragmentTemplateDesignEntityGenerator.fragmentTypeName);
+		fragmentTypeInput.setEntity(FragmentTemplateDesignEntityGenerator.ENTITY).setAttribute(FragmentTemplateDesignEntityGenerator.type);
 		closeEditorButton.setEvent(CloseEditorEventGenerator.EVENT);
 		openEditorButton.setEvent(OpenEditorEventGenerator.EVENT);
 		

@@ -26,23 +26,6 @@ public class ElementDesign extends Design {
 
 	// Attributes
 	
-	private final org.instantlogic.fabric.value.AttributeValue<ElementDesign, java.lang.Boolean> collapsed
-		= createAttributeValue(org.instantlogic.designer.entity.ElementDesignEntity.collapsed);
-	
-	public java.lang.Boolean getCollapsed() {
-		return collapsed.getValue();
-	}
-
-	public org.instantlogic.fabric.value.AttributeValue<ElementDesign, java.lang.Boolean> getCollapsedAttributeValue() {
-		return collapsed;
-	}
-
-	public ElementDesign setCollapsed(java.lang.Boolean newValue) {
-		collapsed.setValue(newValue);
-		return (ElementDesign)this;
-	}
-	
-	
 	private final org.instantlogic.fabric.value.AttributeValue<ElementDesign, java.lang.Boolean> editorOpen
 		= createAttributeValue(org.instantlogic.designer.entity.ElementDesignEntity.editorOpen);
 	

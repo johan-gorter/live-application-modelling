@@ -22,8 +22,37 @@ public class PropertyDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	}
 
 	// Deductions
+
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> createDeduction0() {
+		  	org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> d0 
+		  		= org.instantlogic.fabric.deduction.ConstantDeduction.create(true);
+		return d0;
+	}
+
 	
 	// Attributes
+	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.PropertyDesign, java.lang.Boolean, java.lang.Boolean> collapsed 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.PropertyDesign, java.lang.Boolean, java.lang.Boolean>(
+			"collapsed", INSTANCE, java.lang.Boolean.class
+		) {
+			{
+			}
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.PropertyDesign, java.lang.Boolean> get(org.instantlogic.designer.PropertyDesign instance) {
+				return instance.getCollapsedAttributeValue();
+			}
+
+            private org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> defaultDeduction;
+            @Override
+            public org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> getDefault() {
+                if (defaultDeduction==null) {
+                    defaultDeduction = createDeduction0();
+                }
+                return defaultDeduction;
+            }
+		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.PropertyDesign, java.lang.String, java.lang.String> propertyName 
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.designer.PropertyDesign, java.lang.String, java.lang.String>(
@@ -114,6 +143,7 @@ public class PropertyDesignEntity extends org.instantlogic.fabric.model.Entity<o
 		};
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
+		collapsed,
 		propertyName,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{

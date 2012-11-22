@@ -247,6 +247,38 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 	}
 	
 	
+	private final org.instantlogic.fabric.value.RelationValues<ApplicationDesign, FragmentTypeDesign> fragmentTypes
+		= createRelationValues(org.instantlogic.designer.entity.ApplicationDesignEntity.fragmentTypes);
+		
+	public org.instantlogic.fabric.value.RelationValues<ApplicationDesign, FragmentTypeDesign> getFragmentTypesRelationValue() {
+		return fragmentTypes;
+	}
+
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentTypeDesign> getFragmentTypes() {
+		return fragmentTypes.getValue();
+	}
+	
+	public ApplicationDesign addToFragmentTypes(FragmentTypeDesign item) {
+		fragmentTypes.addValue(item);
+		return (ApplicationDesign)this;
+	}
+	
+	public ApplicationDesign addToFragmentTypes(FragmentTypeDesign item, int index) {
+		fragmentTypes.insertValue(item, index);
+		return (ApplicationDesign)this;
+	}
+	
+	public ApplicationDesign removeFromFragmentTypes(FragmentTypeDesign item) {
+		fragmentTypes.removeValue(item);
+		return (ApplicationDesign)this;
+	}
+	
+	public ApplicationDesign removeFromFragmentTypes(int index) {
+		fragmentTypes.removeValue(index);
+		return (ApplicationDesign)this;
+	}
+	
+	
 	private final org.instantlogic.fabric.value.RelationValue<ApplicationDesign, FlowDesign> mainFlow
 		= createRelationValue(org.instantlogic.designer.entity.ApplicationDesignEntity.mainFlow);
 		

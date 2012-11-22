@@ -26,6 +26,15 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 	}
 
 	// Deductions
+
+	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentTypeDesign>> createDeduction0() {
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.ApplicationDesign> d0 
+		  		= org.instantlogic.fabric.deduction.SelectedInstanceDeduction.create(org.instantlogic.designer.entity.ApplicationDesignEntity.INSTANCE);
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentTypeDesign>> d1 
+		  		= org.instantlogic.fabric.deduction.AttributeDeduction.create(org.instantlogic.designer.entity.ApplicationDesignEntity.fragmentTypes, d0);
+		return d1;
+	}
+
 	
 	// Attributes
 	
@@ -138,6 +147,28 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 			}
 		};
 	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentTypeDesign, org.instantlogic.designer.FragmentTypeDesign> type
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentTypeDesign, org.instantlogic.designer.FragmentTypeDesign>(
+			"type", INSTANCE, org.instantlogic.designer.entity.FragmentTypeDesignEntity.INSTANCE, org.instantlogic.designer.FragmentTypeDesign.class, 
+			org.instantlogic.designer.entity.FragmentTypeDesignEntity.usages
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.FragmentTypeDesign> get(
+					org.instantlogic.designer.FragmentTemplateDesign instance) {
+				return instance.getTypeRelationValue();
+			}
+			
+			private org.instantlogic.fabric.deduction.Deduction<? extends java.lang.Iterable<org.instantlogic.designer.FragmentTypeDesign>> options;
+			@Override
+			public org.instantlogic.fabric.deduction.Deduction<? extends java.lang.Iterable<org.instantlogic.designer.FragmentTypeDesign>> getOptions() {
+				if (options==null) {
+					options = (org.instantlogic.fabric.deduction.Deduction)createDeduction0();
+				}
+				return options;
+			};
+		};
+	
 	// Reverse relations
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
@@ -150,6 +181,7 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 		entity,
 		event,
 		properties,
+		type,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 	};
