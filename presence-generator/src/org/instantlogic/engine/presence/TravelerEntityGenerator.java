@@ -20,6 +20,7 @@ public class TravelerEntityGenerator extends EntityDesign {
     public static final AttributeDesign id = addAttribute(ENTITY, "id", DataCategoryDesign.text);
     public static final AttributeDesign communicatorVisible = addAttribute(ENTITY, "communicatorVisible", DataCategoryDesign._boolean);
     public static final AttributeDesign debugVisible = addAttribute(ENTITY, "debugVisible", DataCategoryDesign._boolean);
+    public static final AttributeDesign focus = addAttribute(ENTITY, "focus", DataCategoryDesign.text);
 
     // Relations
     public static final RelationDesign currentPlace = addRelation(ENTITY, "currentPlace", RelationType.ManyToZeroOrOne, PlaceEntityGenerator.ENTITY)

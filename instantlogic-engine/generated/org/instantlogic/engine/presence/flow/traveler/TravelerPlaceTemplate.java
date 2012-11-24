@@ -100,6 +100,44 @@ public class TravelerPlaceTemplate extends org.instantlogic.interaction.flow.Pla
 		return d2;
 	}
 
+
+	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.engine.presence.Place> createDeduction10() {
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.engine.presence.Traveler> d0 
+		  		= org.instantlogic.fabric.deduction.SelectedInstanceDeduction.create(org.instantlogic.engine.presence.entity.TravelerEntity.INSTANCE);
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.engine.presence.Place> d1 
+		  		= org.instantlogic.fabric.deduction.AttributeDeduction.create(org.instantlogic.engine.presence.entity.TravelerEntity.currentPlace, d0);
+		return d1;
+	}
+
+
+	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.Traveler>> createDeduction11() {
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.engine.presence.Place> d0 
+		  		= org.instantlogic.fabric.deduction.SelectedInstanceDeduction.create(org.instantlogic.engine.presence.entity.PlaceEntity.INSTANCE);
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.fabric.value.Multi<org.instantlogic.engine.presence.Traveler>> d1 
+		  		= org.instantlogic.fabric.deduction.ReverseRelationDeduction.create(org.instantlogic.engine.presence.entity.TravelerEntity.currentPlace, d0);
+		return d1;
+	}
+
+
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.String> createDeduction12() {
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.engine.presence.Traveler> d0 
+		  		= org.instantlogic.fabric.deduction.SelectedInstanceDeduction.create(org.instantlogic.engine.presence.entity.TravelerEntity.INSTANCE);
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.engine.presence.User> d1 
+		  		= org.instantlogic.fabric.deduction.AttributeDeduction.create(org.instantlogic.engine.presence.entity.TravelerEntity.user, d0);
+		  	org.instantlogic.fabric.deduction.Deduction<java.lang.String> d2 
+		  		= org.instantlogic.fabric.deduction.AttributeDeduction.create(org.instantlogic.engine.presence.entity.UserEntity.username, d1);
+		return d2;
+	}
+
+
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.String> createDeduction13() {
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.engine.presence.Traveler> d0 
+		  		= org.instantlogic.fabric.deduction.SelectedInstanceDeduction.create(org.instantlogic.engine.presence.entity.TravelerEntity.INSTANCE);
+		  	org.instantlogic.fabric.deduction.Deduction<java.lang.String> d1 
+		  		= org.instantlogic.fabric.deduction.AttributeDeduction.create(org.instantlogic.engine.presence.entity.TravelerEntity.focus, d0);
+		return d1;
+	}
+
 	
 	private static org.instantlogic.interaction.page.FragmentTemplate CONTENT = 
         new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1", "Presence")      
@@ -126,9 +164,15 @@ public class TravelerPlaceTemplate extends org.instantlogic.interaction.flow.Pla
         new org.instantlogic.interaction.page.Element[] {
                                 new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1P3I1I4F3", "ShowCommunicatorButton")        }
 )
+,                        new org.instantlogic.interaction.page.SelectionElement(createDeduction10()
+,                                new org.instantlogic.interaction.page.SelectionElement(createDeduction11()
+,                                        new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1P3I1S5S2F2", "Avatar")      
+                                        .putValue("username", createDeduction12())      
+                                        .putValue("focus", createDeduction13()))
+)
         },
         new org.instantlogic.interaction.page.Element[] {
-                        new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1P3I1F5", "Login")        }
+                        new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1P3I1F6", "Login")        }
 )
         )
 ; 

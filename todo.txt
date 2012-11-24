@@ -29,3 +29,38 @@ Ritadministratie
 - Look and feel moderniseren
 - route inzichtelijker maken (laatste lokatie naar links)
 
+-------------------------------
+
+Transcript
+
+Hello, my name is Johan Gorter and I am going to demonstrate what instantlogic is about.
+
+Here you can see Izzy. Izzy is a webapplication created using instantlogic. 
+Izzy is a prototype of an issue management system. At first, Izzy does not seem to be that special.
+I can view my dashboard and i can navigate to issue xyz.
+
+But let me show you what happens when another user enters the application. 
+This is Emma. Emma can see that I am currently accessing issue xyz. 
+When I change the headline of issue xyz, that change is propagated through the
+application immediately. I can also assign issue xyz to Emma, which she notices instantly.
+Emma can also join me at issue xyz and we can now see each other.
+
+So what makes instantlogic applications special?
+ - They are cooperative, interactive and fun.
+ - Pages have turned into places, where users can come and work together.
+ - There are no Ok and Cancel buttons, every change you make is effective immediately.
+
+What if you want to make changes to an instantlogic application? I can check the debug checkbox
+and red labels appear. When I click this label I can select 'Insert below'.
+A new window has now opened showing another instantlogic application, the designer. 
+The designer can be used to create and modify instantlogic applications. 
+A new element has just been added to the place.
+I can specify that it will be an Input, select the entity issue and select attribute 'create new'
+Now I can add the new attribute to the entity issue.
+I can now fill in 'story points' 'number', 'whole number'
+
+What I am now currently working on is showing the changes you make in the designer immediately
+in the instantlogic application. I am going to do that using byte-code generation. This is still work
+in progress, but the results are promising.
+
+

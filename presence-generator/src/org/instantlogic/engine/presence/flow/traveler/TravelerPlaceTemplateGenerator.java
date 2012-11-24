@@ -22,7 +22,7 @@ public class TravelerPlaceTemplateGenerator extends PlaceTemplateDesign {
 	@Override
 	public void init() {
 		DeductionSchemeDesign applicationNameDeduction, caseNameDeduction, userHasValue, travelerUsername, communicatorVisible, 
-			activeUsers, username, userTravelers, travelerId, travelerPlaceUrl;
+			activeUsers, username, userTravelers, travelerId, travelerPlaceUrl, visitors, username2, focus, currentPlace;
 		FragmentTemplateDesign debugVisible;
 		
 		setContent(
@@ -61,6 +61,19 @@ public class TravelerPlaceTemplateGenerator extends PlaceTemplateDesign {
 								)
 								.addToElseChildren(new FragmentTemplateDesign("ShowCommunicatorButton"))								
 						)
+						.addToIfChildren(
+							new SelectionDesign()
+								.setSelection(currentPlace = new DeductionSchemeDesign())
+								.addToChildren(
+									new SelectionDesign()
+										.setSelection(visitors = new DeductionSchemeDesign())
+										.addToChildren(
+											new FragmentTemplateDesign("Avatar")
+												.setValue("username", username2 = new DeductionSchemeDesign())
+												.setValue("focus", focus = new DeductionSchemeDesign())
+										)
+								)
+						)
 						.addToElseChildren(new FragmentTemplateDesign("Login"))
 					
 				})
@@ -82,6 +95,10 @@ public class TravelerPlaceTemplateGenerator extends PlaceTemplateDesign {
 		travelerId.deduceAttribute(TravelerEntityGenerator.id);
 		travelerPlaceUrl.deduceAttribute(PlaceEntityGenerator.url, 
 			travelerPlaceUrl.deduceRelation(TravelerEntityGenerator.currentPlace));
+		visitors.deduceReverseRelation(TravelerEntityGenerator.currentPlace, visitors.deduceSelectedInstance(PlaceEntityGenerator.ENTITY));
+		username2.deduceAttribute(UserEntityGenerator.username, username2.deduceRelation(TravelerEntityGenerator.user));
+		currentPlace.deduceRelation(TravelerEntityGenerator.currentPlace);
+		focus.deduceAttribute(TravelerEntityGenerator.focus);
 		
 		debugVisible.setEntity(TravelerEntityGenerator.ENTITY).setAttribute(TravelerEntityGenerator.debugVisible);
 	}

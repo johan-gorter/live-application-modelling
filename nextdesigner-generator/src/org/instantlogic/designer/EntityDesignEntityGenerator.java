@@ -1,5 +1,7 @@
 package org.instantlogic.designer;
 
+import org.instantlogic.designer.EntityDesign.RelationType;
+
 
 
 public class EntityDesignEntityGenerator extends EntityDesign {
@@ -16,6 +18,8 @@ public class EntityDesignEntityGenerator extends EntityDesign {
     // Attributes
 
     // Relations
+    public static final RelationDesign title = addRelation(ENTITY, "title", RelationType.OneToZeroOrOneAggregation, TextTemplateDesignEntityGenerator.ENTITY)
+            .setReverseName("titleOfEntity");
     public static final RelationDesign extendsFrom = addRelation(ENTITY, "extendsFrom", RelationType.ManyToZeroOrOne, EntityDesignEntityGenerator.ENTITY)
             .setReverseName("extensions");
     public static final RelationDesign attributes = addRelation(ENTITY, "attributes", RelationType.OneToManyAggregation, AttributeDesignEntityGenerator.ENTITY)

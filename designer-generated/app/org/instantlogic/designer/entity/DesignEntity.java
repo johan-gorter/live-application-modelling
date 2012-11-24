@@ -7,8 +7,8 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 
 	private static final org.instantlogic.fabric.model.Entity<?>[] EXTENSIONS = new org.instantlogic.fabric.model.Entity<?>[] {
 		org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE,
-		org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE,
 		org.instantlogic.designer.entity.TextTemplateDesignEntity.INSTANCE,
+		org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE,
 		org.instantlogic.designer.entity.StaticInstanceDesignEntity.INSTANCE,
 		org.instantlogic.designer.entity.FlowDesignEntity.INSTANCE,
 		org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.INSTANCE,

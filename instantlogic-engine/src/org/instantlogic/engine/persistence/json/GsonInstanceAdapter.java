@@ -138,10 +138,10 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 			if (!attribute.isReadOnly()) {
 				if (data.has(attribute.getName())) {
 					JsonElement value = data.get(attribute.getName());
-					AttributeValue attributeValue = (AttributeValue) attribute.get(result);
 					if (attribute.isMultivalue()) {
-						setMultivalueAttribute(attribute, (AttributeValues) attributeValue, value);
+						setMultivalueAttribute(attribute, (AttributeValues) attribute.get(result), value);
 					} else {
+						AttributeValue attributeValue = (AttributeValue) attribute.get(result);
 						attributeValue.setValue(toPrimitive(attribute, value));
 					}
 				}

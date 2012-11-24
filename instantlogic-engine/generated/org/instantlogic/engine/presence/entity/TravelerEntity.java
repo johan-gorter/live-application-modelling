@@ -3,6 +3,8 @@ package org.instantlogic.engine.presence.entity;
 public class TravelerEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.engine.presence.Traveler> {
 
 	public static final TravelerEntity INSTANCE = new TravelerEntity();
+
+
 	
 
 	
@@ -75,6 +77,20 @@ public class TravelerEntity extends org.instantlogic.fabric.model.Entity<org.ins
 			}
 		};
 	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.engine.presence.Traveler, java.lang.String, java.lang.String> focus 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.engine.presence.Traveler, java.lang.String, java.lang.String>(
+			"focus", INSTANCE, java.lang.String.class
+		) {
+			{
+				dataType.put("category", "text");
+			}
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.engine.presence.Traveler, java.lang.String> get(org.instantlogic.engine.presence.Traveler instance) {
+				return instance.getFocusAttributeValue();
+			}
+		};
+	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.engine.presence.Traveler, java.lang.String, java.lang.String> id 
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.engine.presence.Traveler, java.lang.String, java.lang.String>(
 			"id", INSTANCE, java.lang.String.class
@@ -138,6 +154,7 @@ public class TravelerEntity extends org.instantlogic.fabric.model.Entity<org.ins
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
 		communicatorVisible,
 		debugVisible,
+		focus,
 		id,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{

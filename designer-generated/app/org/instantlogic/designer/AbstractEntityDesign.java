@@ -169,6 +169,29 @@ public abstract class AbstractEntityDesign extends Design {
 		return (EntityDesign)this;
 	}
 	
+	
+	private final org.instantlogic.fabric.value.RelationValue<EntityDesign, TextTemplateDesign> title
+		= createRelationValue(org.instantlogic.designer.entity.EntityDesignEntity.title);
+		
+	public org.instantlogic.fabric.value.RelationValue<EntityDesign, TextTemplateDesign> getTitleRelationValue() {
+		return title;
+	}
+
+	public org.instantlogic.designer.TextTemplateDesign getTitle() {
+		return title.getValue();
+	}
+	
+	public EntityDesign setTitle(org.instantlogic.designer.TextTemplateDesign newValue) {
+		title.setValue(newValue);
+		return (EntityDesign)this;
+	}
+	
+	public org.instantlogic.designer.TextTemplateDesign newTitle() {
+		org.instantlogic.designer.TextTemplateDesign newValue = new org.instantlogic.designer.TextTemplateDesign(); 
+		title.setValue(newValue);
+		return newValue;
+	}
+
 
 	// Reverse relations
 	
