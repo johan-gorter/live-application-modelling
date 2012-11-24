@@ -3,6 +3,8 @@ package org.instantlogic.engine.presence.entity;
 public class UserEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.engine.presence.User> {
 
 	public static final UserEntity INSTANCE = new UserEntity();
+
+
 	
 
 	

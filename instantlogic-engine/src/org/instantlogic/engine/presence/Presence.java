@@ -12,6 +12,7 @@ public class Presence extends AbstractPresence {
 	
 	public Place enter(Traveler traveler, String url) {
 		traveler.setCurrentPlace(null);
+		traveler.setFocus(null);
 		if (url==null) throw new IllegalArgumentException("url");
 		traveler.placeUpdated();
 		for (Place place : getActivePlaces()) {
@@ -39,6 +40,9 @@ public class Presence extends AbstractPresence {
 				break;
 			case "setDebugVisible":
 				traveler.setDebugVisible((Boolean)value);
+				break;
+			case "setFocus":
+				traveler.setFocus((String)value);
 				break;
 		}
 	}

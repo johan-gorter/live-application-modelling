@@ -60,6 +60,23 @@ public abstract class AbstractTraveler extends org.instantlogic.fabric.Instance 
 	}
 	
 	
+	private final org.instantlogic.fabric.value.AttributeValue<Traveler, java.lang.String> focus
+		= createAttributeValue(org.instantlogic.engine.presence.entity.TravelerEntity.focus);
+	
+	public java.lang.String getFocus() {
+		return focus.getValue();
+	}
+
+	public org.instantlogic.fabric.value.AttributeValue<Traveler, java.lang.String> getFocusAttributeValue() {
+		return focus;
+	}
+
+	public Traveler setFocus(java.lang.String newValue) {
+		focus.setValue(newValue);
+		return (Traveler)this;
+	}
+	
+	
 	private final org.instantlogic.fabric.value.AttributeValue<Traveler, java.lang.String> id
 		= createAttributeValue(org.instantlogic.engine.presence.entity.TravelerEntity.id);
 	

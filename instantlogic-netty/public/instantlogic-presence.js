@@ -57,7 +57,7 @@ YUI.add('instantlogic-presence', function (Y) {
     	init: function(model) {
     		ns.Me.superclass.init.call(this, model);
     		var markup = html.span({className: 'me'},
-				this.avatarDiv = html.span({className: 'avatar'}, html.img({src:'/avatar.png'})),
+				this.avatarDiv = html.span({className: 'avatar'}, html.img({src:'/avatar/'+model.username+'.jpg', width:'23px', height:'23px;'})),
 				this.loginNameSpan = html.span({className: 'username'}, model.username || '')
     		)
     		this.parentNode.appendChild(markup);
@@ -121,10 +121,43 @@ YUI.add('instantlogic-presence', function (Y) {
     		return html.div({className:'traveler'},
     			this.travelernameDiv = html.div()
     		)
-    		this.parentNode.appendChild(markup);
     	},
     	texts: function(model) {
     		return [[this.travelernameDiv, model.placeUrl]];
+    	}
+    });
+    
+    // Avatar
+    ns.Avatar = Y.instantlogic.createFragment({
+    	createMarkup: function() {
+    		return html.div({className:'floating-avatar'});
+    	},
+    	postInit: function(model) {
+    		this.markup.appendChild(
+    			html.img({src:'/avatar/'+model.username+'.jpg', width:'50px', height:'50px;'})
+    		);
+    		var me = this;
+    		setTimeout(function(){me.positionAvatar(false);})
+    	},
+    	postUpdate: function(newModel, diff) {
+    		var me = this;
+    		setTimeout(function(){me.positionAvatar(true);})
+    	},
+    	overrides: {
+    		positionAvatar: function(useAnimation) {
+    			var topright = Y.one('.pull-right'); 
+    			if (topright) {
+					var region = topright.get('region');
+					this.markup.setXY([region.right-60, region.bottom+30]);
+    			}
+    			if (this.model.focus) {
+    				var node = Y.one('[data-fragment-id="'+this.model.focus+'"]');
+    				if (node && node.get('firstChild')) {
+    					var region = node.get('firstChild').get('region');
+    					this.markup.setY(region.top-10);
+    				}
+    			}
+    		}
     	}
     });
     
@@ -163,15 +196,33 @@ YUI.add('instantlogic-presence', function (Y) {
             }
     	}
     }); 
+    
+    ns.Login = Y.instantlogic.createFragment({
+    	createMarkup: function(model) {
+    		var markup = html.form({ action: '.', className: 'form-inline debug-visible' },
+    			html.label(
+    				this.usernameInput = html.input({type:'text'}),
+    				this.loginButton = html.button({className:'btn'}, 'Login')
+    			)
+    		);
+    		this.loginButton.on('click', this.loginClick, this);
+    		return markup;
+    	},
+    	overrides: {
+        	loginClick: function() {
+        		this.engine.enqueueMessage({message: 'presence', command: 'login', value: this.usernameInput.get('value')});
+        	}
+    	}
+    });
 
-    // Login
-    ns.Login = function(parentNode, engine) {
-    	ns.Login.superclass.constructor.apply(this, arguments);
+    // LoginOld
+    ns.LoginOld = function(parentNode, engine) {
+    	ns.LoginOld.superclass.constructor.apply(this, arguments);
     }
     
-    Y.extend(ns.Login, Y.instantlogic.Fragment, {
+    Y.extend(ns.LoginOld, Y.instantlogic.Fragment, {
     	init: function(model) {
-    		ns.Login.superclass.init.call(this, model);
+    		ns.LoginOld.superclass.init.call(this, model);
     		var markup = html.div({className: 'login'},
 				html.div({className: 'window'},
 					html.h2('Please login'),

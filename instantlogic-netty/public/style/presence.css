@@ -6,12 +6,14 @@ body { padding-top: 20px; padding-bottom: 10px; }
 .navbar-fixed-top .application-name {color: #EE4444;font-weight:bold;font-size:20px;}
 .navbar-fixed-top .minus {color: #DDDDDD;font-weight:bold;font-style:italic;font-size:20px;}
 .navbar-fixed-top .case-name {color: #DDDDDD;font-weight:bold;font-style:italic;font-size:20px;}
-.navbar-fixed-top .me .avatar {width:24px; height:24px;overflow:hidden;background-color:white;margin: 3px; }
-.navbar-fixed-top .me .avatar img {width:24px; height:24px;}
+.navbar-fixed-top .me .avatar {width:23px; height:23px;overflow:hidden;background-color:white;margin: 3px; }
+.navbar-fixed-top .me .avatar img {width:23px; height:23px;}
 .navbar-fixed-top .me .username {white-space: nowrap;}
 .show-communicator-button {}
 .debug-visible {display:inline-block;margin:0 10px;}
 .communicator {position:fixed; top:0px; right:0px;width:200px;height:100%; background-color:#2E2E2E; color: #FFFFFF;}
+
+.floating-avatar {position: absolute;left:600px; background-color:#222222;}
 
 .login {position:fixed; top: 200px; width:100%; }
 .login .window {position: relative;margin: 0 auto; width: 400px; background-color: #2E2E2E; color: #FFFFFF; padding: 10px;}

@@ -5,6 +5,7 @@
   "name": "izzy",
   "rootPackageName": "org.instantlogic.example.izzy",
   "sourcePath": "../izzy/generated",
+  "themeNames": [],
   "caseEntity": "E1",
   "entities": [
     {
@@ -16,6 +17,7 @@
           "instanceId": "E1A1",
           "entityName": "AttributeDesign",
           "name": "last issue number",
+          "hasDefault": true,
           "dataType": {
             "instanceId": "E1A1D1",
             "entityName": "DataTypeDesign",
@@ -218,9 +220,7 @@
       ],
       "dataType": {
         "instanceId": "E4D2",
-        "entityName": "DataTypeDesign",
-        "formatted": true,
-        "multiLine": true
+        "entityName": "DataTypeDesign"
       },
       "relations": [
         {
@@ -287,7 +287,12 @@
           "content": {
             "instanceId": "F7P1F1",
             "entityName": "FragmentTemplateDesign",
+            "fragmentFilters": [],
             "fragmentTypeName": "Page",
+            "styleNames": [
+              "margin",
+              "izzy"
+            ],
             "properties": [
               {
                 "instanceId": "F7P1F1P1",
@@ -297,7 +302,9 @@
                   {
                     "instanceId": "F7P1F1P1F1",
                     "entityName": "FragmentTemplateDesign",
+                    "fragmentFilters": [],
                     "fragmentTypeName": "Table",
+                    "styleNames": [],
                     "properties": [
                       {
                         "instanceId": "F7P1F1P1F1P1",
@@ -307,13 +314,18 @@
                           {
                             "instanceId": "F7P1F1P1F1P1F1",
                             "entityName": "FragmentTemplateDesign",
+                            "fragmentFilters": [],
                             "fragmentTypeName": "Column",
-                            "properties": []
+                            "styleNames": [],
+                            "properties": [],
+                            "type": "F15"
                           },
                           {
                             "instanceId": "F7P1F1P1F1P1F2",
                             "entityName": "FragmentTemplateDesign",
+                            "fragmentFilters": [],
                             "fragmentTypeName": "Column",
+                            "styleNames": [],
                             "properties": [
                               {
                                 "instanceId": "F7P1F1P1F1P1F2P1",
@@ -332,7 +344,8 @@
                                   ]
                                 }
                               }
-                            ]
+                            ],
+                            "type": "F15"
                           }
                         ]
                       },
@@ -348,7 +361,9 @@
                               {
                                 "instanceId": "F7P1F1P1F1P2S1F2",
                                 "entityName": "FragmentTemplateDesign",
+                                "fragmentFilters": [],
                                 "fragmentTypeName": "Row",
+                                "styleNames": [],
                                 "properties": [
                                   {
                                     "instanceId": "F7P1F1P1F1P2S1F2P1",
@@ -358,7 +373,9 @@
                                       {
                                         "instanceId": "F7P1F1P1F1P2S1F2P1F1",
                                         "entityName": "FragmentTemplateDesign",
+                                        "fragmentFilters": [],
                                         "fragmentTypeName": "Link",
+                                        "styleNames": [],
                                         "event": "E6",
                                         "properties": [
                                           {
@@ -369,7 +386,9 @@
                                               {
                                                 "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F1",
                                                 "entityName": "FragmentTemplateDesign",
+                                                "fragmentFilters": [],
                                                 "fragmentTypeName": "Cell",
+                                                "styleNames": [],
                                                 "properties": [
                                                   {
                                                     "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F1P1",
@@ -379,7 +398,9 @@
                                                       {
                                                         "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F1P1F1",
                                                         "entityName": "FragmentTemplateDesign",
+                                                        "fragmentFilters": [],
                                                         "fragmentTypeName": "Paragraph",
+                                                        "styleNames": [],
                                                         "properties": [
                                                           {
                                                             "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F1P1F1P1",
@@ -418,16 +439,20 @@
                                                               ]
                                                             }
                                                           }
-                                                        ]
+                                                        ],
+                                                        "type": "F11"
                                                       }
                                                     ]
                                                   }
-                                                ]
+                                                ],
+                                                "type": "F16"
                                               },
                                               {
                                                 "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F2",
                                                 "entityName": "FragmentTemplateDesign",
+                                                "fragmentFilters": [],
                                                 "fragmentTypeName": "Cell",
+                                                "styleNames": [],
                                                 "properties": [
                                                   {
                                                     "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F2P1",
@@ -437,7 +462,9 @@
                                                       {
                                                         "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F2P1F1",
                                                         "entityName": "FragmentTemplateDesign",
+                                                        "fragmentFilters": [],
                                                         "fragmentTypeName": "Paragraph",
+                                                        "styleNames": [],
                                                         "properties": [
                                                           {
                                                             "instanceId": "F7P1F1P1F1P2S1F2P1F1P1F2P1F1P1",
@@ -476,19 +503,23 @@
                                                               ]
                                                             }
                                                           }
-                                                        ]
+                                                        ],
+                                                        "type": "F11"
                                                       }
                                                     ]
                                                   }
-                                                ]
+                                                ],
+                                                "type": "F16"
                                               }
                                             ]
                                           }
-                                        ]
+                                        ],
+                                        "type": "F17"
                                       }
                                     ]
                                   }
-                                ]
+                                ],
+                                "type": "F14"
                               }
                             ],
                             "selection": {
@@ -515,12 +546,15 @@
                           }
                         ]
                       }
-                    ]
+                    ],
+                    "type": "F13"
                   },
                   {
                     "instanceId": "F7P1F1P1F2",
                     "entityName": "FragmentTemplateDesign",
+                    "fragmentFilters": [],
                     "fragmentTypeName": "Button",
+                    "styleNames": [],
                     "event": "E5",
                     "properties": [
                       {
@@ -540,11 +574,13 @@
                           ]
                         }
                       }
-                    ]
+                    ],
+                    "type": "F18"
                   }
                 ]
               }
-            ]
+            ],
+            "type": "F10"
           }
         },
         {
@@ -582,7 +618,12 @@
           "content": {
             "instanceId": "F8P1F1",
             "entityName": "FragmentTemplateDesign",
+            "fragmentFilters": [],
             "fragmentTypeName": "Page",
+            "styleNames": [
+              "margin",
+              "izzy"
+            ],
             "properties": [
               {
                 "instanceId": "F8P1F1P1",
@@ -592,7 +633,9 @@
                   {
                     "instanceId": "F8P1F1P1F1",
                     "entityName": "FragmentTemplateDesign",
+                    "fragmentFilters": [],
                     "fragmentTypeName": "Paragraph",
+                    "styleNames": [],
                     "properties": [
                       {
                         "instanceId": "F8P1F1P1F1P1",
@@ -666,27 +709,35 @@
                           ]
                         }
                       }
-                    ]
+                    ],
+                    "type": "F11"
                   },
                   {
                     "instanceId": "F8P1F1P1F2",
                     "entityName": "FragmentTemplateDesign",
+                    "fragmentFilters": [],
                     "fragmentTypeName": "Input",
+                    "styleNames": [],
                     "attribute": "E3A2",
                     "entity": "E3",
-                    "properties": []
+                    "properties": [],
+                    "type": "F12"
                   },
                   {
                     "instanceId": "F8P1F1P1F3",
                     "entityName": "FragmentTemplateDesign",
+                    "fragmentFilters": [],
                     "fragmentTypeName": "Input",
+                    "styleNames": [],
                     "attribute": "E3A3",
                     "entity": "E3",
-                    "properties": []
+                    "properties": [],
+                    "type": "F12"
                   }
                 ]
               }
-            ]
+            ],
+            "type": "F10"
           }
         }
       ],
@@ -704,6 +755,65 @@
       "parameters": []
     }
   ],
+  "fragmentTypes": [
+    {
+      "instanceId": "F10",
+      "entityName": "FragmentTypeDesign",
+      "name": "Page",
+      "fragmentFilters": []
+    },
+    {
+      "instanceId": "F11",
+      "entityName": "FragmentTypeDesign",
+      "name": "Paragraph",
+      "fragmentFilters": []
+    },
+    {
+      "instanceId": "F12",
+      "entityName": "FragmentTypeDesign",
+      "name": "Input",
+      "fragmentFilters": [],
+      "hasAttribute": true
+    },
+    {
+      "instanceId": "F13",
+      "entityName": "FragmentTypeDesign",
+      "name": "Table",
+      "fragmentFilters": []
+    },
+    {
+      "instanceId": "F14",
+      "entityName": "FragmentTypeDesign",
+      "name": "Row",
+      "fragmentFilters": []
+    },
+    {
+      "instanceId": "F15",
+      "entityName": "FragmentTypeDesign",
+      "name": "Column",
+      "fragmentFilters": []
+    },
+    {
+      "instanceId": "F16",
+      "entityName": "FragmentTypeDesign",
+      "name": "Cell",
+      "fragmentFilters": []
+    },
+    {
+      "instanceId": "F17",
+      "entityName": "FragmentTypeDesign",
+      "name": "Link",
+      "fragmentFilters": [],
+      "hasEvent": true
+    },
+    {
+      "instanceId": "F18",
+      "entityName": "FragmentTypeDesign",
+      "name": "Button",
+      "fragmentFilters": [],
+      "hasEvent": true
+    }
+  ],
   "mainFlow": "F7",
-  "sharedTemplates": []
+  "sharedElements": []
 }

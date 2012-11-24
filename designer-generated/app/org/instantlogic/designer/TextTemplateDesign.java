@@ -62,6 +62,23 @@ public class TextTemplateDesign extends Design {
 
 	// Reverse relations
 	
+	private final org.instantlogic.fabric.value.RelationValue<TextTemplateDesign, EntityDesign> titleOfEntity
+		= createReverseRelationValue(org.instantlogic.designer.entity.TextTemplateDesignEntity.titleOfEntity);
+
+	public org.instantlogic.fabric.value.RelationValue<TextTemplateDesign, EntityDesign> getTitleOfEntityRelationValue() {
+		return titleOfEntity;
+	}
+
+	public org.instantlogic.designer.EntityDesign getTitleOfEntity() {
+		return titleOfEntity.getValue();
+	}
+
+    public TextTemplateDesign setTitleOfEntity(org.instantlogic.designer.EntityDesign newValue) {
+        titleOfEntity.setValue(newValue);
+        return (TextTemplateDesign)this;
+    }
+
+	
 	private final org.instantlogic.fabric.value.RelationValue<TextTemplateDesign, PlaceTemplateDesign> titleOfPlaceTemplate
 		= createReverseRelationValue(org.instantlogic.designer.entity.TextTemplateDesignEntity.titleOfPlaceTemplate);
 

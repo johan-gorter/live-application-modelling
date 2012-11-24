@@ -60,6 +60,7 @@ YUI.add('instantlogic-fragments', function (Y) {
             	this.answer.updateValue(model.value);
             	this.answerDiv.setContent(this.input);
             	this.answerDiv.on('change', this.inputChange, this);
+            	this.answerDiv.on('focus', this.inputFocus, this);
             },
             updateInput: function(newModel, diff) {
             	if (newModel.value!=this.oldModel.value) {
@@ -68,6 +69,9 @@ YUI.add('instantlogic-fragments', function (Y) {
             },
             inputChange: function() {
             	this.engine.sendChange(this.model.id, this.answer.getValue());
+            },
+            inputFocus: function() {
+            	this.engine.enqueueMessage({message: 'presence', command: 'setFocus', value: this.model.id});
             }
     	}
     });

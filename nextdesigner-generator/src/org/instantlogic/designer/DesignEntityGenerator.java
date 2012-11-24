@@ -29,6 +29,10 @@ public class DesignEntityGenerator extends EntityDesign {
     	
     	name.setDefault(new DeductionSchemeDesign().deduceCustom(DefaultDesignNameDeduction.class, String.class).getScheme());
     	
+    	DeductionSchemeDesign nameDeduction;
+		newTitle().addToUntranslated(new StringTemplateDesign().setDeduction(nameDeduction = new DeductionSchemeDesign()));
+		nameDeduction.deduceAttribute(name);
+    	
 		javaIdentifier.setWriteable(false);
 		javaIdentifier.setRule(new DeductionSchemeDesign().deduceCustom(JavaIdentifierDeduction.class, String.class).getScheme());
 

@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.instantlogic.fabric.Instance;
+import org.instantlogic.fabric.text.TextTemplate;
 
 
 /**
@@ -74,6 +75,10 @@ public abstract class Entity<I extends Instance> extends Concept {
 		public void remove() {
 			throw new UnsupportedOperationException("Not implemented");
 		}
+	}
+	
+	public TextTemplate getTitle() {
+		return null;
 	}
 	
 	public Entity<?> extendsEntity() {

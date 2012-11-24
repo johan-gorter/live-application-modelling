@@ -26,6 +26,15 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 	}
 
 	// Deductions
+
+	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentTypeDesign>> createDeduction0() {
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.ApplicationDesign> d0 
+		  		= org.instantlogic.fabric.deduction.SelectedInstanceDeduction.create(org.instantlogic.designer.entity.ApplicationDesignEntity.INSTANCE);
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.fabric.value.Multi<org.instantlogic.designer.FragmentTypeDesign>> d1 
+		  		= org.instantlogic.fabric.deduction.AttributeDeduction.create(org.instantlogic.designer.entity.ApplicationDesignEntity.fragmentTypes, d0);
+		return d1;
+	}
+
 	
 	// Attributes
 	
@@ -149,6 +158,15 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 					org.instantlogic.designer.FragmentTemplateDesign instance) {
 				return instance.getTypeRelationValue();
 			}
+			
+			private org.instantlogic.fabric.deduction.Deduction<? extends java.lang.Iterable<org.instantlogic.designer.FragmentTypeDesign>> options;
+			@Override
+			public org.instantlogic.fabric.deduction.Deduction<? extends java.lang.Iterable<org.instantlogic.designer.FragmentTypeDesign>> getOptions() {
+				if (options==null) {
+					options = (org.instantlogic.fabric.deduction.Deduction)createDeduction0();
+				}
+				return options;
+			};
 		};
 	
 	// Reverse relations

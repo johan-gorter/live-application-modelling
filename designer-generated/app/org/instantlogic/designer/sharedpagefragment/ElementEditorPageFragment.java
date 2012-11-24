@@ -87,7 +87,7 @@ public class ElementEditorPageFragment extends org.instantlogic.interaction.page
                                 new org.instantlogic.interaction.page.FragmentTemplate("S58F1P1S1I1F2", "Block")      .setStyleNames(new String[]{"editor"})
       
                                 .putChildren("content",
-                                        new org.instantlogic.interaction.page.FragmentTemplate("S58F1P1S1I1F2P1F1", "Input")      .setField(org.instantlogic.designer.entity.FragmentTemplateDesignEntity.INSTANCE, org.instantlogic.designer.entity.FragmentTemplateDesignEntity.fragmentTypeName)
+                                        new org.instantlogic.interaction.page.FragmentTemplate("S58F1P1S1I1F2P1F1", "Input")      .setField(org.instantlogic.designer.entity.FragmentTemplateDesignEntity.INSTANCE, org.instantlogic.designer.entity.FragmentTemplateDesignEntity.type)
                                 )
         },
         new org.instantlogic.interaction.page.Element[] {

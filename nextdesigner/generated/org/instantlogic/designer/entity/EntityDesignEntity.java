@@ -128,6 +128,23 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 			}
 		};
 	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.TextTemplateDesign> title
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.TextTemplateDesign, org.instantlogic.designer.TextTemplateDesign>(
+			"title", INSTANCE, org.instantlogic.designer.entity.TextTemplateDesignEntity.INSTANCE, org.instantlogic.designer.TextTemplateDesign.class, 
+			org.instantlogic.designer.entity.TextTemplateDesignEntity.titleOfEntity
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.TextTemplateDesign> get(
+					org.instantlogic.designer.EntityDesign instance) {
+				return instance.getTitleRelationValue();
+			}
+	
+			public boolean isOwner() {
+				return true;
+			}
+		};
+	
 	// Reverse relations
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.EntityDesign, org.instantlogic.designer.ApplicationDesign, org.instantlogic.designer.ApplicationDesign> application
@@ -194,6 +211,7 @@ public class EntityDesignEntity extends org.instantlogic.fabric.model.Entity<org
 		extendsFrom,
 		relations,
 		staticInstances,
+		title,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		application,
