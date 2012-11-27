@@ -30,6 +30,7 @@ public class ApplicationDesignEntityGenerator extends EntityDesign {
     public static final RelationDesign fragmentTypes = addRelation(ENTITY, "fragmentTypes", RelationType.OneToManyAggregation, FragmentTypeDesignEntityGenerator.ENTITY)
             .setReverseName("application");
     public static final RelationDesign mainFlow = addRelation(ENTITY, "mainFlow", RelationType.OneToZeroOrOne, FlowDesignEntityGenerator.ENTITY);
+    public static final RelationDesign startEvent = addRelation(ENTITY, "startEvent", RelationType.OneToZeroOrOne, EventDesignEntityGenerator.ENTITY);
     public static final RelationDesign sharedElements = addRelation(ENTITY, "sharedElements", RelationType.OneToManyAggregation, SharedElementDefinitionDesignEntityGenerator.ENTITY)
             .setReverseName("application");
     

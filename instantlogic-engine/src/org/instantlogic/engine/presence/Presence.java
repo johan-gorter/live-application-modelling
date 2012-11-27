@@ -35,6 +35,10 @@ public class Presence extends AbstractPresence {
 				traveler.getTravelerInfo().setAuthenticatedUsername((String)value);
 				traveler.setUser(findOrActivateUser((String)value));
 				break;
+			case "logout":
+				traveler.getTravelerInfo().setAuthenticatedUsername(null);
+				traveler.setUser(null);
+				break;
 			case "setCommunicatorVisible":
 				traveler.setCommunicatorVisible((Boolean)value);
 				break;

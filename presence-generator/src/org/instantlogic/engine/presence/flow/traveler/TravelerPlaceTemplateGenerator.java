@@ -26,57 +26,57 @@ public class TravelerPlaceTemplateGenerator extends PlaceTemplateDesign {
 		FragmentTemplateDesign debugVisible;
 		
 		setContent(
-			new FragmentTemplateDesign("Presence")
-				.setValue("applicationName", applicationNameDeduction = new DeductionSchemeDesign())
-				.setValue("caseName", caseNameDeduction = new DeductionSchemeDesign())
-				.setChildren("content", new ElementDesign[]{
-					new IfElseDesign()
-						.setCondition(userHasValue = new DeductionSchemeDesign())
-						.addToIfChildren(
-							new FragmentTemplateDesign("Me")
-								.setValue("username", travelerUsername = new DeductionSchemeDesign())
-						)
-						.addToIfChildren(
-							debugVisible = new FragmentTemplateDesign("DebugVisibleToggle")
-						)
-						.addToIfChildren(
+			new FragmentTemplateDesign("Group")
+				.setChildren("content", 
+					new FragmentTemplateDesign("Presence")
+						.setValue("applicationName", applicationNameDeduction = new DeductionSchemeDesign())
+						.setValue("caseName", caseNameDeduction = new DeductionSchemeDesign())
+						.setChildren("content", new ElementDesign[]{
 							new IfElseDesign()
-								.setCondition(communicatorVisible = new DeductionSchemeDesign())
+								.setCondition(userHasValue = new DeductionSchemeDesign())
 								.addToIfChildren(
-									new FragmentTemplateDesign("Communicator")
-										.setChildren("users", 
-											new SelectionDesign()
-												.setSelection(activeUsers = new DeductionSchemeDesign())
-												.addToChildren(new FragmentTemplateDesign("User")
-													.setValue("username", username = new DeductionSchemeDesign())
-												)
-												.addToChildren(new SelectionDesign()
-													.setSelection(userTravelers = new DeductionSchemeDesign())
-													.addToChildren(new FragmentTemplateDesign("Traveler")
-														.setValue("travelerId", travelerId = new DeductionSchemeDesign())
-														.setValue("placeUrl", travelerPlaceUrl = new DeductionSchemeDesign())
-													)
+									new FragmentTemplateDesign("Me")
+										.setValue("username", travelerUsername = new DeductionSchemeDesign())
+								)
+								.addToIfChildren(
+									debugVisible = new FragmentTemplateDesign("DebugVisibleToggle")
+								)
+								.addToIfChildren(
+									new IfElseDesign()
+										.setCondition(communicatorVisible = new DeductionSchemeDesign())
+										.addToIfChildren(
+											new FragmentTemplateDesign("Communicator")
+												.setChildren("users", 
+													new SelectionDesign()
+														.setSelection(activeUsers = new DeductionSchemeDesign())
+														.addToChildren(new FragmentTemplateDesign("User")
+															.setValue("username", username = new DeductionSchemeDesign())
+														)
+														.addToChildren(new SelectionDesign()
+															.setSelection(userTravelers = new DeductionSchemeDesign())
+															.addToChildren(new FragmentTemplateDesign("Traveler")
+																.setValue("travelerId", travelerId = new DeductionSchemeDesign())
+																.setValue("placeUrl", travelerPlaceUrl = new DeductionSchemeDesign())
+															)
+														)
 												)
 										)
+										.addToElseChildren(new FragmentTemplateDesign("ShowCommunicatorButton"))								
 								)
-								.addToElseChildren(new FragmentTemplateDesign("ShowCommunicatorButton"))								
-						)
-						.addToIfChildren(
-							new SelectionDesign()
-								.setSelection(currentPlace = new DeductionSchemeDesign())
-								.addToChildren(
-									new SelectionDesign()
-										.setSelection(visitors = new DeductionSchemeDesign())
-										.addToChildren(
-											new FragmentTemplateDesign("Avatar")
-												.setValue("username", username2 = new DeductionSchemeDesign())
-												.setValue("focus", focus = new DeductionSchemeDesign())
-										)
-								)
-						)
-						.addToElseChildren(new FragmentTemplateDesign("Login"))
-					
-				})
+								.addToElseChildren(new FragmentTemplateDesign("Login"))
+						}),
+						new SelectionDesign()
+							.setSelection(currentPlace = new DeductionSchemeDesign())
+							.addToChildren(
+								new SelectionDesign()
+									.setSelection(visitors = new DeductionSchemeDesign())
+									.addToChildren(
+										new FragmentTemplateDesign("Avatar")
+											.setValue("username", username2 = new DeductionSchemeDesign())
+											.setValue("focus", focus = new DeductionSchemeDesign())
+									)
+							)
+				)
 		);
 		
 		applicationNameDeduction.deduceAttribute(PresenceEntityGenerator.applicationName);

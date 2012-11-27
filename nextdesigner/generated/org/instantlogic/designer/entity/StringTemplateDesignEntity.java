@@ -3,6 +3,8 @@ package org.instantlogic.designer.entity;
 public class StringTemplateDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.StringTemplateDesign> {
 
 	public static final StringTemplateDesignEntity INSTANCE = new StringTemplateDesignEntity();
+
+
 	
 
 	

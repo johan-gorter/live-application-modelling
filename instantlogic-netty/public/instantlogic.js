@@ -61,7 +61,6 @@ YUI.add('instantlogic', function (Y) {
         	this.history = new Y.HistoryHash();
         	this.history.on('locationChange', this.onLocationChange, this);
             this.location = this.history.get('location');
-            if (!location) Y.error('no location given');
             this.presenceNode.setContent('One moment...');
             this.setState('connecting');
             this.sendEnter();
@@ -207,7 +206,11 @@ YUI.add('instantlogic', function (Y) {
         },
         
         sendEnter: function() {
-        	this.enqueueMessage({message:'enter', location: this.location});        	
+        	if (this.location) {
+        		this.enqueueMessage({message:'enter', location: this.location});
+        	} else {
+        		this.enqueueMessage({message:'start'});
+        	}
         },
         
         sendSubmit: function(id) {

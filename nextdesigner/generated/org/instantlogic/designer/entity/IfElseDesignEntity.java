@@ -3,6 +3,8 @@ package org.instantlogic.designer.entity;
 public class IfElseDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.IfElseDesign> {
 
 	public static final IfElseDesignEntity INSTANCE = new IfElseDesignEntity();
+
+
 	
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {

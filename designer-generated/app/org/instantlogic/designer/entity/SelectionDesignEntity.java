@@ -3,6 +3,8 @@ package org.instantlogic.designer.entity;
 public class SelectionDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.SelectionDesign> {
 
 	public static final SelectionDesignEntity INSTANCE = new SelectionDesignEntity();
+
+
 	
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {

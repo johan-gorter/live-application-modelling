@@ -23,6 +23,7 @@ import org.instantlogic.engine.message.EnterMessage;
 import org.instantlogic.engine.message.LeaveMessage;
 import org.instantlogic.engine.message.Message;
 import org.instantlogic.engine.message.PresenceMessage;
+import org.instantlogic.engine.message.StartMessage;
 import org.instantlogic.engine.message.SubmitMessage;
 import org.instantlogic.interaction.util.TravelerInfo;
 import org.jboss.netty.buffer.ChannelBuffers;
@@ -139,6 +140,8 @@ public class NettyTraveler implements TravelerProxy {
 			} else if ("submit".equals(messageName)) {
 				String placeElementId = message.getAsJsonObject().get("id").getAsString();
 				messages.add(new SubmitMessage(placeElementId));
+			} else if ("start".equals(messageName)) {
+				messages.add(new StartMessage());
 			} else if ("enter".equals(messageName)) {
 				String newLocation = message.getAsJsonObject().get("location").getAsString();
 				messages.add(new EnterMessage(newLocation));
@@ -282,6 +285,13 @@ public class NettyTraveler implements TravelerProxy {
     		DefaultCookie cookie = new DefaultCookie("who-am-i", travelerInfo.getAuthenticatedUsername());
     		cookie.setHttpOnly(true);
     		cookie.setMaxAge(60*60*24*365);
+    		encoder.addCookie(cookie);
+    		response.setHeader("Set-Cookie", encoder.encode());
+		} else if (authenticatedUsername==null && readAuthentication(request)!=null) {
+    		CookieEncoder encoder = new CookieEncoder(true);
+			DefaultCookie cookie = new DefaultCookie("who-am-i", "deleteme");
+    		cookie.setHttpOnly(true);
+    		cookie.setMaxAge(0);
     		encoder.addCookie(cookie);
     		response.setHeader("Set-Cookie", encoder.encode());
 		}

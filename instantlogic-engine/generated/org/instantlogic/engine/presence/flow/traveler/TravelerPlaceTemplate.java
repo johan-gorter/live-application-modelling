@@ -140,39 +140,43 @@ public class TravelerPlaceTemplate extends org.instantlogic.interaction.flow.Pla
 
 	
 	private static org.instantlogic.interaction.page.FragmentTemplate CONTENT = 
-        new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1", "Presence")      
-        .putValue("applicationName", createDeduction0())      
-        .putValue("caseName", createDeduction1())      
+        new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1", "Group")      
         .putChildren("content",
-                new org.instantlogic.interaction.page.IfElseElement(createDeduction2(),
+                new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1P1F1", "Presence")      
+                .putValue("applicationName", createDeduction0())      
+                .putValue("caseName", createDeduction1())      
+                .putChildren("content",
+                        new org.instantlogic.interaction.page.IfElseElement(createDeduction2(),
         new org.instantlogic.interaction.page.Element[] {
-                        new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1P3I1F2", "Me")      
-                        .putValue("username", createDeduction3()),                        new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1P3I1F3", "DebugVisibleToggle")      .setField(org.instantlogic.engine.presence.entity.TravelerEntity.INSTANCE, org.instantlogic.engine.presence.entity.TravelerEntity.debugVisible)
-,                        new org.instantlogic.interaction.page.IfElseElement(createDeduction4(),
+                                new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1P1F1P3I1F2", "Me")      
+                                .putValue("username", createDeduction3()),                                new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1P1F1P3I1F3", "DebugVisibleToggle")      .setField(org.instantlogic.engine.presence.entity.TravelerEntity.INSTANCE, org.instantlogic.engine.presence.entity.TravelerEntity.debugVisible)
+,                                new org.instantlogic.interaction.page.IfElseElement(createDeduction4(),
         new org.instantlogic.interaction.page.Element[] {
-                                new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1P3I1I4F2", "Communicator")      
-                                .putChildren("users",
-                                        new org.instantlogic.interaction.page.SelectionElement(createDeduction5()
-,                                                new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1P3I1I4F2P1S1F2", "User")      
-                                                .putValue("username", createDeduction6()),                                                new org.instantlogic.interaction.page.SelectionElement(createDeduction7()
-,                                                        new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1P3I1I4F2P1S1S3F2", "Traveler")      
-                                                        .putValue("travelerId", createDeduction8())      
-                                                        .putValue("placeUrl", createDeduction9()))
+                                        new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1P1F1P3I1I4F2", "Communicator")      
+                                        .putChildren("users",
+                                                new org.instantlogic.interaction.page.SelectionElement(createDeduction5()
+,                                                        new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1P1F1P3I1I4F2P1S1F2", "User")      
+                                                        .putValue("username", createDeduction6()),                                                        new org.instantlogic.interaction.page.SelectionElement(createDeduction7()
+,                                                                new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1P1F1P3I1I4F2P1S1S3F2", "Traveler")      
+                                                                .putValue("travelerId", createDeduction8())      
+                                                                .putValue("placeUrl", createDeduction9()))
 )
-                                )
+                                        )
         },
         new org.instantlogic.interaction.page.Element[] {
-                                new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1P3I1I4F3", "ShowCommunicatorButton")        }
-)
-,                        new org.instantlogic.interaction.page.SelectionElement(createDeduction10()
-,                                new org.instantlogic.interaction.page.SelectionElement(createDeduction11()
-,                                        new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1P3I1S5S2F2", "Avatar")      
-                                        .putValue("username", createDeduction12())      
-                                        .putValue("focus", createDeduction13()))
+                                        new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1P1F1P3I1I4F3", "ShowCommunicatorButton")        }
 )
         },
         new org.instantlogic.interaction.page.Element[] {
-                        new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1P3I1F6", "Login")        }
+                                new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1P1F1P3I1F5", "Login")        }
+)
+                )
+,
+                new org.instantlogic.interaction.page.SelectionElement(createDeduction10()
+,                        new org.instantlogic.interaction.page.SelectionElement(createDeduction11()
+,                                new org.instantlogic.interaction.page.FragmentTemplate("F6P1F1P1S2S2F2", "Avatar")      
+                                .putValue("username", createDeduction12())      
+                                .putValue("focus", createDeduction13()))
 )
         )
 ; 

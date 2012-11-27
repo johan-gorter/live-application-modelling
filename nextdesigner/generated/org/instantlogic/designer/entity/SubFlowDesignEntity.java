@@ -3,6 +3,8 @@ package org.instantlogic.designer.entity;
 public class SubFlowDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.SubFlowDesign> {
 
 	public static final SubFlowDesignEntity INSTANCE = new SubFlowDesignEntity();
+
+
 	
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {

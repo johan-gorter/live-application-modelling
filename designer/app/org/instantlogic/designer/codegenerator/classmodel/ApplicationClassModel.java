@@ -7,6 +7,8 @@ public class ApplicationClassModel extends AbstractClassModel {
 
 	public String caseEntity;
 	public String mainFlow;
+	public String startEvent;
+	public String[] themeNames;
 	public final List<String> entities = new ArrayList<String>();
 	
 	public String getCaseEntity() {
@@ -17,5 +19,11 @@ public class ApplicationClassModel extends AbstractClassModel {
 	}
 	public String getMainFlow() {
 		return mainFlow;
+	}
+	public String getStartEvent() {
+		return startEvent;
+	}
+	public String[] getThemeNames() {
+		return themeNames;
 	}
 }

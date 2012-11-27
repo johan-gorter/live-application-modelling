@@ -3,6 +3,8 @@ package org.instantlogic.designer.entity;
 public class CastInstanceDeductionDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.CastInstanceDeductionDesign> {
 
 	public static final CastInstanceDeductionDesignEntity INSTANCE = new CastInstanceDeductionDesignEntity();
+
+
 	
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {

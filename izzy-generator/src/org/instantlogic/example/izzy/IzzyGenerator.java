@@ -13,7 +13,6 @@ import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.EntityDesign.RelationType;
 import org.instantlogic.designer.EventDesign;
 import org.instantlogic.designer.FlowDesign;
-import org.instantlogic.designer.FlowEdgeDesign;
 import org.instantlogic.designer.FragmentTemplateDesign;
 import org.instantlogic.designer.FragmentTypeDesign;
 import org.instantlogic.designer.PlaceTemplateDesign;
@@ -40,20 +39,25 @@ public class IzzyGenerator extends Design {
 	
 	private static EventDesign createIssueEvent;
 	private static EventDesign issueDetailsEvent;
+	private static EventDesign dashboardEvent;
+	private static EventDesign homeEvent;
+	private static EventDesign notLoggedInEvent;
 	
+	private static PlaceTemplateDesign notLoggedInPlaceTemplate;
 	private static PlaceTemplateDesign dashboardPlaceTemplate;
 	private static PlaceTemplateDesign issueDetailsPlaceTemplate;
 
 	private static FlowDesign mainFlow;
 	private static FlowDesign issueFlow;
 	private static FlowDesign createIssueFlow;
+	private static FlowDesign dashboardFlow;
+	private static FlowDesign selectDashboardFlow;
 	private static AttributeDesign issueDescription;
 
 	public static void main(String[] args) throws IOException { 
 		izzy = new ApplicationDesign();
 		project = new EntityDesign("project").setApplication(izzy);
-		project.addAttribute("last issue number", Integer.class)
-			.setDefault(new DeductionSchemeDesign().deduceConstant(Integer.class, 0).getScheme());
+		project.addAttribute("last issue number", Integer.class).setDefault(new DeductionSchemeDesign().deduceConstant(Integer.class, 0).getScheme());
 		user = new EntityDesign("user").setApplication(izzy);
 		user.addAttribute("username", DataCategoryDesign.text);
 		issue = new EntityDesign("issue").setApplication(izzy);
@@ -77,29 +81,40 @@ public class IzzyGenerator extends Design {
 		izzy.setName("izzy");
 		izzy.setRootPackageName("org.instantlogic.example.izzy");
 		izzy.getCaseEntity().registerApplication(izzy);
+		izzy.addToThemeNames("margin").addToThemeNames("izzy");
 		
+		homeEvent = new EventDesign("home").setApplication(izzy);
 		createIssueEvent = new EventDesign("create issue").setApplication(izzy);
 		issueDetailsEvent = new EventDesign("issue details").setApplication(izzy).addToParameters(issue);
+		dashboardEvent = new EventDesign("dashboard").setApplication(izzy).addToParameters(user);
+		notLoggedInEvent = new EventDesign("not logged in").setApplication(izzy);
 		
 		mainFlow = new FlowDesign("main").setApplication(izzy);
 		issueFlow = new FlowDesign("issue").setApplication(izzy).addToParameters(issue);
 		createIssueFlow = new FlowDesign("create issue").setApplication(izzy);
 		createIssueFlow.setIsCustomized(true);
+		dashboardFlow = new FlowDesign("dashboard").setApplication(izzy).addToParameters(user);
+		selectDashboardFlow = new FlowDesign("select dashboard").setApplication(izzy);
+		selectDashboardFlow.setIsCustomized(true);
 
 		createFragmentTypes();
 		
+		createNotLoggedInPlaceTemplate();
 		createDashboardPlaceTemplate();
 		createIssueDetailsPlaceTemplate();
 		
 		initMainFlow();
 		initIssueFlow();
+		initDashboardFlow();
 
+		notLoggedInPlaceTemplate.lookUpTypes();
 		dashboardPlaceTemplate.lookUpTypes();
 		issueDetailsPlaceTemplate.lookUpTypes();
 		
 		// Application
 		izzy.setSourcePath("../izzy/generated");
 		izzy.setMainFlow(mainFlow);
+		izzy.setStartEvent(homeEvent);
 
 		// Finished with the design, what to do next
 		
@@ -118,6 +133,7 @@ public class IzzyGenerator extends Design {
 	private static void createFragmentTypes() {
 		izzy.addToFragmentTypes((FragmentTypeDesign) new FragmentTypeDesign().setName("Page"));
 		izzy.addToFragmentTypes((FragmentTypeDesign) new FragmentTypeDesign().setName("Paragraph"));
+		izzy.addToFragmentTypes((FragmentTypeDesign) new FragmentTypeDesign().setName("Heading1"));
 		izzy.addToFragmentTypes((FragmentTypeDesign) new FragmentTypeDesign().setHasAttribute(true).setName("Input"));
 		izzy.addToFragmentTypes((FragmentTypeDesign) new FragmentTypeDesign().setName("Table"));
 		izzy.addToFragmentTypes((FragmentTypeDesign) new FragmentTypeDesign().setName("Row"));
@@ -128,38 +144,51 @@ public class IzzyGenerator extends Design {
 	}
 
 	private static void initIssueFlow() {
-		new FlowEdgeDesign()
-			.setOwner(issueFlow)
-			.setEvent(issueDetailsEvent)
-			.setEndNode(issueDetailsPlaceTemplate);
+		issueFlow.newEdge().setEvent(issueDetailsEvent).setEndNode(issueDetailsPlaceTemplate);
 	}
 
+	private static void initDashboardFlow() {
+		dashboardFlow.newEdge().setEvent(dashboardEvent).setEndNode(dashboardPlaceTemplate);
+	}
+	
 	private static void initMainFlow() {
 		SubFlowDesign mainFlowIssueSubFlow = mainFlow.addSubFlow(issueFlow);
 		SubFlowDesign mainFlowCreateIssueSubFlow = mainFlow.addSubFlow(createIssueFlow);
-		new FlowEdgeDesign()
-			.setOwner(mainFlow)
-			.setStartNode(dashboardPlaceTemplate)
-			.setEvent(issueDetailsEvent)
-			.setEndNode(mainFlowIssueSubFlow);
-		new FlowEdgeDesign()
-			.setOwner(mainFlow)
-			.setStartNode(dashboardPlaceTemplate)
-			.setEvent(createIssueEvent)
-			.setEndNode(mainFlowCreateIssueSubFlow);
+		SubFlowDesign selectDashboard = mainFlow.addSubFlow(selectDashboardFlow);
+		SubFlowDesign dashboard = mainFlow.addSubFlow(dashboardFlow);
+		
+		mainFlow.newEdge().setEvent(issueDetailsEvent).setEndNode(mainFlowIssueSubFlow);
+		mainFlow.newEdge().setEvent(createIssueEvent).setEndNode(mainFlowCreateIssueSubFlow);
+		
+		mainFlow.newEdge().setEvent(homeEvent).setEndNode(selectDashboard);
+		mainFlow.newEdge().setEvent(dashboardEvent).setEndNode(dashboard);
+		
+		mainFlow.newEdge().setEvent(notLoggedInEvent).setEndNode(notLoggedInPlaceTemplate);
 	}
 	
 	// Place templates
+	private static void createNotLoggedInPlaceTemplate() {
+		notLoggedInPlaceTemplate = new PlaceTemplateDesign("not logged in")
+			.setOwner(mainFlow)
+			.setContent(
+				new FragmentTemplateDesign("Page")
+					.setChildren("mainContent",
+						new FragmentTemplateDesign("Paragraph")
+							.setText("text", new TextTemplateDesign().addToUntranslated(new StringTemplateDesign().setConstantText("Please log in.")))
+					)
+			);
+	}
 
 	private static void createIssueDetailsPlaceTemplate() {
 		DeductionSchemeDesign number, headline;
-		FragmentTemplateDesign headlineInput, descriptionInput;
+		FragmentTemplateDesign headlineInput, descriptionInput, homeLink;
 		issueDetailsPlaceTemplate = new PlaceTemplateDesign("issueDetails")
 			.setOwner(issueFlow)
 			.setContent(new FragmentTemplateDesign("Page")
-				.addToStyleNames("margin").addToStyleNames("izzy")
 				.setChildren("mainContent", 
-					new FragmentTemplateDesign("Paragraph")
+					homeLink = new FragmentTemplateDesign("Link")
+						.setText("text", new TextTemplateDesign().addToUntranslated(new StringTemplateDesign().setConstantText("Home"))),
+					new FragmentTemplateDesign("Heading1")
 						.setText("text", new TextTemplateDesign()
 							.addToUntranslated(new StringTemplateDesign().setConstantText("Issue "))
 							.addToUntranslated(new StringTemplateDesign().setDeduction(number = new DeductionSchemeDesign()))
@@ -170,6 +199,7 @@ public class IzzyGenerator extends Design {
 					descriptionInput = new FragmentTemplateDesign("Input")
 				)
 			);
+		homeLink.setEvent(homeEvent);
 		number.deduceAttribute(issueNumber);
 		headline.deduceAttribute(issueHeadline);
 		headlineInput.setEntity(issue).setAttribute(issueHeadline);
@@ -180,10 +210,9 @@ public class IzzyGenerator extends Design {
 		DeductionSchemeDesign issues, number, headline;
 		FragmentTemplateDesign detailsLink, createButton;
 		dashboardPlaceTemplate = new PlaceTemplateDesign("dashboard")
-			.setOwner(mainFlow)
+			.setOwner(dashboardFlow)
 			.setContent(
 				new FragmentTemplateDesign("Page")
-					.addToStyleNames("margin").addToStyleNames("izzy")
 					.setChildren("mainContent",
 						new FragmentTemplateDesign("Table")
 							.setChildren("columns", 

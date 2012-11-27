@@ -58,9 +58,15 @@ YUI.add('instantlogic-presence', function (Y) {
     		ns.Me.superclass.init.call(this, model);
     		var markup = html.span({className: 'me'},
 				this.avatarDiv = html.span({className: 'avatar'}, html.img({src:'/avatar/'+model.username+'.jpg', width:'23px', height:'23px;'})),
-				this.loginNameSpan = html.span({className: 'username'}, model.username || '')
+				this.loginNameSpan = html.span({className: 'username'}, model.username || ''),
+				this.logoutButton = html.button({className: 'btn'}, 'Log out')
     		)
+    		this.logoutButton.on('click', this.logoutClick, this);
     		this.parentNode.appendChild(markup);
+    	},
+    	logoutClick: function(evt) {
+    		this.engine.enqueueMessage({message: 'presence', command: 'logout'});
+    		evt.preventDefault();
     	}
     });
     
@@ -134,13 +140,19 @@ YUI.add('instantlogic-presence', function (Y) {
     	},
     	postInit: function(model) {
     		this.markup.appendChild(
-    			html.img({src:'/avatar/'+model.username+'.jpg', width:'50px', height:'50px;'})
+    			html.img({src:'/avatar/'+(model.username || 'anonymous')+'.jpg', width:'50px', height:'50px;'})
     		);
     		var me = this;
     		setTimeout(function(){me.positionAvatar(false);})
     	},
     	postUpdate: function(newModel, diff) {
     		var me = this;
+    		if (this.oldModel.username != newModel.username) {
+    			this.markup.get('children').remove();
+        		this.markup.appendChild(
+        			html.img({src:'/avatar/'+(newModel.username || 'anonymous')+'.jpg', width:'50px', height:'50px;'})
+        		);
+    		}
     		setTimeout(function(){me.positionAvatar(true);})
     	},
     	overrides: {
@@ -197,20 +209,20 @@ YUI.add('instantlogic-presence', function (Y) {
     	}
     }); 
     
+    // Login
     ns.Login = Y.instantlogic.createFragment({
     	createMarkup: function(model) {
-    		var markup = html.form({ action: '.', className: 'form-inline debug-visible' },
-    			html.label(
-    				this.usernameInput = html.input({type:'text'}),
-    				this.loginButton = html.button({className:'btn'}, 'Login')
-    			)
+    		var markup = html.form({ action: '.', className: 'form-inline' },
+				this.usernameInput = html.input({type:'text'}),
+				this.loginButton = html.button({className:'btn'}, 'Login')
     		);
     		this.loginButton.on('click', this.loginClick, this);
     		return markup;
     	},
     	overrides: {
-        	loginClick: function() {
+        	loginClick: function(evt) {
         		this.engine.enqueueMessage({message: 'presence', command: 'login', value: this.usernameInput.get('value')});
+        		evt.preventDefault();
         	}
     	}
     });

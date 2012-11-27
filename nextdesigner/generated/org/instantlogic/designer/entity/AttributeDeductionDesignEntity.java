@@ -3,6 +3,8 @@ package org.instantlogic.designer.entity;
 public class AttributeDeductionDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.AttributeDeductionDesign> {
 
 	public static final AttributeDeductionDesignEntity INSTANCE = new AttributeDeductionDesignEntity();
+
+
 	
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {

@@ -32,6 +32,6 @@ public class SubmitMessage extends Message {
 		while (eventOccurrence!=null) {
 			eventOccurrence = flowContext.step(eventOccurrence);
 		}
-		traveler.getUser().getPresence().enter(traveler, flowContext.getFlowStack().toPath());
+		traveler.getPresence().enter(traveler, flowContext.getFlowStack().toPath());
 	}
 }

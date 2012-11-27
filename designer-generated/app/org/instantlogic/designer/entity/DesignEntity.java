@@ -3,6 +3,8 @@ package org.instantlogic.designer.entity;
 public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.Design> {
 
 	public static final DesignEntity INSTANCE = new DesignEntity();
+
+
 	
 
 	private static final org.instantlogic.fabric.model.Entity<?>[] EXTENSIONS = new org.instantlogic.fabric.model.Entity<?>[] {

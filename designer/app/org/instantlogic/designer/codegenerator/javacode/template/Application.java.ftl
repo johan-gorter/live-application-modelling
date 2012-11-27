@@ -18,6 +18,21 @@ public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${
 		return ${rootPackageName}.flow.${mainFlow}Flow.INSTANCE;
 	}
 	</#if>
+
+    <#if startEvent??>	
+	@Override
+	public org.instantlogic.interaction.flow.FlowEvent getStartEvent() {
+		return ${rootPackageName}.event.${startEvent}Event.INSTANCE;
+	}
+	</#if>
+
+    <#if themeNames??>
+    private static final String[] THEME_NAMES = new String[]{<#list themeNames as name>"${name}"<#if name_has_next>, </#if></#list>};	
+	@Override
+	public String[] getThemeNames() {
+		return THEME_NAMES;
+	}
+	</#if>
 	
 	@Override
 	public String getName() {

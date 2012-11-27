@@ -3,6 +3,8 @@ package org.instantlogic.designer.entity;
 public class PropertyDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.PropertyDesign> {
 
 	public static final PropertyDesignEntity INSTANCE = new PropertyDesignEntity();
+
+
 	
 
 	

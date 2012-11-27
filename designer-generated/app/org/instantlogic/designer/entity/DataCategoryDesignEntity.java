@@ -3,6 +3,8 @@ package org.instantlogic.designer.entity;
 public class DataCategoryDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.DataCategoryDesign> {
 
 	public static final DataCategoryDesignEntity INSTANCE = new DataCategoryDesignEntity();
+
+
 	
 
 	

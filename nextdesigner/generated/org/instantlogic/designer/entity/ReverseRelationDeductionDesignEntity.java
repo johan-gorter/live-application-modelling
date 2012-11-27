@@ -3,6 +3,8 @@ package org.instantlogic.designer.entity;
 public class ReverseRelationDeductionDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.ReverseRelationDeductionDesign> {
 
 	public static final ReverseRelationDeductionDesignEntity INSTANCE = new ReverseRelationDeductionDesignEntity();
+
+
 	
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
