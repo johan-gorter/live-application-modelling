@@ -3,6 +3,8 @@ package org.instantlogic.designer.entity;
 public class EqualsDeductionDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.EqualsDeductionDesign> {
 
 	public static final EqualsDeductionDesignEntity INSTANCE = new EqualsDeductionDesignEntity();
+
+
 	
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {

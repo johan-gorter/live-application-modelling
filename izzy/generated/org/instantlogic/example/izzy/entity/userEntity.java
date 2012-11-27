@@ -3,6 +3,8 @@ package org.instantlogic.example.izzy.entity;
 public class UserEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.example.izzy.User> {
 
 	public static final UserEntity INSTANCE = new UserEntity();
+
+
 	
 
 	

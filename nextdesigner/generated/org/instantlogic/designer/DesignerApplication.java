@@ -16,6 +16,7 @@ public class DesignerApplication extends org.instantlogic.interaction.Applicatio
 	public org.instantlogic.interaction.flow.Flow getMainFlow() {
 		return org.instantlogic.designer.flow.MainFlow.INSTANCE;
 	}
+
 	
 	@Override
 	public String getName() {

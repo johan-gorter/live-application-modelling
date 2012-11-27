@@ -64,6 +64,12 @@ public class ApplicationGenerator extends AbstractGenerator{
 		if (applicationInstance.getMainFlow()!=null) {
 			model.mainFlow = applicationInstance.getMainFlow().getTechnicalNameCapitalized();
 		}
+		if (applicationInstance.getStartEvent()!=null) {
+			model.startEvent = applicationInstance.getStartEvent().getTechnicalNameCapitalized();
+		}
+		if (applicationInstance.getThemeNames().size()>0) {
+			model.themeNames = applicationInstance.getThemeNames().asList().toArray(new String[applicationInstance.getThemeNames().size()]);
+		}
 		
 		List<Design> newEntities = updateGenerators(entityGenerators, applicationInstance.getEntities(), context);
 		for(Design newEntity : newEntities) {

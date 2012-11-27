@@ -17,7 +17,7 @@ public class FlowContext extends DeductionContext {
 		FlowStack flowStack = FlowStack.create(mainFlow, path, caseInstance);
 		FlowContext result = new FlowContext(caseInstance, caseId, travelerInfo);
 		result.setFlowStack(flowStack);
-		if (flowStack.getCurrentNode()==null) {
+		if (flowStack.getCurrentNode()==null && path!=null) {
 			throw new NoSuchElementException();
 		}
 		return result;

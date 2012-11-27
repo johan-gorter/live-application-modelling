@@ -3,6 +3,8 @@ package org.instantlogic.designer.entity;
 public class TextTemplateDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.TextTemplateDesign> {
 
 	public static final TextTemplateDesignEntity INSTANCE = new TextTemplateDesignEntity();
+
+
 	
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {

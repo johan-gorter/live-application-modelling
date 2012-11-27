@@ -3,6 +3,8 @@ package org.instantlogic.designer.entity;
 public class DeductionDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.DeductionDesign> {
 
 	public static final DeductionDesignEntity INSTANCE = new DeductionDesignEntity();
+
+
 	
 
 	private static final org.instantlogic.fabric.model.Entity<?>[] EXTENSIONS = new org.instantlogic.fabric.model.Entity<?>[] {

@@ -11,6 +11,7 @@ import org.instantlogic.interaction.flow.FlowNodeBase;
 public class FlowStack extends AbstractDeductionContext {
 	
 	public static FlowStack create(Flow mainFlow, String path, Instance caseInstance) {
+		if (path==null) return new FlowStack(null, mainFlow);
 		String[] pathElements = path.split("/");
 		Iterator<String> iterator = Arrays.asList(pathElements).iterator();
 		return mainFlow.createFlowStack(null, pathElements[0], iterator, caseInstance);

@@ -3,6 +3,8 @@ package org.instantlogic.example.izzy.entity;
 public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.example.izzy.Issue> {
 
 	public static final IssueEntity INSTANCE = new IssueEntity();
+
+
 	
 
 	

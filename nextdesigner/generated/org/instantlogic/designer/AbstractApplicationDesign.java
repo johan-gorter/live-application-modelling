@@ -333,6 +333,29 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 		return (ApplicationDesign)this;
 	}
 	
+	
+	private final org.instantlogic.fabric.value.RelationValue<ApplicationDesign, EventDesign> startEvent
+		= createRelationValue(org.instantlogic.designer.entity.ApplicationDesignEntity.startEvent);
+		
+	public org.instantlogic.fabric.value.RelationValue<ApplicationDesign, EventDesign> getStartEventRelationValue() {
+		return startEvent;
+	}
+
+	public org.instantlogic.designer.EventDesign getStartEvent() {
+		return startEvent.getValue();
+	}
+	
+	public ApplicationDesign setStartEvent(org.instantlogic.designer.EventDesign newValue) {
+		startEvent.setValue(newValue);
+		return (ApplicationDesign)this;
+	}
+	
+	public org.instantlogic.designer.EventDesign newStartEvent() {
+		org.instantlogic.designer.EventDesign newValue = new org.instantlogic.designer.EventDesign(); 
+		startEvent.setValue(newValue);
+		return newValue;
+	}
+
 
 	// Reverse relations
 

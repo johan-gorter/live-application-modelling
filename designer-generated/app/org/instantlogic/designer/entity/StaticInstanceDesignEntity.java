@@ -3,6 +3,8 @@ package org.instantlogic.designer.entity;
 public class StaticInstanceDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.StaticInstanceDesign> {
 
 	public static final StaticInstanceDesignEntity INSTANCE = new StaticInstanceDesignEntity();
+
+
 	
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {

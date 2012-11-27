@@ -3,6 +3,8 @@ package org.instantlogic.designer.entity;
 public class SharedElementDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.SharedElementDesign> {
 
 	public static final SharedElementDesignEntity INSTANCE = new SharedElementDesignEntity();
+
+
 	
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {

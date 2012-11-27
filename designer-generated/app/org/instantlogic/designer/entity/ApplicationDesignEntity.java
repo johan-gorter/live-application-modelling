@@ -3,6 +3,8 @@ package org.instantlogic.designer.entity;
 public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.ApplicationDesign> {
 
 	public static final ApplicationDesignEntity INSTANCE = new ApplicationDesignEntity();
+
+
 	
 
 	
@@ -227,6 +229,19 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			}
 		};
 	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.designer.EventDesign, org.instantlogic.designer.EventDesign> startEvent
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.ApplicationDesign, org.instantlogic.designer.EventDesign, org.instantlogic.designer.EventDesign>(
+			"startEvent", INSTANCE, org.instantlogic.designer.entity.EventDesignEntity.INSTANCE, org.instantlogic.designer.EventDesign.class, 
+			null
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValue<org.instantlogic.designer.ApplicationDesign, org.instantlogic.designer.EventDesign> get(
+					org.instantlogic.designer.ApplicationDesign instance) {
+				return instance.getStartEventRelationValue();
+			}
+		};
+	
 	// Reverse relations
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
@@ -244,6 +259,7 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 		fragmentTypes,
 		mainFlow,
 		sharedElements,
+		startEvent,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 	};
