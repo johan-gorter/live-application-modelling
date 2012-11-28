@@ -3,8 +3,6 @@ package org.instantlogic.example.izzy.entity;
 public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.example.izzy.Issue> {
 
 	public static final IssueEntity INSTANCE = new IssueEntity();
-
-
 	
 
 	
@@ -24,6 +22,25 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 	}
 
 	// Deductions
+
+	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.User>> createDeduction0() {
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.example.izzy.Project> d0 
+		  		= org.instantlogic.fabric.deduction.SelectedInstanceDeduction.create(org.instantlogic.example.izzy.entity.ProjectEntity.INSTANCE);
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.User>> d1 
+		  		= org.instantlogic.fabric.deduction.AttributeDeduction.create(org.instantlogic.example.izzy.entity.ProjectEntity.users, d0);
+		return d1;
+	}
+
+
+	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.User>> createDeduction1() {
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.example.izzy.Project> d0 
+		  		= org.instantlogic.fabric.deduction.SelectedInstanceDeduction.create(org.instantlogic.example.izzy.entity.ProjectEntity.INSTANCE);
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.User>> d1 
+		  		= org.instantlogic.fabric.deduction.AttributeDeduction.create(org.instantlogic.example.izzy.entity.ProjectEntity.users, d0);
+		return d1;
+	}
+
+
 	
 	// Attributes
 	
@@ -83,6 +100,15 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 					org.instantlogic.example.izzy.Issue instance) {
 				return instance.getAssigneeRelationValue();
 			}
+			
+			private org.instantlogic.fabric.deduction.Deduction<? extends java.lang.Iterable<org.instantlogic.example.izzy.User>> options;
+			@Override
+			public org.instantlogic.fabric.deduction.Deduction<? extends java.lang.Iterable<org.instantlogic.example.izzy.User>> getOptions() {
+				if (options==null) {
+					options = (org.instantlogic.fabric.deduction.Deduction)createDeduction1();
+				}
+				return options;
+			};
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.example.izzy.Issue, org.instantlogic.fabric.value.Multi<org.instantlogic.example.izzy.Comment>, org.instantlogic.example.izzy.Comment> comments
@@ -117,6 +143,15 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 					org.instantlogic.example.izzy.Issue instance) {
 				return instance.getReporterRelationValue();
 			}
+			
+			private org.instantlogic.fabric.deduction.Deduction<? extends java.lang.Iterable<org.instantlogic.example.izzy.User>> options;
+			@Override
+			public org.instantlogic.fabric.deduction.Deduction<? extends java.lang.Iterable<org.instantlogic.example.izzy.User>> getOptions() {
+				if (options==null) {
+					options = (org.instantlogic.fabric.deduction.Deduction)createDeduction0();
+				}
+				return options;
+			};
 		};
 	
 	// Reverse relations

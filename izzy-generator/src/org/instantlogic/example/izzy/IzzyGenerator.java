@@ -34,8 +34,12 @@ public class IzzyGenerator extends Design {
 	private static EntityDesign comment;
 	
 	private static RelationDesign projectIssues;
+	private static RelationDesign issueReporter;
+	private static RelationDesign issueAssignee;
+	
 	private static AttributeDesign issueHeadline;
 	private static AttributeDesign issueNumber;
+	private static AttributeDesign userUsername;
 	
 	private static EventDesign createIssueEvent;
 	private static EventDesign issueDetailsEvent;
@@ -54,12 +58,16 @@ public class IzzyGenerator extends Design {
 	private static FlowDesign selectDashboardFlow;
 	private static AttributeDesign issueDescription;
 
-	public static void main(String[] args) throws IOException { 
+	public static void main(String[] args) throws IOException {
+		// Entities and attributes
 		izzy = new ApplicationDesign();
 		project = new EntityDesign("project").setApplication(izzy);
 		project.addAttribute("last issue number", Integer.class).setDefault(new DeductionSchemeDesign().deduceConstant(Integer.class, 0).getScheme());
 		user = new EntityDesign("user").setApplication(izzy);
-		user.addAttribute("username", DataCategoryDesign.text);
+		userUsername = user.addAttribute("username", DataCategoryDesign.text);
+		DeductionSchemeDesign usernameTitle;
+		user.setTitle(new TextTemplateDesign().addToUntranslated(new StringTemplateDesign().setDeduction(usernameTitle = new DeductionSchemeDesign())));
+		usernameTitle.deduceAttribute(userUsername);
 		issue = new EntityDesign("issue").setApplication(izzy);
 		issueNumber = issue.addAttribute("number", Integer.class);
 		issueHeadline = issue.addAttribute("headline", DataCategoryDesign.text);
@@ -70,12 +78,14 @@ public class IzzyGenerator extends Design {
 		comment.getDataType().setMultiLine(true).setFormatted(true);
 		
 		// Relations
-		project.addRelation("users", RelationType.OneToManyAggregation, user).setReverseName("project");
+		RelationDesign projectUsers = project.addRelation("users", RelationType.OneToManyAggregation, user).setReverseName("project");
 		projectIssues = project.addRelation("issues", RelationType.OneToManyAggregation, issue).setReverseName("project");
-		issue.addRelation("reporter", RelationType.ManyToZeroOrOne, user).setReverseName("reported issues");
-		issue.addRelation("assignee", RelationType.ManyToZeroOrOne, user).setReverseName("assigned issues");
+		issueReporter = issue.addRelation("reporter", RelationType.ManyToZeroOrOne, user).setReverseName("reported issues");
+		issueAssignee = issue.addRelation("assignee", RelationType.ManyToZeroOrOne, user).setReverseName("assigned issues");
 		issue.addRelation("comments", RelationType.OneToManyAggregation, comment).setReverseName("issue");
 		comment.addRelation("by", RelationType.OneToZeroOrOne, user).setReverseName("comments");
+		issueReporter.newOptions().deduceRelation(projectUsers);
+		issueAssignee.newOptions().deduceRelation(projectUsers);
 		
 		izzy.setCaseEntity(project);
 		izzy.setName("izzy");
@@ -134,6 +144,7 @@ public class IzzyGenerator extends Design {
 		izzy.addToFragmentTypes((FragmentTypeDesign) new FragmentTypeDesign().setName("Page"));
 		izzy.addToFragmentTypes((FragmentTypeDesign) new FragmentTypeDesign().setName("Paragraph"));
 		izzy.addToFragmentTypes((FragmentTypeDesign) new FragmentTypeDesign().setName("Heading1"));
+		izzy.addToFragmentTypes((FragmentTypeDesign) new FragmentTypeDesign().setName("Icon"));
 		izzy.addToFragmentTypes((FragmentTypeDesign) new FragmentTypeDesign().setHasAttribute(true).setName("Input"));
 		izzy.addToFragmentTypes((FragmentTypeDesign) new FragmentTypeDesign().setName("Table"));
 		izzy.addToFragmentTypes((FragmentTypeDesign) new FragmentTypeDesign().setName("Row"));
@@ -181,12 +192,13 @@ public class IzzyGenerator extends Design {
 
 	private static void createIssueDetailsPlaceTemplate() {
 		DeductionSchemeDesign number, headline;
-		FragmentTemplateDesign headlineInput, descriptionInput, homeLink;
+		FragmentTemplateDesign headlineInput, descriptionInput, homeLink, reporterInput, assigneeInput;
 		issueDetailsPlaceTemplate = new PlaceTemplateDesign("issueDetails")
 			.setOwner(issueFlow)
 			.setContent(new FragmentTemplateDesign("Page")
 				.setChildren("mainContent", 
-					homeLink = new FragmentTemplateDesign("Link")
+					homeLink = new FragmentTemplateDesign("Button").addToStyleNames("btn-link")
+						.setChildren("content", new FragmentTemplateDesign("Icon").addToStyleNames("icon-home"))
 						.setText("text", new TextTemplateDesign().addToUntranslated(new StringTemplateDesign().setConstantText("Home"))),
 					new FragmentTemplateDesign("Heading1")
 						.setText("text", new TextTemplateDesign()
@@ -195,25 +207,34 @@ public class IzzyGenerator extends Design {
 							.addToUntranslated(new StringTemplateDesign().setConstantText(": "))
 							.addToUntranslated(new StringTemplateDesign().setDeduction(headline = new DeductionSchemeDesign()))
 						),
-					headlineInput = new FragmentTemplateDesign("Input"),
-					descriptionInput = new FragmentTemplateDesign("Input")
+					headlineInput = new FragmentTemplateDesign("Input").addToStyleNames("answer-span8"),
+					reporterInput = new FragmentTemplateDesign("Input").addToStyleNames("answer-span4"),
+					assigneeInput = new FragmentTemplateDesign("Input").addToStyleNames("answer-span4"),
+					descriptionInput = new FragmentTemplateDesign("Input").addToStyleNames("answer-span8").addToStyleNames("answer-rows-40")
 				)
 			);
 		homeLink.setEvent(homeEvent);
 		number.deduceAttribute(issueNumber);
 		headline.deduceAttribute(issueHeadline);
 		headlineInput.setEntity(issue).setAttribute(issueHeadline);
+		reporterInput.setEntity(issue).setAttribute(issueReporter);
+		assigneeInput.setEntity(issue).setAttribute(issueAssignee);
 		descriptionInput.setEntity(issue).setAttribute(issueDescription);
 	}
 
 	private static void createDashboardPlaceTemplate() {
-		DeductionSchemeDesign issues, number, headline;
+		DeductionSchemeDesign issues, number, headline, username;
 		FragmentTemplateDesign detailsLink, createButton;
 		dashboardPlaceTemplate = new PlaceTemplateDesign("dashboard")
 			.setOwner(dashboardFlow)
 			.setContent(
 				new FragmentTemplateDesign("Page")
 					.setChildren("mainContent",
+						new FragmentTemplateDesign("Heading1")
+							.setText("text", new TextTemplateDesign()
+								.addToUntranslated(new StringTemplateDesign().setDeduction(username = new DeductionSchemeDesign()))
+								.addToUntranslated(new StringTemplateDesign().setConstantText("'s dashboard"))
+							),
 						new FragmentTemplateDesign("Table")
 							.setChildren("columns", 
 								new FragmentTemplateDesign("Column"),
@@ -246,6 +267,7 @@ public class IzzyGenerator extends Design {
 							.setText("text", new TextTemplateDesign().addToUntranslated(new StringTemplateDesign().setConstantText("Create issue")))
 					)
 			);
+		username.deduceAttribute(userUsername);
 		issues.deduceAttribute(projectIssues);
 		number.deduceAttribute(issueNumber);
 		headline.deduceAttribute(issueHeadline);

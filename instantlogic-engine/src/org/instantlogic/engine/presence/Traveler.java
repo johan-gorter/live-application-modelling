@@ -113,6 +113,7 @@ public class Traveler extends AbstractTraveler {
 		CaseAdministration caseAdministration = renderContext.getCaseInstance().getMetadata().getCaseAdministration();
 		caseAdministration.startRecordingObservations();
 		update.setRootFragment(placeTemplate.render(renderContext));
+		update.getRootFragment().put("themeNames", caseManager.getApplicationManager().getApplication().getThemeNames());
 		Observations observations = caseAdministration.stopRecordingObservations();
 
 		placeOutdated = false;

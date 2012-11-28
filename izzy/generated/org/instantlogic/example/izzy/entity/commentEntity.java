@@ -3,8 +3,6 @@ package org.instantlogic.example.izzy.entity;
 public class CommentEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.example.izzy.Comment> {
 
 	public static final CommentEntity INSTANCE = new CommentEntity();
-
-
 	
 
 	
@@ -24,6 +22,7 @@ public class CommentEntity extends org.instantlogic.fabric.model.Entity<org.inst
 	}
 
 	// Deductions
+
 	
 	// Attributes
 	

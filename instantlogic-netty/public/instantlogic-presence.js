@@ -213,8 +213,10 @@ YUI.add('instantlogic-presence', function (Y) {
     ns.Login = Y.instantlogic.createFragment({
     	createMarkup: function(model) {
     		var markup = html.form({ action: '.', className: 'form-inline' },
-				this.usernameInput = html.input({type:'text'}),
-				this.loginButton = html.button({className:'btn'}, 'Login')
+//    			html.div({className:'input-append'},
+					this.usernameInput = html.input({type:'text'}),
+					this.loginButton = html.button({className:'btn'}, 'Login')
+//				)
     		);
     		this.loginButton.on('click', this.loginClick, this);
     		return markup;

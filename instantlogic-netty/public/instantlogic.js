@@ -683,6 +683,19 @@ YUI.add('instantlogic', function (Y) {
     				}
     			}
     		}
+    		if (!ns.util.arrayEquals(this.oldModel.styleNames, newModel.styleNames)) {
+	    		if (this.oldModel.styleNames) {
+	    			for (var i=0;i<this.oldModel.styleNames.length;i++) {
+	    				this.markup.removeClass(this.oldModel.styleNames[i]);
+	    			}
+	    		}
+	    		if (newModel.styleNames) {
+	    			for (var i=0;i<newModel.styleNames.length;i++) {
+	    				this.markup.addClass(newModel.styleNames[i]);
+	    			}
+	    		}
+	    		diff.nodeUpdated(this.markup);
+    		}
     		if (options.postUpdate) {
     			options.postUpdate.call(this, newModel, diff);
     		}
@@ -699,6 +712,18 @@ YUI.add('instantlogic', function (Y) {
     	};
     	
     	return constructor;
+    };
+    
+    ns.util = {
+    	arrayEquals: function(a1, a2) {
+    		if (a1==null) return (a2==null);
+    		if (a2==null) return false;
+    		if (a1.length!=a2.length) return false;
+    		for (var i=0;i<a1.length;i++) {
+    			if (a1[i]!=a2[i]) return false;
+    		}
+    		return true;
+    	}
     };
     
 }, '0.7.0', { requires: ['io-base', 'node', 'oop', 'panel', 'json', 'event', 'html', 'history', 'overlay', 'transition'] });

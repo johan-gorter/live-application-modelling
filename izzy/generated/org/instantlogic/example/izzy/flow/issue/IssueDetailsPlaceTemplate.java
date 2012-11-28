@@ -26,16 +26,29 @@ public class IssueDetailsPlaceTemplate extends org.instantlogic.interaction.flow
 	private static org.instantlogic.interaction.page.FragmentTemplate CONTENT = 
         new org.instantlogic.interaction.page.FragmentTemplate("F11P1F1", "Page")      
         .putChildren("mainContent",
-                new org.instantlogic.interaction.page.FragmentTemplate("F11P1F1P1F1", "Link")      .setEvent(org.instantlogic.example.izzy.event.HomeEvent.INSTANCE)
+                new org.instantlogic.interaction.page.FragmentTemplate("F11P1F1P1F1", "Button")      .setStyleNames(new String[]{"btn-link"})
+      .setEvent(org.instantlogic.example.izzy.event.HomeEvent.INSTANCE)
       
                 .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Home")))
+      
+                .putChildren("content",
+                        new org.instantlogic.interaction.page.FragmentTemplate("F11P1F1P1F1P1F1", "Icon")      .setStyleNames(new String[]{"icon-home"})
+                )
 ,
                 new org.instantlogic.interaction.page.FragmentTemplate("F11P1F1P1F2", "Heading1")      
                 .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Issue "),new org.instantlogic.fabric.text.StringTemplate(createDeduction0()),new org.instantlogic.fabric.text.StringTemplate(": "),new org.instantlogic.fabric.text.StringTemplate(createDeduction1())))
 ,
-                new org.instantlogic.interaction.page.FragmentTemplate("F11P1F1P1F3", "Input")      .setField(org.instantlogic.example.izzy.entity.IssueEntity.INSTANCE, org.instantlogic.example.izzy.entity.IssueEntity.headline)
+                new org.instantlogic.interaction.page.FragmentTemplate("F11P1F1P1F3", "Input")      .setStyleNames(new String[]{"answer-span8"})
+      .setField(org.instantlogic.example.izzy.entity.IssueEntity.INSTANCE, org.instantlogic.example.izzy.entity.IssueEntity.headline)
 ,
-                new org.instantlogic.interaction.page.FragmentTemplate("F11P1F1P1F4", "Input")      .setField(org.instantlogic.example.izzy.entity.IssueEntity.INSTANCE, org.instantlogic.example.izzy.entity.IssueEntity.description)
+                new org.instantlogic.interaction.page.FragmentTemplate("F11P1F1P1F4", "Input")      .setStyleNames(new String[]{"answer-span4"})
+      .setField(org.instantlogic.example.izzy.entity.IssueEntity.INSTANCE, org.instantlogic.example.izzy.entity.IssueEntity.reporter)
+,
+                new org.instantlogic.interaction.page.FragmentTemplate("F11P1F1P1F5", "Input")      .setStyleNames(new String[]{"answer-span4"})
+      .setField(org.instantlogic.example.izzy.entity.IssueEntity.INSTANCE, org.instantlogic.example.izzy.entity.IssueEntity.assignee)
+,
+                new org.instantlogic.interaction.page.FragmentTemplate("F11P1F1P1F6", "Input")      .setStyleNames(new String[]{"answer-span8", "answer-rows-40"})
+      .setField(org.instantlogic.example.izzy.entity.IssueEntity.INSTANCE, org.instantlogic.example.izzy.entity.IssueEntity.description)
         )
 ; 
 	

@@ -3,8 +3,6 @@ package org.instantlogic.example.izzy.entity;
 public class UserEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.example.izzy.User> {
 
 	public static final UserEntity INSTANCE = new UserEntity();
-
-
 	
 
 	
@@ -24,6 +22,22 @@ public class UserEntity extends org.instantlogic.fabric.model.Entity<org.instant
 	}
 
 	// Deductions
+
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.String> createDeduction0() {
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.example.izzy.User> d0 
+		  		= org.instantlogic.fabric.deduction.SelectedInstanceDeduction.create(org.instantlogic.example.izzy.entity.UserEntity.INSTANCE);
+		  	org.instantlogic.fabric.deduction.Deduction<java.lang.String> d1 
+		  		= org.instantlogic.fabric.deduction.AttributeDeduction.create(org.instantlogic.example.izzy.entity.UserEntity.username, d0);
+		return d1;
+	}
+
+
+	// Title
+	private static final org.instantlogic.fabric.text.TextTemplate TITLE = new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction0()));
+	@Override
+	public org.instantlogic.fabric.text.TextTemplate getTitle() {
+		return TITLE;
+	}
 	
 	// Attributes
 	
