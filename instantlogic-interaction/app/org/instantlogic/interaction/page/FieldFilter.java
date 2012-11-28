@@ -60,10 +60,13 @@ public class FieldFilter extends AbstractFragmentFilter {
 						resultOption.put("text", value.getMetadata().getStaticDescription().renderText(context));
 					} else if (value.getMetadata().getStaticName()!=null) {
 						resultOption.put("text", value.getMetadata().getStaticName());
-//					} else if (value.getMetadata().getStaticName()!=null) {
-//						resultOption.put("text", value.getMetadata().getStaticName());
 					} else {
-						resultOption.put("text", value.getMetadata().getInstanceId()); // TODO: Entities should get descriptions like titles on Places
+						String title = value.renderTitle(context);
+						if (title!=null) {
+							resultOption.put("text", title);
+						} else {
+							resultOption.put("text", value.getMetadata().getInstanceId()); // TODO: Entities should get descriptions like titles on Places
+						}
 					}
 					resultOptions.add(resultOption);
 				}

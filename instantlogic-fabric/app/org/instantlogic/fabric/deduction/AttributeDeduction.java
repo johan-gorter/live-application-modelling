@@ -16,6 +16,7 @@ public class AttributeDeduction<V, I extends Instance> extends Deduction<V> {
 	private Attribute<I, V, ? extends Object> attribute;
 
 	public AttributeDeduction(Attribute<I, V, ? extends Object> attribute, Deduction<? extends I> instanceDeduction) {
+		if (attribute==null) throw new IllegalArgumentException();
 		this.instanceDeduction = instanceDeduction;
 		this.attribute = attribute;
 	}

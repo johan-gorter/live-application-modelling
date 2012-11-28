@@ -11,10 +11,10 @@ YUI.add('instantlogic-answers', function (Y) {
     ns.createAnswer = function(model) {
     	if (model.dataType) {
 	    	if (model.dataType.multiLine) {
-	    		return new ns.TextareaAnswer();
+	    		return new ns.TextareaAnswer(model);
 	    	}
 	    	if (model.dataType.category == 'boolean') {
-	    		return new ns.CheckboxAnswer();
+	    		return new ns.CheckboxAnswer(model);
 	    	}
     	}
     	if (model.options) {

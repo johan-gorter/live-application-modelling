@@ -35,6 +35,9 @@ public class EntityGenerator extends AbstractGenerator {
 		if (entityDesign.getExtendsFrom()!=null) {
 			model.extendsFrom = entityDesign.getExtendsFrom().getTechnicalNameCapitalized();
 		}
+		if (entityDesign.getTitle()!=null) {
+			model.title = TextGenerator.generate(entityDesign.getTitle(), model);
+		}
 		for (EntityDesign extension : entityDesign.getExtensions()) {
 			model.extensions.add(extension.getTechnicalNameCapitalized());
 		}

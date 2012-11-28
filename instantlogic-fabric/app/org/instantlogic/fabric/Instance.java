@@ -3,12 +3,13 @@ package org.instantlogic.fabric;
 import org.instantlogic.fabric.model.Attribute;
 import org.instantlogic.fabric.model.Entity;
 import org.instantlogic.fabric.model.Relation;
+import org.instantlogic.fabric.text.TextTemplate;
+import org.instantlogic.fabric.util.AbstractDeductionContext;
 import org.instantlogic.fabric.util.InstanceMetadata;
 import org.instantlogic.fabric.value.AttributeValue;
 import org.instantlogic.fabric.value.AttributeValues;
 import org.instantlogic.fabric.value.Multi;
 import org.instantlogic.fabric.value.ReadOnlyRelationValue;
-import org.instantlogic.fabric.value.ReadOnlyRelationValues;
 import org.instantlogic.fabric.value.RelationValue;
 import org.instantlogic.fabric.value.RelationValues;
 import org.instantlogic.fabric.value.impl.AttributeValueImpl;
@@ -89,6 +90,17 @@ public abstract class Instance {
 		StringBuilder instanceId = new StringBuilder();
 		getMetadata().getInstanceId(instanceId);
 		return getInstanceEntity().toString()+"#"+instanceId+name;
+	}
+	
+	public String renderTitle(AbstractDeductionContext context) {
+		TextTemplate title = getMetadata().getEntity().getTitle();
+		if (title==null) return null;
+		try {
+			context.pushSelectedInstance(this);
+			return title.renderText(context);
+		} finally {
+			context.popSelectedInstance(this);
+		}
 	}
 
 	/**

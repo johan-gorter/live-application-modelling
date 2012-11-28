@@ -1,19 +1,11 @@
+/* Provides a margin at offset2 (180px) and has some simple defaults */
 /* Can be used as a base for more specific stylesheets */
-.margin.w920.outer-page {position:relative;width:100%}
-.margin.w920 .page {position:relative;margin:0px auto;width:920px;background-color:#FFFFFF;} /* A centered 920px wide white column */
-.margin .main {padding-top:40px;}
-.margin.w920 .main {width:690px;padding-left:230px;} /* A virtual margin at 230px */
+.margin .main {padding-top:40px;padding-left:180px;}
+.margin .main .input {margin-left:-180px;}
 
 /* Global rules */
-.margin a {color: #000000;text-decoration: none;}
 .margin .error {color:red;}
 .animate-vertically {display:block;overflow:hidden;position:relative;}
-
-/* Fields */
-.margin .input {margin: 5px 0;}
-.margin.w920 .input {width: 920px;margin:5px 0 5px -230px;}
-.margin.w920 .input .question {display: inline-block; width:225px; text-align:right; margin-right:5px;}
-.margin.w920 .input .answer {display: inline-block; width:575px; }
 
 /* Fragments */
 .divtable-column-header {font-weight: bold;}

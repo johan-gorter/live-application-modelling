@@ -5,15 +5,6 @@ package ${rootPackageName}.entity;
 public class ${technicalNameCapitalized}Entity extends org.instantlogic.fabric.model.Entity<${rootPackageName}.${technicalNameCapitalized}> {
 
 	public static final ${technicalNameCapitalized}Entity INSTANCE = new ${technicalNameCapitalized}Entity();
-
-	<#if title??>
-	private static final org.instantlogic.fabric.text.TextTemplate TITLE = <@text_macro text=title />;
-	@Override
-	public org.instantlogic.fabric.text.TextTemplate getTitle() {
-		return TITLE;
-	}
-	</#if>
-
 	
 	<#if extendsFrom??>
 	@Override
@@ -54,6 +45,15 @@ public class ${technicalNameCapitalized}Entity extends org.instantlogic.fabric.m
 	<#list deductionSchemes as scheme>
 		<@deductionscheme_macro scheme=scheme />
 	</#list>
+
+	<#if title??>
+	// Title
+	private static final org.instantlogic.fabric.text.TextTemplate TITLE = <@text_macro text=title />;
+	@Override
+	public org.instantlogic.fabric.text.TextTemplate getTitle() {
+		return TITLE;
+	}
+	</#if>
 	
 	// Attributes
 	<#list attributes as attribute>

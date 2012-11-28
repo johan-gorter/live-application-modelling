@@ -4,11 +4,12 @@ YUI.add('instantlogic-fragments', function (Y) {
     var html = Y.html;
     var FragmentList = Y.instantlogic.FragmentList;
     var createFragment = Y.instantlogic.createFragment;
+    var util = Y.instantlogic.util;
 
     // Page
     ns.Page = createFragment({
     	createMarkup: function() {
-    		var markup = html.div({ className: 'container' },
+    		var markup = html.div({ className: 'page-outer container' },
     			html.div({ className: 'page' },
 	                this.headerDiv = html.div({ className: 'header' }),
 	                this.mainDiv = html.div({ className: 'main' })
@@ -24,10 +25,28 @@ YUI.add('instantlogic-fragments', function (Y) {
     	},
     	postInit: function(model) {
     		document.title = model.title || '';
+    		if (model.themeNames) {
+    			for (var i=0;i<model.themeNames.length;i++) {
+    				this.markup.addClass(model.themeNames[i]);
+    			}
+    		}
     	},
-    	postUpdate: function(newModel) {
+    	postUpdate: function(newModel, diff) {
     		if (newModel.title!=this.oldModel.title) {
     			document.title = newModel.title || '';
+    		}
+    		if (!ns.util.arrayEquals(this.oldModel.themeNames, newModel.themeNames)) {
+	    		if (this.oldModel.themeNames) {
+	    			for (var i=0;i<this.oldModel.themeNames.length;i++) {
+	    				this.markup.removeClass(this.oldModel.themeNames[i]);
+	    			}
+	    		}
+	    		if (newModel.themeNames) {
+	    			for (var i=0;i<newModel.themeNames.length;i++) {
+	    				this.markup.addClass(newModel.themeNames[i]);
+	    			}
+	    		}
+	    		diff.nodeUpdated(this.markup);
     		}
     	},
     	overrides: {
@@ -37,7 +56,7 @@ YUI.add('instantlogic-fragments', function (Y) {
     // Input
     ns.Input = createFragment({ 
     	createMarkup: function() {
-    		return html.form({ action: '.', className: 'form-horizontal' },
+    		return html.form({ action: '.', className: 'form-horizontal input' },
 	        	html.div({className: 'control-group'},
 	                this.questionDiv = html.div({ className: 'control-label' }),
 	                this.answerDiv = html.div({ className: 'controls' })
@@ -48,25 +67,48 @@ YUI.add('instantlogic-fragments', function (Y) {
     		return [[this.questionDiv, model.questionText]];
     	},
     	postInit: function(model) {
-            this.initInput(model);
+        	this.answer = this.engine.createAnswer(model);
+        	this.answerMarkup = this.answer.createMarkup();
+        	this.answer.updateValue(model.value);
+    		if (model.styleNames) {
+    			for (var i=0;i<model.styleNames.length;i++) {
+    				var name = model.styleNames[i];
+    				if (name.substr(0,7)=='answer-') {
+    					this.markup.removeClass(name);
+    					this.answerMarkup.addClass(name.substr(7));
+    				}
+    			}
+    		}
+        	this.answerDiv.setContent(this.answerMarkup);
+        	this.answerDiv.on('change', this.inputChange, this);
+        	this.answerDiv.on('focus', this.inputFocus, this);
     	},
     	postUpdate: function(newModel, diff) {
-            this.updateInput(newModel);
+        	if (newModel.value!=this.oldModel.value) {
+        		this.answer.updateValue(newModel.value);
+        	}
+    		if (!util.arrayEquals(this.oldModel.styleNames, newModel.styleNames)) {
+	    		if (this.oldModel.styleNames) {
+	    			for (var i=0;i<this.oldModel.styleNames.length;i++) {
+	    				var name = this.oldModel.styleNames[i];
+	    				if (name.substr(0,7)=='answer-') {
+	    					this.answerMarkup.removeClass(name.substr(7));
+	    				}
+	    			}
+	    		}
+	    		if (newModel.styleNames) {
+	    			for (var i=0;i<newModel.styleNames.length;i++) {
+	    				var name = newModel.styleNames[i];
+	    				if (name.substr(0,7)=='answer-') {
+	    					this.markup.removeClass(name);	    					
+	    					this.answerMarkup.addClass(name.substr(7));
+	    				}
+	    			}
+	    		}
+	    		diff.nodeUpdated(this.markup);
+    		}
     	},
     	overrides: {
-            initInput: function (model) {
-            	this.answer = this.engine.createAnswer(model);
-            	this.input = this.answer.createMarkup();
-            	this.answer.updateValue(model.value);
-            	this.answerDiv.setContent(this.input);
-            	this.answerDiv.on('change', this.inputChange, this);
-            	this.answerDiv.on('focus', this.inputFocus, this);
-            },
-            updateInput: function(newModel, diff) {
-            	if (newModel.value!=this.oldModel.value) {
-            		this.answer.updateValue(newModel.value);
-            	}
-            },
             inputChange: function() {
             	this.engine.sendChange(this.model.id, this.answer.getValue());
             },
@@ -76,12 +118,18 @@ YUI.add('instantlogic-fragments', function (Y) {
     	}
     });
     
+    ns.Icon = createFragment({
+    	createMarkup: function() {
+    		return html.i(); // A styleName of icon-something is expected here
+    	}
+    }),
+    
     // Link
     ns.Link = createFragment({
     	createMarkup: function() {
             return this.node = html.a({href:'#', className: this.cssClassName()},
-            	this.textSpan = html.span(),
-            	this.contentSpan = html.span()
+            	this.contentSpan = html.span(),
+            	this.textSpan = html.span()
             )
     	},
     	texts: function(model) {
@@ -95,7 +143,7 @@ YUI.add('instantlogic-fragments', function (Y) {
     	},
     	overrides: {
     		cssClassName: function() {
-    			return 'link';
+    			return 'link btn btn-link';
     		},
             onClick: function(e) {
                 e.preventDefault();

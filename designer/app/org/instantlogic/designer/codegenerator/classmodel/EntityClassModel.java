@@ -138,6 +138,8 @@ public class EntityClassModel extends AbstractClassModel {
 	}
 
 	public String extendsFrom;
+	public TextModel title;
+	
 	public final List<String> extensions = new ArrayList<String>();
 	public final List<StaticInstance> staticInstances = new ArrayList<StaticInstance>();
 	public final List<Attribute> attributes = new ArrayList<Attribute>();
@@ -176,5 +178,8 @@ public class EntityClassModel extends AbstractClassModel {
 	}
 	public List<StaticInstance> getStaticInstances() {
 		return staticInstances;
+	}
+	public TextModel getTitle() {
+		return title;
 	}
 }
