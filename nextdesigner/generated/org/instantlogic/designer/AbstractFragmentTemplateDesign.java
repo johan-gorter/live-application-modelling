@@ -18,9 +18,9 @@ public abstract class AbstractFragmentTemplateDesign extends ElementDesign {
 	
 	static {
 	}
-
+	
 	@Override
-	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
+	protected org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.FragmentTemplateDesignEntity.INSTANCE;
 	}
 
@@ -125,11 +125,6 @@ public abstract class AbstractFragmentTemplateDesign extends ElementDesign {
 		return (FragmentTemplateDesign)this;
 	}
 	
-	public org.instantlogic.designer.AttributeDesign newAttribute() {
-		org.instantlogic.designer.AttributeDesign newValue = new org.instantlogic.designer.AttributeDesign(); 
-		attribute.setValue(newValue);
-		return newValue;
-	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValue<FragmentTemplateDesign, EntityDesign> entity
@@ -148,11 +143,6 @@ public abstract class AbstractFragmentTemplateDesign extends ElementDesign {
 		return (FragmentTemplateDesign)this;
 	}
 	
-	public org.instantlogic.designer.EntityDesign newEntity() {
-		org.instantlogic.designer.EntityDesign newValue = new org.instantlogic.designer.EntityDesign(); 
-		entity.setValue(newValue);
-		return newValue;
-	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValue<FragmentTemplateDesign, EventDesign> event
@@ -171,11 +161,6 @@ public abstract class AbstractFragmentTemplateDesign extends ElementDesign {
 		return (FragmentTemplateDesign)this;
 	}
 	
-	public org.instantlogic.designer.EventDesign newEvent() {
-		org.instantlogic.designer.EventDesign newValue = new org.instantlogic.designer.EventDesign(); 
-		event.setValue(newValue);
-		return newValue;
-	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValues<FragmentTemplateDesign, PropertyDesign> properties
@@ -226,11 +211,6 @@ public abstract class AbstractFragmentTemplateDesign extends ElementDesign {
 		return (FragmentTemplateDesign)this;
 	}
 	
-	public org.instantlogic.designer.FragmentTypeDesign newType() {
-		org.instantlogic.designer.FragmentTypeDesign newValue = new org.instantlogic.designer.FragmentTypeDesign(); 
-		type.setValue(newValue);
-		return newValue;
-	}
 
 
 	// Reverse relations

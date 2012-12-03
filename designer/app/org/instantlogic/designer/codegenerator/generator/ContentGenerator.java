@@ -17,7 +17,7 @@ public abstract class ContentGenerator extends AbstractGenerator {
 
 	public static ContentModel generate(ElementDesign element, AbstractClassModel deductionHolder) {
 		ContentModel model = new ContentModel();
-		model.id=element.getMetadata().getInstanceId();
+		model.id=element.getMetadata().getUniqueId();
 		model.rootPackageName = deductionHolder.rootPackageName;
 		model.isCustomized = element.getIsCustomized() == Boolean.TRUE;
 		if (element instanceof SharedElementDesign) {

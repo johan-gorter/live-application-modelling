@@ -18,9 +18,9 @@ public abstract class AbstractDeductionSchemeDesign extends org.instantlogic.fab
 	
 	static {
 	}
-
+	
 	@Override
-	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
+	protected org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.DeductionSchemeDesignEntity.INSTANCE;
 	}
 
@@ -76,11 +76,6 @@ public abstract class AbstractDeductionSchemeDesign extends org.instantlogic.fab
 		return (DeductionSchemeDesign)this;
 	}
 	
-	public org.instantlogic.designer.DeductionDesign newOutput() {
-		org.instantlogic.designer.DeductionDesign newValue = new org.instantlogic.designer.DeductionDesign(); 
-		output.setValue(newValue);
-		return newValue;
-	}
 
 
 	// Reverse relations

@@ -18,9 +18,9 @@ public class StaticInstanceValueDesign extends org.instantlogic.fabric.Instance 
 	
 	static {
 	}
-
+	
 	@Override
-	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
+	protected org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.StaticInstanceValueDesignEntity.INSTANCE;
 	}
 
@@ -61,11 +61,6 @@ public class StaticInstanceValueDesign extends org.instantlogic.fabric.Instance 
 		return (StaticInstanceValueDesign)this;
 	}
 	
-	public org.instantlogic.designer.AttributeDesign newAttribute() {
-		org.instantlogic.designer.AttributeDesign newValue = new org.instantlogic.designer.AttributeDesign(); 
-		attribute.setValue(newValue);
-		return newValue;
-	}
 
 
 	// Reverse relations

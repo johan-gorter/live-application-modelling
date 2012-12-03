@@ -3,8 +3,6 @@ package org.instantlogic.designer.entity;
 public class FlowEdgeDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.FlowEdgeDesign> {
 
 	public static final FlowEdgeDesignEntity INSTANCE = new FlowEdgeDesignEntity();
-
-
 	
 
 	
@@ -24,6 +22,7 @@ public class FlowEdgeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	}
 
 	// Deductions
+
 	
 	// Attributes
 	

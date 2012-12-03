@@ -35,7 +35,7 @@ public class IssueDetailsPlaceTemplate extends org.instantlogic.interaction.flow
                         new org.instantlogic.interaction.page.FragmentTemplate("F11P1F1P1F1P1F1", "Icon")      .setStyleNames(new String[]{"icon-home"})
                 )
 ,
-                new org.instantlogic.interaction.page.FragmentTemplate("F11P1F1P1F2", "Heading1")      
+                new org.instantlogic.interaction.page.FragmentTemplate("F11P1F1P1F2", "Heading2")      
                 .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Issue "),new org.instantlogic.fabric.text.StringTemplate(createDeduction0()),new org.instantlogic.fabric.text.StringTemplate(": "),new org.instantlogic.fabric.text.StringTemplate(createDeduction1())))
 ,
                 new org.instantlogic.interaction.page.FragmentTemplate("F11P1F1P1F3", "Input")      .setStyleNames(new String[]{"answer-span8"})
@@ -47,7 +47,7 @@ public class IssueDetailsPlaceTemplate extends org.instantlogic.interaction.flow
                 new org.instantlogic.interaction.page.FragmentTemplate("F11P1F1P1F5", "Input")      .setStyleNames(new String[]{"answer-span4"})
       .setField(org.instantlogic.example.izzy.entity.IssueEntity.INSTANCE, org.instantlogic.example.izzy.entity.IssueEntity.assignee)
 ,
-                new org.instantlogic.interaction.page.FragmentTemplate("F11P1F1P1F6", "Input")      .setStyleNames(new String[]{"answer-span8", "answer-rows-40"})
+                new org.instantlogic.interaction.page.FragmentTemplate("F11P1F1P1F6", "Input")      .setStyleNames(new String[]{"answer-span8", "answer-height300"})
       .setField(org.instantlogic.example.izzy.entity.IssueEntity.INSTANCE, org.instantlogic.example.izzy.entity.IssueEntity.description)
         )
 ; 

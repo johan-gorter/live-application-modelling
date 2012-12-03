@@ -78,6 +78,11 @@ public class Traveler extends AbstractTraveler {
 	public Traveler() {
 		throw new RuntimeException("Not implemented");
 	}
+
+	public Traveler(String uniqueId) {
+		throw new RuntimeException("Not implemented");
+	}
+	
 	
 	public Traveler(TravelerProxy proxy, CaseManager caseManager) {
 		this.caseManager = caseManager;
@@ -123,7 +128,7 @@ public class Traveler extends AbstractTraveler {
 	
 	public void queuePresenceIfNeeded() {
 		if (this.presenceOutdated) {
-			String location = "Traveler/"+getMetadata().getInstanceId()+"/Presence";
+			String location = "Traveler/"+getMetadata().getUniqueId()+"/Presence";
 			FlowStack flowStack = new FlowStack(null, MainFlow.INSTANCE);
 			flowStack = new FlowStack(flowStack, TravelerFlow.INSTANCE);
 			flowStack.pushSelectedInstance(this);

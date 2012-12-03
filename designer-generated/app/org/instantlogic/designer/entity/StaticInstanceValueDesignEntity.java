@@ -3,8 +3,6 @@ package org.instantlogic.designer.entity;
 public class StaticInstanceValueDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.StaticInstanceValueDesign> {
 
 	public static final StaticInstanceValueDesignEntity INSTANCE = new StaticInstanceValueDesignEntity();
-
-
 	
 
 	
@@ -24,6 +22,7 @@ public class StaticInstanceValueDesignEntity extends org.instantlogic.fabric.mod
 	}
 
 	// Deductions
+
 	
 	// Attributes
 	

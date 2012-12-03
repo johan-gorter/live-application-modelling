@@ -3,8 +3,6 @@ package org.instantlogic.designer.entity;
 public class SumDeductionDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.SumDeductionDesign> {
 
 	public static final SumDeductionDesignEntity INSTANCE = new SumDeductionDesignEntity();
-
-
 	
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
@@ -28,6 +26,7 @@ public class SumDeductionDesignEntity extends org.instantlogic.fabric.model.Enti
 	}
 
 	// Deductions
+
 	
 	// Attributes
 	

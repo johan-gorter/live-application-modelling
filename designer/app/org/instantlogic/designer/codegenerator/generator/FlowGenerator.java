@@ -46,7 +46,7 @@ public class FlowGenerator extends AbstractGenerator {
 		for (FlowNodeBaseDesign nodeDesign : flowDesign.getNodes()) {
 			FlowClassModel.FlowNode node = new FlowClassModel.FlowNode();
 			node.name = nodeDesign.getTechnicalNameCapitalized();
-			node.type = nodeDesign.getInstanceEntity().getName();
+			node.type = nodeDesign.getMetadata().getEntity().getName();
 			node.type = node.type.substring(0, node.type.length() - 6); // remove
 																		// Design
 			model.nodes.add(node);
@@ -126,7 +126,7 @@ public class FlowGenerator extends AbstractGenerator {
 
 	private static String edgePoint(FlowNodeBaseDesign flowNodeBaseDesign) {
 		String name = flowNodeBaseDesign.getTechnicalNameCapitalized();
-		String typeName = flowNodeBaseDesign.getInstanceEntity().getName();
+		String typeName = flowNodeBaseDesign.getMetadata().getEntity().getName();
 		typeName = typeName.substring(0, typeName.length() - 6);// Remove Design
 		return name + typeName + ".INSTANCE";
 	}

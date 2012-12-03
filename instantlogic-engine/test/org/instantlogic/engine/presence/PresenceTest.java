@@ -6,7 +6,7 @@ import junit.framework.Assert;
 
 import org.instantlogic.engine.manager.ApplicationManager;
 import org.instantlogic.engine.manager.CaseManager;
-import org.instantlogic.engine.message.EnterMessage;
+import org.instantlogic.engine.message.StartMessage;
 import org.instantlogic.engine.message.SubmitMessage;
 import org.instantlogic.engine.util.FragmentQuery;
 import org.instantlogic.engine.util.TravelerProxyStub;
@@ -31,10 +31,10 @@ public class PresenceTest {
 		ApplicationManager applicationManager = ApplicationManager.getManager("izzy");
 		CaseManager case1 = applicationManager.getOrCreateCase("PetStore");
 		
-		case1.processMessages(tim, new EnterMessage("dashboard"));
+		case1.processMessages(tim, new StartMessage());
 		case1.sendUpdates();
 		
-		case1.processMessages(bill, new EnterMessage("dashboard"));
+		case1.processMessages(bill, new StartMessage());
 		case1.sendUpdates();
 
 		Map<String, Object> createIssueButton = 
@@ -45,7 +45,7 @@ public class PresenceTest {
 		bill.clearLastUpdates();
 		case1.sendUpdates();
 		
-		Assert.assertEquals(1, tim.getLastUpdates().size()); // Moves to a new place
+		Assert.assertEquals(2, tim.getLastUpdates().size()); // Moves to a new place
 		Assert.assertEquals(1, bill.getLastUpdates().size()); // Dashboard updates to show the new issue
 	}
 }

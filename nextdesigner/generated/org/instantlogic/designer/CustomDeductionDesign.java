@@ -18,9 +18,9 @@ public class CustomDeductionDesign extends DeductionDesign {
 	
 	static {
 	}
-
+	
 	@Override
-	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
+	protected org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.CustomDeductionDesignEntity.INSTANCE;
 	}
 

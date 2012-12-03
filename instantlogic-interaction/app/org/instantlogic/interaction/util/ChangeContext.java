@@ -53,7 +53,7 @@ public class ChangeContext extends RenderContext {
 				Entity<?> entity = administration.getAllEntities().get(id.substring(0,split));
 				return entity.getStaticInstances().get(id.substring(split+1));
 			} else {
-				Instance instance = administration.getInstanceById(id);
+				Instance instance = administration.getInstanceByUniqueId(id);
 				return instance;
 			}
 		}

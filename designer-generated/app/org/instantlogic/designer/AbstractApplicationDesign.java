@@ -18,9 +18,9 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 	
 	static {
 	}
-
+	
 	@Override
-	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
+	protected org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.ApplicationDesignEntity.INSTANCE;
 	}
 
@@ -144,11 +144,6 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 		return (ApplicationDesign)this;
 	}
 	
-	public org.instantlogic.designer.EntityDesign newCaseEntity() {
-		org.instantlogic.designer.EntityDesign newValue = new org.instantlogic.designer.EntityDesign(); 
-		caseEntity.setValue(newValue);
-		return newValue;
-	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValues<ApplicationDesign, EntityDesign> entities
@@ -295,11 +290,6 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 		return (ApplicationDesign)this;
 	}
 	
-	public org.instantlogic.designer.FlowDesign newMainFlow() {
-		org.instantlogic.designer.FlowDesign newValue = new org.instantlogic.designer.FlowDesign(); 
-		mainFlow.setValue(newValue);
-		return newValue;
-	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValues<ApplicationDesign, SharedElementDefinitionDesign> sharedElements
@@ -350,11 +340,6 @@ public abstract class AbstractApplicationDesign extends org.instantlogic.fabric.
 		return (ApplicationDesign)this;
 	}
 	
-	public org.instantlogic.designer.EventDesign newStartEvent() {
-		org.instantlogic.designer.EventDesign newValue = new org.instantlogic.designer.EventDesign(); 
-		startEvent.setValue(newValue);
-		return newValue;
-	}
 
 
 	// Reverse relations

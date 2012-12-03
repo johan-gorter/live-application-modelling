@@ -15,6 +15,8 @@ public class FlowEdge {
 	 * @param endNode required: node the edge ends in
 	 */
 	public FlowEdge(FlowNodeBase startNode, FlowEvent event, FlowNodeBase endNode) {
+		if (event==null) throw new IllegalArgumentException("event");
+		if (endNode==null) throw new IllegalArgumentException("endNode");
 		this.startNode = startNode;
 		this.event = event;
 		this.endNode = endNode;

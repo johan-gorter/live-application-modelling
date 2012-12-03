@@ -26,7 +26,7 @@ public abstract class AbstractDeductionContext extends DeductionContext {
 	public <I extends Instance> I getSelectedInstance(Entity<I> entity) {
 		for (int i=selectedInstances.size()-1;i>=0;i--) {
 			Instance candidate = selectedInstances.get(i);
-			if (Entity.extendsFrom(candidate.getInstanceEntity(), entity)) {
+			if (Entity.extendsFrom(candidate.getMetadata().getEntity(), entity)) {
 				return (I)candidate;
 			}
 		}

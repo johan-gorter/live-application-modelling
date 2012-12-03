@@ -18,9 +18,9 @@ public class IfElseDesign extends ElementDesign {
 	
 	static {
 	}
-
+	
 	@Override
-	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
+	protected org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.IfElseDesignEntity.INSTANCE;
 	}
 

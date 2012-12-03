@@ -35,7 +35,7 @@ YUI.add('instantlogic-fragments', function (Y) {
     		if (newModel.title!=this.oldModel.title) {
     			document.title = newModel.title || '';
     		}
-    		if (!ns.util.arrayEquals(this.oldModel.themeNames, newModel.themeNames)) {
+    		if (!util.arrayEquals(this.oldModel.themeNames, newModel.themeNames)) {
 	    		if (this.oldModel.themeNames) {
 	    			for (var i=0;i<this.oldModel.themeNames.length;i++) {
 	    				this.markup.removeClass(this.oldModel.themeNames[i]);

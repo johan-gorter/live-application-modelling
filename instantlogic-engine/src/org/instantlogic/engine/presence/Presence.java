@@ -10,6 +10,10 @@ public class Presence extends AbstractPresence {
 
 	private static final Logger logger = LoggerFactory.getLogger(Presence.class);
 	
+	public Presence() {
+		super();
+	}
+	
 	public Place enter(Traveler traveler, String url) {
 		traveler.setCurrentPlace(null);
 		traveler.setFocus(null);

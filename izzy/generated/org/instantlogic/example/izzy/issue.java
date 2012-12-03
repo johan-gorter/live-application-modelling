@@ -18,9 +18,9 @@ public class Issue extends org.instantlogic.fabric.Instance {
 	
 	static {
 	}
-
+	
 	@Override
-	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
+	protected org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.example.izzy.entity.IssueEntity.INSTANCE;
 	}
 
@@ -95,11 +95,6 @@ public class Issue extends org.instantlogic.fabric.Instance {
 		return (Issue)this;
 	}
 	
-	public org.instantlogic.example.izzy.User newAssignee() {
-		org.instantlogic.example.izzy.User newValue = new org.instantlogic.example.izzy.User(); 
-		assignee.setValue(newValue);
-		return newValue;
-	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValues<Issue, Comment> comments
@@ -150,11 +145,6 @@ public class Issue extends org.instantlogic.fabric.Instance {
 		return (Issue)this;
 	}
 	
-	public org.instantlogic.example.izzy.User newReporter() {
-		org.instantlogic.example.izzy.User newValue = new org.instantlogic.example.izzy.User(); 
-		reporter.setValue(newValue);
-		return newValue;
-	}
 
 
 	// Reverse relations

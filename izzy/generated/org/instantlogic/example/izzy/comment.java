@@ -18,9 +18,9 @@ public class Comment extends org.instantlogic.fabric.Instance {
 	
 	static {
 	}
-
+	
 	@Override
-	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
+	protected org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.example.izzy.entity.CommentEntity.INSTANCE;
 	}
 
@@ -61,11 +61,6 @@ public class Comment extends org.instantlogic.fabric.Instance {
 		return (Comment)this;
 	}
 	
-	public org.instantlogic.example.izzy.User newBy() {
-		org.instantlogic.example.izzy.User newValue = new org.instantlogic.example.izzy.User(); 
-		by.setValue(newValue);
-		return newValue;
-	}
 
 
 	// Reverse relations

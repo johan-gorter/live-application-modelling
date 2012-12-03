@@ -3,8 +3,6 @@ package org.instantlogic.designer.entity;
 public class HasValueDeductionDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.HasValueDeductionDesign> {
 
 	public static final HasValueDeductionDesignEntity INSTANCE = new HasValueDeductionDesignEntity();
-
-
 	
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
@@ -28,6 +26,7 @@ public class HasValueDeductionDesignEntity extends org.instantlogic.fabric.model
 	}
 
 	// Deductions
+
 	
 	// Attributes
 	

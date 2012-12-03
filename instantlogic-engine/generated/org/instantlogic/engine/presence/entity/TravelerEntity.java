@@ -3,8 +3,6 @@ package org.instantlogic.engine.presence.entity;
 public class TravelerEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.engine.presence.Traveler> {
 
 	public static final TravelerEntity INSTANCE = new TravelerEntity();
-
-
 	
 
 	
@@ -30,6 +28,7 @@ public class TravelerEntity extends org.instantlogic.fabric.model.Entity<org.ins
 		  		= org.instantlogic.fabric.deduction.ConstantDeduction.create(false);
 		return d0;
 	}
+
 
 	
 	// Attributes

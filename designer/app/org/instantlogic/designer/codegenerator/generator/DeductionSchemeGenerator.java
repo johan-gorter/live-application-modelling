@@ -29,7 +29,7 @@ public class DeductionSchemeGenerator {
 		for (DeductionDesign deduction : deductionDesigns) {
 			DeductionModel classModel = new DeductionModel();
 			classModel.index = deductionIndex++;
-			classModel.type = deduction.getInstanceEntity().getName();
+			classModel.type = deduction.getMetadata().getEntity().getName();
 			classModel.type = "org.instantlogic.fabric.deduction."+classModel.type.substring(0, classModel.type.length()-6); // leave Design suffix off
 			if (deduction.getDataType()==null || deduction.getDataType().getJavaClassName()==null) {
 				throw new RuntimeException("Resulting classname was not specified for deduction "+deduction);

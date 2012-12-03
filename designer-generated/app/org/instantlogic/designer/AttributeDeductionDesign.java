@@ -18,9 +18,9 @@ public class AttributeDeductionDesign extends DeductionDesign {
 	
 	static {
 	}
-
+	
 	@Override
-	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
+	protected org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.AttributeDeductionDesignEntity.INSTANCE;
 	}
 
@@ -44,11 +44,6 @@ public class AttributeDeductionDesign extends DeductionDesign {
 		return (AttributeDeductionDesign)this;
 	}
 	
-	public org.instantlogic.designer.AttributeDesign newAttribute() {
-		org.instantlogic.designer.AttributeDesign newValue = new org.instantlogic.designer.AttributeDesign(); 
-		attribute.setValue(newValue);
-		return newValue;
-	}
 
 
 	// Reverse relations

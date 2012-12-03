@@ -1,7 +1,9 @@
 package org.instantlogic.fabric.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -19,6 +21,8 @@ public class CaseAdministration {
 	private Observations currentObservations = null;
 	
 	private SortedMap<String, Entity<?>> allEntities;
+	
+	private Map<String, Instance> instanceByUniqueId = new HashMap<String, Instance>();
 	
 	private static void addEntities(Entity<?> entity, SortedMap<String, Entity<?>> all) {
 		if (all.containsKey(entity.getName())) {
@@ -52,7 +56,8 @@ public class CaseAdministration {
 	public CaseAdministration(Instance rootInstance) {
 		this.rootInstance = rootInstance;
 	}
-	
+
+	@Deprecated
 	public Instance getInstanceById(String id) {
 		if ("0".equals(id)) return rootInstance;
 		Instance result = rootInstance;
@@ -69,6 +74,14 @@ public class CaseAdministration {
 		return result;
 	}
 
+	/**
+	 * Finds the instance by unique id
+	 * @param uniqueId the unique id
+	 * @return The instance if found, null otherwise
+	 */
+	public Instance getInstanceByUniqueId(String uniqueId) {
+		return this.instanceByUniqueId.get(uniqueId);
+	}
 
 	public void registerObservation(ReadOnlyAttributeValue<? extends Instance, ? extends Object> attributeValueObserved) {
 		if (currentObservations!=null) {
@@ -163,5 +176,16 @@ public class CaseAdministration {
 
 	protected void popCurrentOperation(Operation operation) {
 		this.currentOperation = operation;
+	}
+
+	void rememberInstanceWithUniqueId(String uniqueId, Instance instance) {
+		this.instanceByUniqueId.put(uniqueId, instance);
+	}
+
+	void forgetInstanceWithUniqueId(String uniqueId) {
+		Instance removed = this.instanceByUniqueId.remove(uniqueId);
+		if (removed==null) {
+			throw new RuntimeException("UniqueId was not registered: "+uniqueId);
+		}
 	}
 }

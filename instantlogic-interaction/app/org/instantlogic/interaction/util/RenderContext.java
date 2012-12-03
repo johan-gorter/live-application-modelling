@@ -42,7 +42,7 @@ public class RenderContext extends AbstractDeductionContext {
 	}
 	
 	private String makeId(Instance forInstance) {
-		String suffix = forInstance.getMetadata().getInstanceId();
+		String suffix = forInstance.getMetadata().getUniqueId();
 		if (prefixes.size()==0) return suffix;
 		StringBuilder sb = new StringBuilder();
 		sb.append(prefixes.get(prefixes.size()-1));

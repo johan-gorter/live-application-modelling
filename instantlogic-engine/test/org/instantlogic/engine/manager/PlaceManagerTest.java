@@ -4,8 +4,8 @@ import java.util.Collections;
 
 import junit.framework.Assert;
 
-import org.instantlogic.engine.message.EnterMessage;
 import org.instantlogic.engine.message.Message;
+import org.instantlogic.engine.message.StartMessage;
 import org.instantlogic.engine.util.TravelerProxyStub;
 import org.instantlogic.example.izzy.Issue;
 import org.instantlogic.example.izzy.IzzyApplication;
@@ -32,7 +32,7 @@ public class PlaceManagerTest {
 	public void test() {
 		ApplicationManager applicationManager = ApplicationManager.getManager("izzy");
 		CaseManager case1 = applicationManager.getOrCreateCase("project1");
-		case1.processMessages(traveler1, Collections.singletonList((Message)new EnterMessage("dashboard")));
+		case1.processMessages(traveler1, Collections.singletonList((Message)new StartMessage()));
 		case1.sendUpdates();
 		Assert.assertEquals(2, traveler1.getLastUpdates().size());
 		traveler1.clearLastUpdates();

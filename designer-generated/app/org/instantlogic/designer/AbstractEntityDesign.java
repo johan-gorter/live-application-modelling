@@ -18,9 +18,9 @@ public abstract class AbstractEntityDesign extends Design {
 	
 	static {
 	}
-
+	
 	@Override
-	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
+	protected org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE;
 	}
 
@@ -99,11 +99,6 @@ public abstract class AbstractEntityDesign extends Design {
 		return (EntityDesign)this;
 	}
 	
-	public org.instantlogic.designer.EntityDesign newExtendsFrom() {
-		org.instantlogic.designer.EntityDesign newValue = new org.instantlogic.designer.EntityDesign(); 
-		extendsFrom.setValue(newValue);
-		return newValue;
-	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValues<EntityDesign, RelationDesign> relations

@@ -3,8 +3,6 @@ package org.instantlogic.designer.entity;
 public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.RelationDesign> {
 
 	public static final RelationDesignEntity INSTANCE = new RelationDesignEntity();
-
-
 	
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
@@ -41,6 +39,7 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 		    	= new org.instantlogic.designer.deduction.ReverseJavaIdentifierDeduction();
 		return d0;
 	}
+
 
 	
 	// Attributes

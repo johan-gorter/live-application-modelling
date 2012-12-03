@@ -97,6 +97,10 @@ public abstract class Entity<I extends Instance> extends Concept {
 
 	public abstract I createInstance();
 	
+	public I createInstance(String uniqueId) {
+		throw new RuntimeException("");
+	}
+	
 	public abstract Class<I> getInstanceClass();
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
