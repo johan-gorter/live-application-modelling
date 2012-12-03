@@ -3,8 +3,6 @@ package org.instantlogic.designer.entity;
 public class PlaceTemplateDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.PlaceTemplateDesign> {
 
 	public static final PlaceTemplateDesignEntity INSTANCE = new PlaceTemplateDesignEntity();
-
-
 	
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
@@ -28,6 +26,7 @@ public class PlaceTemplateDesignEntity extends org.instantlogic.fabric.model.Ent
 	}
 
 	// Deductions
+
 	
 	// Attributes
 	

@@ -21,9 +21,9 @@ public class DataTypeDesign extends org.instantlogic.fabric.Instance {
 	   _boolean = addStaticInstance("boolean", new DataTypeDesign());
 	   _boolean.getMetadata().setStaticDescription(new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Boolean")));
 	}
-
+	
 	@Override
-	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
+	protected org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.DataTypeDesignEntity.INSTANCE;
 	}
 
@@ -166,11 +166,6 @@ public class DataTypeDesign extends org.instantlogic.fabric.Instance {
 		return (DataTypeDesign)this;
 	}
 	
-	public org.instantlogic.designer.DataCategoryDesign newDataCategory() {
-		org.instantlogic.designer.DataCategoryDesign newValue = new org.instantlogic.designer.DataCategoryDesign(); 
-		dataCategory.setValue(newValue);
-		return newValue;
-	}
 
 	
 	private final org.instantlogic.fabric.value.ReadOnlyRelationValue<DataTypeDesign, EntityDesign> entity

@@ -18,9 +18,9 @@ public abstract class AbstractDeductionDesign extends org.instantlogic.fabric.In
 	
 	static {
 	}
-
+	
 	@Override
-	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
+	protected org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.DeductionDesignEntity.INSTANCE;
 	}
 

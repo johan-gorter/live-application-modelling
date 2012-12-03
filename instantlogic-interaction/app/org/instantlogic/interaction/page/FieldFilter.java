@@ -54,7 +54,7 @@ public class FieldFilter extends AbstractFragmentFilter {
 					if (value.getMetadata().getStaticName()!=null) {
 						resultOption.put("id", value.getMetadata().getEntity().getName()+"!"+value.getMetadata().getStaticName());						
 					} else {
-						resultOption.put("id", value.getMetadata().getInstanceId());						
+						resultOption.put("id", value.getMetadata().getUniqueId());						
 					}
 					if (value.getMetadata().getStaticDescription()!=null) {
 						resultOption.put("text", value.getMetadata().getStaticDescription().renderText(context));
@@ -65,7 +65,7 @@ public class FieldFilter extends AbstractFragmentFilter {
 						if (title!=null) {
 							resultOption.put("text", title);
 						} else {
-							resultOption.put("text", value.getMetadata().getInstanceId()); // TODO: Entities should get descriptions like titles on Places
+							resultOption.put("text", value.getMetadata().getUniqueId());
 						}
 					}
 					resultOptions.add(resultOption);
@@ -93,7 +93,7 @@ public class FieldFilter extends AbstractFragmentFilter {
 			if (metadata.getStaticName()!=null) {
 				return metadata.getEntity().getName()+"!"+metadata.getStaticName();
 			} else {
-				return metadata.getInstanceId();
+				return metadata.getUniqueId();
 			}
 		}
 		return value;

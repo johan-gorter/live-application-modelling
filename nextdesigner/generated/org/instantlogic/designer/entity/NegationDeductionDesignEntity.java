@@ -3,8 +3,6 @@ package org.instantlogic.designer.entity;
 public class NegationDeductionDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.NegationDeductionDesign> {
 
 	public static final NegationDeductionDesignEntity INSTANCE = new NegationDeductionDesignEntity();
-
-
 	
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
@@ -28,6 +26,7 @@ public class NegationDeductionDesignEntity extends org.instantlogic.fabric.model
 	}
 
 	// Deductions
+
 	
 	// Attributes
 	

@@ -18,9 +18,9 @@ public class FlowEdgeDesign extends org.instantlogic.fabric.Instance {
 	
 	static {
 	}
-
+	
 	@Override
-	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
+	protected org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.FlowEdgeDesignEntity.INSTANCE;
 	}
 
@@ -44,11 +44,6 @@ public class FlowEdgeDesign extends org.instantlogic.fabric.Instance {
 		return (FlowEdgeDesign)this;
 	}
 	
-	public org.instantlogic.designer.FlowNodeBaseDesign newEndNode() {
-		org.instantlogic.designer.FlowNodeBaseDesign newValue = new org.instantlogic.designer.FlowNodeBaseDesign(); 
-		endNode.setValue(newValue);
-		return newValue;
-	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValue<FlowEdgeDesign, EventDesign> event
@@ -67,11 +62,6 @@ public class FlowEdgeDesign extends org.instantlogic.fabric.Instance {
 		return (FlowEdgeDesign)this;
 	}
 	
-	public org.instantlogic.designer.EventDesign newEvent() {
-		org.instantlogic.designer.EventDesign newValue = new org.instantlogic.designer.EventDesign(); 
-		event.setValue(newValue);
-		return newValue;
-	}
 
 	
 	private final org.instantlogic.fabric.value.RelationValue<FlowEdgeDesign, FlowNodeBaseDesign> startNode
@@ -90,11 +80,6 @@ public class FlowEdgeDesign extends org.instantlogic.fabric.Instance {
 		return (FlowEdgeDesign)this;
 	}
 	
-	public org.instantlogic.designer.FlowNodeBaseDesign newStartNode() {
-		org.instantlogic.designer.FlowNodeBaseDesign newValue = new org.instantlogic.designer.FlowNodeBaseDesign(); 
-		startNode.setValue(newValue);
-		return newValue;
-	}
 
 
 	// Reverse relations

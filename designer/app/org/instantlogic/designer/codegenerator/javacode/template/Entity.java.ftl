@@ -48,10 +48,13 @@ public class ${technicalNameCapitalized}Entity extends org.instantlogic.fabric.m
 
 	<#if title??>
 	// Title
-	private static final org.instantlogic.fabric.text.TextTemplate TITLE = <@text_macro text=title />;
+	private org.instantlogic.fabric.text.TextTemplate title;
 	@Override
 	public org.instantlogic.fabric.text.TextTemplate getTitle() {
-		return TITLE;
+		if (title==null) {
+			title = <@text_macro text=title />;
+		}
+		return title;
 	}
 	</#if>
 	

@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Attribute;
 import org.instantlogic.fabric.model.Relation;
+import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.util.Operation;
 import org.instantlogic.fabric.util.ValueAndLevel;
 import org.instantlogic.fabric.util.ValueChangeEvent;
@@ -30,6 +31,8 @@ public class ReverseRelationValuesImpl<I extends Instance, From extends Instance
 	
 	@Override
 	public ValueAndLevel<Multi<From>> getValueAndLevel() {
+		CaseAdministration registry = forInstance.getMetadata().getCaseAdministration();
+		registry.registerObservation(this);
 		return ValueAndLevel.rule(reverseValue);
 	}
 

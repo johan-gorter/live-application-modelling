@@ -79,6 +79,9 @@ public class CaseManager {
 				}
 				operation.complete();
 				presenceOperation.complete();
+				long version = caseAdministration.getVersion();
+				caseAdministration.setVersion(version+1);
+				FileCasePersister.INSTANCE.persist(this.caseId, this.theCase, (int)version);
 			} finally {
 				operation.close();
 				presenceOperation.close();

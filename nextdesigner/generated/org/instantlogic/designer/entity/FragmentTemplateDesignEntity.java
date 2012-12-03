@@ -3,8 +3,6 @@ package org.instantlogic.designer.entity;
 public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.FragmentTemplateDesign> {
 
 	public static final FragmentTemplateDesignEntity INSTANCE = new FragmentTemplateDesignEntity();
-
-
 	
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
@@ -36,6 +34,7 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 		  		= org.instantlogic.fabric.deduction.AttributeDeduction.create(org.instantlogic.designer.entity.ApplicationDesignEntity.fragmentTypes, d0);
 		return d1;
 	}
+
 
 	
 	// Attributes

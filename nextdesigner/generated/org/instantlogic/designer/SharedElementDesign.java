@@ -18,9 +18,9 @@ public class SharedElementDesign extends ElementDesign {
 	
 	static {
 	}
-
+	
 	@Override
-	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
+	protected org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.SharedElementDesignEntity.INSTANCE;
 	}
 
@@ -44,11 +44,6 @@ public class SharedElementDesign extends ElementDesign {
 		return (SharedElementDesign)this;
 	}
 	
-	public org.instantlogic.designer.SharedElementDefinitionDesign newDefinition() {
-		org.instantlogic.designer.SharedElementDefinitionDesign newValue = new org.instantlogic.designer.SharedElementDefinitionDesign(); 
-		definition.setValue(newValue);
-		return newValue;
-	}
 
 
 	// Reverse relations

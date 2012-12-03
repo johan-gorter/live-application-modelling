@@ -33,10 +33,13 @@ public class UserEntity extends org.instantlogic.fabric.model.Entity<org.instant
 
 
 	// Title
-	private static final org.instantlogic.fabric.text.TextTemplate TITLE = new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction0()));
+	private org.instantlogic.fabric.text.TextTemplate title;
 	@Override
 	public org.instantlogic.fabric.text.TextTemplate getTitle() {
-		return TITLE;
+		if (title==null) {
+			title = new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction0()));
+		}
+		return title;
 	}
 	
 	// Attributes

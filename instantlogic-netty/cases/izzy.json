@@ -1,5 +1,5 @@
 {
-  "instanceId": "0",
+  "instanceId": "44733007-99f6-4643-a013-9ce7b297b815",
   "entityName": "ApplicationDesign",
   "version": 0,
   "name": "izzy",
@@ -30,7 +30,7 @@
               {
                 "instanceId": "E1A1D2C1",
                 "entityName": "ConstantDeductionDesign",
-                "value": 0,
+                "value": "0",
                 "inputs": [],
                 "constantDataType": {
                   "instanceId": "E1A1D2C1D1",

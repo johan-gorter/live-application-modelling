@@ -1,6 +1,7 @@
 package org.instantlogic.engine.persistence.json;
 
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,7 +40,7 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 	public JsonElement serialize(Instance src, Type typeOfSrc, JsonSerializationContext context) {
 		Entity<? extends Instance> entity = src.getMetadata().getEntity();
 		JsonObject result = new JsonObject();
-		result.add("instanceId", new JsonPrimitive(src.getMetadata().getInstanceId()));
+		result.add("instanceId", new JsonPrimitive(src.getMetadata().getUniqueId()));
 		result.add("entityName", new JsonPrimitive(entity.getName()));
 		if (src.getMetadata().getInstanceOwner() == null) {
 			result.add("version", new JsonPrimitive(src.getMetadata().getCaseAdministration().getVersion()));
@@ -78,7 +79,7 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 							} else if (targetInstance.getMetadata().isStatic()) {
 								values.add(serializeStaticInstance(targetInstance));
 							} else {
-								values.add(new JsonPrimitive(targetInstance.getMetadata().getInstanceId()));
+								values.add(new JsonPrimitive(targetInstance.getMetadata().getUniqueId()));
 							}
 						}
 					} else {
@@ -90,7 +91,7 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 						} else if (targetInstance.getMetadata().isStatic()) {
 							result.add(relation.getName(), serializeStaticInstance(targetInstance));
 						} else {
-							result.add(relation.getName(), new JsonPrimitive(targetInstance.getMetadata().getInstanceId()));
+							result.add(relation.getName(), new JsonPrimitive(targetInstance.getMetadata().getUniqueId()));
 						}
 					}
 				}
@@ -157,8 +158,8 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 							setMultivalueRelation(relation, (RelationValues) relationValue, value, result, caseInstance, instances);
 						} else {
 							JsonObject valueObject = value.getAsJsonObject();
-							Instance target = createInstance(caseInstance, valueObject);
 							String newInstanceId = valueObject.get("instanceId").getAsString();
+							Instance target = createInstance(caseInstance, valueObject, newInstanceId);
 							deserializeFirstPass(valueObject, target, newInstanceId, caseInstance, instances);
 							((RelationValue)relationValue).setValue(target);
 						}
@@ -168,9 +169,10 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 		}
 	}
 
-	private Instance createInstance(Instance caseInstance, JsonObject valueObject) {
+	private Instance createInstance(Instance caseInstance, JsonObject valueObject, String uniqueId) {
 		String entityName = valueObject.get("entityName").getAsString();
 		Instance target = caseInstance.getMetadata().getCaseAdministration().getAllEntities().get(entityName).createInstance();
+		target.getMetadata().initUniqueId(uniqueId);
 		return target;
 	}
 
@@ -240,8 +242,8 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 		JsonArray values = (JsonArray) value;
 		for (JsonElement item : values) {
 			JsonObject valueObject = item.getAsJsonObject();
-			Instance target = createInstance(caseInstance, valueObject);
 			String newInstanceId = valueObject.get("instanceId").getAsString();
+			Instance target = createInstance(caseInstance, valueObject, newInstanceId);
 			deserializeFirstPass(item.getAsJsonObject(), target, newInstanceId, caseInstance, instances);
 			relationValue.addValue(target);
 		}
@@ -263,6 +265,14 @@ public class GsonInstanceAdapter implements JsonSerializer<Instance>, JsonDeseri
 			}
 		} else if (attribute.getJavaClassName() == Boolean.class) {
 			return value.getAsBoolean();
+		} else if (attribute.getJavaClassName() == Long.class) {
+			return value.getAsLong();
+		} else if (attribute.getJavaClassName() == Integer.class) {
+			return value.getAsInt();
+		} else if (attribute.getJavaClassName() == Double.class) {
+			return value.getAsDouble();
+		} else if (attribute.getJavaClassName() == BigDecimal.class) {
+			return value.getAsBigDecimal();
 		} else if (Number.class.isAssignableFrom(attribute.getJavaClassName())) {
 			return value.getAsNumber();
 		} else {

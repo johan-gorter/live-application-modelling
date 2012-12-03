@@ -18,9 +18,9 @@ public abstract class AbstractPresence extends org.instantlogic.fabric.Instance 
 	
 	static {
 	}
-
+	
 	@Override
-	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
+	protected org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.engine.presence.entity.PresenceEntity.INSTANCE;
 	}
 

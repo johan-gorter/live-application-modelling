@@ -28,13 +28,14 @@ import org.instantlogic.fabric.value.impl.ReverseRelationValuesImpl;
  */
 public abstract class Instance {
 
-	private final InstanceMetadata metadata = new InstanceMetadata(this);
+	private final InstanceMetadata metadata;
 	
-	public abstract Entity<?> getInstanceEntity();
+	protected abstract Entity<?> getInstanceEntity();
 	
 	protected Instance() {
+		metadata = new InstanceMetadata(this, getInstanceEntity());
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	protected<Value extends Object, I extends Instance> ReadOnlyAttributeValueImpl<I, Value> createReadOnlyAttributeValue(Attribute<I, Value, Value> attribute) {
 		return new ReadOnlyAttributeValueImpl<I, Value>((I)this, attribute);

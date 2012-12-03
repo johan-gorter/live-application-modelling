@@ -3,8 +3,6 @@ package org.instantlogic.engine.presence.entity;
 public class PlaceEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.engine.presence.Place> {
 
 	public static final PlaceEntity INSTANCE = new PlaceEntity();
-
-
 	
 
 	
@@ -24,6 +22,7 @@ public class PlaceEntity extends org.instantlogic.fabric.model.Entity<org.instan
 	}
 
 	// Deductions
+
 	
 	// Attributes
 	

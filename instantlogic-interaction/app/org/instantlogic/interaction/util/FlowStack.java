@@ -56,7 +56,7 @@ public class FlowStack extends AbstractDeductionContext {
 			parent.toPath(result);
 			result.append("/");
 			for (Instance instance: selectedInstances) {
-				result.append(instance.getMetadata().getInstanceId());
+				result.append(instance.getMetadata().getUniqueId());
 				result.append("/");
 			}
 		}

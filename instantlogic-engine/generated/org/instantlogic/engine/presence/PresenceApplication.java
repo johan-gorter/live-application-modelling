@@ -16,6 +16,8 @@ public class PresenceApplication extends org.instantlogic.interaction.Applicatio
 	public org.instantlogic.interaction.flow.Flow getMainFlow() {
 		return org.instantlogic.engine.presence.flow.MainFlow.INSTANCE;
 	}
+
+
 	
 	@Override
 	public String getName() {

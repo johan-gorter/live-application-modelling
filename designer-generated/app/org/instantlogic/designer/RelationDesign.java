@@ -18,9 +18,9 @@ public class RelationDesign extends AttributeDesign {
 	
 	static {
 	}
-
+	
 	@Override
-	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
+	protected org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.RelationDesignEntity.INSTANCE;
 	}
 
@@ -199,11 +199,6 @@ public class RelationDesign extends AttributeDesign {
 		return (RelationDesign)this;
 	}
 	
-	public org.instantlogic.designer.EntityDesign newTo() {
-		org.instantlogic.designer.EntityDesign newValue = new org.instantlogic.designer.EntityDesign(); 
-		to.setValue(newValue);
-		return newValue;
-	}
 
 
 	// Reverse relations

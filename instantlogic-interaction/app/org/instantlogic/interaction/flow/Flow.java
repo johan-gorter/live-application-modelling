@@ -62,7 +62,7 @@ public abstract class Flow extends Concept {
 	protected void acceptParameters(FlowContext context, Instance[] selectedInstances) {
 		nextParameter: for (Entity<? extends Instance> entity : this.getParameters()) {
 			for (Instance instance: selectedInstances) {
-				if (Entity.extendsFrom(instance.getInstanceEntity(), entity)) {
+				if (Entity.extendsFrom(instance.getMetadata().getEntity(), entity)) {
 					context.getFlowStack().pushSelectedInstance(instance);
 					continue nextParameter;
 				}
@@ -116,7 +116,7 @@ public abstract class Flow extends Concept {
 		for (Entity<? extends Instance> entity: this.getParameters()) {
 			if (!moreCoordinates.hasNext()) throw new InvalidFlowCoordinatesException("Not enough parameters for flow "+getName());
 			String instanceId = moreCoordinates.next();
-			Instance instance = caseInstance.getMetadata().getCaseAdministration().getInstanceById(instanceId);
+			Instance instance = caseInstance.getMetadata().getCaseAdministration().getInstanceByUniqueId(instanceId);
 			if (instance==null) {
 				throw new InvalidFlowCoordinatesException("Unknown instance "+instanceId);
 			}
@@ -150,7 +150,7 @@ public abstract class Flow extends Concept {
 			throw new RuntimeException("Number of parameters does not match number of selected instances"); // TODO check if the right instances are selected
 		}
 		for (String instanceId: current.getActiveInstances()) {
-			Instance instance = caseInstance.getMetadata().getCaseAdministration().getInstanceById(instanceId);
+			Instance instance = caseInstance.getMetadata().getCaseAdministration().getInstanceByUniqueId(instanceId);
 			if (instance==null) {
 				throw new RuntimeException("Instance "+instanceId+" invalid");
 			}

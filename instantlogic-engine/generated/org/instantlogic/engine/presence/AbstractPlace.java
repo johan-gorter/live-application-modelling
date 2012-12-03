@@ -18,9 +18,9 @@ public abstract class AbstractPlace extends org.instantlogic.fabric.Instance {
 	
 	static {
 	}
-
+	
 	@Override
-	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
+	protected org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.engine.presence.entity.PlaceEntity.INSTANCE;
 	}
 

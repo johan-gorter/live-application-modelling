@@ -3,8 +3,6 @@ package org.instantlogic.designer.entity;
 public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.DataTypeDesign> {
 
 	public static final DataTypeDesignEntity INSTANCE = new DataTypeDesignEntity();
-
-
 	
 
 	
@@ -133,6 +131,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 		    	= new org.instantlogic.designer.deduction.DataTypeEntityDeduction();
 		return d0;
 	}
+
 
 	
 	// Attributes

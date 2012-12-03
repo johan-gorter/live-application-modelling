@@ -26,9 +26,9 @@ public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${
 	   <#if staticInstance.description??>${staticInstance.javaIdentifier}.getMetadata().setStaticDescription(<@text_macro text=staticInstance.description />);</#if>
 	   </#list>
 	}
-
+	
 	@Override
-	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
+	protected org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return ${rootPackageName}.entity.${technicalNameCapitalized}Entity.INSTANCE;
 	}
 
@@ -97,11 +97,13 @@ public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${
 		return (${technicalNameCapitalized})this;
 	}
 	
+	<#if relation.owner>	
 	public ${relation.to} new${relation.technicalName?cap_first}() {
 		${relation.to} newValue = new ${relation.to}(); 
 		${relation.javaIdentifier}.setValue(newValue);
 		return newValue;
 	}
+	</#if>
 
 	</#if>
 	<#if !relation.readonly && relation.multivalue>	

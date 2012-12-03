@@ -36,9 +36,9 @@ public class DataCategoryDesign extends org.instantlogic.fabric.Instance {
 	   custom = addStaticInstance("custom", new DataCategoryDesign());
 	   custom.getMetadata().setStaticDescription(new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Custom")));
 	}
-
+	
 	@Override
-	public org.instantlogic.fabric.model.Entity getInstanceEntity() {
+	protected org.instantlogic.fabric.model.Entity getInstanceEntity() {
 		return org.instantlogic.designer.entity.DataCategoryDesignEntity.INSTANCE;
 	}
 

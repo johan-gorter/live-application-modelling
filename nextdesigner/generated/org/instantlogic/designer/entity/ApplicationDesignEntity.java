@@ -3,8 +3,6 @@ package org.instantlogic.designer.entity;
 public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.ApplicationDesign> {
 
 	public static final ApplicationDesignEntity INSTANCE = new ApplicationDesignEntity();
-
-
 	
 
 	
@@ -24,6 +22,7 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 	}
 
 	// Deductions
+
 	
 	// Attributes
 	

@@ -41,7 +41,7 @@ public class PlaceTemplateGenerator extends AbstractGenerator {
 		PlaceClassModel model = new PlaceClassModel();
 		model.name = placeTemplateDesign.getName();
 		model.technicalNameCapitalized = placeTemplateDesign.getTechnicalNameCapitalized();
-		model.id = placeTemplateDesign.getMetadata().getInstanceId();
+		model.id = placeTemplateDesign.getMetadata().getUniqueId();
 		model.isCustomized = placeTemplateDesign.getIsCustomized()==Boolean.TRUE;
 		model.flowname = placeTemplateDesign.getOwner().getTechnicalName();
 		return model;

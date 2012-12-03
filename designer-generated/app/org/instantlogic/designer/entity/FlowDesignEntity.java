@@ -3,8 +3,6 @@ package org.instantlogic.designer.entity;
 public class FlowDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.FlowDesign> {
 
 	public static final FlowDesignEntity INSTANCE = new FlowDesignEntity();
-
-
 	
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
@@ -28,6 +26,7 @@ public class FlowDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 	}
 
 	// Deductions
+
 	
 	// Attributes
 	

@@ -3,8 +3,6 @@ package org.instantlogic.designer.entity;
 public class EventDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.EventDesign> {
 
 	public static final EventDesignEntity INSTANCE = new EventDesignEntity();
-
-
 	
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
@@ -28,6 +26,7 @@ public class EventDesignEntity extends org.instantlogic.fabric.model.Entity<org.
 	}
 
 	// Deductions
+
 	
 	// Attributes
 	

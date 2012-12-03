@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.UUID;
 
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.model.Entity;
@@ -21,6 +22,8 @@ import org.instantlogic.fabric.value.RelationValues;
 public class InstanceMetadata {
 
 	private final Instance instance;
+	private final Entity<? extends Instance> entity;
+	private String uniqueId;
 	private Instance owner = null;
 	private List<GlobalValueChangeListener> globalValueChangeListeners = new ArrayList<GlobalValueChangeListener>();
 	// When this value is the same as globalValueChangeListeners, copy globalValueChangeListeners on write and clear this field.
@@ -36,8 +39,9 @@ public class InstanceMetadata {
 	private TextTemplate staticDescription;
 	private String staticName;
 
-	public InstanceMetadata(Instance instance) {
+	public InstanceMetadata(Instance instance, Entity<? extends Instance> entity) {
 		this.instance = instance;
+		this.entity = entity;
 	}
 
 	private static class GlobalValueChangeListener {
@@ -144,7 +148,7 @@ public class InstanceMetadata {
 		if (ofEntity==null) throw new IllegalArgumentException();
 		Instance candidate = owner;
 		while (candidate!=null) {
-			if (Entity.extendsFrom(candidate.getInstanceEntity(), ofEntity)) return (T)candidate;
+			if (Entity.extendsFrom(candidate.getMetadata().getEntity(), ofEntity)) return (T)candidate;
 			candidate = candidate.getMetadata().getInstanceOwner();
 		}
 		return null;
@@ -159,7 +163,7 @@ public class InstanceMetadata {
 			children = new HashMap<String, Instance>();
 			this.unmodifiableChildren = Collections.unmodifiableMap(children);
 		}
-		String childLocalId = (Character.toUpperCase(instance.getInstanceEntity().getName().charAt(0)))+""+(++lastChildId);
+		String childLocalId = (Character.toUpperCase(instance.getMetadata().getEntity().getName().charAt(0)))+""+(++lastChildId);
 		children.put(childLocalId, instance);
 		instance.getMetadata().registerOwner(this.instance, childLocalId);
 	}
@@ -181,7 +185,7 @@ public class InstanceMetadata {
 			throw new RuntimeException("This instance is already owned by "+this.owner);
 		}
 		if (this.owner!=null) {
-			this.caseAdministration = this.owner.getMetadata().getCaseAdministration();
+			this.caseAdministration = this.owner.getMetadata().getCaseAdministration(); // temporary
 		}
 		this.owner = owner;
 		
@@ -190,13 +194,25 @@ public class InstanceMetadata {
 			this.caseAdministration = null;
 			this.localId="0";
 		} else {
-			this.caseAdministration = null;
-			this.localId = localId;			
+			this.caseAdministration = null; // Fallthrough to the owner
+			this.localId = localId;
+			registerUniqueIdsWithCaseAdministration(getCaseAdministration());
 		}
 	}
 	
+	private void registerUniqueIdsWithCaseAdministration(CaseAdministration newCaseAdministration) {
+		if (uniqueId!=null) {
+			newCaseAdministration.rememberInstanceWithUniqueId(uniqueId, instance);
+		}
+		if (children!=null) {
+			for(Instance instance: children.values()) { // depth-first
+				instance.getMetadata().registerUniqueIdsWithCaseAdministration(newCaseAdministration);
+			}
+		}
+	}
+
 	public Entity<?> getEntity() {
-		return instance.getInstanceEntity();
+		return entity;
 	}
 	
 	@Override
@@ -220,9 +236,12 @@ public class InstanceMetadata {
 	}
 	
 	/**
-	 * Clears all relations to instances in other cases. Applies recursively to children
+	 * Clears all relations to instances in other cases. Applies recursively to children. (getCaseAdministration() still refers the old case now)
 	 */
 	private void clearRelationsAfterSplit(Instance newCase) {
+		if (uniqueId!=null) {
+			getCaseAdministration().forgetInstanceWithUniqueId(uniqueId);
+		}
 		if (children!=null) {
 			for(Instance instance: children.values()) { // depth-first
 				instance.getMetadata().clearRelationsAfterSplit(newCase);
@@ -301,5 +320,21 @@ public class InstanceMetadata {
 
 	public String getStaticName() {
 		return staticName;
+	}
+	
+	public void initUniqueId(String uniqueId) {
+		if (this.uniqueId!=null) {
+			throw new RuntimeException("UniqueId was already initialized and cannot be changed");
+		}
+		getCaseAdministration().rememberInstanceWithUniqueId(this.uniqueId, this.instance);
+		this.uniqueId = uniqueId;
+	}
+
+	public String getUniqueId() {
+		if (this.uniqueId==null) {
+			this.uniqueId = UUID.randomUUID().toString();
+			getCaseAdministration().rememberInstanceWithUniqueId(this.uniqueId, this.instance);
+		}
+		return uniqueId;
 	}
 }

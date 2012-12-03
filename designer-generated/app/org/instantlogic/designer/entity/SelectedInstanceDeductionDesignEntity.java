@@ -3,8 +3,6 @@ package org.instantlogic.designer.entity;
 public class SelectedInstanceDeductionDesignEntity extends org.instantlogic.fabric.model.Entity<org.instantlogic.designer.SelectedInstanceDeductionDesign> {
 
 	public static final SelectedInstanceDeductionDesignEntity INSTANCE = new SelectedInstanceDeductionDesignEntity();
-
-
 	
 	@Override
 	public org.instantlogic.fabric.model.Entity extendsEntity() {
@@ -28,6 +26,7 @@ public class SelectedInstanceDeductionDesignEntity extends org.instantlogic.fabr
 	}
 
 	// Deductions
+
 	
 	// Attributes
 	
