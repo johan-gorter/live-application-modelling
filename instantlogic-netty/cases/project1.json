@@ -1,5 +1,5 @@
 {
-  "instanceId": "cd2c4383-d4dc-49a2-86d1-fe53de0239e0",
+  "instanceId": "13ada220-1290-4405-9ebe-3dd2643f2c98",
   "entityName": "project",
   "version": 1,
   "last issue number": 5,
@@ -11,7 +11,8 @@
       "headline": "Persist issues",
       "number": 1,
       "assignee": "U4",
-      "comments": []
+      "comments": [],
+      "reporter": "e2e8126d-b2f4-4b39-a1ee-a6d8f7fdda42"
     },
     {
       "instanceId": "I2",
@@ -36,7 +37,8 @@
       "description": "We knew this was coming.",
       "headline": "First issue with UUID",
       "number": 4,
-      "comments": []
+      "comments": [],
+      "reporter": "U4"
     },
     {
       "instanceId": "be35693d-8eae-4cad-b818-4e118ea1dfc4",
@@ -44,7 +46,9 @@
       "description": "ss",
       "headline": "New issue344455542222",
       "number": 5,
-      "comments": []
+      "assignee": "U4",
+      "comments": [],
+      "reporter": "e2e8126d-b2f4-4b39-a1ee-a6d8f7fdda42"
     }
   ],
   "users": [
@@ -57,6 +61,11 @@
       "instanceId": "e2e8126d-b2f4-4b39-a1ee-a6d8f7fdda42",
       "entityName": "user",
       "username": "ff6"
+    },
+    {
+      "instanceId": "bc0bae0c-081b-41f4-8ba1-10feb60b93f2",
+      "entityName": "user",
+      "username": "Emma"
     }
   ]
 }
