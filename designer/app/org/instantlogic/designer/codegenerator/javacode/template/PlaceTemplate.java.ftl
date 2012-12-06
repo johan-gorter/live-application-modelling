@@ -7,6 +7,11 @@ public<#if isCustomized> abstract</#if> class <#if isCustomized>Abstract</#if>${
 
 	public static final ${technicalNameCapitalized}PlaceTemplate INSTANCE = new ${technicalNameCapitalized}PlaceTemplate();
 
+	@Override
+	public String getId() {
+		return "${id}";
+	}
+	
 <#list deductionSchemes as scheme>
 	<@deductionscheme_macro scheme=scheme />
 </#list>

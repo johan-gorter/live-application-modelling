@@ -15,17 +15,17 @@ public class EntityContextPageFragment extends org.instantlogic.interaction.page
 
 	
 	public static final org.instantlogic.interaction.page.Element SHARED_INSTANCE = 
-        new org.instantlogic.interaction.page.FragmentTemplate("e6b1f1e7-5391-412d-b59c-726c79fcc3da", "Group")      
+        new org.instantlogic.interaction.page.FragmentTemplate("01ebe1d6-2a69-4011-ac02-9c6ba5e2dc70", "Group")      
         .putChildren("content",
                     org.instantlogic.designer.sharedpagefragment.ApplicationContextPageFragment.INSTANCE
 ,
-                new org.instantlogic.interaction.page.FragmentTemplate("35e29666-a379-41cf-bbfe-ff7e1ca29bca", "Link")      .setEvent(org.instantlogic.designer.event.EntityDetailsEvent.INSTANCE)
+                new org.instantlogic.interaction.page.FragmentTemplate("f717b4fc-63ba-467d-93e8-25427c30707d", "Link")      .setEvent(org.instantlogic.designer.event.EntityDetailsEvent.INSTANCE)
       
                 .putChildren("content",
-                        new org.instantlogic.interaction.page.FragmentTemplate("4dd883d0-6b00-4241-b7e2-70b3479b5a43", "Block")      .setStyleNames(new String[]{"inactive-card"})
+                        new org.instantlogic.interaction.page.FragmentTemplate("0bd4830c-91d0-4509-8da5-e677591f6807", "Block")      .setStyleNames(new String[]{"inactive-card"})
       
                         .putChildren("content",
-                                new org.instantlogic.interaction.page.FragmentTemplate("336abaec-c1e4-44fa-be38-a90dfb2aa1c6", "Heading3")      
+                                new org.instantlogic.interaction.page.FragmentTemplate("a9466aab-e658-44df-89fe-9019a4d1ba8b", "Heading3")      
                                 .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction0()),new org.instantlogic.fabric.text.StringTemplate(" (Entity)")))
                         )
                 )

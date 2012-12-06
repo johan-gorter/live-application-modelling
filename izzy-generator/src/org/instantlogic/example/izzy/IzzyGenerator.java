@@ -253,6 +253,7 @@ public class IzzyGenerator extends Design {
 					descriptionInput = new FragmentTemplateDesign("Input").addToStyleNames("answer-span8").addToStyleNames("answer-height300")
 				)
 			);
+		issueDetailsPlaceTemplate.getMetadata().initUniqueId("issueDetails");// Keep this one fixed
 		homeLink.setEvent(homeEvent);
 		number.deduceAttribute(issueNumber);
 		headline.deduceAttribute(issueHeadline);

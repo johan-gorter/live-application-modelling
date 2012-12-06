@@ -63,6 +63,13 @@ What I am now currently working on is showing the changes you make in the design
 in the instantlogic application. I am going to do that using byte-code generation. This is still work
 in progress, but the results are promising.
 
+-- TODOS --
+- editor verbeteren (attribuut selecteren dus)
+- Presence indicator in table row
+- Edit werkend
+- Insert below werkend
+- Preview iets beter
+
 
 ----------------------------
 Sample issues
@@ -82,3 +89,4 @@ Add a scripting interface for the Designer
 Add a graphical user interface for the Designer
 Add a debugging option which aids in application development
 Generate bytecode on the fly to allow changes from the designer to be visible immediately in the application
+

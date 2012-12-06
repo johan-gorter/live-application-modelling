@@ -61,6 +61,7 @@ public class InstanceMetadata {
 		return caseAdministration;
 	}
 	
+	@Deprecated //Use getUniqueId
 	public void getInstanceId(StringBuilder builder) {
 		if (owner!=null) {
 			owner.getMetadata().getInstanceId(builder);

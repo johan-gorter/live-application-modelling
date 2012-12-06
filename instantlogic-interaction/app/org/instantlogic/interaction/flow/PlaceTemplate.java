@@ -14,6 +14,8 @@ import org.instantlogic.interaction.util.RenderContext;
 public abstract class PlaceTemplate extends FlowNodeBase {
 	
 	public abstract FragmentTemplate getRootContainer();
+	
+	public abstract String getId();
 
 	public FlowEventOccurrence submit(SubmitContext submitContext) {
 		return getRootContainer().submit(submitContext);
@@ -32,9 +34,11 @@ public abstract class PlaceTemplate extends FlowNodeBase {
 		TextTemplate title = getTitle();
 		getRootContainer().render(renderContext, result);
 		if (result.size()!=1) throw new RuntimeException("Rendering resulted in more than one page root");
+		Map<String, Object> fragment = result.get(0);
 		if (title!=null) {
-			result.get(0).put("title", title.renderText(renderContext));
+			fragment.put("title", title.renderText(renderContext));
 		}
-		return result.get(0);
+		fragment.put("placeTemplateId", this.getId());
+		return fragment;
 	}
 }

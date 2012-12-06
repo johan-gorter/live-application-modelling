@@ -17,6 +17,4 @@ public class PlaceClassModel extends AbstractClassModel {
 	public TextModel getTitle() {
 		return title;
 	}
-
-
 }

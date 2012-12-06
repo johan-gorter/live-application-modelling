@@ -22,13 +22,13 @@ body { padding-top: 20px; padding-bottom: 10px; }
 
 /* Debugger labels */
 #presence .fragment-debug {display:none;}
-.fragment-debug {position:absolute;margin-top:-0px;width:10px;height:10px;z-index:9000;color:#FFFFFF;font-size:93%;line-height:11px;}
-.fragment-debug .fragment-debug-button {position:absolute;right:0px;top:0px;width:10px;height:13px;background:rgba(255,128,128,0.8); border:solid 1px #FF0000; border-top-color: #000000; border-radius: 0 0 5px 5px; text-align:center;cursor:pointer } 
-.fragment-debug .fragment-debug-info-outer {position:absolute;right:0px;top:0px;height:16px;background:rgba(255,128,128,0.8);border:solid 1px #FF0000; border-top-color: #000000; border-radius: 0 0 4px 4px; display:none;box-shadow: 0 2px 2px 2px #AAA;}
+.fragment-debug {position:absolute;margin-top:-0px;width:8px;height:14px;z-index:9000;color:#FFFFFF;font-size:93%;line-height:11px;}
+.fragment-debug .fragment-debug-button {position:absolute;right:0px;top:0px;width:8px;height:14px;background:rgba(255,128,128,0.8); border:solid 1px transparent; border-radius: 0 0 5px 5px; text-align:center;cursor:pointer;box-shadow: 0 1px 2px 1px #AAA;} 
+.fragment-debug .fragment-debug-info-outer {position:absolute;right:0px;top:0px;height:16px;background:rgba(255,128,128,0.8);border:solid 1px #FF0000; border-top-color: #000000; border-radius: 0 0 4px 4px; display:none;box-shadow: 0 1px 2px 1px #AAA;}
 .fragment-debug .fragment-debug-info {margin:2px 12px 0 3px;}
 
 .fragment-debug.hover, .fragment-debug.openMenu {z-Index:9001}
-.fragment-debug.hover .fragment-debug-button, .fragment-debug.openMenu .fragment-debug-button {background:transparent url(icons/control-double-000-small.png) no-repeat -4px 0px; border: solid 1px transparent; text-indent:-999px;}
+.fragment-debug.hover .fragment-debug-button, .fragment-debug.openMenu .fragment-debug-button {background:transparent url(../icons/control-double-000-small.png) no-repeat -4px 0px; border: solid 1px transparent; text-indent:-999px;}
 .fragment-debug.hover .fragment-debug-info-outer, .fragment-debug.openMenu .fragment-debug-info-outer  {display:block;}
 
 .fragment-debug-menu {position:absolute;width:120px;background-color:#FFFFFF;border:solid 1px black;z-index:10001;box-shadow: 0 2px 2px 2px #AAA;}
