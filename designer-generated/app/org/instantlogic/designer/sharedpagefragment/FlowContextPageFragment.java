@@ -15,17 +15,17 @@ public class FlowContextPageFragment extends org.instantlogic.interaction.page.S
 
 	
 	public static final org.instantlogic.interaction.page.Element SHARED_INSTANCE = 
-        new org.instantlogic.interaction.page.FragmentTemplate("4e50e1e9-530b-4514-a7b0-f05476eccf3b", "Group")      
+        new org.instantlogic.interaction.page.FragmentTemplate("fa9bf2ce-4af6-4d43-963b-d2598b51bd19", "Group")      
         .putChildren("content",
                     org.instantlogic.designer.sharedpagefragment.ApplicationContextPageFragment.INSTANCE
 ,
-                new org.instantlogic.interaction.page.FragmentTemplate("600816ee-f4b4-4dcb-8456-136ca162157b", "Link")      .setEvent(org.instantlogic.designer.event.FlowDetailsEvent.INSTANCE)
+                new org.instantlogic.interaction.page.FragmentTemplate("f840f561-97e2-45a1-aeb9-4a1b84f948d8", "Link")      .setEvent(org.instantlogic.designer.event.FlowDetailsEvent.INSTANCE)
       
                 .putChildren("content",
-                        new org.instantlogic.interaction.page.FragmentTemplate("ece7137f-162c-4416-9cd9-d6554962cd95", "Block")      .setStyleNames(new String[]{"inactive-card"})
+                        new org.instantlogic.interaction.page.FragmentTemplate("29caa13e-f7ff-499f-9747-c02306c0eb5f", "Block")      .setStyleNames(new String[]{"inactive-card"})
       
                         .putChildren("content",
-                                new org.instantlogic.interaction.page.FragmentTemplate("57565289-f53e-4202-9a4f-8146f5fc5eea", "Heading3")      
+                                new org.instantlogic.interaction.page.FragmentTemplate("4a556d95-9af3-4dce-8b98-d8b6b683e845", "Heading3")      
                                 .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction0()),new org.instantlogic.fabric.text.StringTemplate(" (Flow)")))
                         )
                 )

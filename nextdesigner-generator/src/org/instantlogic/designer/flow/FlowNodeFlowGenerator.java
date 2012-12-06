@@ -21,15 +21,11 @@ public class FlowNodeFlowGenerator extends FlowDesign {
 		addToParameters(FlowNodeBaseDesignEntityGenerator.ENTITY);
 
 		SubFlowDesign flowNodeChoiceSubFlow = addSubFlow(FlowNodeChoiceFlowGenerator.FLOW);
-		SubFlowDesign placeTemplateSubFlow = addSubFlow(PlaceTemplateFlowGenerator.FLOW);
 
 		newEdge()
 			.setEvent(FlowNodeDetailsEventGenerator.EVENT)
 			.setEndNode(flowNodeChoiceSubFlow);
 
-		newEdge()
-			.setEvent(PlaceTemplateDetailsEventGenerator.EVENT)
-			.setEndNode(placeTemplateSubFlow);
 		
 		super.init();
 	}

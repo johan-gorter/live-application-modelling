@@ -6,9 +6,9 @@ public class NotLoggedInPlaceTemplate extends org.instantlogic.interaction.flow.
 
 	
 	private static org.instantlogic.interaction.page.FragmentTemplate CONTENT = 
-        new org.instantlogic.interaction.page.FragmentTemplate("F10P1F1", "Page")      
+        new org.instantlogic.interaction.page.FragmentTemplate("79ffe887-a004-4c15-a6b6-baf311ddb0bf", "Page")      
         .putChildren("mainContent",
-                new org.instantlogic.interaction.page.FragmentTemplate("F10P1F1P1F1", "Paragraph")      
+                new org.instantlogic.interaction.page.FragmentTemplate("f46ad95b-0778-4656-b379-c46faf44aed0", "Paragraph")      
                 .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Please log in.")))
         )
 ; 

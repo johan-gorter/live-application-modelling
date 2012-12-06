@@ -136,38 +136,55 @@ YUI.add('instantlogic-presence', function (Y) {
     // Avatar
     ns.Avatar = Y.instantlogic.createFragment({
     	createMarkup: function() {
-    		return html.div({className:'floating-avatar'});
+    		return html.span(
+    			this.avatarDiv = html.div({className:'floating-avatar'}),
+    			this.pointerDiv = html.div({className:'floating-pointer'})
+    		);
     	},
     	postInit: function(model) {
-    		this.markup.appendChild(
-    			html.img({src:'/avatar/'+(model.username || 'anonymous')+'.jpg', width:'50px', height:'50px;'})
-    		);
+    		this.updateAvatarImage(model);
     		var me = this;
     		setTimeout(function(){me.positionAvatar(false);})
     	},
     	postUpdate: function(newModel, diff) {
-    		var me = this;
     		if (this.oldModel.username != newModel.username) {
-    			this.markup.get('children').remove();
-        		this.markup.appendChild(
-        			html.img({src:'/avatar/'+(newModel.username || 'anonymous')+'.jpg', width:'50px', height:'50px;'})
-        		);
+    			this.updateAvatarImage(newModel);
     		}
+    		var me = this;
     		setTimeout(function(){me.positionAvatar(true);})
     	},
     	overrides: {
+    		updateAvatarImage: function(model) {
+    			this.avatarDiv.get('children').remove();
+        		this.avatarDiv.appendChild(
+        			html.img({src:'/avatar/'+(model.username || 'anonymous')+'.jpg', width:'50px', height:'50px;'})
+        		);
+    		},
     		positionAvatar: function(useAnimation) {
+    			var x = 480;
+    			var y = 50;
     			var topright = Y.one('.pull-right'); 
     			if (topright) {
 					var region = topright.get('region');
-					this.markup.setXY([region.right-60, region.bottom+30]);
+					x = region.right-80;
+					y = region.bottom+30;
     			}
     			if (this.model.focus) {
     				var node = Y.one('[data-fragment-id="'+this.model.focus+'"]');
     				if (node && node.get('firstChild')) {
     					var region = node.get('firstChild').get('region');
-    					this.markup.setY(region.top-10);
+    					y = region.top;
     				}
+    			}
+    			// TODO: change X if other avatars are also at the same Y
+    			if (useAnimation) {
+    				this.avatarDiv.transition({duration:0.5, easing:'ease-out', left: (x+8)+'px', top: (y-10)+'px'});    				
+    				this.pointerDiv.transition({duration:0.5, easing:'ease-out', left: x+'px', top: (y-12)+'px'});    				
+    			} else {
+					this.avatarDiv.setStyle('left',(x+8)+'px');
+					this.avatarDiv.setStyle('top', (y-10)+'px');
+					this.pointerDiv.setStyle('left',x+'px');
+					this.pointerDiv.setStyle('top',(y-12)+'px');
     			}
     		}
     	}

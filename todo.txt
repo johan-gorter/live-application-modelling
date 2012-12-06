@@ -64,3 +64,21 @@ in the instantlogic application. I am going to do that using byte-code generatio
 in progress, but the results are promising.
 
 
+----------------------------
+Sample issues
+
+Design an entity-attribute-relation model, called Fabric
+Make the Fabric observable
+Make the Fabric transactional
+Make the Fabric rule-based
+Add a persistence mechanism to the Fabric
+Extend the fabric with a framework to create web applications, called Interaction
+Add places and flows to Interaction
+Add reusable place-elements to Interaction
+Make a runtime engine for Interaction
+Add functionality which allows users to see and interact with each other
+Make a tool which generates code for the Fabric and Interaction, called Designer
+Add a scripting interface for the Designer
+Add a graphical user interface for the Designer
+Add a debugging option which aids in application development
+Generate bytecode on the fly to allow changes from the designer to be visible immediately in the application

@@ -8,6 +8,8 @@ public class MainFlow extends org.instantlogic.interaction.flow.Flow {
 		org.instantlogic.designer.flow.main.EntitySubFlow.INSTANCE,
 		org.instantlogic.designer.flow.main.FlowSubFlow.INSTANCE,
 		org.instantlogic.designer.flow.main.AddEntitySubFlow.INSTANCE,
+		org.instantlogic.designer.flow.main.FlowNodeSubFlow.INSTANCE,
+		org.instantlogic.designer.flow.main.PlaceTemplateSubFlow.INSTANCE,
 		org.instantlogic.designer.flow.main.WelcomePlaceTemplate.INSTANCE,
 	};
 	
@@ -31,6 +33,16 @@ public class MainFlow extends org.instantlogic.interaction.flow.Flow {
 			null, 
 			org.instantlogic.designer.event.HomeEvent.INSTANCE,
 			org.instantlogic.designer.flow.main.WelcomePlaceTemplate.INSTANCE
+		),
+		new org.instantlogic.interaction.flow.FlowEdge(
+			null, 
+			org.instantlogic.designer.event.FlowNodeDetailsEvent.INSTANCE,
+			org.instantlogic.designer.flow.main.FlowNodeSubFlow.INSTANCE
+		),
+		new org.instantlogic.interaction.flow.FlowEdge(
+			null, 
+			org.instantlogic.designer.event.PlaceTemplateDetailsEvent.INSTANCE,
+			org.instantlogic.designer.flow.main.PlaceTemplateSubFlow.INSTANCE
 		),
 	};
 	

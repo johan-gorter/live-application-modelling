@@ -8,6 +8,6 @@
 .animate-vertically {display:block;overflow:hidden;position:relative;}
 
 /* Fragments */
-.divtable-column-header {font-weight: bold;}
+.divtable-column-header {font-weight: bold;color:white;background-color:#444444}
 .divtable-cells {display:inline-block;border-bottom: solid 1px black;}
-.divtable-cell {display:inline-block; width:200px;overflow:hidden;white-space:no-wrap;}
+.divtable-cell {display:inline-block; width:200px;height:20px;vertical-align:top; overflow:hidden;white-space:no-wrap;}

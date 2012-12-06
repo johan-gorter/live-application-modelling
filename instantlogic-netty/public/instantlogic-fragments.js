@@ -143,7 +143,7 @@ YUI.add('instantlogic-fragments', function (Y) {
     	},
     	overrides: {
     		cssClassName: function() {
-    			return 'link btn btn-link';
+    			return 'link';
     		},
             onClick: function(e) {
                 e.preventDefault();
@@ -308,8 +308,10 @@ YUI.add('instantlogic-fragments', function (Y) {
         init: function (model) {
             ns.Row.superclass.init.call(this, model);
             this.node = 
-            	html.div({className: 'divtable-row'},
-            		this.cellsDiv = html.div({className: 'divtable-cells'})
+            	html.div({className: 'animate-vertically'},
+	            	html.div({className: 'divtable-row'},
+	            		this.cellsDiv = html.div({className: 'divtable-cells'})
+	            	)
             	);
             this.parentNode.appendChild(this.node);
             
@@ -345,25 +347,20 @@ YUI.add('instantlogic-fragments', function (Y) {
     });
 
     // Cell
-    ns.Cell = function (parentNode, engine) {
-        ns.Cell.superclass.constructor.apply(this, arguments);
-    };
-
-    Y.extend(ns.Cell, Y.instantlogic.Fragment, {
-        init: function (model) {
-            ns.Cell.superclass.init.call(this, model);
-            this.node = html.div({className: 'divtable-cell'});
-            this.parentNode.appendChild(this.node);
-            
-            this.contentFragmentList = new FragmentList(this.node, this.engine);
-            this.contentFragmentList.init(model.content);
-        },
-        
-        update: function (newModel, diff) {
-            ns.Cell.superclass.update.call(this, newModel, diff);
-            this.contentFragmentList.update(newModel.content, diff);
-        }
+    ns.Cell = createFragment({
+    	createMarkup: function() {
+            return this.node = html.div({className:'divtable-cell'},
+            	this.contentSpan = html.span(),
+            	this.textSpan = html.span()
+            )
+    	},
+    	texts: function(model) {
+    		return [[this.textSpan, model.text]];
+    	},
+    	fragmentLists: function(model) {
+    		return [[this.contentSpan, model.content]];
+    	}
     });
-
+   
             
 }, '0.7.0', { requires: ['instantlogic', 'html'] });

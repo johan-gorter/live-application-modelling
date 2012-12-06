@@ -6,7 +6,6 @@ public class FlowNodeFlow extends org.instantlogic.interaction.flow.Flow {
 	
 	private static final org.instantlogic.interaction.flow.FlowNodeBase[] NODES = new org.instantlogic.interaction.flow.FlowNodeBase[]{
 		org.instantlogic.designer.flow.flownode.FlowNodeChoiceSubFlow.INSTANCE,
-		org.instantlogic.designer.flow.flownode.PlaceTemplateSubFlow.INSTANCE,
 	};
 	
 	private static final org.instantlogic.interaction.flow.FlowEdge[] EDGES = new org.instantlogic.interaction.flow.FlowEdge[]{
@@ -14,11 +13,6 @@ public class FlowNodeFlow extends org.instantlogic.interaction.flow.Flow {
 			null, 
 			org.instantlogic.designer.event.FlowNodeDetailsEvent.INSTANCE,
 			org.instantlogic.designer.flow.flownode.FlowNodeChoiceSubFlow.INSTANCE
-		),
-		new org.instantlogic.interaction.flow.FlowEdge(
-			null, 
-			org.instantlogic.designer.event.PlaceTemplateDetailsEvent.INSTANCE,
-			org.instantlogic.designer.flow.flownode.PlaceTemplateSubFlow.INSTANCE
 		),
 	};
 	

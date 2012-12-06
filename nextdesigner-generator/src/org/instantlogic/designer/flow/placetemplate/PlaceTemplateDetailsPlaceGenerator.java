@@ -2,6 +2,8 @@ package org.instantlogic.designer.flow.placetemplate;
 
 import org.instantlogic.designer.DeductionSchemeDesign;
 import org.instantlogic.designer.DesignEntityGenerator;
+import org.instantlogic.designer.FlowDesignEntityGenerator;
+import org.instantlogic.designer.FlowNodeBaseDesignEntityGenerator;
 import org.instantlogic.designer.FragmentTemplateDesign;
 import org.instantlogic.designer.PlaceTemplateDesign;
 import org.instantlogic.designer.PlaceTemplateDesignEntityGenerator;
@@ -22,7 +24,7 @@ public class PlaceTemplateDetailsPlaceGenerator extends PlaceTemplateDesign {
 	
 	@Override
 	public void init() {
-		DeductionSchemeDesign placeName;
+		DeductionSchemeDesign placeName, flow;
 		FragmentTemplateDesign placeNameInput;
 		SharedElementDesign flowContext, elementEditor;
 		SelectionDesign selectContent;
@@ -37,9 +39,9 @@ public class PlaceTemplateDetailsPlaceGenerator extends PlaceTemplateDesign {
 		setContent(new FragmentTemplateDesign("Page")
 			.addToStyleNames("margin").addToStyleNames("designer")
 			.setChildren("mainContent", 
-
-				flowContext = new SharedElementDesign(),
-				
+				new SelectionDesign()
+					.setSelection(flow = new DeductionSchemeDesign())
+					.addToChildren(flowContext = new SharedElementDesign()),
 				new FragmentTemplateDesign("Block")
 					.addToStyleNames("card")
 					.setChildren("content",
@@ -62,6 +64,7 @@ public class PlaceTemplateDetailsPlaceGenerator extends PlaceTemplateDesign {
 				)
 		);
 		
+		flow.deduceReverseRelation(FlowDesignEntityGenerator.nodes, flow.deduceSelectedInstance(FlowNodeBaseDesignEntityGenerator.ENTITY));
 		flowContext.setDefinition(FlowContextSharedElementGenerator.DEFINITION);
 		placeName.deduceAttribute(DesignEntityGenerator.name);
 		

@@ -26,6 +26,7 @@ import org.instantlogic.designer.TextTemplateDesign;
 import org.instantlogic.designer.codegenerator.generator.GeneratedClassModels;
 import org.instantlogic.designer.codegenerator.javacode.ApplicationJavacodeGenerator;
 import org.instantlogic.engine.persistence.json.CasePersister;
+import org.instantlogic.example.izzy.deduction.IssuePreviewDeduction;
 
 public class IzzyGenerator extends Design {
 	private static ApplicationDesign izzy;
@@ -150,6 +151,7 @@ public class IzzyGenerator extends Design {
 		FragmentTemplateDesign detailsLink;
 		DeductionSchemeDesign number;
 		DeductionSchemeDesign headline;
+		DeductionSchemeDesign preview;
 		issueRow = new SharedElementDefinitionDesign()
 			.setApplication(izzy)
 			.setFragment(new FragmentTemplateDesign("Row")
@@ -157,23 +159,21 @@ public class IzzyGenerator extends Design {
 						detailsLink = new FragmentTemplateDesign("Link")
 							.setChildren("content", 
 								new FragmentTemplateDesign("Cell")
-									.setChildren("content",
-										new FragmentTemplateDesign("Paragraph")
-											.setText("text", new TextTemplateDesign().addToUntranslated(
-													new StringTemplateDesign().setDeduction(number = new DeductionSchemeDesign())))
-									),
+									.setText("text", new TextTemplateDesign().addToUntranslated(
+										new StringTemplateDesign().setDeduction(number = new DeductionSchemeDesign()))),
 								new FragmentTemplateDesign("Cell")
-									.setChildren("content",
-										new FragmentTemplateDesign("Paragraph")
-											.setText("text", new TextTemplateDesign().addToUntranslated(
-													new StringTemplateDesign().setDeduction(headline = new DeductionSchemeDesign())))
-									)
+									.setText("text", new TextTemplateDesign().addToUntranslated(
+										new StringTemplateDesign().setDeduction(headline = new DeductionSchemeDesign()))),
+								new FragmentTemplateDesign("Cell")
+									.setText("text", new TextTemplateDesign().addToUntranslated(
+											new StringTemplateDesign().setDeduction(preview = new DeductionSchemeDesign())))
 							)
 					)
 				);
 		issueRow.setName("IssueRow");
 		number.deduceAttribute(issueNumber);
 		headline.deduceAttribute(issueHeadline);
+		preview.deduceCustom(IssuePreviewDeduction.class, String.class);
 		detailsLink.setEvent(issueDetailsEvent);
 	}
 
@@ -279,10 +279,11 @@ public class IzzyGenerator extends Design {
 						new FragmentTemplateDesign("Heading4").setText("text", createConstantText("Assigned to me")),
 						new FragmentTemplateDesign("Table")
 							.setChildren("columns", 
-								new FragmentTemplateDesign("Column")
+								new FragmentTemplateDesign("Column").addToStyleNames("issueNr")
 									.setText("header", createConstantText("#")),
-								new FragmentTemplateDesign("Column")
-									.setText("header", createConstantText("Issue"))
+								new FragmentTemplateDesign("Column").addToStyleNames("issueHeadline")
+									.setText("header", createConstantText("Issue")),
+								new FragmentTemplateDesign("Column").addToStyleNames("issuePreview")
 							)
 							.setChildren("rows",
 								new SelectionDesign()
@@ -294,10 +295,11 @@ public class IzzyGenerator extends Design {
 						new FragmentTemplateDesign("Heading4").setText("text", createConstantText("All issues")),
 						new FragmentTemplateDesign("Table")
 							.setChildren("columns", 
-								new FragmentTemplateDesign("Column")
+								new FragmentTemplateDesign("Column").addToStyleNames("issueNr")
 									.setText("header", createConstantText("#")),
-								new FragmentTemplateDesign("Column")
-									.setText("header", createConstantText("Issue"))
+								new FragmentTemplateDesign("Column").addToStyleNames("issueHeadline")
+									.setText("header", createConstantText("Issue")),
+								new FragmentTemplateDesign("Column").addToStyleNames("issuePreview")
 							)
 							.setChildren("rows",
 								new SelectionDesign()

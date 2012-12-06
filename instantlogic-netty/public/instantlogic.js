@@ -441,7 +441,7 @@ YUI.add('instantlogic', function (Y) {
 	        			menuBody = h.div({className: 'fragment-debug-menu'},
 	        				h.ul(
 	        					h.li(logLink = h.a({href:'#'}, 'Log fragment data')),
-	        					h.li(locateLink = h.a({href:'#', target:'designer'}, 'Locate')),
+	        					h.li(locateLink = h.a({href:'?application=designer&case=izzy#location=PlaceTemplate/'+'/PlaceTemplateDetails', target:'designer'}, 'Locate')),
 	        					h.li(editLink = h.a({href:'#', target:'designer'}, 'Edit')),
 	        					h.li(insertAboveLink = h.a({href:'#', target:'designer'}, 'Insert above')),
 	        					// TODO Insert inside(start of) each fragmentList
