@@ -5,7 +5,7 @@ YUI.add('instantlogic-designer', function (Y) {
     var FragmentList = Y.instantlogic.FragmentList;
 
     // OldElementEditor (uses a new node, next to the designer styled node)
-    ns.OldElementEditor = function(parentNode, engine) {
+    ns.OldElementEditor = function(parentNode, parentFragment, engine) {
     	ns.OldElementEditor.superclass.constructor.apply(this, arguments);
     }
     
@@ -14,7 +14,7 @@ YUI.add('instantlogic-designer', function (Y) {
     		var pageRootNode = this.parentNode.ancestor('.designer');
     		this.node = editorRoot = html.div({className:'element-editor'});
     		pageRootNode.ancestor().appendChild(editorRoot);
-            this.contentFragmentList = new FragmentList(this.node, this.engine);
+            this.contentFragmentList = new FragmentList(this.node, this, this.engine);
             this.contentFragmentList.init(model.content);
     	},
     	
@@ -44,7 +44,7 @@ YUI.add('instantlogic-designer', function (Y) {
     });
 
     // Preview
-    ns.Preview = function (parentNode, engine) {
+    ns.Preview = function (parentNode, parentFragment, engine) {
         ns.Preview.superclass.constructor.apply(this, arguments);
     };
     Y.extend(ns.Preview, Y.instantlogic.Fragment, {
@@ -66,7 +66,7 @@ YUI.add('instantlogic-designer', function (Y) {
 
     		this.contentDiv = html.div({className: 'preview'});
     		Y.one(this.frameDocument.body).appendChild(this.contentDiv);
-            this.contentFragmentList = new FragmentList(this.contentDiv, this.engine);
+            this.contentFragmentList = new FragmentList(this.contentDiv, this, this.engine);
             this.contentFragmentList.init(this.model.content);
             
             html.popDocument();

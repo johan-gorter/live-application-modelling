@@ -5,7 +5,7 @@ YUI.add('instantlogic-presence', function (Y) {
     var FragmentList = Y.instantlogic.FragmentList;
 
     // Presence
-    ns.Presence = function (parentNode, engine) {
+    ns.Presence = function (parentNode, parentFragment, engine) {
         ns.Presence.superclass.constructor.apply(this, arguments);
     };
 
@@ -30,7 +30,7 @@ YUI.add('instantlogic-presence', function (Y) {
             );
             this.parentNode.appendChild(markup);
             
-            this.contentFragmentList = new FragmentList(this.contentDiv, this.engine);
+            this.contentFragmentList = new FragmentList(this.contentDiv, this, this.engine);
             this.contentFragmentList.init(model.content);
     	},
     	
@@ -49,7 +49,7 @@ YUI.add('instantlogic-presence', function (Y) {
     });
     
     // Me
-    ns.Me = function (parentNode, engine) {
+    ns.Me = function (parentNode, parentFragment, engine) {
         ns.Me.superclass.constructor.apply(this, arguments);
     };
     
@@ -71,7 +71,7 @@ YUI.add('instantlogic-presence', function (Y) {
     });
     
     // ShowCommunicatorButton
-    ns.ShowCommunicatorButton = function(parentNode, engine) {
+    ns.ShowCommunicatorButton = function(parentNode, parentFragment, engine) {
     	ns.ShowCommunicatorButton.superclass.constructor.apply(this, arguments);
     };
     
@@ -247,7 +247,7 @@ YUI.add('instantlogic-presence', function (Y) {
     });
 
     // LoginOld
-    ns.LoginOld = function(parentNode, engine) {
+    ns.LoginOld = function(parentNode, parentFragment, engine) {
     	ns.LoginOld.superclass.constructor.apply(this, arguments);
     }
     

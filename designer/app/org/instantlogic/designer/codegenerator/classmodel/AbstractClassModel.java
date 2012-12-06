@@ -53,4 +53,8 @@ public abstract class AbstractClassModel {
 	public String getTechnicalNameCapitalized() {
 		return technicalNameCapitalized;
 	}
+
+	public String getId() {
+		return id;
+	}
 }

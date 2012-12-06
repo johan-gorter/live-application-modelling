@@ -271,7 +271,7 @@ YUI.add('instantlogic-fragments', function (Y) {
     });
     
     // Table
-    ns.Table = function (parentNode, engine) {
+    ns.Table = function (parentNode, parentFragment, engine) {
         ns.Table.superclass.constructor.apply(this, arguments);
     };
 
@@ -286,9 +286,9 @@ YUI.add('instantlogic-fragments', function (Y) {
             );
             this.parentNode.appendChild(this.node);
             
-            this.headerFragmentList = new FragmentList(this.headerDiv, this.engine);
+            this.headerFragmentList = new FragmentList(this.headerDiv, this, this.engine);
             this.headerFragmentList.init(model.columns);
-            this.bodyFragmentList = new FragmentList(this.bodyDiv, this.engine);
+            this.bodyFragmentList = new FragmentList(this.bodyDiv, this, this.engine);
             this.bodyFragmentList.init(model.rows);
         },
         
@@ -300,7 +300,7 @@ YUI.add('instantlogic-fragments', function (Y) {
     });
     
     // Row
-    ns.Row = function (parentNode, engine) {
+    ns.Row = function (parentNode, parentFragment, engine) {
         ns.Row.superclass.constructor.apply(this, arguments);
     };
 
@@ -315,7 +315,7 @@ YUI.add('instantlogic-fragments', function (Y) {
             	);
             this.parentNode.appendChild(this.node);
             
-            this.cellsFragmentList = new FragmentList(this.cellsDiv, this.engine);
+            this.cellsFragmentList = new FragmentList(this.cellsDiv, this, this.engine);
             this.cellsFragmentList.init(model.cells);
         },
         
@@ -326,7 +326,7 @@ YUI.add('instantlogic-fragments', function (Y) {
     });
 
     // Column
-    ns.Column = function (parentNode, engine) {
+    ns.Column = function (parentNode, parentFragment, engine) {
         ns.Column.superclass.constructor.apply(this, arguments);
     };
 
