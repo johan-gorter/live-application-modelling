@@ -26,19 +26,19 @@ public abstract class AbstractPlace extends org.instantlogic.fabric.Instance {
 
 	// Attributes
 	
-	private final org.instantlogic.fabric.value.AttributeValue<Place, java.lang.String> description
-		= createAttributeValue(org.instantlogic.engine.presence.entity.PlaceEntity.description);
+	private final org.instantlogic.fabric.value.AttributeValue<Place, java.lang.String> title
+		= createAttributeValue(org.instantlogic.engine.presence.entity.PlaceEntity.title);
 	
-	public java.lang.String getDescription() {
-		return description.getValue();
+	public java.lang.String getTitle() {
+		return title.getValue();
 	}
 
-	public org.instantlogic.fabric.value.AttributeValue<Place, java.lang.String> getDescriptionAttributeValue() {
-		return description;
+	public org.instantlogic.fabric.value.AttributeValue<Place, java.lang.String> getTitleAttributeValue() {
+		return title;
 	}
 
-	public Place setDescription(java.lang.String newValue) {
-		description.setValue(newValue);
+	public Place setTitle(java.lang.String newValue) {
+		title.setValue(newValue);
 		return (Place)this;
 	}
 	

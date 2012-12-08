@@ -118,6 +118,9 @@ public class Traveler extends AbstractTraveler {
 		CaseAdministration caseAdministration = renderContext.getCaseInstance().getMetadata().getCaseAdministration();
 		caseAdministration.startRecordingObservations();
 		update.setRootFragment(placeTemplate.render(renderContext));
+		String title = (String)update.getRootFragment().get("title");
+		if (title==null) title = "?";
+		getCurrentPlace().setTitle(title);
 		update.getRootFragment().put("themeNames", caseManager.getApplicationManager().getApplication().getThemeNames());
 		Observations observations = caseAdministration.stopRecordingObservations();
 
@@ -132,7 +135,7 @@ public class Traveler extends AbstractTraveler {
 			FlowStack flowStack = new FlowStack(null, MainFlow.INSTANCE);
 			flowStack = new FlowStack(flowStack, TravelerFlow.INSTANCE);
 			flowStack.pushSelectedInstance(this);
-			queue.add(renderPresence(location, flowStack, TravelerPlaceTemplate.INSTANCE));
+			queue.add(0, renderPresence(location, flowStack, TravelerPlaceTemplate.INSTANCE)); // Presence is always the first message
 		}
 	}
 	

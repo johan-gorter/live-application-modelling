@@ -16,6 +16,6 @@ public class PlaceEntityGenerator extends EntityDesign {
     
     // Attributes
     public static final AttributeDesign url = addAttribute(ENTITY, "url", DataCategoryDesign.text);
-    public static final AttributeDesign description = addAttribute(ENTITY, "description", DataCategoryDesign.text);
+    public static final AttributeDesign title = addAttribute(ENTITY, "title", DataCategoryDesign.text);
     
 }

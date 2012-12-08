@@ -156,18 +156,22 @@ public class IzzyGenerator extends Design {
 			.setApplication(izzy)
 			.setFragment(new FragmentTemplateDesign("Row")
 				.setChildren("cells",
-						detailsLink = new FragmentTemplateDesign("Link")
-							.setChildren("content", 
-								new FragmentTemplateDesign("Cell")
-									.setText("text", new TextTemplateDesign().addToUntranslated(
-										new StringTemplateDesign().setDeduction(number = new DeductionSchemeDesign()))),
-								new FragmentTemplateDesign("Cell")
-									.setText("text", new TextTemplateDesign().addToUntranslated(
-										new StringTemplateDesign().setDeduction(headline = new DeductionSchemeDesign()))),
-								new FragmentTemplateDesign("Cell")
-									.setText("text", new TextTemplateDesign().addToUntranslated(
-											new StringTemplateDesign().setDeduction(preview = new DeductionSchemeDesign())))
+					detailsLink = new FragmentTemplateDesign("Link")
+						.setChildren("content", 
+							new FragmentTemplateDesign("Cell")
+								.setText("text", new TextTemplateDesign().addToUntranslated(
+									new StringTemplateDesign().setDeduction(number = new DeductionSchemeDesign()))),
+							new FragmentTemplateDesign("Cell")
+								.setText("text", new TextTemplateDesign().addToUntranslated(
+									new StringTemplateDesign().setDeduction(headline = new DeductionSchemeDesign()))),
+							new FragmentTemplateDesign("Cell")
+								.setText("text", new TextTemplateDesign().addToUntranslated(
+									new StringTemplateDesign().setDeduction(preview = new DeductionSchemeDesign()))),
+							new FragmentTemplateDesign("Cell")
+								.setChildren("content", 
+									new FragmentTemplateDesign("PresenceIndicator")
 							)
+						)
 					)
 				);
 		issueRow.setName("IssueRow");
@@ -261,6 +265,14 @@ public class IzzyGenerator extends Design {
 		reporterInput.setEntity(issue).setAttribute(issueReporter);
 		assigneeInput.setEntity(issue).setAttribute(issueAssignee);
 		descriptionInput.setEntity(issue).setAttribute(issueDescription);
+		// Title
+		issueDetailsPlaceTemplate.newTitle()
+			.addToUntranslated(new StringTemplateDesign().setConstantText("Issue "))
+			.addToUntranslated(new StringTemplateDesign().setDeduction(number = new DeductionSchemeDesign()))
+			.addToUntranslated(new StringTemplateDesign().setConstantText(": "))
+			.addToUntranslated(new StringTemplateDesign().setDeduction(headline = new DeductionSchemeDesign()));
+		number.deduceAttribute(issueNumber);
+		headline.deduceAttribute(issueHeadline);
 	}
 
 	private static void createDashboardPlaceTemplate() {
@@ -284,7 +296,8 @@ public class IzzyGenerator extends Design {
 									.setText("header", createConstantText("#")),
 								new FragmentTemplateDesign("Column").addToStyleNames("issueHeadline")
 									.setText("header", createConstantText("Issue")),
-								new FragmentTemplateDesign("Column").addToStyleNames("issuePreview")
+								new FragmentTemplateDesign("Column").addToStyleNames("issuePreview"),
+								new FragmentTemplateDesign("Column").addToStyleNames("presence-indicator")
 							)
 							.setChildren("rows",
 								new SelectionDesign()
@@ -300,7 +313,8 @@ public class IzzyGenerator extends Design {
 									.setText("header", createConstantText("#")),
 								new FragmentTemplateDesign("Column").addToStyleNames("issueHeadline")
 									.setText("header", createConstantText("Issue")),
-								new FragmentTemplateDesign("Column").addToStyleNames("issuePreview")
+								new FragmentTemplateDesign("Column").addToStyleNames("issuePreview"),
+								new FragmentTemplateDesign("Column").addToStyleNames("presence-indicator")
 							)
 							.setChildren("rows",
 								new SelectionDesign()
@@ -319,5 +333,10 @@ public class IzzyGenerator extends Design {
 		issueRow1.setDefinition(issueRow);
 		issueRow2.setDefinition(issueRow);
 		createButton.setEvent(createIssueEvent);
+		//Title
+		dashboardPlaceTemplate.newTitle()
+			.addToUntranslated(new StringTemplateDesign().setDeduction(username = new DeductionSchemeDesign()))
+			.addToUntranslated(new StringTemplateDesign().setConstantText("'s dashboard"));
+		username.deduceAttribute(userUsername);	
 	}
 }

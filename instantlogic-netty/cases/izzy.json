@@ -1,5 +1,5 @@
 {
-  "instanceId": "adf4d188-7c7c-409f-948a-d3d541860611",
+  "instanceId": "c7e2e1b6-f904-4b82-9abd-8b45f02d6ea5",
   "entityName": "ApplicationDesign",
   "version": 0,
   "name": "izzy",
@@ -9,49 +9,49 @@
     "margin",
     "izzy"
   ],
-  "caseEntity": "37844c3a-5c1c-4b2f-962e-b45fcd612172",
+  "caseEntity": "e3d602e6-7b3d-400b-b24d-14fdcb75b33a",
   "entities": [
     {
-      "instanceId": "37844c3a-5c1c-4b2f-962e-b45fcd612172",
+      "instanceId": "e3d602e6-7b3d-400b-b24d-14fdcb75b33a",
       "entityName": "EntityDesign",
       "name": "project",
       "attributes": [
         {
-          "instanceId": "78b9ef86-be69-4b1b-a045-a5a1e6ed8611",
+          "instanceId": "0d9b0713-c19d-4076-b822-bcc047eef6b0",
           "entityName": "AttributeDesign",
           "name": "last issue number",
           "hasDefault": true,
           "dataType": {
-            "instanceId": "d279f2f6-654c-4036-a200-287c6057537c",
+            "instanceId": "a19ab94a-a4cf-49f1-8b0a-9f535eae84d0",
             "entityName": "DataTypeDesign",
             "javaClassName": "java.lang.Integer"
           },
           "default": {
-            "instanceId": "6c423617-69e8-478f-b66d-6d70351dd34f",
+            "instanceId": "36975ace-2415-445d-9e94-c473e6cf0a83",
             "entityName": "DeductionSchemeDesign",
             "deductions": [
               {
-                "instanceId": "c194261e-c05d-4580-8877-b6c45fb9465c",
+                "instanceId": "31a62c31-cad8-4086-a7cf-b5edfbc2c469",
                 "entityName": "ConstantDeductionDesign",
-                "value": "0",
+                "value": 0,
                 "inputs": [],
                 "constantDataType": {
-                  "instanceId": "3e6749ae-a0ca-4631-9660-b35b26d0d3af",
+                  "instanceId": "d199c140-e9fe-417e-8e0d-5de0f28804de",
                   "entityName": "DataTypeDesign"
                 }
               }
             ],
-            "output": "c194261e-c05d-4580-8877-b6c45fb9465c"
+            "output": "31a62c31-cad8-4086-a7cf-b5edfbc2c469"
           }
         }
       ],
       "dataType": {
-        "instanceId": "ef177a3a-45a2-4ae3-b801-23c036135362",
+        "instanceId": "a0859bb8-8197-4c45-9176-99242f0a1563",
         "entityName": "DataTypeDesign"
       },
       "relations": [
         {
-          "instanceId": "c4f12c89-6e29-4b6e-b254-cfb50c23f6d4",
+          "instanceId": "244785a7-4021-4aa8-addc-946eaea4f054",
           "entityName": "RelationDesign",
           "name": "users",
           "autoCreate": false,
@@ -59,14 +59,14 @@
           "reverseMultivalue": false,
           "reverseName": "project",
           "dataType": {
-            "instanceId": "ca75b22f-96dc-4421-8b63-06458f80c0d9",
+            "instanceId": "65e5f2e8-690e-4991-a4c5-bda2bc844f15",
             "entityName": "DataTypeDesign",
             "multivalue": true
           },
-          "to": "b6bff068-73c9-4b88-9854-2e33a4e7256a"
+          "to": "45c246b7-1d90-4e07-9557-c2c7b51f6dee"
         },
         {
-          "instanceId": "cd1fb048-cc71-4661-810c-2dac5b0692e0",
+          "instanceId": "8c3191ad-5dae-4d3c-83cf-1367da65ed7a",
           "entityName": "RelationDesign",
           "name": "issues",
           "autoCreate": false,
@@ -74,26 +74,26 @@
           "reverseMultivalue": false,
           "reverseName": "project",
           "dataType": {
-            "instanceId": "5f383735-86cd-4b1b-8a2e-31844173ca94",
+            "instanceId": "c750cc34-debe-4532-9f19-417cfc02a973",
             "entityName": "DataTypeDesign",
             "multivalue": true
           },
-          "to": "460e0a41-0f79-4f40-87fd-ac290baf12dc"
+          "to": "2ed90baf-5de7-4a01-bae3-62c91371cb84"
         }
       ],
       "staticInstances": []
     },
     {
-      "instanceId": "b6bff068-73c9-4b88-9854-2e33a4e7256a",
+      "instanceId": "45c246b7-1d90-4e07-9557-c2c7b51f6dee",
       "entityName": "EntityDesign",
       "name": "user",
       "attributes": [
         {
-          "instanceId": "ab683e34-2106-47b7-a962-db910805ae0e",
+          "instanceId": "6e95155a-c4d7-430c-80ff-be0f70b2be61",
           "entityName": "AttributeDesign",
           "name": "username",
           "dataType": {
-            "instanceId": "0be52a82-b497-41e6-a3db-23e75d73ddc0",
+            "instanceId": "3ee824a6-49d4-4993-9b4d-24717a549e88",
             "entityName": "DataTypeDesign",
             "dataCategory": {
               "instanceName": "text",
@@ -103,64 +103,64 @@
         }
       ],
       "dataType": {
-        "instanceId": "08a61e9d-9e02-4993-aee1-71697b633149",
+        "instanceId": "430e9744-1f75-46c2-b199-75a49a2e8ded",
         "entityName": "DataTypeDesign"
       },
       "relations": [],
       "staticInstances": [],
       "title": {
-        "instanceId": "c416c866-a755-4e70-85f8-c6e36309a106",
+        "instanceId": "93d9bd2f-51e8-4f41-a2f4-ef512d62bfbf",
         "entityName": "TextTemplateDesign",
         "untranslated": [
           {
-            "instanceId": "b0eb946e-968a-4ce4-9a12-ff4abb2e59ad",
+            "instanceId": "a145d5b8-80e6-4411-b753-c6cd3befc189",
             "entityName": "StringTemplateDesign",
             "deduction": {
-              "instanceId": "a0f95567-f6c0-488f-8cf6-b3871d7e4aad",
+              "instanceId": "19a17e81-379c-4706-b179-69047334cb6b",
               "entityName": "DeductionSchemeDesign",
               "deductions": [
                 {
-                  "instanceId": "0b861766-ba16-4a15-a651-ef1a7c87da45",
+                  "instanceId": "ca058ba0-802b-4082-ad37-a7d3486c0ef9",
                   "entityName": "SelectedInstanceDeductionDesign",
                   "inputs": [],
-                  "ofEntity": "b6bff068-73c9-4b88-9854-2e33a4e7256a"
+                  "ofEntity": "45c246b7-1d90-4e07-9557-c2c7b51f6dee"
                 },
                 {
-                  "instanceId": "45f92f6c-3701-4e06-815b-c3d4ca34631c",
+                  "instanceId": "1d34df9d-0014-412c-867c-a422c588122c",
                   "entityName": "AttributeDeductionDesign",
                   "inputs": [
-                    "0b861766-ba16-4a15-a651-ef1a7c87da45"
+                    "ca058ba0-802b-4082-ad37-a7d3486c0ef9"
                   ],
-                  "attribute": "ab683e34-2106-47b7-a962-db910805ae0e"
+                  "attribute": "6e95155a-c4d7-430c-80ff-be0f70b2be61"
                 }
               ],
-              "output": "45f92f6c-3701-4e06-815b-c3d4ca34631c"
+              "output": "1d34df9d-0014-412c-867c-a422c588122c"
             }
           }
         ]
       }
     },
     {
-      "instanceId": "460e0a41-0f79-4f40-87fd-ac290baf12dc",
+      "instanceId": "2ed90baf-5de7-4a01-bae3-62c91371cb84",
       "entityName": "EntityDesign",
       "name": "issue",
       "attributes": [
         {
-          "instanceId": "16e77aff-8a0a-4583-a96f-a5cc5012cfb7",
+          "instanceId": "4f496617-92ef-43b1-a714-f9cbc06bbef5",
           "entityName": "AttributeDesign",
           "name": "number",
           "dataType": {
-            "instanceId": "8b89f537-2883-4b2b-95fc-c9b2cddda468",
+            "instanceId": "5cb9ef93-ecf5-4c5a-9e37-60f2932576a9",
             "entityName": "DataTypeDesign",
             "javaClassName": "java.lang.Integer"
           }
         },
         {
-          "instanceId": "1767b4a3-46b1-447b-aba6-950d74736868",
+          "instanceId": "4e21e726-a346-4c6b-b11d-1790cbb49ab7",
           "entityName": "AttributeDesign",
           "name": "headline",
           "dataType": {
-            "instanceId": "85d4ffb3-8bc6-44c1-abfc-630a411fea3d",
+            "instanceId": "96dd2bd6-baf9-4205-a153-66de22c1c8ba",
             "entityName": "DataTypeDesign",
             "dataCategory": {
               "instanceName": "text",
@@ -169,11 +169,11 @@
           }
         },
         {
-          "instanceId": "29cf9386-29aa-416c-8218-2d4ab55f0387",
+          "instanceId": "09697840-0af5-4576-897c-0ec4777d8f2a",
           "entityName": "AttributeDesign",
           "name": "description",
           "dataType": {
-            "instanceId": "ed9a6dd1-4467-42e7-ae26-d3528753e0ac",
+            "instanceId": "3084c860-b764-4ad2-8575-24de2fe1e328",
             "entityName": "DataTypeDesign",
             "formatted": true,
             "multiLine": true,
@@ -185,12 +185,12 @@
         }
       ],
       "dataType": {
-        "instanceId": "ee25fae6-bc03-45ef-9d2c-147ac9934bb0",
+        "instanceId": "f31b1097-10f9-4f13-9c37-543bb3d2ca47",
         "entityName": "DataTypeDesign"
       },
       "relations": [
         {
-          "instanceId": "a5a1c715-47dd-4a69-a72e-a54d6da5cc89",
+          "instanceId": "ea9279b6-d2a1-49b8-93d1-036c0c421fcf",
           "entityName": "RelationDesign",
           "name": "reporter",
           "autoCreate": false,
@@ -198,35 +198,35 @@
           "reverseMultivalue": true,
           "reverseName": "reported issues",
           "dataType": {
-            "instanceId": "7fee985e-db1c-4c97-8f4e-651d9cb7d030",
+            "instanceId": "8e01a4b5-11d1-4789-9f3b-0625b4e8ace1",
             "entityName": "DataTypeDesign",
             "multivalue": false
           },
           "options": {
-            "instanceId": "837279a9-12f1-4390-910c-a3eb12c2ef7b",
+            "instanceId": "979b65c5-2975-4289-802a-54994696156a",
             "entityName": "DeductionSchemeDesign",
             "deductions": [
               {
-                "instanceId": "82016e97-3333-4042-950e-93bfdd91ea95",
+                "instanceId": "fd0697fc-f495-4370-93fb-4922f5452c28",
                 "entityName": "SelectedInstanceDeductionDesign",
                 "inputs": [],
-                "ofEntity": "37844c3a-5c1c-4b2f-962e-b45fcd612172"
+                "ofEntity": "e3d602e6-7b3d-400b-b24d-14fdcb75b33a"
               },
               {
-                "instanceId": "c2ed4f23-5eaa-4e04-9c0b-34448fc0e70b",
+                "instanceId": "9c68c770-0605-4b23-8f1a-c1dc9e3ffbb3",
                 "entityName": "AttributeDeductionDesign",
                 "inputs": [
-                  "82016e97-3333-4042-950e-93bfdd91ea95"
+                  "fd0697fc-f495-4370-93fb-4922f5452c28"
                 ],
-                "attribute": "c4f12c89-6e29-4b6e-b254-cfb50c23f6d4"
+                "attribute": "244785a7-4021-4aa8-addc-946eaea4f054"
               }
             ],
-            "output": "c2ed4f23-5eaa-4e04-9c0b-34448fc0e70b"
+            "output": "9c68c770-0605-4b23-8f1a-c1dc9e3ffbb3"
           },
-          "to": "b6bff068-73c9-4b88-9854-2e33a4e7256a"
+          "to": "45c246b7-1d90-4e07-9557-c2c7b51f6dee"
         },
         {
-          "instanceId": "a67f5e94-d29a-467d-90f1-7d3a08a19b45",
+          "instanceId": "bde59bd5-e1aa-4479-9bd2-568cab2306f2",
           "entityName": "RelationDesign",
           "name": "assignee",
           "autoCreate": false,
@@ -234,39 +234,39 @@
           "reverseMultivalue": true,
           "reverseName": "assigned issues",
           "dataType": {
-            "instanceId": "475a8353-0946-4319-b761-e4e9a2fc5e42",
+            "instanceId": "181c3586-6b27-4dd9-872f-1842af69476b",
             "entityName": "DataTypeDesign",
             "multivalue": false
           },
           "options": {
-            "instanceId": "c41a338a-df7d-4de5-8c3e-73a229cefa2b",
+            "instanceId": "1e14df78-0696-4e4b-94b0-585667d3f69f",
             "entityName": "DeductionSchemeDesign",
             "deductions": [
               {
-                "instanceId": "7065a696-8548-4096-b2e2-9daad6f3cc47",
+                "instanceId": "4f056a3e-cbde-4a1a-9760-81022e165eaa",
                 "entityName": "SelectedInstanceDeductionDesign",
                 "inputs": [],
-                "ofEntity": "37844c3a-5c1c-4b2f-962e-b45fcd612172"
+                "ofEntity": "e3d602e6-7b3d-400b-b24d-14fdcb75b33a"
               },
               {
-                "instanceId": "465f0ba6-a483-47f5-a6f7-11146ed23538",
+                "instanceId": "8b20a2bb-3751-4d5a-9463-7fa2bab4e56f",
                 "entityName": "AttributeDeductionDesign",
                 "inputs": [
-                  "7065a696-8548-4096-b2e2-9daad6f3cc47"
+                  "4f056a3e-cbde-4a1a-9760-81022e165eaa"
                 ],
-                "attribute": "c4f12c89-6e29-4b6e-b254-cfb50c23f6d4"
+                "attribute": "244785a7-4021-4aa8-addc-946eaea4f054"
               }
             ],
-            "output": "465f0ba6-a483-47f5-a6f7-11146ed23538"
+            "output": "8b20a2bb-3751-4d5a-9463-7fa2bab4e56f"
           },
           "reverseDataType": {
-            "instanceId": "a79b47c9-60e4-4376-baae-3cb8a53cbf17",
+            "instanceId": "a8d9ce81-7d84-4108-b58c-da717ee74c50",
             "entityName": "DataTypeDesign"
           },
-          "to": "b6bff068-73c9-4b88-9854-2e33a4e7256a"
+          "to": "45c246b7-1d90-4e07-9557-c2c7b51f6dee"
         },
         {
-          "instanceId": "f4de10f7-a0ed-4af7-b7f5-e8bfa81c3bae",
+          "instanceId": "a47e47e3-bf2d-4f45-92e0-95211f1df5a2",
           "entityName": "RelationDesign",
           "name": "comments",
           "autoCreate": false,
@@ -274,26 +274,26 @@
           "reverseMultivalue": false,
           "reverseName": "issue",
           "dataType": {
-            "instanceId": "1f9d6ded-d0e9-41f4-9558-5712b3bc61c3",
+            "instanceId": "562bbfd5-a795-4d9f-a54d-17604f511cef",
             "entityName": "DataTypeDesign",
             "multivalue": true
           },
-          "to": "cb4d4d8e-427b-47bb-97b9-7638a6a0d6af"
+          "to": "77ef320d-9e1c-47dc-ba0b-966dacc5f051"
         }
       ],
       "staticInstances": []
     },
     {
-      "instanceId": "cb4d4d8e-427b-47bb-97b9-7638a6a0d6af",
+      "instanceId": "77ef320d-9e1c-47dc-ba0b-966dacc5f051",
       "entityName": "EntityDesign",
       "name": "comment",
       "attributes": [
         {
-          "instanceId": "c4f05022-69f1-42e9-91e4-f81a03b841bc",
+          "instanceId": "9d2ade97-fe9c-47a2-bb41-a351dbd146da",
           "entityName": "AttributeDesign",
           "name": "text",
           "dataType": {
-            "instanceId": "024beda3-c373-43ec-8a57-791fd2e4dba1",
+            "instanceId": "2b65d218-0d60-46c2-9ae0-13e29cdc68c9",
             "entityName": "DataTypeDesign",
             "dataCategory": {
               "instanceName": "text",
@@ -303,12 +303,12 @@
         }
       ],
       "dataType": {
-        "instanceId": "5dfbfc83-2cae-46d7-9d89-832a24d9243c",
+        "instanceId": "735e42af-aa32-456f-acb6-0b2e5257ae5f",
         "entityName": "DataTypeDesign"
       },
       "relations": [
         {
-          "instanceId": "16c0f91a-c0b8-42aa-91e8-12d7b22600e7",
+          "instanceId": "eee6984b-1cba-4e32-9df3-4175bd8888cf",
           "entityName": "RelationDesign",
           "name": "by",
           "autoCreate": false,
@@ -316,11 +316,11 @@
           "reverseMultivalue": false,
           "reverseName": "comments",
           "dataType": {
-            "instanceId": "f7e7f2ee-1417-4b2b-a917-c23087b7d7c6",
+            "instanceId": "8378d2ee-da49-4add-92a8-a4e690a59087",
             "entityName": "DataTypeDesign",
             "multivalue": false
           },
-          "to": "b6bff068-73c9-4b88-9854-2e33a4e7256a"
+          "to": "45c246b7-1d90-4e07-9557-c2c7b51f6dee"
         }
       ],
       "staticInstances": []
@@ -328,35 +328,35 @@
   ],
   "events": [
     {
-      "instanceId": "ba633c53-1566-4594-99f7-597f4975515f",
+      "instanceId": "d6354e77-61e6-452f-8ef0-f27e4902625a",
       "entityName": "EventDesign",
       "name": "home",
       "parameters": []
     },
     {
-      "instanceId": "26d75c17-b775-48e8-91ff-3503ec29332d",
+      "instanceId": "42054651-cc33-48a9-b5a1-2527b6f4159f",
       "entityName": "EventDesign",
       "name": "create issue",
       "parameters": []
     },
     {
-      "instanceId": "fedd36a1-a29b-4ee2-9656-8e3c897489af",
+      "instanceId": "79402a09-9169-45b1-8167-dec71564cdb7",
       "entityName": "EventDesign",
       "name": "issue details",
       "parameters": [
-        "460e0a41-0f79-4f40-87fd-ac290baf12dc"
+        "2ed90baf-5de7-4a01-bae3-62c91371cb84"
       ]
     },
     {
-      "instanceId": "c633132b-198e-4783-ae64-0a9484ec110a",
+      "instanceId": "39832a63-8ec5-4935-b003-9b8ab24cad68",
       "entityName": "EventDesign",
       "name": "dashboard",
       "parameters": [
-        "b6bff068-73c9-4b88-9854-2e33a4e7256a"
+        "45c246b7-1d90-4e07-9557-c2c7b51f6dee"
       ]
     },
     {
-      "instanceId": "dd108c43-5892-4060-8ec0-7e8e992e6605",
+      "instanceId": "03ef86af-ec3d-400d-b27c-60cf4299d1fb",
       "entityName": "EventDesign",
       "name": "not logged in",
       "parameters": []
@@ -364,76 +364,76 @@
   ],
   "flows": [
     {
-      "instanceId": "8f056327-d8c2-46b7-854b-49a110e2bf7e",
+      "instanceId": "52cdfef1-75c5-4317-bf35-05de910b53ce",
       "entityName": "FlowDesign",
       "name": "main",
       "edges": [
         {
-          "instanceId": "cb4b4e43-1f03-47e7-9f2f-b901e96682dc",
+          "instanceId": "5b6f8444-1399-4445-a4a5-1482265530d3",
           "entityName": "FlowEdgeDesign",
-          "endNode": "7c35ffc1-45ac-4c1f-a48b-7e222edbb324",
-          "event": "fedd36a1-a29b-4ee2-9656-8e3c897489af"
+          "endNode": "a0f2871c-5bc2-48c1-9545-27dfd4dbb3c7",
+          "event": "79402a09-9169-45b1-8167-dec71564cdb7"
         },
         {
-          "instanceId": "500c3d6f-c0c8-4c52-9e87-b91094aed6f1",
+          "instanceId": "06cfa734-e65d-48a5-8c2e-578087e8f785",
           "entityName": "FlowEdgeDesign",
-          "endNode": "feb443f0-89ee-4caa-a0cb-9c2145ac7399",
-          "event": "26d75c17-b775-48e8-91ff-3503ec29332d"
+          "endNode": "6d420283-f182-4e82-84f2-7776f3add1a6",
+          "event": "42054651-cc33-48a9-b5a1-2527b6f4159f"
         },
         {
-          "instanceId": "81541aa5-7bc3-47e4-a5e8-473189f3e20f",
+          "instanceId": "0ceb91c7-dcf4-4877-8d20-6809686b6ba8",
           "entityName": "FlowEdgeDesign",
-          "endNode": "83bc96ca-fd37-4b17-8310-d4f96467fd56",
-          "event": "ba633c53-1566-4594-99f7-597f4975515f"
+          "endNode": "415b3c68-d1e5-4202-85e1-cd880cf6b5d4",
+          "event": "d6354e77-61e6-452f-8ef0-f27e4902625a"
         },
         {
-          "instanceId": "309fc812-85ab-4a43-be3a-84be6f0c5915",
+          "instanceId": "1192e638-f50d-4e1f-a9fe-b525463693af",
           "entityName": "FlowEdgeDesign",
-          "endNode": "9bb24611-ef1b-4c4d-9189-ade0e2bdd7b2",
-          "event": "c633132b-198e-4783-ae64-0a9484ec110a"
+          "endNode": "ee4277c4-e202-4e27-ac86-f011a2311284",
+          "event": "39832a63-8ec5-4935-b003-9b8ab24cad68"
         },
         {
-          "instanceId": "4de9228e-34a2-4340-80eb-cf5c38f51c5e",
+          "instanceId": "0ef8872b-370d-492d-97dd-b628cabe88b3",
           "entityName": "FlowEdgeDesign",
-          "endNode": "a2090ace-58d1-4242-b595-8a54aa8913ec",
-          "event": "dd108c43-5892-4060-8ec0-7e8e992e6605"
+          "endNode": "94e1fe0e-a8c6-4d4c-bd9e-70af5bba4ff3",
+          "event": "03ef86af-ec3d-400d-b27c-60cf4299d1fb"
         }
       ],
       "nodes": [
         {
-          "instanceId": "a2090ace-58d1-4242-b595-8a54aa8913ec",
+          "instanceId": "94e1fe0e-a8c6-4d4c-bd9e-70af5bba4ff3",
           "entityName": "PlaceTemplateDesign",
           "name": "not logged in",
           "content": {
-            "instanceId": "3ef76cf6-0315-4172-8c92-d998cf2b01e4",
+            "instanceId": "3a952f95-eded-428d-931a-92199db1262a",
             "entityName": "FragmentTemplateDesign",
             "fragmentFilters": [],
             "fragmentTypeName": "Page",
             "styleNames": [],
             "properties": [
               {
-                "instanceId": "411f6d31-7df1-40a9-a51b-71af600c25a6",
+                "instanceId": "cf45fbac-c182-468d-ba52-46ed876e7678",
                 "entityName": "PropertyDesign",
                 "propertyName": "mainContent",
                 "children": [
                   {
-                    "instanceId": "18e92734-c7c8-4722-ac1e-04714ae333f5",
+                    "instanceId": "031dd7f5-e407-4691-84bf-6cff622b75dc",
                     "entityName": "FragmentTemplateDesign",
                     "fragmentFilters": [],
                     "fragmentTypeName": "Paragraph",
                     "styleNames": [],
                     "properties": [
                       {
-                        "instanceId": "f04324d9-e603-4efc-94f6-33977d3eb5c0",
+                        "instanceId": "90de258b-245f-40f2-ae99-6601647c0747",
                         "entityName": "PropertyDesign",
                         "propertyName": "text",
                         "children": [],
                         "text": {
-                          "instanceId": "b7efb3f5-f345-4501-9155-7a9aa45f4078",
+                          "instanceId": "6adb3f8e-66ae-4a47-ad62-e3503f01e1d2",
                           "entityName": "TextTemplateDesign",
                           "untranslated": [
                             {
-                              "instanceId": "e33d419b-e5e7-4b0e-9df2-c955e8abd73b",
+                              "instanceId": "0af06434-4287-478d-aa1c-452ef27f8df1",
                               "entityName": "StringTemplateDesign",
                               "constantText": "Please log in."
                             }
@@ -441,51 +441,51 @@
                         }
                       }
                     ],
-                    "type": "087b1c7a-4f18-41c4-81a1-a612b36e53bb"
+                    "type": "811a9715-1a4f-41a0-afec-f846dab62280"
                   }
                 ]
               }
             ],
-            "type": "db6ec436-80e5-4baf-a8c4-87561cfd625e"
+            "type": "6e5c2d6b-3ac3-4de4-8191-d4c3f1241f38"
           }
         },
         {
-          "instanceId": "7c35ffc1-45ac-4c1f-a48b-7e222edbb324",
+          "instanceId": "a0f2871c-5bc2-48c1-9545-27dfd4dbb3c7",
           "entityName": "SubFlowDesign",
           "name": "issue",
-          "flow": "9b185962-75c4-4fcc-a556-9189151aaa9f"
+          "flow": "73066a56-ed1e-4581-814e-f8099622aa96"
         },
         {
-          "instanceId": "feb443f0-89ee-4caa-a0cb-9c2145ac7399",
+          "instanceId": "6d420283-f182-4e82-84f2-7776f3add1a6",
           "entityName": "SubFlowDesign",
           "name": "create issue",
-          "flow": "266e2ed5-8ebe-4e3f-8c9b-5a626702ada7"
+          "flow": "9beda581-c392-41d2-ad76-a98564484fc3"
         },
         {
-          "instanceId": "83bc96ca-fd37-4b17-8310-d4f96467fd56",
+          "instanceId": "415b3c68-d1e5-4202-85e1-cd880cf6b5d4",
           "entityName": "SubFlowDesign",
           "name": "select dashboard",
-          "flow": "e152e74c-08a8-4d0e-a427-71b2fb8fe261"
+          "flow": "10fd23c4-8b9c-4ef8-8c60-fcf3f95bfeea"
         },
         {
-          "instanceId": "9bb24611-ef1b-4c4d-9189-ade0e2bdd7b2",
+          "instanceId": "ee4277c4-e202-4e27-ac86-f011a2311284",
           "entityName": "SubFlowDesign",
           "name": "dashboard",
-          "flow": "18b19ffd-4c06-4bcc-8f39-8717753286ca"
+          "flow": "5edc3fa7-b05d-4fdf-ab7e-724888cd6ffc"
         }
       ],
       "parameters": []
     },
     {
-      "instanceId": "9b185962-75c4-4fcc-a556-9189151aaa9f",
+      "instanceId": "73066a56-ed1e-4581-814e-f8099622aa96",
       "entityName": "FlowDesign",
       "name": "issue",
       "edges": [
         {
-          "instanceId": "b13cfb9d-b519-440f-aa48-5a56b20586d4",
+          "instanceId": "0ae449b6-7aec-4b70-8a6b-f7547252809d",
           "entityName": "FlowEdgeDesign",
           "endNode": "issueDetails",
-          "event": "fedd36a1-a29b-4ee2-9656-8e3c897489af"
+          "event": "79402a09-9169-45b1-8167-dec71564cdb7"
         }
       ],
       "nodes": [
@@ -494,34 +494,34 @@
           "entityName": "PlaceTemplateDesign",
           "name": "issueDetails",
           "content": {
-            "instanceId": "e66b79d7-74a2-4e8c-b9b4-ecf68bad8c8c",
+            "instanceId": "cd277490-c156-4c2c-9512-d048b4a60f3d",
             "entityName": "FragmentTemplateDesign",
             "fragmentFilters": [],
             "fragmentTypeName": "Page",
             "styleNames": [],
             "properties": [
               {
-                "instanceId": "a110eb61-88a6-45a7-ad21-e653b7bc4470",
+                "instanceId": "29eff1c4-1cd0-4c4c-b60d-51f1522c18c1",
                 "entityName": "PropertyDesign",
                 "propertyName": "mainContent",
                 "children": [
                   {
-                    "instanceId": "1a98a352-219c-495a-80a7-9ccd2c2c1b94",
+                    "instanceId": "eaa40f0e-ccc9-4f64-94d6-da2628e231c0",
                     "entityName": "FragmentTemplateDesign",
                     "fragmentFilters": [],
                     "fragmentTypeName": "Button",
                     "styleNames": [
                       "btn-link"
                     ],
-                    "event": "ba633c53-1566-4594-99f7-597f4975515f",
+                    "event": "d6354e77-61e6-452f-8ef0-f27e4902625a",
                     "properties": [
                       {
-                        "instanceId": "9ac5465a-b6c4-4f0d-a30d-56d98cae80f7",
+                        "instanceId": "88e116f4-0e5e-45fd-9dbb-122ac9fdb0c9",
                         "entityName": "PropertyDesign",
                         "propertyName": "content",
                         "children": [
                           {
-                            "instanceId": "b2f2ca79-424c-4ba8-b398-c8c593d12bfe",
+                            "instanceId": "3cb31d74-13fa-4db4-ab1e-daae620b5153",
                             "entityName": "FragmentTemplateDesign",
                             "fragmentFilters": [],
                             "fragmentTypeName": "Icon",
@@ -529,21 +529,21 @@
                               "icon-home"
                             ],
                             "properties": [],
-                            "type": "cc0ec274-9c1e-4d5f-8cbe-3e9e2ec11b7e"
+                            "type": "e6e317d8-e5d9-440e-b749-71031dd75677"
                           }
                         ]
                       },
                       {
-                        "instanceId": "b79e51fd-f6b5-430a-956b-ac8c9c0bf3d5",
+                        "instanceId": "8dbf3854-5541-4003-b61b-9cc1993d894a",
                         "entityName": "PropertyDesign",
                         "propertyName": "text",
                         "children": [],
                         "text": {
-                          "instanceId": "54364a56-13cf-4a6d-904d-dac659503a16",
+                          "instanceId": "30f64be8-7ff1-4147-8eaa-3d7f927d6d45",
                           "entityName": "TextTemplateDesign",
                           "untranslated": [
                             {
-                              "instanceId": "d7b3c918-64b4-4820-bb84-cacc152fb503",
+                              "instanceId": "57da37b4-e2b3-408a-bcbb-37a1141eb4f7",
                               "entityName": "StringTemplateDesign",
                               "constantText": "Home"
                             }
@@ -551,160 +551,222 @@
                         }
                       }
                     ],
-                    "type": "de738c0b-8f81-454a-b669-2c0d855e5f3a"
+                    "type": "b0ccc92d-f22e-45af-b73c-95cde2ebd97e"
                   },
                   {
-                    "instanceId": "dbade824-7487-4c07-8cc5-abe83c439e38",
+                    "instanceId": "ab9d7b25-de93-4048-a210-29443d129c25",
                     "entityName": "FragmentTemplateDesign",
-                    "editorOpen": false,
                     "fragmentFilters": [],
                     "fragmentTypeName": "Heading2",
                     "styleNames": [],
                     "properties": [
                       {
-                        "instanceId": "8f8300e0-646b-4182-96d0-bd6644b7f593",
+                        "instanceId": "676c3a10-54fe-414d-98e5-9918cd94068b",
                         "entityName": "PropertyDesign",
                         "propertyName": "text",
                         "children": [],
                         "text": {
-                          "instanceId": "5317afca-6051-4e7f-8a1d-9bc6d509c418",
+                          "instanceId": "163b20a2-c473-465a-b28f-b8ac83e51f5f",
                           "entityName": "TextTemplateDesign",
                           "untranslated": [
                             {
-                              "instanceId": "70586bdf-0a9f-472a-8e75-09c6c8010112",
+                              "instanceId": "927b03ae-8312-44a8-81a5-2fe157f311de",
                               "entityName": "StringTemplateDesign",
                               "constantText": "Issue "
                             },
                             {
-                              "instanceId": "c8a8d8e1-fbfa-49f4-83ef-2c1b38350a3d",
+                              "instanceId": "4277f5be-5d84-4754-81a1-8a9312c62a08",
                               "entityName": "StringTemplateDesign",
                               "deduction": {
-                                "instanceId": "ae467cf3-b20b-4907-95a6-a29e25454673",
+                                "instanceId": "d5a0458d-3bdc-4db0-8a85-44d461970074",
                                 "entityName": "DeductionSchemeDesign",
                                 "deductions": [
                                   {
-                                    "instanceId": "c3c1f9af-8171-43c8-bf5c-59d7de26a6d1",
+                                    "instanceId": "25a54db6-e4d0-4a55-94df-6d1ca746e399",
                                     "entityName": "SelectedInstanceDeductionDesign",
                                     "inputs": [],
-                                    "ofEntity": "460e0a41-0f79-4f40-87fd-ac290baf12dc"
+                                    "ofEntity": "2ed90baf-5de7-4a01-bae3-62c91371cb84"
                                   },
                                   {
-                                    "instanceId": "49f34d6a-edf0-4f66-bf66-d5860b73eb7f",
+                                    "instanceId": "c92504a5-7e6c-4d61-87e3-bc1aa80bbd4e",
                                     "entityName": "AttributeDeductionDesign",
                                     "inputs": [
-                                      "c3c1f9af-8171-43c8-bf5c-59d7de26a6d1"
+                                      "25a54db6-e4d0-4a55-94df-6d1ca746e399"
                                     ],
-                                    "attribute": "16e77aff-8a0a-4583-a96f-a5cc5012cfb7"
+                                    "attribute": "4f496617-92ef-43b1-a714-f9cbc06bbef5"
                                   }
                                 ],
-                                "output": "49f34d6a-edf0-4f66-bf66-d5860b73eb7f"
+                                "output": "c92504a5-7e6c-4d61-87e3-bc1aa80bbd4e"
                               }
                             },
                             {
-                              "instanceId": "71ea7aad-4197-4594-a070-e8318957c9c2",
+                              "instanceId": "5c445240-cce1-4c36-9dbf-962c085bd69c",
                               "entityName": "StringTemplateDesign",
                               "constantText": ": "
                             },
                             {
-                              "instanceId": "4b31155c-a9ea-4e8b-ae92-3dabf343d08b",
+                              "instanceId": "a2d20d99-a790-4350-83ca-a600d75122ca",
                               "entityName": "StringTemplateDesign",
                               "deduction": {
-                                "instanceId": "909a789d-b0d2-453e-9c29-4bdd7f291366",
+                                "instanceId": "2c9c174f-a89a-4456-a034-3cb9f6764c60",
                                 "entityName": "DeductionSchemeDesign",
                                 "deductions": [
                                   {
-                                    "instanceId": "7b78561e-b861-45f6-a81e-c0e7bec81f04",
+                                    "instanceId": "ee446702-b00c-4670-b96a-578b876da9dc",
                                     "entityName": "SelectedInstanceDeductionDesign",
                                     "inputs": [],
-                                    "ofEntity": "460e0a41-0f79-4f40-87fd-ac290baf12dc"
+                                    "ofEntity": "2ed90baf-5de7-4a01-bae3-62c91371cb84"
                                   },
                                   {
-                                    "instanceId": "68031b9b-3fd9-41ba-b37d-e572aff35e50",
+                                    "instanceId": "f5e9b9e4-5d29-4535-a7e2-dcc8299ad5aa",
                                     "entityName": "AttributeDeductionDesign",
                                     "inputs": [
-                                      "7b78561e-b861-45f6-a81e-c0e7bec81f04"
+                                      "ee446702-b00c-4670-b96a-578b876da9dc"
                                     ],
-                                    "attribute": "1767b4a3-46b1-447b-aba6-950d74736868"
+                                    "attribute": "4e21e726-a346-4c6b-b11d-1790cbb49ab7"
                                   }
                                 ],
-                                "output": "68031b9b-3fd9-41ba-b37d-e572aff35e50"
+                                "output": "f5e9b9e4-5d29-4535-a7e2-dcc8299ad5aa"
                               }
                             }
                           ]
                         }
                       }
                     ],
-                    "type": "db6ec436-80e5-4baf-a8c4-87561cfd625e"
+                    "type": "bd7a2ec1-d931-4308-a966-e5e845483b6a"
                   },
                   {
-                    "instanceId": "12061a40-7afe-4a79-b993-2a264e073462",
+                    "instanceId": "4ad65f01-627c-4521-a96d-dea1cc5d6e4d",
                     "entityName": "FragmentTemplateDesign",
-                    "editorOpen": false,
                     "fragmentFilters": [],
                     "fragmentTypeName": "Input",
                     "styleNames": [
                       "answer-span8"
                     ],
-                    "attribute": "1767b4a3-46b1-447b-aba6-950d74736868",
-                    "entity": "460e0a41-0f79-4f40-87fd-ac290baf12dc",
+                    "attribute": "4e21e726-a346-4c6b-b11d-1790cbb49ab7",
+                    "entity": "2ed90baf-5de7-4a01-bae3-62c91371cb84",
                     "properties": [],
-                    "type": "39afeb50-865a-4aa5-a964-9fcebfa1ed16"
+                    "type": "a768a979-d08c-4934-b469-c238d1f8f01f"
                   },
                   {
-                    "instanceId": "72b89c5e-3e94-451b-8d36-ff13e0ecfca6",
-                    "entityName": "FragmentTemplateDesign",
-                    "editorOpen": false,
-                    "fragmentFilters": [],
-                    "fragmentTypeName": "Input",
-                    "styleNames": [
-                      "answer-span4"
-                    ],
-                    "attribute": "a5a1c715-47dd-4a69-a72e-a54d6da5cc89",
-                    "entity": "460e0a41-0f79-4f40-87fd-ac290baf12dc",
-                    "properties": [],
-                    "type": "39afeb50-865a-4aa5-a964-9fcebfa1ed16"
-                  },
-                  {
-                    "instanceId": "d332214f-a569-42a7-aa12-f90e93f269a9",
+                    "instanceId": "b4044660-edbd-42bf-99a4-c0358df2ac92",
                     "entityName": "FragmentTemplateDesign",
                     "fragmentFilters": [],
                     "fragmentTypeName": "Input",
                     "styleNames": [
                       "answer-span4"
                     ],
-                    "attribute": "a67f5e94-d29a-467d-90f1-7d3a08a19b45",
-                    "entity": "460e0a41-0f79-4f40-87fd-ac290baf12dc",
+                    "attribute": "ea9279b6-d2a1-49b8-93d1-036c0c421fcf",
+                    "entity": "2ed90baf-5de7-4a01-bae3-62c91371cb84",
                     "properties": [],
-                    "type": "39afeb50-865a-4aa5-a964-9fcebfa1ed16"
+                    "type": "a768a979-d08c-4934-b469-c238d1f8f01f"
                   },
                   {
-                    "instanceId": "f2b24da8-407e-48be-b546-a9e54ee54f50",
+                    "instanceId": "fa21b985-83a6-4005-a579-e26f983c642d",
                     "entityName": "FragmentTemplateDesign",
-                    "editorOpen": false,
+                    "fragmentFilters": [],
+                    "fragmentTypeName": "Input",
+                    "styleNames": [
+                      "answer-span4"
+                    ],
+                    "attribute": "bde59bd5-e1aa-4479-9bd2-568cab2306f2",
+                    "entity": "2ed90baf-5de7-4a01-bae3-62c91371cb84",
+                    "properties": [],
+                    "type": "a768a979-d08c-4934-b469-c238d1f8f01f"
+                  },
+                  {
+                    "instanceId": "319427d2-3b95-4076-a853-0d258de1d78e",
+                    "entityName": "FragmentTemplateDesign",
                     "fragmentFilters": [],
                     "fragmentTypeName": "Input",
                     "styleNames": [
                       "answer-span8",
                       "answer-height300"
                     ],
-                    "attribute": "29cf9386-29aa-416c-8218-2d4ab55f0387",
-                    "entity": "460e0a41-0f79-4f40-87fd-ac290baf12dc",
+                    "attribute": "09697840-0af5-4576-897c-0ec4777d8f2a",
+                    "entity": "2ed90baf-5de7-4a01-bae3-62c91371cb84",
                     "properties": [],
-                    "type": "39afeb50-865a-4aa5-a964-9fcebfa1ed16"
+                    "type": "a768a979-d08c-4934-b469-c238d1f8f01f"
                   }
                 ]
               }
             ],
-            "type": "db6ec436-80e5-4baf-a8c4-87561cfd625e"
+            "type": "6e5c2d6b-3ac3-4de4-8191-d4c3f1241f38"
+          },
+          "title": {
+            "instanceId": "dd8e0974-7afe-4976-b37a-c7702815a16e",
+            "entityName": "TextTemplateDesign",
+            "untranslated": [
+              {
+                "instanceId": "1a36bbc5-6e51-4486-aa31-d0495387ae04",
+                "entityName": "StringTemplateDesign",
+                "constantText": "Issue "
+              },
+              {
+                "instanceId": "5e676de8-d9c9-4e6d-b447-ae478c16b045",
+                "entityName": "StringTemplateDesign",
+                "deduction": {
+                  "instanceId": "9da78930-4ae4-4db6-b6dd-1e04fa8819c5",
+                  "entityName": "DeductionSchemeDesign",
+                  "deductions": [
+                    {
+                      "instanceId": "3d1e01cd-2ac2-45ea-90d4-f611e7e1335e",
+                      "entityName": "SelectedInstanceDeductionDesign",
+                      "inputs": [],
+                      "ofEntity": "2ed90baf-5de7-4a01-bae3-62c91371cb84"
+                    },
+                    {
+                      "instanceId": "2879dc5f-2da8-47e9-8f4c-3ab95dd1170e",
+                      "entityName": "AttributeDeductionDesign",
+                      "inputs": [
+                        "3d1e01cd-2ac2-45ea-90d4-f611e7e1335e"
+                      ],
+                      "attribute": "4f496617-92ef-43b1-a714-f9cbc06bbef5"
+                    }
+                  ],
+                  "output": "2879dc5f-2da8-47e9-8f4c-3ab95dd1170e"
+                }
+              },
+              {
+                "instanceId": "296613ca-9a26-4459-b8b5-c8ece31b5b05",
+                "entityName": "StringTemplateDesign",
+                "constantText": ": "
+              },
+              {
+                "instanceId": "b39e05c4-4582-4b77-a0c6-f838fa3513d0",
+                "entityName": "StringTemplateDesign",
+                "deduction": {
+                  "instanceId": "cd7c2784-38b1-48d9-9007-a19d735f6eaa",
+                  "entityName": "DeductionSchemeDesign",
+                  "deductions": [
+                    {
+                      "instanceId": "3ae0102f-f9cf-432d-b6d3-b4f49319a582",
+                      "entityName": "SelectedInstanceDeductionDesign",
+                      "inputs": [],
+                      "ofEntity": "2ed90baf-5de7-4a01-bae3-62c91371cb84"
+                    },
+                    {
+                      "instanceId": "27d1dd39-ef6a-45c1-9ecd-7579087cd5b8",
+                      "entityName": "AttributeDeductionDesign",
+                      "inputs": [
+                        "3ae0102f-f9cf-432d-b6d3-b4f49319a582"
+                      ],
+                      "attribute": "4e21e726-a346-4c6b-b11d-1790cbb49ab7"
+                    }
+                  ],
+                  "output": "27d1dd39-ef6a-45c1-9ecd-7579087cd5b8"
+                }
+              }
+            ]
           }
         }
       ],
       "parameters": [
-        "460e0a41-0f79-4f40-87fd-ac290baf12dc"
+        "2ed90baf-5de7-4a01-bae3-62c91371cb84"
       ]
     },
     {
-      "instanceId": "266e2ed5-8ebe-4e3f-8c9b-5a626702ada7",
+      "instanceId": "9beda581-c392-41d2-ad76-a98564484fc3",
       "entityName": "FlowDesign",
       "isCustomized": true,
       "name": "create issue",
@@ -713,77 +775,77 @@
       "parameters": []
     },
     {
-      "instanceId": "18b19ffd-4c06-4bcc-8f39-8717753286ca",
+      "instanceId": "5edc3fa7-b05d-4fdf-ab7e-724888cd6ffc",
       "entityName": "FlowDesign",
       "name": "dashboard",
       "edges": [
         {
-          "instanceId": "83294af1-f459-456d-b309-4f3b56742361",
+          "instanceId": "02831589-f706-4c61-85e9-4e32351b9a51",
           "entityName": "FlowEdgeDesign",
-          "endNode": "ed34b2f4-a2a4-495e-88e7-96cda4642976",
-          "event": "c633132b-198e-4783-ae64-0a9484ec110a"
+          "endNode": "55c421af-6f9a-47aa-b70c-279cb143c8ed",
+          "event": "39832a63-8ec5-4935-b003-9b8ab24cad68"
         }
       ],
       "nodes": [
         {
-          "instanceId": "ed34b2f4-a2a4-495e-88e7-96cda4642976",
+          "instanceId": "55c421af-6f9a-47aa-b70c-279cb143c8ed",
           "entityName": "PlaceTemplateDesign",
           "name": "dashboard",
           "content": {
-            "instanceId": "544d7cb8-aa9e-4e82-b4fa-525ee3f187be",
+            "instanceId": "5e510c25-4b50-49c3-90c6-2dcd5d5de8e5",
             "entityName": "FragmentTemplateDesign",
             "fragmentFilters": [],
             "fragmentTypeName": "Page",
             "styleNames": [],
             "properties": [
               {
-                "instanceId": "352c8522-4980-4fb1-b930-e774353bcdaa",
+                "instanceId": "d566c410-2c67-468d-a8f5-59bf4dd1e9fe",
                 "entityName": "PropertyDesign",
                 "propertyName": "mainContent",
                 "children": [
                   {
-                    "instanceId": "5eba140e-b5dd-4a66-a58a-185b57dfc4b4",
+                    "instanceId": "d2a9bd7c-6180-4fc9-b369-498c824eb976",
                     "entityName": "FragmentTemplateDesign",
                     "fragmentFilters": [],
                     "fragmentTypeName": "Heading2",
                     "styleNames": [],
                     "properties": [
                       {
-                        "instanceId": "0a7a1eb0-562d-45cf-8075-b43f9d6e6e6d",
+                        "instanceId": "0347fed9-8b58-4467-887c-10f7d738cad4",
                         "entityName": "PropertyDesign",
                         "propertyName": "text",
                         "children": [],
                         "text": {
-                          "instanceId": "475809d8-5685-40bd-8a04-0ae1c7d0dff1",
+                          "instanceId": "129b5fdc-f629-433c-a47c-d9d7bc31713b",
                           "entityName": "TextTemplateDesign",
                           "untranslated": [
                             {
-                              "instanceId": "ebd429d8-e12f-47a5-9b4a-847ba13c954d",
+                              "instanceId": "ed1bdc32-e03d-4ef5-9a5b-b4405bc9f512",
                               "entityName": "StringTemplateDesign",
                               "deduction": {
-                                "instanceId": "4ec4ea75-d8a1-4bff-8f77-3a471c125b9b",
+                                "instanceId": "2a135840-5c04-43fc-b28e-221586280cc0",
                                 "entityName": "DeductionSchemeDesign",
                                 "deductions": [
                                   {
-                                    "instanceId": "e3832115-2536-401f-9ad0-cb83e0be5057",
+                                    "instanceId": "47c0520e-0d63-4bb0-a9c3-d23ecbffc260",
                                     "entityName": "SelectedInstanceDeductionDesign",
                                     "inputs": [],
-                                    "ofEntity": "b6bff068-73c9-4b88-9854-2e33a4e7256a"
+                                    "ofEntity": "45c246b7-1d90-4e07-9557-c2c7b51f6dee"
                                   },
                                   {
-                                    "instanceId": "ce72ae10-b2af-44da-98a9-22002386b96d",
+                                    "instanceId": "61022069-8603-4575-a8a9-b9b9daac3868",
                                     "entityName": "AttributeDeductionDesign",
                                     "inputs": [
-                                      "e3832115-2536-401f-9ad0-cb83e0be5057"
+                                      "47c0520e-0d63-4bb0-a9c3-d23ecbffc260"
                                     ],
-                                    "attribute": "ab683e34-2106-47b7-a962-db910805ae0e"
+                                    "attribute": "6e95155a-c4d7-430c-80ff-be0f70b2be61"
                                   }
                                 ],
-                                "output": "ce72ae10-b2af-44da-98a9-22002386b96d"
+                                "output": "61022069-8603-4575-a8a9-b9b9daac3868"
                               }
                             },
                             {
-                              "instanceId": "76b67fcb-9773-482a-99bd-3623035a600c",
+                              "instanceId": "2dd4587d-08b1-45f7-bc9d-bd4432e4c12e",
                               "entityName": "StringTemplateDesign",
                               "constantText": "\u0027s dashboard"
                             }
@@ -791,26 +853,26 @@
                         }
                       }
                     ],
-                    "type": "ad8f17cb-f299-4e41-9e6c-ddcc47b22f4d"
+                    "type": "bd7a2ec1-d931-4308-a966-e5e845483b6a"
                   },
                   {
-                    "instanceId": "3cfd0af6-d0e8-4fe7-aa7e-84a39046ced4",
+                    "instanceId": "21993055-dce3-4741-ba8b-53f5580686c4",
                     "entityName": "FragmentTemplateDesign",
                     "fragmentFilters": [],
                     "fragmentTypeName": "Heading4",
                     "styleNames": [],
                     "properties": [
                       {
-                        "instanceId": "867d3293-fa09-43bd-a8fe-c45ff924f5ee",
+                        "instanceId": "f4dcfa6c-bd33-42fa-ad00-8dc7be4ae1be",
                         "entityName": "PropertyDesign",
                         "propertyName": "text",
                         "children": [],
                         "text": {
-                          "instanceId": "a4bd04f2-972b-48ca-b7c4-4b5981069730",
+                          "instanceId": "24e3088c-5e11-4101-9c67-4c3e3c490d6a",
                           "entityName": "TextTemplateDesign",
                           "untranslated": [
                             {
-                              "instanceId": "76a18837-c785-425f-8d7d-30034ba12809",
+                              "instanceId": "5fa91174-84ba-4c12-9287-435d5cad3f0d",
                               "entityName": "StringTemplateDesign",
                               "constantText": "Assigned to me"
                             }
@@ -818,22 +880,22 @@
                         }
                       }
                     ],
-                    "type": "c4f5e794-73f9-47da-b1ff-2d210b627734"
+                    "type": "142a367c-0ddc-49d8-950e-17957d2106e7"
                   },
                   {
-                    "instanceId": "bc82548b-dbd6-4e12-a3ab-3ebfea98d7b3",
+                    "instanceId": "b120cf30-f6b3-4229-9ce8-46a733baba9f",
                     "entityName": "FragmentTemplateDesign",
                     "fragmentFilters": [],
                     "fragmentTypeName": "Table",
                     "styleNames": [],
                     "properties": [
                       {
-                        "instanceId": "4d941f0c-ff7e-412f-a331-16293276178b",
+                        "instanceId": "8286e697-18f3-4c83-a7b2-aa5948f6b6a4",
                         "entityName": "PropertyDesign",
                         "propertyName": "columns",
                         "children": [
                           {
-                            "instanceId": "5eb67ba1-2800-49f9-80f6-87aafedabc5f",
+                            "instanceId": "d3c86a21-3310-4e0c-bd68-fd14a37fdde2",
                             "entityName": "FragmentTemplateDesign",
                             "fragmentFilters": [],
                             "fragmentTypeName": "Column",
@@ -842,16 +904,16 @@
                             ],
                             "properties": [
                               {
-                                "instanceId": "2d2f9265-2a74-4d2e-b9ed-14a4cd71847e",
+                                "instanceId": "48b63641-807c-46ef-a612-68d3ad35b44e",
                                 "entityName": "PropertyDesign",
                                 "propertyName": "header",
                                 "children": [],
                                 "text": {
-                                  "instanceId": "4f0fda00-ee89-4112-8230-3ba7a3b57353",
+                                  "instanceId": "fe24a929-9877-45d2-9474-ddd3cf85ac26",
                                   "entityName": "TextTemplateDesign",
                                   "untranslated": [
                                     {
-                                      "instanceId": "2a065332-d7d9-4988-9c77-f03e031547f4",
+                                      "instanceId": "bc882aef-3d7a-4818-988b-4aac14435c3c",
                                       "entityName": "StringTemplateDesign",
                                       "constantText": "#"
                                     }
@@ -859,10 +921,10 @@
                                 }
                               }
                             ],
-                            "type": "9c8259db-383e-48af-9d0b-7f38b089431a"
+                            "type": "b305b31d-0142-45fa-a7ea-5ed2fc4fba5a"
                           },
                           {
-                            "instanceId": "4e6086fa-eb0f-4393-a3fc-6f10efce8eca",
+                            "instanceId": "61cb36a7-c365-4ea0-a7c3-e1866a529fc9",
                             "entityName": "FragmentTemplateDesign",
                             "fragmentFilters": [],
                             "fragmentTypeName": "Column",
@@ -871,16 +933,16 @@
                             ],
                             "properties": [
                               {
-                                "instanceId": "ebbf0f02-e1a6-4954-b448-962424def310",
+                                "instanceId": "b1e0e5d0-7524-4fc9-b17b-885144f321e0",
                                 "entityName": "PropertyDesign",
                                 "propertyName": "header",
                                 "children": [],
                                 "text": {
-                                  "instanceId": "17df455d-65f4-4ca5-bbe7-2f042210d382",
+                                  "instanceId": "367668a8-9aad-4e3c-9db7-550672f91607",
                                   "entityName": "TextTemplateDesign",
                                   "untranslated": [
                                     {
-                                      "instanceId": "e71d864b-3449-459c-aacd-9e4ae45e0e9d",
+                                      "instanceId": "6c25cbc8-d4c2-4deb-96ae-41404e938dc8",
                                       "entityName": "StringTemplateDesign",
                                       "constantText": "Issue"
                                     }
@@ -888,10 +950,10 @@
                                 }
                               }
                             ],
-                            "type": "9c8259db-383e-48af-9d0b-7f38b089431a"
+                            "type": "b305b31d-0142-45fa-a7ea-5ed2fc4fba5a"
                           },
                           {
-                            "instanceId": "4bfb766c-9d19-40e8-bd43-0af0135e4aad",
+                            "instanceId": "9a4edb06-ae71-44cc-b555-5eb2c52887e4",
                             "entityName": "FragmentTemplateDesign",
                             "fragmentFilters": [],
                             "fragmentTypeName": "Column",
@@ -899,70 +961,81 @@
                               "issuePreview"
                             ],
                             "properties": [],
-                            "type": "9c8259db-383e-48af-9d0b-7f38b089431a"
+                            "type": "b305b31d-0142-45fa-a7ea-5ed2fc4fba5a"
+                          },
+                          {
+                            "instanceId": "a0a8ecb0-c1c5-48a9-8edb-9e7c6159a46c",
+                            "entityName": "FragmentTemplateDesign",
+                            "fragmentFilters": [],
+                            "fragmentTypeName": "Column",
+                            "styleNames": [
+                              "presence-indicator"
+                            ],
+                            "properties": [],
+                            "type": "b305b31d-0142-45fa-a7ea-5ed2fc4fba5a"
                           }
                         ]
                       },
                       {
-                        "instanceId": "69047bf6-042f-4150-8429-aa31442b50a3",
+                        "instanceId": "a6b3fa12-82e3-4ad1-b8ee-9a9ac6e937ed",
                         "entityName": "PropertyDesign",
                         "propertyName": "rows",
                         "children": [
                           {
-                            "instanceId": "1db85782-627d-4431-a25d-3db80e50e90b",
+                            "instanceId": "ee8d93dc-e4fa-4f9d-99fa-91f03029ffbe",
                             "entityName": "SelectionDesign",
                             "children": [
                               {
-                                "instanceId": "224cbc86-659a-4be2-a365-2db3d46ce2d0",
+                                "instanceId": "a5d1c9e8-4327-4e3f-9a6f-f0613c4b5326",
                                 "entityName": "SharedElementDesign",
-                                "definition": "c642f658-57b8-4625-b0a5-afed9a0298ad"
+                                "definition": "75a09c5b-8e12-4ff5-85ee-88d1372c4919"
                               }
                             ],
                             "selection": {
-                              "instanceId": "040b57fd-aa3b-46ab-b418-c54902d6b8ec",
+                              "instanceId": "874bc5ee-0561-431b-b5f2-b40479109b5a",
                               "entityName": "DeductionSchemeDesign",
                               "deductions": [
                                 {
-                                  "instanceId": "1a3b0efa-8a79-436e-8f55-1515b311241f",
+                                  "instanceId": "a6efd631-a7ab-46a0-8fa1-f518bcd9b926",
                                   "entityName": "SelectedInstanceDeductionDesign",
                                   "inputs": [],
-                                  "ofEntity": "b6bff068-73c9-4b88-9854-2e33a4e7256a"
+                                  "ofEntity": "45c246b7-1d90-4e07-9557-c2c7b51f6dee"
                                 },
                                 {
-                                  "instanceId": "833cb855-fc6a-4df8-99f0-0fd51280bed2",
+                                  "instanceId": "1200c845-d19d-4809-bfc7-fa28679bcb7b",
                                   "entityName": "ReverseRelationDeductionDesign",
                                   "inputs": [
-                                    "1a3b0efa-8a79-436e-8f55-1515b311241f"
+                                    "a6efd631-a7ab-46a0-8fa1-f518bcd9b926"
                                   ],
-                                  "relation": "a67f5e94-d29a-467d-90f1-7d3a08a19b45"
+                                  "relation": "bde59bd5-e1aa-4479-9bd2-568cab2306f2"
                                 }
                               ],
-                              "output": "833cb855-fc6a-4df8-99f0-0fd51280bed2"
+                              "output": "1200c845-d19d-4809-bfc7-fa28679bcb7b"
                             }
                           }
                         ]
                       }
                     ],
-                    "type": "6e939191-7d24-4b7c-9c2d-db2ca5078d30"
+                    "type": "871a5b0b-d6ab-4dd7-8aa8-03610142adaa"
                   },
                   {
-                    "instanceId": "d96abf3c-c165-4880-b689-914e7158e424",
+                    "instanceId": "a20628c9-22f2-49d6-9286-bc462438c6d3",
                     "entityName": "FragmentTemplateDesign",
                     "fragmentFilters": [],
                     "fragmentTypeName": "Heading4",
                     "styleNames": [],
                     "properties": [
                       {
-                        "instanceId": "fee77ae2-beb8-45da-b291-a4185c05d71c",
+                        "instanceId": "3f49ff02-fa93-432b-a753-6417a8a93bcd",
                         "entityName": "PropertyDesign",
                         "propertyName": "text",
                         "children": [],
                         "text": {
-                          "instanceId": "4b884d65-e890-4793-b276-bbf615e37c34",
+                          "instanceId": "880b9c68-56ad-4cd8-95d9-94127446bf4e",
                           "entityName": "TextTemplateDesign",
                           "untranslated": [
                             {
-                              "instanceId": "0b94c0a3-8b20-40b8-ae05-9581084c9832",
+                              "instanceId": "ac431299-a0b6-41c0-bfba-659162619acb",
                               "entityName": "StringTemplateDesign",
                               "constantText": "All issues"
                             }
@@ -970,22 +1043,22 @@
                         }
                       }
                     ],
-                    "type": "c4f5e794-73f9-47da-b1ff-2d210b627734"
+                    "type": "142a367c-0ddc-49d8-950e-17957d2106e7"
                   },
                   {
-                    "instanceId": "2553df92-f929-4d00-854e-7e0c54575cf4",
+                    "instanceId": "844bf33f-96b1-433a-9a9f-e178c9932827",
                     "entityName": "FragmentTemplateDesign",
                     "fragmentFilters": [],
                     "fragmentTypeName": "Table",
                     "styleNames": [],
                     "properties": [
                       {
-                        "instanceId": "164bc8ff-9112-4de0-acb6-3118cf33b4c5",
+                        "instanceId": "d480dc29-5f71-46fa-b3d4-0e3ebef5c960",
                         "entityName": "PropertyDesign",
                         "propertyName": "columns",
                         "children": [
                           {
-                            "instanceId": "8093f67b-ea6b-4dfb-b978-58f2c9631451",
+                            "instanceId": "29a6d291-b252-4ee1-88de-e0fd1f9f397e",
                             "entityName": "FragmentTemplateDesign",
                             "fragmentFilters": [],
                             "fragmentTypeName": "Column",
@@ -994,16 +1067,16 @@
                             ],
                             "properties": [
                               {
-                                "instanceId": "8cd47e81-748c-4695-88fc-033ffe8c5fb0",
+                                "instanceId": "8d59fef3-0556-43f7-9d12-a95cc77b1676",
                                 "entityName": "PropertyDesign",
                                 "propertyName": "header",
                                 "children": [],
                                 "text": {
-                                  "instanceId": "fbdc5d07-d731-4265-b497-b5d9414ea3f2",
+                                  "instanceId": "1cb9cf75-e221-4952-b05c-2738f1e59304",
                                   "entityName": "TextTemplateDesign",
                                   "untranslated": [
                                     {
-                                      "instanceId": "a0d8c670-3250-4efb-959f-e4d8d921c253",
+                                      "instanceId": "918fd1ee-c13c-4aac-8f9a-b2614a72fd21",
                                       "entityName": "StringTemplateDesign",
                                       "constantText": "#"
                                     }
@@ -1011,10 +1084,10 @@
                                 }
                               }
                             ],
-                            "type": "9c8259db-383e-48af-9d0b-7f38b089431a"
+                            "type": "b305b31d-0142-45fa-a7ea-5ed2fc4fba5a"
                           },
                           {
-                            "instanceId": "251c3e9b-934f-470f-82e8-304e10750ffb",
+                            "instanceId": "9695e2cc-3dbd-44f3-925e-648c9fb36e29",
                             "entityName": "FragmentTemplateDesign",
                             "fragmentFilters": [],
                             "fragmentTypeName": "Column",
@@ -1023,16 +1096,16 @@
                             ],
                             "properties": [
                               {
-                                "instanceId": "8cb9464e-10af-40b7-8ec2-8cd5eba03d50",
+                                "instanceId": "b6ccb5ad-8351-431d-9079-787694bcf623",
                                 "entityName": "PropertyDesign",
                                 "propertyName": "header",
                                 "children": [],
                                 "text": {
-                                  "instanceId": "7e0f6ac4-0fb4-4d3c-a7d0-105e135f85da",
+                                  "instanceId": "ac53d6fa-6042-44e3-b9b5-8e53ca546f28",
                                   "entityName": "TextTemplateDesign",
                                   "untranslated": [
                                     {
-                                      "instanceId": "4136901b-fc3e-4918-a959-eeed6417ec69",
+                                      "instanceId": "86908754-1211-413a-8716-bc8dab1083e6",
                                       "entityName": "StringTemplateDesign",
                                       "constantText": "Issue"
                                     }
@@ -1040,10 +1113,10 @@
                                 }
                               }
                             ],
-                            "type": "9c8259db-383e-48af-9d0b-7f38b089431a"
+                            "type": "b305b31d-0142-45fa-a7ea-5ed2fc4fba5a"
                           },
                           {
-                            "instanceId": "c7b00a19-82aa-4a16-a77d-3fa08d85f8a2",
+                            "instanceId": "430490de-c176-4b3b-af86-f90b46c9c585",
                             "entityName": "FragmentTemplateDesign",
                             "fragmentFilters": [],
                             "fragmentTypeName": "Column",
@@ -1051,71 +1124,82 @@
                               "issuePreview"
                             ],
                             "properties": [],
-                            "type": "9c8259db-383e-48af-9d0b-7f38b089431a"
+                            "type": "b305b31d-0142-45fa-a7ea-5ed2fc4fba5a"
+                          },
+                          {
+                            "instanceId": "0b27d1cb-538e-4594-9c11-40ea0cc4f862",
+                            "entityName": "FragmentTemplateDesign",
+                            "fragmentFilters": [],
+                            "fragmentTypeName": "Column",
+                            "styleNames": [
+                              "presence-indicator"
+                            ],
+                            "properties": [],
+                            "type": "b305b31d-0142-45fa-a7ea-5ed2fc4fba5a"
                           }
                         ]
                       },
                       {
-                        "instanceId": "0ef3699f-8f86-4893-a253-9abaec5c0756",
+                        "instanceId": "3a02885a-a521-4417-adb0-c66842b2ddd0",
                         "entityName": "PropertyDesign",
                         "propertyName": "rows",
                         "children": [
                           {
-                            "instanceId": "0e7db8c5-e082-47a5-b657-cac87d661087",
+                            "instanceId": "3ef34873-05c9-4d68-8fce-0c964446de67",
                             "entityName": "SelectionDesign",
                             "children": [
                               {
-                                "instanceId": "20469511-729a-4f4c-97fc-a30e5726acba",
+                                "instanceId": "b77395b5-3769-45ea-a1e1-ba9d497728b4",
                                 "entityName": "SharedElementDesign",
-                                "definition": "c642f658-57b8-4625-b0a5-afed9a0298ad"
+                                "definition": "75a09c5b-8e12-4ff5-85ee-88d1372c4919"
                               }
                             ],
                             "selection": {
-                              "instanceId": "cab0fc5a-b3c9-4d71-8ab0-18225df94b1d",
+                              "instanceId": "8a43252a-e591-43f7-8ea9-13b179114148",
                               "entityName": "DeductionSchemeDesign",
                               "deductions": [
                                 {
-                                  "instanceId": "af79fcd9-f0e1-4b46-8a87-44650dbd1fc7",
+                                  "instanceId": "609fda8a-bc85-43ef-8a55-befad8f5a2c6",
                                   "entityName": "SelectedInstanceDeductionDesign",
                                   "inputs": [],
-                                  "ofEntity": "37844c3a-5c1c-4b2f-962e-b45fcd612172"
+                                  "ofEntity": "e3d602e6-7b3d-400b-b24d-14fdcb75b33a"
                                 },
                                 {
-                                  "instanceId": "e28106f6-6ad6-48ef-9855-d06604b83e4e",
+                                  "instanceId": "6dfd505c-30e3-4a41-99c2-92502bab99db",
                                   "entityName": "AttributeDeductionDesign",
                                   "inputs": [
-                                    "af79fcd9-f0e1-4b46-8a87-44650dbd1fc7"
+                                    "609fda8a-bc85-43ef-8a55-befad8f5a2c6"
                                   ],
-                                  "attribute": "cd1fb048-cc71-4661-810c-2dac5b0692e0"
+                                  "attribute": "8c3191ad-5dae-4d3c-83cf-1367da65ed7a"
                                 }
                               ],
-                              "output": "e28106f6-6ad6-48ef-9855-d06604b83e4e"
+                              "output": "6dfd505c-30e3-4a41-99c2-92502bab99db"
                             }
                           }
                         ]
                       }
                     ],
-                    "type": "6e939191-7d24-4b7c-9c2d-db2ca5078d30"
+                    "type": "871a5b0b-d6ab-4dd7-8aa8-03610142adaa"
                   },
                   {
-                    "instanceId": "24e13784-1d54-49c4-9656-2cb4560ea4ee",
+                    "instanceId": "2fcb358d-872a-442a-8224-e71ff32674bf",
                     "entityName": "FragmentTemplateDesign",
                     "fragmentFilters": [],
                     "fragmentTypeName": "Button",
                     "styleNames": [],
-                    "event": "26d75c17-b775-48e8-91ff-3503ec29332d",
+                    "event": "42054651-cc33-48a9-b5a1-2527b6f4159f",
                     "properties": [
                       {
-                        "instanceId": "5ee7a30d-697a-4935-a41f-1f734ecdc3de",
+                        "instanceId": "fc595826-22ca-4594-8f58-72cdb3495fb3",
                         "entityName": "PropertyDesign",
                         "propertyName": "text",
                         "children": [],
                         "text": {
-                          "instanceId": "fe5d934f-80d8-4ef0-9d55-6b8e30f7886b",
+                          "instanceId": "079eb840-cdf2-4521-a17d-d4263eb98404",
                           "entityName": "TextTemplateDesign",
                           "untranslated": [
                             {
-                              "instanceId": "bc55df49-715c-4b12-936c-706d17876261",
+                              "instanceId": "31f1cee9-e788-4044-bdd1-e160e17d4c47",
                               "entityName": "StringTemplateDesign",
                               "constantText": "Create issue"
                             }
@@ -1123,21 +1207,57 @@
                         }
                       }
                     ],
-                    "type": "de738c0b-8f81-454a-b669-2c0d855e5f3a"
+                    "type": "b0ccc92d-f22e-45af-b73c-95cde2ebd97e"
                   }
                 ]
               }
             ],
-            "type": "db6ec436-80e5-4baf-a8c4-87561cfd625e"
+            "type": "6e5c2d6b-3ac3-4de4-8191-d4c3f1241f38"
+          },
+          "title": {
+            "instanceId": "e941fdd4-8485-42f8-ba8e-0434c8ccaf78",
+            "entityName": "TextTemplateDesign",
+            "untranslated": [
+              {
+                "instanceId": "cc3cd2e8-f568-49cf-8808-c28f51807dfe",
+                "entityName": "StringTemplateDesign",
+                "deduction": {
+                  "instanceId": "c8b55e90-e63f-4eeb-8a2c-8a3ad5c3b154",
+                  "entityName": "DeductionSchemeDesign",
+                  "deductions": [
+                    {
+                      "instanceId": "8aabc18c-b66c-4f7e-a219-3cf45a80f49a",
+                      "entityName": "SelectedInstanceDeductionDesign",
+                      "inputs": [],
+                      "ofEntity": "45c246b7-1d90-4e07-9557-c2c7b51f6dee"
+                    },
+                    {
+                      "instanceId": "3dcdefba-65b1-4e9d-bc68-2ad234ce6bee",
+                      "entityName": "AttributeDeductionDesign",
+                      "inputs": [
+                        "8aabc18c-b66c-4f7e-a219-3cf45a80f49a"
+                      ],
+                      "attribute": "6e95155a-c4d7-430c-80ff-be0f70b2be61"
+                    }
+                  ],
+                  "output": "3dcdefba-65b1-4e9d-bc68-2ad234ce6bee"
+                }
+              },
+              {
+                "instanceId": "1129f203-c30f-4ce4-8d6b-8645528dc42d",
+                "entityName": "StringTemplateDesign",
+                "constantText": "\u0027s dashboard"
+              }
+            ]
           }
         }
       ],
       "parameters": [
-        "b6bff068-73c9-4b88-9854-2e33a4e7256a"
+        "45c246b7-1d90-4e07-9557-c2c7b51f6dee"
       ]
     },
     {
-      "instanceId": "e152e74c-08a8-4d0e-a427-71b2fb8fe261",
+      "instanceId": "10fd23c4-8b9c-4ef8-8c60-fcf3f95bfeea",
       "entityName": "FlowDesign",
       "isCustomized": true,
       "name": "select dashboard",
@@ -1148,163 +1268,163 @@
   ],
   "fragmentTypes": [
     {
-      "instanceId": "db6ec436-80e5-4baf-a8c4-87561cfd625e",
+      "instanceId": "6e5c2d6b-3ac3-4de4-8191-d4c3f1241f38",
       "entityName": "FragmentTypeDesign",
       "name": "Page",
       "fragmentFilters": []
     },
     {
-      "instanceId": "087b1c7a-4f18-41c4-81a1-a612b36e53bb",
+      "instanceId": "811a9715-1a4f-41a0-afec-f846dab62280",
       "entityName": "FragmentTypeDesign",
       "name": "Paragraph",
       "fragmentFilters": []
     },
     {
-      "instanceId": "d4a753de-96e1-420c-93ac-18c171f5b3f7",
+      "instanceId": "5c3873fb-65aa-4e39-ba5b-2541232ed266",
       "entityName": "FragmentTypeDesign",
       "name": "Heading1",
       "fragmentFilters": []
     },
     {
-      "instanceId": "ad8f17cb-f299-4e41-9e6c-ddcc47b22f4d",
+      "instanceId": "bd7a2ec1-d931-4308-a966-e5e845483b6a",
       "entityName": "FragmentTypeDesign",
       "name": "Heading2",
       "fragmentFilters": []
     },
     {
-      "instanceId": "d6c82d38-9754-4042-a3e4-77a9d2bb9051",
+      "instanceId": "413aab74-e373-4b75-b9a3-c54e9f366498",
       "entityName": "FragmentTypeDesign",
       "name": "Heading3",
       "fragmentFilters": []
     },
     {
-      "instanceId": "c4f5e794-73f9-47da-b1ff-2d210b627734",
+      "instanceId": "142a367c-0ddc-49d8-950e-17957d2106e7",
       "entityName": "FragmentTypeDesign",
       "name": "Heading4",
       "fragmentFilters": []
     },
     {
-      "instanceId": "cc0ec274-9c1e-4d5f-8cbe-3e9e2ec11b7e",
+      "instanceId": "e6e317d8-e5d9-440e-b749-71031dd75677",
       "entityName": "FragmentTypeDesign",
       "name": "Icon",
       "fragmentFilters": []
     },
     {
-      "instanceId": "39afeb50-865a-4aa5-a964-9fcebfa1ed16",
+      "instanceId": "a768a979-d08c-4934-b469-c238d1f8f01f",
       "entityName": "FragmentTypeDesign",
       "name": "Input",
       "fragmentFilters": [],
       "hasAttribute": true
     },
     {
-      "instanceId": "6e939191-7d24-4b7c-9c2d-db2ca5078d30",
+      "instanceId": "871a5b0b-d6ab-4dd7-8aa8-03610142adaa",
       "entityName": "FragmentTypeDesign",
       "name": "Table",
       "fragmentFilters": []
     },
     {
-      "instanceId": "d581f325-dcc0-4237-93d9-1bb8ead33a8f",
+      "instanceId": "79d4526b-09a2-4ae1-85a4-babed7115c2d",
       "entityName": "FragmentTypeDesign",
       "name": "Row",
       "fragmentFilters": []
     },
     {
-      "instanceId": "9c8259db-383e-48af-9d0b-7f38b089431a",
+      "instanceId": "b305b31d-0142-45fa-a7ea-5ed2fc4fba5a",
       "entityName": "FragmentTypeDesign",
       "name": "Column",
       "fragmentFilters": []
     },
     {
-      "instanceId": "9a3d98d5-c3d5-4b58-942d-edc9abd1e290",
+      "instanceId": "1d916233-1d00-47cf-8b4e-94bc9ee6be64",
       "entityName": "FragmentTypeDesign",
       "name": "Cell",
       "fragmentFilters": []
     },
     {
-      "instanceId": "0614084d-c4b8-42f1-aefa-82e46d51600f",
+      "instanceId": "4701b19f-743a-4bc6-81c8-4325c63d139e",
       "entityName": "FragmentTypeDesign",
       "name": "Link",
       "fragmentFilters": [],
       "hasEvent": true
     },
     {
-      "instanceId": "de738c0b-8f81-454a-b669-2c0d855e5f3a",
+      "instanceId": "b0ccc92d-f22e-45af-b73c-95cde2ebd97e",
       "entityName": "FragmentTypeDesign",
       "name": "Button",
       "fragmentFilters": [],
       "hasEvent": true
     }
   ],
-  "mainFlow": "8f056327-d8c2-46b7-854b-49a110e2bf7e",
+  "mainFlow": "52cdfef1-75c5-4317-bf35-05de910b53ce",
   "sharedElements": [
     {
-      "instanceId": "c642f658-57b8-4625-b0a5-afed9a0298ad",
+      "instanceId": "75a09c5b-8e12-4ff5-85ee-88d1372c4919",
       "entityName": "SharedElementDefinitionDesign",
       "name": "IssueRow",
       "fragment": {
-        "instanceId": "3e300c5b-05ef-44b3-a8d2-bb474b3d1064",
+        "instanceId": "b68cef23-b075-4c44-8786-ae9d071241db",
         "entityName": "FragmentTemplateDesign",
         "fragmentFilters": [],
         "fragmentTypeName": "Row",
         "styleNames": [],
         "properties": [
           {
-            "instanceId": "43f033ef-5e33-43d0-9995-545bd10cc26f",
+            "instanceId": "7873a347-471c-4d4d-923d-713d5d836b32",
             "entityName": "PropertyDesign",
             "propertyName": "cells",
             "children": [
               {
-                "instanceId": "84637dd1-7372-435a-9424-d0eecd915e5b",
+                "instanceId": "0de2e928-4c51-4154-95f6-96f910c57994",
                 "entityName": "FragmentTemplateDesign",
                 "fragmentFilters": [],
                 "fragmentTypeName": "Link",
                 "styleNames": [],
-                "event": "fedd36a1-a29b-4ee2-9656-8e3c897489af",
+                "event": "79402a09-9169-45b1-8167-dec71564cdb7",
                 "properties": [
                   {
-                    "instanceId": "5ae626ff-2d12-4cc1-a267-7aa3127d7434",
+                    "instanceId": "8d73f009-41c6-4dab-936d-ab07607e8054",
                     "entityName": "PropertyDesign",
                     "propertyName": "content",
                     "children": [
                       {
-                        "instanceId": "fdffab5c-a4e8-42d4-952e-733e7ccadb14",
+                        "instanceId": "f5fda65c-a9d4-4a60-856c-c61e85a53ba6",
                         "entityName": "FragmentTemplateDesign",
                         "fragmentFilters": [],
                         "fragmentTypeName": "Cell",
                         "styleNames": [],
                         "properties": [
                           {
-                            "instanceId": "9f838536-2a1a-4884-85e0-b3c7963d37af",
+                            "instanceId": "c0eac85a-0563-4a24-bf45-71493fd9a189",
                             "entityName": "PropertyDesign",
                             "propertyName": "text",
                             "children": [],
                             "text": {
-                              "instanceId": "6cd71ff1-4bde-4dd4-aa52-c6571dab6443",
+                              "instanceId": "5e9ab997-b8b3-4c17-9b90-e20d649beacf",
                               "entityName": "TextTemplateDesign",
                               "untranslated": [
                                 {
-                                  "instanceId": "256c7fc2-1f1e-43cc-90fd-36d0d14e30e0",
+                                  "instanceId": "870b4e63-0421-4a9b-82a1-e982dc4fedb8",
                                   "entityName": "StringTemplateDesign",
                                   "deduction": {
-                                    "instanceId": "d95f1d5d-5f66-421c-97b2-62ea89962f10",
+                                    "instanceId": "9bdd33c6-8e58-468f-adaa-32b3cdeadba0",
                                     "entityName": "DeductionSchemeDesign",
                                     "deductions": [
                                       {
-                                        "instanceId": "012a424d-e89d-42d7-b17a-6315a9d10f9a",
+                                        "instanceId": "030e10fe-b5da-48c7-927e-aa13d138d227",
                                         "entityName": "SelectedInstanceDeductionDesign",
                                         "inputs": [],
-                                        "ofEntity": "460e0a41-0f79-4f40-87fd-ac290baf12dc"
+                                        "ofEntity": "2ed90baf-5de7-4a01-bae3-62c91371cb84"
                                       },
                                       {
-                                        "instanceId": "b9fed4db-7155-4d40-a8d9-d89ae0a4a691",
+                                        "instanceId": "87233655-4dd6-4fa1-9035-fb4bcf543bb9",
                                         "entityName": "AttributeDeductionDesign",
                                         "inputs": [
-                                          "012a424d-e89d-42d7-b17a-6315a9d10f9a"
+                                          "030e10fe-b5da-48c7-927e-aa13d138d227"
                                         ],
-                                        "attribute": "16e77aff-8a0a-4583-a96f-a5cc5012cfb7"
+                                        "attribute": "4f496617-92ef-43b1-a714-f9cbc06bbef5"
                                       }
                                     ],
-                                    "output": "b9fed4db-7155-4d40-a8d9-d89ae0a4a691"
+                                    "output": "87233655-4dd6-4fa1-9035-fb4bcf543bb9"
                                   }
                                 }
                               ]
@@ -1313,44 +1433,44 @@
                         ]
                       },
                       {
-                        "instanceId": "4649e1ad-c2db-408e-8356-474e05d03992",
+                        "instanceId": "6ee559f6-a995-4870-9c1e-a7e4e3a273e5",
                         "entityName": "FragmentTemplateDesign",
                         "fragmentFilters": [],
                         "fragmentTypeName": "Cell",
                         "styleNames": [],
                         "properties": [
                           {
-                            "instanceId": "522895f0-881c-42a5-87eb-b2039d18dd4f",
+                            "instanceId": "314b8be3-3375-4607-9ab3-93ca9bba6263",
                             "entityName": "PropertyDesign",
                             "propertyName": "text",
                             "children": [],
                             "text": {
-                              "instanceId": "f18dc182-98b1-48f5-9ca6-d158c17d8091",
+                              "instanceId": "6e666370-2215-4b4b-aac6-90f4fe19d26a",
                               "entityName": "TextTemplateDesign",
                               "untranslated": [
                                 {
-                                  "instanceId": "bd8d95f5-4d90-40a4-b833-4363cc536772",
+                                  "instanceId": "7466834c-f507-496f-91d0-78777fa17f91",
                                   "entityName": "StringTemplateDesign",
                                   "deduction": {
-                                    "instanceId": "6f682653-8fb6-43bd-8244-1ebaf98a54a4",
+                                    "instanceId": "7fd3c822-155a-40a4-9a96-78f1da2da267",
                                     "entityName": "DeductionSchemeDesign",
                                     "deductions": [
                                       {
-                                        "instanceId": "8bc0cc9e-4fbe-49d1-a3f9-00afc48b55f9",
+                                        "instanceId": "6a86f73b-06b4-4f0d-82d6-15329b10ea36",
                                         "entityName": "SelectedInstanceDeductionDesign",
                                         "inputs": [],
-                                        "ofEntity": "460e0a41-0f79-4f40-87fd-ac290baf12dc"
+                                        "ofEntity": "2ed90baf-5de7-4a01-bae3-62c91371cb84"
                                       },
                                       {
-                                        "instanceId": "6244d64d-2fd5-492b-bc8b-14e53ad50c23",
+                                        "instanceId": "dedeec8a-4855-401a-b294-cfa1c4f92156",
                                         "entityName": "AttributeDeductionDesign",
                                         "inputs": [
-                                          "8bc0cc9e-4fbe-49d1-a3f9-00afc48b55f9"
+                                          "6a86f73b-06b4-4f0d-82d6-15329b10ea36"
                                         ],
-                                        "attribute": "1767b4a3-46b1-447b-aba6-950d74736868"
+                                        "attribute": "4e21e726-a346-4c6b-b11d-1790cbb49ab7"
                                       }
                                     ],
-                                    "output": "6244d64d-2fd5-492b-bc8b-14e53ad50c23"
+                                    "output": "dedeec8a-4855-401a-b294-cfa1c4f92156"
                                   }
                                 }
                               ]
@@ -1359,45 +1479,69 @@
                         ]
                       },
                       {
-                        "instanceId": "3b4a119a-3b80-4bd8-b4d8-dc4b63f082d4",
+                        "instanceId": "4e9321ce-ff20-4d18-99bf-a626431a37de",
                         "entityName": "FragmentTemplateDesign",
                         "fragmentFilters": [],
                         "fragmentTypeName": "Cell",
                         "styleNames": [],
                         "properties": [
                           {
-                            "instanceId": "e22066c7-fde4-4e61-adbf-0f0f9de5750e",
+                            "instanceId": "360064f3-7752-453e-8a2e-b1fcc0509e64",
                             "entityName": "PropertyDesign",
                             "propertyName": "text",
                             "children": [],
                             "text": {
-                              "instanceId": "a8e10546-c891-439b-9082-001c637bed28",
+                              "instanceId": "993b5244-0b53-4e73-8059-f6bf680b50a9",
                               "entityName": "TextTemplateDesign",
                               "untranslated": [
                                 {
-                                  "instanceId": "4de45bda-1a76-486c-ab06-5c1ba8159c0f",
+                                  "instanceId": "ea102afc-6cb1-4bde-bee8-82f72b08006c",
                                   "entityName": "StringTemplateDesign",
                                   "deduction": {
-                                    "instanceId": "2a34da8d-d1d4-4e14-9bd2-4af103a1cdab",
+                                    "instanceId": "4f325a53-9f15-47ff-950e-5593646a48fa",
                                     "entityName": "DeductionSchemeDesign",
                                     "deductions": [
                                       {
-                                        "instanceId": "0da35a77-cf57-4561-a42f-c80121062680",
+                                        "instanceId": "0955589c-09f7-402b-a04d-acdf26c74664",
                                         "entityName": "CustomDeductionDesign",
                                         "implementationClassName": "org.instantlogic.example.izzy.deduction.IssuePreviewDeduction",
                                         "inputs": [],
                                         "customDataType": {
-                                          "instanceId": "eb4abc2e-6573-4630-b8f0-f3bf6a04cfaf",
+                                          "instanceId": "1f157de6-e18c-48ba-8a7d-39a92382b3e9",
                                           "entityName": "DataTypeDesign",
                                           "javaClassName": "java.lang.String"
                                         }
                                       }
                                     ],
-                                    "output": "0da35a77-cf57-4561-a42f-c80121062680"
+                                    "output": "0955589c-09f7-402b-a04d-acdf26c74664"
                                   }
                                 }
                               ]
                             }
+                          }
+                        ]
+                      },
+                      {
+                        "instanceId": "8fd5d61b-bc1f-494a-b79d-b0f8f9e65446",
+                        "entityName": "FragmentTemplateDesign",
+                        "fragmentFilters": [],
+                        "fragmentTypeName": "Cell",
+                        "styleNames": [],
+                        "properties": [
+                          {
+                            "instanceId": "fe7b10c7-efbd-4842-91a6-693be2cc6d50",
+                            "entityName": "PropertyDesign",
+                            "propertyName": "content",
+                            "children": [
+                              {
+                                "instanceId": "41d9f29d-62a6-4d48-8a04-6ddf24c4d9f2",
+                                "entityName": "FragmentTemplateDesign",
+                                "fragmentFilters": [],
+                                "fragmentTypeName": "PresenceIndicator",
+                                "styleNames": [],
+                                "properties": []
+                              }
+                            ]
                           }
                         ]
                       }
@@ -1411,5 +1555,5 @@
       }
     }
   ],
-  "startEvent": "ba633c53-1566-4594-99f7-597f4975515f"
+  "startEvent": "d6354e77-61e6-452f-8ef0-f27e4902625a"
 }

@@ -26,9 +26,9 @@ public class PlaceEntity extends org.instantlogic.fabric.model.Entity<org.instan
 	
 	// Attributes
 	
-	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.engine.presence.Place, java.lang.String, java.lang.String> description 
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.engine.presence.Place, java.lang.String, java.lang.String> title 
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.engine.presence.Place, java.lang.String, java.lang.String>(
-			"description", INSTANCE, java.lang.String.class
+			"title", INSTANCE, java.lang.String.class
 		) {
 			{
 				dataType.put("category", "text");
@@ -36,7 +36,7 @@ public class PlaceEntity extends org.instantlogic.fabric.model.Entity<org.instan
 	
 			@Override
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.engine.presence.Place, java.lang.String> get(org.instantlogic.engine.presence.Place instance) {
-				return instance.getDescriptionAttributeValue();
+				return instance.getTitleAttributeValue();
 			}
 		};
 	
@@ -95,7 +95,7 @@ public class PlaceEntity extends org.instantlogic.fabric.model.Entity<org.instan
 		};
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
-		description,
+		title,
 		url,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
