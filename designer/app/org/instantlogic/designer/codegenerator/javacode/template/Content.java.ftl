@@ -2,7 +2,7 @@
 <#macro content_macro content depth>
   <#list 1..depth as i>    </#list><#t>
   <#if content.category=="Shared">
-    ${rootPackageName}.sharedpagefragment.${content.name}PageFragment.INSTANCE
+    new org.instantlogic.interaction.page.SharedElementHolder("${content.id}", ${rootPackageName}.sharedpagefragment.${content.name}PageFragment.INSTANCE)
   <#elseif content.category=="Selection">
     new org.instantlogic.interaction.page.SelectionElement(createDeduction${content.deductionIndex}()<#lt>
         <#list content.children as child>

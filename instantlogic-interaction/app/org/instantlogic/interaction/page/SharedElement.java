@@ -12,7 +12,7 @@ import org.instantlogic.interaction.util.RenderContext;
 public class SharedElement extends Element {
 
 	private Element delegate;
-	
+
 	protected void setElement(Element delegate) {
 		this.delegate = delegate;
 	}

@@ -136,13 +136,12 @@ public class FragmentTemplate extends Element {
 	@Override
 	public void render(RenderContext context, List<Map<String, Object>> appendTo) {
 		initFilters();
-		String id = context.enterScope(this);
+		String id = context.makeId(this);
 		FilterChain chain = new FilterChain(id);
 		Map<String, Object> rendering = chain.render(context); // Chain ends with a call to doRender
 		if (rendering!=null) {
 			appendTo.add(rendering);
 		}
-		context.exitScope();
 	}
 	
 	protected Map<String, Object> doRender(RenderContext context, String id) {
@@ -171,10 +170,9 @@ public class FragmentTemplate extends Element {
 	@Override
 	public FlowEventOccurrence submit(SubmitContext submitContext) {
 		initFilters();
-		String id = submitContext.enterScope(this);
+		String id = submitContext.makeId(this);
 		FilterChain chain = new FilterChain(id);
 		FlowEventOccurrence result = chain.submit(submitContext); // Chain ends with a call to doSubmit
-		submitContext.exitScope();
 		return result;
 	}
 	
@@ -198,10 +196,9 @@ public class FragmentTemplate extends Element {
 	@Override
 	public void change(ChangeContext changeContext) {
 		initFilters();
-		String id = changeContext.enterScope(this);
+		String id = changeContext.makeId(this);
 		FilterChain chain = new FilterChain(id);
 		chain.change(changeContext); // Chain ends with a call to doSubmit
-		changeContext.exitScope();
 	}
 	
 	public void doChange(ChangeContext changeContext, String id) {

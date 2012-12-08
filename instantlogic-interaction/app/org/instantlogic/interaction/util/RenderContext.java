@@ -7,6 +7,7 @@ import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.util.AbstractDeductionContext;
 import org.instantlogic.interaction.flow.Flow;
 import org.instantlogic.interaction.page.FragmentTemplate;
+import org.instantlogic.interaction.page.SharedElementHolder;
 
 
 public class RenderContext extends AbstractDeductionContext {
@@ -31,32 +32,36 @@ public class RenderContext extends AbstractDeductionContext {
 		return flowContext.getCaseInstance();
 	}
 	
-	private String makeId(FragmentTemplate fragmentTemplate) {
+	public String makeId(FragmentTemplate fragmentTemplate) {
 		String suffix = fragmentTemplate.getId();
+		return makeId(suffix);
+	}
+	
+	private String makeId(String suffix) {
 		if (prefixes.size()==0) return suffix;
 		StringBuilder sb = new StringBuilder();
 		sb.append(prefixes.get(prefixes.size()-1));
-		sb.append('-');
+		sb.append('+');
 		sb.append(suffix);
 		return sb.toString();
 	}
-	
+
 	private String makeId(Instance forInstance) {
 		String suffix = forInstance.getMetadata().getUniqueId();
-		if (prefixes.size()==0) return suffix;
+		if (prefixes.size()==0) return "!"+suffix;
 		StringBuilder sb = new StringBuilder();
 		sb.append(prefixes.get(prefixes.size()-1));
 		sb.append('!');
 		sb.append(suffix);
 		return sb.toString();
 	}
-	
-	public String enterScope(FragmentTemplate fragmentTemplate) {
-		String id = makeId(fragmentTemplate);
+
+	public String enterScope(SharedElementHolder sharedElementHolder) {
+		String id = makeId(sharedElementHolder.getId());
 		prefixes.add(id);
 		return id;
 	}
-
+	
 	public String enterScope(Instance forInstance) {
 		String id = makeId(forInstance);
 		prefixes.add(id);

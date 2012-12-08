@@ -269,6 +269,36 @@ YUI.add('instantlogic-fragments', function (Y) {
             }
     	}
     });
+
+    ns.PresenceIndicator = createFragment({
+    	createMarkup: function() {
+    		return html.div({className: 'presence-indicator'});
+    	},
+    	postInit: function(model) {
+    		if (!this.engine.communicator) Y.error('No communicator registered from which to obtain presence indicator information');
+    		this.lastInstanceId = model.id.substr(model.id.lastIndexOf('!')+1);
+    		this.lastInstanceId = this.lastInstanceId.substr(0, this.lastInstanceId.indexOf('+'));
+    		this.updateImages();
+    		var me = this;
+    		this.onTravelersUpdate = function() {
+    			me.updateImages();
+    		}
+    		this.engine.communicator.subscribe(this.onTravelersUpdate);
+    	},
+    	overrides: {
+    		updateImages: function() {
+    			this.markup.get('children').remove();
+    			var usernames = this.engine.communicator.findTravelersInPlace(this.lastInstanceId);
+    			for (var i=0; i<usernames.length;i++) {
+    				var username = usernames[i];
+    				this.markup.appendChild(html.img({src:'/avatar/'+username+'.jpg', width:'20', height:'20', style:'width:20px;height:20px;'}));
+    			}
+    		},
+    		destroy: function() {
+    			this.engine.communicator.unsubscribe(this.onTravelersUpdate);
+    		}
+    	}
+    });
     
     // Table
     ns.Table = function (parentNode, parentFragment, engine) {

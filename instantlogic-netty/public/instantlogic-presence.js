@@ -70,25 +70,6 @@ YUI.add('instantlogic-presence', function (Y) {
     	}
     });
     
-    // ShowCommunicatorButton
-    ns.ShowCommunicatorButton = function(parentNode, parentFragment, engine) {
-    	ns.ShowCommunicatorButton.superclass.constructor.apply(this, arguments);
-    };
-    
-    Y.extend(ns.ShowCommunicatorButton, Y.instantlogic.Fragment, {
-    	init: function(model) {
-    		ns.ShowCommunicatorButton.superclass.init.call(this, model);
-    		var markup = html.span({className: 'show-communicator-button'},
-    			this.button = html.button({className:'btn'},'Communicator')
-    		)
-    		this.parentNode.appendChild(markup);
-    		this.button.on('click', this.onClick, this);
-    	},
-    	onClick: function() {
-    		this.engine.enqueueMessage({message: 'presence', command: 'setCommunicatorVisible', value:true});
-    	}
-    });
-    
     // Communicator
     ns.Communicator = Y.instantlogic.createFragment({
     	createMarkup: function() {
@@ -102,9 +83,40 @@ YUI.add('instantlogic-presence', function (Y) {
     	fragmentLists: function(model) {
     		return [[this.usersDiv, model.users]];
     	},
+    	postInit: function(model) {
+    		this.engine.communicator = this;
+    	},
+    	postUpdate: function(newModel, diff) {
+    		for (var i=0;i<this.subscribers.length;i++) {
+    			this.subscribers[i]();
+    		}
+    	},
     	overrides: {
+    		subscribers : [],
         	onHideClick: function() {
-        		this.engine.enqueueMessage({message: 'presence', command: 'setCommunicatorVisible', value:false});
+        	},
+        	findTravelersInPlace: function(instanceId) { // returns list of usernames who are visiting a place which contains the instanceId
+        		var result = [];
+        		var placeUrlSubstring = '/'+instanceId+'/';
+        		for (var i=0;i<this.model.users.length;i++) {
+        			var user = this.model.users[i];
+        			for (var ii=0;ii<user.travelers.length;ii++) {
+        				var traveler = user.travelers[ii];
+        				if (traveler.placeUrl.indexOf(placeUrlSubstring)>=0) {
+        					result.push(user.username);
+        				}
+        			}
+        		}
+        		return result;
+        	},
+        	subscribe: function(callback) {
+        		this.subscribers.push(callback);
+        	},
+        	unsubscribe: function(callback) {
+        		this.subscribers.splice(subscribers.indexOf(callback),1);
+        	},
+        	destroy: function() {
+        		this.engine.communicator = null;
         	}
     	}
     });
@@ -113,11 +125,15 @@ YUI.add('instantlogic-presence', function (Y) {
     ns.User = Y.instantlogic.createFragment({ 
     	createMarkup: function() {
     		return html.div({className:'user'},
-    			this.usernameDiv = html.div()
+    			this.usernameDiv = html.div({className:'username'}),
+    			this.travelersDiv = html.div({className: 'travelers'})
     		);
     	},
     	texts: function(model) {
     		return [[this.usernameDiv, model.username]];
+    	},
+    	fragmentLists: function(model) {
+    		return [[this.travelersDiv, model.travelers]];
     	}
     });
 
@@ -125,12 +141,21 @@ YUI.add('instantlogic-presence', function (Y) {
     ns.Traveler = Y.instantlogic.createFragment({
     	createMarkup: function(model) {
     		return html.div({className:'traveler'},
-    			this.travelernameDiv = html.div()
+    			this.link = html.a({href:'#'})
     		)
     	},
     	texts: function(model) {
-    		return [[this.travelernameDiv, model.placeUrl]];
+    		return [[this.link, model.placeTitle]];
+    	},
+    	postInit: function(model) {
+    		this.link.set('href', '#location='+model.placeUrl);
+    	},
+    	postUpdate: function(newModel, diff) {
+    		if (this.oldModel.placeUrl!=newModel.placeUrl) {
+    			this.link.set('href', '#location='+newModel.placeUrl);
+    		}
     	}
+    	
     });
     
     // Avatar

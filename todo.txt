@@ -64,8 +64,9 @@ in the instantlogic application. I am going to do that using byte-code generatio
 in progress, but the results are promising.
 
 -- TODOS --
+v Presence indicator in table row
+- Communicator vernieuwen
 - editor verbeteren (attribuut selecteren dus)
-- Presence indicator in table row
 - Edit werkend
 - Insert below werkend
 - Preview iets beter

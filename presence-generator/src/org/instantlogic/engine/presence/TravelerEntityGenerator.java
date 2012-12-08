@@ -18,7 +18,6 @@ public class TravelerEntityGenerator extends EntityDesign {
     
     // Attributes
     public static final AttributeDesign id = addAttribute(ENTITY, "id", DataCategoryDesign.text);
-    public static final AttributeDesign communicatorVisible = addAttribute(ENTITY, "communicatorVisible", DataCategoryDesign._boolean);
     public static final AttributeDesign debugVisible = addAttribute(ENTITY, "debugVisible", DataCategoryDesign._boolean);
     public static final AttributeDesign focus = addAttribute(ENTITY, "focus", DataCategoryDesign.text);
 
@@ -31,7 +30,6 @@ public class TravelerEntityGenerator extends EntityDesign {
     
     @Override
     public void init() {
-    	communicatorVisible.setDefault(new DeductionSchemeDesign().deduceConstant(Boolean.class, false).getScheme());
     	debugVisible.setQuestion(createConstantText("debug"));
     }
 }
