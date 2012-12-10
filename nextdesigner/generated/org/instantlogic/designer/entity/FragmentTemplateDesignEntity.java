@@ -36,6 +36,26 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 	}
 
 
+	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.fabric.value.Multi<org.instantlogic.designer.AttributeDesign>> createDeduction1() {
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.FragmentTemplateDesign> d0 
+		  		= org.instantlogic.fabric.deduction.SelectedInstanceDeduction.create(org.instantlogic.designer.entity.FragmentTemplateDesignEntity.INSTANCE);
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.EntityDesign> d1 
+		  		= org.instantlogic.fabric.deduction.AttributeDeduction.create(org.instantlogic.designer.entity.FragmentTemplateDesignEntity.entity, d0);
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.fabric.value.Multi<org.instantlogic.designer.AttributeDesign>> d2 
+		  		= org.instantlogic.fabric.deduction.AttributeDeduction.create(org.instantlogic.designer.entity.EntityDesignEntity.attributes, d1);
+		return d2;
+	}
+
+
+	private static org.instantlogic.fabric.deduction.Deduction<org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EntityDesign>> createDeduction2() {
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.designer.ApplicationDesign> d0 
+		  		= org.instantlogic.fabric.deduction.SelectedInstanceDeduction.create(org.instantlogic.designer.entity.ApplicationDesignEntity.INSTANCE);
+		  	org.instantlogic.fabric.deduction.Deduction<org.instantlogic.fabric.value.Multi<org.instantlogic.designer.EntityDesign>> d1 
+		  		= org.instantlogic.fabric.deduction.AttributeDeduction.create(org.instantlogic.designer.entity.ApplicationDesignEntity.entities, d0);
+		return d1;
+	}
+
+
 	
 	// Attributes
 	
@@ -99,6 +119,15 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 					org.instantlogic.designer.FragmentTemplateDesign instance) {
 				return instance.getAttributeRelationValue();
 			}
+			
+			private org.instantlogic.fabric.deduction.Deduction<? extends java.lang.Iterable<org.instantlogic.designer.AttributeDesign>> options;
+			@Override
+			public org.instantlogic.fabric.deduction.Deduction<? extends java.lang.Iterable<org.instantlogic.designer.AttributeDesign>> getOptions() {
+				if (options==null) {
+					options = (org.instantlogic.fabric.deduction.Deduction)createDeduction1();
+				}
+				return options;
+			};
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> entity
@@ -112,6 +141,15 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 					org.instantlogic.designer.FragmentTemplateDesign instance) {
 				return instance.getEntityRelationValue();
 			}
+			
+			private org.instantlogic.fabric.deduction.Deduction<? extends java.lang.Iterable<org.instantlogic.designer.EntityDesign>> options;
+			@Override
+			public org.instantlogic.fabric.deduction.Deduction<? extends java.lang.Iterable<org.instantlogic.designer.EntityDesign>> getOptions() {
+				if (options==null) {
+					options = (org.instantlogic.fabric.deduction.Deduction)createDeduction2();
+				}
+				return options;
+			};
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.designer.EventDesign, org.instantlogic.designer.EventDesign> event

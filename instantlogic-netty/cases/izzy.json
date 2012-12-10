@@ -1,5 +1,5 @@
 {
-  "instanceId": "c7e2e1b6-f904-4b82-9abd-8b45f02d6ea5",
+  "instanceId": "3dad768d-bf2e-47bb-8b4e-aef83a15ceaa",
   "entityName": "ApplicationDesign",
   "version": 0,
   "name": "izzy",
@@ -33,7 +33,7 @@
               {
                 "instanceId": "31a62c31-cad8-4086-a7cf-b5edfbc2c469",
                 "entityName": "ConstantDeductionDesign",
-                "value": 0,
+                "value": "0",
                 "inputs": [],
                 "constantDataType": {
                   "instanceId": "d199c140-e9fe-417e-8e0d-5de0f28804de",
@@ -638,12 +638,13 @@
                   {
                     "instanceId": "4ad65f01-627c-4521-a96d-dea1cc5d6e4d",
                     "entityName": "FragmentTemplateDesign",
+                    "editorOpen": true,
                     "fragmentFilters": [],
                     "fragmentTypeName": "Input",
                     "styleNames": [
                       "answer-span8"
                     ],
-                    "attribute": "4e21e726-a346-4c6b-b11d-1790cbb49ab7",
+                    "attribute": "4f496617-92ef-43b1-a714-f9cbc06bbef5",
                     "entity": "2ed90baf-5de7-4a01-bae3-62c91371cb84",
                     "properties": [],
                     "type": "a768a979-d08c-4934-b469-c238d1f8f01f"

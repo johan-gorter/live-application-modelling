@@ -27,6 +27,20 @@ public class FragmentTypeDesignEntity extends org.instantlogic.fabric.model.Enti
 
 	// Deductions
 
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> createDeduction0() {
+		  	org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> d0 
+		  		= org.instantlogic.fabric.deduction.ConstantDeduction.create(false);
+		return d0;
+	}
+
+
+	private static org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> createDeduction1() {
+		  	org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> d0 
+		  		= org.instantlogic.fabric.deduction.ConstantDeduction.create(false);
+		return d0;
+	}
+
+
 	
 	// Attributes
 	
@@ -60,6 +74,15 @@ public class FragmentTypeDesignEntity extends org.instantlogic.fabric.model.Enti
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.FragmentTypeDesign, java.lang.Boolean> get(org.instantlogic.designer.FragmentTypeDesign instance) {
 				return instance.getHasAttributeAttributeValue();
 			}
+
+            private org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> defaultDeduction;
+            @Override
+            public org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> getDefault() {
+                if (defaultDeduction==null) {
+                    defaultDeduction = createDeduction0();
+                }
+                return defaultDeduction;
+            }
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.FragmentTypeDesign, java.lang.Boolean, java.lang.Boolean> hasEvent 
@@ -74,6 +97,15 @@ public class FragmentTypeDesignEntity extends org.instantlogic.fabric.model.Enti
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.FragmentTypeDesign, java.lang.Boolean> get(org.instantlogic.designer.FragmentTypeDesign instance) {
 				return instance.getHasEventAttributeValue();
 			}
+
+            private org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> defaultDeduction;
+            @Override
+            public org.instantlogic.fabric.deduction.Deduction<java.lang.Boolean> getDefault() {
+                if (defaultDeduction==null) {
+                    defaultDeduction = createDeduction1();
+                }
+                return defaultDeduction;
+            }
 		};
 	
 	// Relations

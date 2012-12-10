@@ -5,6 +5,7 @@ import org.instantlogic.designer.DesignerApplicationGenerator;
 import org.instantlogic.designer.ElementDesignEntityGenerator;
 import org.instantlogic.designer.FragmentTemplateDesign;
 import org.instantlogic.designer.FragmentTemplateDesignEntityGenerator;
+import org.instantlogic.designer.FragmentTypeDesignEntityGenerator;
 import org.instantlogic.designer.IfElseDesign;
 import org.instantlogic.designer.PropertyDesignEntityGenerator;
 import org.instantlogic.designer.SelectionDesign;
@@ -12,6 +13,7 @@ import org.instantlogic.designer.SharedElementDefinitionDesign;
 import org.instantlogic.designer.SharedElementDesign;
 import org.instantlogic.designer.StringTemplateDesign;
 import org.instantlogic.designer.TextTemplateDesign;
+import org.instantlogic.designer.event.AddAttributeEventGenerator;
 import org.instantlogic.designer.event.CloseEditorEventGenerator;
 import org.instantlogic.designer.event.OpenEditorEventGenerator;
 
@@ -26,10 +28,10 @@ public class ElementEditorSharedElementGenerator extends SharedElementDefinition
 	
 	@Override
 	public void init() {
-		DeductionSchemeDesign fragmentType, propertyName, editorOpen1, editorOpen2, previewMode;
+		DeductionSchemeDesign fragmentType, propertyName, editorOpen1, editorOpen2, hasAttribute, previewMode, entityHasValue;
 		SelectionDesign asFragmentTemplate, selectProperties, selectPropertyChildren;
-		FragmentTemplateDesign fragmentTypeInput;
-		FragmentTemplateDesign openEditorButton, closeEditorButton;
+		FragmentTemplateDesign fragmentTypeInput, entityInput, attributeInput;
+		FragmentTemplateDesign openEditorButton, closeEditorButton, newAttributeButton;
 		SharedElementDesign recursiveElementEditor;
 		
 		setFragment(
@@ -42,7 +44,23 @@ public class ElementEditorSharedElementGenerator extends SharedElementDefinition
 								.addToIfChildren(
 									new FragmentTemplateDesign("Block").addToStyleNames("editor")
 										.setChildren("content", 
-											fragmentTypeInput = new FragmentTemplateDesign("Input")
+											fragmentTypeInput = new FragmentTemplateDesign("Input"),
+											new IfElseDesign()
+												.setCondition(hasAttribute = new DeductionSchemeDesign())
+												.addToIfChildren(new FragmentTemplateDesign("Block")
+													.setChildren("content",
+														entityInput = new FragmentTemplateDesign("Input"),
+														new IfElseDesign()
+															.setCondition(entityHasValue = new DeductionSchemeDesign())
+															.addToIfChildren(new FragmentTemplateDesign("Block")
+																.setChildren("content",
+																	attributeInput = new FragmentTemplateDesign("Input"),
+																	newAttributeButton = new FragmentTemplateDesign("Button")
+																		.setText("text", createConstantText("New attribute"))
+																)
+															)
+													)
+												)
 										)
 								)
 						)
@@ -89,7 +107,14 @@ public class ElementEditorSharedElementGenerator extends SharedElementDefinition
 		editorOpen1.deduceAttribute(ElementDesignEntityGenerator.editorOpen);
 		editorOpen2.deduceAttribute(ElementDesignEntityGenerator.editorOpen);
 		previewMode.deduceAttribute(ElementDesignEntityGenerator.previewMode);
+
 		fragmentTypeInput.setEntity(FragmentTemplateDesignEntityGenerator.ENTITY).setAttribute(FragmentTemplateDesignEntityGenerator.type);
+		hasAttribute.deduceAttribute(FragmentTypeDesignEntityGenerator.hasAttribute, hasAttribute.deduceRelation(FragmentTemplateDesignEntityGenerator.type));
+		entityInput.setEntity(FragmentTemplateDesignEntityGenerator.ENTITY).setAttribute(FragmentTemplateDesignEntityGenerator.entity);
+		entityHasValue.deduceHasValue(entityHasValue.deduceAttribute(FragmentTemplateDesignEntityGenerator.entity));
+		attributeInput.setEntity(FragmentTemplateDesignEntityGenerator.ENTITY).setAttribute(FragmentTemplateDesignEntityGenerator.attribute);
+		newAttributeButton.setEvent(AddAttributeEventGenerator.EVENT);
+		
 		closeEditorButton.setEvent(CloseEditorEventGenerator.EVENT);
 		openEditorButton.setEvent(OpenEditorEventGenerator.EVENT);
 		
