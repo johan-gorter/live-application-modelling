@@ -31,5 +31,7 @@ public class FragmentTemplateDesignEntityGenerator extends EntityDesign {
     	styleNames.getDataType().setMultivalue(true);
     	fragmentFilters.getDataType().setMultivalue(true);
     	type.newOptions().deduceRelation(ApplicationDesignEntityGenerator.fragmentTypes);
+    	entity.newOptions().deduceRelation(ApplicationDesignEntityGenerator.entities);
+    	attribute.newOptions().deduceRelation(EntityDesignEntityGenerator.attributes, attribute.getOptions().deduceRelation(entity)); //TODO: Union relations
     }
 }

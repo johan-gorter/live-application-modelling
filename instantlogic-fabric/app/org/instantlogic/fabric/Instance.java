@@ -89,12 +89,16 @@ public abstract class Instance {
 			name="("+name+")";
 		}
 		StringBuilder instanceId = new StringBuilder();
-		getMetadata().getInstanceId(instanceId);
+		getMetadata().getUniqueId();
 		return getInstanceEntity().toString()+"#"+instanceId+name;
 	}
 	
 	public String renderTitle(AbstractDeductionContext context) {
-		TextTemplate title = getMetadata().getEntity().getTitle();
+		Entity<?> entity = getMetadata().getEntity();
+		while (entity.getTitle()==null && entity.extendsEntity()!=null) {
+			entity = entity.extendsEntity();
+		}
+		TextTemplate title = entity.getTitle();
 		if (title==null) return null;
 		try {
 			context.pushSelectedInstance(this);

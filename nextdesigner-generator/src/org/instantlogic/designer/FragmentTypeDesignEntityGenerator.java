@@ -22,5 +22,7 @@ public class FragmentTypeDesignEntityGenerator extends EntityDesign {
     @Override
     public void init() {
     	fragmentFilters.getDataType().setMultivalue(true);
+    	hasAttribute.newDefault().deduceConstant(Boolean.class, false);
+    	hasEvent.newDefault().deduceConstant(Boolean.class, false);
     }
 }
