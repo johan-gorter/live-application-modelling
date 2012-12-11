@@ -37,7 +37,6 @@ public class PlaceTemplateDetailsPlaceGenerator extends PlaceTemplateDesign {
 		placeName.deduceAttribute(DesignEntityGenerator.name);
 		
 		setContent(new FragmentTemplateDesign("Page")
-			.addToStyleNames("margin").addToStyleNames("designer")
 			.setChildren("mainContent", 
 				new SelectionDesign()
 					.setSelection(flow = new DeductionSchemeDesign())

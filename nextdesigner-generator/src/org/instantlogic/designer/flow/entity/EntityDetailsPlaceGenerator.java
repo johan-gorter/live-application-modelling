@@ -37,7 +37,6 @@ public class EntityDetailsPlaceGenerator extends PlaceTemplateDesign {
 		entityName.deduceCustom(CapitalizeFirstDeduction.class, String.class, entityName.deduceAttribute(DesignEntityGenerator.name));
 		
 		setContent(new FragmentTemplateDesign("Page")
-			.addToStyleNames("margin").addToStyleNames("designer")
 			.setChildren("mainContent", 
 				
 				applicationContext = new SharedElementDesign(),	

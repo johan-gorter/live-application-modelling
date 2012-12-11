@@ -11,6 +11,7 @@ public abstract class AbstractNewAttributeForFragmentTemplateFlow extends org.in
 	};
 	
 	private static final org.instantlogic.fabric.model.Entity[] PARAMETERS = new org.instantlogic.fabric.model.Entity[]{
+		org.instantlogic.designer.entity.FragmentTemplateDesignEntity.INSTANCE,
 	};
 	
 	@Override

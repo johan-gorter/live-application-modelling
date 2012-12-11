@@ -5,6 +5,7 @@ import java.io.File;
 import org.instantlogic.designer.ApplicationDesign;
 import org.instantlogic.designer.codegenerator.generator.GeneratedClassModels;
 import org.instantlogic.designer.codegenerator.javacode.ApplicationJavacodeGenerator;
+import org.instantlogic.designer.event.HomeEventGenerator;
 import org.instantlogic.designer.flow.MainFlowGenerator;
 
 
@@ -29,6 +30,9 @@ public class DesignerApplicationGenerator extends ApplicationDesign {
         setSourcePath("../nextdesigner/generated");
         setCaseEntity(ApplicationDesignEntityGenerator.ENTITY);
         setMainFlow(MainFlowGenerator.FLOW);
+        setStartEvent(HomeEventGenerator.EVENT);
+        addToThemeNames("margin");
+        addToThemeNames("designer");
 
         init();
         

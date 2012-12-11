@@ -22,7 +22,6 @@ public class EntityFlowGenerator extends FlowDesign {
 	public void init() {
 		addToParameters(EntityDesignEntityGenerator.ENTITY);
 
-		SubFlowDesign attributeSubFlow = addSubFlow(AttributeFlowGenerator.FLOW);
 		SubFlowDesign addAttributeSubFlow = addSubFlow(AddAttributeFlowGenerator.FLOW);
 
 		addToNodes(EntityDetailsPlaceGenerator.PLACE);
@@ -34,10 +33,6 @@ public class EntityFlowGenerator extends FlowDesign {
 		newEdge()
 			.setEvent(AddAttributeEventGenerator.EVENT)
 			.setEndNode(addAttributeSubFlow);
-		
-		newEdge()
-			.setEvent(AttributeDetailsEventGenerator.EVENT)
-			.setEndNode(attributeSubFlow);
 		
 		super.init();
 	}

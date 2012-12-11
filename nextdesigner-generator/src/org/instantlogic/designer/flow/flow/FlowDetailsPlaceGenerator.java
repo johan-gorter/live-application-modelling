@@ -36,7 +36,6 @@ public class FlowDetailsPlaceGenerator extends PlaceTemplateDesign {
 		flowName.deduceCustom(CapitalizeFirstDeduction.class, String.class, flowName.deduceAttribute(DesignEntityGenerator.name));
 		
 		setContent(new FragmentTemplateDesign("Page")
-			.addToStyleNames("margin").addToStyleNames("designer")
 			.setChildren("mainContent", 
 				
 				applicationContext = new SharedElementDesign(),	

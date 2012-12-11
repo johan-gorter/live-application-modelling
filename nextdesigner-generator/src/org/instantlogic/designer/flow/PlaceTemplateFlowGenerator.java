@@ -6,6 +6,7 @@ import org.instantlogic.designer.PlaceTemplateDesignEntityGenerator;
 import org.instantlogic.designer.SubFlowDesign;
 import org.instantlogic.designer.event.AddAttributeEventGenerator;
 import org.instantlogic.designer.event.CloseEditorEventGenerator;
+import org.instantlogic.designer.event.NewAttributeForFragmentTemplateEventGenerator;
 import org.instantlogic.designer.event.OpenEditorEventGenerator;
 import org.instantlogic.designer.event.PlaceTemplateDetailsEventGenerator;
 import org.instantlogic.designer.flow.placetemplate.PlaceTemplateDetailsPlaceGenerator;
@@ -52,7 +53,7 @@ public class PlaceTemplateFlowGenerator extends FlowDesign {
 
 		newEdge()
 			.setStartNode(PlaceTemplateDetailsPlaceGenerator.PLACE)
-			.setEvent(AddAttributeEventGenerator.EVENT)
+			.setEvent(NewAttributeForFragmentTemplateEventGenerator.EVENT)
 			.setEndNode(newAttributeSubFlow);
 		
 		super.init();

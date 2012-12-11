@@ -73,11 +73,17 @@ YUI.add('instantlogic-presence', function (Y) {
     // Communicator
     ns.Communicator = Y.instantlogic.createFragment({
     	createMarkup: function() {
-    		var markup = html.div({className:'communicator'},
-    			this.hideButton = html.button({className:'btn'},'Hide communicator'),
-    			this.usersDiv = html.div()
-    		)
+    		var markup = html.span(
+    			html.div({className:'communicator-space'}),
+    			this.communicatorDiv = html.div({className:'communicator'},
+	    			this.showButton = html.button({className:'btn'},'Show communicator'),
+	    			this.hideButton = html.button({className:'btn'},'Hide communicator'),
+	    			this.usersDiv = html.div()
+	    		)
+	    	);
+    		this.showButton.on('click', this.onShowClick, this);
     		this.hideButton.on('click', this.onHideClick, this);
+    		this.hideButton.hide();
             return markup;
     	},
     	fragmentLists: function(model) {
@@ -94,6 +100,14 @@ YUI.add('instantlogic-presence', function (Y) {
     	overrides: {
     		subscribers : [],
         	onHideClick: function() {
+        		this.communicatorDiv.setStyle('height', '40px');
+        		this.hideButton.hide();
+        		this.showButton.show();
+        	},
+        	onShowClick: function() {
+        		this.communicatorDiv.setStyle('height', '100%');
+        		this.showButton.hide();
+        		this.hideButton.show();
         	},
         	findTravelersInPlace: function(instanceId) { // returns list of usernames who are visiting a place which contains the instanceId
         		var result = [];
