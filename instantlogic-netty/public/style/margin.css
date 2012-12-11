@@ -5,7 +5,7 @@
 
 /* Global rules */
 .margin .error {color:red;}
-.animate-vertically {display:block;overflow-y:hidden;overflow:visible;position:relative;}
+.animate-vertically {display:block;overflow:hidden;position:relative;margin-left:-180px;padding-left:180px;}
 
 /* Fragments */
 .divtable-column-header {font-weight: bold;color:white;background-color:#444444}

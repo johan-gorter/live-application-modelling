@@ -39,7 +39,7 @@ public class PlaceTemplateFlow extends org.instantlogic.interaction.flow.Flow {
 		),
 		new org.instantlogic.interaction.flow.FlowEdge(
 			org.instantlogic.designer.flow.placetemplate.PlaceTemplateDetailsPlaceTemplate.INSTANCE, 
-			org.instantlogic.designer.event.AddAttributeEvent.INSTANCE,
+			org.instantlogic.designer.event.NewAttributeForFragmentTemplateEvent.INSTANCE,
 			org.instantlogic.designer.flow.placetemplate.NewAttributeForFragmentTemplateSubFlow.INSTANCE
 		),
 	};

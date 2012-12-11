@@ -11,7 +11,8 @@ body { padding-top: 20px; padding-bottom: 10px; }
 .navbar-fixed-top .me .username {white-space: nowrap; margin:0 10px 0 0;}
 .show-communicator-button {}
 .debug-visible {display:inline-block;margin:0 10px;}
-.communicator {position:fixed; top:0px; right:0px;width:200px;height:100%; background-color:#2E2E2E; color: #FFFFFF;}
+.communicator-space {width:200px;display:inline-block;}
+.communicator {position:fixed; top:0px; right:0px;width:200px;height:40px; background-color:#2E2E2E; color: #FFFFFF;overflow:hidden;}
 
 .floating-avatar {position:absolute; left:600px; background-color:#222222;z-index:11}
 .floating-pointer {position:absolute; left:600px; width:60px; height:54px; background-color:#222222; z-index:10}

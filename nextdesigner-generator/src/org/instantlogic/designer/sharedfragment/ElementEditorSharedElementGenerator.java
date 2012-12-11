@@ -15,6 +15,7 @@ import org.instantlogic.designer.StringTemplateDesign;
 import org.instantlogic.designer.TextTemplateDesign;
 import org.instantlogic.designer.event.AddAttributeEventGenerator;
 import org.instantlogic.designer.event.CloseEditorEventGenerator;
+import org.instantlogic.designer.event.NewAttributeForFragmentTemplateEventGenerator;
 import org.instantlogic.designer.event.OpenEditorEventGenerator;
 
 public class ElementEditorSharedElementGenerator extends SharedElementDefinitionDesign {
@@ -77,7 +78,7 @@ public class ElementEditorSharedElementGenerator extends SharedElementDefinition
 									),
 								new FragmentTemplateDesign("Block").addToStyleNames("info")
 									.setChildren("content", 
-										new FragmentTemplateDesign("Paragraph").setText("text", new TextTemplateDesign()
+										new FragmentTemplateDesign("Heading5").setText("text", new TextTemplateDesign()
 											.addToUntranslated(new StringTemplateDesign().setDeduction(fragmentType = new DeductionSchemeDesign())))
 									),
 								new FragmentTemplateDesign("Preview")
@@ -88,11 +89,11 @@ public class ElementEditorSharedElementGenerator extends SharedElementDefinition
 						)
 						.addToChildren(
 							selectProperties = new SelectionDesign()
-								.addToChildren(
-									new FragmentTemplateDesign("Paragraph").setText("text", new TextTemplateDesign()
-										.addToUntranslated(new StringTemplateDesign().setDeduction(propertyName = new DeductionSchemeDesign()))
-									)
-								)
+//								.addToChildren(
+//									new FragmentTemplateDesign("Paragraph").setText("text", new TextTemplateDesign()
+//										.addToUntranslated(new StringTemplateDesign().setDeduction(propertyName = new DeductionSchemeDesign()))
+//									)
+//								)
 								.addToChildren(
 									selectPropertyChildren = new SelectionDesign()
 										.addToChildren(recursiveElementEditor = new SharedElementDesign())
@@ -113,14 +114,14 @@ public class ElementEditorSharedElementGenerator extends SharedElementDefinition
 		entityInput.setEntity(FragmentTemplateDesignEntityGenerator.ENTITY).setAttribute(FragmentTemplateDesignEntityGenerator.entity);
 		entityHasValue.deduceHasValue(entityHasValue.deduceAttribute(FragmentTemplateDesignEntityGenerator.entity));
 		attributeInput.setEntity(FragmentTemplateDesignEntityGenerator.ENTITY).setAttribute(FragmentTemplateDesignEntityGenerator.attribute);
-		newAttributeButton.setEvent(AddAttributeEventGenerator.EVENT);
+		newAttributeButton.setEvent(NewAttributeForFragmentTemplateEventGenerator.EVENT);
 		
 		closeEditorButton.setEvent(CloseEditorEventGenerator.EVENT);
 		openEditorButton.setEvent(OpenEditorEventGenerator.EVENT);
 		
 		fragmentType.deduceAttribute(FragmentTemplateDesignEntityGenerator.fragmentTypeName);
 		selectProperties.newSelection().deduceAttribute(FragmentTemplateDesignEntityGenerator.properties);
-		propertyName.deduceAttribute(PropertyDesignEntityGenerator.propertyName);
+//		propertyName.deduceAttribute(PropertyDesignEntityGenerator.propertyName);
 		selectPropertyChildren.newSelection().deduceRelation(PropertyDesignEntityGenerator.children);
 		
 		recursiveElementEditor.setDefinition(DEFINITION);

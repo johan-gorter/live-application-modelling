@@ -10,14 +10,25 @@ public class MainFlow extends org.instantlogic.interaction.flow.Flow {
 		org.instantlogic.designer.flow.main.AddEntitySubFlow.INSTANCE,
 		org.instantlogic.designer.flow.main.FlowNodeSubFlow.INSTANCE,
 		org.instantlogic.designer.flow.main.PlaceTemplateSubFlow.INSTANCE,
+		org.instantlogic.designer.flow.main.AttributeSubFlow.INSTANCE,
 		org.instantlogic.designer.flow.main.WelcomePlaceTemplate.INSTANCE,
 	};
 	
 	private static final org.instantlogic.interaction.flow.FlowEdge[] EDGES = new org.instantlogic.interaction.flow.FlowEdge[]{
 		new org.instantlogic.interaction.flow.FlowEdge(
 			null, 
+			org.instantlogic.designer.event.HomeEvent.INSTANCE,
+			org.instantlogic.designer.flow.main.WelcomePlaceTemplate.INSTANCE
+		),
+		new org.instantlogic.interaction.flow.FlowEdge(
+			null, 
 			org.instantlogic.designer.event.EntityDetailsEvent.INSTANCE,
 			org.instantlogic.designer.flow.main.EntitySubFlow.INSTANCE
+		),
+		new org.instantlogic.interaction.flow.FlowEdge(
+			null, 
+			org.instantlogic.designer.event.AttributeDetailsEvent.INSTANCE,
+			org.instantlogic.designer.flow.main.AttributeSubFlow.INSTANCE
 		),
 		new org.instantlogic.interaction.flow.FlowEdge(
 			null, 
@@ -28,11 +39,6 @@ public class MainFlow extends org.instantlogic.interaction.flow.Flow {
 			null, 
 			org.instantlogic.designer.event.AddEntityEvent.INSTANCE,
 			org.instantlogic.designer.flow.main.AddEntitySubFlow.INSTANCE
-		),
-		new org.instantlogic.interaction.flow.FlowEdge(
-			null, 
-			org.instantlogic.designer.event.HomeEvent.INSTANCE,
-			org.instantlogic.designer.flow.main.WelcomePlaceTemplate.INSTANCE
 		),
 		new org.instantlogic.interaction.flow.FlowEdge(
 			null, 

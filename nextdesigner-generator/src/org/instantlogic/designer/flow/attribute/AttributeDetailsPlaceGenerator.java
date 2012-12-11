@@ -4,6 +4,7 @@ import org.instantlogic.designer.AttributeDesignEntityGenerator;
 import org.instantlogic.designer.DataTypeDesignEntityGenerator;
 import org.instantlogic.designer.DeductionSchemeDesign;
 import org.instantlogic.designer.DesignEntityGenerator;
+import org.instantlogic.designer.EntityDesignEntityGenerator;
 import org.instantlogic.designer.FragmentTemplateDesign;
 import org.instantlogic.designer.PlaceTemplateDesign;
 import org.instantlogic.designer.SelectionDesign;
@@ -22,7 +23,7 @@ public class AttributeDetailsPlaceGenerator extends PlaceTemplateDesign {
 	
 	@Override
 	public void init() {
-		DeductionSchemeDesign attributeName;
+		DeductionSchemeDesign attributeName, entity;
 		FragmentTemplateDesign nameInput, categoryInput, multilineInput, formattedInput,
 			percentageInput, exactRoundingInput, wholeNumberInput,
 			hasRelevanceInput, hasRuleInput, writeableInput, hasDefaultInput;
@@ -37,10 +38,11 @@ public class AttributeDetailsPlaceGenerator extends PlaceTemplateDesign {
 		attributeName.deduceAttribute(DesignEntityGenerator.name);
 		
 		setContent(new FragmentTemplateDesign("Page")
-			.addToStyleNames("margin").addToStyleNames("designer")
 			.setChildren("mainContent", 
 
-				entityContext = new SharedElementDesign(),
+				new SelectionDesign()
+					.setSelection(entity = new DeductionSchemeDesign())
+					.addToChildren(entityContext = new SharedElementDesign()),
 				
 				new FragmentTemplateDesign("Block")
 					.addToStyleNames("card")
@@ -69,6 +71,7 @@ public class AttributeDetailsPlaceGenerator extends PlaceTemplateDesign {
 			)
 		);
 		
+		entity.deduceReverseRelation(EntityDesignEntityGenerator.attributes, entity.deduceSelectedInstance(AttributeDesignEntityGenerator.ENTITY));
 		entityContext.setDefinition(EntityContextSharedElementGenerator.DEFINITION);
 		attributeName.deduceAttribute(DesignEntityGenerator.name);
 		

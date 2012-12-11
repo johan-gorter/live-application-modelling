@@ -30,7 +30,6 @@ public class WelcomePlaceTemplateGenerator extends PlaceTemplateDesign {
 		setTitle(createConstantText("Welcome"));
 		
 		setContent(new FragmentTemplateDesign("Page")
-			.addToStyleNames("margin").addToStyleNames("designer")
 			.setChildren("mainContent", 
 				
 				new FragmentTemplateDesign("Block")

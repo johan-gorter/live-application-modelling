@@ -6,7 +6,7 @@ public class PlaceTemplateDetailsPlaceTemplate extends org.instantlogic.interact
 
 	@Override
 	public String getId() {
-		return "50924dc3-3810-42e2-b607-7b494453db5c";
+		return "093b0091-e738-4f7b-bbe3-6233f5914e59";
 	}
 	
 
@@ -47,28 +47,28 @@ public class PlaceTemplateDetailsPlaceTemplate extends org.instantlogic.interact
 
 	
 	private static org.instantlogic.interaction.page.FragmentTemplate CONTENT = 
-        new org.instantlogic.interaction.page.FragmentTemplate("c32edf43-b761-42aa-ba58-59e8567fd01f", "Page")      .setStyleNames(new String[]{"margin", "designer"})
+        new org.instantlogic.interaction.page.FragmentTemplate("cdbcc61a-1060-469a-873c-5d0d3bc5a6d5", "Page")      .setStyleNames(new String[]{"margin", "designer"})
       
         .putChildren("mainContent",
                 new org.instantlogic.interaction.page.SelectionElement(createDeduction0()
-,                            new org.instantlogic.interaction.page.SharedElementHolder("a338f1d8-15cc-440f-b56e-5a77492b556c", org.instantlogic.designer.sharedpagefragment.FlowContextPageFragment.INSTANCE)
+,                            new org.instantlogic.interaction.page.SharedElementHolder("37de486b-fae6-40fc-a01c-0f092693f5e9", org.instantlogic.designer.sharedpagefragment.FlowContextPageFragment.INSTANCE)
 )
 ,
-                new org.instantlogic.interaction.page.FragmentTemplate("4db25b38-39a7-4e7b-b8a1-737c8d1d912d", "Block")      .setStyleNames(new String[]{"card"})
+                new org.instantlogic.interaction.page.FragmentTemplate("d6b52a02-d4c4-4693-99ae-990c6b851f07", "Block")      .setStyleNames(new String[]{"card"})
       
                 .putChildren("content",
-                        new org.instantlogic.interaction.page.FragmentTemplate("093af5e2-30d8-4124-9b04-1d04b6fb23c2", "Heading3")      
+                        new org.instantlogic.interaction.page.FragmentTemplate("6163c841-571d-4fd1-a593-4e58bd86fb55", "Heading3")      
                         .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction1()),new org.instantlogic.fabric.text.StringTemplate(" (Place template)")))
 ,
-                        new org.instantlogic.interaction.page.FragmentTemplate("7fd982b0-af46-4f7f-bda5-7b7fffd39126", "Input")      .setField(org.instantlogic.designer.entity.DesignEntity.INSTANCE, org.instantlogic.designer.entity.DesignEntity.name)
+                        new org.instantlogic.interaction.page.FragmentTemplate("3a89fa3d-f8da-4784-8b89-cd45b5ec98b8", "Input")      .setField(org.instantlogic.designer.entity.DesignEntity.INSTANCE, org.instantlogic.designer.entity.DesignEntity.name)
 ,
-                        new org.instantlogic.interaction.page.FragmentTemplate("75384bfc-bac7-4e9c-9c9d-4deaeabd7aed", "Heading4")      
+                        new org.instantlogic.interaction.page.FragmentTemplate("0b6f6b1a-a2e3-4d0e-86c9-33e7f6193d36", "Heading4")      
                         .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Content")))
 ,
                         new org.instantlogic.interaction.page.SelectionElement(createDeduction2()
-,                                new org.instantlogic.interaction.page.FragmentTemplate("5c67ddd0-a170-412d-8f8f-bea657a494c3", "ElementEditor")      
+,                                new org.instantlogic.interaction.page.FragmentTemplate("3524721a-62ae-49ff-af48-1fc065ea5e7c", "ElementEditor")      
                                 .putChildren("content",
-                                            new org.instantlogic.interaction.page.SharedElementHolder("28fed766-b872-4858-b307-1954d8031c8c", org.instantlogic.designer.sharedpagefragment.ElementEditorPageFragment.INSTANCE)
+                                            new org.instantlogic.interaction.page.SharedElementHolder("ee678bb6-d636-46ef-a8e6-471e4adadc22", org.instantlogic.designer.sharedpagefragment.ElementEditorPageFragment.INSTANCE)
                                 )
 )
                 )
