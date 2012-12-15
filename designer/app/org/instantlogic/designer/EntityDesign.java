@@ -68,6 +68,27 @@ public class EntityDesign extends AbstractEntityDesign {
 		return relation;
 	}
 	
+	public DeductionSchemeDesign newValidation(String uniqueId, String message, AttributeDesign... displayWith) {
+		ValidationDesign validation = new ValidationDesign();
+		validation.getMetadata().initUniqueId(uniqueId);
+		addToValidations(validation);
+		validation.setMessage(createConstantText(message));
+		for (AttributeDesign attribute : displayWith) {
+			validation.addToDisplayWith(attribute);
+		}
+		return validation.newRule();
+	}
+	
+	public ValidationDesign newValidation(String uniqueId, AttributeDesign... displayWith) {
+		ValidationDesign validation = new ValidationDesign();
+		validation.getMetadata().initUniqueId(uniqueId);
+		addToValidations(validation);
+		for (AttributeDesign attribute : displayWith) {
+			validation.addToDisplayWith(attribute);
+		}
+		return validation;
+	}
+	
 	public void registerApplication(ApplicationDesign application) {
 		if (application.getEntities().contains(this)) return;
 		application.addToEntities(this);

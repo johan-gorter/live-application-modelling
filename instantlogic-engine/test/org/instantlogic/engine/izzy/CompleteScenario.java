@@ -29,7 +29,7 @@ public class CompleteScenario {
 		CaseManager petstoreManager = designerApplicationManager.getOrCreateCase("petstore");
 		Project petstore = (Project)petstoreManager.getCase();
 
-		petstoreManager.processMessages(tim, new StartMessage());
+		petstoreManager.processMessages(tim, new StartMessage(null, null));
 		assertEquals(1, petstore.getUsers().size());
 		petstoreManager.sendUpdates();
 	}

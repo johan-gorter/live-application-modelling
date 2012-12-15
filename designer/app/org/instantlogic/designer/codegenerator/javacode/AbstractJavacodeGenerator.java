@@ -23,6 +23,7 @@ public abstract class AbstractJavacodeGenerator {
 	public static Template applicationTemplate;
 	public static Template instanceTemplate;
 	public static Template entityTemplate;
+	public static Template validationTemplate;
 
 	static {
 		freemarkerConfig = new Configuration();
@@ -37,6 +38,7 @@ public abstract class AbstractJavacodeGenerator {
 			flowTemplate = freemarkerConfig.getTemplate("Flow.java.ftl");
 			placeTemplateTemplate = freemarkerConfig.getTemplate("PlaceTemplate.java.ftl");
 			subFlowTemplate = freemarkerConfig.getTemplate("SubFlow.java.ftl");
+			validationTemplate = freemarkerConfig.getTemplate("Validation.java.ftl");
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

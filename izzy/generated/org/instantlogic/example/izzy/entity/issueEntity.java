@@ -58,6 +58,18 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.example.izzy.Issue, java.lang.String> get(org.instantlogic.example.izzy.Issue instance) {
 				return instance.getDescriptionAttributeValue();
 			}
+            
+            
+            public org.instantlogic.fabric.model.Validation[] validations;
+			@Override
+			public org.instantlogic.fabric.model.Validation[] getValidations() {
+				if (validations==null) {
+					validations = new org.instantlogic.fabric.model.Validation[] {
+						org.instantlogic.example.izzy.validation.IssueDescriptionRequiredValidation.INSTANCE,
+					};
+				}
+				return validations;
+			}
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.example.izzy.Issue, java.lang.String, java.lang.String> headline 
@@ -72,6 +84,18 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.example.izzy.Issue, java.lang.String> get(org.instantlogic.example.izzy.Issue instance) {
 				return instance.getHeadlineAttributeValue();
 			}
+            
+            
+            public org.instantlogic.fabric.model.Validation[] validations;
+			@Override
+			public org.instantlogic.fabric.model.Validation[] getValidations() {
+				if (validations==null) {
+					validations = new org.instantlogic.fabric.model.Validation[] {
+						org.instantlogic.example.izzy.validation.IssueHeadlineRequiredValidation.INSTANCE,
+					};
+				}
+				return validations;
+			}
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.example.izzy.Issue, java.lang.Integer, java.lang.Integer> number 
@@ -85,6 +109,7 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.example.izzy.Issue, java.lang.Integer> get(org.instantlogic.example.izzy.Issue instance) {
 				return instance.getNumberAttributeValue();
 			}
+            
 		};
 	
 	// Relations
@@ -185,6 +210,11 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		project,
 	};
+	private static final org.instantlogic.fabric.model.Validation[] VALIDATIONS = new org.instantlogic.fabric.model.Validation[]{
+		org.instantlogic.example.izzy.validation.IssueDescriptionRequiredValidation.INSTANCE,
+		org.instantlogic.example.izzy.validation.IssueHeadlineRequiredValidation.INSTANCE,
+	};
+	
 
 	@Override
 	public org.instantlogic.fabric.model.Attribute[] getLocalAttributes() {
@@ -199,6 +229,10 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	@Override
+	public org.instantlogic.fabric.model.Validation[] getLocalValidations() {
+		return VALIDATIONS;
 	}
 	
 	@Override

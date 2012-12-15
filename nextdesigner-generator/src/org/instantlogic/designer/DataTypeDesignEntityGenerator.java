@@ -72,6 +72,7 @@ public class DataTypeDesignEntityGenerator extends EntityDesign {
     	exactRounding.newRelevance().deduceEquals(
     			exactRounding.getRelevance().deduceAttribute(wholeNumber), 
     			exactRounding.getRelevance().deduceConstant(Boolean.class, Boolean.FALSE));
+    	
+    	newValidation("DataCategoryRequired", "Select a value", dataCategory).deduceAttributeHasValue(dataCategory).getMetadata().initUniqueId("DataCategoryRequired");
     }
-
 }

@@ -75,6 +75,7 @@ public class ElementDesignEntity extends org.instantlogic.fabric.model.Entity<or
                 }
                 return defaultDeduction;
             }
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.ElementDesign, java.lang.String, java.lang.String> previewMode 
@@ -97,6 +98,7 @@ public class ElementDesignEntity extends org.instantlogic.fabric.model.Entity<or
                 }
                 return defaultDeduction;
             }
+            
 		};
 	
 	// Relations
@@ -179,6 +181,9 @@ public class ElementDesignEntity extends org.instantlogic.fabric.model.Entity<or
 		contentOfPage,
 		partOfSharedElementDefinition,
 	};
+	private static final org.instantlogic.fabric.model.Validation[] VALIDATIONS = new org.instantlogic.fabric.model.Validation[]{
+	};
+	
 
 	@Override
 	public org.instantlogic.fabric.model.Attribute[] getLocalAttributes() {
@@ -193,6 +198,10 @@ public class ElementDesignEntity extends org.instantlogic.fabric.model.Entity<or
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	@Override
+	public org.instantlogic.fabric.model.Validation[] getLocalValidations() {
+		return VALIDATIONS;
 	}
 	
 	@Override

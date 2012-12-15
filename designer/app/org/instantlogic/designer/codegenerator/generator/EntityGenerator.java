@@ -2,14 +2,18 @@ package org.instantlogic.designer.codegenerator.generator;
 
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.instantlogic.designer.AttributeDesign;
 import org.instantlogic.designer.DataTypeDesign;
+import org.instantlogic.designer.Design;
 import org.instantlogic.designer.EntityDesign;
 import org.instantlogic.designer.RelationDesign;
 import org.instantlogic.designer.StaticInstanceDesign;
 import org.instantlogic.designer.TextTemplateDesign;
+import org.instantlogic.designer.ValidationDesign;
 import org.instantlogic.designer.codegenerator.classmodel.EntityClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.EntityClassModel.Attribute;
 import org.instantlogic.designer.codegenerator.classmodel.EntityClassModel.StaticInstance;
@@ -18,6 +22,7 @@ import org.instantlogic.fabric.util.ObservationsOutdatedObserver;
 public class EntityGenerator extends AbstractGenerator {
 
 	public EntityDesign entityDesign;
+	private Map<String, AbstractGenerator> validationGenerators = new HashMap<String, AbstractGenerator>();
 	
 	public EntityGenerator(EntityDesign entityDesign) {
 		this.entityDesign = entityDesign;
@@ -25,7 +30,10 @@ public class EntityGenerator extends AbstractGenerator {
 	
 	@Override
 	public void update(GeneratedClassModels context) {
-		if (observations!=null && !observations.isOutdated()) return;
+		if (observations != null && !observations.isOutdated()) {
+			updateAll(validationGenerators.values(), context);
+			return;
+		}
 
 		entityDesign.getMetadata().getCaseAdministration().startRecordingObservations();
 		
@@ -72,6 +80,9 @@ public class EntityGenerator extends AbstractGenerator {
 			if (attributeDesign.getDefault()!=null) {
 				attribute.defaultDeductionIndex = model.addDeductionScheme(DeductionSchemeGenerator.generate(model.rootPackageName, attributeDesign.getDefault()));
 			}
+			for (ValidationDesign validation:attributeDesign.getValidations()) {
+				attribute.validations.add(validation.getTechnicalNameCapitalized());
+			}
 			model.attributes.add(attribute);
 		}
 		for (RelationDesign relationDesign: entityDesign.getRelations()) {
@@ -96,6 +107,9 @@ public class EntityGenerator extends AbstractGenerator {
 			if (relationDesign.getOptions()!=null) {
 				relation.optionsDeductionIndex = model.addDeductionScheme(DeductionSchemeGenerator.generate(model.rootPackageName, relationDesign.getOptions()));
 			}
+			for (ValidationDesign validation:relationDesign.getValidations()) {
+				relation.validations.add(validation.getTechnicalNameCapitalized());
+			}
 			model.relations.add(relation);
 		}
 		for (RelationDesign relationDesign: entityDesign.getReverseRelations()) {
@@ -115,6 +129,9 @@ public class EntityGenerator extends AbstractGenerator {
 				model.reverseRelations.add(relation);
 			}
 		}
+		for (ValidationDesign validation: entityDesign.getValidations()) {
+			model.validations.add(validation.getTechnicalNameCapitalized());
+		}
 		sortNames(model);
 		for (StaticInstanceDesign staticInstanceDesign: entityDesign.getStaticInstances()) {
 			StaticInstance staticInstance = new StaticInstance();
@@ -123,6 +140,15 @@ public class EntityGenerator extends AbstractGenerator {
 			staticInstance.description = TextGenerator.generate(staticInstanceDesign.getDescription(), model);
 			model.staticInstances.add(staticInstance);
 		}
+		
+		List<Design> newValidations = updateGenerators(validationGenerators, entityDesign.getValidations(), context);
+		for (Design newDesign : newValidations) {
+			ValidationDesign newValidation = (ValidationDesign) newDesign;
+			ValidationGenerator validationGenerator = new ValidationGenerator(newValidation);
+			validationGenerator.update(context);
+			validationGenerators.put(newValidation.getName(), validationGenerator);
+		}
+		
 		this.observations = new ObservationsOutdatedObserver(entityDesign.getMetadata().getCaseAdministration().stopRecordingObservations(), null);
 		context.updatedEntities.add(model);
 	}
@@ -157,6 +183,7 @@ public class EntityGenerator extends AbstractGenerator {
 		Collections.sort(model.attributes);
 		Collections.sort(model.relations);
 		Collections.sort(model.reverseRelations);
+		Collections.sort(model.validations);
 	}
 
 	private EntityClassModel initModel() {

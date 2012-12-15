@@ -28,7 +28,7 @@ public class IfElseElement extends Element {
 	public void render(RenderContext context, List<Map<String, Object>> appendTo) {
 		ValueAndLevel<Boolean> valueAndLevel = condition.deduct(context);
 		if (!valueAndLevel.hasValue()) {
-			throw new RuntimeException("If clause did not yield a value"); // TODO: render an error
+			return; // Render no If nor Else elements. This may be worth reconsidering
 		}
 		Element[] elements = valueAndLevel.getValue()==Boolean.TRUE?ifElements:elseElements;
 		for (Element template: elements) {
@@ -40,7 +40,7 @@ public class IfElseElement extends Element {
 	public FlowEventOccurrence submit(SubmitContext submitContext) {
 		FlowEventOccurrence result = null;
 		ValueAndLevel<?> valueAndLevel = condition.deduct(submitContext);
-		if (!valueAndLevel.hasValue()) return null; // Depend on render() to handle this gracefully
+		if (!valueAndLevel.hasValue()) return null; 
 		Element[] elements = valueAndLevel.getValue()==Boolean.TRUE?ifElements:elseElements;
 
 		for (Element template: elements) {

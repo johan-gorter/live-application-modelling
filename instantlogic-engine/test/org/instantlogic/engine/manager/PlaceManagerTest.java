@@ -32,7 +32,7 @@ public class PlaceManagerTest {
 	public void test() {
 		ApplicationManager applicationManager = ApplicationManager.getManager("izzy");
 		CaseManager case1 = applicationManager.getOrCreateCase("project1");
-		case1.processMessages(traveler1, Collections.singletonList((Message)new StartMessage()));
+		case1.processMessages(traveler1, Collections.singletonList((Message)new StartMessage(null, null)));
 		case1.sendUpdates();
 		Assert.assertEquals(2, traveler1.getLastUpdates().size());
 		traveler1.clearLastUpdates();

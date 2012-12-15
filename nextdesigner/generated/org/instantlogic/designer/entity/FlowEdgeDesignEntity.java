@@ -95,6 +95,9 @@ public class FlowEdgeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		owner,
 	};
+	private static final org.instantlogic.fabric.model.Validation[] VALIDATIONS = new org.instantlogic.fabric.model.Validation[]{
+	};
+	
 
 	@Override
 	public org.instantlogic.fabric.model.Attribute[] getLocalAttributes() {
@@ -109,6 +112,10 @@ public class FlowEdgeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	@Override
+	public org.instantlogic.fabric.model.Validation[] getLocalValidations() {
+		return VALIDATIONS;
 	}
 	
 	@Override

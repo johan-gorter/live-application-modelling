@@ -96,6 +96,9 @@ public class SharedElementDefinitionDesignEntity extends org.instantlogic.fabric
 		application,
 		usages,
 	};
+	private static final org.instantlogic.fabric.model.Validation[] VALIDATIONS = new org.instantlogic.fabric.model.Validation[]{
+	};
+	
 
 	@Override
 	public org.instantlogic.fabric.model.Attribute[] getLocalAttributes() {
@@ -110,6 +113,10 @@ public class SharedElementDefinitionDesignEntity extends org.instantlogic.fabric
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	@Override
+	public org.instantlogic.fabric.model.Validation[] getLocalValidations() {
+		return VALIDATIONS;
 	}
 	
 	@Override

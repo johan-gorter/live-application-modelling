@@ -60,6 +60,7 @@ public class FragmentTypeDesignEntity extends org.instantlogic.fabric.model.Enti
 			public boolean isMultivalue() {
 				return true;
 			}
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.FragmentTypeDesign, java.lang.Boolean, java.lang.Boolean> hasAttribute 
@@ -83,6 +84,7 @@ public class FragmentTypeDesignEntity extends org.instantlogic.fabric.model.Enti
                 }
                 return defaultDeduction;
             }
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.FragmentTypeDesign, java.lang.Boolean, java.lang.Boolean> hasEvent 
@@ -106,6 +108,7 @@ public class FragmentTypeDesignEntity extends org.instantlogic.fabric.model.Enti
                 }
                 return defaultDeduction;
             }
+            
 		};
 	
 	// Relations
@@ -159,6 +162,9 @@ public class FragmentTypeDesignEntity extends org.instantlogic.fabric.model.Enti
 		application,
 		usages,
 	};
+	private static final org.instantlogic.fabric.model.Validation[] VALIDATIONS = new org.instantlogic.fabric.model.Validation[]{
+	};
+	
 
 	@Override
 	public org.instantlogic.fabric.model.Attribute[] getLocalAttributes() {
@@ -173,6 +179,10 @@ public class FragmentTypeDesignEntity extends org.instantlogic.fabric.model.Enti
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	@Override
+	public org.instantlogic.fabric.model.Validation[] getLocalValidations() {
+		return VALIDATIONS;
 	}
 	
 	@Override

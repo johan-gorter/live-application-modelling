@@ -37,6 +37,7 @@ public class StaticInstanceValueDesignEntity extends org.instantlogic.fabric.mod
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.StaticInstanceValueDesign, java.lang.Object> get(org.instantlogic.designer.StaticInstanceValueDesign instance) {
 				return instance.getValueAttributeValue();
 			}
+            
 		};
 	
 	// Relations
@@ -64,6 +65,9 @@ public class StaticInstanceValueDesignEntity extends org.instantlogic.fabric.mod
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 	};
+	private static final org.instantlogic.fabric.model.Validation[] VALIDATIONS = new org.instantlogic.fabric.model.Validation[]{
+	};
+	
 
 	@Override
 	public org.instantlogic.fabric.model.Attribute[] getLocalAttributes() {
@@ -78,6 +82,10 @@ public class StaticInstanceValueDesignEntity extends org.instantlogic.fabric.mod
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	@Override
+	public org.instantlogic.fabric.model.Validation[] getLocalValidations() {
+		return VALIDATIONS;
 	}
 	
 	@Override

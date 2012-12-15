@@ -92,6 +92,10 @@ public class IzzyGenerator extends Design {
 		issueReporter.newOptions().deduceRelation(projectUsers);
 		issueAssignee.newOptions().deduceRelation(projectUsers);
 		
+		// Validations
+    	issue.newValidation("HeadlineRequired","Enter a value", issueHeadline).deduceAttributeHasValue(issueHeadline);
+    	issue.newValidation("DescriptionRequired", "Enter a value", issueDescription).deduceAttributeHasValue(issueDescription);
+
 		izzy.setCaseEntity(project);
 		izzy.setName("izzy");
 		izzy.setRootPackageName("org.instantlogic.example.izzy");

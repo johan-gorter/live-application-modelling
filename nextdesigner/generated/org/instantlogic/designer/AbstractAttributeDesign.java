@@ -264,5 +264,27 @@ public abstract class AbstractAttributeDesign extends Design {
         return (AttributeDesign)this;
     }
 
+	
+	private final org.instantlogic.fabric.value.RelationValues<AttributeDesign, ValidationDesign> validations
+		= createReverseRelationValues(org.instantlogic.designer.entity.AttributeDesignEntity.validations);
+
+	public org.instantlogic.fabric.value.RelationValues<AttributeDesign, ValidationDesign> getValidationsRelationValue() {
+		return validations;
+	}
+
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.ValidationDesign> getValidations() {
+		return validations.getValue();
+	}
+
+    public AttributeDesign addToValidations(ValidationDesign item) {
+        validations.addValue(item);
+        return (AttributeDesign)this;
+    }
+
+    public AttributeDesign removeFromValidations(ValidationDesign item) {
+        validations.removeValue(item);
+        return (AttributeDesign)this;
+    }
+
 
 }

@@ -56,7 +56,7 @@ public class CaseProcessor {
 			do {
 				for (int i=processEntries.size()-1;i>=0;i--) {
 					QueueEntry entry = processEntries.get(i);
-					caseManager.processMessages(travelerProxy, entry.messages);
+					caseManager.processMessages(entry.travelerProxy, entry.messages);
 				}
 				processEntries.clear();
 				synchronized (queueLock) {

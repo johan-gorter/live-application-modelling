@@ -157,6 +157,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
                 }
                 return relevance;
             }
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.DataTypeDesign, java.lang.Boolean, java.lang.Boolean> formatted 
@@ -180,6 +181,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
                 }
                 return relevance;
             }
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.DataTypeDesign, java.lang.String, java.lang.String> javaClassName 
@@ -203,6 +205,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
                 }
                 return defaultDeduction;
             }
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.DataTypeDesign, java.lang.Boolean, java.lang.Boolean> multiLine 
@@ -226,6 +229,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
                 }
                 return relevance;
             }
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.DataTypeDesign, java.lang.Boolean, java.lang.Boolean> multivalue 
@@ -258,6 +262,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
                 }
                 return defaultDeduction;
             }
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.DataTypeDesign, java.lang.Boolean, java.lang.Boolean> percentage 
@@ -281,6 +286,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
                 }
                 return relevance;
             }
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.DataTypeDesign, java.lang.Boolean, java.lang.Boolean> wholeNumber 
@@ -313,6 +319,7 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
                 }
                 return defaultDeduction;
             }
+            
 		};
 	
 	// Relations
@@ -346,6 +353,17 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 				}
 				return options;
 			};
+            
+            public org.instantlogic.fabric.model.Validation[] validations;
+			@Override
+			public org.instantlogic.fabric.model.Validation[] getValidations() {
+				if (validations==null) {
+					validations = new org.instantlogic.fabric.model.Validation[] {
+						org.instantlogic.designer.validation.DataTypeDesignDataCategoryRequiredValidation.INSTANCE,
+					};
+				}
+				return validations;
+			}
 		};
 	
 	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.DataTypeDesign, org.instantlogic.designer.EntityDesign, org.instantlogic.designer.EntityDesign> entity
@@ -476,6 +494,10 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 		forEntity,
 		reverseRelation,
 	};
+	private static final org.instantlogic.fabric.model.Validation[] VALIDATIONS = new org.instantlogic.fabric.model.Validation[]{
+		org.instantlogic.designer.validation.DataTypeDesignDataCategoryRequiredValidation.INSTANCE,
+	};
+	
 
 	@Override
 	public org.instantlogic.fabric.model.Attribute[] getLocalAttributes() {
@@ -490,6 +512,10 @@ public class DataTypeDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	@Override
+	public org.instantlogic.fabric.model.Validation[] getLocalValidations() {
+		return VALIDATIONS;
 	}
 	
 	@Override

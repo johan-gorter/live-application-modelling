@@ -9,6 +9,7 @@ import org.instantlogic.designer.codegenerator.classmodel.FlowClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.PlaceClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.SharedPageFragmentClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.SubFlowClassModel;
+import org.instantlogic.designer.codegenerator.classmodel.ValidationClassModel;
 import org.instantlogic.designer.codegenerator.generator.GeneratedClassModels;
 
 public class ApplicationJavacodeGenerator extends AbstractJavacodeGenerator {
@@ -24,6 +25,7 @@ public class ApplicationJavacodeGenerator extends AbstractJavacodeGenerator {
 			new File(applicationRoot, "entity").mkdirs();
 			new File(applicationRoot, "event").mkdirs();
 			new File(applicationRoot, "flow").mkdirs();
+			new File(applicationRoot, "validation").mkdirs();
 			new File(applicationRoot, "sharedpagefragment").mkdirs();
 			
 			generateFile(AbstractJavacodeGenerator.applicationTemplate, context.updatedApplication, null, "Application", applicationRoot);
@@ -76,6 +78,12 @@ public class ApplicationJavacodeGenerator extends AbstractJavacodeGenerator {
 		}
 		for (SubFlowClassModel subFlow:context.deletedSubFlows) {
 			deleteFile("flow/"+subFlow.flowname.toLowerCase(), subFlow, "SubFlow", applicationRoot);
+		}
+		for (ValidationClassModel Validation:context.updatedValidations) {
+			generateFile(AbstractJavacodeGenerator.validationTemplate, Validation, "validation", "Validation", applicationRoot);
+		}
+		for (ValidationClassModel Validation:context.deletedValidations) {
+			deleteFile("validation", Validation, "Validation", applicationRoot);
 		}
 	}
 }

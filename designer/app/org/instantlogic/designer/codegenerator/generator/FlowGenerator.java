@@ -47,8 +47,7 @@ public class FlowGenerator extends AbstractGenerator {
 			FlowClassModel.FlowNode node = new FlowClassModel.FlowNode();
 			node.name = nodeDesign.getTechnicalNameCapitalized();
 			node.type = nodeDesign.getMetadata().getEntity().getName();
-			node.type = node.type.substring(0, node.type.length() - 6); // remove
-																		// Design
+			node.type = node.type.substring(0, node.type.length() - 6); // remove Design
 			model.nodes.add(node);
 		}
 		for (FlowEdgeDesign edgeDesign : flowDesign.getEdges()) {
@@ -57,8 +56,7 @@ public class FlowGenerator extends AbstractGenerator {
 				edge.startNode = edgePoint(edgeDesign.getStartNode());
 			}
 			if (edgeDesign.getEvent() != null) {
-				edge.event = edgeDesign.getEvent()
-						.getTechnicalNameCapitalized();
+				edge.event = edgeDesign.getEvent().getTechnicalNameCapitalized();
 			}
 			edge.endNode = edgePoint(edgeDesign.getEndNode());
 			model.edges.add(edge);
@@ -67,20 +65,16 @@ public class FlowGenerator extends AbstractGenerator {
 			model.parameters.add(selectDesign.getTechnicalNameCapitalized());
 		}
 
-		List<Design> newPages = updateGenerators(placeTemplateGenerators,
-				getPages(flowDesign.getNodes()), context);
+		List<Design> newPages = updateGenerators(placeTemplateGenerators, getPages(flowDesign.getNodes()), context);
 		for (Design newPage : newPages) {
-			PlaceTemplateGenerator placeTemplateGenerator = new PlaceTemplateGenerator(
-					(PlaceTemplateDesign) newPage);
+			PlaceTemplateGenerator placeTemplateGenerator = new PlaceTemplateGenerator((PlaceTemplateDesign) newPage);
 			placeTemplateGenerator.update(context);
 			placeTemplateGenerators.put(newPage.getName(),
 					placeTemplateGenerator);
 		}
-		List<Design> newSubFlows = updateGenerators(subFlowGenerators,
-				getSubFlows(flowDesign.getNodes()), context);
+		List<Design> newSubFlows = updateGenerators(subFlowGenerators, getSubFlows(flowDesign.getNodes()), context);
 		for (Design newSubFlow : newSubFlows) {
-			SubFlowGenerator subFlowGenerator = new SubFlowGenerator(
-					(SubFlowDesign) newSubFlow);
+			SubFlowGenerator subFlowGenerator = new SubFlowGenerator((SubFlowDesign) newSubFlow);
 			subFlowGenerator.update(context);
 			subFlowGenerators.put(newSubFlow.getName(), subFlowGenerator);
 		}

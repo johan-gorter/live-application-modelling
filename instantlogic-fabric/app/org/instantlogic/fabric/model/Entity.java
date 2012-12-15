@@ -81,6 +81,7 @@ public abstract class Entity<I extends Instance> extends Concept {
 		return null;
 	}
 	
+	// TODO: Allow multiple inheritance (Java code generation: generate Instance classes + interfaces and implement all baseclass-interfaces instead of extending baseclass)
 	public Entity<?> extendsEntity() {
 		return null;
 	}
@@ -94,6 +95,10 @@ public abstract class Entity<I extends Instance> extends Concept {
 	public abstract Relation<I, ? extends Object, ? extends Instance>[] getLocalRelations();
 
 	public abstract Relation<? extends Instance, ? extends Object, I>[] getLocalReverseRelations();
+	
+	public Validation[] getLocalValidations() { // TODO: make abstract
+		return new Validation[0];
+	}
 
 	public abstract I createInstance();
 	
@@ -133,8 +138,17 @@ public abstract class Entity<I extends Instance> extends Concept {
 		return new BaseEntityFirstIterable(baseEntityIterator, getLocalReverseRelations());
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public final Iterable<Validation> getValidations() {
+		Entity<?> extendsEntity = extendsEntity();
+		Iterable<?> baseEntityIterator=null;
+		if (extendsEntity!=null) {
+			baseEntityIterator = (Iterable<?>)extendsEntity.getValidations();
+		}
+		return new BaseEntityFirstIterable(baseEntityIterator, getLocalValidations());
+	}
+	
 	protected I addStaticInstance(String name, I instance) {
-//		staticInstances.put(name, instance);
 		instance.getMetadata().makeStatic(name);
 		return instance;
 	}

@@ -37,6 +37,7 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.ApplicationDesign, java.lang.Boolean> get(org.instantlogic.designer.ApplicationDesign instance) {
 				return instance.getIsCustomizedAttributeValue();
 			}
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.ApplicationDesign, java.lang.String, java.lang.String> name 
@@ -50,6 +51,7 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.ApplicationDesign, java.lang.String> get(org.instantlogic.designer.ApplicationDesign instance) {
 				return instance.getNameAttributeValue();
 			}
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.ApplicationDesign, java.lang.String, java.lang.String> rootPackageName 
@@ -63,6 +65,7 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.ApplicationDesign, java.lang.String> get(org.instantlogic.designer.ApplicationDesign instance) {
 				return instance.getRootPackageNameAttributeValue();
 			}
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.ApplicationDesign, java.lang.String, java.lang.String> sourcePath 
@@ -76,6 +79,7 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.ApplicationDesign, java.lang.String> get(org.instantlogic.designer.ApplicationDesign instance) {
 				return instance.getSourcePathAttributeValue();
 			}
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.ApplicationDesign, org.instantlogic.fabric.value.Multi<java.lang.String>, java.lang.String> themeNames 
@@ -93,6 +97,7 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 			public boolean isMultivalue() {
 				return true;
 			}
+            
 		};
 	
 	// Relations
@@ -262,6 +267,9 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 	};
+	private static final org.instantlogic.fabric.model.Validation[] VALIDATIONS = new org.instantlogic.fabric.model.Validation[]{
+	};
+	
 
 	@Override
 	public org.instantlogic.fabric.model.Attribute[] getLocalAttributes() {
@@ -276,6 +284,10 @@ public class ApplicationDesignEntity extends org.instantlogic.fabric.model.Entit
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	@Override
+	public org.instantlogic.fabric.model.Validation[] getLocalValidations() {
+		return VALIDATIONS;
 	}
 	
 	@Override

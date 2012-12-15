@@ -187,6 +187,38 @@ public abstract class AbstractEntityDesign extends Design {
 		return newValue;
 	}
 
+	
+	private final org.instantlogic.fabric.value.RelationValues<EntityDesign, ValidationDesign> validations
+		= createRelationValues(org.instantlogic.designer.entity.EntityDesignEntity.validations);
+		
+	public org.instantlogic.fabric.value.RelationValues<EntityDesign, ValidationDesign> getValidationsRelationValue() {
+		return validations;
+	}
+
+	public org.instantlogic.fabric.value.Multi<org.instantlogic.designer.ValidationDesign> getValidations() {
+		return validations.getValue();
+	}
+	
+	public EntityDesign addToValidations(ValidationDesign item) {
+		validations.addValue(item);
+		return (EntityDesign)this;
+	}
+	
+	public EntityDesign addToValidations(ValidationDesign item, int index) {
+		validations.insertValue(item, index);
+		return (EntityDesign)this;
+	}
+	
+	public EntityDesign removeFromValidations(ValidationDesign item) {
+		validations.removeValue(item);
+		return (EntityDesign)this;
+	}
+	
+	public EntityDesign removeFromValidations(int index) {
+		validations.removeValue(index);
+		return (EntityDesign)this;
+	}
+	
 
 	// Reverse relations
 	

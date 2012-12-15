@@ -18,12 +18,17 @@ import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
  */
 public abstract class Attribute<I extends Instance, Value extends Object, Item extends Object> extends Concept {
 
+	private static final Validation[] NO_VALIDATIONS = new Validation[0];
 	public abstract Entity<I> getEntity();
 	
 	public abstract Class<Item> getJavaClassName();
 
 	public abstract TextTemplate getQuestion();
 
+	public Validation[] getValidations() {
+		return NO_VALIDATIONS;
+	}
+	
 	public TextTemplate getExplain() {
 		return null;
 	}

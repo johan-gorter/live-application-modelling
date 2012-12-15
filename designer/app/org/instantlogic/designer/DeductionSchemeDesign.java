@@ -86,6 +86,17 @@ public class DeductionSchemeDesign extends AbstractDeductionSchemeDesign {
 		result.addToInputs(input);
 		return result;
 	}
+
+	public DeductionDesign deduceAttributeHasValue(AttributeDesign attribute) {
+		HasValueDeductionDesign result = new HasValueDeductionDesign();
+
+		addToDeductions(result);
+		DeductionDesign attributeDeduction = deduceAttribute(attribute);
+		setOutput(result);
+		
+		result.addToInputs(attributeDeduction);
+		return result;
+	}
 	
 	public DeductionDesign deduceCastInstance(DeductionDesign input, EntityDesign to) {
 		CastInstanceDeductionDesign result = new CastInstanceDeductionDesign();

@@ -136,6 +136,9 @@ public class FlowDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 		application,
 		subFlowIn,
 	};
+	private static final org.instantlogic.fabric.model.Validation[] VALIDATIONS = new org.instantlogic.fabric.model.Validation[]{
+	};
+	
 
 	@Override
 	public org.instantlogic.fabric.model.Attribute[] getLocalAttributes() {
@@ -150,6 +153,10 @@ public class FlowDesignEntity extends org.instantlogic.fabric.model.Entity<org.i
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	@Override
+	public org.instantlogic.fabric.model.Validation[] getLocalValidations() {
+		return VALIDATIONS;
 	}
 	
 	@Override

@@ -1,6 +1,5 @@
 package org.instantlogic.designer;
 
-import org.instantlogic.designer.EntityDesign.RelationType;
 
 
 
@@ -26,6 +25,10 @@ public class EntityDesignEntityGenerator extends EntityDesign {
             .setReverseName("attributeOf");
     public static final RelationDesign relations = addRelation(ENTITY, "relations", RelationType.OneToManyAggregation, RelationDesignEntityGenerator.ENTITY)
             .setReverseName("from");
+
+    public static final RelationDesign validations = addRelation(ENTITY, "validations", RelationType.OneToManyAggregation, ValidationDesignEntityGenerator.ENTITY)
+            .setReverseName("forEntity");
+    
     public static final RelationDesign staticInstances = addRelation(ENTITY, "staticInstances", RelationType.OneToManyAggregation, StaticInstanceDesignEntityGenerator.ENTITY)
             .setReverseName("entity");
 
