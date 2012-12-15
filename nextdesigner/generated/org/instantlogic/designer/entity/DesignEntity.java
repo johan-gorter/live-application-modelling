@@ -9,6 +9,7 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 		org.instantlogic.designer.entity.EntityDesignEntity.INSTANCE,
 		org.instantlogic.designer.entity.TextTemplateDesignEntity.INSTANCE,
 		org.instantlogic.designer.entity.AttributeDesignEntity.INSTANCE,
+		org.instantlogic.designer.entity.ValidationDesignEntity.INSTANCE,
 		org.instantlogic.designer.entity.StaticInstanceDesignEntity.INSTANCE,
 		org.instantlogic.designer.entity.FlowDesignEntity.INSTANCE,
 		org.instantlogic.designer.entity.FlowNodeBaseDesignEntity.INSTANCE,
@@ -93,6 +94,7 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.Design, java.lang.Boolean> get(org.instantlogic.designer.Design instance) {
 				return instance.getIsCustomizedAttributeValue();
 			}
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.Design, java.lang.String, java.lang.String> javaIdentifier 
@@ -119,6 +121,7 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
                 }
                 return rule;
             }
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.Design, java.lang.String, java.lang.String> name 
@@ -141,6 +144,7 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
                 }
                 return defaultDeduction;
             }
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.Design, java.lang.String, java.lang.String> technicalName 
@@ -167,6 +171,7 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
                 }
                 return rule;
             }
+            
 		};
 	
 	// Relations
@@ -183,6 +188,9 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 	};
+	private static final org.instantlogic.fabric.model.Validation[] VALIDATIONS = new org.instantlogic.fabric.model.Validation[]{
+	};
+	
 
 	@Override
 	public org.instantlogic.fabric.model.Attribute[] getLocalAttributes() {
@@ -197,6 +205,10 @@ public class DesignEntity extends org.instantlogic.fabric.model.Entity<org.insta
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	@Override
+	public org.instantlogic.fabric.model.Validation[] getLocalValidations() {
+		return VALIDATIONS;
 	}
 	
 	@Override

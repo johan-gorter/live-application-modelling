@@ -41,6 +41,7 @@ public class CustomDeductionDesignEntity extends org.instantlogic.fabric.model.E
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.CustomDeductionDesign, java.lang.String> get(org.instantlogic.designer.CustomDeductionDesign instance) {
 				return instance.getImplementationClassNameAttributeValue();
 			}
+            
 		};
 	
 	// Relations
@@ -76,6 +77,9 @@ public class CustomDeductionDesignEntity extends org.instantlogic.fabric.model.E
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 	};
+	private static final org.instantlogic.fabric.model.Validation[] VALIDATIONS = new org.instantlogic.fabric.model.Validation[]{
+	};
+	
 
 	@Override
 	public org.instantlogic.fabric.model.Attribute[] getLocalAttributes() {
@@ -90,6 +94,10 @@ public class CustomDeductionDesignEntity extends org.instantlogic.fabric.model.E
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	@Override
+	public org.instantlogic.fabric.model.Validation[] getLocalValidations() {
+		return VALIDATIONS;
 	}
 	
 	@Override

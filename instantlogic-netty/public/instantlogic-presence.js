@@ -177,7 +177,10 @@ YUI.add('instantlogic-presence', function (Y) {
     	createMarkup: function() {
     		return html.span(
     			this.avatarDiv = html.div({className:'floating-avatar'}),
-    			this.pointerDiv = html.div({className:'floating-pointer'})
+    			this.pointerDiv = html.div({className:'floating-pointer'},
+        			html.div({className:'arrow-top'}),
+        			html.div({className:'arrow-bottom'})
+    			)
     		);
     	},
     	postInit: function(model) {
@@ -217,10 +220,10 @@ YUI.add('instantlogic-presence', function (Y) {
     			}
     			// TODO: change X if other avatars are also at the same Y
     			if (useAnimation) {
-    				this.avatarDiv.transition({duration:0.5, easing:'ease-out', left: (x+8)+'px', top: (y-10)+'px'});    				
+    				this.avatarDiv.transition({duration:0.5, easing:'ease-out', left: (x+2)+'px', top: (y-10)+'px'});    				
     				this.pointerDiv.transition({duration:0.5, easing:'ease-out', left: x+'px', top: (y-12)+'px'});    				
     			} else {
-					this.avatarDiv.setStyle('left',(x+8)+'px');
+					this.avatarDiv.setStyle('left',(x+2)+'px');
 					this.avatarDiv.setStyle('top', (y-10)+'px');
 					this.pointerDiv.setStyle('left',x+'px');
 					this.pointerDiv.setStyle('top',(y-12)+'px');

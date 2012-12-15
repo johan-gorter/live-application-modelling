@@ -38,6 +38,7 @@ public class CommentEntity extends org.instantlogic.fabric.model.Entity<org.inst
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.example.izzy.Comment, java.lang.String> get(org.instantlogic.example.izzy.Comment instance) {
 				return instance.getTextAttributeValue();
 			}
+            
 		};
 	
 	// Relations
@@ -82,6 +83,9 @@ public class CommentEntity extends org.instantlogic.fabric.model.Entity<org.inst
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		issue,
 	};
+	private static final org.instantlogic.fabric.model.Validation[] VALIDATIONS = new org.instantlogic.fabric.model.Validation[]{
+	};
+	
 
 	@Override
 	public org.instantlogic.fabric.model.Attribute[] getLocalAttributes() {
@@ -96,6 +100,10 @@ public class CommentEntity extends org.instantlogic.fabric.model.Entity<org.inst
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	@Override
+	public org.instantlogic.fabric.model.Validation[] getLocalValidations() {
+		return VALIDATIONS;
 	}
 	
 	@Override

@@ -3,14 +3,21 @@ package org.instantlogic.designer;
 import java.io.File;
 
 import org.instantlogic.designer.codegenerator.generator.ApplicationGenerator;
+import org.instantlogic.fabric.CaseInstanceTriggers;
 
-public class ApplicationDesign extends AbstractApplicationDesign {
+public class ApplicationDesign extends AbstractApplicationDesign implements CaseInstanceTriggers {
 	
 	private ApplicationGenerator applicationGenerator = new ApplicationGenerator(this);
 	
 	public ApplicationGenerator getApplicationGenerator() {
 		return applicationGenerator;
 	}
+	
+	@Override
+	public void afterPersist() {
+//		applicationGenerator.generateJavaCode(); //TODO: offload this work to a background thread.
+	}
+	
 	
 	/**
 	 * Registers every entity reachable from caseEntity to application.entities. Also calls init() on every entity.

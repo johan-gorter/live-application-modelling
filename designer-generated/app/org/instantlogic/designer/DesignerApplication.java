@@ -22,6 +22,11 @@ public class DesignerApplication extends org.instantlogic.interaction.Applicatio
 		return org.instantlogic.designer.event.HomeEvent.INSTANCE;
 	}
 
+    private static final String[] THEME_NAMES = new String[]{"margin", "designer"};	
+	@Override
+	public String[] getThemeNames() {
+		return THEME_NAMES;
+	}
 	
 	@Override
 	public String getName() {

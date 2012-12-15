@@ -74,6 +74,7 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 			public boolean isMultivalue() {
 				return true;
 			}
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.FragmentTemplateDesign, java.lang.String, java.lang.String> fragmentTypeName 
@@ -87,6 +88,7 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.FragmentTemplateDesign, java.lang.String> get(org.instantlogic.designer.FragmentTemplateDesign instance) {
 				return instance.getFragmentTypeNameAttributeValue();
 			}
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.FragmentTemplateDesign, org.instantlogic.fabric.value.Multi<java.lang.String>, java.lang.String> styleNames 
@@ -104,6 +106,7 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 			public boolean isMultivalue() {
 				return true;
 			}
+            
 		};
 	
 	// Relations
@@ -224,6 +227,9 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 	};
+	private static final org.instantlogic.fabric.model.Validation[] VALIDATIONS = new org.instantlogic.fabric.model.Validation[]{
+	};
+	
 
 	@Override
 	public org.instantlogic.fabric.model.Attribute[] getLocalAttributes() {
@@ -238,6 +244,10 @@ public class FragmentTemplateDesignEntity extends org.instantlogic.fabric.model.
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	@Override
+	public org.instantlogic.fabric.model.Validation[] getLocalValidations() {
+		return VALIDATIONS;
 	}
 	
 	@Override

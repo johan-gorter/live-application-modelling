@@ -41,6 +41,7 @@ public class ConstantDeductionDesignEntity extends org.instantlogic.fabric.model
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.ConstantDeductionDesign, java.lang.Object> get(org.instantlogic.designer.ConstantDeductionDesign instance) {
 				return instance.getValueAttributeValue();
 			}
+            
 		};
 	
 	// Relations
@@ -76,6 +77,9 @@ public class ConstantDeductionDesignEntity extends org.instantlogic.fabric.model
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 	};
+	private static final org.instantlogic.fabric.model.Validation[] VALIDATIONS = new org.instantlogic.fabric.model.Validation[]{
+	};
+	
 
 	@Override
 	public org.instantlogic.fabric.model.Attribute[] getLocalAttributes() {
@@ -90,6 +94,10 @@ public class ConstantDeductionDesignEntity extends org.instantlogic.fabric.model
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	@Override
+	public org.instantlogic.fabric.model.Validation[] getLocalValidations() {
+		return VALIDATIONS;
 	}
 	
 	@Override

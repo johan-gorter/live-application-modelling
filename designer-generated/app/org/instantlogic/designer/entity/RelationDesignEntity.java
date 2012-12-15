@@ -55,6 +55,7 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.RelationDesign, java.lang.Boolean> get(org.instantlogic.designer.RelationDesign instance) {
 				return instance.getAutoCreateAttributeValue();
 			}
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.RelationDesign, java.lang.Boolean, java.lang.Boolean> hasOptions 
@@ -68,6 +69,7 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.RelationDesign, java.lang.Boolean> get(org.instantlogic.designer.RelationDesign instance) {
 				return instance.getHasOptionsAttributeValue();
 			}
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.RelationDesign, java.lang.Boolean, java.lang.Boolean> owner 
@@ -81,6 +83,7 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.RelationDesign, java.lang.Boolean> get(org.instantlogic.designer.RelationDesign instance) {
 				return instance.getOwnerAttributeValue();
 			}
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.RelationDesign, java.lang.String, java.lang.String> reverseJavaIdentifier 
@@ -107,6 +110,7 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
                 }
                 return rule;
             }
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.RelationDesign, java.lang.Boolean, java.lang.Boolean> reverseMultivalue 
@@ -120,6 +124,7 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.RelationDesign, java.lang.Boolean> get(org.instantlogic.designer.RelationDesign instance) {
 				return instance.getReverseMultivalueAttributeValue();
 			}
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.RelationDesign, java.lang.String, java.lang.String> reverseName 
@@ -133,6 +138,7 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.RelationDesign, java.lang.String> get(org.instantlogic.designer.RelationDesign instance) {
 				return instance.getReverseNameAttributeValue();
 			}
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.RelationDesign, java.lang.String, java.lang.String> reverseTechnicalName 
@@ -159,6 +165,7 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
                 }
                 return rule;
             }
+            
 		};
 	
 	// Relations
@@ -249,6 +256,9 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		from,
 	};
+	private static final org.instantlogic.fabric.model.Validation[] VALIDATIONS = new org.instantlogic.fabric.model.Validation[]{
+	};
+	
 
 	@Override
 	public org.instantlogic.fabric.model.Attribute[] getLocalAttributes() {
@@ -263,6 +273,10 @@ public class RelationDesignEntity extends org.instantlogic.fabric.model.Entity<o
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	@Override
+	public org.instantlogic.fabric.model.Validation[] getLocalValidations() {
+		return VALIDATIONS;
 	}
 	
 	@Override

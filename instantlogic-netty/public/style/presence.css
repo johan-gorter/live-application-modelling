@@ -11,11 +11,14 @@ body { padding-top: 20px; padding-bottom: 10px; }
 .navbar-fixed-top .me .username {white-space: nowrap; margin:0 10px 0 0;}
 .show-communicator-button {}
 .debug-visible {display:inline-block;margin:0 10px;}
-.communicator-space {width:200px;display:inline-block;}
+.communicator-space {width:210px;display:inline-block;}
 .communicator {position:fixed; top:0px; right:0px;width:200px;height:40px; background-color:#2E2E2E; color: #FFFFFF;overflow:hidden;}
 
 .floating-avatar {position:absolute; left:600px; background-color:#222222;z-index:11}
-.floating-pointer {position:absolute; left:600px; width:60px; height:54px; background-color:#222222; z-index:10}
+.floating-pointer {position:absolute; left:600px; width:54px; height:54px; background-color:#222222; z-index:10}
+.floating-pointer .arrow-top {position:absolute;left:-10px;top:0px;border-left:solid 10px transparent;border-bottom:solid 26px #222222}
+.floating-pointer .arrow-bottom {position:absolute;left:-10px;top:26px;border-left:solid 10px transparent;border-top:solid 26px #222222}
+
 .login {position:fixed; top: 200px; width:100%; }
 .login .window {position: relative;margin: 0 auto; width: 400px; background-color: #2E2E2E; color: #FFFFFF; padding: 10px;}
 

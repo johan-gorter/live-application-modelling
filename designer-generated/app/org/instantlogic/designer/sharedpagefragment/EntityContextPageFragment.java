@@ -15,17 +15,17 @@ public class EntityContextPageFragment extends org.instantlogic.interaction.page
 
 	
 	public static final org.instantlogic.interaction.page.Element SHARED_INSTANCE = 
-        new org.instantlogic.interaction.page.FragmentTemplate("98d09e42-5787-4ce2-96b1-49dbc462d9af", "Group")      
+        new org.instantlogic.interaction.page.FragmentTemplate("9177cf64-f0a5-438d-b57a-22bfe4a3d0d5", "Group")      
         .putChildren("content",
-                    new org.instantlogic.interaction.page.SharedElementHolder("b6d619c6-fc2e-4e39-b0fb-f6569c6dadf8", org.instantlogic.designer.sharedpagefragment.ApplicationContextPageFragment.INSTANCE)
+                    new org.instantlogic.interaction.page.SharedElementHolder("52cedd3a-f336-4aa9-b9ec-f10639959e6f", org.instantlogic.designer.sharedpagefragment.ApplicationContextPageFragment.INSTANCE)
 ,
-                new org.instantlogic.interaction.page.FragmentTemplate("812e6caf-fffa-407b-98c8-1616765d8096", "Link")      .setEvent(org.instantlogic.designer.event.EntityDetailsEvent.INSTANCE)
+                new org.instantlogic.interaction.page.FragmentTemplate("ea73ae83-7512-47a5-ac5e-8be5966fed1d", "Link")      .setEvent(org.instantlogic.designer.event.EntityDetailsEvent.INSTANCE)
       
                 .putChildren("content",
-                        new org.instantlogic.interaction.page.FragmentTemplate("881319bb-f3c5-453b-b2ef-84adab489aa0", "Block")      .setStyleNames(new String[]{"inactive-card"})
+                        new org.instantlogic.interaction.page.FragmentTemplate("fcf9435d-0e9c-4bd7-96e3-4584230fdcc9", "Block")      .setStyleNames(new String[]{"inactive-card"})
       
                         .putChildren("content",
-                                new org.instantlogic.interaction.page.FragmentTemplate("0988cbd7-5b70-41fb-a538-406d350a164d", "Heading3")      
+                                new org.instantlogic.interaction.page.FragmentTemplate("26e2316d-8c8d-41c3-8c9e-60834fcfe746", "Heading3")      
                                 .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction0()),new org.instantlogic.fabric.text.StringTemplate(" (Entity)")))
                         )
                 )

@@ -78,6 +78,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.AttributeDesign, java.lang.Boolean> get(org.instantlogic.designer.AttributeDesign instance) {
 				return instance.getHasDefaultAttributeValue();
 			}
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.AttributeDesign, java.lang.Boolean, java.lang.Boolean> hasRelevance 
@@ -101,6 +102,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
                 }
                 return defaultDeduction;
             }
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.AttributeDesign, java.lang.Boolean, java.lang.Boolean> hasRule 
@@ -124,6 +126,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
                 }
                 return defaultDeduction;
             }
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.designer.AttributeDesign, java.lang.Boolean, java.lang.Boolean> writeable 
@@ -147,6 +150,7 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
                 }
                 return defaultDeduction;
             }
+            
 		};
 	
 	// Relations
@@ -300,6 +304,26 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 				return true;
 			}
 		};
+	
+	public static final org.instantlogic.fabric.model.Relation<org.instantlogic.designer.AttributeDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.ValidationDesign>, org.instantlogic.designer.ValidationDesign> validations
+		= new org.instantlogic.fabric.model.impl.SimpleRelation<org.instantlogic.designer.AttributeDesign, org.instantlogic.fabric.value.Multi<org.instantlogic.designer.ValidationDesign>, org.instantlogic.designer.ValidationDesign>(
+			"validations", INSTANCE, org.instantlogic.designer.entity.ValidationDesignEntity.INSTANCE, org.instantlogic.designer.ValidationDesign.class, org.instantlogic.designer.entity.ValidationDesignEntity.displayWith
+		) {
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyRelationValues<org.instantlogic.designer.AttributeDesign, org.instantlogic.designer.ValidationDesign> get(
+					org.instantlogic.designer.AttributeDesign instance) {
+				return instance.getValidationsRelationValue();
+			}
+	
+			public boolean isReverse() {
+				return true;
+			}
+	
+			public boolean isMultivalue() {
+				return true;
+			}
+		};
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
 		hasDefault,
@@ -318,7 +342,11 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		attributeOf,
+		validations,
 	};
+	private static final org.instantlogic.fabric.model.Validation[] VALIDATIONS = new org.instantlogic.fabric.model.Validation[]{
+	};
+	
 
 	@Override
 	public org.instantlogic.fabric.model.Attribute[] getLocalAttributes() {
@@ -333,6 +361,10 @@ public class AttributeDesignEntity extends org.instantlogic.fabric.model.Entity<
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	@Override
+	public org.instantlogic.fabric.model.Validation[] getLocalValidations() {
+		return VALIDATIONS;
 	}
 	
 	@Override

@@ -1,5 +1,5 @@
 {
-  "instanceId": "dbd7a758-ca70-4172-9734-cde08c015f7b",
+  "instanceId": "402601b4-1c14-4fee-b5f1-18636ca1a1eb",
   "entityName": "project",
   "version": 1,
   "last issue number": 5,
@@ -26,17 +26,18 @@
     {
       "instanceId": "I3",
       "entityName": "issue",
-      "description": "hlkj",
-      "headline": "New issue 123",
+      "description": "",
+      "headline": "Hello world",
       "number": 3,
-      "assignee": "U4",
-      "comments": []
+      "assignee": "bc0bae0c-081b-41f4-8ba1-10feb60b93f2",
+      "comments": [],
+      "reporter": "bc0bae0c-081b-41f4-8ba1-10feb60b93f2"
     },
     {
       "instanceId": "6f86ecaf-6e76-455b-854f-910639d16462",
       "entityName": "issue",
       "description": "We knew this was coming.",
-      "headline": "First issue with UUID",
+      "headline": "First issue with GUID",
       "number": 4,
       "comments": [],
       "reporter": "U4"
@@ -44,10 +45,9 @@
     {
       "instanceId": "be35693d-8eae-4cad-b818-4e118ea1dfc4",
       "entityName": "issue",
-      "description": "ss",
-      "headline": "New issue344455542222",
+      "description": "Description text",
+      "headline": "Newest issue",
       "number": 5,
-      "assignee": "U4",
       "comments": [],
       "reporter": "e2e8126d-b2f4-4b39-a1ee-a6d8f7fdda42"
     }

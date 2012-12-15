@@ -65,10 +65,12 @@ in progress, but the results are promising.
 
 -- TODOS --
 v Presence indicator in table row
-- Communicator vernieuwen
-- editor verbeteren (attribuut selecteren dus)
-- Edit werkend
-- Insert below werkend
+V Communicator vernieuwen
+V editor verbeteren (attribuut selecteren dus)
+V Edit werkend
+V Insert below werkend
+- Basale validaties
+- Code genereren
 - Preview iets beter
 
 

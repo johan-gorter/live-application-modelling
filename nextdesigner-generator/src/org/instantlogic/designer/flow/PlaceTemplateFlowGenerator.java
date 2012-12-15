@@ -4,8 +4,8 @@ import org.instantlogic.designer.DesignerApplicationGenerator;
 import org.instantlogic.designer.FlowDesign;
 import org.instantlogic.designer.PlaceTemplateDesignEntityGenerator;
 import org.instantlogic.designer.SubFlowDesign;
-import org.instantlogic.designer.event.AddAttributeEventGenerator;
 import org.instantlogic.designer.event.CloseEditorEventGenerator;
+import org.instantlogic.designer.event.InsertFragmentTemplateBelowEventGenerator;
 import org.instantlogic.designer.event.NewAttributeForFragmentTemplateEventGenerator;
 import org.instantlogic.designer.event.OpenEditorEventGenerator;
 import org.instantlogic.designer.event.PlaceTemplateDetailsEventGenerator;
@@ -28,6 +28,7 @@ public class PlaceTemplateFlowGenerator extends FlowDesign {
 		SubFlowDesign openEditorSubFlow = addSubFlow(OpenEditorFlowGenerator.FLOW);
 		SubFlowDesign closeEditorSubFlow = addSubFlow(CloseEditorFlowGenerator.FLOW);
 		SubFlowDesign newAttributeSubFlow = addSubFlow(NewAttributeForFragmentTemplateFlowGenerator.FLOW);
+		SubFlowDesign insertFragmentTemplateBelowSubFlow = addSubFlow(InsertFragmentTemplateBelowFlowGenerator.FLOW);
 		
 		newEdge()
 			.setEvent(PlaceTemplateDetailsEventGenerator.EVENT)
@@ -55,6 +56,15 @@ public class PlaceTemplateFlowGenerator extends FlowDesign {
 			.setStartNode(PlaceTemplateDetailsPlaceGenerator.PLACE)
 			.setEvent(NewAttributeForFragmentTemplateEventGenerator.EVENT)
 			.setEndNode(newAttributeSubFlow);
+		
+		newEdge()
+			.setStartNode(PlaceTemplateDetailsPlaceGenerator.PLACE)
+			.setEvent(InsertFragmentTemplateBelowEventGenerator.EVENT)
+			.setEndNode(insertFragmentTemplateBelowSubFlow);
+		newEdge()
+			.setStartNode(insertFragmentTemplateBelowSubFlow)
+			.setEvent(InsertFragmentTemplateBelowEventGenerator.EVENT)
+			.setEndNode(PlaceTemplateDetailsPlaceGenerator.PLACE);
 		
 		super.init();
 	}

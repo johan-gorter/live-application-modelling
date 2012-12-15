@@ -2,10 +2,13 @@ package org.instantlogic.interaction.util;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.util.AbstractDeductionContext;
 import org.instantlogic.interaction.flow.Flow;
+import org.instantlogic.interaction.flow.FlowEdge;
+import org.instantlogic.interaction.flow.FlowEvent;
 import org.instantlogic.interaction.flow.FlowNodeBase;
 
 public class FlowStack extends AbstractDeductionContext {
@@ -66,5 +69,15 @@ public class FlowStack extends AbstractDeductionContext {
 	@Override
 	public String toString() {
 		return "("+currentNode+" in "+flow+")"+(parent==null?"":"-->"+parent);
+	}
+
+	public FlowEvent findEvent(String eventName) {
+		for (FlowEdge edge : flow.getEdges()) {
+			if (edge.getEvent()!=null && edge.getEvent().getName().equals(eventName)) {
+				return edge.getEvent();
+			}
+		}
+		if (parent==null) throw new NoSuchElementException("Event not found from this flow: "+eventName);
+		return parent.findEvent(eventName);
 	}
 }

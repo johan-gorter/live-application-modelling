@@ -56,11 +56,13 @@ YUI.add('instantlogic-fragments', function (Y) {
     // Input
     ns.Input = createFragment({ 
     	createMarkup: function() {
-    		return html.form({ action: '.', className: 'form-horizontal input' },
-	        	html.div({className: 'control-group'},
-	                this.questionDiv = html.div({ className: 'control-label' }),
-	                this.answerDiv = html.div({ className: 'controls' })
-	            )
+    		return html.div({className: 'animate-vertically'},
+	    		html.form({ action: '.', className: 'form-horizontal input' },
+		        	html.div({className: 'control-group'},
+		                this.questionDiv = html.div({ className: 'control-label' }),
+		                this.answerDiv = html.div({ className: 'controls' })
+		            )
+	    		)
     		);
     	},
     	texts: function(model) {

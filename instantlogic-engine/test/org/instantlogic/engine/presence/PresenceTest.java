@@ -31,10 +31,10 @@ public class PresenceTest {
 		ApplicationManager applicationManager = ApplicationManager.getManager("izzy");
 		CaseManager case1 = applicationManager.getOrCreateCase("PetStore");
 		
-		case1.processMessages(tim, new StartMessage());
+		case1.processMessages(tim, new StartMessage(null, null));
 		case1.sendUpdates();
 		
-		case1.processMessages(bill, new StartMessage());
+		case1.processMessages(bill, new StartMessage(null, null));
 		case1.sendUpdates();
 
 		Map<String, Object> createIssueButton = 

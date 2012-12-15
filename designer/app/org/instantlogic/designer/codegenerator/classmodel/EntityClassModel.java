@@ -36,6 +36,7 @@ public class EntityClassModel extends AbstractClassModel {
 		public Integer defaultDeductionIndex;
 		public Integer optionsDeductionIndex;
 		public final Map<String, Object> dataType = new LinkedHashMap<String, Object>();
+		public final List<String> validations = new ArrayList<String>();
 		
 		public Map<String, Object> getDataType() {
 			return dataType;
@@ -85,6 +86,9 @@ public class EntityClassModel extends AbstractClassModel {
 		}
 		public Integer getOptionsDeductionIndex() {
 			return optionsDeductionIndex;
+		}
+		public List<String> getValidations() {
+			return validations;
 		}
 	}
 	
@@ -145,6 +149,7 @@ public class EntityClassModel extends AbstractClassModel {
 	public final List<Attribute> attributes = new ArrayList<Attribute>();
 	public final List<Relation> relations = new ArrayList<Relation>();
 	public final List<Relation> reverseRelations = new ArrayList<Relation>();
+	public final List<String> validations = new ArrayList<String>();
 	
 	private String internalName;
 	private String internalEntityName;
@@ -181,5 +186,8 @@ public class EntityClassModel extends AbstractClassModel {
 	}
 	public TextModel getTitle() {
 		return title;
+	}
+	public List<String> getValidations() {
+		return validations;
 	}
 }

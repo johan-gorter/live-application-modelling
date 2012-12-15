@@ -56,6 +56,7 @@ public class UserEntity extends org.instantlogic.fabric.model.Entity<org.instant
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.example.izzy.User, java.lang.String> get(org.instantlogic.example.izzy.User instance) {
 				return instance.getUsernameAttributeValue();
 			}
+            
 		};
 	
 	// Relations
@@ -145,6 +146,9 @@ public class UserEntity extends org.instantlogic.fabric.model.Entity<org.instant
 		project,
 		reportedIssues,
 	};
+	private static final org.instantlogic.fabric.model.Validation[] VALIDATIONS = new org.instantlogic.fabric.model.Validation[]{
+	};
+	
 
 	@Override
 	public org.instantlogic.fabric.model.Attribute[] getLocalAttributes() {
@@ -159,6 +163,10 @@ public class UserEntity extends org.instantlogic.fabric.model.Entity<org.instant
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	@Override
+	public org.instantlogic.fabric.model.Validation[] getLocalValidations() {
+		return VALIDATIONS;
 	}
 	
 	@Override

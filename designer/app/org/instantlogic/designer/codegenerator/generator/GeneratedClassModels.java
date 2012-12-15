@@ -10,6 +10,7 @@ import org.instantlogic.designer.codegenerator.classmodel.FlowClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.PlaceClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.SharedPageFragmentClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.SubFlowClassModel;
+import org.instantlogic.designer.codegenerator.classmodel.ValidationClassModel;
 
 public class GeneratedClassModels {
 
@@ -36,6 +37,10 @@ public class GeneratedClassModels {
 	public final List<SubFlowClassModel> updatedSubFlows = new ArrayList<SubFlowClassModel>();
 
 	public final List<SubFlowClassModel> deletedSubFlows = new ArrayList<SubFlowClassModel>();
+
+	public final List<ValidationClassModel> updatedValidations = new ArrayList<ValidationClassModel>();
+
+	public final List<ValidationClassModel> deletedValidations = new ArrayList<ValidationClassModel>();
 	
 	public ApplicationClassModel updatedApplication = null;
 	

@@ -53,6 +53,7 @@ public class ProjectEntity extends org.instantlogic.fabric.model.Entity<org.inst
                 }
                 return defaultDeduction;
             }
+            
 		};
 	
 	// Relations
@@ -110,6 +111,9 @@ public class ProjectEntity extends org.instantlogic.fabric.model.Entity<org.inst
 	};
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 	};
+	private static final org.instantlogic.fabric.model.Validation[] VALIDATIONS = new org.instantlogic.fabric.model.Validation[]{
+	};
+	
 
 	@Override
 	public org.instantlogic.fabric.model.Attribute[] getLocalAttributes() {
@@ -124,6 +128,10 @@ public class ProjectEntity extends org.instantlogic.fabric.model.Entity<org.inst
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	@Override
+	public org.instantlogic.fabric.model.Validation[] getLocalValidations() {
+		return VALIDATIONS;
 	}
 	
 	@Override

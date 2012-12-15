@@ -37,6 +37,7 @@ public class StringTemplateDesignEntity extends org.instantlogic.fabric.model.En
 			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.designer.StringTemplateDesign, java.lang.String> get(org.instantlogic.designer.StringTemplateDesign instance) {
 				return instance.getConstantTextAttributeValue();
 			}
+            
 		};
 	
 	// Relations
@@ -89,6 +90,9 @@ public class StringTemplateDesignEntity extends org.instantlogic.fabric.model.En
 	private static final org.instantlogic.fabric.model.Relation[] REVERSE_RELATIONS = new org.instantlogic.fabric.model.Relation[]{
 		untranslatedInTemplate,
 	};
+	private static final org.instantlogic.fabric.model.Validation[] VALIDATIONS = new org.instantlogic.fabric.model.Validation[]{
+	};
+	
 
 	@Override
 	public org.instantlogic.fabric.model.Attribute[] getLocalAttributes() {
@@ -103,6 +107,10 @@ public class StringTemplateDesignEntity extends org.instantlogic.fabric.model.En
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	@Override
+	public org.instantlogic.fabric.model.Validation[] getLocalValidations() {
+		return VALIDATIONS;
 	}
 	
 	@Override

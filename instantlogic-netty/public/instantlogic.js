@@ -60,6 +60,7 @@ YUI.add('instantlogic', function (Y) {
         start: function () {
         	this.history = new Y.HistoryHash();
         	this.history.on('locationChange', this.onLocationChange, this);
+        	this.history.on('eventChange', this.onEventChange, this);
             this.location = this.history.get('location');
             this.presenceNode.setContent('One moment...');
             this.setState('connecting');
@@ -82,6 +83,12 @@ YUI.add('instantlogic', function (Y) {
         onLocationChange: function(e) {
         	if (e.src !== Y.HistoryBase.SRC_ADD) {
         		this.location = e.newVal;
+        		this.sendEnter();
+        	}
+        },
+
+        onEventChange: function(e) {
+        	if (e.src !== Y.HistoryBase.SRC_ADD) {
         		this.sendEnter();
         	}
         },
@@ -207,11 +214,15 @@ YUI.add('instantlogic', function (Y) {
         },
         
         sendEnter: function() {
-        	if (this.location) {
+    		var event = this.history.get('event');
+        	if (this.location && !event) {
         		this.enqueueMessage({message:'enter', location: this.location});
         	} else {
-        		this.enqueueMessage({message:'start'});
+	    		this.enqueueMessage({message:'start', event: event, location: this.location});
         	}
+    		if (event) {
+    			this.history.replaceValue('event', '');
+    		}
         },
         
         sendSubmit: function(id) {
@@ -442,17 +453,22 @@ YUI.add('instantlogic', function (Y) {
         		var logLink, locateLink, editLink, insertAboveLink, insertBelowLink, menuBody;
         		var appName = Y.one('.application-name').get('text');
         		var designerUrl = '?application=Designer&case='+appName+'#location=';
+        		var id = me.id;
+        		if (id.lastIndexOf('+')>=0) {
+        			id = id.substr(id.lastIndexOf('+')+1);
+        		}
         		var placeTemplateId = me.parentFragment.findAncestor('Page').model.placeTemplateId;
+        		var placeTemplateDetailsUrl = designerUrl+'PlaceTemplate/'+placeTemplateId+'/PlaceTemplateDetails';
         		openMenu = new Y.Overlay({
         			bodyContent:
 	        			menuBody = h.div({className: 'fragment-debug-menu'},
 	        				h.ul(
 	        					h.li(logLink = h.a({href:'#'}, 'Log fragment data')),
-	        					h.li(locateLink = h.a({href:designerUrl+'PlaceTemplate/'+placeTemplateId+'/PlaceTemplateDetails', target:'designer'}, 'Go to template')),
-	        					h.li(editLink = h.a({href:'#', target:'designer'}, 'Edit')),
+	        					h.li(locateLink = h.a({href:placeTemplateDetailsUrl, target:'designer'}, 'Go to template')),
+	        					h.li(editLink = h.a({href:placeTemplateDetailsUrl+'&event=OpenEditor/'+id, target:'designer'}, 'Edit')),
 	        					h.li(insertAboveLink = h.a({href:'#', target:'designer'}, 'Insert above')),
-	        					// TODO Insert inside(start of) each fragmentList
-	        					h.li(insertBelowLink = h.a({href:'#', target:'designer'}, 'Insert below'))
+	        					// TODO Insert inside: (start of) each fragmentList
+	        					h.li(insertBelowLink = h.a({href:placeTemplateDetailsUrl+'&event=InsertFragmentTemplateBelow/'+id, target:'designer'}, 'Insert below'))
 	        				)
 	        			),
 	        		align: {node: button, points: [Y.WidgetPositionAlign.TL, Y.WidgetPositionAlign.TR]},

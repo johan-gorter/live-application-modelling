@@ -9,6 +9,7 @@ import org.instantlogic.engine.persistence.json.CasePersister;
 import org.instantlogic.engine.persistence.json.FileCasePersister;
 import org.instantlogic.engine.presence.Presence;
 import org.instantlogic.engine.presence.Traveler;
+import org.instantlogic.fabric.CaseInstanceTriggers;
 import org.instantlogic.fabric.Instance;
 import org.instantlogic.fabric.util.CaseAdministration;
 import org.instantlogic.fabric.util.Operation;
@@ -82,6 +83,9 @@ public class CaseManager {
 				long version = caseAdministration.getVersion();
 				caseAdministration.setVersion(version+1);
 				FileCasePersister.INSTANCE.persist(this.caseId, this.theCase, (int)version);
+				if (this.theCase instanceof CaseInstanceTriggers) {
+					((CaseInstanceTriggers)this.theCase).afterPersist();
+				}
 			} finally {
 				operation.close();
 				presenceOperation.close();

@@ -134,6 +134,22 @@ public class ${technicalNameCapitalized}Entity extends org.instantlogic.fabric.m
                 return defaultDeduction;
             }
             </#if>
+            
+            <#if attribute.validations?size!=0>
+            
+            public org.instantlogic.fabric.model.Validation[] validations;
+			@Override
+			public org.instantlogic.fabric.model.Validation[] getValidations() {
+				if (validations==null) {
+					validations = new org.instantlogic.fabric.model.Validation[] {
+						<#list attribute.validations as validation>
+						${rootPackageName}.validation.${validation}Validation.INSTANCE,
+						</#list>
+					};
+				}
+				return validations;
+			}
+			</#if>
 		};
 	</#list>
 	
@@ -197,6 +213,21 @@ public class ${technicalNameCapitalized}Entity extends org.instantlogic.fabric.m
 				return options;
 			};
 			</#if>
+            <#if relation.validations?size!=0>
+            
+            public org.instantlogic.fabric.model.Validation[] validations;
+			@Override
+			public org.instantlogic.fabric.model.Validation[] getValidations() {
+				if (validations==null) {
+					validations = new org.instantlogic.fabric.model.Validation[] {
+						<#list relation.validations as validation>
+						${rootPackageName}.validation.${validation}Validation.INSTANCE,
+						</#list>
+					};
+				}
+				return validations;
+			}
+			</#if>
 		};
 	</#list>
 	
@@ -241,6 +272,12 @@ public class ${technicalNameCapitalized}Entity extends org.instantlogic.fabric.m
 		${relation.javaIdentifier},
 		</#list>
 	};
+	private static final org.instantlogic.fabric.model.Validation[] VALIDATIONS = new org.instantlogic.fabric.model.Validation[]{
+		<#list validations as validation>
+		${rootPackageName}.validation.${validation}Validation.INSTANCE,
+		</#list>
+	};
+	
 
 	@Override
 	public org.instantlogic.fabric.model.Attribute[] getLocalAttributes() {
@@ -255,6 +292,10 @@ public class ${technicalNameCapitalized}Entity extends org.instantlogic.fabric.m
 	@Override
 	public org.instantlogic.fabric.model.Relation[] getLocalReverseRelations() {
 		return REVERSE_RELATIONS;
+	}
+	@Override
+	public org.instantlogic.fabric.model.Validation[] getLocalValidations() {
+		return VALIDATIONS;
 	}
 	
 	@Override
