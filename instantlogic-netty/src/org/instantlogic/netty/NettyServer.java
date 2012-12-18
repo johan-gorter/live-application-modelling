@@ -18,7 +18,6 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
-import org.instantlogic.designer.DesignerApplication;
 import org.instantlogic.engine.manager.ApplicationManager;
 import org.instantlogic.engine.manager.EngineProcessor;
 import org.instantlogic.engine.manager.Update;
@@ -113,7 +112,7 @@ public class NettyServer {
 
 	public static void main(String[] args) throws IOException {
 		// TODO: Discover which applications should be loaded
-		ApplicationManager.registerApplication(DesignerApplication.INSTANCE);
+		DesignerApplicationManager.registerDesignerApplication();
 		ApplicationManager.registerApplication(IzzyApplication.INSTANCE);
 		
 		ExecutorService executor = Executors.newCachedThreadPool(factory);

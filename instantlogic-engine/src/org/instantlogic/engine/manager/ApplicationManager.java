@@ -3,11 +3,12 @@ package org.instantlogic.engine.manager;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.instantlogic.fabric.Instance;
 import org.instantlogic.interaction.Application;
 
 public class ApplicationManager {
 
-	private static Map<String, ApplicationManager> applicationManagers = new HashMap<String, ApplicationManager>();
+	protected static Map<String, ApplicationManager> applicationManagers = new HashMap<String, ApplicationManager>();
 	
 	public static void registerApplication(Application application) {
 		applicationManagers.put(application.getName(), new ApplicationManager(application));
@@ -33,8 +34,12 @@ public class ApplicationManager {
 		if (result == null) {
 			result = new CaseManager(this, caseId);
 			activeCases.put(result.getCaseId(), result);
+			caseCreated(result.getCase());
 		}
 		return result;
+	}
+
+	protected void caseCreated(Instance case1) {
 	}
 
 	public Application getApplication() {

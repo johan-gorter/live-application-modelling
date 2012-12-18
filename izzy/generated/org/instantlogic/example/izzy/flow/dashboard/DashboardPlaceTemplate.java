@@ -6,7 +6,7 @@ public class DashboardPlaceTemplate extends org.instantlogic.interaction.flow.Pl
 
 	@Override
 	public String getId() {
-		return "ea7e32e8-aa99-476d-bcca-f5559ef4b635";
+		return "b4dbf407-84a6-4907-b69e-595de25fd6b8";
 	}
 	
 
@@ -47,60 +47,60 @@ public class DashboardPlaceTemplate extends org.instantlogic.interaction.flow.Pl
 
 	
 	private static org.instantlogic.interaction.page.FragmentTemplate CONTENT = 
-        new org.instantlogic.interaction.page.FragmentTemplate("bfac744e-904f-47d8-a109-914b0a0ac9e3", "Page")      
+        new org.instantlogic.interaction.page.FragmentTemplate("1990d090-1b18-4763-90a3-e14173be10a3", "Page")      
         .putChildren("mainContent",
-                new org.instantlogic.interaction.page.FragmentTemplate("35ab22cb-b59e-4710-9040-be174c931a89", "Heading2")      
+                new org.instantlogic.interaction.page.FragmentTemplate("951816d3-fb09-4f03-9178-38f929eb1a30", "Heading2")      
                 .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction0()),new org.instantlogic.fabric.text.StringTemplate("'s dashboard")))
 ,
-                new org.instantlogic.interaction.page.FragmentTemplate("32b4cb7d-ccd9-4320-b62f-9dc2f9b7cc37", "Heading4")      
+                new org.instantlogic.interaction.page.FragmentTemplate("85cf7f53-ab5a-4327-9793-e04113d1e7c0", "Heading4")      
                 .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Assigned to me")))
 ,
-                new org.instantlogic.interaction.page.FragmentTemplate("dab277dd-530f-4d9d-9e07-67b7fb67b2ab", "Table")      
+                new org.instantlogic.interaction.page.FragmentTemplate("6a6d6ac6-fe90-48b8-8847-29faeeffcb2b", "Table")      
                 .putChildren("columns",
-                        new org.instantlogic.interaction.page.FragmentTemplate("a0ed1d38-5e68-4bcd-95d1-b526641c5dc2", "Column")      .setStyleNames(new String[]{"issueNr"})
+                        new org.instantlogic.interaction.page.FragmentTemplate("3bd374f3-e7a6-43d6-a049-9a3f5b01d82d", "Column")      .setStyleNames(new String[]{"issueNr"})
       
                         .putText("header", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("#")))
 ,
-                        new org.instantlogic.interaction.page.FragmentTemplate("6a97c335-57d5-4c69-922f-4724c9bb0a47", "Column")      .setStyleNames(new String[]{"issueHeadline"})
+                        new org.instantlogic.interaction.page.FragmentTemplate("72b42d46-1da8-4d5a-b3ed-518d7a9aa2de", "Column")      .setStyleNames(new String[]{"issueHeadline"})
       
                         .putText("header", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Issue")))
 ,
-                        new org.instantlogic.interaction.page.FragmentTemplate("5101152a-5ef7-4c0a-9393-21180144f9a6", "Column")      .setStyleNames(new String[]{"issuePreview"})
+                        new org.instantlogic.interaction.page.FragmentTemplate("f776bd63-44a0-4ca6-b028-e1a9e7f17939", "Column")      .setStyleNames(new String[]{"issuePreview"})
 ,
-                        new org.instantlogic.interaction.page.FragmentTemplate("1f39cc85-fc71-4350-9005-111cf9226c8f", "Column")      .setStyleNames(new String[]{"presence-indicator"})
+                        new org.instantlogic.interaction.page.FragmentTemplate("0a82620e-88f4-4355-b4d9-9a9d2adbd934", "Column")      .setStyleNames(new String[]{"presence-indicator"})
                 )
       
                 .putChildren("rows",
                         new org.instantlogic.interaction.page.SelectionElement(createDeduction1()
-,                                    new org.instantlogic.interaction.page.SharedElementHolder("fef20d98-6fa7-46ea-b84c-981556bcc3bc", org.instantlogic.example.izzy.sharedpagefragment.IssueRowPageFragment.INSTANCE)
+,                                    new org.instantlogic.interaction.page.SharedElementHolder("f2a7b99c-af69-4af1-9499-ec5a1241034c", org.instantlogic.example.izzy.sharedpagefragment.IssueRowPageFragment.INSTANCE)
 )
                 )
 ,
-                new org.instantlogic.interaction.page.FragmentTemplate("838e4b1d-6d5a-426e-8e2b-a247754a462a", "Heading4")      
+                new org.instantlogic.interaction.page.FragmentTemplate("d35d6cbc-7b18-48b9-ab44-481fae6c7a0e", "Heading4")      
                 .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("All issues")))
 ,
-                new org.instantlogic.interaction.page.FragmentTemplate("6600d56f-16ee-4f5a-9eb3-420bd5eb33b6", "Table")      
+                new org.instantlogic.interaction.page.FragmentTemplate("0e42d952-2e86-45de-ae69-04ef772a5730", "Table")      
                 .putChildren("columns",
-                        new org.instantlogic.interaction.page.FragmentTemplate("745e7991-a114-4322-9fa3-66294bf0fdd5", "Column")      .setStyleNames(new String[]{"issueNr"})
+                        new org.instantlogic.interaction.page.FragmentTemplate("cbc0f7d6-6c64-447f-a884-eca8bae773f9", "Column")      .setStyleNames(new String[]{"issueNr"})
       
                         .putText("header", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("#")))
 ,
-                        new org.instantlogic.interaction.page.FragmentTemplate("ab240443-c0b4-4710-8c52-9fe384764065", "Column")      .setStyleNames(new String[]{"issueHeadline"})
+                        new org.instantlogic.interaction.page.FragmentTemplate("cb2acc01-d93b-49d6-9dee-9e2f0d1768cc", "Column")      .setStyleNames(new String[]{"issueHeadline"})
       
                         .putText("header", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Issue")))
 ,
-                        new org.instantlogic.interaction.page.FragmentTemplate("c68c3cff-322f-4af7-a7f2-3bb00c2ed7b3", "Column")      .setStyleNames(new String[]{"issuePreview"})
+                        new org.instantlogic.interaction.page.FragmentTemplate("1af2937f-423a-47e8-87ee-91e5eb2e6d70", "Column")      .setStyleNames(new String[]{"issuePreview"})
 ,
-                        new org.instantlogic.interaction.page.FragmentTemplate("c1805f94-81c7-4d1e-9248-ef0a7c7b4dde", "Column")      .setStyleNames(new String[]{"presence-indicator"})
+                        new org.instantlogic.interaction.page.FragmentTemplate("51bece99-261c-4797-9e9d-f3b96b5e1326", "Column")      .setStyleNames(new String[]{"presence-indicator"})
                 )
       
                 .putChildren("rows",
                         new org.instantlogic.interaction.page.SelectionElement(createDeduction2()
-,                                    new org.instantlogic.interaction.page.SharedElementHolder("6648625e-0f71-4148-9004-35ffaf828688", org.instantlogic.example.izzy.sharedpagefragment.IssueRowPageFragment.INSTANCE)
+,                                    new org.instantlogic.interaction.page.SharedElementHolder("ff9aaadd-2b5b-4819-8500-0d405d8ab7d1", org.instantlogic.example.izzy.sharedpagefragment.IssueRowPageFragment.INSTANCE)
 )
                 )
 ,
-                new org.instantlogic.interaction.page.FragmentTemplate("dd62ae60-14ea-496a-ba91-3eb11a9c795d", "Button")      .setEvent(org.instantlogic.example.izzy.event.CreateIssueEvent.INSTANCE)
+                new org.instantlogic.interaction.page.FragmentTemplate("b443f99c-6b27-4e78-af6e-170d9a22e2e8", "Button")      .setEvent(org.instantlogic.example.izzy.event.CreateIssueEvent.INSTANCE)
       
                 .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Create issue")))
         )

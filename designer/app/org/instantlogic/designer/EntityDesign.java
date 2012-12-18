@@ -1,5 +1,9 @@
 package org.instantlogic.designer;
 
+import java.util.Iterator;
+
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
+
 
 
 public class EntityDesign extends AbstractEntityDesign { 
@@ -87,6 +91,38 @@ public class EntityDesign extends AbstractEntityDesign {
 			validation.addToDisplayWith(attribute);
 		}
 		return validation;
+	}
+	
+	public Iterable<AttributeDesign> getAttributesAndRelations() {
+		return new Iterable<AttributeDesign>() {
+			
+			@Override
+			public Iterator<AttributeDesign> iterator() {
+				return new Iterator<AttributeDesign>() {
+					
+					final Iterator<AttributeDesign> attributes = getAttributes().iterator();
+					final Iterator<RelationDesign> relations = getRelations().iterator();
+
+					@Override
+					public void remove() {
+						throw new UnsupportedOperationException();
+					}
+					
+					@Override
+					public AttributeDesign next() {
+						if(attributes.hasNext()) {
+							return attributes.next();
+						}
+						return relations.next();
+					}
+					
+					@Override
+					public boolean hasNext() {
+						return attributes.hasNext()||relations.hasNext();
+					}
+				};
+			}
+		};
 	}
 	
 	public void registerApplication(ApplicationDesign application) {

@@ -47,30 +47,30 @@ public class IssueDetailsPlaceTemplate extends org.instantlogic.interaction.flow
 
 	
 	private static org.instantlogic.interaction.page.FragmentTemplate CONTENT = 
-        new org.instantlogic.interaction.page.FragmentTemplate("ae323dac-0707-4544-9d2b-1d49601a8291", "Page")      
+        new org.instantlogic.interaction.page.FragmentTemplate("7a251bbd-866d-4908-b8a6-b41c1d300aa0", "Page")      
         .putChildren("mainContent",
-                new org.instantlogic.interaction.page.FragmentTemplate("575e8fe4-bb84-4a93-bed7-b4c4d37b66f7", "Button")      .setStyleNames(new String[]{"btn-link"})
+                new org.instantlogic.interaction.page.FragmentTemplate("87c9c021-bb7a-4fef-88d6-7369f8dbc12b", "Button")      .setStyleNames(new String[]{"btn-link"})
       .setEvent(org.instantlogic.example.izzy.event.HomeEvent.INSTANCE)
       
                 .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Home")))
       
                 .putChildren("content",
-                        new org.instantlogic.interaction.page.FragmentTemplate("15abcd01-80dd-417b-8138-2d1888bf9cdd", "Icon")      .setStyleNames(new String[]{"icon-home"})
+                        new org.instantlogic.interaction.page.FragmentTemplate("a269f4c8-6b87-4d91-b649-9c83847c8983", "Icon")      .setStyleNames(new String[]{"icon-home"})
                 )
 ,
-                new org.instantlogic.interaction.page.FragmentTemplate("3bf3e8af-36ae-4cd2-b451-e34a0c4c0039", "Heading2")      
+                new org.instantlogic.interaction.page.FragmentTemplate("2d884abd-3d30-4e96-9874-423bfb0a4e95", "Heading2")      
                 .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Issue "),new org.instantlogic.fabric.text.StringTemplate(createDeduction0()),new org.instantlogic.fabric.text.StringTemplate(": "),new org.instantlogic.fabric.text.StringTemplate(createDeduction1())))
 ,
-                new org.instantlogic.interaction.page.FragmentTemplate("b79dc1df-73e1-4dca-9b85-e68e3f4d85cc", "Input")      .setStyleNames(new String[]{"answer-span8"})
+                new org.instantlogic.interaction.page.FragmentTemplate("a0b7750a-0ab3-4f94-825e-5ad213098baf", "Input")      .setStyleNames(new String[]{"answer-span8"})
       .setField(org.instantlogic.example.izzy.entity.IssueEntity.INSTANCE, org.instantlogic.example.izzy.entity.IssueEntity.headline)
 ,
-                new org.instantlogic.interaction.page.FragmentTemplate("33d1634c-aa92-4ce6-bd48-028b6e281c5a", "Input")      .setStyleNames(new String[]{"answer-span4"})
+                new org.instantlogic.interaction.page.FragmentTemplate("0e05cd69-5d02-48fa-959e-b37fc59ea691", "Input")      .setStyleNames(new String[]{"answer-span4"})
       .setField(org.instantlogic.example.izzy.entity.IssueEntity.INSTANCE, org.instantlogic.example.izzy.entity.IssueEntity.reporter)
 ,
-                new org.instantlogic.interaction.page.FragmentTemplate("557ac2ef-354a-4191-9380-c3a6aa6e92c6", "Input")      .setStyleNames(new String[]{"answer-span4"})
+                new org.instantlogic.interaction.page.FragmentTemplate("84eade7e-92d5-4c49-88a1-1c03c9daa01d", "Input")      .setStyleNames(new String[]{"answer-span4"})
       .setField(org.instantlogic.example.izzy.entity.IssueEntity.INSTANCE, org.instantlogic.example.izzy.entity.IssueEntity.assignee)
 ,
-                new org.instantlogic.interaction.page.FragmentTemplate("5eaf7fca-72e9-4ec3-b1cf-f8a3db81609c", "Input")      .setStyleNames(new String[]{"answer-span8", "answer-height300"})
+                new org.instantlogic.interaction.page.FragmentTemplate("a2cfdc9b-7676-47bb-a525-44e8a81d4a4f", "Input")      .setStyleNames(new String[]{"answer-span8", "answer-height300"})
       .setField(org.instantlogic.example.izzy.entity.IssueEntity.INSTANCE, org.instantlogic.example.izzy.entity.IssueEntity.description)
         )
 ; 

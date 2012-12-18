@@ -11,16 +11,17 @@ import org.instantlogic.designer.codegenerator.classmodel.SharedPageFragmentClas
 import org.instantlogic.designer.codegenerator.classmodel.SubFlowClassModel;
 import org.instantlogic.designer.codegenerator.classmodel.ValidationClassModel;
 import org.instantlogic.designer.codegenerator.generator.GeneratedClassModels;
+import org.instantlogic.designer.codegenerator.generator.GeneratedClassModelsProcessor;
 
-public class ApplicationJavacodeGenerator extends AbstractJavacodeGenerator {
+public class ApplicationJavacodeGenerator extends AbstractJavacodeGenerator implements GeneratedClassModelsProcessor {
 
 	public static void generate(GeneratedClassModels context, File sourcePath) {
 		File applicationRoot = sourcePath;
+		String[] packageNames = context.rootPackageName.split("\\.");
+		for (String packageName : packageNames) {
+			applicationRoot = new File(applicationRoot, packageName);
+		}
 		if (context.updatedApplication!=null) {
-			String[] packageNames = context.updatedApplication.rootPackageName.split("\\.");
-			for (String packageName : packageNames) {
-				applicationRoot = new File(applicationRoot, packageName);
-			}
 			applicationRoot.mkdirs();
 			new File(applicationRoot, "entity").mkdirs();
 			new File(applicationRoot, "event").mkdirs();
@@ -55,10 +56,10 @@ public class ApplicationJavacodeGenerator extends AbstractJavacodeGenerator {
 		for (EventClassModel event:context.deletedEvents) {
 			deleteFile("event", event, "Event", applicationRoot);
 		}
-		for (PlaceClassModel page:context.updatedPages) {
+		for (PlaceClassModel page:context.updatedPlaces) {
 			generateFile(AbstractJavacodeGenerator.placeTemplateTemplate, page, "flow/"+page.flowname.toLowerCase(), "PlaceTemplate", applicationRoot);
 		}
-		for (PlaceClassModel page:context.deletedPages) {
+		for (PlaceClassModel page:context.deletedPlaces) {
 			deleteFile("flow/"+page.flowname.toLowerCase(), page, "Page", applicationRoot);
 		}
 		for (FlowClassModel flow:context.updatedFlows) {
@@ -85,5 +86,21 @@ public class ApplicationJavacodeGenerator extends AbstractJavacodeGenerator {
 		for (ValidationClassModel Validation:context.deletedValidations) {
 			deleteFile("validation", Validation, "Validation", applicationRoot);
 		}
+	}
+
+	private File sourcePath;
+	
+	public ApplicationJavacodeGenerator(File sourcePath) {
+		this.sourcePath = sourcePath;
+	}
+
+	@Override
+	public void process(GeneratedClassModels models) {
+		generate(models, this.sourcePath);
+	}
+
+	@Override
+	public String getName() {
+		return "Java code generator";
 	}
 }

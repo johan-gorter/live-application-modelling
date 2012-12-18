@@ -50,6 +50,7 @@ public class EntityGenerator extends AbstractGenerator {
 			model.extensions.add(extension.getTechnicalNameCapitalized());
 		}
 		for (AttributeDesign attributeDesign: entityDesign.getAttributes()) {
+			if (!attributeDesign.isValidForCodegeneration()) continue;
 			EntityClassModel.Attribute attribute = new EntityClassModel.Attribute();
 			attribute.name = attributeDesign.getName();
 			attribute.technicalName = attributeDesign.getTechnicalName();
@@ -86,6 +87,7 @@ public class EntityGenerator extends AbstractGenerator {
 			model.attributes.add(attribute);
 		}
 		for (RelationDesign relationDesign: entityDesign.getRelations()) {
+			if (!relationDesign.isValidForCodegeneration()) continue;
 			EntityClassModel.Relation relation = new EntityClassModel.Relation();
 			relation.name = relationDesign.getName();
 			relation.technicalName = relationDesign.getTechnicalName();
@@ -114,6 +116,7 @@ public class EntityGenerator extends AbstractGenerator {
 		}
 		for (RelationDesign relationDesign: entityDesign.getReverseRelations()) {
 			if (relationDesign.getReverseName()!=null) {
+				if (!relationDesign.isValidForCodegeneration()) continue;
 				EntityClassModel.Relation relation = new EntityClassModel.Relation();
 				relation.name = relationDesign.getReverseName();
 				relation.technicalName = relationDesign.getReverseTechnicalName();

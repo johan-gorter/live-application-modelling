@@ -31,7 +31,7 @@ public class CaseProcessor {
 	private final CaseManager caseManager;
 	
 	public CaseProcessor(ApplicationManager applicationManager, String caseId) {
-		this.caseManager = new CaseManager(applicationManager,caseId);
+		this.caseManager = applicationManager.getOrCreateCase(caseId);
 	}
 
 	public void processMessagesAndSendUpdates(TravelerProxy travelerProxy, List<Message> messages) {

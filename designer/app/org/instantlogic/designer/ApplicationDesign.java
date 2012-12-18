@@ -3,9 +3,15 @@ package org.instantlogic.designer;
 import java.io.File;
 
 import org.instantlogic.designer.codegenerator.generator.ApplicationGenerator;
+import org.instantlogic.designer.codegenerator.generator.GeneratedClassModels;
+import org.instantlogic.designer.codegenerator.generator.GeneratedClassModelsProcessor;
 import org.instantlogic.fabric.CaseInstanceTriggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ApplicationDesign extends AbstractApplicationDesign implements CaseInstanceTriggers {
+	
+	private static final Logger logger = LoggerFactory.getLogger(ApplicationDesign.class);
 	
 	private ApplicationGenerator applicationGenerator = new ApplicationGenerator(this);
 	
@@ -13,11 +19,20 @@ public class ApplicationDesign extends AbstractApplicationDesign implements Case
 		return applicationGenerator;
 	}
 	
+	private GeneratedClassModelsProcessor generatedClassModelsProcessor; 
+	
 	@Override
 	public void afterPersist() {
-//		applicationGenerator.generateJavaCode(); //TODO: offload this work to a background thread.
+		if (generatedClassModelsProcessor!=null) {
+			GeneratedClassModels classModelUpdates = applicationGenerator.getClassModelUpdates();
+			int updates = classModelUpdates.countUpdates();
+			int deletes = classModelUpdates.countDeletes();
+			if (updates>0 || deletes>0) {
+				logger.info("Updated {} class models and deleted {} class models", updates, deletes);
+				generatedClassModelsProcessor.process(classModelUpdates);
+			}
+		}
 	}
-	
 	
 	/**
 	 * Registers every entity reachable from caseEntity to application.entities. Also calls init() on every entity.
@@ -78,5 +93,16 @@ public class ApplicationDesign extends AbstractApplicationDesign implements Case
 				throw new RuntimeException(e);
 			}
         }
+	}
+
+
+	public GeneratedClassModelsProcessor getGeneratedClassModelsProcessor() {
+		return generatedClassModelsProcessor;
+	}
+
+
+	public void setGeneratedClassModelsProcessor(
+			GeneratedClassModelsProcessor generatedClassModelsProcessor) {
+		this.generatedClassModelsProcessor = generatedClassModelsProcessor;
 	}
 }

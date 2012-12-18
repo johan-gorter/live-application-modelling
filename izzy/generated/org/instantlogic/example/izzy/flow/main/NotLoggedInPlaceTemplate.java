@@ -6,14 +6,14 @@ public class NotLoggedInPlaceTemplate extends org.instantlogic.interaction.flow.
 
 	@Override
 	public String getId() {
-		return "8e1dcfb5-436f-4829-bfea-584db36c64b4";
+		return "204a707e-ea07-4910-8226-a30d3e6938de";
 	}
 	
 	
 	private static org.instantlogic.interaction.page.FragmentTemplate CONTENT = 
-        new org.instantlogic.interaction.page.FragmentTemplate("5ff2c95e-7704-4bb3-844c-683fdf826a99", "Page")      
+        new org.instantlogic.interaction.page.FragmentTemplate("6cda9309-d778-46f8-bdd0-18060df46d89", "Page")      
         .putChildren("mainContent",
-                new org.instantlogic.interaction.page.FragmentTemplate("b8e22811-2e18-4bce-abb7-b079aab4a34d", "Paragraph")      
+                new org.instantlogic.interaction.page.FragmentTemplate("0e39edbe-937a-40de-a57b-4e546583924c", "Paragraph")      
                 .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate("Please log in.")))
         )
 ; 
