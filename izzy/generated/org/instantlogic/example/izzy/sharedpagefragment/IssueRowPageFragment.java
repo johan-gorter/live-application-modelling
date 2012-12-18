@@ -31,23 +31,23 @@ public class IssueRowPageFragment extends org.instantlogic.interaction.page.Shar
 
 	
 	public static final org.instantlogic.interaction.page.Element SHARED_INSTANCE = 
-        new org.instantlogic.interaction.page.FragmentTemplate("29ace753-ac84-4a47-8fe2-4dd8f2d677d7", "Row")      
+        new org.instantlogic.interaction.page.FragmentTemplate("2ece944e-3c04-4b23-9dbb-72dc783cf0e9", "Row")      
         .putChildren("cells",
-                new org.instantlogic.interaction.page.FragmentTemplate("1b7eb1c3-1753-4c6b-a48b-323185aef969", "Link")      .setEvent(org.instantlogic.example.izzy.event.IssueDetailsEvent.INSTANCE)
+                new org.instantlogic.interaction.page.FragmentTemplate("f39bfb7d-8529-47cf-bddd-1dd3a9475eaa", "Link")      .setEvent(org.instantlogic.example.izzy.event.IssueDetailsEvent.INSTANCE)
       
                 .putChildren("content",
-                        new org.instantlogic.interaction.page.FragmentTemplate("00e3f348-6ea4-4593-955d-6c9dc679c99f", "Cell")      
+                        new org.instantlogic.interaction.page.FragmentTemplate("d3ddefa9-538d-4ef2-b975-6e4248b87894", "Cell")      
                         .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction0())))
 ,
-                        new org.instantlogic.interaction.page.FragmentTemplate("1e2b425f-af4c-4537-9d8e-eb4c04473bea", "Cell")      
+                        new org.instantlogic.interaction.page.FragmentTemplate("b0580176-07aa-4de5-ba17-8fb59bf289ac", "Cell")      
                         .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction1())))
 ,
-                        new org.instantlogic.interaction.page.FragmentTemplate("29cef55f-7e73-41f4-8e80-430de01fee2a", "Cell")      
+                        new org.instantlogic.interaction.page.FragmentTemplate("4ebbbe94-f378-4608-9928-f2434a11b8a7", "Cell")      
                         .putText("text", new org.instantlogic.fabric.text.TextTemplate(new org.instantlogic.fabric.text.StringTemplate(createDeduction2())))
 ,
-                        new org.instantlogic.interaction.page.FragmentTemplate("6bbfb4fd-6c2c-4310-a090-778d644d290a", "Cell")      
+                        new org.instantlogic.interaction.page.FragmentTemplate("9afa4f47-0a19-40f5-af7d-d7038ab2b212", "Cell")      
                         .putChildren("content",
-                                new org.instantlogic.interaction.page.FragmentTemplate("e25292dc-3c50-4cc5-9cdb-d1ec28c39262", "PresenceIndicator")                        )
+                                new org.instantlogic.interaction.page.FragmentTemplate("69009685-05bd-4bdb-96f6-158cb79d84f4", "PresenceIndicator")                        )
                 )
         )
 ; 

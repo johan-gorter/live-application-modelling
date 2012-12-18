@@ -26,6 +26,23 @@ public class Issue extends org.instantlogic.fabric.Instance {
 
 	// Attributes
 	
+	private final org.instantlogic.fabric.value.AttributeValue<Issue, java.lang.Integer> StoryPoints
+		= createAttributeValue(org.instantlogic.example.izzy.entity.IssueEntity.StoryPoints);
+	
+	public java.lang.Integer getStoryPoints() {
+		return StoryPoints.getValue();
+	}
+
+	public org.instantlogic.fabric.value.AttributeValue<Issue, java.lang.Integer> getStoryPointsAttributeValue() {
+		return StoryPoints;
+	}
+
+	public Issue setStoryPoints(java.lang.Integer newValue) {
+		StoryPoints.setValue(newValue);
+		return (Issue)this;
+	}
+	
+	
 	private final org.instantlogic.fabric.value.AttributeValue<Issue, java.lang.String> description
 		= createAttributeValue(org.instantlogic.example.izzy.entity.IssueEntity.description);
 	
@@ -56,6 +73,23 @@ public class Issue extends org.instantlogic.fabric.Instance {
 
 	public Issue setHeadline(java.lang.String newValue) {
 		headline.setValue(newValue);
+		return (Issue)this;
+	}
+	
+	
+	private final org.instantlogic.fabric.value.AttributeValue<Issue, java.lang.String> newAttribute
+		= createAttributeValue(org.instantlogic.example.izzy.entity.IssueEntity.newAttribute);
+	
+	public java.lang.String getNewAttribute() {
+		return newAttribute.getValue();
+	}
+
+	public org.instantlogic.fabric.value.AttributeValue<Issue, java.lang.String> getNewAttributeAttributeValue() {
+		return newAttribute;
+	}
+
+	public Issue setNewAttribute(java.lang.String newValue) {
+		newAttribute.setValue(newValue);
 		return (Issue)this;
 	}
 	

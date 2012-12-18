@@ -28,13 +28,13 @@ public class PlaceTemplateGenerator extends AbstractGenerator {
 		model.title = TextGenerator.generate(placeTemplateDesign.getTitle(), model);
 
 		this.observations = new ObservationsOutdatedObserver(caseAdministration.stopRecordingObservations(), null);
-		context.updatedPages.add(model);
+		context.updatedPlaces.add(model);
 	}
 
 	@Override
 	public void delete(GeneratedClassModels context) {
 		PlaceClassModel model = initModel();
-		context.deletedPages.add(model);
+		context.deletedPlaces.add(model);
 	}
 
 	private PlaceClassModel initModel() {

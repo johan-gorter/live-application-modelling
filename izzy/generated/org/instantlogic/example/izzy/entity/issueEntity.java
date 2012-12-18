@@ -44,6 +44,22 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 	
 	// Attributes
 	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.example.izzy.Issue, java.lang.Integer, java.lang.Integer> StoryPoints 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.example.izzy.Issue, java.lang.Integer, java.lang.Integer>(
+			"Story points", INSTANCE, java.lang.Integer.class
+		) {
+			{
+				dataType.put("category", "number");
+				dataType.put("wholeNumber", true);
+			}
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.example.izzy.Issue, java.lang.Integer> get(org.instantlogic.example.izzy.Issue instance) {
+				return instance.getStoryPointsAttributeValue();
+			}
+            
+		};
+	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.example.izzy.Issue, java.lang.String, java.lang.String> description 
 		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.example.izzy.Issue, java.lang.String, java.lang.String>(
 			"description", INSTANCE, java.lang.String.class
@@ -59,17 +75,6 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 				return instance.getDescriptionAttributeValue();
 			}
             
-            
-            public org.instantlogic.fabric.model.Validation[] validations;
-			@Override
-			public org.instantlogic.fabric.model.Validation[] getValidations() {
-				if (validations==null) {
-					validations = new org.instantlogic.fabric.model.Validation[] {
-						org.instantlogic.example.izzy.validation.IssueDescriptionRequiredValidation.INSTANCE,
-					};
-				}
-				return validations;
-			}
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.example.izzy.Issue, java.lang.String, java.lang.String> headline 
@@ -85,17 +90,21 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 				return instance.getHeadlineAttributeValue();
 			}
             
-            
-            public org.instantlogic.fabric.model.Validation[] validations;
-			@Override
-			public org.instantlogic.fabric.model.Validation[] getValidations() {
-				if (validations==null) {
-					validations = new org.instantlogic.fabric.model.Validation[] {
-						org.instantlogic.example.izzy.validation.IssueHeadlineRequiredValidation.INSTANCE,
-					};
-				}
-				return validations;
+		};
+	
+	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.example.izzy.Issue, java.lang.String, java.lang.String> newAttribute 
+		= new org.instantlogic.fabric.model.impl.SimpleAttribute<org.instantlogic.example.izzy.Issue, java.lang.String, java.lang.String>(
+			"new attribute", INSTANCE, java.lang.String.class
+		) {
+			{
+				dataType.put("category", "text");
 			}
+	
+			@Override
+			public org.instantlogic.fabric.value.ReadOnlyAttributeValue<org.instantlogic.example.izzy.Issue, java.lang.String> get(org.instantlogic.example.izzy.Issue instance) {
+				return instance.getNewAttributeAttributeValue();
+			}
+            
 		};
 	
 	public static final org.instantlogic.fabric.model.Attribute<org.instantlogic.example.izzy.Issue, java.lang.Integer, java.lang.Integer> number 
@@ -198,8 +207,10 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 		};
 
 	private static final org.instantlogic.fabric.model.Attribute[] ATTRIBUTES = new org.instantlogic.fabric.model.Attribute[]{
+		StoryPoints,
 		description,
 		headline,
+		newAttribute,
 		number,
 	};
 	private static final org.instantlogic.fabric.model.Relation[] RELATIONS = new org.instantlogic.fabric.model.Relation[]{
@@ -211,8 +222,6 @@ public class IssueEntity extends org.instantlogic.fabric.model.Entity<org.instan
 		project,
 	};
 	private static final org.instantlogic.fabric.model.Validation[] VALIDATIONS = new org.instantlogic.fabric.model.Validation[]{
-		org.instantlogic.example.izzy.validation.IssueDescriptionRequiredValidation.INSTANCE,
-		org.instantlogic.example.izzy.validation.IssueHeadlineRequiredValidation.INSTANCE,
 	};
 	
 
