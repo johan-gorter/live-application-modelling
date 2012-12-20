@@ -13,13 +13,18 @@ import static org.jboss.netty.handler.codec.http.HttpResponseStatus.NOT_FOUND;
 import static org.jboss.netty.handler.codec.http.HttpResponseStatus.OK;
 import static org.jboss.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
+import javax.activation.MimetypesFileTypeMap;
+
+import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelFuture;
@@ -33,6 +38,7 @@ import org.jboss.netty.channel.MessageEvent;
 import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
 import org.jboss.netty.handler.codec.frame.TooLongFrameException;
 import org.jboss.netty.handler.codec.http.DefaultHttpResponse;
+import org.jboss.netty.handler.codec.http.HttpHeaders;
 import org.jboss.netty.handler.codec.http.HttpRequest;
 import org.jboss.netty.handler.codec.http.HttpResponse;
 import org.jboss.netty.handler.codec.http.HttpResponseStatus;
@@ -51,6 +57,7 @@ import org.slf4j.LoggerFactory;
 public class HttpStaticFileServerHandler extends SimpleChannelUpstreamHandler {
 
 	private static final Logger logger = LoggerFactory.getLogger(HttpStaticFileServerHandler.class);
+    private static final MimetypesFileTypeMap fileTypeMap = new MimetypesFileTypeMap();
 	
 	private boolean sendingError = false;
 	
@@ -66,63 +73,90 @@ public class HttpStaticFileServerHandler extends SimpleChannelUpstreamHandler {
 			return;
 		}
 
-		final String path = sanitizeUri(request.getUri());
-		if (path == null) {
-			sendError(ctx, FORBIDDEN);
-			return;
-		}
-
-		File file = new File(path);
-		if (file.isHidden() || !file.exists()) {
-			sendError(ctx, NOT_FOUND);
-			return;
-		}
-		if (!file.isFile()) {
-			sendError(ctx, FORBIDDEN);
-			return;
-		}
-
-		RandomAccessFile raf;
-		try {
-			raf = new RandomAccessFile(file, "r");
-		} catch (FileNotFoundException fnfe) {
-			sendError(ctx, NOT_FOUND);
-			return;
-		}
-		long fileLength = raf.length();
-
-		HttpResponse response = new DefaultHttpResponse(HTTP_1_1, OK);
-		if (path.endsWith(".css")) {
-			response.setHeader(CONTENT_TYPE, "text/css; charset=UTF-8");
-		} else if (path.endsWith(".js")) {
-			response.setHeader(CONTENT_TYPE, "text/javascript; charset=UTF-8");
-		} else if (path.endsWith(".html")) {
-			response.setHeader(CONTENT_TYPE, "text/html; charset=UTF-8");
-		}
-		setContentLength(response, fileLength);
-		Channel ch = e.getChannel();
-
-		// Write the initial line and the header.
-		ch.write(response);
-
-		// Write the content.
 		ChannelFuture writeFuture;
-		if (ch.getPipeline().get(SslHandler.class) != null) {
-			// Cannot use zero-copy with HTTPS.
-			writeFuture = ch.write(new ChunkedFile(raf, 0, fileLength, 8192));
-		} else {
-			// No encryption - use zero-copy.
-			final FileRegion region = new DefaultFileRegion(raf.getChannel(), 0, fileLength);
-			writeFuture = ch.write(region);
-			writeFuture.addListener(new ChannelFutureProgressListener() {
-				public void operationComplete(ChannelFuture future) {
-					region.releaseExternalResources();
-				}
+		String uri = sanitizeUri(request.getUri());
+		if (uri == null) {
+			sendError(ctx, FORBIDDEN);
+			return;
+		}
+        String contentType = fileTypeMap.getContentType(uri);
+		if (uri.startsWith("/webjars")) {
+	        InputStream is;
+	        try {
+	            is = this.getClass().getResourceAsStream("/META-INF/resources" + uri);
+	            if (is == null) {
+	    			sendError(ctx, NOT_FOUND);
+	    			return;
+	            }
+	            final int maxSize = 512 * 1024;
+	            ByteArrayOutputStream out = new ByteArrayOutputStream(maxSize);
+	            byte[] bytes = new byte[maxSize];
+	            while (true) {
+	                int r = is.read(bytes);
+	                if (r == -1) break;
+	                out.write(bytes, 0, r);
+	            }
+	            ChannelBuffer cb = ChannelBuffers.copiedBuffer(out.toByteArray());
+	            out.close();
+	            is.close();
 
-				public void operationProgressed(ChannelFuture future, long amount, long current, long total) {
-					//System.out.printf("%s: %d / %d (+%d)%n", path, current, total, amount);
-				}
-			});
+	            DefaultHttpResponse response = new DefaultHttpResponse(HTTP_1_1, OK);
+	            response.setHeader(HttpHeaders.Names.CONTENT_TYPE, contentType);
+	            setContentLength(response, cb.readableBytes());
+
+	            response.setContent(cb);
+	            writeFuture = e.getChannel().write(response);
+	        } catch (IOException ex) {
+				sendError(ctx, INTERNAL_SERVER_ERROR);
+				return;
+	        }
+		} else {
+			String path = new File(".").getAbsolutePath() + File.separator + "public" + File.separator + uri.replace('/', File.separatorChar);
+			
+			File file = new File(path);
+			if (file.isHidden() || !file.exists()) {
+				sendError(ctx, NOT_FOUND);
+				return;
+			}
+			if (!file.isFile()) {
+				sendError(ctx, FORBIDDEN);
+				return;
+			}
+			RandomAccessFile raf;
+			try {
+				raf = new RandomAccessFile(file, "r");
+			} catch (FileNotFoundException fnfe) {
+				sendError(ctx, NOT_FOUND);
+				return;
+			}
+			long fileLength = raf.length();
+	
+			HttpResponse response = new DefaultHttpResponse(HTTP_1_1, OK);
+			response.setHeader(CONTENT_TYPE, contentType+"; charset=UTF-8");
+			setContentLength(response, fileLength);
+			Channel ch = e.getChannel();
+	
+			// Write the initial line and the header.
+			ch.write(response);
+	
+			// Write the content.
+			if (ch.getPipeline().get(SslHandler.class) != null) {
+				// Cannot use zero-copy with HTTPS.
+				writeFuture = ch.write(new ChunkedFile(raf, 0, fileLength, 8192));
+			} else {
+				// No encryption - use zero-copy.
+				final FileRegion region = new DefaultFileRegion(raf.getChannel(), 0, fileLength);
+				writeFuture = ch.write(region);
+				writeFuture.addListener(new ChannelFutureProgressListener() {
+					public void operationComplete(ChannelFuture future) {
+						region.releaseExternalResources();
+					}
+	
+					public void operationProgressed(ChannelFuture future, long amount, long current, long total) {
+						//System.out.printf("%s: %d / %d (+%d)%n", path, current, total, amount);
+					}
+				});
+			}
 		}
 
 		// Decide whether to close the connection or not.
@@ -165,17 +199,13 @@ public class HttpStaticFileServerHandler extends SimpleChannelUpstreamHandler {
 		if (index>=0) {
 			uri = uri.substring(0, index);
 		}
-		// Convert file separators.
-		uri = uri.replace('/', File.separatorChar);
 
 		// Simplistic dumb security check.
 		// You will have to do something serious in the production environment.
-		if (uri.contains(File.separator + ".") || uri.contains("." + File.separator) || uri.startsWith(".") || uri.endsWith(".")) {
+		if (uri.contains("\\") || uri.contains("/.") || uri.contains("./") || uri.startsWith(".") || uri.endsWith(".")) {
 			return null;
 		}
-
-		// Convert to absolute path.
-		return new File(".").getAbsolutePath() + File.separator + "public" + File.separator + uri;
+		return uri;
 	}
 
 	protected void sendError(ChannelHandlerContext ctx, HttpResponseStatus status) {
