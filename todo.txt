@@ -1,35 +1,9 @@
-0.7
-Fabric
-? inheritance van attributen mogelijk maken
-? Alias verplicht voor selected instances
-
-Interaction
-- gebruikers elkaar laten zien
-- Look and feel showcasebaar
-
-0.8
-? Serialisatie
-? Android apps onderzoeken
-? CaseExplorer dynamisch
-
-
-
---------- Uitgangspunten ------------
+Instantlogic is a fundamentally different web application framework, where interactivity and user experience are the main design goals.
 
 OBJECTIVES
 1) Create cooperative and interactive web applications
 2) Make web application creation as non-technical as possible by using modeling techniques and business-rules 
 3) Easy integration with programming
-
-
-Ritadministratie
-- Afwijking zichtbaar
-- Demo pagina
-- Stresstest feature op demo pagina
-- Look and feel moderniseren
-- route inzichtelijker maken (laatste lokatie naar links)
-
--------------------------------
 
 Transcript
 
@@ -93,3 +67,6 @@ Add a graphical user interface for the Designer
 Add a debugging option which aids in application development
 Generate bytecode on the fly to allow changes from the designer to be visible immediately in the application
 
+? Multiple interitance
+? inheritance van attributen mogelijk maken
+? Alias verplicht voor selected instances

@@ -1,5 +1,5 @@
 {
-  "instanceId": "402601b4-1c14-4fee-b5f1-18636ca1a1eb",
+  "instanceId": "8fa4d52d-5d4d-4851-b0bf-cf28e97930a5",
   "entityName": "project",
   "version": 1,
   "last issue number": 5,
@@ -7,8 +7,8 @@
     {
       "instanceId": "I1",
       "entityName": "issue",
-      "description": "Persist the state of the system upon each change.1",
-      "headline": "Persist issue",
+      "description": "Persist the statez of the system upon each change.2",
+      "headline": "Persist issuez",
       "number": 1,
       "assignee": "bc0bae0c-081b-41f4-8ba1-10feb60b93f2",
       "comments": [],
