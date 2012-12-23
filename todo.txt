@@ -43,8 +43,10 @@ V Communicator vernieuwen
 V editor verbeteren (attribuut selecteren dus)
 V Edit werkend
 V Insert below werkend
-- Basale validaties
-- Code genereren
+V Basale validaties
+V Code genereren
+- Build: Fabric, Interaction, Designer, Presence-generator, +Engine, Netty, (nextdesigner-generator, nextdesigner, izzy-generator, izzy)
+- naar GitHub
 - Preview iets beter
 
 

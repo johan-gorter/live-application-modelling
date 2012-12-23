@@ -12,6 +12,7 @@ import org.instantlogic.fabric.util.DeductionContext;
 import org.instantlogic.fabric.util.ValueAndLevel;
 import org.instantlogic.fabric.value.ReadOnlyAttributeValue;
 
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class PeriodEntity extends Entity<Period> {
 
 	public static class DaysBetweenRule extends Deduction<Integer> {
