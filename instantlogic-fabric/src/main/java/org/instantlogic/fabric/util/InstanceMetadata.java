@@ -239,6 +239,7 @@ public class InstanceMetadata {
 	/**
 	 * Clears all relations to instances in other cases. Applies recursively to children. (getCaseAdministration() still refers the old case now)
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void clearRelationsAfterSplit(Instance newCase) {
 		if (uniqueId!=null) {
 			getCaseAdministration().forgetInstanceWithUniqueId(uniqueId);
