@@ -30,13 +30,14 @@ public class ChangeContext extends RenderContext {
 		this.value = value;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void setValue(Entity entity, Attribute attribute, Object value) {
 		((AttributeValue)getAttributeValue(entity, attribute)).setValue(parse(value, attribute));
 	}
 	
 	private static final DateFormat DATE_INTERNATIONAL = new SimpleDateFormat("yyyy/MM/dd");
 	
-	public Object parse(Object value, Attribute attribute) {
+	public Object parse(Object value, Attribute<?,?,?> attribute) {
 		if (attribute.getJavaClassName()==Date.class && value instanceof String) {
 			try {
 				return DATE_INTERNATIONAL.parseObject((String)value);

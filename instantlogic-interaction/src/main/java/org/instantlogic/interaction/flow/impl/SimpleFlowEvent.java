@@ -10,15 +10,15 @@ public class SimpleFlowEvent extends FlowEvent {
 
 	private String name;
 	
-	private Entity[] parameterTypes;
+	private Entity<?>[] parameterTypes;
 
-	public SimpleFlowEvent(String name, Entity... parameterTypes) {
+	public SimpleFlowEvent(String name, Entity<?>... parameterTypes) {
 		this.name = name;
 		this.parameterTypes = parameterTypes;
 	}
 	
 	@Override
-	public Entity[] getParameterTypes() {
+	public Entity<?>[] getParameterTypes() {
 		return parameterTypes;
 	}
 
