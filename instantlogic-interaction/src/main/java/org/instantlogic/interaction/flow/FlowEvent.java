@@ -7,7 +7,7 @@ import org.instantlogic.interaction.util.FlowEventOccurrence;
 
 public abstract class FlowEvent extends Concept {
 
-	public abstract Entity[] getParameterTypes();
+	public abstract Entity<?>[] getParameterTypes();
 	
 	public abstract FlowEventOccurrence createOccurrence(SubmitContext context);
 	

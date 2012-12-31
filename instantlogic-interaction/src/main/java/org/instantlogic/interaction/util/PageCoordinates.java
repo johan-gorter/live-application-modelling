@@ -20,7 +20,7 @@ public class PageCoordinates {
 			if (activeInstanceIds!=null) {
 				this.activeInstances = activeInstanceIds;
 			} else {
-				this.activeInstances = Collections.EMPTY_LIST;
+				this.activeInstances = Collections.emptyList();
 			}
 		}
 

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="test"/>
-	<classpathentry kind="src" path="generated"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/instantlogic-designs/presence"/>
+	<classpathentry kind="src" path="target/generated-sources/instantlogic-app"/>
+	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?project=instantlogic-engine&amp;ivyXmlPath=ivy.xml&amp;confs=*"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/instantlogic-fabric"/>
@@ -12,6 +13,6 @@
 			<attribute name="javadoc_location" value="jar:file:/C:/Users/gast/.ivy2/cache/org.slf4j/slf4j-api/javadocs/slf4j-api-1.6.4-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/izzy"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/designer"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
