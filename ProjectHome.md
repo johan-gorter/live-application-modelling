@@ -1,0 +1,1 @@
+Change the model -> Code gets generated -> Code gets compiled -> Classloader picks up new classes -> Server push  -> browser clients
